@@ -199,6 +199,10 @@ func typeDependencies(typeDef: TypeDefinitionRecord, selfFullName: String): Arra
             case Some(metadataType) => addMetadataTypeDependency(dependencies, metadataType, selfFullName)
             case None => ()
         }
+        match (impl.typeSpecification) {
+            case Some(typeSpecification) => addSignatureDependencies(dependencies, typeSpecification.signature, selfFullName)
+            case None => ()
+        }
         addCustomAttributeTypeDependencies(dependencies, selfFullName, impl.customAttributes)
     }
     let filtered = ArrayList<String>()

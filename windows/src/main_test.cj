@@ -96,6 +96,80 @@ func testParseArgsDefaultsAndDeduplicatesFeatures() {
 }
 
 @Test
+func testParseArgsAcceptsInputDir() {
+    let config = parseArgs(["--input-dir", ".generated/winmd-json", "--feature", "Windows.Foundation"])
+
+    @Expect(config.inputJsonDirs.size, 1)
+    @Expect(config.inputJsonDirs[0], ".generated/winmd-json")
+    @Expect(config.inputJsonPaths.isEmpty(), true)
+}
+
+@Test
+func testParseArgsAcceptsFiltersWithoutDefaultAllFeature() {
+    let config = parseArgs([
+        "--input-json", "metadata.json",
+        "--filter", "Widget",
+        "--filter", "!Hidden"
+    ])
+
+    @Expect(config.features.isEmpty(), true)
+    @Expect(config.filters.size, 2)
+    @Expect(config.filters[0], "Widget")
+    @Expect(config.filters[1], "!Hidden")
+}
+
+@Test
+func testBindgenBuilderBuildsConfigSnapshot() {
+    let config = BindgenBuilder()
+        .inputJson("metadata.json")
+        .inputDir("winmd-json")
+        .supportPackageDir("windows-runtime")
+        .filter("Widget")
+        .filter("!Hidden")
+        .outputDir("out")
+        .packageName("windows_generated")
+        .manifest("out/manifest.json")
+        .clean()
+        .dryRun()
+        .configSnapshot()
+
+    @Expect(config.features.isEmpty(), true)
+    @Expect(config.filters.size, 2)
+    @Expect(config.filters[0], "Widget")
+    @Expect(config.filters[1], "!Hidden")
+    @Expect(config.inputJsonPaths[0], "metadata.json")
+    @Expect(config.inputJsonDirs[0], "winmd-json")
+    @Expect(config.supportPackageDirs[0], "windows-runtime")
+    @Expect(config.outputDir, "out")
+    @Expect(config.packageName, "windows_generated")
+    @Expect(config.manifestPath, "out/manifest.json")
+    @Expect(config.clean, true)
+    @Expect(config.dryRun, true)
+}
+
+@Test
+func testBindgenBuilderDefaultsToAllWithoutExplicitSelection() {
+    let config = BindgenBuilder().inputJson("metadata.json").configSnapshot()
+
+    @Expect(config.features.size, 1)
+    @Expect(config.features[0], "all")
+}
+
+@Test
+func testBindgenBuilderCanSelectFromLoadedRecords() {
+    let records = ArrayList<SymbolRecord>()
+    records.add(SymbolRecord("Example.Foundation.Widget", "Example.Foundation", "Widget", "Example_Foundation_Widget", ["Example.Shared.Size"]))
+    records.add(SymbolRecord("Example.Shared.Size", "Example.Shared", "Size", "Example_Shared_Size", []))
+    records.add(SymbolRecord("Example.Controls.Button", "Example.Controls", "Button", "Example_Controls_Button", []))
+
+    let selected = BindgenBuilder().filter("Widget").selectedSymbols(records)
+
+    @Expect(cliTestContainsSymbol(selected, "Example.Foundation.Widget"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Shared.Size"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Controls.Button"), false)
+}
+
+@Test
 func testParseArgsPrintLinkOptionsFlag() {
     let config = parseArgs([
         "--input-json", "metadata.json",
@@ -158,7 +232,9 @@ func testCommonFeatureScanRejectsMissingSupportPackage() {
 @Test
 func testParseArgsRejectsBadArguments() {
     @Expect(cliTestThrows({ => let _ = parseArgs(["--feature"]) }), true)
+    @Expect(cliTestThrows({ => let _ = parseArgs(["--filter"]) }), true)
     @Expect(cliTestThrows({ => let _ = parseArgs(["--input-json"]) }), true)
+    @Expect(cliTestThrows({ => let _ = parseArgs(["--input-dir"]) }), true)
     @Expect(cliTestThrows({ => let _ = parseArgs(["--unknown"]) }), true)
 }
 
@@ -191,6 +267,100 @@ func testSelectSymbolsAcceptsExactSymbolFeature() {
     @Expect(cliTestContainsSymbol(selected, "Example.Foundation.Gadget"), false)
     @Expect(cliTestContainsSymbol(selected, "Example.Foundation.Widget"), true)
     @Expect(cliTestContainsSymbol(selected, "Example.Shared.Size"), true)
+}
+
+@Test
+func testSelectSymbolsFiltersByShortNameAndExpandsDependencies() {
+    let records = ArrayList<SymbolRecord>()
+    records.add(SymbolRecord("Example.Foundation.Widget", "Example.Foundation", "Widget", "Example_Foundation_Widget", ["Example.Shared.Size"]))
+    records.add(SymbolRecord("Example.Controls.Widget", "Example.Controls", "Widget", "Example_Controls_Widget", []))
+    records.add(SymbolRecord("Example.Controls.Button", "Example.Controls", "Button", "Example_Controls_Button", []))
+    records.add(SymbolRecord("Example.Shared.Size", "Example.Shared", "Size", "Example_Shared_Size", []))
+    let filters = ArrayList<String>()
+    filters.add("Widget")
+
+    let selected = selectSymbolsFromRecords(filters, records)
+
+    @Expect(cliTestContainsSymbol(selected, "Example.Foundation.Widget"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Controls.Widget"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Shared.Size"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Controls.Button"), false)
+}
+
+@Test
+func testSelectSymbolsFiltersNamespacePrefixWildcardAndExclude() {
+    let records = ArrayList<SymbolRecord>()
+    records.add(SymbolRecord("Example.Foundation.Widget", "Example.Foundation", "Widget", "Example_Foundation_Widget", []))
+    records.add(SymbolRecord("Example.Foundation.Controls.Button", "Example.Foundation.Controls", "Button", "Example_Foundation_Controls_Button", []))
+    records.add(SymbolRecord("Example.Foundation.Controls.ButtonHelper", "Example.Foundation.Controls", "ButtonHelper", "Example_Foundation_Controls_ButtonHelper", []))
+    records.add(SymbolRecord("Example.Other.Button", "Example.Other", "Button", "Example_Other_Button", []))
+    let filters = ArrayList<String>()
+    filters.add("Example.Foundation")
+    filters.add("!*Helper")
+
+    let selected = selectSymbolsFromRecords(filters, records)
+
+    @Expect(cliTestContainsSymbol(selected, "Example.Foundation.Widget"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Foundation.Controls.Button"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Foundation.Controls.ButtonHelper"), false)
+    @Expect(cliTestContainsSymbol(selected, "Example.Other.Button"), false)
+}
+
+@Test
+func testSelectSymbolsExplicitExcludePreventsDependencyReentry() {
+    let records = ArrayList<SymbolRecord>()
+    records.add(SymbolRecord("Example.Controls.Button", "Example.Controls", "Button", "Example_Controls_Button", ["Example.Foundation.Widget"]))
+    records.add(SymbolRecord("Example.Foundation.Widget", "Example.Foundation", "Widget", "Example_Foundation_Widget", []))
+    let filters = ArrayList<String>()
+    filters.add("Button")
+    filters.add("!Example.Foundation.Widget")
+
+    let selected = selectSymbolsFromRecords(filters, records)
+
+    @Expect(cliTestContainsSymbol(selected, "Example.Controls.Button"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Foundation.Widget"), false)
+}
+
+@Test
+func testValidateRequestedFiltersAcceptKnownFormsAndRejectUnknown() {
+    let records = ArrayList<SymbolRecord>()
+    records.add(SymbolRecord("Example.Foundation.Widget", "Example.Foundation", "Widget", "Example_Foundation_Widget", []))
+    records.add(SymbolRecord("Example.Foundation.Controls.Button", "Example.Foundation.Controls", "Button", "Example_Foundation_Controls_Button", []))
+    let valid = ArrayList<String>()
+    valid.add("all")
+    valid.add("Widget")
+    valid.add("Example.Foundation.Controls.Button")
+    valid.add("Example.Foundation.*")
+    valid.add("!Example.Foundation.Controls")
+    let invalid = ArrayList<String>()
+    invalid.add("MissingType")
+
+    validateRequestedFilters(valid, records)
+    @Expect(cliTestThrows({ => validateRequestedFilters(invalid, records) }), true)
+}
+
+@Test
+func testInterfaceImplementationTopLevelTypeSpecificationResolvesAndAddsDependencies() {
+    let typeArguments = ArrayList<SignatureRecord>()
+    typeArguments.add(SignatureRecord("Type", name: "IWidget", namespace: "Example.Foundation", hasNamespace: true))
+    let signature = SignatureRecord("Type", name: "IVector", namespace: "Example.Foundation", hasNamespace: true, typeArguments: typeArguments)
+    let implementation = InterfaceImplementationRecord(typeSpecification: Some(TypeSpecificationRecord(signature)))
+    let records = ArrayList<SymbolRecord>()
+    records.add(SymbolRecord("Example.Foundation.IVector", "Example.Foundation", "IVector", "Example_Foundation_IVector", []))
+    records.add(SymbolRecord("Example.Foundation.IWidget", "Example.Foundation", "IWidget", "Example_Foundation_IWidget", []))
+    let symbolsByName = cliTestRecordsByName(records)
+
+    match (interfaceImplementationFullName(implementation, symbolsByName, "Example.Foundation.Widget")) {
+        case Some(fullName) => @Expect(fullName, "Example.Foundation.IVector")
+        case None => @Expect(false, true)
+    }
+
+    let implementations = ArrayList<InterfaceImplementationRecord>()
+    implementations.add(implementation)
+    let typeDef = TypeDefinitionRecord("Example.Foundation", "Widget", interfaceImplementations: implementations)
+    let dependencies = typeDependencies(typeDef, typeDef.fullName())
+    @Expect(contains(dependencies, "Example.Foundation.IVector"), true)
+    @Expect(contains(dependencies, "Example.Foundation.IWidget"), true)
 }
 
 @Test
@@ -1773,6 +1943,110 @@ func testCommonNativeHelperFilesProjectBoolParametersAndReturns() {
     @Expect(helper.contains("enabled: Int32"), false)
     @Expect(helper.contains("let proc = CFunc<(Int32) -> Int32>"), true)
     @Expect(helper.contains("return unsafe { proc(if (enabled) { 1 } else { 0 }) } != 0"), true)
+}
+
+@Test
+func testCommonNativeHelperFilesRenderSetLastErrorCheckedBoolWrapper() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Windows.Win32.Foundation",
+          "Name": "BOOL",
+          "BaseType": "System.ValueType",
+          "IsNested": false,
+          "Attributes": ["Public", "SequentialLayout", "Sealed"],
+          "CustomAttributes": [],
+          "Fields": [
+            {
+              "Name": "Value",
+              "Signature": {"Kind": "Primitive", "Name": "Int32"},
+              "Attributes": ["Public"],
+              "CustomAttributes": [],
+              "DefaultValue": null
+            }
+          ],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Native",
+          "Name": "Apis",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "Class"],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "SetEnabled",
+              "Attributes": ["Public", "Static", "PinvokeImpl"],
+              "CustomAttributes": [],
+              "ImplAttributes": ["IL", "Managed"],
+              "RelativeVirtualAddress": 0,
+              "Import": {
+                "Name": "SetEnabled",
+                "Attributes": ["ExactSpelling", "CallingConventionWinApi", "SetLastError"],
+                "Module": {"Name": "example.dll", "CustomAttributes": []}
+              },
+              "Signature": {
+                "ReturnType": {"Kind": "Type", "Namespace": "Windows.Win32.Foundation", "Name": "BOOL"},
+                "ParameterTypes": [{"Kind": "Type", "Namespace": "Windows.Win32.Foundation", "Name": "BOOL"}],
+                "RequiredParameterCount": 1
+              },
+              "Parameters": [
+                {"Name": "enabled", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null}
+              ],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let features = ArrayList<String>()
+    features.add("Example.Native")
+    let selected = selectSymbols(features, records)
+    let helper = cliTestHelperFile(
+        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        "src/Example/Native/native_helpers.cj"
+    )
+
+    @Expect(helper.contains("import windows_core as windows_core"), true)
+    @Expect(helper.contains("public func SetEnabled(enabled: Bool): Bool"), true)
+    @Expect(helper.contains("public func SetEnabledChecked(enabled: Bool): Result<Unit>"), true)
+    @Expect(helper.contains("if (SetEnabled(enabled))"), true)
+    @Expect(helper.contains("Result<Unit>.Err(windows_core.errorFromThread())"), true)
 }
 
 @Test
@@ -5119,6 +5393,12 @@ func testGeneratedWriterAddsDoNotEditHeaders() {
     @Expect(startsWithString(cj, "// Generated by windows-gen. DO NOT EDIT.\n\npackage windows_gen\n"), true)
     @Expect(startsWithString(toml, "# Generated by windows-gen. DO NOT EDIT.\n\n[package]\n"), true)
     @Expect(startsWithString(json, "{}\n"), true)
+    @Expect(endsWithString(cj, "\n"), true)
+    @Expect(endsWithString(cj, "\n\n"), false)
+    @Expect(endsWithString(toml, "\n"), true)
+    @Expect(endsWithString(toml, "\n\n"), false)
+    @Expect(endsWithString(json, "\n"), true)
+    @Expect(endsWithString(json, "\n\n"), false)
 }
 
 @Test
@@ -12317,6 +12597,191 @@ func testWinrtInterfaceRendersInterfaceMacroAndSupportDependencies() {
 }
 
 @Test
+func testGenericWinrtInterfaceUsesClosedSignatureIid() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Foundation",
+          "Name": "IVector`1",
+          "MetadataToken": "0x02000002",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "AutoLayout", "Interface", "Abstract", "WindowsRuntime"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 286331153},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 8738},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 13107},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 68},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 85},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 102},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 119},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 136},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 153},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 170},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 187}
+              ],
+              "NamedArguments": []
+            }
+          ],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "GetAt",
+              "Attributes": ["Public", "Virtual", "NewSlot", "Abstract"],
+              "CustomAttributes": [],
+              "ImplAttributes": ["IL", "Managed"],
+              "RelativeVirtualAddress": 0,
+              "Import": null,
+              "Signature": {
+                "ParameterTypes": [
+                  {"Kind": "Primitive", "Name": "UInt32"}
+                ],
+                "RequiredParameterCount": 1,
+                "ReturnType": {"Kind": "GenericParameter", "Name": "T"}
+              },
+              "Parameters": [
+                {"Name": "result", "SequenceNumber": 0, "Attributes": ["Retval"], "CustomAttributes": [], "DefaultValue": null},
+                {"Name": "index", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null}
+              ],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [
+            {"Name": "T", "SequenceNumber": 0, "Attributes": [], "CustomAttributes": [], "Constraints": []}
+          ],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    var source = ""
+    for (record in records) {
+        if (record.fullName == "Example.Foundation.IVector`1") {
+            source = renderSymbolImpl(record, symbolsByName)
+        }
+    }
+
+    @Expect(source.contains("public interface Example_Foundation_IVector_1_Impl<T> <: Example_Foundation_IVector_1_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}"), true)
+    @Expect(source.contains("public open class Example_Foundation_IVector_1<T> <: windows_interface.InterfaceWrapperBase"), true)
+    @Expect(source.contains("windows_interface.GUID.from_signature(Example_Foundation_IVector_1<T>.signature())"), true)
+    @Expect(source.contains("sb.append(\"pinterface({11111111-2222-3333-4455-66778899aabb}\")"), true)
+    @Expect(source.contains("sb.append(T.signature())"), true)
+    @Expect(source.contains("func GetAt(index: UInt32, result: CPointer<CPointer<Unit>>): windows_core.HRESULT"), true)
+    @Expect(source.contains("windows_interface.InterfaceDescriptor<Example_Foundation_IVector_1<T>>"), true)
+    @Expect(source.contains("extend<T> Example_Foundation_IVector_1<T> <: windows_core.Interface<Example_Foundation_IVector_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}"), true)
+    @Expect(source.contains("windows_interface.GUID.parse(\"11111111-2222-3333-4455-66778899aabb\")"), false)
+}
+
+@Test
+func testGenericWinrtDelegateUsesClosedSignatureIid() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Foundation",
+          "Name": "EventHandler`1",
+          "MetadataToken": "0x02000002",
+          "BaseType": "System.MulticastDelegate",
+          "IsNested": false,
+          "Attributes": ["Public", "Sealed", "WindowsRuntime"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 286331153},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 8738},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 13107},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 68},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 85},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 102},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 119},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 136},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 153},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 170},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 187}
+              ],
+              "NamedArguments": []
+            }
+          ],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [
+            {"Name": "T", "SequenceNumber": 0, "Attributes": [], "CustomAttributes": [], "Constraints": []}
+          ],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    var source = ""
+    for (record in records) {
+        if (record.fullName == "Example.Foundation.EventHandler`1") {
+            source = renderSymbolImpl(record, symbolsByName)
+        }
+    }
+
+    @Expect(source.contains("public class Example_Foundation_EventHandler_1<T> <: windows_interface.InterfaceWrapperBase"), true)
+    @Expect(source.contains("windows_interface.GUID.from_signature(Example_Foundation_EventHandler_1<T>.signature())"), true)
+    @Expect(source.contains("sb.append(T.signature())"), true)
+    @Expect(source.contains("extend<T> Example_Foundation_EventHandler_1<T> <: windows_core.Interface<Example_Foundation_EventHandler_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}"), true)
+    @Expect(source.contains("public class Example_Foundation_EventHandler_1 {\n    private let raw: CPointer<Unit>"), false)
+}
+
+@Test
 func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
     let json = ##"{
       "winmd_file": "Tiny.winmd",
@@ -12735,9 +13200,8 @@ func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
             },
             {
               "Interface": {
-                "Kind": "Type",
-                "Namespace": "Example.Foundation",
-                "Name": "IMap",
+                "Kind": "Generic",
+                "Type": {"Kind": "Type", "Namespace": "Example.Foundation", "Name": "IMap"},
                 "TypeArguments": [
                   {"Kind": "Type", "Namespace": "System", "Name": "String"},
                   {"Kind": "Type", "Namespace": "Example.Foundation", "Name": "IWidget"}
@@ -12813,6 +13277,8 @@ func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
     @Expect(classSource.contains("hr__ = unsafe { factory__.SetDisplayName(__argBorrow0.asRaw()) }"), true)
     @Expect(classSource.contains("public static func SetKind(kind: Example_Foundation_WidgetKind): Unit"), true)
     @Expect(classSource.contains("hr__ = unsafe { factory__.SetKind(kind.value) }"), true)
+    @Expect(classSource.contains("hr__.check()"), true)
+    @Expect(classSource.contains("let _ = hr__.ok()"), false)
     @Expect(classSource.contains("public static func GetKind(): Example_Foundation_WidgetKind"), true)
     @Expect(classSource.contains("return Example_Foundation_WidgetKind(result__)"), true)
     @Expect(classSource.contains("public static func CreateGuidArray(valuesSize: UInt32, values: CPointer<GUID>, result: CPointer<CPointer<Unit>>): Unit"), true)
@@ -12820,7 +13286,7 @@ func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
     @Expect(classSource.contains("public static func GetNames(namesSize: CPointer<UInt32>, names: CPointer<CPointer<CPointer<Unit>>>): Unit"), true)
     @Expect(classSource.contains("hr__ = unsafe { factory__.GetNames(namesSize, names) }"), true)
     @Expect(classSource.contains("public static func runtimeName(): String {\n        \"Example.Foundation.Widget\"\n    }"), true)
-    @Expect(classSource.contains("return \"rc(Example.Foundation.Widget;\" + Example_Foundation_IWidget.signature() + \")\""), true)
+    @Expect(classSource.contains("return \"rc(Example.Foundation.Widget;{\" + Example_Foundation_IWidget.iid().toSignatureString() + \"})\""), true)
     @Expect(classSource.contains("windows_interface.RuntimeTypeContract(\"Example.Foundation.Widget\", Example_Foundation_Widget.signature(), Example_Foundation_IWidget.iid())"), true)
     @Expect(classSource.contains("extend Example_Foundation_Widget <: windows_core.HandleWinrtType<Example_Foundation_Widget>"), true)
     @Expect(classSource.contains("public class Example_Foundation_Widget {\n    private let raw: CPointer<Unit>"), false)
@@ -12841,6 +13307,446 @@ func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
     @Expect(cliTestContainsSymbol(selected, "Example.Foundation.WidgetKind"), true)
     @Expect(cliTestContainsSymbol(selected, "Example.Foundation.IWidgetFactory"), true)
     @Expect(cliTestContainsSymbol(selected, "Example.Foundation.IWidgetStatics"), true)
+}
+
+@Test
+func testWinrtRuntimeClassProjectsDefaultInterfaceMembersPropertiesAndEvents() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Tiny.Foundation",
+          "Name": "EventRegistrationToken",
+          "BaseType": "System.ValueType",
+          "IsNested": false,
+          "Attributes": ["Public", "SequentialLayout", "Sealed"],
+          "CustomAttributes": [],
+          "Fields": [
+            {"Name": "value", "Signature": {"Kind": "Primitive", "Name": "Int64"}, "Attributes": ["Public"], "CustomAttributes": [], "DefaultValue": null}
+          ],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Tiny.Foundation",
+          "Name": "TypedEventHandler",
+          "BaseType": "System.MulticastDelegate",
+          "IsNested": false,
+          "Attributes": ["Public", "Class", "Sealed", "WindowsRuntime"],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "Invoke",
+              "Signature": {
+                "ReturnType": {"Kind": "Void"},
+                "Parameters": [
+                  {"Kind": "Primitive", "Name": "Object"},
+                  {"Kind": "Primitive", "Name": "Object"}
+                ]
+              },
+              "Parameters": [],
+              "Attributes": ["Public", "Virtual"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Tiny.Foundation",
+          "Name": "IWidget",
+          "MetadataToken": "0x02000004",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "AutoLayout", "Interface", "Abstract", "WindowsRuntime"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 286331153},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 8738},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 13107},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 68},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 85},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 102},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 119},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 136},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 153},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 170},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 187}
+              ],
+              "NamedArguments": []
+            }
+          ],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "GetName",
+              "Signature": {
+                "ReturnType": {"Kind": "Type", "Namespace": "System", "Name": "String"},
+                "Parameters": [{"Kind": "Type", "Namespace": "System", "Name": "String"}]
+              },
+              "Parameters": [
+                {"Name": "result", "SequenceNumber": 0, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Type", "Namespace": "System", "Name": "String"}},
+                {"Name": "prefix", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Type", "Namespace": "System", "Name": "String"}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "get_Title",
+              "Signature": {"ReturnType": {"Kind": "Type", "Namespace": "System", "Name": "String"}, "Parameters": []},
+              "Parameters": [
+                {"Name": "result", "SequenceNumber": 0, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Type", "Namespace": "System", "Name": "String"}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual", "SpecialName"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "put_Title",
+              "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "Void"}, "Parameters": [{"Kind": "Type", "Namespace": "System", "Name": "String"}]},
+              "Parameters": [
+                {"Name": "value", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Type", "Namespace": "System", "Name": "String"}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual", "SpecialName"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "add_Changed",
+              "Signature": {
+                "ReturnType": {"Kind": "Type", "Namespace": "Tiny.Foundation", "Name": "EventRegistrationToken"},
+                "Parameters": [{"Kind": "Type", "Namespace": "Tiny.Foundation", "Name": "TypedEventHandler"}]
+              },
+              "Parameters": [
+                {"Name": "handler", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Type", "Namespace": "Tiny.Foundation", "Name": "TypedEventHandler"}},
+                {"Name": "result", "SequenceNumber": 0, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Type", "Namespace": "Tiny.Foundation", "Name": "EventRegistrationToken"}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual", "SpecialName"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "remove_Changed",
+              "Signature": {
+                "ReturnType": {"Kind": "Primitive", "Name": "Void"},
+                "Parameters": [{"Kind": "Type", "Namespace": "Tiny.Foundation", "Name": "EventRegistrationToken"}]
+              },
+              "Parameters": [
+                {"Name": "token", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Type", "Namespace": "Tiny.Foundation", "Name": "EventRegistrationToken"}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual", "SpecialName"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [
+            {
+              "Name": "Changed",
+              "Type": {"Kind": "Type", "Namespace": "Tiny.Foundation", "Name": "TypedEventHandler"},
+              "Attributes": ["SpecialName"],
+              "CustomAttributes": [],
+              "Accessors": {"Adder": "add_Changed", "Remover": "remove_Changed"}
+            }
+          ],
+          "Properties": [
+            {
+              "Name": "Title",
+              "Signature": {"ReturnType": {"Kind": "Type", "Namespace": "System", "Name": "String"}, "Parameters": []},
+              "Attributes": ["SpecialName"],
+              "CustomAttributes": [],
+              "Accessors": {"Getter": "get_Title", "Setter": "put_Title"},
+              "DefaultValue": null
+            }
+          ]
+        },
+        {
+          "Namespace": "Tiny.Foundation",
+          "Name": "Widget",
+          "MetadataToken": "0x02000005",
+          "BaseType": "System.Object",
+          "IsNested": false,
+          "Attributes": ["Public", "Class", "Sealed", "WindowsRuntime"],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [
+            {
+              "Interface": {"Kind": "Type", "Namespace": "Tiny.Foundation", "Name": "IWidget"},
+              "CustomAttributes": [
+                {"Type": "Windows.Foundation.Metadata.DefaultAttribute", "FixedArguments": [], "NamedArguments": []}
+              ]
+            }
+          ],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    var classSource = ""
+    for (record in records) {
+        if (record.fullName == "Tiny.Foundation.Widget") {
+            classSource = renderSymbolImpl(record, symbolsByName)
+        }
+    }
+
+    @Expect(classSource.contains("public func GetName(prefix: windows_core.HString): windows_core.HString"), true)
+    @Expect(classSource.contains("try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(prefix))"), true)
+    @Expect(classSource.contains("try (interface__ = defaultInterface())"), true)
+    @Expect(classSource.contains("hr__ = unsafe { interface__.GetName(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }"), true)
+    @Expect(classSource.contains("return windows_core.HString.fromAbiTakeWinrtHandle(result__)"), true)
+    @Expect(classSource.contains("public mut prop Title: windows_core.HString"), true)
+    @Expect(classSource.contains("hr__ = unsafe { interface__.Title(CPointer<CPointer<Unit>>(inout result__)) }"), true)
+    @Expect(classSource.contains("hr__ = unsafe { interface__.SetTitle(__argBorrow0.asRaw()) }"), true)
+    @Expect(classSource.contains("public func addChanged(handler: Tiny_Foundation_TypedEventHandler): Tiny_Foundation_EventRegistrationToken"), true)
+    @Expect(classSource.contains("hr__ = unsafe { interface__.Changed(__argBorrow0.asRaw(), CPointer<Tiny_Foundation_EventRegistrationToken>(inout result__)) }"), true)
+    @Expect(classSource.contains("public func removeChanged(token: Tiny_Foundation_EventRegistrationToken): Unit"), true)
+    @Expect(classSource.contains("hr__ = unsafe { interface__.RemoveChanged(token) }"), true)
+    @Expect(classSource.contains("public func get_Title("), false)
+    @Expect(classSource.contains("public func put_Title("), false)
+    @Expect(classSource.contains("public func add_Changed("), false)
+    @Expect(classSource.contains("public func remove_Changed("), false)
+}
+
+@Test
+func testWinrtRuntimeClassAncestorsIncludeRequiredInterfacesAndBaseClass() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Foundation",
+          "Name": "IBase",
+          "MetadataToken": "0x02000002",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "AutoLayout", "Interface", "Abstract", "WindowsRuntime"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 286331153},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 8738},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 13107},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 68},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 85},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 102},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 119},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 136},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 153},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 170},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 187}
+              ],
+              "NamedArguments": []
+            }
+          ],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Foundation",
+          "Name": "IRequired",
+          "MetadataToken": "0x02000003",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "AutoLayout", "Interface", "Abstract", "WindowsRuntime"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 305419896},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 4660},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 22136},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 144},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 171},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 205},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 239},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 1},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 35},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 69},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 103}
+              ],
+              "NamedArguments": []
+            }
+          ],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Foundation",
+          "Name": "IDerived",
+          "MetadataToken": "0x02000004",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "AutoLayout", "Interface", "Abstract", "WindowsRuntime"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 572662306},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 13107},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 17476},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 85},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 102},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 119},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 136},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 153},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 170},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 187},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 204}
+              ],
+              "NamedArguments": []
+            }
+          ],
+          "Fields": [],
+          "InterfaceImplementations": [
+            {
+              "Interface": {"Kind": "Type", "Namespace": "Example.Foundation", "Name": "IRequired"},
+              "CustomAttributes": []
+            }
+          ],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Foundation",
+          "Name": "BaseWidget",
+          "MetadataToken": "0x02000005",
+          "BaseType": "System.Object",
+          "IsNested": false,
+          "Attributes": ["Public", "Class", "WindowsRuntime"],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [
+            {
+              "Interface": {"Kind": "Type", "Namespace": "Example.Foundation", "Name": "IBase"},
+              "CustomAttributes": [
+                {"Type": "Windows.Foundation.Metadata.DefaultAttribute", "FixedArguments": [], "NamedArguments": []}
+              ]
+            }
+          ],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Foundation",
+          "Name": "DerivedWidget",
+          "MetadataToken": "0x02000006",
+          "BaseType": "Example.Foundation.BaseWidget",
+          "IsNested": false,
+          "Attributes": ["Public", "Class", "Sealed", "WindowsRuntime"],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [
+            {
+              "Interface": {"Kind": "Type", "Namespace": "Example.Foundation", "Name": "IDerived"},
+              "CustomAttributes": [
+                {"Type": "Windows.Foundation.Metadata.DefaultAttribute", "FixedArguments": [], "NamedArguments": []}
+              ]
+            }
+          ],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    var classSource = ""
+    for (record in records) {
+        if (record.fullName == "Example.Foundation.DerivedWidget") {
+            classSource = renderSymbolImpl(record, symbolsByName)
+        }
+    }
+
+    @Expect(classSource.contains("let ancestors = [Example_Foundation_IDerived.iid(), Example_Foundation_IRequired.iid(), Example_Foundation_IBase.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]"), true)
+    @Expect(classSource.contains("public func asIDerived(): Example_Foundation_IDerived"), true)
+    @Expect(classSource.contains("public func asIRequired(): Example_Foundation_IRequired"), true)
+    @Expect(classSource.contains("public func asIBase(): Example_Foundation_IBase"), true)
 }
 
 @Test
@@ -13664,6 +14570,28 @@ func testWinrtInterfaceArrayParametersRenderSizePointerPairs() {
               "GenericParameters": []
             },
             {
+              "Name": "GetItemsLegacyReference",
+              "Attributes": ["Public", "Virtual", "NewSlot", "Abstract"],
+              "CustomAttributes": [],
+              "ImplAttributes": ["IL", "Managed"],
+              "RelativeVirtualAddress": 0,
+              "Import": null,
+              "Signature": {
+                "ParameterTypes": [
+                  {
+                    "Kind": "Reference",
+                    "Type": {"Kind": "SZArray", "Type": {"Kind": "Primitive", "Name": "Int32"}}
+                  }
+                ],
+                "RequiredParameterCount": 1,
+                "ReturnType": {"Kind": "Primitive", "Name": "Void"}
+              },
+              "Parameters": [
+                {"Name": "items", "SequenceNumber": 1, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null}
+              ],
+              "GenericParameters": []
+            },
+            {
               "Name": "SetGuids",
               "Attributes": ["Public", "Virtual", "NewSlot", "Abstract"],
               "CustomAttributes": [],
@@ -13716,11 +14644,13 @@ func testWinrtInterfaceArrayParametersRenderSizePointerPairs() {
     @Expect(source.contains("func SetItems(valuesSize: UInt32, values: CPointer<Int32>): Int32"), true)
     @Expect(source.contains("func GetItems(itemsSize: CPointer<UInt32>, items: CPointer<CPointer<Int32>>): Int32"), true)
     @Expect(source.contains("func GetItemsByRef(itemsSize: CPointer<UInt32>, items: CPointer<CPointer<Int32>>): Int32"), true)
+    @Expect(source.contains("func GetItemsLegacyReference(itemsSize: CPointer<UInt32>, items: CPointer<CPointer<Int32>>): Int32"), true)
     @Expect(source.contains("func SetGuids(valuesSize: UInt32, values: CPointer<GUID>): Int32"), true)
     @Expect(source.contains("func GetGuids(guidsSize: CPointer<UInt32>, guids: CPointer<CPointer<GUID>>): Int32"), true)
     @Expect(source.contains("func SetItems(values: CPointer<Unit>): Int32"), false)
     @Expect(source.contains("func GetItems(items: CPointer<CPointer<Unit>>): Int32"), false)
     @Expect(source.contains("func GetItemsByRef(items: CPointer<CPointer<Unit>>): Int32"), false)
+    @Expect(source.contains("func GetItemsLegacyReference(items: CPointer<CPointer<Unit>>): Int32"), false)
     @Expect(source.contains("func SetGuids(valuesSize: UInt32, values: CPointer<Unit>): Int32"), false)
     @Expect(source.contains("func GetGuids(guidsSize: CPointer<UInt32>, guids: CPointer<CPointer<Unit>>): Int32"), false)
 
@@ -13886,6 +14816,15 @@ func testWinrtDelegateParametersRenderAsComPointers() {
 
     @Expect(delegateSource.contains("public type Tiny_Foundation_TypedEventHandler = CFunc"), false)
     @Expect(delegateSource.contains("public class Tiny_Foundation_TypedEventHandler"), true)
+    @Expect(delegateSource.contains("public class Tiny_Foundation_TypedEventHandler <: Resource"), true)
+    @Expect(delegateSource.contains("private var ownsHandle: Bool"), true)
+    @Expect(delegateSource.contains("public func close(): Unit"), true)
+    @Expect(delegateSource.contains("public static func intoOwnedWinrtHandle(value: Tiny_Foundation_TypedEventHandler): CPointer<Unit>"), true)
+    @Expect(delegateSource.contains("Tiny_Foundation_TypedEventHandler.addRefRaw(raw)"), true)
+    @Expect(delegateSource.contains("public static func cloneWinrtValue(value: Tiny_Foundation_TypedEventHandler): Tiny_Foundation_TypedEventHandler"), true)
+    @Expect(delegateSource.contains("Tiny_Foundation_TypedEventHandler(raw, takeOwnership: true)"), true)
+    @Expect(delegateSource.contains("Tiny_Foundation_TypedEventHandler(raw, takeOwnership: false)"), true)
+    @Expect(delegateSource.contains("extend Tiny_Foundation_TypedEventHandler <: windows_core.HandleWinrtType<Tiny_Foundation_TypedEventHandler>"), true)
     @Expect(source.contains("func add_Completed(handler: CPointer<Unit>, result: CPointer<Tiny_Foundation_EventRegistrationToken>): Int32"), true)
     @Expect(source.contains("func add_Completed(handler: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>"), false)
     @Expect(source.contains("func add_Completed(handler: CPointer<Unit>, sender: CPointer<Unit>, args: CPointer<Unit>, result: CPointer<Tiny_Foundation_EventRegistrationToken>): Int32"), false)
@@ -14196,4 +15135,190 @@ func testImplFilesImportPolyfillWhenRenderedSourceUsesLayoutHelper() {
     removeIfExists(outDir, recursive: true)
 
     @Expect(content.contains("import windows_polyfill as windows_polyfill"), true)
+}
+
+@Test
+func testApisClassRendersLiteralGuidAndConstantAttributeFieldConstants() {
+    let json = ##"{
+      "winmd_file": "Sample.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Sample.Foundation",
+          "Name": "PROPKEY",
+          "MetadataToken": "0x02000002",
+          "BaseType": "System.ValueType",
+          "IsNested": false,
+          "Attributes": ["Public", "SequentialLayout", "Sealed"],
+          "CustomAttributes": [],
+          "Fields": [
+            {
+              "Name": "fmtid",
+              "Signature": {"Kind": "Type", "Namespace": "System", "Name": "Guid", "Comment": "TypeReference"},
+              "Attributes": ["Public"],
+              "CustomAttributes": [],
+              "DefaultValue": null
+            },
+            {
+              "Name": "pid",
+              "Signature": {"Kind": "Primitive", "Name": "UInt32"},
+              "Attributes": ["Public"],
+              "CustomAttributes": [],
+              "DefaultValue": null
+            }
+          ],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Sample.Foundation",
+          "Name": "AUTH",
+          "MetadataToken": "0x02000003",
+          "BaseType": "System.ValueType",
+          "IsNested": false,
+          "Attributes": ["Public", "SequentialLayout", "Sealed"],
+          "CustomAttributes": [],
+          "Fields": [
+            {
+              "Name": "Value",
+              "Signature": {"Kind": "Array", "Type": {"Kind": "Primitive", "Name": "Byte"}, "LowerBounds": [0], "Rank": 1, "Sizes": [6]},
+              "Attributes": ["Public"],
+              "CustomAttributes": [],
+              "DefaultValue": null
+            }
+          ],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Sample.Foundation",
+          "Name": "Apis",
+          "MetadataToken": "0x02000004",
+          "BaseType": "System.Object",
+          "IsNested": false,
+          "Attributes": ["Public", "AutoLayout", "Class", "Abstract", "Sealed"],
+          "CustomAttributes": [],
+          "Fields": [
+            {
+              "Name": "SAMPLE_CONST",
+              "Signature": {"Kind": "Primitive", "Name": "UInt32"},
+              "Attributes": ["Public", "Static", "Literal", "HasDefault"],
+              "CustomAttributes": [],
+              "DefaultValue": {"TypeCode": "UInt32", "Value": 42}
+            },
+            {
+              "Name": "SAMPLE_GUID",
+              "Signature": {"Kind": "Type", "Namespace": "System", "Name": "Guid", "Comment": "TypeReference"},
+              "Attributes": ["Public", "Static"],
+              "CustomAttributes": [
+                {
+                  "Type": "Windows.Win32.Foundation.Metadata.GuidAttribute",
+                  "FixedArguments": [
+                    {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 1},
+                    {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 2},
+                    {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 3},
+                    {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 4},
+                    {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 5},
+                    {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 6},
+                    {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 7},
+                    {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 8},
+                    {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 9},
+                    {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 10},
+                    {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 11}
+                  ],
+                  "NamedArguments": []
+                }
+              ],
+              "DefaultValue": null
+            },
+            {
+              "Name": "SAMPLE_PKEY",
+              "Signature": {"Kind": "Type", "Namespace": "Sample.Foundation", "Name": "PROPKEY", "Comment": "TypeReference"},
+              "Attributes": ["Public", "Static"],
+              "CustomAttributes": [
+                {
+                  "Type": "Windows.Win32.Foundation.Metadata.ConstantAttribute",
+                  "FixedArguments": [
+                    {"Type": {"Kind": "Primitive", "Name": "String"}, "Value": "{100, 200, 300, 1, 2, 3, 4, 5, 6, 7, 8}, 9"}
+                  ],
+                  "NamedArguments": []
+                }
+              ],
+              "DefaultValue": null
+            },
+            {
+              "Name": "SAMPLE_AUTH",
+              "Signature": {"Kind": "Type", "Namespace": "Sample.Foundation", "Name": "AUTH", "Comment": "TypeReference"},
+              "Attributes": ["Public", "Static"],
+              "CustomAttributes": [
+                {
+                  "Type": "Windows.Win32.Foundation.Metadata.ConstantAttribute",
+                  "FixedArguments": [
+                    {"Type": {"Kind": "Primitive", "Name": "String"}, "Value": "{10, 11, 12, 13, 14, 15}"}
+                  ],
+                  "NamedArguments": []
+                }
+              ],
+              "DefaultValue": null
+            }
+          ],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "sample"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    var apisSource = ""
+    for (record in records) {
+        if (record.fullName == "Sample.Foundation.Apis") {
+            apisSource = renderSymbolImpl(record, symbolsByName)
+            break
+        }
+    }
+
+    @Expect(apisSource.contains("public struct Sample_Foundation_Apis"), true)
+    @Expect(apisSource.contains("public static const SAMPLE_CONST: UInt32 = 42"), true)
+    @Expect(apisSource.contains(
+        "public static func SAMPLE_GUID(): windows_interface.GUID {\n" +
+        "        return windows_interface.GUID.from_values(1u32, 2u16, 3u16, 4u8, 5u8, 6u8, 7u8, 8u8, 9u8, 10u8, 11u8)\n" +
+        "    }"), true)
+    @Expect(apisSource.contains(
+        "public static func SAMPLE_PKEY(): Sample_Foundation_PROPKEY {"), true)
+    @Expect(apisSource.contains("        value.pid = 9\n"), true)
+    @Expect(apisSource.contains(
+        "public static func SAMPLE_AUTH(): Sample_Foundation_AUTH {"), true)
+    @Expect(apisSource.contains("        value.Value[5] = 15u8\n"), true)
 }

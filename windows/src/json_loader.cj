@@ -360,11 +360,16 @@ func parseInterfaceImplementations(array: JsonArray, path: String): ArrayList<In
                 }
             case None => ()
         }
+        var typeSpecification: Option<TypeSpecificationRecord> = None
+        match (optionalObject(obj, "TypeSpecification", implPath)) {
+            case Some(typeObj) => typeSpecification = Some(parseTypeSpecification(typeObj, "${implPath}.TypeSpecification"))
+            case None => ()
+        }
         values.add(InterfaceImplementationRecord(
             interfaceSignature: interfaceSignature,
             typeDefinition: typeDefinition,
             typeReference: typeReference,
-            typeSpecification: optionalJsonValue(obj, "TypeSpecification"),
+            typeSpecification: typeSpecification,
             customAttributes: parseCustomAttributes(optionalArrayDefault(obj, "CustomAttributes", implPath), "${implPath}.CustomAttributes")
         ))
         i += 1

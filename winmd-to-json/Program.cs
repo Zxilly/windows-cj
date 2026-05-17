@@ -142,7 +142,7 @@ class TypeProvider : ISignatureTypeProvider<TType, TGenericContext>, ICustomAttr
     {
         return new TType()
         {
-            Kind = "Reference",
+            Kind = "ByReference",
             Type = elementType
         };
     }

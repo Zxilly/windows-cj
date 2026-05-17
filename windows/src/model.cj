@@ -310,14 +310,14 @@ public class InterfaceImplementationRecord {
     public let interfaceSignature: Option<SignatureRecord>
     public let typeDefinition: Option<MetadataTypeRecord>
     public let typeReference: Option<MetadataTypeRecord>
-    public let typeSpecification: Option<JsonValue>
+    public let typeSpecification: Option<TypeSpecificationRecord>
     public let customAttributes: ArrayList<CustomAttributeRecord>
 
     public init(
         interfaceSignature!: Option<SignatureRecord> = None,
         typeDefinition!: Option<MetadataTypeRecord> = None,
         typeReference!: Option<MetadataTypeRecord> = None,
-        typeSpecification!: Option<JsonValue> = None,
+        typeSpecification!: Option<TypeSpecificationRecord> = None,
         customAttributes!: ArrayList<CustomAttributeRecord> = ArrayList<CustomAttributeRecord>()
     ) {
         this.interfaceSignature = interfaceSignature

@@ -333,6 +333,9 @@ func nativeHelperImports(
             )
             index += 1
         }
+        if (nativeMethodNeedsSetLastErrorCheckedWrapper(spec.method, symbolsByName, spec.ownerFullName)) {
+            addUnique(imports, "windows_core as windows_core")
+        }
     }
     sortStrings(imports)
     return imports
@@ -514,7 +517,44 @@ func renderNativeFunction(spec: NativeFunctionSpec, symbolsByName: HashMap<Strin
         content += "    }\n"
     }
     content += "}\n"
+    if (nativeMethodNeedsSetLastErrorCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
+        content += "\n"
+        content += renderNativeSetLastErrorCheckedWrapper(spec, symbolsByName)
+    }
     return content
+}
+
+func renderNativeSetLastErrorCheckedWrapper(spec: NativeFunctionSpec, symbolsByName: HashMap<String, SymbolRecord>): String {
+    let methodName = cjIdentifier(spec.method.name)
+    let publicParams = nativeFunctionParameterText(spec, symbolsByName)
+    let args = nativeFunctionPublicArgumentText(spec, symbolsByName)
+    var content = "public func ${methodName}Checked(${publicParams}): Result<Unit> {\n"
+    content += "    if (${methodName}(${args})) {\n"
+    content += "        return Result<Unit>.Ok(())\n"
+    content += "    }\n"
+    content += "    Result<Unit>.Err(windows_core.errorFromThread())\n"
+    content += "}\n"
+    return content
+}
+
+func nativeMethodNeedsSetLastErrorCheckedWrapper(
+    method: MethodRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): Bool {
+    if (!nativeMethodSetsLastError(method)) {
+        return false
+    }
+    let returnType = nativePublicType(method.signature.returnType, symbolsByName, ownerFullName)
+    let rawReturnType = nativeRawType(method.signature.returnType, symbolsByName, ownerFullName)
+    return returnType == "Bool" && nativeIsIntegerBoolAbiType(rawReturnType)
+}
+
+func nativeMethodSetsLastError(method: MethodRecord): Bool {
+    match (method.methodImport) {
+        case Some(methodImport) => return contains(methodImport.attributes, "SetLastError")
+        case None => return false
+    }
 }
 
 func renderNativeArrayLengthChecks(infos: ArrayList<NativeArrayParameterInfo>, indent: String): String {
@@ -636,6 +676,33 @@ func nativeFunctionParameterText(spec: NativeFunctionSpec, symbolsByName: HashMa
         index += 1
     }
     return joinStrings(parts, ", ")
+}
+
+func nativeFunctionPublicArgumentText(spec: NativeFunctionSpec, symbolsByName: HashMap<String, SymbolRecord>): String {
+    let args = ArrayList<String>()
+    if (!spec.dynamicModuleParameterName.isEmpty()) {
+        args.add(spec.dynamicModuleParameterName)
+    }
+    let metadataParameters = metadataMethodParameters(spec.method)
+    let arrayInfos = nativeArrayParameterInfos(spec, symbolsByName)
+    var index: Int64 = 0
+    while (index < Int64(spec.method.signature.parameters.size)) {
+        let parameter = metadataParameterAt(metadataParameters, index)
+        let name = interfaceParameterName(parameter, index)
+        match (nativeArrayInfoForLengthIndex(arrayInfos, index)) {
+            case Some(_) =>
+                index += 1
+                continue
+            case None => ()
+        }
+        if (nativeReservedParameterCanBeDefaulted(parameter)) {
+            index += 1
+            continue
+        }
+        args.add(name)
+        index += 1
+    }
+    return joinStrings(args, ", ")
 }
 
 func nativeFunctionArgumentText(spec: NativeFunctionSpec, symbolsByName: HashMap<String, SymbolRecord>): String {
