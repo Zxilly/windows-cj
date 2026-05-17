@@ -91,3 +91,72 @@ public func referenceContainsRecord(references: ArrayList<ReferenceStage>, recor
     }
     return None
 }
+
+public func referenceMatchingFullName(
+    references: ArrayList<ReferenceStage>,
+    namespace: String,
+    name: String,
+    fullName: String
+): Option<ReferenceStage> {
+    for (stage in references) {
+        if (referenceMatchesFullName(stage, namespace, name, fullName)) {
+            return Some(stage)
+        }
+    }
+    return None
+}
+
+var activeReferences: ArrayList<ReferenceStage> = ArrayList<ReferenceStage>()
+
+public func setActiveReferences(references: ArrayList<ReferenceStage>): Unit {
+    activeReferences = references
+}
+
+public func clearActiveReferences(): Unit {
+    activeReferences = ArrayList<ReferenceStage>()
+}
+
+public func currentReferences(): ArrayList<ReferenceStage> {
+    return activeReferences
+}
+
+public func qualifyMangledFullName(fullName: String): String {
+    let mangled = mangleFullName(fullName)
+    return qualifyMangledFullName(fullName, mangled)
+}
+
+public func qualifyMangledFullName(fullName: String, mangled: String): String {
+    if (activeReferences.isEmpty()) {
+        return mangled
+    }
+    let namespace = namespaceOfFullName(fullName)
+    let leafName = leafOfFullName(fullName)
+    match (referenceMatchingFullName(activeReferences, namespace, leafName, fullName)) {
+        case Some(stage) => return "${stage.name}.${mangled}"
+        case None => return mangled
+    }
+}
+
+func namespaceOfFullName(fullName: String): String {
+    let bytes = fullName.toArray()
+    var i = Int64(bytes.size) - 1
+    while (i >= 0) {
+        if (bytes[i] == b'.') {
+            return String.fromUtf8(bytes[0..i])
+        }
+        i -= 1
+    }
+    return ""
+}
+
+func leafOfFullName(fullName: String): String {
+    let bytes = fullName.toArray()
+    var i = Int64(bytes.size) - 1
+    while (i >= 0) {
+        if (bytes[i] == b'.') {
+            return String.fromUtf8(bytes[(i + 1)..Int64(bytes.size)])
+        }
+        i -= 1
+    }
+    return fullName
+}

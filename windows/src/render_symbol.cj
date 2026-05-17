@@ -109,13 +109,13 @@ public func renderSymbolImpl(
                 case None => ()
             }
             if (isEnumType(typeDef)) {
-                return "${header}\n${renderEnumSymbol(symbol, typeDef, symbolsByName)}"
+                return "${header}\n${renderEnumSymbol(symbol, typeDef, symbolsByName, options)}"
             }
             if (isDelegateType(typeDef)) {
                 return "${header}\n${renderDelegateSymbol(symbol, typeDef, symbolsByName)}"
             }
             if (isValueType(typeDef)) {
-                return "${header}\n${renderValueStructSymbol(symbol, typeDef, symbolsByName)}"
+                return "${header}\n${renderValueStructSymbol(symbol, typeDef, symbolsByName, options)}"
             }
             if (hasPInvokeMethods(typeDef)) {
                 return "${header}\n${renderPInvokeSymbol(symbol, typeDef, symbolsByName, options)}"
@@ -272,13 +272,14 @@ func renderGenericWinrtDelegateSymbol(
 func renderValueStructSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
-    symbolsByName: HashMap<String, SymbolRecord>
+    symbolsByName: HashMap<String, SymbolRecord>,
+    options: RenderOptions
 ): String {
     if (!hasPublicInstanceFields(typeDef) && hasLiteralFields(typeDef)) {
         return renderStaticLiteralStructSymbol(symbol, typeDef, symbolsByName)
     }
     if (contains(typeDef.attributes, "ExplicitLayout")) {
-        return renderExplicitLayoutStructSymbol(symbol, typeDef, symbolsByName)
+        return renderExplicitLayoutStructSymbol(symbol, typeDef, symbolsByName, options)
     }
     var content = "@C\npublic struct ${symbol.implName} {\n"
     var count: Int64 = 0
@@ -295,8 +296,28 @@ func renderValueStructSymbol(
         content += "    public var reserved: Int32 = 0\n"
     }
     content += renderLiteralFieldConstants(typeDef, symbolsByName, true)
+    if (options.hasDerive("guid_access")) {
+        content += renderGuidAccessHelper(typeDef)
+    }
     content += "}"
     return content
+}
+
+func renderGuidAccessHelper(typeDef: TypeDefinitionRecord): String {
+    match (guidAttributeValues(typeDef)) {
+        case Some(values) =>
+            let parts = ArrayList<String>()
+            var i: Int64 = 0
+            while (i < 11) {
+                parts.add(guidLiteralPart(values[i], i))
+                i += 1
+            }
+            var content = "    public static func GUID(): GUID {\n"
+            content += "        return GUID.from_values(${joinStrings(parts, ", ")})\n"
+            content += "    }\n"
+            return content
+        case None => return ""
+    }
 }
 
 func renderStaticLiteralStructSymbol(
@@ -387,7 +408,8 @@ func fixedArgumentInt64(argument: CustomAttributeFixedArgumentRecord): Option<In
 func renderExplicitLayoutStructSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
-    symbolsByName: HashMap<String, SymbolRecord>
+    symbolsByName: HashMap<String, SymbolRecord>,
+    options: RenderOptions
 ): String {
     let storage = rawStorageSpec(symbol.fullName, typeDef, symbolsByName)
     var content = "@C\npublic struct ${symbol.implName} {\n"
@@ -408,6 +430,9 @@ func renderExplicitLayoutStructSymbol(
             "    }\n"
     }
     content += renderLiteralFieldConstants(typeDef, symbolsByName, true)
+    if (options.hasDerive("guid_access")) {
+        content += renderGuidAccessHelper(typeDef)
+    }
     content += "}"
     return content
 }
@@ -483,7 +508,10 @@ func renderApisFieldConstant(
         case Some(value) =>
             let fieldType = cjConstantType(field.signature, symbolsByName)
             if (!isSimpleConstantFieldType(field.signature, fieldType, symbolsByName)) {
-                return ""
+                match (renderHandleStructLiteralConstant(fieldName, field, fieldType, value, symbolsByName)) {
+                    case Some(rendered) => return rendered
+                    case None => return ""
+                }
             }
             if (literalFieldRequiresFunction(false, fieldType) ||
                 literalFieldRequiresRuntimeStorage(fieldType)) {
@@ -511,6 +539,157 @@ func renderApisFieldConstant(
     }
 
     return ""
+}
+
+func renderHandleStructLiteralConstant(
+    fieldName: String,
+    field: FieldRecord,
+    fieldType: String,
+    value: JsonValue,
+    symbolsByName: HashMap<String, SymbolRecord>
+): Option<String> {
+    let _ = fieldType
+    let fullName = signatureFullNameInContext(field.signature, symbolsByName, "")
+    match (fullName) {
+        case Some(name) =>
+            if (startsWith(name, "System.")) {
+                return None
+            }
+            match (win32ScalarRawAbiTypeByFullName(name)) {
+                case Some(_) => return None
+                case None => ()
+            }
+            match (stringHandleRawAbiTypeByFullName(name)) {
+                case Some(_) => return None
+                case None => ()
+            }
+            match (hresultRawAbiTypeByFullName(name)) {
+                case Some(_) => return None
+                case None => ()
+            }
+            match (eventRegistrationTokenRawAbiTypeByFullName(name)) {
+                case Some(_) => return None
+                case None => ()
+            }
+            match (win32TextPointerRawAbiTypeByFullName(name)) {
+                case Some(_) => return None
+                case None => ()
+            }
+            match (symbolsByName.get(name)) {
+                case Some(targetSymbol) =>
+                    match (targetSymbol.typeDef) {
+                        case Some(targetDef) =>
+                            if (!isValueType(targetDef) || isEnumType(targetDef)) {
+                                return None
+                            }
+                            if (!hasNativeTypedefAttribute(targetDef)) {
+                                return None
+                            }
+                            match (handleStructFieldInfo(targetDef, symbolsByName)) {
+                                case Some(info) =>
+                                    let literal = handleStructFieldLiteral(value, info.cjFieldType)
+                                    match (literal) {
+                                        case Some(rendered) =>
+                                            let structType = qualifyMangledFullName(name)
+                                            var content = "    public static func ${fieldName}(): ${structType} {\n"
+                                            content += "        var value = ${structType}()\n"
+                                            content += "        value.${info.cjFieldName} = ${rendered}\n"
+                                            content += "        return value\n"
+                                            content += "    }\n"
+                                            return Some(content)
+                                        case None => return None
+                                    }
+                                case None => return None
+                            }
+                        case None => return None
+                    }
+                case None => return None
+            }
+        case None => return None
+    }
+}
+
+func hasNativeTypedefAttribute(typeDef: TypeDefinitionRecord): Bool {
+    for (attr in typeDef.customAttributes) {
+        if (hasAttributeName(attr, "NativeTypedefAttribute")) {
+            return true
+        }
+    }
+    return false
+}
+
+class HandleFieldInfo {
+    public let cjFieldName: String
+    public let cjFieldType: String
+
+    public init(cjFieldName: String, cjFieldType: String) {
+        this.cjFieldName = cjFieldName
+        this.cjFieldType = cjFieldType
+    }
+}
+
+func handleStructFieldInfo(
+    targetDef: TypeDefinitionRecord,
+    symbolsByName: HashMap<String, SymbolRecord>
+): Option<HandleFieldInfo> {
+    var found: Option<HandleFieldInfo> = None
+    var count: Int64 = 0
+    for (targetField in targetDef.fields) {
+        if (!isPublicInstanceField(targetField)) {
+            continue
+        }
+        if (targetField.name == "value__") {
+            continue
+        }
+        count += 1
+        if (count > 1) {
+            return None
+        }
+        let cjFieldName = cjIdentifier(targetField.name)
+        let cjFieldType = cjAbiTypeInContext(targetField.signature, symbolsByName, targetDef.fullName())
+        found = Some(HandleFieldInfo(cjFieldName, cjFieldType))
+    }
+    return found
+}
+
+func handleStructFieldLiteral(value: JsonValue, cjFieldType: String): Option<String> {
+    match (value.kind()) {
+        case JsonKind.JsInt =>
+            let raw = value.asInt().getValue()
+            if (cjFieldType == "CPointer<Unit>") {
+                return Some("windows_polyfill.handlePointerFromInt(${raw}i64)")
+            }
+            if (startsWith(cjFieldType, "CPointer<")) {
+                return Some("unsafe { ${cjFieldType}(windows_polyfill.handlePointerFromInt(${raw}i64)) }")
+            }
+            if (cjFieldType == "IntNative") {
+                return Some("IntNative(${raw}i64)")
+            }
+            if (cjFieldType == "UIntNative") {
+                return Some("UIntNative(${raw}i64)")
+            }
+            if (cjFieldType == "Int8" || cjFieldType == "Int16" || cjFieldType == "Int32" ||
+                cjFieldType == "Int64" || cjFieldType == "UInt8" || cjFieldType == "UInt16" ||
+                cjFieldType == "UInt32" || cjFieldType == "UInt64") {
+                return Some("${raw}${integerLiteralSuffix(cjFieldType)}")
+            }
+            return None
+        case _ => return None
+    }
+}
+
+func integerLiteralSuffix(cjType: String): String {
+    match (cjType) {
+        case "Int8" => return "i8"
+        case "Int16" => return "i16"
+        case "Int32" => return "i32"
+        case "Int64" => return "i64"
+        case "UInt8" => return "u8"
+        case "UInt16" => return "u16"
+        case "UInt32" => return "u32"
+        case "UInt64" => return "u64"
+        case _ => return ""
+    }
 }
 
 func isSimpleConstantFieldType(
@@ -605,7 +784,7 @@ func renderFieldConstantAttribute(
                             if (!isValueType(targetDef)) {
                                 return None
                             }
-                            let typeName = mangleFullName(name)
+                            let typeName = qualifyMangledFullName(name)
                             return Some(renderConstantStructFromAttribute(
                                 fieldName,
                                 typeName,
@@ -1173,7 +1352,8 @@ func bitfieldWriteHelper(typeName: String): Option<String> {
 func renderEnumSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
-    symbolsByName: HashMap<String, SymbolRecord>
+    symbolsByName: HashMap<String, SymbolRecord>,
+    options: RenderOptions
 ): String {
     let underlying = enumUnderlyingType(typeDef, symbolsByName)
     var content = "public struct ${symbol.implName} {\n" +
@@ -1184,8 +1364,12 @@ func renderEnumSymbol(
         "    public init(value: ${underlying}) {\n" +
         "        this.value = value\n" +
         "    }\n"
-    if (hasSystemFlagsAttribute(typeDef.customAttributes)) {
+    let isFlags = hasSystemFlagsAttribute(typeDef.customAttributes)
+    if (isFlags) {
         content += renderFlagsEnumHelpers(symbol.implName)
+    }
+    if (isFlags && options.hasDerive("flags_ops")) {
+        content += renderFlagsEnumExtendedHelpers(symbol.implName)
     }
     content += "}"
     for (field in typeDef.fields) {
@@ -1198,6 +1382,25 @@ func renderEnumSymbol(
             }
         }
     }
+    return content
+}
+
+func renderFlagsEnumExtendedHelpers(typeName: String): String {
+    var content = "    public func toggle(other: ${typeName}): ${typeName} {\n"
+    content += "        return ${typeName}(value ^ other.value)\n"
+    content += "    }\n"
+    content += "    public func intersect(other: ${typeName}): ${typeName} {\n"
+    content += "        return ${typeName}(value & other.value)\n"
+    content += "    }\n"
+    content += "    public func union(other: ${typeName}): ${typeName} {\n"
+    content += "        return ${typeName}(value | other.value)\n"
+    content += "    }\n"
+    content += "    public func difference(other: ${typeName}): ${typeName} {\n"
+    content += "        return ${typeName}(value & !other.value)\n"
+    content += "    }\n"
+    content += "    public func symmetric_difference(other: ${typeName}): ${typeName} {\n"
+    content += "        return ${typeName}(value ^ other.value)\n"
+    content += "    }\n"
     return content
 }
 
@@ -1521,8 +1724,8 @@ func renderPInvokeQueryWrapper(
     for (pair in leadingPairs) {
         callArgs.add(pair.name)
     }
-    callArgs.add("CPointer<windows_interface.GUID>(inout iid__)")
-    callArgs.add("CPointer<CPointer<Unit>>(inout raw__)")
+    callArgs.add("unsafe { CPointer<Unit>(CPointer<windows_interface.GUID>(inout iid__)) }")
+    callArgs.add("unsafe { CPointer<Unit>(CPointer<CPointer<Unit>>(inout raw__)) }")
     content += "        let hr__ = ${ownerImplName}.${sysName}(${joinStrings(callArgs, ", ")})\n"
     content += "        windows_core.HRESULT(hr__).check()\n"
     content += "        if (raw__.isNull()) {\n"
@@ -3430,7 +3633,7 @@ func winrtProjectedTypeName(
             }
             match (symbolsByName.get(fullName)) {
                 case Some(symbol) => return closedWinrtTypeName(signature, symbol, symbolsByName, ownerFullName)
-                case None => return mangleFullName(fullName)
+                case None => return qualifyMangledFullName(fullName)
             }
         case None => ()
     }
@@ -3691,6 +3894,9 @@ func cjConstantType(signature: SignatureRecord, symbolsByName: HashMap<String, S
         case Some(fullName) =>
             if (fullName == "System.String") {
                 return "String"
+            }
+            if (fullName == "System.Guid") {
+                return "GUID"
             }
         case None => ()
     }
@@ -4130,6 +4336,9 @@ func cjAbiTypeInContext(
     if (signature.kind == "Type" || signature.kind == "TypeReference" || signature.kind == "TypeDefinition") {
         match (signatureFullNameInContext(signature, symbolsByName, ownerFullName)) {
             case Some(fullName) =>
+                if (fullName == "System.Guid") {
+                    return "GUID"
+                }
                 if (startsWith(fullName, "System.")) {
                     return systemType(fullName)
                 }
@@ -4156,7 +4365,7 @@ func cjAbiTypeInContext(
                         }
                     case None => ()
                 }
-                return mangleFullName(fullName)
+                return qualifyMangledFullName(fullName)
             case None => ()
         }
     }

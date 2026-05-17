@@ -33,3 +33,13 @@ public func handleIsNullRaw(v: IntNative): Bool {
 public func handleIsMinusOneRaw(v: IntNative): Bool {
     return v == INVALID_HANDLE_VALUE_RAW
 }
+
+// handlePointerFromInt builds an opaque CPointer<Unit> from a numeric address.
+// Used by bindgen to materialize handle-typed constants (e.g. BCRYPT_*_ALG_HANDLE = 49
+// or INVALID_HANDLE_VALUE = -1) where the source metadata expresses the value as a
+// raw integer to be re-interpreted as a Win32 handle pointer.
+public func handlePointerFromInt(value: Int64): CPointer<Unit> {
+    let basePtr = CPointer<UInt8>()
+    let offsetPtr: CPointer<UInt8> = unsafe { basePtr + value }
+    return unsafe { CPointer<Unit>(offsetPtr) }
+}

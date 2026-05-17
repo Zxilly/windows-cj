@@ -15321,6 +15321,119 @@ func testApisClassRendersLiteralGuidAndConstantAttributeFieldConstants() {
     @Expect(apisSource.contains(
         "public static func SAMPLE_AUTH(): Sample_Foundation_AUTH {"), true)
     @Expect(apisSource.contains("        value.Value[5] = 15u8\n"), true)
+
+    var propkeySource = ""
+    for (record in records) {
+        if (record.fullName == "Sample.Foundation.PROPKEY") {
+            propkeySource = renderSymbolImpl(record, symbolsByName)
+            break
+        }
+    }
+    @Expect(propkeySource.contains("public var fmtid: GUID = GUID()"), true)
+    @Expect(apisSource.contains(
+        "        value.fmtid = windows_interface.GUID.from_values(100u32, 200u16, 300u16, 1u8, 2u8, 3u8, 4u8, 5u8, 6u8, 7u8, 8u8)\n"
+    ), true)
+}
+
+@Test
+func testApisClassRendersHandleStructLiteralConstants() {
+    let json = ##"{
+      "winmd_file": "Sample.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Sample.Cryptography",
+          "Name": "BCRYPT_ALG_HANDLE",
+          "MetadataToken": "0x02000002",
+          "BaseType": "System.ValueType",
+          "IsNested": false,
+          "Attributes": ["Public", "SequentialLayout", "Sealed"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Win32.Foundation.Metadata.NativeTypedefAttribute",
+              "FixedArguments": [],
+              "NamedArguments": []
+            }
+          ],
+          "Fields": [
+            {
+              "Name": "Value",
+              "Signature": {"Kind": "Pointer", "Type": {"Kind": "Primitive", "Name": "Void"}},
+              "Attributes": ["Public"],
+              "CustomAttributes": [],
+              "DefaultValue": null
+            }
+          ],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Sample.Cryptography",
+          "Name": "Apis",
+          "MetadataToken": "0x02000003",
+          "BaseType": "System.Object",
+          "IsNested": false,
+          "Attributes": ["Public", "AutoLayout", "Class", "Abstract", "Sealed"],
+          "CustomAttributes": [],
+          "Fields": [
+            {
+              "Name": "BCRYPT_SHA1_ALG_HANDLE",
+              "Signature": {"Kind": "Type", "Namespace": "Sample.Cryptography", "Name": "BCRYPT_ALG_HANDLE", "Comment": "TypeReference"},
+              "Attributes": ["Public", "Static", "Literal", "HasDefault"],
+              "CustomAttributes": [],
+              "DefaultValue": {"TypeCode": "UInt32", "Value": 49}
+            }
+          ],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "sample"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    var apisSource = ""
+    for (record in records) {
+        if (record.fullName == "Sample.Cryptography.Apis") {
+            apisSource = renderSymbolImpl(record, symbolsByName)
+            break
+        }
+    }
+
+    @Expect(apisSource.contains(
+        "    public static func BCRYPT_SHA1_ALG_HANDLE(): Sample_Cryptography_BCRYPT_ALG_HANDLE {\n" +
+        "        var value = Sample_Cryptography_BCRYPT_ALG_HANDLE()\n" +
+        "        value.Value = windows_polyfill.handlePointerFromInt(49i64)\n" +
+        "        return value\n" +
+        "    }\n"
+    ), true)
 }
 
 @Test
@@ -15401,6 +15514,172 @@ func testRenderOptionsFromCliConfigSysDisablesErgonomicWrappers() {
 
     @Expect(options.sys, true)
     @Expect(options.ergonomicWrappers, false)
+}
+
+@Test
+func testRenderEnumWithFlagsOpsDeriveEmitsExtendedHelpers() {
+    let json = ##"{
+      "winmd_file": "Sample.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Sample.Foundation",
+          "Name": "MyFlags",
+          "BaseType": "System.Enum",
+          "IsNested": false,
+          "Attributes": ["Public", "SequentialLayout", "Sealed"],
+          "CustomAttributes": [
+            {"Type": "System.FlagsAttribute", "FixedArguments": [], "NamedArguments": []}
+          ],
+          "Fields": [
+            {"Name": "value__", "Signature": {"Kind": "Primitive", "Name": "UInt32"}, "Attributes": ["Public", "SpecialName", "RuntimeSpecialName"], "CustomAttributes": [], "DefaultValue": null},
+            {"Name": "A", "Signature": {"Kind": "Type", "Namespace": "Sample.Foundation", "Name": "MyFlags", "Comment": "TypeReference"}, "Attributes": ["Public", "Static", "Literal", "HasDefault"], "CustomAttributes": [], "DefaultValue": {"TypeCode": "UInt32", "Value": 1}}
+          ],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "sample"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+
+    let optionsNoDerive = RenderOptions.defaults()
+    var sourceNoDerive = ""
+    for (record in records) {
+        if (record.fullName == "Sample.Foundation.MyFlags") {
+            sourceNoDerive = renderSymbolImpl(record, symbolsByName, optionsNoDerive)
+        }
+    }
+    @Expect(sourceNoDerive.contains("public operator func |"), true)
+    @Expect(sourceNoDerive.contains("public func toggle"), false)
+    @Expect(sourceNoDerive.contains("public func intersect"), false)
+
+    let optionsDerive = RenderOptions.defaults()
+    optionsDerive.derives.add("flags_ops")
+    var sourceDerive = ""
+    for (record in records) {
+        if (record.fullName == "Sample.Foundation.MyFlags") {
+            sourceDerive = renderSymbolImpl(record, symbolsByName, optionsDerive)
+        }
+    }
+    @Expect(sourceDerive.contains("public func toggle(other: Sample_Foundation_MyFlags): Sample_Foundation_MyFlags"), true)
+    @Expect(sourceDerive.contains("public func intersect(other: Sample_Foundation_MyFlags): Sample_Foundation_MyFlags"), true)
+    @Expect(sourceDerive.contains("public func union(other: Sample_Foundation_MyFlags): Sample_Foundation_MyFlags"), true)
+    @Expect(sourceDerive.contains("public func difference(other: Sample_Foundation_MyFlags): Sample_Foundation_MyFlags"), true)
+    @Expect(sourceDerive.contains("public func symmetric_difference(other: Sample_Foundation_MyFlags): Sample_Foundation_MyFlags"), true)
+}
+
+@Test
+func testRenderStructWithGuidAccessDeriveEmitsStaticGuid() {
+    let json = ##"{
+      "winmd_file": "Sample.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Sample.Foundation",
+          "Name": "Tagged",
+          "BaseType": "System.ValueType",
+          "IsNested": false,
+          "Attributes": ["Public", "SequentialLayout", "Sealed"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Win32.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 1},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 2},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 3},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 4},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 5},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 6},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 7},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 8},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 9},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 10},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 11}
+              ],
+              "NamedArguments": []
+            }
+          ],
+          "Fields": [
+            {"Name": "Value", "Signature": {"Kind": "Primitive", "Name": "UInt32"}, "Attributes": ["Public"], "CustomAttributes": [], "DefaultValue": null}
+          ],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "sample"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+
+    let optionsNoDerive = RenderOptions.defaults()
+    var sourceNoDerive = ""
+    for (record in records) {
+        if (record.fullName == "Sample.Foundation.Tagged") {
+            sourceNoDerive = renderSymbolImpl(record, symbolsByName, optionsNoDerive)
+        }
+    }
+    @Expect(sourceNoDerive.contains("public static func GUID()"), false)
+
+    let optionsDerive = RenderOptions.defaults()
+    optionsDerive.derives.add("guid_access")
+    var sourceDerive = ""
+    for (record in records) {
+        if (record.fullName == "Sample.Foundation.Tagged") {
+            sourceDerive = renderSymbolImpl(record, symbolsByName, optionsDerive)
+        }
+    }
+    @Expect(sourceDerive.contains("public static func GUID(): GUID {"), true)
+    @Expect(sourceDerive.contains(
+        "return GUID.from_values(1u32, 2u16, 3u16, 4u8, 5u8, 6u8, 7u8, 8u8, 9u8, 10u8, 11u8)"
+    ), true)
 }
 
 @Test
@@ -15965,6 +16244,90 @@ func testFilterReferencedSymbolsSupportsWildcardForNamespacePrefix() {
 }
 
 @Test
+func testQualifyMangledFullNameRespectsActiveReferences() {
+    let references = ArrayList<ReferenceStage>()
+    references.add(ReferenceStage.parse("windows_collections,flat,Windows.Foundation.Collections"))
+    setActiveReferences(references)
+    let outsideRef = qualifyMangledFullName("Windows.Foundation.IThing")
+    let insideRef = qualifyMangledFullName("Windows.Foundation.Collections.IVector")
+    clearActiveReferences()
+    let clearedRef = qualifyMangledFullName("Windows.Foundation.Collections.IVector")
+
+    @Expect(outsideRef, "Windows_Foundation_IThing")
+    @Expect(insideRef, "windows_collections.Windows_Foundation_Collections_IVector")
+    @Expect(clearedRef, "Windows_Foundation_Collections_IVector")
+}
+
+@Test
+func testWriteImplFilesAddsReferenceImportWhenSymbolIsRemapped() {
+    let json = ##"{
+      "winmd_file": "Sample.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.LocalNs",
+          "Name": "Holder",
+          "MetadataToken": "0x02000002",
+          "BaseType": "System.ValueType",
+          "IsNested": false,
+          "Attributes": ["Public", "SequentialLayout", "Sealed"],
+          "CustomAttributes": [],
+          "Fields": [
+            {
+              "Name": "extern_handle",
+              "Signature": {"Kind": "Type", "Namespace": "Example.RefNs", "Name": "RefHandle", "Comment": "TypeReference"},
+              "Attributes": ["Public"],
+              "CustomAttributes": [],
+              "DefaultValue": null
+            }
+          ],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "sample"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+
+    let options = RenderOptions.defaults()
+    options.references.add(ReferenceStage.parse("windows_refpkg,full,Example.RefNs"))
+
+    let outDir = ".generated/ref-remap-test"
+    removeIfExists(outDir, recursive: true)
+    let writer = GeneratedPackageWriter(outDir, false)
+    writeImplFiles(writer, records, "windows_local", symbolsByName, options)
+    let content = String.fromUtf8(File.readFrom("${outDir}/src/impl/symbols_0.cj"))
+    removeIfExists(outDir, recursive: true)
+
+    @Expect(content.contains("import windows_refpkg as windows_refpkg"), true)
+    @Expect(content.contains("public var extern_handle: windows_refpkg.Example_RefNs_RefHandle"), true)
+}
+
+@Test
 func testWin32GuidAttributeIsRecognizedOnInterface() {
     let json = ##"{
       "winmd_file": "Tiny.winmd",
@@ -16056,6 +16419,108 @@ func testWin32GuidAttributeIsRecognizedOnInterface() {
 
     @Expect(source.contains("@Interface[\"00000001-0000-0000-c000-000000000046\", \"Example.Win32.System.Com.IClassFactory\"]"), true)
     @Expect(source.contains("public interface Example_Win32_System_Com_IClassFactory <: IInspectable {"), true)
+}
+
+@Test
+func testImplementOptionEmitsImplTraitForWin32ComInterface() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Win32.System.Com",
+          "Name": "IClassFactory",
+          "MetadataToken": "0x02000002",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "AutoLayout", "Interface", "Abstract", "AnsiClass"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Win32.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 1},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 192},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 70}
+              ],
+              "NamedArguments": []
+            }
+          ],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "CreateInstance",
+              "Attributes": ["Public", "Virtual", "NewSlot", "Abstract"],
+              "CustomAttributes": [],
+              "ImplAttributes": ["IL", "Managed"],
+              "RelativeVirtualAddress": 0,
+              "Import": null,
+              "Signature": {
+                "GenericParameterCount": 0,
+                "Header": {"Attributes": ["Instance"], "CallingConvention": "Default", "HasExplicitThis": false, "IsGeneric": false, "IsInstance": true, "Kind": "Method"},
+                "ParameterTypes": [],
+                "RequiredParameterCount": 0,
+                "ReturnType": {"Kind": "Primitive", "Name": "Int32"}
+              },
+              "Parameters": [],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    let defaultOptions = RenderOptions.defaults()
+    let withImpl = RenderOptions()
+    withImpl.implement = true
+
+    var defaultSource = ""
+    var implSource = ""
+    for (record in records) {
+        if (record.fullName == "Example.Win32.System.Com.IClassFactory") {
+            defaultSource = renderSymbolImpl(record, symbolsByName, defaultOptions)
+            implSource = renderSymbolImpl(record, symbolsByName, withImpl)
+        }
+    }
+
+    @Expect(defaultSource.contains("public interface Example_Win32_System_Com_IClassFactory"), true)
+    @Expect(defaultSource.contains("Example_Win32_System_Com_IClassFactory_Impl"), false)
+
+    @Expect(implSource.contains("public interface Example_Win32_System_Com_IClassFactory_Impl {"), true)
+    @Expect(implSource.contains("func CreateInstance("), true)
 }
 
 @Test
