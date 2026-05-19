@@ -17,6 +17,7 @@ class QualityGatePlanTests(unittest.TestCase):
             self.step_names(["--mode", "quick"]),
             [
                 "py_compile",
+                "windows-common codegen gate",
                 "workspace setup audit",
                 "ignored results audit",
                 "ABI ownership audit",
@@ -28,6 +29,7 @@ class QualityGatePlanTests(unittest.TestCase):
             self.step_names([]),
             [
                 "py_compile",
+                "windows-common codegen gate",
                 "workspace setup audit",
                 "ignored results audit",
                 "ABI ownership audit",
@@ -57,6 +59,28 @@ class QualityGatePlanTests(unittest.TestCase):
         self.assertIn("--skip-build", command)
         self.assertTrue(command[-1].endswith("windows-core"))
 
+    def test_codegen_options_are_forwarded_to_codegen_gate(self) -> None:
+        args = gate.parse_args(
+            [
+                "--codegen-timeout-seconds",
+                "23",
+                "--skip-codegen-regenerate",
+            ]
+        )
+        steps = {step.name: step for step in gate.build_steps(args)}
+        command = steps["windows-common codegen gate"].command
+        self.assertIn("--timeout-seconds", command)
+        self.assertIn("23", command)
+        self.assertIn("--skip-regenerate", command)
+
+    def test_codegen_gate_uses_common_bindgen_script(self) -> None:
+        removed_subset_gate = "check_" + "windows" + "_sys_subset.py"
+        steps = {step.name: step for step in gate.build_steps(gate.parse_args(["--mode", "quick"]))}
+        command = steps["windows-common codegen gate"].command
+
+        self.assertTrue(command[1].endswith("check_windows_common_codegen.py"))
+        self.assertNotIn(removed_subset_gate, command)
+
     def test_macro_timeout_is_forwarded_as_environment(self) -> None:
         args = gate.parse_args(["--macro-timeout-seconds", "19"])
         steps = {step.name: step for step in gate.build_steps(args)}
@@ -76,6 +100,7 @@ class QualityGatePlanTests(unittest.TestCase):
         self.assertEqual(result, 0)
         output = stdout.getvalue()
         self.assertIn("mode = quick", output)
+        self.assertIn("check_windows_common_codegen.py", output)
         self.assertIn("check_workspace_setup.py", output)
         self.assertIn("check_ignored_results.py", output)
         self.assertIn("check_abi_ownership.py", output)

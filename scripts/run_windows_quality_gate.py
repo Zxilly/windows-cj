@@ -30,6 +30,7 @@ from typing import Sequence
 ROOT = Path(__file__).resolve().parents[1]
 DEMO_ROOT = ROOT.parent / "windows-cj-demo"
 DEFAULT_WORKSPACE_TIMEOUT_SECONDS = 240
+DEFAULT_CODEGEN_TIMEOUT_SECONDS = 300
 
 
 @dataclass(frozen=True)
@@ -53,7 +54,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         "--mode",
         choices=("quick", "full"),
         default="full",
-        help="quick runs static/script checks; full also runs workspace tests and macro fixtures.",
+        help="quick runs static/script checks; full also runs generated subset gates, workspace tests, and macro fixtures.",
     )
     parser.add_argument("--dry-run", action="store_true", help="Print the planned gate commands without running them.")
     parser.add_argument(
@@ -73,6 +74,17 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         type=positive_int,
         default=DEFAULT_WORKSPACE_TIMEOUT_SECONDS,
         help="External watchdog timeout for each workspace build/test step.",
+    )
+    parser.add_argument(
+        "--codegen-timeout-seconds",
+        type=positive_int,
+        default=DEFAULT_CODEGEN_TIMEOUT_SECONDS,
+        help="External watchdog timeout for each generated subset gate build/regenerate step.",
+    )
+    parser.add_argument(
+        "--skip-codegen-regenerate",
+        action="store_true",
+        help="Skip the full-mode temporary windows-common regeneration/diff step.",
     )
     parser.add_argument(
         "--macro-timeout-seconds",
@@ -125,6 +137,18 @@ def build_steps(args: argparse.Namespace) -> list[Step]:
         Step(
             "py_compile",
             [sys.executable, "-m", "py_compile", *[str(path) for path in py_files]],
+        ),
+        Step(
+            "windows-common codegen gate",
+            [
+                sys.executable,
+                script("scripts/check_windows_common_codegen.py"),
+                "--mode",
+                args.mode,
+                "--timeout-seconds",
+                str(args.codegen_timeout_seconds),
+                *(["--skip-regenerate"] if args.skip_codegen_regenerate else []),
+            ],
         ),
         Step("workspace setup audit", [sys.executable, script("scripts/check_workspace_setup.py")]),
         Step("ignored results audit", [sys.executable, script("scripts/check_ignored_results.py")]),

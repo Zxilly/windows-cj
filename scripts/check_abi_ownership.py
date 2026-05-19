@@ -17,35 +17,33 @@ from __future__ import annotations
 
 import re
 import sys
+import tomllib
 from pathlib import Path
 
 
-ACTIVE_WORKSPACE_MEMBERS = (
-    "windows-libloading",
-    "windows-result",
-    "windows-strings",
-    "windows-interface",
-    "windows-implement",
-    "windows-core",
-    "windows-polyfill",
-    "windows-runtime",
-    "windows-threading",
-    "windows-version",
-    "windows-targets",
-    "windows-registry",
-    "windows-services",
-    "windows-common",
-    "windows-winui3",
-    "windows",
+MATCH_EXPR_RE = re.compile(r"match\s*\(")
+QUERY_INTERFACE_HELPERS = ("queryInterfaceRaw", "queryInterfaceAs", "comQueryInterfaceRaw")
+QUERY_INTERFACE_HELPER_CALL = rf"(?:[A-Za-z_][A-Za-z0-9_]*\.)*(?:{'|'.join(QUERY_INTERFACE_HELPERS)})"
+QUERY_INTERFACE_BINDING_RE = re.compile(
+    rf"\b(?:let|var)\s+([A-Za-z_][A-Za-z0-9_]*)(?:\s*:[^=\n]+)?\s*=\s*(?:unsafe\s*\{{\s*)?{QUERY_INTERFACE_HELPER_CALL}\b",
+    re.MULTILINE,
 )
-
-QUERY_MATCH_RE = re.compile(r"match\s*\([^\n]*(?:queryInterfaceRaw|queryInterfaceAs|comQueryInterfaceRaw)")
 SOME_CASE_RE = re.compile(r"^(\s*)case\s+Some\(([A-Za-z_][A-Za-z0-9_]*)\)\s*=>", re.MULTILINE)
+CASE_RE = re.compile(r"^(\s*)case\b.*=>", re.MULTILINE)
 DIRECT_QUERY_INTERFACE_RE = re.compile(r"\.QueryInterface\s*\(")
+DISCARDED_OWNED_WRAPPER_RE = re.compile(
+    r"\b(?:let|var)\s+_\s*(?::[^=\n]+)?=\s*[^\n;]*"
+    r"(?:fromAbiTake|fromAbiTakeWinrtHandle|takeFromAbi)\s*\(",
+    re.MULTILINE,
+)
+CONDITIONAL_BLOCK_RE = re.compile(r"\b(?:if|else|while|for|match|do|case|try|catch)\b")
+NESTED_FUNCTION_BLOCK_RE = re.compile(r"\b(?:func|init|get|set)\b")
+LAMBDA_BODY_START_RE = re.compile(r"^\s*[^{}\n]*=>")
 FROM_ABI_TAKE_RE = re.compile(
     r"public\s+static\s+func\s+fromAbiTake\s*\(\s*raw:\s*CPointer<Unit>\s*\)[^{]*\{",
     re.MULTILINE,
 )
+OWNED_CONSTRUCTOR_RE = re.compile(r"\bOwned[A-Za-z0-9_]*(?:\s*<[^{}\n]+>)?\s*\(\s*raw\s*\)")
 
 # These files contain low-level helper implementations or COM forwarding thunks.
 # New direct vtable QueryInterface calls should normally go through
@@ -70,9 +68,18 @@ def fail(message: str) -> None:
     sys.exit(1)
 
 
+def workspace_members(workspace: Path) -> list[str]:
+    with (workspace / "cjpm.toml").open("rb") as f:
+        config = tomllib.load(f)
+    members = config.get("workspace", {}).get("members", [])
+    if not isinstance(members, list) or not all(isinstance(member, str) for member in members):
+        fail(f"{workspace / 'cjpm.toml'} workspace.members must be a string array")
+    return list(members)
+
+
 def cj_sources(workspace: Path, *, production_only: bool) -> list[Path]:
     sources: list[Path] = []
-    for member in ACTIVE_WORKSPACE_MEMBERS:
+    for member in workspace_members(workspace):
         src = workspace / member / "src"
         if not src.exists():
             continue
@@ -102,6 +109,103 @@ def extract_braced_block(text: str, start: int) -> str:
     fail("internal parser error: unterminated braced block")
 
 
+def matching_paren_end(text: str, open_index: int) -> int | None:
+    depth = 0
+    in_string = False
+    escaped = False
+    index = open_index
+    while index < len(text):
+        char = text[index]
+        if escaped:
+            escaped = False
+            index += 1
+            continue
+        if char == "\\" and in_string:
+            escaped = True
+            index += 1
+            continue
+        if char == '"':
+            in_string = not in_string
+            index += 1
+            continue
+        if in_string:
+            index += 1
+            continue
+        if char == "(":
+            depth += 1
+        elif char == ")":
+            depth -= 1
+            if depth == 0:
+                return index
+        index += 1
+    return None
+
+
+def matching_brace_end(text: str, open_index: int) -> int | None:
+    depth = 0
+    in_string = False
+    escaped = False
+    index = open_index
+    while index < len(text):
+        char = text[index]
+        if escaped:
+            escaped = False
+            index += 1
+            continue
+        if char == "\\" and in_string:
+            escaped = True
+            index += 1
+            continue
+        if char == '"':
+            in_string = not in_string
+            index += 1
+            continue
+        if in_string:
+            index += 1
+            continue
+        if char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                return index
+        index += 1
+    return None
+
+
+def query_interface_match_positions(text: str) -> list[int]:
+    positions: list[int] = []
+    helper_bindings = {match.group(1) for match in QUERY_INTERFACE_BINDING_RE.finditer(text)}
+    for match_expr in MATCH_EXPR_RE.finditer(text):
+        open_index = text.find("(", match_expr.start(), match_expr.end())
+        if open_index < 0:
+            continue
+        close_index = matching_paren_end(text, open_index)
+        if close_index is None:
+            continue
+        header = text[match_expr.start() : close_index + 1]
+        matched_value = text[open_index + 1 : close_index].strip()
+        if any(helper in header for helper in QUERY_INTERFACE_HELPERS) or matched_value in helper_bindings:
+            positions.append(match_expr.start())
+    return positions
+
+
+def extract_match_braced_block(text: str, match_start: int) -> tuple[str, int]:
+    open_index = text.find("(", match_start)
+    if open_index < 0:
+        fail("internal parser error: expected a match expression")
+    close_index = matching_paren_end(text, open_index)
+    if close_index is None:
+        fail("internal parser error: unterminated match expression")
+    brace = text.find("{", close_index + 1)
+    if brace < 0:
+        fail("internal parser error: expected a match body")
+    end = matching_brace_end(text, brace)
+    if end is None:
+        fail("internal parser error: unterminated match body")
+    return text[brace + 1 : end], brace + 1
+
+
 def case_body_until_next_sibling(block: str, match: re.Match[str]) -> str:
     indent = len(match.group(1))
     start = match.end()
@@ -113,31 +217,246 @@ def case_body_until_next_sibling(block: str, match: re.Match[str]) -> str:
 
 
 def query_result_consumed(body: str, name: str) -> bool:
-    patterns = (
-        rf"\breturn\b[^\n;]*\b{name}\b",
-        rf"\b(?:Some|Ok)\s*\([^)]*\b{name}\b",
-        rf"=\s*Some\s*\([^)]*\b{name}\b",
-        rf"\b{name}\s*\.\s*(?:close|intoAbi|release)\s*\(",
-        rf"\b(?:interfaceHandleReleaseRaw|comReleaseRaw|releaseRaw)\s*\(\s*{name}\s*\)",
-        rf"\b(?:takeFromAbi|releasePointer)\s*\(\s*{name}\s*\)",
-        rf"\.\s*(?:fromAbiTake|fromAbiTakeWinrtHandle)\s*\(\s*{name}\s*\)",
-        rf"\b(?:InterfaceHandle|ComHandle)<[^\n>]+>\.fromAbiTake\s*\(\s*{name}\b",
+    raw_name = re.escape(name)
+    search_body = mask_cj_strings_and_comments(body)
+    unconditional_body = mask_conditional_blocks(search_body)
+    tail_body = single_non_comment_statement(search_body)
+    final_body = last_non_comment_statement(search_body)
+    tail_expression = tail_body if tail_body is not None else final_body
+    qualified_prefix = rf"(?:[A-Za-z_][A-Za-z0-9_]*(?:\s*<[^{{}}\n]+>)?\.)*"
+    enum_wrapper = rf"{qualified_prefix}(?:Some|Ok)"
+    direct_tail_raw = tail_expression == name
+    direct_tail_wrapper = (
+        tail_expression is not None
+        and re.fullmatch(rf"{enum_wrapper}\s*\(\s*{raw_name}\s*\)", tail_expression) is not None
     )
-    return any(re.search(pattern, body, re.DOTALL) for pattern in patterns)
+    known_take_call = (
+        qualified_prefix
+        + rf"(?:takeFromAbi|fromAbiTake|fromAbiTakeWinrtHandle)\s*\(\s*{raw_name}\b[^\n;]*\)"
+    )
+    direct_tail_owned_wrapper = (
+        tail_expression is not None
+        and (
+            re.fullmatch(known_take_call, tail_expression) is not None
+            or re.fullmatch(rf"{enum_wrapper}\s*\(\s*{known_take_call}\s*\)", tail_expression) is not None
+        )
+    )
+    patterns = (
+        rf"\breturn\s+{raw_name}\b(?!\s*\.)(?:\s*(?:;|$)|\s*\n)",
+        rf"\breturn\s+{known_take_call}",
+        rf"\breturn\s+{enum_wrapper}\s*\(\s*{raw_name}\s*\)",
+        rf"\breturn\s+{enum_wrapper}\s*\([^\n;]*(?:takeFromAbi|releasePointer|fromAbiTake|fromAbiTakeWinrtHandle)\s*\(\s*{raw_name}\b[^\n;]*\)",
+        rf"\b{raw_name}\s*\.\s*(?:close|intoAbi|release)\s*\(",
+        rf"\b(?:interfaceHandleReleaseRaw|comReleaseRaw|releaseRaw)\s*\(\s*{raw_name}\s*\)",
+        rf"\breleasePointer\s*\(\s*{raw_name}\s*\)",
+    )
+    return (
+        direct_tail_raw
+        or direct_tail_wrapper
+        or direct_tail_owned_wrapper
+        or any(re.search(pattern, unconditional_body, re.DOTALL) for pattern in patterns)
+        or top_level_match_consumes_all_cases(search_body, name)
+    )
+
+
+def strip_line_comments(text: str) -> str:
+    return mask_cj_strings_and_comments(text)
+
+
+def mask_cj_strings_and_comments(text: str) -> str:
+    chars = list(text)
+
+    def mask_range(start: int, end: int) -> None:
+        for offset in range(start, end):
+            if chars[offset] != "\n":
+                chars[offset] = " "
+
+    index = 0
+    while index < len(text):
+        if text.startswith("//", index):
+            end = text.find("\n", index)
+            if end < 0:
+                end = len(text)
+            mask_range(index, end)
+            index = end
+            continue
+        if text.startswith("/*", index):
+            end = text.find("*/", index + 2)
+            if end < 0:
+                end = len(text)
+            else:
+                end += 2
+            mask_range(index, end)
+            index = end
+            continue
+        if text[index] == "#":
+            hash_count = 0
+            while index + hash_count < len(text) and text[index + hash_count] == "#":
+                hash_count += 1
+            string_start = index + hash_count
+            if string_start < len(text) and text[string_start] == '"':
+                close_marker = '"' + ("#" * hash_count)
+                end = text.find(close_marker, string_start + 1)
+                if end < 0:
+                    end = len(text)
+                else:
+                    end += len(close_marker)
+                mask_range(index, end)
+                index = end
+                continue
+        if text[index] == '"':
+            end = index + 1
+            escaped = False
+            while end < len(text):
+                char = text[end]
+                if escaped:
+                    escaped = False
+                elif char == "\\":
+                    escaped = True
+                elif char == '"':
+                    end += 1
+                    break
+                end += 1
+            mask_range(index, min(end, len(text)))
+            index = end
+            continue
+        if text[index] == "'":
+            end = index + 1
+            escaped = False
+            while end < len(text):
+                char = text[end]
+                if escaped:
+                    escaped = False
+                elif char == "\\":
+                    escaped = True
+                elif char == "'":
+                    end += 1
+                    break
+                end += 1
+            mask_range(index, min(end, len(text)))
+            index = end
+            continue
+        index += 1
+    return "".join(chars)
+
+
+def mask_conditional_blocks(text: str) -> str:
+    chars = list(text)
+    index = 0
+    while index < len(text):
+        if text[index] != "{":
+            index += 1
+            continue
+        header_end = index - 1
+        while header_end >= 0 and text[header_end].isspace():
+            header_end -= 1
+        line_start = max(
+            text.rfind("\n", 0, header_end + 1),
+            text.rfind("}", 0, header_end + 1),
+            text.rfind(";", 0, header_end + 1),
+        ) + 1
+        prefix = text[line_start : header_end + 1]
+        end = matching_brace_end(text, index)
+        if end is None:
+            return text
+        body_prefix = text[index + 1 : min(end, index + 160)]
+        if (
+            CONDITIONAL_BLOCK_RE.search(prefix)
+            or NESTED_FUNCTION_BLOCK_RE.search(prefix)
+            or LAMBDA_BODY_START_RE.search(body_prefix)
+        ):
+            for offset in range(index, end + 1):
+                if chars[offset] != "\n":
+                    chars[offset] = " "
+            index = end + 1
+            continue
+        index += 1
+    return "".join(chars)
+
+
+def top_level_match_consumes_all_cases(text: str, name: str) -> bool:
+    for match_expr in MATCH_EXPR_RE.finditer(text):
+        if brace_depth_at(text, match_expr.start()) != 0:
+            continue
+        open_index = text.find("(", match_expr.start(), match_expr.end())
+        if open_index < 0:
+            continue
+        close_index = matching_paren_end(text, open_index)
+        if close_index is None:
+            continue
+        brace = text.find("{", close_index)
+        if brace < 0:
+            continue
+        end = matching_brace_end(text, brace)
+        if end is None:
+            continue
+        block = text[brace + 1 : end]
+        cases = list(CASE_RE.finditer(block))
+        if cases and all(query_result_consumed(case_body_until_next_sibling(block, case), name) for case in cases):
+            return True
+    return False
+
+
+def brace_depth_at(text: str, target: int) -> int:
+    depth = 0
+    in_string = False
+    escaped = False
+    index = 0
+    while index < target:
+        char = text[index]
+        if escaped:
+            escaped = False
+            index += 1
+            continue
+        if char == "\\" and in_string:
+            escaped = True
+            index += 1
+            continue
+        if char == '"':
+            in_string = not in_string
+            index += 1
+            continue
+        if in_string:
+            index += 1
+            continue
+        if char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+        index += 1
+    return depth
+
+
+def single_non_comment_statement(text: str) -> str | None:
+    statements = [line.strip() for line in mask_cj_strings_and_comments(text).splitlines() if line.strip()]
+    if len(statements) != 1:
+        return None
+    if ";" in statements[0]:
+        return None
+    return statements[0]
+
+
+def last_non_comment_statement(text: str) -> str | None:
+    statements = [line.strip() for line in mask_cj_strings_and_comments(text).splitlines() if line.strip()]
+    if not statements:
+        return None
+    if ";" in statements[-1]:
+        return None
+    return statements[-1]
 
 
 def check_query_interface_results_consumed(workspace: Path) -> None:
     findings: list[str] = []
     for source in cj_sources(workspace, production_only=True):
         text = source.read_text(encoding="utf-8")
-        for query_match in QUERY_MATCH_RE.finditer(text):
-            block = extract_braced_block(text, query_match.start())
+        for query_match_start in query_interface_match_positions(text):
+            block, block_start = extract_match_braced_block(text, query_match_start)
             for some_case in SOME_CASE_RE.finditer(block):
                 name = some_case.group(2)
                 body = case_body_until_next_sibling(block, some_case)
                 if query_result_consumed(body, name):
                     continue
-                line = text[: query_match.start()].count("\n") + block[: some_case.start()].count("\n") + 1
+                line = text[:block_start].count("\n") + block[: some_case.start()].count("\n") + 1
                 findings.append(
                     f"{rel(source, workspace)}:{line}: QueryInterface result {name!r} "
                     "must be returned/wrapped or closed"
@@ -171,6 +490,24 @@ def check_direct_query_interface_call_sites(workspace: Path) -> None:
         sys.exit(1)
 
 
+def check_discarded_owned_wrappers(workspace: Path) -> None:
+    findings: list[str] = []
+    for source in cj_sources(workspace, production_only=True):
+        text = source.read_text(encoding="utf-8")
+        masked = mask_cj_strings_and_comments(text)
+        for match in DISCARDED_OWNED_WRAPPER_RE.finditer(masked):
+            line = text[: match.start()].count("\n") + 1
+            findings.append(
+                f"{rel(source, workspace)}:{line}: owned ABI wrapper constructors "
+                "must not be discarded with let _"
+            )
+    if findings:
+        print("FAIL: discarded owned ABI wrapper audit failed:", file=sys.stderr)
+        for finding in findings:
+            print(f"  {finding}", file=sys.stderr)
+        sys.exit(1)
+
+
 def check_interface_take_ownership_guard(workspace: Path) -> None:
     interface_wrapper = workspace / "windows-interface" / "src" / "interface_wrapper.cj"
     text = interface_wrapper.read_text(encoding="utf-8")
@@ -186,8 +523,8 @@ def check_from_abi_take_routes_to_owned_guard(workspace: Path) -> None:
     for source in cj_sources(workspace, production_only=True):
         relative = rel(source, workspace)
         if (
-            relative.startswith("windows-strings/")
-            or relative.startswith("windows/src/")
+            relative.startswith("windows-bindgen/")
+            or relative.startswith("windows-strings/")
             or relative.startswith("windows-interface/src/macros/")
             or relative.startswith("windows-implement/src/descriptor_codegen")
         ):
@@ -197,7 +534,7 @@ def check_from_abi_take_routes_to_owned_guard(workspace: Path) -> None:
             body = extract_braced_block(text, match.start())
             if (
                 "takeOwnership: true" in body
-                or re.search(r"\bOwned[A-Za-z0-9_]*\s*\(\s*raw\s*\)", body)
+                or OWNED_CONSTRUCTOR_RE.search(body)
                 or "requireOwnedInterfaceRaw(raw)" in body
             ):
                 continue
@@ -220,6 +557,7 @@ def main() -> None:
     workspace = Path(__file__).resolve().parent.parent
     check_query_interface_results_consumed(workspace)
     check_direct_query_interface_call_sites(workspace)
+    check_discarded_owned_wrappers(workspace)
     check_interface_take_ownership_guard(workspace)
     check_from_abi_take_routes_to_owned_guard(workspace)
     print(f"workspace = {workspace}")
