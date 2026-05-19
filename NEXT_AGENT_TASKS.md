@@ -9,6 +9,7 @@
 - 最近已知提交基线：`58c8770c fix: clean replaced abi arrays`。
 - 不要直接恢复已放弃的未提交 Round140 代码。
 - `AbiArray<HString>.get()` 所有权候选问题已结案：`windows-core/src/abi_array_test.cj` 固化了 get 返回独立 owned wrapper、replaceWith 先 clone 再 clear 的契约；`windows-core` 单包验证通过。
+- 2026-05-19 收尾基线：两轮 8 小时 bugfix 已完成；逻辑修复后的 full workspace tests 与 full quality gate 均通过，后续 EOF/hash 收尾由轻量门禁和 quick codegen 覆盖。详细流水见 `AGENT_TIMELOG_2026-05-19.md`。
 
 ## 目标
 
@@ -114,31 +115,49 @@ fake vtable 单元测试是必要的，但不足以证明生产质量。需要�
 状态定义：
 
 - **Production-ready**：核心 ABI/所有权不变量有自动测试或静态审计覆盖；当前无开放 P0/P1/P2；下一步只剩工具改进。
+- **Subset-ready**：当前 checked-in 子集有静态/生成门禁覆盖，但不能代表完整 `windows` 包已经交付。
 - **Candidate**：测试覆盖核心 ABI 路径但还缺真实 Windows smoke 或类型类别完成度；无活跃 P0/P1。
 - **Needs tests**：编译通过但单元覆盖明显不足；P0/P1 可能潜伏未发现。
 - **Blocked**：依赖未交付或上游约束未解。
+- **Not active**：不是当前 workspace member，不作为构建或 readiness 目标。
 
-最近一次刷新：2026-05-16（runtime finalizer-thread park 修复、长期 vtable/slot 存储改为 unmanaged native allocation、真实 WinRT smoke、ABI ownership 审计、`ComObject.intoInterface` 消费 owner 引用后，`windows-runtime` 163 tests passed，0 failed；WinUI3 `Application.Start` delegate ABI 改为真实 COM delegate object，`windows-cj-demo` smoke 已进入 callback 并输出 `Window activated`；按 member 直接执行 workspace 验证合计 463 passed，0 failed；`python windows-interface/scripts/check_macros.py` 约 12s 完成）。
+最近一次账本刷新：2026-05-19（两轮 bugfix 后刷新 readiness 与测试数量；`windows-propvariant`、`windows-safearray` 已进入根 workspace，并纳入 `scripts/check_workspace_setup.py` active member / dependency gate 覆盖）。
+
+收尾验证：2026-05-19 19:10 +08:00 已完成逻辑修复后的 full workspace test pass，所有 active test members 均通过；随后 `python scripts\run_windows_quality_gate.py --mode full --workspace-timeout-seconds 480 --codegen-timeout-seconds 600` 通过 full codegen、全部 workspace tests 和 macro fixtures。2026-05-19 收尾阶段又做了 generated EOF / LF-normalized manifest hash 修正，并补跑 `git diff --check`、changed Python gate scripts 的 `py_compile`、`python scripts\check_workspace_setup.py`、以及 `$env:cjHeapSize='32GB'; python scripts\check_windows_common_codegen.py --mode quick --timeout-seconds 600`，均通过。
+
+本轮门禁刷新：2026-05-18（`scripts/check_workspace_setup.py` 已通过 active workspace member / dependency / generated-output invariant gate；`scripts/check_windows_common_codegen.py --mode quick` 已通过 manifest file_hashes、`.generated/winmd-json` 顶层 `winmd_file`/`winmd_sha256` 对真实 `winmd/*.winmd` 的 checksum、以及 `windows-common` 编译入口；`scripts/check_windows_common_codegen.py --mode full` 已通过当前可用 Windows/Win32/Wdk metadata 子集再生成与 checked-in `windows-common` diff。旧的可用子集 diff 已关闭：MsXml extra、DEVPROPKEY/PROPERTYKEY/BINDINFO GUID layout、SetLastError BOOL checked helper、Com/Ole/Threading vtbl alias 不再列入 blocker。当前仓库只有 Windows/Win32/Wdk winmd-json，仓库内没有已转换的 `Microsoft.UI.*` JSON；本机 NuGet cache 可作为外部 WinUI/WindowsAppSDK `.winmd` 来源，但 gate 和转换 helper 都默认不自动消费本机 cache，因此缺 converted WinUI JSON 时 10 个 `Microsoft.UI.Xaml.*` requested feature 仍明确记录为 blocked/skipped。worker BB 新增 `scripts/convert_winmd_to_json.py`，支持显式 `--winmd-root` 到 JSON 目录转换、`--dry-run` 和 `--list-candidates`，并让 gate 错误提示引用该 helper。带 WinUI 的 full gate 需要通过 `--winui-winmd-json-dir` / `WINDOWS_CJ_WINUI_WINMD_JSON_DIRS` 加入 helper 产出的 JSON，并用 `--winui-winmd-root` / `WINDOWS_CJ_WINUI_WINMD_ROOTS` 校验对应原始 `.winmd` hash。）
+
+本机 WinUI metadata gate 评估：2026-05-18（worker 3 只读优先验证 helper。候选发现命令：`python .\scripts\convert_winmd_to_json.py --list-candidates --candidate-limit 50`。最新本机 WindowsAppSDK roots 为 `%USERPROFILE%\.nuget\packages\microsoft.windowsappsdk\1.4.231219000\lib\uap10.0` 和 `...\lib\uap10.0.18362`；转换命令：`python .\scripts\convert_winmd_to_json.py --winmd-root $rootA --winmd-root $rootB --json-dir $jsonDir --overwrite --timeout-seconds 300`，临时目录内 17 个 `.winmd` 成功生成 57 个 JSON。验证命令：`python .\scripts\check_windows_common_codegen.py --mode full --skip-build --winui-winmd-json-dir $jsonDir --winui-winmd-root $rootA --winui-winmd-root $rootB --timeout-seconds 300`。结果：不能在本机完整跑通 checked-in parity；metadata hash 校验通过（739 个 JSON、包含 17 个 WinUI/WindowsAppSDK source 和默认 Windows/Win32/Wdk source），`cjpm build -m windows-bindgen` 通过，但带 WinUI 再生成后 manifest 的 `selected_symbols` / `files` / `file_hashes` 与 checked-in `windows-common` 不一致。临时再生成统计：checked-in 1603 selected symbols / 136 files；本机 WindowsAppSDK 1.4 再生成 2222 selected symbols / 157 files，新增 626 symbols 和 21 files，且缺少 checked-in 里的 `Microsoft.UI.Xaml.DispatcherShutdownMode`、`Microsoft.UI.Xaml.IApplication3`、`Microsoft.UI.Xaml.IDebugSettings3`、`Microsoft.UI.Xaml.IXamlRoot3`、`Microsoft.UI.Xaml.IXamlRoot4`、`Microsoft.UI.Xaml.LayoutCycleDebugBreakLevel`、`Microsoft.UI.Xaml.LayoutCycleTracingLevel`。这些 7 个 symbols 在本机 `Microsoft.WindowsAppSDK` 1.1.0..1.4.231219000 与 `Microsoft.UI.Xaml` 2.0/2.5/2.8 candidate 转换后的 `Microsoft.UI.Xaml.winmd` JSON 中均未出现。单独使用 `%USERPROFILE%\.nuget\packages\microsoft.ui.xaml\2.8.2-prerelease.220830001\lib\uap10.0` 可转换 1 个 `.winmd` 为 8 个 JSON，但 full gate 在 generator 阶段失败：`unknown feature: Microsoft.UI.Xaml.Application`。下一步需要获取与 checked-in WinUI surface 匹配的 WinUI/WindowsAppSDK metadata，或明确重定当前 `windows-common` WinUI selected subset；不要提交临时 WinUI JSON。）
+
+本轮交付面审计更正：2026-05-18（当前 root workspace member 是 `windows-bindgen`，不是旧的 `windows-cj/windows`；`windows-cj/windows-bindgen/cjpm.toml` 的 package name 是 `windows_bindgen`，用户 CLI 名称记录为 `windows-bindgen`。WinMD reader 只有 C#/.NET `winmd-to-json` converter；Cangjie bindgen 只消费 converter 产出的 JSON，不计划实现 native Cangjie `.winmd` reader。当前 root workspace 不再包含 `windows-sys` / `windows_sys`。由于仓颉编译速度约束，full raw sys package 不再作为交付目标；需要 Win32/WinRT ABI surface 时，优先通过 selected generated/common support、明确 feature set 和 manifest gate 扩展。`windows_projection` 仍只是消费侧 scaffold，checked-in 可导入生成面仍主要是 `windows-common` / `windows_common`，manifest 为 19 个 requested features、1603 个 selected symbols、136 个 generated files。）
+
+上一轮质量刷新：2026-05-16（runtime finalizer-thread park 修复、长期 vtable/slot 存储改为 unmanaged native allocation、真实 WinRT smoke、ABI ownership 审计、`ComObject.intoInterface` 消费 owner 引用后，`windows-runtime` 163 tests passed，0 failed；WinUI3 `Application.Start` delegate ABI 改为真实 COM delegate object，`windows-cj-demo` smoke 已进入 callback 并输出 `Window activated`；按 member 直接执行 workspace 验证合计 463 passed，0 failed；`python windows-interface/scripts/check_macros.py` 约 12s 完成）。
 
 | Package | 状态 | 测试数 | 关键不变量覆盖 | 下一步 |
 | --- | --- | --- | --- | --- |
-| `windows-libloading` | Production-ready | 9 | System32-only / explicit search-path 双策略；DLL 缓存；path-like 模块名拒绝 | 工具：审计扩展到泛 native helper 调用 |
-| `windows-result` | Production-ready | 13 | HRESULT / NTSTATUS / RPC_STATUS / WIN32_ERROR `.ok()`/`.unwrap()`/`.check()` 三栏；公开符号 surface 测试 | — |
-| `windows-strings` | Production-ready | 8 | HSTRING handle 生命周期、ref-backed vs alloc-backed clone、BSTR `fromRaw*` 视图 | smoke：WindowsCreateString / DeleteString 真实调用 |
+| `windows-libloading` | Production-ready | 13 | System32-only / explicit search-path 双策略；DLL 缓存；path-like 模块名拒绝；ordinal 范围校验；public uncached byte inputs 必须 NUL 终止 | — |
+| `windows-result` | Production-ready | 21 | HRESULT / NTSTATUS / RPC_STATUS / WIN32_ERROR `.ok()`/`.unwrap()`/`.check()` 三栏；公开符号 surface；error-info BSTR / QueryInterface failed-output cleanup | — |
+| `windows-strings` | Production-ready | 11 | HSTRING handle 生命周期、ref-backed vs alloc-backed clone、BSTR `fromRaw*` 视图；lossy UTF-8 trailing incomplete sequence emits replacement char | smoke：WindowsCreateString / DeleteString 真实调用 |
 | `windows-result` internal BSTR helper / `windows-strings.BSTR` | Production-ready | — | 公开/生成 Win32 BSTR 统一映射到 `windows_strings.BSTR`；`windows-result.BasicString` 仅为内部 error-info helper，显式 `close()` 释放，finalizer 不跑 native free | — |
-| `windows-interface` | Production-ready | 8 | Macro 生成 vtable 形态；descriptor 基础约束；继承链覆盖 fixture | — |
-| `windows-implement` | Production-ready | 19 | Schema vtable resolution、深继承 slot 数、QI ancestor fallback、custom vtable 必填 | smoke：真实 ComObject 注册 / WinRT activation |
-| `windows-core` | Production-ready | 24 | AbiArray owned semantics（红测固化）、HString winrt out/in 边界、null owned 拒绝、generic factory borrow view | 类型类别矩阵补齐（见下） |
+| `windows-interface` | Production-ready | 19 | Macro 生成 vtable 形态；descriptor 基础约束；继承链覆盖 fixture；manual wrapper `release()` / `intoAbi()` re-entrant ownership | — |
+| `windows-implement` | Production-ready | 30 | Schema vtable resolution、深继承 slot 数、QI ancestor fallback、custom vtable 必填；descriptor/composable/weak-reference failed-output cleanup | smoke：真实 ComObject 注册 / WinRT activation |
+| `windows-core` | Production-ready | 57 | AbiArray owned semantics（红测固化）、HString winrt out/in 边界、null owned 拒绝、generic factory borrow view；WinRT generic out range / QueryInterface / marshaler / factory failed-output cleanup | — |
 | `windows-polyfill` | Production-ready | 60 | factory_cache、reflective COM 接入、polyfill 形态 | — |
-| `windows-runtime` | Production-ready | 163 | Vector/VectorView/Map/MapView/Iterator/Array scalar + copy struct + HString + COM interface 代表 ABI；async finish/cancel/fail；collection null-buffer guard；真实 WinRT activation / PropertyValue array / Uri decoder smoke | 工具：继续扩展静态审计 |
+| `windows-runtime` | Production-ready | 197 | Vector/VectorView/Map/MapView/Iterator/Array scalar + copy struct + HString + COM interface 代表 ABI；async finish/cancel/fail；collection null-buffer guard；GetMany / Split / PropertyValue array failed-output cleanup；真实 WinRT activation / PropertyValue array / Uri decoder smoke | 工具：继续扩展静态审计 |
 | `windows-threading` | Production-ready | 6 | submit / submitDefault / closeInternal；真实 Windows threadpool submit/forEach/withScope smoke；裸 Pool 使用由静态审计要求显式 close 或 withScope | — |
 | `windows-version` | Production-ready | 3 | 版本字符串解析；OS 包装 ABI 类型；当前系统版本 smoke | — |
-| `windows-targets` | Production-ready | 2 | 链接 target 选择；bundled GNU archive 元数据；`check_workspace_setup.py` 校验 archive 名称、存在性和非空 payload | — |
-| `windows-registry` | Production-ready | 7 | 字节↔宽字符转换、ABI types 委托给 windows-common；真实 HKCU volatile key roundtrip smoke | — |
-| `windows-services` | Production-ready | 6 | dispatch / 状态守护 synchronized 块；dispatcher failure smoke；fallback path 覆盖 start/stop 状态序列 | 可选：单独的管理员/服务宿主集成 harness，不作为常规单测门禁 |
-| `windows-common` | Production-ready | 0 (generated) | 由 `check_workspace_setup.py` 强校验：DO NOT EDIT 头、SHA256 哈希、WinUI3 delegate raw COM pointer、delegate `HandleWinrtType`、依赖闭包 | — |
-| `windows-winui3` | Production-ready | 5 | XAML / Markup / Controls 手写 helper；HSTRING 输入借用；`Application.Start` 真实 WinRT delegate COM object；demo smoke 激活窗口 | — |
-| `windows` (CLI) | Production-ready | 125 | render_symbol / interface / runtime class / collection thunk 模板；生成 manifest file_hashes；`--input-dir`；生成文件 EOF 规范化 | — |
+| `windows-numerics` | Production-ready | 9 | Vector2/Vector3/Vector4 与 Matrix3x2/Matrix4x4 构造、算术、比较和投影 helper | — |
+| `windows-variant` | Candidate | 13 | VARIANT scalar/BSTR/raw pointer payload roundtrip；`Variant` Resource clone/clear 路径；failed native cleanup preserves ownership for retry；re-entrant clear guard | smoke：真实 COM VARIANT interop |
+| `windows-propvariant` | Candidate | 17 | PROPVARIANT scalar、FILETIME、CLSID、blob、LPSTR/LPWSTR、BSTR、raw COM pointer payload；`PropVariant` Resource clone/clear 路径；re-entrant clear guard | smoke：真实 shell property API roundtrip |
+| `windows-safearray` | Candidate | 23 | SAFEARRAY create/destroy/lock/access；I4/R8/BSTR/VARIANT typed arrays；ownership transfer 和 descriptor deep copy；clone partial-output destroy；re-entrant destroy guard | smoke：真实 COM SAFEARRAY consumer/provider roundtrip |
+| `windows-targets` | Production-ready | 2 | 链接 target 选择；bundled GNU archive 元数据；`check_workspace_setup.py` 校验 archive 名称、存在性和非空 payload；当前 active payload 仅 `x86_64_gnu`，其它 target 明确 unsupported/no bundled payload | — |
+| `windows-registry` | Production-ready | 12 | 字节↔宽字符转换、ABI types 委托给 windows-common；真实 HKCU volatile key roundtrip smoke；Key/Transaction re-entrant native close guard | — |
+| `windows-services` | Production-ready | 8 | dispatch / 状态守护 synchronized 块；dispatcher failure smoke；fallback path 覆盖 start/stop 状态序列；`Service.run()` finally unregisters active service id | 可选：单独的管理员/服务宿主集成 harness，不作为常规单测门禁 |
+| `windows-common` | Subset-ready | 0 (generated) | 由 `check_workspace_setup.py` 强校验：DO NOT EDIT 头、SHA256 哈希、WinUI3 delegate raw COM pointer、delegate `HandleWinrtType`、依赖闭包；`check_windows_common_codegen.py --mode quick` 覆盖真实 WinMD JSON checksum 与编译入口；full 对当前可用 Windows/Win32/Wdk metadata 子集再生成并 diff，当前可用子集无剩余 diff；WinUI feature 在缺 metadata 时明确 blocked/skipped；`scripts/convert_winmd_to_json.py` 可将显式 WinUI/WindowsAppSDK `.winmd` root 转为 JSON 并通过 hash gate，但本机 WindowsAppSDK 1.4 / Microsoft.UI.Xaml 2.x metadata 尚不能重现 checked-in WinUI parity（见上方 worker 3 记录）。注意：这是 `windows_common` selected subset，不是完整 high-level `windows` 包；当前 workspace 没有 `windows_sys` / `windows-sys`，full raw sys package 因仓颉编译速度约束不再作为交付目标 | 获取与 checked-in WinUI surface 匹配的 WinUI/WindowsAppSDK metadata，或明确重定 `windows-common` WinUI selected subset；设计 full projection package / selected generated/common support / feature slicing；继续使用 `winmd-to-json` 作为唯一 WinMD reader |
+| `windows-winui3` | Production-ready | 14 | XAML / Markup / Controls 手写 helper；HSTRING 输入借用；`Application.Start` 真实 WinRT delegate COM object；manual helper failed out-slot cleanup for CreateInstance / FindName / Load | — |
+| `windows-projection` | Subset-ready | 2 (scaffold import smoke) | `windows_projection` scaffold 可导入 checked-in `windows_common`，并暴露 tiny `windows_projection.Win32.Foundation` 与 `windows_projection.Win32.System.Threading` facade；它不是 full consumer `windows` projection package | 明确保留 `windows_projection` 作为消费包名或另行设计 full projection package 后，扩展 projection surface 与 feature slicing |
+| `windows-sys` / `windows_sys` | Not active | — | 当前 root workspace 不包含该 package。仓颉编译速度使 full raw sys package 成为错误交付面；不要把它作为 active readiness 目标 | 如需 Win32/WinRT ABI surface，扩展 selected generated/common support，并让 manifest/gate 覆盖明确 feature set |
+| `windows-bindgen` (generator CLI) | Production-ready | 187 | 目录 `windows-cj/windows-bindgen`，package name `windows_bindgen`，用户 CLI 名称记录为 `windows-bindgen`；render_symbol / interface / runtime class / collection thunk 模板；generated native helper checked wrappers；generic aliases；raw handle/delegate `Resource` wrappers；manifest file_hashes；`--input-dir`；生成文件 EOF 规范化。注意：该 package 是 executable generator，不是用户可依赖的 high-level `windows` projection package；它只消费 JSON，WinMD reader 是 C#/.NET `winmd-to-json` | 后续若要交付 full `windows` 包，应与 `windows-bindgen` 保持命名和职责边界清晰 |
 
 不变量覆盖（向量化清单）：
 
@@ -146,15 +165,25 @@ fake vtable 单元测试是必要的，但不足以证明生产质量。需要�
 - ✅ HSTRING 唯一释放方：`windows-strings` + `windows-core` ABI 边界 + AbiArray.get() owned clone。
 - ✅ HRESULT 失败不被静默 `.ok()` 吞：`scripts/check_ignored_results.py` 审计。
 - ✅ `Resource.close()` 与 finalizer closed/raw-slot 标记防 double free：`windows-core` / `windows-runtime` impl 测试；native 释放责任在 `close()`，finalizer 不再执行 native cleanup；`scripts/check_workspace_setup.py` 要求持有 `allocateNativeValue`/`allocateNativeArray` 的 class 具备 `Resource.close()`、refcount destroy 或 runtime onDestroy 释放路径。
-- ✅ finalizer 不阻塞：`scripts/check_workspace_setup.py` 扫描所有 active `.cj` 的 `~init()`，拒绝直接 `synchronized` / `lock` / `unlock`，并拒绝已知间接阻塞 helper（如动态 `resolveProc`、HSTRING/BSTR/native free、COM registry `releaseBase`、registry/threadpool cleanup wait）。
+- ✅ finalizer 不阻塞：`scripts/check_workspace_setup.py` 扫描所有 active `.cj` 的 `~init()`，拒绝直接 `synchronized` / `lock` / `unlock`，并拒绝已知间接 native/COM cleanup helper（如 `release*NoThrow`、`destroySafeArrayNoThrow`、`closeRegistryKey*`、`closeHString*`、`releaseOwnedComPointer`、动态 `resolveProc`、HSTRING/BSTR/native free、COM registry `releaseBase`、registry/threadpool cleanup wait）；普通 `Resource.close()` 中的 helper cleanup 仍允许。
 - ✅ 临时 `ComObject` 投影不会泄漏 owner 初始引用：`ComObject.intoInterface` 投影成功后立即 `close()` owner，返回的 owned interface 持有唯一活引用；`scripts/check_workspace_setup.py` 拒绝生产代码用临时 `ComObject` `toInterface()` 后忘记 `close()` / `releaseBase()`。
 - ✅ 真实 Windows smoke：`windows_runtime_smoke_test.cj` 覆盖 activation factory 失败路径、`PropertyValue.CreateInt32Array` roundtrip、`Uri` / `WwwFormUrlDecoder` HSTRING 与集合投影 roundtrip。
 - ✅ generated vtable thunk 非零容量 null buffer guard：`windows-runtime/collection_null_buffer_thunk_test.cj` 与 vector/vector view/iterator direct ABI 测试覆盖代表类型类别。
 - ✅ owned QueryInterface 结果确定性关闭：`scripts/check_abi_ownership.py` 自动审计 `queryInterfaceRaw` / `queryInterfaceAs` / `comQueryInterfaceRaw` 的 `Some(raw)` 消费路径。
 - ✅ array/raw-slot 部分失败清理：`scripts/check_workspace_setup.py` 审计 `AbiArray`、`ArrayProxy`、generic WinRT handle arrays、PropertyValue HSTRING/interface array materializer，要求失败路径释放已接管元素、剩余 raw slot 和 CoTaskMem buffers。
 - ✅ WinRT delegate ABI：生成器将 WinRT delegate 参数渲染为 COM pointer / raw handle class，raw handle class 实现 `HandleWinrtType`；`windows-winui3` 为 `ApplicationInitializationCallback` 构造 IUnknown-based COM object，demo smoke 已验证 `Application.Start` 回调进入并激活窗口。
+- ✅ failed-HRESULT partial output cleanup：client wrappers、producer thunks、generated descriptor/runtime wrappers、WinUI helpers、BSTR/HSTRING/COM/interface/SAFEARRAY paths 均有代表测试或静态审计覆盖，失败前清 slot 并释放已接管资源。
+- ✅ generated raw handle ownership：生成 raw COM/interface handle wrappers 实现 `Resource`，区分 owned/borrowed handles，并用 workspace invariant 拒绝缺少 `Resource` 的 stale raw wrappers。
+- ✅ stale caller slot 防护：GetMany、Split、PropertyValue array、descriptor producer 和 QueryInterface fallback 路径在 dispatch 前清 out slots / result counts，避免 no-write failure 释放调用方旧值。
 
-后续工具改进（非阻塞）：继续扩展静态审计到更多生成 wrapper 边界；`CoTaskMemAlloc` / raw HSTRING slot materialization 失败清理、out-parameter array 部分 materialize 失败清理已由 `scripts/check_workspace_setup.py` 的 array materialization cleanup 门禁覆盖。
+后续工具改进（非阻塞）：继续扩展静态审计到更多生成 wrapper 边界；`CoTaskMemAlloc` / raw HSTRING slot materialization 失败清理、out-parameter array 部分 materialize 失败清理已由 `scripts/check_workspace_setup.py` 的 array materialization cleanup 门禁覆盖。剩余产品化 blocker 是 WinUI metadata parity、`windows-variant`/`windows-propvariant`/`windows-safearray` 真实 Windows smoke，以及 full projection package / selected generated support 的交付边界。
+
+## 交付收尾状态
+
+- 2026-05-19：两轮 8 小时 bugfix 目标已完成，最终验证通过；后续 heartbeat 自动化已删除。
+- 轻量收尾检查通过：`git diff --check`、changed Python gate scripts 的 `py_compile`、`python scripts\check_workspace_setup.py`、`$env:cjHeapSize='32GB'; python scripts\check_windows_common_codegen.py --mode quick --timeout-seconds 600`。
+- 建议提交拆分：quality gate scripts；core/runtime/implement/interface ownership fixes；generator 与 `windows-common` 同步；targeted package fixes（WinUI/libloading/services/strings/variant/propvariant/safearray/registry/result）；timelog/readiness docs。
+- 不建议直接开启第三轮盲修。下一项工程任务应从明确 blocker 中选择：WinUI metadata parity、真实 COM smoke、或 projection/package boundary。
 
 ## 已完成批次记录
 
