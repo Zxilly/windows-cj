@@ -1,5 +1,5 @@
 [package]
-  name = "windows"
+  name = "windows_bindgen"
   version = "0.1.0"
   description = "Windows metadata bindgen CLI for Cangjie"
   output-type = "executable"

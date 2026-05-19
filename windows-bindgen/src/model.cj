@@ -1,4 +1,4 @@
-package windows
+package windows_bindgen
 
 import std.collection.*
 import stdx.encoding.json.*
@@ -140,6 +140,29 @@ public class TypeLayoutRecord {
     }
 }
 
+public class TargetAbiOptions {
+    public let pointerSize: Int64
+
+    public init(pointerSize!: Int64 = 8) {
+        if (pointerSize != 4 && pointerSize != 8) {
+            throw Exception("target pointer size must be 4 or 8 bytes")
+        }
+        this.pointerSize = pointerSize
+    }
+
+    public static func defaults(): TargetAbiOptions {
+        return TargetAbiOptions()
+    }
+
+    public static func pointer32(): TargetAbiOptions {
+        return TargetAbiOptions(pointerSize: 4)
+    }
+
+    public static func pointer64(): TargetAbiOptions {
+        return TargetAbiOptions(pointerSize: 8)
+    }
+}
+
 public class FieldRecord {
     public let name: String
     public let signature: SignatureRecord
@@ -231,20 +254,59 @@ public class MethodImportRecord {
     public let moduleReference: Option<ModuleReferenceRecord>
     public let attributes: ArrayList<String>
     public let customAttributes: ArrayList<CustomAttributeRecord>
+    public let callingConvention: String
 
     public init(
         name: String,
         moduleName: String,
         moduleReference!: Option<ModuleReferenceRecord> = None,
         attributes!: ArrayList<String> = ArrayList<String>(),
-        customAttributes!: ArrayList<CustomAttributeRecord> = ArrayList<CustomAttributeRecord>()
+        customAttributes!: ArrayList<CustomAttributeRecord> = ArrayList<CustomAttributeRecord>(),
+        callingConvention!: String = ""
     ) {
         this.name = name
         this.moduleName = moduleName
         this.moduleReference = moduleReference
         this.attributes = attributes
         this.customAttributes = customAttributes
+        let normalizedConvention = normalizeMethodImportCallingConvention(callingConvention)
+        if (normalizedConvention.isEmpty()) {
+            this.callingConvention = methodImportCallingConventionFromAttributes(attributes)
+        } else {
+            this.callingConvention = normalizedConvention
+        }
     }
+}
+
+public func normalizeMethodImportCallingConvention(value: String): String {
+    match (value) {
+        case "CallingConventionWinApi" => return "WinApi"
+        case "CallingConventionCDecl" => return "CDecl"
+        case "CallingConventionStdCall" => return "StdCall"
+        case "CallingConventionThisCall" => return "ThisCall"
+        case "CallingConventionFastCall" => return "FastCall"
+        case _ => return value
+    }
+}
+
+func methodImportCallingConventionFromAttributes(attributes: ArrayList<String>): String {
+    var convention = "Default"
+    for (attribute in attributes) {
+        let normalizedConvention = normalizeMethodImportCallingConvention(attribute)
+        if (isMethodImportCallingConvention(normalizedConvention)) {
+            convention = normalizedConvention
+        }
+    }
+    return convention
+}
+
+func isMethodImportCallingConvention(value: String): Bool {
+    return value == "Default" ||
+        value == "WinApi" ||
+        value == "CDecl" ||
+        value == "StdCall" ||
+        value == "ThisCall" ||
+        value == "FastCall"
 }
 
 public class GenericParameterRecord {

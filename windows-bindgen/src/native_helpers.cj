@@ -1,4 +1,4 @@
-package windows
+package windows_bindgen
 
 import std.collection.*
 
@@ -528,11 +528,11 @@ func renderNativeSetLastErrorCheckedWrapper(spec: NativeFunctionSpec, symbolsByN
     let methodName = cjIdentifier(spec.method.name)
     let publicParams = nativeFunctionParameterText(spec, symbolsByName)
     let args = nativeFunctionPublicArgumentText(spec, symbolsByName)
-    var content = "public func ${methodName}Checked(${publicParams}): Result<Unit> {\n"
+    var content = "public func ${methodName}Checked(${publicParams}): windows_core.Result<Unit> {\n"
     content += "    if (${methodName}(${args})) {\n"
-    content += "        return Result<Unit>.Ok(())\n"
+    content += "        return windows_core.Result<Unit>.Ok(())\n"
     content += "    }\n"
-    content += "    Result<Unit>.Err(windows_core.errorFromThread())\n"
+    content += "    windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
     content += "}\n"
     return content
 }
@@ -545,9 +545,33 @@ func nativeMethodNeedsSetLastErrorCheckedWrapper(
     if (!nativeMethodSetsLastError(method)) {
         return false
     }
+    if (nativeMethodReturnsSemanticBool(method)) {
+        return false
+    }
     let returnType = nativePublicType(method.signature.returnType, symbolsByName, ownerFullName)
     let rawReturnType = nativeRawType(method.signature.returnType, symbolsByName, ownerFullName)
     return returnType == "Bool" && nativeIsIntegerBoolAbiType(rawReturnType)
+}
+
+func nativeMethodReturnsSemanticBool(method: MethodRecord): Bool {
+    if (nativeMethodHasOutParameter(method)) {
+        return false
+    }
+    return startsWithString(method.name, "Is") ||
+        startsWithString(method.name, "Are") ||
+        startsWithString(method.name, "Can") ||
+        startsWithString(method.name, "Does") ||
+        startsWithString(method.name, "Equal") ||
+        startsWithString(method.name, "Has")
+}
+
+func nativeMethodHasOutParameter(method: MethodRecord): Bool {
+    for (parameter in method.parameters) {
+        if (contains(parameter.attributes, "Out")) {
+            return true
+        }
+    }
+    return false
 }
 
 func nativeMethodSetsLastError(method: MethodRecord): Bool {

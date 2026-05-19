@@ -1,4 +1,4 @@
-package windows
+package windows_bindgen
 
 import std.collection.*
 import std.fs.*
@@ -12,6 +12,15 @@ func cliTestThrows(action: () -> Unit): Bool {
         return true
     }
     false
+}
+
+func cliTestExceptionMessage(action: () -> Unit): String {
+    try {
+        action()
+    } catch (err: Exception) {
+        return "${err}"
+    }
+    return ""
 }
 
 func cliTestContainsSymbol(symbols: ArrayList<SymbolRecord>, fullName: String): Bool {
@@ -38,6 +47,107 @@ func cliTestRecordsByName(records: ArrayList<SymbolRecord>): HashMap<String, Sym
         map.add(record.fullName, record)
     }
     return map
+}
+
+func cliTestPInvokeApiSymbol(conventionAttribute: String): SymbolRecord {
+    let importAttributes = ArrayList<String>()
+    importAttributes.add("ExactSpelling")
+    if (!conventionAttribute.isEmpty()) {
+        importAttributes.add(conventionAttribute)
+    }
+    let methods = ArrayList<MethodRecord>()
+    methods.add(MethodRecord(
+        "CallNative",
+        MethodSignatureRecord(SignatureRecord("Primitive", name: "Int32")),
+        methodImport: Some(MethodImportRecord("CallNative", "native.dll", attributes: importAttributes))
+    ))
+    let typeAttributes = ArrayList<String>()
+    typeAttributes.add("Public")
+    typeAttributes.add("Class")
+    let typeDef = TypeDefinitionRecord(
+        "Example.Native",
+        "Apis",
+        baseType: "System.Object",
+        hasBaseType: true,
+        attributes: typeAttributes,
+        methods: methods
+    )
+    return SymbolRecord(
+        "Example.Native.Apis",
+        "Example.Native",
+        "Apis",
+        "Example_Native_Apis",
+        [],
+        typeDef: Some(typeDef)
+    )
+}
+
+@Test
+func testWinrtProjectedPrimitiveStringUsesHString() {
+    let symbolsByName = HashMap<String, SymbolRecord>()
+
+    @Expect(
+        winrtProjectedTypeName(SignatureRecord("Primitive", name: "String"), symbolsByName, "Example.Foundation.Uri"),
+        "windows_core.HString"
+    )
+    @Expect(
+        winrtProjectedTypeName(SignatureRecord("Primitive", name: "Object"), symbolsByName, "Example.Foundation.Value"),
+        "windows_interface.IInspectable"
+    )
+}
+
+@Test
+func testClosedWinrtGenericValueStructArgumentFallsBackToInspectable() {
+    let symbolsByName = HashMap<String, SymbolRecord>()
+    let vectorAttributes = ArrayList<String>()
+    vectorAttributes.add("Public")
+    vectorAttributes.add("AutoLayout")
+    vectorAttributes.add("Interface")
+    vectorAttributes.add("Abstract")
+    vectorAttributes.add("WindowsRuntime")
+    let vectorGenerics = ArrayList<GenericParameterRecord>()
+    vectorGenerics.add(GenericParameterRecord("T"))
+    let vectorDef = TypeDefinitionRecord(
+        "Example.Foundation",
+        "IVectorView`1",
+        attributes: vectorAttributes,
+        genericParameters: vectorGenerics
+    )
+    let valueAttributes = ArrayList<String>()
+    valueAttributes.add("Public")
+    valueAttributes.add("SequentialLayout")
+    let valueDef = TypeDefinitionRecord(
+        "Example.Foundation",
+        "Usage",
+        baseType: "System.ValueType",
+        hasBaseType: true,
+        attributes: valueAttributes
+    )
+    symbolsByName.add("Example.Foundation.IVectorView`1", SymbolRecord(
+        "Example.Foundation.IVectorView`1",
+        "Example.Foundation",
+        "IVectorView`1",
+        "Example_Foundation_IVectorView_1",
+        [],
+        typeDef: Some(vectorDef)
+    ))
+    symbolsByName.add("Example.Foundation.Usage", SymbolRecord(
+        "Example.Foundation.Usage",
+        "Example.Foundation",
+        "Usage",
+        "Example_Foundation_Usage",
+        [],
+        typeDef: Some(valueDef)
+    ))
+    let arguments = ArrayList<SignatureRecord>()
+    arguments.add(SignatureRecord("Type", name: "Usage", namespace: "Example.Foundation", hasNamespace: true))
+    let signature = SignatureRecord(
+        "Generic",
+        typeSig: Some(SignatureRecord("Type", name: "IVectorView`1", namespace: "Example.Foundation", hasNamespace: true)),
+        typeArguments: arguments
+    )
+
+    @Expect(winrtProjectedTypeName(signature, symbolsByName, "Example.Foundation.Device"), "windows_interface.IInspectable")
 }
 
 func cliTestHelperFile(files: ArrayList<GeneratedNativeHelperFile>, path: String): String {
@@ -88,7 +198,7 @@ func testParseArgsDefaultsAndDeduplicatesFeatures() {
 
     @Expect(defaults.features.size, 1)
     @Expect(defaults.features[0], "all")
-    @Expect(defaults.packageName, "windows_gen")
+    @Expect(defaults.packageName, "windows")
     @Expect(defaults.inputJsonPaths[0], "metadata.json")
     @Expect(defaults.outputDir, ".generated/windows")
     @Expect(repeated.features.size, 1)
@@ -102,6 +212,129 @@ func testParseArgsAcceptsInputDir() {
     @Expect(config.inputJsonDirs.size, 1)
     @Expect(config.inputJsonDirs[0], ".generated/winmd-json")
     @Expect(config.inputJsonPaths.isEmpty(), true)
+}
+
+@Test
+func testParseArgsAcceptsPositionalJsonAndJsonDir() {
+    let dir = ".generated/cli-json-input-test"
+    removeIfExists(dir, recursive: true)
+    Directory.create(dir, recursive: true)
+    File.writeTo("${dir}/metadata.json", "{}".toArray())
+
+    let config = parseArgs(["metadata.json", dir, "--feature", "Windows.Foundation"])
+    removeIfExists(dir, recursive: true)
+
+    @Expect(config.inputJsonPaths.size, 1)
+    @Expect(config.inputJsonPaths[0], "metadata.json")
+    @Expect(config.inputJsonDirs.size, 1)
+    @Expect(config.inputJsonDirs[0], dir)
+    @Expect(config.inputWinmdPaths.isEmpty(), true)
+    @Expect(config.inputWinmdDirs.isEmpty(), true)
+}
+
+@Test
+func testParseArgsRecognizesWinmdInputsAndDefault() {
+    let dir = ".generated/cli-winmd-input-test"
+    removeIfExists(dir, recursive: true)
+    Directory.create(dir, recursive: true)
+    File.writeTo("${dir}/Windows.winmd", "".toArray())
+
+    let config = parseArgs(["default", "Sample.winmd", dir])
+    removeIfExists(dir, recursive: true)
+
+    @Expect(config.defaultWinmdInput, true)
+    @Expect(config.inputWinmdPaths.size, 1)
+    @Expect(config.inputWinmdPaths[0], "Sample.winmd")
+    @Expect(config.inputWinmdDirs.size, 1)
+    @Expect(config.inputWinmdDirs[0], dir)
+}
+
+@Test
+func testParseArgsAcceptsExplicitWinmdConverter() {
+    let config = parseArgs([
+        "--winmd-to-json", "../winmd-to-json/bin/winmd-to-json.exe",
+        "Sample.winmd"
+    ])
+
+    @Expect(config.winmdToJsonPath, "../winmd-to-json/bin/winmd-to-json.exe")
+    @Expect(config.inputWinmdPaths.size, 1)
+    @Expect(config.inputWinmdPaths[0], "Sample.winmd")
+}
+
+@Test
+func testWinmdInputsAreAllowedWhenConverterIsExplicit() {
+    let config = parseArgs([
+        "--winmd-to-json", "../winmd-to-json/bin/winmd-to-json.exe",
+        "default",
+        "Sample.winmd"
+    ])
+
+    @Expect(cliTestThrows({ => validateMetadataInputs(config, true) }), false)
+}
+
+@Test
+func testEnvironmentWinmdToJsonPathUsesDocumentedVariable() {
+    let resolved = environmentWinmdToJsonPath([
+        ("Path", "ignored"),
+        ("windows_cj_winmd_to_json", "converter.exe")
+    ])
+    let empty = environmentWinmdToJsonPath([
+        (WINMD_TO_JSON_ENV, "")
+    ])
+
+    match (resolved) {
+        case Some(path) => @Expect(path, "converter.exe")
+        case None => @Expect(true, false)
+    }
+    match (empty) {
+        case Some(_) => @Expect(true, false)
+        case None => @Expect(true, true)
+    }
+}
+
+@Test
+func testLoadSymbolRecordsRejectsWinmdInputsWithConverterPath() {
+    let directMessage = cliTestExceptionMessage({ => let _ = loadSymbolRecords(parseArgs(["Sample.winmd"])) })
+    let defaultMessage = cliTestExceptionMessage({ => let _ = loadSymbolRecords(parseArgs(["default"])) })
+    let jsonFlagMessage = cliTestExceptionMessage({ => let _ = loadSymbolRecords(parseArgs(["--input-json", "Sample.WINMD"])) })
+
+    @Expect(directMessage.contains("WinMD input 'Sample.winmd' requires an explicit converter"), true)
+    @Expect(directMessage.contains("--winmd-to-json ../winmd-to-json/bin/winmd-to-json.exe"), true)
+    @Expect(defaultMessage.contains("default WinMD input requires an explicit converter"), true)
+    @Expect(defaultMessage.contains(WINMD_TO_JSON_ENV), true)
+    @Expect(jsonFlagMessage.contains("--input-json expects converted JSON"), true)
+}
+
+@Test
+func testInputDirRejectsWinmdOnlyDirectoryWithWorkflow() {
+    let dir = ".generated/cli-winmd-dir-test"
+    removeIfExists(dir, recursive: true)
+    Directory.create(dir, recursive: true)
+    File.writeTo("${dir}/Windows.winmd", "".toArray())
+
+    let message = cliTestExceptionMessage({ => let _ = loadSymbolRecords(parseArgs(["--input-dir", dir])) })
+    removeIfExists(dir, recursive: true)
+
+    @Expect(message.contains("WinMD directory '${dir}' requires an explicit converter"), true)
+    @Expect(message.contains("--winmd-to-json ../winmd-to-json/bin/winmd-to-json.exe"), true)
+}
+
+@Test
+func testLoadSymbolRecordsRejectsMissingInputWithDefaultWorkflow() {
+    let message = cliTestExceptionMessage({ => let _ = loadSymbolRecords(parseArgs([])) })
+
+    @Expect(message.contains("no metadata JSON input provided"), true)
+    @Expect(message.contains("windows-bindgen default --winmd-to-json"), true)
+}
+
+@Test
+func testUsageTextDocumentsJsonAndWinmdWorkflow() {
+    let help = usageText()
+
+    @Expect(help.contains("metadata.json | json-dir | default | metadata.winmd | winmd-dir"), true)
+    @Expect(help.contains("--winmd-to-json <converter>"), true)
+    @Expect(help.contains(WINMD_TO_JSON_ENV), true)
+    @Expect(help.contains("Native WinMD parsing is not implemented here"), true)
 }
 
 @Test
@@ -124,6 +357,7 @@ func testBindgenBuilderBuildsConfigSnapshot() {
         .inputJson("metadata.json")
         .inputDir("winmd-json")
         .supportPackageDir("windows-runtime")
+        .winmdToJson("winmd-to-json.exe")
         .filter("Widget")
         .filter("!Hidden")
         .outputDir("out")
@@ -140,6 +374,7 @@ func testBindgenBuilderBuildsConfigSnapshot() {
     @Expect(config.inputJsonPaths[0], "metadata.json")
     @Expect(config.inputJsonDirs[0], "winmd-json")
     @Expect(config.supportPackageDirs[0], "windows-runtime")
+    @Expect(config.winmdToJsonPath, "winmd-to-json.exe")
     @Expect(config.outputDir, "out")
     @Expect(config.packageName, "windows_generated")
     @Expect(config.manifestPath, "out/manifest.json")
@@ -194,6 +429,19 @@ func testParseArgsCommonModeDefaultsOutputAndFeatures() {
 }
 
 @Test
+func testParseArgsPackageNameOverride() {
+    let config = parseArgs([
+        "--input-json", "metadata.json",
+        "--feature", "Windows.Win32.Foundation",
+        "--sys",
+        "--package-name", "raw_slice"
+    ])
+
+    @Expect(config.sys, true)
+    @Expect(config.packageName, "raw_slice")
+}
+
+@Test
 func testCommonModeScansNativeSupportPackages() {
     let config = parseArgs(["--input-json", "metadata.json", "--common"])
 
@@ -235,6 +483,7 @@ func testParseArgsRejectsBadArguments() {
     @Expect(cliTestThrows({ => let _ = parseArgs(["--filter"]) }), true)
     @Expect(cliTestThrows({ => let _ = parseArgs(["--input-json"]) }), true)
     @Expect(cliTestThrows({ => let _ = parseArgs(["--input-dir"]) }), true)
+    @Expect(cliTestThrows({ => let _ = parseArgs(["--winmd-to-json"]) }), true)
     @Expect(cliTestThrows({ => let _ = parseArgs(["--unknown"]) }), true)
 }
 
@@ -319,6 +568,67 @@ func testSelectSymbolsExplicitExcludePreventsDependencyReentry() {
 
     @Expect(cliTestContainsSymbol(selected, "Example.Controls.Button"), true)
     @Expect(cliTestContainsSymbol(selected, "Example.Foundation.Widget"), false)
+}
+
+@Test
+func testFeatureSelectionDoesNotPullWin32SubnamespaceMsxmlDependencies() {
+    let records = ArrayList<SymbolRecord>()
+    records.add(SymbolRecord("Windows.Win32.Foundation.HANDLE", "Windows.Win32.Foundation", "HANDLE", "Windows_Win32_Foundation_HANDLE", []))
+    records.add(SymbolRecord("Windows.Win32.Foundation.Metadata.GuidAttribute", "Windows.Win32.Foundation.Metadata", "GuidAttribute", "Windows_Win32_Foundation_Metadata_GuidAttribute", []))
+    records.add(SymbolRecord("Windows.Win32.Security.ACL", "Windows.Win32.Security", "ACL", "Windows_Win32_Security_ACL", []))
+    records.add(SymbolRecord("Windows.Win32.Security.ExtensibleAuthenticationProtocol.EapXml", "Windows.Win32.Security.ExtensibleAuthenticationProtocol", "EapXml", "Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapXml", ["Windows.Win32.Data.Xml.MsXml.IXMLDOMNode"]))
+    records.add(SymbolRecord("Windows.Win32.System.Com.IUnknown", "Windows.Win32.System.Com", "IUnknown", "Windows_Win32_System_Com_IUnknown", []))
+    records.add(SymbolRecord("Windows.Win32.System.Com.Urlmon.XmlConsumer", "Windows.Win32.System.Com.Urlmon", "XmlConsumer", "Windows_Win32_System_Com_Urlmon_XmlConsumer", ["Windows.Win32.Data.Xml.MsXml.IXMLElement"]))
+    records.add(SymbolRecord("Windows.Win32.Data.Xml.MsXml.IXMLDOMNode", "Windows.Win32.Data.Xml.MsXml", "IXMLDOMNode", "Windows_Win32_Data_Xml_MsXml_IXMLDOMNode", []))
+    records.add(SymbolRecord("Windows.Win32.Data.Xml.MsXml.IXMLElement", "Windows.Win32.Data.Xml.MsXml", "IXMLElement", "Windows_Win32_Data_Xml_MsXml_IXMLElement", []))
+
+    let selected = BindgenBuilder()
+        .feature("Windows.Win32.Foundation")
+        .feature("Windows.Win32.Security")
+        .feature("Windows.Win32.System.Com")
+        .selectedSymbols(records)
+
+    @Expect(cliTestContainsSymbol(selected, "Windows.Win32.Foundation.HANDLE"), true)
+    @Expect(cliTestContainsSymbol(selected, "Windows.Win32.Security.ACL"), true)
+    @Expect(cliTestContainsSymbol(selected, "Windows.Win32.System.Com.IUnknown"), true)
+    @Expect(cliTestContainsSymbol(selected, "Windows.Win32.Foundation.Metadata.GuidAttribute"), false)
+    @Expect(cliTestContainsSymbol(selected, "Windows.Win32.Security.ExtensibleAuthenticationProtocol.EapXml"), false)
+    @Expect(cliTestContainsSymbol(selected, "Windows.Win32.System.Com.Urlmon.XmlConsumer"), false)
+    @Expect(cliTestContainsSymbol(selected, "Windows.Win32.Data.Xml.MsXml.IXMLDOMNode"), false)
+    @Expect(cliTestContainsSymbol(selected, "Windows.Win32.Data.Xml.MsXml.IXMLElement"), false)
+}
+
+@Test
+func testGenerateUsesExactFeatureSelectionForWin32MsxmlDrift() {
+    let records = ArrayList<SymbolRecord>()
+    records.add(SymbolRecord("Windows.Win32.Foundation.HANDLE", "Windows.Win32.Foundation", "HANDLE", "Windows_Win32_Foundation_HANDLE", []))
+    records.add(SymbolRecord("Windows.Win32.Foundation.Metadata.GuidAttribute", "Windows.Win32.Foundation.Metadata", "GuidAttribute", "Windows_Win32_Foundation_Metadata_GuidAttribute", []))
+    records.add(SymbolRecord("Windows.Win32.Security.ACL", "Windows.Win32.Security", "ACL", "Windows_Win32_Security_ACL", []))
+    records.add(SymbolRecord("Windows.Win32.Security.ExtensibleAuthenticationProtocol.EapXml", "Windows.Win32.Security.ExtensibleAuthenticationProtocol", "EapXml", "Windows_Win32_Security_ExtensibleAuthenticationProtocol_EapXml", ["Windows.Win32.Data.Xml.MsXml.IXMLDOMNode"]))
+    records.add(SymbolRecord("Windows.Win32.System.Com.IUnknown", "Windows.Win32.System.Com", "IUnknown", "Windows_Win32_System_Com_IUnknown", []))
+    records.add(SymbolRecord("Windows.Win32.System.Com.Urlmon.XmlConsumer", "Windows.Win32.System.Com.Urlmon", "XmlConsumer", "Windows_Win32_System_Com_Urlmon_XmlConsumer", ["Windows.Win32.Data.Xml.MsXml.IXMLElement"]))
+    records.add(SymbolRecord("Windows.Win32.Data.Xml.MsXml.IXMLDOMNode", "Windows.Win32.Data.Xml.MsXml", "IXMLDOMNode", "Windows_Win32_Data_Xml_MsXml_IXMLDOMNode", []))
+    records.add(SymbolRecord("Windows.Win32.Data.Xml.MsXml.IXMLElement", "Windows.Win32.Data.Xml.MsXml", "IXMLElement", "Windows_Win32_Data_Xml_MsXml_IXMLElement", []))
+    let outDir = ".generated/feature-msxml-drift-test"
+    removeIfExists(outDir, recursive: true)
+    let config = CliConfig()
+    config.outputDir = outDir
+    config.clean = true
+    config.features.add("Windows.Win32.Foundation")
+    config.features.add("Windows.Win32.Security")
+    config.features.add("Windows.Win32.System.Com")
+
+    generate(config, records)
+    let manifest = String.fromUtf8(File.readFrom("${outDir}/codegen-manifest.json"))
+    removeIfExists(outDir, recursive: true)
+
+    @Expect(manifest.contains("Windows.Win32.Foundation.HANDLE"), true)
+    @Expect(manifest.contains("Windows.Win32.Security.ACL"), true)
+    @Expect(manifest.contains("Windows.Win32.System.Com.IUnknown"), true)
+    @Expect(manifest.contains("Windows.Win32.Foundation.Metadata.GuidAttribute"), false)
+    @Expect(manifest.contains("Windows.Win32.Security.ExtensibleAuthenticationProtocol.EapXml"), false)
+    @Expect(manifest.contains("Windows.Win32.System.Com.Urlmon.XmlConsumer"), false)
+    @Expect(manifest.contains("Windows.Win32.Data.Xml.MsXml"), false)
 }
 
 @Test
@@ -540,7 +850,7 @@ func testRenderCjpmAndManifestArePackageAwareAndEscaped() {
 
     @Expect(renderCjpmToml("windows_common").contains("name = \"windows_common\""), true)
     @Expect(renderCjpmToml("windows_common").contains("[dependencies]"), true)
-    @Expect(manifest.contains("\"generated_by\": \"Generated by windows-gen. DO NOT EDIT.\""), true)
+    @Expect(manifest.contains("\"generated_by\": \"Generated by windows-bindgen. DO NOT EDIT.\""), true)
     @Expect(manifest.contains("\"package_name\": \"windows_common\""), true)
     @Expect(manifest.contains("\"files\": [\"src/a.cj\", \"src/z.cj\"]"), true)
     @Expect(manifest.contains("\"file_hashes\": {"), true)
@@ -553,10 +863,10 @@ func testRenderCjpmAndManifestArePackageAwareAndEscaped() {
 func testGeneratedPackageCjpmIncludesOnlyUsedSupportPackages() {
     let deps = ArrayList<String>()
     deps.add("windows_polyfill")
-    let cjpm = renderCjpmToml("windows_gen", supportDeps: deps)
-    let supportDeps = renderSupportDependencyImports("windows_gen", supportDeps: deps)
+    let cjpm = renderCjpmToml("windows", supportDeps: deps)
+    let supportDeps = renderSupportDependencyImports("windows", supportDeps: deps)
 
-    @Expect(cjpm.contains("name = \"windows_gen\""), true)
+    @Expect(cjpm.contains("name = \"windows\""), true)
     @Expect(cjpm.contains("link-option ="), false)
     @Expect(cjpm.contains("windows_polyfill = { path = \"../../windows-polyfill\" }"), true)
     @Expect(cjpm.contains("windows_common ="), false)
@@ -568,12 +878,27 @@ func testGeneratedPackageCjpmIncludesOnlyUsedSupportPackages() {
 }
 
 @Test
+func testRawSlicePackageCjpmUsesGeneratedPackageDependencies() {
+    let deps = ArrayList<String>()
+    deps.add("windows_interface")
+    deps.add("windows_libloading")
+    deps.add("windows_polyfill")
+    let cjpm = renderCjpmToml("raw_slice", supportDeps: deps)
+
+    @Expect(cjpm.contains("name = \"raw_slice\""), true)
+    @Expect(cjpm.contains("windows_interface = { path = \"../../windows-interface\" }"), true)
+    @Expect(cjpm.contains("windows_libloading = { path = \"../../windows-libloading\" }"), true)
+    @Expect(cjpm.contains("windows_polyfill = { path = \"../../windows-polyfill\" }"), true)
+    @Expect(cjpm.contains("windows_interface = { path = \"../windows-interface\" }"), false)
+}
+
+@Test
 func testRuntimeSupportDependencyReplacesSplitProjectionPackages() {
     let names = stableSupportDependencyNames()
     let deps = ArrayList<String>()
     deps.add("windows_runtime")
-    let cjpm = renderCjpmToml("windows_gen", supportDeps: deps)
-    let supportDeps = renderSupportDependencyImports("windows_gen", supportDeps: deps)
+    let cjpm = renderCjpmToml("windows", supportDeps: deps)
+    let supportDeps = renderSupportDependencyImports("windows", supportDeps: deps)
 
     @Expect(cliTestContainsString(names, "windows_runtime"), true)
     @Expect(cliTestContainsString(names, "windows_collections"), false)
@@ -590,9 +915,9 @@ func testGeneratedPackageCjpmOmitsSupportLinkOptionsForDynamicNativeDeps() {
     let deps = ArrayList<String>()
     deps.add("windows_interface")
     deps.add("windows_implement")
-    let cjpm = renderCjpmToml("windows_gen", supportDeps: deps)
+    let cjpm = renderCjpmToml("windows", supportDeps: deps)
 
-    @Expect(cjpm.contains("name = \"windows_gen\""), true)
+    @Expect(cjpm.contains("name = \"windows\""), true)
     @Expect(cjpm.contains("windows_interface = { path = \"../../windows-interface\" }"), true)
     @Expect(cjpm.contains("windows_implement = { path = \"../../windows-implement\" }"), true)
     @Expect(cjpm.contains("link-option ="), false)
@@ -603,7 +928,7 @@ func testCoreAndResultSupportDepsDoNotEmitStaticLinkOptions() {
     let deps = ArrayList<String>()
     deps.add("windows_core")
     deps.add("windows_result")
-    let cjpm = renderCjpmToml("windows_gen", supportDeps: deps)
+    let cjpm = renderCjpmToml("windows", supportDeps: deps)
 
     @Expect(cjpm.contains("windows_core = { path = \"../../windows-core\" }"), true)
     @Expect(cjpm.contains("windows_result = { path = \"../../windows-result\" }"), true)
@@ -747,8 +1072,8 @@ func testPInvokeWrappersUseLibloadingDependencyWithoutForeignFunc() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let selectedByName = recordsByFullName(selected)
-    let deps = collectSupportDependencyNames("windows_gen", selected, selectedByName)
-    let cjpm = renderCjpmToml("windows_gen", supportDeps: deps)
+    let deps = collectSupportDependencyNames("windows", selected, selectedByName)
+    let cjpm = renderCjpmToml("windows", supportDeps: deps)
     var source = ""
     for (record in selected) {
         if (record.fullName == "Example.Native.Apis") {
@@ -762,6 +1087,38 @@ func testPInvokeWrappersUseLibloadingDependencyWithoutForeignFunc() {
     @Expect(cliTestContainsString(deps.toArray(), "windows_libloading"), true)
     @Expect(cjpm.contains("windows_libloading = { path = \"../../windows-libloading\" }"), true)
     @Expect(cjpm.contains("-lkernel32"), false)
+}
+
+@Test
+func testPInvokeCDeclCallingConventionUsesDefaultCFunc() {
+    let symbol = cliTestPInvokeApiSymbol("CallingConventionCDecl")
+    let records = ArrayList<SymbolRecord>()
+    records.add(symbol)
+    let symbolsByName = cliTestRecordsByName(records)
+    let source = renderSymbolImpl(symbol, symbolsByName)
+
+    @Expect(source.contains("let proc = CFunc<() -> Int32>(windows_libloading.resolveProc(\"native.dll\", \"CallNative\"))"), true)
+    @Expect(source.contains("return unsafe { proc() }"), true)
+}
+
+@Test
+func testPInvokeUnsupportedCallingConventionIsRejected() {
+    let symbol = cliTestPInvokeApiSymbol("CallingConventionStdCall")
+    let records = ArrayList<SymbolRecord>()
+    records.add(symbol)
+    let symbolsByName = cliTestRecordsByName(records)
+
+    @Expect(cliTestThrows({ => let _ = renderSymbolImpl(symbol, symbolsByName) }), true)
+}
+
+@Test
+func testPInvokeWinApiCallingConventionRejects32BitDynamicCFunc() {
+    let symbol = cliTestPInvokeApiSymbol("CallingConventionWinApi")
+    let records = ArrayList<SymbolRecord>()
+    records.add(symbol)
+    let symbolsByName = cliTestRecordsByName(records)
+
+    @Expect(cliTestThrows({ => let _ = renderSymbolImpl(symbol, symbolsByName, TargetAbiOptions.pointer32()) }), true)
 }
 
 @Test
@@ -1728,7 +2085,7 @@ func testCommonNativeHelperFilesDefaultReservedParameters() {
     @Expect(helper.contains("public func Configure(value: UInt32): Int32"), true)
     @Expect(helper.contains("reserved: UInt32"), false)
     @Expect(helper.contains("let proc = CFunc<(UInt32, UInt32) -> Int32>"), true)
-    @Expect(helper.contains("return unsafe { proc(0, value) }"), true)
+    @Expect(helper.contains("return unsafe { proc(0u32, value) }"), true)
 }
 
 @Test
@@ -1839,7 +2196,7 @@ func testCommonNativeHelperFilesDoNotInferReservedArrayLengthParameters() {
     @Expect(helper.contains("count: UInt32"), false)
     @Expect(helper.contains("values: Array<UInt16>"), false)
     @Expect(helper.contains("acquireArrayRawData(values)"), false)
-    @Expect(helper.contains("return unsafe { proc(0, values) }"), true)
+    @Expect(helper.contains("return unsafe { proc(0u32, values) }"), true)
 }
 
 @Test
@@ -2044,9 +2401,226 @@ func testCommonNativeHelperFilesRenderSetLastErrorCheckedBoolWrapper() {
 
     @Expect(helper.contains("import windows_core as windows_core"), true)
     @Expect(helper.contains("public func SetEnabled(enabled: Bool): Bool"), true)
-    @Expect(helper.contains("public func SetEnabledChecked(enabled: Bool): Result<Unit>"), true)
+    @Expect(helper.contains("public func SetEnabledChecked(enabled: Bool): windows_core.Result<Unit>"), true)
     @Expect(helper.contains("if (SetEnabled(enabled))"), true)
-    @Expect(helper.contains("Result<Unit>.Err(windows_core.errorFromThread())"), true)
+    @Expect(helper.contains("windows_core.Result<Unit>.Err(windows_core.errorFromThread())"), true)
+}
+
+@Test
+func testCommonNativeHelperFilesRenderWin32FoundationCheckedHandleWrappers() {
+    let publicFieldAttributes = ArrayList<String>()
+    publicFieldAttributes.add("Public")
+    let valueTypeAttributes = ArrayList<String>()
+    valueTypeAttributes.add("Public")
+    valueTypeAttributes.add("SequentialLayout")
+    valueTypeAttributes.add("Sealed")
+
+    let handleFields = ArrayList<FieldRecord>()
+    handleFields.add(FieldRecord("Value", pointerSignature(voidSignature()), attributes: publicFieldAttributes))
+    let boolFields = ArrayList<FieldRecord>()
+    boolFields.add(FieldRecord("Value", primitiveSignature("Int32"), attributes: publicFieldAttributes))
+
+    let handleType = TypeDefinitionRecord(
+        "Windows.Win32.Foundation",
+        "HANDLE",
+        baseType: "System.ValueType",
+        hasBaseType: true,
+        attributes: valueTypeAttributes,
+        fields: handleFields
+    )
+    let boolType = TypeDefinitionRecord(
+        "Windows.Win32.Foundation",
+        "BOOL",
+        baseType: "System.ValueType",
+        hasBaseType: true,
+        attributes: valueTypeAttributes,
+        fields: boolFields
+    )
+    let symbolsByName = HashMap<String, SymbolRecord>()
+    symbolsByName.add(
+        "Windows.Win32.Foundation.HANDLE",
+        SymbolRecord(
+            "Windows.Win32.Foundation.HANDLE",
+            "Windows.Win32.Foundation",
+            "HANDLE",
+            "Windows_Win32_Foundation_HANDLE",
+            [],
+            typeDef: Some(handleType)
+        )
+    )
+    symbolsByName.add(
+        "Windows.Win32.Foundation.BOOL",
+        SymbolRecord(
+            "Windows.Win32.Foundation.BOOL",
+            "Windows.Win32.Foundation",
+            "BOOL",
+            "Windows_Win32_Foundation_BOOL",
+            [],
+            typeDef: Some(boolType)
+        )
+    )
+
+    let importAttributes = ArrayList<String>()
+    importAttributes.add("ExactSpelling")
+    importAttributes.add("SetLastError")
+    importAttributes.add("CallingConventionWinApi")
+
+    let closeParameterTypes = ArrayList<SignatureRecord>()
+    closeParameterTypes.add(typeSignature("Windows.Win32.Foundation", "HANDLE"))
+    let closeParameters = ArrayList<ParameterRecord>()
+    closeParameters.add(ParameterRecord("hObject", sequenceNumber: 1))
+    let closeMethod = MethodRecord(
+        "CloseHandle",
+        MethodSignatureRecord(
+            typeSignature("Windows.Win32.Foundation", "BOOL"),
+            parameters: closeParameterTypes,
+            requiredParameterCount: 1
+        ),
+        parameters: closeParameters,
+        methodImport: Some(MethodImportRecord("CloseHandle", "KERNEL32.dll", attributes: importAttributes))
+    )
+
+    let duplicateParameterTypes = ArrayList<SignatureRecord>()
+    duplicateParameterTypes.add(typeSignature("Windows.Win32.Foundation", "HANDLE"))
+    duplicateParameterTypes.add(typeSignature("Windows.Win32.Foundation", "HANDLE"))
+    duplicateParameterTypes.add(typeSignature("Windows.Win32.Foundation", "HANDLE"))
+    duplicateParameterTypes.add(pointerSignature(typeSignature("Windows.Win32.Foundation", "HANDLE")))
+    duplicateParameterTypes.add(primitiveSignature("UInt32"))
+    duplicateParameterTypes.add(typeSignature("Windows.Win32.Foundation", "BOOL"))
+    duplicateParameterTypes.add(primitiveSignature("UInt32"))
+    let duplicateParameters = ArrayList<ParameterRecord>()
+    duplicateParameters.add(ParameterRecord("hSourceProcessHandle", sequenceNumber: 1))
+    duplicateParameters.add(ParameterRecord("hSourceHandle", sequenceNumber: 2))
+    duplicateParameters.add(ParameterRecord("hTargetProcessHandle", sequenceNumber: 3))
+    duplicateParameters.add(ParameterRecord("lpTargetHandle", sequenceNumber: 4))
+    duplicateParameters.add(ParameterRecord("dwDesiredAccess", sequenceNumber: 5))
+    duplicateParameters.add(ParameterRecord("bInheritHandle", sequenceNumber: 6))
+    duplicateParameters.add(ParameterRecord("dwOptions", sequenceNumber: 7))
+    let duplicateMethod = MethodRecord(
+        "DuplicateHandle",
+        MethodSignatureRecord(
+            typeSignature("Windows.Win32.Foundation", "BOOL"),
+            parameters: duplicateParameterTypes,
+            requiredParameterCount: 7
+        ),
+        parameters: duplicateParameters,
+        methodImport: Some(MethodImportRecord("DuplicateHandle", "KERNEL32.dll", attributes: importAttributes))
+    )
+
+    let specs = ArrayList<NativeFunctionSpec>()
+    specs.add(NativeFunctionSpec("Windows.Win32.Foundation", "Windows.Win32.Foundation.Apis", closeMethod))
+    specs.add(NativeFunctionSpec("Windows.Win32.Foundation", "Windows.Win32.Foundation.Apis", duplicateMethod))
+    let helper = renderNativeHelperNamespaceSource(
+        "windows_common",
+        "Windows.Win32.Foundation",
+        specs,
+        symbolsByName
+    )
+
+    @Expect(helper.contains("public func CloseHandle(hObject: HANDLE): Bool"), true)
+    @Expect(helper.contains("public func CloseHandleChecked(hObject: HANDLE): windows_core.Result<Unit>"), true)
+    @Expect(helper.contains("if (CloseHandle(hObject))"), true)
+    @Expect(helper.contains("public func DuplicateHandle(hSourceProcessHandle: HANDLE, hSourceHandle: HANDLE, hTargetProcessHandle: HANDLE, lpTargetHandle: CPointer<HANDLE>, dwDesiredAccess: UInt32, bInheritHandle: Bool, dwOptions: UInt32): Bool"), true)
+    @Expect(helper.contains("public func DuplicateHandleChecked(hSourceProcessHandle: HANDLE, hSourceHandle: HANDLE, hTargetProcessHandle: HANDLE, lpTargetHandle: CPointer<HANDLE>, dwDesiredAccess: UInt32, bInheritHandle: Bool, dwOptions: UInt32): windows_core.Result<Unit>"), true)
+    @Expect(helper.contains("if (DuplicateHandle(hSourceProcessHandle, hSourceHandle, hTargetProcessHandle, lpTargetHandle, dwDesiredAccess, bInheritHandle, dwOptions))"), true)
+}
+
+@Test
+func testCommonNativeHelperFilesSkipCheckedWrapperForSetLastErrorBoolPredicates() {
+    let publicFieldAttributes = ArrayList<String>()
+    publicFieldAttributes.add("Public")
+    let valueTypeAttributes = ArrayList<String>()
+    valueTypeAttributes.add("Public")
+    valueTypeAttributes.add("SequentialLayout")
+    valueTypeAttributes.add("Sealed")
+
+    let handleFields = ArrayList<FieldRecord>()
+    handleFields.add(FieldRecord("Value", pointerSignature(voidSignature()), attributes: publicFieldAttributes))
+    let boolFields = ArrayList<FieldRecord>()
+    boolFields.add(FieldRecord("Value", primitiveSignature("Int32"), attributes: publicFieldAttributes))
+
+    let symbolsByName = HashMap<String, SymbolRecord>()
+    symbolsByName.add(
+        "Windows.Win32.Foundation.HANDLE",
+        SymbolRecord(
+            "Windows.Win32.Foundation.HANDLE",
+            "Windows.Win32.Foundation",
+            "HANDLE",
+            "Windows_Win32_Foundation_HANDLE",
+            [],
+            typeDef: Some(TypeDefinitionRecord(
+                "Windows.Win32.Foundation",
+                "HANDLE",
+                baseType: "System.ValueType",
+                hasBaseType: true,
+                attributes: valueTypeAttributes,
+                fields: handleFields
+            ))
+        )
+    )
+    symbolsByName.add(
+        "Windows.Win32.Foundation.BOOL",
+        SymbolRecord(
+            "Windows.Win32.Foundation.BOOL",
+            "Windows.Win32.Foundation",
+            "BOOL",
+            "Windows_Win32_Foundation_BOOL",
+            [],
+            typeDef: Some(TypeDefinitionRecord(
+                "Windows.Win32.Foundation",
+                "BOOL",
+                baseType: "System.ValueType",
+                hasBaseType: true,
+                attributes: valueTypeAttributes,
+                fields: boolFields
+            ))
+        )
+    )
+
+    let importAttributes = ArrayList<String>()
+    importAttributes.add("ExactSpelling")
+    importAttributes.add("SetLastError")
+    importAttributes.add("CallingConventionWinApi")
+
+    let parameterTypes = ArrayList<SignatureRecord>()
+    parameterTypes.add(typeSignature("Windows.Win32.Foundation", "HANDLE"))
+    let parameters = ArrayList<ParameterRecord>()
+    parameters.add(ParameterRecord("TokenHandle", sequenceNumber: 1))
+    let method = MethodRecord(
+        "IsTokenRestricted",
+        MethodSignatureRecord(
+            typeSignature("Windows.Win32.Foundation", "BOOL"),
+            parameters: parameterTypes,
+            requiredParameterCount: 1
+        ),
+        parameters: parameters,
+        methodImport: Some(MethodImportRecord("IsTokenRestricted", "ADVAPI32.dll", attributes: importAttributes))
+    )
+    let canMethod = MethodRecord(
+        "CanAccessToken",
+        MethodSignatureRecord(
+            typeSignature("Windows.Win32.Foundation", "BOOL"),
+            parameters: parameterTypes,
+            requiredParameterCount: 1
+        ),
+        parameters: parameters,
+        methodImport: Some(MethodImportRecord("CanAccessToken", "ADVAPI32.dll", attributes: importAttributes))
+    )
+
+    let specs = ArrayList<NativeFunctionSpec>()
+    specs.add(NativeFunctionSpec("Windows.Win32.Security", "Windows.Win32.Security.Apis", method))
+    specs.add(NativeFunctionSpec("Windows.Win32.Security", "Windows.Win32.Security.Apis", canMethod))
+    let helper = renderNativeHelperNamespaceSource(
+        "windows_common",
+        "Windows.Win32.Security",
+        specs,
+        symbolsByName
+    )
+
+    @Expect(helper.contains("public func IsTokenRestricted(TokenHandle: HANDLE): Bool"), true)
+    @Expect(helper.contains("public func IsTokenRestrictedChecked"), false)
+    @Expect(helper.contains("public func CanAccessToken(TokenHandle: HANDLE): Bool"), true)
+    @Expect(helper.contains("public func CanAccessTokenChecked"), false)
 }
 
 @Test
@@ -4951,7 +5525,11 @@ func testCommonNativeHelpersRemapDirect2DAndDirect3DNumericsTypes() {
           "CustomAttributes": [],
           "Fields": [
             {"Name": "M11", "Signature": {"Kind": "Primitive", "Name": "Float32"}, "Attributes": ["Public"], "CustomAttributes": [], "DefaultValue": null},
-            {"Name": "M12", "Signature": {"Kind": "Primitive", "Name": "Float32"}, "Attributes": ["Public"], "CustomAttributes": [], "DefaultValue": null}
+            {"Name": "M12", "Signature": {"Kind": "Primitive", "Name": "Float32"}, "Attributes": ["Public"], "CustomAttributes": [], "DefaultValue": null},
+            {"Name": "M21", "Signature": {"Kind": "Primitive", "Name": "Float32"}, "Attributes": ["Public"], "CustomAttributes": [], "DefaultValue": null},
+            {"Name": "M22", "Signature": {"Kind": "Primitive", "Name": "Float32"}, "Attributes": ["Public"], "CustomAttributes": [], "DefaultValue": null},
+            {"Name": "M31", "Signature": {"Kind": "Primitive", "Name": "Float32"}, "Attributes": ["Public"], "CustomAttributes": [], "DefaultValue": null},
+            {"Name": "M32", "Signature": {"Kind": "Primitive", "Name": "Float32"}, "Attributes": ["Public"], "CustomAttributes": [], "DefaultValue": null}
           ],
           "InterfaceImplementations": [],
           "Methods": [],
@@ -5132,6 +5710,17 @@ func testCommonNativeHelpersRemapDirect2DAndDirect3DNumericsTypes() {
         )
     ))
     specs.add(NativeFunctionSpec(
+        "Windows.Win32.Graphics.Direct2D.Common",
+        "Windows.Win32.Graphics.Direct2D.Common.Apis",
+        nativeMethod(
+            "UseVector4",
+            "UseVector4",
+            "example.dll",
+            typeSignature("Windows.Win32.Graphics.Direct2D.Common", "D2D_VECTOR_4F"),
+            [NativeParameterSeed("matrix", typeSignature("Windows.Win32.Graphics.Direct2D.Common", "D2D_MATRIX_3X2_F"))]
+        )
+    ))
+    specs.add(NativeFunctionSpec(
         "Windows.Win32.Graphics.Direct3D",
         "Windows.Win32.Graphics.Direct3D.Apis",
         nativeMethod(
@@ -5158,9 +5747,14 @@ func testCommonNativeHelpersRemapDirect2DAndDirect3DNumericsTypes() {
     )
 
     @Expect(direct2d.contains("import windows_common.Foundation.Numerics.Vector2"), true)
+    @Expect(direct2d.contains("import windows_common.Foundation.Numerics.Matrix3x2"), true)
+    @Expect(direct2d.contains("import windows_common.Foundation.Numerics.Vector4"), true)
     @Expect(direct2d.contains("public func UsePoint(point: Vector2): Vector2"), true)
+    @Expect(direct2d.contains("public func UseVector4(matrix: Matrix3x2): Vector4"), true)
     @Expect(direct2d.contains("let proc = CFunc<(Vector2) -> Vector2>"), true)
+    @Expect(direct2d.contains("let proc = CFunc<(Matrix3x2) -> Vector4>"), true)
     @Expect(direct2d.contains("return unsafe { proc(point) }"), true)
+    @Expect(direct2d.contains("return unsafe { proc(matrix) }"), true)
     @Expect(direct3d.contains("import windows_common.Foundation.Numerics.Matrix4x4"), true)
     @Expect(direct3d.contains("public func UseMatrix(matrix: Matrix4x4): Matrix4x4"), true)
     @Expect(direct3d.contains("let proc = CFunc<(Matrix4x4) -> Matrix4x4>"), true)
@@ -5181,6 +5775,21 @@ func testCommonNativeHelpersRemapDirect2DAndDirect3DNumericsTypes() {
     @Expect(cliTestContainsSymbol(selected, "Windows.Foundation.Numerics.Vector4"), true)
     @Expect(cliTestContainsSymbol(selected, "Windows.Foundation.Numerics.Matrix3x2"), true)
     @Expect(cliTestContainsSymbol(selected, "Windows.Foundation.Numerics.Matrix4x4"), true)
+
+    let writer = GeneratedPackageWriter("__windows_cj_dry_run__", true)
+    writeImplFiles(writer, selected, "windows_common", selectedByName)
+    writeFacadeFiles(writer, "Windows.Foundation.Numerics", selected, "windows_common")
+    let numericsImpl = writer.writtenFileContent.get("src/impl/symbols_0.cj").getOrThrow()
+    let numericsFacade = writer.writtenFileContent.get("src/Foundation/Numerics/facade_0.cj").getOrThrow()
+    @Expect(numericsFacade.contains("import windows_common.impl.{Windows_Foundation_Numerics_Matrix3x2"), true)
+    @Expect(numericsFacade.contains("Windows_Foundation_Numerics_Vector4}"), true)
+    @Expect(numericsFacade.contains("public type Matrix3x2 = Windows_Foundation_Numerics_Matrix3x2"), true)
+    @Expect(numericsFacade.contains("public type Vector4 = Windows_Foundation_Numerics_Vector4"), true)
+    @Expect(numericsImpl.contains("public struct Windows_Foundation_Numerics_Matrix3x2"), true)
+    @Expect(numericsImpl.contains("public var M32: Float32 = 0.0"), true)
+    @Expect(numericsImpl.contains("public struct Windows_Foundation_Numerics_Vector4"), true)
+    @Expect(numericsImpl.contains("public var W: Float32 = 0.0"), true)
+
     @Expect(productionDirect2d.contains("import windows_common.Foundation.Numerics.Matrix3x2"), true)
     @Expect(productionDirect2d.contains("import windows_common.Foundation.Numerics.Matrix4x4"), true)
     @Expect(productionDirect2d.contains("import windows_common.Foundation.Numerics.Vector2"), true)
@@ -5381,7 +5990,7 @@ func testGeneratedWriterAddsDoNotEditHeaders() {
     let outDir = ".generated/header-test"
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
-    writer.writeFile("src/mod.cj", "package windows_gen\n")
+    writer.writeFile("src/mod.cj", "package windows\n")
     writer.writeFile("cjpm.toml", "[package]\n")
     writer.writeFile("codegen-manifest.json", "{}\n")
 
@@ -5390,8 +5999,8 @@ func testGeneratedWriterAddsDoNotEditHeaders() {
     let json = String.fromUtf8(File.readFrom("${outDir}/codegen-manifest.json"))
     removeIfExists(outDir, recursive: true)
 
-    @Expect(startsWithString(cj, "// Generated by windows-gen. DO NOT EDIT.\n\npackage windows_gen\n"), true)
-    @Expect(startsWithString(toml, "# Generated by windows-gen. DO NOT EDIT.\n\n[package]\n"), true)
+    @Expect(startsWithString(cj, "// Generated by windows-bindgen. DO NOT EDIT.\n\npackage windows\n"), true)
+    @Expect(startsWithString(toml, "# Generated by windows-bindgen. DO NOT EDIT.\n\n[package]\n"), true)
     @Expect(startsWithString(json, "{}\n"), true)
     @Expect(endsWithString(cj, "\n"), true)
     @Expect(endsWithString(cj, "\n\n"), false)
@@ -5965,11 +6574,11 @@ func testWin32TextPointerLiteralConstantsUseStringFactories() {
             textValueSource = renderSymbolImpl(record, symbolsByName)
         }
     }
-    let deps = collectSupportDependencyNames("windows_gen", records, symbolsByName)
+    let deps = collectSupportDependencyNames("windows", records, symbolsByName)
     let outDir = ".generated/text-literal-import-test"
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
-    writeImplFiles(writer, records, "windows_gen", symbolsByName)
+    writeImplFiles(writer, records, "windows", symbolsByName)
     let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
 
@@ -6351,7 +6960,25 @@ func testEventRegistrationTokenAbiContextsUseInt64Aliases() {
           "BaseType": "System.MulticastDelegate",
           "IsNested": false,
           "Attributes": ["Public", "Class", "Sealed", "WindowsRuntime"],
-          "CustomAttributes": [],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 286331153},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 8738},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 13107},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 68},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 85},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 102},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 119},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 136},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 153},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 170},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 187}
+              ],
+              "NamedArguments": []
+            }
+          ],
           "Fields": [],
           "InterfaceImplementations": [],
           "Methods": [
@@ -12218,6 +12845,7 @@ func testStringHandleAbiContextsUseRawPointerAliases() {
     var boxSource = ""
     var unionSource = ""
     var interfaceSource = ""
+    var rawStringHandleCleanupSpecsEmpty = true
     for (record in records) {
         if (record.fullName == "Windows.Win32.Foundation.BSTR") {
             bstrSource = renderSymbolImpl(record, symbolsByName)
@@ -12233,6 +12861,17 @@ func testStringHandleAbiContextsUseRawPointerAliases() {
         }
         if (record.fullName == "Tiny.Foundation.IStringHandleSource") {
             interfaceSource = renderSymbolImpl(record, symbolsByName)
+            match (record.typeDef) {
+                case Some(typeDef) =>
+                    for (method in typeDef.methods) {
+                        if (method.name == "GetBstr" || method.name == "GetHString") {
+                            if (!runtimeClassRawAbiFailedOutSlotCleanupSpecs(method, symbolsByName, record.fullName).isEmpty()) {
+                                rawStringHandleCleanupSpecsEmpty = false
+                            }
+                        }
+                    }
+                case None => ()
+            }
         }
     }
 
@@ -12252,6 +12891,28 @@ func testStringHandleAbiContextsUseRawPointerAliases() {
     @Expect(interfaceSource.contains("func GetHString(value: CPointer<CPointer<Unit>>): Int32"), true)
     @Expect(interfaceSource.contains("Windows_Win32_Foundation_BSTR"), false)
     @Expect(interfaceSource.contains("Windows_Win32_System_WinRT_HSTRING"), false)
+
+    let bstrHandleSignature = typeSignature("Windows.Win32.Foundation", "BSTR")
+    let hstringHandleSignature = typeSignature("Windows.Win32.System.WinRT", "HSTRING")
+    @Expect(winrtProjectedTypeName(bstrHandleSignature, symbolsByName, ""), "CPointer<Unit>")
+    @Expect(winrtProjectedTypeName(hstringHandleSignature, symbolsByName, ""), "CPointer<Unit>")
+    @Expect(runtimeProjectedReturnTypeName(bstrHandleSignature, symbolsByName, ""), "CPointer<Unit>")
+    @Expect(runtimeProjectedReturnTypeName(hstringHandleSignature, symbolsByName, ""), "CPointer<Unit>")
+    @Expect(
+        runtimeArrayElementUsesHandleBorrow(
+            winrtProjectedTypeName(bstrHandleSignature, symbolsByName, ""),
+            interfaceSlotAbiType(bstrHandleSignature, symbolsByName, "")
+        ),
+        false
+    )
+    @Expect(
+        runtimeArrayElementUsesHandleBorrow(
+            winrtProjectedTypeName(hstringHandleSignature, symbolsByName, ""),
+            interfaceSlotAbiType(hstringHandleSignature, symbolsByName, "")
+        ),
+        false
+    )
+    @Expect(rawStringHandleCleanupSpecsEmpty, true)
 }
 
 @Test
@@ -12566,7 +13227,7 @@ func testWinrtInterfaceRendersInterfaceMacroAndSupportDependencies() {
     let records = buildSymbolRecords(files)
     let symbolsByName = cliTestRecordsByName(records)
     let source = renderSymbolImpl(records[0], symbolsByName)
-    let deps = collectSupportDependencyNames("windows_gen", records, symbolsByName)
+    let deps = collectSupportDependencyNames("windows", records, symbolsByName)
 
     @Expect(source.contains("@Interface[\"11111111-2222-3333-4455-66778899aabb\", \"Example.Foundation.IWidget\"]"), true)
     @Expect(source.contains("public interface Example_Foundation_IWidget <: IInspectable {"), true)
@@ -12578,13 +13239,13 @@ func testWinrtInterfaceRendersInterfaceMacroAndSupportDependencies() {
     @Expect(source.contains("public open class Example_Foundation_IWidget"), false)
     @Expect(cliTestContainsString(deps.toArray(), "windows_core"), true)
     @Expect(cliTestContainsString(deps.toArray(), "windows_interface"), true)
-    @Expect(renderCjpmToml("windows_gen", supportDeps: deps).contains("windows_core = { path = \"../../windows-core\" }"), true)
-    @Expect(renderCjpmToml("windows_gen", supportDeps: deps).contains("windows_interface = { path = \"../../windows-interface\" }"), true)
+    @Expect(renderCjpmToml("windows", supportDeps: deps).contains("windows_core = { path = \"../../windows-core\" }"), true)
+    @Expect(renderCjpmToml("windows", supportDeps: deps).contains("windows_interface = { path = \"../../windows-interface\" }"), true)
 
     let outDir = ".generated/interface-macro-import-test"
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
-    writeImplFiles(writer, records, "windows_gen", symbolsByName)
+    writeImplFiles(writer, records, "windows", symbolsByName)
     let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
     @Expect(implChunk.contains("import windows_core.*"), false)
@@ -12699,6 +13360,17 @@ func testGenericWinrtInterfaceUsesClosedSignatureIid() {
     @Expect(source.contains("windows_interface.InterfaceDescriptor<Example_Foundation_IVector_1<T>>"), true)
     @Expect(source.contains("extend<T> Example_Foundation_IVector_1<T> <: windows_core.Interface<Example_Foundation_IVector_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}"), true)
     @Expect(source.contains("windows_interface.GUID.parse(\"11111111-2222-3333-4455-66778899aabb\")"), false)
+
+    let outDir = ".generated/generic-facade-alias-test"
+    removeIfExists(outDir, recursive: true)
+    let writer = GeneratedPackageWriter(outDir, false)
+    writeFacadeFiles(writer, "Example.Foundation", records, "windows")
+    let facade = String.fromUtf8(File.readFrom("${outDir}/src/Example/Foundation/facade_0.cj"))
+    removeIfExists(outDir, recursive: true)
+
+    @Expect(facade.contains("public type IVector<T> = Example_Foundation_IVector_1<T>"), true)
+    @Expect(facade.contains("public type IVector = Example_Foundation_IVector_1"), false)
+    @Expect(facade.contains("public type IVectorVtbl = Example_Foundation_IVector_1Vtbl"), true)
 }
 
 @Test
@@ -12753,7 +13425,29 @@ func testGenericWinrtDelegateUsesClosedSignatureIid() {
           ],
           "Fields": [],
           "InterfaceImplementations": [],
-          "Methods": [],
+          "Methods": [
+            {
+              "Name": "Invoke",
+              "Attributes": ["Public", "Virtual"],
+              "CustomAttributes": [],
+              "ImplAttributes": [],
+              "RelativeVirtualAddress": 0,
+              "Import": null,
+              "Signature": {
+                "ReturnType": {"Kind": "Void"},
+                "ParameterTypes": [
+                  {"Kind": "Primitive", "Name": "Object"},
+                  {"Kind": "GenericParameter", "Name": "T"}
+                ],
+                "RequiredParameterCount": 2
+              },
+              "Parameters": [
+                {"Name": "sender", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null},
+                {"Name": "args", "SequenceNumber": 2, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null}
+              ],
+              "GenericParameters": []
+            }
+          ],
           "NestedTypes": [],
           "GenericParameters": [
             {"Name": "T", "SequenceNumber": 0, "Attributes": [], "CustomAttributes": [], "Constraints": []}
@@ -12774,11 +13468,101 @@ func testGenericWinrtDelegateUsesClosedSignatureIid() {
         }
     }
 
-    @Expect(source.contains("public class Example_Foundation_EventHandler_1<T> <: windows_interface.InterfaceWrapperBase"), true)
+    @Expect(source.contains("public open class Example_Foundation_EventHandler_1<T> <: windows_interface.InterfaceWrapperBase"), true)
     @Expect(source.contains("windows_interface.GUID.from_signature(Example_Foundation_EventHandler_1<T>.signature())"), true)
     @Expect(source.contains("sb.append(T.signature())"), true)
+    @Expect(source.contains("@C\npublic struct Example_Foundation_EventHandler_1Vtbl"), true)
+    @Expect(source.contains("windows_interface.InterfaceDescriptorSchema(\"Example.Foundation.EventHandler\", Example_Foundation_EventHandler_1<T>.iid(), windows_interface.IUnknown.descriptorSchema()"), true)
+    @Expect(source.contains("windows_interface.InterfaceMethodSchema(\"Invoke\", 3"), true)
+    @Expect(source.contains("public unsafe func Invoke(sender: windows_interface.IInspectable, args: T): Unit"), true)
+    @Expect(source.contains("public static func new(invoke: (windows_interface.IInspectable, T) -> Unit): Example_Foundation_EventHandler_1<T>"), true)
+    @Expect(source.contains("this.Invoke(windows_core.winrtProjectGenericIn<windows_interface.IInspectable>(sender), windows_core.winrtProjectGenericIn<T>(args))"), true)
+    @Expect(source.contains("private class Example_Foundation_EventHandler_1Box<T> <: Example_Foundation_EventHandler_1Invoker<T> & Resource"), true)
+    @Expect(source.contains("func buildExample_Foundation_EventHandler_1BoxVtbl<T>(): Example_Foundation_EventHandler_1Vtbl where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T>"), true)
+    @Expect(source.contains("windows_core.asImplFromRaw<Example_Foundation_EventHandler_1InvokerErased>(instanceRaw)"), true)
     @Expect(source.contains("extend<T> Example_Foundation_EventHandler_1<T> <: windows_core.Interface<Example_Foundation_EventHandler_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}"), true)
     @Expect(source.contains("public class Example_Foundation_EventHandler_1 {\n    private let raw: CPointer<Unit>"), false)
+    @Expect(source.contains("unsupportedDelegateAuthoringReason"), false)
+}
+
+@Test
+func testWinrtDelegateWithoutGuidRendersUnsupportedAuthoringFactory() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Foundation",
+          "Name": "NoGuidHandler",
+          "MetadataToken": "0x02000002",
+          "BaseType": "System.MulticastDelegate",
+          "IsNested": false,
+          "Attributes": ["Public", "Sealed", "WindowsRuntime"],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "Invoke",
+              "Attributes": ["Public", "Virtual"],
+              "CustomAttributes": [],
+              "ImplAttributes": [],
+              "RelativeVirtualAddress": 0,
+              "Import": null,
+              "Signature": {
+                "ReturnType": {"Kind": "Void"},
+                "ParameterTypes": [{"Kind": "Primitive", "Name": "Int32"}],
+                "RequiredParameterCount": 1
+              },
+              "Parameters": [
+                {"Name": "value", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null}
+              ],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    var source = ""
+    for (record in records) {
+        if (record.fullName == "Example.Foundation.NoGuidHandler") {
+            source = renderSymbolImpl(record, symbolsByName)
+        }
+    }
+
+    @Expect(source.contains("public class Example_Foundation_NoGuidHandler <: Resource"), true)
+    @Expect(source.contains("let shouldRelease = ownsHandle\n        ownsHandle = false\n        closed = true\n        if (shouldRelease) {\n            Example_Foundation_NoGuidHandler.releaseRaw(raw)\n        }"), true)
+    @Expect(source.contains("unsupportedDelegateAuthoringReason"), true)
+    @Expect(source.contains("missing GuidAttribute"), true)
+    @Expect(source.contains("public static func new(): Example_Foundation_NoGuidHandler"), true)
+    @Expect(source.contains("public static func new(invoke:"), false)
+    @Expect(source.contains("InterfaceDescriptorSchema"), false)
 }
 
 @Test
@@ -12875,6 +13659,79 @@ func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
         },
         {
           "Namespace": "Example.Foundation",
+          "Name": "IIterable",
+          "MetadataToken": "0x0200000a",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "AutoLayout", "Interface", "Abstract", "WindowsRuntime"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 1717986918},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 30583},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 34952},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 153},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 170},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 187},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 204},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 221},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 238},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 255},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 17}
+              ],
+              "NamedArguments": []
+            }
+          ],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [
+            {"Name": "T", "SequenceNumber": 0, "Attributes": [], "CustomAttributes": [], "Constraints": []}
+          ],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Foundation",
+          "Name": "IKeyValuePair",
+          "MetadataToken": "0x0200000b",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "AutoLayout", "Interface", "Abstract", "WindowsRuntime"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 2004318071},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 34952},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 39321},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 170},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 187},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 204},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 221},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 238},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 255},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 17},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 34}
+          ],
+          "NamedArguments": []
+            }
+          ],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [
+            {"Name": "K", "SequenceNumber": 0, "Attributes": [], "CustomAttributes": [], "Constraints": []},
+            {"Name": "V", "SequenceNumber": 1, "Attributes": [], "CustomAttributes": [], "Constraints": []}
+          ],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Foundation",
           "Name": "WidgetKind",
           "MetadataToken": "0x02000009",
           "BaseType": "System.Enum",
@@ -12919,7 +13776,25 @@ func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
             }
           ],
           "Fields": [],
-          "InterfaceImplementations": [],
+          "InterfaceImplementations": [
+            {
+              "Interface": {
+                "Kind": "Generic",
+                "Type": {"Kind": "Type", "Namespace": "Example.Foundation", "Name": "IIterable"},
+                "TypeArguments": [
+                  {
+                    "Kind": "Generic",
+                    "Type": {"Kind": "Type", "Namespace": "Example.Foundation", "Name": "IKeyValuePair"},
+                    "TypeArguments": [
+                      {"Kind": "GenericParameter", "Name": "K"},
+                      {"Kind": "GenericParameter", "Name": "V"}
+                    ]
+                  }
+                ]
+              },
+              "CustomAttributes": []
+            }
+          ],
           "Methods": [],
           "NestedTypes": [],
           "GenericParameters": [
@@ -13089,6 +13964,107 @@ func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
               "GenericParameters": []
             },
             {
+              "Name": "CreateRawStrings",
+              "Signature": {
+                "ReturnType": {"Kind": "Type", "Namespace": "System", "Name": "Object"},
+                "Parameters": [
+                  {"Kind": "SZArray", "Type": {"Kind": "Primitive", "Name": "String"}}
+                ]
+              },
+              "Parameters": [
+                {"Name": "result", "SequenceNumber": 0, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Type", "Namespace": "System", "Name": "Object"}},
+                {"Name": "values", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "SZArray", "Type": {"Kind": "Primitive", "Name": "String"}}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "CreateRawObjectOut",
+              "Signature": {
+                "ReturnType": {"Kind": "Primitive", "Name": "Void"},
+                "Parameters": [
+                  {"Kind": "SZArray", "Type": {"Kind": "Primitive", "Name": "String"}},
+                  {"Kind": "ByReference", "Type": {"Kind": "Primitive", "Name": "Object"}}
+                ]
+              },
+              "Parameters": [
+                {"Name": "values", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "SZArray", "Type": {"Kind": "Primitive", "Name": "String"}}},
+                {"Name": "objectValue", "SequenceNumber": 2, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Primitive", "Name": "Object"}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "CreateRawStringOut",
+              "Signature": {
+                "ReturnType": {"Kind": "Primitive", "Name": "Void"},
+                "Parameters": [
+                  {"Kind": "SZArray", "Type": {"Kind": "Primitive", "Name": "String"}},
+                  {"Kind": "ByReference", "Type": {"Kind": "Primitive", "Name": "String"}}
+                ]
+              },
+              "Parameters": [
+                {"Name": "values", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "SZArray", "Type": {"Kind": "Primitive", "Name": "String"}}},
+                {"Name": "stringValue", "SequenceNumber": 2, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Primitive", "Name": "String"}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "GetCount",
+              "Signature": {
+                "ReturnType": {"Kind": "Primitive", "Name": "Void"},
+                "Parameters": [
+                  {"Kind": "ByReference", "Type": {"Kind": "Primitive", "Name": "Int32"}}
+                ]
+              },
+              "Parameters": [
+                {"Name": "count", "SequenceNumber": 1, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Primitive", "Name": "Int32"}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "GetRawObjectOut",
+              "Signature": {
+                "ReturnType": {"Kind": "Primitive", "Name": "Void"},
+                "Parameters": [
+                  {"Kind": "ByReference", "Type": {"Kind": "Primitive", "Name": "Object"}}
+                ]
+              },
+              "Parameters": [
+                {"Name": "objectValue", "SequenceNumber": 1, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Primitive", "Name": "Object"}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "GetRawStringOut",
+              "Signature": {
+                "ReturnType": {"Kind": "Primitive", "Name": "Void"},
+                "Parameters": [
+                  {"Kind": "ByReference", "Type": {"Kind": "Primitive", "Name": "String"}}
+                ]
+              },
+              "Parameters": [
+                {"Name": "stringValue", "SequenceNumber": 1, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Primitive", "Name": "String"}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
               "Name": "GetNames",
               "Signature": {
                 "ReturnType": {"Kind": "SZArray", "Type": {"Kind": "Type", "Namespace": "System", "Name": "String"}},
@@ -13250,13 +14226,15 @@ func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
     @Expect(classSource.contains("public static func fromAbiTake(raw: CPointer<Unit>): Example_Foundation_Widget"), true)
     @Expect(classSource.contains("public static func viewOf(raw: CPointer<Unit>): Example_Foundation_Widget"), true)
     @Expect(classSource.contains("public static func iid(): windows_interface.GUID {\n        Example_Foundation_IWidget.iid()\n    }"), true)
-    @Expect(classSource.contains("let ancestors = [Example_Foundation_IWidget.iid(), Example_Foundation_IWidgetExtra.iid(), Example_Foundation_IMap<windows_core.HString, Example_Foundation_IWidget>.iid(), Example_Foundation_IVector<Example_Foundation_IWidgetExtra>.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]"), true)
+    @Expect(classSource.contains("let ancestors = [Example_Foundation_IWidget.iid(), Example_Foundation_IWidgetExtra.iid(), Example_Foundation_IMap<windows_core.HString, Example_Foundation_IWidget>.iid(), Example_Foundation_IIterable<Example_Foundation_IKeyValuePair<windows_core.HString, Example_Foundation_IWidget>>.iid(), Example_Foundation_IVector<Example_Foundation_IWidgetExtra>.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]"), true)
     @Expect(classSource.contains("windows_interface.InterfaceDescriptor<Example_Foundation_Widget>(\"Widget\", Example_Foundation_IWidget.iid(), ancestors"), true)
     @Expect(classSource.contains("public func defaultInterface(): Example_Foundation_IWidget"), true)
     @Expect(classSource.contains("public func asIWidget(): Example_Foundation_IWidget"), true)
     @Expect(classSource.contains("public func asIWidgetExtra(): Example_Foundation_IWidgetExtra"), true)
     @Expect(classSource.contains("public func asIMap(): Example_Foundation_IMap<windows_core.HString, Example_Foundation_IWidget>"), true)
     @Expect(classSource.contains("query<Example_Foundation_IMap<windows_core.HString, Example_Foundation_IWidget>>(Example_Foundation_IMap<windows_core.HString, Example_Foundation_IWidget>.descriptor())"), true)
+    @Expect(classSource.contains("public func asIIterable(): Example_Foundation_IIterable<Example_Foundation_IKeyValuePair<windows_core.HString, Example_Foundation_IWidget>>"), true)
+    @Expect(classSource.contains("IKeyValuePair<K, V>"), false)
     @Expect(classSource.contains("public func asIVector(): Example_Foundation_IVector<Example_Foundation_IWidgetExtra>"), true)
     @Expect(classSource.contains("public static func new(): Example_Foundation_Widget"), true)
     @Expect(classSource.contains("windows_core.factory<Example_Foundation_Widget, windows_core.IGenericFactory>().unwrap()"), true)
@@ -13265,14 +14243,17 @@ func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
     @Expect(classSource.contains("windows_core.factory<Example_Foundation_Widget, Example_Foundation_IWidgetFactory>().unwrap()"), true)
     @Expect(classSource.contains("try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(name))"), true)
     @Expect(classSource.contains("hr__ = unsafe { factory__.CreateWidget(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }"), true)
+    @Expect(classSource.contains("if (hr__.failed() && result__.isNotNull()) {\n            windows_core.winrtReleaseGenericOut<Example_Foundation_Widget>(result__)\n            result__ = CPointer<Unit>()\n        }"), true)
     @Expect(classSource.contains("return Example_Foundation_Widget.fromAbiTakeWinrtHandle(result__)"), true)
     @Expect(classSource.contains("public static func NormalizeName(value: windows_core.HString): windows_core.HString"), true)
     @Expect(classSource.contains("windows_core.factory<Example_Foundation_Widget, Example_Foundation_IWidgetStatics>().unwrap()"), true)
     @Expect(classSource.contains("try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value))"), true)
     @Expect(classSource.contains("hr__ = unsafe { factory__.NormalizeName(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }"), true)
-    @Expect(classSource.contains("return windows_core.HString.fromAbiTakeWinrtHandle(result__)"), true)
+    @Expect(classSource.contains("if (hr__.failed() && result__.isNotNull()) {\n            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)\n            result__ = CPointer<Unit>()\n        }"), true)
+    @Expect(classSource.contains("return windows_core.HString.fromSystemHandleTake(result__)"), true)
     @Expect(classSource.contains("public static func DisplayName(): windows_core.HString"), true)
     @Expect(classSource.contains("hr__ = unsafe { factory__.DisplayName(CPointer<CPointer<Unit>>(inout result__)) }"), true)
+    @Expect(classSource.contains("if (hr__.failed() && result__.isNotNull()) {\n            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)\n            result__ = CPointer<Unit>()\n        }"), true)
     @Expect(classSource.contains("public static func SetDisplayName(value: windows_core.HString): Unit"), true)
     @Expect(classSource.contains("hr__ = unsafe { factory__.SetDisplayName(__argBorrow0.asRaw()) }"), true)
     @Expect(classSource.contains("public static func SetKind(kind: Example_Foundation_WidgetKind): Unit"), true)
@@ -13281,10 +14262,40 @@ func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
     @Expect(classSource.contains("let _ = hr__.ok()"), false)
     @Expect(classSource.contains("public static func GetKind(): Example_Foundation_WidgetKind"), true)
     @Expect(classSource.contains("return Example_Foundation_WidgetKind(result__)"), true)
-    @Expect(classSource.contains("public static func CreateGuidArray(valuesSize: UInt32, values: CPointer<GUID>, result: CPointer<CPointer<Unit>>): Unit"), true)
-    @Expect(classSource.contains("hr__ = unsafe { factory__.CreateGuidArray(valuesSize, values, result) }"), true)
-    @Expect(classSource.contains("public static func GetNames(namesSize: CPointer<UInt32>, names: CPointer<CPointer<CPointer<Unit>>>): Unit"), true)
-    @Expect(classSource.contains("hr__ = unsafe { factory__.GetNames(namesSize, names) }"), true)
+    @Expect(classSource.contains("public static func CreateGuidArray(values: Array<windows_core.GuidValue>): windows_interface.IInspectable"), true)
+    @Expect(classSource.contains("let __arg0AbiValues = Array<GUID>(values.size, { index => values[index].toRaw() })"), true)
+    @Expect(classSource.contains("hr__ = unsafe { factory__.CreateGuidArray(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }"), true)
+    @Expect(classSource.contains("if (hr__.failed() && result__.isNotNull()) {\n            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)\n            result__ = CPointer<Unit>()\n        }"), true)
+    @Expect(classSource.contains("return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)"), true)
+    @Expect(classSource.contains("public static func CreateRawStrings(values: Array<windows_core.HString>): windows_interface.IInspectable"), true)
+    @Expect(classSource.contains("hr__ = unsafe { factory__.CreateRawStrings(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }"), true)
+    @Expect(classSource.contains("public static func CreateRawStrings(valuesSize: UInt32, values: CPointer<CPointer<Unit>>, result: CPointer<CPointer<Unit>>): Unit"), false)
+    @Expect(classSource.contains("windows_core.releaseFailedComOutSlot(result)"), false)
+    @Expect(classSource.contains("windows_core.releaseFailedComOutSlot(values)"), false)
+    @Expect(classSource.contains("public static func CreateRawObjectOut(values: Array<windows_core.HString>, objectValue: windows_core.OutSlot<windows_interface.IInspectable>): Unit"), true)
+    @Expect(classSource.contains("hr__ = unsafe { factory__.CreateRawObjectOut(__arg0Len, __arg0Raw, objectValue.borrowMut<CPointer<Unit>>()) }"), true)
+    @Expect(classSource.contains("public static func CreateRawObjectOut(valuesSize: UInt32, values: CPointer<CPointer<Unit>>, objectValue: CPointer<CPointer<Unit>>): Unit"), false)
+    @Expect(classSource.contains("public static func CreateRawStringOut(values: Array<windows_core.HString>, stringValue: windows_core.OutSlot<windows_core.HString>): Unit"), true)
+    @Expect(classSource.contains("hr__ = unsafe { factory__.CreateRawStringOut(__arg0Len, __arg0Raw, stringValue.borrowMut<CPointer<Unit>>()) }"), true)
+    @Expect(classSource.contains("public static func CreateRawStringOut(valuesSize: UInt32, values: CPointer<CPointer<Unit>>, stringValue: CPointer<CPointer<Unit>>): Unit"), false)
+    @Expect(classSource.contains("windows_core.releaseFailedComOutSlot(objectValue)"), false)
+    @Expect(classSource.contains("windows_core.releaseFailedComOutSlot(stringValue)"), false)
+    @Expect(classSource.contains("public static func GetCount(count: windows_core.OutSlot<Int32>): Unit"), true)
+    @Expect(classSource.contains("hr__ = unsafe { factory__.GetCount(count.borrowMut<Int32>()) }"), true)
+    @Expect(classSource.contains("count.write(__arg0Value)"), true)
+    @Expect(classSource.contains("public static func GetRawObjectOut(objectValue: windows_core.OutSlot<windows_interface.IInspectable>): Unit"), true)
+    @Expect(classSource.contains("hr__ = unsafe { factory__.GetRawObjectOut(objectValue.borrowMut<CPointer<Unit>>()) }"), true)
+    @Expect(classSource.contains("public static func GetRawObjectOut(objectValue: windows_core.OutSlot<windows_interface.IInspectable>): Unit {\n        var hr__ = windows_core.E_POINTER\n        try (factory__ = windows_core.factory<Example_Foundation_Widget, Example_Foundation_IWidgetFactory>().unwrap()) {\n            hr__ = unsafe { factory__.GetRawObjectOut(objectValue.borrowMut<CPointer<Unit>>()) }\n        }\n        if (hr__.failed()) {\n            match (objectValue.takeAbi<CPointer<Unit>>()) {\n                case Some(__arg0ValuePartial) =>\n                    if (__arg0ValuePartial.isNotNull()) {\n                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg0ValuePartial)\n                    }\n                case None => ()\n            }\n        }\n        hr__.check()\n        let __arg0Value = match (objectValue.takeAbi<CPointer<Unit>>()) {\n            case Some(value) => value\n            case None => throw windows_core.WindowsException(windows_core.E_POINTER)\n        }\n        objectValue.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg0Value))\n    }"), true)
+    @Expect(classSource.contains("public static func GetRawStringOut(stringValue: windows_core.OutSlot<windows_core.HString>): Unit"), true)
+    @Expect(classSource.contains("hr__ = unsafe { factory__.GetRawStringOut(stringValue.borrowMut<CPointer<Unit>>()) }"), true)
+    @Expect(classSource.contains("stringValue.write(windows_core.HString.fromSystemHandleTake(__arg0Value))"), true)
+    @Expect(classSource.contains("public static func GetNames(): Array<windows_core.HString>"), true)
+    @Expect(classSource.contains("var __returnData = CPointer<CPointer<Unit>>()"), true)
+    @Expect(classSource.contains("hr__ = unsafe { factory__.GetNames(CPointer<UInt32>(inout __returnSize), CPointer<CPointer<CPointer<Unit>>>(inout __returnData)) }"), true)
+    @Expect(classSource.contains("if (hr__.failed() && __returnData.isNotNull()) {\n            windows_core.winrtReleaseGenericArrayOut<windows_core.HString>(CPointer<Unit>(__returnData), __returnSize)\n            __returnData = CPointer<CPointer<Unit>>()\n            __returnSize = 0u32\n        }\n        hr__.check()"), true)
+    @Expect(classSource.contains("return windows_core.winrtTakeGenericArrayOut<windows_core.HString>(CPointer<Unit>(__returnData), __returnSize)"), true)
+    @Expect(classSource.contains("public static func CreateGuidArray(valuesSize: UInt32, values: CPointer<GUID>, result: CPointer<CPointer<Unit>>): Unit"), false)
+    @Expect(classSource.contains("public static func GetNames(namesSize: CPointer<UInt32>, names: CPointer<CPointer<CPointer<Unit>>>): Unit"), false)
     @Expect(classSource.contains("public static func runtimeName(): String {\n        \"Example.Foundation.Widget\"\n    }"), true)
     @Expect(classSource.contains("return \"rc(Example.Foundation.Widget;{\" + Example_Foundation_IWidget.iid().toSignatureString() + \"})\""), true)
     @Expect(classSource.contains("windows_interface.RuntimeTypeContract(\"Example.Foundation.Widget\", Example_Foundation_Widget.signature(), Example_Foundation_IWidget.iid())"), true)
@@ -13294,7 +14305,7 @@ func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
     let outDir = ".generated/runtime-class-wrapper-import-test"
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
-    writeImplFiles(writer, records, "windows_gen", symbolsByName)
+    writeImplFiles(writer, records, "windows", symbolsByName)
     let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
     @Expect(implChunk.contains("import windows_core as windows_core"), true)
@@ -13356,7 +14367,25 @@ func testWinrtRuntimeClassProjectsDefaultInterfaceMembersPropertiesAndEvents() {
           "BaseType": "System.MulticastDelegate",
           "IsNested": false,
           "Attributes": ["Public", "Class", "Sealed", "WindowsRuntime"],
-          "CustomAttributes": [],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 286331153},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 8738},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 13107},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 68},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 85},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 102},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 119},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 136},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 153},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 170},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 187}
+              ],
+              "NamedArguments": []
+            }
+          ],
           "Fields": [],
           "InterfaceImplementations": [],
           "Methods": [
@@ -13437,6 +14466,28 @@ func testWinrtRuntimeClassProjectsDefaultInterfaceMembersPropertiesAndEvents() {
               "GenericParameters": []
             },
             {
+              "Name": "GetRawObject",
+              "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "Object"}, "Parameters": []},
+              "Parameters": [
+                {"Name": "result", "SequenceNumber": 0, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Primitive", "Name": "Object"}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "GetRawString",
+              "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "String"}, "Parameters": []},
+              "Parameters": [
+                {"Name": "result", "SequenceNumber": 0, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Primitive", "Name": "String"}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
               "Name": "put_Title",
               "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "Void"}, "Parameters": [{"Kind": "Type", "Namespace": "System", "Name": "String"}]},
               "Parameters": [
@@ -13472,6 +14523,63 @@ func testWinrtRuntimeClassProjectsDefaultInterfaceMembersPropertiesAndEvents() {
                 {"Name": "token", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Type", "Namespace": "Tiny.Foundation", "Name": "EventRegistrationToken"}}
               ],
               "Attributes": ["Public", "Abstract", "Virtual", "SpecialName"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "SetTags",
+              "Signature": {
+                "ReturnType": {"Kind": "Primitive", "Name": "Void"},
+                "Parameters": [{"Kind": "SZArray", "Type": {"Kind": "Type", "Namespace": "System", "Name": "String"}}]
+              },
+              "Parameters": [
+                {"Name": "values", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "SZArray", "Type": {"Kind": "Type", "Namespace": "System", "Name": "String"}}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "CreateRawTitle",
+              "Signature": {
+                "ReturnType": {"Kind": "Type", "Namespace": "System", "Name": "String"},
+                "Parameters": [{"Kind": "SZArray", "Type": {"Kind": "Primitive", "Name": "String"}}]
+              },
+              "Parameters": [
+                {"Name": "result", "SequenceNumber": 0, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Type", "Namespace": "System", "Name": "String"}},
+                {"Name": "values", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "SZArray", "Type": {"Kind": "Primitive", "Name": "String"}}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "GetIds",
+              "Signature": {
+                "ReturnType": {"Kind": "SZArray", "Type": {"Kind": "Type", "Namespace": "System", "Name": "Guid"}},
+                "Parameters": []
+              },
+              "Parameters": [
+                {"Name": "ids", "SequenceNumber": 0, "Attributes": ["Retval"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "SZArray", "Type": {"Kind": "Type", "Namespace": "System", "Name": "Guid"}}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual"],
+              "ImplAttributes": [],
+              "CustomAttributes": [],
+              "GenericParameters": []
+            },
+            {
+              "Name": "GetPriority",
+              "Signature": {
+                "ReturnType": {"Kind": "Primitive", "Name": "Void"},
+                "Parameters": [{"Kind": "ByReference", "Type": {"Kind": "Primitive", "Name": "Int32"}}]
+              },
+              "Parameters": [
+                {"Name": "priority", "SequenceNumber": 1, "Attributes": ["Out"], "CustomAttributes": [], "DefaultValue": null, "Signature": {"Kind": "Primitive", "Name": "Int32"}}
+              ],
+              "Attributes": ["Public", "Abstract", "Virtual"],
               "ImplAttributes": [],
               "CustomAttributes": [],
               "GenericParameters": []
@@ -13539,14 +14647,45 @@ func testWinrtRuntimeClassProjectsDefaultInterfaceMembersPropertiesAndEvents() {
     @Expect(classSource.contains("try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(prefix))"), true)
     @Expect(classSource.contains("try (interface__ = defaultInterface())"), true)
     @Expect(classSource.contains("hr__ = unsafe { interface__.GetName(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }"), true)
-    @Expect(classSource.contains("return windows_core.HString.fromAbiTakeWinrtHandle(result__)"), true)
+    @Expect(classSource.contains("if (hr__.failed() && result__.isNotNull()) {\n            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)\n            result__ = CPointer<Unit>()\n        }"), true)
+    @Expect(classSource.contains("return windows_core.HString.fromSystemHandleTake(result__)"), true)
     @Expect(classSource.contains("public mut prop Title: windows_core.HString"), true)
     @Expect(classSource.contains("hr__ = unsafe { interface__.Title(CPointer<CPointer<Unit>>(inout result__)) }"), true)
+    @Expect(classSource.contains("if (hr__.failed() && result__.isNotNull()) {\n            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)\n            result__ = CPointer<Unit>()\n        }"), true)
+    @Expect(classSource.contains("public func GetRawObject(): windows_interface.IInspectable"), true)
+    @Expect(classSource.contains("hr__ = unsafe { interface__.GetRawObject(CPointer<CPointer<Unit>>(inout result__)) }"), true)
+    @Expect(classSource.contains("if (hr__.failed() && result__.isNotNull()) {\n            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)\n            result__ = CPointer<Unit>()\n        }"), true)
+    @Expect(classSource.contains("public func GetRawObject(): windows_interface.IInspectable {\n        var result__ = CPointer<Unit>()\n        var hr__ = windows_core.E_POINTER\n        try (interface__ = defaultInterface()) {\n            hr__ = unsafe { interface__.GetRawObject(CPointer<CPointer<Unit>>(inout result__)) }\n        }\n        if (hr__.failed() && result__.isNotNull()) {\n            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)\n            result__ = CPointer<Unit>()\n        }\n        hr__.check()\n        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)\n    }"), true)
+    @Expect(classSource.contains("public func GetRawString(): windows_core.HString"), true)
+    @Expect(classSource.contains("hr__ = unsafe { interface__.GetRawString(CPointer<CPointer<Unit>>(inout result__)) }"), true)
+    @Expect(classSource.contains("if (hr__.failed() && result__.isNotNull()) {\n            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)\n            result__ = CPointer<Unit>()\n        }"), true)
+    @Expect(classSource.contains("return windows_core.HString.fromSystemHandleTake(result__)"), true)
     @Expect(classSource.contains("hr__ = unsafe { interface__.SetTitle(__argBorrow0.asRaw()) }"), true)
     @Expect(classSource.contains("public func addChanged(handler: Tiny_Foundation_TypedEventHandler): Tiny_Foundation_EventRegistrationToken"), true)
     @Expect(classSource.contains("hr__ = unsafe { interface__.Changed(__argBorrow0.asRaw(), CPointer<Tiny_Foundation_EventRegistrationToken>(inout result__)) }"), true)
     @Expect(classSource.contains("public func removeChanged(token: Tiny_Foundation_EventRegistrationToken): Unit"), true)
     @Expect(classSource.contains("hr__ = unsafe { interface__.RemoveChanged(token) }"), true)
+    @Expect(classSource.contains("public func SetTags(values: Array<windows_core.HString>): Unit"), true)
+    @Expect(classSource.contains("let __arg0AbiValues = Array<CPointer<Unit>>(values.size, { _ => CPointer<Unit>() })"), true)
+    @Expect(classSource.contains("let __arg0Borrow = windows_core.winrtBorrowGenericIn<windows_core.HString>(values[__arg0Index])"), true)
+    @Expect(classSource.contains("hr__ = unsafe { interface__.SetTags(__arg0Len, __arg0Raw) }"), true)
+    @Expect(classSource.contains("public func CreateRawTitle(values: Array<windows_core.HString>): windows_core.HString"), true)
+    @Expect(classSource.contains("hr__ = unsafe { interface__.CreateRawTitle(__arg0Len, __arg0Raw, CPointer<CPointer<Unit>>(inout result__)) }"), true)
+    @Expect(classSource.contains("return windows_core.HString.fromSystemHandleTake(result__)"), true)
+    @Expect(classSource.contains("public func CreateRawTitle(valuesSize: UInt32, values: CPointer<CPointer<Unit>>, result: CPointer<CPointer<Unit>>): Unit"), false)
+    @Expect(classSource.contains("windows_core.releaseFailedComOutSlot(result)"), false)
+    @Expect(classSource.contains("windows_core.releaseFailedComOutSlot(values)"), false)
+    @Expect(classSource.contains("public func GetIds(): Array<windows_core.GuidValue>"), true)
+    @Expect(classSource.contains("var __returnData = CPointer<GUID>()"), true)
+    @Expect(classSource.contains("hr__ = unsafe { interface__.GetIds(CPointer<UInt32>(inout __returnSize), CPointer<CPointer<GUID>>(inout __returnData)) }"), true)
+    @Expect(classSource.contains("if (hr__.failed() && __returnData.isNotNull()) {\n            windows_core.coTaskMemFree(CPointer<Unit>(__returnData))\n            __returnData = CPointer<GUID>()\n            __returnSize = 0u32\n        }\n        hr__.check()"), true)
+    @Expect(classSource.contains("return { =>\n            if (__returnSize > 0u32 && __returnData.isNull())"), true)
+    @Expect(classSource.contains("Array<windows_core.GuidValue>(__returnValueAbiValues.size, { index => windows_core.GuidValue.fromRaw(__returnValueAbiValues[index]) })"), true)
+    @Expect(classSource.contains("public func GetPriority(priority: windows_core.OutSlot<Int32>): Unit"), true)
+    @Expect(classSource.contains("hr__ = unsafe { interface__.GetPriority(priority.borrowMut<Int32>()) }"), true)
+    @Expect(classSource.contains("priority.write(__arg0Value)"), true)
+    @Expect(classSource.contains("public func SetTags(valuesSize: UInt32, values: CPointer<CPointer<Unit>>): Unit"), false)
+    @Expect(classSource.contains("public func GetIds(idsSize: CPointer<UInt32>, ids: CPointer<CPointer<GUID>>): Unit"), false)
     @Expect(classSource.contains("public func get_Title("), false)
     @Expect(classSource.contains("public func put_Title("), false)
     @Expect(classSource.contains("public func add_Changed("), false)
@@ -14185,8 +15324,13 @@ func testWinrtComposableAttributeRendersRuntimeFactoryMethod() {
     }
 
     @Expect(classSource.contains("windows_core.factory<Example_Foundation_ComposableWidget, Example_Foundation_IComposableWidgetFactory>().unwrap()"), true)
-    @Expect(classSource.contains("public static func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, result: CPointer<CPointer<Unit>>): Unit"), true)
-    @Expect(classSource.contains("hr__ = unsafe { factory__.CreateInstance(baseInterface, innerInterface, result) }"), true)
+    @Expect(classSource.contains("public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Example_Foundation_ComposableWidget"), true)
+    @Expect(classSource.contains("try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface))"), true)
+    @Expect(classSource.contains("hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }"), true)
+    @Expect(classSource.contains("if (hr__.failed()) {\n            match (innerInterface.takeAbi<CPointer<Unit>>()) {\n                case Some(__arg1ValuePartial) =>\n                    if (__arg1ValuePartial.isNotNull()) {\n                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)\n                    }\n                case None => ()\n            }\n        }"), true)
+    @Expect(classSource.contains("innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))"), true)
+    @Expect(classSource.contains("return Example_Foundation_ComposableWidget.fromAbiTakeWinrtHandle(result__)"), true)
+    @Expect(classSource.contains("public static func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, result: CPointer<CPointer<Unit>>): Unit"), false)
 
     let exactFeatures = ArrayList<String>()
     exactFeatures.add("Example.Foundation.ComposableWidget")
@@ -14313,7 +15457,8 @@ func testWinrtStaticOnlyClassRendersRuntimeFactoryMethods() {
     @Expect(classSource.contains("windows_core.factory<Example_Foundation_StaticWidget, Example_Foundation_IStaticWidgetStatics>().unwrap()"), true)
     @Expect(classSource.contains("try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value))"), true)
     @Expect(classSource.contains("hr__ = unsafe { factory__.BuildName(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }"), true)
-    @Expect(classSource.contains("return windows_core.HString.fromAbiTakeWinrtHandle(result__)"), true)
+    @Expect(classSource.contains("if (hr__.failed() && result__.isNotNull()) {\n            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)\n            result__ = CPointer<Unit>()\n        }"), true)
+    @Expect(classSource.contains("return windows_core.HString.fromSystemHandleTake(result__)"), true)
     @Expect(classSource.contains("public static func runtimeName(): String {\n        \"Example.Foundation.StaticWidget\"\n    }"), true)
     @Expect(classSource.contains("return \"rc(Example.Foundation.StaticWidget)\""), true)
     @Expect(classSource.contains("windows_interface.RuntimeTypeContract(\"Example.Foundation.StaticWidget\", Example_Foundation_StaticWidget.signature())"), true)
@@ -14657,7 +15802,7 @@ func testWinrtInterfaceArrayParametersRenderSizePointerPairs() {
     let outDir = ".generated/interface-array-guid-import-test"
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
-    writeImplFiles(writer, records, "windows_gen", symbolsByName)
+    writeImplFiles(writer, records, "windows", symbolsByName)
     let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
     @Expect(implChunk.contains("import windows_interface.GUID"), true)
@@ -14716,7 +15861,25 @@ func testWinrtDelegateParametersRenderAsComPointers() {
           "BaseType": "System.MulticastDelegate",
           "IsNested": false,
           "Attributes": ["Public", "Class", "Sealed", "WindowsRuntime"],
-          "CustomAttributes": [],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 286331153},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 8738},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 13107},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 68},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 85},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 102},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 119},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 136},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 153},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 170},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 187}
+              ],
+              "NamedArguments": []
+            }
+          ],
           "Fields": [],
           "InterfaceImplementations": [],
           "Methods": [
@@ -14815,16 +15978,28 @@ func testWinrtDelegateParametersRenderAsComPointers() {
     }
 
     @Expect(delegateSource.contains("public type Tiny_Foundation_TypedEventHandler = CFunc"), false)
-    @Expect(delegateSource.contains("public class Tiny_Foundation_TypedEventHandler"), true)
-    @Expect(delegateSource.contains("public class Tiny_Foundation_TypedEventHandler <: Resource"), true)
-    @Expect(delegateSource.contains("private var ownsHandle: Bool"), true)
-    @Expect(delegateSource.contains("public func close(): Unit"), true)
-    @Expect(delegateSource.contains("public static func intoOwnedWinrtHandle(value: Tiny_Foundation_TypedEventHandler): CPointer<Unit>"), true)
-    @Expect(delegateSource.contains("Tiny_Foundation_TypedEventHandler.addRefRaw(raw)"), true)
-    @Expect(delegateSource.contains("public static func cloneWinrtValue(value: Tiny_Foundation_TypedEventHandler): Tiny_Foundation_TypedEventHandler"), true)
-    @Expect(delegateSource.contains("Tiny_Foundation_TypedEventHandler(raw, takeOwnership: true)"), true)
-    @Expect(delegateSource.contains("Tiny_Foundation_TypedEventHandler(raw, takeOwnership: false)"), true)
-    @Expect(delegateSource.contains("extend Tiny_Foundation_TypedEventHandler <: windows_core.HandleWinrtType<Tiny_Foundation_TypedEventHandler>"), true)
+    @Expect(delegateSource.contains("public open class Tiny_Foundation_TypedEventHandler"), true)
+    @Expect(delegateSource.contains("@C\npublic struct Tiny_Foundation_TypedEventHandlerVtbl"), true)
+    @Expect(delegateSource.contains("public open class Tiny_Foundation_TypedEventHandler <: windows_interface.InterfaceWrapperBase"), true)
+    @Expect(delegateSource.contains("windows_interface.GUID.from_values(286331153u32, 8738u16, 13107u16"), true)
+    @Expect(delegateSource.contains("windows_interface.InterfaceDescriptorSchema(\"Tiny.Foundation.TypedEventHandler\", Tiny_Foundation_TypedEventHandler.iid(), windows_interface.IUnknown.descriptorSchema()"), true)
+    @Expect(delegateSource.contains("windows_interface.InterfaceMethodSchema(\"Invoke\", 3"), true)
+    @Expect(delegateSource.contains("public unsafe func Invoke(p0: windows_interface.IInspectable, p1: windows_interface.IInspectable): Unit"), true)
+    @Expect(delegateSource.contains("public static func new(invoke: (windows_interface.IInspectable, windows_interface.IInspectable) -> Unit): Tiny_Foundation_TypedEventHandler"), true)
+    @Expect(delegateSource.contains("public interface Tiny_Foundation_TypedEventHandlerInvokerErased {\n    func __winrtThunk_Invoke(p0: CPointer<Unit>, p1: CPointer<Unit>): Int32"), true)
+    @Expect(delegateSource.contains("public interface Tiny_Foundation_TypedEventHandlerInvoker <: Tiny_Foundation_TypedEventHandlerInvokerErased {\n    func Invoke(p0: windows_interface.IInspectable, p1: windows_interface.IInspectable): Unit"), true)
+    @Expect(delegateSource.contains("public func __winrtThunk_Invoke(p0: CPointer<Unit>, p1: CPointer<Unit>): Int32"), false)
+    @Expect(delegateSource.contains("this.Invoke(windows_core.winrtProjectGenericIn<windows_interface.IInspectable>(p0), windows_core.winrtProjectGenericIn<windows_interface.IInspectable>(p1))"), true)
+    @Expect(delegateSource.contains("try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(p0))"), true)
+    @Expect(delegateSource.contains("private class Tiny_Foundation_TypedEventHandlerBox <: Tiny_Foundation_TypedEventHandlerInvoker & Resource"), true)
+    @Expect(delegateSource.contains("windows_core.ComObject<Tiny_Foundation_TypedEventHandlerBox>.new(box, [Tiny_Foundation_TypedEventHandler.descriptorSchema()], box.vtblPtr())"), true)
+    @Expect(delegateSource.contains("windows_core.asImplFromRaw<Tiny_Foundation_TypedEventHandlerInvokerErased>(instanceRaw)"), true)
+    @Expect(delegateSource.contains("OwnedTiny_Foundation_TypedEventHandler(raw)"), true)
+    @Expect(delegateSource.contains("private class OwnedTiny_Foundation_TypedEventHandler <: Tiny_Foundation_TypedEventHandler"), true)
+    @Expect(delegateSource.contains("super(raw, takeOwnership: true, allowManualRelease: false)"), true)
+    @Expect(delegateSource.contains("Tiny_Foundation_TypedEventHandler(raw, takeOwnership: false, allowManualRelease: false)"), true)
+    @Expect(delegateSource.contains("extend Tiny_Foundation_TypedEventHandler <: windows_core.Interface<Tiny_Foundation_TypedEventHandler>"), true)
+    @Expect(delegateSource.contains("unsupportedDelegateAuthoringReason"), false)
     @Expect(source.contains("func add_Completed(handler: CPointer<Unit>, result: CPointer<Tiny_Foundation_EventRegistrationToken>): Int32"), true)
     @Expect(source.contains("func add_Completed(handler: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>"), false)
     @Expect(source.contains("func add_Completed(handler: CPointer<Unit>, sender: CPointer<Unit>, args: CPointer<Unit>, result: CPointer<Tiny_Foundation_EventRegistrationToken>): Int32"), false)
@@ -15112,6 +16287,70 @@ func testExplicitLayoutUnionRendersRawStorageAndProperties() {
     @Expect(unionSource.contains("public var _raw: VArray<UInt8, $1>"), false)
     @Expect(unionSource.contains("public var Anonymous: _Anonymous_e__Struct"), false)
     @Expect(unionSource.contains("public var Lo64: UInt64 = 0"), false)
+}
+
+@Test
+func testTargetPointerSizeControlsNestedStructLayoutForRawStorage() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "Tiny.Foundation",
+          "Name": "PointerPacked",
+          "BaseType": "System.ValueType",
+          "Attributes": ["Public", "SequentialLayout", "Sealed"],
+          "Fields": [
+            {
+              "Name": "tag",
+              "Signature": {"Kind": "Primitive", "Name": "UInt8"},
+              "Attributes": ["Public"]
+            },
+            {
+              "Name": "handle",
+              "Signature": {"Kind": "Pointer", "Type": {"Kind": "Primitive", "Name": "Void"}},
+              "Attributes": ["Public"]
+            }
+          ]
+        },
+        {
+          "Namespace": "Tiny.Foundation",
+          "Name": "PointerUnion",
+          "BaseType": "System.ValueType",
+          "Attributes": ["Public", "ExplicitLayout", "Sealed"],
+          "Layout": {"IsDefault": false, "PackingSize": 0, "Size": 0},
+          "Fields": [
+            {
+              "Name": "value",
+              "Signature": {"Kind": "Type", "Namespace": "Tiny.Foundation", "Name": "PointerPacked"},
+              "Attributes": ["Public"],
+              "Offset": 0
+            }
+          ]
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    var symbol = records[0]
+    for (record in records) {
+        if (record.fullName == "Tiny.Foundation.PointerUnion") {
+            symbol = record
+            break
+        }
+    }
+
+    let source64 = renderSymbolImpl(symbol, symbolsByName)
+    let source32 = renderSymbolImpl(symbol, symbolsByName, TargetAbiOptions.pointer32())
+
+    @Expect(source64.contains("public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)"), true)
+    @Expect(source32.contains("public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0u32)"), true)
+    @Expect(source32.contains("VArray<UInt64, $2>"), false)
 }
 
 @Test
@@ -15472,6 +16711,7 @@ func testParseArgsCollectsDeriveAndReferenceFlags() {
 
 @Test
 func testParseArgsRejectsMissingValuesForNewFlags() {
+    @Expect(cliTestThrows({ => let _ = parseArgs(["--package-name"]) }), true)
     @Expect(cliTestThrows({ => let _ = parseArgs(["--derive"]) }), true)
     @Expect(cliTestThrows({ => let _ = parseArgs(["--reference"]) }), true)
 }
@@ -15851,6 +17091,94 @@ func testPInvokeErgonomicResultValueWrapperIsGeneratedFromRetval() {
 }
 
 @Test
+func testPInvokeErgonomicResultValueWrapperReleasesComRetvalOnFailedHRESULT() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Retval",
+          "Name": "Apis",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "Class"],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "GetObject",
+              "Attributes": ["Public", "Static", "PinvokeImpl"],
+              "CustomAttributes": [],
+              "ImplAttributes": ["IL", "Managed"],
+              "RelativeVirtualAddress": 0,
+              "Import": {
+                "Name": "GetObject",
+                "Attributes": ["ExactSpelling", "CallingConventionWinApi"],
+                "Module": {"Name": "ole32.dll", "CustomAttributes": []}
+              },
+              "Signature": {
+                "ReturnType": {"Kind": "Type", "Namespace": "Windows.Win32.Foundation", "Name": "HRESULT", "Comment": "TypeReference"},
+                "ParameterTypes": [
+                  {"Kind": "Pointer", "Type": {"Kind": "Pointer", "Type": {"Kind": "Primitive", "Name": "Void"}}}
+                ],
+                "RequiredParameterCount": 1
+              },
+              "Parameters": [
+                {"Name": "value", "SequenceNumber": 1, "Attributes": ["Out", "Retval"], "CustomAttributes": [
+                  {"Type": "Windows.Win32.Foundation.Metadata.ComOutPtrAttribute", "FixedArguments": [], "NamedArguments": []}
+                ]}
+              ],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    let options = RenderOptions.cliDefaults()
+    var source = ""
+    for (record in records) {
+        if (record.fullName == "Example.Retval.Apis") {
+            source = renderSymbolImpl(record, symbolsByName, options)
+        }
+    }
+
+    @Expect(source.contains("public static func GetObjectChecked(): CPointer<Unit> {"), true)
+    @Expect(source.contains("var result__: CPointer<Unit> = CPointer<Unit>()"), true)
+    @Expect(source.contains("Example_Retval_Apis.GetObject(unsafe { CPointer<Unit>(CPointer<CPointer<Unit>>(inout result__)) })"), true)
+    @Expect(source.contains("let resultHr__ = windows_core.HRESULT(hr__)"), true)
+    @Expect(source.contains("if (resultHr__.failed() && result__.isNotNull()) {\n            windows_core.releaseFailedComOutSlot(CPointer<CPointer<Unit>>(inout result__))\n        }"), true)
+    @Expect(source.contains("resultHr__.check()"), true)
+    @Expect(source.contains("return result__"), true)
+}
+
+@Test
 func testPInvokeErgonomicQueryWrapperHandlesIidPlusComOutPtr() {
     let json = ##"{
       "winmd_file": "Tiny.winmd",
@@ -15936,6 +17264,9 @@ func testPInvokeErgonomicQueryWrapperHandlesIidPlusComOutPtr() {
     @Expect(source.contains(": T where T <: windows_interface.ComInterface"), true)
     @Expect(source.contains("var iid__ = descriptor.iid"), true)
     @Expect(source.contains("var raw__: CPointer<Unit> = CPointer<Unit>()"), true)
+    @Expect(source.contains("let resultHr__ = windows_core.HRESULT(hr__)"), true)
+    @Expect(source.contains("if (resultHr__.failed() && raw__.isNotNull()) {\n            let _ = descriptor.releasePointer(raw__)\n            raw__ = CPointer<Unit>()\n        }"), true)
+    @Expect(source.contains("resultHr__.check()"), true)
     @Expect(source.contains("descriptor.takeFromAbi(raw__)"), true)
 }
 
@@ -16328,7 +17659,7 @@ func testWriteImplFilesAddsReferenceImportWhenSymbolIsRemapped() {
 }
 
 @Test
-func testWin32GuidAttributeIsRecognizedOnInterface() {
+func testWin32GuidAttributeRendersIUnknownBasedNativeComSurface() {
     let json = ##"{
       "winmd_file": "Tiny.winmd",
       "winmd_sha256": "abcd",
@@ -16417,12 +17748,131 @@ func testWin32GuidAttributeIsRecognizedOnInterface() {
         }
     }
 
-    @Expect(source.contains("@Interface[\"00000001-0000-0000-c000-000000000046\", \"Example.Win32.System.Com.IClassFactory\"]"), true)
-    @Expect(source.contains("public interface Example_Win32_System_Com_IClassFactory <: IInspectable {"), true)
+    @Expect(source.contains("@Interface["), false)
+    @Expect(source.contains("public class Example_Win32_System_Com_IClassFactory <: Resource {"), true)
+    @Expect(source.contains("private var ownsHandle: Bool = false"), true)
+    @Expect(source.contains("public func close(): Unit"), true)
+    @Expect(source.contains("let shouldRelease = ownsHandle\n        ownsHandle = false\n        closed = true\n        if (shouldRelease) {\n            Example_Win32_System_Com_IClassFactory.releaseRaw(raw)\n        }"), true)
+    @Expect(source.contains("public static func addRefRaw(raw: CPointer<Unit>): Unit"), true)
+    @Expect(source.contains("let _ = vtbl.Release(raw)"), true)
+    @Expect(source.contains("public static func intoOwnedWinrtHandle(value: Example_Win32_System_Com_IClassFactory): CPointer<Unit>"), true)
+    @Expect(source.contains("Example_Win32_System_Com_IClassFactory(raw, takeOwnership: true)"), true)
+    @Expect(source.contains("Example_Win32_System_Com_IClassFactory(raw, takeOwnership: false)"), true)
+    @Expect(source.contains("// Example.Win32.System.Com.IClassFactoryVtbl (synthetic:Example_Win32_System_Com_IClassFactoryVtbl)"), true)
+    @Expect(source.contains("public struct Example_Win32_System_Com_IClassFactoryVtbl {"), true)
+    @Expect(source.contains("public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()"), true)
+    @Expect(source.contains("public var CreateInstance: CFunc<(CPointer<Unit>) -> Int32>"), true)
 }
 
 @Test
-func testImplementOptionEmitsImplTraitForWin32ComInterface() {
+func testWin32ComVoidInterfacePreservesVoidSlots() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "",
+          "Name": "<Module>",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": [],
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Win32.System.Com",
+          "Name": "IAdviseLike",
+          "MetadataToken": "0x02000002",
+          "BaseType": null,
+          "IsNested": false,
+          "Attributes": ["Public", "AutoLayout", "Interface", "Abstract", "AnsiClass"],
+          "CustomAttributes": [
+            {
+              "Type": "Windows.Win32.Foundation.Metadata.GuidAttribute",
+              "FixedArguments": [
+                {"Type": {"Kind": "Primitive", "Name": "UInt32"}, "Value": 336},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "UInt16"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 192},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 0},
+                {"Type": {"Kind": "Primitive", "Name": "Byte"}, "Value": 70}
+              ],
+              "NamedArguments": []
+            }
+          ],
+          "Fields": [],
+          "InterfaceImplementations": [
+            {
+              "Interface": {
+                "Kind": "TypeReference",
+                "TypeReference": {
+                  "Name": "IUnknown",
+                  "Namespace": "Windows.Win32.System.Com"
+                },
+                "TypeDefinition": null,
+                "TypeSpecification": null
+              },
+              "CustomAttributes": []
+            }
+          ],
+          "Methods": [
+            {
+              "Name": "OnClose",
+              "Attributes": ["Public", "Virtual", "NewSlot", "Abstract"],
+              "CustomAttributes": [],
+              "ImplAttributes": ["IL", "Managed"],
+              "RelativeVirtualAddress": 0,
+              "Import": null,
+              "Signature": {
+                "GenericParameterCount": 0,
+                "Header": {"Attributes": ["Instance"], "CallingConvention": "Default", "HasExplicitThis": false, "IsGeneric": false, "IsInstance": true, "Kind": "Method"},
+                "ParameterTypes": [],
+                "RequiredParameterCount": 0,
+                "ReturnType": {"Kind": "Primitive", "Name": "Void"}
+              },
+              "Parameters": [],
+              "GenericParameters": []
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    var source = ""
+    for (record in records) {
+        if (record.fullName == "Example.Win32.System.Com.IAdviseLike") {
+            source = renderSymbolImpl(record, symbolsByName)
+            break
+        }
+    }
+
+    @Expect(source.contains("@Interface["), false)
+    @Expect(source.contains("public var OnClose: CFunc<(CPointer<Unit>) -> Unit>"), true)
+}
+
+@Test
+func testImplementOptionDoesNotRouteWin32ComThroughWinrtInterfaceMacro() {
     let json = ##"{
       "winmd_file": "Tiny.winmd",
       "winmd_sha256": "abcd",
@@ -16516,11 +17966,13 @@ func testImplementOptionEmitsImplTraitForWin32ComInterface() {
         }
     }
 
-    @Expect(defaultSource.contains("public interface Example_Win32_System_Com_IClassFactory"), true)
+    @Expect(defaultSource.contains("@Interface["), false)
+    @Expect(defaultSource.contains("public class Example_Win32_System_Com_IClassFactory"), true)
     @Expect(defaultSource.contains("Example_Win32_System_Com_IClassFactory_Impl"), false)
 
-    @Expect(implSource.contains("public interface Example_Win32_System_Com_IClassFactory_Impl {"), true)
-    @Expect(implSource.contains("func CreateInstance("), true)
+    @Expect(implSource.contains("@Interface["), false)
+    @Expect(implSource.contains("public class Example_Win32_System_Com_IClassFactory"), true)
+    @Expect(implSource.contains("Example_Win32_System_Com_IClassFactory_Impl"), false)
 }
 
 @Test

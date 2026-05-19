@@ -1,0 +1,10 @@
+[package]
+  name = "windows_projection"
+  version = "0.1.0"
+  description = "Scaffold consumer projection package for generated Windows APIs"
+  output-type = "static"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_common = { path = "../windows-common" }

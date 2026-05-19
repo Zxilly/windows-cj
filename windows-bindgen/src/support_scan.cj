@@ -1,4 +1,4 @@
-package windows
+package windows_bindgen
 
 import std.collection.*
 import std.fs.*
@@ -77,9 +77,6 @@ func windowsImportPayload(line: String): Option<String> {
     }
     if (startsWith(text, "import windows_common.")) {
         return Some(stripPrefix(text, "import windows_common."))
-    }
-    if (startsWith(text, "import windows_gen.")) {
-        return Some(stripPrefix(text, "import windows_gen."))
     }
     if (startsWith(text, "import windows.")) {
         return Some(stripPrefix(text, "import windows."))

@@ -1,4 +1,4 @@
-package windows
+package windows_bindgen
 
 import std.collection.*
 import stdx.encoding.json.*
@@ -25,13 +25,134 @@ class RuntimeBorrowSpec {
     }
 }
 
+class RuntimeArrayInputSpec {
+    public let sourceName: String
+    public let elementProjectedType: String
+    public let elementAbiType: String
+    public let elementSignature: SignatureRecord
+    public let abiValuesName: String
+    public let abiArrayName: String
+    public let rawName: String
+    public let lenName: String
+    public let borrowsName: String
+    public let indexName: String
+    public let closeIndexName: String
+    public let borrowName: String
+    public let usesHandleBorrow: Bool
+
+    public init(
+        sourceName: String,
+        elementProjectedType: String,
+        elementAbiType: String,
+        elementSignature: SignatureRecord,
+        localPrefix: String,
+        usesHandleBorrow: Bool
+    ) {
+        this.sourceName = sourceName
+        this.elementProjectedType = elementProjectedType
+        this.elementAbiType = elementAbiType
+        this.elementSignature = elementSignature
+        this.abiValuesName = "${localPrefix}AbiValues"
+        this.abiArrayName = "${localPrefix}AbiArray"
+        this.rawName = "${localPrefix}Raw"
+        this.lenName = "${localPrefix}Len"
+        this.borrowsName = "${localPrefix}Borrows"
+        this.indexName = "${localPrefix}Index"
+        this.closeIndexName = "${localPrefix}CloseIndex"
+        this.borrowName = "${localPrefix}Borrow"
+        this.usesHandleBorrow = usesHandleBorrow
+    }
+}
+
+class RuntimeScalarOutputSpec {
+    public let name: String
+    public let valueName: String
+    public let projectedType: String
+    public let abiType: String
+    public let signature: SignatureRecord
+
+    public init(
+        name: String,
+        valueName: String,
+        projectedType: String,
+        abiType: String,
+        signature: SignatureRecord
+    ) {
+        this.name = name
+        this.valueName = valueName
+        this.projectedType = projectedType
+        this.abiType = abiType
+        this.signature = signature
+    }
+}
+
+class RuntimeRawAbiOutSlotCleanupSpec {
+    public let slotName: String
+    public let projectedType: String
+    public let abiType: String
+
+    public init(slotName: String, projectedType: String, abiType: String) {
+        this.slotName = slotName
+        this.projectedType = projectedType
+        this.abiType = abiType
+    }
+}
+
+class RuntimeArrayOutputSpec {
+    public let targetName: String
+    public let valueName: String
+    public let dataName: String
+    public let sizeName: String
+    public let elementProjectedType: String
+    public let elementAbiType: String
+    public let elementSignature: SignatureRecord
+
+    public init(
+        targetName: String,
+        valueName: String,
+        dataName: String,
+        sizeName: String,
+        elementProjectedType: String,
+        elementAbiType: String,
+        elementSignature: SignatureRecord
+    ) {
+        this.targetName = targetName
+        this.valueName = valueName
+        this.dataName = dataName
+        this.sizeName = sizeName
+        this.elementProjectedType = elementProjectedType
+        this.elementAbiType = elementAbiType
+        this.elementSignature = elementSignature
+    }
+}
+
 class RuntimeCallPlan {
     public let borrows: ArrayList<RuntimeBorrowSpec>
     public let args: ArrayList<String>
+    public let arrayInputs: ArrayList<RuntimeArrayInputSpec>
+    public let scalarOutputs: ArrayList<RuntimeScalarOutputSpec>
+    public let arrayOutputs: ArrayList<RuntimeArrayOutputSpec>
 
     public init(borrows: ArrayList<RuntimeBorrowSpec>, args: ArrayList<String>) {
         this.borrows = borrows
         this.args = args
+        this.arrayInputs = ArrayList<RuntimeArrayInputSpec>()
+        this.scalarOutputs = ArrayList<RuntimeScalarOutputSpec>()
+        this.arrayOutputs = ArrayList<RuntimeArrayOutputSpec>()
+    }
+
+    public init(
+        borrows: ArrayList<RuntimeBorrowSpec>,
+        args: ArrayList<String>,
+        arrayInputs: ArrayList<RuntimeArrayInputSpec>,
+        scalarOutputs: ArrayList<RuntimeScalarOutputSpec>,
+        arrayOutputs: ArrayList<RuntimeArrayOutputSpec>
+    ) {
+        this.borrows = borrows
+        this.args = args
+        this.arrayInputs = arrayInputs
+        this.scalarOutputs = scalarOutputs
+        this.arrayOutputs = arrayOutputs
     }
 }
 
@@ -64,23 +185,56 @@ class RuntimeClassInterfaceSpec {
     public let typeName: String
     public let fullName: String
     public let accessorName: String
+    public let substitutions: ArrayList<RuntimeClassGenericSubstitution>
 
-    public init(symbol: SymbolRecord, typeName: String) {
+    public init(
+        symbol: SymbolRecord,
+        typeName: String,
+        substitutions!: ArrayList<RuntimeClassGenericSubstitution> = ArrayList<RuntimeClassGenericSubstitution>()
+    ) {
         this.symbol = symbol
         this.typeName = typeName
         this.fullName = symbol.fullName
         this.accessorName = cjIdentifier(symbol.name)
+        this.substitutions = substitutions
+    }
+}
+
+class RuntimeClassGenericSubstitution {
+    public let name: String
+    public let typeName: String
+
+    public init(name: String, typeName: String) {
+        this.name = name
+        this.typeName = typeName
     }
 }
 
 public func renderSymbolImpl(symbol: SymbolRecord, symbolsByName: HashMap<String, SymbolRecord>): String {
-    return renderSymbolImpl(symbol, symbolsByName, RenderOptions.defaults())
+    return renderSymbolImpl(symbol, symbolsByName, RenderOptions.defaults(), TargetAbiOptions.defaults())
+}
+
+public func renderSymbolImpl(
+    symbol: SymbolRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    targetAbi: TargetAbiOptions
+): String {
+    return renderSymbolImpl(symbol, symbolsByName, RenderOptions.defaults(), targetAbi)
 }
 
 public func renderSymbolImpl(
     symbol: SymbolRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
     options: RenderOptions
+): String {
+    return renderSymbolImpl(symbol, symbolsByName, options, TargetAbiOptions.defaults())
+}
+
+public func renderSymbolImpl(
+    symbol: SymbolRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    options: RenderOptions,
+    targetAbi: TargetAbiOptions
 ): String {
     if (!symbol.implSource.isEmpty()) {
         return symbol.implSource
@@ -115,17 +269,20 @@ public func renderSymbolImpl(
                 return "${header}\n${renderDelegateSymbol(symbol, typeDef, symbolsByName)}"
             }
             if (isValueType(typeDef)) {
-                return "${header}\n${renderValueStructSymbol(symbol, typeDef, symbolsByName, options)}"
+                return "${header}\n${renderValueStructSymbol(symbol, typeDef, symbolsByName, options, targetAbi)}"
             }
             if (hasPInvokeMethods(typeDef)) {
-                return "${header}\n${renderPInvokeSymbol(symbol, typeDef, symbolsByName, options)}"
+                return "${header}\n${renderPInvokeSymbol(symbol, typeDef, symbolsByName, options, targetAbi)}"
             }
             if (isApisLikeClass(typeDef)) {
-                return "${header}\n${renderPInvokeSymbol(symbol, typeDef, symbolsByName, options)}"
+                return "${header}\n${renderPInvokeSymbol(symbol, typeDef, symbolsByName, options, targetAbi)}"
             }
             if (isInterfaceType(typeDef)) {
                 match (guidAttributeString(typeDef)) {
                     case Some(guidValue) =>
+                        if (!contains(typeDef.attributes, "WindowsRuntime")) {
+                            return "${header}\n${renderNativeComInterfaceSymbol(symbol, typeDef, symbolsByName)}"
+                        }
                         return "${header}\n${renderInterfaceSymbol(symbol, typeDef, symbolsByName, guidValue, options)}"
                     case None => ()
                 }
@@ -202,13 +359,17 @@ func renderDelegateSymbol(
     symbolsByName: HashMap<String, SymbolRecord>
 ): String {
     if (isWinrtDelegateType(typeDef)) {
-        if (isGenericWinrtType(typeDef)) {
-            match (guidAttributeString(typeDef)) {
-                case Some(guidValue) => return renderGenericWinrtDelegateSymbol(symbol, typeDef, guidValue)
-                case None => ()
-            }
+        match (guidAttributeString(typeDef)) {
+            case Some(guidValue) =>
+                match (delegateInvokeMethod(typeDef)) {
+                    case Some(invokeMethod) =>
+                        return renderWinrtDelegateSymbol(symbol, typeDef, symbolsByName, guidValue, invokeMethod)
+                    case None =>
+                        return renderUnsupportedWinrtDelegateSymbol(symbol, "missing Invoke method")
+                }
+            case None =>
+                return renderUnsupportedWinrtDelegateSymbol(symbol, "missing GuidAttribute")
         }
-        return renderRawHandleSymbol(symbol, "delegate")
     }
     match (delegateCFuncType(typeDef, symbolsByName)) {
         case Some(typeName) => return "public type ${symbol.implName} = ${typeName}"
@@ -216,18 +377,79 @@ func renderDelegateSymbol(
     }
 }
 
-func renderGenericWinrtDelegateSymbol(
+func delegateInvokeMethod(typeDef: TypeDefinitionRecord): Option<MethodRecord> {
+    for (method in typeDef.methods) {
+        if (method.name == "Invoke") {
+            return Some(method)
+        }
+    }
+    return None
+}
+
+func renderUnsupportedWinrtDelegateSymbol(symbol: SymbolRecord, reason: String): String {
+    return renderRawDelegateHandleSymbol(symbol) + "\n\n" +
+        "// WinRT delegate authoring is unavailable for this metadata shape: ${cjStringContent(reason)}.\n" +
+        "extend ${symbol.implName} {\n" +
+        "    public static func unsupportedDelegateAuthoringReason(): String {\n" +
+        "        return \"${cjStringContent(reason)}\"\n" +
+        "    }\n\n" +
+        "    public static func new(): ${symbol.implName} {\n" +
+        "        throw Exception(\"${symbol.implName} cannot be authored as a WinRT delegate: ${cjStringContent(reason)}\")\n" +
+        "    }\n" +
+        "}"
+}
+
+func renderWinrtDelegateSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
-    guidValue: String
+    symbolsByName: HashMap<String, SymbolRecord>,
+    guidValue: String,
+    invokeMethod: MethodRecord
 ): String {
     let genericNames = genericParameterNames(typeDef)
+    var content = renderWinrtDelegateVtbl(symbol, invokeMethod, symbolsByName)
+    content += renderWinrtDelegateWrapper(symbol, typeDef, symbolsByName, guidValue, invokeMethod, genericNames)
+    content += renderWinrtDelegateInvoker(symbol, invokeMethod, symbolsByName, genericNames)
+    return content
+}
+
+func renderWinrtDelegateVtbl(
+    symbol: SymbolRecord,
+    invokeMethod: MethodRecord,
+    symbolsByName: HashMap<String, SymbolRecord>
+): String {
+    let pairs = interfaceMethodMacroParameterPairs(invokeMethod, symbolsByName, symbol.fullName)
+    var content = "@C\npublic struct ${symbol.implName}Vtbl {\n"
+    content += "    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()\n"
+    content += "    public var Invoke: CFunc<(${interfaceCFuncParameterTypes(pairs)}) -> Int32> = " +
+        "{ ${interfaceClosurePlaceholders(Int64(pairs.size) + 1)} => windows_core.E_NOTIMPL.value }\n"
+    content += "    public init() {}\n"
+    content += "}\n\n"
+    return content
+}
+
+func renderWinrtDelegateWrapper(
+    symbol: SymbolRecord,
+    typeDef: TypeDefinitionRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    guidValue: String,
+    invokeMethod: MethodRecord,
+    genericNames: ArrayList<String>
+): String {
     let genericParams = genericParameterList(genericNames)
     let genericWhere = genericRuntimeWhereClause(genericNames)
     let genericTypeName = "${symbol.implName}${genericParams}"
     let runtimeName = stripGenericArity(symbol.fullName)
-    var content = "public class ${genericTypeName} <: windows_interface.InterfaceWrapperBase & " +
-        "windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType${genericWhere} {\n"
+    let abiPairs = interfaceMethodMacroParameterPairs(invokeMethod, symbolsByName, symbol.fullName)
+    let projectInvoke = winrtDelegateCanProjectInvoke(invokeMethod)
+    let projectedPairs = if (projectInvoke) {
+        winrtProjectedMethodParameterPairs(invokeMethod, symbolsByName, symbol.fullName)
+    } else {
+        abiPairs
+    }
+    var content = "public open class ${genericTypeName} <: windows_interface.InterfaceWrapperBase & " +
+        "windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & " +
+        "windows_interface.DescriptorSchemaProvider${genericWhere} {\n"
     content += "    public init(raw: CPointer<Unit>) {\n"
     content += "        super(raw)\n"
     content += "    }\n\n"
@@ -241,23 +463,74 @@ func renderGenericWinrtDelegateSymbol(
     content += "        ${genericTypeName}(raw, takeOwnership: false, allowManualRelease: false)\n"
     content += "    }\n\n"
     content += "    public static func iid(): windows_interface.GUID {\n"
-    content += "        windows_interface.GUID.from_signature(${genericTypeName}.signature())\n"
+    if (genericNames.isEmpty()) {
+        match (guidAttributeInterfaceExpression(typeDef)) {
+            case Some(expr) => content += "        ${expr}\n"
+            case None => content += "        windows_interface.GUID.from_signature(${genericTypeName}.signature())\n"
+        }
+    } else {
+        content += "        windows_interface.GUID.from_signature(${genericTypeName}.signature())\n"
+    }
     content += "    }\n\n"
     content += "    public static func descriptor(): windows_interface.InterfaceDescriptor<${genericTypeName}> {\n"
     content += "        windows_interface.InterfaceDescriptor<${genericTypeName}>(\"${cjStringContent(runtimeName)}\", " +
         "${genericTypeName}.iid(), [windows_interface.IUnknown.iid()], " +
         "{ raw => ${genericTypeName}.fromAbiTake(raw) }, { raw => ${genericTypeName}.viewOf(raw) })\n"
     content += "    }\n\n"
+    content += "    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {\n"
+    content += "        var schema = windows_interface.InterfaceDescriptorSchema(\"${cjStringContent(runtimeName)}\", " +
+        "${genericTypeName}.iid(), windows_interface.IUnknown.descriptorSchema(), " +
+        "\"${symbol.implName}Vtbl\", \"${symbol.implName}\", \"${symbol.implName}Invoker\", " +
+        "${winrtDelegateMethodSchemas(invokeMethod, symbolsByName, symbol.fullName)})\n"
+    content += "        schema.runtimeTypeContract = Some(${genericTypeName}.runtimeType())\n"
+    content += "        return schema\n"
+    content += "    }\n\n"
     content += "    public static func abiType(): String {\n"
     content += "        \"CPointer<Unit>\"\n"
     content += "    }\n\n"
-    content += renderGenericWinrtSignatureFunction(genericTypeName, guidValue, genericNames)
+    if (genericNames.isEmpty()) {
+        content += "    public static func signature(): String {\n"
+        content += "        \"${cjStringContent(runtimeName)}\"\n"
+        content += "    }\n\n"
+    } else {
+        content += renderGenericWinrtSignatureFunction(genericTypeName, guidValue, genericNames)
+    }
     content += "    public static func runtimeType(): windows_interface.RuntimeTypeContract {\n"
     content += "        windows_interface.RuntimeTypeContract(\"${cjStringContent(runtimeName)}\", " +
         "${genericTypeName}.signature(), ${genericTypeName}.iid())\n"
     content += "    }\n\n"
     content += "    public static func projectionKind(): String {\n"
     content += "        return \"delegate\"\n"
+    content += "    }\n"
+    content += "\n"
+    content += "    public unsafe func vtbl(): ${symbol.implName}Vtbl {\n"
+    content += "        readVtbl<${symbol.implName}Vtbl>(${symbol.implName}Vtbl())\n"
+    content += "    }\n\n"
+    content += "    public unsafe func Invoke(${parameterPairListText(projectedPairs)}): Unit {\n"
+    content += "        let liveRaw = asRaw()\n"
+    content += "        if (liveRaw.isNull()) {\n"
+    content += "            throw windows_core.WindowsException(windows_core.E_POINTER)\n"
+    content += "        }\n"
+    content += "        let v = vtbl()\n"
+    if (projectInvoke) {
+        content += "        var hr__ = windows_core.E_POINTER\n"
+        content += renderWinrtDelegateProjectedInvokeAbiCall(
+            invokeMethod,
+            projectedPairs,
+            symbolsByName,
+            symbol.fullName,
+            2
+        )
+        content += "        hr__.check()\n"
+    } else {
+        content += "        windows_core.HRESULT(v.Invoke(liveRaw${interfaceMethodCallArguments(abiPairs)})).check()\n"
+    }
+    content += "    }\n\n"
+    content += "    public static func new(invoke: ${delegateClosureType(projectedPairs)}): ${genericTypeName} {\n"
+    content += "        let box = ${symbol.implName}Box${genericParams}(invoke)\n"
+    content += "        let object = windows_core.ComObject<${symbol.implName}Box${genericParams}>.new(" +
+        "box, [${genericTypeName}.descriptorSchema()], box.vtblPtr())\n"
+    content += "        return object.intoInterface(${genericTypeName}.descriptor())\n"
     content += "    }\n"
     content += "}\n\n"
     content += "extend${genericParams} ${genericTypeName} <: windows_core.Interface<${genericTypeName}>${genericWhere} {}\n\n"
@@ -269,17 +542,230 @@ func renderGenericWinrtDelegateSymbol(
     return content
 }
 
+func renderWinrtDelegateInvoker(
+    symbol: SymbolRecord,
+    invokeMethod: MethodRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    genericNames: ArrayList<String>
+): String {
+    let genericParams = genericParameterList(genericNames)
+    let genericWhere = genericRuntimeWhereClause(genericNames)
+    let abiPairs = interfaceMethodMacroParameterPairs(invokeMethod, symbolsByName, symbol.fullName)
+    let projectInvoke = winrtDelegateCanProjectInvoke(invokeMethod)
+    let projectedPairs = if (projectInvoke) {
+        winrtProjectedMethodParameterPairs(invokeMethod, symbolsByName, symbol.fullName)
+    } else {
+        abiPairs
+    }
+    var content = "\npublic interface ${symbol.implName}InvokerErased {\n"
+    content += "    func __winrtThunk_Invoke(${parameterPairListText(abiPairs)}): Int32\n"
+    content += "}\n\n"
+    content += "public interface ${symbol.implName}Invoker${genericParams} <: " +
+        "${symbol.implName}InvokerErased${genericWhere} {\n"
+    content += "    func Invoke(${parameterPairListText(projectedPairs)}): Unit {\n"
+    content += "        ()\n"
+    content += "    }\n\n"
+    content += "    func __winrtThunk_Invoke(${parameterPairListText(abiPairs)}): Int32 {\n"
+    if (projectInvoke) {
+        content += "        this.Invoke(${winrtDelegateProjectedArguments(invokeMethod, abiPairs, projectedPairs, symbolsByName, symbol.fullName)})\n"
+    } else {
+        content += "        this.Invoke(${argumentPairListText(abiPairs)})\n"
+    }
+    content += "        return windows_core.S_OK.value\n"
+    content += "    }\n"
+    content += "}\n\n"
+    content += "private class ${symbol.implName}Box${genericParams} <: ${symbol.implName}Invoker${genericParams} & Resource${genericWhere} {\n"
+    content += "    public let invoke_: ${delegateClosureType(projectedPairs)}\n"
+    content += "    private let vtblHandle: CPointer<${symbol.implName}Vtbl>\n"
+    content += "    private var closed: Bool = false\n\n"
+    content += "    public init(invoke: ${delegateClosureType(projectedPairs)}) {\n"
+    content += "        this.invoke_ = invoke\n"
+    content += "        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<${symbol.implName}Vtbl>(" +
+        "build${symbol.implName}BoxVtbl${genericParams}()) }\n"
+    content += "    }\n\n"
+    content += "    public func vtblPtr(): CPointer<Unit> {\n"
+    content += "        CPointer<Unit>(vtblHandle)\n"
+    content += "    }\n\n"
+    content += "    public func isClosed(): Bool {\n"
+    content += "        closed\n"
+    content += "    }\n\n"
+    content += "    ~init() {\n"
+    content += "        if (!closed) {\n"
+    content += "            closed = true\n"
+    content += "        }\n"
+    content += "    }\n\n"
+    content += "    public func close(): Unit {\n"
+    content += "        if (closed) {\n"
+    content += "            return\n"
+    content += "        }\n"
+    content += "        unsafe { windows_interface.freeNativeValue(vtblHandle) }\n"
+    content += "        closed = true\n"
+    content += "    }\n\n"
+    content += "    public func Invoke(${parameterPairListText(projectedPairs)}): Unit {\n"
+    content += "        invoke_(${argumentPairListText(projectedPairs)})\n"
+    content += "    }\n"
+    content += "}\n\n"
+    content += "func build${symbol.implName}BoxVtbl${genericParams}(): ${symbol.implName}Vtbl${genericWhere} {\n"
+    content += "    var vtbl = ${symbol.implName}Vtbl()\n"
+    content += "    vtbl.base_ = windows_core.buildIUnknownVtbl()\n"
+    content += "    vtbl.Invoke = { instanceRaw: CPointer<Unit>${delegateClosureTypedParameters(abiPairs)} =>\n"
+    content += "        match (unsafe { windows_core.asImplFromRaw<${symbol.implName}InvokerErased>(instanceRaw) }) {\n"
+    content += "            case Some(invoker) =>\n"
+    content += "                invoker.__winrtThunk_Invoke(${argumentPairListText(abiPairs)})\n"
+    content += "            case None =>\n"
+    content += "                windows_core.E_NOTIMPL.value\n"
+    content += "        }\n"
+    content += "    }\n"
+    content += "    return vtbl\n"
+    content += "}\n"
+    return content
+}
+
+func guidAttributeInterfaceExpression(typeDef: TypeDefinitionRecord): Option<String> {
+    match (guidAttributeValues(typeDef)) {
+        case Some(rawValues) =>
+            let values = ArrayList<String>()
+            var i: Int64 = 0
+            while (i < 11) {
+                values.add(guidLiteralPart(rawValues[i], i))
+                i += 1
+            }
+            return Some("windows_interface.GUID.from_values(${joinStrings(values, ", ")})")
+        case None => return None
+    }
+}
+
+func winrtDelegateMethodSchemas(
+    invokeMethod: MethodRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): String {
+    return "[windows_interface.InterfaceMethodSchema(\"Invoke\", 3, " +
+        "${interfaceParameterSchemas(invokeMethod, symbolsByName, ownerFullName)}, \"Int32\")]"
+}
+
+func winrtDelegateCanProjectInvoke(method: MethodRecord): Bool {
+    if (method.signature.returnType.kind != "Void" && method.signature.returnType.kind != "Unit") {
+        return false
+    }
+    let metadataParameters = metadataMethodParameters(method)
+    var index: Int64 = 0
+    while (index < Int64(method.signature.parameters.size)) {
+        let signature = method.signature.parameters[index]
+        let parameter = metadataParameterAt(metadataParameters, index)
+        if (isOutParameter(parameter) || isByReferenceSignature(signature) || isWinrtArraySignature(signature)) {
+            return false
+        }
+        index += 1
+    }
+    return true
+}
+
+func renderWinrtDelegateProjectedInvokeAbiCall(
+    method: MethodRecord,
+    projectedPairs: ArrayList<ParameterPair>,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String,
+    indentLevel: Int64
+): String {
+    let callPlan = runtimeClassFactoryCallPlan(method, projectedPairs, symbolsByName, ownerFullName)
+    let callArgs = ArrayList<String>()
+    callArgs.add("liveRaw")
+    for (arg in callPlan.args) {
+        callArgs.add(arg)
+    }
+    var content = ""
+    var index: Int64 = 0
+    while (index < Int64(callPlan.borrows.size)) {
+        let borrow = callPlan.borrows[index]
+        content += "${runtimeIndent(indentLevel + index)}try (${borrow.name} = windows_core.winrtBorrowGenericIn<${borrow.typeName}>(${borrow.sourceName})) {\n"
+        index += 1
+    }
+    let callIndentLevel = indentLevel + Int64(callPlan.borrows.size)
+    content += "${runtimeIndent(callIndentLevel)}hr__ = unsafe { v.Invoke(${joinStrings(callArgs, ", ")}) }\n"
+    var closeIndex = Int64(callPlan.borrows.size) - 1
+    while (closeIndex >= 0) {
+        content += "${runtimeIndent(indentLevel + closeIndex)}}\n"
+        closeIndex -= 1
+    }
+    return content
+}
+
+func winrtDelegateProjectedArguments(
+    method: MethodRecord,
+    abiPairs: ArrayList<ParameterPair>,
+    projectedPairs: ArrayList<ParameterPair>,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): String {
+    let values = ArrayList<String>()
+    var index: Int64 = 0
+    while (index < Int64(method.signature.parameters.size)) {
+        let signature = method.signature.parameters[index]
+        values.add(winrtDelegateProjectedArgument(
+            abiPairs[index].name,
+            abiPairs[index].typeName,
+            projectedPairs[index].typeName,
+            signature,
+            symbolsByName,
+            ownerFullName
+        ))
+        index += 1
+    }
+    return joinStrings(values, ", ")
+}
+
+func winrtDelegateProjectedArgument(
+    name: String,
+    abiType: String,
+    projectedType: String,
+    signature: SignatureRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): String {
+    if (runtimeCallNeedsHandleBorrow(projectedType, abiType)) {
+        return "windows_core.winrtProjectGenericIn<${projectedType}>(${name})"
+    }
+    if (projectedType == "windows_core.GuidValue" && abiType == "GUID") {
+        return "windows_core.GuidValue.fromRaw(${name})"
+    }
+    if (isEnumSignature(signature, symbolsByName, ownerFullName)) {
+        return "${projectedType}(${name})"
+    }
+    return name
+}
+
+func delegateClosureType(pairs: ArrayList<ParameterPair>): String {
+    if (pairs.isEmpty()) {
+        return "() -> Unit"
+    }
+    let types = ArrayList<String>()
+    for (pair in pairs) {
+        types.add(pair.typeName)
+    }
+    return "(${joinStrings(types, ", ")}) -> Unit"
+}
+
+func delegateClosureTypedParameters(pairs: ArrayList<ParameterPair>): String {
+    var content = ""
+    for (pair in pairs) {
+        content += ", ${pair.name}: ${pair.typeName}"
+    }
+    return content
+}
+
 func renderValueStructSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
-    options: RenderOptions
+    options: RenderOptions,
+    targetAbi: TargetAbiOptions
 ): String {
     if (!hasPublicInstanceFields(typeDef) && hasLiteralFields(typeDef)) {
         return renderStaticLiteralStructSymbol(symbol, typeDef, symbolsByName)
     }
     if (contains(typeDef.attributes, "ExplicitLayout")) {
-        return renderExplicitLayoutStructSymbol(symbol, typeDef, symbolsByName, options)
+        return renderExplicitLayoutStructSymbol(symbol, typeDef, symbolsByName, options, targetAbi)
     }
     var content = "@C\npublic struct ${symbol.implName} {\n"
     var count: Int64 = 0
@@ -409,9 +895,10 @@ func renderExplicitLayoutStructSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
-    options: RenderOptions
+    options: RenderOptions,
+    targetAbi: TargetAbiOptions
 ): String {
-    let storage = rawStorageSpec(symbol.fullName, typeDef, symbolsByName)
+    let storage = rawStorageSpec(symbol.fullName, typeDef, symbolsByName, targetAbi)
     var content = "@C\npublic struct ${symbol.implName} {\n"
     content += "    public var _raw: VArray<${storage.typeName}, \$${storage.count}> = " +
         "VArray<${storage.typeName}, \$${storage.count}>(repeat: ${storage.repeatValue})\n"
@@ -1102,8 +1589,17 @@ func rawStorageSpec(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>
 ): RawStorageSpec {
-    let size = layoutSize(ownerFullName, typeDef, symbolsByName)
-    let alignment = layoutAlignment(ownerFullName, typeDef, symbolsByName)
+    return rawStorageSpec(ownerFullName, typeDef, symbolsByName, TargetAbiOptions.defaults())
+}
+
+func rawStorageSpec(
+    ownerFullName: String,
+    typeDef: TypeDefinitionRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    targetAbi: TargetAbiOptions
+): RawStorageSpec {
+    let size = layoutSize(ownerFullName, typeDef, symbolsByName, targetAbi)
+    let alignment = layoutAlignment(ownerFullName, typeDef, symbolsByName, targetAbi)
     if (alignment >= 8 && size % 8 == 0) {
         return RawStorageSpec("UInt64", size / 8, "0u64")
     }
@@ -1121,12 +1617,21 @@ func layoutSize(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>
 ): Int64 {
+    return layoutSize(ownerFullName, typeDef, symbolsByName, TargetAbiOptions.defaults())
+}
+
+func layoutSize(
+    ownerFullName: String,
+    typeDef: TypeDefinitionRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    targetAbi: TargetAbiOptions
+): Int64 {
     var size = declaredLayoutSize(typeDef)
     var inferred: Int64 = 0
     if (contains(typeDef.attributes, "ExplicitLayout")) {
-        inferred = explicitLayoutSize(ownerFullName, typeDef, symbolsByName)
+        inferred = explicitLayoutSize(ownerFullName, typeDef, symbolsByName, targetAbi)
     } else {
-        inferred = sequentialLayoutSize(ownerFullName, typeDef, symbolsByName)
+        inferred = sequentialLayoutSize(ownerFullName, typeDef, symbolsByName, targetAbi)
     }
     if (inferred > size) {
         size = inferred
@@ -1153,11 +1658,20 @@ func explicitLayoutSize(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>
 ): Int64 {
+    return explicitLayoutSize(ownerFullName, typeDef, symbolsByName, TargetAbiOptions.defaults())
+}
+
+func explicitLayoutSize(
+    ownerFullName: String,
+    typeDef: TypeDefinitionRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    targetAbi: TargetAbiOptions
+): Int64 {
     var size: Int64 = 0
     for (field in typeDef.fields) {
         if (isPublicInstanceField(field) && field.name != "value__") {
             let fieldType = cjAbiTypeInContext(field.signature, symbolsByName, ownerFullName)
-            let end = field.offset + abiTypeSize(fieldType, symbolsByName)
+            let end = field.offset + abiTypeSize(fieldType, symbolsByName, targetAbi)
             if (end > size) {
                 size = end
             }
@@ -1171,17 +1685,26 @@ func sequentialLayoutSize(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>
 ): Int64 {
+    return sequentialLayoutSize(ownerFullName, typeDef, symbolsByName, TargetAbiOptions.defaults())
+}
+
+func sequentialLayoutSize(
+    ownerFullName: String,
+    typeDef: TypeDefinitionRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    targetAbi: TargetAbiOptions
+): Int64 {
     var offset: Int64 = 0
     var maxAlignment: Int64 = 1
     for (field in typeDef.fields) {
         if (isPublicInstanceField(field) && field.name != "value__") {
             let fieldType = cjAbiTypeInContext(field.signature, symbolsByName, ownerFullName)
-            let fieldAlignment = effectiveFieldAlignment(typeDef, abiTypeAlignment(fieldType, symbolsByName))
+            let fieldAlignment = effectiveFieldAlignment(typeDef, abiTypeAlignment(fieldType, symbolsByName, targetAbi))
             if (fieldAlignment > maxAlignment) {
                 maxAlignment = fieldAlignment
             }
             offset = alignUp(offset, fieldAlignment)
-            offset += abiTypeSize(fieldType, symbolsByName)
+            offset += abiTypeSize(fieldType, symbolsByName, targetAbi)
         }
     }
     return alignUp(offset, maxAlignment)
@@ -1192,12 +1715,21 @@ func layoutAlignment(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>
 ): Int64 {
+    return layoutAlignment(ownerFullName, typeDef, symbolsByName, TargetAbiOptions.defaults())
+}
+
+func layoutAlignment(
+    ownerFullName: String,
+    typeDef: TypeDefinitionRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    targetAbi: TargetAbiOptions
+): Int64 {
     var alignment: Int64 = 1
     for (field in typeDef.fields) {
         if (isPublicInstanceField(field) && field.name != "value__") {
             let fieldAlignment = effectiveFieldAlignment(
                 typeDef,
-                abiTypeAlignment(cjAbiTypeInContext(field.signature, symbolsByName, ownerFullName), symbolsByName)
+                abiTypeAlignment(cjAbiTypeInContext(field.signature, symbolsByName, ownerFullName), symbolsByName, targetAbi)
             )
             if (fieldAlignment > alignment) {
                 alignment = fieldAlignment
@@ -1230,10 +1762,20 @@ func alignUp(value: Int64, alignment: Int64): Int64 {
 }
 
 func abiTypeAlignment(typeName: String, symbolsByName: HashMap<String, SymbolRecord>): Int64 {
-    if (typeName == "UInt64" || typeName == "Int64" || typeName == "Float64" ||
-        typeName == "UIntNative" || typeName == "IntNative" ||
-        startsWith(typeName, "CPointer<") || startsWith(typeName, "CFunc<")) {
+    return abiTypeAlignment(typeName, symbolsByName, TargetAbiOptions.defaults())
+}
+
+func abiTypeAlignment(
+    typeName: String,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    targetAbi: TargetAbiOptions
+): Int64 {
+    if (typeName == "UInt64" || typeName == "Int64" || typeName == "Float64") {
         return 8
+    }
+    if (typeName == "UIntNative" || typeName == "IntNative" ||
+        startsWith(typeName, "CPointer<") || startsWith(typeName, "CFunc<")) {
+        return targetAbi.pointerSize
     }
     if (typeName == "UInt32" || typeName == "Int32" || typeName == "Float32") {
         return 4
@@ -1243,7 +1785,7 @@ func abiTypeAlignment(typeName: String, symbolsByName: HashMap<String, SymbolRec
     }
     if (startsWith(typeName, "VArray<")) {
         match (vArrayElementTypeName(typeName)) {
-            case Some(elementType) => return abiTypeAlignment(elementType, symbolsByName)
+            case Some(elementType) => return abiTypeAlignment(elementType, symbolsByName, targetAbi)
             case None => ()
         }
     }
@@ -1253,7 +1795,7 @@ func abiTypeAlignment(typeName: String, symbolsByName: HashMap<String, SymbolRec
     for ((_, symbol) in symbolsByName) {
         if (symbol.implName == typeName) {
             match (symbol.typeDef) {
-                case Some(typeDef) => return layoutAlignment(symbol.fullName, typeDef, symbolsByName)
+                case Some(typeDef) => return layoutAlignment(symbol.fullName, typeDef, symbolsByName, targetAbi)
                 case None => return 1
             }
         }
@@ -1262,6 +1804,14 @@ func abiTypeAlignment(typeName: String, symbolsByName: HashMap<String, SymbolRec
 }
 
 func abiTypeSize(typeName: String, symbolsByName: HashMap<String, SymbolRecord>): Int64 {
+    return abiTypeSize(typeName, symbolsByName, TargetAbiOptions.defaults())
+}
+
+func abiTypeSize(
+    typeName: String,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    targetAbi: TargetAbiOptions
+): Int64 {
     if (typeName == "Bool" || typeName == "UInt8" || typeName == "Int8") {
         return 1
     }
@@ -1271,16 +1821,18 @@ func abiTypeSize(typeName: String, symbolsByName: HashMap<String, SymbolRecord>)
     if (typeName == "UInt32" || typeName == "Int32" || typeName == "Float32") {
         return 4
     }
-    if (typeName == "UInt64" || typeName == "Int64" || typeName == "Float64" ||
-        typeName == "UIntNative" || typeName == "IntNative" ||
-        startsWith(typeName, "CPointer<") || startsWith(typeName, "CFunc<")) {
+    if (typeName == "UInt64" || typeName == "Int64" || typeName == "Float64") {
         return 8
+    }
+    if (typeName == "UIntNative" || typeName == "IntNative" ||
+        startsWith(typeName, "CPointer<") || startsWith(typeName, "CFunc<")) {
+        return targetAbi.pointerSize
     }
     if (startsWith(typeName, "VArray<")) {
         match (vArrayElementTypeName(typeName)) {
             case Some(elementType) =>
                 match (vArrayCount(typeName)) {
-                    case Some(count) => return abiTypeSize(elementType, symbolsByName) * count
+                    case Some(count) => return abiTypeSize(elementType, symbolsByName, targetAbi) * count
                     case None => ()
                 }
             case None => ()
@@ -1289,7 +1841,7 @@ func abiTypeSize(typeName: String, symbolsByName: HashMap<String, SymbolRecord>)
     for ((_, symbol) in symbolsByName) {
         if (symbol.implName == typeName) {
             match (symbol.typeDef) {
-                case Some(typeDef) => return layoutSize(symbol.fullName, typeDef, symbolsByName)
+                case Some(typeDef) => return layoutSize(symbol.fullName, typeDef, symbolsByName, targetAbi)
                 case None => return 1
             }
         }
@@ -1451,13 +2003,15 @@ func renderPInvokeSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
-    options: RenderOptions
+    options: RenderOptions,
+    targetAbi: TargetAbiOptions
 ): String {
     var content = "public struct ${symbol.implName} {\n"
     content += "    public init() {}\n"
     for (method in typeDef.methods) {
         match (method.methodImport) {
             case Some(methodImport) =>
+                validatePInvokeCallingConvention(method, methodImport, targetAbi)
                 let params = methodParameterText(method, true, symbolsByName)
                 let args = methodArgumentText(method, true, symbolsByName)
                 let returnType = cjAbiType(method.signature.returnType, symbolsByName)
@@ -1482,6 +2036,30 @@ func renderPInvokeSymbol(
     content += renderApisFieldConstants(typeDef, symbolsByName)
     content += "}"
     return content
+}
+
+func validatePInvokeCallingConvention(
+    method: MethodRecord,
+    methodImport: MethodImportRecord,
+    targetAbi: TargetAbiOptions
+): Unit {
+    let callingConvention = methodImport.callingConvention
+    if (callingConvention.isEmpty() || callingConvention == "Default" || callingConvention == "CDecl") {
+        return
+    }
+    if (callingConvention == "WinApi") {
+        if (targetAbi.pointerSize == 4) {
+            throw Exception(
+                "P/Invoke ${method.name} uses WinApi calling convention on a 32-bit target; " +
+                "dynamic CFunc(resolveProc) bindings cannot emit @CallingConv[STDCALL]"
+            )
+        }
+        return
+    }
+    throw Exception(
+        "P/Invoke ${method.name} uses unsupported calling convention ${callingConvention}; " +
+        "dynamic CFunc(resolveProc) bindings only support CDecl/default and WinApi on 64-bit targets"
+    )
 }
 
 func renderPInvokeErgonomicWrapper(
@@ -1605,14 +2183,46 @@ func pinvokeMethodLooksLikeQuery(method: MethodRecord): Bool {
     }
     match (metadataParameterAt(metadataParameters, objectIndex)) {
         case Some(parameter) =>
-            for (attribute in parameter.customAttributes) {
-                if (hasAttributeName(attribute, "ComOutPtrAttribute")) {
-                    return true
-                }
-            }
+            return parameterHasComOutPtrAttribute(parameter)
         case None => ()
     }
     return false
+}
+
+func parameterHasComOutPtrAttribute(parameter: ParameterRecord): Bool {
+    for (attribute in parameter.customAttributes) {
+        if (hasAttributeName(attribute, "ComOutPtrAttribute")) {
+            return true
+        }
+    }
+    return false
+}
+
+func pinvokeRetValOutHasComOutPtr(method: MethodRecord): Bool {
+    if (method.signature.parameters.isEmpty()) {
+        return false
+    }
+    let lastIndex = Int64(method.signature.parameters.size) - 1
+    let metadataParameters = metadataMethodParameters(method)
+    match (metadataParameterAt(metadataParameters, lastIndex)) {
+        case Some(parameter) => return parameterHasComOutPtrAttribute(parameter)
+        case None => return false
+    }
+}
+
+func signaturePointerTarget(signature: SignatureRecord): Option<SignatureRecord> {
+    if (signature.kind != "Pointer" && !isByReferenceSignature(signature)) {
+        return None
+    }
+    match (signature.typeSig) {
+        case Some(nested) => return Some(nested)
+        case None => ()
+    }
+    match (signature.unmodifiedType) {
+        case Some(nested) => return Some(nested)
+        case None => ()
+    }
+    return None
 }
 
 func signatureIsGuidPointer(signature: SignatureRecord): Bool {
@@ -1672,8 +2282,12 @@ func renderPInvokeResultValueWrapper(
     }
     let lastIndex = Int64(pairs.size) - 1
     let lastPair = pairs[lastIndex]
-    let valueType = pointerElementType(lastPair.typeName)
-    if (valueType.isEmpty()) {
+    let lastSignature = method.signature.parameters[lastIndex]
+    let valueType = match (signaturePointerTarget(lastSignature)) {
+        case Some(target) => cjAbiType(target, symbolsByName)
+        case None => pointerElementType(lastPair.typeName)
+    }
+    if (valueType.isEmpty() || valueType == "Unit") {
         return ""
     }
     let leadingPairs = ArrayList<ParameterPair>()
@@ -1689,9 +2303,21 @@ func renderPInvokeResultValueWrapper(
     for (pair in leadingPairs) {
         callArgs.add(pair.name)
     }
-    callArgs.add("CPointer<${valueType}>(inout result__)")
+    if (lastPair.typeName == "CPointer<${valueType}>") {
+        callArgs.add("CPointer<${valueType}>(inout result__)")
+    } else {
+        callArgs.add("unsafe { ${lastPair.typeName}(CPointer<${valueType}>(inout result__)) }")
+    }
     content += "        let hr__ = ${ownerImplName}.${sysName}(${joinStrings(callArgs, ", ")})\n"
-    content += "        windows_core.HRESULT(hr__).check()\n"
+    if (valueType == "CPointer<Unit>" && pinvokeRetValOutHasComOutPtr(method)) {
+        content += "        let resultHr__ = windows_core.HRESULT(hr__)\n"
+        content += "        if (resultHr__.failed() && result__.isNotNull()) {\n"
+        content += "            windows_core.releaseFailedComOutSlot(CPointer<CPointer<Unit>>(inout result__))\n"
+        content += "        }\n"
+        content += "        resultHr__.check()\n"
+    } else {
+        content += "        windows_core.HRESULT(hr__).check()\n"
+    }
     content += "        return result__\n"
     content += "    }\n"
     return content
@@ -1727,7 +2353,12 @@ func renderPInvokeQueryWrapper(
     callArgs.add("unsafe { CPointer<Unit>(CPointer<windows_interface.GUID>(inout iid__)) }")
     callArgs.add("unsafe { CPointer<Unit>(CPointer<CPointer<Unit>>(inout raw__)) }")
     content += "        let hr__ = ${ownerImplName}.${sysName}(${joinStrings(callArgs, ", ")})\n"
-    content += "        windows_core.HRESULT(hr__).check()\n"
+    content += "        let resultHr__ = windows_core.HRESULT(hr__)\n"
+    content += "        if (resultHr__.failed() && raw__.isNotNull()) {\n"
+    content += "            let _ = descriptor.releasePointer(raw__)\n"
+    content += "            raw__ = CPointer<Unit>()\n"
+    content += "        }\n"
+    content += "        resultHr__.check()\n"
     content += "        if (raw__.isNull()) {\n"
     content += "            throw windows_core.WindowsException(windows_core.E_POINTER)\n"
     content += "        }\n"
@@ -1768,6 +2399,107 @@ func pointerElementType(typeName: String): String {
         return ""
     }
     return String.fromUtf8(bytes[prefixSize..Int64(bytes.size) - 1])
+}
+
+func renderNativeComInterfaceSymbol(
+    symbol: SymbolRecord,
+    typeDef: TypeDefinitionRecord,
+    symbolsByName: HashMap<String, SymbolRecord>
+): String {
+    return renderRawHandleSymbol(symbol, "interface") + "\n\n" +
+        renderNativeComInterfaceVtblSymbol(symbol, typeDef, symbolsByName)
+}
+
+func renderNativeComInterfaceVtblSymbol(
+    symbol: SymbolRecord,
+    typeDef: TypeDefinitionRecord,
+    symbolsByName: HashMap<String, SymbolRecord>
+): String {
+    let vtblFullName = "${symbol.fullName}Vtbl"
+    let vtblImplName = "${symbol.implName}Vtbl"
+    var content = "// ${vtblFullName} (synthetic:${vtblImplName})\n"
+    if (symbol.fullName == "Windows.Win32.System.Com.IUnknown") {
+        content += "public type ${vtblImplName} = windows_interface.IUnknownVtbl"
+        return content
+    }
+
+    let baseVtbl = nativeComInterfaceBaseVtblName(typeDef, symbolsByName, symbol.fullName)
+    content += "@C\n"
+    content += "public struct ${vtblImplName} {\n"
+    content += "    public var base_: ${baseVtbl} = ${baseVtbl}()\n"
+    let slotNames = ArrayList<String>()
+    for (method in typeDef.methods) {
+        let slotName = uniqueInterfaceSlotName(method, slotNames)
+        slotNames.add(slotName)
+        let cfuncType = nativeComInterfaceMethodCFuncType(method, symbolsByName)
+        content += "    public var ${slotName}: ${cfuncType} = ${cfuncType}(CPointer<Unit>())\n"
+    }
+    content += "    public init() {}\n"
+    content += "}"
+    return content
+}
+
+func nativeComInterfaceBaseVtblName(
+    typeDef: TypeDefinitionRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): String {
+    match (nativeComInterfaceDirectBaseFullName(typeDef, symbolsByName, ownerFullName)) {
+        case Some(baseFullName) =>
+            if (baseFullName == "Windows.Win32.System.Com.IUnknown") {
+                return "windows_interface.IUnknownVtbl"
+            }
+            if (baseFullName == "Windows.Win32.System.WinRT.IInspectable") {
+                return "windows_interface.IInspectableVtbl"
+            }
+            return "${mangleFullName(baseFullName)}Vtbl"
+        case None => return "windows_interface.IUnknownVtbl"
+    }
+}
+
+func nativeComInterfaceDirectBaseFullName(
+    typeDef: TypeDefinitionRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): Option<String> {
+    for (implementation in typeDef.interfaceImplementations) {
+        match (implementation.interfaceSignature) {
+            case Some(signature) =>
+                match (signatureFullNameInContext(signature, symbolsByName, ownerFullName)) {
+                    case Some(fullName) => return Some(fullName)
+                    case None => ()
+                }
+            case None => ()
+        }
+        match (implementation.typeDefinition) {
+            case Some(metadataType) => return Some(metadataType.fullName())
+            case None => ()
+        }
+        match (implementation.typeReference) {
+            case Some(metadataType) => return Some(metadataType.fullName())
+            case None => ()
+        }
+        match (implementation.typeSpecification) {
+            case Some(typeSpecification) =>
+                match (signatureFullNameInContext(typeSpecification.signature, symbolsByName, ownerFullName)) {
+                    case Some(fullName) => return Some(fullName)
+                    case None => ()
+                }
+            case None => ()
+        }
+    }
+    return None
+}
+
+func nativeComInterfaceMethodCFuncType(method: MethodRecord, symbolsByName: HashMap<String, SymbolRecord>): String {
+    let pairs = methodParameterPairs(method, true, symbolsByName)
+    let types = ArrayList<String>()
+    types.add("CPointer<Unit>")
+    for (pair in pairs) {
+        types.add(pair.typeName)
+    }
+    let returnType = cjAbiType(method.signature.returnType, symbolsByName)
+    return "CFunc<(${joinStrings(types, ", ")}) -> ${returnType}>"
 }
 
 func pinvokeCFuncType(method: MethodRecord, returnType: String, symbolsByName: HashMap<String, SymbolRecord>): String {
@@ -2241,6 +2973,50 @@ func interfaceArrayElementAbiType(
     return "Unit"
 }
 
+func runtimeArrayElementSignature(signature: SignatureRecord): Option<SignatureRecord> {
+    match (winrtArraySignature(signature)) {
+        case Some(arraySignature) =>
+            match (arraySignature.typeSig) {
+                case Some(elementSignature) => return Some(elementSignature)
+                case None => ()
+            }
+        case None => ()
+    }
+    return None
+}
+
+func runtimeArrayElementCanProject(
+    signature: SignatureRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): Bool {
+    match (runtimeArrayElementSignature(signature)) {
+        case Some(elementSignature) =>
+            let projectedType = winrtProjectedTypeName(elementSignature, symbolsByName, ownerFullName)
+            let abiType = interfaceSlotAbiType(elementSignature, symbolsByName, ownerFullName)
+            return projectedType != "CPointer<Unit>" && abiType != "Unit"
+        case None => return false
+    }
+}
+
+func runtimeArrayElementUsesHandleBorrow(projectedType: String, abiType: String): Bool {
+    return abiType == "CPointer<Unit>" && projectedType != "CPointer<Unit>"
+}
+
+func runtimeReferenceTargetSignature(signature: SignatureRecord): SignatureRecord {
+    if (isByReferenceSignature(signature)) {
+        match (signature.typeSig) {
+            case Some(nested) => return nested
+            case None => ()
+        }
+        match (signature.unmodifiedType) {
+            case Some(nested) => return nested
+            case None => ()
+        }
+    }
+    return signature
+}
+
 func isOutParameter(parameter: Option<ParameterRecord>): Bool {
     match (parameter) {
         case Some(value) => return contains(value.attributes, "Out")
@@ -2534,14 +3310,72 @@ func renderRawHandleSymbol(symbol: SymbolRecord, kind: String): String {
     if (kind == "delegate") {
         return renderRawDelegateHandleSymbol(symbol)
     }
-    return "public class ${symbol.implName} {\n" +
+    return "public class ${symbol.implName} <: Resource {\n" +
         "    private let raw: CPointer<Unit>\n" +
+        "    private var ownsHandle: Bool = false\n" +
+        "    private var closed: Bool = false\n" +
+        "\n" +
         "    public init(raw: CPointer<Unit>) {\n" +
         "        this.raw = raw\n" +
         "    }\n" +
-        "    public func asRaw(): CPointer<Unit> {\n" +
-        "        return raw\n" +
+        "\n" +
+        "    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {\n" +
+        "        if (takeOwnership && raw.isNull()) {\n" +
+        "            throw windows_core.WindowsException(windows_core.E_POINTER)\n" +
+        "        }\n" +
+        "        this.raw = raw\n" +
+        "        this.ownsHandle = takeOwnership\n" +
         "    }\n" +
+        "\n" +
+        "    public func asRaw(): CPointer<Unit> {\n" +
+        "        if (closed) {\n" +
+        "            return CPointer<Unit>()\n" +
+        "        }\n" +
+        "        raw\n" +
+        "    }\n" +
+        "\n" +
+        "    public func isClosed(): Bool {\n" +
+        "        closed\n" +
+        "    }\n" +
+        "\n" +
+        "    public func close(): Unit {\n" +
+        "        if (closed) {\n" +
+        "            return\n" +
+        "        }\n" +
+        "        let shouldRelease = ownsHandle\n" +
+        "        ownsHandle = false\n" +
+        "        closed = true\n" +
+        "        if (shouldRelease) {\n" +
+        "            ${symbol.implName}.releaseRaw(raw)\n" +
+        "        }\n" +
+        "    }\n" +
+        "\n" +
+        "    public static func addRefRaw(raw: CPointer<Unit>): Unit {\n" +
+        "        if (raw.isNull()) {\n" +
+        "            return\n" +
+        "        }\n" +
+        "        unsafe {\n" +
+        "            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()\n" +
+        "            if (vtblPtr.isNotNull()) {\n" +
+        "                let vtbl = vtblPtr.read()\n" +
+        "                let _ = vtbl.AddRef(raw)\n" +
+        "            }\n" +
+        "        }\n" +
+        "    }\n" +
+        "\n" +
+        "    private static func releaseRaw(raw: CPointer<Unit>): Unit {\n" +
+        "        if (raw.isNull()) {\n" +
+        "            return\n" +
+        "        }\n" +
+        "        unsafe {\n" +
+        "            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()\n" +
+        "            if (vtblPtr.isNotNull()) {\n" +
+        "                let vtbl = vtblPtr.read()\n" +
+        "                let _ = vtbl.Release(raw)\n" +
+        "            }\n" +
+        "        }\n" +
+        "    }\n" +
+        "\n" +
         "    public static func runtimeName(): String {\n" +
         "        return \"${cjStringContent(symbol.fullName)}\"\n" +
         "    }\n" +
@@ -2553,14 +3387,26 @@ func renderRawHandleSymbol(symbol: SymbolRecord, kind: String): String {
         "    public static func intoWinrtHandle(value: ${symbol.implName}): CPointer<Unit> {\n" +
         "        value.asRaw()\n" +
         "    }\n\n" +
+        "    public static func intoOwnedWinrtHandle(value: ${symbol.implName}): CPointer<Unit> {\n" +
+        "        let raw = value.asRaw()\n" +
+        "        if (raw.isNull()) {\n" +
+        "            return CPointer<Unit>()\n" +
+        "        }\n" +
+        "        ${symbol.implName}.addRefRaw(raw)\n" +
+        "        raw\n" +
+        "    }\n\n" +
         "    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): ${symbol.implName} {\n" +
+        "        ${symbol.implName}(raw, takeOwnership: true)\n" +
+        "    }\n\n" +
+        "    public static func viewWinrtHandle(raw: CPointer<Unit>): ${symbol.implName} {\n" +
+        "        ${symbol.implName}(raw, takeOwnership: false)\n" +
+        "    }\n\n" +
+        "    public static func cloneWinrtValue(value: ${symbol.implName}): ${symbol.implName} {\n" +
+        "        let raw = ${symbol.implName}.intoOwnedWinrtHandle(value)\n" +
         "        if (raw.isNull()) {\n" +
         "            throw windows_core.WindowsException(windows_core.E_POINTER)\n" +
         "        }\n" +
-        "        ${symbol.implName}(raw)\n" +
-        "    }\n\n" +
-        "    public static func viewWinrtHandle(raw: CPointer<Unit>): ${symbol.implName} {\n" +
-        "        ${symbol.implName}(raw)\n" +
+        "        ${symbol.implName}(raw, takeOwnership: true)\n" +
         "    }\n" +
         "}"
 }
@@ -2598,10 +3444,12 @@ func renderRawDelegateHandleSymbol(symbol: SymbolRecord): String {
         "        if (closed) {\n" +
         "            return\n" +
         "        }\n" +
-        "        if (ownsHandle) {\n" +
+        "        let shouldRelease = ownsHandle\n" +
+        "        ownsHandle = false\n" +
+        "        closed = true\n" +
+        "        if (shouldRelease) {\n" +
         "            ${symbol.implName}.releaseRaw(raw)\n" +
         "        }\n" +
-        "        closed = true\n" +
         "    }\n" +
         "\n" +
         "    public static func addRefRaw(raw: CPointer<Unit>): Unit {\n" +
@@ -2709,7 +3557,7 @@ func renderWinrtRuntimeClassSymbol(
             content += "        windows_interface.IInspectable.viewOf(asRaw())\n"
             content += "    }\n\n"
             for (interfaceSpec in interfaceSpecs) {
-                content += renderRuntimeClassInterfaceAccessor(interfaceSpec, defaultInterface)
+                content += renderRuntimeClassInterfaceAccessor(interfaceSpec, interfaceSpecs, defaultInterface)
             }
             content += renderRuntimeClassDefaultInterfaceMembers(symbol, defaultInterface, symbolsByName)
             if (hasDefaultActivatableConstructor(typeDef)) {
@@ -2816,49 +3664,48 @@ func renderRuntimeClassFactoryMethod(
     methodName: String,
     symbolsByName: HashMap<String, SymbolRecord>
 ): String {
-    if (runtimeFactoryRequiresRawAbiShape(method)) {
+    if (runtimeFactoryRequiresRawAbiShape(method, symbolsByName, symbol.fullName)) {
         return renderRuntimeClassFactoryRawAbiMethod(symbol, factorySpec, method, methodName, symbolsByName)
     }
-    let pairs = winrtProjectedMethodParameterPairs(method, symbolsByName, symbol.fullName)
+    let pairs = runtimeProjectedMethodParameterPairs(method, symbolsByName, symbol.fullName)
     let params = parameterPairListText(pairs)
     let callPlan = runtimeClassFactoryCallPlan(method, pairs, symbolsByName, symbol.fullName)
-    let returnType = winrtProjectedTypeName(method.signature.returnType, symbolsByName, symbol.fullName)
+    let returnType = runtimeProjectedReturnTypeName(method.signature.returnType, symbolsByName, symbol.fullName)
     var content = "    public static func ${methodName}(${params}): ${returnType} {\n"
-    let returnAbiType = interfaceSlotAbiType(method.signature.returnType, symbolsByName, symbol.fullName)
-    if (returnType == "Unit") {
-        content += "        var hr__ = windows_core.E_POINTER\n"
-        content += renderRuntimeClassFactoryAbiCall(symbol, factorySpec, methodName, callPlan, "")
-        content += "        hr__.check()\n"
-        content += "    }\n\n"
-        return content
-    }
-    content += "        var result__ = ${cjDefaultValue(returnAbiType)}\n"
-    content += "        var hr__ = windows_core.E_POINTER\n"
-    content += renderRuntimeClassFactoryAbiCall(
+    content += renderRuntimeClassProjectedMethodBody(
         symbol,
-        factorySpec,
+        method,
         methodName,
         callPlan,
-        "CPointer<${returnAbiType}>(inout result__)"
+        symbolsByName,
+        2,
+        RuntimeDispatchKind.Factory,
+        Some(factorySpec)
     )
-    content += "        hr__.check()\n"
-    content += "        return ${runtimeProjectedReturnExpression(returnType, returnAbiType, "result__", method.signature.returnType, symbolsByName, symbol.fullName)}\n"
     content += "    }\n\n"
     return content
 }
 
-func runtimeFactoryRequiresRawAbiShape(method: MethodRecord): Bool {
-    if (isWinrtArraySignature(method.signature.returnType)) {
+enum RuntimeDispatchKind {
+    | Factory
+    | Instance
+}
+
+func runtimeFactoryRequiresRawAbiShape(
+    method: MethodRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): Bool {
+    if (isWinrtArraySignature(method.signature.returnType) &&
+        !runtimeArrayElementCanProject(method.signature.returnType, symbolsByName, ownerFullName)) {
         return true
     }
     let metadataParameters = metadataMethodParameters(method)
     var index: Int64 = 0
     while (index < Int64(method.signature.parameters.size)) {
         let signature = method.signature.parameters[index]
-        if (isWinrtArraySignature(signature) || isByReferenceSignature(signature)) {
-            return true
-        }
-        if (isOutParameter(metadataParameterAt(metadataParameters, index))) {
+        if (isWinrtArraySignature(signature) &&
+            !runtimeArrayElementCanProject(signature, symbolsByName, ownerFullName)) {
             return true
         }
         index += 1
@@ -2881,9 +3728,91 @@ func renderRuntimeClassFactoryRawAbiMethod(
     content += "        try (factory__ = windows_core.factory<${symbol.implName}, ${factorySpec.typeName}>().unwrap()) {\n"
     content += "            hr__ = unsafe { factory__.${methodName}(${args}) }\n"
     content += "        }\n"
+    content += renderRuntimeClassRawAbiFailureCleanup(method, symbolsByName, symbol.fullName, 2)
     content += "        hr__.check()\n"
     content += "    }\n\n"
     return content
+}
+
+func renderRuntimeClassRawAbiFailureCleanup(
+    method: MethodRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String,
+    indentLevel: Int64
+): String {
+    let cleanupSpecs = runtimeClassRawAbiFailedOutSlotCleanupSpecs(method, symbolsByName, ownerFullName)
+    if (cleanupSpecs.isEmpty()) {
+        return ""
+    }
+    var content = ""
+    content += "${runtimeIndent(indentLevel)}if (hr__.failed()) {\n"
+    var index: Int64 = 0
+    for (spec in cleanupSpecs) {
+        if (runtimeArrayElementUsesHandleBorrow(spec.projectedType, spec.abiType)) {
+            let partialName = "__rawAbiOut${index}Partial"
+            content += "${runtimeIndent(indentLevel + 1)}if (!${spec.slotName}.isNull()) {\n"
+            content += "${runtimeIndent(indentLevel + 2)}let ${partialName} = unsafe { ${spec.slotName}.read() }\n"
+            content += "${runtimeIndent(indentLevel + 2)}if (${partialName}.isNotNull()) {\n"
+            content += "${runtimeIndent(indentLevel + 3)}windows_core.winrtReleaseGenericOut<${spec.projectedType}>(${partialName})\n"
+            content += "${runtimeIndent(indentLevel + 3)}unsafe { ${spec.slotName}.write(CPointer<Unit>()) }\n"
+            content += "${runtimeIndent(indentLevel + 2)}}\n"
+            content += "${runtimeIndent(indentLevel + 1)}}\n"
+        } else {
+            content += "${runtimeIndent(indentLevel + 1)}windows_core.releaseFailedComOutSlot(${spec.slotName})\n"
+        }
+        index += 1
+    }
+    content += "${runtimeIndent(indentLevel)}}\n"
+    return content
+}
+
+func runtimeClassRawAbiFailedOutSlotCleanupSpecs(
+    method: MethodRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): ArrayList<RuntimeRawAbiOutSlotCleanupSpec> {
+    let cleanupSpecs = ArrayList<RuntimeRawAbiOutSlotCleanupSpec>()
+    let metadataParameters = metadataMethodParameters(method)
+    var index: Int64 = 0
+    while (index < Int64(method.signature.parameters.size)) {
+        let signature = method.signature.parameters[index]
+        let parameter = metadataParameterAt(metadataParameters, index)
+        let targetSignature = runtimeReferenceTargetSignature(signature)
+        let projectedType = winrtProjectedTypeName(targetSignature, symbolsByName, ownerFullName)
+        let abiType = interfaceSlotAbiType(targetSignature, symbolsByName, ownerFullName)
+        var cleanupType = projectedType
+        var needsCleanup = runtimeArrayElementUsesHandleBorrow(projectedType, abiType)
+        if (!needsCleanup && abiType == "CPointer<Unit>") {
+            match (runtimeRawPointerReturnCleanupType(targetSignature)) {
+                case Some(rawCleanupType) =>
+                    cleanupType = rawCleanupType
+                    needsCleanup = true
+                case None => ()
+            }
+        }
+        if (!isWinrtArraySignature(signature) && isOutParameter(parameter) &&
+            interfaceParameterAbiType(signature, parameter, symbolsByName, ownerFullName) == "CPointer<CPointer<Unit>>" &&
+            needsCleanup) {
+            cleanupSpecs.add(RuntimeRawAbiOutSlotCleanupSpec(interfaceParameterName(parameter, index), cleanupType, abiType))
+        }
+        index += 1
+    }
+    let returnProjectedType = winrtProjectedTypeName(method.signature.returnType, symbolsByName, ownerFullName)
+    let returnAbiType = interfaceSlotAbiType(method.signature.returnType, symbolsByName, ownerFullName)
+    var returnCleanupType = returnProjectedType
+    var returnNeedsCleanup = runtimeArrayElementUsesHandleBorrow(returnProjectedType, returnAbiType)
+    if (!returnNeedsCleanup && returnAbiType == "CPointer<Unit>") {
+        match (runtimeRawPointerReturnCleanupType(method.signature.returnType)) {
+            case Some(rawReturnCleanupType) =>
+                returnCleanupType = rawReturnCleanupType
+                returnNeedsCleanup = true
+            case None => ()
+        }
+    }
+    if (!isWinrtArraySignature(method.signature.returnType) && returnAbiType == "CPointer<Unit>" && returnNeedsCleanup) {
+        cleanupSpecs.add(RuntimeRawAbiOutSlotCleanupSpec(interfaceReturnParameterName(method), returnCleanupType, returnAbiType))
+    }
+    return cleanupSpecs
 }
 
 func runtimeClassFactoryCallPlan(
@@ -2894,21 +3823,70 @@ func runtimeClassFactoryCallPlan(
 ): RuntimeCallPlan {
     let borrows = ArrayList<RuntimeBorrowSpec>()
     let args = ArrayList<String>()
+    let arrayInputs = ArrayList<RuntimeArrayInputSpec>()
+    let scalarOutputs = ArrayList<RuntimeScalarOutputSpec>()
+    let arrayOutputs = ArrayList<RuntimeArrayOutputSpec>()
+    let metadataParameters = metadataMethodParameters(method)
     var index: Int64 = 0
     while (index < Int64(method.signature.parameters.size)) {
         let signature = method.signature.parameters[index]
+        let parameter = metadataParameterAt(metadataParameters, index)
         let pair = pairs[index]
-        let abiType = interfaceSlotAbiType(signature, symbolsByName, ownerFullName)
-        if (runtimeCallNeedsHandleBorrow(pair.typeName, abiType)) {
-            let borrowName = "__argBorrow${borrows.size}"
-            borrows.add(RuntimeBorrowSpec(borrowName, pair.typeName, pair.name))
-            args.add("${borrowName}.asRaw()")
+        if (isWinrtArraySignature(signature)) {
+            match (runtimeArrayElementSignature(signature)) {
+                case Some(elementSignature) =>
+                    let elementProjectedType = winrtProjectedTypeName(elementSignature, symbolsByName, ownerFullName)
+                    let elementAbiType = interfaceSlotAbiType(elementSignature, symbolsByName, ownerFullName)
+                    if (isOutParameter(parameter)) {
+                        let localPrefix = "__arg${index}"
+                        arrayOutputs.add(RuntimeArrayOutputSpec(
+                            pair.name,
+                            "${localPrefix}Value",
+                            "${localPrefix}Data",
+                            "${localPrefix}Size",
+                            elementProjectedType,
+                            elementAbiType,
+                            elementSignature
+                        ))
+                        args.add("CPointer<UInt32>(inout ${localPrefix}Size)")
+                        args.add("CPointer<CPointer<${elementAbiType}>>(inout ${localPrefix}Data)")
+                    } else {
+                        let localPrefix = "__arg${index}"
+                        arrayInputs.add(RuntimeArrayInputSpec(
+                            pair.name,
+                            elementProjectedType,
+                            elementAbiType,
+                            elementSignature,
+                            localPrefix,
+                            runtimeArrayElementUsesHandleBorrow(elementProjectedType, elementAbiType)
+                        ))
+                        args.add("${localPrefix}Len")
+                        args.add("${localPrefix}Raw")
+                    }
+                case None => ()
+            }
+        } else if (isOutParameter(parameter)) {
+            let targetSignature = runtimeReferenceTargetSignature(signature)
+            let projectedType = winrtProjectedTypeName(targetSignature, symbolsByName, ownerFullName)
+            let abiType = interfaceSlotAbiType(targetSignature, symbolsByName, ownerFullName)
+            let valueName = "__arg${index}Value"
+            scalarOutputs.add(RuntimeScalarOutputSpec(pair.name, valueName, projectedType, abiType, targetSignature))
+            args.add("${pair.name}.borrowMut<${abiType}>()")
+        } else if (isByReferenceSignature(signature)) {
+            args.add(pair.name)
         } else {
-            args.add(runtimeInputAbiExpression(pair.name, pair.typeName, abiType, signature, symbolsByName, ownerFullName))
+            let abiType = interfaceSlotAbiType(signature, symbolsByName, ownerFullName)
+            if (runtimeCallNeedsHandleBorrow(pair.typeName, abiType)) {
+                let borrowName = "__argBorrow${borrows.size}"
+                borrows.add(RuntimeBorrowSpec(borrowName, pair.typeName, pair.name))
+                args.add("${borrowName}.asRaw()")
+            } else {
+                args.add(runtimeInputAbiExpression(pair.name, pair.typeName, abiType, signature, symbolsByName, ownerFullName))
+            }
         }
         index += 1
     }
-    return RuntimeCallPlan(borrows, args)
+    return RuntimeCallPlan(borrows, args, arrayInputs, scalarOutputs, arrayOutputs)
 }
 
 func runtimeCallNeedsHandleBorrow(typeName: String, abiType: String): Bool {
@@ -2937,14 +3915,40 @@ func renderRuntimeClassFactoryAbiCall(
     factorySpec: RuntimeClassInterfaceSpec,
     methodName: String,
     callPlan: RuntimeCallPlan,
-    outputArg: String
+    outputArg: String,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): String {
+    let outputArgs = ArrayList<String>()
+    if (!outputArg.isEmpty()) {
+        outputArgs.add(outputArg)
+    }
+    return renderRuntimeClassFactoryAbiCallWithArgs(
+        symbol,
+        factorySpec,
+        methodName,
+        callPlan,
+        outputArgs,
+        symbolsByName,
+        ownerFullName
+    )
+}
+
+func renderRuntimeClassFactoryAbiCallWithArgs(
+    symbol: SymbolRecord,
+    factorySpec: RuntimeClassInterfaceSpec,
+    methodName: String,
+    callPlan: RuntimeCallPlan,
+    outputArgs: ArrayList<String>,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
 ): String {
     let callArgs = ArrayList<String>()
     for (arg in callPlan.args) {
         callArgs.add(arg)
     }
-    if (!outputArg.isEmpty()) {
-        callArgs.add(outputArg)
+    for (arg in outputArgs) {
+        callArgs.add(arg)
     }
     var content = ""
     var index: Int64 = 0
@@ -2953,15 +3957,101 @@ func renderRuntimeClassFactoryAbiCall(
         content += "${runtimeIndent(2 + index)}try (${borrow.name} = windows_core.winrtBorrowGenericIn<${borrow.typeName}>(${borrow.sourceName})) {\n"
         index += 1
     }
-    let factoryIndentLevel = 2 + Int64(callPlan.borrows.size)
+    var callIndentLevel = 2 + Int64(callPlan.borrows.size)
+    var arrayIndex: Int64 = 0
+    while (arrayIndex < Int64(callPlan.arrayInputs.size)) {
+        let spec = callPlan.arrayInputs[arrayIndex]
+        content += renderRuntimeArrayInputOpen(spec, callIndentLevel, symbolsByName, ownerFullName)
+        callIndentLevel += runtimeArrayInputNesting(spec)
+        arrayIndex += 1
+    }
+    let factoryIndentLevel = callIndentLevel
     content += "${runtimeIndent(factoryIndentLevel)}try (factory__ = windows_core.factory<${symbol.implName}, ${factorySpec.typeName}>().unwrap()) {\n"
     content += "${runtimeIndent(factoryIndentLevel + 1)}hr__ = unsafe { factory__.${methodName}(${joinStrings(callArgs, ", ")}) }\n"
     content += "${runtimeIndent(factoryIndentLevel)}}\n"
+    var closeArrayIndex = Int64(callPlan.arrayInputs.size) - 1
+    while (closeArrayIndex >= 0) {
+        let spec = callPlan.arrayInputs[closeArrayIndex]
+        callIndentLevel -= runtimeArrayInputNesting(spec)
+        content += renderRuntimeArrayInputClose(spec, callIndentLevel)
+        closeArrayIndex -= 1
+    }
     var closeIndex = Int64(callPlan.borrows.size) - 1
     while (closeIndex >= 0) {
         content += "${runtimeIndent(2 + closeIndex)}}\n"
         closeIndex -= 1
     }
+    return content
+}
+
+func runtimeArrayInputNesting(spec: RuntimeArrayInputSpec): Int64 {
+    if (spec.usesHandleBorrow) {
+        return 2
+    }
+    return 1
+}
+
+func renderRuntimeArrayInputOpen(
+    spec: RuntimeArrayInputSpec,
+    indentLevel: Int64,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): String {
+    var content = ""
+    if (spec.usesHandleBorrow) {
+        content += "${runtimeIndent(indentLevel)}let ${spec.abiValuesName} = Array<CPointer<Unit>>(${spec.sourceName}.size, { _ => CPointer<Unit>() })\n"
+        content += "${runtimeIndent(indentLevel)}var ${spec.borrowsName} = Array<Option<windows_core.WinrtInputBorrow>>(${spec.sourceName}.size, { _ => Option<windows_core.WinrtInputBorrow>.None })\n"
+        content += "${runtimeIndent(indentLevel)}try {\n"
+        content += "${runtimeIndent(indentLevel + 1)}var ${spec.indexName} = 0\n"
+        content += "${runtimeIndent(indentLevel + 1)}while (${spec.indexName} < ${spec.sourceName}.size) {\n"
+        content += "${runtimeIndent(indentLevel + 2)}let ${spec.borrowName} = windows_core.winrtBorrowGenericIn<${spec.elementProjectedType}>(${spec.sourceName}[${spec.indexName}])\n"
+        content += "${runtimeIndent(indentLevel + 2)}${spec.borrowsName}[${spec.indexName}] = Some(${spec.borrowName})\n"
+        content += "${runtimeIndent(indentLevel + 2)}${spec.abiValuesName}[${spec.indexName}] = ${spec.borrowName}.asRaw()\n"
+        content += "${runtimeIndent(indentLevel + 2)}${spec.indexName} += 1\n"
+        content += "${runtimeIndent(indentLevel + 1)}}\n"
+        content += "${runtimeIndent(indentLevel + 1)}let ${spec.abiArrayName} = windows_core.AbiArray<CPointer<Unit>>.fromSlice(${spec.abiValuesName})\n"
+        content += "${runtimeIndent(indentLevel + 1)}let (${spec.rawName}, ${spec.lenName}) = ${spec.abiArrayName}.intoAbi()\n"
+        content += "${runtimeIndent(indentLevel + 1)}try {\n"
+        return content
+    }
+
+    let abiExpression = runtimeInputAbiExpression(
+        "${spec.sourceName}[index]",
+        spec.elementProjectedType,
+        spec.elementAbiType,
+        spec.elementSignature,
+        symbolsByName,
+        ownerFullName
+    )
+    content += "${runtimeIndent(indentLevel)}let ${spec.abiValuesName} = Array<${spec.elementAbiType}>(${spec.sourceName}.size, { index => ${abiExpression} })\n"
+    content += "${runtimeIndent(indentLevel)}let ${spec.abiArrayName} = windows_core.AbiArray<${spec.elementAbiType}>.fromSlice(${spec.abiValuesName})\n"
+    content += "${runtimeIndent(indentLevel)}let (${spec.rawName}, ${spec.lenName}) = ${spec.abiArrayName}.intoAbi()\n"
+    content += "${runtimeIndent(indentLevel)}try {\n"
+    return content
+}
+
+func renderRuntimeArrayInputClose(spec: RuntimeArrayInputSpec, indentLevel: Int64): String {
+    var content = ""
+    if (spec.usesHandleBorrow) {
+        content += "${runtimeIndent(indentLevel + 1)}} finally {\n"
+        content += "${runtimeIndent(indentLevel + 2)}windows_core.coTaskMemFree(CPointer<Unit>(${spec.rawName}))\n"
+        content += "${runtimeIndent(indentLevel + 1)}}\n"
+        content += "${runtimeIndent(indentLevel)}} finally {\n"
+        content += "${runtimeIndent(indentLevel + 1)}var ${spec.closeIndexName} = 0\n"
+        content += "${runtimeIndent(indentLevel + 1)}while (${spec.closeIndexName} < ${spec.borrowsName}.size) {\n"
+        content += "${runtimeIndent(indentLevel + 2)}match (${spec.borrowsName}[${spec.closeIndexName}]) {\n"
+        content += "${runtimeIndent(indentLevel + 3)}case Some(borrow) => borrow.close()\n"
+        content += "${runtimeIndent(indentLevel + 3)}case None => ()\n"
+        content += "${runtimeIndent(indentLevel + 2)}}\n"
+        content += "${runtimeIndent(indentLevel + 2)}${spec.closeIndexName} += 1\n"
+        content += "${runtimeIndent(indentLevel + 1)}}\n"
+        content += "${runtimeIndent(indentLevel)}}\n"
+        return content
+    }
+
+    content += "${runtimeIndent(indentLevel)}} finally {\n"
+    content += "${runtimeIndent(indentLevel + 1)}windows_core.coTaskMemFree(CPointer<Unit>(${spec.rawName}))\n"
+    content += "${runtimeIndent(indentLevel)}}\n"
     return content
 }
 
@@ -2983,9 +4073,24 @@ func runtimeProjectedReturnExpression(
         return "${returnType}(${resultName})"
     }
     if (returnAbiType == "CPointer<Unit>") {
+        if (returnType == "windows_core.HString") {
+            return "windows_core.HString.fromSystemHandleTake(${resultName})"
+        }
         return "${returnType}.fromAbiTakeWinrtHandle(${resultName})"
     }
     return resultName
+}
+
+func runtimeRawPointerReturnCleanupType(signature: SignatureRecord): Option<String> {
+    if (signature.kind == "Primitive") {
+        if (signature.name == "Object") {
+            return Some("windows_interface.IInspectable")
+        }
+        if (signature.name == "String") {
+            return Some("windows_core.HString")
+        }
+    }
+    return None
 }
 
 func isEnumSignature(
@@ -3086,6 +4191,65 @@ func winrtProjectedMethodParameterPairs(
     return pairs
 }
 
+func runtimeProjectedMethodParameterPairs(
+    method: MethodRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): ArrayList<ParameterPair> {
+    let pairs = ArrayList<ParameterPair>()
+    let metadataParameters = metadataMethodParameters(method)
+    var index: Int64 = 0
+    while (index < Int64(method.signature.parameters.size)) {
+        let signature = method.signature.parameters[index]
+        let parameter = metadataParameterAt(metadataParameters, index)
+        let name = interfaceParameterName(parameter, index)
+        if (isWinrtArraySignature(signature)) {
+            match (runtimeArrayElementSignature(signature)) {
+                case Some(elementSignature) =>
+                    let elementType = winrtProjectedTypeName(elementSignature, symbolsByName, ownerFullName)
+                    if (isOutParameter(parameter)) {
+                        pairs.add(ParameterPair(name, "windows_core.OutSlot<Array<${elementType}>>"))
+                    } else {
+                        pairs.add(ParameterPair(name, "Array<${elementType}>"))
+                    }
+                case None =>
+                    pairs.add(ParameterPair(name, "CPointer<Unit>"))
+            }
+        } else if (isOutParameter(parameter)) {
+            let targetSignature = runtimeReferenceTargetSignature(signature)
+            pairs.add(ParameterPair(
+                name,
+                "windows_core.OutSlot<${winrtProjectedTypeName(targetSignature, symbolsByName, ownerFullName)}>"
+            ))
+        } else if (isByReferenceSignature(signature)) {
+            let targetSignature = runtimeReferenceTargetSignature(signature)
+            pairs.add(ParameterPair(name, "CPointer<${interfaceSlotAbiType(targetSignature, symbolsByName, ownerFullName)}>"))
+        } else {
+            pairs.add(ParameterPair(
+                name,
+                winrtProjectedTypeName(signature, symbolsByName, ownerFullName)
+            ))
+        }
+        index += 1
+    }
+    return pairs
+}
+
+func runtimeProjectedReturnTypeName(
+    signature: SignatureRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): String {
+    if (isWinrtArraySignature(signature)) {
+        match (runtimeArrayElementSignature(signature)) {
+            case Some(elementSignature) =>
+                return "Array<${winrtProjectedTypeName(elementSignature, symbolsByName, ownerFullName)}>"
+            case None => return "Array<CPointer<Unit>>"
+        }
+    }
+    return winrtProjectedTypeName(signature, symbolsByName, ownerFullName)
+}
+
 func parameterPairListText(pairs: ArrayList<ParameterPair>): String {
     let rendered = ArrayList<String>()
     for (pair in pairs) {
@@ -3146,7 +4310,12 @@ func addRuntimeClassInterfaceSpecWithRequired(
     match (spec.symbol.typeDef) {
         case Some(typeDef) =>
             for (implementation in typeDef.interfaceImplementations) {
-                match (runtimeClassInterfaceSpec(implementation, symbolsByName, spec.fullName)) {
+                match (runtimeClassInterfaceSpecWithSubstitutions(
+                    implementation,
+                    symbolsByName,
+                    spec.fullName,
+                    spec.substitutions
+                )) {
                     case Some(requiredSpec) =>
                         addRuntimeClassInterfaceSpecWithRequired(values, requiredSpec, symbolsByName)
                     case None => ()
@@ -3199,9 +4368,11 @@ func runtimeClassAncestorIidExpressions(interfaceSpecs: ArrayList<RuntimeClassIn
 
 func renderRuntimeClassInterfaceAccessor(
     interfaceSpec: RuntimeClassInterfaceSpec,
+    interfaceSpecs: ArrayList<RuntimeClassInterfaceSpec>,
     defaultInterface: RuntimeClassInterfaceSpec
 ): String {
-    var content = "    public func as${interfaceSpec.accessorName}(): ${interfaceSpec.typeName} {\n"
+    let accessorName = runtimeClassInterfaceAccessorName(interfaceSpec, interfaceSpecs)
+    var content = "    public func as${accessorName}(): ${interfaceSpec.typeName} {\n"
     if (interfaceSpec.typeName == defaultInterface.typeName) {
         content += "        defaultInterface()\n"
     } else {
@@ -3212,6 +4383,22 @@ func renderRuntimeClassInterfaceAccessor(
     }
     content += "    }\n\n"
     content
+}
+
+func runtimeClassInterfaceAccessorName(
+    interfaceSpec: RuntimeClassInterfaceSpec,
+    interfaceSpecs: ArrayList<RuntimeClassInterfaceSpec>
+): String {
+    var count: Int64 = 0
+    for (candidate in interfaceSpecs) {
+        if (candidate.accessorName == interfaceSpec.accessorName) {
+            count += 1
+        }
+    }
+    if (count <= 1) {
+        return interfaceSpec.accessorName
+    }
+    return "${interfaceSpec.accessorName}_${mangleFullName(interfaceSpec.typeName)}"
 }
 
 func renderRuntimeClassDefaultInterfaceMembers(
@@ -3246,18 +4433,49 @@ func runtimeInterfaceSlotNamesByMethod(typeDef: TypeDefinitionRecord): HashMap<S
     for (method in typeDef.methods) {
         let slotName = uniqueInterfaceSlotName(method, seen)
         seen.add(slotName)
-        if (!values.contains(method.name)) {
-            values.add(method.name, slotName)
+        let key = runtimeMethodSlotKey(method)
+        if (!values.contains(key)) {
+            values.add(key, slotName)
         }
     }
     return values
 }
 
 func runtimeInterfaceSlotName(slotNames: HashMap<String, String>, method: MethodRecord): String {
-    match (slotNames.get(method.name)) {
+    match (slotNames.get(runtimeMethodSlotKey(method))) {
         case Some(name) => return name
         case None => return cjIdentifier(projectedMethodBaseName(method))
     }
+}
+
+func runtimeMethodSlotKey(method: MethodRecord): String {
+    let parts = ArrayList<String>()
+    parts.add(method.name)
+    for (signature in method.signature.parameters) {
+        parts.add(runtimeSignatureSlotKey(signature))
+    }
+    parts.add(runtimeSignatureSlotKey(method.signature.returnType))
+    return joinStrings(parts, "|")
+}
+
+func runtimeSignatureSlotKey(signature: SignatureRecord): String {
+    match (signature.typeSpecification) {
+        case Some(typeSpec) => return "TypeSpecification(${runtimeSignatureSlotKey(typeSpec.signature)})"
+        case None => ()
+    }
+    var content = "${signature.kind}:${signature.namespace}:${signature.name}"
+    match (signature.typeSig) {
+        case Some(nested) => content += "<${runtimeSignatureSlotKey(nested)}>"
+        case None => ()
+    }
+    if (!signature.typeArguments.isEmpty()) {
+        let arguments = ArrayList<String>()
+        for (argument in signature.typeArguments) {
+            arguments.add(runtimeSignatureSlotKey(argument))
+        }
+        content += "[${joinStrings(arguments, ",")}]"
+    }
+    return content
 }
 
 func renderRuntimeClassProperty(
@@ -3277,22 +4495,25 @@ func renderRuntimeClassProperty(
             addUnique(accessorNames, getter.name)
             let setterName = runtimeAccessorMethodName(property.accessors, "Setter") ?? "put_${property.name}"
             let propertyName = cjIdentifier(property.name)
-            let propertyType = winrtProjectedTypeName(property.signature.returnType, symbolsByName, symbol.fullName)
+            let propertyType = runtimeProjectedReturnTypeName(property.signature.returnType, symbolsByName, symbol.fullName)
             var content = ""
             match (runtimeMethodByName(interfaceTypeDef, setterName)) {
                 case Some(setter) =>
                     addUnique(accessorNames, setter.name)
-                    let pairs = winrtProjectedMethodParameterPairs(setter, symbolsByName, symbol.fullName)
+                    let pairs = runtimeProjectedMethodParameterPairs(setter, symbolsByName, symbol.fullName)
                     let setterParameterName = runtimePropertySetterParameterName(pairs)
+                    let getterPairs = runtimeProjectedMethodParameterPairs(getter, symbolsByName, symbol.fullName)
                     content += "    public mut prop ${propertyName}: ${propertyType} {\n"
                     content += "        get() {\n"
                     content += renderRuntimeClassProjectedMethodBody(
                         symbol,
                         getter,
                         runtimeInterfaceSlotName(slotNames, getter),
-                        RuntimeCallPlan(ArrayList<RuntimeBorrowSpec>(), ArrayList<String>()),
+                        runtimeClassFactoryCallPlan(getter, getterPairs, symbolsByName, symbol.fullName),
                         symbolsByName,
-                        3
+                        3,
+                        RuntimeDispatchKind.Instance,
+                        None
                     )
                     content += "        }\n"
                     content += "        set(${setterParameterName}) {\n"
@@ -3302,20 +4523,25 @@ func renderRuntimeClassProperty(
                         runtimeInterfaceSlotName(slotNames, setter),
                         runtimeClassFactoryCallPlan(setter, pairs, symbolsByName, symbol.fullName),
                         symbolsByName,
-                        3
+                        3,
+                        RuntimeDispatchKind.Instance,
+                        None
                     )
                     content += "        }\n"
                     content += "    }\n\n"
                 case None =>
+                    let getterPairs = runtimeProjectedMethodParameterPairs(getter, symbolsByName, symbol.fullName)
                     content += "    public prop ${propertyName}: ${propertyType} {\n"
                     content += "        get() {\n"
                     content += renderRuntimeClassProjectedMethodBody(
                         symbol,
                         getter,
                         runtimeInterfaceSlotName(slotNames, getter),
-                        RuntimeCallPlan(ArrayList<RuntimeBorrowSpec>(), ArrayList<String>()),
+                        runtimeClassFactoryCallPlan(getter, getterPairs, symbolsByName, symbol.fullName),
                         symbolsByName,
-                        3
+                        3,
+                        RuntimeDispatchKind.Instance,
+                        None
                     )
                     content += "        }\n"
                     content += "    }\n\n"
@@ -3393,15 +4619,24 @@ func renderRuntimeClassInstanceMethodWithName(
     slotName: String,
     symbolsByName: HashMap<String, SymbolRecord>
 ): String {
-    if (runtimeFactoryRequiresRawAbiShape(method)) {
+    if (runtimeFactoryRequiresRawAbiShape(method, symbolsByName, symbol.fullName)) {
         return renderRuntimeClassInstanceRawAbiMethod(symbol, method, publicName, slotName, symbolsByName)
     }
-    let pairs = winrtProjectedMethodParameterPairs(method, symbolsByName, symbol.fullName)
+    let pairs = runtimeProjectedMethodParameterPairs(method, symbolsByName, symbol.fullName)
     let params = parameterPairListText(pairs)
-    let returnType = winrtProjectedTypeName(method.signature.returnType, symbolsByName, symbol.fullName)
+    let returnType = runtimeProjectedReturnTypeName(method.signature.returnType, symbolsByName, symbol.fullName)
     let callPlan = runtimeClassFactoryCallPlan(method, pairs, symbolsByName, symbol.fullName)
     var content = "    public func ${publicName}(${params}): ${returnType} {\n"
-    content += renderRuntimeClassProjectedMethodBody(symbol, method, slotName, callPlan, symbolsByName, 2)
+    content += renderRuntimeClassProjectedMethodBody(
+        symbol,
+        method,
+        slotName,
+        callPlan,
+        symbolsByName,
+        2,
+        RuntimeDispatchKind.Instance,
+        None
+    )
     content += "    }\n\n"
     return content
 }
@@ -3422,11 +4657,172 @@ func renderRuntimeClassInstanceRawAbiMethod(
     if (args.isEmpty()) {
         content += "            hr__ = unsafe { interface__.${slotName}() }\n"
     } else {
-        content += "            hr__ = unsafe { interface__.${slotName}(${args}) }\n"
+    content += "            hr__ = unsafe { interface__.${slotName}(${args}) }\n"
     }
     content += "        }\n"
+    content += renderRuntimeClassRawAbiFailureCleanup(method, symbolsByName, symbol.fullName, 2)
     content += "        hr__.check()\n"
     content += "    }\n\n"
+    return content
+}
+
+func runtimeReturnArrayOutputSpec(
+    method: MethodRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): Option<RuntimeArrayOutputSpec> {
+    if (!isWinrtArraySignature(method.signature.returnType)) {
+        return None
+    }
+    match (runtimeArrayElementSignature(method.signature.returnType)) {
+        case Some(elementSignature) =>
+            return Some(RuntimeArrayOutputSpec(
+                "",
+                "__returnValue",
+                "__returnData",
+                "__returnSize",
+                winrtProjectedTypeName(elementSignature, symbolsByName, ownerFullName),
+                interfaceSlotAbiType(elementSignature, symbolsByName, ownerFullName),
+                elementSignature
+            ))
+        case None => return None
+    }
+}
+
+func renderRuntimeArrayOutputDeclarations(output: RuntimeArrayOutputSpec, indentLevel: Int64): String {
+    var content = ""
+    content += "${runtimeIndent(indentLevel)}var ${output.sizeName} = 0u32\n"
+    content += "${runtimeIndent(indentLevel)}var ${output.dataName} = CPointer<${output.elementAbiType}>()\n"
+    return content
+}
+
+func renderRuntimeScalarOutputPublish(
+    output: RuntimeScalarOutputSpec,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String,
+    indentLevel: Int64
+): String {
+    var content = ""
+    content += "${runtimeIndent(indentLevel)}let ${output.valueName} = match (${output.name}.takeAbi<${output.abiType}>()) {\n"
+    content += "${runtimeIndent(indentLevel + 1)}case Some(value) => value\n"
+    content += "${runtimeIndent(indentLevel + 1)}case None => throw windows_core.WindowsException(windows_core.E_POINTER)\n"
+    content += "${runtimeIndent(indentLevel)}}\n"
+    content += "${runtimeIndent(indentLevel)}${output.name}.write(${runtimeProjectedReturnExpression(output.projectedType, output.abiType, output.valueName, output.signature, symbolsByName, ownerFullName)})\n"
+    return content
+}
+
+func renderRuntimeScalarOutputFailureCleanup(
+    output: RuntimeScalarOutputSpec,
+    indentLevel: Int64
+): String {
+    var cleanupType: Option<String> = None
+    if (runtimeArrayElementUsesHandleBorrow(output.projectedType, output.abiType)) {
+        cleanupType = Some(output.projectedType)
+    } else if (output.abiType == "CPointer<Unit>") {
+        cleanupType = runtimeRawPointerReturnCleanupType(output.signature)
+    }
+    match (cleanupType) {
+        case None => return ""
+        case Some(projectedCleanupType) =>
+            let rawName = "${output.valueName}Partial"
+            var content = ""
+            content += "${runtimeIndent(indentLevel)}if (hr__.failed()) {\n"
+            content += "${runtimeIndent(indentLevel + 1)}match (${output.name}.takeAbi<${output.abiType}>()) {\n"
+            content += "${runtimeIndent(indentLevel + 2)}case Some(${rawName}) =>\n"
+            content += "${runtimeIndent(indentLevel + 3)}if (${rawName}.isNotNull()) {\n"
+            content += "${runtimeIndent(indentLevel + 4)}windows_core.winrtReleaseGenericOut<${projectedCleanupType}>(${rawName})\n"
+            content += "${runtimeIndent(indentLevel + 3)}}\n"
+            content += "${runtimeIndent(indentLevel + 2)}case None => ()\n"
+            content += "${runtimeIndent(indentLevel + 1)}}\n"
+            content += "${runtimeIndent(indentLevel)}}\n"
+            return content
+    }
+}
+
+func renderRuntimeArrayOutputFailureCleanup(
+    output: RuntimeArrayOutputSpec,
+    indentLevel: Int64
+): String {
+    var content = ""
+    if (runtimeArrayElementUsesHandleBorrow(output.elementProjectedType, output.elementAbiType)) {
+        content += "${runtimeIndent(indentLevel)}if (hr__.failed() && ${output.dataName}.isNotNull()) {\n"
+        content += "${runtimeIndent(indentLevel + 1)}windows_core.winrtReleaseGenericArrayOut<${output.elementProjectedType}>(CPointer<Unit>(${output.dataName}), ${output.sizeName})\n"
+        content += "${runtimeIndent(indentLevel + 1)}${output.dataName} = CPointer<${output.elementAbiType}>()\n"
+        content += "${runtimeIndent(indentLevel + 1)}${output.sizeName} = 0u32\n"
+        content += "${runtimeIndent(indentLevel)}}\n"
+        return content
+    }
+    content += "${runtimeIndent(indentLevel)}if (hr__.failed() && ${output.dataName}.isNotNull()) {\n"
+    content += "${runtimeIndent(indentLevel + 1)}windows_core.coTaskMemFree(CPointer<Unit>(${output.dataName}))\n"
+    content += "${runtimeIndent(indentLevel + 1)}${output.dataName} = CPointer<${output.elementAbiType}>()\n"
+    content += "${runtimeIndent(indentLevel + 1)}${output.sizeName} = 0u32\n"
+    content += "${runtimeIndent(indentLevel)}}\n"
+    return content
+}
+
+func renderRuntimeArrayOutputPublish(
+    output: RuntimeArrayOutputSpec,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String,
+    indentLevel: Int64
+): String {
+    var content = renderRuntimeArrayTakeValue(output, symbolsByName, ownerFullName, indentLevel, false)
+    content += "${runtimeIndent(indentLevel)}${output.targetName}.write(${output.valueName})\n"
+    return content
+}
+
+func renderRuntimeArrayTakeValue(
+    output: RuntimeArrayOutputSpec,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String,
+    indentLevel: Int64,
+    asReturn: Bool
+): String {
+    if (runtimeArrayElementUsesHandleBorrow(output.elementProjectedType, output.elementAbiType)) {
+        let expression = "windows_core.winrtTakeGenericArrayOut<${output.elementProjectedType}>(CPointer<Unit>(${output.dataName}), ${output.sizeName})"
+        if (asReturn) {
+            return "${runtimeIndent(indentLevel)}return ${expression}\n"
+        }
+        return "${runtimeIndent(indentLevel)}let ${output.valueName} = ${expression}\n"
+    }
+
+    let assignmentPrefix = if (asReturn) {
+        "return "
+    } else {
+        "let ${output.valueName} = "
+    }
+    let projectedName = "${output.valueName}Projected"
+    let ownedName = "${output.valueName}Owned"
+    let abiArrayName = "${output.valueName}AbiArray"
+    let abiValuesName = "${output.valueName}AbiValues"
+    let projection = runtimeProjectedReturnExpression(
+        output.elementProjectedType,
+        output.elementAbiType,
+        "${abiValuesName}[index]",
+        output.elementSignature,
+        symbolsByName,
+        ownerFullName
+    )
+    var content = ""
+    content += "${runtimeIndent(indentLevel)}${assignmentPrefix}{ =>\n"
+    content += "${runtimeIndent(indentLevel + 1)}if (${output.sizeName} > 0u32 && ${output.dataName}.isNull()) {\n"
+    content += "${runtimeIndent(indentLevel + 2)}throw windows_core.WindowsException(windows_core.E_POINTER)\n"
+    content += "${runtimeIndent(indentLevel + 1)}}\n"
+    content += "${runtimeIndent(indentLevel + 1)}var ${projectedName} = Array<${output.elementProjectedType}>()\n"
+    content += "${runtimeIndent(indentLevel + 1)}var ${ownedName}: Option<windows_core.AbiArray<${output.elementAbiType}>> = None\n"
+    content += "${runtimeIndent(indentLevel + 1)}try {\n"
+    content += "${runtimeIndent(indentLevel + 2)}let ${abiArrayName} = unsafe { windows_core.AbiArray<${output.elementAbiType}>.fromRawParts(${output.dataName}, ${output.sizeName}) }\n"
+    content += "${runtimeIndent(indentLevel + 2)}${ownedName} = Some(${abiArrayName})\n"
+    content += "${runtimeIndent(indentLevel + 2)}let ${abiValuesName} = ${abiArrayName}.toArray()\n"
+    content += "${runtimeIndent(indentLevel + 2)}${projectedName} = Array<${output.elementProjectedType}>(${abiValuesName}.size, { index => ${projection} })\n"
+    content += "${runtimeIndent(indentLevel + 1)}} finally {\n"
+    content += "${runtimeIndent(indentLevel + 2)}match (${ownedName}) {\n"
+    content += "${runtimeIndent(indentLevel + 3)}case Some(array) => array.close()\n"
+    content += "${runtimeIndent(indentLevel + 3)}case None => windows_core.coTaskMemFree(CPointer<Unit>(${output.dataName}))\n"
+    content += "${runtimeIndent(indentLevel + 2)}}\n"
+    content += "${runtimeIndent(indentLevel + 1)}}\n"
+    content += "${runtimeIndent(indentLevel + 1)}${projectedName}\n"
+    content += "${runtimeIndent(indentLevel)}}()\n"
     return content
 }
 
@@ -3436,27 +4832,97 @@ func renderRuntimeClassProjectedMethodBody(
     slotName: String,
     callPlan: RuntimeCallPlan,
     symbolsByName: HashMap<String, SymbolRecord>,
-    indentLevel: Int64
+    indentLevel: Int64,
+    dispatchKind: RuntimeDispatchKind,
+    factorySpec: Option<RuntimeClassInterfaceSpec>
 ): String {
-    let returnType = winrtProjectedTypeName(method.signature.returnType, symbolsByName, symbol.fullName)
+    let returnType = runtimeProjectedReturnTypeName(method.signature.returnType, symbolsByName, symbol.fullName)
     let returnAbiType = interfaceSlotAbiType(method.signature.returnType, symbolsByName, symbol.fullName)
+    let extraArgs = ArrayList<String>()
     var content = ""
-    if (returnType == "Unit") {
-        content += "${runtimeIndent(indentLevel)}var hr__ = windows_core.E_POINTER\n"
-        content += renderRuntimeClassInstanceAbiCall(slotName, callPlan, "", indentLevel)
-        content += "${runtimeIndent(indentLevel)}hr__.check()\n"
-        return content
+    match (runtimeReturnArrayOutputSpec(method, symbolsByName, symbol.fullName)) {
+        case Some(arrayReturn) =>
+            content += renderRuntimeArrayOutputDeclarations(arrayReturn, indentLevel)
+            extraArgs.add("CPointer<UInt32>(inout ${arrayReturn.sizeName})")
+            extraArgs.add("CPointer<CPointer<${arrayReturn.elementAbiType}>>(inout ${arrayReturn.dataName})")
+        case None =>
+            if (returnType != "Unit") {
+                content += "${runtimeIndent(indentLevel)}var result__ = ${cjDefaultValue(returnAbiType)}\n"
+                extraArgs.add("CPointer<${returnAbiType}>(inout result__)")
+            }
     }
-    content += "${runtimeIndent(indentLevel)}var result__ = ${cjDefaultValue(returnAbiType)}\n"
+    for (output in callPlan.arrayOutputs) {
+        content += renderRuntimeArrayOutputDeclarations(output, indentLevel)
+    }
     content += "${runtimeIndent(indentLevel)}var hr__ = windows_core.E_POINTER\n"
-    content += renderRuntimeClassInstanceAbiCall(
-        slotName,
-        callPlan,
-        "CPointer<${returnAbiType}>(inout result__)",
-        indentLevel
-    )
+    match (dispatchKind) {
+        case RuntimeDispatchKind.Factory =>
+            match (factorySpec) {
+                case Some(spec) =>
+                    content += renderRuntimeClassFactoryAbiCallWithArgs(
+                        symbol,
+                        spec,
+                        slotName,
+                        callPlan,
+                        extraArgs,
+                        symbolsByName,
+                        symbol.fullName
+                    )
+                case None =>
+                    content += "${runtimeIndent(indentLevel)}throw IllegalStateException(\"Runtime factory dispatch is missing factory metadata\")\n"
+            }
+        case RuntimeDispatchKind.Instance =>
+            content += renderRuntimeClassInstanceAbiCallWithArgs(
+                slotName,
+                callPlan,
+                extraArgs,
+                indentLevel,
+                symbolsByName,
+                symbol.fullName
+            )
+    }
+    if (returnType != "Unit" && runtimeArrayElementUsesHandleBorrow(returnType, returnAbiType)) {
+        content += "${runtimeIndent(indentLevel)}if (hr__.failed() && result__.isNotNull()) {\n"
+        content += "${runtimeIndent(indentLevel + 1)}windows_core.winrtReleaseGenericOut<${returnType}>(result__)\n"
+        content += "${runtimeIndent(indentLevel + 1)}result__ = CPointer<Unit>()\n"
+        content += "${runtimeIndent(indentLevel)}}\n"
+    }
+    if (returnType == "CPointer<Unit>" && returnAbiType == "CPointer<Unit>") {
+        match (runtimeRawPointerReturnCleanupType(method.signature.returnType)) {
+            case Some(cleanupType) =>
+                content += "${runtimeIndent(indentLevel)}if (hr__.failed() && result__.isNotNull()) {\n"
+                content += "${runtimeIndent(indentLevel + 1)}windows_core.winrtReleaseGenericOut<${cleanupType}>(result__)\n"
+                content += "${runtimeIndent(indentLevel + 1)}result__ = CPointer<Unit>()\n"
+                content += "${runtimeIndent(indentLevel)}}\n"
+            case None => ()
+        }
+    }
+    for (output in callPlan.scalarOutputs) {
+        content += renderRuntimeScalarOutputFailureCleanup(output, indentLevel)
+    }
+    match (runtimeReturnArrayOutputSpec(method, symbolsByName, symbol.fullName)) {
+        case Some(arrayReturn) =>
+            content += renderRuntimeArrayOutputFailureCleanup(arrayReturn, indentLevel)
+        case None => ()
+    }
+    for (output in callPlan.arrayOutputs) {
+        content += renderRuntimeArrayOutputFailureCleanup(output, indentLevel)
+    }
     content += "${runtimeIndent(indentLevel)}hr__.check()\n"
-    content += "${runtimeIndent(indentLevel)}return ${runtimeProjectedReturnExpression(returnType, returnAbiType, "result__", method.signature.returnType, symbolsByName, symbol.fullName)}\n"
+    for (output in callPlan.scalarOutputs) {
+        content += renderRuntimeScalarOutputPublish(output, symbolsByName, symbol.fullName, indentLevel)
+    }
+    for (output in callPlan.arrayOutputs) {
+        content += renderRuntimeArrayOutputPublish(output, symbolsByName, symbol.fullName, indentLevel)
+    }
+    match (runtimeReturnArrayOutputSpec(method, symbolsByName, symbol.fullName)) {
+        case Some(arrayReturn) =>
+            content += renderRuntimeArrayTakeValue(arrayReturn, symbolsByName, symbol.fullName, indentLevel, true)
+        case None =>
+            if (returnType != "Unit") {
+                content += "${runtimeIndent(indentLevel)}return ${runtimeProjectedReturnExpression(returnType, returnAbiType, "result__", method.signature.returnType, symbolsByName, symbol.fullName)}\n"
+            }
+    }
     return content
 }
 
@@ -3466,12 +4932,34 @@ func renderRuntimeClassInstanceAbiCall(
     outputArg: String,
     indentLevel: Int64
 ): String {
+    let outputArgs = ArrayList<String>()
+    if (!outputArg.isEmpty()) {
+        outputArgs.add(outputArg)
+    }
+    return renderRuntimeClassInstanceAbiCallWithArgs(
+        slotName,
+        callPlan,
+        outputArgs,
+        indentLevel,
+        HashMap<String, SymbolRecord>(),
+        ""
+    )
+}
+
+func renderRuntimeClassInstanceAbiCallWithArgs(
+    slotName: String,
+    callPlan: RuntimeCallPlan,
+    outputArgs: ArrayList<String>,
+    indentLevel: Int64,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): String {
     let callArgs = ArrayList<String>()
     for (arg in callPlan.args) {
         callArgs.add(arg)
     }
-    if (!outputArg.isEmpty()) {
-        callArgs.add(outputArg)
+    for (arg in outputArgs) {
+        callArgs.add(arg)
     }
     var content = ""
     var index: Int64 = 0
@@ -3480,7 +4968,15 @@ func renderRuntimeClassInstanceAbiCall(
         content += "${runtimeIndent(indentLevel + index)}try (${borrow.name} = windows_core.winrtBorrowGenericIn<${borrow.typeName}>(${borrow.sourceName})) {\n"
         index += 1
     }
-    let interfaceIndentLevel = indentLevel + Int64(callPlan.borrows.size)
+    var callIndentLevel = indentLevel + Int64(callPlan.borrows.size)
+    var arrayIndex: Int64 = 0
+    while (arrayIndex < Int64(callPlan.arrayInputs.size)) {
+        let spec = callPlan.arrayInputs[arrayIndex]
+        content += renderRuntimeArrayInputOpen(spec, callIndentLevel, symbolsByName, ownerFullName)
+        callIndentLevel += runtimeArrayInputNesting(spec)
+        arrayIndex += 1
+    }
+    let interfaceIndentLevel = callIndentLevel
     content += "${runtimeIndent(interfaceIndentLevel)}try (interface__ = defaultInterface()) {\n"
     if (callArgs.isEmpty()) {
         content += "${runtimeIndent(interfaceIndentLevel + 1)}hr__ = unsafe { interface__.${slotName}() }\n"
@@ -3488,6 +4984,13 @@ func renderRuntimeClassInstanceAbiCall(
         content += "${runtimeIndent(interfaceIndentLevel + 1)}hr__ = unsafe { interface__.${slotName}(${joinStrings(callArgs, ", ")}) }\n"
     }
     content += "${runtimeIndent(interfaceIndentLevel)}}\n"
+    var closeArrayIndex = Int64(callPlan.arrayInputs.size) - 1
+    while (closeArrayIndex >= 0) {
+        let spec = callPlan.arrayInputs[closeArrayIndex]
+        callIndentLevel -= runtimeArrayInputNesting(spec)
+        content += renderRuntimeArrayInputClose(spec, callIndentLevel)
+        closeArrayIndex -= 1
+    }
     var closeIndex = Int64(callPlan.borrows.size) - 1
     while (closeIndex >= 0) {
         content += "${runtimeIndent(indentLevel + closeIndex)}}\n"
@@ -3538,6 +5041,20 @@ func runtimeClassInterfaceSpec(
     symbolsByName: HashMap<String, SymbolRecord>,
     ownerFullName: String
 ): Option<RuntimeClassInterfaceSpec> {
+    return runtimeClassInterfaceSpecWithSubstitutions(
+        implementation,
+        symbolsByName,
+        ownerFullName,
+        ArrayList<RuntimeClassGenericSubstitution>()
+    )
+}
+
+func runtimeClassInterfaceSpecWithSubstitutions(
+    implementation: InterfaceImplementationRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String,
+    substitutions: ArrayList<RuntimeClassGenericSubstitution>
+): Option<RuntimeClassInterfaceSpec> {
     match (implementation.interfaceSignature) {
         case Some(signature) =>
             match (interfaceImplementationFullName(implementation, symbolsByName, ownerFullName)) {
@@ -3546,7 +5063,20 @@ func runtimeClassInterfaceSpec(
                         case Some(symbol) =>
                             return Some(RuntimeClassInterfaceSpec(
                                 symbol,
-                                closedWinrtTypeName(signature, symbol, symbolsByName, ownerFullName)
+                                closedWinrtTypeNameWithSubstitutions(
+                                    signature,
+                                    symbol,
+                                    symbolsByName,
+                                    ownerFullName,
+                                    substitutions
+                                ),
+                                substitutions: runtimeClassGenericSubstitutions(
+                                    symbol,
+                                    signature,
+                                    symbolsByName,
+                                    ownerFullName,
+                                    substitutions
+                                )
                             ))
                         case None => ()
                     }
@@ -3565,11 +5095,74 @@ func runtimeClassInterfaceSpec(
     return None
 }
 
+func runtimeClassGenericSubstitutions(
+    symbol: SymbolRecord,
+    signature: SignatureRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String,
+    substitutions: ArrayList<RuntimeClassGenericSubstitution>
+): ArrayList<RuntimeClassGenericSubstitution> {
+    let values = ArrayList<RuntimeClassGenericSubstitution>()
+    match (symbol.typeDef) {
+        case Some(typeDef) =>
+            let names = genericParameterNames(typeDef)
+            let arguments = signatureTypeArguments(signature)
+            var index: Int64 = 0
+            while (index < Int64(names.size) && index < Int64(arguments.size)) {
+                let argument = arguments[index]
+                var typeName = "windows_interface.IInspectable"
+                if (winrtGenericArgumentSatisfiesRuntimeConstraint(argument, symbolsByName, ownerFullName, substitutions)) {
+                    typeName = winrtProjectedTypeNameWithSubstitutions(
+                        argument,
+                        symbolsByName,
+                        ownerFullName,
+                        substitutions
+                    )
+                }
+                values.add(RuntimeClassGenericSubstitution(
+                    names[index],
+                    typeName
+                ))
+                index += 1
+            }
+        case None => ()
+    }
+    return values
+}
+
+func runtimeClassGenericSubstitutionTypeName(
+    name: String,
+    substitutions: ArrayList<RuntimeClassGenericSubstitution>
+): Option<String> {
+    for (substitution in substitutions) {
+        if (substitution.name == name) {
+            return Some(substitution.typeName)
+        }
+    }
+    return None
+}
+
 func closedWinrtTypeName(
     signature: SignatureRecord,
     symbol: SymbolRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
     ownerFullName: String
+): String {
+    return closedWinrtTypeNameWithSubstitutions(
+        signature,
+        symbol,
+        symbolsByName,
+        ownerFullName,
+        ArrayList<RuntimeClassGenericSubstitution>()
+    )
+}
+
+func closedWinrtTypeNameWithSubstitutions(
+    signature: SignatureRecord,
+    symbol: SymbolRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String,
+    substitutions: ArrayList<RuntimeClassGenericSubstitution>
 ): String {
     let typeArguments = signatureTypeArguments(signature)
     if (typeArguments.isEmpty()) {
@@ -3577,9 +5170,62 @@ func closedWinrtTypeName(
     }
     let rendered = ArrayList<String>()
     for (argument in typeArguments) {
-        rendered.add(winrtProjectedTypeName(argument, symbolsByName, ownerFullName))
+        if (!winrtGenericArgumentSatisfiesRuntimeConstraint(argument, symbolsByName, ownerFullName, substitutions)) {
+            return "windows_interface.IInspectable"
+        }
+        rendered.add(winrtProjectedTypeNameWithSubstitutions(argument, symbolsByName, ownerFullName, substitutions))
     }
     "${symbol.implName}<${joinStrings(rendered, ", ")}>"
+}
+
+func winrtGenericArgumentSatisfiesRuntimeConstraint(
+    signature: SignatureRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String,
+    substitutions: ArrayList<RuntimeClassGenericSubstitution>
+): Bool {
+    match (signature.typeSpecification) {
+        case Some(typeSpec) =>
+            return winrtGenericArgumentSatisfiesRuntimeConstraint(typeSpec.signature, symbolsByName, ownerFullName, substitutions)
+        case None => ()
+    }
+    if (signature.kind == "Primitive") {
+        return true
+    }
+    if (signature.kind == "GenericParameter") {
+        let name = cjIdentifier(signature.name)
+        match (runtimeClassGenericSubstitutionTypeName(name, substitutions)) {
+            case Some(typeName) => return typeName != "windows_interface.IInspectable"
+            case None => return true
+        }
+    }
+    if (signature.kind == "Void" || signature.kind == "Unit") {
+        return false
+    }
+    match (signatureFullNameInContext(signature, symbolsByName, ownerFullName)) {
+        case Some(fullName) =>
+            if (fullName == "System.String" || fullName == "System.Guid" || fullName == "System.Object") {
+                return true
+            }
+            if (startsWith(fullName, "System.")) {
+                return true
+            }
+            match (symbolsByName.get(fullName)) {
+                case Some(symbol) =>
+                    match (symbol.typeDef) {
+                        case Some(typeDef) =>
+                            return !isValueType(typeDef)
+                        case None => return true
+                    }
+                case None => return true
+            }
+        case None => ()
+    }
+    match (signature.typeSig) {
+        case Some(nested) =>
+            return winrtGenericArgumentSatisfiesRuntimeConstraint(nested, symbolsByName, ownerFullName, substitutions)
+        case None => return false
+    }
 }
 
 func signatureTypeArguments(signature: SignatureRecord): ArrayList<SignatureRecord> {
@@ -3601,21 +5247,50 @@ func winrtProjectedTypeName(
     symbolsByName: HashMap<String, SymbolRecord>,
     ownerFullName: String
 ): String {
+    return winrtProjectedTypeNameWithSubstitutions(
+        signature,
+        symbolsByName,
+        ownerFullName,
+        ArrayList<RuntimeClassGenericSubstitution>()
+    )
+}
+
+func winrtProjectedTypeNameWithSubstitutions(
+    signature: SignatureRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String,
+    substitutions: ArrayList<RuntimeClassGenericSubstitution>
+): String {
     match (signature.typeSpecification) {
-        case Some(typeSpec) => return winrtProjectedTypeName(typeSpec.signature, symbolsByName, ownerFullName)
+        case Some(typeSpec) =>
+            return winrtProjectedTypeNameWithSubstitutions(typeSpec.signature, symbolsByName, ownerFullName, substitutions)
         case None => ()
     }
     if (signature.kind == "Primitive") {
+        if (signature.name == "String") {
+            return "windows_core.HString"
+        }
+        if (signature.name == "Object") {
+            return "windows_interface.IInspectable"
+        }
         return primitiveCjType(signature.name)
     }
     if (signature.kind == "GenericParameter") {
         let name = cjIdentifier(signature.name)
+        match (runtimeClassGenericSubstitutionTypeName(name, substitutions)) {
+            case Some(typeName) => return typeName
+            case None => ()
+        }
         if (!name.isEmpty() && name != "_") {
             return name
         }
     }
     if (signature.kind == "Void" || signature.kind == "Unit") {
         return "Unit"
+    }
+    match (stringHandleRawAbiType(signature, symbolsByName, ownerFullName)) {
+        case Some(typeName) => return typeName
+        case None => ()
     }
     match (signatureFullNameInContext(signature, symbolsByName, ownerFullName)) {
         case Some(fullName) =>
@@ -3632,13 +5307,20 @@ func winrtProjectedTypeName(
                 return systemType(fullName)
             }
             match (symbolsByName.get(fullName)) {
-                case Some(symbol) => return closedWinrtTypeName(signature, symbol, symbolsByName, ownerFullName)
+                case Some(symbol) =>
+                    return closedWinrtTypeNameWithSubstitutions(
+                        signature,
+                        symbol,
+                        symbolsByName,
+                        ownerFullName,
+                        substitutions
+                    )
                 case None => return qualifyMangledFullName(fullName)
             }
         case None => ()
     }
     match (signature.typeSig) {
-        case Some(nested) => return winrtProjectedTypeName(nested, symbolsByName, ownerFullName)
+        case Some(nested) => return winrtProjectedTypeNameWithSubstitutions(nested, symbolsByName, ownerFullName, substitutions)
         case None => ()
     }
     return "CPointer<Unit>"
@@ -4581,8 +6263,11 @@ func cjDefaultValue(typeName: String): String {
     if (typeName == "Bool") {
         return "false"
     }
-    if (typeName == "Float32" || typeName == "Float64") {
-        return "0.0"
+    if (typeName == "Float32") {
+        return "0.0f32"
+    }
+    if (typeName == "Float64") {
+        return "0.0f64"
     }
     if (startsWith(typeName, "CPointer<")) {
         return "${typeName}()"
@@ -4596,13 +6281,19 @@ func cjDefaultValue(typeName: String): String {
             case None => return "${typeName}()"
         }
     }
-    if (typeName != "Int8" && typeName != "Int16" && typeName != "Int32" &&
-        typeName != "Int64" && typeName != "IntNative" && typeName != "UInt8" &&
-        typeName != "UInt16" && typeName != "UInt32" && typeName != "UInt64" &&
-        typeName != "UIntNative") {
-        return "${typeName}()"
+    match (typeName) {
+        case "UInt8" => return "0u8"
+        case "UInt16" => return "0u16"
+        case "UInt32" => return "0u32"
+        case "UInt64" => return "0u64"
+        case "Int8" => return "0i8"
+        case "Int16" => return "0i16"
+        case "Int32" => return "0i32"
+        case "Int64" => return "0i64"
+        case "UIntNative" => return "0"
+        case "IntNative" => return "0"
+        case _ => return "${typeName}()"
     }
-    return "0"
 }
 
 func vArrayRepeatValue(elementType: String): String {

@@ -1,4 +1,4 @@
-package windows
+package windows_bindgen
 
 import std.collection.*
 import std.fs.*

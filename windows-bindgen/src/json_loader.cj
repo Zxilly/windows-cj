@@ -1,4 +1,4 @@
-package windows
+package windows_bindgen
 
 import std.collection.*
 import std.fs.*
@@ -269,6 +269,7 @@ func parseMethodImport(obj: JsonObject, path: String): MethodImportRecord {
         "Name",
         "Module",
         "Attributes",
+        "CallingConvention",
         "CustomAttributes"
     ])
     var moduleName = ""
@@ -282,12 +283,14 @@ func parseMethodImport(obj: JsonObject, path: String): MethodImportRecord {
             moduleReference = Some(module)
         case _ => throw Exception("${path}.Module must be a string or object")
     }
+    let attributes = optionalStringList(obj, "Attributes", path)
     return MethodImportRecord(
         requiredString(obj, "Name", path),
         moduleName,
         moduleReference: moduleReference,
-        attributes: optionalStringList(obj, "Attributes", path),
-        customAttributes: parseCustomAttributes(optionalArrayDefault(obj, "CustomAttributes", path), "${path}.CustomAttributes")
+        attributes: attributes,
+        customAttributes: parseCustomAttributes(optionalArrayDefault(obj, "CustomAttributes", path), "${path}.CustomAttributes"),
+        callingConvention: optionalStringDefault(obj, "CallingConvention", path, "")
     )
 }
 

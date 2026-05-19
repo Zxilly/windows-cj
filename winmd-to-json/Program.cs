@@ -62,6 +62,21 @@ enum CompositionType
     Public = 2
 }
 
+class UnsupportedMetadataException : Exception
+{
+    public string MetadataMessage { get; }
+
+    public UnsupportedMetadataException(string message) : base($"unsupported metadata: {message}")
+    {
+        MetadataMessage = message;
+    }
+
+    public UnsupportedMetadataException(string message, Exception innerException) : base($"unsupported metadata: {message}", innerException)
+    {
+        MetadataMessage = message;
+    }
+}
+
 class TType
 {
     public string Kind { get; set; } /* for CS8625 */ = "";
@@ -86,7 +101,11 @@ class TType
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public bool? IsRequired { get; set; }
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public JsMethodSignature? Signature { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     public string? Comment { get; set; }
+    [JsonIgnore]
+    public PrimitiveTypeCode? UnderlyingEnumType { get; set; }
 }
 
 class TGenericContext
@@ -149,7 +168,11 @@ class TypeProvider : ISignatureTypeProvider<TType, TGenericContext>, ICustomAttr
 
     public TType GetFunctionPointerType(MethodSignature<TType> signature)
     {
-        throw new NotImplementedException();
+        return new TType()
+        {
+            Kind = "FunctionPointer",
+            Signature = new JsMethodSignature(signature)
+        };
     }
 
     public TType GetGenericInstantiation(TType genericType, ImmutableArray<TType> typeArguments)
@@ -187,7 +210,11 @@ class TypeProvider : ISignatureTypeProvider<TType, TGenericContext>, ICustomAttr
 
     public TType GetPinnedType(TType elementType)
     {
-        throw new NotImplementedException();
+        return new TType()
+        {
+            Kind = "Pinned",
+            Type = elementType
+        };
     }
 
     public TType GetPointerType(TType elementType)
@@ -220,13 +247,20 @@ class TypeProvider : ISignatureTypeProvider<TType, TGenericContext>, ICustomAttr
     public TType GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind)
     {
         var td = reader.GetTypeDefinition(handle);
-        return new TType()
+        var type = new TType()
         {
             Kind = "Type",
             Namespace = reader.GetString(td.Namespace),
             Name = reader.GetString(td.Name),
             Comment = "TypeDefinition"
         };
+
+        if (TryGetEnumUnderlyingType(reader, handle, out var underlyingType))
+        {
+            type.UnderlyingEnumType = underlyingType;
+        }
+
+        return type;
     }
 
     public TType GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind)
@@ -243,7 +277,7 @@ class TypeProvider : ISignatureTypeProvider<TType, TGenericContext>, ICustomAttr
 
     public TType GetTypeFromSpecification(MetadataReader reader, TGenericContext genericContext, TypeSpecificationHandle handle, byte rawTypeKind)
     {
-        throw new NotImplementedException();
+        return reader.GetTypeSpecification(handle).DecodeSignature(this, genericContext);
     }
 
     // ?
@@ -266,6 +300,11 @@ class TypeProvider : ISignatureTypeProvider<TType, TGenericContext>, ICustomAttr
 
     public PrimitiveTypeCode GetUnderlyingEnumType(TType type)
     {
+        if (type.UnderlyingEnumType is PrimitiveTypeCode underlyingType)
+        {
+            return underlyingType;
+        }
+
         var name = type.Namespace is null ? type.Name : $"{type.Namespace}.{type.Name}";
         return name switch
         {
@@ -282,8 +321,60 @@ class TypeProvider : ISignatureTypeProvider<TType, TGenericContext>, ICustomAttr
             "Windows.Foundation.Metadata.ThreadingModel" => PrimitiveTypeCode.Int32,
             "Windows.Win32.Foundation.Metadata.Architecture" => PrimitiveTypeCode.Int32,
             "Windows.Win32.Interop.Architecture" => PrimitiveTypeCode.Int32,
-            _ => throw new NotImplementedException(name),
+            _ => throw new UnsupportedMetadataException(
+                $"custom attribute enum type '{name ?? type.Kind}' does not expose a known underlying type (kind: {type.Kind}, source: {type.Comment ?? "unknown"})"),
         };
+    }
+
+    private static bool TryGetEnumUnderlyingType(MetadataReader reader, TypeDefinitionHandle handle, out PrimitiveTypeCode typeCode)
+    {
+        var td = reader.GetTypeDefinition(handle);
+
+        if (!IsSystemEnum(reader, td.BaseType))
+        {
+            typeCode = default;
+            return false;
+        }
+
+        foreach (var fieldHandle in td.GetFields())
+        {
+            var field = reader.GetFieldDefinition(fieldHandle);
+            if (reader.GetString(field.Name) != "value__")
+            {
+                continue;
+            }
+
+            var signature = field.DecodeSignature(new TypeProvider(), new TGenericContext(reader, td));
+            if (signature.Kind == "Primitive" && Enum.TryParse(signature.Name, out typeCode))
+            {
+                return true;
+            }
+        }
+
+        typeCode = default;
+        return false;
+    }
+
+    private static bool IsSystemEnum(MetadataReader reader, EntityHandle handle)
+    {
+        if (handle.IsNil)
+        {
+            return false;
+        }
+
+        if (handle.Kind == HandleKind.TypeReference)
+        {
+            var tr = reader.GetTypeReference((TypeReferenceHandle)handle);
+            return reader.GetString(tr.Namespace) == "System" && reader.GetString(tr.Name) == "Enum";
+        }
+
+        if (handle.Kind == HandleKind.TypeDefinition)
+        {
+            var td = reader.GetTypeDefinition((TypeDefinitionHandle)handle);
+            return reader.GetString(td.Namespace) == "System" && reader.GetString(td.Name) == "Enum";
+        }
+
+        return false;
     }
 
     public static object? ToCustomValue(TType type, object? val)
@@ -380,10 +471,34 @@ class JsTypeDefinition
 
     private string FormatType(TType type)
     {
-        if (type.Kind == "Generic")
+        if (type.Kind == "Array")
+        {
+            return $"{FormatType(type.Type!)}[{new string(',', Math.Max(type.Rank.GetValueOrDefault(1) - 1, 0))}]";
+        }
+        else if (type.Kind == "ByReference")
+        {
+            return $"{FormatType(type.Type!)}&";
+        }
+        else if (type.Kind == "FunctionPointer")
+        {
+            return FormatFunctionPointer(type);
+        }
+        else if (type.Kind == "Generic")
         {
             var arguments = FormatTypeArguments(type);
             return $"{type.Type!.Namespace}.{type.Type!.Name}[{arguments}]";
+        }
+        else if (type.Kind == "Modified")
+        {
+            return FormatType(type.UnmodifiedType!);
+        }
+        else if (type.Kind == "Pinned")
+        {
+            return $"pinned {FormatType(type.Type!)}";
+        }
+        else if (type.Kind == "Pointer")
+        {
+            return $"{FormatType(type.Type!)}*";
         }
         else if (type.Kind == "Type")
         {
@@ -397,10 +512,34 @@ class JsTypeDefinition
         {
             return type.Name!;
         }
+        else if (type.Kind == "SerializedName")
+        {
+            return type.Name!;
+        }
+        else if (type.Kind == "System.Type")
+        {
+            return "System.Type";
+        }
+        else if (type.Kind == "SZArray")
+        {
+            return $"{FormatType(type.Type!)}[]";
+        }
         else
         {
-            throw new NotImplementedException(type.Kind);
+            throw new UnsupportedMetadataException(
+                $"type signature kind '{type.Kind}' cannot be formatted while processing {Namespace}.{Name}");
         }
+    }
+
+    private string FormatFunctionPointer(TType type)
+    {
+        if (type.Signature is null)
+        {
+            return "methodptr";
+        }
+
+        var parameters = string.Join(", ", from t in type.Signature.ParameterTypes select FormatType(t));
+        return $"methodptr[{parameters} -> {FormatType(type.Signature.ReturnType)}]";
     }
 
     private string FormatTypeArguments(TType type)
@@ -722,7 +861,14 @@ class JsCustomAttribute
         {
             throw new ArgumentException();
         }
-        _cv = _ca.DecodeValue(new TypeProvider());
+        try
+        {
+            _cv = _ca.DecodeValue(new TypeProvider());
+        }
+        catch (UnsupportedMetadataException ex)
+        {
+            throw new UnsupportedMetadataException($"while decoding custom attribute '{Type}': {ex.MetadataMessage}", ex);
+        }
     }
 
     public string Type { get; set; }
@@ -1198,7 +1344,7 @@ class JsMethodImport
             if ((_mi.Attributes & MethodImportAttributes.BestFitMappingMask) == MethodImportAttributes.BestFitMappingDisable)
                 yield return "BestFitMappingDisable";
             if ((_mi.Attributes & MethodImportAttributes.CharSetMask) == MethodImportAttributes.CharSetAnsi)
-                yield return "CharSetAnti";
+                yield return "CharSetAnsi";
             if ((_mi.Attributes & MethodImportAttributes.CharSetMask) == MethodImportAttributes.CharSetUnicode)
                 yield return "CharSetUnicode";
             if ((_mi.Attributes & MethodImportAttributes.CharSetMask) == MethodImportAttributes.CharSetAuto)

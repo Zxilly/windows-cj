@@ -1,8 +1,12 @@
 # winmd-to-json
 
-WinMD → JSON converter for the windows-cj VPGC bindgen pipeline. Vendored from
-[ynkdir/winmd-printer](https://github.com/ynkdir/winmd-printer) (MIT, copyright
-Yukihiro Nakadaira).
+WinMD to JSON converter for the windows-cj bindgen pipeline. This C#/.NET tool
+is the only WinMD reader in the active toolchain. `windows-bindgen`
+(`windows_bindgen`) consumes the JSON emitted by this converter; no native
+Cangjie `.winmd` reader is planned.
+
+Vendored from [ynkdir/winmd-printer](https://github.com/ynkdir/winmd-printer)
+(MIT, copyright Yukihiro Nakadaira).
 
 ## Acknowledgement
 
@@ -15,15 +19,24 @@ Upstream: <https://github.com/ynkdir/winmd-printer>
 
 ## What's different from upstream
 
-The upstream tool is general-purpose. We may add windows-cj specific output
-fields in later milestones (e.g., explicit `supported_architectures` array,
-`source_set` discriminator). At M0.7 the only delta is the csproj — we use
-`PublishSingleFile` + `SelfContained` for portable deployment.
+The upstream tool is general-purpose. This fork defines the converter contract
+used by the JSON-backed bindgen pipeline:
+
+- top-level metadata fields: `winmd_file`, `winmd_sha256`, `tool_version`,
+  `schema_version`, and `source_set`
+- per-type `source_set` propagation for split namespace output
+- a portable deployment csproj using `PublishSingleFile` + `SelfContained`
+
+Quality gates validate the `winmd_file` / `winmd_sha256` header against the raw
+WinMD source used for conversion.
+
+Keep WinMD parsing changes here. Cangjie packages should depend on converted
+JSON and should not grow a separate native metadata reader.
 
 ## Build
 
 ```pwsh
-pwsh scripts/build_and_publish.ps1
+python scripts/build_and_publish.py
 ```
 
 This produces `bin/winmd-to-json.exe` (self-contained Windows x64).
