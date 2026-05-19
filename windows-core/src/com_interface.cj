@@ -67,6 +67,9 @@ public unsafe func queryInterfaceResult<U>(
         return QueryResult<InterfaceHandle<U>>.Err(pointerError)
     }
 
+    if (result.isNotNull()) {
+        interfaceHandleReleaseRaw(result)
+    }
     QueryResult<InterfaceHandle<U>>.Err(hr)
 }
 

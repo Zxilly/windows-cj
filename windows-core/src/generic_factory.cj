@@ -66,6 +66,9 @@ public class IGenericFactory <: InterfaceWrapperBase & ComInterface {
         var raw = CPointer<Unit>()
         let hr = activateInstanceRaw(CPointer<CPointer<Unit>>(inout raw))
         if (hr.failed()) {
+            if (raw.isNotNull()) {
+                interfaceHandleReleaseRaw(raw)
+            }
             return Result<T>.Err(WinError.fromHRESULT(hr))
         }
         if (raw.isNull()) {

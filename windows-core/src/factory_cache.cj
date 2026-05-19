@@ -72,6 +72,23 @@ func queryFactoryInterface<I>(
     }
 }
 
+func activationFactoryFromRaw<I>(
+    rawFactory: CPointer<Unit>,
+    hr: HRESULT,
+    descriptor: InterfaceDescriptor<I>
+): Result<I> where I <: ComInterface {
+    if (hr.failed()) {
+        if (rawFactory.isNotNull()) {
+            interfaceHandleReleaseRaw(rawFactory)
+        }
+        return Result<I>.Err(WinError.fromHRESULT(hr))
+    }
+    if (rawFactory.isNull()) {
+        return Result<I>.Err(WinError(E_POINTER))
+    }
+    queryFactoryInterface(rawFactory, descriptor)
+}
+
 func loadSystemActivationFactory<I>(
     runtimeName: String,
     descriptor: InterfaceDescriptor<I>
@@ -91,6 +108,9 @@ func loadSystemActivationFactory<I>(
         }
 
         if (hr.value == CO_E_NOTINITIALIZED.value) {
+            if (raw.isNotNull()) {
+                interfaceHandleReleaseRaw(raw)
+            }
             var cookie = CPointer<Unit>()
             callCoIncrementMTAUsage(CPointer<CPointer<Unit>>(inout cookie))
             iid = descriptor.iid
@@ -106,14 +126,7 @@ func loadSystemActivationFactory<I>(
             }
         }
 
-        if (hr.failed()) {
-            return Result<I>.Err(WinError.fromHRESULT(hr))
-        }
-        if (raw.isNull()) {
-            return Result<I>.Err(WinError(E_POINTER))
-        }
-
-        queryFactoryInterface(raw, descriptor)
+        activationFactoryFromRaw(raw, hr, descriptor)
     } finally {
         classId.close()
     }
@@ -192,11 +205,15 @@ func loadRegFreeFactoryFromDll<I>(
                 )
             )
         }
-        if (hr.failed() || rawFactory.isNull()) {
-            windows_libloading.freeLibrary(module)
-            if (hr.failed()) {
-                return Result<I>.Err(WinError.fromHRESULT(hr))
+        if (hr.failed()) {
+            if (rawFactory.isNotNull()) {
+                interfaceHandleReleaseRaw(rawFactory)
             }
+            windows_libloading.freeLibrary(module)
+            return Result<I>.Err(WinError.fromHRESULT(hr))
+        }
+        if (rawFactory.isNull()) {
+            windows_libloading.freeLibrary(module)
             return Result<I>.Err(WinError(E_POINTER))
         }
 

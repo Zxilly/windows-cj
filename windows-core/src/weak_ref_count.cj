@@ -56,8 +56,8 @@ class LocalAggregatedMarshalerHandle <: Resource {
         if (closed) {
             return
         }
-        wrapper.close()
         closed = true
+        wrapper.close()
     }
 
     ~init() {
@@ -406,10 +406,14 @@ class LocalWeakReferenceTearOff {
         }
 
         var iidCopy = iid
-        unsafe {
+        let hr = unsafe {
             let vtblPtr = CPointer<CPointer<IUnknownVtbl>>(ownerRaw).read()
             vtblPtr.read().QueryInterface(ownerRaw, CPointer<GUID>(inout iidCopy), resultSlot)
         }
+        if (hr < 0) {
+            releaseFailedComOutSlot(resultSlot)
+        }
+        hr
     }
 
     private func cloneWeakMarshaler(resultSlot: CPointer<CPointer<Unit>>): Int32 {
@@ -776,11 +780,11 @@ public class TearOff<T> <: Resource where T <: ComInterface {
             return
         }
 
+        closed = true
         match (weakReference) {
             case Some(reference) => reference.close()
             case None => ()
         }
-        closed = true
     }
 
     ~init() {

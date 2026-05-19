@@ -14,6 +14,7 @@ import windows_core.{
     WinrtGenericType,
     WinError,
     createComObjectFromSchemas,
+    winrtReleaseGenericOutRange,
     winrtStoreGenericOutAt
 }
 import windows_interface.{InterfaceDescriptor, InterfaceDescriptorSchema}
@@ -212,6 +213,13 @@ where T <: RuntimeType & WinrtGenericType<T> {
             case Some(value) =>
                 let hr = HRESULT(winrtStoreGenericOutAt<T>(items, written, value))
                 if (hr.failed()) {
+                    if (written > 0) {
+                        try {
+                            winrtReleaseGenericOutRange<T>(items, UInt32(written))
+                        } catch (_: Exception) {
+                            ()
+                        }
+                    }
                     return Result<UInt32>.Err(WinError(hr))
                 }
             case None =>

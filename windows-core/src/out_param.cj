@@ -46,11 +46,8 @@ class OutParamState<T> {
         slotSize = UIntNative(0)
     }
 
+    // OutSlot is the deterministic Resource owner; finalizers must not run native cleanup.
     ~init() {
-        if (slot.isNull()) {
-            return
-        }
-        unsafe { CoTaskMemFree(slot) }
         slot = CPointer<Unit>()
         slotSize = UIntNative(0)
     }
@@ -130,7 +127,9 @@ public class OutSlot<T> <: Resource {
         if (closed) {
             return None
         }
-        state.readSlot<A>()
+        let current = state.readSlot<A>()
+        state.closeSlot()
+        current
     }
 
     public func close(): Unit {

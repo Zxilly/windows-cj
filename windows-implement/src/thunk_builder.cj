@@ -1,6 +1,7 @@
 package windows_implement
 
 import windows_interface.*
+import windows_strings.releaseSystemHStringHandle
 
 // Thunks translate native COM callbacks into registry-backed runtime calls.
 
@@ -9,6 +10,21 @@ func lookupRegistryObject(instanceRaw: CPointer<Unit>): Option<Object> {
         return None
     }
     unsafe { comRegistryLookup(rootRegistryKeyFromRaw(instanceRaw)) }
+}
+
+func releaseFailedRuntimeClassNameSlot(hr: Int32, value: CPointer<CPointer<Unit>>): Int32 {
+    if (hr >= 0 || value.isNull()) {
+        return hr
+    }
+
+    unsafe {
+        let raw = value.read()
+        if (raw.isNotNull()) {
+            releaseSystemHStringHandle(raw)
+            value.write(CPointer<Unit>())
+        }
+    }
+    hr
 }
 
 @C
@@ -101,18 +117,16 @@ public func iinspectableGetRuntimeClassNameThunk(
         if (value.isNull()) {
             return E_POINTER
         }
-        match (lookupRegistryObject(instanceRaw)) {
+        value.write(CPointer<Unit>())
+        let hr = match (lookupRegistryObject(instanceRaw)) {
             case Some(obj) =>
                 match (obj) {
                     case inspectable: IInspectableBase => inspectable.getRuntimeClassNameBase(value)
-                    case _ =>
-                        value.write(CPointer<Unit>())
-                        E_NOINTERFACE
+                    case _ => E_NOINTERFACE
                 }
-            case None =>
-                value.write(CPointer<Unit>())
-                E_NOINTERFACE
+            case None => E_NOINTERFACE
         }
+        releaseFailedRuntimeClassNameSlot(hr, value)
     }
 }
 

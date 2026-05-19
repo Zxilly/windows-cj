@@ -309,7 +309,13 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
 
         match (queryInterfaceFallback) {
             case Some(callback) =>
+                if (resultSlot.isNotNull()) {
+                    unsafe { resultSlot.write(CPointer<Unit>()) }
+                }
                 let delegated = callback(iid, resultSlot)
+                if (delegated != S_OK) {
+                    releaseFailedComOutSlot(resultSlot)
+                }
                 if (delegated != E_NOINTERFACE) {
                     return delegated
                 }

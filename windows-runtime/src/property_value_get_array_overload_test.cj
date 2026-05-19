@@ -4,7 +4,7 @@ import windows_interface as windows_interface
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_POINTER, GuidValue, S_OK}
+import windows_core.{E_FAIL, E_POINTER, GuidValue, S_OK, WindowsException}
 import windows_core as windows_core
 import windows_interface.{GUID, IInspectable}
 
@@ -15,6 +15,9 @@ let propertyValueGetArrayRectCalls = AtomicInt64(0)
 let propertyValueGetArrayStringCalls = AtomicInt64(0)
 let propertyValueGetArrayInspectableCalls = AtomicInt64(0)
 let propertyValueGetArrayInspectableReleaseCalls = AtomicInt64(0)
+let propertyValueGetArrayFailingInt32Calls = AtomicInt64(0)
+let propertyValueGetArrayFailingStringCalls = AtomicInt64(0)
+let propertyValueGetArrayFailingInspectableCalls = AtomicInt64(0)
 
 func propertyValueGetArrayGuidExpected(offset: UInt32): GUID {
     GUID.from_values(0xB0C0D000u32 + offset, 0x2211u16, 0x4433u16, 0x66u8, 0x55u8, 0x88u8, 0x77u8, 0xAAu8, 0x99u8, 0xCCu8, 0xBBu8)
@@ -256,6 +259,111 @@ func propertyValueGetRectArrayThunk(
     S_OK.value
 }
 
+@C
+func propertyValueGetFailingInt32ArrayThunk(
+    _: CPointer<Unit>,
+    size: CPointer<UInt32>,
+    value: CPointer<CPointer<Int32>>
+): Int32 {
+    if (size.isNull() || value.isNull()) {
+        return E_POINTER.value
+    }
+    let data = allocatePropertyValueGetArray<Int32>(2)
+    if (data.isNull()) {
+        return E_POINTER.value
+    }
+    unsafe {
+        data.write(111i32)
+        (data + 1).write(222i32)
+        size.write(2u32)
+        value.write(data)
+    }
+    propertyValueGetArrayFailingInt32Calls.fetchAdd(1)
+    E_FAIL.value
+}
+
+@C
+func propertyValueGetFailingStringArrayThunk(
+    _: CPointer<Unit>,
+    size: CPointer<UInt32>,
+    value: CPointer<CPointer<CPointer<Unit>>>
+): Int32 {
+    if (size.isNull() || value.isNull()) {
+        return E_POINTER.value
+    }
+    let data = allocatePropertyValueGetArray<CPointer<Unit>>(2)
+    if (data.isNull()) {
+        return E_POINTER.value
+    }
+    unsafe {
+        data.write(propertyValueGetArraySystemString("failed-left"))
+        (data + 1).write(propertyValueGetArraySystemString("failed-right"))
+        size.write(2u32)
+        value.write(data)
+    }
+    propertyValueGetArrayFailingStringCalls.fetchAdd(1)
+    E_FAIL.value
+}
+
+@C
+func propertyValueGetFailingInspectableArrayThunk(
+    instanceRaw: CPointer<Unit>,
+    size: CPointer<UInt32>,
+    value: CPointer<CPointer<CPointer<Unit>>>
+): Int32 {
+    if (size.isNull() || value.isNull()) {
+        return E_POINTER.value
+    }
+    let data = allocatePropertyValueGetArray<CPointer<Unit>>(2)
+    if (data.isNull()) {
+        return E_POINTER.value
+    }
+    let first = propertyValueGetArrayInspectableObject(instanceRaw)
+    let second = propertyValueGetArrayInspectableObject(instanceRaw)
+    if (first.isNull() || second.isNull()) {
+        if (first.isNotNull()) {
+            windows_core.coTaskMemFree(first)
+        }
+        if (second.isNotNull()) {
+            windows_core.coTaskMemFree(second)
+        }
+        windows_core.coTaskMemFree(CPointer<Unit>(data))
+        return E_POINTER.value
+    }
+    unsafe {
+        data.write(first)
+        (data + 1).write(second)
+        size.write(2u32)
+        value.write(data)
+    }
+    propertyValueGetArrayFailingInspectableCalls.fetchAdd(1)
+    E_FAIL.value
+}
+
+@C
+func propertyValueGetNoWriteFailingStringArrayThunk(
+    _: CPointer<Unit>,
+    size: CPointer<UInt32>,
+    value: CPointer<CPointer<CPointer<Unit>>>
+): Int32 {
+    if (size.isNull() || value.isNull()) {
+        return E_POINTER.value
+    }
+    E_FAIL.value
+}
+
+@C
+func propertyValueGetNoWriteFailingInspectableArrayThunk(
+    _: CPointer<Unit>,
+    size: CPointer<UInt32>,
+    value: CPointer<CPointer<CPointer<Unit>>>
+): Int32 {
+    if (size.isNull() || value.isNull()) {
+        return E_POINTER.value
+    }
+    E_FAIL.value
+}
+
 func propertyValueGetArrayOverloadVtbl(): IPropertyValueVtbl {
     var vtbl = IPropertyValueVtbl()
     vtbl.base_.base_.Release = propertyValueGetArrayInspectableReleaseThunk
@@ -268,8 +376,55 @@ func propertyValueGetArrayOverloadVtbl(): IPropertyValueVtbl {
     vtbl
 }
 
+func propertyValueGetArrayFailingPartialVtbl(): IPropertyValueVtbl {
+    var vtbl = IPropertyValueVtbl()
+    vtbl.base_.base_.Release = propertyValueGetArrayInspectableReleaseThunk
+    vtbl.GetInt32Array = propertyValueGetFailingInt32ArrayThunk
+    vtbl.GetStringArray = propertyValueGetFailingStringArrayThunk
+    vtbl.GetInspectableArray = propertyValueGetFailingInspectableArrayThunk
+    vtbl
+}
+
+func propertyValueGetArrayNoWriteFailingVtbl(): IPropertyValueVtbl {
+    var vtbl = IPropertyValueVtbl()
+    vtbl.base_.base_.Release = propertyValueGetArrayInspectableReleaseThunk
+    vtbl.GetStringArray = propertyValueGetNoWriteFailingStringArrayThunk
+    vtbl.GetInspectableArray = propertyValueGetNoWriteFailingInspectableArrayThunk
+    vtbl
+}
+
 func withPropertyValueGetArrayOverloadRaw(action: (CPointer<Unit>) -> Unit): Unit {
     let vtblHandle = unsafe { windows_interface.allocateNativeValue<IPropertyValueVtbl>(propertyValueGetArrayOverloadVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IPropertyValueVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
+
+    try {
+        action(raw)
+    } finally {
+        unsafe {
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
+        }
+    }
+}
+
+func withPropertyValueGetArrayFailingPartialRaw(action: (CPointer<Unit>) -> Unit): Unit {
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IPropertyValueVtbl>(propertyValueGetArrayFailingPartialVtbl()) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IPropertyValueVtbl>>(vtblHandle) }
+    let raw = CPointer<Unit>(objectHandle)
+
+    try {
+        action(raw)
+    } finally {
+        unsafe {
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
+        }
+    }
+}
+
+func withPropertyValueGetArrayNoWriteFailingRaw(action: (CPointer<Unit>) -> Unit): Unit {
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IPropertyValueVtbl>(propertyValueGetArrayNoWriteFailingVtbl()) }
     let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IPropertyValueVtbl>>(vtblHandle) }
     let raw = CPointer<Unit>(objectHandle)
 
@@ -296,6 +451,113 @@ func testIPropertyValueGetArrayOverloadsReturnPrimitiveManagedArrays() {
         @Expect(values[1], 20i32)
         @Expect(values[2], 30i32)
         @Expect(propertyValueGetArrayInt32Calls.load(), 1)
+    })
+}
+
+@Test
+func testIPropertyValueGetArrayRawOverloadsClearStaleOutputsBeforeNoWriteFailure() {
+    propertyValueGetArrayInspectableReleaseCalls.store(0)
+
+    withPropertyValueGetArrayNoWriteFailingRaw({ raw: CPointer<Unit> =>
+        let propertyValue = IPropertyValue.viewOf(raw)
+        let staleStringArray = allocatePropertyValueGetArray<CPointer<Unit>>(1)
+        let staleStringRaw = propertyValueGetArraySystemString("stale")
+        let staleInspectableArray = allocatePropertyValueGetArray<CPointer<Unit>>(1)
+        let staleInspectableRaw = propertyValueGetArrayInspectableObject(raw)
+        unsafe {
+            staleStringArray.write(staleStringRaw)
+            staleInspectableArray.write(staleInspectableRaw)
+        }
+
+        try {
+            var stringSize = 1u32
+            var stringData = staleStringArray
+            let deleteBefore = windows_core.debugObservedWindowsDeleteStringCount()
+            var stringFailed = false
+            try {
+                unsafe { propertyValue.GetStringArray(CPointer<UInt32>(inout stringSize), CPointer<CPointer<CPointer<Unit>>>(inout stringData)) }
+            } catch (_: WindowsException) {
+                stringFailed = true
+            }
+            @Expect(stringFailed, true)
+            @Expect(stringSize, 0u32)
+            @Expect(stringData.isNull(), true)
+            @Expect(windows_core.debugObservedWindowsDeleteStringCount() - deleteBefore, 0)
+
+            var inspectableSize = 1u32
+            var inspectableData = staleInspectableArray
+            var inspectableFailed = false
+            try {
+                unsafe { propertyValue.GetInspectableArray(CPointer<UInt32>(inout inspectableSize), CPointer<CPointer<CPointer<Unit>>>(inout inspectableData)) }
+            } catch (_: WindowsException) {
+                inspectableFailed = true
+            }
+            @Expect(inspectableFailed, true)
+            @Expect(inspectableSize, 0u32)
+            @Expect(inspectableData.isNull(), true)
+            @Expect(propertyValueGetArrayInspectableReleaseCalls.load(), 0)
+        } finally {
+            let staleString = windows_core.HString.fromSystemHandleTake(staleStringRaw)
+            staleString.close()
+            if (staleInspectableRaw.isNotNull()) {
+                windows_core.coTaskMemFree(staleInspectableRaw)
+            }
+            windows_core.coTaskMemFree(CPointer<Unit>(staleStringArray))
+            windows_core.coTaskMemFree(CPointer<Unit>(staleInspectableArray))
+        }
+    })
+}
+
+@Test
+func testIPropertyValueGetArrayRawOverloadsCleanFailedPartialOutputs() {
+    propertyValueGetArrayFailingInt32Calls.store(0)
+    propertyValueGetArrayFailingStringCalls.store(0)
+    propertyValueGetArrayFailingInspectableCalls.store(0)
+    propertyValueGetArrayInspectableReleaseCalls.store(0)
+
+    withPropertyValueGetArrayFailingPartialRaw({ raw: CPointer<Unit> =>
+        let propertyValue = IPropertyValue.viewOf(raw)
+        let deleteBefore = windows_core.debugObservedWindowsDeleteStringCount()
+        var intSize = 99u32
+        var intData = CPointer<Int32>()
+        var intFailed = false
+        try {
+            unsafe { propertyValue.GetInt32Array(CPointer<UInt32>(inout intSize), CPointer<CPointer<Int32>>(inout intData)) }
+        } catch (_: WindowsException) {
+            intFailed = true
+        }
+        @Expect(intFailed, true)
+        @Expect(intSize, 0u32)
+        @Expect(intData.isNull(), true)
+
+        var stringSize = 99u32
+        var stringData = CPointer<CPointer<Unit>>()
+        var stringFailed = false
+        try {
+            unsafe { propertyValue.GetStringArray(CPointer<UInt32>(inout stringSize), CPointer<CPointer<CPointer<Unit>>>(inout stringData)) }
+        } catch (_: WindowsException) {
+            stringFailed = true
+        }
+        @Expect(stringFailed, true)
+        @Expect(stringSize, 0u32)
+        @Expect(stringData.isNull(), true)
+        @Expect(windows_core.debugObservedWindowsDeleteStringCount() - deleteBefore, 2)
+
+        var inspectableSize = 99u32
+        var inspectableData = CPointer<CPointer<Unit>>()
+        var inspectableFailed = false
+        try {
+            unsafe { propertyValue.GetInspectableArray(CPointer<UInt32>(inout inspectableSize), CPointer<CPointer<CPointer<Unit>>>(inout inspectableData)) }
+        } catch (_: WindowsException) {
+            inspectableFailed = true
+        }
+        @Expect(inspectableFailed, true)
+        @Expect(inspectableSize, 0u32)
+        @Expect(inspectableData.isNull(), true)
+        @Expect(propertyValueGetArrayInspectableReleaseCalls.load(), 2)
+        @Expect(propertyValueGetArrayFailingInt32Calls.load(), 1)
+        @Expect(propertyValueGetArrayFailingStringCalls.load(), 1)
+        @Expect(propertyValueGetArrayFailingInspectableCalls.load(), 1)
     })
 }
 

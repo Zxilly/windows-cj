@@ -24,7 +24,9 @@ func coreWeakReferenceResolveThunk(
         case Some(value) =>
             match (value.Resolve(riid, objectreference)) {
                 case Result<Unit>.Ok(_) => S_OK.value
-                case Result<Unit>.Err(error) => error.code().value
+                case Result<Unit>.Err(error) =>
+                    releaseFailedComOutSlot(objectreference)
+                    error.code().value
             }
         case None =>
             E_NOINTERFACE.value
@@ -155,6 +157,7 @@ public class Weak<T> <: Resource where T <: ComInterface {
         if (closed) {
             return
         }
+        closed = true
         match (systemReference) {
             case Some(reference) => reference.close()
             case None => ()
@@ -163,6 +166,5 @@ public class Weak<T> <: Resource where T <: ComInterface {
             case Some(localReference) => localReference.close()
             case None => ()
         }
-        closed = true
     }
 }

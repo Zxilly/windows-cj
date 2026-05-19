@@ -6,6 +6,17 @@ import std.unittest.*
 import std.unittest.testmacro.*
 
 let genericFactoryReleaseCount = AtomicInt64(0)
+var genericFactoryActivateHRESULT = S_OK.value
+var genericFactoryPartialRaw = CPointer<Unit>()
+
+@C
+func genericFactoryActivateInstanceThunk(
+    _: CPointer<Unit>,
+    result: CPointer<CPointer<Unit>>
+): Int32 {
+    unsafe { result.write(genericFactoryPartialRaw) }
+    genericFactoryActivateHRESULT
+}
 
 @C
 func genericFactoryReleaseThunk(_: CPointer<Unit>): UInt32 {
@@ -15,11 +26,14 @@ func genericFactoryReleaseThunk(_: CPointer<Unit>): UInt32 {
 
 func resetGenericFactoryReleaseCount(): Unit {
     genericFactoryReleaseCount.store(0)
+    genericFactoryActivateHRESULT = S_OK.value
+    genericFactoryPartialRaw = CPointer<Unit>()
 }
 
 func genericFactoryLifetimeVtbl(): IGenericFactoryVtbl {
     var vtbl = IGenericFactoryVtbl()
     vtbl.base_.base_.Release = genericFactoryReleaseThunk
+    vtbl.ActivateInstance = genericFactoryActivateInstanceThunk
     vtbl
 }
 
@@ -46,6 +60,50 @@ func testGenericFactoryBorrowedViewCannotManualRelease() {
 
         let owned = IGenericFactory.fromAbiTake(raw)
         @Expect(owned.release(), 1u32)
+        @Expect(genericFactoryReleaseCount.load(), 1)
+        @Expect(owned.isClosed(), true)
+        @Expect(owned.asRaw().isNull(), true)
+
+        owned.close()
+        @Expect(genericFactoryReleaseCount.load(), 1)
+        @Expect(owned.release(), 0u32)
+        @Expect(genericFactoryReleaseCount.load(), 1)
+    })
+}
+
+@Test
+func testGenericFactoryManualReleaseClosesWrapper() {
+    resetGenericFactoryReleaseCount()
+    withGenericFactoryRaw({ raw: CPointer<Unit> =>
+        let wrapper = IGenericFactory(raw)
+        @Expect(wrapper.isClosed(), false)
+        @Expect(wrapper.asRaw().toUIntNative(), raw.toUIntNative())
+
+        @Expect(wrapper.release(), 1u32)
+        @Expect(genericFactoryReleaseCount.load(), 1)
+        @Expect(wrapper.isClosed(), true)
+        @Expect(wrapper.asRaw().isNull(), true)
+
+        @Expect(wrapper.release(), 0u32)
+        @Expect(genericFactoryReleaseCount.load(), 1)
+    })
+}
+
+@Test
+func testGenericFactoryActivateReleasesPartialOutputOnFailedHRESULT() {
+    resetGenericFactoryReleaseCount()
+    withGenericFactoryRaw({ raw: CPointer<Unit> =>
+        genericFactoryPartialRaw = raw
+        genericFactoryActivateHRESULT = E_FAIL.value
+        let factory = IGenericFactory.viewOf(raw)
+        let result = unsafe { factory.ActivateInstance<IGenericFactory>(IGenericFactory.descriptor()) }
+        match (result) {
+            case Result<IGenericFactory>.Ok(value) =>
+                value.close()
+                throw Exception("IGenericFactory.ActivateInstance unexpectedly succeeded")
+            case Result<IGenericFactory>.Err(error) =>
+                @Expect(error.code(), E_FAIL)
+        }
         @Expect(genericFactoryReleaseCount.load(), 1)
     })
 }

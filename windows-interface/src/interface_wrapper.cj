@@ -56,6 +56,12 @@ func releaseRaw(raw: CPointer<Unit>): UInt32 {
     }
 }
 
+func releaseFailedOutRaw(hr: HRESULT, raw: CPointer<Unit>): Unit {
+    if (hr.failed() && raw.isNotNull()) {
+        let _ = releaseRaw(raw)
+    }
+}
+
 func requireOwnedInterfaceRaw(raw: CPointer<Unit>): CPointer<Unit> {
     if (raw.isNull()) {
         throw WindowsException(E_POINTER)
@@ -259,6 +265,7 @@ public open class InterfaceWrapperBase <: Resource {
         let abiRaw = if (ownsHandle_) {
             detachOwnedHandle()
         } else {
+            closed_ = true
             let _ = addRefRaw(liveRaw)
             liveRaw
         }
@@ -271,8 +278,15 @@ public open class InterfaceWrapperBase <: Resource {
         if (liveRaw.isNull()) {
             return 0u32
         }
-        if (ownsHandle_ || allowManualRelease_) {
-            return releaseRaw(liveRaw)
+        if (ownsHandle_) {
+            let remaining = releaseOwnedHandle()
+            closed_ = true
+            return remaining
+        }
+        if (allowManualRelease_) {
+            closed_ = true
+            let remaining = releaseRaw(liveRaw)
+            return remaining
         }
         0u32
     }
@@ -435,6 +449,9 @@ public open class IInspectable <: InterfaceWrapperBase & ComInterface & RuntimeN
         var rawValue = CPointer<Unit>()
         let hr = getRuntimeClassNameRaw(CPointer<CPointer<Unit>>(inout rawValue))
         if (hr.failed()) {
+            if (rawValue.isNotNull()) {
+                releaseSystemHStringHandle(rawValue)
+            }
             throw WindowsException(hr)
         }
         if (rawValue.isNull()) {
@@ -534,6 +551,7 @@ public open class IAgileReference <: InterfaceWrapperBase & ComInterface {
         var raw = CPointer<Unit>()
         let hr = HRESULT(vtbl().Resolve(liveRaw, CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>(inout raw)))
         if (hr.failed()) {
+            releaseFailedOutRaw(hr, raw)
             return Result<T>.Err(WinResultError.fromHRESULT(hr))
         }
         if (raw.isNull()) {
@@ -583,6 +601,7 @@ public open class IWeakReference <: InterfaceWrapperBase & ComInterface {
         var raw = CPointer<Unit>()
         let hr = HRESULT(vtbl().Resolve(liveRaw, CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>(inout raw)))
         if (hr.failed()) {
+            releaseFailedOutRaw(hr, raw)
             return Result<T>.Err(WinResultError.fromHRESULT(hr))
         }
         if (raw.isNull()) {
@@ -615,6 +634,7 @@ public open class IWeakReferenceSource <: InterfaceWrapperBase & ComInterface {
         var raw = CPointer<Unit>()
         let hr = HRESULT(vtbl().GetWeakReference(liveRaw, CPointer<CPointer<Unit>>(inout raw)))
         if (hr.failed()) {
+            releaseFailedOutRaw(hr, raw)
             return Result<IWeakReference>.Err(WinResultError.fromHRESULT(hr))
         }
         if (raw.isNull()) {
@@ -705,6 +725,7 @@ public open class IActivationFactory <: InterfaceWrapperBase & ComInterface & Ru
         var raw = CPointer<Unit>()
         let hr = activateInstance(CPointer<CPointer<Unit>>(inout raw))
         if (hr.failed()) {
+            releaseFailedOutRaw(hr, raw)
             return Result<T>.Err(WinResultError.fromHRESULT(hr))
         }
         if (raw.isNull()) {
@@ -721,6 +742,9 @@ public open class IActivationFactory <: InterfaceWrapperBase & ComInterface & Ru
         let queryHr = HRESULT(vtbl.QueryInterface(raw, CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>(inout projectedRaw)))
         let _ = releaseRaw(raw)
         if (queryHr.failed()) {
+            if (projectedRaw.isNotNull()) {
+                let _ = releaseRaw(projectedRaw)
+            }
             return Result<T>.Err(WinResultError.fromHRESULT(queryHr))
         }
         if (projectedRaw.isNull()) {
@@ -792,6 +816,9 @@ public unsafe func queryInterfaceRaw(source: CPointer<Unit>, targetIid: GUID): O
     if (hr.succeeded() && !result.isNull()) {
         Some(result)
     } else {
+        if (result.isNotNull()) {
+            let _ = releaseRaw(result)
+        }
         None
     }
 }

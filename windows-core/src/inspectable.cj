@@ -2,10 +2,26 @@ package windows_core
 
 import windows_implement.IInspectableBase
 import windows_implement.ComObjectRuntime
+import windows_strings.releaseSystemHStringHandle
 
 public interface IInspectableImpl <: IUnknownImpl & IInspectableBase {}
 
 extend<T> ComObjectRuntime<T> <: IInspectableImpl {}
+
+func releaseFailedRuntimeClassNameSlot(hr: Int32, value: CPointer<CPointer<Unit>>): Int32 {
+    if (hr >= 0 || value.isNull()) {
+        return hr
+    }
+
+    unsafe {
+        let raw = value.read()
+        if (raw.isNotNull()) {
+            releaseSystemHStringHandle(raw)
+            value.write(CPointer<Unit>())
+        }
+    }
+    hr
+}
 
 @C
 func coreIInspectableGetIidsThunk(
@@ -41,12 +57,13 @@ func coreIInspectableGetRuntimeClassNameThunk(
         value.write(CPointer<Unit>())
     }
 
-    match (lookupComImpl<IInspectableImpl>(instanceRaw)) {
+    let hr = match (lookupComImpl<IInspectableImpl>(instanceRaw)) {
         case Some(inspectable) =>
             inspectable.getRuntimeClassNameBase(value)
         case None =>
             E_NOINTERFACE.value
     }
+    releaseFailedRuntimeClassNameSlot(hr, value)
 }
 
 @C

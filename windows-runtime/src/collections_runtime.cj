@@ -11,6 +11,60 @@ import windows_interface as windows_interface
 
 type WinrtSize = Size
 
+func checkCollectionComOutHRESULT(hr: HRESULT, result: CPointer<CPointer<Unit>>): Unit {
+    if (hr.failed()) {
+        windows_core.releaseFailedComOutSlot(result)
+    }
+    hr.check()
+}
+
+func checkCollectionSplitComOutHRESULT(
+    hr: HRESULT,
+    first: CPointer<CPointer<Unit>>,
+    second: CPointer<CPointer<Unit>>
+): Unit {
+    if (hr.failed()) {
+        windows_core.releaseFailedComOutSlot(first)
+        windows_core.releaseFailedComOutSlot(second)
+    }
+    hr.check()
+}
+
+func checkCollectionHStringOutHRESULT(hr: HRESULT, result: CPointer<CPointer<Unit>>): Unit {
+    if (hr.failed() && result.isNotNull()) {
+        let raw = unsafe { result.read() }
+        if (raw.isNotNull()) {
+            windows_core.releaseSystemHStringHandle(raw)
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+    }
+    hr.check()
+}
+
+func checkCollectionGenericOutRangeHRESULT<T>(
+    hr: HRESULT,
+    items: CPointer<Unit>,
+    itemsSize: UInt32,
+    written: UInt32
+): Unit where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
+    if (hr.failed()) {
+        let _ = written
+        windows_core.winrtReleaseGenericOutRange<T>(items, itemsSize)
+    }
+    hr.check()
+}
+
+func releaseCollectionGenericOutRangeNoThrow<T>(
+    items: CPointer<Unit>,
+    itemsSize: UInt32
+): Unit where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
+    try {
+        windows_core.winrtReleaseGenericOutRange<T>(items, itemsSize)
+    } catch (_: Exception) {
+        ()
+    }
+}
+
 func projectWinrtSizeAbi(value: WinrtSize): SizeAbi {
     Size.projectAbi(value)
 }
@@ -145,6 +199,7 @@ public interface IIterator_Impl<T> <: IIterator_ImplErased where T <: windows_co
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.Current()) {
             case Result<T>.Ok(value) =>
                 windows_core.winrtStoreGenericOut<T>(result__, value)
@@ -192,11 +247,14 @@ public interface IIterator_Impl<T> <: IIterator_ImplErased where T <: windows_co
         if (arg0Size > 0u32 && arg0.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(0u32) }
+        windows_core.winrtPrepareGenericOutRange<T>(arg0, arg0Size)
         match (this.GetMany(arg0Size, CPointer<Unit>(arg0))) {
             case Result<UInt32>.Ok(value) =>
                 unsafe { result__.write(value) }
                 S_OK.value
             case Result<UInt32>.Err(error) =>
+                releaseCollectionGenericOutRangeNoThrow<T>(arg0, arg0Size)
                 error.code().value
         }
     }
@@ -295,8 +353,9 @@ public class IIterator<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
     public unsafe func GetMany(itemsSize: UInt32, items: CPointer<Unit>): UInt32 {
         let v = vtbl()
         var result__ = 0u32
+        windows_core.winrtPrepareGenericOutRange<T>(items, itemsSize)
         let hr = v.GetMany(asRaw(), itemsSize, CPointer<Unit>(items), CPointer<UInt32>(inout result__))
-        HRESULT(hr).check()
+        checkCollectionGenericOutRangeHRESULT<T>(HRESULT(hr), items, itemsSize, result__)
         return result__
     }
 
@@ -387,6 +446,7 @@ public interface IKeyValuePair_Impl<K, V> <: IKeyValuePair_ImplErased where K <:
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.Key()) {
             case Result<K>.Ok(value) =>
                 windows_core.winrtStoreGenericOut<K>(result__, value)
@@ -401,6 +461,7 @@ public interface IKeyValuePair_Impl<K, V> <: IKeyValuePair_ImplErased where K <:
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.Value()) {
             case Result<V>.Ok(value) =>
                 windows_core.winrtStoreGenericOut<V>(result__, value)
@@ -560,6 +621,7 @@ public interface IMapChangedEventArgs_Impl<K> <: IMapChangedEventArgs_ImplErased
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.Key()) {
             case Result<K>.Ok(value) =>
                 windows_core.winrtStoreGenericOut<K>(result__, value)
@@ -853,6 +915,7 @@ public interface IIterable_Impl<T> <: IIterable_ImplErased where T <: windows_co
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.First()) {
             case Result<IIterator<T>>.Ok(value) =>
                 let raw = value.intoAbi()
@@ -941,7 +1004,7 @@ public class IIterable<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.First(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).check()
+        checkCollectionComOutHRESULT(HRESULT(hr), CPointer<CPointer<Unit>>(inout result__))
         return IIterator<T>.fromAbiTake(result__)
     }
 
@@ -976,7 +1039,7 @@ func callMapViewLookupInt32HString(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
     var result__ = CPointer<Unit>()
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
-    HRESULT(hr).check()
+    checkCollectionHStringOutHRESULT(HRESULT(hr), CPointer<CPointer<Unit>>(inout result__))
     windows_core.HString.fromSystemHandleTake(result__)
 }
 
@@ -1024,7 +1087,7 @@ func callMapViewLookupInt32VectorViewInt32(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
     var result__ = CPointer<Unit>()
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
-    HRESULT(hr).check()
+    checkCollectionComOutHRESULT(HRESULT(hr), CPointer<CPointer<Unit>>(inout result__))
     IVectorView<Int32>.fromAbiTake(result__)
 }
 
@@ -1036,7 +1099,7 @@ func callMapViewLookupInt32Inspectable(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
     var result__ = CPointer<Unit>()
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
-    HRESULT(hr).check()
+    checkCollectionComOutHRESULT(HRESULT(hr), CPointer<CPointer<Unit>>(inout result__))
     IInspectable.fromAbiTake(result__)
 }
 
@@ -1060,7 +1123,7 @@ func callMapViewLookupUInt32HString(
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
     var result__ = CPointer<Unit>()
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
-    HRESULT(hr).check()
+    checkCollectionHStringOutHRESULT(HRESULT(hr), CPointer<CPointer<Unit>>(inout result__))
     windows_core.HString.fromSystemHandleTake(result__)
 }
 
@@ -1707,6 +1770,7 @@ public interface IMapView_Impl<K, V> <: IMapView_ImplErased & IIterable_Impl<IKe
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.Lookup(windows_core.winrtProjectGenericIn<K>(arg0))) {
             case Result<V>.Ok(value) =>
                 windows_core.winrtStoreGenericOut<V>(result__, value)
@@ -1748,10 +1812,19 @@ public interface IMapView_Impl<K, V> <: IMapView_ImplErased & IIterable_Impl<IKe
     public func Split(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): windows_core.Result<Unit>
 
     public func __winrtThunk_Split(arg0: CPointer<CPointer<Unit>>, arg1: CPointer<CPointer<Unit>>): Int32 {
+        if (arg0.isNull() || arg1.isNull()) {
+            return E_POINTER.value
+        }
+        unsafe {
+            arg0.write(CPointer<Unit>())
+            arg1.write(CPointer<Unit>())
+        }
         match (this.Split(arg0, arg1)) {
             case Result<Unit>.Ok(_) =>
                 S_OK.value
             case Result<Unit>.Err(error) =>
+                windows_core.releaseFailedComOutSlot(arg0)
+                windows_core.releaseFailedComOutSlot(arg1)
                 error.code().value
         }
     }
@@ -1760,6 +1833,7 @@ public interface IMapView_Impl<K, V> <: IMapView_ImplErased & IIterable_Impl<IKe
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.First()) {
             case Result<IIterator<IKeyValuePair<K, V>>>.Ok(value) =>
                 let raw = value.intoAbi()
@@ -2062,9 +2136,17 @@ public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public unsafe func Split(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Unit {
+        if (first.isNull() || second.isNull()) {
+            HRESULT(E_POINTER.value).check()
+            return
+        }
+        unsafe {
+            first.write(CPointer<Unit>())
+            second.write(CPointer<Unit>())
+        }
         let v = vtbl()
         let hr = v.Split(asRaw(), first, second)
-        HRESULT(hr).check()
+        checkCollectionSplitComOutHRESULT(HRESULT(hr), first, second)
     }
 
     public func intoIterator(): Iterator<IKeyValuePair<K, V>> {
@@ -2909,6 +2991,7 @@ public interface IVectorView_Impl<T> <: IVectorView_ImplErased & IIterable_Impl<
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.GetAt(arg0)) {
             case Result<T>.Ok(value) =>
                 windows_core.winrtStoreGenericOut<T>(result__, value)
@@ -2938,6 +3021,9 @@ public interface IVectorView_Impl<T> <: IVectorView_ImplErased & IIterable_Impl<
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        if (arg1.isNull()) {
+            return E_POINTER.value
+        }
         match (this.IndexOf(windows_core.winrtProjectGenericIn<T>(arg0), arg1)) {
             case Result<Bool>.Ok(value) =>
                 unsafe { result__.write(value) }
@@ -2956,11 +3042,14 @@ public interface IVectorView_Impl<T> <: IVectorView_ImplErased & IIterable_Impl<
         if (arg1Size > 0u32 && arg1.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(0u32) }
+        windows_core.winrtPrepareGenericOutRange<T>(arg1, arg1Size)
         match (this.GetMany(arg0, arg1Size, CPointer<Unit>(arg1))) {
             case Result<UInt32>.Ok(value) =>
                 unsafe { result__.write(value) }
                 S_OK.value
             case Result<UInt32>.Err(error) =>
+                releaseCollectionGenericOutRangeNoThrow<T>(arg1, arg1Size)
                 error.code().value
         }
     }
@@ -2969,6 +3058,7 @@ public interface IVectorView_Impl<T> <: IVectorView_ImplErased & IIterable_Impl<
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.First()) {
             case Result<IIterator<T>>.Ok(value) =>
                 let raw = value.intoAbi()
@@ -3115,8 +3205,9 @@ public class IVectorView<T> <: InterfaceWrapperBase & ComInterface & RuntimeName
     public unsafe func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>): UInt32 {
         let v = vtbl()
         var result__ = 0u32
+        windows_core.winrtPrepareGenericOutRange<T>(items, itemsSize)
         let hr = v.GetMany(asRaw(), startIndex, itemsSize, CPointer<Unit>(items), CPointer<UInt32>(inout result__))
-        HRESULT(hr).check()
+        checkCollectionGenericOutRangeHRESULT<T>(HRESULT(hr), items, itemsSize, result__)
         return result__
     }
 
@@ -3154,7 +3245,7 @@ func callMapLookupInt32HString(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
     var result__ = CPointer<Unit>()
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
-    HRESULT(hr).check()
+    checkCollectionHStringOutHRESULT(HRESULT(hr), CPointer<CPointer<Unit>>(inout result__))
     windows_core.HString.fromSystemHandleTake(result__)
 }
 
@@ -3166,7 +3257,7 @@ func callMapLookupInt32Inspectable(
     let typedSlot = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
     var result__ = CPointer<Unit>()
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
-    HRESULT(hr).check()
+    checkCollectionComOutHRESULT(HRESULT(hr), CPointer<CPointer<Unit>>(inout result__))
     IInspectable.fromAbiTake(result__)
 }
 
@@ -3214,7 +3305,7 @@ func callMapLookupUInt32HString(
     let typedSlot = CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(slot))
     var result__ = CPointer<Unit>()
     let hr = unsafe { typedSlot(instanceRaw, key, CPointer<CPointer<Unit>>(inout result__)) }
-    HRESULT(hr).check()
+    checkCollectionHStringOutHRESULT(HRESULT(hr), CPointer<CPointer<Unit>>(inout result__))
     windows_core.HString.fromSystemHandleTake(result__)
 }
 
@@ -4257,6 +4348,7 @@ public interface IMap_Impl<K, V> <: IMap_ImplErased & IIterable_Impl<IKeyValuePa
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.Lookup(windows_core.winrtProjectGenericIn<K>(arg0))) {
             case Result<V>.Ok(value) =>
                 windows_core.winrtStoreGenericOut<V>(result__, value)
@@ -4301,6 +4393,7 @@ public interface IMap_Impl<K, V> <: IMap_ImplErased & IIterable_Impl<IKeyValuePa
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.GetView()) {
             case Result<IMapView<K, V>>.Ok(value) =>
                 let raw = value.intoAbi()
@@ -4356,6 +4449,7 @@ public interface IMap_Impl<K, V> <: IMap_ImplErased & IIterable_Impl<IKeyValuePa
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.First()) {
             case Result<IIterator<IKeyValuePair<K, V>>>.Ok(value) =>
                 let raw = value.intoAbi()
@@ -4619,7 +4713,7 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetView(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).check()
+        checkCollectionComOutHRESULT(HRESULT(hr), CPointer<CPointer<Unit>>(inout result__))
         return IMapView<K, V>.fromAbiTake(result__)
     }
 
@@ -6713,6 +6807,7 @@ public interface IVector_Impl<T> <: IVector_ImplErased & IIterable_Impl<T> where
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.GetAt(arg0)) {
             case Result<T>.Ok(value) =>
                 windows_core.winrtStoreGenericOut<T>(result__, value)
@@ -6742,6 +6837,7 @@ public interface IVector_Impl<T> <: IVector_ImplErased & IIterable_Impl<T> where
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.GetView()) {
             case Result<IVectorView<T>>.Ok(value) =>
                 let raw = value.intoAbi()
@@ -6760,6 +6856,9 @@ public interface IVector_Impl<T> <: IVector_ImplErased & IIterable_Impl<T> where
 
     public func __winrtThunk_IndexOf(arg0: CPointer<Unit>, arg1: CPointer<UInt32>, result__: CPointer<Bool>): Int32 {
         if (result__.isNull()) {
+            return E_POINTER.value
+        }
+        if (arg1.isNull()) {
             return E_POINTER.value
         }
         match (this.IndexOf(windows_core.winrtProjectGenericIn<T>(arg0), arg1)) {
@@ -6846,11 +6945,14 @@ public interface IVector_Impl<T> <: IVector_ImplErased & IIterable_Impl<T> where
         if (arg1Size > 0u32 && arg1.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(0u32) }
+        windows_core.winrtPrepareGenericOutRange<T>(arg1, arg1Size)
         match (this.GetMany(arg0, arg1Size, CPointer<Unit>(arg1))) {
             case Result<UInt32>.Ok(value) =>
                 unsafe { result__.write(value) }
                 S_OK.value
             case Result<UInt32>.Err(error) =>
+                releaseCollectionGenericOutRangeNoThrow<T>(arg1, arg1Size)
                 error.code().value
         }
     }
@@ -6873,6 +6975,7 @@ public interface IVector_Impl<T> <: IVector_ImplErased & IIterable_Impl<T> where
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.First()) {
             case Result<IIterator<T>>.Ok(value) =>
                 let raw = value.intoAbi()
@@ -6986,7 +7089,7 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
         let v = vtbl()
         var result__ = CPointer<Unit>()
         let hr = v.GetView(asRaw(), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).check()
+        checkCollectionComOutHRESULT(HRESULT(hr), CPointer<CPointer<Unit>>(inout result__))
         return IVectorView<T>.fromAbiTake(result__)
     }
 
@@ -7237,8 +7340,9 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     public unsafe func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>): UInt32 {
         let v = vtbl()
         var result__ = 0u32
+        windows_core.winrtPrepareGenericOutRange<T>(items, itemsSize)
         let hr = v.GetMany(asRaw(), startIndex, itemsSize, CPointer<Unit>(items), CPointer<UInt32>(inout result__))
-        HRESULT(hr).check()
+        checkCollectionGenericOutRangeHRESULT<T>(HRESULT(hr), items, itemsSize, result__)
         return result__
     }
 
@@ -7347,6 +7451,7 @@ public interface IObservableMap_Impl<K, V> <: IObservableMap_ImplErased & IMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.Lookup(windows_core.winrtProjectGenericIn<K>(arg0))) {
             case Result<V>.Ok(value) =>
                 windows_core.winrtStoreGenericOut<V>(result__, value)
@@ -7385,6 +7490,7 @@ public interface IObservableMap_Impl<K, V> <: IObservableMap_ImplErased & IMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.GetView()) {
             case Result<IMapView<K, V>>.Ok(value) =>
                 let raw = value.intoAbi()
@@ -7434,6 +7540,7 @@ public interface IObservableMap_Impl<K, V> <: IObservableMap_ImplErased & IMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.First()) {
             case Result<IIterator<IKeyValuePair<K, V>>>.Ok(value) =>
                 let raw = value.intoAbi()
@@ -7703,6 +7810,7 @@ public interface IObservableVector_Impl<T> <: IObservableVector_ImplErased & IVe
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.GetAt(arg0)) {
             case Result<T>.Ok(value) =>
                 windows_core.winrtStoreGenericOut<T>(result__, value)
@@ -7728,6 +7836,7 @@ public interface IObservableVector_Impl<T> <: IObservableVector_ImplErased & IVe
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.GetView()) {
             case Result<IVectorView<T>>.Ok(value) =>
                 let raw = value.intoAbi()
@@ -7744,6 +7853,9 @@ public interface IObservableVector_Impl<T> <: IObservableVector_ImplErased & IVe
 
     public func __winrtThunk_IndexOf(arg0: CPointer<Unit>, arg1: CPointer<UInt32>, result__: CPointer<Bool>): Int32 {
         if (result__.isNull()) {
+            return E_POINTER.value
+        }
+        if (arg1.isNull()) {
             return E_POINTER.value
         }
         match (this.IndexOf(windows_core.winrtProjectGenericIn<T>(arg0), arg1)) {
@@ -7816,11 +7928,14 @@ public interface IObservableVector_Impl<T> <: IObservableVector_ImplErased & IVe
         if (arg1Size > 0u32 && arg1.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(0u32) }
+        windows_core.winrtPrepareGenericOutRange<T>(arg1, arg1Size)
         match (this.GetMany(arg0, arg1Size, CPointer<Unit>(arg1))) {
             case Result<UInt32>.Ok(value) =>
                 unsafe { result__.write(value) }
                 S_OK.value
             case Result<UInt32>.Err(error) =>
+                releaseCollectionGenericOutRangeNoThrow<T>(arg1, arg1Size)
                 error.code().value
         }
     }
@@ -7841,6 +7956,7 @@ public interface IObservableVector_Impl<T> <: IObservableVector_ImplErased & IVe
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.First()) {
             case Result<IIterator<T>>.Ok(value) =>
                 let raw = value.intoAbi()
@@ -8123,6 +8239,7 @@ public interface IPropertySet_Impl <: IPropertySet_ImplErased & IObservableMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.Lookup(windows_core.winrtProjectGenericIn<windows_core.HString>(arg0))) {
             case Result<IInspectable>.Ok(value) =>
                 let raw = value.intoAbi()
@@ -8167,6 +8284,7 @@ public interface IPropertySet_Impl <: IPropertySet_ImplErased & IObservableMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.GetView()) {
             case Result<IMapView<windows_core.HString, IInspectable>>.Ok(value) =>
                 let raw = value.intoAbi()
@@ -8216,6 +8334,7 @@ public interface IPropertySet_Impl <: IPropertySet_ImplErased & IObservableMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
+        unsafe { result__.write(CPointer<Unit>()) }
         match (this.First()) {
             case Result<IIterator<IKeyValuePair<windows_core.HString, IInspectable>>>.Ok(value) =>
                 let raw = value.intoAbi()

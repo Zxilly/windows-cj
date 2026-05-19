@@ -270,16 +270,7 @@ public class Event<T> <: Resource where T <: ComInterface {
                 )
             )
         }
-        if (hr.failed()) {
-            return Result<EventEntry<T>>.Err(WinError.fromHRESULT(hr))
-        }
-        if (raw.isNull()) {
-            return Result<EventEntry<T>>.Err(WinError(E_POINTER))
-        }
-        let pointer = InterfaceHandle<IAgileReference>.fromAbiTake(raw, IAgileReference.descriptor())
-        Result<EventEntry<T>>.Ok(
-            EventEntry<T>(encodeEventToken(pointer.asRaw()), None, Some(pointer))
-        )
+        eventEntryFromRoGetAgileReferenceResult<T>(descriptor, hr, raw)
     }
 
     private func invokeEntry(
@@ -321,4 +312,24 @@ public class Event<T> <: Resource where T <: ComInterface {
             code == RPC_E_SERVER_UNAVAILABLE_EVENT ||
             code == JSCRIPT_E_CANTEXECUTE_EVENT
     }
+}
+
+func eventEntryFromRoGetAgileReferenceResult<T>(
+    _: InterfaceDescriptor<T>,
+    hr: HRESULT,
+    raw: CPointer<Unit>
+): Result<EventEntry<T>> where T <: ComInterface {
+    if (hr.failed()) {
+        if (raw.isNotNull()) {
+            interfaceHandleReleaseRaw(raw)
+        }
+        return Result<EventEntry<T>>.Err(WinError.fromHRESULT(hr))
+    }
+    if (raw.isNull()) {
+        return Result<EventEntry<T>>.Err(WinError(E_POINTER))
+    }
+    let pointer = InterfaceHandle<IAgileReference>.fromAbiTake(raw, IAgileReference.descriptor())
+    Result<EventEntry<T>>.Ok(
+        EventEntry<T>(encodeEventToken(pointer.asRaw()), None, Some(pointer))
+    )
 }

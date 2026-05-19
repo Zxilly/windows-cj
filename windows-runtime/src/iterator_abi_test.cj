@@ -2,11 +2,87 @@ package windows_runtime
 
 import windows_interface as windows_interface
 import std.collection.*
+import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_POINTER, HString, Result, RuntimeType, S_OK, WinrtGenericType, createComObjectFromSchemas}
+import windows_core.{E_FAIL, E_POINTER, HString, Result, RuntimeType, S_OK, WindowsException, WinrtGenericType, createComObjectFromSchemas}
 import windows_interface.IInspectable
 import windows_strings.releaseSystemHStringHandle
+
+let iterableFirstPartialReleaseCalls = AtomicInt64(0)
+var iterableFirstPartialRaw = CPointer<Unit>()
+
+@C
+func iterableFirstPartialReleaseThunk(raw: CPointer<Unit>): UInt32 {
+    let oldCount = iterableFirstPartialReleaseCalls.fetchAdd(1)
+    if (raw.isNotNull()) {
+        unsafe { windows_interface.freeNativeValue(CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw)) }
+    }
+    UInt32(oldCount + 1)
+}
+
+@C
+func iterableFirstFailingPartialThunk(_: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32 {
+    if (result.isNotNull()) {
+        unsafe { result.write(iterableFirstPartialRaw) }
+    }
+    E_FAIL.value
+}
+
+func failingIterableFirstVtbl(): IIterableVtbl {
+    var vtbl = IIterableVtbl()
+    vtbl.First = iterableFirstFailingPartialThunk
+    vtbl
+}
+
+func iterableFirstPartialIUnknownVtbl(): windows_interface.IUnknownVtbl {
+    var vtbl = windows_interface.IUnknownVtbl()
+    vtbl.Release = iterableFirstPartialReleaseThunk
+    vtbl
+}
+
+func withFailingIterableFirstRaw(action: (CPointer<Unit>) -> Unit): Unit {
+    iterableFirstPartialReleaseCalls.store(0)
+    let partialVtblHandle = unsafe {
+        windows_interface.allocateNativeValue<windows_interface.IUnknownVtbl>(iterableFirstPartialIUnknownVtbl())
+    }
+    let partialObjectHandle = unsafe {
+        windows_interface.allocateNativeValue<CPointer<windows_interface.IUnknownVtbl>>(partialVtblHandle)
+    }
+    iterableFirstPartialRaw = CPointer<Unit>(partialObjectHandle)
+
+    let iterableVtblHandle = unsafe { windows_interface.allocateNativeValue<IIterableVtbl>(failingIterableFirstVtbl()) }
+    let iterableObjectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IIterableVtbl>>(iterableVtblHandle) }
+    try {
+        action(CPointer<Unit>(iterableObjectHandle))
+    } finally {
+        unsafe {
+            windows_interface.freeNativeValue(iterableObjectHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            if (iterableFirstPartialReleaseCalls.load() == 0) {
+                windows_interface.freeNativeValue(partialObjectHandle)
+            }
+            windows_interface.freeNativeValue(partialVtblHandle)
+        }
+        iterableFirstPartialRaw = CPointer<Unit>()
+    }
+}
+
+@Test
+func testIIterableFirstReleasesFailedPartialIteratorOutput() {
+    withFailingIterableFirstRaw({ raw: CPointer<Unit> =>
+        let iterable = IIterable<IInspectable>.viewOf(raw)
+        var failed = false
+        try {
+            let iterator = unsafe { iterable.First() }
+            iterator.close()
+        } catch (_: WindowsException) {
+            failed = true
+        }
+        @Expect(failed, true)
+        @Expect(iterableFirstPartialReleaseCalls.load(), 1)
+    })
+}
 
 class CopyIteratorAbiTestImpl<T> <: IIterator_Impl<T> & Resource where T <: RuntimeType & WinrtGenericType<T> {
     private let items: ArrayList<T>

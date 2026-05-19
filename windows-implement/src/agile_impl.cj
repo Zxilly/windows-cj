@@ -11,7 +11,11 @@ public func createFreeThreadedMarshaler(outer: CPointer<Unit>): Option<IMarshal>
     let hr = unsafe {
         CoCreateFreeThreadedMarshaler(outer, CPointer<CPointer<Unit>>(inout marshalerRaw))
     }
-    if (hr != S_OK || marshalerRaw.isNull()) {
+    if (hr != S_OK) {
+        releaseFailedComOutSlot(CPointer<CPointer<Unit>>(inout marshalerRaw))
+        return None
+    }
+    if (marshalerRaw.isNull()) {
         return None
     }
 

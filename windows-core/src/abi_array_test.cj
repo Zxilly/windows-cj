@@ -41,10 +41,26 @@ func testNativeAbiArrayIntoAbiTransfersOwnership() {
 }
 
 @Test
+func testNativeAbiArrayCloseIsIdempotent() {
+    let array = AbiArray<Int32>.withLen(1)
+    array.set(0, 42i32)
+    @Expect(array.asRaw().isNotNull(), true)
+
+    array.close()
+    array.close()
+
+    @Expect(array.isClosed(), true)
+    @Expect(array.asRaw().isNull(), true)
+    @Expect(array.toArray().size, 0)
+}
+
+@Test
 func testPublicCoTaskMemHelpersAllocateAndFree() {
     let raw = coTaskMemAlloc(UIntNative(1))
     @Expect(raw.isNotNull(), true)
+    @Expect(coTaskMemAllocationSize(raw), Some(UIntNative(1)))
     coTaskMemFree(raw)
+    @Expect(coTaskMemAllocationSize(raw), Option<UIntNative>.None)
 }
 
 @Test
@@ -64,12 +80,31 @@ func testPublicCoTaskMemReallocPreservesPrefixBytes() {
         coTaskMemFree(raw)
         throw Exception("coTaskMemRealloc returned null")
     }
+    @Expect(coTaskMemAllocationSize(raw), Option<UIntNative>.None)
+    @Expect(coTaskMemAllocationSize(resized), Some(UIntNative(4)))
     let resizedBytes = CPointer<UInt8>(resized)
     unsafe {
         @Expect(resizedBytes.read(), 0x41u8)
         @Expect((resizedBytes + 1).read(), 0x42u8)
     }
     coTaskMemFree(resized)
+}
+
+@Test
+func testPublicCoTaskMemReallocZeroClearsTrackedSize() {
+    let raw = coTaskMemAlloc(UIntNative(16))
+    if (raw.isNull()) {
+        throw Exception("coTaskMemAlloc returned null")
+    }
+    @Expect(coTaskMemAllocationSize(raw), Some(UIntNative(16)))
+
+    let resized = coTaskMemRealloc(raw, UIntNative(0))
+
+    @Expect(resized.isNull(), true)
+    @Expect(coTaskMemAllocationSize(raw), Option<UIntNative>.None)
+    if (resized.isNotNull()) {
+        coTaskMemFree(resized)
+    }
 }
 
 class TrackingInt32AbiArrayStorage <: AbiArrayStorage<Int32> {
@@ -192,6 +227,36 @@ func testArrayProxyCopyArrayNullDataTargetClosesStagedStorage() {
     @Expect(tracking.clearCount, 1)
 }
 
+@Test
+func testArrayProxyObjectNullDataTargetClosesHStringProjectionClone() {
+    var length = 0u32
+    let source = HString("proxy-null-object")
+    let freeBefore = debugObservedHStringFreeCount()
+
+    try (proxy = unsafe { arrayProxy<HString>(CPointer<CPointer<Unit>>(), CPointer<UInt32>(inout length)) }) {
+        proxy.value().replaceWith([source])
+    }
+
+    @Expect(length, 1u32)
+    source.close()
+    @Expect(debugObservedHStringFreeCount() - freeBefore, 1)
+}
+
+@Test
+func testArrayProxyCloseIsIdempotent() {
+    var length = 0u32
+    let tracking = TrackingInt32AbiArrayStorage([10i32, 20i32])
+    let proxy = unsafe { arrayProxy<Int32>(CPointer<CPointer<Int32>>(), CPointer<UInt32>(inout length)) }
+    proxy.value().storage = tracking
+
+    proxy.close()
+    proxy.close()
+
+    @Expect(proxy.isClosed(), true)
+    @Expect(length, 2u32)
+    @Expect(tracking.clearCount, 1)
+}
+
 @When[os == "Windows"]
 @Test
 func testArrayProxyPublishesHStringElementsAsSystemHandles() {
@@ -214,5 +279,26 @@ func testArrayProxyPublishesHStringElementsAsSystemHandles() {
 
     first.close()
     second.close()
+    unsafe { CoTaskMemFree(rawItems) }
+}
+
+@When[os == "Windows"]
+@Test
+func testArrayProxyPublishesHStringElementsClosesProjectionClone() {
+    var rawItems = CPointer<Unit>()
+    var length = 0u32
+    let source = HString("proxy-object")
+    let freeBefore = debugObservedHStringFreeCount()
+
+    try (proxy = unsafe { arrayProxy<HString>(CPointer<CPointer<Unit>>(inout rawItems), CPointer<UInt32>(inout length)) }) {
+        proxy.value().replaceWith([source])
+    }
+
+    @Expect(length, 1u32)
+    source.close()
+    @Expect(debugObservedHStringFreeCount() - freeBefore, 1)
+
+    let slots = CPointer<CPointer<Unit>>(rawItems)
+    releaseSystemHStringHandle(unsafe { slots.read() })
     unsafe { CoTaskMemFree(rawItems) }
 }

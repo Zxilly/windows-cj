@@ -62,42 +62,43 @@ func publishObjectArray<T>(
     let values = staged.toArray()
     let length = UInt32(values.size)
 
-    if (dataTarget.isNotNull()) {
-        if (values.size == 0) {
-            unsafe { dataTarget.write(CPointer<Unit>()) }
-            writePublishedLength(lengthTarget, length)
-            staged.close()
-            return
-        }
-
-        let slots = allocateUnitPointerSlots(values.size)
-        var index = 0
-        try {
-            while (index < values.size) {
-                match (values[index]) {
-                    case value: HString =>
-                        unsafe { (slots + index).write(value.toSystemHandleCopy()) }
-                    case value: ComInterface =>
-                        let raw = value.asRaw()
-                        if (raw.isNotNull()) {
-                            interfaceHandleAddRefRaw(raw)
+    try {
+        if (dataTarget.isNotNull()) {
+            if (values.size == 0) {
+                unsafe { dataTarget.write(CPointer<Unit>()) }
+            } else {
+                let slots = allocateUnitPointerSlots(values.size)
+                var index = 0
+                try {
+                    while (index < values.size) {
+                        match (values[index]) {
+                            case value: HString =>
+                                unsafe { (slots + index).write(value.toSystemHandleCopy()) }
+                            case value: ComInterface =>
+                                let raw = value.asRaw()
+                                if (raw.isNotNull()) {
+                                    interfaceHandleAddRefRaw(raw)
+                                }
+                                unsafe { (slots + index).write(raw) }
+                            case _ =>
+                                throw Exception("ArrayProxy object marshaller only supports HString and COM interface elements")
                         }
-                        unsafe { (slots + index).write(raw) }
-                    case _ =>
-                        throw Exception("ArrayProxy object marshaller only supports HString and COM interface elements")
+                        index += 1
                     }
-                index += 1
+                } catch (error: Exception) {
+                    releasePublishedObjectSlots(values, slots, index)
+                    unsafe { CoTaskMemFree(CPointer<Unit>(slots)) }
+                    throw error
+                }
+                unsafe { dataTarget.write(CPointer<Unit>(slots)) }
             }
-        } catch (error: Exception) {
-            releasePublishedObjectSlots(values, slots, index)
-            unsafe { CoTaskMemFree(CPointer<Unit>(slots)) }
-            throw error
         }
-        unsafe { dataTarget.write(CPointer<Unit>(slots)) }
-    }
 
-    writePublishedLength(lengthTarget, length)
-    staged.close()
+        writePublishedLength(lengthTarget, length)
+        staged.close()
+    } finally {
+        closeProjectedElements(values)
+    }
 }
 
 // ArrayProxy stages an ABI array and publishes it to WinRT out parameters on close.
@@ -127,11 +128,10 @@ public class ArrayProxy<T> <: Resource {
     }
 
     ~init() {
-        // If the user never closed the proxy, do not invoke the publish callback —
-        // its capture (dataTarget/lengthTarget) may already be unreachable. Just
-        // clear the staged buffer so its CoTaskMem allocation is freed.
+        // Finalizers must not invoke publish or staged cleanup; those paths can
+        // release native handles or projected HString storage. Explicit close()
+        // remains the deterministic owner for staged cleanup/publication.
         if (!closed) {
-            staged.clear()
             closed = true
         }
     }

@@ -223,10 +223,15 @@ class WeakReferenceTearOff {
             return E_NOINTERFACE
         }
         var iidCopy = iid
-        unsafe {
+        let hr = unsafe {
             let vtblPtr = CPointer<CPointer<IUnknownVtbl>>(ownerRaw).read()
+            resultSlot.write(CPointer<Unit>())
             vtblPtr.read().QueryInterface(ownerRaw, CPointer<GUID>(inout iidCopy), resultSlot)
         }
+        if (hr != S_OK) {
+            releaseFailedComOutSlot(resultSlot)
+        }
+        hr
     }
 
     private func cloneWeakMarshaler(resultSlot: CPointer<CPointer<Unit>>): Int32 {

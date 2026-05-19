@@ -3,13 +3,24 @@ package windows_interface
 import std.unittest.*
 import std.unittest.testmacro.*
 import std.sync.AtomicInt64
-import windows_result.{E_NOINTERFACE, Result, S_OK, WindowsException}
+import windows_result.{E_FAIL, E_NOINTERFACE, Result, S_OK, WindowsException}
+import windows_strings.{HString, debugObservedWindowsDeleteStringCount}
 
 let typedActivationTestIid = GUID.parse("00000031-0000-0000-C000-000000000046")
 let typedActivationQueryCount = AtomicInt64(0)
 let typedActivationReleaseCount = AtomicInt64(0)
+var typedActivationQueryHRESULT = S_OK.value
 var typedActivationRaw = CPointer<Unit>()
 var typedActivationProjectedRaw = CPointer<Unit>()
+var typedActivationActivateHRESULT = S_OK.value
+var typedActivationResolveHRESULT = S_OK.value
+var typedActivationWeakReferenceHRESULT = S_OK.value
+var typedActivationRuntimeClassNameHRESULT = S_OK.value
+let reentrantInterfaceResourceReleaseCount = AtomicInt64(0)
+let reentrantInterfaceResourceOnCloseCount = AtomicInt64(0)
+let reentrantManualAddRefCount = AtomicInt64(0)
+var reentrantInterfaceResourceValue: Option<InterfaceResource<IUnknown>> = None
+var reentrantManualReleaseValue: Option<IUnknown> = None
 
 class TypedActivationTestInterface <: InterfaceWrapperBase & ComInterface {
     public init(raw: CPointer<Unit>) {
@@ -53,7 +64,7 @@ func typedActivationQueryInterfaceThunk(
     let requestedIid = unsafe { iid.read() }
     if (requestedIid == typedActivationTestIid) {
         unsafe { result.write(typedActivationProjectedRaw) }
-        return S_OK.value
+        return typedActivationQueryHRESULT
     }
     unsafe { result.write(CPointer<Unit>()) }
     E_NOINTERFACE.value
@@ -66,17 +77,98 @@ func typedActivationReleaseThunk(_: CPointer<Unit>): UInt32 {
 }
 
 @C
+func reentrantInterfaceResourceReleaseThunk(_: CPointer<Unit>): UInt32 {
+    let previous = reentrantInterfaceResourceReleaseCount.fetchAdd(1)
+    if (previous == 0) {
+        match (reentrantInterfaceResourceValue) {
+            case Some(resource) => resource.close()
+            case None => ()
+        }
+        match (reentrantManualReleaseValue) {
+            case Some(wrapper) => let _ = wrapper.release()
+            case None => ()
+        }
+    }
+    UInt32(previous + 1)
+}
+
+func reentrantInterfaceResourceVtbl(): IUnknownVtbl {
+    var vtbl = IUnknownVtbl()
+    vtbl.Release = reentrantInterfaceResourceReleaseThunk
+    vtbl
+}
+
+@C
+func reentrantManualAddRefThunk(_: CPointer<Unit>): UInt32 {
+    let previous = reentrantManualAddRefCount.fetchAdd(1)
+    if (previous == 0) {
+        match (reentrantManualReleaseValue) {
+            case Some(wrapper) => let _ = wrapper.release()
+            case None => ()
+        }
+    }
+    UInt32(previous + 1)
+}
+
+func reentrantManualAddRefVtbl(): IUnknownVtbl {
+    var vtbl = reentrantInterfaceResourceVtbl()
+    vtbl.AddRef = reentrantManualAddRefThunk
+    vtbl
+}
+
+func resetReentrantInterfaceResourceState(): Unit {
+    reentrantInterfaceResourceReleaseCount.store(0)
+    reentrantInterfaceResourceOnCloseCount.store(0)
+    reentrantManualAddRefCount.store(0)
+    reentrantInterfaceResourceValue = None
+    reentrantManualReleaseValue = None
+}
+
+@C
 func typedActivationActivateInstanceThunk(
     _: CPointer<Unit>,
     result: CPointer<CPointer<Unit>>
 ): Int32 {
     unsafe { result.write(typedActivationRaw) }
-    S_OK.value
+    typedActivationActivateHRESULT
+}
+
+@C
+func typedActivationGetRuntimeClassNameThunk(
+    _: CPointer<Unit>,
+    result: CPointer<CPointer<Unit>>
+): Int32 {
+    unsafe { result.write(typedActivationProjectedRaw) }
+    typedActivationRuntimeClassNameHRESULT
+}
+
+@C
+func typedActivationResolveThunk(
+    _: CPointer<Unit>,
+    _: CPointer<GUID>,
+    result: CPointer<CPointer<Unit>>
+): Int32 {
+    unsafe { result.write(typedActivationProjectedRaw) }
+    typedActivationResolveHRESULT
+}
+
+@C
+func typedActivationGetWeakReferenceThunk(
+    _: CPointer<Unit>,
+    result: CPointer<CPointer<Unit>>
+): Int32 {
+    unsafe { result.write(typedActivationProjectedRaw) }
+    typedActivationWeakReferenceHRESULT
 }
 
 func resetTypedActivationTestState(): Unit {
     typedActivationQueryCount.store(0)
     typedActivationReleaseCount.store(0)
+    typedActivationQueryHRESULT = S_OK.value
+    typedActivationActivateHRESULT = S_OK.value
+    typedActivationResolveHRESULT = S_OK.value
+    typedActivationWeakReferenceHRESULT = S_OK.value
+    typedActivationRuntimeClassNameHRESULT = S_OK.value
     typedActivationRaw = CPointer<Unit>()
     typedActivationProjectedRaw = CPointer<Unit>()
 }
@@ -91,6 +183,27 @@ func typedActivationObjectVtbl(): IInspectableVtbl {
     var vtbl = IInspectableVtbl()
     vtbl.base_.QueryInterface = typedActivationQueryInterfaceThunk
     vtbl.base_.Release = typedActivationReleaseThunk
+    vtbl
+}
+
+func typedActivationAgileReferenceVtbl(): IAgileReferenceVtbl {
+    var vtbl = IAgileReferenceVtbl()
+    vtbl.base_.Release = typedActivationReleaseThunk
+    vtbl.Resolve = typedActivationResolveThunk
+    vtbl
+}
+
+func typedActivationWeakReferenceVtbl(): IWeakReferenceVtbl {
+    var vtbl = IWeakReferenceVtbl()
+    vtbl.base_.Release = typedActivationReleaseThunk
+    vtbl.Resolve = typedActivationResolveThunk
+    vtbl
+}
+
+func typedActivationWeakReferenceSourceVtbl(): IWeakReferenceSourceVtbl {
+    var vtbl = IWeakReferenceSourceVtbl()
+    vtbl.base_.Release = typedActivationReleaseThunk
+    vtbl.GetWeakReference = typedActivationGetWeakReferenceThunk
     vtbl
 }
 
@@ -138,6 +251,85 @@ func testInterfaceFromAbiTakeRejectsNullOwnedPointer() {
     }), true)
 
     @Expect(IUnknown.viewOf(CPointer<Unit>()).asRaw().isNull(), true)
+}
+
+@Test
+func testInterfaceResourceCloseIsReleaseReentrantSafe() {
+    resetReentrantInterfaceResourceState()
+    let vtblHandle = unsafe { allocateNativeValue<IUnknownVtbl>(reentrantInterfaceResourceVtbl()) }
+    let objectHandle = unsafe { allocateNativeValue<CPointer<IUnknownVtbl>>(vtblHandle) }
+    let resource = InterfaceResource<IUnknown>(
+        CPointer<Unit>(objectHandle),
+        IUnknown.descriptor(),
+        onClose: Some({ =>
+            let _ = reentrantInterfaceResourceOnCloseCount.fetchAdd(1)
+        })
+    )
+    reentrantInterfaceResourceValue = Some(resource)
+    try {
+        resource.close()
+        @Expect(resource.isClosed(), true)
+        @Expect(reentrantInterfaceResourceReleaseCount.load(), 1)
+        @Expect(reentrantInterfaceResourceOnCloseCount.load(), 1)
+    } finally {
+        reentrantInterfaceResourceValue = None
+        unsafe {
+            freeNativeValue<CPointer<IUnknownVtbl>>(objectHandle)
+            freeNativeValue<IUnknownVtbl>(vtblHandle)
+        }
+    }
+}
+
+@Test
+func testManualInterfaceWrapperReleaseIsReleaseReentrantSafe() {
+    resetReentrantInterfaceResourceState()
+    let vtblHandle = unsafe { allocateNativeValue<IUnknownVtbl>(reentrantInterfaceResourceVtbl()) }
+    let objectHandle = unsafe { allocateNativeValue<CPointer<IUnknownVtbl>>(vtblHandle) }
+    let wrapper = IUnknown(CPointer<Unit>(objectHandle))
+    reentrantManualReleaseValue = Some(wrapper)
+    try {
+        @Expect(wrapper.release(), 1u32)
+        @Expect(wrapper.isClosed(), true)
+        @Expect(wrapper.asRaw().isNull(), true)
+        @Expect(reentrantInterfaceResourceReleaseCount.load(), 1)
+    } finally {
+        reentrantManualReleaseValue = None
+        unsafe {
+            freeNativeValue<CPointer<IUnknownVtbl>>(objectHandle)
+            freeNativeValue<IUnknownVtbl>(vtblHandle)
+        }
+    }
+}
+
+@Test
+func testManualInterfaceWrapperIntoAbiIsAddRefReentrantSafe() {
+    resetReentrantInterfaceResourceState()
+    let vtblHandle = unsafe { allocateNativeValue<IUnknownVtbl>(reentrantManualAddRefVtbl()) }
+    let objectHandle = unsafe { allocateNativeValue<CPointer<IUnknownVtbl>>(vtblHandle) }
+    let wrapper = IUnknown(CPointer<Unit>(objectHandle))
+    reentrantManualReleaseValue = Some(wrapper)
+    var abiRaw = CPointer<Unit>()
+    try {
+        abiRaw = wrapper.intoAbi()
+        @Expect(abiRaw.isNull(), false)
+        @Expect(wrapper.isClosed(), true)
+        @Expect(wrapper.asRaw().isNull(), true)
+        @Expect(reentrantManualAddRefCount.load(), 1)
+        @Expect(reentrantInterfaceResourceReleaseCount.load(), 0)
+
+        let _ = releaseRaw(abiRaw)
+        abiRaw = CPointer<Unit>()
+        @Expect(reentrantInterfaceResourceReleaseCount.load(), 1)
+    } finally {
+        reentrantManualReleaseValue = None
+        if (abiRaw.isNotNull()) {
+            let _ = releaseRaw(abiRaw)
+        }
+        unsafe {
+            freeNativeValue<CPointer<IUnknownVtbl>>(objectHandle)
+            freeNativeValue<IUnknownVtbl>(vtblHandle)
+        }
+    }
 }
 
 @Test
@@ -215,6 +407,229 @@ func testActivationFactoryTypedActivateUsesDescriptorQueryAndReleasesInspectable
             freeNativeValue<IInspectableVtbl>(objectVtblHandle)
             freeNativeValue<CPointer<IActivationFactoryVtbl>>(factoryObjectHandle)
             freeNativeValue<IActivationFactoryVtbl>(factoryVtblHandle)
+        }
+        resetTypedActivationTestState()
+    }
+}
+
+@Test
+func testActivationFactoryTypedActivateReleasesPartialProjectedOutputOnFailedQuery() {
+    resetTypedActivationTestState()
+    let factoryVtblHandle = unsafe { allocateNativeValue<IActivationFactoryVtbl>(typedActivationFactoryVtbl()) }
+    let factoryObjectHandle = unsafe { allocateNativeValue<CPointer<IActivationFactoryVtbl>>(factoryVtblHandle) }
+    let objectVtblHandle = unsafe { allocateNativeValue<IInspectableVtbl>(typedActivationObjectVtbl()) }
+    let objectHandle = unsafe { allocateNativeValue<CPointer<IInspectableVtbl>>(objectVtblHandle) }
+    typedActivationRaw = CPointer<Unit>(objectHandle)
+    typedActivationProjectedRaw = CPointer<Unit>(objectHandle)
+    typedActivationQueryHRESULT = E_FAIL.value
+
+    try {
+        let factory = IActivationFactory.viewOf(CPointer<Unit>(factoryObjectHandle))
+        let result = unsafe {
+            factory.activateInstance<TypedActivationTestInterface>(TypedActivationTestInterface.descriptor())
+        }
+        match (result) {
+            case Result<TypedActivationTestInterface>.Ok(value) =>
+                value.close()
+                throw Exception("typed activation unexpectedly succeeded")
+            case Result<TypedActivationTestInterface>.Err(error) =>
+                @Expect(error.code(), E_FAIL)
+        }
+        @Expect(typedActivationQueryCount.load(), 1)
+        @Expect(typedActivationReleaseCount.load(), 2)
+    } finally {
+        unsafe {
+            freeNativeValue<CPointer<IInspectableVtbl>>(objectHandle)
+            freeNativeValue<IInspectableVtbl>(objectVtblHandle)
+            freeNativeValue<CPointer<IActivationFactoryVtbl>>(factoryObjectHandle)
+            freeNativeValue<IActivationFactoryVtbl>(factoryVtblHandle)
+        }
+        resetTypedActivationTestState()
+    }
+}
+
+@Test
+func testActivationFactoryTypedActivateReleasesPartialInspectableOnFailedActivateInstance() {
+    resetTypedActivationTestState()
+    let factoryVtblHandle = unsafe { allocateNativeValue<IActivationFactoryVtbl>(typedActivationFactoryVtbl()) }
+    let factoryObjectHandle = unsafe { allocateNativeValue<CPointer<IActivationFactoryVtbl>>(factoryVtblHandle) }
+    let objectVtblHandle = unsafe { allocateNativeValue<IInspectableVtbl>(typedActivationObjectVtbl()) }
+    let objectHandle = unsafe { allocateNativeValue<CPointer<IInspectableVtbl>>(objectVtblHandle) }
+    typedActivationRaw = CPointer<Unit>(objectHandle)
+    typedActivationActivateHRESULT = E_FAIL.value
+
+    try {
+        let factory = IActivationFactory.viewOf(CPointer<Unit>(factoryObjectHandle))
+        let result = unsafe {
+            factory.activateInstance<TypedActivationTestInterface>(TypedActivationTestInterface.descriptor())
+        }
+        match (result) {
+            case Result<TypedActivationTestInterface>.Ok(value) =>
+                value.close()
+                throw Exception("typed activation unexpectedly succeeded")
+            case Result<TypedActivationTestInterface>.Err(error) =>
+                @Expect(error.code(), E_FAIL)
+        }
+        @Expect(typedActivationQueryCount.load(), 0)
+        @Expect(typedActivationReleaseCount.load(), 1)
+    } finally {
+        unsafe {
+            freeNativeValue<CPointer<IInspectableVtbl>>(objectHandle)
+            freeNativeValue<IInspectableVtbl>(objectVtblHandle)
+            freeNativeValue<CPointer<IActivationFactoryVtbl>>(factoryObjectHandle)
+            freeNativeValue<IActivationFactoryVtbl>(factoryVtblHandle)
+        }
+        resetTypedActivationTestState()
+    }
+}
+
+@When[os == "Windows"]
+@Test
+func testIInspectableGetRuntimeClassNameReleasesPartialOutputOnFailedHRESULT() {
+    resetTypedActivationTestState()
+    let source = HString("partial-runtime-class")
+    let deleteBefore = debugObservedWindowsDeleteStringCount()
+    var vtbl = typedActivationObjectVtbl()
+    vtbl.GetRuntimeClassName = typedActivationGetRuntimeClassNameThunk
+    let objectVtblHandle = unsafe { allocateNativeValue<IInspectableVtbl>(vtbl) }
+    let objectHandle = unsafe { allocateNativeValue<CPointer<IInspectableVtbl>>(objectVtblHandle) }
+    typedActivationProjectedRaw = source.toSystemHandleCopy()
+    typedActivationRuntimeClassNameHRESULT = E_FAIL.value
+
+    try {
+        let object = IInspectable.viewOf(CPointer<Unit>(objectHandle))
+        @Expect(interfaceTestThrowsWindowsException({ =>
+            let _ = unsafe { object.getRuntimeClassName() }
+        }), true)
+        @Expect(debugObservedWindowsDeleteStringCount() - deleteBefore, 1)
+    } finally {
+        source.close()
+        unsafe {
+            freeNativeValue<CPointer<IInspectableVtbl>>(objectHandle)
+            freeNativeValue<IInspectableVtbl>(objectVtblHandle)
+        }
+        resetTypedActivationTestState()
+    }
+}
+
+@Test
+func testQueryInterfaceRawReleasesPartialOutputOnFailedHRESULT() {
+    resetTypedActivationTestState()
+    let objectVtblHandle = unsafe { allocateNativeValue<IInspectableVtbl>(typedActivationObjectVtbl()) }
+    let objectHandle = unsafe { allocateNativeValue<CPointer<IInspectableVtbl>>(objectVtblHandle) }
+    typedActivationProjectedRaw = CPointer<Unit>(objectHandle)
+    typedActivationQueryHRESULT = E_FAIL.value
+
+    try {
+        let result = unsafe { queryInterfaceRaw(CPointer<Unit>(objectHandle), typedActivationTestIid) }
+        match (result) {
+            case Some(raw) =>
+                let _ = releaseRaw(raw)
+                throw Exception("queryInterfaceRaw unexpectedly succeeded")
+            case None => ()
+        }
+        @Expect(typedActivationQueryCount.load(), 1)
+        @Expect(typedActivationReleaseCount.load(), 1)
+    } finally {
+        unsafe {
+            freeNativeValue<CPointer<IInspectableVtbl>>(objectHandle)
+            freeNativeValue<IInspectableVtbl>(objectVtblHandle)
+        }
+        resetTypedActivationTestState()
+    }
+}
+
+@Test
+func testAgileReferenceResolveReleasesPartialOutputOnFailedHRESULT() {
+    resetTypedActivationTestState()
+    let referenceVtblHandle = unsafe { allocateNativeValue<IAgileReferenceVtbl>(typedActivationAgileReferenceVtbl()) }
+    let referenceHandle = unsafe { allocateNativeValue<CPointer<IAgileReferenceVtbl>>(referenceVtblHandle) }
+    let objectVtblHandle = unsafe { allocateNativeValue<IInspectableVtbl>(typedActivationObjectVtbl()) }
+    let objectHandle = unsafe { allocateNativeValue<CPointer<IInspectableVtbl>>(objectVtblHandle) }
+    typedActivationProjectedRaw = CPointer<Unit>(objectHandle)
+    typedActivationResolveHRESULT = E_FAIL.value
+
+    try {
+        let reference = IAgileReference.viewOf(CPointer<Unit>(referenceHandle))
+        let result = unsafe { reference.resolve<TypedActivationTestInterface>(TypedActivationTestInterface.descriptor()) }
+        match (result) {
+            case Result<TypedActivationTestInterface>.Ok(value) =>
+                value.close()
+                throw Exception("IAgileReference.resolve unexpectedly succeeded")
+            case Result<TypedActivationTestInterface>.Err(error) =>
+                @Expect(error.code(), E_FAIL)
+        }
+        @Expect(typedActivationReleaseCount.load(), 1)
+    } finally {
+        unsafe {
+            freeNativeValue<CPointer<IInspectableVtbl>>(objectHandle)
+            freeNativeValue<IInspectableVtbl>(objectVtblHandle)
+            freeNativeValue<CPointer<IAgileReferenceVtbl>>(referenceHandle)
+            freeNativeValue<IAgileReferenceVtbl>(referenceVtblHandle)
+        }
+        resetTypedActivationTestState()
+    }
+}
+
+@Test
+func testWeakReferenceResolveReleasesPartialOutputOnFailedHRESULT() {
+    resetTypedActivationTestState()
+    let referenceVtblHandle = unsafe { allocateNativeValue<IWeakReferenceVtbl>(typedActivationWeakReferenceVtbl()) }
+    let referenceHandle = unsafe { allocateNativeValue<CPointer<IWeakReferenceVtbl>>(referenceVtblHandle) }
+    let objectVtblHandle = unsafe { allocateNativeValue<IInspectableVtbl>(typedActivationObjectVtbl()) }
+    let objectHandle = unsafe { allocateNativeValue<CPointer<IInspectableVtbl>>(objectVtblHandle) }
+    typedActivationProjectedRaw = CPointer<Unit>(objectHandle)
+    typedActivationResolveHRESULT = E_FAIL.value
+
+    try {
+        let reference = IWeakReference.viewOf(CPointer<Unit>(referenceHandle))
+        let result = unsafe { reference.resolve<TypedActivationTestInterface>(TypedActivationTestInterface.descriptor()) }
+        match (result) {
+            case Result<TypedActivationTestInterface>.Ok(value) =>
+                value.close()
+                throw Exception("IWeakReference.resolve unexpectedly succeeded")
+            case Result<TypedActivationTestInterface>.Err(error) =>
+                @Expect(error.code(), E_FAIL)
+        }
+        @Expect(typedActivationReleaseCount.load(), 1)
+    } finally {
+        unsafe {
+            freeNativeValue<CPointer<IInspectableVtbl>>(objectHandle)
+            freeNativeValue<IInspectableVtbl>(objectVtblHandle)
+            freeNativeValue<CPointer<IWeakReferenceVtbl>>(referenceHandle)
+            freeNativeValue<IWeakReferenceVtbl>(referenceVtblHandle)
+        }
+        resetTypedActivationTestState()
+    }
+}
+
+@Test
+func testWeakReferenceSourceReleasesPartialOutputOnFailedHRESULT() {
+    resetTypedActivationTestState()
+    let sourceVtblHandle = unsafe { allocateNativeValue<IWeakReferenceSourceVtbl>(typedActivationWeakReferenceSourceVtbl()) }
+    let sourceHandle = unsafe { allocateNativeValue<CPointer<IWeakReferenceSourceVtbl>>(sourceVtblHandle) }
+    let referenceVtblHandle = unsafe { allocateNativeValue<IWeakReferenceVtbl>(typedActivationWeakReferenceVtbl()) }
+    let referenceHandle = unsafe { allocateNativeValue<CPointer<IWeakReferenceVtbl>>(referenceVtblHandle) }
+    typedActivationProjectedRaw = CPointer<Unit>(referenceHandle)
+    typedActivationWeakReferenceHRESULT = E_FAIL.value
+
+    try {
+        let source = IWeakReferenceSource.viewOf(CPointer<Unit>(sourceHandle))
+        let result = unsafe { source.getWeakReference() }
+        match (result) {
+            case Result<IWeakReference>.Ok(reference) =>
+                reference.close()
+                throw Exception("IWeakReferenceSource.getWeakReference unexpectedly succeeded")
+            case Result<IWeakReference>.Err(error) =>
+                @Expect(error.code(), E_FAIL)
+        }
+        @Expect(typedActivationReleaseCount.load(), 1)
+    } finally {
+        unsafe {
+            freeNativeValue<CPointer<IWeakReferenceVtbl>>(referenceHandle)
+            freeNativeValue<IWeakReferenceVtbl>(referenceVtblHandle)
+            freeNativeValue<CPointer<IWeakReferenceSourceVtbl>>(sourceHandle)
+            freeNativeValue<IWeakReferenceSourceVtbl>(sourceVtblHandle)
         }
         resetTypedActivationTestState()
     }

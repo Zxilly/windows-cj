@@ -63,7 +63,11 @@ class AggregatedMarshalerState {
                 return E_POINTER.value
             }
             let vtblPtr = CPointer<CPointer<IUnknownVtbl>>(outerRaw).read()
-            vtblPtr.read().QueryInterface(outerRaw, iid, resultSlot)
+            let hr = vtblPtr.read().QueryInterface(outerRaw, iid, resultSlot)
+            if (hr < 0) {
+                releaseFailedComOutSlot(resultSlot)
+            }
+            hr
         }
     }
 
@@ -133,7 +137,15 @@ class AggregatedMarshalerState {
         if (raw.isNull()) {
             return E_POINTER.value
         }
-        unsafe { innerMarshaler.vtbl().UnmarshalInterface(raw, pstm, riid, ppv) }
+        if (ppv.isNull()) {
+            return E_POINTER.value
+        }
+        unsafe { ppv.write(CPointer<Unit>()) }
+        let hr = unsafe { innerMarshaler.vtbl().UnmarshalInterface(raw, pstm, riid, ppv) }
+        if (hr < 0) {
+            releaseFailedComOutSlot(ppv)
+        }
+        hr
     }
 
     public func releaseMarshalData(pstm: CPointer<Unit>): Int32 {
@@ -330,6 +342,7 @@ func createInnerMarshaler(): Result<IMarshal> {
         )
     }
     if (hr.failed()) {
+        releaseFailedComOutSlot(CPointer<CPointer<Unit>>(inout marshalerRaw))
         return Result<IMarshal>.Err(WinError.fromHRESULT(hr))
     }
     if (marshalerRaw.isNull()) {

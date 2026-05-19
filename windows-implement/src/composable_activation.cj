@@ -23,9 +23,10 @@ public func queryComposableInner(
             return E_NOINTERFACE
         }
 
+        resultSlot.write(CPointer<Unit>())
         let hr = vtblPtr.read().QueryInterface(innerRaw, CPointer<GUID>(inout requestedIid), resultSlot)
         if (hr != S_OK) {
-            resultSlot.write(CPointer<Unit>())
+            releaseFailedComOutSlot(resultSlot)
         }
         hr
     }
@@ -112,7 +113,11 @@ public class ComposableActivation<TOuter, TBase> <: Resource where TBase <: ComI
     }
 
     public func close(): Unit {
-        closed = closeComposableActivationState(outer, baseObject, innerObject, closed)
+        if (closed) {
+            return
+        }
+        closed = true
+        let _ = closeComposableActivationState(outer, baseObject, innerObject, false)
     }
 
     ~init() {

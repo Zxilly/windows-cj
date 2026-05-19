@@ -55,7 +55,9 @@ func agileReferenceResolveThunk(
         case Some(value) =>
             match (value.Resolve(riid, ppvobjectreference)) {
                 case Result<Unit>.Ok(_) => S_OK.value
-                case Result<Unit>.Err(error) => error.code().value
+                case Result<Unit>.Err(error) =>
+                    releaseFailedComOutSlot(ppvobjectreference)
+                    error.code().value
             }
         case None =>
             E_NOINTERFACE.value
@@ -81,6 +83,25 @@ public class AgileReference<T> <: Resource where T <: ComInterface {
         this.descriptor = descriptor
     }
 
+    static func fromRoGetResult(
+        descriptor: InterfaceDescriptor<T>,
+        hr: HRESULT,
+        raw: CPointer<Unit>
+    ): Result<AgileReference<T>> {
+        if (hr.failed()) {
+            if (raw.isNotNull()) {
+                interfaceHandleReleaseRaw(raw)
+            }
+            return Result<AgileReference<T>>.Err(WinError.fromHRESULT(hr))
+        }
+        if (raw.isNull()) {
+            return Result<AgileReference<T>>.Err(WinError(E_POINTER))
+        }
+        Result<AgileReference<T>>.Ok(
+            AgileReference<T>(Some(IAgileReference.fromAbiTake(raw)), None, descriptor)
+        )
+    }
+
     public static func new(object: T, descriptor: InterfaceDescriptor<T>): Result<AgileReference<T>> {
         let liveRaw = object.asRaw()
         if (liveRaw.isNull()) {
@@ -99,15 +120,7 @@ public class AgileReference<T> <: Resource where T <: ComInterface {
                 )
             )
         }
-        if (hr.failed()) {
-            return Result<AgileReference<T>>.Err(WinError.fromHRESULT(hr))
-        }
-        if (raw.isNull()) {
-            return Result<AgileReference<T>>.Err(WinError(E_POINTER))
-        }
-        Result<AgileReference<T>>.Ok(
-            AgileReference<T>(Some(IAgileReference.fromAbiTake(raw)), None, descriptor)
-        )
+        AgileReference<T>.fromRoGetResult(descriptor, hr, raw)
     }
 
     public func isClosed(): Bool {
@@ -150,6 +163,7 @@ public class AgileReference<T> <: Resource where T <: ComInterface {
         if (closed) {
             return
         }
+        closed = true
         match (inner) {
             case Some(reference) => reference.close()
             case None => ()
@@ -158,6 +172,5 @@ public class AgileReference<T> <: Resource where T <: ComInterface {
             case Some(pointer) => pointer.close()
             case None => ()
         }
-        closed = true
     }
 }

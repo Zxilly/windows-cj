@@ -4,7 +4,7 @@ import windows_interface as windows_interface
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_POINTER, S_OK}
+import windows_core.{E_FAIL, E_POINTER, S_OK, WindowsException}
 import windows_core as windows_core
 import windows_interface.IInspectable
 
@@ -13,6 +13,9 @@ let referenceArrayValueDateTimeCalls = AtomicInt64(0)
 let referenceArrayValueStringCalls = AtomicInt64(0)
 let referenceArrayValueInspectableCalls = AtomicInt64(0)
 let referenceArrayValueInspectableReleaseCalls = AtomicInt64(0)
+let referenceArrayValueFailingInt32Calls = AtomicInt64(0)
+let referenceArrayValueFailingStringCalls = AtomicInt64(0)
+let referenceArrayValueFailingInspectableCalls = AtomicInt64(0)
 
 func allocateReferenceArrayValue<T>(length: Int64): CPointer<T> where T <: CType {
     let raw = windows_core.coTaskMemAlloc(sizeOf<T>() * UIntNative(length))
@@ -177,6 +180,87 @@ func referenceArrayValueInspectableThunk(
     S_OK.value
 }
 
+@C
+func referenceArrayValueFailingInt32Thunk(
+    _: CPointer<Unit>,
+    size: CPointer<UInt32>,
+    value: CPointer<CPointer<Unit>>
+): Int32 {
+    if (size.isNull() || value.isNull()) {
+        return E_POINTER.value
+    }
+    let data = allocateReferenceArrayValue<Int32>(2)
+    if (data.isNull()) {
+        return E_POINTER.value
+    }
+    unsafe {
+        data.write(44i32)
+        (data + 1).write(55i32)
+        size.write(2u32)
+        value.write(CPointer<Unit>(data))
+    }
+    referenceArrayValueFailingInt32Calls.fetchAdd(1)
+    E_FAIL.value
+}
+
+@C
+func referenceArrayValueFailingStringThunk(
+    _: CPointer<Unit>,
+    size: CPointer<UInt32>,
+    value: CPointer<CPointer<Unit>>
+): Int32 {
+    if (size.isNull() || value.isNull()) {
+        return E_POINTER.value
+    }
+    let data = allocateReferenceArrayValue<CPointer<Unit>>(2)
+    if (data.isNull()) {
+        return E_POINTER.value
+    }
+    unsafe {
+        data.write(referenceArrayValueSystemString("failed-alpha"))
+        (data + 1).write(referenceArrayValueSystemString("failed-omega"))
+        size.write(2u32)
+        value.write(CPointer<Unit>(data))
+    }
+    referenceArrayValueFailingStringCalls.fetchAdd(1)
+    E_FAIL.value
+}
+
+@C
+func referenceArrayValueFailingInspectableThunk(
+    instanceRaw: CPointer<Unit>,
+    size: CPointer<UInt32>,
+    value: CPointer<CPointer<Unit>>
+): Int32 {
+    if (size.isNull() || value.isNull()) {
+        return E_POINTER.value
+    }
+    let data = allocateReferenceArrayValue<CPointer<Unit>>(2)
+    if (data.isNull()) {
+        return E_POINTER.value
+    }
+    let first = referenceArrayValueInspectableObject(instanceRaw)
+    let second = referenceArrayValueInspectableObject(instanceRaw)
+    if (first.isNull() || second.isNull()) {
+        if (first.isNotNull()) {
+            windows_core.coTaskMemFree(first)
+        }
+        if (second.isNotNull()) {
+            windows_core.coTaskMemFree(second)
+        }
+        windows_core.coTaskMemFree(CPointer<Unit>(data))
+        return E_POINTER.value
+    }
+    unsafe {
+        data.write(first)
+        (data + 1).write(second)
+        size.write(2u32)
+        value.write(CPointer<Unit>(data))
+    }
+    referenceArrayValueFailingInspectableCalls.fetchAdd(1)
+    E_FAIL.value
+}
+
 func referenceArrayValueVtbl(
     action: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Int32>
 ): IReferenceArrayVtbl {
@@ -202,6 +286,59 @@ func withReferenceArrayValueRaw(
             windows_interface.freeNativeValue(vtblHandle)
         }
     }
+}
+
+@Test
+func testIReferenceArrayValueCleansFailedPartialOutputs() {
+    referenceArrayValueFailingInt32Calls.store(0)
+    referenceArrayValueFailingStringCalls.store(0)
+    referenceArrayValueFailingInspectableCalls.store(0)
+    referenceArrayValueInspectableReleaseCalls.store(0)
+
+    withReferenceArrayValueRaw(referenceArrayValueVtbl(referenceArrayValueFailingInt32Thunk), { raw: CPointer<Unit> =>
+        let reference = IReferenceArray<Int32>.viewOf(raw)
+        var failed = false
+        try {
+            let values = unsafe { reference.Value() }
+            let _ = values
+            throw Exception("expected failing IReferenceArray<Int32>.Value")
+        } catch (_: WindowsException) {
+            failed = true
+        }
+        @Expect(failed, true)
+        @Expect(referenceArrayValueFailingInt32Calls.load(), 1)
+    })
+
+    withReferenceArrayValueRaw(referenceArrayValueVtbl(referenceArrayValueFailingStringThunk), { raw: CPointer<Unit> =>
+        let reference = IReferenceArray<windows_core.HString>.viewOf(raw)
+        let deleteBefore = windows_core.debugObservedWindowsDeleteStringCount()
+        var failed = false
+        try {
+            let values = unsafe { reference.Value() }
+            closeReferenceArrayValueStrings(values)
+            throw Exception("expected failing IReferenceArray<HString>.Value")
+        } catch (_: WindowsException) {
+            failed = true
+        }
+        @Expect(failed, true)
+        @Expect(windows_core.debugObservedWindowsDeleteStringCount() - deleteBefore, 2)
+        @Expect(referenceArrayValueFailingStringCalls.load(), 1)
+    })
+
+    withReferenceArrayValueRaw(referenceArrayValueVtbl(referenceArrayValueFailingInspectableThunk), { raw: CPointer<Unit> =>
+        let reference = IReferenceArray<IInspectable>.viewOf(raw)
+        var failed = false
+        try {
+            let values = unsafe { reference.Value() }
+            closeReferenceArrayValueInspectables(values)
+            throw Exception("expected failing IReferenceArray<IInspectable>.Value")
+        } catch (_: WindowsException) {
+            failed = true
+        }
+        @Expect(failed, true)
+        @Expect(referenceArrayValueInspectableReleaseCalls.load(), 2)
+        @Expect(referenceArrayValueFailingInspectableCalls.load(), 1)
+    })
 }
 
 @Test

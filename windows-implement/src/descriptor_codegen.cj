@@ -394,6 +394,17 @@ func callerResultReturnExpr(method: InterfaceMethodSchema, abiValueType: String,
     }
 }
 
+func callerResultNeedsPointerRelease(method: InterfaceMethodSchema, abiValueType: String): Bool {
+    if (abiValueType != "CPointer<Unit>") {
+        return false
+    }
+    match (resultCallerValueType(method)) {
+        case Some(callerType) =>
+            callerType != abiValueType && !callerType.startsWith("CPointer")
+        case None => false
+    }
+}
+
 func thunkResultWriteExpr(method: InterfaceMethodSchema, abiValueType: String): String {
     match (resultCallerValueType(method)) {
         case Some(callerType) =>
@@ -506,7 +517,7 @@ func appendVtblBuilder(sb: StringBuilder, descriptor: ResolvedDescriptor): Unit 
     sb.append("}\n")
 }
 
-func appendCallerMethod(sb: StringBuilder, _: ResolvedDescriptor, method: InterfaceMethodSchema): Unit {
+func appendCallerMethod(sb: StringBuilder, descriptor: ResolvedDescriptor, method: InterfaceMethodSchema): Unit {
     sb.append("    public unsafe func ")
     sb.append(method.name)
     sb.append("(")
@@ -543,6 +554,14 @@ func appendCallerMethod(sb: StringBuilder, _: ResolvedDescriptor, method: Interf
                 sb.append(", CPointer<")
                 sb.append(abiValueType)
                 sb.append(">(inout result))\n")
+                if (callerResultNeedsPointerRelease(method, abiValueType)) {
+                    sb.append("        if (windows_result.HRESULT(hr).failed() && result.isNotNull()) {\n")
+                    sb.append("            let _ = ")
+                    sb.append(descriptor.wrapperTypeName)
+                    sb.append(".descriptor().releasePointer(result)\n")
+                    sb.append("            result = CPointer<Unit>()\n")
+                    sb.append("        }\n")
+                }
                 sb.append("        windows_result.HRESULT(hr).check()\n")
                 sb.append("        return ")
                 sb.append(callerResultReturnExpr(method, abiValueType, "result"))
@@ -857,6 +876,13 @@ func appendDispatchThunk(sb: StringBuilder, descriptor: ResolvedDescriptor, meth
         sb.append("    if (result__.isNull()) {\n")
         sb.append("        return E_POINTER\n")
         sb.append("    }\n")
+        match (resultAbiValueType(method)) {
+            case Some(abiValueType) =>
+                sb.append("    unsafe { result__.write(")
+                sb.append(defaultLocalValueExpr(abiValueType))
+                sb.append(") }\n")
+            case None => ()
+        }
     }
     sb.append("    match (unsafe { asImplFromRaw<")
     sb.append(descriptor.implSurfaceName)

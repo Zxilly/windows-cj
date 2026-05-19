@@ -198,6 +198,20 @@ func releaseOwnedWinrtHandle<T>(raw: CPointer<Unit>): Unit where T <: HandleWinr
     T.releaseWinrtHandle(raw)
 }
 
+public func winrtReleaseGenericOut<T>(raw: CPointer<Unit>): Unit where T <: HandleWinrtType<T> {
+    releaseOwnedWinrtHandle<T>(raw)
+}
+
+func checkHandleWinrtOutHRESULT<T>(hr: HRESULT, result__: OutSlot<T>): Unit where T <: HandleWinrtType<T> {
+    if (hr.failed()) {
+        match (result__.takeAbi<CPointer<Unit>>()) {
+            case Some(raw) => releaseOwnedWinrtHandle<T>(raw)
+            case None => ()
+        }
+    }
+    hr.check()
+}
+
 func releaseOwnedWinrtHandleSlots<T>(slots: CPointer<CPointer<Unit>>, length: UInt32): Unit where T <: HandleWinrtType<T> {
     if (slots.isNull()) {
         return
@@ -209,8 +223,8 @@ func releaseOwnedWinrtHandleSlots<T>(slots: CPointer<CPointer<Unit>>, length: UI
         let raw = unsafe { slot.read() }
         if (raw.isNotNull()) {
             try {
-                releaseOwnedWinrtHandle<T>(raw)
                 unsafe { slot.write(CPointer<Unit>()) }
+                releaseOwnedWinrtHandle<T>(raw)
             } catch (error: Exception) {
                 match (firstError) {
                     case Some(_) => ()
@@ -223,6 +237,60 @@ func releaseOwnedWinrtHandleSlots<T>(slots: CPointer<CPointer<Unit>>, length: UI
     match (firstError) {
         case Some(error) => throw error
         case None => ()
+    }
+}
+
+func releaseHandleWinrtArrayOut<T>(
+    data: CPointer<Unit>,
+    length: UInt32
+): Unit where T <: HandleWinrtType<T> {
+    if (data.isNull()) {
+        return
+    }
+    try {
+        releaseOwnedWinrtHandleSlots<T>(CPointer<CPointer<Unit>>(data), length)
+    } finally {
+        coTaskMemFree(data)
+    }
+}
+
+public func winrtReleaseGenericArrayOut<T>(
+    data: CPointer<Unit>,
+    length: UInt32
+): Unit where T <: WinrtGenericType<T> {
+    T.winrtOutputBridge().releaseArrayOut(data, length)
+}
+
+public func winrtReleaseGenericOutRange<T>(
+    buffer: CPointer<Unit>,
+    length: UInt32
+): Unit where T <: WinrtGenericType<T> {
+    T.winrtOutputBridge().releaseOutRange(buffer, length)
+}
+
+public func winrtPrepareGenericOutRange<T>(
+    buffer: CPointer<Unit>,
+    length: UInt32
+): Unit where T <: WinrtGenericType<T> {
+    T.winrtOutputBridge().prepareOutRange(buffer, length)
+}
+
+func releaseFailedHandleWinrtOutRange<T>(
+    buffer: CPointer<Unit>,
+    size: UInt32,
+    written: UInt32
+): Unit where T <: HandleWinrtType<T> {
+    if (buffer.isNull()) {
+        return
+    }
+    let _ = written
+    if (size == 0u32) {
+        return
+    }
+    try {
+        releaseOwnedWinrtHandleSlots<T>(CPointer<CPointer<Unit>>(buffer), size)
+    } catch (_: Exception) {
+        ()
     }
 }
 
@@ -302,6 +370,14 @@ public open class WinrtOutputBridge<T> {
         throw IllegalStateException("WinrtOutputBridge.callArrayOutAfterUInt32 is not implemented")
     }
 
+    public open func prepareOutRange(
+        buffer: CPointer<Unit>,
+        length: UInt32
+    ): Unit {
+        let _ = buffer
+        let _ = length
+    }
+
     public open func takeArrayOut(
         data: CPointer<Unit>,
         length: UInt32
@@ -309,6 +385,22 @@ public open class WinrtOutputBridge<T> {
         let _ = data
         let _ = length
         throw IllegalStateException("WinrtOutputBridge.takeArrayOut is not implemented")
+    }
+
+    public open func releaseArrayOut(
+        data: CPointer<Unit>,
+        length: UInt32
+    ): Unit {
+        let _ = length
+        coTaskMemFree(data)
+    }
+
+    public open func releaseOutRange(
+        buffer: CPointer<Unit>,
+        length: UInt32
+    ): Unit {
+        let _ = buffer
+        let _ = length
     }
 
     public open func storeOut(
@@ -751,8 +843,8 @@ class HandleWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: HandleWinrtT
     ): T {
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
-            let hr = unsafe { slot(instanceRaw, result__.borrowMut<CPointer<Unit>>()) }
-            HRESULT(hr).check()
+            let hr = HRESULT(unsafe { slot(instanceRaw, result__.borrowMut<CPointer<Unit>>()) })
+            checkHandleWinrtOutHRESULT<T>(hr, result__)
             match (result__.takeAbi<CPointer<Unit>>()) {
                 case Some(raw) => value__ = Some(T.fromAbiTakeWinrtHandle(raw))
                 case None => throw WindowsException(E_POINTER)
@@ -771,8 +863,8 @@ class HandleWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: HandleWinrtT
     ): T {
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
-            let hr = unsafe { slot(instanceRaw, arg0, result__.borrowMut<CPointer<Unit>>()) }
-            HRESULT(hr).check()
+            let hr = HRESULT(unsafe { slot(instanceRaw, arg0, result__.borrowMut<CPointer<Unit>>()) })
+            checkHandleWinrtOutHRESULT<T>(hr, result__)
             match (result__.takeAbi<CPointer<Unit>>()) {
                 case Some(raw) => value__ = Some(T.fromAbiTakeWinrtHandle(raw))
                 case None => throw WindowsException(E_POINTER)
@@ -791,8 +883,8 @@ class HandleWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: HandleWinrtT
     ): T {
         var value__: ?T = None
         try (result__ = OutSlot<T>()) {
-            let hr = unsafe { slot(instanceRaw, inputRaw, result__.borrowMut<CPointer<Unit>>()) }
-            HRESULT(hr).check()
+            let hr = HRESULT(unsafe { slot(instanceRaw, inputRaw, result__.borrowMut<CPointer<Unit>>()) })
+            checkHandleWinrtOutHRESULT<T>(hr, result__)
             match (result__.takeAbi<CPointer<Unit>>()) {
                 case Some(raw) => value__ = Some(T.fromAbiTakeWinrtHandle(raw))
                 case None => throw WindowsException(E_POINTER)
@@ -811,8 +903,13 @@ class HandleWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: HandleWinrtT
         items: CPointer<Unit>
     ): UInt32 {
         var result = 0u32
+        prepareOutRange(items, size)
         let hr = unsafe { slot(instanceRaw, size, CPointer<CPointer<Unit>>(items), CPointer<UInt32>(inout result)) }
-        HRESULT(hr).check()
+        let status = HRESULT(hr)
+        if (status.failed()) {
+            releaseFailedHandleWinrtOutRange<T>(items, size, result)
+        }
+        status.check()
         result
     }
 
@@ -824,9 +921,29 @@ class HandleWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: HandleWinrtT
         items: CPointer<Unit>
     ): UInt32 {
         var result = 0u32
+        prepareOutRange(items, size)
         let hr = unsafe { slot(instanceRaw, arg0, size, CPointer<CPointer<Unit>>(items), CPointer<UInt32>(inout result)) }
-        HRESULT(hr).check()
+        let status = HRESULT(hr)
+        if (status.failed()) {
+            releaseFailedHandleWinrtOutRange<T>(items, size, result)
+        }
+        status.check()
         result
+    }
+
+    public override func prepareOutRange(
+        buffer: CPointer<Unit>,
+        length: UInt32
+    ): Unit {
+        if (buffer.isNull()) {
+            return
+        }
+        let slots = CPointer<CPointer<Unit>>(buffer)
+        var index = 0
+        while (index < Int64(length)) {
+            unsafe { (slots + index).write(CPointer<Unit>()) }
+            index += 1
+        }
     }
 
     public override func takeArrayOut(
@@ -881,6 +998,20 @@ class HandleWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: HandleWinrtT
                 }
             }
         }
+    }
+
+    public override func releaseArrayOut(
+        data: CPointer<Unit>,
+        length: UInt32
+    ): Unit {
+        releaseHandleWinrtArrayOut<T>(data, length)
+    }
+
+    public override func releaseOutRange(
+        buffer: CPointer<Unit>,
+        length: UInt32
+    ): Unit {
+        releaseOwnedWinrtHandleSlots<T>(CPointer<CPointer<Unit>>(buffer), length)
     }
 
     public override func storeOut(

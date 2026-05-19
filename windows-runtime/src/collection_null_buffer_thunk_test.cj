@@ -32,6 +32,7 @@ class NullBufferIteratorThunkImpl <: IIterator_Impl<Int32> {
 
 class NullBufferVectorViewThunkImpl <: IVectorView_Impl<Int32> {
     public var getManyCalls: Int64 = 0
+    public var indexOfCalls: Int64 = 0
 
     public func First(): Result<IIterator<Int32>> {
         nullBufferThunkError<IIterator<Int32>>()
@@ -48,6 +49,7 @@ class NullBufferVectorViewThunkImpl <: IVectorView_Impl<Int32> {
 
     public func IndexOf(value: Int32, index: CPointer<UInt32>): Result<Bool> {
         let _ = value
+        indexOfCalls += 1
         if (index.isNotNull()) {
             unsafe { index.write(0u32) }
         }
@@ -64,6 +66,7 @@ class NullBufferVectorViewThunkImpl <: IVectorView_Impl<Int32> {
 
 class NullBufferVectorThunkImpl <: IVector_Impl<Int32> {
     public var getManyCalls: Int64 = 0
+    public var indexOfCalls: Int64 = 0
     public var replaceAllCalls: Int64 = 0
 
     public func First(): Result<IIterator<Int32>> {
@@ -85,6 +88,7 @@ class NullBufferVectorThunkImpl <: IVector_Impl<Int32> {
 
     public func IndexOf(value: Int32, index: CPointer<UInt32>): Result<Bool> {
         let _ = value
+        indexOfCalls += 1
         if (index.isNotNull()) {
             unsafe { index.write(0u32) }
         }
@@ -138,6 +142,7 @@ class NullBufferVectorThunkImpl <: IVector_Impl<Int32> {
 
 class NullBufferObservableVectorThunkImpl <: IObservableVector_Impl<Int32> {
     public var getManyCalls: Int64 = 0
+    public var indexOfCalls: Int64 = 0
     public var replaceAllCalls: Int64 = 0
 
     public func First(): Result<IIterator<Int32>> {
@@ -159,6 +164,7 @@ class NullBufferObservableVectorThunkImpl <: IObservableVector_Impl<Int32> {
 
     public func IndexOf(value: Int32, index: CPointer<UInt32>): Result<Bool> {
         let _ = value
+        indexOfCalls += 1
         if (index.isNotNull()) {
             unsafe { index.write(0u32) }
         }
@@ -253,6 +259,17 @@ func testGeneratedVectorViewGetManyThunkRejectsNullBufferWithNonZeroCapacity() {
 }
 
 @Test
+func testGeneratedVectorViewIndexOfThunkRejectsNullIndexSlot() {
+    let impl = NullBufferVectorViewThunkImpl()
+    var found = true
+
+    let hr = impl.__winrtThunk_IndexOf(CPointer<Unit>(), CPointer<UInt32>(), CPointer<Bool>(inout found))
+    @Expect(hr, E_POINTER.value)
+    @Expect(found, true)
+    @Expect(impl.indexOfCalls, 0)
+}
+
+@Test
 func testGeneratedVectorGetManyThunkRejectsNullBufferWithNonZeroCapacity() {
     let impl = NullBufferVectorThunkImpl()
     var copied = 99u32
@@ -266,6 +283,17 @@ func testGeneratedVectorGetManyThunkRejectsNullBufferWithNonZeroCapacity() {
     @Expect(emptyHr, S_OK.value)
     @Expect(copied, 0u32)
     @Expect(impl.getManyCalls, 1)
+}
+
+@Test
+func testGeneratedVectorIndexOfThunkRejectsNullIndexSlot() {
+    let impl = NullBufferVectorThunkImpl()
+    var found = true
+
+    let hr = impl.__winrtThunk_IndexOf(CPointer<Unit>(), CPointer<UInt32>(), CPointer<Bool>(inout found))
+    @Expect(hr, E_POINTER.value)
+    @Expect(found, true)
+    @Expect(impl.indexOfCalls, 0)
 }
 
 @Test
@@ -303,4 +331,15 @@ func testGeneratedObservableVectorThunkRejectsNullBuffersWithNonZeroCapacity() {
     let emptyReplaceHr = impl.__winrtThunk_ReplaceAll(0u32, CPointer<Unit>())
     @Expect(emptyReplaceHr, S_OK.value)
     @Expect(impl.replaceAllCalls, 1)
+}
+
+@Test
+func testGeneratedObservableVectorIndexOfThunkRejectsNullIndexSlot() {
+    let impl = NullBufferObservableVectorThunkImpl()
+    var found = true
+
+    let hr = impl.__winrtThunk_IndexOf(CPointer<Unit>(), CPointer<UInt32>(), CPointer<Bool>(inout found))
+    @Expect(hr, E_POINTER.value)
+    @Expect(found, true)
+    @Expect(impl.indexOfCalls, 0)
 }

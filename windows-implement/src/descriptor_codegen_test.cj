@@ -134,3 +134,35 @@ func testGeneratedThunkProjectsInParamBeforeDispatch() {
     @Expect(source.contains("windows_core.withHStringInParam(right, { right__inParam =>"), true)
     @Expect(source.contains("qualifiedImpl.InputStringPair(left__inParam, right__inParam)"), true)
 }
+
+@Test
+func testGeneratedResultBridgeCleansFailedPointerOutputs() {
+    let schema = InterfaceDescriptorSchema(
+        "Fixture.IOutput",
+        GUID.parse("33333333-3434-5656-7878-909090909090"),
+        IUnknown.descriptorSchema(),
+        "Fixture_IOutputVtbl",
+        "Fixture_IOutput",
+        "Fixture_IOutput_Impl",
+        [
+            InterfaceMethodSchema(
+                "Create",
+                3,
+                [
+                    InterfaceParameterSchema(
+                        "result",
+                        "CPointer<CPointer<Unit>>",
+                        "OutSlot<Fixture_IOutput>",
+                        InterfaceParameterBridgeKind.OutSlot
+                    )
+                ],
+                "Int32"
+            )
+        ]
+    )
+
+    let source = renderDescriptor(resolveSchema(schema))
+
+    @Expect(source.contains("let hr = v.Create(asRaw(), CPointer<CPointer<Unit>>(inout result))\n        if (windows_result.HRESULT(hr).failed() && result.isNotNull()) {\n            let _ = Fixture_IOutput.descriptor().releasePointer(result)\n            result = CPointer<Unit>()\n        }\n        windows_result.HRESULT(hr).check()\n        return Fixture_IOutput.fromAbiTake(result)"), true)
+    @Expect(source.contains("if (result__.isNull()) {\n        return E_POINTER\n    }\n    unsafe { result__.write(CPointer<Unit>()) }"), true)
+}

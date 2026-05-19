@@ -1,15 +1,59 @@
 package windows_core
 
+import std.collection.HashMap
+import std.sync.Mutex
+
+var coTaskMemAllocationSizeMutex = Mutex()
+var coTaskMemAllocationSizes = HashMap<UIntNative, UIntNative>()
+
 public func coTaskMemAlloc(cb: UIntNative): CPointer<Unit> {
-    unsafe { CoTaskMemAlloc(cb) }
+    let raw = unsafe { CoTaskMemAlloc(cb) }
+    if (raw.isNotNull()) {
+        synchronized(coTaskMemAllocationSizeMutex) {
+            coTaskMemAllocationSizes.add(raw.toUIntNative(), cb)
+        }
+    }
+    raw
 }
 
 public func coTaskMemRealloc(pv: CPointer<Unit>, cb: UIntNative): CPointer<Unit> {
-    unsafe { CoTaskMemRealloc(pv, cb) }
+    let resized = unsafe { CoTaskMemRealloc(pv, cb) }
+    if (cb == UIntNative(0)) {
+        synchronized(coTaskMemAllocationSizeMutex) {
+            if (pv.isNotNull()) {
+                coTaskMemAllocationSizes.remove(pv.toUIntNative())
+            }
+            if (resized.isNotNull()) {
+                coTaskMemAllocationSizes.add(resized.toUIntNative(), cb)
+            }
+        }
+    } else if (resized.isNotNull()) {
+        synchronized(coTaskMemAllocationSizeMutex) {
+            if (pv.isNotNull()) {
+                coTaskMemAllocationSizes.remove(pv.toUIntNative())
+            }
+            coTaskMemAllocationSizes.add(resized.toUIntNative(), cb)
+        }
+    }
+    resized
 }
 
 public func coTaskMemFree(pv: CPointer<Unit>): Unit {
+    if (pv.isNotNull()) {
+        synchronized(coTaskMemAllocationSizeMutex) {
+            coTaskMemAllocationSizes.remove(pv.toUIntNative())
+        }
+    }
     unsafe { CoTaskMemFree(pv) }
+}
+
+public func coTaskMemAllocationSize(pv: CPointer<Unit>): Option<UIntNative> {
+    if (pv.isNull()) {
+        return None
+    }
+    synchronized(coTaskMemAllocationSizeMutex) {
+        coTaskMemAllocationSizes.get(pv.toUIntNative())
+    }
 }
 
 abstract class AbiArrayStorage<T> {
@@ -62,15 +106,17 @@ class ProjectedAbiArrayStorage<T> <: AbiArrayStorage<T> {
     }
 }
 
-class NativeAbiArrayStorage<T> <: AbiArrayStorage<T> where T <: CType {
+class NativeAbiArrayStorage<T> <: AbiArrayStorage<T> & Resource where T <: CType {
     private var data: CPointer<T> = CPointer<T>()
     private var length: UInt32 = 0u32
+    private var closed: Bool = false
 
     public init() {}
 
     public init(data: CPointer<T>, length: UInt32) {
         this.data = data
         this.length = length
+        this.closed = data.isNull()
     }
 
     public static func withLen(length: Int64): NativeAbiArrayStorage<T> {
@@ -82,7 +128,7 @@ class NativeAbiArrayStorage<T> <: AbiArrayStorage<T> where T <: CType {
         }
 
         let totalBytes = sizeOf<T>() * UIntNative(length)
-        let raw = unsafe { CoTaskMemAlloc(totalBytes) }
+        let raw = coTaskMemAlloc(totalBytes)
         if (raw.isNull()) {
             throw WindowsException(E_OUTOFMEMORY)
         }
@@ -99,6 +145,10 @@ class NativeAbiArrayStorage<T> <: AbiArrayStorage<T> where T <: CType {
 
     public func len(): UInt32 {
         length
+    }
+
+    public func isClosed(): Bool {
+        closed
     }
 
     public func get(index: Int64): T {
@@ -127,35 +177,48 @@ class NativeAbiArrayStorage<T> <: AbiArrayStorage<T> where T <: CType {
     public func replaceWith(values: Array<T>): Unit {
         clear()
         if (values.size == 0) {
+            closed = false
             return
         }
 
         let replacement = NativeAbiArrayStorage<T>.withLen(values.size)
-        var index = 0
-        while (index < values.size) {
-            replacement.set(index, values[index])
-            index += 1
+        try {
+            var index = 0
+            while (index < values.size) {
+                replacement.set(index, values[index])
+                index += 1
+            }
+        } catch (error: Exception) {
+            replacement.close()
+            throw error
         }
 
         let (raw, len) = replacement.detach()
         data = raw
         length = len
+        closed = false
     }
 
     public func clear(): Unit {
         if (data.isNotNull()) {
-            unsafe { CoTaskMemFree(CPointer<Unit>(data)) }
+            coTaskMemFree(CPointer<Unit>(data))
         }
         data = CPointer<T>()
         length = 0u32
     }
 
-    ~init() {
-        if (data.isNotNull()) {
-            unsafe { CoTaskMemFree(CPointer<Unit>(data)) }
-            data = CPointer<T>()
-            length = 0u32
+    public func close(): Unit {
+        if (closed) {
+            return
         }
+        clear()
+        closed = true
+    }
+
+    ~init() {
+        data = CPointer<T>()
+        length = 0u32
+        closed = true
     }
 
     public func rawOrNull(): CPointer<T> {
@@ -167,11 +230,12 @@ class NativeAbiArrayStorage<T> <: AbiArrayStorage<T> where T <: CType {
         let detachedLength = length
         data = CPointer<T>()
         length = 0u32
+        closed = true
         (detachedData, detachedLength)
     }
 
     private func checkedElementPointer(index: Int64): CPointer<T> {
-        if (data.isNull()) {
+        if (closed || data.isNull()) {
             throw IllegalStateException("AbiArray storage is closed")
         }
         if (index < 0 || index >= Int64(length)) {
@@ -286,7 +350,6 @@ public class AbiArray<T> <: Resource {
 
     ~init() {
         if (!closed) {
-            storage.clear()
             closed = true
         }
     }
@@ -322,10 +385,15 @@ extend<T> AbiArray<T> where T <: CType {
             case projected: ProjectedAbiArrayStorage<T> =>
                 let native = NativeAbiArrayStorage<T>.withLen(Int64(projected.len()))
                 let values = projected.toArray()
-                var index = 0
-                while (index < values.size) {
-                    native.set(index, values[index])
-                    index += 1
+                try {
+                    var index = 0
+                    while (index < values.size) {
+                        native.set(index, values[index])
+                        index += 1
+                    }
+                } catch (error: Exception) {
+                    native.close()
+                    throw error
                 }
                 native.detach()
             case _ =>

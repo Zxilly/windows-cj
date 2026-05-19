@@ -203,12 +203,14 @@ public struct InterfaceResource<T> <: Resource {
         if (state.closed) {
             return
         }
-        if (state.releaseOnClose && !state.raw.isNull()) {
-            state.descriptor.releasePointer(state.raw)
-        }
+        let rawToRelease = state.raw
+        let shouldRelease = state.releaseOnClose && !rawToRelease.isNull()
         state.raw = CPointer<Unit>()
         state.slotInfo = InterfaceSlotInfo()
         state.closed = true
+        if (shouldRelease) {
+            state.descriptor.releasePointer(rawToRelease)
+        }
         match (state.onClose) {
             case Some(callback) => callback()
             case None => ()

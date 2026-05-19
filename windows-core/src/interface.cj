@@ -146,11 +146,11 @@ public unsafe func cast<T, U>(
     if (raw.isNull()) {
         return Result<U>.Err(WinError(E_POINTER))
     }
-    match (queryInterfaceRaw(raw, descriptor.iid)) {
-        case Some(resolved) =>
-            Result<U>.Ok(descriptor.takeFromAbi(resolved))
-        case None =>
-            Result<U>.Err(WinError(E_NOINTERFACE))
+    match (queryInterfaceResult<U>(raw, descriptor)) {
+        case QueryResult<InterfaceHandle<U>>.Ok(handle) =>
+            Result<U>.Ok(descriptor.takeFromAbi(handle.intoAbi()))
+        case QueryResult<InterfaceHandle<U>>.Err(hr) =>
+            Result<U>.Err(WinError.fromHRESULT(hr))
     }
 }
 

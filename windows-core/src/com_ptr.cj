@@ -22,6 +22,17 @@ func interfaceHandleReleaseRaw(raw: CPointer<Unit>): UInt32 {
     }
 }
 
+public func releaseFailedComOutSlot(slot: CPointer<CPointer<Unit>>): Unit {
+    if (slot.isNull()) {
+        return
+    }
+    let raw = unsafe { slot.read() }
+    if (raw.isNotNull()) {
+        unsafe { slot.write(CPointer<Unit>()) }
+        interfaceHandleReleaseRaw(raw)
+    }
+}
+
 // InterfaceHandle<T> keeps a live COM interface reference as a Resource.
 public class InterfaceHandle<T> <: Resource {
     private let descriptor: InterfaceDescriptor<T>
@@ -96,9 +107,12 @@ public class InterfaceHandle<T> <: Resource {
 
     public func close(): Unit {
         if (!closed) {
-            interfaceHandleReleaseRaw(raw)
+            let rawToRelease = raw
             raw = CPointer<Unit>()
             closed = true
+            if (rawToRelease.isNotNull()) {
+                interfaceHandleReleaseRaw(rawToRelease)
+            }
         }
     }
 }
