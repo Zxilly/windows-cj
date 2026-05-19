@@ -1,9 +1,17 @@
 package windows_result
 
+import std.sync.AtomicInt32
 import windows_libloading as windows_libloading
 
 type IntPtr = CPointer<Unit>
 type FORMAT_MESSAGE_OPTIONS = UInt32
+
+let observedSysFreeStringCount = AtomicInt32(0)
+
+@When[os == "Windows"]
+public func debugObservedSysFreeStringCount(): Int32 {
+    observedSysFreeStringCount.load()
+}
 
 @When[os != "Windows"]
 func ensureDynamicWin32CFuncAbiSupported(): Unit {}
@@ -258,6 +266,7 @@ func sysAllocStringLenAbi(_: CPointer<UInt16>, _: UInt32): CPointer<UInt16> {
 @When[os == "Windows"]
 func sysFreeStringAbi(text: CPointer<UInt16>): Unit {
     unsafe { SysFreeString(text) }
+    observedSysFreeStringCount.fetchAdd(1)
 }
 
 @When[os != "Windows"]

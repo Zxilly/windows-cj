@@ -2,6 +2,7 @@ package windows_safearray
 
 import std.unittest.*
 import std.unittest.testmacro.*
+import windows_common.Win32.System.Com.IUnknownVtbl
 import windows_strings.BSTR
 import windows_variant.Variant
 import windows_variant.VARIANT
@@ -11,9 +12,38 @@ import windows_variant.VT_R8
 import windows_variant.VT_VARIANT
 import windows_variant.variantFromI4
 import windows_variant.variantFromString
+import windows_variant.variantFromUnknownRaw
 import windows_variant.variantAsBstr
 import windows_variant.variantAsI4
 import windows_variant.variantVt
+import windows_variant.debugObservedVariantClearCount
+
+func safeArrayTestThrows(action: () -> Unit): Bool {
+    try {
+        action()
+    } catch (_: Exception) {
+        return true
+    }
+    false
+}
+
+@C
+struct ReentrantSafeArrayUnknown {
+    var lpVtbl: CPointer<IUnknownVtbl> = CPointer<IUnknownVtbl>()
+    init() {}
+}
+
+var reentrantSafeArrayTarget: Option<SafeArray> = None
+var reentrantSafeArrayReleaseCalls: UInt32 = 0u32
+
+@C
+func reentrantSafeArrayRelease(_: CPointer<Unit>): UInt32 {
+    reentrantSafeArrayReleaseCalls += 1u32
+    if (let Some(target) <- reentrantSafeArrayTarget) {
+        target.close()
+    }
+    0u32
+}
 
 @Test
 func fadfConstantsExposeRustValues(): Unit {
@@ -51,7 +81,10 @@ func createVectorAndDestroyRoundTrips(): Unit {
     @Expect(debugObservedSafeArrayCreateCount() > createsBefore, true)
     arr.close()
     @Expect(arr.isClosed(), true)
-    @Expect(debugObservedSafeArrayDestroyCount() > destroysBefore, true)
+    let destroysAfterClose = debugObservedSafeArrayDestroyCount()
+    @Expect(destroysAfterClose > destroysBefore, true)
+    arr.close()
+    @Expect(debugObservedSafeArrayDestroyCount(), destroysAfterClose)
 }
 
 @Test
@@ -77,6 +110,20 @@ func lockUnlockBalancesCount(): Unit {
     arr.unlock()
     @Expect(arr.lockCount(), 0u32)
     arr.close()
+}
+
+@Test
+func closeRetainsHandleWhenSafeArrayDestroyFails(): Unit {
+    let arr = SafeArray.createVector(VT_I4, 0i32, 2u32)
+    arr.lock()
+    @Expect(safeArrayTestThrows({ => arr.close() }), true)
+    @Expect(arr.isClosed(), false)
+    @Expect(arr.isNull(), false)
+    @Expect(arr.lockCount(), 1u32)
+
+    arr.unlock()
+    arr.close()
+    @Expect(arr.isClosed(), true)
 }
 
 @Test
@@ -115,9 +162,24 @@ func withSafeArrayDataExposesDataPointer(): Unit {
 }
 
 @Test
+func closeOwnedSafeArrayOnFailureClosesWhenBodyThrows(): Unit {
+    let arr = SafeArray.createVector(VT_I4, 0i32, 1u32)
+    let destroysBefore = debugObservedSafeArrayDestroyCount()
+    @Expect(safeArrayTestThrows({ =>
+        closeOwnedSafeArrayOnFailure(arr) { =>
+            throw SafeArrayAbiException("boom")
+        }
+    }), true)
+    @Expect(arr.isClosed(), true)
+    @Expect(debugObservedSafeArrayDestroyCount() > destroysBefore, true)
+}
+
+@Test
 func cloneSelfDeepCopiesDescriptor(): Unit {
     let arr = SafeArrayOfInt32.fromArray([10i32, 20i32, 30i32])
-    let dup = SafeArrayOfInt32.fromRaw(arr.raw().cloneSelf().intoRaw())
+    let cloned = arr.raw().cloneSelf()
+    @Expect(cloned.isNull(), false)
+    let dup = SafeArrayOfInt32.fromRaw(cloned.intoRaw())
     @Expect(dup.length(), 3)
     @Expect(dup.get(0), 10i32)
     @Expect(dup.get(1), 20i32)
@@ -130,6 +192,17 @@ func cloneSelfDeepCopiesDescriptor(): Unit {
 }
 
 @Test
+func failedSafeArrayCopyResultDestroysPartialOutput(): Unit {
+    let partial = SafeArray.createVector(VT_I4, 0i32, 1u32)
+    let destroysBefore = debugObservedSafeArrayDestroyCount()
+    let raw = partial.intoRaw()
+
+    @Expect(safeArrayTestThrows({ => let _ = takeSafeArrayCopyResult(-1i32, raw) }), true)
+    @Expect(debugObservedSafeArrayDestroyCount() > destroysBefore, true)
+    @Expect(partial.isClosed(), true)
+}
+
+@Test
 func intoRawTransfersOwnership(): Unit {
     let arr = SafeArray.createVector(VT_I4, 0i32, 1u32)
     let raw = arr.intoRaw()
@@ -138,6 +211,16 @@ func intoRawTransfersOwnership(): Unit {
     // Re-take ownership so the descriptor is properly destroyed.
     let again = SafeArray(raw)
     again.close()
+}
+
+@Test
+func typedFromRawClosesTakenHandleWhenLowerBoundRejected(): Unit {
+    let source = SafeArray.createVector(VT_I4, 1i32, 2u32)
+    let destroysBefore = debugObservedSafeArrayDestroyCount()
+    let raw = source.intoRaw()
+    @Expect(source.isClosed(), true)
+    @Expect(safeArrayTestThrows({ => let _ = SafeArrayOfInt32.fromRaw(raw) }), true)
+    @Expect(debugObservedSafeArrayDestroyCount() > destroysBefore, true)
 }
 
 @Test
@@ -194,6 +277,32 @@ func safeArrayOfStringsCopiesEachBstr(): Unit {
 }
 
 @Test
+func safeArrayOfStringsCloneAndCloseUsesExplicitDestroys(): Unit {
+    let destroysBefore = debugObservedSafeArrayDestroyCount()
+    let arr = SafeArrayOfStrings.fromArray(["red", "green", "blue"])
+    let clonedRaw = arr.raw().cloneSelf()
+    let dup = SafeArrayOfStrings.fromRaw(clonedRaw.intoRaw())
+    try {
+        @Expect(clonedRaw.isClosed(), true)
+        @Expect(dup.length(), 3)
+        arr.set(1, "changed")
+        @Expect(arr.toArray()[1], "changed")
+        @Expect(dup.toArray()[1], "green")
+    } finally {
+        arr.close()
+        dup.close()
+    }
+
+    let destroysAfter = debugObservedSafeArrayDestroyCount()
+    @Expect(destroysAfter >= destroysBefore + 2i32, true)
+    arr.close()
+    dup.close()
+    @Expect(debugObservedSafeArrayDestroyCount(), destroysAfter)
+    @Expect(arr.isClosed(), true)
+    @Expect(dup.isClosed(), true)
+}
+
+@Test
 func safeArrayOfVariantsDeepCopiesElements(): Unit {
     let arr = SafeArrayOfVariants.withLength(2)
     @Expect(arr.length(), 2)
@@ -219,6 +328,93 @@ func safeArrayOfVariantsDeepCopiesElements(): Unit {
     got1.close()
 
     arr.close()
+}
+
+@Test
+func safeArrayOfVariantsCloneKeepsElementsIndependentAndClosesExplicitly(): Unit {
+    let destroysBefore = debugObservedSafeArrayDestroyCount()
+    let clearsBefore = debugObservedVariantClearCount()
+    let arr = SafeArrayOfVariants.withLength(2)
+
+    let first = Variant(variantFromString("left"))
+    let second = Variant(variantFromI4(7i32))
+    try {
+        arr.setRaw(0, first.get())
+        arr.setRaw(1, second.get())
+    } finally {
+        first.close()
+        second.close()
+    }
+
+    let clonedRaw = arr.raw().cloneSelf()
+    let dup = SafeArrayOfVariants.fromRaw(clonedRaw.intoRaw())
+    let replacement = Variant(variantFromString("changed"))
+    try {
+        @Expect(clonedRaw.isClosed(), true)
+        arr.setRaw(0, replacement.get())
+
+        let source0 = Variant(arr.get(0))
+        try {
+            @Expect(source0.vt(), VT_BSTR)
+            @Expect(variantAsBstr(source0.get()).getOrThrow().get(), "changed")
+        } finally {
+            source0.close()
+        }
+
+        let clone0 = Variant(dup.get(0))
+        try {
+            @Expect(clone0.vt(), VT_BSTR)
+            @Expect(variantAsBstr(clone0.get()).getOrThrow().get(), "left")
+        } finally {
+            clone0.close()
+        }
+
+        let clone1 = Variant(dup.get(1))
+        try {
+            @Expect(clone1.vt(), VT_I4)
+            @Expect(variantAsI4(clone1.get()), Some(7i32))
+        } finally {
+            clone1.close()
+        }
+    } finally {
+        replacement.close()
+        arr.close()
+        dup.close()
+    }
+
+    let destroysAfter = debugObservedSafeArrayDestroyCount()
+    @Expect(destroysAfter >= destroysBefore + 2i32, true)
+    @Expect(debugObservedVariantClearCount() > clearsBefore, true)
+    arr.close()
+    dup.close()
+    @Expect(debugObservedSafeArrayDestroyCount(), destroysAfter)
+    @Expect(arr.isClosed(), true)
+    @Expect(dup.isClosed(), true)
+}
+
+@Test
+func safeArrayCloseIsElementReleaseReentrantSafe(): Unit {
+    var vtbl = IUnknownVtbl()
+    vtbl.Release = reentrantSafeArrayRelease
+    var object = ReentrantSafeArrayUnknown()
+    object.lpVtbl = CPointer<IUnknownVtbl>(inout vtbl)
+    let arr = SafeArrayOfVariants.withLength(1)
+    let element = Variant(variantFromUnknownRaw(CPointer<Unit>(inout object)))
+    try {
+        arr.setRaw(0, element.get())
+    } finally {
+        element.close()
+    }
+
+    reentrantSafeArrayReleaseCalls = 0u32
+    reentrantSafeArrayTarget = Some(arr.raw())
+    try {
+        arr.close()
+        @Expect(arr.isClosed(), true)
+        @Expect(reentrantSafeArrayReleaseCalls, 1u32)
+    } finally {
+        reentrantSafeArrayTarget = None
+    }
 }
 
 @Test

@@ -266,13 +266,9 @@ class HeapString <: Resource & ToString {
     }
 
     ~init() {
-        if (!closed && ptr.isNotNull()) {
-            unsafe {
-                HeapFree(GetProcessHeap(), 0u32, CPointer<Unit>(ptr))
-            }
-            ptr = CPointer<UInt16>()
-            closed = true
-        }
+        // Native cleanup is explicit; finalizers only invalidate local state.
+        ptr = CPointer<UInt16>()
+        closed = true
     }
 
     public func close(): Unit {

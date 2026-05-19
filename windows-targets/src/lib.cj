@@ -3,6 +3,17 @@ package windows_targets
 private let bundledVersion = "0.53.0"
 private let bundledGnuArchive = "libwindows.0.53.0.a"
 
+public class UnsupportedTarget <: Exception {
+    public let targetName: String
+    public let reason: String
+
+    public init(targetName: String, reason: String) {
+        super("unsupported windows-targets import library target `${targetName}`: ${reason}")
+        this.targetName = targetName
+        this.reason = reason
+    }
+}
+
 public struct ImportLibTarget {
     public let name: String
     public let operatingSystem: String
@@ -40,6 +51,13 @@ public struct ImportLibTarget {
         }
     }
 
+    public func requireArchiveRelativePath(): String {
+        match (archiveRelativePath()) {
+            case Some(relative) => relative
+            case None => throw unsupportedTarget(name)
+        }
+    }
+
     public func archivePath(root: String): Option<String> {
         match (archiveRelativePath()) {
             case Some(relative) => Some("${root}/${relative}")
@@ -47,11 +65,45 @@ public struct ImportLibTarget {
         }
     }
 
+    public func requireArchivePath(root: String): String {
+        "${root}/${requireArchiveRelativePath()}"
+    }
+
     public func gnuLinkOptions(root: String): Option<Array<String>> {
+        if (toolchain != "gnu") {
+            return None
+        }
         match (archiveName) {
             case Some(name) => Some(["-L${root}/${archiveDirectory}", "-l:${name}"])
             case None => None
         }
+    }
+
+    public func requireGnuLinkOptions(root: String): Array<String> {
+        if (!supported) {
+            throw unsupportedTarget(name)
+        }
+        if (toolchain != "gnu") {
+            throw UnsupportedTarget(name, "GNU linker options are not valid for ${toolchain} targets")
+        }
+        match (gnuLinkOptions(root)) {
+            case Some(options) => options
+            case None => throw unsupportedTarget(name)
+        }
+    }
+
+    public func status(): String {
+        if (supported) {
+            return "supported"
+        }
+        "unsupported"
+    }
+
+    public func unsupportedReason(): Option<String> {
+        if (supported) {
+            return None
+        }
+        Some(unsupportedReasonForName(name))
     }
 }
 
@@ -65,6 +117,29 @@ private func importLibTarget(
     supported: Bool
 ): ImportLibTarget {
     ImportLibTarget(name, "Windows", arch, toolchain, cangjieEnv, archiveDirectory, archiveName, supported)
+}
+
+private func unsupportedReasonForName(name: String): String {
+    if (name == "i686_gnu") {
+        return "no bundled import library payload exists under i686_gnu/lib"
+    }
+    if (name == "aarch64_gnu") {
+        return "no bundled import library payload exists under aarch64_gnu/lib"
+    }
+    if (name == "x86_64_msvc") {
+        return "no bundled MSVC import library payload exists under x86_64_msvc/lib"
+    }
+    if (name == "i686_msvc") {
+        return "no bundled MSVC import library payload exists under i686_msvc/lib"
+    }
+    if (name == "aarch64_msvc") {
+        return "no bundled MSVC import library payload exists under aarch64_msvc/lib"
+    }
+    "target is not part of the windows-targets import library matrix"
+}
+
+private func unsupportedTarget(name: String): UnsupportedTarget {
+    UnsupportedTarget(name, unsupportedReasonForName(name))
 }
 
 public func targetsVersion(): String {
@@ -81,7 +156,7 @@ public func supportedImportLibTargets(): Array<ImportLibTarget> {
     ]
 }
 
-public func plannedImportLibTargets(): Array<ImportLibTarget> {
+public func unsupportedImportLibTargets(): Array<ImportLibTarget> {
     [
         importLibTarget("i686_gnu", "i686", "gnu", "gnu", "i686_gnu/lib", None, false),
         importLibTarget("aarch64_gnu", "aarch64", "gnu", "gnu", "aarch64_gnu/lib", None, false),
@@ -92,32 +167,66 @@ public func plannedImportLibTargets(): Array<ImportLibTarget> {
 }
 
 public func importLibTargets(): Array<ImportLibTarget> {
+    let supported = supportedImportLibTargets()
+    let unsupported = unsupportedImportLibTargets()
     [
-        supportedImportLibTargets()[0],
-        plannedImportLibTargets()[0],
-        plannedImportLibTargets()[1],
-        plannedImportLibTargets()[2],
-        plannedImportLibTargets()[3],
-        plannedImportLibTargets()[4]
+        supported[0],
+        unsupported[0],
+        unsupported[1],
+        unsupported[2],
+        unsupported[3],
+        unsupported[4]
     ]
 }
 
-public func requireSupportedImportLibTarget(name: String): ImportLibTarget {
-    for (target in supportedImportLibTargets()) {
-        if (target.name == name) {
-            return target
-        }
-    }
-    throw Exception("unsupported windows-targets import library target: ${name}")
-}
-
-public func findSupportedImportLibTarget(name: String): Option<ImportLibTarget> {
-    for (target in supportedImportLibTargets()) {
+public func findImportLibTarget(name: String): Option<ImportLibTarget> {
+    for (target in importLibTargets()) {
         if (target.name == name) {
             return Some(target)
         }
     }
     None
+}
+
+public func requireImportLibTarget(name: String): ImportLibTarget {
+    match (findImportLibTarget(name)) {
+        case Some(target) => target
+        case None => throw unsupportedTarget(name)
+    }
+}
+
+public func requireSupportedImportLibTarget(name: String): ImportLibTarget {
+    match (findImportLibTarget(name)) {
+        case Some(target) =>
+            if (target.supported) {
+                return target
+            }
+            throw unsupportedTarget(name)
+        case None => throw unsupportedTarget(name)
+    }
+}
+
+public func requireImportLibArchiveRelativePath(target: ImportLibTarget): String {
+    target.requireArchiveRelativePath()
+}
+
+public func requireImportLibArchivePath(target: ImportLibTarget, root: String): String {
+    target.requireArchivePath(root)
+}
+
+public func requireImportLibGnuLinkOptions(target: ImportLibTarget, root: String): Array<String> {
+    target.requireGnuLinkOptions(root)
+}
+
+public func findSupportedImportLibTarget(name: String): Option<ImportLibTarget> {
+    match (findImportLibTarget(name)) {
+        case Some(target) =>
+            if (target.supported) {
+                return Some(target)
+            }
+            None
+        case None => None
+    }
 }
 
 public func importLibArchiveRelativePath(target: ImportLibTarget): Option<String> {
@@ -145,6 +254,9 @@ public func currentImportLibTargetName(): Option<String> {
 public func requireCurrentImportLibTarget(): ImportLibTarget {
     match (currentImportLibTargetName()) {
         case Some(name) => requireSupportedImportLibTarget(name)
-        case None => throw Exception("windows-targets only bundles import libraries for x86_64 Windows GNU")
+        case None => throw UnsupportedTarget(
+            "current",
+            "windows-targets only bundles import libraries for x86_64 Windows GNU"
+        )
     }
 }

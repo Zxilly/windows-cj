@@ -2,7 +2,7 @@ package windows_winui3.xaml
 
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_POINTER, GUID, IID_IUNKNOWN, IUnknownVtbl, S_OK, coTaskMemAlloc, coTaskMemFree}
+import windows_core.{E_FAIL, E_POINTER, GUID, HRESULT, IID_IUNKNOWN, IUnknownVtbl, S_OK, coTaskMemAlloc, coTaskMemFree}
 
 class XamlTestFlag {
     var value = false
@@ -108,6 +108,48 @@ func xamlTestThrows(action: () -> Unit): Bool {
 }
 
 @Test
+func testFailedWinuiOutSlotCleanupReleasesAndClearsPartialResult() {
+    xamlTestComReleaseCount = 0
+    var result = xamlTestCreateComObject()
+
+    var threw = false
+    try {
+        releaseFailedWinuiOutSlot(CPointer<CPointer<Unit>>(inout result))
+        checkHRESULT(HRESULT(E_FAIL.value), "test failed out slot")
+    } catch (_: Exception) {
+        threw = true
+    }
+
+    @Expect(threw, true)
+    @Expect(result.isNull(), true)
+    @Expect(xamlTestComReleaseCount, 1)
+}
+
+@Test
+func testFailedWinuiOutSlotCleanupReleasesBothCreateInstanceOutputs() {
+    xamlTestComReleaseCount = 0
+    var inner = xamlTestCreateComObject()
+    var result = xamlTestCreateComObject()
+    let hr = HRESULT(E_FAIL.value)
+
+    var threw = false
+    try {
+        if (hr.failed()) {
+            releaseFailedWinuiOutSlot(CPointer<CPointer<Unit>>(inout inner))
+            releaseFailedWinuiOutSlot(CPointer<CPointer<Unit>>(inout result))
+        }
+        checkHRESULT(hr, "test failed two out slots")
+    } catch (_: Exception) {
+        threw = true
+    }
+
+    @Expect(threw, true)
+    @Expect(inner.isNull(), true)
+    @Expect(result.isNull(), true)
+    @Expect(xamlTestComReleaseCount, 2)
+}
+
+@Test
 func testApplicationCallbackStateNoThrowReleasesAndClearsSlot() {
     let counter = XamlTestCounter()
     let slot = addApplicationInitializationCallbackSlot({ => counter.value += 1 })
@@ -124,6 +166,23 @@ func testApplicationCallbackStateNoThrowReleasesAndClearsSlot() {
     @Expect(againRaw.isNull(), true)
     @Expect(againSlot, -1)
     @Expect(againClosed, true)
+}
+
+@Test
+func testApplicationCallbackFinalizerStateOnlyDropsLocalSlot() {
+    let counter = XamlTestCounter()
+    let slot = addApplicationInitializationCallbackSlot({ => counter.value += 1 })
+
+    try {
+        let (nextRaw, nextSlot, nextClosed) = finalizeApplicationCallbackStateNoThrow()
+        @Expect(nextRaw.isNull(), true)
+        @Expect(nextSlot, -1)
+        @Expect(nextClosed, true)
+        @Expect(invokeApplicationInitializationCallbackSlot(slot), true)
+        @Expect(counter.value, 1)
+    } finally {
+        clearApplicationInitializationCallbackSlot(slot)
+    }
 }
 
 @Test
@@ -191,6 +250,23 @@ func testRawHandleCloseStateReleasesOnce() {
 }
 
 @Test
+func testRawHandleFinalizerStateDoesNotReleaseNativePointer() {
+    xamlTestComReleaseCount = 0
+    let raw = xamlTestCreateComObject()
+
+    try {
+        let (nextRaw, nextClosed) = finalizeWinuiRawStateNoThrow()
+        @Expect(nextRaw.isNull(), true)
+        @Expect(nextClosed, true)
+        @Expect(xamlTestComReleaseCount, 0)
+    } finally {
+        releaseRaw(raw)
+    }
+
+    @Expect(xamlTestComReleaseCount, 1)
+}
+
+@Test
 func testRawHandleWrappersCloseReleaseOnce() {
     xamlTestComReleaseCount = 0
 
@@ -246,6 +322,23 @@ func testRoutedEventHandlerStateNoThrowReleasesAndClearsSlot() {
     @Expect(againRaw.isNull(), true)
     @Expect(againSlot, -1)
     @Expect(againClosed, true)
+}
+
+@Test
+func testRoutedEventHandlerFinalizerStateOnlyDropsLocalSlot() {
+    let counter = XamlTestCounter()
+    let slot = addRoutedEventHandlerSlot({ => counter.value += 1 })
+
+    try {
+        let (nextRaw, nextSlot, nextClosed) = finalizeRoutedEventHandlerStateNoThrow()
+        @Expect(nextRaw.isNull(), true)
+        @Expect(nextSlot, -1)
+        @Expect(nextClosed, true)
+        @Expect(invokeRoutedEventHandlerSlot(slot), true)
+        @Expect(counter.value, 1)
+    } finally {
+        clearRoutedEventHandlerSlot(slot)
+    }
 }
 
 @Test

@@ -1,8 +1,17 @@
 package windows_registry
 
+import std.fs.*
 import std.unittest.*
 import std.unittest.testmacro.*
 import windows_result.*
+
+func readRegistrySourceForTesting(): String {
+    try {
+        return String.fromUtf8(File.readFrom("windows-registry/src/lib.cj"))
+    } catch (_: Exception) {
+        return String.fromUtf8(File.readFrom("src/lib.cj"))
+    }
+}
 
 @Test
 func testRegistryValueRejectsMalformedIntegerByteLengths() {
@@ -98,7 +107,20 @@ func testRegistryOwnedInvalidResourcesCloseIdempotently() {
 }
 
 @Test
+func testRegistryCloseClearsOwnedSlotsBeforeNativeClose() {
+    let source = readRegistrySourceForTesting()
+    let transactionClose = "let closing = handle\n        closed = true\n        handle = HANDLE()\n        closeHandleNoThrow(closing)"
+    let transactionCloseCrLf = "let closing = handle\r\n        closed = true\r\n        handle = HANDLE()\r\n        closeHandleNoThrow(closing)"
+    let keyClose = "let closing = handle\n        closed = true\n        handle = HKEY()\n        closeRegistryKeyNoThrow(closing)"
+    let keyCloseCrLf = "let closing = handle\r\n        closed = true\r\n        handle = HKEY()\r\n        closeRegistryKeyNoThrow(closing)"
+
+    @Expect(source.contains(transactionClose) || source.contains(transactionCloseCrLf), true)
+    @Expect(source.contains(keyClose) || source.contains(keyCloseCrLf), true)
+}
+
+@Test
 func testRegistryBorrowedRootKeysDoNotClose() {
+    CURRENT_USER.close()
     CURRENT_USER.close()
 
     @Expect(CURRENT_USER.isClosed(), false)

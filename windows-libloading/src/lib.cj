@@ -87,6 +87,9 @@ public func resolveProcFromSearchPath(moduleName: String, procName: String): CPo
 }
 
 public func resolveProcByOrdinal(moduleName: String, ordinal: Int64): CPointer<Unit> {
+    if (ordinal < 0 || ordinal > 0xFFFF) {
+        throw Exception("ordinal must be in the range 0..65535")
+    }
     let moduleKey = systemModuleKey(moduleName)
     let cacheKey = "${moduleKey}\n#${ordinal}"
     synchronized(cacheMutex) {
@@ -120,6 +123,7 @@ public func loadLibraryFromSearchPathUncached(moduleName: String): CPointer<Unit
 }
 
 func loadLibraryWithFlags(moduleNameBytes: Array<UInt8>, flags: UInt32): CPointer<Unit> {
+    ensureNullTerminatedBytes(moduleNameBytes, "module name")
     unsafe {
         let moduleNameHandle = acquireArrayRawData(moduleNameBytes)
         try {
@@ -135,6 +139,7 @@ func loadLibraryWithFlags(moduleNameBytes: Array<UInt8>, flags: UInt32): CPointe
 }
 
 public func resolveProcUncached(module: CPointer<Unit>, procNameBytes: Array<UInt8>): CPointer<Unit> {
+    ensureNullTerminatedBytes(procNameBytes, "proc name")
     unsafe {
         let procNameHandle = acquireArrayRawData(procNameBytes)
         try {
@@ -224,6 +229,18 @@ func ensureSystemModuleNameBytes(moduleNameBytes: Array<UInt8>): Unit {
         }
         index += 1
     }
+    throw Exception("module name must be null-terminated")
+}
+
+func ensureNullTerminatedBytes(bytes: Array<UInt8>, label: String): Unit {
+    var index: Int64 = 0
+    while (index < bytes.size) {
+        if (bytes[index] == 0u8) {
+            return
+        }
+        index += 1
+    }
+    throw Exception("${label} must be null-terminated")
 }
 
 func isPathLikeModuleName(moduleName: String): Bool {

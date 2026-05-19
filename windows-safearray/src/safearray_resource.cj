@@ -12,8 +12,30 @@ func destroySafeArrayNoThrow(handle: CPointer<SAFEARRAY>, closed: Bool): Unit {
     } catch (_: Exception) {}
 }
 
+func closeSafeArrayState(handle: CPointer<SAFEARRAY>, closed: Bool): (CPointer<SAFEARRAY>, Bool) {
+    if (closed || handle.isNull()) {
+        return (CPointer<SAFEARRAY>(), true)
+    }
+    let hr = safeArrayDestroy(handle)
+    if (hr < 0) {
+        throw SafeArrayAbiException("SafeArrayDestroy failed with HRESULT ${hr}")
+    }
+    (CPointer<SAFEARRAY>(), true)
+}
+
+func takeSafeArrayCopyResult(hr: Int32, slot: CPointer<SAFEARRAY>): SafeArray {
+    if (hr < 0) {
+        destroySafeArrayNoThrow(slot, false)
+        throw SafeArrayAbiException("SafeArrayCopy failed with HRESULT ${hr}")
+    }
+    if (slot.isNull()) {
+        throw SafeArrayAbiException("SafeArrayCopy returned null")
+    }
+    SafeArray(slot)
+}
+
 /// SafeArray — owning wrapper around a SAFEARRAY descriptor pointer. Calls
-/// SafeArrayDestroy on close / finalisation, which releases the descriptor,
+/// SafeArrayDestroy on explicit close, which releases the descriptor,
 /// the contained data block, and any contained reference-counted elements
 /// (BSTR / IUnknown / IDispatch / VARIANT).
 ///
@@ -22,6 +44,7 @@ func destroySafeArrayNoThrow(handle: CPointer<SAFEARRAY>, closed: Bool): Unit {
 public class SafeArray <: Resource {
     var handle: CPointer<SAFEARRAY> = CPointer<SAFEARRAY>()
     private var closed: Bool = false
+    private var closing: Bool = false
 
     public init() {}
 
@@ -175,10 +198,7 @@ public class SafeArray <: Resource {
         var slot: CPointer<SAFEARRAY> = CPointer<SAFEARRAY>()
         let slotPtr = unsafe { CPointer<CPointer<SAFEARRAY>>(inout slot) }
         let hr = safeArrayCopyAbi(handle, slotPtr)
-        if (hr < 0) {
-            throw SafeArrayAbiException("SafeArrayCopy failed with HRESULT ${hr}")
-        }
-        SafeArray(slot)
+        takeSafeArrayCopyResult(hr, slot)
     }
 
     /// Transfer ownership of the raw descriptor pointer to the caller.
@@ -191,20 +211,23 @@ public class SafeArray <: Resource {
     }
 
     public func close(): Unit {
-        if (closed) {
+        if (closed || closing) {
             return
         }
-        destroySafeArrayNoThrow(handle, false)
-        handle = CPointer<SAFEARRAY>()
-        closed = true
+        closing = true
+        try {
+            let (nextHandle, nextClosed) = closeSafeArrayState(handle, false)
+            handle = nextHandle
+            closed = nextClosed
+        } finally {
+            closing = false
+        }
     }
 
     ~init() {
-        if (!closed) {
-            destroySafeArrayNoThrow(handle, false)
-            handle = CPointer<SAFEARRAY>()
-            closed = true
-        }
+        handle = CPointer<SAFEARRAY>()
+        closed = true
+        closing = false
     }
 }
 

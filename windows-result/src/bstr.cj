@@ -103,9 +103,6 @@ class BasicString <: Resource & ToString & Equatable<BasicString> {
     }
 
     ~init() {
-        if (!closed && ownsStorage && ptr.isNotNull()) {
-            sysFreeStringAbi(ptr)
-        }
         ptr = CPointer<UInt16>()
         ownsStorage = false
         closed = true

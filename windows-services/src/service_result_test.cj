@@ -43,6 +43,21 @@ func testServiceStateAndFallbackPath() {
     @Expect(result.isOk(), true)
     @Expect(fallbackRan.value, true)
     @Expect(service.state() == State.Stopped, true)
+    @Expect(activeServiceIdForTesting(), 0)
+    @Expect(activeServiceRegistrySizeForTesting(), 0)
+}
+
+@Test
+func testServiceFallbackThrowStopsAndUnregistersService() {
+    let service = Service.new().canFallback({ _ => throw Exception("fallback failed") })
+    let probe = CommandProbe()
+
+    @Expect(serviceTestThrows({ => let _ = service.run({ _, command => recordCommand(probe, command) }) }), true)
+    @Expect(probe.startCount, 1)
+    @Expect(probe.stopCount, 1)
+    @Expect(service.state() == State.Stopped, true)
+    @Expect(activeServiceIdForTesting(), 0)
+    @Expect(activeServiceRegistrySizeForTesting(), 0)
 }
 
 @Test

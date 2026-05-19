@@ -197,44 +197,48 @@ public class Service {
         }
 
         let serviceId = registerService(this)
-        var table = Array<SERVICE_TABLE_ENTRYW>(2, repeat: SERVICE_TABLE_ENTRYW())
-        let serviceName = Array<UInt16>(1, repeat: 0u16)
-        let started = unsafe {
-            let nameHandle = acquireArrayRawData(serviceName)
-                let tableHandle = acquireArrayRawData(table)
-                try {
-                    var entry = SERVICE_TABLE_ENTRYW()
-                    entry.lpServiceName = nameHandle.pointer
-                    entry.lpServiceProc = serviceMainThunk
-                    table[0] = entry
-                    table[1] = SERVICE_TABLE_ENTRYW()
-                    Win32Services.StartServiceCtrlDispatcherW(tableHandle.pointer)
-                } finally {
-                    releaseArrayRawData(tableHandle)
-                    releaseArrayRawData(nameHandle)
+        try {
+            var table = Array<SERVICE_TABLE_ENTRYW>(2, repeat: SERVICE_TABLE_ENTRYW())
+            let serviceName = Array<UInt16>(1, repeat: 0u16)
+            let started = unsafe {
+                let nameHandle = acquireArrayRawData(serviceName)
+                    let tableHandle = acquireArrayRawData(table)
+                    try {
+                        var entry = SERVICE_TABLE_ENTRYW()
+                        entry.lpServiceName = nameHandle.pointer
+                        entry.lpServiceProc = serviceMainThunk
+                        table[0] = entry
+                        table[1] = SERVICE_TABLE_ENTRYW()
+                        Win32Services.StartServiceCtrlDispatcherW(tableHandle.pointer)
+                    } finally {
+                        releaseArrayRawData(tableHandle)
+                        releaseArrayRawData(nameHandle)
+                }
             }
-        }
 
-        if (!started) {
-            match (takeFallback()) {
-                case Some(fallback) =>
-                    setState(State.StartPending)
-                    command(Command.Start)
-                    setState(State.Running)
-                    fallback(this)
-                    setState(State.StopPending)
-                    command(Command.Stop)
-                    setState(State.Stopped)
-                    unregisterService(serviceId)
-                    return ServiceResult<Unit>.Ok(())
-                case None =>
-                    unregisterService(serviceId)
-                    return ServiceResult<Unit>.Err("Use service control manager to start service")
+            if (!started) {
+                match (takeFallback()) {
+                    case Some(fallback) =>
+                        setState(State.StartPending)
+                        command(Command.Start)
+                        setState(State.Running)
+                        try {
+                            fallback(this)
+                        } finally {
+                            setState(State.StopPending)
+                            command(Command.Stop)
+                            setState(State.Stopped)
+                        }
+                        return ServiceResult<Unit>.Ok(())
+                    case None =>
+                        return ServiceResult<Unit>.Err("Use service control manager to start service")
+                }
             }
-        }
 
-        unregisterService(serviceId)
-        ServiceResult<Unit>.Ok(())
+            ServiceResult<Unit>.Ok(())
+        } finally {
+            unregisterService(serviceId)
+        }
     }
 
     public func setState(state: State): Unit {
@@ -327,6 +331,16 @@ private func unregisterService(id: UIntNative): Unit {
 private func currentActiveServiceId(): UIntNative {
     synchronized(registryMutex) {
         activeServiceId
+    }
+}
+
+func activeServiceIdForTesting(): UIntNative {
+    currentActiveServiceId()
+}
+
+func activeServiceRegistrySizeForTesting(): Int64 {
+    synchronized(registryMutex) {
+        serviceRegistry.size
     }
 }
 

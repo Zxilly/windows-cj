@@ -252,6 +252,7 @@ public func decodeUtf8Lossy(bytes: Array<UInt8>): String {
         }
 
         if (index + expected >= len) {
+            result += "${Rune(0xFFFDu32)}"
             break
         }
 

@@ -154,6 +154,11 @@ func closeApplicationCallbackStateNoThrow(
     return (CPointer<Unit>(), -1, true)
 }
 
+// GC finalizers only detach local managed state; explicit close owns native cleanup.
+func finalizeApplicationCallbackStateNoThrow(): (CPointer<Unit>, Int64, Bool) {
+    return (CPointer<Unit>(), -1, true)
+}
+
 func closeWinuiRawStateNoThrow(raw: CPointer<Unit>, closed: Bool): (CPointer<Unit>, Bool) {
     if (!closed && raw.isNotNull()) {
         try {
@@ -162,6 +167,10 @@ func closeWinuiRawStateNoThrow(raw: CPointer<Unit>, closed: Bool): (CPointer<Uni
             ()
         }
     }
+    return (CPointer<Unit>(), true)
+}
+
+func finalizeWinuiRawStateNoThrow(): (CPointer<Unit>, Bool) {
     return (CPointer<Unit>(), true)
 }
 
@@ -187,6 +196,10 @@ func closeRoutedEventHandlerStateNoThrow(
             }
         }
     }
+    return (CPointer<Unit>(), -1, true)
+}
+
+func finalizeRoutedEventHandlerStateNoThrow(): (CPointer<Unit>, Int64, Bool) {
     return (CPointer<Unit>(), -1, true)
 }
 
@@ -230,7 +243,7 @@ public class ApplicationCallback <: Resource {
     }
 
     ~init() {
-        let (nextRawObject, nextSlot, nextClosed) = closeApplicationCallbackStateNoThrow(rawObject, slot, closed)
+        let (nextRawObject, nextSlot, nextClosed) = finalizeApplicationCallbackStateNoThrow()
         rawObject = nextRawObject
         slot = nextSlot
         closed = nextClosed
@@ -267,6 +280,10 @@ public class WindowHandle <: Resource {
                     CPointer<CPointer<Unit>>(inout result)
                 )
             })
+            if (hr.failed()) {
+                releaseFailedWinuiOutSlot(CPointer<CPointer<Unit>>(inout inner))
+                releaseFailedWinuiOutSlot(CPointer<CPointer<Unit>>(inout result))
+            }
             checkHRESULT(hr, "IWindowFactory.CreateInstance")
             if (inner.isNotNull()) {
                 releaseRaw(inner)
@@ -322,7 +339,7 @@ public class WindowHandle <: Resource {
 
     ~init() {
         valueObject = None
-        let (nextRaw, nextClosed) = closeWinuiRawStateNoThrow(raw, closed)
+        let (nextRaw, nextClosed) = finalizeWinuiRawStateNoThrow()
         raw = nextRaw
         closed = nextClosed
     }
@@ -376,6 +393,9 @@ public class UIElementHandle <: Resource {
                         table.FindName(framework, borrow.asRaw(), CPointer<CPointer<Unit>>(inout result))
                     })
                 }
+                if (hr.failed()) {
+                    releaseFailedWinuiOutSlot(CPointer<CPointer<Unit>>(inout result))
+                }
                 checkHRESULT(hr, "IFrameworkElement.FindName(${name})")
                 if (result.isNull()) {
                     throw Exception("IFrameworkElement.FindName(${name}) returned null")
@@ -411,7 +431,7 @@ public class UIElementHandle <: Resource {
 
     ~init() {
         valueObject = None
-        let (nextRaw, nextClosed) = closeWinuiRawStateNoThrow(raw, closed)
+        let (nextRaw, nextClosed) = finalizeWinuiRawStateNoThrow()
         raw = nextRaw
         closed = nextClosed
     }
@@ -450,7 +470,7 @@ public class XamlObjectHandle <: Resource {
     }
 
     ~init() {
-        let (nextRaw, nextClosed) = closeWinuiRawStateNoThrow(raw, closed)
+        let (nextRaw, nextClosed) = finalizeWinuiRawStateNoThrow()
         raw = nextRaw
         closed = nextClosed
     }
@@ -490,7 +510,7 @@ public class ButtonBaseHandle <: Resource {
     }
 
     ~init() {
-        let (nextRaw, nextClosed) = closeWinuiRawStateNoThrow(raw, closed)
+        let (nextRaw, nextClosed) = finalizeWinuiRawStateNoThrow()
         raw = nextRaw
         closed = nextClosed
     }
@@ -536,7 +556,7 @@ class RoutedEventHandlerHandle <: Resource {
     }
 
     ~init() {
-        let (nextRawObject, nextSlot, nextClosed) = closeRoutedEventHandlerStateNoThrow(rawObject, slot, closed)
+        let (nextRawObject, nextSlot, nextClosed) = finalizeRoutedEventHandlerStateNoThrow()
         rawObject = nextRawObject
         slot = nextSlot
         closed = nextClosed
@@ -634,6 +654,9 @@ func loadXamlInspectable(xaml: HString): CPointer<Unit> {
                 table.Load(statics.asRaw(), borrow.asRaw(), CPointer<CPointer<Unit>>(inout result))
             })
         }
+        if (hr.failed()) {
+            releaseFailedWinuiOutSlot(CPointer<CPointer<Unit>>(inout result))
+        }
         checkHRESULT(hr, "IXamlReaderStatics.Load")
         if (result.isNull()) {
             throw Exception("IXamlReaderStatics.Load returned null")
@@ -660,6 +683,17 @@ func expectFactory<T>(result: Result<T>, operation: String): T {
 func releaseRaw(raw: CPointer<Unit>): Unit {
     if (raw.isNotNull()) {
         IUnknown.fromAbiTake(raw).close()
+    }
+}
+
+func releaseFailedWinuiOutSlot(slot: CPointer<CPointer<Unit>>): Unit {
+    if (slot.isNull()) {
+        return
+    }
+    let raw = unsafe { slot.read() }
+    if (raw.isNotNull()) {
+        unsafe { slot.write(CPointer<Unit>()) }
+        releaseRaw(raw)
     }
 }
 

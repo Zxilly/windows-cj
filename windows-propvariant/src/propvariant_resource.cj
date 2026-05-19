@@ -11,9 +11,21 @@ func releasePropVariantStorageNoThrow(storage: PROPVARIANT, closed: Bool): Unit 
     } catch (_: Exception) {}
 }
 
+func releasePropVariantStorage(storage: PROPVARIANT, closed: Bool): Unit {
+    if (closed || propVariantVt(storage) == VT_EMPTY) {
+        return
+    }
+    var slot = storage
+    let slotPtr = unsafe { CPointer<PROPVARIANT>(inout slot) }
+    let hr = propVariantClear(slotPtr)
+    if (hr < 0) {
+        throw PropVariantAbiException("PropVariantClear failed with HRESULT ${hr}")
+    }
+}
+
 /// PropVariant — owning wrapper around a 24-byte PROPVARIANT value that
 /// releases its payload (BSTR / IUnknown / IDispatch / SAFEARRAY / LPSTR /
-/// LPWSTR / CLSID / STREAM / STORAGE / ...) on close or finalization.
+/// LPWSTR / CLSID / STREAM / STORAGE / ...) on explicit close.
 ///
 /// PROPVARIANT itself is an `@C struct` and cannot implement an interface;
 /// this class provides the Cangjie-equivalent free behaviour via
@@ -21,12 +33,13 @@ func releasePropVariantStorageNoThrow(storage: PROPVARIANT, closed: Bool): Unit 
 public class PropVariant <: Resource {
     private var storage: PROPVARIANT = PROPVARIANT()
     private var closed: Bool = false
+    private var closing: Bool = false
 
     public init() {}
 
     /// Take ownership of an already-initialised PROPVARIANT value. The caller
     /// must no longer release the payload — this wrapper will call
-    /// PropVariantClear on close / finalisation.
+    /// PropVariantClear on explicit close.
     public init(value: PROPVARIANT) {
         this.storage = value
         if (propVariantVt(value) != VT_EMPTY) {
@@ -86,10 +99,18 @@ public class PropVariant <: Resource {
         if (closed) {
             throw PropVariantAbiException("PropVariant is already closed")
         }
-        releasePropVariantStorageNoThrow(storage, false)
-        storage = value
-        if (propVariantVt(value) != VT_EMPTY) {
-            ensurePropVariantClearAbiResolved()
+        if (closing) {
+            throw PropVariantAbiException("PropVariant is already closing")
+        }
+        closing = true
+        try {
+            releasePropVariantStorage(storage, false)
+            storage = value
+            if (propVariantVt(value) != VT_EMPTY) {
+                ensurePropVariantClearAbiResolved()
+            }
+        } finally {
+            closing = false
         }
     }
 
@@ -107,19 +128,22 @@ public class PropVariant <: Resource {
     }
 
     public func close(): Unit {
-        if (closed) {
+        if (closed || closing) {
             return
         }
-        releasePropVariantStorageNoThrow(storage, false)
-        storage = PROPVARIANT()
-        closed = true
+        closing = true
+        try {
+            releasePropVariantStorage(storage, false)
+            closed = true
+            storage = PROPVARIANT()
+        } finally {
+            closing = false
+        }
     }
 
     ~init() {
-        if (!closed) {
-            releasePropVariantStorageNoThrow(storage, false)
-            storage = PROPVARIANT()
-            closed = true
-        }
+        closed = true
+        closing = false
+        storage = PROPVARIANT()
     }
 }

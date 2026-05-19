@@ -15,6 +15,19 @@ func testResolveProcByOrdinalReportsMissingOrdinal() {
     @Expect(testThrows({ => let _ = resolveProcByOrdinal("kernel32.dll", 65535) }), true)
 }
 
+@Test
+func testResolveProcByOrdinalRejectsValuesOutsideOrdinalRange() {
+    @Expect(testThrows({ => let _ = resolveProcByOrdinal("kernel32.dll", -1) }), true)
+    @Expect(testThrows({ => let _ = resolveProcByOrdinal("kernel32.dll", 65536) }), true)
+}
+
+@Test
+func testUncachedByteInputsMustBeNullTerminatedBeforeFfi() {
+    @Expect(testThrows({ => let _ = loadSystemLibraryUncached([0x6Bu8]) }), true)
+    @Expect(testThrows({ => let _ = loadLibraryUncached([0x6Bu8]) }), true)
+    @Expect(testThrows({ => let _ = resolveProcUncached(CPointer<Unit>(), [0x47u8]) }), true)
+}
+
 @When[os == "Windows"]
 @Test
 func testUncachedLoadResolveAndFreeLibrary() {

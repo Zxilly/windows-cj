@@ -548,16 +548,13 @@ public class Transaction <: Resource {
         if (closed) {
             return
         }
-        closeHandleNoThrow(handle)
+        let closing = handle
         closed = true
         handle = HANDLE()
+        closeHandleNoThrow(closing)
     }
 
     ~init() {
-        if (closed) {
-            return
-        }
-        closeHandleNoThrow(handle)
         closed = true
         handle = HANDLE()
     }
@@ -1011,16 +1008,13 @@ public class Key <: Resource {
         if (!ownsHandle || closed) {
             return
         }
-        closeRegistryKeyNoThrow(handle)
+        let closing = handle
         closed = true
         handle = HKEY()
+        closeRegistryKeyNoThrow(closing)
     }
 
     ~init() {
-        if (!ownsHandle || closed) {
-            return
-        }
-        closeRegistryKeyNoThrow(handle)
         closed = true
         handle = HKEY()
     }

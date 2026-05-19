@@ -1,41 +1,44 @@
 package windows_result
 
-@When[test]
+@When[test && os == "Windows"]
+import std.fs.*
+
+@When[test && os == "Windows"]
 import std.unittest.*
 
-@When[test]
+@When[test && os == "Windows"]
 import std.unittest.testmacro.*
 
-@When[test]
+@When[test && os == "Windows"]
 func require(condition: Bool, message: String): Unit {
     if (!condition) {
         throw Exception(message)
     }
 }
 
-@When[test]
+@When[test && os == "Windows"]
 @C
 struct FakeIdentityInterface {
     var lpVtbl: CPointer<IUnknownVtbl> = CPointer<IUnknownVtbl>()
     init() {}
 }
 
-@When[test]
+@When[test && os == "Windows"]
 var fakeIdentityCanonicalPtr: CPointer<Unit> = CPointer<Unit>()
 
-@When[test]
+@When[test && os == "Windows"]
 var fakeIdentityQueryCalls: UInt32 = 0u32
 
-@When[test]
+@When[test && os == "Windows"]
 var fakeIdentityAddRefCalls: UInt32 = 0u32
 
-@When[test]
+@When[test && os == "Windows"]
 var fakeIdentityReleaseCalls: UInt32 = 0u32
 
-@When[test]
+@When[test && os == "Windows"]
 var fakeIdentityRefCount: UInt32 = 0u32
 
-@When[test]
+@When[test && os == "Windows"]
 func resetIdentityState(): Unit {
     fakeIdentityCanonicalPtr = CPointer<Unit>()
     fakeIdentityQueryCalls = 0u32
@@ -44,7 +47,16 @@ func resetIdentityState(): Unit {
     fakeIdentityRefCount = 0u32
 }
 
-@When[test]
+@When[test && os == "Windows"]
+func readComSourceForTesting(): String {
+    try {
+        return String.fromUtf8(File.readFrom("windows-result/src/com.cj"))
+    } catch (_: Exception) {
+        return String.fromUtf8(File.readFrom("src/com.cj"))
+    }
+}
+
+@When[test && os == "Windows"]
 @C
 func fakeIdentityQueryInterface(
     _: CPointer<Unit>,
@@ -69,7 +81,26 @@ func fakeIdentityQueryInterface(
     }
 }
 
-@When[test]
+@When[test && os == "Windows"]
+@C
+func fakeIdentityFailingPartialQueryInterface(
+    _: CPointer<Unit>,
+    iid: CPointer<GUID>,
+    resultPtr: CPointer<CPointer<Unit>>
+): Int32 {
+    unsafe {
+        fakeIdentityQueryCalls += 1u32
+        if (iid.isNull() || resultPtr.isNull()) {
+            return E_POINTER.value
+        }
+
+        resultPtr.write(fakeIdentityCanonicalPtr)
+        fakeIdentityRefCount = fakeIdentityAddRef(fakeIdentityCanonicalPtr)
+        E_FAIL.value
+    }
+}
+
+@When[test && os == "Windows"]
 @C
 func fakeIdentityAddRef(_: CPointer<Unit>): UInt32 {
     fakeIdentityAddRefCalls += 1u32
@@ -77,7 +108,7 @@ func fakeIdentityAddRef(_: CPointer<Unit>): UInt32 {
     fakeIdentityRefCount
 }
 
-@When[test]
+@When[test && os == "Windows"]
 @C
 func fakeIdentityRelease(_: CPointer<Unit>): UInt32 {
     fakeIdentityReleaseCalls += 1u32
@@ -87,36 +118,36 @@ func fakeIdentityRelease(_: CPointer<Unit>): UInt32 {
     fakeIdentityRefCount
 }
 
-@When[test]
+@When[test && os == "Windows"]
 @C
 struct FakeErrorInfo {
     var lpVtbl: CPointer<IErrorInfoVtbl> = CPointer<IErrorInfoVtbl>()
     init() {}
 }
 
-@When[test]
+@When[test && os == "Windows"]
 @C
 struct FakeRestrictedErrorInfo {
     var lpVtbl: CPointer<IRestrictedErrorInfoVtbl> = CPointer<IRestrictedErrorInfoVtbl>()
     init() {}
 }
 
-@When[test]
+@When[test && os == "Windows"]
 var fakeErrorInfoPrimaryPtr: CPointer<Unit> = CPointer<Unit>()
 
-@When[test]
+@When[test && os == "Windows"]
 var fakeRestrictedInfoPtr: CPointer<Unit> = CPointer<Unit>()
 
-@When[test]
+@When[test && os == "Windows"]
 var fakeErrorInfoAddRefCalls: UInt32 = 0u32
 
-@When[test]
+@When[test && os == "Windows"]
 var fakeErrorInfoReleaseCalls: UInt32 = 0u32
 
-@When[test]
+@When[test && os == "Windows"]
 var fakeErrorInfoRefCount: UInt32 = 0u32
 
-@When[test]
+@When[test && os == "Windows"]
 func resetErrorInfoLifetimeState(): Unit {
     fakeErrorInfoAddRefCalls = 0u32
     fakeErrorInfoReleaseCalls = 0u32
@@ -124,7 +155,7 @@ func resetErrorInfoLifetimeState(): Unit {
     let _ = setErrorInfoAbi(0u32, CPointer<Unit>())
 }
 
-@When[test]
+@When[test && os == "Windows"]
 @C
 func fakeErrorInfoQueryInterface(
     _: CPointer<Unit>,
@@ -151,7 +182,7 @@ func fakeErrorInfoQueryInterface(
     }
 }
 
-@When[test]
+@When[test && os == "Windows"]
 @C
 func fakeErrorInfoAddRef(_: CPointer<Unit>): UInt32 {
     fakeErrorInfoAddRefCalls += 1u32
@@ -159,7 +190,7 @@ func fakeErrorInfoAddRef(_: CPointer<Unit>): UInt32 {
     fakeErrorInfoRefCount
 }
 
-@When[test]
+@When[test && os == "Windows"]
 @C
 func fakeErrorInfoRelease(_: CPointer<Unit>): UInt32 {
     fakeErrorInfoReleaseCalls += 1u32
@@ -169,7 +200,7 @@ func fakeErrorInfoRelease(_: CPointer<Unit>): UInt32 {
     fakeErrorInfoRefCount
 }
 
-@When[test]
+@When[test && os == "Windows"]
 @C
 func fakeGetDescription(
     _: CPointer<Unit>,
@@ -183,7 +214,37 @@ func fakeGetDescription(
     S_OK.value
 }
 
-@When[test]
+@When[test && os == "Windows"]
+func allocateTestBstr(text: String): CPointer<UInt16> {
+    let units = encodeUtf16Units(text)
+    if (units.isEmpty()) {
+        return CPointer<UInt16>()
+    }
+    unsafe {
+        let handle = acquireArrayRawData(units)
+        try {
+            sysAllocStringLenAbi(handle.pointer, UInt32(units.size))
+        } finally {
+            releaseArrayRawData(handle)
+        }
+    }
+}
+
+@When[test && os == "Windows"]
+@C
+func fakeGetDescriptionFailingPartial(
+    _: CPointer<Unit>,
+    description: CPointer<CPointer<UInt16>>
+): Int32 {
+    unsafe {
+        if (description.isNotNull()) {
+            description.write(allocateTestBstr("partial description"))
+        }
+    }
+    E_FAIL.value
+}
+
+@When[test && os == "Windows"]
 @C
 func fakeGetErrorDetails(
     _: CPointer<Unit>,
@@ -209,7 +270,33 @@ func fakeGetErrorDetails(
     S_OK.value
 }
 
-@When[test]
+@When[test && os == "Windows"]
+@C
+func fakeGetErrorDetailsFailingPartial(
+    _: CPointer<Unit>,
+    fallback: CPointer<CPointer<UInt16>>,
+    errorCode: CPointer<Int32>,
+    description: CPointer<CPointer<UInt16>>,
+    reference: CPointer<CPointer<UInt16>>
+): Int32 {
+    unsafe {
+        if (fallback.isNotNull()) {
+            fallback.write(allocateTestBstr("partial fallback"))
+        }
+        if (errorCode.isNotNull()) {
+            errorCode.write(E_FAIL.value)
+        }
+        if (description.isNotNull()) {
+            description.write(allocateTestBstr("partial description"))
+        }
+        if (reference.isNotNull()) {
+            reference.write(allocateTestBstr("partial reference"))
+        }
+    }
+    E_FAIL.value
+}
+
+@When[test && os == "Windows"]
 @C
 func fakeGetReference(
     _: CPointer<Unit>,
@@ -223,7 +310,7 @@ func fakeGetReference(
     S_OK.value
 }
 
-@When[test]
+@When[test && os == "Windows"]
 func publishAndClearThreadError(infoPtr: CPointer<IErrorInfo>): Unit {
     let error = errorFromRawForTesting(E_FAIL, infoPtr)
     require(fakeErrorInfoRefCount == 1u32, "test setup should start with exactly one retained COM reference")
@@ -234,6 +321,147 @@ func publishAndClearThreadError(infoPtr: CPointer<IErrorInfo>): Unit {
 @When[test && os == "Windows"]
 @Test
 class WindowsResultInternalTests {
+    @TestCase
+    public func basicStringCloseIsIdempotent(): Unit {
+        let value = BasicString("owned BSTR")
+        try {
+            require(!value.isClosed(), "BasicString should start open")
+            require(value.asRaw().isNotNull(), "owned BasicString should expose its raw BSTR before close")
+            require(value.toString() == "owned BSTR", "BasicString should decode before close")
+
+            value.close()
+            require(value.isClosed(), "BasicString should report closed after explicit close")
+            require(value.asRaw().isNull(), "BasicString should hide its raw pointer after close")
+            require(value.length() == 0, "BasicString length should be zero after close")
+
+            value.close()
+            require(value.isClosed(), "BasicString close should be idempotent")
+            require(value.asRaw().isNull(), "BasicString pointer should stay null after repeated close")
+        } finally {
+            value.close()
+        }
+    }
+
+    @TestCase
+    public func heapStringCloseIsIdempotent(): Unit {
+        var buffer = CPointer<UInt16>()
+        let size = unsafe {
+            FormatMessageW(
+                FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+                CPointer<Unit>(),
+                ERROR_INVALID_DATA.value,
+                0u32,
+                CPointer<CPointer<UInt16>>(inout buffer),
+                0u32,
+                CPointer<Unit>()
+            )
+        }
+        let value = HeapString.fromRaw(buffer)
+        try {
+            require(size != 0u32, "test setup should allocate a Win32 message buffer")
+            require(!value.isClosed(), "HeapString should start open")
+            require(value.asRaw().isNotNull(), "owned HeapString should expose its raw pointer before close")
+            require(!value.decode(length: Int64(size)).isEmpty(), "HeapString should decode before close")
+
+            value.close()
+            require(value.isClosed(), "HeapString should report closed after explicit close")
+            require(value.asRaw().isNull(), "HeapString should hide its raw pointer after close")
+            require(value.toWideArray(length: Int64(size)).isEmpty(), "HeapString should be empty after close")
+
+            value.close()
+            require(value.isClosed(), "HeapString close should be idempotent")
+            require(value.asRaw().isNull(), "HeapString pointer should stay null after repeated close")
+        } finally {
+            value.close()
+        }
+    }
+
+    @TestCase
+    public func comHandleCloseIsIdempotentAndReleasesOnce(): Unit {
+        resetIdentityState()
+
+        var vtbl = IUnknownVtbl()
+        vtbl.QueryInterface = fakeIdentityQueryInterface
+        vtbl.AddRef = fakeIdentityAddRef
+        vtbl.Release = fakeIdentityRelease
+
+        var primary = FakeIdentityInterface()
+        primary.lpVtbl = CPointer<IUnknownVtbl>(inout vtbl)
+
+        let primaryPtr = CPointer<FakeIdentityInterface>(inout primary)
+        fakeIdentityCanonicalPtr = CPointer<Unit>(primaryPtr)
+        fakeIdentityRefCount = 1u32
+
+        let handle = ComHandle<FakeIdentityInterface>.fromAbiTake(primaryPtr)
+        try {
+            require(!handle.isClosed(), "ComHandle should start open")
+            require(handle.asRaw().isNotNull(), "ComHandle should expose raw pointer before close")
+
+            handle.close()
+            require(handle.isClosed(), "ComHandle should report closed after close")
+            require(handle.asRaw().isNull(), "ComHandle should clear raw pointer after close")
+            require(fakeIdentityReleaseCalls == 1u32, "ComHandle.close should call COM Release once")
+            require(fakeIdentityRefCount == 0u32, "ComHandle.close should release the owned COM reference")
+
+            handle.close()
+            require(handle.isClosed(), "ComHandle.close should be idempotent")
+            require(handle.asRaw().isNull(), "ComHandle raw pointer should stay null after repeated close")
+            require(fakeIdentityReleaseCalls == 1u32, "repeated ComHandle.close should not call COM Release again")
+        } finally {
+            handle.close()
+        }
+    }
+
+    @TestCase
+    public func comHandleReleaseIsIdempotentAndReleasesOnce(): Unit {
+        resetIdentityState()
+
+        var vtbl = IUnknownVtbl()
+        vtbl.QueryInterface = fakeIdentityQueryInterface
+        vtbl.AddRef = fakeIdentityAddRef
+        vtbl.Release = fakeIdentityRelease
+
+        var primary = FakeIdentityInterface()
+        primary.lpVtbl = CPointer<IUnknownVtbl>(inout vtbl)
+
+        let primaryPtr = CPointer<FakeIdentityInterface>(inout primary)
+        fakeIdentityCanonicalPtr = CPointer<Unit>(primaryPtr)
+        fakeIdentityRefCount = 1u32
+
+        let handle = ComHandle<FakeIdentityInterface>.fromAbiTake(primaryPtr)
+        try {
+            let remaining = handle.release()
+            require(remaining == 0u32, "ComHandle.release should return the COM Release result")
+            require(handle.isClosed(), "ComHandle.release should close the handle")
+            require(handle.asRaw().isNull(), "ComHandle.release should clear raw pointer")
+            require(fakeIdentityReleaseCalls == 1u32, "ComHandle.release should call COM Release once")
+
+            let repeated = handle.release()
+            require(repeated == 0u32, "repeated ComHandle.release should return zero")
+            require(fakeIdentityReleaseCalls == 1u32, "repeated ComHandle.release should not call COM Release again")
+        } finally {
+            handle.close()
+        }
+    }
+
+    @TestCase
+    public func comHandleFinalizerBodyDoesNotReleaseCom(): Unit {
+        let source = readComSourceForTesting()
+        let expectedLfBody = "~init() {\n        raw = CPointer<T>()\n        closed = true\n    }"
+        let expectedCrLfBody = "~init() {\r\n        raw = CPointer<T>()\r\n        closed = true\r\n    }"
+        let oldLfReleaseBody = "~init() {\n        if (!closed) {\n            comReleaseRaw(raw)"
+        let oldCrLfReleaseBody = "~init() {\r\n        if (!closed) {\r\n            comReleaseRaw(raw)"
+
+        require(
+            source.contains(expectedLfBody) || source.contains(expectedCrLfBody),
+            "ComHandle finalizer should only clear the raw slot and mark closed"
+        )
+        require(
+            !source.contains(oldLfReleaseBody) && !source.contains(oldCrLfReleaseBody),
+            "ComHandle finalizer body should not call the COM Release helper"
+        )
+    }
+
     @TestCase
     public func comHandleEqualityUsesCanonicalIUnknownIdentity(): Unit {
         if (slimErrorsEnabledForTesting()) {
@@ -273,6 +501,34 @@ class WindowsResultInternalTests {
     }
 
     @TestCase
+    public func failedComQueryInterfaceReleasesPartialOutput(): Unit {
+        resetIdentityState()
+
+        var vtbl = IUnknownVtbl()
+        vtbl.QueryInterface = fakeIdentityFailingPartialQueryInterface
+        vtbl.AddRef = fakeIdentityAddRef
+        vtbl.Release = fakeIdentityRelease
+
+        var primary = FakeIdentityInterface()
+        primary.lpVtbl = CPointer<IUnknownVtbl>(inout vtbl)
+
+        let primaryPtr = CPointer<FakeIdentityInterface>(inout primary)
+        fakeIdentityCanonicalPtr = CPointer<Unit>(primaryPtr)
+        fakeIdentityRefCount = 1u32
+
+        let result = comQueryInterfaceRaw<FakeIdentityInterface, IUnknown>(primaryPtr, IID_IUnknown)
+
+        match (result) {
+            case Some(_) => throw Exception("failing QueryInterface should not return a partial raw pointer")
+            case None => ()
+        }
+        require(fakeIdentityQueryCalls == 1u32, "test should call QueryInterface once")
+        require(fakeIdentityAddRefCalls == 1u32, "fake QueryInterface should publish one partial reference")
+        require(fakeIdentityReleaseCalls == 1u32, "failed partial QueryInterface output should be released")
+        require(fakeIdentityRefCount == 1u32, "partial release should restore the original reference count")
+    }
+
+    @TestCase
     public func errorMessageReturnsExplicitEmptyString(): Unit {
         if (slimErrorsEnabledForTesting()) {
             return
@@ -302,6 +558,65 @@ class WindowsResultInternalTests {
 
         let error = errorFromRawForTesting(E_FAIL, CPointer<IErrorInfo>(fakeErrorInfoPrimaryPtr))
         require(error.message() == "", "Error.message() should preserve an explicit empty COM message")
+    }
+
+    @TestCase
+    public func failedErrorDescriptionReleasesPartialBstr(): Unit {
+        if (slimErrorsEnabledForTesting()) {
+            return
+        }
+        resetErrorInfoLifetimeState()
+
+        var errorVtbl = IErrorInfoVtbl()
+        errorVtbl.base__.QueryInterface = fakeErrorInfoQueryInterface
+        errorVtbl.base__.AddRef = fakeErrorInfoAddRef
+        errorVtbl.base__.Release = fakeErrorInfoRelease
+        errorVtbl.GetDescription = fakeGetDescriptionFailingPartial
+
+        var info = FakeErrorInfo()
+        info.lpVtbl = CPointer<IErrorInfoVtbl>(inout errorVtbl)
+        let before = debugObservedSysFreeStringCount()
+
+        let result = captureDescription(CPointer<IErrorInfo>(CPointer<FakeErrorInfo>(inout info)))
+
+        match (result) {
+            case Some(_) => throw Exception("failing GetDescription should not return a partial message")
+            case None => ()
+        }
+        require(
+            debugObservedSysFreeStringCount() - before == 1i32,
+            "failed GetDescription partial BSTR should be freed once"
+        )
+    }
+
+    @TestCase
+    public func failedRestrictedErrorDetailsReleasesPartialBstrs(): Unit {
+        if (slimErrorsEnabledForTesting()) {
+            return
+        }
+        resetErrorInfoLifetimeState()
+
+        var restrictedVtbl = IRestrictedErrorInfoVtbl()
+        restrictedVtbl.base__.QueryInterface = fakeErrorInfoQueryInterface
+        restrictedVtbl.base__.AddRef = fakeErrorInfoAddRef
+        restrictedVtbl.base__.Release = fakeErrorInfoRelease
+        restrictedVtbl.GetErrorDetails = fakeGetErrorDetailsFailingPartial
+        restrictedVtbl.GetReference = fakeGetReference
+
+        var restricted = FakeRestrictedErrorInfo()
+        restricted.lpVtbl = CPointer<IRestrictedErrorInfoVtbl>(inout restrictedVtbl)
+        let before = debugObservedSysFreeStringCount()
+
+        let result = captureRestrictedDescription(CPointer<IRestrictedErrorInfo>(CPointer<FakeRestrictedErrorInfo>(inout restricted)))
+
+        match (result) {
+            case Some(_) => throw Exception("failing GetErrorDetails should not return a partial message")
+            case None => ()
+        }
+        require(
+            debugObservedSysFreeStringCount() - before == 3i32,
+            "failed GetErrorDetails partial BSTR outputs should be freed once each"
+        )
     }
 
     @TestCase

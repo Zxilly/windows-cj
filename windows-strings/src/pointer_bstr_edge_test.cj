@@ -87,4 +87,6 @@ func testBstrCloseReleasesOwnedStorageOnce() {
     @Expect(debugObservedSysFreeStringCount(), afterClose)
     @Expect(value.isClosed(), true)
     @Expect(value.ownsStorage(), false)
+    @Expect(value.asPtr().isNull(), true)
+    @Expect(value.length(), 0)
 }

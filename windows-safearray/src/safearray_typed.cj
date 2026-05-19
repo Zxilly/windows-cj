@@ -8,6 +8,18 @@ import windows_variant.VT_VARIANT
 import windows_variant.variantClear
 import windows_strings.BSTR
 
+func closeOwnedSafeArrayOnFailure(arr: SafeArray, body: () -> Unit): Unit {
+    var completed = false
+    try {
+        body()
+        completed = true
+    } finally {
+        if (!completed) {
+            arr.close()
+        }
+    }
+}
+
 func ensureLowerBoundZero(arr: SafeArray): Unit {
     if (arr.lbound(1u32) != 0i32) {
         throw SafeArrayAbiException("typed SafeArray wrapper requires lower bound 0")
@@ -41,8 +53,10 @@ public class SafeArrayOfInt32 <: Resource {
 
     public static func fromArray(values: Array<Int32>): SafeArrayOfInt32 {
         let result = withLength(Int64(values.size))
-        for (i in 0..values.size) {
-            result.set(i, values[i])
+        closeOwnedSafeArrayOnFailure(result.raw()) { =>
+            for (i in 0..values.size) {
+                result.set(i, values[i])
+            }
         }
         result
     }
@@ -50,12 +64,13 @@ public class SafeArrayOfInt32 <: Resource {
     /// Take ownership of an existing 1-d VT_I4 SAFEARRAY descriptor.
     public static func fromRaw(handle: CPointer<SAFEARRAY>): SafeArrayOfInt32 {
         let arr = SafeArray(handle)
-        if (!arr.isNull()) {
-            if (arr.vartype() != VT_I4) {
-                arr.close()
-                throw SafeArrayAbiException("SafeArrayOfInt32.fromRaw expected VT_I4 array")
+        closeOwnedSafeArrayOnFailure(arr) { =>
+            if (!arr.isNull()) {
+                if (arr.vartype() != VT_I4) {
+                    throw SafeArrayAbiException("SafeArrayOfInt32.fromRaw expected VT_I4 array")
+                }
+                ensureLowerBoundZero(arr)
             }
-            ensureLowerBoundZero(arr)
         }
         SafeArrayOfInt32(arr)
     }
@@ -131,20 +146,23 @@ public class SafeArrayOfFloat64 <: Resource {
 
     public static func fromArray(values: Array<Float64>): SafeArrayOfFloat64 {
         let result = withLength(Int64(values.size))
-        for (i in 0..values.size) {
-            result.set(i, values[i])
+        closeOwnedSafeArrayOnFailure(result.raw()) { =>
+            for (i in 0..values.size) {
+                result.set(i, values[i])
+            }
         }
         result
     }
 
     public static func fromRaw(handle: CPointer<SAFEARRAY>): SafeArrayOfFloat64 {
         let arr = SafeArray(handle)
-        if (!arr.isNull()) {
-            if (arr.vartype() != VT_R8) {
-                arr.close()
-                throw SafeArrayAbiException("SafeArrayOfFloat64.fromRaw expected VT_R8 array")
+        closeOwnedSafeArrayOnFailure(arr) { =>
+            if (!arr.isNull()) {
+                if (arr.vartype() != VT_R8) {
+                    throw SafeArrayAbiException("SafeArrayOfFloat64.fromRaw expected VT_R8 array")
+                }
+                ensureLowerBoundZero(arr)
             }
-            ensureLowerBoundZero(arr)
         }
         SafeArrayOfFloat64(arr)
     }
@@ -222,20 +240,23 @@ public class SafeArrayOfStrings <: Resource {
 
     public static func fromArray(values: Array<String>): SafeArrayOfStrings {
         let result = withLength(Int64(values.size))
-        for (i in 0..values.size) {
-            result.set(i, values[i])
+        closeOwnedSafeArrayOnFailure(result.raw()) { =>
+            for (i in 0..values.size) {
+                result.set(i, values[i])
+            }
         }
         result
     }
 
     public static func fromRaw(handle: CPointer<SAFEARRAY>): SafeArrayOfStrings {
         let arr = SafeArray(handle)
-        if (!arr.isNull()) {
-            if (arr.vartype() != VT_BSTR) {
-                arr.close()
-                throw SafeArrayAbiException("SafeArrayOfStrings.fromRaw expected VT_BSTR array")
+        closeOwnedSafeArrayOnFailure(arr) { =>
+            if (!arr.isNull()) {
+                if (arr.vartype() != VT_BSTR) {
+                    throw SafeArrayAbiException("SafeArrayOfStrings.fromRaw expected VT_BSTR array")
+                }
+                ensureLowerBoundZero(arr)
             }
-            ensureLowerBoundZero(arr)
         }
         SafeArrayOfStrings(arr)
     }
@@ -326,20 +347,23 @@ public class SafeArrayOfVariants <: Resource {
 
     public static func fromArray(values: Array<VARIANT>): SafeArrayOfVariants {
         let result = withLength(Int64(values.size))
-        for (i in 0..values.size) {
-            result.setRaw(i, values[i])
+        closeOwnedSafeArrayOnFailure(result.raw()) { =>
+            for (i in 0..values.size) {
+                result.setRaw(i, values[i])
+            }
         }
         result
     }
 
     public static func fromRaw(handle: CPointer<SAFEARRAY>): SafeArrayOfVariants {
         let arr = SafeArray(handle)
-        if (!arr.isNull()) {
-            if (arr.vartype() != VT_VARIANT) {
-                arr.close()
-                throw SafeArrayAbiException("SafeArrayOfVariants.fromRaw expected VT_VARIANT array")
+        closeOwnedSafeArrayOnFailure(arr) { =>
+            if (!arr.isNull()) {
+                if (arr.vartype() != VT_VARIANT) {
+                    throw SafeArrayAbiException("SafeArrayOfVariants.fromRaw expected VT_VARIANT array")
+                }
+                ensureLowerBoundZero(arr)
             }
-            ensureLowerBoundZero(arr)
         }
         SafeArrayOfVariants(arr)
     }

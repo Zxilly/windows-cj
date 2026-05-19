@@ -3,7 +3,175 @@ package windows_propvariant
 import std.unittest.*
 import std.unittest.testmacro.*
 import windows_interface.GUID
+import windows_interface.IUnknownVtbl
 import windows_strings.BSTR
+import windows_strings.HString
+import windows_strings.debugObservedWindowsCreateStringCount
+import windows_strings.debugObservedWindowsDeleteStringCount
+import windows_libloading as windows_libloading
+
+func propVariantSmokeOleAut32Proc(name: String): CPointer<Unit> {
+    try {
+        windows_libloading.resolveProc("oleaut32.dll", name)
+    } catch (_: Exception) {
+        throw PropVariantAbiException("failed to resolve OleAut32 smoke ABI '${name}'")
+    }
+}
+
+func propVariantSmokeSafeArrayCreateVector(vt: VARENUM, count: Int64): CPointer<Unit> {
+    let proc = propVariantSmokeOleAut32Proc("SafeArrayCreateVector")
+    let createFn = CFunc<(UInt16, Int32, UInt32) -> CPointer<Unit>>(proc)
+    let handle = unsafe { createFn(vt, 0i32, UInt32(count)) }
+    if (handle.isNull()) {
+        throw PropVariantAbiException("SafeArrayCreateVector returned null in PROPVARIANT smoke test")
+    }
+    handle
+}
+
+func propVariantSmokeSafeArrayDestroy(handle: CPointer<Unit>): Unit {
+    if (handle.isNull()) {
+        return
+    }
+    let proc = propVariantSmokeOleAut32Proc("SafeArrayDestroy")
+    let destroyFn = CFunc<(CPointer<Unit>) -> Int32>(proc)
+    let hr = unsafe { destroyFn(handle) }
+    if (hr < 0) {
+        throw PropVariantAbiException("SafeArrayDestroy failed in PROPVARIANT smoke test with HRESULT ${hr}")
+    }
+}
+
+func propVariantSmokeSafeArrayLock(handle: CPointer<Unit>): Unit {
+    let proc = propVariantSmokeOleAut32Proc("SafeArrayLock")
+    let lockFn = CFunc<(CPointer<Unit>) -> Int32>(proc)
+    let hr = unsafe { lockFn(handle) }
+    if (hr < 0) {
+        throw PropVariantAbiException("SafeArrayLock failed in PROPVARIANT smoke test with HRESULT ${hr}")
+    }
+}
+
+func propVariantSmokeSafeArrayUnlock(handle: CPointer<Unit>): Unit {
+    let proc = propVariantSmokeOleAut32Proc("SafeArrayUnlock")
+    let unlockFn = CFunc<(CPointer<Unit>) -> Int32>(proc)
+    let hr = unsafe { unlockFn(handle) }
+    if (hr < 0) {
+        throw PropVariantAbiException("SafeArrayUnlock failed in PROPVARIANT smoke test with HRESULT ${hr}")
+    }
+}
+
+func propVariantSmokeSafeArrayPutElement(
+    handle: CPointer<Unit>,
+    indexPtr: CPointer<Int32>,
+    dataPtr: CPointer<Unit>
+): Unit {
+    let proc = propVariantSmokeOleAut32Proc("SafeArrayPutElement")
+    let putFn = CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<Unit>) -> Int32>(proc)
+    let hr = unsafe { putFn(handle, indexPtr, dataPtr) }
+    if (hr < 0) {
+        throw PropVariantAbiException("SafeArrayPutElement failed in PROPVARIANT smoke test with HRESULT ${hr}")
+    }
+}
+
+func propVariantSmokeSafeArrayGetElement(
+    handle: CPointer<Unit>,
+    indexPtr: CPointer<Int32>,
+    dataPtr: CPointer<Unit>
+): Unit {
+    let proc = propVariantSmokeOleAut32Proc("SafeArrayGetElement")
+    let getFn = CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<Unit>) -> Int32>(proc)
+    let hr = unsafe { getFn(handle, indexPtr, dataPtr) }
+    if (hr < 0) {
+        throw PropVariantAbiException("SafeArrayGetElement failed in PROPVARIANT smoke test with HRESULT ${hr}")
+    }
+}
+
+func propVariantSmokeSafeArraySetBstr(handle: CPointer<Unit>, index: Int64, value: String): Unit {
+    let bstr = BSTR(value)
+    try {
+        var indexSlot = Int32(index)
+        let indexPtr = unsafe { CPointer<Int32>(inout indexSlot) }
+        let rawUnit = unsafe { CPointer<Unit>(bstr.asPtr()) }
+        propVariantSmokeSafeArrayPutElement(handle, indexPtr, rawUnit)
+    } finally {
+        bstr.close()
+    }
+}
+
+func propVariantSmokeSafeArrayBstrText(handle: CPointer<Unit>, index: Int64): String {
+    var indexSlot = Int32(index)
+    let indexPtr = unsafe { CPointer<Int32>(inout indexSlot) }
+    var raw: CPointer<UInt16> = CPointer<UInt16>()
+    let rawPtr = unsafe { CPointer<CPointer<UInt16>>(inout raw) }
+    let rawPtrUnit = unsafe { CPointer<Unit>(rawPtr) }
+    propVariantSmokeSafeArrayGetElement(handle, indexPtr, rawPtrUnit)
+    let bstr = BSTR.fromRawTake(raw)
+    var text = ""
+    try {
+        text = bstr.get()
+    } finally {
+        bstr.close()
+    }
+    text
+}
+
+func propVariantSmokeCreateBstrSafeArray(values: Array<String>): CPointer<Unit> {
+    let handle = propVariantSmokeSafeArrayCreateVector(VT_BSTR, values.size)
+    var completed = false
+    try {
+        for (i in 0..values.size) {
+            propVariantSmokeSafeArraySetBstr(handle, i, values[i])
+        }
+        completed = true
+    } finally {
+        if (!completed) {
+            propVariantSmokeSafeArrayDestroy(handle)
+        }
+    }
+    handle
+}
+
+func propVariantSmokeFromSafeArrayRaw(vt: VARENUM, handle: CPointer<Unit>): PROPVARIANT {
+    var result = zeroPayload(writeVtSlot(PROPVARIANT(), VT_ARRAY | vt))
+    unsafe {
+        let slotPtr = CPointer<PROPVARIANT>(inout result)
+        writePayloadPointer(payloadBase(slotPtr), 0, handle)
+    }
+    result
+}
+
+func propVariantSmokeSafeArrayRaw(value: PROPVARIANT): CPointer<Unit> {
+    var copy = value
+    unsafe {
+        let slotPtr = CPointer<PROPVARIANT>(inout copy)
+        readPayloadPointer(payloadBase(slotPtr), 0)
+    }
+}
+
+func propVariantTestThrows(action: () -> Unit): Bool {
+    try {
+        action()
+    } catch (_: Exception) {
+        return true
+    }
+    false
+}
+
+@C
+struct ReentrantPropVariantUnknown {
+    var lpVtbl: CPointer<IUnknownVtbl> = CPointer<IUnknownVtbl>()
+    init() {}
+}
+
+var reentrantPropVariantTarget: Option<PropVariant> = None
+var reentrantPropVariantReleaseCalls: UInt32 = 0u32
+
+@C
+func reentrantPropVariantRelease(_: CPointer<Unit>): UInt32 {
+    reentrantPropVariantReleaseCalls += 1u32
+    if (let Some(target) <- reentrantPropVariantTarget) {
+        target.close()
+    }
+    0u32
+}
 
 @Test
 func scalarPropVariantsRoundTrip(): Unit {
@@ -166,7 +334,125 @@ func propVariantClearReleasesLpwstrAllocation(): Unit {
     let before = debugObservedPropVariantClearCount()
     var owned = PropVariant(propVariantFromString("transient"))
     owned.close()
-    @Expect(debugObservedPropVariantClearCount() > before, true)
+    let afterClose = debugObservedPropVariantClearCount()
+    @Expect(afterClose > before, true)
+    owned.close()
+    @Expect(debugObservedPropVariantClearCount(), afterClose)
+}
+
+@Test
+func propVariantCloseIsReleaseReentrantSafe(): Unit {
+    ensurePropVariantClearAbiResolved()
+    var vtbl = IUnknownVtbl()
+    vtbl.Release = reentrantPropVariantRelease
+    var object = ReentrantPropVariantUnknown()
+    object.lpVtbl = CPointer<IUnknownVtbl>(inout vtbl)
+    reentrantPropVariantReleaseCalls = 0u32
+
+    let owned = PropVariant(propVariantFromUnknownRaw(CPointer<Unit>(inout object)))
+    reentrantPropVariantTarget = Some(owned)
+    try {
+        owned.close()
+        @Expect(owned.isClosed(), true)
+        @Expect(reentrantPropVariantReleaseCalls, 1u32)
+    } finally {
+        reentrantPropVariantTarget = None
+    }
+}
+
+@Test
+func propVariantCopyAndClearDeepCopiesBstrSafeArray(): Unit {
+    ensurePropVariantClearAbiResolved()
+    let clearBefore = debugObservedPropVariantClearCount()
+    let copyBefore = debugObservedPropVariantCopyCount()
+    let raw = propVariantSmokeCreateBstrSafeArray(["first", "second"])
+    let source = PropVariant(propVariantSmokeFromSafeArrayRaw(VT_BSTR, raw))
+    let dup = source.cloneSelf()
+    try {
+        @Expect(source.vt(), VT_ARRAY | VT_BSTR)
+        @Expect(dup.vt(), VT_ARRAY | VT_BSTR)
+        @Expect(debugObservedPropVariantCopyCount() > copyBefore, true)
+
+        let sourceArray = propVariantSmokeSafeArrayRaw(source.get())
+        let dupArray = propVariantSmokeSafeArrayRaw(dup.get())
+        @Expect(propVariantSmokeSafeArrayBstrText(sourceArray, 0), "first")
+        @Expect(propVariantSmokeSafeArrayBstrText(dupArray, 0), "first")
+
+        propVariantSmokeSafeArraySetBstr(sourceArray, 0, "replaced")
+        @Expect(propVariantSmokeSafeArrayBstrText(sourceArray, 0), "replaced")
+        @Expect(propVariantSmokeSafeArrayBstrText(dupArray, 0), "first")
+    } finally {
+        source.close()
+        dup.close()
+    }
+
+    let clearAfter = debugObservedPropVariantClearCount()
+    @Expect(clearAfter >= clearBefore + 2i32, true)
+    source.close()
+    dup.close()
+    @Expect(debugObservedPropVariantClearCount(), clearAfter)
+    @Expect(source.isClosed(), true)
+    @Expect(dup.isClosed(), true)
+}
+
+@Test
+func propVariantCloseRetainsPayloadWhenClearFails(): Unit {
+    ensurePropVariantClearAbiResolved()
+    let raw = propVariantSmokeCreateBstrSafeArray(["locked"])
+    propVariantSmokeSafeArrayLock(raw)
+    let owned = PropVariant(propVariantSmokeFromSafeArrayRaw(VT_BSTR, raw))
+
+    @Expect(propVariantTestThrows({ => owned.close() }), true)
+    @Expect(owned.isClosed(), false)
+    @Expect(owned.vt(), VT_ARRAY | VT_BSTR)
+    @Expect(propVariantSmokeSafeArrayRaw(owned.get()).toUIntNative(), raw.toUIntNative())
+
+    propVariantSmokeSafeArrayUnlock(raw)
+    owned.close()
+    @Expect(owned.isClosed(), true)
+}
+
+@When[os == "Windows"]
+@Test
+func hstringSystemHandleFeedsPropVariantStringsWithExplicitClose(): Unit {
+    let createBefore = debugObservedWindowsCreateStringCount()
+    let deleteBefore = debugObservedWindowsDeleteStringCount()
+    let clearBefore = debugObservedPropVariantClearCount()
+    let source = HString("propvariant-hstring")
+    let raw = source.toSystemHandleCopy()
+    let projected = HString.fromSystemHandleTake(raw)
+    let wide = PropVariant(propVariantFromString(projected.get()))
+    let bstr = PropVariant(propVariantFromBstrString(projected.get()))
+    let wideClone = wide.cloneSelf()
+    let bstrClone = bstr.cloneSelf()
+
+    try {
+        @Expect(debugObservedWindowsCreateStringCount(), createBefore + 1i32)
+        @Expect(debugObservedWindowsDeleteStringCount(), deleteBefore + 1i32)
+        @Expect(wide.vt(), VT_LPWSTR)
+        @Expect(bstr.vt(), VT_BSTR)
+        @Expect(wideClone.vt(), VT_LPWSTR)
+        @Expect(bstrClone.vt(), VT_BSTR)
+        @Expect(propVariantAsString(wideClone.get()).getOrThrow(), "propvariant-hstring")
+        @Expect(propVariantAsBstr(bstrClone.get()).getOrThrow().get(), "propvariant-hstring")
+    } finally {
+        wide.close()
+        bstr.close()
+        wideClone.close()
+        bstrClone.close()
+        projected.close()
+        source.close()
+    }
+
+    let clearAfter = debugObservedPropVariantClearCount()
+    @Expect(clearAfter >= clearBefore + 4i32, true)
+    wide.close()
+    bstr.close()
+    wideClone.close()
+    bstrClone.close()
+    @Expect(debugObservedPropVariantClearCount(), clearAfter)
+    @Expect(projected.isClosed(), true)
+    @Expect(source.isClosed(), true)
 }
 
 @Test

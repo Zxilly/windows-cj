@@ -30,6 +30,10 @@ func captureDescription(raw: CPointer<IErrorInfo>): Option<String> {
         HRESULT(vtbl.GetDescription(CPointer<Unit>(raw), CPointer<CPointer<UInt16>>(inout descriptionPtr)))
     }
     if (hr.failed()) {
+        if (descriptionPtr.isNotNull()) {
+            sysFreeStringAbi(descriptionPtr)
+            descriptionPtr = CPointer<UInt16>()
+        }
         return None
     }
 
@@ -65,6 +69,18 @@ func captureRestrictedDescription(raw: CPointer<IRestrictedErrorInfo>): Option<S
         )
     }
     if (hr.failed()) {
+        if (referencePtr.isNotNull()) {
+            sysFreeStringAbi(referencePtr)
+            referencePtr = CPointer<UInt16>()
+        }
+        if (descriptionPtr.isNotNull()) {
+            sysFreeStringAbi(descriptionPtr)
+            descriptionPtr = CPointer<UInt16>()
+        }
+        if (fallbackPtr.isNotNull()) {
+            sysFreeStringAbi(fallbackPtr)
+            fallbackPtr = CPointer<UInt16>()
+        }
         return None
     }
 

@@ -49,6 +49,10 @@ func comQueryInterfaceRaw<T, U>(raw: CPointer<T>, iid: GUID): Option<CPointer<U>
         if (hr.succeeded() && result.isNotNull()) {
             return Some(CPointer<U>(result))
         }
+        if (hr.failed() && result.isNotNull()) {
+            let _ = comReleaseRaw(result)
+            result = CPointer<Unit>()
+        }
     }
 
     None
@@ -122,11 +126,8 @@ class ComHandle<T> <: Resource where T <: CType {
     }
 
     ~init() {
-        if (!closed) {
-            comReleaseRaw(raw)
-            raw = CPointer<T>()
-            closed = true
-        }
+        raw = CPointer<T>()
+        closed = true
     }
 
     public operator func ==(other: ComHandle<T>): Bool {
@@ -157,11 +158,17 @@ class ComHandle<T> <: Resource where T <: CType {
         }
     }
 
-    public func close(): Unit {
+    public func release(): UInt32 {
         if (!closed) {
-            comReleaseRaw(raw)
+            let released = raw
             raw = CPointer<T>()
             closed = true
+            return comReleaseRaw(released)
         }
+        0u32
+    }
+
+    public func close(): Unit {
+        let _ = release()
     }
 }

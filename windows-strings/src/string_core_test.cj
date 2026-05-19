@@ -16,6 +16,8 @@ func testUtf16AndUtf8Helpers() {
     @Expect(decodeUtf16(copied), "AB")
     @Expect(appended[2], 0u16)
     @Expect(decodeUtf8Lossy([0x41u8, 0x42u8]), "AB")
+    @Expect(decodeUtf8Lossy([0xE2u8]), "${Rune(0xFFFDu32)}")
+    @Expect(decodeUtf8Lossy([0x41u8, 0xE2u8]), "A${Rune(0xFFFDu32)}")
 }
 
 @Test
@@ -54,6 +56,8 @@ func testHStringCloseReleasesOwnedStorageOnce() {
     @Expect(afterClose, before + 1i32)
     @Expect(debugObservedHStringFreeCount(), afterClose)
     @Expect(value.isClosed(), true)
+    @Expect(value.asRaw().isNull(), true)
+    @Expect(value.length(), 0)
 }
 
 @Test
@@ -68,6 +72,8 @@ func testHStringBuilderCloseReleasesOwnedStorageOnce() {
     @Expect(afterClose, before + 1i32)
     @Expect(debugObservedHStringFreeCount(), afterClose)
     @Expect(builder.isClosed(), true)
+    @Expect(builder.asRaw().isNull(), true)
+    @Expect(builder.length(), 0)
 }
 
 @When[os == "Windows"]
