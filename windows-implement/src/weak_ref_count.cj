@@ -308,15 +308,18 @@ public func weakReferenceSourceQueryInterfaceThunk(
     iid: CPointer<GUID>,
     resultSlot: CPointer<CPointer<Unit>>
 ): Int32 {
+    unsafe {
+        if (resultSlot.isNull()) {
+            return E_POINTER
+        }
+        resultSlot.write(CPointer<Unit>())
+        if (iid.isNull()) {
+            return E_POINTER
+        }
+    }
     match (lookupWeakReferenceTearOff(instanceRaw)) {
         case Some(tearOff) => tearOff.queryStrong(iid, resultSlot)
-        case None =>
-            unsafe {
-                if (resultSlot.isNotNull()) {
-                    resultSlot.write(CPointer<Unit>())
-                }
-            }
-            E_NOINTERFACE
+        case None => E_NOINTERFACE
     }
 }
 
@@ -341,15 +344,15 @@ public func weakReferenceSourceGetWeakReferenceThunk(
     instanceRaw: CPointer<Unit>,
     resultSlot: CPointer<CPointer<Unit>>
 ): Int32 {
+    unsafe {
+        if (resultSlot.isNull()) {
+            return E_POINTER
+        }
+        resultSlot.write(CPointer<Unit>())
+    }
     match (lookupWeakReferenceTearOff(instanceRaw)) {
         case Some(tearOff) => tearOff.writeWeakReference(resultSlot)
-        case None =>
-            unsafe {
-                if (resultSlot.isNotNull()) {
-                    resultSlot.write(CPointer<Unit>())
-                }
-            }
-            E_NOINTERFACE
+        case None => E_NOINTERFACE
     }
 }
 
@@ -359,15 +362,18 @@ public func weakReferenceQueryInterfaceThunk(
     iid: CPointer<GUID>,
     resultSlot: CPointer<CPointer<Unit>>
 ): Int32 {
+    unsafe {
+        if (resultSlot.isNull()) {
+            return E_POINTER
+        }
+        resultSlot.write(CPointer<Unit>())
+        if (iid.isNull()) {
+            return E_POINTER
+        }
+    }
     match (lookupWeakReferenceTearOff(instanceRaw)) {
         case Some(tearOff) => tearOff.queryWeak(iid, resultSlot)
-        case None =>
-            unsafe {
-                if (resultSlot.isNotNull()) {
-                    resultSlot.write(CPointer<Unit>())
-                }
-            }
-            E_NOINTERFACE
+        case None => E_NOINTERFACE
     }
 }
 
@@ -393,15 +399,18 @@ public func weakReferenceResolveThunk(
     iid: CPointer<GUID>,
     resultSlot: CPointer<CPointer<Unit>>
 ): Int32 {
+    unsafe {
+        if (resultSlot.isNull()) {
+            return E_POINTER
+        }
+        resultSlot.write(CPointer<Unit>())
+        if (iid.isNull()) {
+            return E_POINTER
+        }
+    }
     match (lookupWeakReferenceTearOff(instanceRaw)) {
         case Some(tearOff) => tearOff.resolve(iid, resultSlot)
-        case None =>
-            unsafe {
-                if (resultSlot.isNotNull()) {
-                    resultSlot.write(CPointer<Unit>())
-                }
-            }
-            E_NOINTERFACE
+        case None => E_NOINTERFACE
     }
 }
 

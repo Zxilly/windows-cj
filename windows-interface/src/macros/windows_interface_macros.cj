@@ -6,10 +6,12 @@ import std.collection.ArrayList
 class AbiParam {
     let name: String
     let typeName: String
+    let cleanupKind: String
 
-    init(name: String, typeName: String) {
+    init(name: String, typeName: String, cleanupKind: String) {
         this.name = name
         this.typeName = typeName
+        this.cleanupKind = cleanupKind
     }
 }
 
@@ -72,10 +74,56 @@ func directBaseName(interfaceDecl: InterfaceDecl): String {
     interfaceDecl.superTypes[0].toTokens().toString()
 }
 
-func parseMethod(funcDecl: FuncDecl): AbiMethod {
+func interfaceCleanupValue(cleanupSpecs: String, methodName: String, paramName: String): String {
+    let key = "${methodName}.${paramName}="
+    let bytes = cleanupSpecs.toArray()
+    let keyBytes = key.toArray()
+    let keySize = Int64(keyBytes.size)
+    var index: Int64 = 0
+    while (index + keySize <= Int64(bytes.size)) {
+        var matched = true
+        var keyIndex: Int64 = 0
+        while (keyIndex < keySize) {
+            if (bytes[index + keyIndex] != keyBytes[keyIndex]) {
+                matched = false
+                break
+            }
+            keyIndex += 1
+        }
+        if (matched) {
+            let valueStart = index + keySize
+            var valueEnd = valueStart
+            while (valueEnd < Int64(bytes.size) && bytes[valueEnd] != b';' && bytes[valueEnd] != b'"') {
+                valueEnd += 1
+            }
+            return String.fromUtf8(bytes[valueStart..valueEnd])
+        }
+        index += 1
+    }
+    ""
+}
+
+func interfaceCleanupKind(cleanupSpecs: String, methodName: String, paramName: String): String {
+    let cleanupValue = interfaceCleanupValue(cleanupSpecs, methodName, paramName)
+    if (cleanupValue == "HString" || cleanupValue == "Com") {
+        return cleanupValue
+    }
+    if (cleanupValue.startsWith("Array<") && cleanupValue.endsWith(">")) {
+        return cleanupValue
+    }
+    ""
+}
+
+func parseMethod(funcDecl: FuncDecl, cleanupSpecs: String): AbiMethod {
     let params = ArrayList<AbiParam>()
+    let methodName = funcDecl.identifier.value
     for (param in funcDecl.funcParams) {
-        params.add(AbiParam(param.identifier.value, typeSource(param.paramType)))
+        let paramName = param.identifier.value
+        params.add(AbiParam(
+            paramName,
+            typeSource(param.paramType),
+            interfaceCleanupKind(cleanupSpecs, methodName, paramName)
+        ))
     }
     let returnType = typeSource(funcDecl.declType)
     if (returnType != "Int32") {
@@ -86,14 +134,14 @@ func parseMethod(funcDecl: FuncDecl): AbiMethod {
             "Change the method return type to Int32"
         )
     }
-    AbiMethod(funcDecl.identifier.value, returnType, params.toArray())
+    AbiMethod(methodName, returnType, params.toArray())
 }
 
-func parseMethods(interfaceDecl: InterfaceDecl): Array<AbiMethod> {
+func parseMethods(interfaceDecl: InterfaceDecl, cleanupSpecs: String): Array<AbiMethod> {
     let methods = ArrayList<AbiMethod>()
     for (decl in interfaceDecl.body.decls) {
         match (decl as FuncDecl) {
-            case Some(funcDecl) => methods.add(parseMethod(funcDecl))
+            case Some(funcDecl) => methods.add(parseMethod(funcDecl, cleanupSpecs))
             case None =>
                 diagReport(
                     DiagReportLevel.ERROR,
@@ -147,12 +195,357 @@ func appendClosurePlaceholders(sb: StringBuilder, params: Array<AbiParam>): Unit
     }
 }
 
+func appendDefaultVtblClosureParams(sb: StringBuilder, params: Array<AbiParam>): Unit {
+    sb.append("_")
+    for (param in params) {
+        sb.append(", ")
+        sb.append(param.name)
+    }
+}
+
 func appendThunkArgs(sb: StringBuilder, params: Array<AbiParam>): Unit {
     var index: Int64 = 0
     while (index < params.size) {
         appendComma(sb, index)
         sb.append(params[index].name)
         index += 1
+    }
+}
+
+func substringBetween(value: String, start: Int64, end: Int64): String {
+    let arr = value.toArray()
+    let boundedEnd = if (end > Int64(arr.size)) {
+        Int64(arr.size)
+    } else {
+        end
+    }
+    if (start >= boundedEnd) {
+        return ""
+    }
+    String.fromUtf8(arr[start..boundedEnd])
+}
+
+func compactTypeName(value: String): String {
+    let compact = ArrayList<Byte>()
+    for (byte in value.toArray()) {
+        if (!isAttrWhitespace(byte)) {
+            compact.add(byte)
+        }
+    }
+    String.fromUtf8(compact.toArray())
+}
+
+func unwrapGenericType(value: String, wrapperName: String): Option<String> {
+    let compactValue = compactTypeName(value)
+    let prefix = "${wrapperName}<"
+    if (!compactValue.startsWith(prefix) || !compactValue.endsWith(">")) {
+        return None
+    }
+    let prefixLen = Int64(prefix.toArray().size)
+    let end = Int64(compactValue.toArray().size) - 1
+    Some(substringBetween(compactValue, prefixLen, end))
+}
+
+func defaultOutSlotValueExpr(typeName: String): String {
+    if (typeName == "Bool") {
+        return "false"
+    }
+    if (typeName == "Int8") {
+        return "0i8"
+    }
+    if (typeName == "Int16") {
+        return "0i16"
+    }
+    if (typeName == "Int32") {
+        return "0i32"
+    }
+    if (typeName == "Int64") {
+        return "0i64"
+    }
+    if (typeName == "UInt8" || typeName == "Byte") {
+        return "0u8"
+    }
+    if (typeName == "UInt16") {
+        return "0u16"
+    }
+    if (typeName == "UInt32") {
+        return "0u32"
+    }
+    if (typeName == "UInt64") {
+        return "0u64"
+    }
+    if (typeName == "Float32") {
+        return "0.0f32"
+    }
+    if (typeName == "Float64") {
+        return "0.0"
+    }
+    "${typeName}()"
+}
+
+func hasPointerSizeOutParam(method: AbiMethod, paramName: String): Bool {
+    for (candidate in method.params) {
+        if (candidate.name == "${paramName}Size" && candidate.typeName == "CPointer<UInt32>") {
+            return true
+        }
+    }
+    false
+}
+
+func isLikelyOutSlotParam(method: AbiMethod, param: AbiParam, valueType: String): Bool {
+    if (valueType == "Unit") {
+        return false
+    }
+    if (!param.cleanupKind.isEmpty()) {
+        return true
+    }
+    let name = param.name
+    if (
+        name == "result" ||
+        name == "value" ||
+        name == "innerInterface" ||
+        name == "object" ||
+        name == "instance" ||
+        name == "className" ||
+        name == "trustLevel" ||
+        name == "iidCount" ||
+        name == "iids" ||
+        name == "index" ||
+        name == "cookie" ||
+        name == "token" ||
+        name == "first" ||
+        name == "second"
+    ) {
+        return true
+    }
+    if (name.endsWith("Size") && param.typeName == "CPointer<UInt32>") {
+        return true
+    }
+    if (hasPointerSizeOutParam(method, name)) {
+        return true
+    }
+    false
+}
+
+func outSlotDefaultExpr(method: AbiMethod, param: AbiParam): Option<String> {
+    match (unwrapGenericType(param.typeName, "CPointer")) {
+        case Some(valueType) =>
+            if (isLikelyOutSlotParam(method, param, valueType)) {
+                return Some(defaultOutSlotValueExpr(valueType))
+            }
+        case None => ()
+    }
+    None
+}
+
+func methodParamType(method: AbiMethod, paramName: String): Option<String> {
+    for (candidate in method.params) {
+        if (candidate.name == paramName) {
+            return Some(candidate.typeName)
+        }
+    }
+    None
+}
+
+func appendVtblNoneBranchOutSlotClears(sb: StringBuilder, method: AbiMethod): Unit {
+    appendVtblOutSlotClears(sb, method, "                    ")
+}
+
+func appendVtblOutSlotClears(sb: StringBuilder, method: AbiMethod, indent: String): Unit {
+    for (param in method.params) {
+        match (outSlotDefaultExpr(method, param)) {
+            case Some(defaultExpr) =>
+                sb.append(indent)
+                sb.append("if (")
+                sb.append(param.name)
+                sb.append(".isNotNull()) {\n")
+                sb.append(indent)
+                sb.append("    unsafe { ")
+                sb.append(param.name)
+                sb.append(".write(")
+                sb.append(defaultExpr)
+                sb.append(") }\n")
+                sb.append(indent)
+                sb.append("}\n")
+            case None => ()
+        }
+    }
+}
+
+func methodHasVtblOutSlots(method: AbiMethod): Bool {
+    for (param in method.params) {
+        match (outSlotDefaultExpr(method, param)) {
+            case Some(_) => return true
+            case None => ()
+        }
+    }
+    false
+}
+
+func appendVtblSomeBranchOutSlotGuard(sb: StringBuilder, method: AbiMethod): Bool {
+    var hasOutSlot = false
+    for (param in method.params) {
+        match (outSlotDefaultExpr(method, param)) {
+            case Some(_) =>
+                if (hasOutSlot) {
+                    sb.append(" || ")
+                } else {
+                    sb.append("                    if (")
+                }
+                sb.append(param.name)
+                sb.append(".isNull()")
+                hasOutSlot = true
+            case None => ()
+        }
+    }
+    if (hasOutSlot) {
+        sb.append(") {\n")
+        appendVtblOutSlotClears(sb, method, "                        ")
+        sb.append("                        windows_core.E_POINTER.value\n")
+        sb.append("                    } else {\n")
+    }
+    hasOutSlot
+}
+
+func appendVtblFailureArrayOutSlotCleanup(
+    sb: StringBuilder,
+    method: AbiMethod,
+    param: AbiParam,
+    elementProjectedType: String,
+    indent: String
+): Unit {
+    let sizeParamName = "${param.name}Size"
+    match (methodParamType(method, sizeParamName)) {
+        case Some(sizeType) =>
+            if (compactTypeName(sizeType) != "CPointer<UInt32>") {
+                return
+            }
+        case None => return
+    }
+    match (unwrapGenericType(param.typeName, "CPointer")) {
+        case Some(dataPointerType) =>
+            match (unwrapGenericType(dataPointerType, "CPointer")) {
+                case Some(elementAbiType) =>
+                    sb.append(indent)
+                    sb.append("if (")
+                    sb.append(param.name)
+                    sb.append(".isNotNull()) {\n")
+                    sb.append(indent)
+                    sb.append("    var rawSize__ = 0u32\n")
+                    sb.append(indent)
+                    sb.append("    if (")
+                    sb.append(sizeParamName)
+                    sb.append(".isNotNull()) {\n")
+                    sb.append(indent)
+                    sb.append("        rawSize__ = unsafe { ")
+                    sb.append(sizeParamName)
+                    sb.append(".read() }\n")
+                    sb.append(indent)
+                    sb.append("    }\n")
+                    sb.append(indent)
+                    sb.append("    let rawArray__ = unsafe { ")
+                    sb.append(param.name)
+                    sb.append(".read() }\n")
+                    sb.append(indent)
+                    sb.append("    if (rawArray__.isNotNull()) {\n")
+                    if (elementAbiType == "CPointer<Unit>" && elementProjectedType != "CPointer<Unit>") {
+                        sb.append(indent)
+                        sb.append("        windows_core.winrtReleaseGenericArrayOut<")
+                        sb.append(elementProjectedType)
+                        sb.append(">(CPointer<Unit>(rawArray__), rawSize__)\n")
+                    } else {
+                        sb.append(indent)
+                        sb.append("        windows_core.coTaskMemFree(CPointer<Unit>(rawArray__))\n")
+                    }
+                    sb.append(indent)
+                    sb.append("    }\n")
+                    sb.append(indent)
+                    sb.append("    unsafe { ")
+                    sb.append(param.name)
+                    sb.append(".write(")
+                    sb.append(dataPointerType)
+                    sb.append("()) }\n")
+                    sb.append(indent)
+                    sb.append("}\n")
+                    sb.append(indent)
+                    sb.append("if (")
+                    sb.append(sizeParamName)
+                    sb.append(".isNotNull()) {\n")
+                    sb.append(indent)
+                    sb.append("    unsafe { ")
+                    sb.append(sizeParamName)
+                    sb.append(".write(0u32) }\n")
+                    sb.append(indent)
+                    sb.append("}\n")
+                case None => ()
+            }
+        case None => ()
+    }
+}
+
+func appendVtblFailureOutSlotCleanup(sb: StringBuilder, method: AbiMethod, indent: String): Unit {
+    for (param in method.params) {
+        match (unwrapGenericType(param.cleanupKind, "Array")) {
+            case Some(elementProjectedType) =>
+                appendVtblFailureArrayOutSlotCleanup(sb, method, param, elementProjectedType, indent)
+            case None => ()
+        }
+    }
+    for (param in method.params) {
+        match (unwrapGenericType(param.cleanupKind, "Array")) {
+            case Some(_) => ()
+            case None =>
+                match (outSlotDefaultExpr(method, param)) {
+                    case Some(defaultExpr) =>
+                        match (unwrapGenericType(param.typeName, "CPointer")) {
+                            case Some(valueType) =>
+                                if (valueType == "CPointer<Unit>") {
+                                    if (param.cleanupKind == "HString" || (param.cleanupKind.isEmpty() && param.name == "className")) {
+                                        sb.append(indent)
+                                        sb.append("if (")
+                                        sb.append(param.name)
+                                        sb.append(".isNotNull()) {\n")
+                                        sb.append(indent)
+                                        sb.append("    let raw__ = unsafe { ")
+                                        sb.append(param.name)
+                                        sb.append(".read() }\n")
+                                        sb.append(indent)
+                                        sb.append("    if (raw__.isNotNull()) {\n")
+                                        sb.append(indent)
+                                        sb.append("        windows_core.releaseSystemHStringHandle(raw__)\n")
+                                        sb.append(indent)
+                                        sb.append("        unsafe { ")
+                                        sb.append(param.name)
+                                        sb.append(".write(CPointer<Unit>()) }\n")
+                                        sb.append(indent)
+                                        sb.append("    }\n")
+                                        sb.append(indent)
+                                        sb.append("}\n")
+                                    } else {
+                                        sb.append(indent)
+                                        sb.append("windows_core.releaseFailedComOutSlot(")
+                                        sb.append(param.name)
+                                        sb.append(")\n")
+                                    }
+                                } else {
+                                    sb.append(indent)
+                                    sb.append("if (")
+                                    sb.append(param.name)
+                                    sb.append(".isNotNull()) {\n")
+                                    sb.append(indent)
+                                    sb.append("    unsafe { ")
+                                    sb.append(param.name)
+                                    sb.append(".write(")
+                                    sb.append(defaultExpr)
+                                    sb.append(") }\n")
+                                    sb.append(indent)
+                                    sb.append("}\n")
+                                }
+                            case None => ()
+                        }
+                    case None => ()
+                }
+        }
     }
 }
 
@@ -260,7 +653,7 @@ func appendMethodSchemas(sb: StringBuilder, methods: Array<AbiMethod>): Unit {
         sb.append("windows_interface.InterfaceMethodSchema(\"")
         sb.append(method.name)
         sb.append("\", ")
-        appendParamSchemas(sb, method.params)
+        appendParamSchemas(sb, method)
         sb.append(", \"")
         sb.append(method.returnType)
         sb.append("\")")
@@ -269,7 +662,8 @@ func appendMethodSchemas(sb: StringBuilder, methods: Array<AbiMethod>): Unit {
     sb.append("]")
 }
 
-func appendParamSchemas(sb: StringBuilder, params: Array<AbiParam>): Unit {
+func appendParamSchemas(sb: StringBuilder, method: AbiMethod): Unit {
+    let params = method.params
     if (params.size == 0) {
         sb.append("Array<windows_interface.InterfaceParameterSchema>(0, { _ => windows_interface.InterfaceParameterSchema(\"\", \"\", \"\", windows_interface.InterfaceParameterBridgeKind.Value) })")
         return
@@ -286,7 +680,12 @@ func appendParamSchemas(sb: StringBuilder, params: Array<AbiParam>): Unit {
         sb.append(param.typeName)
         sb.append("\", \"")
         sb.append(param.typeName)
-        sb.append("\", windows_interface.InterfaceParameterBridgeKind.Value)")
+        sb.append("\", ")
+        match (outSlotDefaultExpr(method, param)) {
+            case Some(_) => sb.append("windows_interface.InterfaceParameterBridgeKind.OutSlot")
+            case None => sb.append("windows_interface.InterfaceParameterBridgeKind.Value")
+        }
+        sb.append(")")
         index += 1
     }
     sb.append("]")
@@ -294,6 +693,10 @@ func appendParamSchemas(sb: StringBuilder, params: Array<AbiParam>): Unit {
 
 func appendVtblStruct(sb: StringBuilder, interfaceName: String, baseName: String, methods: Array<AbiMethod>): Unit {
     let baseVtblName = runtimeVtblName(baseName)
+    let exceptionAlias = "${interfaceName}_ExceptionBase"
+    sb.append("type ")
+    sb.append(exceptionAlias)
+    sb.append(" = Exception\n\n")
     sb.append("@C\n")
     sb.append("public struct ")
     sb.append(interfaceName)
@@ -309,9 +712,19 @@ func appendVtblStruct(sb: StringBuilder, interfaceName: String, baseName: String
         sb.append(method.name)
         sb.append(": CFunc<(")
         appendParamTypes(sb, method.params, true)
-        sb.append(") -> Int32> = { ")
-        appendClosurePlaceholders(sb, method.params)
-        sb.append(" => windows_core.E_NOTIMPL.value }\n")
+        sb.append(") -> Int32> = ")
+        if (methodHasVtblOutSlots(method)) {
+            sb.append("{ ")
+            appendDefaultVtblClosureParams(sb, method.params)
+            sb.append(" =>\n")
+            appendVtblOutSlotClears(sb, method, "        ")
+            sb.append("        windows_core.E_NOTIMPL.value\n")
+            sb.append("    }\n")
+        } else {
+            sb.append("{ ")
+            appendClosurePlaceholders(sb, method.params)
+            sb.append(" => windows_core.E_NOTIMPL.value }\n")
+        }
     }
 
     sb.append("\n    public init() {}\n\n")
@@ -345,12 +758,49 @@ func appendVtblStruct(sb: StringBuilder, interfaceName: String, baseName: String
         sb.append("            match (unsafe { windows_core.asImplFromRaw<")
         sb.append(interfaceName)
         sb.append("_ImplErased>(instanceRaw) }) {\n")
-        sb.append("                case Some(impl) => impl.__winrtThunk_")
+        sb.append("                case Some(impl) =>\n")
+        let hasOutSlotGuard = appendVtblSomeBranchOutSlotGuard(sb, method)
+        let bodyIndent = if (hasOutSlotGuard) {
+            "                        "
+        } else {
+            "                    "
+        }
+        appendVtblOutSlotClears(sb, method, bodyIndent)
+        sb.append(bodyIndent)
+        sb.append("try {\n")
+        sb.append(bodyIndent)
+        sb.append("    let resultHr__ = impl.__winrtThunk_")
         sb.append(method.name)
         sb.append("(")
         appendThunkArgs(sb, method.params)
         sb.append(")\n")
-        sb.append("                case None => windows_core.E_NOINTERFACE.value\n")
+        sb.append(bodyIndent)
+        sb.append("    if (windows_core.HRESULT(resultHr__).failed()) {\n")
+        appendVtblFailureOutSlotCleanup(sb, method, bodyIndent + "        ")
+        sb.append(bodyIndent)
+        sb.append("    }\n")
+        sb.append(bodyIndent)
+        sb.append("    resultHr__\n")
+        sb.append(bodyIndent)
+        sb.append("} catch (error: windows_core.WindowsException) {\n")
+        appendVtblFailureOutSlotCleanup(sb, method, bodyIndent + "    ")
+        sb.append(bodyIndent)
+        sb.append("    error.code().value\n")
+        sb.append(bodyIndent)
+        sb.append("} catch (_: ")
+        sb.append(exceptionAlias)
+        sb.append(") {\n")
+        appendVtblFailureOutSlotCleanup(sb, method, bodyIndent + "    ")
+        sb.append(bodyIndent)
+        sb.append("    windows_core.E_FAIL.value\n")
+        sb.append(bodyIndent)
+        sb.append("}\n")
+        if (hasOutSlotGuard) {
+            sb.append("                    }\n")
+        }
+        sb.append("                case None =>\n")
+        appendVtblNoneBranchOutSlotClears(sb, method)
+        sb.append("                    windows_core.E_NOINTERFACE.value\n")
         sb.append("            }\n")
         sb.append("        }\n")
     }
@@ -583,9 +1033,10 @@ public macro Interface(attrTokens: Tokens, inputTokens: Tokens): Tokens {
     let interfaceDecl = parseInterfaceDecl(inputTokens)
     let interfaceName = interfaceDecl.identifier.value
     let baseName = directBaseName(interfaceDecl)
-    let methods = parseMethods(interfaceDecl)
     let iidSource = attrSourcePart(attrTokens, 0)
     let runtimeNameSource = interfaceRuntimeNameSource(interfaceName, attrTokens)
+    let cleanupSpecs = attrSourcePart(attrTokens, 2)
+    let methods = parseMethods(interfaceDecl, cleanupSpecs)
 
     let sb = StringBuilder()
     appendVtblStruct(sb, interfaceName, baseName, methods)

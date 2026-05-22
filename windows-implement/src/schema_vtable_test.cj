@@ -1,10 +1,44 @@
 package windows_implement
 
+import std.reflect.*
 import std.unittest.*
 import std.unittest.testmacro.*
 import windows_interface.*
 
 class SchemaOnlyDummy {}
+
+class DescriptorAutoVtblProbe <: InterfaceWrapperBase & ComInterface {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    public static func iid(): GUID {
+        GUID.parse("13572468-2468-1357-2468-135724681357")
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): DescriptorAutoVtblProbe {
+        DescriptorAutoVtblProbe(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): DescriptorAutoVtblProbe {
+        DescriptorAutoVtblProbe(raw)
+    }
+
+    public static func descriptor(): InterfaceDescriptor<DescriptorAutoVtblProbe> {
+        InterfaceDescriptor<DescriptorAutoVtblProbe>(
+            TypeInfo.of<DescriptorAutoVtblProbe>().name,
+            iid(),
+            IUnknown.descriptor(),
+            fromAbiTake,
+            viewOf,
+            ownMethodCount: 1
+        )
+    }
+
+    public static func vtablePtr(): CPointer<Unit> {
+        fakeVtbl(0xA000)
+    }
+}
 
 func schemaFactoryThrows(action: () -> Unit): Bool {
     try {
@@ -17,6 +51,20 @@ func schemaFactoryThrows(action: () -> Unit): Bool {
 
 func fakeVtbl(offset: Int64): CPointer<Unit> {
     unsafe { CPointer<Unit>(CPointer<UInt8>() + offset) }
+}
+
+@Test
+func testDescriptorBackedCustomInterfaceReflectsNoArgWrapperVtbl() {
+    let object = createComObjectFromDescriptors(SchemaOnlyDummy(), [DescriptorAutoVtblProbe.descriptor()])
+    var raw = CPointer<Unit>()
+    let hr = object.queryInterfaceBase(DescriptorAutoVtblProbe.iid(), CPointer<CPointer<Unit>>(inout raw))
+    @Expect(hr, S_OK)
+    @Expect(raw.isNotNull(), true)
+    let returnedVtbl = unsafe { CPointer<CPointer<Unit>>(raw).read() }
+    @Expect(returnedVtbl.toUIntNative(), DescriptorAutoVtblProbe.vtablePtr().toUIntNative())
+
+    let _ = object.releaseBase()
+    let _ = object.releaseBase()
 }
 
 @Test

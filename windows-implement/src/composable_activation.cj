@@ -147,13 +147,42 @@ public func activateComposable<TOuter, TBase>(
     activate: (IInspectable, CPointer<CPointer<Unit>>) -> TBase
 ): ComposableActivation<TOuter, TBase> where TBase <: ComInterface & Resource {
     var innerRaw = CPointer<Unit>()
-    let baseObject = activate(IInspectable.viewOf(outer.asRaw()), CPointer<CPointer<Unit>>(inout innerRaw))
-    let innerObject = if (innerRaw.isNull()) {
-        IInspectable.viewOf(CPointer<Unit>())
-    } else {
-        IInspectable.fromAbiTake(innerRaw)
+    let baseObject: TBase
+    try {
+        baseObject = activate(IInspectable.viewOf(outer.asRaw()), CPointer<CPointer<Unit>>(inout innerRaw))
+    } catch (e: Exception) {
+        if (innerRaw.isNotNull()) {
+            let _ = releaseComRaw(innerRaw)
+            innerRaw = CPointer<Unit>()
+        }
+        outer.runtime.clearQueryInterfaceFallback()
+        let _ = outer.releaseBase()
+        throw e
     }
-    ComposableActivation<TOuter, TBase>(outer, baseObject, innerObject)
+    try {
+        let innerObject = if (innerRaw.isNull()) {
+            IInspectable.viewOf(CPointer<Unit>())
+        } else {
+            let rawToTake = innerRaw
+            innerRaw = CPointer<Unit>()
+            IInspectable.fromAbiTake(rawToTake)
+        }
+        try {
+            ComposableActivation<TOuter, TBase>(outer, baseObject, innerObject)
+        } catch (e: Exception) {
+            innerObject.close()
+            throw e
+        }
+    } catch (e: Exception) {
+        if (innerRaw.isNotNull()) {
+            let _ = releaseComRaw(innerRaw)
+            innerRaw = CPointer<Unit>()
+        }
+        outer.runtime.clearQueryInterfaceFallback()
+        baseObject.close()
+        let _ = outer.releaseBase()
+        throw e
+    }
 }
 
 public func activateComposable<TOuter, TBase>(

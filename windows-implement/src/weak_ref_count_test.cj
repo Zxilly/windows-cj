@@ -4,7 +4,8 @@ import std.sync.{AtomicBool, AtomicInt64}
 import std.unittest.*
 import std.unittest.testmacro.*
 import windows_interface.*
-import windows_result.{E_FAIL, Result}
+import windows_result.{E_FAIL, Result, WindowsException}
+import windows_result as windows_result
 
 class WeakReferenceResolveRaceDummy {}
 
@@ -69,6 +70,27 @@ func resetPartialCleanupState(): Unit {
     partialCleanupReentrantRelease.store(false)
     partialCleanupRaw = CPointer<Unit>()
     partialCleanupReentrantSlot = CPointer<CPointer<Unit>>()
+}
+
+func composableActivationActionThrows(action: () -> Unit): Bool {
+    try {
+        action()
+    } catch (_: Exception) {
+        return true
+    }
+    false
+}
+
+func throwingComposableActivator(_: IInspectable, _: CPointer<CPointer<Unit>>): IInspectable {
+    throw Exception("composable activation failed")
+}
+
+func throwingComposableInnerOutActivator(
+    _: IInspectable,
+    innerSlot: CPointer<CPointer<Unit>>
+): IInspectable {
+    unsafe { innerSlot.write(partialCleanupRaw) }
+    throw Exception("composable activation failed after inner out")
 }
 
 func partialCleanupFailedQueryVtbl(): IUnknownVtbl {
@@ -212,6 +234,58 @@ func testQueryComposableInnerReleasesPartialOutputOnFailedQueryInterface() {
 }
 
 @Test
+func testActivateComposableReleasesOuterWhenActivatorThrows() {
+    resetPartialCleanupState()
+    let outer = createComObject(WeakReferenceResolveRaceDummy(), [IID_IINSPECTABLE])
+
+    try {
+        let threw = composableActivationActionThrows({ =>
+            let activation = activateComposable(outer, throwingComposableActivator)
+            activation.close()
+        })
+
+        @Expect(threw, true)
+        @Expect(outer.isClosed(), true)
+        @Expect(outer.runtime.isDestroyed(), true)
+    } finally {
+        if (!outer.isClosed()) {
+            outer.close()
+        }
+        resetPartialCleanupState()
+    }
+}
+
+@Test
+func testActivateComposableReleasesInnerOutAndOuterWhenActivatorThrows() {
+    resetPartialCleanupState()
+    let partialVtblHandle = unsafe { allocateNativeValue<IUnknownVtbl>(partialCleanupReleaseVtbl()) }
+    let partialHandle = unsafe { allocateNativeValue<CPointer<IUnknownVtbl>>(partialVtblHandle) }
+    partialCleanupRaw = CPointer<Unit>(partialHandle)
+    let outer = createComObject(WeakReferenceResolveRaceDummy(), [IID_IINSPECTABLE])
+
+    try {
+        let threw = composableActivationActionThrows({ =>
+            let activation = activateComposable(outer, throwingComposableInnerOutActivator)
+            activation.close()
+        })
+
+        @Expect(threw, true)
+        @Expect(partialCleanupReleaseCount.load(), 1)
+        @Expect(outer.isClosed(), true)
+        @Expect(outer.runtime.isDestroyed(), true)
+    } finally {
+        if (!outer.isClosed()) {
+            outer.close()
+        }
+        unsafe {
+            freeNativeValue<CPointer<IUnknownVtbl>>(partialHandle)
+            freeNativeValue<IUnknownVtbl>(partialVtblHandle)
+        }
+        resetPartialCleanupState()
+    }
+}
+
+@Test
 func testComObjectQueryFallbackClearsStaleOutputBeforeNoWriteFailure() {
     resetPartialCleanupState()
     let staleVtblHandle = unsafe { allocateNativeValue<IUnknownVtbl>(partialCleanupReleaseVtbl()) }
@@ -267,6 +341,66 @@ func testComObjectQueryFallbackReleasesPartialOutputOnFailedHRESULT() {
         @Expect(hr, E_FAIL.value)
         @Expect(resultRaw.isNull(), true)
         @Expect(partialCleanupReleaseCount.load(), 1)
+    } finally {
+        owner.close()
+        unsafe {
+            freeNativeValue<CPointer<IUnknownVtbl>>(partialHandle)
+            freeNativeValue<IUnknownVtbl>(partialVtblHandle)
+        }
+        resetPartialCleanupState()
+    }
+}
+
+@Test
+func testIunknownQueryInterfaceThunkTranslatesThrownFallbackAndReleasesPartialOutput() {
+    resetPartialCleanupState()
+    let partialVtblHandle = unsafe { allocateNativeValue<IUnknownVtbl>(partialCleanupReleaseVtbl()) }
+    let partialHandle = unsafe { allocateNativeValue<CPointer<IUnknownVtbl>>(partialVtblHandle) }
+    partialCleanupRaw = CPointer<Unit>(partialHandle)
+    let owner = createComObject(WeakReferenceResolveRaceDummy(), [IID_IINSPECTABLE])
+    var resultRaw = CPointer<Unit>()
+    var iid = partialCleanupTestIid
+
+    try {
+        owner.runtime.setQueryInterfaceFallback({ requested, resultSlot =>
+            if (requested == partialCleanupTestIid) {
+                unsafe { resultSlot.write(partialCleanupRaw) }
+                throw WindowsException(windows_result.E_POINTER)
+            }
+            E_NOINTERFACE
+        })
+
+        let windowsHr = unsafe {
+            iunknownQueryInterfaceThunk(
+                owner.asRaw(),
+                CPointer<GUID>(inout iid),
+                CPointer<CPointer<Unit>>(inout resultRaw)
+            )
+        }
+        @Expect(windowsHr, windows_result.E_POINTER.value)
+        @Expect(resultRaw.isNull(), true)
+        @Expect(partialCleanupReleaseCount.load(), 1)
+
+        owner.runtime.setQueryInterfaceFallback({ requested, resultSlot =>
+            if (requested == partialCleanupTestIid) {
+                unsafe { resultSlot.write(partialCleanupRaw) }
+                throw Exception("query fallback failure")
+            }
+            E_NOINTERFACE
+        })
+
+        iid = partialCleanupTestIid
+        resultRaw = CPointer<Unit>()
+        let plainHr = unsafe {
+            iunknownQueryInterfaceThunk(
+                owner.asRaw(),
+                CPointer<GUID>(inout iid),
+                CPointer<CPointer<Unit>>(inout resultRaw)
+            )
+        }
+        @Expect(plainHr, E_FAIL.value)
+        @Expect(resultRaw.isNull(), true)
+        @Expect(partialCleanupReleaseCount.load(), 2)
     } finally {
         owner.close()
         unsafe {

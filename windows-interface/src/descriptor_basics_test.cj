@@ -3,7 +3,7 @@ package windows_interface
 import std.unittest.*
 import std.unittest.testmacro.*
 import std.sync.AtomicInt64
-import windows_result.{E_FAIL, E_NOINTERFACE, Result, S_OK, WindowsException}
+import windows_result.{E_FAIL, E_NOINTERFACE, E_NOTIMPL, E_POINTER, HRESULT, Result, S_OK, WindowsException}
 import windows_strings.{HString, debugObservedWindowsDeleteStringCount}
 
 let typedActivationTestIid = GUID.parse("00000031-0000-0000-C000-000000000046")
@@ -122,6 +122,140 @@ func resetReentrantInterfaceResourceState(): Unit {
     reentrantManualAddRefCount.store(0)
     reentrantInterfaceResourceValue = None
     reentrantManualReleaseValue = None
+}
+
+func staleDefaultObjectOutPointer(): CPointer<Unit> {
+    unsafe { CPointer<Unit>(CPointer<UInt8>() + 0x1234) }
+}
+
+@Test
+func testDefaultIUnknownVtblQueryInterfaceRejectsNullAndClearsStaleOutPointer() {
+    let vtbl = IUnknownVtbl()
+    var iid = IUnknown.iid()
+    var result = unsafe { CPointer<Unit>(CPointer<UInt8>() + 0x1234) }
+
+    let nullResultHr = unsafe {
+        HRESULT(vtbl.QueryInterface(CPointer<Unit>(), CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>()))
+    }
+    @Expect(nullResultHr, E_POINTER)
+
+    let unsupportedHr = unsafe {
+        HRESULT(vtbl.QueryInterface(CPointer<Unit>(), CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>(inout result)))
+    }
+    @Expect(unsupportedHr, E_NOINTERFACE)
+    @Expect(result.isNull(), true)
+}
+
+@Test
+func testDefaultUnsupportedVtblsClearFailedOutPointers() {
+    let agileReferenceVtbl = IAgileReferenceVtbl()
+    let weakReferenceVtbl = IWeakReferenceVtbl()
+    let weakReferenceSourceVtbl = IWeakReferenceSourceVtbl()
+    let activationFactoryVtbl = IActivationFactoryVtbl()
+    let marshalVtbl = IMarshalVtbl()
+    var iid = IUnknown.iid()
+    var result = staleDefaultObjectOutPointer()
+
+    let agileResolveHr = unsafe {
+        HRESULT(agileReferenceVtbl.Resolve(CPointer<Unit>(), CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>(inout result)))
+    }
+    @Expect(agileResolveHr, E_NOTIMPL)
+    @Expect(result.isNull(), true)
+
+    result = staleDefaultObjectOutPointer()
+    let weakResolveHr = unsafe {
+        HRESULT(weakReferenceVtbl.Resolve(CPointer<Unit>(), CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>(inout result)))
+    }
+    @Expect(weakResolveHr, E_NOTIMPL)
+    @Expect(result.isNull(), true)
+
+    result = staleDefaultObjectOutPointer()
+    let weakReferenceHr = unsafe {
+        HRESULT(weakReferenceSourceVtbl.GetWeakReference(CPointer<Unit>(), CPointer<CPointer<Unit>>(inout result)))
+    }
+    @Expect(weakReferenceHr, E_NOTIMPL)
+    @Expect(result.isNull(), true)
+
+    result = staleDefaultObjectOutPointer()
+    let activateHr = unsafe {
+        HRESULT(activationFactoryVtbl.ActivateInstance(CPointer<Unit>(), CPointer<CPointer<Unit>>(inout result)))
+    }
+    @Expect(activateHr, E_NOTIMPL)
+    @Expect(result.isNull(), true)
+
+    var classId = IUnknown.iid()
+    let unmarshalClassHr = unsafe {
+        HRESULT(marshalVtbl.GetUnmarshalClass(
+            CPointer<Unit>(),
+            CPointer<GUID>(inout iid),
+            CPointer<Unit>(),
+            0u32,
+            CPointer<Unit>(),
+            0u32,
+            CPointer<GUID>(inout classId)
+        ))
+    }
+    @Expect(unmarshalClassHr, E_NOTIMPL)
+    @Expect(classId == GUID_ZERO, true)
+
+    var size = 123u32
+    let marshalSizeHr = unsafe {
+        HRESULT(marshalVtbl.GetMarshalSizeMax(
+            CPointer<Unit>(),
+            CPointer<GUID>(inout iid),
+            CPointer<Unit>(),
+            0u32,
+            CPointer<Unit>(),
+            0u32,
+            CPointer<UInt32>(inout size)
+        ))
+    }
+    @Expect(marshalSizeHr, E_NOTIMPL)
+    @Expect(size, 0u32)
+
+    result = staleDefaultObjectOutPointer()
+    let unmarshalInterfaceHr = unsafe {
+        HRESULT(marshalVtbl.UnmarshalInterface(
+            CPointer<Unit>(),
+            CPointer<Unit>(),
+            CPointer<GUID>(inout iid),
+            CPointer<CPointer<Unit>>(inout result)
+        ))
+    }
+    @Expect(unmarshalInterfaceHr, E_NOTIMPL)
+    @Expect(result.isNull(), true)
+}
+
+@Test
+func testDefaultIInspectableVtblRejectsNullOutPointers() {
+    let vtbl = IInspectableVtbl()
+    var count = 123u32
+    var iids = unsafe { CPointer<GUID>(CPointer<UInt8>() + 0x1234) }
+    var runtimeName = CPointer<Unit>()
+    var trustLevel = 123i32
+
+    let nullCountHr = unsafe { HRESULT(vtbl.GetIids(CPointer<Unit>(), CPointer<UInt32>(), CPointer<CPointer<GUID>>(inout iids))) }
+    @Expect(iids.isNull(), true)
+    count = 123u32
+    let nullIidsHr = unsafe { HRESULT(vtbl.GetIids(CPointer<Unit>(), CPointer<UInt32>(inout count), CPointer<CPointer<GUID>>())) }
+    @Expect(count, 0u32)
+    let nullRuntimeNameHr = unsafe { HRESULT(vtbl.GetRuntimeClassName(CPointer<Unit>(), CPointer<CPointer<Unit>>())) }
+    let nullTrustLevelHr = unsafe { HRESULT(vtbl.GetTrustLevel(CPointer<Unit>(), CPointer<Int32>())) }
+    @Expect(nullCountHr, E_POINTER)
+    @Expect(nullIidsHr, E_POINTER)
+    @Expect(nullRuntimeNameHr, E_POINTER)
+    @Expect(nullTrustLevelHr, E_POINTER)
+
+    let getIidsHr = unsafe { HRESULT(vtbl.GetIids(CPointer<Unit>(), CPointer<UInt32>(inout count), CPointer<CPointer<GUID>>(inout iids))) }
+    @Expect(getIidsHr, S_OK)
+    @Expect(count, 0u32)
+    @Expect(iids.isNull(), true)
+    let runtimeNameHr = unsafe { HRESULT(vtbl.GetRuntimeClassName(CPointer<Unit>(), CPointer<CPointer<Unit>>(inout runtimeName))) }
+    @Expect(runtimeNameHr, S_OK)
+    @Expect(runtimeName.isNull(), true)
+    let trustLevelHr = unsafe { HRESULT(vtbl.GetTrustLevel(CPointer<Unit>(), CPointer<Int32>(inout trustLevel))) }
+    @Expect(trustLevelHr, S_OK)
+    @Expect(trustLevel, 0i32)
 }
 
 @C

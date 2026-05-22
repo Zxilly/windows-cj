@@ -62,6 +62,24 @@ func releaseFailedOutRaw(hr: HRESULT, raw: CPointer<Unit>): Unit {
     }
 }
 
+func clearDefaultObjectOutSlot(slot: CPointer<CPointer<Unit>>): Unit {
+    if (slot.isNotNull()) {
+        unsafe { slot.write(CPointer<Unit>()) }
+    }
+}
+
+func clearDefaultGuidOutSlot(slot: CPointer<GUID>): Unit {
+    if (slot.isNotNull()) {
+        unsafe { slot.write(GUID_ZERO) }
+    }
+}
+
+func clearDefaultUInt32OutSlot(slot: CPointer<UInt32>): Unit {
+    if (slot.isNotNull()) {
+        unsafe { slot.write(0u32) }
+    }
+}
+
 func requireOwnedInterfaceRaw(raw: CPointer<Unit>): CPointer<Unit> {
     if (raw.isNull()) {
         throw WindowsException(E_POINTER)
@@ -87,7 +105,13 @@ func viewIInspectable(raw: CPointer<Unit>): IInspectable {
 
 @C
 public struct IUnknownVtbl {
-    public var QueryInterface: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOINTERFACE.value }
+    public var QueryInterface: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, resultPtr =>
+        if (resultPtr.isNull()) {
+            return E_POINTER.value
+        }
+        unsafe { resultPtr.write(CPointer<Unit>()) }
+        E_NOINTERFACE.value
+    }
     public var AddRef: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0u32 }
     public var Release: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0u32 }
 
@@ -98,6 +122,17 @@ public struct IUnknownVtbl {
 public struct IInspectableVtbl {
     public var base_: IUnknownVtbl = IUnknownVtbl()
     public var GetIids: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<GUID>>) -> Int32> = { _, countPtr, iidsPtr =>
+        if (countPtr.isNull() || iidsPtr.isNull()) {
+            unsafe {
+                if (countPtr.isNotNull()) {
+                    countPtr.write(0u32)
+                }
+                if (iidsPtr.isNotNull()) {
+                    iidsPtr.write(CPointer<GUID>())
+                }
+            }
+            return E_POINTER.value
+        }
         unsafe {
             countPtr.write(0u32)
             iidsPtr.write(CPointer<GUID>())
@@ -105,10 +140,16 @@ public struct IInspectableVtbl {
         0i32
     }
     public var GetRuntimeClassName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, valuePtr =>
+        if (valuePtr.isNull()) {
+            return E_POINTER.value
+        }
         unsafe { valuePtr.write(CPointer<Unit>()) }
         0i32
     }
     public var GetTrustLevel: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, valuePtr =>
+        if (valuePtr.isNull()) {
+            return E_POINTER.value
+        }
         unsafe { valuePtr.write(0i32) }
         0i32
     }
@@ -126,7 +167,10 @@ public struct IAgileObjectVtbl {
 @C
 public struct IAgileReferenceVtbl {
     public var base_: IUnknownVtbl = IUnknownVtbl()
-    public var Resolve: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var Resolve: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, resultPtr =>
+        clearDefaultObjectOutSlot(resultPtr)
+        E_NOTIMPL.value
+    }
 
     public init() {}
 }
@@ -134,10 +178,19 @@ public struct IAgileReferenceVtbl {
 @C
 public struct IMarshalVtbl {
     public var base_: IUnknownVtbl = IUnknownVtbl()
-    public var GetUnmarshalClass: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<GUID>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
-    public var GetMarshalSizeMax: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
+    public var GetUnmarshalClass: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<GUID>) -> Int32> = { _, _, _, _, _, _, classId =>
+        clearDefaultGuidOutSlot(classId)
+        E_NOTIMPL.value
+    }
+    public var GetMarshalSizeMax: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, size =>
+        clearDefaultUInt32OutSlot(size)
+        E_NOTIMPL.value
+    }
     public var MarshalInterface: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }
-    public var UnmarshalInterface: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var UnmarshalInterface: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, resultPtr =>
+        clearDefaultObjectOutSlot(resultPtr)
+        E_NOTIMPL.value
+    }
     public var ReleaseMarshalData: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var DisconnectObject: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
 
@@ -147,7 +200,10 @@ public struct IMarshalVtbl {
 @C
 public struct IWeakReferenceVtbl {
     public var base_: IUnknownVtbl = IUnknownVtbl()
-    public var Resolve: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var Resolve: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, resultPtr =>
+        clearDefaultObjectOutSlot(resultPtr)
+        E_NOTIMPL.value
+    }
 
     public init() {}
 }
@@ -155,7 +211,10 @@ public struct IWeakReferenceVtbl {
 @C
 public struct IWeakReferenceSourceVtbl {
     public var base_: IUnknownVtbl = IUnknownVtbl()
-    public var GetWeakReference: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var GetWeakReference: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, resultPtr =>
+        clearDefaultObjectOutSlot(resultPtr)
+        E_NOTIMPL.value
+    }
 
     public init() {}
 }
@@ -647,7 +706,10 @@ public open class IWeakReferenceSource <: InterfaceWrapperBase & ComInterface {
 @C
 public struct IActivationFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var ActivateInstance: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var ActivateInstance: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, resultPtr =>
+        clearDefaultObjectOutSlot(resultPtr)
+        E_NOTIMPL.value
+    }
 
     public init() {}
 }

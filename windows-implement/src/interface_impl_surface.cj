@@ -6,7 +6,7 @@ import std.reflect.*
 import std.sync.AtomicBool
 import std.sync.AtomicInt64
 import windows_interface.*
-import windows_result.{Result, HRESULT}
+import windows_result.{E_FAIL, Result, HRESULT, WindowsException}
 import windows_result.Error as WinError
 import windows_strings.*
 
@@ -312,7 +312,15 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
                 if (resultSlot.isNotNull()) {
                     unsafe { resultSlot.write(CPointer<Unit>()) }
                 }
-                let delegated = callback(iid, resultSlot)
+                let delegated = try {
+                    callback(iid, resultSlot)
+                } catch (error: WindowsException) {
+                    releaseFailedComOutSlot(resultSlot)
+                    return error.code().value
+                } catch (_: Exception) {
+                    releaseFailedComOutSlot(resultSlot)
+                    return E_FAIL.value
+                }
                 if (delegated != S_OK) {
                     releaseFailedComOutSlot(resultSlot)
                 }
@@ -331,6 +339,12 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
     public func getIidsBase(count: CPointer<UInt32>, values: CPointer<CPointer<GUID>>): Int32 {
         unsafe {
             if (count.isNull() || values.isNull()) {
+                if (count.isNotNull()) {
+                    count.write(0u32)
+                }
+                if (values.isNotNull()) {
+                    values.write(CPointer<GUID>())
+                }
                 return E_POINTER
             }
         }
@@ -513,7 +527,7 @@ func reflectedWrapperVtblPtr(descriptor: ResolvedDescriptor): Option<CPointer<Un
         case Some(qualifiedName) =>
             try {
                 let wrapperType = TypeInfo.get(qualifiedName)
-                let vtablePtrFunc = wrapperType.getStaticFunction("vtablePtr", Array<TypeInfo>(0, { _ => TypeInfo.of<Int64>() }))
+                let vtablePtrFunc = wrapperType.getStaticFunction("vtablePtr", parseParameterTypes(""))
                 match (vtablePtrFunc.apply(wrapperType, Array<Any>(0, { _ => 0i32 })) as CPointer<Unit>) {
                     case Some(vtblPtr) =>
                         if (vtblPtr.isNotNull()) {
@@ -1090,7 +1104,7 @@ public class ComObject<T> <: Resource {
 }
 
 func appendMethodSignature(sb: StringBuilder, method: InterfaceMethodSchema): Unit {
-    sb.append("    public func ")
+    sb.append("    func ")
     sb.append(method.name)
     sb.append("(")
     var index: Int64 = 0
@@ -1112,17 +1126,25 @@ public func renderImplSurface(descriptor: ResolvedDescriptor): String {
     let sb = StringBuilder()
     sb.append("public interface ")
     sb.append(descriptor.implSurfaceName)
-    match (descriptor.baseInterfaceName) {
-        case Some(name) =>
-            sb.append(" <: ")
-            sb.append(name)
-            sb.append("_Impl")
-        case None => ()
-    }
-    sb.append(" {\n")
+    sb.append("Erased {\n")
     for (method in descriptor.methods) {
         appendMethodSignature(sb, method)
     }
-    sb.append("}")
+    sb.append("}\n\n")
+    sb.append("public interface ")
+    sb.append(descriptor.implSurfaceName)
+    sb.append(" <: ")
+    sb.append(descriptor.implSurfaceName)
+    sb.append("Erased")
+    match (descriptor.baseInterfaceName) {
+        case Some(name) =>
+            if (name != "IUnknown" && name != "IInspectable") {
+                sb.append(" & ")
+                sb.append(name)
+                sb.append("_Impl")
+            }
+        case None => ()
+    }
+    sb.append(" {}")
     sb.toString()
 }

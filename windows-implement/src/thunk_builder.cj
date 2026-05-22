@@ -1,6 +1,7 @@
 package windows_implement
 
 import windows_interface.*
+import windows_result.{E_FAIL, WindowsException}
 import windows_strings.releaseSystemHStringHandle
 
 // Thunks translate native COM callbacks into registry-backed runtime calls.
@@ -27,33 +28,79 @@ func releaseFailedRuntimeClassNameSlot(hr: Int32, value: CPointer<CPointer<Unit>
     hr
 }
 
+func clearInspectableIidsOutSlots(count: CPointer<UInt32>, values: CPointer<CPointer<GUID>>): Unit {
+    unsafe {
+        if (count.isNotNull()) {
+            count.write(0u32)
+        }
+        if (values.isNotNull()) {
+            values.write(CPointer<GUID>())
+        }
+    }
+}
+
+func releaseFailedInspectableIidsOutSlots(
+    hr: Int32,
+    count: CPointer<UInt32>,
+    values: CPointer<CPointer<GUID>>
+): Int32 {
+    if (hr < 0 && values.isNotNull()) {
+        unsafe {
+            let raw = values.read()
+            if (raw.isNotNull()) {
+                CoTaskMemFree(CPointer<Unit>(raw))
+            }
+        }
+    }
+    if (hr < 0) {
+        clearInspectableIidsOutSlots(count, values)
+    }
+    hr
+}
+
+func clearTrustLevelOutSlot(value: CPointer<Int32>): Unit {
+    unsafe {
+        if (value.isNotNull()) {
+            value.write(0i32)
+        }
+    }
+}
+
 @C
 public func iunknownQueryInterfaceThunk(
     instanceRaw: CPointer<Unit>,
     iid: CPointer<GUID>,
     resultSlot: CPointer<CPointer<Unit>>
 ): Int32 {
-    unsafe {
-        if (resultSlot.isNull()) {
-            return E_POINTER
-        }
-        match (lookupRegistryObject(instanceRaw)) {
-            case Some(obj) =>
-                match (obj) {
-                    case comObj: ComObjectBase =>
-                        if (iid.isNull()) {
+    try {
+        unsafe {
+            if (resultSlot.isNull()) {
+                return E_POINTER
+            }
+            match (lookupRegistryObject(instanceRaw)) {
+                case Some(obj) =>
+                    match (obj) {
+                        case comObj: ComObjectBase =>
+                            if (iid.isNull()) {
+                                resultSlot.write(CPointer<Unit>())
+                                return E_POINTER
+                            }
+                            comObj.queryInterfaceBase(instanceRaw, iid.read(), resultSlot)
+                        case _ =>
                             resultSlot.write(CPointer<Unit>())
-                            return E_POINTER
-                        }
-                        comObj.queryInterfaceBase(instanceRaw, iid.read(), resultSlot)
-                    case _ =>
-                        resultSlot.write(CPointer<Unit>())
-                        E_NOINTERFACE
-                }
-            case None =>
-                resultSlot.write(CPointer<Unit>())
-                E_NOINTERFACE
+                            E_NOINTERFACE
+                    }
+                case None =>
+                    resultSlot.write(CPointer<Unit>())
+                    E_NOINTERFACE
+            }
         }
+    } catch (error: WindowsException) {
+        releaseFailedComOutSlot(resultSlot)
+        error.code().value
+    } catch (_: Exception) {
+        releaseFailedComOutSlot(resultSlot)
+        E_FAIL.value
     }
 }
 
@@ -87,24 +134,27 @@ public func iinspectableGetIidsThunk(
     count: CPointer<UInt32>,
     values: CPointer<CPointer<GUID>>
 ): Int32 {
-    unsafe {
-        if (count.isNull() || values.isNull()) {
-            return E_POINTER
+    try {
+        unsafe {
+            if (count.isNull() || values.isNull()) {
+                clearInspectableIidsOutSlots(count, values)
+                return E_POINTER
+            }
+            clearInspectableIidsOutSlots(count, values)
+            let hr = match (lookupRegistryObject(instanceRaw)) {
+                case Some(obj) =>
+                    match (obj) {
+                        case inspectable: IInspectableBase => inspectable.getIidsBase(count, values)
+                        case _ => E_NOINTERFACE
+                    }
+                case None => E_NOINTERFACE
+            }
+            releaseFailedInspectableIidsOutSlots(hr, count, values)
         }
-        match (lookupRegistryObject(instanceRaw)) {
-            case Some(obj) =>
-                match (obj) {
-                    case inspectable: IInspectableBase => inspectable.getIidsBase(count, values)
-                    case _ =>
-                        count.write(0u32)
-                        values.write(CPointer<GUID>())
-                        E_NOINTERFACE
-                }
-            case None =>
-                count.write(0u32)
-                values.write(CPointer<GUID>())
-                E_NOINTERFACE
-        }
+    } catch (error: WindowsException) {
+        releaseFailedInspectableIidsOutSlots(error.code().value, count, values)
+    } catch (_: Exception) {
+        releaseFailedInspectableIidsOutSlots(E_FAIL.value, count, values)
     }
 }
 
@@ -113,20 +163,26 @@ public func iinspectableGetRuntimeClassNameThunk(
     instanceRaw: CPointer<Unit>,
     value: CPointer<CPointer<Unit>>
 ): Int32 {
-    unsafe {
-        if (value.isNull()) {
-            return E_POINTER
+    try {
+        unsafe {
+            if (value.isNull()) {
+                return E_POINTER
+            }
+            value.write(CPointer<Unit>())
+            let hr = match (lookupRegistryObject(instanceRaw)) {
+                case Some(obj) =>
+                    match (obj) {
+                        case inspectable: IInspectableBase => inspectable.getRuntimeClassNameBase(value)
+                        case _ => E_NOINTERFACE
+                    }
+                case None => E_NOINTERFACE
+            }
+            releaseFailedRuntimeClassNameSlot(hr, value)
         }
-        value.write(CPointer<Unit>())
-        let hr = match (lookupRegistryObject(instanceRaw)) {
-            case Some(obj) =>
-                match (obj) {
-                    case inspectable: IInspectableBase => inspectable.getRuntimeClassNameBase(value)
-                    case _ => E_NOINTERFACE
-                }
-            case None => E_NOINTERFACE
-        }
-        releaseFailedRuntimeClassNameSlot(hr, value)
+    } catch (error: WindowsException) {
+        releaseFailedRuntimeClassNameSlot(error.code().value, value)
+    } catch (_: Exception) {
+        releaseFailedRuntimeClassNameSlot(E_FAIL.value, value)
     }
 }
 
@@ -135,21 +191,26 @@ public func iinspectableGetTrustLevelThunk(
     instanceRaw: CPointer<Unit>,
     value: CPointer<Int32>
 ): Int32 {
-    unsafe {
-        if (value.isNull()) {
-            return E_POINTER
+    try {
+        unsafe {
+            if (value.isNull()) {
+                return E_POINTER
+            }
+            clearTrustLevelOutSlot(value)
+            match (lookupRegistryObject(instanceRaw)) {
+                case Some(obj) =>
+                    match (obj) {
+                        case inspectable: IInspectableBase => inspectable.getTrustLevelBase(value)
+                        case _ => E_NOINTERFACE
+                    }
+                case None => E_NOINTERFACE
+            }
         }
-        match (lookupRegistryObject(instanceRaw)) {
-            case Some(obj) =>
-                match (obj) {
-                    case inspectable: IInspectableBase => inspectable.getTrustLevelBase(value)
-                    case _ =>
-                        value.write(0i32)
-                        E_NOINTERFACE
-                }
-            case None =>
-                value.write(0i32)
-                E_NOINTERFACE
-        }
+    } catch (error: WindowsException) {
+        clearTrustLevelOutSlot(value)
+        error.code().value
+    } catch (_: Exception) {
+        clearTrustLevelOutSlot(value)
+        E_FAIL.value
     }
 }

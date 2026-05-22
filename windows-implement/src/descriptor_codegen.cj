@@ -1,7 +1,7 @@
 package windows_implement
 
 func thunkName(descriptor: ResolvedDescriptor, method: InterfaceMethodSchema): String {
-    "${descriptor.name}_${method.name}Thunk"
+    "${descriptor.wrapperTypeName}_${method.name}Thunk"
 }
 
 func appendThunkSignature(
@@ -135,6 +135,58 @@ func defaultFailureReturn(returnType: String): String {
         return "${returnType}()"
     }
     "0"
+}
+
+func thunkWindowsExceptionReturn(returnType: String): String {
+    if (returnType == "Int32") {
+        return "error.code().value"
+    }
+    defaultFailureReturn(returnType)
+}
+
+func thunkPlainExceptionReturn(returnType: String): String {
+    if (returnType == "Int32") {
+        return "windows_result.E_FAIL.value"
+    }
+    defaultFailureReturn(returnType)
+}
+
+func appendDispatchExceptionOutSlotCleanup(sb: StringBuilder, method: InterfaceMethodSchema): Unit {
+    match (resultAbiValueType(method)) {
+        case Some(abiValueType) =>
+            sb.append("        unsafe { result__.write(")
+            sb.append(defaultLocalValueExpr(abiValueType))
+            sb.append(") }\n")
+        case None => ()
+    }
+}
+
+func validateDescriptorAbiSurface(descriptor: ResolvedDescriptor): Unit {
+    if (!descriptor.isComInterface) {
+        return
+    }
+    for (method in descriptor.methods) {
+        if (method.returnType.startsWith("CPointer")) {
+            throw IllegalArgumentException("${descriptor.name}.${method.name} directly returns ${method.returnType}; COM descriptor pointer returns need explicit ownership semantics")
+        }
+        match (resultBridgeParameter(method)) {
+            case Some(parameter) =>
+                match (unwrapGenericType(parameter.abiType, "CPointer")) {
+                    case Some(abiValueType) =>
+                        if (abiValueType == "CPointer<Unit>") {
+                            match (unwrapGenericType(parameter.callerType, "OutSlot")) {
+                                case Some(callerValueType) =>
+                                    if (callerValueType.startsWith("CPointer")) {
+                                        throw IllegalArgumentException("${descriptor.name}.${method.name} uses raw pointer result bridge ${parameter.callerType}; use a typed interface wrapper so ownership can transfer through typed WinRT output storage")
+                                    }
+                                case None => ()
+                            }
+                        }
+                    case None => ()
+                }
+            case None => ()
+        }
+    }
 }
 
 func baseVtableTypeName(descriptor: ResolvedDescriptor): String {
@@ -412,7 +464,7 @@ func thunkResultWriteExpr(method: InterfaceMethodSchema, abiValueType: String): 
                 return "value"
             }
             if (abiValueType == "CPointer<Unit>") {
-                return "value.asAbiPointer()"
+                return "value"
             }
             "value"
         case None => "value"
@@ -865,6 +917,14 @@ func appendWrapperClass(sb: StringBuilder, descriptor: ResolvedDescriptor): Unit
     sb.append("})\"\n")
     sb.append("    }\n")
     sb.append("}\n")
+    if (descriptor.isComInterface) {
+        sb.append("\n")
+        sb.append("extend ")
+        sb.append(descriptor.wrapperTypeName)
+        sb.append(" <: windows_core.Interface<")
+        sb.append(descriptor.wrapperTypeName)
+        sb.append("> {}\n")
+    }
 }
 
 func appendDispatchThunk(sb: StringBuilder, descriptor: ResolvedDescriptor, method: InterfaceMethodSchema): Unit {
@@ -884,6 +944,7 @@ func appendDispatchThunk(sb: StringBuilder, descriptor: ResolvedDescriptor, meth
             case None => ()
         }
     }
+    sb.append("    try {\n")
     sb.append("    match (unsafe { asImplFromRaw<")
     sb.append(descriptor.implSurfaceName)
     sb.append(">(instanceRaw")
@@ -912,15 +973,9 @@ func appendDispatchThunk(sb: StringBuilder, descriptor: ResolvedDescriptor, meth
                             sb.append(") }\n")
                             sb.append("                            S_OK\n")
                         } else if (abiValueType == "CPointer<Unit>") {
-                            sb.append("                            let raw = ")
-                            sb.append(thunkResultWriteExpr(method, abiValueType))
-                            sb.append("\n")
-                            sb.append("                            if (raw.isNull()) {\n")
-                            sb.append("                                E_POINTER\n")
-                            sb.append("                            } else {\n")
-                            sb.append("                                unsafe { result__.write(raw) }\n")
-                            sb.append("                                S_OK\n")
-                            sb.append("                            }\n")
+                            sb.append("                            windows_core.winrtStoreGenericOut<")
+                            sb.append(callerType)
+                            sb.append(">(result__, value)\n")
                         } else {
                             sb.append("                            unsafe { result__.write(")
                             sb.append(thunkResultWriteExpr(method, abiValueType))
@@ -954,10 +1009,22 @@ func appendDispatchThunk(sb: StringBuilder, descriptor: ResolvedDescriptor, meth
     sb.append(defaultFailureReturn(method.returnType))
     sb.append("\n")
     sb.append("    }\n")
+    sb.append("    } catch (error: windows_result.WindowsException) {\n")
+    appendDispatchExceptionOutSlotCleanup(sb, method)
+    sb.append("        ")
+    sb.append(thunkWindowsExceptionReturn(method.returnType))
+    sb.append("\n")
+    sb.append("    } catch (_: Exception) {\n")
+    appendDispatchExceptionOutSlotCleanup(sb, method)
+    sb.append("        ")
+    sb.append(thunkPlainExceptionReturn(method.returnType))
+    sb.append("\n")
+    sb.append("    }\n")
     sb.append("}\n")
 }
 
 public func renderDescriptor(descriptor: ResolvedDescriptor): String {
+    validateDescriptorAbiSurface(descriptor)
     var sb = StringBuilder()
     sb.append(renderImplSurface(descriptor))
     sb.append("\n\n")
