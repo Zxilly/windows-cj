@@ -110,6 +110,13 @@ class ClassifiedNameParseTests(unittest.TestCase):
         source = 'nativeMethodImportsFromModule(method, "WINHTTP.dll")\nfullName == "Windows.Win32.Foundation.HRESULT"'
         self.assertEqual(scanner.parse_classified_method_names(source), set())
 
+    def test_captures_not_equal_guard(self) -> None:
+        # `if (method.name != "X") { return false }` means X is special-cased.
+        source = 'if (method.name != "WSAWaitForMultipleEvents") { return false }'
+        self.assertEqual(
+            scanner.parse_classified_method_names(source), {"WSAWaitForMultipleEvents"}
+        )
+
 
 class HighConfidenceFlagTests(unittest.TestCase):
     def test_status_dll_integer_unclassified_is_flagged(self) -> None:

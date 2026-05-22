@@ -51,8 +51,9 @@ HIGH_CONFIDENCE_STATUS_BUCKETS = frozenset({"UInt32", "Int32", "WIN32_ERROR"})
 DOCUMENTATION_ATTRIBUTE = "Windows.Win32.Foundation.Metadata.DocumentationAttribute"
 
 # Method-name literal comparisons in the classification source. Matches both
-# `name == "Foo"` and `method.name == "Foo"`.
-CLASSIFIED_NAME_RE = re.compile(r'(?:method\.)?name\s*==\s*"([A-Za-z0-9_]+)"')
+# `name == "Foo"` and `method.name == "Foo"`, and the `name != "Foo"` early-return
+# guard form ("if not this name, bail") which also means the name is special-cased.
+CLASSIFIED_NAME_RE = re.compile(r'(?:method\.)?name\s*[=!]=\s*"([A-Za-z0-9_]+)"')
 
 # Typed handle return names that are not value-like. HRESULT is matched earlier
 # so the leading-H heuristic below does not capture it.
