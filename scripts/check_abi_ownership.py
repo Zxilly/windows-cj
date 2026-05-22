@@ -28,6 +28,11 @@ QUERY_INTERFACE_BINDING_RE = re.compile(
     rf"\b(?:let|var)\s+([A-Za-z_][A-Za-z0-9_]*)(?:\s*:[^=\n]+)?\s*=\s*(?:unsafe\s*\{{\s*)?{QUERY_INTERFACE_HELPER_CALL}\b",
     re.MULTILINE,
 )
+QUERY_REQUIRED_BINDING_RE = re.compile(
+    r"\b(?:let|var)\s+([A-Za-z_][A-Za-z0-9_]*)(?:\s*:[^=\n]+)?\s*=\s*queryRequired\s*\(",
+    re.MULTILINE,
+)
+QUERY_REQUIRED_CALL_RE = re.compile(r"\bqueryRequired\s*\(")
 SOME_CASE_RE = re.compile(r"^(\s*)case\s+Some\(([A-Za-z_][A-Za-z0-9_]*)\)\s*=>", re.MULTILINE)
 CASE_RE = re.compile(r"^(\s*)case\b.*=>", re.MULTILINE)
 DIRECT_QUERY_INTERFACE_RE = re.compile(r"\.QueryInterface\s*\(")
@@ -259,6 +264,20 @@ def query_result_consumed(body: str, name: str) -> bool:
     )
 
 
+def query_required_result_consumed(body: str, name: str) -> bool:
+    if query_result_consumed(body, name):
+        return True
+    raw_name = re.escape(name)
+    search_body = mask_cj_strings_and_comments(body)
+    tail_body = single_non_comment_statement(search_body)
+    final_body = last_non_comment_statement(search_body)
+    tail_expression = tail_body if tail_body is not None else final_body
+    owning_wrapper = r"(?:UIElementHandle|ButtonBaseHandle|XamlObjectHandle)\s*\(\s*" + raw_name + r"\s*\)"
+    if tail_expression is not None and re.fullmatch(owning_wrapper, tail_expression) is not None:
+        return True
+    return re.search(rf"\breturn\s+{owning_wrapper}", search_body) is not None
+
+
 def strip_line_comments(text: str) -> str:
     return mask_cj_strings_and_comments(text)
 
@@ -468,6 +487,55 @@ def check_query_interface_results_consumed(workspace: Path) -> None:
         sys.exit(1)
 
 
+def check_owned_raw_query_required_results_consumed(workspace: Path) -> None:
+    xaml = workspace / "windows-winui3" / "src" / "xaml" / "mod.cj"
+    if not xaml.exists():
+        return
+    text = xaml.read_text(encoding="utf-8")
+    masked = mask_cj_strings_and_comments(text)
+    findings: list[str] = []
+    binding_spans: list[tuple[int, int]] = []
+    for match in QUERY_REQUIRED_BINDING_RE.finditer(masked):
+        name = match.group(1)
+        line_end = masked.find("\n", match.end())
+        if line_end < 0:
+            line_end = len(masked)
+        # The WinUI helper has short functions; keep the audit conservative and local.
+        body = masked[line_end : min(len(masked), line_end + 2400)]
+        binding_spans.append((match.start(), line_end))
+        if query_required_result_consumed(body, name):
+            continue
+        line = text[: match.start()].count("\n") + 1
+        findings.append(
+            f"{rel(xaml, workspace)}:{line}: queryRequired result {name!r} "
+            "must be transferred to an owning wrapper or released with releaseRaw"
+        )
+
+    for match in QUERY_REQUIRED_CALL_RE.finditer(masked):
+        if any(start <= match.start() < end for start, end in binding_spans):
+            continue
+        line_start = masked.rfind("\n", 0, match.start()) + 1
+        line_end = masked.find("\n", match.end())
+        if line_end < 0:
+            line_end = len(masked)
+        line = masked[line_start:line_end]
+        if re.search(r"\bfunc\s+queryRequired\s*\(", line):
+            continue
+        if re.search(r"\b(?:UIElementHandle|ButtonBaseHandle|XamlObjectHandle)\s*\(\s*queryRequired\s*\(", line):
+            continue
+        line_number = text[: match.start()].count("\n") + 1
+        findings.append(
+            f"{rel(xaml, workspace)}:{line_number}: queryRequired call must be immediately wrapped, "
+            "bound for checked release, or returned through an owning wrapper"
+        )
+
+    if findings:
+        print("FAIL: WinUI queryRequired ownership audit failed:", file=sys.stderr)
+        for finding in findings:
+            print(f"  {finding}", file=sys.stderr)
+        sys.exit(1)
+
+
 def check_direct_query_interface_call_sites(workspace: Path) -> None:
     findings: list[str] = []
     for source in cj_sources(workspace, production_only=True):
@@ -556,6 +624,7 @@ def check_from_abi_take_routes_to_owned_guard(workspace: Path) -> None:
 def main() -> None:
     workspace = Path(__file__).resolve().parent.parent
     check_query_interface_results_consumed(workspace)
+    check_owned_raw_query_required_results_consumed(workspace)
     check_direct_query_interface_call_sites(workspace)
     check_discarded_owned_wrappers(workspace)
     check_interface_take_ownership_guard(workspace)

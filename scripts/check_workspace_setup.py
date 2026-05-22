@@ -16,6 +16,7 @@ import hashlib
 import json
 import re
 from pathlib import Path
+from typing import Sequence
 
 
 ACTIVE_WORKSPACE_MEMBERS = {
@@ -172,12 +173,554 @@ WINDOWS_INTERFACE_MACRO_TEST_LINK_CLOSURE = {
     "windows_libloading",
 }
 IGNORED_SHELL_SCRIPT_DIRS = {".git", "target"}
-FORBIDDEN_SCRIPT_EXTENSIONS = {".sh", ".ps1", ".bat"}
+FORBIDDEN_SCRIPT_EXTENSIONS = {".sh", ".ps1", ".bat", ".cmd"}
 FINALIZER_SAFE_CLEANUP_HELPERS = {
     "closeBstrStateNoThrow",
     "closeHStringStateNoThrow",
     "closeHStringBuilderStateNoThrow",
 }
+NATIVE_CHECKED_WRAPPER_START_RE = re.compile(
+    r"^public\s+func\s+([A-Za-z_][A-Za-z0-9_]*)Checked\b",
+    re.MULTILINE,
+)
+NATIVE_FUNC_DECL_RE = re.compile(r"^public\s+func\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(", re.MULTILINE)
+PACKAGE_RE = re.compile(r"^\s*package\s+([A-Za-z_][A-Za-z0-9_.]*)", re.MULTILINE)
+SEMANTIC_BOOL_PREFIXES = ("Is", "Are", "Can", "Does", "Equal", "Has")
+WIN32_BOOL_ABI_RETURN_TYPES = {
+    "Windows.Win32.Foundation.BOOL",
+    "Windows.Win32.Foundation.BOOLEAN",
+}
+WIN32_INTNATIVE_ABI_RETURN_TYPES = {
+    "Windows.Win32.Foundation.LRESULT",
+}
+SET_LAST_ERROR_BOOL_MISSING_METADATA = {
+    "AttachThreadInput",
+    "GetCachedSigningLevel",
+    "SetCachedSigningLevel",
+}
+MULTIPLE_SUCCESS_BOOL_ZERO_FAILURE = {"AttachThreadInput"}
+SET_LAST_ERROR_BOOL_NO_CHECKED_WRAPPER_METHODS = {"GetQueuedCompletionStatus"}
+SET_LAST_ERROR_BOOL_FALSE_SUCCESS_STATUS_METHODS = {
+    "SleepConditionVariableCS": (1460,),
+    "SleepConditionVariableSRW": (1460,),
+    "WaitOnAddress": (1460,),
+    "DeleteTimerQueueTimer": (997,),
+    "UnregisterWait": (997,),
+    "UnregisterWaitEx": (997,),
+    "ConnectNamedPipe": (997, 535),
+    "DeviceIoControl": (997,),
+    "GetThreadWaitChain": (997,),
+    "HandleLogFull": (997,),
+    "GetOverlappedResult": (996,),
+    "GetOverlappedResultEx": (996, 192, 258),
+    "GetQueuedCompletionStatusEx": (258,),
+    "LockFileEx": (997,),
+    "ReadFile": (997,),
+    "ReadFileScatter": (997,),
+    "TransactNamedPipe": (997,),
+    "WaitCommEvent": (997,),
+    "WinUsb_ReadPipe": (997,),
+    "WinUsb_WritePipe": (997,),
+    "WriteFile": (997,),
+    "WriteFileGather": (997,),
+}
+SET_LAST_ERROR_BOOL_STATUS_METHODS = {
+    "WinHttpCrackUrl": (122,),
+    "WinHttpCreateUrl": (122,),
+    "WinHttpQueryHeaders": (122, 12150),
+    "WinHttpQueryOption": (122,),
+    "WinHttpReceiveResponse": (12032,),
+    "WinHttpSendRequest": (12032,),
+}
+SET_LAST_ERROR_NULL_HANDLE_RETURN_TYPES = {
+    "Windows.Win32.Foundation.HANDLE",
+    "Windows.Win32.System.Services.SC_HANDLE",
+    "Windows.Win32.System.Services.SERVICE_STATUS_HANDLE",
+    "Windows.Win32.System.Threading.AVRT_TASK_HANDLE",
+    "Windows.Win32.System.Threading.PTP_CLEANUP_GROUP",
+    "Windows.Win32.System.Threading.PTP_IO",
+    "Windows.Win32.System.Threading.PTP_POOL",
+    "Windows.Win32.System.Threading.PTP_TIMER",
+    "Windows.Win32.System.Threading.PTP_WAIT",
+    "Windows.Win32.System.Threading.PTP_WORK",
+}
+SET_LAST_ERROR_NULL_SUCCESS_HANDLE_RETURN_TYPES = {
+    "GlobalFree": "Windows.Win32.Foundation.HGLOBAL",
+    "LocalFree": "Windows.Win32.Foundation.HLOCAL",
+}
+SET_LAST_ERROR_INVALID_HANDLE_RETURN_TYPES = {
+    "CreateFileA": "Windows.Win32.Foundation.HANDLE",
+    "CreateFileW": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstChangeNotificationA": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstChangeNotificationW": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstFileA": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstFileW": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstFileExA": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstFileExW": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstFileNameW": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstFileNameTransactedW": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstFileTransactedA": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstFileTransactedW": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstStreamW": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstStreamTransactedW": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstVolumeA": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstVolumeW": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstVolumeMountPointA": "Windows.Win32.Foundation.HANDLE",
+    "FindFirstVolumeMountPointW": "Windows.Win32.Foundation.HANDLE",
+}
+SET_LAST_ERROR_WAIT_EVENT_RETURN_TYPE = "Windows.Win32.Foundation.WAIT_EVENT"
+SET_LAST_ERROR_NULL_POINTER_METHODS = {
+    "LockServiceDatabase",
+    "CreateFiberEx",
+    "ConvertThreadToFiberEx",
+    "CreateFiber",
+    "ConvertThreadToFiber",
+    "CertCreateCertificateContext",
+}
+SET_LAST_ERROR_TLS_VALUE_METHODS = {"TlsGetValue", "FlsGetValue"}
+SET_LAST_ERROR_UINT32_MINUS_ONE_METHODS = {
+    "FlsAlloc",
+    "TlsAlloc",
+    "SuspendThread",
+    "ResumeThread",
+    "SetThreadIdealProcessor",
+    "Wow64SuspendThread",
+    "GetFileAttributesA",
+    "GetFileAttributesW",
+}
+SET_LAST_ERROR_UINT32_ZERO_LAST_ERROR_METHODS = {"GetGuiResources"}
+SET_LAST_ERROR_UINT32_ZERO_METHODS = {
+    "GetSystemDirectoryA",
+    "GetSystemDirectoryW",
+    "GetWindowsDirectoryA",
+    "GetWindowsDirectoryW",
+    "GetSystemWindowsDirectoryA",
+    "GetSystemWindowsDirectoryW",
+    "EnumSystemFirmwareTables",
+    "GetSystemFirmwareTable",
+    "GetSystemWow64DirectoryA",
+    "GetSystemWow64DirectoryW",
+    "GetSystemWow64Directory2A",
+    "GetSystemWow64Directory2W",
+    "QueueUserAPC",
+    "GetProcessVersion",
+    "GetPriorityClass",
+    "GetProcessId",
+    "GetThreadId",
+    "GetProcessIdOfThread",
+    "GetActiveProcessorCount",
+    "GetMaximumProcessorCount",
+    "GetFileVersionInfoSizeA",
+    "GetFileVersionInfoSizeW",
+    "QueryDosDeviceA",
+    "QueryDosDeviceW",
+}
+SET_LAST_ERROR_UINTNATIVE_ZERO_METHODS = {"SetThreadAffinityMask"}
+SET_LAST_ERROR_INTNATIVE_ZERO_LAST_ERROR_METHODS = {"SendMessageTimeoutA", "SendMessageTimeoutW"}
+SET_LAST_ERROR_INT32_MAX_METHODS = {"GetThreadPriority"}
+SET_LAST_ERROR_INT32_MINUS_ONE_METHODS = {"GetMessageA", "GetMessageW"}
+WINSOCK_INVALID_SOCKET_METHODS = {
+    "accept",
+    "socket",
+    "WSAAccept",
+    "WSAJoinLeaf",
+    "WSASocketA",
+    "WSASocketW",
+}
+WINSOCK_BOOL_METHODS = {
+    "AcceptEx",
+    "TransmitFile",
+    "WSACloseEvent",
+    "WSAConnectByNameW",
+    "WSAConnectByNameA",
+    "WSAConnectByList",
+    "WSAGetOverlappedResult",
+    "WSAGetQOSByName",
+    "WSAResetEvent",
+    "WSASetEvent",
+}
+WINSOCK_BOOL_PENDING_SUCCESS_METHODS = {
+    "AcceptEx": 997,
+    "TransmitFile": 997,
+}
+WINSOCK_WAIT_EVENT_METHODS = {"WSAWaitForMultipleEvents"}
+WINSOCK_INVALID_EVENT_METHODS = {"WSACreateEvent"}
+WINSOCK_NULL_HANDLE_METHODS = {
+    "WSAAsyncGetServByName",
+    "WSAAsyncGetServByPort",
+    "WSAAsyncGetProtoByName",
+    "WSAAsyncGetProtoByNumber",
+    "WSAAsyncGetHostByName",
+    "WSAAsyncGetHostByAddr",
+}
+WINSOCK_NULL_POINTER_METHODS = {
+    "gethostbyaddr",
+    "gethostbyname",
+    "getservbyport",
+    "getservbyname",
+    "getprotobynumber",
+    "getprotobyname",
+}
+WINSOCK_SOCKET_ERROR_INT32_METHODS = {
+    "bind",
+    "closesocket",
+    "connect",
+    "getpeername",
+    "getsockname",
+    "getsockopt",
+    "ioctlsocket",
+    "listen",
+    "recv",
+    "recvfrom",
+    "select",
+    "send",
+    "sendto",
+    "setsockopt",
+    "shutdown",
+    "gethostname",
+    "GetHostNameW",
+    "WSACleanup",
+    "WSAUnhookBlockingHook",
+    "WSACancelBlockingCall",
+    "WSACancelAsyncRequest",
+    "WSAAsyncSelect",
+    "WSAConnect",
+    "WSADuplicateSocketA",
+    "WSADuplicateSocketW",
+    "WSAEnumNetworkEvents",
+    "WSAEnumProtocolsA",
+    "WSAEnumProtocolsW",
+    "WSAEventSelect",
+    "WSAHtonl",
+    "WSAHtons",
+    "WSAIoctl",
+    "WSANtohl",
+    "WSANtohs",
+    "WSARecv",
+    "WSARecvEx",
+    "WSARecvDisconnect",
+    "WSARecvFrom",
+    "WSASend",
+    "WSASendMsg",
+    "WSASendDisconnect",
+    "WSASendTo",
+    "WSAAddressToStringA",
+    "WSAAddressToStringW",
+    "WSAStringToAddressA",
+    "WSAStringToAddressW",
+    "WSALookupServiceBeginA",
+    "WSALookupServiceBeginW",
+    "WSALookupServiceNextA",
+    "WSALookupServiceNextW",
+    "WSANSPIoctl",
+    "WSALookupServiceEnd",
+    "WSAInstallServiceClassA",
+    "WSAInstallServiceClassW",
+    "WSARemoveServiceClass",
+    "WSAGetServiceClassInfoA",
+    "WSAGetServiceClassInfoW",
+    "WSAEnumNameSpaceProvidersA",
+    "WSAEnumNameSpaceProvidersW",
+    "WSAEnumNameSpaceProvidersExA",
+    "WSAEnumNameSpaceProvidersExW",
+    "WSAGetServiceClassNameByClassIdA",
+    "WSAGetServiceClassNameByClassIdW",
+    "WSASetServiceA",
+    "WSASetServiceW",
+    "WSAProviderConfigChange",
+    "WSAPoll",
+    "WSAAdvertiseProvider",
+    "WSAUnadvertiseProvider",
+    "WSAProviderCompleteAsyncCall",
+    "inet_pton",
+    "InetPtonW",
+    "WSCEnumNameSpaceProviders32",
+    "WSCEnumNameSpaceProvidersEx32",
+    "WSCInstallNameSpace",
+    "WSCInstallNameSpace32",
+    "WSCInstallNameSpaceEx",
+    "WSCInstallNameSpaceEx32",
+    "WSCUnInstallNameSpace",
+    "WSCUnInstallNameSpace32",
+    "WSCEnableNSProvider",
+    "WSCEnableNSProvider32",
+}
+WINSOCK_SOCKET_ERROR_UNIT_INT32_METHODS = {
+    "bind",
+    "closesocket",
+    "connect",
+    "getpeername",
+    "getsockname",
+    "getsockopt",
+    "ioctlsocket",
+    "listen",
+    "setsockopt",
+    "shutdown",
+    "gethostname",
+    "GetHostNameW",
+    "WSACleanup",
+    "WSAUnhookBlockingHook",
+    "WSACancelBlockingCall",
+    "WSACancelAsyncRequest",
+    "WSAAsyncSelect",
+    "WSAConnect",
+    "WSADuplicateSocketA",
+    "WSADuplicateSocketW",
+    "WSAEnumNetworkEvents",
+    "WSAEventSelect",
+    "WSAHtonl",
+    "WSAHtons",
+    "WSAIoctl",
+    "WSANtohl",
+    "WSANtohs",
+    "WSARecv",
+    "WSARecvDisconnect",
+    "WSARecvFrom",
+    "WSASend",
+    "WSASendMsg",
+    "WSASendDisconnect",
+    "WSASendTo",
+    "WSAAddressToStringA",
+    "WSAAddressToStringW",
+    "WSAStringToAddressA",
+    "WSAStringToAddressW",
+    "WSALookupServiceBeginA",
+    "WSALookupServiceBeginW",
+    "WSALookupServiceNextA",
+    "WSALookupServiceNextW",
+    "WSALookupServiceEnd",
+    "WSANSPIoctl",
+    "WSAInstallServiceClassA",
+    "WSAInstallServiceClassW",
+    "WSARemoveServiceClass",
+    "WSAGetServiceClassInfoA",
+    "WSAGetServiceClassInfoW",
+    "WSAGetServiceClassNameByClassIdA",
+    "WSAGetServiceClassNameByClassIdW",
+    "WSASetServiceA",
+    "WSASetServiceW",
+    "WSAProviderConfigChange",
+    "WSAAdvertiseProvider",
+    "WSAUnadvertiseProvider",
+    "WSAProviderCompleteAsyncCall",
+    "WSCInstallNameSpace",
+    "WSCInstallNameSpace32",
+    "WSCInstallNameSpaceEx",
+    "WSCInstallNameSpaceEx32",
+    "WSCUnInstallNameSpace",
+    "WSCUnInstallNameSpace32",
+    "WSCEnableNSProvider",
+    "WSCEnableNSProvider32",
+}
+WINSOCK_SOCKET_ERROR_PENDING_SUCCESS_INT32_METHODS = {
+    "WSAIoctl": 997,
+    "WSARecv": 997,
+    "WSARecvFrom": 997,
+    "WSASend": 997,
+    "WSASendMsg": 997,
+    "WSASendTo": 997,
+    "WSAProviderConfigChange": 997,
+}
+MSWSOCK_GET_LAST_ERROR_SOCKET_ERROR_INT32_METHODS = {
+    "EnumProtocolsA",
+    "EnumProtocolsW",
+    "GetAddressByNameA",
+    "GetAddressByNameW",
+    "GetNameByTypeA",
+    "GetNameByTypeW",
+    "GetServiceA",
+    "GetServiceW",
+    "GetTypeByNameA",
+    "GetTypeByNameW",
+    "SetServiceA",
+    "SetServiceW",
+}
+MSWSOCK_GET_LAST_ERROR_SOCKET_ERROR_UNIT_INT32_METHODS = {
+    "GetTypeByNameA",
+    "GetTypeByNameW",
+    "SetServiceA",
+    "SetServiceW",
+}
+WINSOCK_DIRECT_ERROR_INT32_METHODS = {
+    "WSAStartup",
+    "getaddrinfo",
+    "getnameinfo",
+    "GetAddrInfoW",
+    "GetNameInfoW",
+    "GetAddrInfoExA",
+    "GetAddrInfoExCancel",
+    "SetAddrInfoExA",
+    "SetAddrInfoExW",
+    "WSCWriteProviderOrder",
+    "WSCWriteProviderOrder32",
+    "WSCWriteNameSpaceOrder",
+    "WSCWriteNameSpaceOrder32",
+}
+WINSOCK_INT32_CAN_USE_WSA_GET_LAST_ERROR_WITHOUT_METADATA = {
+    "InetPtonW",
+    "WSCEnumNameSpaceProviders32",
+    "WSCEnumNameSpaceProvidersEx32",
+    "WSCInstallNameSpace",
+    "WSCInstallNameSpace32",
+    "WSCInstallNameSpaceEx",
+    "WSCInstallNameSpaceEx32",
+    "WSCUnInstallNameSpace",
+    "WSCUnInstallNameSpace32",
+    "WSCEnableNSProvider",
+    "WSCEnableNSProvider32",
+}
+WINSOCK_LPERRNO_STATUS_INT32_METHODS = {
+    "WSCEnumProtocols",
+    "WSCEnumProtocols32",
+}
+WINSOCK_LPERRNO_UNIT_INT32_METHODS = {
+    "WSCDeinstallProvider",
+    "WSCDeinstallProvider32",
+    "WSCInstallProvider",
+    "WSCInstallProvider64_32",
+    "WSCInstallProviderAndChains64_32",
+    "WSCGetProviderPath",
+    "WSCGetProviderPath32",
+    "WSCUpdateProvider",
+    "WSCUpdateProvider32",
+    "WSCSetProviderInfo",
+    "WSCSetProviderInfo32",
+    "WSCGetProviderInfo",
+    "WSCGetProviderInfo32",
+    "WSCSetApplicationCategory",
+    "WSCGetApplicationCategory",
+    "WPUCompleteOverlappedRequest",
+}
+WINSOCK_PENDING_STATUS_INT32_METHODS = {
+    "GetAddrInfoExW": 997,
+    "GetAddrInfoExOverlappedResult": 10036,
+}
+DIRECT_WIN32_ERROR_CODE_INT32_UNIT_METHODS = {
+    "DnsCancelQuery",
+    "DnsCancelQueryRaw",
+    "DnsServiceBrowseCancel",
+    "DnsServiceResolveCancel",
+    "DnsStartMulticastQuery",
+    "DnsStopMulticastQuery",
+    "DnsAcquireContextHandle_W",
+    "DnsAcquireContextHandle_A",
+    "DnsModifyRecordsInSet_W",
+    "DnsModifyRecordsInSet_A",
+    "DnsModifyRecordsInSet_UTF8",
+    "DnsReplaceRecordSetW",
+    "DnsReplaceRecordSetA",
+    "DnsReplaceRecordSetUTF8",
+    "DnsExtractRecordsFromMessage_W",
+    "DnsExtractRecordsFromMessage_UTF8",
+    "DnsIsFlatRecord",
+}
+DIRECT_WIN32_ERROR_CODE_INT32_STATUS_METHODS = {
+    "DNSAPI.dll": {
+        "DnsQueryConfig": (0, 234),
+        "DnsQueryEx": (0, 9501, 9506),
+        "DnsQueryRaw": (0, 9506),
+        "DnsValidateName_W": (0, 9556),
+        "DnsValidateName_A": (0, 9556),
+        "DnsValidateName_UTF8": (0, 9556),
+        "DnsServiceBrowse": (9506,),
+        "DnsServiceResolve": (9506,),
+    },
+}
+WAIT_FAILED_UINT32_METHODS = {"WaitForInputIdle"}
+DIRECT_WIN32_ERROR_CODE_UINT32_UNIT_METHODS = {
+    "HttpInitialize",
+    "HttpTerminate",
+    "HttpCreateHttpHandle",
+    "HttpCreateRequestQueue",
+    "HttpCloseRequestQueue",
+    "HttpSetRequestQueueProperty",
+    "HttpCancelHttpRequest",
+    "HttpShutdownRequestQueue",
+    "HttpCreateServerSession",
+    "HttpCloseServerSession",
+    "HttpSetServerSessionProperty",
+    "HttpAddUrl",
+    "HttpRemoveUrl",
+    "HttpCreateUrlGroup",
+    "HttpCloseUrlGroup",
+    "HttpAddUrlToUrlGroup",
+    "HttpRemoveUrlFromUrlGroup",
+    "HttpSetUrlGroupProperty",
+    "HttpPrepareUrl",
+    "HttpDeclarePush",
+    "HttpDelegateRequestEx",
+    "HttpFindUrlGroupId",
+    "HttpSetServiceConfiguration",
+    "HttpUpdateServiceConfiguration",
+    "HttpDeleteServiceConfiguration",
+    "WinHttpCreateProxyResolver",
+    "WinHttpGetProxyResult",
+    "WinHttpGetProxyResultEx",
+    "WinHttpResetAutoProxy",
+    "WinHttpWriteProxySettings",
+    "WinHttpReadProxySettings",
+    "WinHttpGetProxySettingsVersion",
+    "WinHttpSetProxySettingsPerUser",
+    "WinHttpReadDataEx",
+    "WinHttpAddRequestHeadersEx",
+    "WinHttpWebSocketSend",
+    "WinHttpWebSocketReceive",
+    "WinHttpWebSocketShutdown",
+    "WinHttpWebSocketClose",
+    "WinHttpRegisterProxyChangeNotification",
+    "WinHttpUnregisterProxyChangeNotification",
+    "WinHttpGetProxySettingsResultEx",
+    "WinHttpFreeProxySettingsEx",
+    "DnsSetApplicationSettings",
+    "DnsGetApplicationSettings",
+    "DnsGetProxyInformation",
+    "DnsConnectionSetProxyInfo",
+    "DnsConnectionDeleteProxyInfo",
+    "DnsConnectionUpdateIfIndexTable",
+    "DnsConnectionSetPolicyEntries",
+    "DnsConnectionDeletePolicyEntries",
+    "DnsServiceRegisterCancel",
+}
+DIRECT_WIN32_ERROR_CODE_UINT32_STATUS_METHODS = {
+    "HTTPAPI.dll": {
+        "HttpQueryRequestQueueProperty": (0, 234),
+        "HttpSetRequestProperty": (0, 997),
+        "HttpQueryRequestProperty": (0, 997, 234),
+        "HttpReceiveClientCertificate": (0, 997, 122, 234),
+        "HttpQueryServerSessionProperty": (0, 234),
+        "HttpQueryUrlGroupProperty": (0, 234),
+        "HttpReceiveHttpRequest": (0, 997, 234, 38),
+        "HttpReceiveRequestEntityBody": (0, 997, 38),
+        "HttpSendHttpResponse": (0, 997),
+        "HttpSendResponseEntityBody": (0, 997),
+        "HttpWaitForDisconnect": (0, 997),
+        "HttpWaitForDisconnectEx": (0, 997),
+        "HttpWaitForDemandStart": (0, 997),
+        "HttpFlushResponseCache": (0, 997),
+        "HttpAddFragmentToCache": (0, 997),
+        "HttpReadFragmentFromCache": (0, 997, 122, 234),
+        "HttpQueryServiceConfiguration": (0, 122, 234, 259),
+    },
+    "WINHTTP.dll": {
+        "WinHttpGetProxyForUrlEx": (997,),
+        "WinHttpGetProxyForUrlEx2": (997,),
+        "WinHttpGetProxySettingsEx": (997,),
+        "WinHttpQueryHeadersEx": (0, 122, 12150),
+        "WinHttpWebSocketQueryCloseStatus": (0, 122),
+    },
+    "WS2_32.dll": {
+        "ProcessSocketNotifications": (0, 258),
+    },
+    "DNSAPI.dll": {
+        "DnsQuery_A": (0, 9501),
+        "DnsQuery_UTF8": (0, 9501),
+        "DnsQuery_W": (0, 9501),
+        "DnsServiceRegister": (0, 9506),
+        "DnsServiceDeRegister": (0, 9506),
+    },
+}
+UINT32_LESS_THAN_OR_EQUAL_FAILURE_METHODS = {"WinExec": 31}
+MULTIPLE_SUCCESS_HRESULT_MISSING_METADATA = {"CoCreateInstanceEx", "CoCreateInstanceFromApp"}
 
 
 def fail(message: str) -> None:
@@ -234,6 +777,84 @@ def require_text_before(text: str, earlier: str, later: str, message: str) -> No
         fail(message)
 
 
+def require_text_fragments(text: str, fragments: tuple[str, ...], message: str) -> None:
+    for fragment in fragments:
+        if fragment not in text:
+            fail(f"{message}: missing {fragment!r}")
+
+
+def mask_cj_strings_and_comments(text: str) -> str:
+    chars = list(text)
+
+    def mask_range(start: int, end: int) -> None:
+        for offset in range(start, end):
+            if chars[offset] != "\n":
+                chars[offset] = " "
+
+    index = 0
+    while index < len(text):
+        if text.startswith("//", index):
+            end = text.find("\n", index)
+            if end < 0:
+                end = len(text)
+            mask_range(index, end)
+            index = end
+            continue
+        if text.startswith("/*", index):
+            end = text.find("*/", index + 2)
+            if end < 0:
+                end = len(text)
+            else:
+                end += 2
+            mask_range(index, end)
+            index = end
+            continue
+        if text[index] == "#":
+            hash_count = 0
+            while index + hash_count < len(text) and text[index + hash_count] == "#":
+                hash_count += 1
+            string_start = index + hash_count
+            if string_start < len(text) and text[string_start] in ("\"", "'"):
+                close_marker = text[string_start] + ("#" * hash_count)
+                end = text.find(close_marker, string_start + 1)
+                if end < 0:
+                    end = len(text)
+                else:
+                    end += len(close_marker)
+                mask_range(index, end)
+                index = end
+                continue
+        if text.startswith('"""', index) or text.startswith("'''", index):
+            marker = text[index : index + 3]
+            end = text.find(marker, index + 3)
+            if end < 0:
+                end = len(text)
+            else:
+                end += len(marker)
+            mask_range(index, end)
+            index = end
+            continue
+        if text[index] in ("\"", "'"):
+            quote = text[index]
+            end = index + 1
+            escaped = False
+            while end < len(text):
+                char = text[end]
+                if escaped:
+                    escaped = False
+                elif char == "\\":
+                    escaped = True
+                elif char == quote:
+                    end += 1
+                    break
+                end += 1
+            mask_range(index, min(end, len(text)))
+            index = end
+            continue
+        index += 1
+    return "".join(chars)
+
+
 def check_winui_xaml_failed_out_cleanup(workspace: Path) -> None:
     xaml = workspace / "windows-winui3" / "src" / "xaml" / "mod.cj"
     check_path_exists(xaml, "windows-winui3 XAML helper")
@@ -273,6 +894,494 @@ def check_winui_xaml_failed_out_cleanup(workspace: Path) -> None:
         "unsafe { slot.write(CPointer<Unit>()) }",
         "releaseRaw(raw)",
         "windows-winui3 failed out-slot cleanup must clear the slot before releasing it",
+    )
+
+
+def check_winui_xaml_callback_com_invariants(workspace: Path) -> None:
+    xaml = workspace / "windows-winui3" / "src" / "xaml" / "mod.cj"
+    check_path_exists(xaml, "windows-winui3 XAML helper")
+    text = xaml.read_text(encoding="utf-8")
+    button_vtbl = section_between(
+        text,
+        "struct ButtonBaseVtbl",
+        "struct WindowVtbl",
+        "windows-winui3 default ButtonBaseVtbl",
+    )
+    require_text_fragments(
+        button_vtbl,
+        (
+            "public var AddClick: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<EventRegistrationToken>) -> Int32> = { _, _, result =>",
+            "if (result.isNotNull())",
+            "unsafe { result.write(0) }",
+            "E_NOTIMPL.value",
+        ),
+        "windows-winui3 default ButtonBaseVtbl.AddClick must clear stale token out slots before E_NOTIMPL",
+    )
+    require_text_before(
+        button_vtbl,
+        "unsafe { result.write(0) }",
+        "E_NOTIMPL.value",
+        "windows-winui3 default ButtonBaseVtbl.AddClick must clear stale token out slots before E_NOTIMPL",
+    )
+    routed_default_vtbl = section_between(
+        text,
+        "struct RoutedEventHandlerVtbl",
+        "struct RoutedEventHandlerObject",
+        "windows-winui3 default RoutedEventHandlerVtbl",
+    )
+    require_text_fragments(
+        routed_default_vtbl,
+        (
+            "public var QueryInterface: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result =>",
+            "if (result.isNotNull())",
+            "unsafe { result.write(CPointer<Unit>()) }",
+            "E_NOTIMPL.value",
+        ),
+        "windows-winui3 default RoutedEventHandlerVtbl.QueryInterface must clear stale result out slots before E_NOTIMPL",
+    )
+    require_text_before(
+        routed_default_vtbl,
+        "unsafe { result.write(CPointer<Unit>()) }",
+        "E_NOTIMPL.value",
+        "windows-winui3 default RoutedEventHandlerVtbl.QueryInterface must clear stale result out slots before E_NOTIMPL",
+    )
+    callback_pairs = (
+        ("applicationInitializationCallback", "IID_APPLICATION_INITIALIZATION_CALLBACK", "clearApplicationInitializationCallbackSlot"),
+        ("routedEventHandler", "IID_ROUTED_EVENT_HANDLER", "clearRoutedEventHandlerSlot"),
+    )
+    for prefix, iid_name, clear_slot in callback_pairs:
+        query = section_between(
+            text,
+            f"func {prefix}QueryInterface",
+            f"func {prefix}AddRef",
+            f"windows-winui3 {prefix} QueryInterface",
+        )
+        require_text_fragments(
+            query,
+            (
+                "if (thisPtr.isNull() || iidPtr.isNull() || result.isNull())",
+                "return E_POINTER.value",
+                f"if (iid == IID_IUNKNOWN || iid == {iid_name})",
+                "unsafe { result.write(thisPtr) }",
+                f"unsafe {{ {prefix}AddRef(thisPtr) }}",
+                "return S_OK.value",
+                "unsafe { result.write(CPointer<Unit>()) }",
+                "return E_NOINTERFACE.value",
+            ),
+            f"windows-winui3 {prefix} QueryInterface must preserve COM out-pointer/AddRef semantics",
+        )
+        pointer_failure = section_between(
+            query,
+            "if (thisPtr.isNull() || iidPtr.isNull() || result.isNull())",
+            "let iid = unsafe { iidPtr.read() }",
+            f"windows-winui3 {prefix} QueryInterface pointer-failure branch",
+        )
+        require_text_fragments(
+            pointer_failure,
+            (
+                "if (result.isNotNull())",
+                "unsafe { result.write(CPointer<Unit>()) }",
+                "return E_POINTER.value",
+            ),
+            f"windows-winui3 {prefix} QueryInterface must only clear E_POINTER result slots after a null-result guard",
+        )
+        require_text_before(
+            pointer_failure,
+            "if (result.isNotNull())",
+            "unsafe { result.write(CPointer<Unit>()) }",
+            f"windows-winui3 {prefix} QueryInterface must guard E_POINTER out-slot clearing",
+        )
+        require_text_before(
+            pointer_failure,
+            "unsafe { result.write(CPointer<Unit>()) }",
+            "return E_POINTER.value",
+            f"windows-winui3 {prefix} QueryInterface must clear failed out pointers before E_POINTER",
+        )
+        require_text_before(
+            query,
+            "unsafe { result.write(CPointer<Unit>()) }",
+            "return E_NOINTERFACE.value",
+            f"windows-winui3 {prefix} QueryInterface must clear failed out pointers before E_NOINTERFACE",
+        )
+
+        release = section_between(
+            text,
+            f"func {prefix}Release",
+            f"func {prefix}Invoke",
+            f"windows-winui3 {prefix} Release",
+        )
+        require_text_fragments(
+            release,
+            (
+                "if (value.refCount == 0u32)",
+                "value.refCount -= 1u32",
+                "let refCount = value.refCount",
+                "if (refCount == 0u32)",
+                "if (value.slot >= 0)",
+                clear_slot,
+                "value.slot = -1",
+                "unsafe { obj.write(value) }",
+                "coTaskMemFree(thisPtr)",
+            ),
+            f"windows-winui3 {prefix} Release must clear slots and free exactly on final Release",
+        )
+        require_text_before(
+            release,
+            "unsafe { obj.write(value) }",
+            "coTaskMemFree(thisPtr)",
+            f"windows-winui3 {prefix} Release must persist cleared slot before freeing storage",
+        )
+
+        invoke = section_between(
+            text,
+            f"func {prefix}Invoke",
+            f"func {prefix}Vtbl",
+            f"windows-winui3 {prefix} Invoke",
+        )
+        require_text_fragments(
+            invoke,
+            (
+                "catch (error: WindowsException)",
+                "return error.code().value",
+                "catch (err: Exception)",
+                "return E_FAIL.value",
+            ),
+            f"windows-winui3 {prefix} Invoke must preserve WindowsException HRESULTs before generic failure mapping",
+        )
+        require_text_before(
+            invoke,
+            "catch (error: WindowsException)",
+            "catch (err: Exception)",
+            f"windows-winui3 {prefix} Invoke must catch WindowsException before generic Exception",
+        )
+        require_text_before(
+            invoke,
+            "return error.code().value",
+            "return E_FAIL.value",
+            f"windows-winui3 {prefix} Invoke must return the original WindowsException HRESULT before generic E_FAIL",
+        )
+
+    check_hresult = section_between(
+        text,
+        "func checkHRESULT",
+        "func expectFactory",
+        "windows-winui3 checkHRESULT",
+    )
+    require_text_fragments(
+        check_hresult,
+        ("throw WindowsException(hr)",),
+        "windows-winui3 checkHRESULT must throw WindowsException with the original HRESULT",
+    )
+    if "throw Exception(" in check_hresult:
+        fail("windows-winui3 checkHRESULT must not collapse HRESULT failures into plain Exception")
+
+
+def check_pinvoke_string_out_cleanup_gate(workspace: Path) -> None:
+    render_symbol = workspace / "windows-bindgen" / "src" / "render_symbol.cj"
+    bindgen_tests = workspace / "windows-bindgen" / "src" / "main_test.cj"
+    check_path_exists(render_symbol, "windows-bindgen render_symbol")
+    check_path_exists(bindgen_tests, "windows-bindgen tests")
+    render_text = render_symbol.read_text(encoding="utf-8")
+    require_text_fragments(
+        render_text,
+        (
+            "class PInvokeStringOutSlot",
+            "func pinvokeStringHandlePointerKind",
+            "func pinvokeStringOutSlotParameters",
+            "contains(parameter.attributes, \"Out\") && !contains(parameter.attributes, \"Retval\")",
+            "func pinvokePreclearOutSlots",
+            "var nullOutSlot__ = false",
+            "nullOutSlot__ = true",
+            "func pinvokeClearStringOutSlot",
+            "func pinvokeReleaseFailedStringOutSlot",
+            "windows_core.releaseSystemHStringHandle(failedString__)",
+            "windows_strings.BSTR.fromRawTake(CPointer<UInt16>(failedString__))",
+            "let stringOutSlots = pinvokeStringOutSlotParameters(method, pairs, symbolsByName)",
+            "let leadingStringOutSlots = pinvokeStringOutSlotParameters(method, leadingPairs, symbolsByName)",
+            "pinvokePreclearOutSlots(comOutPairs, stringOutSlots, \"        \")",
+            "pinvokePreclearOutSlots(leadingComOutPairs, leadingStringOutSlots, \"        \")",
+        ),
+        "windows-bindgen P/Invoke wrappers must release failed non-retval string handle out slots",
+    )
+    test_text = bindgen_tests.read_text(encoding="utf-8")
+    require_text_fragments(
+        test_text,
+        (
+            "testPInvokeErgonomicWrappersReleaseLeadingStringHandleOutsOnFailedHRESULT",
+            "\"Name\": \"FillStrings\"",
+            "\"Name\": \"TryFillStrings\"",
+            "var nullOutSlot__ = false\\n        if (name.isNull())",
+            "windows_core.releaseSystemHStringHandle(failedString__)",
+            "failedBstr__.close()",
+            "cliTestCountOccurrences(source, \"windows_core.releaseSystemHStringHandle(failedString__)\")",
+        ),
+        "windows-bindgen tests must cover failed non-retval HSTRING/BSTR out cleanup",
+    )
+
+
+def check_native_hresult_optional_out_cleanup_gate(workspace: Path) -> None:
+    native_helpers = workspace / "windows-bindgen" / "src" / "native_helpers.cj"
+    bindgen_tests = workspace / "windows-bindgen" / "src" / "main_test.cj"
+    check_path_exists(native_helpers, "windows-bindgen native helpers")
+    check_path_exists(bindgen_tests, "windows-bindgen tests")
+    native_text = native_helpers.read_text(encoding="utf-8")
+    require_text_fragments(
+        native_text,
+        (
+            "class NativeHResultBorrowedOptionalOutSlot",
+            "class NativeHResultOptionalScalarOutSlot",
+            "class NativeHResultOwnedPointerOutSlot",
+            "allowNullSlot",
+            "let ownedPointerOutSlots = nativeHResultOwnedPointerOutSlots(spec, symbolsByName)",
+            "let borrowedOptionalOutSlots = nativeHResultBorrowedOptionalOutSlots(spec, symbolsByName)",
+            "let optionalScalarOutSlots = nativeHResultOptionalScalarOutSlots(spec, symbolsByName)",
+            "func nativeHResultOwnedPointerOutSlots",
+            "func nativeHResultOwnedPointerOutAllocator",
+            "func nativeHResultBorrowedOptionalOutSlots",
+            "func nativeHResultOptionalScalarOutSlots",
+            "func nativeHResultParameterIsBorrowedOptionalOutSlot",
+            "func nativeHResultOptionalScalarOutSlotDefaultValue",
+            "func nativeHResultStringOutSlotAllowsNull",
+            "func nativePreclearOptionalHResultOutSlots",
+            "func nativeReleaseFailedOwnedPointerOutSlot",
+            "func nativeReleaseFailedBorrowedOptionalOutSlots",
+            "func nativeReleaseFailedOptionalScalarOutSlots",
+            "CoGetSystemSecurityPermissions",
+            "CoQueryAuthenticationServices",
+            "importName == \"CoQueryProxyBlanket\" || importName == \"CoQueryClientBlanket\"",
+            "parameter.name == \"pAuthInfo\"",
+            "parameter.name == \"pPrivs\"",
+            "RtwqPutWaitingWorkItem",
+            "RtwqScheduleWorkItem",
+            "RtwqAddPeriodicCallback",
+        ),
+        "windows-bindgen native HRESULT wrappers must model optional owned/borrowed/scalar out slots",
+    )
+    test_text = bindgen_tests.read_text(encoding="utf-8")
+    require_text_fragments(
+        test_text,
+        (
+            "testCommonNativeHelperFilesRenderCoQueryBlanketOptionalOutCleanup",
+            "CoQueryProxyBlanket",
+            "CoQueryClientBlanket",
+            "pAuthInfo.write(CPointer<Unit>())",
+            "pPrivs.write(CPointer<Unit>())",
+            "windows_libloading.resolveProc(\\\"OLE32.dll\\\", \\\"CoTaskMemFree\\\")",
+            "windows_core.releaseFailedComOutSlot(pAuthInfo)\"), false",
+            "windows_core.releaseFailedComOutSlot(pPrivs)\"), false",
+            "testCommonNativeHelperFilesRenderRtwqOptionalScalarKeyCleanup",
+            "unsafe { key.write(0u64) }",
+            "unsafe { key.write(0u32) }",
+            "windows_core.releaseFailedComOutSlot(key)\"), false",
+            "testCommonNativeHelperFilesRenderHResultOwnedPointerOutCheckedWrapper",
+            "CoGetSystemSecurityPermissions",
+            "CoQueryAuthenticationServices",
+            "windows_core.releaseFailedComOutSlot(asAuthSvc)\"), false",
+        ),
+        "windows-bindgen tests must cover CoQuery*Blanket and RTWorkQ optional out cleanup",
+    )
+
+
+def check_interface_dispatcher_exception_out_cleanup(workspace: Path) -> None:
+    render_symbol = workspace / "windows-bindgen" / "src" / "render_symbol.cj"
+    bindgen_tests = workspace / "windows-bindgen" / "src" / "main_test.cj"
+    check_path_exists(render_symbol, "windows-bindgen render_symbol")
+    check_path_exists(bindgen_tests, "windows-bindgen tests")
+    render_text = render_symbol.read_text(encoding="utf-8")
+    require_text_fragments(
+        render_text,
+        (
+            "class InterfaceDispatcherOutSlotCleanupSpec",
+            "func interfaceDispatcherOutSlotCleanupSpecs",
+            "func interfaceDispatcherOutSlotCleanupKind",
+            "func interfaceDispatcherArrayCleanupElementType",
+            "func interfaceMacroCleanupSpecs",
+            "runtimeReferenceTargetSignature(signature)",
+            "winrtProjectedTypeName(targetSignature, symbolsByName, ownerFullName)",
+            "!isCallerAllocatedOutArrayParameter(parameter)",
+            "\"Array<${winrtProjectedTypeName(elementSignature, symbolsByName, ownerFullName)}>\"",
+            "interfaceAttr += \", \\\"${cjStringContent(cleanupSpecs)}\\\"\"",
+            "let resultHr__ = impl.${slotName}(${argumentPairListText(pairs)})",
+            "if (windows_core.HRESULT(resultHr__).failed())",
+            "interfaceDispatcherReleaseFailedOutSlots(cleanupSpecs, indentLevel + 1)",
+            "interfaceDispatcherReleaseFailedOutSlots(cleanupSpecs, indentLevel + 2)",
+            "windows_core.releaseFailedComOutSlot(${slotName})",
+            "windows_core.releaseSystemHStringHandle(failedString__)",
+            "windows_core.winrtReleaseGenericArrayOut<${arrayElementType}>(CPointer<Unit>(rawArray__), rawSize__)",
+            "windows_core.coTaskMemFree(CPointer<Unit>(rawArray__))",
+            "unsafe { ${slotName}.write(${dataPointerType}()) }",
+            "unsafe { ${sizeSlotName}.write(0u32) }",
+        ),
+        "windows-bindgen interface dispatchers must release partial COM/HSTRING/array out slots on thrown exceptions",
+    )
+    require_text_before(
+        render_text,
+        "interfaceDispatcherReleaseFailedOutSlots(cleanupSpecs, indentLevel + 1)",
+        "interfaceDispatcherClearPairs(outPairs, indentLevel + 1)",
+        "windows-bindgen interface dispatcher catch paths must release partial out slots before clearing them",
+    )
+    test_text = bindgen_tests.read_text(encoding="utf-8")
+    require_text_fragments(
+        test_text,
+        (
+            "impl.Name(result)",
+            "windows_core.releaseSystemHStringHandle(failedString__)",
+            "impl.CreateObject(result)",
+            "windows_core.releaseFailedComOutSlot(result)",
+            "Title.value=HString",
+            "External.value=Com",
+            "GetNames.names=Array<windows_core.HString>",
+            "let resultHr__ = impl.CreateObject(result)",
+            "if (windows_core.HRESULT(resultHr__).failed())",
+            "windows_core.winrtReleaseGenericArrayOut<windows_core.HString>(CPointer<Unit>(rawArray__), rawSize__)",
+            "windows_core.coTaskMemFree(CPointer<Unit>(rawArray__))",
+        ),
+        "windows-bindgen tests must cover interface dispatcher partial COM/HSTRING/array out cleanup",
+    )
+
+
+def check_generated_interface_dispatcher_failed_hresult_out_cleanup(workspace: Path) -> None:
+    impl_root = workspace / "windows-common" / "src" / "impl"
+    check_path_exists(impl_root, "windows-common generated impl directory")
+    sources = sorted(impl_root.glob("symbols_*.cj"))
+    if not sources:
+        fail("windows-common generated impl directory must contain symbols_*.cj")
+
+    issues: list[str] = []
+    for source in sources:
+        text = source.read_text(encoding="utf-8")
+        for match in re.finditer(r"try\s*\{(?P<body>.*?)\}\s*catch\s*\(", text, flags=re.DOTALL):
+            try_body = match.group("body")
+            if "impl." not in try_body:
+                continue
+
+            tail = text[match.end() :]
+            boundary = re.search(r"\n\s*case\s+None\s*=>|\n// ", tail)
+            cleanup_region = tail[: boundary.start()] if boundary is not None else tail[:1800]
+            catch_slots = sorted(set(re.findall(r"windows_core\.releaseFailedComOutSlot\(([^)\s]+)\)", cleanup_region)))
+            if not catch_slots:
+                continue
+
+            failed_branch_index = try_body.find("if (windows_core.HRESULT(resultHr__).failed())")
+            missing_failed_branch = "let resultHr__ = impl." not in try_body or failed_branch_index < 0
+            failed_branch_region = try_body[failed_branch_index:] if failed_branch_index >= 0 else ""
+            missing_slots = [
+                slot
+                for slot in catch_slots
+                if f"windows_core.releaseFailedComOutSlot({slot})" not in failed_branch_region
+            ]
+            if missing_failed_branch or missing_slots:
+                line = text.count("\n", 0, match.start()) + 1
+                method_match = re.search(r"\bimpl\.([A-Za-z_][A-Za-z0-9_]*)\(", try_body)
+                method = method_match.group(1) if method_match is not None else "<unknown>"
+                issues.append(
+                    f"{source.relative_to(workspace).as_posix()}:{line} impl.{method} "
+                    f"must release failed-HRESULT out slots {catch_slots}"
+                )
+
+    if issues:
+        fail("generated interface dispatchers must clean failed-HRESULT out slots:\n" + "\n".join(issues[:20]))
+
+
+def check_runtime_class_raw_abi_array_out_preclear(workspace: Path) -> None:
+    render_symbol = workspace / "windows-bindgen" / "src" / "render_symbol.cj"
+    bindgen_tests = workspace / "windows-bindgen" / "src" / "main_test.cj"
+    check_path_exists(render_symbol, "windows-bindgen render_symbol")
+    check_path_exists(bindgen_tests, "windows-bindgen tests")
+    render_text = render_symbol.read_text(encoding="utf-8")
+    out_slot_guard_body = cj_function_body(
+        render_text,
+        "renderRuntimeOutSlotGuards",
+        render_symbol,
+        workspace,
+    )
+    require_text_fragments(
+        out_slot_guard_body,
+        (
+            "var nullOutSlot__ = false",
+            "nullOutSlot__ = true",
+            "if (nullOutSlot__)",
+            "throw windows_core.WindowsException(windows_core.E_POINTER)",
+        ),
+        "windows-bindgen runtime-class projected wrappers must pre-clear sibling OutSlot values before E_POINTER",
+    )
+    preclear_body = cj_function_body(
+        render_text,
+        "renderRuntimeClassRawAbiPreDispatchOutSlotClears",
+        render_symbol,
+        workspace,
+    )
+    require_text_fragments(
+        preclear_body,
+        (
+            "let arrayCleanupSpecs = runtimeClassRawAbiFailedArrayOutSlotCleanupSpecs(method, symbolsByName, ownerFullName)",
+            "if (${spec.sizeSlotName}.isNotNull())",
+            "unsafe { ${spec.sizeSlotName}.write(0u32) }",
+            "if (${spec.dataSlotName}.isNotNull())",
+            "unsafe { ${spec.dataSlotName}.write(CPointer<${spec.elementAbiType}>()) }",
+        ),
+        "windows-bindgen runtime-class raw ABI wrappers must pre-clear array out slots before dispatch",
+    )
+    failure_cleanup_body = cj_function_body(
+        render_text,
+        "renderRuntimeClassRawAbiFailureCleanup",
+        render_symbol,
+        workspace,
+    )
+    require_text_fragments(
+        failure_cleanup_body,
+        (
+            "let arrayCleanupSpecs = runtimeClassRawAbiFailedArrayOutSlotCleanupSpecs(method, symbolsByName, ownerFullName)",
+            "if (hr__.failed())",
+            "let ${sizeName} = unsafe { ${spec.sizeSlotName}.read() }",
+            "let ${dataName} = unsafe { ${spec.dataSlotName}.read() }",
+            "windows_core.winrtReleaseGenericArrayOut<${spec.elementProjectedType}>(CPointer<Unit>(${dataName}), ${sizeName})",
+            "windows_core.coTaskMemFree(CPointer<Unit>(${dataName}))",
+            "unsafe { ${spec.dataSlotName}.write(CPointer<${spec.elementAbiType}>()) }",
+            "unsafe { ${spec.sizeSlotName}.write(0u32) }",
+        ),
+        "windows-bindgen runtime-class raw ABI wrappers must retain failed-HRESULT array out-slot cleanup after dispatch",
+    )
+    factory_body = cj_function_body(render_text, "renderRuntimeClassFactoryRawAbiMethod", render_symbol, workspace)
+    require_text_before(
+        factory_body,
+        "renderRuntimeClassRawAbiPreDispatchOutSlotClears(method, symbolsByName, symbol.fullName, 2)",
+        "try (factory__ = windows_core.factory<${symbol.implName}, ${factorySpec.typeName}>().unwrap())",
+        "windows-bindgen runtime-class factory raw ABI wrappers must pre-clear array out slots before factory__ dispatch",
+    )
+    require_text_before(
+        factory_body,
+        "hr__ = unsafe { factory__.${methodName}(${args}) }",
+        "renderRuntimeClassRawAbiFailureCleanup(method, symbolsByName, symbol.fullName, 2)",
+        "windows-bindgen runtime-class factory raw ABI wrappers must keep failed-HRESULT cleanup after factory__ dispatch",
+    )
+    instance_body = cj_function_body(render_text, "renderRuntimeClassInstanceRawAbiMethod", render_symbol, workspace)
+    require_text_before(
+        instance_body,
+        "renderRuntimeClassRawAbiPreDispatchOutSlotClears(method, symbolsByName, symbol.fullName, 2)",
+        "try (interface__ = defaultInterface())",
+        "windows-bindgen runtime-class interface raw ABI wrappers must pre-clear array out slots before interface__ dispatch",
+    )
+    require_text_before(
+        instance_body,
+        "hr__ = unsafe { interface__.",
+        "renderRuntimeClassRawAbiFailureCleanup(method, symbolsByName, symbol.fullName, 2)",
+        "windows-bindgen runtime-class interface raw ABI wrappers must keep failed-HRESULT cleanup after interface__ dispatch",
+    )
+
+    test_text = bindgen_tests.read_text(encoding="utf-8")
+    require_text_fragments(
+        test_text,
+        (
+            "testWinrtRuntimeClassRawAbiFailureCleanupReleasesArrayOutSlots",
+            "public static func GetPairOut(firstValue: windows_core.OutSlot<windows_interface.IInspectable>, secondValue: windows_core.OutSlot<windows_core.HString>): Unit",
+            "var nullOutSlot__ = false\\n        if (firstValue.isNull())",
+            "var hr__ = windows_core.E_POINTER\\n        if (namesSize.isNotNull()) {\\n            unsafe { namesSize.write(0u32) }\\n        }\\n        if (names.isNotNull()) {\\n            unsafe { names.write(CPointer<CPointer<Unit>>()) }\\n        }\\n        try (interface__ = defaultInterface()) {\\n            hr__ = unsafe { interface__.CollectNamesWithRawInput(rawValuesSize, rawValues, namesSize, names) }",
+            "var hr__ = windows_core.E_POINTER\\n        if (namesSize.isNotNull()) {\\n            unsafe { namesSize.write(0u32) }\\n        }\\n        if (names.isNotNull()) {\\n            unsafe { names.write(CPointer<CPointer<Unit>>()) }\\n        }\\n        try (interface__ = defaultInterface()) {\\n            hr__ = unsafe { interface__.ReturnNamesWithRawInput(rawValuesSize, rawValues, namesSize, names) }",
+            "windows_core.winrtReleaseGenericArrayOut<windows_core.HString>(CPointer<Unit>(__rawAbiArrayOut0Data), __rawAbiArrayOut0Size)",
+            "windows_core.coTaskMemFree(CPointer<Unit>(__rawAbiArrayOut0Data))",
+        ),
+        "windows-bindgen tests must mark runtime-class raw ABI array out-slot pre-clear before raw ABI calls",
     )
 
 
@@ -510,7 +1619,7 @@ def matching_cj_brace_end(text: str, open_index: int) -> int | None:
 
 
 def cj_function_body(text: str, name: str, source: Path, workspace: Path) -> str:
-    match = re.search(rf"\bfunc\s+{re.escape(name)}\s*\(", text)
+    match = re.search(rf"\bfunc\s+{re.escape(name)}(?:<[^>]+>)?\s*\(", text)
     if match is None:
         fail(f"{source.relative_to(workspace)} must define {name}()")
     brace = text.find("{", match.end())
@@ -666,6 +1775,109 @@ def iter_cj_function_bodies(text: str, name: str) -> list[tuple[int, str]]:
     return blocks
 
 
+def iter_cj_named_function_bodies(text: str) -> list[tuple[str, int, str]]:
+    blocks: list[tuple[str, int, str]] = []
+    for match in re.finditer(r"\bfunc\s+([A-Za-z_][A-Za-z0-9_]*)(?:<[^>]+>)?\s*\(", text):
+        brace = text.find("{", match.end())
+        if brace < 0:
+            continue
+        depth = 0
+        end = brace
+        while end < len(text):
+            char = text[end]
+            if char == "{":
+                depth += 1
+            elif char == "}":
+                depth -= 1
+                if depth == 0:
+                    end += 1
+                    break
+            end += 1
+        if depth != 0:
+            continue
+        line = text[: match.start()].count("\n") + 1
+        blocks.append((match.group(1), line, text[brace:end]))
+    return blocks
+
+
+def first_fragment_index(text: str, fragments: tuple[str, ...]) -> int:
+    indexes = [index for fragment in fragments if (index := text.find(fragment)) >= 0]
+    return min(indexes) if indexes else -1
+
+
+def find_iinspectable_iids_release_helper(text: str, source: Path, workspace: Path) -> str:
+    free_fragments = ("CoTaskMemFree(", "coTaskMemFree(")
+    candidates: list[tuple[str, int, str]] = []
+    for name, line, body in iter_cj_named_function_bodies(text):
+        lowered = name.lower()
+        if "iid" not in lowered or "failed" not in lowered:
+            continue
+        if first_fragment_index(body, free_fragments) < 0:
+            continue
+        candidates.append((name, line, body))
+
+    if not candidates:
+        fail(
+            f"{source.relative_to(workspace)} must define a failed IInspectable.GetIids helper "
+            "that releases partially written IID arrays with CoTaskMemFree/coTaskMemFree"
+        )
+
+    for name, line, body in candidates:
+        missing = [
+            fragment
+            for fragment in (
+                "hr",
+                "values.read()",
+                "raw.isNotNull()",
+            )
+            if fragment not in body
+        ]
+        free_index = first_fragment_index(body, free_fragments)
+        clear_call = re.search(r"\bclear[A-Za-z0-9_]*Iids[A-Za-z0-9_]*OutSlots\s*\(\s*count\s*,\s*values\s*\)", body)
+        clear_call_index = clear_call.start() if clear_call is not None else -1
+        values_clear_index = body.find("values.write(CPointer<GUID>())")
+        count_clear_index = body.find("count.write(0u32)")
+        direct_clear_index = -1
+        if values_clear_index >= 0 and count_clear_index >= 0:
+            direct_clear_index = min(values_clear_index, count_clear_index)
+        clear_index = min(index for index in (clear_call_index, direct_clear_index) if index >= 0) if (
+            clear_call_index >= 0 or direct_clear_index >= 0
+        ) else -1
+        has_failed_hr_guard = any(fragment in body for fragment in ("hr < 0", "hr.failed()", "hr >= 0"))
+        if not missing and has_failed_hr_guard and free_index >= 0 and clear_index >= 0:
+            if free_index < clear_index:
+                return name
+
+    first_name, first_line, _ = candidates[0]
+    fail(
+        f"{source.relative_to(workspace)}:{first_line} {first_name}() must read and free a "
+        "partially written IID array before clearing count/values on failed HRESULTs"
+    )
+
+
+def require_iinspectable_iids_release_helper_call(
+    body: str,
+    helper_name: str,
+    dispatch_fragment: str,
+    label: str,
+) -> None:
+    helper_call = f"{helper_name}(hr"
+    dispatch_index = body.find(dispatch_fragment)
+    if dispatch_index < 0:
+        fail(f"{label} must dispatch through {dispatch_fragment}")
+    after_dispatch = body[dispatch_index:]
+    if helper_call not in after_dispatch:
+        fail(f"{label} must release partial IID arrays after failed HRESULT dispatch")
+    require_text_fragments(
+        body,
+        (
+            f"{helper_name}(error.code().value",
+            f"{helper_name}(E_FAIL.value",
+        ),
+        f"{label} must release partial IID arrays in WindowsException and Exception catch paths",
+    )
+
+
 def check_native_allocations_have_deterministic_owner(workspace: Path) -> None:
     source_roots = [
         workspace / "windows-core" / "src",
@@ -721,6 +1933,2036 @@ def check_collection_indexof_thunks_reject_null_index(workspace: Path) -> None:
                 f"windows-runtime/src/collections_runtime.cj:{line} IndexOf thunk must reject null "
                 "index out pointer before dispatch"
             )
+
+
+def check_generated_collection_vtable_abi_parity(workspace: Path) -> None:
+    impl_root = workspace / "windows-common" / "src" / "impl"
+    check_path_exists(impl_root, "windows-common generated impl sources")
+    impl_text = "\n".join(path.read_text(encoding="utf-8") for path in sorted(impl_root.glob("symbols_*.cj")))
+    required_fragments = {
+        "IIterator.GetMany caller buffer ABI": "public var GetMany: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32>",
+        "IVectorView.IndexOf UInt32 out slot": "public var IndexOf: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>",
+        "IVectorView.GetMany caller buffer ABI": "public var GetMany: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32>",
+        "IVectorView.IndexOf method surface": "public unsafe func IndexOf(value: CPointer<Unit>, index: CPointer<UInt32>, result: CPointer<Bool>): windows_core.HRESULT",
+        "IVectorView.GetMany method surface": "public unsafe func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>, result: CPointer<UInt32>): windows_core.HRESULT",
+    }
+    forbidden_fragments = {
+        "IndexOf pointer-to-pointer index": "IndexOf: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Bool>) -> Int32>",
+        "IndexOf pointer-to-pointer method": "IndexOf(value: CPointer<Unit>, index: CPointer<CPointer<Unit>>, result: CPointer<Bool>)",
+        "IVectorView.GetMany allocated-array ABI": "GetMany: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>, CPointer<UInt32>) -> Int32>",
+        "IIterator.GetMany allocated-array ABI": "GetMany: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>, CPointer<UInt32>) -> Int32>",
+        "GetMany pointer-size method": "GetMany(startIndex: UInt32, itemsSize: CPointer<UInt32>, items: CPointer<CPointer<CPointer<Unit>>>, result: CPointer<UInt32>)",
+    }
+    for label, fragment in forbidden_fragments.items():
+        if fragment in impl_text:
+            fail(f"windows-common generated collection vtable ABI still uses {label}")
+    for label, fragment in required_fragments.items():
+        if fragment not in impl_text:
+            fail(f"windows-common generated collection vtable ABI missing {label}")
+
+
+def check_collection_generic_input_thunks_translate_projection_failures(workspace: Path) -> None:
+    runtime_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    text = runtime_path.read_text(encoding="utf-8")
+    thunk_names = ("Lookup", "HasKey", "Insert", "Remove", "IndexOf", "SetAt", "InsertAt", "Append")
+    checked = 0
+    for name in thunk_names:
+        for line, body in iter_cj_function_bodies(text, f"__winrtThunk_{name}"):
+            if "winrtProjectGenericIn" not in body:
+                continue
+            checked += 1
+            if "catch (error: windows_core.WindowsException)" not in body or "windows_core.E_FAIL.value" not in body:
+                fail(
+                    f"windows-runtime/src/collections_runtime.cj:{line} {name} thunk must translate "
+                    "generic input projection exceptions to HRESULT values"
+                )
+            dispatch = body.find("winrtProjectGenericIn")
+            prefix = body[:dispatch if dispatch >= 0 else len(body)]
+            if "CPointer<Bool>" in body and "clearCollectionBoolOutSlot(result__)" not in prefix:
+                fail(
+                    f"windows-runtime/src/collections_runtime.cj:{line} {name} thunk must clear Bool "
+                    "out slots before projecting generic inputs"
+                )
+            if name == "IndexOf":
+                if "clearCollectionIndexOutSlot(arg1)" not in prefix:
+                    fail(
+                        f"windows-runtime/src/collections_runtime.cj:{line} IndexOf thunk must clear "
+                        "index out slots before projecting generic inputs"
+                    )
+                if "clearCollectionBoolOutSlot(result__)" not in prefix:
+                    fail(
+                        f"windows-runtime/src/collections_runtime.cj:{line} IndexOf thunk must clear "
+                        "Bool out slots before projecting generic inputs"
+                    )
+    if checked < 18:
+        fail("windows-runtime collection generic input thunk audit saw too few guarded thunks")
+
+
+def check_collection_scalar_output_thunks_clear_outputs(workspace: Path) -> None:
+    runtime_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    test_path = workspace / "windows-runtime" / "src" / "collection_get_many_cleanup_test.cj"
+    default_vtable_test_path = workspace / "windows-runtime" / "src" / "collection_default_vtable_abi_test.cj"
+    null_buffer_test_path = workspace / "windows-runtime" / "src" / "collection_null_buffer_thunk_test.cj"
+    text = runtime_path.read_text(encoding="utf-8")
+    require_text_fragments(
+        text,
+        (
+            "func collectionNotImplGenericOut",
+            "func collectionNotImplBoolOut",
+            "func collectionNotImplUInt32Out",
+            "func collectionNotImplValueOut<T>",
+            "func collectionNotImplIndexBoolOut",
+            "func collectionNotImplSplitOut",
+            "func collectionGenericOutThunk<T>",
+            "func collectionUnitThunk(action: () -> Result<Unit>): Int32",
+            "func collectionGenericOutRangeThunk<T>",
+            "func collectionSplitOutThunk",
+            "windows_core.releaseFailedComOutSlot(result)",
+            "let hr = windows_core.winrtStoreGenericOut<T>(result, value)",
+            "releaseCollectionGenericOutRangeNoThrow<T>(CPointer<Unit>(result), 1u32)",
+            "releaseCollectionGenericOutRangeNoThrow<T>(items, itemsSize)",
+            "collectionGenericOutThunk<T>(result__, { => this.Current() })",
+            "collectionGenericOutRangeThunk<T>",
+            "collectionUnitThunk({ => this.Clear() })",
+            "collectionSplitOutThunk(arg0, arg1, { => this.Split(arg0, arg1) })",
+        ),
+        "windows-runtime collection manual thunks must use shared cleanup/translation helpers",
+    )
+    range_body = cj_function_body(text, "collectionGenericOutRangeThunk", runtime_path, workspace)
+    require_text_before(
+        range_body,
+        "clearCollectionIndexOutSlot(result)",
+        "if (itemsSize > 0u32 && items.isNull())",
+        "windows-runtime collection GetMany helper must clear written out slots before E_POINTER buffer failures",
+    )
+    split_body = cj_function_body(text, "collectionSplitOutThunk", runtime_path, workspace)
+    split_failure_start = split_body.find("if (first.isNull() || second.isNull())")
+    split_failure_return = split_body.find("return E_POINTER.value", split_failure_start)
+    if split_failure_start < 0 or split_failure_return < 0:
+        fail("windows-runtime collection Split helper must reject null out pointers with E_POINTER")
+    split_failure_branch = split_body[split_failure_start:split_failure_return]
+    require_text_fragments(
+        split_failure_branch,
+        (
+            "if (first.isNotNull())",
+            "clearCollectionGenericOutSlot(first)",
+            "if (second.isNotNull())",
+            "clearCollectionGenericOutSlot(second)",
+        ),
+        "windows-runtime collection Split helper must clear non-null sibling out slots before E_POINTER",
+    )
+    specs = (
+        ("HasCurrent", "this.HasCurrent()", "clearCollectionBoolOutSlot(result__)", 1),
+        ("MoveNext", "this.MoveNext()", "clearCollectionBoolOutSlot(result__)", 1),
+        ("get_CollectionChange", "this.get_CollectionChange()", "result__.write(CollectionChangeAbi())", 2),
+        ("Index", "this.Index()", "clearCollectionIndexOutSlot(result__)", 1),
+        ("Size", "this.Size()", "clearCollectionIndexOutSlot(result__)", 7),
+    )
+    for name, dispatch_fragment, clear_fragment, minimum in specs:
+        checked = 0
+        for line, body in iter_cj_function_bodies(text, f"__winrtThunk_{name}"):
+            dispatch = body.find(dispatch_fragment)
+            if dispatch < 0:
+                continue
+            checked += 1
+            prefix = body[:dispatch]
+            if clear_fragment not in prefix:
+                fail(
+                    f"windows-runtime/src/collections_runtime.cj:{line} {name} thunk must clear "
+                    "scalar out slots before dispatch"
+                )
+            if (
+                "try {" not in prefix
+                or "catch (error: windows_core.WindowsException)" not in body
+                or "catch (_: Exception)" not in body
+                or "windows_core.E_FAIL.value" not in body
+            ):
+                fail(
+                    f"windows-runtime/src/collections_runtime.cj:{line} {name} thunk must translate "
+                    "thrown exceptions to HRESULT values"
+                )
+        if checked < minimum:
+            fail(f"windows-runtime collection scalar thunk audit saw too few {name} thunks")
+
+    check_path_exists(test_path, "windows-runtime collection scalar thunk cleanup tests")
+    test_text = test_path.read_text(encoding="utf-8")
+    require_text_fragments(
+        test_text,
+        (
+            "testIIteratorProducerBoolThunksClearStaleOutputsBeforeFailure",
+            "testIIteratorProducerBoolThunksClearStaleOutputsBeforeThrownExceptions",
+            "testCollectionChangedProducerScalarThunksClearStaleOutputsBeforeFailure",
+            "testCollectionProducerSizeThunksClearStaleOutputsBeforeFailure",
+            "testIVectorProducerManualThunksTranslateThrownExceptions",
+            "testCollectionGenericOutThunkCleansStoreFailure",
+        ),
+        "windows-runtime collection scalar output thunk cleanup tests must cover stale slots and exceptions",
+    )
+    check_path_exists(default_vtable_test_path, "windows-runtime collection default vtable ABI tests")
+    default_vtable_test_text = default_vtable_test_path.read_text(encoding="utf-8")
+    require_text_fragments(
+        default_vtable_test_text,
+        (
+            "testCollectionDefaultIteratorAndEventVtablesClearOutSlotsBeforeNotImpl",
+            "testCollectionDefaultMapAndVectorVtablesClearOutSlotsBeforeNotImpl",
+            "testCollectionDefaultObservableVtablesClearTokenOutSlotsBeforeNotImpl",
+            "IIteratorVtbl()",
+            "IMapViewVtbl()",
+            "IVectorVtbl()",
+            "IObservableMapVtbl()",
+            "@Expect(current.isNull(), true)",
+            "@Expect(vectorMany, 0u32)",
+            "@Expect(vectorToken.Value, 0i64)",
+        ),
+        "windows-runtime collection default vtable ABI tests must cover E_NOTIMPL out-slot clearing",
+    )
+    check_path_exists(null_buffer_test_path, "windows-runtime collection null-buffer thunk tests")
+    null_buffer_test_text = null_buffer_test_path.read_text(encoding="utf-8")
+    require_text_fragments(
+        null_buffer_test_text,
+        (
+            "testGeneratedIteratorGetManyThunkRejectsNullBufferWithNonZeroCapacity",
+            "testGeneratedMapViewSplitThunkClearsSiblingOutSlotOnPointerFailure",
+            "@Expect(copied, 0u32)",
+        ),
+        "windows-runtime collection null-pointer thunk tests must cover E_POINTER sibling out-slot clearing",
+    )
+
+
+def check_iinspectable_get_iids_clears_sibling_out_slots(workspace: Path) -> None:
+    interface_wrapper = workspace / "windows-interface" / "src" / "interface_wrapper.cj"
+    thunk_builder = workspace / "windows-implement" / "src" / "thunk_builder.cj"
+    interface_surface = workspace / "windows-implement" / "src" / "interface_impl_surface.cj"
+    core_inspectable = workspace / "windows-core" / "src" / "inspectable.cj"
+    implement_tests = workspace / "windows-implement" / "src" / "com_object_lifetime_test.cj"
+    interface_tests = workspace / "windows-interface" / "src" / "descriptor_basics_test.cj"
+    core_tests = workspace / "windows-core" / "src" / "core_descriptor_test.cj"
+    for path, label in (
+        (interface_wrapper, "windows-interface interface wrapper"),
+        (thunk_builder, "windows-implement thunk builder"),
+        (interface_surface, "windows-implement interface surface"),
+        (core_inspectable, "windows-core inspectable thunks"),
+        (implement_tests, "windows-implement COM object lifetime tests"),
+        (interface_tests, "windows-interface descriptor basics tests"),
+        (core_tests, "windows-core descriptor tests"),
+    ):
+        check_path_exists(path, label)
+
+    wrapper_text = interface_wrapper.read_text(encoding="utf-8")
+    iunknown_vtbl_section = section_between(
+        wrapper_text,
+        "public struct IUnknownVtbl",
+        "public struct IInspectableVtbl",
+        "windows-interface default IUnknownVtbl",
+    )
+    query_interface_section = section_between(
+        iunknown_vtbl_section,
+        "public var QueryInterface",
+        "public var AddRef",
+        "windows-interface default IUnknownVtbl.QueryInterface",
+    )
+    require_text_fragments(
+        query_interface_section,
+        (
+            "if (resultPtr.isNull())",
+            "return E_POINTER.value",
+            "resultPtr.write(CPointer<Unit>())",
+            "E_NOINTERFACE.value",
+        ),
+        "windows-interface default IUnknownVtbl.QueryInterface must reject null result slots and clear stale out pointers",
+    )
+    require_text_before(
+        query_interface_section,
+        "if (resultPtr.isNull())",
+        "return E_POINTER.value",
+        "windows-interface default IUnknownVtbl.QueryInterface must reject null result slots",
+    )
+    require_text_before(
+        query_interface_section,
+        "resultPtr.write(CPointer<Unit>())",
+        "E_NOINTERFACE.value",
+        "windows-interface default IUnknownVtbl.QueryInterface must clear failed out pointers before E_NOINTERFACE",
+    )
+    require_text_fragments(
+        wrapper_text,
+        (
+            "func clearDefaultObjectOutSlot",
+            "slot.write(CPointer<Unit>())",
+            "func clearDefaultGuidOutSlot",
+            "slot.write(GUID_ZERO)",
+            "func clearDefaultUInt32OutSlot",
+            "slot.write(0u32)",
+        ),
+        "windows-interface default unsupported vtable stubs must have failed out-slot clear helpers",
+    )
+    unsupported_out_slot_methods = (
+        (
+            "public struct IAgileReferenceVtbl",
+            "public struct IMarshalVtbl",
+            "public var Resolve",
+            "public init()",
+            "clearDefaultObjectOutSlot(resultPtr)",
+            "windows-interface default IAgileReferenceVtbl.Resolve",
+        ),
+        (
+            "public struct IMarshalVtbl",
+            "public struct IWeakReferenceVtbl",
+            "public var GetUnmarshalClass",
+            "public var GetMarshalSizeMax",
+            "clearDefaultGuidOutSlot(classId)",
+            "windows-interface default IMarshalVtbl.GetUnmarshalClass",
+        ),
+        (
+            "public struct IMarshalVtbl",
+            "public struct IWeakReferenceVtbl",
+            "public var GetMarshalSizeMax",
+            "public var MarshalInterface",
+            "clearDefaultUInt32OutSlot(size)",
+            "windows-interface default IMarshalVtbl.GetMarshalSizeMax",
+        ),
+        (
+            "public struct IMarshalVtbl",
+            "public struct IWeakReferenceVtbl",
+            "public var UnmarshalInterface",
+            "public var ReleaseMarshalData",
+            "clearDefaultObjectOutSlot(resultPtr)",
+            "windows-interface default IMarshalVtbl.UnmarshalInterface",
+        ),
+        (
+            "public struct IWeakReferenceVtbl",
+            "public struct IWeakReferenceSourceVtbl",
+            "public var Resolve",
+            "public init()",
+            "clearDefaultObjectOutSlot(resultPtr)",
+            "windows-interface default IWeakReferenceVtbl.Resolve",
+        ),
+        (
+            "public struct IWeakReferenceSourceVtbl",
+            "func iunknownDescriptorMethods",
+            "public var GetWeakReference",
+            "public init()",
+            "clearDefaultObjectOutSlot(resultPtr)",
+            "windows-interface default IWeakReferenceSourceVtbl.GetWeakReference",
+        ),
+        (
+            "public struct IActivationFactoryVtbl",
+            "func takeIActivationFactoryFromAbi",
+            "public var ActivateInstance",
+            "public init()",
+            "clearDefaultObjectOutSlot(resultPtr)",
+            "windows-interface default IActivationFactoryVtbl.ActivateInstance",
+        ),
+    )
+    for struct_start, struct_end, method_start, method_end, clear_call, label in unsupported_out_slot_methods:
+        struct_section = section_between(wrapper_text, struct_start, struct_end, label)
+        method_section = section_between(struct_section, method_start, method_end, label)
+        require_text_before(
+            method_section,
+            clear_call,
+            "E_NOTIMPL.value",
+            f"{label} must clear failed out slots before E_NOTIMPL",
+        )
+
+    iinspectable_vtbl_section = section_between(
+        wrapper_text,
+        "public struct IInspectableVtbl",
+        "public struct IAgileObjectVtbl",
+        "windows-interface default IInspectableVtbl",
+    )
+    get_iids_section = section_between(
+        iinspectable_vtbl_section,
+        "public var GetIids",
+        "public var GetRuntimeClassName",
+        "windows-interface default IInspectableVtbl.GetIids",
+    )
+    get_iids_failure_return = get_iids_section.find("return E_POINTER.value")
+    if get_iids_failure_return < 0:
+        fail("windows-interface default IInspectableVtbl.GetIids must reject null out pointers")
+    get_iids_failure_branch = get_iids_section[:get_iids_failure_return]
+    require_text_fragments(
+        get_iids_failure_branch,
+        (
+            "if (countPtr.isNotNull())",
+            "countPtr.write(0u32)",
+            "if (iidsPtr.isNotNull())",
+            "iidsPtr.write(CPointer<GUID>())",
+        ),
+        "windows-interface default IInspectableVtbl.GetIids must clear non-null sibling out slots before E_POINTER",
+    )
+
+    thunk_text = thunk_builder.read_text(encoding="utf-8")
+    thunk_body = cj_function_body(thunk_text, "iinspectableGetIidsThunk", thunk_builder, workspace)
+    iids_clear_helper = cj_function_body(thunk_text, "clearInspectableIidsOutSlots", thunk_builder, workspace)
+    iids_release_helper = find_iinspectable_iids_release_helper(thunk_text, thunk_builder, workspace)
+    require_text_fragments(
+        iids_clear_helper,
+        (
+            "if (count.isNotNull())",
+            "count.write(0u32)",
+            "if (values.isNotNull())",
+            "values.write(CPointer<GUID>())",
+        ),
+        "windows-implement clearInspectableIidsOutSlots must clear non-null GetIids out slots",
+    )
+    require_text_fragments(
+        thunk_body,
+        (
+            "clearInspectableIidsOutSlots(count, values)",
+            "catch (error: WindowsException)",
+            "error.code().value",
+            "catch (_: Exception)",
+            "E_FAIL.value",
+        ),
+        "windows-implement iinspectableGetIidsThunk must clear stale outputs and translate thrown exceptions",
+    )
+    thunk_iids_cleanup_count = (
+        thunk_body.count("clearInspectableIidsOutSlots(count, values)")
+        + thunk_body.count(f"{iids_release_helper}(")
+    )
+    if thunk_iids_cleanup_count < 4:
+        fail("windows-implement iinspectableGetIidsThunk must clear outputs on pointer failure, before dispatch, and in both catch paths")
+    iids_dispatch_index = thunk_body.find("inspectable.getIidsBase(count, values)")
+    if iids_dispatch_index < 0:
+        fail("windows-implement iinspectableGetIidsThunk must dispatch to IInspectableBase.getIidsBase")
+    if thunk_body[:iids_dispatch_index].count("clearInspectableIidsOutSlots(count, values)") < 2:
+        fail("windows-implement iinspectableGetIidsThunk must clear valid out slots before dispatch")
+    require_iinspectable_iids_release_helper_call(
+        thunk_body,
+        iids_release_helper,
+        "inspectable.getIidsBase(count, values)",
+        "windows-implement iinspectableGetIidsThunk",
+    )
+    core_text = core_inspectable.read_text(encoding="utf-8")
+    core_release_helper = find_iinspectable_iids_release_helper(core_text, core_inspectable, workspace)
+    core_thunk_body = cj_function_body(core_text, "coreIInspectableGetIidsThunk", core_inspectable, workspace)
+    require_text_fragments(
+        core_thunk_body,
+        (
+            "catch (error: WindowsException)",
+            "error.code().value",
+            "catch (_: Exception)",
+            "E_FAIL.value",
+        ),
+        "windows-core coreIInspectableGetIidsThunk must translate thrown exceptions",
+    )
+    require_iinspectable_iids_release_helper_call(
+        core_thunk_body,
+        core_release_helper,
+        "value.getIidsBase(count, values)",
+        "windows-core coreIInspectableGetIidsThunk",
+    )
+    core_runtime_name_thunk_body = cj_function_body(
+        core_text,
+        "coreIInspectableGetRuntimeClassNameThunk",
+        core_inspectable,
+        workspace,
+    )
+    require_text_fragments(
+        core_runtime_name_thunk_body,
+        (
+            "value.write(CPointer<Unit>())",
+            "catch (error: WindowsException)",
+            "releaseFailedRuntimeClassNameSlot(error.code().value, value)",
+            "catch (_: Exception)",
+            "releaseFailedRuntimeClassNameSlot(E_FAIL.value, value)",
+        ),
+        "windows-core coreIInspectableGetRuntimeClassNameThunk must translate thrown exceptions and release partial HSTRING outputs",
+    )
+    core_trust_thunk_body = cj_function_body(
+        core_text,
+        "coreIInspectableGetTrustLevelThunk",
+        core_inspectable,
+        workspace,
+    )
+    core_trust_clear_helper = cj_function_body(
+        core_text,
+        "clearInspectableTrustLevelOutSlot",
+        core_inspectable,
+        workspace,
+    )
+    require_text_fragments(
+        core_trust_clear_helper,
+        ("if (value.isNotNull())", "value.write(0i32)"),
+        "windows-core clearInspectableTrustLevelOutSlot must clear non-null GetTrustLevel out slots",
+    )
+    require_text_fragments(
+        core_trust_thunk_body,
+        (
+            "clearInspectableTrustLevelOutSlot(value)",
+            "catch (error: WindowsException)",
+            "error.code().value",
+            "catch (_: Exception)",
+            "E_FAIL.value",
+        ),
+        "windows-core coreIInspectableGetTrustLevelThunk must clear stale outputs and translate thrown exceptions",
+    )
+    if core_trust_thunk_body.count("clearInspectableTrustLevelOutSlot(value)") < 3:
+        fail("windows-core coreIInspectableGetTrustLevelThunk must clear outputs before dispatch and in both catch paths")
+    runtime_name_thunk_body = cj_function_body(
+        thunk_text,
+        "iinspectableGetRuntimeClassNameThunk",
+        thunk_builder,
+        workspace,
+    )
+    require_text_fragments(
+        runtime_name_thunk_body,
+        (
+            "catch (error: WindowsException)",
+            "releaseFailedRuntimeClassNameSlot(error.code().value, value)",
+            "catch (_: Exception)",
+            "releaseFailedRuntimeClassNameSlot(E_FAIL.value, value)",
+        ),
+        "windows-implement iinspectableGetRuntimeClassNameThunk must translate thrown exceptions and release partial HSTRING outputs",
+    )
+    trust_thunk_body = cj_function_body(thunk_text, "iinspectableGetTrustLevelThunk", thunk_builder, workspace)
+    trust_clear_helper = cj_function_body(thunk_text, "clearTrustLevelOutSlot", thunk_builder, workspace)
+    require_text_fragments(
+        trust_clear_helper,
+        ("if (value.isNotNull())", "value.write(0i32)"),
+        "windows-implement clearTrustLevelOutSlot must clear non-null GetTrustLevel out slots",
+    )
+    require_text_fragments(
+        trust_thunk_body,
+        (
+            "clearTrustLevelOutSlot(value)",
+            "catch (error: WindowsException)",
+            "error.code().value",
+            "catch (_: Exception)",
+            "E_FAIL.value",
+        ),
+        "windows-implement iinspectableGetTrustLevelThunk must clear stale outputs and translate thrown exceptions",
+    )
+    if trust_thunk_body.count("clearTrustLevelOutSlot(value)") < 3:
+        fail("windows-implement iinspectableGetTrustLevelThunk must clear outputs before dispatch and in both catch paths")
+    surface_text = interface_surface.read_text(encoding="utf-8")
+    surface_bodies = [body for _, body in iter_cj_function_bodies(surface_text, "getIidsBase") if "supportedIids" in body]
+    if not surface_bodies:
+        fail("windows-implement ComObjectRuntime.getIidsBase must be present")
+    surface_body = surface_bodies[0]
+    failure_start = surface_body.find("if (count.isNull() || values.isNull())")
+    failure_return = surface_body.find("return E_POINTER", failure_start)
+    if failure_start < 0 or failure_return < 0:
+        fail("windows-implement ComObjectRuntime.getIidsBase must reject null GetIids out pointers")
+    failure_branch = surface_body[failure_start:failure_return]
+    require_text_fragments(
+        failure_branch,
+        (
+            "if (count.isNotNull())",
+            "count.write(0u32)",
+            "if (values.isNotNull())",
+            "values.write(CPointer<GUID>())",
+        ),
+        "windows-implement ComObjectRuntime.getIidsBase must clear non-null sibling out slots before E_POINTER",
+    )
+
+    implement_test_text = implement_tests.read_text(encoding="utf-8")
+    require_text_fragments(
+        implement_test_text,
+        (
+            "testInspectableGetIidsClearsSiblingOutSlotsOnPointerFailure",
+            "testIInspectableThunksTranslateWindowsExceptionsAndClearOutSlots",
+            "testIInspectableThunksTranslatePlainExceptionsAndClearOutSlots",
+            "testIInspectableGetIidsThunkReleasesPartialIidArrayOnFailedHRESULT",
+            "testIInspectableGetIidsThunkReleasesPartialIidArrayOnThrownException",
+            "testIInspectableRuntimeClassNameThunkReleasesPartialHandleOnThrownWindowsException",
+            "iinspectableGetIidsThunk(",
+            "iinspectableGetTrustLevelThunk(",
+            "iinspectableGetRuntimeClassNameThunk(",
+            "owner.runtime.getIidsBase(",
+            "@Expect(iids.isNull(), true)",
+            "@Expect(count, 0u32)",
+            "@Expect(trustLevel, 0i32)",
+        ),
+        "windows-implement tests must cover IInspectable thunk stale out-slot clearing and exception translation",
+    )
+    interface_test_text = interface_tests.read_text(encoding="utf-8")
+    require_text_fragments(
+        interface_test_text,
+        (
+            "testDefaultIUnknownVtblQueryInterfaceRejectsNullAndClearsStaleOutPointer",
+            "vtbl.QueryInterface",
+            "@Expect(nullResultHr, E_POINTER)",
+            "@Expect(unsupportedHr, E_NOINTERFACE)",
+            "@Expect(result.isNull(), true)",
+            "testDefaultUnsupportedVtblsClearFailedOutPointers",
+            "IAgileReferenceVtbl",
+            "IWeakReferenceVtbl",
+            "IWeakReferenceSourceVtbl",
+            "IActivationFactoryVtbl",
+            "IMarshalVtbl",
+            "@Expect(agileResolveHr, E_NOTIMPL)",
+            "@Expect(classId == GUID_ZERO, true)",
+            "@Expect(size, 0u32)",
+            "testDefaultIInspectableVtblRejectsNullOutPointers",
+            "@Expect(iids.isNull(), true)",
+            "@Expect(count, 0u32)",
+        ),
+        "windows-interface tests must cover default IUnknown/IInspectable vtable out-slot clearing",
+    )
+    core_test_text = core_tests.read_text(encoding="utf-8")
+    require_text_fragments(
+        core_test_text,
+        (
+            "testCoreIInspectableGetIidsThunkReleasesPartialIidArrayOnFailedHRESULT",
+            "testCoreIInspectableGetIidsThunkReleasesPartialIidArrayOnThrownException",
+            "testCoreIInspectableGetRuntimeClassNameThunkReleasesPartialHandleOnThrownWindowsException",
+            "testCoreIInspectableGetRuntimeClassNameThunkReleasesPartialHandleOnThrownPlainException",
+            "testCoreIInspectableGetTrustLevelThunkTranslatesExceptionsAndClearsOutSlot",
+            "coreIInspectableGetIidsThunk(",
+            "coreIInspectableGetRuntimeClassNameThunk(",
+            "coreIInspectableGetTrustLevelThunk(",
+            "@Expect(iids.isNull(), true)",
+            "@Expect(nameRaw.isNull(), true)",
+            "@Expect(trustLevel, 0i32)",
+            "@Expect(count, 0u32)",
+        ),
+        "windows-core tests must cover core IInspectable partial out cleanup and exception translation",
+    )
+
+
+def check_default_vtable_stubs_clear_failed_out_slots(workspace: Path) -> None:
+    core_factory = workspace / "windows-core" / "src" / "generic_factory.cj"
+    core_factory_tests = workspace / "windows-core" / "src" / "generic_factory_lifetime_test.cj"
+    result_bindings = workspace / "windows-result" / "src" / "bindings.cj"
+    result_tests = workspace / "windows-result" / "src" / "internal_test.cj"
+    for path, label in (
+        (core_factory, "windows-core generic factory"),
+        (core_factory_tests, "windows-core generic factory tests"),
+        (result_bindings, "windows-result bindings"),
+        (result_tests, "windows-result internal tests"),
+    ):
+        check_path_exists(path, label)
+
+    core_factory_text = core_factory.read_text(encoding="utf-8")
+    factory_vtbl_section = section_between(
+        core_factory_text,
+        "public struct IGenericFactoryVtbl",
+        "public class IGenericFactory",
+        "windows-core default IGenericFactoryVtbl",
+    )
+    factory_activate_section = section_between(
+        factory_vtbl_section,
+        "public var ActivateInstance",
+        "public init()",
+        "windows-core default IGenericFactoryVtbl.ActivateInstance",
+    )
+    require_text_fragments(
+        factory_activate_section,
+        (
+            "if (result.isNotNull())",
+            "result.write(CPointer<Unit>())",
+            "E_NOTIMPL.value",
+        ),
+        "windows-core default IGenericFactoryVtbl.ActivateInstance must clear stale result slots",
+    )
+    require_text_before(
+        factory_activate_section,
+        "result.write(CPointer<Unit>())",
+        "E_NOTIMPL.value",
+        "windows-core default IGenericFactoryVtbl.ActivateInstance must clear stale result slots before E_NOTIMPL",
+    )
+    core_factory_test_text = core_factory_tests.read_text(encoding="utf-8")
+    require_text_fragments(
+        core_factory_test_text,
+        (
+            "testGenericFactoryDefaultActivateInstanceClearsStaleOutPointerOnENotImpl",
+            "IGenericFactoryVtbl",
+            "@Expect(hr, E_NOTIMPL)",
+            "@Expect(result.isNull(), true)",
+        ),
+        "windows-core tests must cover default IGenericFactoryVtbl failed out-slot clearing",
+    )
+
+    result_bindings_text = result_bindings.read_text(encoding="utf-8")
+    require_text_fragments(
+        result_bindings_text,
+        (
+            "func clearDefaultUnknownOutSlot",
+            "slot.write(CPointer<Unit>())",
+            "func clearDefaultBstrOutSlot",
+            "slot.write(CPointer<UInt16>())",
+            "func clearDefaultGuidOutSlot",
+            "slot.write(GUID.zeroed())",
+            "func clearDefaultInt32OutSlot",
+            "slot.write(0i32)",
+            "func clearDefaultUInt32OutSlot",
+            "slot.write(0u32)",
+        ),
+        "windows-result default COM error vtables must have failed out-slot clear helpers",
+    )
+    result_iunknown_section = section_between(
+        result_bindings_text,
+        "struct IUnknownVtbl",
+        "@C\nstruct IErrorInfoVtbl",
+        "windows-result default IUnknownVtbl",
+    )
+    result_query_section = section_between(
+        result_iunknown_section,
+        "var QueryInterface",
+        "var AddRef",
+        "windows-result default IUnknownVtbl.QueryInterface",
+    )
+    require_text_fragments(
+        result_query_section,
+        (
+            "if (resultPtr.isNull())",
+            "return E_POINTER.value",
+            "clearDefaultUnknownOutSlot(resultPtr)",
+            "E_NOINTERFACE.value",
+        ),
+        "windows-result default IUnknownVtbl.QueryInterface must reject null result slots and clear stale outputs",
+    )
+    require_text_before(
+        result_query_section,
+        "clearDefaultUnknownOutSlot(resultPtr)",
+        "E_NOINTERFACE.value",
+        "windows-result default IUnknownVtbl.QueryInterface must clear stale outputs before E_NOINTERFACE",
+    )
+
+    result_error_info_section = section_between(
+        result_bindings_text,
+        "struct IErrorInfoVtbl",
+        "@C\nstruct IRestrictedErrorInfoVtbl",
+        "windows-result default IErrorInfoVtbl",
+    )
+    error_info_methods = (
+        ("var GetGUID", "var GetSource", "clearDefaultGuidOutSlot(result)", "windows-result default IErrorInfoVtbl.GetGUID"),
+        ("var GetSource", "var GetDescription", "clearDefaultBstrOutSlot(result)", "windows-result default IErrorInfoVtbl.GetSource"),
+        (
+            "var GetDescription",
+            "var GetHelpFile",
+            "clearDefaultBstrOutSlot(result)",
+            "windows-result default IErrorInfoVtbl.GetDescription",
+        ),
+        ("var GetHelpFile", "var GetHelpContext", "clearDefaultBstrOutSlot(result)", "windows-result default IErrorInfoVtbl.GetHelpFile"),
+        ("var GetHelpContext", "init()", "clearDefaultUInt32OutSlot(result)", "windows-result default IErrorInfoVtbl.GetHelpContext"),
+    )
+    for method_start, method_end, clear_call, label in error_info_methods:
+        method_section = section_between(result_error_info_section, method_start, method_end, label)
+        require_text_before(
+            method_section,
+            clear_call,
+            "E_NOTIMPL.value",
+            f"{label} must clear stale outputs before E_NOTIMPL",
+        )
+
+    result_restricted_section = section_between(
+        result_bindings_text,
+        "struct IRestrictedErrorInfoVtbl",
+        "func GetErrorInfo",
+        "windows-result default IRestrictedErrorInfoVtbl",
+    )
+    details_section = section_between(
+        result_restricted_section,
+        "var GetErrorDetails",
+        "var GetReference",
+        "windows-result default IRestrictedErrorInfoVtbl.GetErrorDetails",
+    )
+    require_text_fragments(
+        details_section,
+        (
+            "clearDefaultBstrOutSlot(fallback)",
+            "clearDefaultInt32OutSlot(errorCode)",
+            "clearDefaultBstrOutSlot(description)",
+            "clearDefaultBstrOutSlot(reference)",
+            "E_NOTIMPL.value",
+        ),
+        "windows-result default IRestrictedErrorInfoVtbl.GetErrorDetails must clear all stale outputs",
+    )
+    reference_section = section_between(
+        result_restricted_section,
+        "var GetReference",
+        "init()",
+        "windows-result default IRestrictedErrorInfoVtbl.GetReference",
+    )
+    require_text_before(
+        reference_section,
+        "clearDefaultBstrOutSlot(result)",
+        "E_NOTIMPL.value",
+        "windows-result default IRestrictedErrorInfoVtbl.GetReference must clear stale outputs before E_NOTIMPL",
+    )
+    result_test_text = result_tests.read_text(encoding="utf-8")
+    require_text_fragments(
+        result_test_text,
+        (
+            "defaultErrorInfoVtablesClearFailedOutSlots",
+            "IErrorInfoVtbl",
+            "IRestrictedErrorInfoVtbl",
+            "require(queryResult.isNull()",
+            "require(guidResult == GUID.zeroed()",
+            "require(helpContextResult == 0u32",
+            "require(errorCodeResult == 0i32",
+        ),
+        "windows-result tests must cover default COM error vtable failed out-slot clearing",
+    )
+
+
+def check_descriptor_generated_thunks_translate_exceptions(workspace: Path) -> None:
+    generator = workspace / "windows-implement" / "src" / "descriptor_codegen.cj"
+    tests = workspace / "windows-implement" / "src" / "descriptor_codegen_test.cj"
+    check_path_exists(generator, "windows-implement descriptor code generator")
+    check_path_exists(tests, "windows-implement descriptor codegen tests")
+    generator_text = generator.read_text(encoding="utf-8")
+    append_body = cj_function_body(generator_text, "appendDispatchThunk", generator, workspace)
+    require_text_fragments(
+        generator_text,
+        (
+            "func thunkWindowsExceptionReturn",
+            "func thunkPlainExceptionReturn",
+            "func appendDispatchExceptionOutSlotCleanup",
+            "windows_result.WindowsException",
+            "E_FAIL",
+        ),
+        "windows-implement descriptor generated thunks must have exception translation helpers",
+    )
+    require_text_before(
+        append_body,
+        'sb.append("    try {\\n")',
+        'sb.append("    match (unsafe { asImplFromRaw<")',
+        "windows-implement descriptor generated thunks must wrap ABI dispatch in try/catch",
+    )
+    require_text_fragments(
+        append_body,
+        (
+            'sb.append("    } catch (error: windows_result.WindowsException) {\\n")',
+            "appendDispatchExceptionOutSlotCleanup(sb, method)",
+            "thunkWindowsExceptionReturn(method.returnType)",
+            'sb.append("    } catch (_: Exception) {\\n")',
+            "thunkPlainExceptionReturn(method.returnType)",
+        ),
+        "windows-implement descriptor generated thunks must translate thrown exceptions to HRESULTs",
+    )
+    tests_text = tests.read_text(encoding="utf-8")
+    require_text_fragments(
+        tests_text,
+        (
+            "testGeneratedResultBridgeCleansFailedPointerOutputs",
+            "testGeneratedNonResultThunkTranslatesThrownExceptions",
+            "catch (error: windows_result.WindowsException)",
+            "error.code().value",
+            "E_FAIL",
+            "unsafe { result__.write(CPointer<Unit>()) }",
+        ),
+        "windows-implement descriptor codegen tests must cover generated thunk exception translation",
+    )
+
+
+def check_collection_specialized_bool_thunks_clear_outputs(workspace: Path) -> None:
+    runtime_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    text = runtime_path.read_text(encoding="utf-8")
+    checked = 0
+    for match in re.finditer(r"impl\.(HasKey|Insert)\s*\(", text):
+        checked += 1
+        prefix = text[max(0, match.start() - 800) : match.start()]
+        if "clearCollectionBoolOutSlot(result__)" not in prefix:
+            line = text[: match.start()].count("\n") + 1
+            fail(
+                f"windows-runtime/src/collections_runtime.cj:{line} specialized {match.group(1)} "
+                "thunk must clear Bool out slots before dispatch"
+            )
+    if checked < 25:
+        fail("windows-runtime specialized collection Bool thunk audit saw too few vtable branches")
+
+
+def check_collection_specialized_indexof_thunks_clear_outputs(workspace: Path) -> None:
+    runtime_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    text = runtime_path.read_text(encoding="utf-8")
+    checked = 0
+    pattern = re.compile(
+        r"let\s+indexOfAbi\s*:[^=]+=\s*\{(?P<body>.*?)\n\s*\}\s*\n\s*vtbl\.IndexOf",
+        re.S,
+    )
+    for match in pattern.finditer(text):
+        body = match.group("body")
+        dispatch = body.find("match (impl.IndexOf")
+        if dispatch < 0:
+            continue
+        checked += 1
+        prefix = body[:dispatch]
+        line = text[: match.start()].count("\n") + 1
+        if "result__.isNull() || arg1.isNull()" not in prefix:
+            fail(
+                f"windows-runtime/src/collections_runtime.cj:{line} specialized IndexOf thunk must "
+                "reject null found/index out slots before dispatch"
+            )
+        if "clearCollectionIndexOutSlot(arg1)" not in prefix:
+            fail(
+                f"windows-runtime/src/collections_runtime.cj:{line} specialized IndexOf thunk must "
+                "clear index out slots before dispatch"
+            )
+        if "clearCollectionBoolOutSlot(result__)" not in prefix:
+            fail(
+                f"windows-runtime/src/collections_runtime.cj:{line} specialized IndexOf thunk must "
+                "clear Bool out slots before dispatch"
+            )
+    if checked < 35:
+        fail("windows-runtime specialized collection IndexOf thunk audit saw too few vtable branches")
+
+
+def check_collection_specialized_lookup_thunks_clear_outputs(workspace: Path) -> None:
+    runtime_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    text = runtime_path.read_text(encoding="utf-8")
+    checked = 0
+    scalar_checked = 0
+    pattern = re.compile(
+        r"let\s+lookupAbi\s*:\s*CFunc<(?P<signature>[^=]+?)>\s*=\s*\{(?P<body>.*?)\n\s*\}\s*\n\s*vtbl\.Lookup",
+        re.S,
+    )
+    for match in pattern.finditer(text):
+        body = match.group("body")
+        dispatch = body.find("match (impl.Lookup")
+        if dispatch < 0:
+            dispatch = body.find("impl.Lookup")
+        if dispatch < 0:
+            continue
+        checked += 1
+        prefix = body[:dispatch]
+        signature = match.group("signature")
+        line = text[: match.start()].count("\n") + 1
+        if "CPointer<CPointer<Unit>>" in signature:
+            if "clearCollectionGenericOutSlot(result__)" not in prefix:
+                fail(
+                    f"windows-runtime/src/collections_runtime.cj:{line} specialized Lookup thunk must "
+                    "clear generic out slots before dispatch"
+                )
+        else:
+            scalar_checked += 1
+            if "unsafe { result__.write(" not in prefix:
+                fail(
+                    f"windows-runtime/src/collections_runtime.cj:{line} specialized scalar Lookup thunk "
+                    "must clear value out slots before dispatch"
+                )
+    if checked < 20 or scalar_checked < 10:
+        fail("windows-runtime specialized collection Lookup thunk audit saw too few vtable branches")
+
+
+def check_collection_specialized_vector_thunks_translate_exceptions(workspace: Path) -> None:
+    runtime_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    text = runtime_path.read_text(encoding="utf-8")
+    checked = 0
+    pattern = re.compile(
+        r"let\s+(?P<abi>indexOfAbi|setAtAbi|insertAtAbi|appendAbi)\s*:[^=]+=\s*\{"
+        r"(?P<body>.*?)\n\s*\}\s*\n\s*vtbl\.(?P<slot>IndexOf|SetAt|InsertAt|Append)",
+        re.S,
+    )
+    for match in pattern.finditer(text):
+        slot = match.group("slot")
+        body = match.group("body")
+        dispatch = body.find(f"match (impl.{slot}")
+        if dispatch < 0:
+            continue
+        checked += 1
+        prefix = body[:dispatch]
+        if (
+            "try {" not in prefix
+            or "catch (error: windows_core.WindowsException)" not in body
+            or "catch (_: Exception)" not in body
+            or "windows_core.E_FAIL.value" not in body
+        ):
+            line = text[: match.start()].count("\n") + 1
+            fail(
+                f"windows-runtime/src/collections_runtime.cj:{line} specialized vector {slot} "
+                "thunk must translate thrown exceptions to HRESULT values before returning"
+            )
+    if checked < 80:
+        fail("windows-runtime specialized vector exception thunk audit saw too few vtable branches")
+
+
+def check_collection_event_thunks_translate_exceptions_and_clear_tokens(workspace: Path) -> None:
+    sources = [
+        ("windows-runtime/src/collections_runtime.cj", workspace / "windows-runtime" / "src" / "collections_runtime.cj"),
+        ("windows-runtime/src/foundation_runtime.cj", workspace / "windows-runtime" / "src" / "foundation_runtime.cj"),
+    ]
+    checked_add = 0
+    checked_remove = 0
+
+    for relative, runtime_path in sources:
+        if not runtime_path.exists():
+            continue
+        text = runtime_path.read_text(encoding="utf-8")
+
+        for name in ("MapChanged", "VectorChanged", "Closed"):
+            for line, body in iter_cj_function_bodies(text, f"__winrtThunk_{name}"):
+                dispatch = body.find(f"this.{name}(")
+                if dispatch < 0:
+                    continue
+                checked_add += 1
+                prefix = body[:dispatch]
+                if "result__.write(EventRegistrationTokenAbi())" not in prefix:
+                    fail(
+                        f"{relative}:{line} {name} thunk must clear "
+                        "EventRegistrationToken out slots before dispatch"
+                    )
+                if (
+                    "try {" not in prefix
+                    or "catch (error: windows_core.WindowsException)" not in body
+                    or "catch (_: Exception)" not in body
+                    or "windows_core.E_FAIL.value" not in body
+                ):
+                    fail(
+                        f"{relative}:{line} {name} thunk must translate thrown exceptions to HRESULT values"
+                    )
+
+        for name in ("RemoveMapChanged", "RemoveVectorChanged", "RemoveClosed"):
+            for line, body in iter_cj_function_bodies(text, f"__winrtThunk_{name}"):
+                dispatch = body.find(f"this.{name}(")
+                if dispatch < 0:
+                    continue
+                checked_remove += 1
+                prefix = body[:dispatch]
+                if (
+                    "try {" not in prefix
+                    or "catch (error: windows_core.WindowsException)" not in body
+                    or "catch (_: Exception)" not in body
+                    or "windows_core.E_FAIL.value" not in body
+                ):
+                    fail(
+                        f"{relative}:{line} {name} thunk must translate thrown exceptions to HRESULT values"
+                    )
+
+    if checked_add < 4 or checked_remove < 4:
+        fail("windows-runtime event thunk audit saw too few event branches")
+
+
+def check_generated_raw_event_add_wrappers_clear_tokens(workspace: Path) -> None:
+    impl_root = workspace / "windows-common" / "src" / "impl"
+    check_path_exists(impl_root, "windows-common generated impl directory")
+    sources = sorted(impl_root.glob("symbols_*.cj"))
+    if not sources:
+        fail("windows-common generated impl symbols files are missing")
+
+    checked = 0
+    wrapper_re = re.compile(
+        r"public\s+unsafe\s+func\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)"
+        r"\s*\((?P<params>[^)]*CPointer<Int64>[^)]*)\)\s*:\s*windows_core\.HRESULT\s*\{",
+        re.S,
+    )
+    for source in sources:
+        text = source.read_text(encoding="utf-8")
+        for match in wrapper_re.finditer(text):
+            params = match.group("params")
+            param_match = re.search(r"\b(?P<name>[A-Za-z_][A-Za-z0-9_]*)\s*:\s*CPointer<Int64>(?=\s*(?:,|$))", params)
+            if param_match is None:
+                continue
+            out_name = param_match.group("name")
+            function_name = match.group("name")
+            brace = text.find("{", match.end() - 1)
+            if brace < 0:
+                continue
+            depth = 0
+            end = brace
+            while end < len(text):
+                char = text[end]
+                if char == "{":
+                    depth += 1
+                elif char == "}":
+                    depth -= 1
+                    if depth == 0:
+                        end += 1
+                        break
+                end += 1
+            if depth != 0:
+                continue
+            body = text[brace + 1 : end - 1]
+            dispatch = body.find(f"v.{function_name}(")
+            if dispatch < 0 or out_name not in body[dispatch:]:
+                continue
+            checked += 1
+            prefix = body[:dispatch]
+            compact_prefix = re.sub(r"\s+", "", prefix)
+            compact_clears = (
+                f"if({out_name}.isNotNull()){{unsafe{{{out_name}.write(0i64)}}}}",
+                f"if(!{out_name}.isNull()){{unsafe{{{out_name}.write(0i64)}}}}",
+            )
+            clear_indexes = [compact_prefix.find(clear) for clear in compact_clears]
+            present_clear_indexes = [index for index in clear_indexes if index >= 0]
+            clear_index = min(present_clear_indexes) if present_clear_indexes else -1
+            pointer_failure_index = compact_prefix.find("returnwindows_core.E_POINTER")
+            if clear_index < 0 or (pointer_failure_index >= 0 and clear_index > pointer_failure_index):
+                line = text[: match.start()].count("\n") + 1
+                relative = source.relative_to(workspace).as_posix()
+                fail(
+                    f"{relative}:{line} raw event add wrapper {function_name} must pre-clear "
+                    f"non-null EventRegistrationToken out pointer {out_name} before early failure/dispatch"
+                )
+
+    if checked < 2:
+        fail("windows-common generated raw event add wrapper audit saw too few wrappers")
+
+
+GENERATED_DEFAULT_NOTIMPL_FIELD_RE = re.compile(
+    r"(?m)^[ \t]*public var (?P<slot>[A-Za-z_][A-Za-z0-9_]*): CFunc<[^=\r\n]+> = \{"
+)
+
+
+def generated_default_notimpl_stub_requires_clears(text: str, slot: str, search_from: int) -> bool:
+    assignment_match = re.search(rf"(?m)^[ \t]*vtbl\.{re.escape(slot)}\s*=\s*\{{", text[search_from:])
+    if assignment_match is None:
+        return False
+    assignment_start = search_from + assignment_match.start()
+    next_search_start = text.find("\n", assignment_start)
+    if next_search_start < 0:
+        next_search_start = assignment_start + 1
+    next_assignment = re.search(r"(?m)^[ \t]*vtbl\.[A-Za-z_][A-Za-z0-9_]*\s*=", text[next_search_start + 1 :])
+    assignment_end = len(text)
+    if next_assignment is not None:
+        assignment_end = min(assignment_end, next_search_start + 1 + next_assignment.start())
+    return_vtbl = text.find("\n        return vtbl", assignment_start)
+    if return_vtbl >= 0:
+        assignment_end = min(assignment_end, return_vtbl)
+    assignment = text[assignment_start:assignment_end]
+    none_index = assignment.find("case None =>")
+    if none_index < 0:
+        return False
+    failure_index = assignment.find("windows_core.E_NOINTERFACE.value", none_index)
+    if failure_index < 0:
+        return False
+    return ".write(" in assignment[none_index:failure_index]
+
+
+def generated_default_notimpl_stub_issues(text: str) -> list[tuple[int, str]]:
+    issues: list[tuple[int, str]] = []
+    for match in GENERATED_DEFAULT_NOTIMPL_FIELD_RE.finditer(text):
+        slot = match.group("slot")
+        brace = text.find("{", match.start(), match.end())
+        if brace < 0:
+            continue
+        end = matching_cj_brace_end(text, brace)
+        if end is None:
+            continue
+        stub = text[match.start() : end + 1]
+        notimpl_index = stub.find("windows_core.E_NOTIMPL.value")
+        if notimpl_index < 0:
+            continue
+        if generated_default_notimpl_stub_requires_clears(text, slot, end + 1) and ".write(" not in stub[:notimpl_index]:
+            line = text[: match.start()].count("\n") + 1
+            issues.append((line, slot))
+    return issues
+
+
+def check_vtable_none_branches_clear_out_slots(workspace: Path) -> None:
+    foundation = workspace / "windows-runtime" / "src" / "foundation_runtime.cj"
+    collections = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    marshaler = workspace / "windows-core" / "src" / "marshaler.cj"
+    core_agile_ref = workspace / "windows-core" / "src" / "agile_reference.cj"
+    core_reference_ref = workspace / "windows-core" / "src" / "weak.cj"
+    core_descriptor_tests = workspace / "windows-core" / "src" / "core_descriptor_test.cj"
+    core_weak_ref = workspace / "windows-core" / "src" / "weak_ref_count.cj"
+    implement_weak_ref = workspace / "windows-implement" / "src" / "weak_ref_count.cj"
+    implement_surface_ref = workspace / "windows-implement" / "src" / "interface_impl_surface.cj"
+    implement_composable_ref = workspace / "windows-implement" / "src" / "composable_activation.cj"
+    implement_thunk_ref = workspace / "windows-implement" / "src" / "thunk_builder.cj"
+    implement_weak_tests = workspace / "windows-implement" / "src" / "weak_ref_count_test.cj"
+    interface_macro = workspace / "windows-interface" / "src" / "macros" / "windows_interface_macros.cj"
+    interface_macro_fixture = workspace / "windows-interface" / "tests" / "macros" / "generated_interface_fixture.cj"
+    bindgen_render = workspace / "windows-bindgen" / "src" / "render_symbol.cj"
+    bindgen_tests = workspace / "windows-bindgen" / "src" / "main_test.cj"
+    common_impl = workspace / "windows-common" / "src" / "impl"
+    check_path_exists(foundation, "windows-runtime foundation runtime")
+    check_path_exists(collections, "windows-runtime collections runtime")
+    check_path_exists(marshaler, "windows-core marshaler runtime")
+    check_path_exists(core_agile_ref, "windows-core agile reference runtime")
+    check_path_exists(core_reference_ref, "windows-core weak reference interface runtime")
+    check_path_exists(core_descriptor_tests, "windows-core descriptor tests")
+    check_path_exists(core_weak_ref, "windows-core weak reference runtime")
+    check_path_exists(implement_weak_ref, "windows-implement weak reference runtime")
+    check_path_exists(implement_surface_ref, "windows-implement interface implementation surface")
+    check_path_exists(implement_composable_ref, "windows-implement composable activation runtime")
+    check_path_exists(implement_thunk_ref, "windows-implement COM thunk builder")
+    check_path_exists(implement_weak_tests, "windows-implement weak reference tests")
+    check_path_exists(interface_macro, "windows-interface Interface macro")
+    check_path_exists(interface_macro_fixture, "windows-interface generated macro fixture")
+    check_path_exists(bindgen_render, "windows-bindgen render_symbol")
+    check_path_exists(bindgen_tests, "windows-bindgen tests")
+    check_path_exists(common_impl, "windows-common generated impl directory")
+
+    foundation_text = foundation.read_text(encoding="utf-8")
+    require_text_fragments(
+        foundation_text,
+        (
+            "func foundationNoInterfaceValueOut<T>",
+            "func foundationNoInterfaceArrayOut<T>",
+            "func foundationNoInterfaceUnitArrayOut",
+            "foundationNoInterfaceComOut(result__)",
+            "foundationNoInterfaceValueOut<Bool>(result__, false)",
+            "foundationNoInterfaceArrayOut<UInt16>(arg0Size, arg0)",
+            "foundationNoInterfaceUnitArrayOut(resultSize__, result__)",
+        ),
+        "windows-runtime foundation vtable None branches must clear stale out slots",
+    )
+
+    foundation_lines = foundation_text.splitlines()
+
+    def foundation_lambda_start(line_index: int) -> int:
+        for cursor in range(line_index - 1, max(-1, line_index - 80), -1):
+            candidate = foundation_lines[cursor].strip()
+            if "instanceRaw" in candidate and (
+                candidate.endswith("=>") or "=> {" in candidate or "=> " in candidate
+            ):
+                return cursor
+        return -1
+
+    for index, line in enumerate(foundation_lines):
+        stripped = line.strip()
+        stale = stripped == "case None => E_NOINTERFACE.value"
+        stale = stale or (
+            stripped == "case None =>"
+            and index + 1 < len(foundation_lines)
+            and foundation_lines[index + 1].strip() == "E_NOINTERFACE.value"
+        )
+        if not stale:
+            continue
+        lambda_start = foundation_lambda_start(index)
+        if lambda_start < 0 or "result__" not in foundation_lines[lambda_start]:
+            continue
+        branch_prefix = "\n".join(foundation_lines[lambda_start:index])
+        clears_output = "foundationNoInterface" in branch_prefix or "result__.write(" in branch_prefix
+        if not clears_output:
+            relative = foundation.relative_to(workspace).as_posix()
+            fail(
+                f"{relative}:{index + 1} foundation vtable dispatcher None branch with out slot "
+                "must clear result__ before E_NOINTERFACE"
+            )
+
+    value_raw_body = function_body(foundation_text, "ValueRaw")
+    if value_raw_body is None:
+        fail("windows-runtime IReferenceArray must expose ValueRaw")
+    value_raw_check = value_raw_body.find("status__.check()")
+    value_raw_release = value_raw_body.find("windows_core.winrtReleaseGenericArrayOut<T>(result__, resultSize__)")
+    if value_raw_check < 0 or value_raw_release < 0 or value_raw_release > value_raw_check:
+        fail("windows-runtime IReferenceArray.ValueRaw must release failed generic array out before HRESULT check")
+
+    collections_text = collections.read_text(encoding="utf-8")
+    require_text_fragments(
+        collections_text,
+        (
+            "func collectionNoInterfaceGenericOut",
+            "func collectionNoInterfaceValueOut<T>",
+            "func collectionNoInterfaceIndexBoolOut",
+            "collectionNoInterfaceGenericOut(result__)",
+            "collectionNoInterfaceUInt32Out(result__)",
+            "collectionNoInterfaceValueOut<Int32>(result__, 0i32)",
+            "collectionNoInterfaceIndexBoolOut(arg1, result__)",
+            "collectionNoInterfaceSplitOut(arg0, arg1)",
+        ),
+        "windows-runtime collection vtable None branches must clear stale out slots",
+    )
+
+    collection_lines = collections_text.splitlines()
+
+    def collection_lambda_start(line_index: int) -> str:
+        for cursor in range(line_index - 1, max(-1, line_index - 80), -1):
+            candidate = collection_lines[cursor].strip()
+            if "instanceRaw" in candidate and (
+                candidate.endswith("=>") or "=> {" in candidate or "=> " in candidate
+            ):
+                return candidate
+        return ""
+
+    def collection_none_branch_has_out_slot(line_index: int) -> bool:
+        lambda_line = collection_lambda_start(line_index)
+        return "result__" in lambda_line or "vtbl.Split = { instanceRaw, arg0, arg1 =>" in lambda_line
+
+    for index, line in enumerate(collection_lines):
+        stripped = line.strip()
+        stale = stripped == "case None => E_NOINTERFACE.value"
+        stale = stale or (
+            stripped == "case None =>"
+            and index + 1 < len(collection_lines)
+            and collection_lines[index + 1].strip() == "E_NOINTERFACE.value"
+        )
+        if stale and collection_none_branch_has_out_slot(index):
+            relative = collections.relative_to(workspace).as_posix()
+            fail(
+                f"{relative}:{index + 1} collection vtable dispatcher None branch with out slot "
+                "must use a cleanup helper before E_NOINTERFACE"
+            )
+
+    marshaler_text = marshaler.read_text(encoding="utf-8")
+
+    def require_marshaler_lookup_miss_cleanup(function_name: str, clear_fragment: str, out_name: str) -> None:
+        body = function_body(marshaler_text, function_name)
+        if body is None:
+            fail(f"windows-core marshaler must define {function_name}")
+        branch_index = body.find("case None =>")
+        if branch_index < 0:
+            fail(f"windows-core marshaler {function_name} must handle lookup-miss None branch")
+        branch = body[branch_index:]
+        error_index = branch.find("E_NOINTERFACE.value")
+        clear_index = branch.find(clear_fragment)
+        if error_index < 0 or clear_index < 0 or clear_index > error_index:
+            fail(
+                f"windows-core marshaler {function_name} lookup-miss branch must clear "
+                f"{out_name} before E_NOINTERFACE"
+            )
+
+    require_marshaler_lookup_miss_cleanup(
+        "aggregatedMarshalerGetUnmarshalClassThunk",
+        "pcid.write(GUID())",
+        "pcid",
+    )
+    require_marshaler_lookup_miss_cleanup(
+        "aggregatedMarshalerGetMarshalSizeMaxThunk",
+        "psize.write(0u32)",
+        "psize",
+    )
+    require_marshaler_lookup_miss_cleanup(
+        "aggregatedMarshalerUnmarshalInterfaceThunk",
+        "ppv.write(CPointer<Unit>())",
+        "ppv",
+    )
+
+    def require_marshaler_state_scalar_cleanup(
+        function_name: str,
+        clear_fragment: str,
+        call_fragment: str,
+        out_name: str,
+    ) -> None:
+        body = function_body(marshaler_text, function_name)
+        if body is None:
+            fail(f"windows-core marshaler must define {function_name}")
+        call_index = body.find(call_fragment)
+        if call_index < 0:
+            fail(f"windows-core marshaler {function_name} must dispatch to inner marshaler")
+        preclear_index = body.find(clear_fragment)
+        if preclear_index < 0 or preclear_index > call_index:
+            fail(f"windows-core marshaler {function_name} must clear {out_name} before inner dispatch")
+        failure_index = body.find("hr < 0", call_index)
+        postclear_index = body.find(clear_fragment, call_index)
+        if failure_index < 0 or postclear_index < 0 or postclear_index < failure_index:
+            fail(f"windows-core marshaler {function_name} must clear {out_name} after failed inner HRESULT")
+
+    require_marshaler_state_scalar_cleanup(
+        "getUnmarshalClass",
+        "pcid.write(GUID())",
+        "GetUnmarshalClass(",
+        "pcid",
+    )
+    require_marshaler_state_scalar_cleanup(
+        "getMarshalSizeMax",
+        "psize.write(0u32)",
+        "GetMarshalSizeMax(",
+        "psize",
+    )
+
+    def require_weak_lookup_precheck(
+        source: Path,
+        text: str,
+        function_name: str,
+        *,
+        checks_iid: bool,
+    ) -> None:
+        body = function_body(text, function_name)
+        if body is None:
+            fail(f"{source.relative_to(workspace).as_posix()} must define {function_name}")
+        lookup_index = body.find("lookup")
+        if lookup_index < 0:
+            fail(f"{source.relative_to(workspace).as_posix()} {function_name} must route through weak lookup")
+        prefix = body[:lookup_index]
+        if "resultSlot.isNull()" not in prefix or "resultSlot.write(CPointer<Unit>())" not in prefix:
+            fail(
+                f"{source.relative_to(workspace).as_posix()} {function_name} must reject null out slots "
+                "and clear stale out slots before weak lookup"
+            )
+        if checks_iid and "iid.isNull()" not in prefix:
+            fail(f"{source.relative_to(workspace).as_posix()} {function_name} must reject null IID before weak lookup")
+
+    core_weak_text = core_weak_ref.read_text(encoding="utf-8")
+    require_weak_lookup_precheck(core_weak_ref, core_weak_text, "localWeakReferenceSourceQueryInterfaceThunk", checks_iid=True)
+    require_weak_lookup_precheck(core_weak_ref, core_weak_text, "localWeakReferenceSourceGetWeakReferenceThunk", checks_iid=False)
+    require_weak_lookup_precheck(core_weak_ref, core_weak_text, "localWeakReferenceQueryInterfaceThunk", checks_iid=True)
+    require_weak_lookup_precheck(core_weak_ref, core_weak_text, "localWeakReferenceResolveThunk", checks_iid=True)
+
+    implement_weak_text = implement_weak_ref.read_text(encoding="utf-8")
+    require_weak_lookup_precheck(implement_weak_ref, implement_weak_text, "weakReferenceSourceQueryInterfaceThunk", checks_iid=True)
+    require_weak_lookup_precheck(implement_weak_ref, implement_weak_text, "weakReferenceSourceGetWeakReferenceThunk", checks_iid=False)
+    require_weak_lookup_precheck(implement_weak_ref, implement_weak_text, "weakReferenceQueryInterfaceThunk", checks_iid=True)
+    require_weak_lookup_precheck(implement_weak_ref, implement_weak_text, "weakReferenceResolveThunk", checks_iid=True)
+
+    def require_weak_query_owner_preclear(source: Path, text: str) -> None:
+        body = function_body(text, "queryOwner")
+        if body is None:
+            fail(f"{source.relative_to(workspace).as_posix()} must define queryOwner")
+        query_index = body.find("QueryInterface(")
+        clear_index = body.find("resultSlot.write(CPointer<Unit>())")
+        if query_index < 0:
+            fail(f"{source.relative_to(workspace).as_posix()} queryOwner must delegate owner QueryInterface")
+        if clear_index < 0 or clear_index > query_index:
+            fail(
+                f"{source.relative_to(workspace).as_posix()} queryOwner must clear stale resultSlot "
+                "before delegating owner QueryInterface"
+            )
+
+    require_weak_query_owner_preclear(core_weak_ref, core_weak_text)
+    require_weak_query_owner_preclear(implement_weak_ref, implement_weak_text)
+
+    def require_core_reference_exception_translation(source: Path, text: str, function_name: str, out_name: str) -> None:
+        body = function_body(text, function_name)
+        if body is None:
+            fail(f"{source.relative_to(workspace).as_posix()} must define {function_name}")
+        required = (
+            "try {",
+            "catch (error: WindowsException)",
+            "catch (_: Exception)",
+            f"releaseFailedComOutSlot({out_name})",
+            "E_FAIL.value",
+        )
+        for fragment in required:
+            if fragment not in body:
+                fail(
+                    f"{source.relative_to(workspace).as_posix()} {function_name} must translate "
+                    "thrown exceptions and clean failed out slots"
+                )
+
+    core_agile_text = core_agile_ref.read_text(encoding="utf-8")
+    core_reference_text = core_reference_ref.read_text(encoding="utf-8")
+    require_core_reference_exception_translation(
+        core_agile_ref,
+        core_agile_text,
+        "agileReferenceResolveThunk",
+        "ppvobjectreference",
+    )
+    require_core_reference_exception_translation(
+        core_reference_ref,
+        core_reference_text,
+        "coreWeakReferenceResolveThunk",
+        "objectreference",
+    )
+    require_core_reference_exception_translation(
+        core_reference_ref,
+        core_reference_text,
+        "coreWeakReferenceSourceGetWeakReferenceThunk",
+        "weakreference",
+    )
+    require_text_fragments(
+        core_descriptor_tests.read_text(encoding="utf-8"),
+        (
+            "testCoreAgileReferenceResolveThunkCleansThrownPartialOutputs",
+            "testCoreWeakReferenceResolveThunkCleansThrownPartialOutputs",
+            "testCoreWeakReferenceSourceThunkTranslatesThrownExceptions",
+        ),
+        "windows-core weak/agile reference thunk tests must cover thrown-exception HRESULT translation",
+    )
+
+    def require_implement_qi_exception_translation(source: Path, text: str, function_name: str) -> None:
+        if function_name == "queryInterfaceBase" and "match (queryInterfaceFallback)" in text:
+            body = section_between(
+                text,
+                "match (queryInterfaceFallback)",
+                "case None => ()",
+                "windows-implement QueryInterface fallback",
+            )
+        else:
+            body = function_body(text, function_name)
+            if body is None:
+                fail(f"{source.relative_to(workspace).as_posix()} must define {function_name}")
+        for fragment in (
+            "catch (error: WindowsException)",
+            "catch (_: Exception)",
+            "releaseFailedComOutSlot(resultSlot)",
+            "E_FAIL.value",
+        ):
+            if fragment not in body:
+                fail(
+                    f"{source.relative_to(workspace).as_posix()} {function_name} must translate "
+                    "thrown QueryInterface fallback exceptions and clean failed out slots"
+                )
+
+    implement_surface_text = implement_surface_ref.read_text(encoding="utf-8")
+    implement_thunk_text = implement_thunk_ref.read_text(encoding="utf-8")
+    require_implement_qi_exception_translation(implement_surface_ref, implement_surface_text, "queryInterfaceBase")
+    require_implement_qi_exception_translation(implement_thunk_ref, implement_thunk_text, "iunknownQueryInterfaceThunk")
+    require_text_fragments(
+        implement_weak_tests.read_text(encoding="utf-8"),
+        (
+            "testIunknownQueryInterfaceThunkTranslatesThrownFallbackAndReleasesPartialOutput",
+            "throw WindowsException(windows_result.E_POINTER)",
+            "throw Exception(\"query fallback failure\")",
+        ),
+        "windows-implement QueryInterface fallback tests must cover thrown-exception HRESULT translation",
+    )
+    implement_composable_text = implement_composable_ref.read_text(encoding="utf-8")
+    activate_composable_body = function_body(implement_composable_text, "activateComposable")
+    if activate_composable_body is None:
+        fail("windows-implement composable activation runtime must define activateComposable")
+    require_text_fragments(
+        activate_composable_body,
+        (
+            "try {",
+            "catch (e: Exception)",
+            "releaseComRaw(innerRaw)",
+            "innerRaw = CPointer<Unit>()",
+            "outer.runtime.clearQueryInterfaceFallback()",
+            "outer.releaseBase()",
+            "baseObject.close()",
+            "innerObject.close()",
+        ),
+        "windows-implement activateComposable must clean outer/base/inner ownership when activation throws",
+    )
+    if activate_composable_body.count("releaseComRaw(innerRaw)") < 2:
+        fail("windows-implement activateComposable must release innerRaw in every thrown activation path")
+    require_text_fragments(
+        implement_weak_tests.read_text(encoding="utf-8"),
+        (
+            "testActivateComposableReleasesOuterWhenActivatorThrows",
+            "testActivateComposableReleasesInnerOutAndOuterWhenActivatorThrows",
+            "throwingComposableInnerOutActivator",
+            "partialCleanupReleaseCount.load(), 1",
+            "outer.runtime.isDestroyed(), true",
+        ),
+        "windows-implement tests must cover activateComposable thrown-activation ownership cleanup",
+    )
+
+    interface_macro_text = interface_macro.read_text(encoding="utf-8")
+    if "case None => windows_core.E_NOINTERFACE.value" in interface_macro_text:
+        relative = interface_macro.relative_to(workspace).as_posix()
+        fail(f"{relative} @Interface vtable None branch must clear out slots before E_NOINTERFACE")
+    require_text_fragments(
+        interface_macro_text,
+        (
+            "func appendVtblNoneBranchOutSlotClears",
+            "func appendVtblOutSlotClears",
+            "func appendDefaultVtblClosureParams",
+            "func methodHasVtblOutSlots",
+            "func appendVtblSomeBranchOutSlotGuard",
+            "appendVtblOutSlotClears(sb, method, \"                        \")",
+            "if (methodHasVtblOutSlots(method))",
+            "appendDefaultVtblClosureParams(sb, method.params)",
+            "appendVtblOutSlotClears(sb, method, \"        \")",
+            "func appendVtblFailureOutSlotCleanup",
+            "func appendVtblFailureArrayOutSlotCleanup",
+            "func interfaceCleanupKind",
+            "func interfaceCleanupValue",
+            "let cleanupKind: String",
+            "interfaceCleanupKind(cleanupSpecs, methodName, paramName)",
+            "cleanupValue.startsWith(\"Array<\")",
+            "func outSlotDefaultExpr",
+            "func compactTypeName",
+            "let compactValue = compactTypeName(value)",
+            "if (!param.cleanupKind.isEmpty())",
+            ".write(",
+            "windows_core.E_POINTER.value",
+            "windows_core.E_NOINTERFACE.value",
+            "let cleanupSpecs = attrSourcePart(attrTokens, 2)",
+            "parseMethods(interfaceDecl, cleanupSpecs)",
+            "param.cleanupKind == \"HString\"",
+            "let resultHr__ = impl.__winrtThunk_",
+            "if (windows_core.HRESULT(resultHr__).failed())",
+            "appendVtblFailureOutSlotCleanup(sb, method, bodyIndent + \"        \")",
+            "catch (error: windows_core.WindowsException)",
+            "let exceptionAlias = \"${interfaceName}_ExceptionBase\"",
+            "sb.append(\" = Exception\\n\\n\")",
+            "sb.append(exceptionAlias)",
+            "error.code().value",
+            "windows_core.E_FAIL.value",
+            "windows_core.releaseFailedComOutSlot(",
+            "windows_core.winrtReleaseGenericArrayOut<",
+            "windows_core.coTaskMemFree(CPointer<Unit>(rawArray__))",
+        ),
+        "windows-interface @Interface macro vtable branches must clear likely out slots and translate exceptions",
+    )
+    failure_cleanup_body = function_body(interface_macro_text, "appendVtblFailureOutSlotCleanup")
+    if failure_cleanup_body is None:
+        fail("windows-interface @Interface macro appendVtblFailureOutSlotCleanup is missing")
+    require_text_before(
+        failure_cleanup_body,
+        "appendVtblFailureArrayOutSlotCleanup(sb, method, param, elementProjectedType, indent)",
+        "match (outSlotDefaultExpr(method, param))",
+        "windows-interface @Interface macro must release array out slots before scalar clears can zero their size slots",
+    )
+
+    interface_macro_fixture_text = interface_macro_fixture.read_text(encoding="utf-8")
+    require_text_fragments(
+        interface_macro_fixture_text,
+        (
+            "func requireVtblNoneBranchClearsOutSlots",
+            "innerInterface.isNull()",
+            "result.isNull()",
+            "token.value != 0",
+            "func requireDefaultVtblConstructorClearsOutSlotsBeforeNotImpl",
+            "Example_Foundation_IWidgetVtbl()",
+            "windows_core.E_NOTIMPL.value",
+            "func requireVtblSomeBranchClearsOutSlotsAndTranslatesThrownExceptions",
+            "throw Exception(\"CreateInstance failure\")",
+            "throw windows_core.WindowsException(windows_core.E_INVALIDARG)",
+            "windows_core.E_FAIL.value",
+            "windows_core.E_INVALIDARG.value",
+            "func requireVtblFailedHRESULTReleasesPartialOutSlots",
+            "failedOutputReleaseCount.load() != 1",
+            "vtbl.TryCreate",
+            "GetTitle.value=HString",
+            "func requireVtblFailedHRESULTReleasesPartialHStringOutSlot",
+            "debugObservedWindowsDeleteStringCount() - deleteBefore != 1",
+            "vtbl.GetTitle",
+            "GetNames.names=Array<windows_core.HString>",
+            "func requireVtblFailedHRESULTReleasesPartialHStringArrayOutSlot",
+            "vtbl.GetNames",
+            "coTaskMemAllocationSize(failedOutputArrayRaw).isNone()",
+            "TryAlias.aliasOut=Com",
+            "GetAliasText.textOut=HString",
+            "func requireExplicitComCleanupSpecMarksAtypicalOutSlot",
+            "failedOutputReleaseCount.load() != 1",
+            "func requireExplicitHStringCleanupSpecMarksAtypicalOutSlot",
+        ),
+        "windows-interface macro fixture must cover @Interface lookup-miss/live/failed-HRESULT out-slot cleanup",
+    )
+
+    bindgen_render_text = bindgen_render.read_text(encoding="utf-8")
+    generic_vtbl_body = function_body(bindgen_render_text, "renderGenericWinrtInterfaceVtbl")
+    if generic_vtbl_body is None:
+        fail("windows-bindgen renderGenericWinrtInterfaceVtbl is missing")
+    require_text_fragments(
+        generic_vtbl_body,
+        (
+            "interfaceDefaultVtblStub(method, pairs, symbolsByName, symbol.fullName)",
+        ),
+        "windows-bindgen generic WinRT vtable defaults must use the default out-slot clearing stub",
+    )
+    require_text_fragments(
+        bindgen_render_text,
+        (
+            "func interfaceDefaultVtblStub",
+            "let clears = interfaceDispatcherClearOutSlots(method, pairs, symbolsByName, ownerFullName, 2)",
+            "if (clears.isEmpty())",
+            "{ ${interfaceClosurePlaceholders(Int64(pairs.size) + 1)} => windows_core.E_NOTIMPL.value }\\n",
+            "return \"{ _${interfaceClosureParameterNames(pairs)} =>\\n\"",
+            "windows_core.E_NOTIMPL.value",
+        ),
+        "windows-bindgen default vtable stubs must clear generated out slots before E_NOTIMPL",
+    )
+
+    bindgen_tests_text = bindgen_tests.read_text(encoding="utf-8")
+    require_text_fragments(
+        bindgen_tests_text,
+        (
+            "testGenericWinrtVtblNoneBranchClearsOutSlots",
+            "public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>",
+            "public var IndexOf: CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<Bool>) -> Int32> = { _, value, index, result =>",
+            "public var Items: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Int32>>) -> Int32> = { _, resultSize, result =>",
+            "public var Names: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, resultSize, result =>",
+            "windows_core.winrtReleaseGenericArrayOut<windows_core.HString>(CPointer<Unit>(rawArray__), rawSize__)",
+            "windows_core.coTaskMemFree(CPointer<Unit>(rawArray__))",
+            "windows_core.E_NOTIMPL.value",
+        ),
+        "windows-bindgen tests must cover default vtable E_NOTIMPL out-slot clearing",
+    )
+
+    common_sources = sorted(common_impl.glob("symbols_*.cj"))
+    if not common_sources:
+        fail("windows-common generated impl symbols files are missing")
+    common_text_parts = []
+    for source in common_sources:
+        text = source.read_text(encoding="utf-8")
+        default_stub_issues = generated_default_notimpl_stub_issues(text)
+        if default_stub_issues:
+            line, slot = default_stub_issues[0]
+            relative = source.relative_to(workspace).as_posix()
+            fail(
+                f"{relative}:{line} generated default vtable stub {slot} must clear "
+                "out slots before E_NOTIMPL"
+            )
+        stale = "case None => windows_core.E_NOINTERFACE.value"
+        if stale in text:
+            line = text[: text.index(stale)].count("\n") + 1
+            relative = source.relative_to(workspace).as_posix()
+            fail(f"{relative}:{line} generated vtable dispatcher None branch must clear out slots before E_NOINTERFACE")
+        stale_live_out = re.search(
+            r"case\s+Some\(impl\)\s*=>\s*impl\.[A-Za-z_][A-Za-z0-9_]*\([^)]*"
+            r"\b(?:result|first|second)\b[^)]*\)",
+            text,
+        )
+        if stale_live_out is not None:
+            line = text[: stale_live_out.start()].count("\n") + 1
+            relative = source.relative_to(workspace).as_posix()
+            fail(
+                f"{relative}:{line} generated vtable dispatcher live impl branch with out slot "
+                "must reject null and clear stale out slots before dispatch"
+            )
+        common_text_parts.append(text)
+    common_text = "\n".join(common_text_parts)
+    require_text_fragments(
+        common_text,
+        (
+            "case Some(impl) =>\n                    if (result.isNull())",
+            "if (items.isNull() || result.isNull())",
+            "if (first.isNull() || second.isNull())",
+            "impl.First(result)",
+            "impl.GetMany(itemsSize, items, result)",
+            "impl.Split(first, second)",
+            "catch (error: windows_core.WindowsException)",
+            "ExceptionBase = Exception",
+            "ExceptionBase) {",
+            "error.code().value",
+            "windows_core.E_FAIL.value",
+            "unsafe { result.write(CPointer<Unit>()) }",
+            "unsafe { result.write(false) }",
+            "unsafe { first.write(CPointer<Unit>()) }",
+            "unsafe { second.write(CPointer<Unit>()) }",
+            "unsafe { result.write(0i64) }",
+        ),
+        "windows-common generated vtable branches must clear representative out slots and translate thrown exceptions",
+    )
+    if (
+        "try {\n                            impl.First(result)" not in common_text
+        and "try {\n                            let resultHr__ = impl.First(result)" not in common_text
+    ):
+        fail("windows-common generated vtable branches must dispatch representative First method inside try")
+    for label, start, clear_fragments in (
+        (
+            "single-result",
+            "case Some(impl) =>\n                    if (result.isNull())",
+            ("unsafe { result.write(CPointer<Unit>()) }",),
+        ),
+        (
+            "GetMany",
+            "if (items.isNull() || result.isNull())",
+            (
+                "unsafe { result.write(0u32) }",
+            ),
+        ),
+        (
+            "Split",
+            "if (first.isNull() || second.isNull())",
+            (
+                "unsafe { first.write(CPointer<Unit>()) }",
+                "unsafe { second.write(CPointer<Unit>()) }",
+            ),
+        ),
+    ):
+        pointer_branch = section_between(
+            common_text,
+            start,
+            "} else {",
+            f"windows-common generated {label} E_POINTER branch",
+        )
+        for clear_fragment in clear_fragments:
+            require_text_before(
+                pointer_branch,
+                clear_fragment,
+                "windows_core.E_POINTER.value",
+                f"windows-common generated {label} E_POINTER branch must clear non-null out slots before E_POINTER",
+            )
+    for call in (
+        "impl.First(result)",
+        "impl.GetMany(itemsSize, items, result)",
+        "impl.Split(first, second)",
+    ):
+        call_index = common_text.find(call)
+        if call_index < 0:
+            fail(f"windows-common generated vtable branches must contain representative call {call}")
+        next_impl_index = common_text.find("impl.", call_index + len(call))
+        branch_end = next_impl_index if next_impl_index >= 0 else call_index + 1200
+        catch_index = common_text.find("catch (error: windows_core.WindowsException)", call_index, branch_end)
+        if catch_index < 0:
+            fail(f"windows-common generated vtable branch for {call} must translate WindowsException")
+
+
+def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None:
+    runtime_path = workspace / "windows-runtime" / "src" / "foundation_runtime.cj"
+    check_path_exists(runtime_path, "windows-runtime foundation runtime")
+    text = runtime_path.read_text(encoding="utf-8")
+    require_text_fragments(
+        text,
+        (
+            "func foundationDirectScalarOutThunk<T>",
+            "unsafe { result.write(defaultValue) }",
+            "func foundationProjectedScalarOutThunk<TProjected, TAbi, TDefault>",
+            "windows_core.projectTypedAbi(value, windows_core.typeMarker<TProjected>())",
+            "func foundationUnitThunk(action: () -> Result<Unit>): Int32",
+            "func cleanupFoundationHStringOutSlot",
+            "func foundationNotImplValueOut<T>",
+            "func foundationNotImplArrayOut<T>",
+            "func foundationNotImplUnitArrayOut",
+            "func foundationNotImplComOut",
+            "func foundationHStringOutThunk",
+            "func cleanupFoundationGenericOutSlot<T>",
+            "windows_core.winrtReleaseGenericOutRange<T>(CPointer<Unit>(result), 1u32)",
+            "func foundationGenericOutThunk<T>",
+            "cleanupFoundationGenericOutSlot<T>(result)",
+            "func clearFoundationArrayOut<T>",
+            "func clearFoundationUnitArrayOut",
+            "func foundationReferenceArrayValueThunk",
+            "func preparePropertyValueArrayOut<T>",
+            "func foundationPropertyValueArrayOutThunk",
+            "cleanup()",
+            "catch (error: windows_core.WindowsException)",
+            "catch (_: Exception)",
+            "windows_core.E_FAIL.value",
+        ),
+        "windows-runtime foundation thunk helpers must clear outputs and translate thrown exceptions",
+    )
+    array_clear_body = cj_function_body(text, "clearFoundationArrayOut", runtime_path, workspace)
+    require_text_fragments(
+        array_clear_body,
+        (
+            "if (valueSize.isNotNull())",
+            "valueSize.write(0u32)",
+            "if (value.isNotNull())",
+            "value.write(CPointer<T>())",
+        ),
+        "windows-runtime clearFoundationArrayOut must clear non-null array size/data out slots",
+    )
+    unit_array_clear_body = cj_function_body(text, "clearFoundationUnitArrayOut", runtime_path, workspace)
+    require_text_fragments(
+        unit_array_clear_body,
+        (
+            "if (valueSize.isNotNull())",
+            "valueSize.write(0u32)",
+            "if (value.isNotNull())",
+            "value.write(CPointer<Unit>())",
+        ),
+        "windows-runtime clearFoundationUnitArrayOut must clear non-null array size/data out slots",
+    )
+    reference_array_body = cj_function_body(text, "foundationReferenceArrayValueThunk", runtime_path, workspace)
+    require_text_fragments(
+        reference_array_body,
+        (
+            "if (resultSize.isNull() || result.isNull())",
+            "clearFoundationUnitArrayOut(resultSize, result)",
+            "return E_POINTER.value",
+        ),
+        "windows-runtime IReferenceArray.Value helper must clear sibling out slots before E_POINTER",
+    )
+    require_text_before(
+        reference_array_body,
+        "clearFoundationUnitArrayOut(resultSize, result)",
+        "return E_POINTER.value",
+        "windows-runtime IReferenceArray.Value helper must clear sibling out slots before E_POINTER",
+    )
+    property_array_prepare_body = cj_function_body(text, "preparePropertyValueArrayOut", runtime_path, workspace)
+    require_text_fragments(
+        property_array_prepare_body,
+        (
+            "if (valueSize.isNull() || value.isNull())",
+            "clearFoundationArrayOut<T>(valueSize, value)",
+            "return E_POINTER.value",
+        ),
+        "windows-runtime IPropertyValue array prepare helper must clear sibling out slots before E_POINTER",
+    )
+    require_text_before(
+        property_array_prepare_body,
+        "clearFoundationArrayOut<T>(valueSize, value)",
+        "return E_POINTER.value",
+        "windows-runtime IPropertyValue array prepare helper must clear sibling out slots before E_POINTER",
+    )
+
+    async_info_section = section_between(
+        text,
+        "public interface IAsyncInfo_Impl <: IAsyncInfo_ImplErased",
+        "public class IAsyncInfo <:",
+        "windows-runtime IAsyncInfo_Impl",
+    )
+    output_thunks = {
+        "Id": "foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })",
+        "Status": "foundationProjectedScalarOutThunk<AsyncStatus, AsyncStatusAbi, AsyncStatus>(result__, AsyncStatusAbi(), { => this.Status() })",
+        "ErrorCode": "foundationProjectedScalarOutThunk<HResult, HResultAbi, HResult>(result__, HResultAbi(), { => this.ErrorCode() })",
+    }
+    for name, helper_call in output_thunks.items():
+        body = function_body(async_info_section, f"__winrtThunk_{name}")
+        if body is None:
+            fail(f"windows-runtime IAsyncInfo_Impl must define __winrtThunk_{name}")
+        if helper_call not in body:
+            fail(f"windows-runtime IAsyncInfo {name} thunk must use scalar helper cleanup/translation")
+
+    for name in ("Cancel", "Close"):
+        body = function_body(async_info_section, f"__winrtThunk_{name}")
+        if body is None:
+            fail(f"windows-runtime IAsyncInfo_Impl must define __winrtThunk_{name}")
+        if f"foundationUnitThunk({{ => this.{name}() }})" not in body:
+            fail(f"windows-runtime IAsyncInfo {name} thunk must use Unit helper exception translation")
+
+    for fragment, minimum in (
+        ("foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })", 5),
+        ("foundationProjectedScalarOutThunk<AsyncStatus, AsyncStatusAbi, AsyncStatus>(result__, AsyncStatusAbi(), { => this.Status() })", 5),
+        ("foundationProjectedScalarOutThunk<HResult, HResultAbi, HResult>(result__, HResultAbi(), { => this.ErrorCode() })", 5),
+        ("foundationProjectedScalarOutThunk<PropertyType, PropertyTypeAbi, PropertyType>(result__, PropertyTypeAbi(), { => this.Type() })", 3),
+        ("foundationDirectScalarOutThunk<Bool>(result__, false, { => this.IsNumericScalar() })", 3),
+        ("foundationProjectedScalarOutThunk<GuidValue, GUID, GuidValue>(result__, GUID(), { => this.GetGuid() })", 3),
+        ("foundationProjectedScalarOutThunk<Point, PointAbi, Point>(result__, PointAbi(), { => this.GetPoint() })", 3),
+        ("foundationHStringOutThunk(result__, { => this.GetString() })", 3),
+        ("foundationHStringOutThunk(result__, { => this.ToString() })", 1),
+        ("foundationHStringOutThunk(result__, { => this.Name() })", 1),
+        ("foundationHStringOutThunk(result__, { => this.Value() })", 1),
+        ("foundationGenericOutThunk<T>(result__, { => this.Value() })", 1),
+        ("foundationReferenceArrayValueThunk(resultSize__, result__, { => this.Value() })", 1),
+        ("foundationUnitThunk({ => this.SetCompleted(handler) })", 3),
+        ("foundationUnitThunk({ => this.SetProgress(handler) })", 2),
+        ("foundationUnitThunk({ => this.GetResults() })", 2),
+        ("foundationGenericOutThunk<AsyncActionCompletedHandler>(result__, { => this.Completed() })", 1),
+        ("foundationGenericOutThunk<AsyncActionProgressHandler<TProgress>>(result__, { => this.Progress() })", 1),
+        ("foundationGenericOutThunk<AsyncOperationCompletedHandler<TResult>>(result__, { => this.Completed() })", 1),
+        ("foundationGenericOutThunk<TResult>(result__, { => this.GetResults() })", 2),
+        ("foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Capacity() })", 1),
+        ("foundationGenericOutThunk<IMemoryBufferReference>(result__, { => this.CreateReference() })", 1),
+        ("foundationPropertyValueArrayOutThunk(", 57),
+        ("{ => cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0) }", 6),
+        ("{ => cleanupFailedPropertyValueStringArrayOut(arg0Size, arg0) }", 3),
+        ("{ => cleanupFailedPropertyValueInspectableArrayOut(arg0Size, arg0) }", 3),
+    ):
+        if text.count(fragment) < minimum:
+            fail("windows-runtime foundation thunks must use cleanup/translation helpers across inherited interfaces")
+
+    property_cleanup_tests = workspace / "windows-runtime" / "src" / "property_value_array_thunk_cleanup_test.cj"
+    property_abi_tests = workspace / "windows-runtime" / "src" / "property_value_array_abi_test.cj"
+    default_vtable_tests = workspace / "windows-runtime" / "src" / "foundation_default_vtable_abi_test.cj"
+    async_tests = workspace / "windows-runtime" / "src" / "async_helpers_test.cj"
+    async_helpers = workspace / "windows-runtime" / "src" / "async_helpers.cj"
+    memory_tests = workspace / "windows-runtime" / "src" / "memory_buffer_close_forwarding_test.cj"
+    check_path_exists(property_cleanup_tests, "windows-runtime property value cleanup tests")
+    check_path_exists(property_abi_tests, "windows-runtime property value ABI tests")
+    check_path_exists(default_vtable_tests, "windows-runtime foundation default vtable ABI tests")
+    check_path_exists(async_tests, "windows-runtime async helper tests")
+    check_path_exists(async_helpers, "windows-runtime async helper implementation")
+    check_path_exists(memory_tests, "windows-runtime memory buffer thunk tests")
+    require_text_fragments(
+        property_cleanup_tests.read_text(encoding="utf-8"),
+        (
+            "testIPropertyValueScalarThunksClearOutputsAndTranslateThrownExceptions",
+            "testInheritedPropertyValueScalarThunksClearOutputsAndTranslateThrownExceptions",
+            "assertPropertyValueScalarThunksClearThrownOutputs",
+            "testIPropertyValueArrayThunksCleanThrownPartialOutputs",
+            "testInheritedPropertyValueArrayThunksCleanThrownPartialOutputs",
+            "assertPropertyValueArrayThunksCleanThrownPartialOutputs",
+            "assertReferenceValueThunksClearOutputsAndTranslateThrownExceptions",
+            "testPropertyValueArrayThunksClearSiblingOutSlotsOnPointerFailure",
+            "primitiveNullSizeHr",
+            "referenceNullDataHr",
+        ),
+        "windows-runtime property value thunk cleanup tests must cover direct and inherited thrown-exception paths",
+    )
+    require_text_fragments(
+        property_abi_tests.read_text(encoding="utf-8"),
+        (
+            "testIPropertyValueDefaultVtblClearsOutSlotsBeforeNotImpl",
+            "testIPropertyValueStaticsDefaultVtblClearsResultBeforeNotImpl",
+            "IPropertyValueVtbl()",
+            "IPropertyValueStaticsVtbl()",
+            "@Expect(stringRaw.isNull(), true)",
+            "@Expect(intSize, 0u32)",
+            "@Expect(stringResult.isNull(), true)",
+        ),
+        "windows-runtime property value ABI tests must cover default vtable E_NOTIMPL out-slot clearing",
+    )
+    require_text_fragments(
+        default_vtable_tests.read_text(encoding="utf-8"),
+        (
+            "testFoundationDefaultScalarFactoryAndReferenceVtablesClearOutSlotsBeforeNotImpl",
+            "testFoundationDefaultAsyncVtablesClearOutSlotsBeforeNotImpl",
+            "testFoundationDefaultUriAndDecoderVtablesClearOutSlotsBeforeNotImpl",
+            "assertFoundationDefaultComOut1Cleared",
+            "assertFoundationDefaultUnitArrayOutCleared",
+            "IAsyncInfoVtbl()",
+            "IReferenceArrayVtbl()",
+            "IAsyncOperationWithProgressVtbl()",
+            "IUriRuntimeClassVtbl()",
+            "IWwwFormUrlDecoderRuntimeClassFactoryVtbl()",
+            "@Expect(raw.isNull(), true)",
+            "@Expect(size, 0u32)",
+            "@Expect(token.Value, 0i64)",
+        ),
+        "windows-runtime foundation default vtable ABI tests must cover E_NOTIMPL out-slot clearing",
+    )
+    require_text_fragments(
+        async_tests.read_text(encoding="utf-8"),
+        (
+            "testDerivedAsyncInfoThunksClearOutputsAndTranslateThrownExceptions",
+            "testFoundationGenericOutThunkCleansStoreExceptions",
+            "testAsyncManualThunksClearOutputsAndTranslateThrownExceptions",
+            "assertAsyncManualComOutThunkClearsOutputsAndTranslatesThrownExceptions",
+            "AsyncActionWithProgressThrowingInfoImpl",
+            "AsyncOperationWithProgressThrowingInfoImpl",
+        ),
+        "windows-runtime async derived info thunk cleanup tests must cover derived paths",
+    )
+    async_helper_text = async_helpers.read_text(encoding="utf-8")
+    spawn_sections = (
+        ("public static func spawnAsync(work: () -> Unit): IAsyncAction", "IAsyncAction.spawnAsync"),
+        (
+            "public static func spawnAsync(work: () -> TResult): IAsyncOperation<TResult>",
+            "IAsyncOperation.spawnAsync",
+        ),
+        (
+            "public static func spawnAsync(work: (ProgressReporter<TProgress>) -> Unit): IAsyncActionWithProgress<TProgress>",
+            "IAsyncActionWithProgress.spawnAsync",
+        ),
+        (
+            "public static func spawnAsync(\n        work: (ProgressReporter<TProgress>) -> TResult",
+            "IAsyncOperationWithProgress.spawnAsync",
+        ),
+    )
+    for marker, label in spawn_sections:
+        section = section_between(
+            async_helper_text,
+            marker,
+            "impl.attachWorker(worker)",
+            f"windows-runtime {label}",
+        )
+        require_text_fragments(
+            section,
+            (
+                "catch (error: windows_core.WindowsException)",
+                "impl.fail(toFoundationHResult(error.code()))",
+                "catch (_: Exception)",
+                "impl.fail(asyncFailureCode)",
+            ),
+            f"windows-runtime {label} must preserve WindowsException HRESULTs before generic E_FAIL fallback",
+        )
+        require_text_before(
+            section,
+            "catch (error: windows_core.WindowsException)",
+            "catch (_: Exception)",
+            f"windows-runtime {label} must catch WindowsException before generic Exception",
+        )
+        require_text_before(
+            section,
+            "impl.fail(toFoundationHResult(error.code()))",
+            "impl.fail(asyncFailureCode)",
+            f"windows-runtime {label} must record the original WindowsException HRESULT before generic E_FAIL",
+        )
+    require_text_fragments(
+        async_tests.read_text(encoding="utf-8"),
+        (
+            "testSpawnedActionPreservesWindowsExceptionHRESULT",
+            "testSpawnedOperationPreservesWindowsExceptionHRESULT",
+            "testSpawnedActionWithProgressPreservesWindowsExceptionHRESULT",
+            "testSpawnedOperationWithProgressPreservesWindowsExceptionHRESULT",
+            "expectAsyncJoinError",
+            "asyncTestToCoreHRESULT",
+            "throw WindowsException(E_POINTER)",
+        ),
+        "windows-runtime async spawnAsync tests must cover WindowsException HRESULT preservation",
+    )
+    require_text_fragments(
+        memory_tests.read_text(encoding="utf-8"),
+        (
+            "throwWindowsOnCapacity",
+            "testIMemoryBufferCreateReferenceThunkClearsOutputAndTranslatesExceptions",
+        ),
+        "windows-runtime memory buffer thunk tests must cover scalar and generic out exception paths",
+    )
+
+    activation_section = section_between(
+        text,
+        "public interface IGetActivationFactory_Impl <: IGetActivationFactory_ImplErased",
+        "public class IGetActivationFactory <:",
+        "windows-runtime IGetActivationFactory_Impl",
+    )
+    activation_body = function_body(activation_section, "__winrtThunk_GetActivationFactory")
+    if activation_body is None:
+        fail("windows-runtime IGetActivationFactory_Impl must define __winrtThunk_GetActivationFactory")
+    dispatch = activation_body.find("this.GetActivationFactory(")
+    if dispatch < 0:
+        fail("windows-runtime IGetActivationFactory thunk must dispatch to the implementation")
+    prefix = activation_body[:dispatch]
+    if "result__.write(CPointer<Unit>())" not in prefix:
+        fail("windows-runtime IGetActivationFactory thunk must clear its out slot before dispatch")
+    if (
+        "try {" not in prefix
+        or "catch (error: windows_core.WindowsException)" not in activation_body
+        or "catch (_: Exception)" not in activation_body
+        or "windows_core.E_FAIL.value" not in activation_body
+    ):
+        fail("windows-runtime IGetActivationFactory thunk must translate thrown exceptions to HRESULT values")
 
 
 def check_array_materialization_cleanup(workspace: Path) -> None:
@@ -848,6 +4090,17 @@ def check_array_materialization_cleanup(workspace: Path) -> None:
                 fail(f"windows-core {label}.takeArrayOut must free CoTaskMem arrays on all paths")
 
     foundation_runtime_text = (workspace / "windows-runtime" / "src" / "foundation_runtime.cj").read_text(encoding="utf-8")
+    if "let raw = value.intoAbi()" in foundation_runtime_text:
+        fail("windows-runtime Foundation interface-return thunks must retain returned wrappers instead of consuming intoAbi()")
+    descriptor_codegen_text = (workspace / "windows-implement" / "src" / "descriptor_codegen.cj").read_text(encoding="utf-8")
+    if "value.intoAbi()" in descriptor_codegen_text:
+        fail("windows-implement descriptor return thunks must retain returned wrappers instead of consuming intoAbi()")
+    if "windows_core.winrtStoreGenericOut<" not in descriptor_codegen_text:
+        fail("windows-implement descriptor return thunks must publish WinRT outputs through winrtStoreGenericOut")
+    if "${descriptor.wrapperTypeName}_${method.name}Thunk" not in descriptor_codegen_text:
+        fail("windows-implement descriptor thunks must use Cangjie-safe wrapper identifiers")
+    if " <: windows_core.Interface<" not in descriptor_codegen_text:
+        fail("windows-implement descriptor wrappers must emit Interface<T> marker extensions")
     string_projector = section_between(
         foundation_runtime_text,
         "func projectPropertyValueStringHandleArray",
@@ -1047,6 +4300,7 @@ def check_generated_common_package(workspace: Path) -> None:
         fail("windows-common must not emit static link options; native calls go through windows_libloading")
 
     check_generated_common_impl_invariants(generated)
+    check_windows_common_native_checked_wrappers(workspace)
 
 
 def check_generated_common_impl_invariants(generated: Path) -> None:
@@ -1104,6 +4358,4197 @@ def check_generated_common_impl_invariants(generated: Path) -> None:
         fail("windows-common runtime class signatures must not call ambiguous interface signature() members")
     if "let _ = hr__.ok()" in impl_text:
         fail("windows-common runtime class factory wrappers must throw on failed HRESULT values")
+
+
+def check_windows_common_native_checked_wrappers(workspace: Path) -> None:
+    native_root = workspace / "windows-common" / "src"
+    check_path_exists(native_root, "windows-common generated native helper root")
+    checked_count = 0
+    inspectable_checked_count = 0
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]] = {}
+    native_helper_text_by_namespace: dict[str, str] = {}
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]] = {}
+    for source in sorted(native_root.rglob("native_helpers.cj")):
+        text = mask_cj_strings_and_comments(source.read_text(encoding="utf-8"))
+        namespace = windows_namespace_from_native_helper(text)
+        public_funcs = set(NATIVE_FUNC_DECL_RE.findall(text))
+        checked_funcs = {name[:-7] for name in public_funcs if name.endswith("Checked")}
+        if namespace is not None:
+            native_helpers_by_namespace[namespace] = (public_funcs, checked_funcs)
+            native_helper_text_by_namespace[namespace] = text
+            checked_wrappers_by_namespace[namespace] = {}
+        file_checked_count = 0
+        file_inspectable_checked_count = 0
+        for match in NATIVE_CHECKED_WRAPPER_START_RE.finditer(text):
+            brace = text.find("{", match.end())
+            if brace < 0:
+                fail(f"{source.relative_to(workspace)} contains malformed {match.group(1)}Checked wrapper")
+            header = text[match.start() : brace]
+            end = matching_cj_brace_end(text, brace)
+            if end is None:
+                fail(f"{source.relative_to(workspace)} contains unterminated {match.group(1)}Checked wrapper")
+            wrapper = text[match.start() : end + 1]
+            base_name = match.group(1)
+            wrapper_name = f"{base_name}Checked"
+            line = text[: match.start()].count("\n") + 1
+            relative = source.relative_to(workspace)
+            if base_name in SET_LAST_ERROR_BOOL_NO_CHECKED_WRAPPER_METHODS:
+                fail(f"{relative}:{line} {wrapper_name} must not collapse multi-state SetLastError BOOL results")
+            inspectable_checked_count += 1
+            file_inspectable_checked_count += 1
+            if namespace is not None:
+                checked_wrappers_by_namespace[namespace][base_name] = (wrapper, relative.as_posix(), line)
+            if not re.search(rf"^public\s+func\s+{re.escape(base_name)}\s*\(", text, re.MULTILINE):
+                fail(f"{relative}:{line} {wrapper_name} must wrap a same-file {base_name} native helper")
+            if ": windows_core.Result<Bool>" in header:
+                if native_checked_wrapper_uses_bool_false_success_status(wrapper, base_name):
+                    file_checked_count += 1
+                    checked_count += 1
+                continue
+            if ": windows_core.Result<Unit>" not in header:
+                continue
+            if native_checked_wrapper_wraps_hresult(wrapper, base_name):
+                if ".ok()" not in wrapper:
+                    fail(f"{relative}:{line} {wrapper_name} must translate HRESULT through ok()")
+                file_checked_count += 1
+                checked_count += 1
+                continue
+            if native_checked_wrapper_name_can_be_null_success_handle(base_name):
+                file_checked_count += 1
+                checked_count += 1
+                continue
+            if native_checked_wrapper_uses_winsock_error(wrapper):
+                file_checked_count += 1
+                checked_count += 1
+                continue
+            if native_checked_wrapper_uses_returned_win32_error(wrapper, base_name):
+                file_checked_count += 1
+                checked_count += 1
+                continue
+            if native_checked_wrapper_uses_winsock_lperrno_error(wrapper, base_name):
+                file_checked_count += 1
+                checked_count += 1
+                continue
+            if native_checked_wrapper_uses_int32_minus_one_thread_error(wrapper, base_name):
+                file_checked_count += 1
+                checked_count += 1
+                continue
+            if re.search(rf"\bif\s*\(\s*{re.escape(base_name)}\s*\(", wrapper) is None:
+                fail(f"{relative}:{line} {wrapper_name} must branch on {base_name}(...) success")
+            if "return windows_core.Result<Unit>.Ok(())" not in wrapper:
+                fail(f"{relative}:{line} {wrapper_name} must return Ok(()) on native success")
+            if "windows_core.Result<Unit>.Err(windows_core.errorFromThread())" not in wrapper:
+                fail(f"{relative}:{line} {wrapper_name} must translate failure through windows_core.errorFromThread()")
+            file_checked_count += 1
+            checked_count += 1
+        if file_inspectable_checked_count > 0 and "import windows_core as windows_core" not in text:
+            fail(f"{source.relative_to(workspace)} checked wrappers must import windows_core as windows_core")
+    check_required_set_last_error_bool_wrappers(workspace, native_helpers_by_namespace)
+    check_required_multiple_success_bool_status_returns(
+        workspace,
+        native_helpers_by_namespace,
+        native_helper_text_by_namespace,
+    )
+    check_required_set_last_error_bool_false_success_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_bool_status_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_handle_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_invalid_handle_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_null_success_handle_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_wait_event_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_null_pointer_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_tls_value_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_uint32_minus_one_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_uint32_zero_last_error_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_uint32_zero_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_uintnative_zero_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_intnative_zero_last_error_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_int32_max_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_set_last_error_int32_minus_one_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_winsock_invalid_socket_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_winsock_bool_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_winsock_wait_event_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_winsock_invalid_event_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_winsock_null_handle_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_winsock_null_pointer_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_winsock_socket_error_int32_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_mswinsock_get_last_error_socket_error_int32_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_winsock_direct_error_int32_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_winsock_pending_status_int32_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_winsock_lperrno_int32_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_wait_failed_uint32_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_direct_win32_error_code_int32_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_direct_win32_error_code_uint32_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_uint32_less_than_or_equal_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_hresult_com_out_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_multiple_success_hresult_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    if inspectable_checked_count == 0:
+        fail("windows-common generated native helpers must include checked Win32 wrappers")
+    check_required_hresult_owned_string_out_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_hresult_owned_pointer_out_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_hresult_borrowed_optional_out_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+    check_required_hresult_optional_scalar_out_wrappers(
+        workspace,
+        native_helpers_by_namespace,
+        checked_wrappers_by_namespace,
+    )
+
+
+def native_checked_wrapper_wraps_hresult(wrapper: str, base_name: str) -> bool:
+    return re.search(rf"\bwindows_core\.HRESULT\s*\(\s*{re.escape(base_name)}\s*\(", wrapper) is not None
+
+
+def native_checked_wrapper_name_can_be_null_success_handle(base_name: str) -> bool:
+    return base_name in SET_LAST_ERROR_NULL_SUCCESS_HANDLE_RETURN_TYPES
+
+
+def native_checked_wrapper_uses_winsock_error(wrapper: str) -> bool:
+    return (
+        "windows_libloading.resolveProc(" in wrapper
+        and "CFunc<() -> Int32>" in wrapper
+        and "windows_core.errorFromWin32(UInt32(error__))" in wrapper
+    )
+
+
+def native_checked_wrapper_uses_returned_win32_error(wrapper: str, base_name: str) -> bool:
+    return (
+        f"let result__ = {base_name}(" in wrapper
+        and "result__ != 0" in wrapper
+        and "windows_core.Result<Unit>.Ok(())" in wrapper
+    )
+
+
+def wrapper_reads_win32_last_error(wrapper: str) -> bool:
+    return (
+        "let lastError__ = GetLastError()" in wrapper
+        or (
+            "let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc(" in wrapper
+            and "let lastError__ = unsafe { getLastErrorProc__() }" in wrapper
+        )
+    )
+
+
+def wrapper_clears_win32_last_error(wrapper: str) -> bool:
+    return (
+        "SetLastError(0u32)" in wrapper
+        or (
+            "let setLastErrorProc__ = CFunc<(UInt32) -> Unit>(windows_libloading.resolveProc(" in wrapper
+            and "unsafe { setLastErrorProc__(0u32) }" in wrapper
+        )
+    )
+
+
+def wrapper_clear_win32_last_error_index(wrapper: str) -> int:
+    direct_index = wrapper.find("SetLastError(0u32)")
+    if direct_index >= 0:
+        return direct_index
+    return wrapper.find("unsafe { setLastErrorProc__(0u32) }")
+
+
+def native_checked_wrapper_uses_bool_false_success_status(wrapper: str, base_name: str) -> bool:
+    return (
+        f"let result__ = {base_name}(" in wrapper
+        and "if (result__)" in wrapper
+        and wrapper_reads_win32_last_error(wrapper)
+        and "windows_core.Result<Bool>.Ok(true)" in wrapper
+        and "windows_core.Result<Bool>.Ok(false)" in wrapper
+        and "windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))" in wrapper
+    )
+
+
+def native_checked_wrapper_uses_winsock_lperrno_error(wrapper: str, base_name: str) -> bool:
+    return (
+        f"let result__ = {base_name}(" in wrapper
+        and "result__ == -1" in wrapper
+        and "let error__ = unsafe { lpErrno.read() }" in wrapper
+        and "windows_core.Result<Unit>.Err(windows_core.errorFromWin32(UInt32(error__)))" in wrapper
+        and "windows_core.Result<Unit>.Ok(())" in wrapper
+    )
+
+
+def native_checked_wrapper_uses_int32_minus_one_thread_error(wrapper: str, base_name: str) -> bool:
+    return (
+        f"let result__ = {base_name}(" in wrapper
+        and "result__ == -1" in wrapper
+        and "windows_core.Result<Unit>.Err(windows_core.errorFromThread())" in wrapper
+        and "windows_core.Result<Unit>.Ok(())" in wrapper
+    )
+
+
+def windows_namespace_from_native_helper(text: str) -> str | None:
+    match = PACKAGE_RE.search(text)
+    if match is None:
+        return None
+    package_name = match.group(1)
+    prefix = "windows_common."
+    if not package_name.startswith(prefix):
+        return None
+    return "Windows." + package_name[len(prefix) :]
+
+
+def native_function_header(text: str, name: str) -> str | None:
+    match = re.search(rf"^public\s+func\s+{re.escape(name)}\b", text, re.MULTILINE)
+    if match is None:
+        return None
+    brace = text.find("{", match.end())
+    if brace < 0:
+        return None
+    return text[match.start() : brace]
+
+
+def native_function_returns_int32(text: str, name: str) -> bool:
+    header = native_function_header(text, name)
+    if header is None:
+        return False
+    return re.search(r":\s*Int32\s*$", header) is not None
+
+
+def check_required_set_last_error_bool_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_set_last_error_bool_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+    if missing:
+        fail(f"windows-common missing SetLastError Bool ABI checked wrapper(s): {missing[:20]}")
+
+
+def check_required_multiple_success_bool_status_returns(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    native_helper_text_by_namespace: dict[str, str],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            helper_text = native_helper_text_by_namespace.get(namespace)
+            if helper_info is None or helper_text is None:
+                continue
+            public_funcs, _ = helper_info
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_multiple_success_bool_status_return(method):
+                    continue
+                if not native_function_returns_int32(helper_text, name):
+                    invalid.append(f"{namespace}.{name} must preserve multi-success BOOL return as Int32")
+    if invalid:
+        fail(f"windows-common invalid multi-success BOOL native helper return(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_bool_false_success_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                false_success_statuses = method_set_last_error_bool_false_success_statuses(method)
+                if false_success_statuses is None:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_bool_false_success_wrapper_shape_issues(wrapper, name, false_success_statuses)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError Bool false-success checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError Bool false-success checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_bool_status_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                status_successes = method_set_last_error_bool_statuses(method)
+                if status_successes is None:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_bool_status_wrapper_shape_issues(wrapper, name, status_successes)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError Bool status checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError Bool status checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_handle_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                return_type = method_set_last_error_null_handle_return_type(method)
+                if return_type is None:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_handle_wrapper_shape_issues(wrapper, name, return_type)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError null-handle ABI checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError null-handle ABI checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_invalid_handle_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                return_type = method_set_last_error_invalid_handle_return_type(method)
+                if return_type is None:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_invalid_handle_wrapper_shape_issues(wrapper, name, return_type)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError invalid-handle ABI checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError invalid-handle ABI checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_null_success_handle_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                return_type = method_set_last_error_null_success_handle_return_type(method)
+                if return_type is None:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_null_success_handle_wrapper_shape_issues(wrapper, name, return_type)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError null-success handle ABI checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError null-success handle ABI checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_wait_event_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_set_last_error_wait_event_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_wait_event_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError WAIT_EVENT checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError WAIT_EVENT checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_null_pointer_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                return_type = method_set_last_error_null_pointer_return_type(method)
+                if return_type is None:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_null_pointer_wrapper_shape_issues(wrapper, name, return_type)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError null-pointer checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError null-pointer checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_tls_value_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_set_last_error_tls_value_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_tls_value_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError TLS value checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError TLS value checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_uint32_minus_one_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_set_last_error_uint32_minus_one_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_uint32_minus_one_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError UInt32 -1 checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError UInt32 -1 checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_uint32_zero_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_set_last_error_uint32_zero_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_uint32_zero_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError UInt32 zero checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError UInt32 zero checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_uint32_zero_last_error_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_set_last_error_uint32_zero_last_error_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_uint32_zero_last_error_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError UInt32 zero-last-error checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError UInt32 zero-last-error checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_uintnative_zero_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_set_last_error_uintnative_zero_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_uintnative_zero_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError UIntNative zero checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError UIntNative zero checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_intnative_zero_last_error_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_set_last_error_intnative_zero_last_error_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_intnative_zero_last_error_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError IntNative zero-last-error checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError IntNative zero-last-error checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_int32_max_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_set_last_error_int32_max_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_int32_max_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError Int32 max checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError Int32 max checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_set_last_error_int32_minus_one_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_set_last_error_int32_minus_one_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = set_last_error_int32_minus_one_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing SetLastError Int32 -1 checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid SetLastError Int32 -1 checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_winsock_invalid_socket_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_winsock_invalid_socket_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = winsock_invalid_socket_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing WinSock INVALID_SOCKET checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid WinSock INVALID_SOCKET checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_winsock_bool_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_winsock_bool_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = winsock_bool_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing WinSock BOOL checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid WinSock BOOL checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_winsock_wait_event_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_winsock_wait_event_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = winsock_wait_event_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing WinSock WAIT_EVENT checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid WinSock WAIT_EVENT checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_winsock_invalid_event_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_winsock_invalid_event_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = winsock_invalid_event_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing WinSock WSA_INVALID_EVENT checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid WinSock WSA_INVALID_EVENT checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_winsock_null_handle_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_winsock_null_handle_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = winsock_null_wrapper_shape_issues(wrapper, name, "CPointer<Unit>")
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing WinSock null-handle checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid WinSock null-handle checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_winsock_null_pointer_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                return_type = method_winsock_null_pointer_return_type(method)
+                if return_type is None:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = winsock_null_wrapper_shape_issues(wrapper, name, return_type)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing WinSock null-pointer checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid WinSock null-pointer checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_winsock_socket_error_int32_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_winsock_socket_error_int32_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                preserves_status = name not in WINSOCK_SOCKET_ERROR_UNIT_INT32_METHODS
+                issues = winsock_socket_error_int32_wrapper_shape_issues(wrapper, name, preserves_status)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing WinSock SOCKET_ERROR Int32 checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid WinSock SOCKET_ERROR Int32 checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_mswinsock_get_last_error_socket_error_int32_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_mswinsock_get_last_error_socket_error_int32_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                preserves_status = name not in MSWSOCK_GET_LAST_ERROR_SOCKET_ERROR_UNIT_INT32_METHODS
+                issues = mswinsock_get_last_error_socket_error_int32_wrapper_shape_issues(wrapper, name, preserves_status)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing MSWSOCK GetLastError SOCKET_ERROR Int32 checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid MSWSOCK GetLastError SOCKET_ERROR Int32 checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_winsock_direct_error_int32_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_winsock_direct_error_int32_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = winsock_direct_error_int32_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing WinSock direct-error Int32 checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid WinSock direct-error Int32 checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_winsock_pending_status_int32_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                pending_status = method_winsock_pending_status_int32(method)
+                if pending_status is None:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = winsock_pending_status_int32_wrapper_shape_issues(wrapper, name, pending_status)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing WinSock pending-status Int32 checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid WinSock pending-status Int32 checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_winsock_lperrno_int32_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                lperrno_status = method_winsock_lperrno_int32_status(method)
+                if lperrno_status is None:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = winsock_lperrno_int32_wrapper_shape_issues(wrapper, name, lperrno_status)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing WinSock lpErrno Int32 checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid WinSock lpErrno Int32 checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_wait_failed_uint32_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_wait_failed_uint32_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = wait_failed_uint32_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing WAIT_FAILED UInt32 checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid WAIT_FAILED UInt32 checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_direct_win32_error_code_int32_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                success_statuses = method_direct_win32_error_code_int32_success_statuses(method)
+                if success_statuses is not None:
+                    if name not in checked_funcs:
+                        missing.append(f"{namespace}.{name}")
+                        continue
+                    wrapper_info = checked_wrappers.get(name)
+                    if wrapper_info is None:
+                        invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                        continue
+                    wrapper, relative, line = wrapper_info
+                    issues = direct_win32_error_code_int32_status_wrapper_shape_issues(
+                        wrapper,
+                        name,
+                        success_statuses,
+                    )
+                    for issue in issues:
+                        invalid.append(f"{relative}:{line} {name}Checked {issue}")
+                    continue
+                if method_needs_direct_win32_error_code_int32_wrapper(method):
+                    if name not in checked_funcs:
+                        missing.append(f"{namespace}.{name}")
+                        continue
+                    wrapper_info = checked_wrappers.get(name)
+                    if wrapper_info is None:
+                        invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                        continue
+                    wrapper, relative, line = wrapper_info
+                    issues = direct_win32_error_code_int32_wrapper_shape_issues(wrapper, name)
+                    for issue in issues:
+                        invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing direct Win32 error-code Int32 checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid direct Win32 error-code Int32 checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_direct_win32_error_code_uint32_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                success_statuses = method_direct_win32_error_code_uint32_success_statuses(method)
+                if success_statuses is not None:
+                    if name not in checked_funcs:
+                        missing.append(f"{namespace}.{name}")
+                        continue
+                    wrapper_info = checked_wrappers.get(name)
+                    if wrapper_info is None:
+                        invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                        continue
+                    wrapper, relative, line = wrapper_info
+                    issues = direct_win32_error_code_uint32_status_wrapper_shape_issues(
+                        wrapper,
+                        name,
+                        success_statuses,
+                    )
+                    for issue in issues:
+                        invalid.append(f"{relative}:{line} {name}Checked {issue}")
+                    continue
+                if method_needs_direct_win32_error_code_uint32_wrapper(method):
+                    if name not in checked_funcs:
+                        missing.append(f"{namespace}.{name}")
+                        continue
+                    wrapper_info = checked_wrappers.get(name)
+                    if wrapper_info is None:
+                        invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                        continue
+                    wrapper, relative, line = wrapper_info
+                    issues = direct_win32_error_code_uint32_wrapper_shape_issues(wrapper, name)
+                    for issue in issues:
+                        invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing direct Win32 error-code UInt32 checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid direct Win32 error-code UInt32 checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_uint32_less_than_or_equal_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                threshold = method_uint32_less_than_or_equal_failure_threshold(method)
+                if threshold is None:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must be inspectable")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = uint32_less_than_or_equal_wrapper_shape_issues(wrapper, name, threshold)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing UInt32 <= threshold checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid UInt32 <= threshold checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_hresult_com_out_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+    payloads = []
+    type_attributes: dict[str, set[str]] = {}
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        payloads.append(payload)
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            name = type_def.get("Name")
+            if isinstance(namespace, str) and isinstance(name, str):
+                type_attributes[f"{namespace}.{name}"] = set(type_def.get("Attributes") or [])
+
+    missing: list[str] = []
+    invalid: list[str] = []
+    for payload in payloads:
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                slots = method_hresult_com_out_slot_names(method, type_attributes)
+                if not slots:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must return windows_core.Result<Unit>")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = hresult_com_out_wrapper_shape_issues(wrapper, name, slots)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing HRESULT COM out ABI checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid HRESULT COM out ABI checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_hresult_owned_string_out_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                slots = method_hresult_owned_string_out_slots(method)
+                if not slots:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must return windows_core.Result<Unit>")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = hresult_owned_string_out_wrapper_shape_issues(wrapper, name, slots)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing HRESULT owned string out ABI checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid HRESULT owned string out ABI checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_hresult_owned_pointer_out_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                slots = method_hresult_owned_pointer_out_slots(method)
+                if not slots:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must return windows_core.Result<Unit>")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = hresult_owned_pointer_out_wrapper_shape_issues(wrapper, name, slots)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing HRESULT owned pointer out ABI checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid HRESULT owned pointer out ABI checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_hresult_borrowed_optional_out_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                slots = method_hresult_borrowed_optional_out_slots(method)
+                if not slots:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must return windows_core.Result<Unit>")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = hresult_borrowed_optional_out_wrapper_shape_issues(wrapper, name, slots)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing HRESULT borrowed optional out ABI checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid HRESULT borrowed optional out ABI checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_hresult_optional_scalar_out_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                slots = method_hresult_optional_scalar_out_slots(method)
+                if not slots:
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must return windows_core.Result<Unit>")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = hresult_optional_scalar_out_wrapper_shape_issues(wrapper, name, slots)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing HRESULT optional scalar out ABI checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid HRESULT optional scalar out ABI checked wrapper(s): {invalid[:20]}")
+
+
+def check_required_multiple_success_hresult_wrappers(
+    workspace: Path,
+    native_helpers_by_namespace: dict[str, tuple[set[str], set[str]]],
+    checked_wrappers_by_namespace: dict[str, dict[str, tuple[str, str, int]]],
+) -> None:
+    metadata_root = workspace / ".generated" / "winmd-json"
+    manifest_path = workspace / "windows-common" / "codegen-manifest.json"
+    if not metadata_root.exists() or not manifest_path.exists():
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requested_features = [
+        feature
+        for feature in manifest.get("requested_features", [])
+        if isinstance(feature, str) and feature.startswith("Windows.Win32.")
+    ]
+
+    missing: list[str] = []
+    invalid: list[str] = []
+    for json_path in sorted(metadata_root.glob("Windows.Win32*.json")):
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+        for type_def in payload.get("types", []):
+            namespace = type_def.get("Namespace")
+            if not isinstance(namespace, str) or not namespace_matches_any_feature(namespace, requested_features):
+                continue
+            helper_info = native_helpers_by_namespace.get(namespace)
+            if helper_info is None:
+                continue
+            public_funcs, checked_funcs = helper_info
+            checked_wrappers = checked_wrappers_by_namespace.get(namespace, {})
+            for method in type_def.get("Methods", []):
+                name = method.get("Name")
+                if not isinstance(name, str) or name not in public_funcs:
+                    continue
+                if not method_needs_multiple_success_hresult_wrapper(method):
+                    continue
+                if name not in checked_funcs:
+                    missing.append(f"{namespace}.{name}")
+                    continue
+                wrapper_info = checked_wrappers.get(name)
+                if wrapper_info is None:
+                    invalid.append(f"{namespace}.{name}Checked must preserve the HRESULT success value")
+                    continue
+                wrapper, relative, line = wrapper_info
+                issues = multiple_success_hresult_wrapper_shape_issues(wrapper, name)
+                for issue in issues:
+                    invalid.append(f"{relative}:{line} {name}Checked {issue}")
+    if missing:
+        fail(f"windows-common missing multiple-success HRESULT checked wrapper(s): {missing[:20]}")
+    if invalid:
+        fail(f"windows-common invalid multiple-success HRESULT checked wrapper(s): {invalid[:20]}")
+
+
+def method_hresult_com_out_slot_names(method: dict, type_attributes: dict[str, set[str]]) -> list[str]:
+    if not isinstance(method.get("Import"), dict):
+        return []
+    signature = method.get("Signature") or {}
+    if signature_full_name(signature.get("ReturnType")) != "Windows.Win32.Foundation.HRESULT":
+        return []
+    parameter_types = signature.get("ParameterTypes") or []
+    if not isinstance(parameter_types, list):
+        return []
+    slots: list[str] = []
+    for parameter in method.get("Parameters") or []:
+        name = parameter.get("Name")
+        sequence = parameter.get("SequenceNumber")
+        if not isinstance(name, str) or not name:
+            continue
+        if not isinstance(sequence, int) or sequence <= 0 or sequence > len(parameter_types):
+            continue
+        if "Out" not in (parameter.get("Attributes") or []):
+            continue
+        parameter_type = parameter_types[sequence - 1]
+        if parameter_has_custom_attribute(parameter, "ComOutPtrAttribute") or signature_points_to_com_interface(
+            parameter_type,
+            type_attributes,
+        ):
+            slots.append(name)
+    return slots
+
+
+def method_hresult_owned_string_out_slots(method: dict) -> list[tuple[str, str, bool]]:
+    if not isinstance(method.get("Import"), dict):
+        return []
+    signature = method.get("Signature") or {}
+    if signature_full_name(signature.get("ReturnType")) != "Windows.Win32.Foundation.HRESULT":
+        return []
+    import_record = method.get("Import") or {}
+    import_name = import_record.get("Name")
+    if not isinstance(import_name, str) or not import_name:
+        name = method.get("Name")
+        import_name = name if isinstance(name, str) else ""
+    allocator = hresult_owned_pwstr_allocator(import_name)
+    if allocator is None:
+        return []
+    parameter_types = signature.get("ParameterTypes") or []
+    if not isinstance(parameter_types, list):
+        return []
+    slots: list[tuple[str, str, bool]] = []
+    for parameter in method.get("Parameters") or []:
+        name = parameter.get("Name")
+        sequence = parameter.get("SequenceNumber")
+        if not isinstance(name, str) or not name:
+            continue
+        if not isinstance(sequence, int) or sequence <= 0 or sequence > len(parameter_types):
+            continue
+        if "Out" not in (parameter.get("Attributes") or []):
+            continue
+        if signature_pointer_target_full_name(parameter_types[sequence - 1]) == "Windows.Win32.Foundation.PWSTR":
+            slots.append((name, allocator, hresult_owned_pwstr_slot_allows_null(import_name, name, parameter)))
+    return slots
+
+
+def method_hresult_owned_pointer_out_slots(method: dict) -> list[tuple[str, str]]:
+    if not isinstance(method.get("Import"), dict):
+        return []
+    signature = method.get("Signature") or {}
+    if signature_full_name(signature.get("ReturnType")) != "Windows.Win32.Foundation.HRESULT":
+        return []
+    import_record = method.get("Import") or {}
+    import_name = import_record.get("Name")
+    if not isinstance(import_name, str) or not import_name:
+        name = method.get("Name")
+        import_name = name if isinstance(name, str) else ""
+    expected = hresult_owned_pointer_out_slot(import_name)
+    if expected is None:
+        return []
+    expected_name, expected_type, allocator, pointer_depth = expected
+    parameter_types = signature.get("ParameterTypes") or []
+    if not isinstance(parameter_types, list):
+        return []
+    slots: list[tuple[str, str]] = []
+    for parameter in method.get("Parameters") or []:
+        name = parameter.get("Name")
+        sequence = parameter.get("SequenceNumber")
+        if name != expected_name:
+            continue
+        if not isinstance(sequence, int) or sequence <= 0 or sequence > len(parameter_types):
+            continue
+        if "Out" not in (parameter.get("Attributes") or []):
+            continue
+        parameter_type = parameter_types[sequence - 1]
+        if pointer_depth == 1 and signature_pointer_target_full_name(parameter_type) == expected_type:
+            slots.append((expected_name, allocator))
+        elif pointer_depth == 2 and signature_pointer_pointer_target_full_name(parameter_type) == expected_type:
+            slots.append((expected_name, allocator))
+    return slots
+
+
+def method_hresult_borrowed_optional_out_slots(method: dict) -> list[str]:
+    if not isinstance(method.get("Import"), dict):
+        return []
+    name = method.get("Name")
+    if name == "CoQueryProxyBlanket":
+        expected = {"pAuthInfo"}
+    elif name == "CoQueryClientBlanket":
+        expected = {"pPrivs"}
+    else:
+        return []
+    signature = method.get("Signature") or {}
+    if signature_full_name(signature.get("ReturnType")) != "Windows.Win32.Foundation.HRESULT":
+        return []
+    parameter_types = signature.get("ParameterTypes") or []
+    if not isinstance(parameter_types, list):
+        return []
+    slots: list[str] = []
+    for parameter in method.get("Parameters") or []:
+        parameter_name = parameter.get("Name")
+        sequence = parameter.get("SequenceNumber")
+        if not isinstance(parameter_name, str) or parameter_name not in expected:
+            continue
+        if not isinstance(sequence, int) or sequence <= 0 or sequence > len(parameter_types):
+            continue
+        attributes = parameter.get("Attributes") or []
+        if "Out" not in attributes or "Optional" not in attributes or "In" in attributes:
+            continue
+        if signature_is_pointer_to_pointer(parameter_types[sequence - 1]):
+            slots.append(parameter_name)
+    return slots
+
+
+def method_hresult_optional_scalar_out_slots(method: dict) -> list[tuple[str, str]]:
+    if not isinstance(method.get("Import"), dict):
+        return []
+    expected = {
+        "RtwqPutWaitingWorkItem": ("key", "UInt64"),
+        "RtwqScheduleWorkItem": ("key", "UInt64"),
+        "RtwqAddPeriodicCallback": ("key", "UInt32"),
+    }.get(method.get("Name"))
+    if expected is None:
+        return []
+    expected_name, expected_type = expected
+    signature = method.get("Signature") or {}
+    if signature_full_name(signature.get("ReturnType")) != "Windows.Win32.Foundation.HRESULT":
+        return []
+    parameter_types = signature.get("ParameterTypes") or []
+    if not isinstance(parameter_types, list):
+        return []
+    slots: list[tuple[str, str]] = []
+    for parameter in method.get("Parameters") or []:
+        parameter_name = parameter.get("Name")
+        sequence = parameter.get("SequenceNumber")
+        if parameter_name != expected_name:
+            continue
+        if not isinstance(sequence, int) or sequence <= 0 or sequence > len(parameter_types):
+            continue
+        attributes = parameter.get("Attributes") or []
+        if "Out" not in attributes or "Optional" not in attributes or "In" in attributes:
+            continue
+        target_type = signature_pointer_target_primitive_name(parameter_types[sequence - 1])
+        if target_type == expected_type:
+            slots.append((expected_name, optional_scalar_default_literal(expected_type)))
+    return slots
+
+
+def optional_scalar_default_literal(type_name: str) -> str:
+    if type_name == "UInt64":
+        return "0u64"
+    if type_name == "UInt32":
+        return "0u32"
+    raise ValueError(f"unsupported optional scalar out type: {type_name}")
+
+
+def hresult_owned_pwstr_allocator(import_name: str) -> str | None:
+    if import_name == "GetThreadDescription":
+        return "LocalFree"
+    if import_name in {"StringFromCLSID", "StringFromIID", "ProgIDFromCLSID"}:
+        return "CoTaskMemFree"
+    if import_name in {"CoQueryProxyBlanket", "CoQueryClientBlanket"}:
+        return "CoTaskMemFree"
+    return None
+
+
+def hresult_owned_pwstr_slot_allows_null(import_name: str, name: str, parameter: dict) -> bool:
+    attributes = parameter.get("Attributes") or []
+    return (
+        import_name in {"CoQueryProxyBlanket", "CoQueryClientBlanket"}
+        and name == "pServerPrincName"
+        and "Optional" in attributes
+    )
+
+
+def hresult_owned_pointer_out_slot(import_name: str) -> tuple[str, str, str, int] | None:
+    if import_name == "CoGetSystemSecurityPermissions":
+        return ("ppSD", "Windows.Win32.Security.PSECURITY_DESCRIPTOR", "LocalFree", 1)
+    if import_name == "CoQueryAuthenticationServices":
+        return ("asAuthSvc", "Windows.Win32.System.Com.SOLE_AUTHENTICATION_SERVICE", "CoTaskMemFree", 2)
+    return None
+
+
+def signature_points_to_com_interface(signature: object, type_attributes: dict[str, set[str]]) -> bool:
+    if not isinstance(signature, dict) or signature.get("Kind") != "Pointer":
+        return False
+    target_name = signature_full_name(signature.get("Type"))
+    if target_name is None:
+        return False
+    return "Interface" in type_attributes.get(target_name, set())
+
+
+def hresult_com_out_wrapper_shape_issues(wrapper: str, base_name: str, slots: list[str]) -> list[str]:
+    issues: list[str] = []
+    if re.search(rf"\bwindows_core\.HRESULT\s*\(\s*{re.escape(base_name)}\s*\([^)]*\)\s*\)\.ok\(\)", wrapper):
+        issues.append("must not collapse COM out cleanup to bare HRESULT(...).ok()")
+    if re.search(rf"\blet\s+resultHr__\s*=\s*windows_core\.HRESULT\s*\(\s*{re.escape(base_name)}\s*\(", wrapper) is None:
+        issues.append("must store the HRESULT in resultHr__ before cleanup checks")
+    failed_branch = re.search(
+        r"\bif\s*\(\s*resultHr__\.failed\(\)\s*\)\s*\{(?P<body>.*?)return\s+resultHr__\.ok\(\)",
+        wrapper,
+        flags=re.DOTALL,
+    )
+    if failed_branch is None:
+        issues.append("must branch on failed HRESULT and return resultHr__.ok()")
+    if "windows_core.Result<Unit>.Ok(())" not in wrapper:
+        issues.append("must return Ok(()) after successful COM out validation")
+    first_epointer_index = wrapper.find("windows_core.E_POINTER")
+    for slot in slots:
+        escaped = re.escape(slot)
+        if re.search(rf"\bif\s*\(\s*{escaped}\.isNull\(\)\s*\)", wrapper) is None or "windows_core.E_POINTER" not in wrapper:
+            issues.append(f"must reject null {slot} with E_POINTER")
+        preclear_fragment = f"unsafe {{ {slot}.write(CPointer<Unit>()) }}"
+        preclear_index = wrapper.find(preclear_fragment)
+        if preclear_index < 0:
+            issues.append(f"must pre-clear {slot}")
+        if len(slots) > 1 and (first_epointer_index < 0 or preclear_index < 0 or preclear_index > first_epointer_index):
+            issues.append(f"must pre-clear non-null {slot} before null out E_POINTER")
+        if failed_branch is not None and f"windows_core.releaseFailedComOutSlot({slot})" not in failed_branch.group("body"):
+            issues.append(f"must release failed {slot} values")
+        success_null_branch = re.search(
+            rf"\bif\s*\(\s*unsafe\s*\{{\s*{escaped}\.read\(\)\s*\}}\s*\.isNull\(\)\s*\)\s*\{{(?P<body>.*?)windows_core\.E_POINTER",
+            wrapper,
+            flags=re.DOTALL,
+        )
+        if success_null_branch is None:
+            issues.append(f"must reject null {slot} after a successful HRESULT")
+        elif f"windows_core.releaseFailedComOutSlot({slot})" not in success_null_branch.group("body"):
+            issues.append(f"must release null-success {slot} values")
+    return issues
+
+
+def hresult_owned_string_out_wrapper_shape_issues(
+    wrapper: str,
+    base_name: str,
+    slots: list[tuple[str, str, bool]],
+) -> list[str]:
+    issues: list[str] = []
+    if re.search(rf"\bwindows_core\.HRESULT\s*\(\s*{re.escape(base_name)}\s*\([^)]*\)\s*\)\.ok\(\)", wrapper):
+        issues.append("must not collapse owned string out cleanup to bare HRESULT(...).ok()")
+    if re.search(rf"\blet\s+resultHr__\s*=\s*windows_core\.HRESULT\s*\(\s*{re.escape(base_name)}\s*\(", wrapper) is None:
+        issues.append("must store the HRESULT in resultHr__ before owned string cleanup checks")
+    failed_branch = re.search(
+        r"\bif\s*\(\s*resultHr__\.failed\(\)\s*\)\s*\{(?P<body>.*?)return\s+resultHr__\.ok\(\)",
+        wrapper,
+        flags=re.DOTALL,
+    )
+    if failed_branch is None:
+        issues.append("must branch on failed HRESULT and return resultHr__.ok()")
+    if "windows_core.Result<Unit>.Ok(())" not in wrapper:
+        issues.append("must return Ok(()) after successful owned string out validation")
+    first_epointer_index = wrapper.find("windows_core.E_POINTER")
+    required_slot_count = sum(1 for _, _, allow_null_slot in slots if not allow_null_slot)
+    for slot, allocator, allow_null_slot in slots:
+        escaped = re.escape(slot)
+        slot_expr = rf"(?:CPointer<CPointer<Unit>>\(\s*{escaped}\s*\)|{escaped})"
+        preclear_pattern = rf"{slot_expr}\.write\s*\(\s*CPointer<Unit>\(\)\s*\)"
+        preclear_match = re.search(preclear_pattern, wrapper)
+        if preclear_match is None:
+            issues.append(f"must pre-clear {slot}")
+        failed_body = failed_branch.group("body") if failed_branch is not None else ""
+        if allocator_release_marker(allocator) not in failed_body:
+            issues.append(f"must release failed {slot} values with {allocator}")
+        if allow_null_slot:
+            if re.search(optional_out_slot_clear_pattern(slot_expr), wrapper, flags=re.DOTALL) is None:
+                issues.append(f"must only pre-clear optional {slot} when the slot pointer is non-null")
+            if re.search(
+                rf"\bif\s*\(\s*{slot_expr}\.isNull\(\)\s*\)\s*\{{(?P<body>.*?)windows_core\.E_POINTER",
+                wrapper,
+                flags=re.DOTALL,
+            ):
+                issues.append(f"must allow null optional {slot} without E_POINTER")
+            continue
+        if re.search(rf"\bif\s*\(\s*{slot_expr}\.isNull\(\)\s*\)", wrapper) is None or "windows_core.E_POINTER" not in wrapper:
+            issues.append(f"must reject null {slot} with E_POINTER")
+        if required_slot_count > 1 and (
+            first_epointer_index < 0 or preclear_match is None or preclear_match.start() > first_epointer_index
+        ):
+            issues.append(f"must pre-clear non-null {slot} before null out E_POINTER")
+        success_null_branch = re.search(
+            rf"\bif\s*\(\s*unsafe\s*\{{\s*{slot_expr}\.read\(\)\s*\}}\s*\.isNull\(\)\s*\)\s*\{{(?P<body>.*?)windows_core\.E_POINTER",
+            wrapper,
+            flags=re.DOTALL,
+        )
+        if success_null_branch is None:
+            issues.append(f"must reject null {slot} after a successful HRESULT")
+        elif allocator_release_marker(allocator) not in success_null_branch.group("body"):
+            issues.append(f"must release null-success {slot} values with {allocator}")
+    return issues
+
+
+def hresult_owned_pointer_out_wrapper_shape_issues(
+    wrapper: str,
+    base_name: str,
+    slots: list[tuple[str, str]],
+) -> list[str]:
+    issues: list[str] = []
+    if re.search(rf"\bwindows_core\.HRESULT\s*\(\s*{re.escape(base_name)}\s*\([^)]*\)\s*\)\.ok\(\)", wrapper):
+        issues.append("must not collapse owned pointer out cleanup to bare HRESULT(...).ok()")
+    if re.search(rf"\blet\s+resultHr__\s*=\s*windows_core\.HRESULT\s*\(\s*{re.escape(base_name)}\s*\(", wrapper) is None:
+        issues.append("must store the HRESULT in resultHr__ before owned pointer cleanup checks")
+    failed_branch = re.search(
+        r"\bif\s*\(\s*resultHr__\.failed\(\)\s*\)\s*\{(?P<body>.*?)return\s+resultHr__\.ok\(\)",
+        wrapper,
+        flags=re.DOTALL,
+    )
+    if failed_branch is None:
+        issues.append("must branch on failed HRESULT and return resultHr__.ok()")
+    if "windows_core.Result<Unit>.Ok(())" not in wrapper:
+        issues.append("must return Ok(()) after successful owned pointer out validation")
+    first_epointer_index = wrapper.find("windows_core.E_POINTER")
+    for slot, allocator in slots:
+        escaped = re.escape(slot)
+        slot_expr = rf"(?:CPointer<CPointer<Unit>>\(\s*{escaped}\s*\)|{escaped})"
+        preclear_pattern = rf"{slot_expr}\.write\s*\(\s*CPointer<Unit>\(\)\s*\)"
+        preclear_match = re.search(preclear_pattern, wrapper)
+        if preclear_match is None:
+            issues.append(f"must pre-clear {slot}")
+        failed_body = failed_branch.group("body") if failed_branch is not None else ""
+        release_marker = owned_pointer_allocator_release_marker(allocator)
+        if release_marker not in failed_body:
+            issues.append(f"must release failed {slot} values with {allocator}")
+        if re.search(rf"\bif\s*\(\s*{slot_expr}\.isNull\(\)\s*\)", wrapper) is None or "windows_core.E_POINTER" not in wrapper:
+            issues.append(f"must reject null {slot} with E_POINTER")
+        if len(slots) > 1 and (
+            first_epointer_index < 0 or preclear_match is None or preclear_match.start() > first_epointer_index
+        ):
+            issues.append(f"must pre-clear non-null {slot} before null out E_POINTER")
+        success_null_branch = re.search(
+            rf"\bif\s*\(\s*unsafe\s*\{{\s*{slot_expr}\.read\(\)\s*\}}\s*\.isNull\(\)\s*\)\s*\{{(?P<body>.*?)windows_core\.E_POINTER",
+            wrapper,
+            flags=re.DOTALL,
+        )
+        if success_null_branch is None:
+            issues.append(f"must reject null {slot} after a successful HRESULT")
+        elif release_marker not in success_null_branch.group("body"):
+            issues.append(f"must release null-success {slot} values with {allocator}")
+        if f"windows_core.releaseFailedComOutSlot({slot})" in wrapper:
+            issues.append(f"must not release owned pointer {slot} as COM")
+    return issues
+
+
+def hresult_borrowed_optional_out_wrapper_shape_issues(
+    wrapper: str,
+    base_name: str,
+    slots: list[str],
+) -> list[str]:
+    issues: list[str] = []
+    if re.search(rf"\bwindows_core\.HRESULT\s*\(\s*{re.escape(base_name)}\s*\([^)]*\)\s*\)\.ok\(\)", wrapper):
+        issues.append("must not collapse borrowed optional out cleanup to bare HRESULT(...).ok()")
+    if re.search(rf"\blet\s+resultHr__\s*=\s*windows_core\.HRESULT\s*\(\s*{re.escape(base_name)}\s*\(", wrapper) is None:
+        issues.append("must store the HRESULT in resultHr__ before borrowed optional cleanup checks")
+    failed_branch = re.search(
+        r"\bif\s*\(\s*resultHr__\.failed\(\)\s*\)\s*\{(?P<body>.*?)return\s+resultHr__\.ok\(\)",
+        wrapper,
+        flags=re.DOTALL,
+    )
+    if failed_branch is None:
+        issues.append("must branch on failed HRESULT and return resultHr__.ok()")
+    if "windows_core.Result<Unit>.Ok(())" not in wrapper:
+        issues.append("must return Ok(()) after successful borrowed optional out cleanup")
+    failed_body = failed_branch.group("body") if failed_branch is not None else ""
+    for slot in slots:
+        escaped = re.escape(slot)
+        slot_expr = rf"(?:CPointer<CPointer<Unit>>\(\s*{escaped}\s*\)|{escaped})"
+        clear_pattern = optional_out_slot_clear_pattern(slot_expr)
+        if len(re.findall(clear_pattern, wrapper, flags=re.DOTALL)) < 2:
+            issues.append(f"must clear optional borrowed {slot} before the call and after failed HRESULT")
+        if re.search(rf"\bif\s*\(\s*{slot_expr}\.isNull\(\)\s*\)\s*\{{(?P<body>.*?)windows_core\.E_POINTER", wrapper, flags=re.DOTALL):
+            issues.append(f"must allow null optional borrowed {slot} without E_POINTER")
+        if re.search(
+            rf"\bif\s*\(\s*unsafe\s*\{{\s*{slot_expr}\.read\(\)\s*\}}\s*\.isNull\(\)\s*\)\s*\{{(?P<body>.*?)windows_core\.E_POINTER",
+            wrapper,
+            flags=re.DOTALL,
+        ):
+            issues.append(f"must not require optional borrowed {slot} to be non-null after success")
+        if f"windows_core.releaseFailedComOutSlot({slot})" in wrapper:
+            issues.append(f"must not release borrowed optional {slot} as COM")
+        if f"coTaskMemFreeString__({slot})" in wrapper or f"coTaskMemFreeString__(CPointer<Unit>({slot}))" in wrapper:
+            issues.append(f"must not free borrowed optional {slot} with CoTaskMemFree")
+        if failed_branch is not None and re.search(clear_pattern, failed_body, flags=re.DOTALL) is None:
+            issues.append(f"must clear borrowed optional {slot} in the failed HRESULT branch")
+    return issues
+
+
+def hresult_optional_scalar_out_wrapper_shape_issues(
+    wrapper: str,
+    base_name: str,
+    slots: list[tuple[str, str]],
+) -> list[str]:
+    issues: list[str] = []
+    if re.search(rf"\bwindows_core\.HRESULT\s*\(\s*{re.escape(base_name)}\s*\([^)]*\)\s*\)\.ok\(\)", wrapper):
+        issues.append("must not collapse optional scalar out cleanup to bare HRESULT(...).ok()")
+    if re.search(rf"\blet\s+resultHr__\s*=\s*windows_core\.HRESULT\s*\(\s*{re.escape(base_name)}\s*\(", wrapper) is None:
+        issues.append("must store the HRESULT in resultHr__ before optional scalar cleanup checks")
+    failed_branch = re.search(
+        r"\bif\s*\(\s*resultHr__\.failed\(\)\s*\)\s*\{(?P<body>.*?)return\s+resultHr__\.ok\(\)",
+        wrapper,
+        flags=re.DOTALL,
+    )
+    if failed_branch is None:
+        issues.append("must branch on failed HRESULT and return resultHr__.ok()")
+    if "windows_core.Result<Unit>.Ok(())" not in wrapper:
+        issues.append("must return Ok(()) after successful optional scalar out cleanup")
+    failed_body = failed_branch.group("body") if failed_branch is not None else ""
+    for slot, default_value in slots:
+        escaped = re.escape(slot)
+        clear_pattern = optional_scalar_out_slot_clear_pattern(slot, default_value)
+        if len(re.findall(clear_pattern, wrapper, flags=re.DOTALL)) < 2:
+            issues.append(f"must clear optional scalar {slot} before the call and after failed HRESULT")
+        if re.search(rf"\bif\s*\(\s*{escaped}\.isNull\(\)\s*\)\s*\{{(?P<body>.*?)windows_core\.E_POINTER", wrapper, flags=re.DOTALL):
+            issues.append(f"must allow null optional scalar {slot} without E_POINTER")
+        if re.search(
+            rf"\bif\s*\(\s*unsafe\s*\{{\s*{escaped}\.read\(\)\s*\}}\s*\.isNull\(\)\s*\)\s*\{{(?P<body>.*?)windows_core\.E_POINTER",
+            wrapper,
+            flags=re.DOTALL,
+        ):
+            issues.append(f"must not require optional scalar {slot} to be non-null after success")
+        if f"windows_core.releaseFailedComOutSlot({slot})" in wrapper:
+            issues.append(f"must not release optional scalar {slot} as COM")
+        if f"coTaskMemFreeString__({slot})" in wrapper or f"coTaskMemFreeString__(CPointer<Unit>({slot}))" in wrapper:
+            issues.append(f"must not free optional scalar {slot} with CoTaskMemFree")
+        if failed_branch is not None and re.search(clear_pattern, failed_body, flags=re.DOTALL) is None:
+            issues.append(f"must clear optional scalar {slot} in the failed HRESULT branch")
+    return issues
+
+
+def optional_out_slot_clear_pattern(slot_expr: str) -> str:
+    return (
+        rf"\bif\s*\(\s*{slot_expr}\.isNotNull\(\)\s*\)\s*\{{\s*"
+        rf"unsafe\s*\{{\s*{slot_expr}\.write\s*\(\s*CPointer<Unit>\(\)\s*\)\s*\}}\s*\}}"
+    )
+
+
+def optional_scalar_out_slot_clear_pattern(slot: str, default_value: str) -> str:
+    escaped = re.escape(slot)
+    return (
+        rf"\bif\s*\(\s*{escaped}\.isNotNull\(\)\s*\)\s*\{{\s*"
+        rf"unsafe\s*\{{\s*{escaped}\.write\s*\(\s*{re.escape(default_value)}\s*\)\s*\}}\s*\}}"
+    )
+
+
+def multiple_success_hresult_wrapper_shape_issues(wrapper: str, base_name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<windows_core.HRESULT>" not in wrapper:
+        issues.append("must return windows_core.Result<windows_core.HRESULT>")
+    if "windows_core.Result<Unit>" in wrapper:
+        issues.append("must not collapse multiple success HRESULTs to Result<Unit>")
+    if re.search(rf"\bwindows_core\.HRESULT\s*\(\s*{re.escape(base_name)}\s*\([^)]*\)\s*\)\.ok\(\)", wrapper):
+        issues.append("must not collapse multiple success HRESULTs through ok()")
+    if "windows_core.Result<Unit>.Ok(())" in wrapper:
+        issues.append("must not return Ok(()) for multiple success HRESULTs")
+    if re.search(rf"\blet\s+resultHr__\s*=\s*windows_core\.HRESULT\s*\(\s*{re.escape(base_name)}\s*\(", wrapper) is None:
+        issues.append("must store the HRESULT in resultHr__")
+    if re.search(r"\bif\s*\(\s*resultHr__\.failed\(\)\s*\)", wrapper) is None:
+        issues.append("must branch on failed HRESULT")
+    if (
+        "windows_core.Result<windows_core.HRESULT>.Err(windows_core.errorFromHRESULT(resultHr__))"
+        not in wrapper
+    ):
+        issues.append("must return Err(errorFromHRESULT(resultHr__)) on failed HRESULT")
+    if "windows_core.Result<windows_core.HRESULT>.Ok(resultHr__)" not in wrapper:
+        issues.append("must return Ok(resultHr__) on successful HRESULT")
+    return issues
+
+
+def allocator_release_marker(allocator: str) -> str:
+    if allocator == "LocalFree":
+        return "localFreeString__"
+    if allocator == "CoTaskMemFree":
+        return "coTaskMemFreeString__"
+    return allocator
+
+
+def owned_pointer_allocator_release_marker(allocator: str) -> str:
+    if allocator == "LocalFree":
+        return "localFreePointer__"
+    if allocator == "CoTaskMemFree":
+        return "coTaskMemFreePointer__"
+    return allocator
+
+
+def namespace_matches_any_feature(namespace: str, features: list[str]) -> bool:
+    return any(namespace == feature or namespace.startswith(feature + ".") for feature in features)
+
+
+def method_needs_set_last_error_bool_wrapper(method: dict) -> bool:
+    method_import = method.get("Import") or {}
+    import_attributes = method_import.get("Attributes") or []
+    name = method.get("Name")
+    if "SetLastError" not in import_attributes and name not in SET_LAST_ERROR_BOOL_MISSING_METADATA:
+        return False
+    if method_imports_from_module(method, "WS2_32.dll"):
+        return False
+    if method_set_last_error_bool_statuses(method) is not None:
+        return False
+    if method_set_last_error_bool_false_success_statuses(method) is not None:
+        return False
+    if name in SET_LAST_ERROR_BOOL_NO_CHECKED_WRAPPER_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    if signature_full_name(signature.get("ReturnType")) not in WIN32_BOOL_ABI_RETURN_TYPES:
+        return False
+    if (
+        method_has_custom_attribute(method, "CanReturnMultipleSuccessValuesAttribute")
+        and name not in MULTIPLE_SUCCESS_BOOL_ZERO_FAILURE
+    ):
+        return False
+    if isinstance(name, str) and semantic_bool_name(name) and not method_has_out_parameter(method):
+        return False
+    return True
+
+
+def method_needs_multiple_success_bool_status_return(method: dict) -> bool:
+    name = method.get("Name")
+    if not isinstance(name, str) or name in MULTIPLE_SUCCESS_BOOL_ZERO_FAILURE:
+        return False
+    if not method_has_custom_attribute(method, "CanReturnMultipleSuccessValuesAttribute"):
+        return False
+    signature = method.get("Signature") or {}
+    return signature_full_name(signature.get("ReturnType")) in WIN32_BOOL_ABI_RETURN_TYPES
+
+
+def method_set_last_error_bool_false_success_statuses(method: dict) -> tuple[int, ...] | None:
+    if not method_has_set_last_error(method):
+        return None
+    name = method.get("Name")
+    if not isinstance(name, str):
+        return None
+    false_success_statuses = SET_LAST_ERROR_BOOL_FALSE_SUCCESS_STATUS_METHODS.get(name)
+    if false_success_statuses is None:
+        return None
+    signature = method.get("Signature") or {}
+    if signature_full_name(signature.get("ReturnType")) not in WIN32_BOOL_ABI_RETURN_TYPES:
+        return None
+    return false_success_statuses
+
+
+def method_set_last_error_bool_statuses(method: dict) -> tuple[int, ...] | None:
+    if not method_has_set_last_error(method):
+        return None
+    name = method.get("Name")
+    if not isinstance(name, str):
+        return None
+    status_successes = SET_LAST_ERROR_BOOL_STATUS_METHODS.get(name)
+    if status_successes is None:
+        return None
+    if not method_imports_from_module(method, "WINHTTP.dll"):
+        return None
+    signature = method.get("Signature") or {}
+    if signature_full_name(signature.get("ReturnType")) not in WIN32_BOOL_ABI_RETURN_TYPES:
+        return None
+    return status_successes
+
+
+def method_needs_multiple_success_hresult_wrapper(method: dict) -> bool:
+    if not isinstance(method.get("Import"), dict):
+        return False
+    signature = method.get("Signature") or {}
+    if signature_full_name(signature.get("ReturnType")) != "Windows.Win32.Foundation.HRESULT":
+        return False
+    name = method.get("Name")
+    return (
+        method_has_custom_attribute(method, "CanReturnMultipleSuccessValuesAttribute")
+        or name in MULTIPLE_SUCCESS_HRESULT_MISSING_METADATA
+    )
+
+
+def method_set_last_error_null_handle_return_type(method: dict) -> str | None:
+    if method_needs_winsock_null_handle_wrapper(method):
+        return None
+    method_import = method.get("Import") or {}
+    import_attributes = method_import.get("Attributes") or []
+    if "SetLastError" not in import_attributes:
+        return None
+    signature = method.get("Signature") or {}
+    return_type = signature_full_name(signature.get("ReturnType"))
+    if return_type not in SET_LAST_ERROR_NULL_HANDLE_RETURN_TYPES:
+        return None
+    if method_has_custom_attribute(method, "CanReturnMultipleSuccessValuesAttribute"):
+        return None
+    name = method.get("Name")
+    if not isinstance(name, str) or not handle_return_uses_null_failure(name):
+        return None
+    return return_type
+
+
+def method_set_last_error_invalid_handle_return_type(method: dict) -> str | None:
+    method_import = method.get("Import") or {}
+    import_attributes = method_import.get("Attributes") or []
+    if "SetLastError" not in import_attributes:
+        return None
+    name = method.get("Name")
+    if not isinstance(name, str):
+        return None
+    expected_return_type = SET_LAST_ERROR_INVALID_HANDLE_RETURN_TYPES.get(name)
+    if expected_return_type is None:
+        return None
+    signature = method.get("Signature") or {}
+    return_type = signature_full_name(signature.get("ReturnType"))
+    if return_type != expected_return_type:
+        return None
+    return return_type
+
+
+def method_set_last_error_null_success_handle_return_type(method: dict) -> str | None:
+    method_import = method.get("Import") or {}
+    import_attributes = method_import.get("Attributes") or []
+    if "SetLastError" not in import_attributes:
+        return None
+    name = method.get("Name")
+    if not isinstance(name, str):
+        return None
+    expected_return_type = SET_LAST_ERROR_NULL_SUCCESS_HANDLE_RETURN_TYPES.get(name)
+    if expected_return_type is None:
+        return None
+    signature = method.get("Signature") or {}
+    return_type = signature_full_name(signature.get("ReturnType"))
+    if return_type != expected_return_type:
+        return None
+    return return_type
+
+
+def method_needs_set_last_error_wait_event_wrapper(method: dict) -> bool:
+    if method_needs_winsock_wait_event_wrapper(method):
+        return False
+    method_import = method.get("Import") or {}
+    import_attributes = method_import.get("Attributes") or []
+    if "SetLastError" not in import_attributes:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_full_name(signature.get("ReturnType")) == SET_LAST_ERROR_WAIT_EVENT_RETURN_TYPE
+
+
+def method_set_last_error_null_pointer_return_type(method: dict) -> str | None:
+    if method_needs_winsock_null_pointer_wrapper(method):
+        return None
+    if not method_has_set_last_error(method):
+        return None
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in SET_LAST_ERROR_NULL_POINTER_METHODS:
+        return None
+    signature = method.get("Signature") or {}
+    return signature_pointer_cj_type(signature.get("ReturnType"))
+
+
+def method_needs_set_last_error_tls_value_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in SET_LAST_ERROR_TLS_VALUE_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_is_void_pointer(signature.get("ReturnType"))
+
+
+def method_needs_set_last_error_uint32_minus_one_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in SET_LAST_ERROR_UINT32_MINUS_ONE_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_is_uint32_like(signature.get("ReturnType"))
+
+
+def method_needs_set_last_error_uint32_zero_last_error_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in SET_LAST_ERROR_UINT32_ZERO_LAST_ERROR_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_primitive_name(signature.get("ReturnType")) == "UInt32"
+
+
+def method_needs_set_last_error_uint32_zero_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in SET_LAST_ERROR_UINT32_ZERO_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_primitive_name(signature.get("ReturnType")) == "UInt32"
+
+
+def method_needs_set_last_error_uintnative_zero_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in SET_LAST_ERROR_UINTNATIVE_ZERO_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_primitive_name(signature.get("ReturnType")) == "UIntPtr"
+
+
+def method_needs_set_last_error_intnative_zero_last_error_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in SET_LAST_ERROR_INTNATIVE_ZERO_LAST_ERROR_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_full_name(signature.get("ReturnType")) in WIN32_INTNATIVE_ABI_RETURN_TYPES
+
+
+def method_needs_set_last_error_int32_max_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in SET_LAST_ERROR_INT32_MAX_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_primitive_name(signature.get("ReturnType")) == "Int32"
+
+
+def method_needs_set_last_error_int32_minus_one_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in SET_LAST_ERROR_INT32_MINUS_ONE_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_full_name(signature.get("ReturnType")) in WIN32_BOOL_ABI_RETURN_TYPES
+
+
+def method_needs_winsock_invalid_socket_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    if not method_imports_from_module(method, "WS2_32.dll"):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in WINSOCK_INVALID_SOCKET_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_full_name(signature.get("ReturnType")) == "Windows.Win32.Networking.WinSock.SOCKET"
+
+
+def method_needs_winsock_bool_wrapper(method: dict) -> bool:
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in WINSOCK_BOOL_METHODS:
+        return False
+    if not method_imports_from_module(method, "WS2_32.dll") and not method_imports_from_module(method, "MSWSOCK.dll"):
+        return False
+    if not method_has_set_last_error(method) and name not in WINSOCK_BOOL_PENDING_SUCCESS_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_full_name(signature.get("ReturnType")) in WIN32_BOOL_ABI_RETURN_TYPES
+
+
+def method_needs_winsock_wait_event_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    if not method_imports_from_module(method, "WS2_32.dll"):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in WINSOCK_WAIT_EVENT_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_full_name(signature.get("ReturnType")) == SET_LAST_ERROR_WAIT_EVENT_RETURN_TYPE
+
+
+def method_needs_winsock_invalid_event_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    if not method_imports_from_module(method, "WS2_32.dll"):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in WINSOCK_INVALID_EVENT_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_full_name(signature.get("ReturnType")) == "Windows.Win32.Networking.WinSock.WSAEVENT"
+
+
+def method_needs_winsock_null_handle_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    if not method_imports_from_module(method, "WS2_32.dll"):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in WINSOCK_NULL_HANDLE_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_full_name(signature.get("ReturnType")) == "Windows.Win32.Foundation.HANDLE"
+
+
+def method_winsock_null_pointer_return_type(method: dict) -> str | None:
+    if not method_needs_winsock_null_pointer_wrapper(method):
+        return None
+    signature = method.get("Signature") or {}
+    return signature_pointer_cj_type(signature.get("ReturnType"))
+
+
+def method_needs_winsock_null_pointer_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    if not method_imports_from_module(method, "WS2_32.dll"):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in WINSOCK_NULL_POINTER_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_pointer_cj_type(signature.get("ReturnType")) is not None
+
+
+def method_needs_winsock_socket_error_int32_wrapper(method: dict) -> bool:
+    if not method_imports_from_module(method, "WS2_32.dll") and not method_imports_from_module(method, "MSWSOCK.dll"):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in WINSOCK_SOCKET_ERROR_INT32_METHODS:
+        return False
+    if not method_has_set_last_error(method) and name not in WINSOCK_INT32_CAN_USE_WSA_GET_LAST_ERROR_WITHOUT_METADATA:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_primitive_name(signature.get("ReturnType")) == "Int32"
+
+
+def method_needs_mswinsock_get_last_error_socket_error_int32_wrapper(method: dict) -> bool:
+    if not method_has_set_last_error(method):
+        return False
+    if not method_imports_from_module(method, "MSWSOCK.dll"):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in MSWSOCK_GET_LAST_ERROR_SOCKET_ERROR_INT32_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_primitive_name(signature.get("ReturnType")) == "Int32"
+
+
+def method_needs_winsock_direct_error_int32_wrapper(method: dict) -> bool:
+    if not method_imports_from_module(method, "WS2_32.dll"):
+        return False
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in WINSOCK_DIRECT_ERROR_INT32_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_primitive_name(signature.get("ReturnType")) == "Int32"
+
+
+def method_winsock_pending_status_int32(method: dict) -> int | None:
+    if not method_imports_from_module(method, "WS2_32.dll"):
+        return None
+    name = method.get("Name")
+    if not isinstance(name, str):
+        return None
+    pending_status = WINSOCK_PENDING_STATUS_INT32_METHODS.get(name)
+    if pending_status is None:
+        return None
+    signature = method.get("Signature") or {}
+    if signature_primitive_name(signature.get("ReturnType")) != "Int32":
+        return None
+    return pending_status
+
+
+def method_winsock_lperrno_int32_status(method: dict) -> bool | None:
+    if not method_imports_from_module(method, "WS2_32.dll"):
+        return None
+    name = method.get("Name")
+    if not isinstance(name, str):
+        return None
+    if name in WINSOCK_LPERRNO_STATUS_INT32_METHODS:
+        preserves_status = True
+    elif name in WINSOCK_LPERRNO_UNIT_INT32_METHODS:
+        preserves_status = False
+    else:
+        return None
+    signature = method.get("Signature") or {}
+    if signature_primitive_name(signature.get("ReturnType")) != "Int32":
+        return None
+    if not method_has_parameter_named(method, "lpErrno"):
+        return None
+    return preserves_status
+
+
+def method_needs_wait_failed_uint32_wrapper(method: dict) -> bool:
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in WAIT_FAILED_UINT32_METHODS:
+        return False
+    signature = method.get("Signature") or {}
+    return signature_primitive_name(signature.get("ReturnType")) == "UInt32"
+
+
+def method_needs_direct_win32_error_code_int32_wrapper(method: dict) -> bool:
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in DIRECT_WIN32_ERROR_CODE_INT32_UNIT_METHODS:
+        return False
+    if name.startswith("Dns") and not method_imports_from_module(method, "DNSAPI.dll"):
+        return False
+    signature = method.get("Signature") or {}
+    return signature_primitive_name(signature.get("ReturnType")) == "Int32"
+
+
+def method_direct_win32_error_code_int32_success_statuses(method: dict) -> tuple[int, ...] | None:
+    name = method.get("Name")
+    if not isinstance(name, str):
+        return None
+    for module_name, methods in DIRECT_WIN32_ERROR_CODE_INT32_STATUS_METHODS.items():
+        statuses = methods.get(name)
+        if statuses is None:
+            continue
+        if not method_imports_from_module(method, module_name):
+            return None
+        signature = method.get("Signature") or {}
+        if signature_primitive_name(signature.get("ReturnType")) != "Int32":
+            return None
+        return statuses
+    return None
+
+
+def method_needs_direct_win32_error_code_uint32_wrapper(method: dict) -> bool:
+    name = method.get("Name")
+    if not isinstance(name, str) or name not in DIRECT_WIN32_ERROR_CODE_UINT32_UNIT_METHODS:
+        return False
+    if name.startswith("Http") and not method_imports_from_module(method, "HTTPAPI.dll"):
+        return False
+    if name.startswith("WinHttp") and not method_imports_from_module(method, "WINHTTP.dll"):
+        return False
+    if name.startswith("Dns") and not method_imports_from_module(method, "DNSAPI.dll"):
+        return False
+    signature = method.get("Signature") or {}
+    return signature_primitive_name(signature.get("ReturnType")) == "UInt32"
+
+
+def method_direct_win32_error_code_uint32_success_statuses(method: dict) -> tuple[int, ...] | None:
+    name = method.get("Name")
+    if not isinstance(name, str):
+        return None
+    for module_name, methods in DIRECT_WIN32_ERROR_CODE_UINT32_STATUS_METHODS.items():
+        statuses = methods.get(name)
+        if statuses is None:
+            continue
+        if not method_imports_from_module(method, module_name):
+            return None
+        signature = method.get("Signature") or {}
+        if not signature_is_uint32_like(signature.get("ReturnType")):
+            return None
+        return statuses
+    return None
+
+
+def method_uint32_less_than_or_equal_failure_threshold(method: dict) -> int | None:
+    name = method.get("Name")
+    if not isinstance(name, str):
+        return None
+    threshold = UINT32_LESS_THAN_OR_EQUAL_FAILURE_METHODS.get(name)
+    if threshold is None:
+        return None
+    signature = method.get("Signature") or {}
+    if not signature_is_uint32_like(signature.get("ReturnType")):
+        return None
+    return threshold
+
+
+def handle_return_uses_null_failure(name: str) -> bool:
+    return name not in SET_LAST_ERROR_INVALID_HANDLE_RETURN_TYPES
+
+
+def set_last_error_handle_wrapper_shape_issues(wrapper: str, name: str, return_type: str) -> list[str]:
+    short_type = return_type.rsplit(".", 1)[-1]
+    issues: list[str] = []
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append(f"must store the {short_type} result before checking failure")
+    if "result__.Value.isNull()" not in wrapper:
+        issues.append(f"must reject null {short_type} returns")
+    if f"windows_core.Result<{short_type}>.Err(windows_core.errorFromThread())" not in wrapper:
+        issues.append(f"must translate null {short_type} failure through errorFromThread()")
+    if f"windows_core.Result<{short_type}>.Ok(result__)" not in wrapper:
+        issues.append(f"must return the {short_type} on success")
+    return issues
+
+
+def set_last_error_invalid_handle_wrapper_shape_issues(wrapper: str, name: str, return_type: str) -> list[str]:
+    short_type = return_type.rsplit(".", 1)[-1]
+    issues: list[str] = []
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append(f"must store the {short_type} result before checking failure")
+    if "windows_polyfill.handlePointerIsMinusOne(result__.Value)" not in wrapper:
+        issues.append(f"must reject INVALID_HANDLE_VALUE {short_type} returns")
+    if "result__.Value.isNull()" in wrapper:
+        issues.append(f"must not use null-check semantics for INVALID_HANDLE_VALUE {short_type} returns")
+    if f"windows_core.Result<{short_type}>.Err(windows_core.errorFromThread())" not in wrapper:
+        issues.append(f"must translate INVALID_HANDLE_VALUE {short_type} failure through errorFromThread()")
+    if f"windows_core.Result<{short_type}>.Ok(result__)" not in wrapper:
+        issues.append(f"must return the {short_type} on success")
+    return issues
+
+
+def set_last_error_bool_false_success_wrapper_shape_issues(
+    wrapper: str,
+    name: str,
+    false_success_statuses: Sequence[int],
+) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<Bool>" not in wrapper:
+        issues.append("must return Result<Bool>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the Bool result before checking false-success status")
+    if "if (result__)" not in wrapper:
+        issues.append("must return true success before checking GetLastError")
+    if "windows_core.Result<Bool>.Ok(true)" not in wrapper:
+        issues.append("must return Ok(true) for native TRUE")
+    if not wrapper_reads_win32_last_error(wrapper):
+        issues.append("must read GetLastError() for native FALSE")
+    for false_success_status in false_success_statuses:
+        if f"lastError__ == {false_success_status}u32" not in wrapper:
+            issues.append(f"must treat status {false_success_status} as false success")
+    if "windows_core.Result<Bool>.Ok(false)" not in wrapper:
+        issues.append("must return Ok(false) for false-success status")
+    if "windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))" not in wrapper:
+        issues.append("must translate non-status failure through errorFromWin32(lastError__)")
+    if "windows_core.Result<Unit>" in wrapper:
+        issues.append("must preserve false-success status as Bool instead of collapsing to Unit")
+    if "windows_core.errorFromThread()" in wrapper:
+        issues.append("must not hide false-success status behind errorFromThread()")
+    return issues
+
+
+def set_last_error_bool_status_wrapper_shape_issues(
+    wrapper: str,
+    name: str,
+    status_successes: Sequence[int],
+) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<UInt32>" not in wrapper:
+        issues.append("must return Result<UInt32>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the Bool result before checking status")
+    if "if (result__)" not in wrapper:
+        issues.append("must return native TRUE before checking GetLastError")
+    if "windows_core.Result<UInt32>.Ok(0u32)" not in wrapper:
+        issues.append("must return status 0 for native TRUE")
+    if not wrapper_reads_win32_last_error(wrapper):
+        issues.append("must read GetLastError() for native FALSE")
+    for status_success in status_successes:
+        if f"lastError__ == {status_success}u32" not in wrapper:
+            issues.append(f"must preserve status {status_success} as success")
+    if "windows_core.Result<UInt32>.Ok(lastError__)" not in wrapper:
+        issues.append("must return the preserved last-error status")
+    if "windows_core.Result<UInt32>.Err(windows_core.errorFromWin32(lastError__))" not in wrapper:
+        issues.append("must translate non-status failure through errorFromWin32(lastError__)")
+    if "windows_core.Result<Bool>" in wrapper:
+        issues.append("must preserve the exact status instead of collapsing to Bool")
+    if "windows_core.errorFromThread()" in wrapper:
+        issues.append("must not hide false status behind errorFromThread()")
+    return issues
+
+
+def set_last_error_null_success_handle_wrapper_shape_issues(wrapper: str, name: str, return_type: str) -> list[str]:
+    short_type = return_type.rsplit(".", 1)[-1]
+    issues: list[str] = []
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append(f"must store the {short_type} result before checking success")
+    if "result__.Value.isNotNull()" not in wrapper:
+        issues.append(f"must reject non-null {short_type} returns")
+    if "windows_core.Result<Unit>.Err(windows_core.errorFromThread())" not in wrapper:
+        issues.append(f"must translate non-null {short_type} failure through errorFromThread()")
+    if "windows_core.Result<Unit>.Ok(())" not in wrapper:
+        issues.append("must return Ok(()) on null success")
+    return issues
+
+
+def set_last_error_wait_event_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<WAIT_EVENT>" not in wrapper:
+        issues.append("must return Result<WAIT_EVENT>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the WAIT_EVENT result before checking failure")
+    if "result__ == 0xFFFFFFFFu32" not in wrapper:
+        issues.append("must reject WAIT_FAILED only")
+    if "windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())" not in wrapper:
+        issues.append("must translate WAIT_FAILED through errorFromThread()")
+    if "windows_core.Result<WAIT_EVENT>.Ok(result__)" not in wrapper:
+        issues.append("must return the WAIT_EVENT on success")
+    if "WAIT_TIMEOUT" in wrapper:
+        issues.append("must not special-case WAIT_TIMEOUT as failure")
+    return issues
+
+
+def set_last_error_null_pointer_wrapper_shape_issues(wrapper: str, name: str, return_type: str) -> list[str]:
+    issues: list[str] = []
+    if f"windows_core.Result<{return_type}>" not in wrapper:
+        issues.append(f"must return Result<{return_type}>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the pointer result before checking failure")
+    if "result__.isNull()" not in wrapper:
+        issues.append("must reject null pointer returns")
+    if f"windows_core.Result<{return_type}>.Err(windows_core.errorFromThread())" not in wrapper:
+        issues.append("must translate null pointer failure through errorFromThread()")
+    if f"windows_core.Result<{return_type}>.Ok(result__)" not in wrapper:
+        issues.append("must return the pointer on success")
+    return issues
+
+
+def set_last_error_tls_value_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<CPointer<Unit>>" not in wrapper:
+        issues.append("must return Result<CPointer<Unit>>")
+    result_index = wrapper.find(f"let result__ = {name}(")
+    if result_index < 0:
+        issues.append("must store the TLS value before checking failure")
+    set_last_error_index = wrapper_clear_win32_last_error_index(wrapper)
+    if set_last_error_index < 0:
+        issues.append("must clear last error before reading TLS/FLS value")
+    elif result_index >= 0 and set_last_error_index > result_index:
+        issues.append("must clear last error before reading TLS/FLS value")
+    if "result__.isNotNull()" not in wrapper:
+        issues.append("must accept non-null TLS values without checking last error")
+    if not wrapper_reads_win32_last_error(wrapper):
+        issues.append("must read GetLastError() for null TLS values")
+    if "lastError__ == 0u32" not in wrapper:
+        issues.append("must treat ERROR_SUCCESS as null-value success")
+    if "windows_core.Result<CPointer<Unit>>.Err(windows_core.errorFromWin32(lastError__))" not in wrapper:
+        issues.append("must translate nonzero TLS last error through errorFromWin32(lastError__)")
+    if wrapper.count("windows_core.Result<CPointer<Unit>>.Ok(result__)") < 2:
+        issues.append("must return Ok(result__) for both non-null and null ERROR_SUCCESS values")
+    return issues
+
+
+def set_last_error_uint32_minus_one_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<UInt32>" not in wrapper:
+        issues.append("must return Result<UInt32>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the UInt32 result before checking failure")
+    if "result__ == 0xFFFFFFFFu32" not in wrapper:
+        issues.append("must reject the UInt32 -1 failure sentinel")
+    if "windows_core.Result<UInt32>.Err(windows_core.errorFromThread())" not in wrapper:
+        issues.append("must translate UInt32 -1 failure through errorFromThread()")
+    if "windows_core.Result<UInt32>.Ok(result__)" not in wrapper:
+        issues.append("must return the UInt32 value on success")
+    return issues
+
+
+def set_last_error_uint32_zero_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<UInt32>" not in wrapper:
+        issues.append("must return Result<UInt32>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the UInt32 result before checking failure")
+    if "result__ == 0u32" not in wrapper:
+        issues.append("must reject the UInt32 zero failure sentinel")
+    if "windows_core.Result<UInt32>.Err(windows_core.errorFromThread())" not in wrapper:
+        issues.append("must translate UInt32 zero failure through errorFromThread()")
+    if "windows_core.Result<UInt32>.Ok(result__)" not in wrapper:
+        issues.append("must return the UInt32 value on success")
+    return issues
+
+
+def set_last_error_uint32_zero_last_error_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<UInt32>" not in wrapper:
+        issues.append("must return Result<UInt32>")
+    if not wrapper_clears_win32_last_error(wrapper):
+        issues.append("must clear last error before calling the zero/success API")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the UInt32 result before checking failure")
+    if "result__ != 0u32" not in wrapper:
+        issues.append("must accept nonzero UInt32 results without checking last error")
+    if not wrapper_reads_win32_last_error(wrapper):
+        issues.append("must read GetLastError() for zero UInt32 results")
+    if "lastError__ == 0u32" not in wrapper:
+        issues.append("must treat ERROR_SUCCESS as zero-value success")
+    if "windows_core.Result<UInt32>.Err(windows_core.errorFromWin32(lastError__))" not in wrapper:
+        issues.append("must translate nonzero last error through errorFromWin32(lastError__)")
+    if wrapper.count("windows_core.Result<UInt32>.Ok(result__)") < 2:
+        issues.append("must return Ok(result__) for both nonzero and zero ERROR_SUCCESS values")
+    if "windows_core.Result<UInt32>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not treat every zero result as failure")
+    return issues
+
+
+def set_last_error_uintnative_zero_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<UIntNative>" not in wrapper:
+        issues.append("must return Result<UIntNative>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the UIntNative result before checking failure")
+    if "result__ == 0" not in wrapper:
+        issues.append("must reject the UIntNative zero failure sentinel")
+    if "windows_core.Result<UIntNative>.Err(windows_core.errorFromThread())" not in wrapper:
+        issues.append("must translate UIntNative zero failure through errorFromThread()")
+    if "windows_core.Result<UIntNative>.Ok(result__)" not in wrapper:
+        issues.append("must return the UIntNative value on success")
+    return issues
+
+
+def set_last_error_intnative_zero_last_error_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<IntNative>" not in wrapper:
+        issues.append("must return Result<IntNative>")
+    set_last_error_index = wrapper_clear_win32_last_error_index(wrapper)
+    if set_last_error_index < 0:
+        issues.append("must clear last error before calling the zero/failure API")
+    result_index = wrapper.find(f"let result__ = {name}(")
+    if result_index < 0:
+        issues.append("must store the IntNative result before checking failure")
+    elif set_last_error_index >= 0 and set_last_error_index > result_index:
+        issues.append("must clear last error before calling the zero/failure API")
+    if "result__ != 0" not in wrapper:
+        issues.append("must accept nonzero IntNative results without checking last error")
+    if not wrapper_reads_win32_last_error(wrapper):
+        issues.append("must read GetLastError() for zero IntNative results")
+    if "lastError__ == 0u32" not in wrapper:
+        issues.append("must treat ERROR_SUCCESS as a generic zero-value failure")
+    if "windows_core.Result<IntNative>.Err(windows_core.errorFromHRESULT(windows_core.E_FAIL))" not in wrapper:
+        issues.append("must translate zero with ERROR_SUCCESS through E_FAIL")
+    if "windows_core.Result<IntNative>.Err(windows_core.errorFromWin32(lastError__))" not in wrapper:
+        issues.append("must translate nonzero last error through errorFromWin32(lastError__)")
+    if "windows_core.Result<IntNative>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not use thread last-error directly because zero last-error is a generic failure")
+    if "windows_core.Result<IntNative>.Ok(result__)" not in wrapper:
+        issues.append("must return the IntNative value on success")
+    return issues
+
+
+def set_last_error_int32_max_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<Int32>" not in wrapper:
+        issues.append("must return Result<Int32>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the Int32 result before checking failure")
+    if "result__ == 2147483647" not in wrapper:
+        issues.append("must reject THREAD_PRIORITY_ERROR_RETURN")
+    if "windows_core.Result<Int32>.Err(windows_core.errorFromThread())" not in wrapper:
+        issues.append("must translate Int32 sentinel failure through errorFromThread()")
+    if "windows_core.Result<Int32>.Ok(result__)" not in wrapper:
+        issues.append("must return the Int32 value on success")
+    return issues
+
+
+def set_last_error_int32_minus_one_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<Int32>" not in wrapper:
+        issues.append("must return Result<Int32>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the Int32 result before checking failure")
+    if "result__ == -1" not in wrapper:
+        issues.append("must reject the Int32 -1 failure sentinel")
+    if "windows_core.Result<Int32>.Err(windows_core.errorFromThread())" not in wrapper:
+        issues.append("must translate Int32 -1 failure through errorFromThread()")
+    if "windows_core.Result<Int32>.Ok(result__)" not in wrapper:
+        issues.append("must return the Int32 value on success, including zero")
+    if "windows_core.Result<Unit>" in wrapper or "if (" + name + "(" in wrapper:
+        issues.append("must preserve the tri-state Int32 status instead of collapsing it to Bool/Unit")
+    return issues
+
+
+def winsock_socket_error_int32_wrapper_shape_issues(
+    wrapper: str,
+    name: str,
+    preserves_status: bool,
+) -> list[str]:
+    issues: list[str] = []
+    result_type = "Int32" if preserves_status else "Unit"
+    pending_success_status = WINSOCK_SOCKET_ERROR_PENDING_SUCCESS_INT32_METHODS.get(name)
+    if f"windows_core.Result<{result_type}>" not in wrapper:
+        issues.append(f"must return Result<{result_type}>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the Int32 result before checking failure")
+    if "result__ == -1" not in wrapper:
+        issues.append("must reject the SOCKET_ERROR -1 failure sentinel")
+    if "windows_libloading.resolveProc(" not in wrapper or "CFunc<() -> Int32>" not in wrapper:
+        issues.append("must resolve WSAGetLastError through a zero-argument Int32 CFunc")
+    if "let error__ = unsafe { errorProc__() }" not in wrapper:
+        issues.append("must read the WinSock extended error immediately")
+    if pending_success_status is not None:
+        if f"error__ == {pending_success_status}" not in wrapper:
+            issues.append(f"must treat WSA_IO_PENDING status {pending_success_status} as success")
+        if "windows_core.Result<Unit>.Ok(())" not in wrapper:
+            issues.append("must return Unit success for pending overlapped initiation")
+        pending_index = wrapper.find(f"error__ == {pending_success_status}")
+        err_index = wrapper.find(f"windows_core.Result<{result_type}>.Err(windows_core.errorFromWin32(UInt32(error__)))")
+        if pending_index < 0 or err_index < 0 or pending_index > err_index:
+            issues.append("must check WSA_IO_PENDING before translating the WinSock error")
+    if f"windows_core.Result<{result_type}>.Err(windows_core.errorFromWin32(UInt32(error__)))" not in wrapper:
+        issues.append("must translate the WSAGetLastError code through errorFromWin32")
+    if f"windows_core.Result<{result_type}>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not use Win32 thread last-error for WinSock SOCKET_ERROR failures")
+    if "GetLastError()" in wrapper or "SetLastError(" in wrapper:
+        issues.append("must not use regular Win32 last-error APIs for WinSock SOCKET_ERROR failures")
+    if preserves_status:
+        if "windows_core.Result<Int32>.Ok(result__)" not in wrapper:
+            issues.append("must return the Int32 value on success, including zero")
+        if "windows_core.Result<Unit>" in wrapper or "if (" + name + "(" in wrapper:
+            issues.append("must preserve the Int32 status instead of collapsing it to Bool/Unit")
+    else:
+        if "windows_core.Result<Unit>.Ok(())" not in wrapper:
+            issues.append("must return Unit on zero success")
+        if "windows_core.Result<Int32>" in wrapper:
+            issues.append("must not expose the zero success carrier as an Int32 value")
+    return issues
+
+
+def mswinsock_get_last_error_socket_error_int32_wrapper_shape_issues(
+    wrapper: str,
+    name: str,
+    preserves_status: bool,
+) -> list[str]:
+    issues: list[str] = []
+    result_type = "Int32" if preserves_status else "Unit"
+    if f"windows_core.Result<{result_type}>" not in wrapper:
+        issues.append(f"must return Result<{result_type}>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the Int32 result before checking failure")
+    if "result__ == -1" not in wrapper:
+        issues.append("must reject the SOCKET_ERROR -1 failure sentinel")
+    if "WSAGetLastError" in wrapper or "windows_libloading.resolveProc(" in wrapper:
+        issues.append("must use regular Win32 last-error, not WSAGetLastError")
+    if f"windows_core.Result<{result_type}>.Err(windows_core.errorFromThread())" not in wrapper and "GetLastError()" not in wrapper:
+        issues.append("must translate failure through regular Win32 last-error")
+    if preserves_status:
+        if "windows_core.Result<Int32>.Ok(result__)" not in wrapper:
+            issues.append("must return the Int32 value on success, including zero")
+        if "windows_core.Result<Unit>" in wrapper or "if (" + name + "(" in wrapper:
+            issues.append("must preserve the Int32 count/status instead of collapsing it to Bool/Unit")
+    else:
+        if "windows_core.Result<Unit>.Ok(())" not in wrapper:
+            issues.append("must return Unit on zero/non-SOCKET_ERROR success")
+        if "windows_core.Result<Int32>" in wrapper:
+            issues.append("must not expose the zero success carrier as an Int32 value")
+    return issues
+
+
+def winsock_direct_error_int32_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<Unit>" not in wrapper:
+        issues.append("must return Result<Unit>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the direct WinSock error code before checking failure")
+    if "result__ != 0" not in wrapper:
+        issues.append("must reject nonzero direct WinSock error codes")
+    if "windows_core.Result<Unit>.Err(windows_core.errorFromWin32(UInt32(result__)))" not in wrapper:
+        issues.append("must translate the returned WinSock error code through errorFromWin32")
+    if "windows_libloading.resolveProc(" in wrapper or "WSAGetLastError" in wrapper:
+        issues.append("must not call WSAGetLastError for direct-return WinSock error codes")
+    if "windows_core.Result<Unit>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not use Win32 thread last-error for direct-return WinSock error codes")
+    if "GetLastError()" in wrapper or "SetLastError(" in wrapper:
+        issues.append("must not use regular Win32 last-error APIs for direct-return WinSock error codes")
+    if "windows_core.Result<Unit>.Ok(())" not in wrapper:
+        issues.append("must return Unit on zero success")
+    if "windows_core.Result<Int32>" in wrapper:
+        issues.append("must not expose the success error-code carrier as an Int32 value")
+    return issues
+
+
+def winsock_pending_status_int32_wrapper_shape_issues(wrapper: str, name: str, pending_status: int) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<Int32>" not in wrapper:
+        issues.append("must return Result<Int32>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the WinSock status code before checking failure")
+    if f"result__ != 0 && result__ != {pending_status}" not in wrapper:
+        issues.append(f"must preserve pending status {pending_status} as a non-error result")
+    if "windows_core.Result<Int32>.Err(windows_core.errorFromWin32(UInt32(result__)))" not in wrapper:
+        issues.append("must translate non-pending returned WinSock error codes through errorFromWin32")
+    if "windows_libloading.resolveProc(" in wrapper or "WSAGetLastError" in wrapper:
+        issues.append("must not call WSAGetLastError for returned WinSock status codes")
+    if "windows_core.Result<Int32>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not use Win32 thread last-error for returned WinSock status codes")
+    if "GetLastError()" in wrapper or "SetLastError(" in wrapper:
+        issues.append("must not use regular Win32 last-error APIs for returned WinSock status codes")
+    if "windows_core.Result<Int32>.Ok(result__)" not in wrapper:
+        issues.append("must return the status code on zero or pending success")
+    if "windows_core.Result<Unit>" in wrapper:
+        issues.append("must preserve pending status instead of collapsing it to Unit")
+    return issues
+
+
+def winsock_lperrno_int32_wrapper_shape_issues(wrapper: str, name: str, preserves_status: bool) -> list[str]:
+    issues: list[str] = []
+    result_type = "Int32" if preserves_status else "Unit"
+    if f"windows_core.Result<{result_type}>" not in wrapper:
+        issues.append(f"must return Result<{result_type}>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the Int32 result before checking failure")
+    if "result__ == -1" not in wrapper:
+        issues.append("must reject the SOCKET_ERROR -1 failure sentinel")
+    if "lpErrno.isNull()" not in wrapper:
+        issues.append("must guard the lpErrno output pointer before reading it")
+    if f"windows_core.Result<{result_type}>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))" not in wrapper:
+        issues.append("must translate a null lpErrno pointer through E_POINTER")
+    if "let error__ = unsafe { lpErrno.read() }" not in wrapper:
+        issues.append("must read the WinSock error code from lpErrno")
+    if f"windows_core.Result<{result_type}>.Err(windows_core.errorFromWin32(UInt32(error__)))" not in wrapper:
+        issues.append("must translate the lpErrno code through errorFromWin32")
+    if "windows_libloading.resolveProc(" in wrapper or "WSAGetLastError" in wrapper:
+        issues.append("must not call WSAGetLastError for lpErrno-returned WinSock errors")
+    if f"windows_core.Result<{result_type}>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not use Win32 thread last-error for lpErrno-returned WinSock errors")
+    if "GetLastError()" in wrapper or "SetLastError(" in wrapper:
+        issues.append("must not use regular Win32 last-error APIs for lpErrno-returned WinSock errors")
+    if preserves_status:
+        if "windows_core.Result<Int32>.Ok(result__)" not in wrapper:
+            issues.append("must return the Int32 value on success")
+    elif "windows_core.Result<Unit>.Ok(())" not in wrapper:
+        issues.append("must return Unit on zero success")
+    if preserves_status and "windows_core.Result<Unit>" in wrapper:
+        issues.append("must preserve count/status instead of collapsing it to Unit")
+    if not preserves_status and "windows_core.Result<Int32>" in wrapper:
+        issues.append("must not expose the zero success carrier as an Int32 value")
+    return issues
+
+
+def winsock_invalid_socket_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<SOCKET>" not in wrapper:
+        issues.append("must return Result<SOCKET>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the SOCKET result before checking failure")
+    if "windows_polyfill.handlePointerIsMinusOne(result__.Value)" not in wrapper:
+        issues.append("must reject the pointer-width INVALID_SOCKET sentinel")
+    if "result__.Value == windows_polyfill.handlePointerFromInt(-1i64).toUIntNative()" in wrapper:
+        issues.append("must not compare CPointer SOCKET values to UIntNative sentinels")
+    if "result__.Value.isNull()" in wrapper:
+        issues.append("must not use null-handle semantics for INVALID_SOCKET")
+    if "windows_libloading.resolveProc(" not in wrapper or "CFunc<() -> Int32>" not in wrapper:
+        issues.append("must resolve WSAGetLastError through a zero-argument Int32 CFunc")
+    if "let error__ = unsafe { errorProc__() }" not in wrapper:
+        issues.append("must read the WinSock extended error immediately")
+    if "windows_core.Result<SOCKET>.Err(windows_core.errorFromWin32(UInt32(error__)))" not in wrapper:
+        issues.append("must translate the WSAGetLastError code through errorFromWin32")
+    if "windows_core.Result<SOCKET>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not use Win32 thread last-error for WinSock INVALID_SOCKET failures")
+    if "GetLastError()" in wrapper or "SetLastError(" in wrapper:
+        issues.append("must not use regular Win32 last-error APIs for WinSock INVALID_SOCKET failures")
+    if "windows_core.Result<SOCKET>.Ok(result__)" not in wrapper:
+        issues.append("must return the SOCKET on success")
+    return issues
+
+
+def winsock_bool_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    pending_success_status = WINSOCK_BOOL_PENDING_SUCCESS_METHODS.get(name)
+    result_type = "Bool" if pending_success_status is not None else "Unit"
+    if f"windows_core.Result<{result_type}>" not in wrapper:
+        issues.append(f"must return Result<{result_type}>")
+    if pending_success_status is not None:
+        if f"let result__ = {name}(" not in wrapper:
+            issues.append("must store the BOOL result before checking failure")
+        if "if (result__)" not in wrapper:
+            issues.append("must branch on the stored BOOL success result")
+        if "windows_core.Result<Bool>.Ok(true)" not in wrapper:
+            issues.append("must return Ok(true) on WinSock TRUE")
+        if f"error__ == {pending_success_status}" not in wrapper:
+            issues.append(f"must treat WSA_IO_PENDING status {pending_success_status} as pending success")
+        if "windows_core.Result<Bool>.Ok(false)" not in wrapper:
+            issues.append("must return Ok(false) for pending overlapped initiation")
+        pending_index = wrapper.find(f"error__ == {pending_success_status}")
+        err_index = wrapper.find("windows_core.Result<Bool>.Err(windows_core.errorFromWin32(UInt32(error__)))")
+        if pending_index < 0 or err_index < 0 or pending_index > err_index:
+            issues.append("must check WSA_IO_PENDING before translating the WinSock error")
+        if "windows_core.Result<Unit>" in wrapper:
+            issues.append("must preserve pending BOOL status instead of collapsing it to Unit")
+    else:
+        if re.search(rf"\bif\s*\(\s*{re.escape(name)}\s*\(", wrapper) is None:
+            issues.append("must branch on the BOOL success result")
+        if "return windows_core.Result<Unit>.Ok(())" not in wrapper:
+            issues.append("must return Ok(()) on WinSock TRUE")
+    if "windows_libloading.resolveProc(" not in wrapper or "CFunc<() -> Int32>" not in wrapper:
+        issues.append("must resolve WSAGetLastError through a zero-argument Int32 CFunc")
+    if "let error__ = unsafe { errorProc__() }" not in wrapper:
+        issues.append("must read the WinSock extended error immediately")
+    if f"windows_core.Result<{result_type}>.Err(windows_core.errorFromWin32(UInt32(error__)))" not in wrapper:
+        issues.append("must translate the WSAGetLastError code through errorFromWin32")
+    if "errorFromThread()" in wrapper:
+        issues.append("must not use Win32 thread last-error for WinSock BOOL failures")
+    if "GetLastError()" in wrapper or "SetLastError(" in wrapper:
+        issues.append("must not use regular Win32 last-error APIs for WinSock BOOL failures")
+    return issues
+
+
+def winsock_wait_event_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<WAIT_EVENT>" not in wrapper:
+        issues.append("must return Result<WAIT_EVENT>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the WAIT_EVENT result before checking failure")
+    if "result__ == 0xFFFFFFFFu32" not in wrapper:
+        issues.append("must reject WSA_WAIT_FAILED only")
+    if "windows_libloading.resolveProc(" not in wrapper or "CFunc<() -> Int32>" not in wrapper:
+        issues.append("must resolve WSAGetLastError through a zero-argument Int32 CFunc")
+    if "let error__ = unsafe { errorProc__() }" not in wrapper:
+        issues.append("must read the WinSock extended error immediately")
+    if "windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromWin32(UInt32(error__)))" not in wrapper:
+        issues.append("must translate the WSAGetLastError code through errorFromWin32")
+    if "windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not use Win32 thread last-error for WinSock WAIT_EVENT failures")
+    if "GetLastError()" in wrapper or "SetLastError(" in wrapper:
+        issues.append("must not use regular Win32 last-error APIs for WinSock WAIT_EVENT failures")
+    if "windows_core.Result<WAIT_EVENT>.Ok(result__)" not in wrapper:
+        issues.append("must return the WAIT_EVENT on success")
+    return issues
+
+
+def winsock_invalid_event_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<WSAEVENT>" not in wrapper:
+        issues.append("must return Result<WSAEVENT>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the WSAEVENT result before checking failure")
+    if "result__.Value.isNull()" not in wrapper:
+        issues.append("must reject WSA_INVALID_EVENT null event returns")
+    if "windows_libloading.resolveProc(" not in wrapper or "CFunc<() -> Int32>" not in wrapper:
+        issues.append("must resolve WSAGetLastError through a zero-argument Int32 CFunc")
+    if "let error__ = unsafe { errorProc__() }" not in wrapper:
+        issues.append("must read the WinSock extended error immediately")
+    if "windows_core.Result<WSAEVENT>.Err(windows_core.errorFromWin32(UInt32(error__)))" not in wrapper:
+        issues.append("must translate the WSAGetLastError code through errorFromWin32")
+    if "windows_core.Result<WSAEVENT>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not use Win32 thread last-error for WinSock WSA_INVALID_EVENT failures")
+    if "GetLastError()" in wrapper or "SetLastError(" in wrapper:
+        issues.append("must not use regular Win32 last-error APIs for WinSock WSA_INVALID_EVENT failures")
+    if "windows_core.Result<WSAEVENT>.Ok(result__)" not in wrapper:
+        issues.append("must return the WSAEVENT on success")
+    return issues
+
+
+def winsock_null_wrapper_shape_issues(wrapper: str, name: str, return_type: str) -> list[str]:
+    issues: list[str] = []
+    if f"windows_core.Result<{return_type}>" not in wrapper:
+        issues.append(f"must return Result<{return_type}>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the nullable result before checking failure")
+    if "result__.isNull()" not in wrapper:
+        issues.append("must reject null WinSock returns")
+    if "windows_libloading.resolveProc(" not in wrapper or "CFunc<() -> Int32>" not in wrapper:
+        issues.append("must resolve WSAGetLastError through a zero-argument Int32 CFunc")
+    if "let error__ = unsafe { errorProc__() }" not in wrapper:
+        issues.append("must read the WinSock extended error immediately")
+    if f"windows_core.Result<{return_type}>.Err(windows_core.errorFromWin32(UInt32(error__)))" not in wrapper:
+        issues.append("must translate the WSAGetLastError code through errorFromWin32")
+    if f"windows_core.Result<{return_type}>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not use Win32 thread last-error for WinSock null returns")
+    if "GetLastError()" in wrapper or "SetLastError(" in wrapper:
+        issues.append("must not use regular Win32 last-error APIs for WinSock null returns")
+    if f"windows_core.Result<{return_type}>.Ok(result__)" not in wrapper:
+        issues.append("must return the value on success")
+    return issues
+
+
+def wait_failed_uint32_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<WAIT_EVENT>" not in wrapper:
+        issues.append("must return Result<WAIT_EVENT>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the UInt32 wait result before checking failure")
+    if "result__ == 0xFFFFFFFFu32" not in wrapper:
+        issues.append("must reject WAIT_FAILED only")
+    if "windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())" not in wrapper:
+        issues.append("must translate WAIT_FAILED through errorFromThread()")
+    if "windows_core.Result<WAIT_EVENT>.Ok(result__)" not in wrapper:
+        issues.append("must return the wait result on success or timeout")
+    if "WAIT_TIMEOUT" in wrapper:
+        issues.append("must not special-case WAIT_TIMEOUT as failure")
+    return issues
+
+
+def direct_win32_error_code_int32_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<Unit>" not in wrapper:
+        issues.append("must return Result<Unit>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the returned Win32 error code before checking failure")
+    if "result__ != 0" not in wrapper:
+        issues.append("must reject nonzero returned Win32 error codes")
+    if "windows_core.Result<Unit>.Err(windows_core.errorFromWin32(UInt32(result__)))" not in wrapper:
+        issues.append("must translate the returned Win32 error code through errorFromWin32(UInt32(result__))")
+    if "windows_core.Result<Unit>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not read thread last-error for returned-error-code APIs")
+    if "windows_libloading.resolveProc(" in wrapper or "WSAGetLastError" in wrapper:
+        issues.append("must not call WSAGetLastError for returned-error-code APIs")
+    if "GetLastError()" in wrapper or "SetLastError(" in wrapper:
+        issues.append("must not use regular Win32 last-error APIs for returned-error-code APIs")
+    if "windows_core.Result<Unit>.Ok(())" not in wrapper:
+        issues.append("must return Ok(()) on ERROR_SUCCESS")
+    if "windows_core.Result<Int32>" in wrapper:
+        issues.append("must not expose the success error-code carrier as an Int32 value")
+    return issues
+
+
+def direct_win32_error_code_int32_status_wrapper_shape_issues(
+    wrapper: str,
+    name: str,
+    success_statuses: Sequence[int],
+) -> list[str]:
+    issues: list[str] = []
+    expected_statuses = set(success_statuses)
+    if "windows_core.Result<Int32>" not in wrapper:
+        issues.append("must return Result<Int32>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the returned Win32 status code before checking failure")
+    for status in success_statuses:
+        if f"result__ == {status}" not in wrapper:
+            issues.append(f"must preserve {status} as a non-failing status")
+    observed_statuses = {int(value) for value in re.findall(r"result__\s*==\s*(\d+)(?!u32)", wrapper)}
+    extra_statuses = sorted(observed_statuses - expected_statuses)
+    if extra_statuses:
+        issues.append(f"must not preserve unexpected status code(s): {extra_statuses}")
+    if "result__ != 0" in wrapper:
+        issues.append("must not reject every nonzero status")
+    if "windows_core.Result<Int32>.Err(windows_core.errorFromWin32(UInt32(result__)))" not in wrapper:
+        issues.append("must translate unrecognized returned status codes through errorFromWin32(UInt32(result__))")
+    if "windows_core.Result<Int32>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not read thread last-error for returned-status APIs")
+    if "windows_libloading.resolveProc(" in wrapper or "WSAGetLastError" in wrapper:
+        issues.append("must not call WSAGetLastError for returned-status APIs")
+    if "GetLastError()" in wrapper or "SetLastError(" in wrapper:
+        issues.append("must not use regular Win32 last-error APIs for returned-status APIs")
+    if "windows_core.Result<Int32>.Ok(result__)" not in wrapper:
+        issues.append("must return the Int32 status on recognized non-failing statuses")
+    if "windows_core.Result<Unit>" in wrapper or "windows_core.Result<Unit>.Ok(())" in wrapper:
+        issues.append("must not collapse status-bearing success into Unit")
+    return issues
+
+
+def direct_win32_error_code_uint32_wrapper_shape_issues(wrapper: str, name: str) -> list[str]:
+    issues: list[str] = []
+    if "windows_core.Result<Unit>" not in wrapper:
+        issues.append("must return Result<Unit>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the returned Win32 error code before checking failure")
+    if "result__ != 0u32" not in wrapper:
+        issues.append("must reject nonzero returned Win32 error codes")
+    if "windows_core.Result<Unit>.Err(windows_core.errorFromWin32(result__))" not in wrapper:
+        issues.append("must translate the returned Win32 error code through errorFromWin32(result__)")
+    if "windows_core.Result<Unit>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not read thread last-error for returned-error-code APIs")
+    if "windows_libloading.resolveProc(" in wrapper or "WSAGetLastError" in wrapper:
+        issues.append("must not call WSAGetLastError for returned-error-code APIs")
+    if "GetLastError()" in wrapper or "SetLastError(" in wrapper:
+        issues.append("must not use regular Win32 last-error APIs for returned-error-code APIs")
+    if "windows_core.Result<Unit>.Ok(())" not in wrapper:
+        issues.append("must return Ok(()) on NO_ERROR")
+    if "windows_core.Result<UInt32>" in wrapper:
+        issues.append("must not expose the success error-code carrier as a UInt32 value")
+    return issues
+
+
+def direct_win32_error_code_uint32_status_wrapper_shape_issues(
+    wrapper: str,
+    name: str,
+    success_statuses: Sequence[int],
+) -> list[str]:
+    issues: list[str] = []
+    expected_statuses = set(success_statuses)
+    if "windows_core.Result<UInt32>" not in wrapper:
+        issues.append("must return Result<UInt32>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the returned Win32 status code before checking failure")
+    for status in success_statuses:
+        if f"result__ == {status}u32" not in wrapper:
+            issues.append(f"must preserve {status}u32 as a non-failing status")
+    observed_statuses = {int(value) for value in re.findall(r"result__\s*==\s*(\d+)u32", wrapper)}
+    extra_statuses = sorted(observed_statuses - expected_statuses)
+    if extra_statuses:
+        issues.append(f"must not preserve unexpected status code(s): {extra_statuses}")
+    if "result__ != 0u32" in wrapper:
+        issues.append("must not reject every nonzero status")
+    if "windows_core.Result<UInt32>.Err(windows_core.errorFromWin32(result__))" not in wrapper:
+        issues.append("must translate unrecognized returned status codes through errorFromWin32(result__)")
+    if "windows_core.Result<UInt32>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not read thread last-error for returned-status APIs")
+    if "windows_libloading.resolveProc(" in wrapper or "WSAGetLastError" in wrapper:
+        issues.append("must not call WSAGetLastError for returned-status APIs")
+    if "GetLastError()" in wrapper or "SetLastError(" in wrapper:
+        issues.append("must not use regular Win32 last-error APIs for returned-status APIs")
+    if "windows_core.Result<UInt32>.Ok(result__)" not in wrapper:
+        issues.append("must return the UInt32 status on recognized non-failing statuses")
+    if "windows_core.Result<Unit>" in wrapper or "windows_core.Result<Unit>.Ok(())" in wrapper:
+        issues.append("must not collapse status-bearing success into Unit")
+    return issues
+
+
+def uint32_less_than_or_equal_wrapper_shape_issues(wrapper: str, name: str, threshold: int) -> list[str]:
+    issues: list[str] = []
+    threshold_literal = f"{threshold}u32"
+    if "windows_core.Result<UInt32>" not in wrapper:
+        issues.append("must return Result<UInt32>")
+    if f"let result__ = {name}(" not in wrapper:
+        issues.append("must store the UInt32 result before checking failure")
+    if f"result__ <= {threshold_literal}" not in wrapper:
+        issues.append(f"must reject UInt32 results <= {threshold_literal}")
+    if "windows_core.Result<UInt32>.Err(windows_core.errorFromWin32(result__))" not in wrapper:
+        issues.append("must translate the returned Win32 error code through errorFromWin32(result__)")
+    if "windows_core.Result<UInt32>.Err(windows_core.errorFromThread())" in wrapper:
+        issues.append("must not read thread last-error for returned-error-code APIs")
+    if "windows_core.Result<UInt32>.Ok(result__)" not in wrapper:
+        issues.append("must return the UInt32 value on success")
+    return issues
+
+
+def method_has_set_last_error(method: dict) -> bool:
+    method_import = method.get("Import") or {}
+    import_attributes = method_import.get("Attributes") or []
+    return "SetLastError" in import_attributes
+
+
+def method_imports_from_module(method: dict, module_name: str) -> bool:
+    method_import = method.get("Import") or {}
+    module = method_import.get("Module") or {}
+    return module.get("Name") == module_name
+
+
+def method_has_parameter_named(method: dict, parameter_name: str) -> bool:
+    for parameter in method.get("Parameters") or []:
+        if not isinstance(parameter, dict):
+            continue
+        if parameter.get("Name") == parameter_name:
+            return True
+    return False
+
+
+def method_has_custom_attribute(method: dict, short_name: str) -> bool:
+    return parameter_has_custom_attribute(method, short_name)
+
+
+def parameter_has_custom_attribute(parameter: dict, short_name: str) -> bool:
+    for attribute in parameter.get("CustomAttributes") or []:
+        if not isinstance(attribute, dict):
+            continue
+        type_name = attribute.get("Type")
+        if isinstance(type_name, str) and (type_name == short_name or type_name.endswith("." + short_name)):
+            return True
+    return False
+
+
+def signature_full_name(signature: object) -> str | None:
+    if not isinstance(signature, dict) or signature.get("Kind") != "Type":
+        return None
+    namespace = signature.get("Namespace")
+    name = signature.get("Name")
+    if not isinstance(name, str):
+        return None
+    if isinstance(namespace, str) and namespace:
+        return f"{namespace}.{name}"
+    return name
+
+
+def signature_primitive_name(signature: object) -> str | None:
+    if not isinstance(signature, dict) or signature.get("Kind") != "Primitive":
+        return None
+    name = signature.get("Name")
+    return name if isinstance(name, str) else None
+
+
+def signature_is_uint32_like(signature: object) -> bool:
+    primitive_name = signature_primitive_name(signature)
+    if primitive_name == "UInt32":
+        return True
+    return signature_full_name(signature) == "Windows.Win32.Foundation.WIN32_ERROR"
+
+
+def signature_is_void_pointer(signature: object) -> bool:
+    if not isinstance(signature, dict) or signature.get("Kind") != "Pointer":
+        return False
+    target = signature.get("Type")
+    return signature_primitive_name(target) == "Void"
+
+
+def signature_pointer_cj_type(signature: object) -> str | None:
+    if not isinstance(signature, dict) or signature.get("Kind") != "Pointer":
+        return None
+    target = signature.get("Type")
+    primitive_name = signature_primitive_name(target)
+    if primitive_name == "Void":
+        return "CPointer<Unit>"
+    target_full_name = signature_full_name(target)
+    if target_full_name is not None:
+        return f"CPointer<{target_full_name.rsplit('.', 1)[-1]}>"
+    return None
+
+
+def signature_is_pointer_to_pointer(signature: object) -> bool:
+    if not isinstance(signature, dict) or signature.get("Kind") != "Pointer":
+        return False
+    target = signature.get("Type")
+    return isinstance(target, dict) and target.get("Kind") == "Pointer"
+
+
+def signature_pointer_target_full_name(signature: object) -> str | None:
+    if not isinstance(signature, dict) or signature.get("Kind") != "Pointer":
+        return None
+    return signature_full_name(signature.get("Type"))
+
+
+def signature_pointer_pointer_target_full_name(signature: object) -> str | None:
+    if not isinstance(signature, dict) or signature.get("Kind") != "Pointer":
+        return None
+    return signature_pointer_target_full_name(signature.get("Type"))
+
+
+def signature_pointer_target_primitive_name(signature: object) -> str | None:
+    if not isinstance(signature, dict) or signature.get("Kind") != "Pointer":
+        return None
+    return signature_primitive_name(signature.get("Type"))
+
+
+def method_has_out_parameter(method: dict) -> bool:
+    for parameter in method.get("Parameters") or []:
+        if "Out" in (parameter.get("Attributes") or []):
+            return True
+    return False
+
+
+def semantic_bool_name(name: str) -> bool:
+    return any(semantic_prefix_matches(name, prefix) for prefix in SEMANTIC_BOOL_PREFIXES)
+
+
+def semantic_prefix_matches(name: str, prefix: str) -> bool:
+    if not name.startswith(prefix):
+        return False
+    if len(name) == len(prefix):
+        return True
+    return "A" <= name[len(prefix)] <= "Z"
 
 
 def check_cj_import_boundaries(workspace: Path, root: Path, allowed_imports: set[str]) -> None:
@@ -1171,6 +8616,17 @@ def check_package_boundaries(workspace: Path) -> None:
     interface_native = workspace / "windows-interface" / "src" / "native.cj"
     if interface_native.exists():
         fail("implementation native helpers must not live in windows-interface/src/native.cj")
+    interface_wrapper_text = (workspace / "windows-interface" / "src" / "interface_wrapper.cj").read_text(encoding="utf-8")
+    iinspectable_vtbl_section = section_between(
+        interface_wrapper_text,
+        "public struct IInspectableVtbl",
+        "public struct IAgileObjectVtbl",
+        "windows-interface default IInspectableVtbl",
+    )
+    if "countPtr.isNull() || iidsPtr.isNull()" not in iinspectable_vtbl_section:
+        fail("windows-interface default IInspectableVtbl.GetIids must reject null out pointers")
+    if iinspectable_vtbl_section.count("if (valuePtr.isNull())") < 2:
+        fail("windows-interface default IInspectableVtbl must reject null runtime-name and trust-level out pointers")
 
     implement_native = workspace / "windows-implement" / "src" / "native.cj"
     check_path_exists(implement_native, "windows-implement native helper")
@@ -1289,6 +8745,10 @@ def check_package_boundaries(workspace: Path) -> None:
         fail("windows-implement must map explicit custom vtables through resolved schema slots")
     if "func requiredDescriptorIndicesForCustomSlots(" not in implement_surface_text:
         fail("windows-implement explicit custom vtable mapping must require the deepest descriptor per slot")
+    if 'getStaticFunction("vtablePtr", parseParameterTypes(""))' not in implement_surface_text:
+        fail("windows-implement descriptor-backed vtable reflection must target no-arg wrapper vtablePtr()")
+    if 'getStaticFunction("vtablePtr", Array<TypeInfo>(0, { _ => TypeInfo.of<Int64>() }))' in implement_surface_text:
+        fail("windows-implement descriptor-backed vtable reflection must not look for obsolete vtablePtr(Int64)")
     if "func requireExplicitSchemaCustomVtbls(" not in implement_surface_text:
         fail("windows-implement schema-only factories must reject custom interfaces without vtables")
     if "func requireCompleteCustomVtbls(" not in implement_surface_text:
@@ -1301,6 +8761,8 @@ def check_package_boundaries(workspace: Path) -> None:
     check_path_exists(schema_vtable_test, "windows-implement schema vtable guard test")
     if "testSchemaOnlyCustomInterfacesRequireExplicitVtables" not in schema_vtable_test.read_text(encoding="utf-8"):
         fail("windows-implement must test schema-only custom interface rejection")
+    if "testDescriptorBackedCustomInterfaceReflectsNoArgWrapperVtbl" not in schema_vtable_test.read_text(encoding="utf-8"):
+        fail("windows-implement must test descriptor-backed custom interface vtable reflection")
     if "Array<CPointer<Unit>>(0" not in schema_vtable_test.read_text(encoding="utf-8") or "[CPointer<Unit>()]" not in schema_vtable_test.read_text(encoding="utf-8"):
         fail("windows-implement must test missing explicit schema vtable rejection")
     if "testInheritedCustomInterfacesRequireLeafVtable" not in schema_vtable_test.read_text(encoding="utf-8"):
@@ -1327,6 +8789,31 @@ def check_package_boundaries(workspace: Path) -> None:
         fail("windows-core activation factory loading must centralize HSTRING input projection")
     if "winrtBorrowGenericIn<HString>(classId)" not in factory_cache_text:
         fail("windows-core activation factory loading must borrow class IDs as system HSTRING copies")
+    if "if (incrementHr.failed())" not in factory_cache_text:
+        fail("windows-core activation factory loading must preserve CoIncrementMTAUsage failures")
+    if "class FactoryMTAUsageGuard" not in factory_cache_text or "let processFactoryMTAUsage" not in factory_cache_text:
+        fail("windows-core activation factory loading must retain CoIncrementMTAUsage as a single process guard")
+    if "mtaUsage!: FactoryMTAUsageGuard = processFactoryMTAUsage" not in factory_cache_text:
+        fail("windows-core activation factory test hook must allow isolated MTA usage guards")
+    if "let incrementHr = mtaUsage.ensure(incrementMTAUsageCall)" not in factory_cache_text:
+        fail("windows-core activation factory loading must route CoIncrementMTAUsage through the process guard")
+    if "cookie = Some(newCookie)" not in factory_cache_text or "newCookie.isNull()" not in factory_cache_text:
+        fail("windows-core activation factory MTA guard must store only successful non-null cookies")
+    factory_cache_tests = (workspace / "windows-core" / "src" / "factory_cache_test.cj").read_text(encoding="utf-8")
+    if (
+        "testSystemActivationFactoryUsesSingleProcessMTAUsageGuard" not in factory_cache_tests
+        or "factoryCacheTestSuccessfulMTAIncrement" not in factory_cache_tests
+        or "mtaUsage: mtaUsage" not in factory_cache_tests
+        or "@Expect(factoryCacheTestIncrementCalls.load(), 1)" not in factory_cache_tests
+    ):
+        fail("windows-core activation factory tests must cover single-guard MTA usage fallback")
+    if (
+        "enum RegFreeFactoryLoad" not in factory_cache_text
+        or "MissingCandidate" not in factory_cache_text
+        or "Loaded(Result<I>)" not in factory_cache_text
+        or "case RegFreeFactoryLoad<I>.Loaded(result)" not in factory_cache_text
+    ):
+        fail("windows-core reg-free activation must distinguish missing candidates from loaded candidate failures")
     winui_xaml_text = (workspace / "windows-winui3" / "src" / "xaml" / "mod.cj").read_text(encoding="utf-8")
     for pattern in (
         "table.SetTitle(raw, title.asRaw())",
@@ -1378,6 +8865,7 @@ def check_package_boundaries(workspace: Path) -> None:
         if pattern in winui_xaml_text:
             fail("windows-winui3 Application.Start must not use function-pointer delegate shims")
     check_winui_xaml_failed_out_cleanup(workspace)
+    check_winui_xaml_callback_com_invariants(workspace)
     foundation_runtime_text = (workspace / "windows-runtime" / "src" / "foundation_runtime.cj").read_text(encoding="utf-8")
     for pattern in (
         "v.GetActivationFactory(asRaw(), activatableClassId.asRaw(),",
@@ -1459,6 +8947,8 @@ def check_package_boundaries(workspace: Path) -> None:
     native_helpers_text = (workspace / "windows-bindgen" / "src" / "native_helpers.cj").read_text(encoding="utf-8")
     if "resolveProc(${spec.dynamicModuleParameterName}" in native_helpers_text:
         fail("windows-bindgen dynamic native helpers must use the explicit search-path resolver")
+    check_pinvoke_string_out_cleanup_gate(workspace)
+    check_native_hresult_optional_out_cleanup_gate(workspace)
     app_runtime_helpers = workspace / "windows-common" / "src" / "Native" / "AppRuntime" / "native_helpers.cj"
     check_path_exists(app_runtime_helpers, "windows-common AppRuntime native helpers")
     app_runtime_text = app_runtime_helpers.read_text(encoding="utf-8")
@@ -1498,6 +8988,28 @@ def check_active_tools(workspace: Path) -> None:
     check_path_exists(workspace / "windows-winui3" / "src" / "xaml" / "mod.cj", "WinUI3 XAML helper")
     runtime_runner = workspace / "scripts" / "run_windows_runtime_tests.py"
     check_path_exists(runtime_runner, "windows-runtime watchdog test runner")
+    runtime_runner_text = runtime_runner.read_text(encoding="utf-8")
+    try:
+        runtime_runner_tree = ast.parse(runtime_runner_text)
+    except SyntaxError as exc:
+        fail(f"windows-runtime test runner must be valid Python: {exc}")
+    if not python_has_command_list_prefix(runtime_runner_tree, ("cjv", "exec")):
+        fail("windows-runtime test runner must build with cjpm --no-run and execute binaries through cjv exec")
+    if not python_has_command_list_prefix(runtime_runner_tree, ("cjpm", "test")) or not python_has_command_list_value(
+        runtime_runner_tree,
+        "--no-run",
+    ):
+        fail("windows-runtime test runner must build with cjpm --no-run and execute binaries through cjv exec")
+    if python_runner_directly_executes_name(runtime_runner_tree, "BINARY"):
+        fail("windows-runtime test runner must not execute produced .exe files directly")
+    if "cjHeapSize" not in runtime_runner_text or "32GB" not in runtime_runner_text:
+        fail("windows-runtime test runner must force cjHeapSize=32GB")
+    if "FAILED" not in runtime_runner_text or "ERROR" not in runtime_runner_text or "summary_counts" not in runtime_runner_text:
+        fail("windows-runtime test runner must fail on unittest FAILED/ERROR summary counts")
+    if "remove_expected_runtime_binary()" not in runtime_runner_text or "$test.cjo.flag" not in runtime_runner_text:
+        fail("windows-runtime test runner must clear stale unittest binaries before rebuilding")
+    if "do not pass --timeout-each" not in runtime_runner_text or "runtime_test_command" not in runtime_runner_text:
+        fail("windows-runtime test runner must use the external watchdog instead of unittest --timeout-each")
     workspace_runner = workspace / "scripts" / "run_windows_workspace_tests.py"
     check_path_exists(workspace_runner, "workspace direct-binary test runner")
     workspace_runner_text = workspace_runner.read_text(encoding="utf-8")
@@ -1509,6 +9021,63 @@ def check_active_tools(workspace: Path) -> None:
         fail("workspace test runner must fail on unittest FAILED/ERROR summary counts")
     if "test_package_names" not in workspace_runner_text or "remove_expected_test_binaries" not in workspace_runner_text:
         fail("workspace test runner must execute exact package unittest binaries without stale prefix matches")
+    if "workspace_build_command" not in workspace_runner_text or "workspace_test_command" not in workspace_runner_text:
+        fail("workspace test runner must centralize exact cjpm build and cjv exec commands")
+    if "--dry-run" not in workspace_runner_text or "--self-test" not in workspace_runner_text:
+        fail("workspace test runner must expose dry-run sampling and quick-gate self-test modes")
+    common_codegen_gate = workspace / "scripts" / "check_windows_common_codegen.py"
+    check_path_exists(common_codegen_gate, "windows-common codegen gate")
+    common_codegen_gate_text = common_codegen_gate.read_text(encoding="utf-8")
+    if (
+        "--allow-missing-winui-metadata" not in common_codegen_gate_text
+        or "cannot silently skip missing WinUI/WindowsAppSDK metadata" not in common_codegen_gate_text
+    ):
+        fail("full windows-common codegen gate must require explicit opt-in before skipping missing WinUI metadata")
+    if "remove_expected_generator_binary()" not in common_codegen_gate_text or 'with_suffix(".cjo")' not in common_codegen_gate_text:
+        fail("windows-common codegen gate must clear stale generator binaries before rebuilding")
+    quality_gate = workspace / "scripts" / "run_windows_quality_gate.py"
+    check_path_exists(quality_gate, "unified quality gate")
+    quality_gate_text = quality_gate.read_text(encoding="utf-8")
+    if "--allow-missing-winui-metadata" not in quality_gate_text:
+        fail("unified quality gate must expose the explicit missing-WinUI metadata opt-in")
+    if "generate_vector_input_abi.py" not in quality_gate_text or "--check-all" not in quality_gate_text:
+        fail("unified quality gate must check both vector ABI tests and collections_runtime fragments")
+    macro_check = workspace / "windows-interface" / "scripts" / "check_macros.py"
+    check_path_exists(macro_check, "windows-interface macro check script")
+    macro_check_text = macro_check.read_text(encoding="utf-8")
+    try:
+        macro_check_tree = ast.parse(macro_check_text)
+    except SyntaxError as exc:
+        fail(f"windows-interface macro check script must be valid Python: {exc}")
+    if not python_defines_function(macro_check_tree, "cjv_exec_args") or not macro_fixture_uses_cjv_exec(macro_check_tree):
+        fail("windows-interface macro fixtures must execute produced binaries through cjv exec")
+    if macro_fixture_directly_executes_binary(macro_check_tree):
+        fail("windows-interface macro fixtures must not execute produced .exe files directly")
+    if (
+        "compile_descriptor_codegen_fixture" not in macro_check_text
+        or "descriptor_codegen_compile_fixture" not in macro_check_text
+        or "windows_core.winrtStoreGenericOut<Fixture_IOutput>(result__, value)" not in macro_check_text
+    ):
+        fail("windows-interface macro fixtures must compile descriptor_codegen WinRT out-slot output")
+    if (
+        "quick workspace Cangjie tests" not in quality_gate_text
+        or '"windows-bindgen"' not in quality_gate_text
+        or '"windows-core"' not in quality_gate_text
+        or '"windows-implement"' not in quality_gate_text
+        or '"windows-interface"' not in quality_gate_text
+        or '"windows-runtime"' not in quality_gate_text
+    ):
+        fail("quick quality gate must run focused Cangjie workspace tests")
+    if "macro fixtures" not in quality_gate_text or "windows-interface/scripts/check_macros.py" not in quality_gate_text:
+        fail("quick quality gate must compile and execute macro fixtures")
+    required_runtime_smokes = (
+        "testRealActivationFactoryReportsUnavailableClass",
+        "testRealPropertyValueInt32ArrayRoundTrip",
+        "testRealUriDecoderRoundTripsHStringAndCollectionProjection",
+    )
+    if "windows-runtime smoke test" not in quality_gate_text or any(name not in quality_gate_text for name in required_runtime_smokes):
+        fail("quick quality gate must run a real windows-runtime smoke test")
+    check_runtime_smoke_bodies(workspace, required_runtime_smokes)
     demo_root = workspace.parent / "windows-cj-demo"
     if demo_root.exists():
         demo_cjpm = (demo_root / "cjpm.toml").read_text(encoding="utf-8")
@@ -1625,6 +9194,307 @@ def check_abi_ownership(workspace: Path) -> None:
         fail(f"check_abi_ownership.py failed:\n{result.stdout}{result.stderr}")
 
 
+def function_body(text: str, function_name: str) -> str | None:
+    match = re.search(rf"\bfunc\s+{re.escape(function_name)}\s*(?:<[^{{()]*>)?\s*\(", text)
+    if match is None:
+        return None
+    brace = text.find("{", match.end())
+    if brace < 0:
+        return None
+    depth = 0
+    for index in range(brace, len(text)):
+        char = text[index]
+        if char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                return text[brace + 1 : index]
+    return None
+
+
+def python_defines_function(tree: ast.AST, name: str) -> bool:
+    return any(isinstance(node, ast.FunctionDef) and node.name == name for node in ast.walk(tree))
+
+
+def python_name(node: ast.AST) -> str | None:
+    if isinstance(node, ast.Name):
+        return node.id
+    if isinstance(node, ast.Attribute):
+        owner = python_name(node.value)
+        if owner is None:
+            return node.attr
+        return f"{owner}.{node.attr}"
+    return None
+
+
+def python_references_name(node: ast.AST, name: str) -> bool:
+    return any(isinstance(child, ast.Name) and child.id == name for child in ast.walk(node))
+
+
+def python_is_cjv_exec_args_fixture_call(node: ast.AST) -> bool:
+    return (
+        isinstance(node, ast.Call)
+        and python_name(node.func) == "cjv_exec_args"
+        and len(node.args) == 1
+        and isinstance(node.args[0], ast.Name)
+        and node.args[0].id == "fixture_exe"
+    )
+
+
+def macro_fixture_uses_cjv_exec(tree: ast.AST) -> bool:
+    for node in ast.walk(tree):
+        if (
+            isinstance(node, ast.Call)
+            and python_name(node.func) == "run"
+            and len(node.args) >= 1
+            and python_is_cjv_exec_args_fixture_call(node.args[0])
+        ):
+            return True
+    return False
+
+
+def macro_fixture_directly_executes_binary(tree: ast.AST) -> bool:
+    launchers = {"run", "subprocess.run", "subprocess.Popen", "subprocess.call", "subprocess.check_call", "subprocess.check_output"}
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call) or python_name(node.func) not in launchers or len(node.args) < 1:
+            continue
+        command = node.args[0]
+        if python_is_cjv_exec_args_fixture_call(command):
+            continue
+        if python_command_starts_with_name(command, "fixture_exe"):
+            return True
+    return False
+
+
+def python_command_starts_with_name(command: ast.AST, name: str) -> bool:
+    if python_direct_name_or_str_call(command, name):
+        return True
+    if isinstance(command, (ast.List, ast.Tuple)) and command.elts:
+        return python_direct_name_or_str_call(command.elts[0], name)
+    return False
+
+
+def python_direct_name_or_str_call(node: ast.AST, name: str) -> bool:
+    if isinstance(node, ast.Name) and node.id == name:
+        return True
+    return (
+        isinstance(node, ast.Call)
+        and python_name(node.func) == "str"
+        and len(node.args) == 1
+        and isinstance(node.args[0], ast.Name)
+        and node.args[0].id == name
+    )
+
+
+def python_has_command_list_prefix(tree: ast.AST, prefix: tuple[str, ...]) -> bool:
+    for node in ast.walk(tree):
+        if not isinstance(node, (ast.List, ast.Tuple)) or len(node.elts) < len(prefix):
+            continue
+        values: list[str] = []
+        for element in node.elts[: len(prefix)]:
+            if not isinstance(element, ast.Constant) or not isinstance(element.value, str):
+                break
+            values.append(element.value)
+        if tuple(values) == prefix:
+            return True
+    return False
+
+
+def python_has_command_list_value(tree: ast.AST, value: str) -> bool:
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Constant) and node.value == value:
+            return True
+    return False
+
+
+def python_runner_directly_executes_name(tree: ast.AST, name: str) -> bool:
+    launchers = {
+        "run_with_watchdog",
+        "run",
+        "subprocess.run",
+        "subprocess.Popen",
+        "subprocess.call",
+        "subprocess.check_call",
+        "subprocess.check_output",
+    }
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call) or python_name(node.func) not in launchers or len(node.args) < 1:
+            continue
+        if python_command_starts_with_name(node.args[0], name):
+            return True
+    return False
+
+
+def check_runtime_smoke_bodies(workspace: Path, required_smokes: Sequence[str]) -> None:
+    smoke_source = workspace / "windows-runtime" / "src" / "windows_runtime_smoke_test.cj"
+    check_path_exists(smoke_source, "windows-runtime real smoke tests")
+    smoke_text = smoke_source.read_text(encoding="utf-8")
+    required_markers = {
+        "testRealActivationFactoryReportsUnavailableClass": (
+            "activationFactory<",
+            "Result<IActivationFactory>.Err",
+            "error.code()",
+            "REGDB_E_CLASSNOTREG",
+        ),
+        "testRealPropertyValueInt32ArrayRoundTrip": (
+            "PropertyValue.CreateInt32Array",
+            "GetInt32Array",
+        ),
+        "testRealUriDecoderRoundTripsHStringAndCollectionProjection": (
+            "Uri.CreateUri",
+            "QueryParsed",
+            "GetFirstValueByName",
+            "GetAt",
+        ),
+    }
+    for smoke in required_smokes:
+        body = function_body(smoke_text, smoke)
+        if body is None:
+            fail(f"windows-runtime smoke test is missing required function body: {smoke}")
+        code_body = mask_cj_strings_and_comments(body)
+        missing = [marker for marker in required_markers.get(smoke, ()) if marker not in code_body]
+        if missing:
+            fail(f"windows-runtime smoke test {smoke} no longer exercises real WinRT calls; missing={missing}")
+
+
+def check_propvariant_propsys_smoke(workspace: Path) -> None:
+    source = workspace / "windows-propvariant" / "src" / "propvariant_test.cj"
+    check_path_exists(source, "windows-propvariant PROPVARIANT tests")
+    text = source.read_text(encoding="utf-8")
+    required_file_markers = (
+        "func propVariantSmokePropsysProc",
+        '"propsys.dll"',
+        '"PropVariantToString"',
+        '"PropVariantToInt32"',
+        '@When[os == "Windows"]',
+        "func propsysConsumesCangjiePropVariants",
+    )
+    missing_file = [marker for marker in required_file_markers if marker not in text]
+    if missing_file:
+        fail(f"windows-propvariant must keep real Propsys PROPVARIANT smoke coverage; missing={missing_file}")
+
+    body = function_body(text, "propsysConsumesCangjiePropVariants")
+    if body is None:
+        fail("windows-propvariant Propsys smoke test body is missing")
+    code_body = mask_cj_strings_and_comments(body)
+    required_body_markers = (
+        "PropVariant(propVariantFromString(",
+        "PropVariant(propVariantFromInt32(",
+        "propVariantSmokeToString(",
+        "propVariantSmokeToInt32(",
+    )
+    missing_body = [marker for marker in required_body_markers if marker not in code_body]
+    if missing_body:
+        fail(f"windows-propvariant Propsys smoke no longer consumes Cangjie PROPVARIANTs; missing={missing_body}")
+
+
+def check_variant_oleaut_smoke(workspace: Path) -> None:
+    source = workspace / "windows-variant" / "src" / "variant_test.cj"
+    check_path_exists(source, "windows-variant VARIANT tests")
+    text = source.read_text(encoding="utf-8")
+    required_file_markers = (
+        "func variantSmokeChangeType",
+        '"oleaut32.dll"',
+        '"VariantChangeType"',
+        '@When[os == "Windows"]',
+        "func oleautVariantChangeTypeConsumesCangjieVariants",
+    )
+    missing_file = [marker for marker in required_file_markers if marker not in text]
+    if missing_file:
+        fail(f"windows-variant must keep real OleAut32 VARIANT smoke coverage; missing={missing_file}")
+
+    helper_body = function_body(text, "variantSmokeChangeType")
+    if helper_body is None:
+        fail("windows-variant VariantChangeType smoke helper is missing")
+    helper_code = mask_cj_strings_and_comments(helper_body)
+    required_helper_markers = (
+        "CFunc<(CPointer<VARIANT>, CPointer<VARIANT>, UInt16, VARENUM) -> Int32>",
+        "variantInit(resultPtr)",
+        "variantClear(resultPtr)",
+        "Variant(result)",
+    )
+    missing_helper = [marker for marker in required_helper_markers if marker not in helper_code]
+    if missing_helper:
+        fail(f"windows-variant VariantChangeType helper no longer owns output cleanup; missing={missing_helper}")
+
+    body = function_body(text, "oleautVariantChangeTypeConsumesCangjieVariants")
+    if body is None:
+        fail("windows-variant OleAut32 smoke test body is missing")
+    code_body = mask_cj_strings_and_comments(body)
+    required_body_markers = (
+        "Variant(variantFromString(",
+        "Variant(variantFromI4(",
+        "variantSmokeChangeType(textSource.get(), VT_I4)",
+        "variantSmokeChangeType(numberSource.get(), VT_BSTR)",
+        "variantAsI4(numberResult.get())",
+        "variantAsBstr(textResult.get())",
+    )
+    missing_body = [marker for marker in required_body_markers if marker not in code_body]
+    if missing_body:
+        fail(f"windows-variant OleAut32 smoke no longer consumes Cangjie VARIANTs; missing={missing_body}")
+
+
+def check_safearray_oleaut_smoke(workspace: Path) -> None:
+    source = workspace / "windows-safearray" / "src" / "safearray_test.cj"
+    check_path_exists(source, "windows-safearray SAFEARRAY tests")
+    text = source.read_text(encoding="utf-8")
+    required_file_markers = (
+        "func safeArraySmokeVectorFromBstr",
+        "func safeArraySmokeBstrFromVector",
+        "resolveOleaut32Proc",
+        '"VectorFromBstr"',
+        '"BstrFromVector"',
+        '@When[os == "Windows"]',
+        "func oleautBstrVectorRoundTripsThroughSafeArray",
+    )
+    missing_file = [marker for marker in required_file_markers if marker not in text]
+    if missing_file:
+        fail(f"windows-safearray must keep real OleAut32 SAFEARRAY smoke coverage; missing={missing_file}")
+
+    vector_body = function_body(text, "safeArraySmokeVectorFromBstr")
+    if vector_body is None:
+        fail("windows-safearray VectorFromBstr smoke helper is missing")
+    vector_code = mask_cj_strings_and_comments(vector_body)
+    required_vector_markers = (
+        "CFunc<(CPointer<UInt16>, CPointer<CPointer<SAFEARRAY>>) -> Int32>",
+        "BSTR(value)",
+        "source.close()",
+        "SafeArray(raw)",
+    )
+    missing_vector = [marker for marker in required_vector_markers if marker not in vector_code]
+    if missing_vector:
+        fail(f"windows-safearray VectorFromBstr helper no longer owns output cleanup; missing={missing_vector}")
+
+    bstr_body = function_body(text, "safeArraySmokeBstrFromVector")
+    if bstr_body is None:
+        fail("windows-safearray BstrFromVector smoke helper is missing")
+    bstr_code = mask_cj_strings_and_comments(bstr_body)
+    required_bstr_markers = (
+        "CFunc<(CPointer<SAFEARRAY>, CPointer<CPointer<UInt16>>) -> Int32>",
+        "arr.get()",
+        "BSTR.fromRawTake(raw)",
+    )
+    missing_bstr = [marker for marker in required_bstr_markers if marker not in bstr_code]
+    if missing_bstr:
+        fail(f"windows-safearray BstrFromVector helper no longer consumes SAFEARRAY and owns BSTR output; missing={missing_bstr}")
+
+    body = function_body(text, "oleautBstrVectorRoundTripsThroughSafeArray")
+    if body is None:
+        fail("windows-safearray OleAut32 smoke test body is missing")
+    code_body = mask_cj_strings_and_comments(body)
+    required_body_markers = (
+        "safeArraySmokeVectorFromBstr(",
+        "safeArraySmokeBstrFromVector(arr)",
+        "roundtrip.get()",
+        "roundtrip.close()",
+        "arr.close()",
+    )
+    missing_body = [marker for marker in required_body_markers if marker not in code_body]
+    if missing_body:
+        fail(f"windows-safearray OleAut32 smoke no longer roundtrips through SAFEARRAY; missing={missing_body}")
+
+
 def main() -> None:
     workspace = Path(__file__).resolve().parent.parent
     print(f"workspace = {workspace}")
@@ -1656,10 +9526,50 @@ def main() -> None:
     print("OK: long-lived vtables use unmanaged native storage")
     check_native_allocations_have_deterministic_owner(workspace)
     print("OK: native allocated class storage has deterministic owners")
+    check_iinspectable_get_iids_clears_sibling_out_slots(workspace)
+    print("OK: IInspectable.GetIids clears sibling out slots on pointer failures")
+    check_default_vtable_stubs_clear_failed_out_slots(workspace)
+    print("OK: default COM vtable stubs clear failed out slots")
+    check_descriptor_generated_thunks_translate_exceptions(workspace)
+    print("OK: descriptor-generated COM thunks translate thrown exceptions")
     check_collection_indexof_thunks_reject_null_index(workspace)
     print("OK: collection IndexOf thunks reject null index out pointers")
+    check_generated_collection_vtable_abi_parity(workspace)
+    print("OK: generated collection vtable ABI matches runtime caller-buffer shape")
+    check_collection_generic_input_thunks_translate_projection_failures(workspace)
+    print("OK: collection generic input thunks translate projection failures")
+    check_collection_scalar_output_thunks_clear_outputs(workspace)
+    print("OK: collection scalar output thunks clear out slots")
+    check_collection_specialized_bool_thunks_clear_outputs(workspace)
+    print("OK: specialized collection Bool thunks clear out slots")
+    check_collection_specialized_indexof_thunks_clear_outputs(workspace)
+    print("OK: specialized collection IndexOf thunks clear out slots")
+    check_collection_specialized_lookup_thunks_clear_outputs(workspace)
+    print("OK: specialized collection Lookup thunks clear out slots")
+    check_collection_specialized_vector_thunks_translate_exceptions(workspace)
+    print("OK: specialized vector thunks translate thrown exceptions")
+    check_collection_event_thunks_translate_exceptions_and_clear_tokens(workspace)
+    print("OK: WinRT event thunks clear tokens and translate thrown exceptions")
+    check_generated_raw_event_add_wrappers_clear_tokens(workspace)
+    print("OK: generated raw event add wrappers clear token out slots")
+    check_interface_dispatcher_exception_out_cleanup(workspace)
+    print("OK: generated interface dispatchers release partial out slots on exceptions")
+    check_generated_interface_dispatcher_failed_hresult_out_cleanup(workspace)
+    print("OK: generated interface dispatchers release partial out slots on failed HRESULTs")
+    check_runtime_class_raw_abi_array_out_preclear(workspace)
+    print("OK: runtime-class raw ABI wrappers pre-clear array out slots")
+    check_vtable_none_branches_clear_out_slots(workspace)
+    print("OK: vtable dispatcher None branches clear stale out slots")
+    check_foundation_manual_thunks_translate_exceptions(workspace)
+    print("OK: foundation manual thunks translate thrown exceptions")
     check_array_materialization_cleanup(workspace)
     print("OK: array materialization cleanup paths are statically covered")
+    check_propvariant_propsys_smoke(workspace)
+    print("OK: PROPVARIANT layout is covered by a real Propsys consumer smoke")
+    check_variant_oleaut_smoke(workspace)
+    print("OK: VARIANT layout is covered by a real OleAut32 consumer smoke")
+    check_safearray_oleaut_smoke(workspace)
+    print("OK: SAFEARRAY layout is covered by a real OleAut32 consumer/provider smoke")
     check_ignored_results(workspace)
     print("OK: no ignored HRESULT/Result.ok() values in active .cj sources")
     check_abi_ownership(workspace)

@@ -3,8 +3,10 @@ from __future__ import annotations
 
 import contextlib
 import io
+import json
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 import check_abi_ownership as abi
@@ -44,6 +46,273 @@ class ActiveWorkspaceLayoutTests(unittest.TestCase):
             self.assertEqual(abi.workspace_members(workspace), ["windows-bindgen"])
 
 
+class ActiveToolGateTests(unittest.TestCase):
+    def write_text(self, root: Path, relative: str, text: str = "placeholder\n") -> Path:
+        path = root / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+        return path
+
+    def runtime_smoke_text(self) -> str:
+        return (
+            "func testRealActivationFactoryReportsUnavailableClass() {\n"
+            "    match (windows_core.activationFactory<MissingActivationFactorySmokeClass>()) {\n"
+            "        case Result<IActivationFactory>.Err(error) => @Expect(error.code(), REGDB_E_CLASSNOTREG)\n"
+            "        case _ => ()\n"
+            "    }\n"
+            "}\n"
+            "func testRealPropertyValueInt32ArrayRoundTrip() {\n"
+            "    let boxed = unsafe { PropertyValue.CreateInt32Array([1i32]) }\n"
+            "    let values = unsafe { boxed.GetInt32Array() }\n"
+            "}\n"
+            "func testRealUriDecoderRoundTripsHStringAndCollectionProjection() {\n"
+            "    let uri = unsafe { Uri.CreateUri(text) }\n"
+            "    let decoder = unsafe { uri.QueryParsed() }\n"
+            "    let value = unsafe { decoder.GetFirstValueByName(key) }\n"
+            "    let first = unsafe { decoder.GetAt(0u32) }\n"
+            "}\n"
+        )
+
+    def write_active_tools_workspace(
+        self,
+        workspace: Path,
+        *,
+        runtime_runner_text: str | None = None,
+        runtime_smoke_text: str | None = None,
+        macro_check_text: str | None = None,
+    ) -> None:
+        self.write_text(workspace, "windows-bindgen/src/main.cj", "writer.fileHashes()\nfile_hashes\n")
+        self.write_text(workspace, "windows-bindgen/src/json_loader.cj")
+        self.write_text(workspace, "winmd-to-json/Program.cs")
+        self.write_text(workspace, "windows-winui3/src/xaml/mod.cj")
+        self.write_text(
+            workspace,
+            "scripts/run_windows_runtime_tests.py",
+            runtime_runner_text
+            if runtime_runner_text is not None
+            else (
+                "from pathlib import Path\n"
+                "BINARY = Path('windows_runtime.exe')\n"
+                "PACKAGE = Path('.')\n"
+                "ROOT = Path('.')\n"
+                "def run_with_watchdog(command, *, cwd, env, timeout_seconds):\n"
+                "    return 0, 'PASSED: 1 FAILED: 0 ERROR: 0'\n"
+                "def summary_counts(output):\n"
+                "    return {'PASSED': 1, 'FAILED': 0, 'ERROR': 0}\n"
+                "def remove_expected_runtime_binary():\n"
+                "    marker = '$test.cjo.flag'\n"
+                "def runtime_test_command(binary, filter_value, extra_args):\n"
+                "    # do not pass --timeout-each\n"
+                "    return ['cjv', 'exec', str(binary), '--no-color', '--progress-brief']\n"
+                "def main():\n"
+                "    env = {'cjHeapSize': '32GB'}\n"
+                "    remove_expected_runtime_binary()\n"
+                "    run_with_watchdog(['cjpm', 'test', '--no-run'], cwd=PACKAGE, env=env, timeout_seconds=1)\n"
+                "    command = runtime_test_command(BINARY, None, [])\n"
+                "    return run_with_watchdog(command, cwd=ROOT, env=env, timeout_seconds=1)\n"
+            ),
+        )
+        self.write_text(
+            workspace,
+            "scripts/run_windows_workspace_tests.py",
+            '"cjv", "exec"\n--no-run\ncjHeapSize\n32GB\nFAILED\nERROR\nsummary_counts\n'
+            "test_package_names\nremove_expected_test_binaries\nworkspace_build_command\nworkspace_test_command\n"
+            "--dry-run\n--self-test\n",
+        )
+        self.write_text(
+            workspace,
+            "scripts/check_windows_common_codegen.py",
+            '--allow-missing-winui-metadata\ncannot silently skip missing WinUI/WindowsAppSDK metadata\n'
+            'remove_expected_generator_binary()\nwith_suffix(".cjo")\n',
+        )
+        self.write_text(
+            workspace,
+            "scripts/run_windows_quality_gate.py",
+            '--allow-missing-winui-metadata\nquick workspace Cangjie tests\n"windows-bindgen"\n"windows-core"\n'
+            '"windows-implement"\n"windows-interface"\n"windows-runtime"\nwindows-runtime smoke test\ntestRealActivationFactoryReportsUnavailableClass\n'
+            "testRealPropertyValueInt32ArrayRoundTrip\ntestRealUriDecoderRoundTripsHStringAndCollectionProjection\n"
+            "generate_vector_input_abi.py\n--check-all\nmacro fixtures\nwindows-interface/scripts/check_macros.py\n",
+        )
+        self.write_text(
+            workspace,
+            "windows-runtime/src/windows_runtime_smoke_test.cj",
+            runtime_smoke_text if runtime_smoke_text is not None else self.runtime_smoke_text(),
+        )
+        self.write_text(
+            workspace,
+            "windows-interface/scripts/check_macros.py",
+            macro_check_text
+            if macro_check_text is not None
+            else (
+                "def cjv_exec_args(executable):\n    return []\n"
+                "def compile_descriptor_codegen_fixture(env):\n"
+                "    marker = 'descriptor_codegen_compile_fixture'\n"
+                "    marker2 = 'windows_core.winrtStoreGenericOut<Fixture_IOutput>(result__, value)'\n"
+                "run(cjv_exec_args(fixture_exe), env=env)\n"
+            ),
+        )
+
+    def assert_active_tools_fail(self, workspace: Path, expected: str) -> None:
+        stderr = io.StringIO()
+        with contextlib.redirect_stderr(stderr):
+            with self.assertRaises(SystemExit) as raised:
+                setup.check_active_tools(workspace)
+        self.assertEqual(raised.exception.code, 1)
+        self.assertIn(expected, stderr.getvalue())
+
+    def test_active_tools_rejects_stubbed_runtime_smoke_body(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir) / "workspace"
+            self.write_active_tools_workspace(
+                workspace,
+                runtime_smoke_text=(
+                    "func testRealActivationFactoryReportsUnavailableClass() { () }\n"
+                    "func testRealPropertyValueInt32ArrayRoundTrip() { () }\n"
+                    "func testRealUriDecoderRoundTripsHStringAndCollectionProjection() { () }\n"
+                ),
+            )
+
+            self.assert_active_tools_fail(workspace, "no longer exercises real WinRT calls")
+
+    def test_active_tools_rejects_macro_check_without_descriptor_codegen_compile_fixture(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir) / "workspace"
+            self.write_active_tools_workspace(
+                workspace,
+                macro_check_text="def cjv_exec_args(executable):\n    return []\nrun(cjv_exec_args(fixture_exe), env=env)\n",
+            )
+
+            self.assert_active_tools_fail(workspace, "descriptor_codegen WinRT out-slot output")
+
+    def test_active_tools_rejects_runtime_smoke_markers_only_in_comments_or_strings(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir) / "workspace"
+            self.write_active_tools_workspace(
+                workspace,
+                runtime_smoke_text=(
+                    "func testRealActivationFactoryReportsUnavailableClass() {\n"
+                    "    // activationFactory< Result<IActivationFactory>.Err\n"
+                    "    ()\n"
+                    "}\n"
+                    "func testRealPropertyValueInt32ArrayRoundTrip() {\n"
+                    "    let text = #\"PropertyValue.CreateInt32Array GetInt32Array\"#\n"
+                    "    ()\n"
+                    "}\n"
+                    "func testRealUriDecoderRoundTripsHStringAndCollectionProjection() {\n"
+                    "    /* Uri.CreateUri QueryParsed GetFirstValueByName GetAt */\n"
+                    "    ()\n"
+                    "}\n"
+                ),
+            )
+
+            self.assert_active_tools_fail(workspace, "no longer exercises real WinRT calls")
+
+    def test_active_tools_rejects_missing_activation_smoke_without_hresult_assertion(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir) / "workspace"
+            self.write_active_tools_workspace(
+                workspace,
+                runtime_smoke_text=(
+                    "func testRealActivationFactoryReportsUnavailableClass() {\n"
+                    "    match (windows_core.activationFactory<MissingActivationFactorySmokeClass>()) {\n"
+                    "        case Result<IActivationFactory>.Err(_) => ()\n"
+                    "        case _ => ()\n"
+                    "    }\n"
+                    "}\n"
+                    "func testRealPropertyValueInt32ArrayRoundTrip() {\n"
+                    "    let boxed = unsafe { PropertyValue.CreateInt32Array([1i32]) }\n"
+                    "    let values = unsafe { boxed.GetInt32Array() }\n"
+                    "}\n"
+                    "func testRealUriDecoderRoundTripsHStringAndCollectionProjection() {\n"
+                    "    let uri = unsafe { Uri.CreateUri(text) }\n"
+                    "    let decoder = unsafe { uri.QueryParsed() }\n"
+                    "    let value = unsafe { decoder.GetFirstValueByName(key) }\n"
+                    "    let first = unsafe { decoder.GetAt(0u32) }\n"
+                    "}\n"
+                ),
+            )
+
+            self.assert_active_tools_fail(workspace, "no longer exercises real WinRT calls")
+
+    def test_active_tools_rejects_runtime_runner_direct_binary_execution(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir) / "workspace"
+            self.write_active_tools_workspace(
+                workspace,
+                runtime_runner_text=(
+                    "from pathlib import Path\n"
+                    "BINARY = Path('windows_runtime.exe')\n"
+                    "PACKAGE = Path('.')\n"
+                    "ROOT = Path('.')\n"
+                    "def run_with_watchdog(command, *, cwd, env, timeout_seconds):\n"
+                    "    return 0, 'PASSED: 1 FAILED: 0 ERROR: 0'\n"
+                    "def summary_counts(output):\n"
+                    "    return {'PASSED': 1, 'FAILED': 0, 'ERROR': 0}\n"
+                    "def remove_expected_runtime_binary():\n"
+                    "    marker = '$test.cjo.flag'\n"
+                    "def runtime_test_command(binary, filter_value, extra_args):\n"
+                    "    # do not pass --timeout-each\n"
+                    "    return ['cjv', 'exec', str(binary), '--no-color', '--progress-brief']\n"
+                    "def main():\n"
+                    "    env = {'cjHeapSize': '32GB'}\n"
+                    "    remove_expected_runtime_binary()\n"
+                    "    run_with_watchdog(['cjpm', 'test', '--no-run'], cwd=PACKAGE, env=env, timeout_seconds=1)\n"
+                    "    return run_with_watchdog([str(BINARY)], cwd=ROOT, env=env, timeout_seconds=1)\n"
+                ),
+            )
+
+            self.assert_active_tools_fail(workspace, "must not execute produced .exe files directly")
+
+    def test_active_tools_rejects_direct_macro_fixture_execution(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir) / "workspace"
+            self.write_active_tools_workspace(
+                workspace,
+                macro_check_text=(
+                    "def cjv_exec_args(executable):\n"
+                    "    return []\n"
+                    "run(cjv_exec_args(fixture_exe), env=env)\n"
+                    "run([str(fixture_exe)], env=env)\n"
+                ),
+            )
+
+            self.assert_active_tools_fail(workspace, "must not execute produced .exe files directly")
+
+    def test_active_tools_rejects_macro_fixture_cjv_exec_only_in_comment(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir) / "workspace"
+            self.write_active_tools_workspace(
+                workspace,
+                macro_check_text=(
+                    "def cjv_exec_args(executable):\n"
+                    "    return []\n"
+                    "# run(cjv_exec_args(fixture_exe), env=env)\n"
+                    "def main():\n"
+                    "    return 0\n"
+                ),
+            )
+
+            self.assert_active_tools_fail(workspace, "must execute produced binaries through cjv exec")
+
+    def test_active_tools_rejects_vector_abi_generator_without_check_all(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir) / "workspace"
+            self.write_active_tools_workspace(workspace)
+            (workspace / "scripts" / "run_windows_quality_gate.py").write_text(
+                (
+                    '--allow-missing-winui-metadata\nquick workspace Cangjie tests\n"windows-bindgen"\n'
+                    '"windows-core"\n"windows-implement"\n"windows-interface"\nwindows-runtime smoke test\n'
+                    "testRealActivationFactoryReportsUnavailableClass\n"
+                    "testRealPropertyValueInt32ArrayRoundTrip\n"
+                    "testRealUriDecoderRoundTripsHStringAndCollectionProjection\n"
+                    "generate_vector_input_abi.py\n--check-test\nmacro fixtures\nwindows-interface/scripts/check_macros.py\n"
+                ),
+                encoding="utf-8",
+            )
+
+            self.assert_active_tools_fail(workspace, "must check both vector ABI tests and collections_runtime fragments")
+
+
 class WorkspaceSetupParserTests(unittest.TestCase):
     def test_finalizer_scan_ignores_block_comment_braces(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -69,11 +338,1052 @@ class WorkspaceSetupParserTests(unittest.TestCase):
             self.assertIn("CloseHandle", stderr.getvalue())
 
 
+class IInspectableGetIidsGateTests(unittest.TestCase):
+    def write_iinspectable_workspace(
+        self,
+        workspace: Path,
+        *,
+        iunknown_rejects_null: bool = True,
+        iunknown_clears: bool = True,
+        unsupported_stubs_clear: bool = True,
+        wrapper_clears: bool = True,
+        thunk_clears: bool = True,
+        thunk_releases_partial_iids: bool = True,
+        core_releases_partial_iids: bool = True,
+        core_thunk_releases_partial_iids: bool = True,
+        core_runtime_name_thunk_translates: bool = True,
+        core_trust_level_thunk_translates: bool = True,
+        surface_clears: bool = True,
+        implement_partial_iid_test_markers: bool = True,
+        core_partial_iid_test_markers: bool = True,
+        core_runtime_name_test_markers: bool = True,
+        core_trust_level_test_markers: bool = True,
+    ) -> None:
+        iunknown_null_guard = (
+            "        if (resultPtr.isNull()) {\n"
+            "            return E_POINTER.value\n"
+            "        }\n"
+            if iunknown_rejects_null
+            else ""
+        )
+        iunknown_clear = (
+            "        unsafe { resultPtr.write(CPointer<Unit>()) }\n"
+            if iunknown_clears
+            else ""
+        )
+        unsupported_object_clear = (
+            "        clearDefaultObjectOutSlot(resultPtr)\n"
+            if unsupported_stubs_clear
+            else ""
+        )
+        unsupported_guid_clear = (
+            "        clearDefaultGuidOutSlot(classId)\n"
+            if unsupported_stubs_clear
+            else ""
+        )
+        unsupported_uint_clear = (
+            "        clearDefaultUInt32OutSlot(size)\n"
+            if unsupported_stubs_clear
+            else ""
+        )
+        wrapper_clear = (
+            "            unsafe {\n"
+            "                if (countPtr.isNotNull()) { countPtr.write(0u32) }\n"
+            "                if (iidsPtr.isNotNull()) { iidsPtr.write(CPointer<GUID>()) }\n"
+            "            }\n"
+            if wrapper_clears
+            else ""
+        )
+        thunk_clear = (
+                "                clearInspectableIidsOutSlots(count, values)\n"
+            if thunk_clears
+            else ""
+        )
+        thunk_valid_clear = "            clearInspectableIidsOutSlots(count, values)\n" if thunk_clears else ""
+        thunk_catch_clear = "        clearInspectableIidsOutSlots(count, values)\n" if thunk_clears else ""
+        thunk_iid_release_helper = (
+            "func releaseFailedInspectableIidsOutSlots(hr: Int32, count: CPointer<UInt32>, values: CPointer<CPointer<GUID>>): Int32 {\n"
+            "    unsafe {\n"
+            "        if (hr < 0 && values.isNotNull()) {\n"
+            "            let raw = values.read()\n"
+            "            if (raw.isNotNull()) {\n"
+            "                CoTaskMemFree(CPointer<Unit>(raw))\n"
+            "            }\n"
+            "        }\n"
+            "        if (values.isNotNull()) { values.write(CPointer<GUID>()) }\n"
+            "        if (count.isNotNull()) { count.write(0u32) }\n"
+            "    }\n"
+            "    hr\n"
+            "}\n"
+            if thunk_releases_partial_iids
+            else (
+                "func releaseFailedInspectableIidsOutSlots(hr: Int32, count: CPointer<UInt32>, values: CPointer<CPointer<GUID>>): Int32 {\n"
+                "    unsafe {\n"
+                "        if (values.isNotNull()) { values.write(CPointer<GUID>()) }\n"
+                "        if (count.isNotNull()) { count.write(0u32) }\n"
+                "    }\n"
+                "    hr\n"
+                "}\n"
+            )
+        )
+        thunk_release_call = (
+            "            releaseFailedInspectableIidsOutSlots(hr, count, values)\n"
+            if thunk_releases_partial_iids
+            else "            hr\n"
+        )
+        thunk_catch_release_call = (
+            "        releaseFailedInspectableIidsOutSlots(error.code().value, count, values)\n"
+            "    } catch (_: Exception) {\n"
+            f"{thunk_catch_clear}"
+            "        releaseFailedInspectableIidsOutSlots(E_FAIL.value, count, values)\n"
+            if thunk_releases_partial_iids
+            else (
+                "        error.code().value\n"
+                "    } catch (_: Exception) {\n"
+                f"{thunk_catch_clear}"
+                "        E_FAIL.value\n"
+            )
+        )
+        core_iid_release_helper = (
+            "func releaseFailedCoreInspectableIidsOutSlots(hr: Int32, count: CPointer<UInt32>, values: CPointer<CPointer<GUID>>): Int32 {\n"
+            "    unsafe {\n"
+            "        if (hr < 0 && values.isNotNull()) {\n"
+            "            let raw = values.read()\n"
+            "            if (raw.isNotNull()) {\n"
+            "                coTaskMemFree(CPointer<Unit>(raw))\n"
+            "            }\n"
+            "        }\n"
+            "        if (values.isNotNull()) { values.write(CPointer<GUID>()) }\n"
+            "        if (count.isNotNull()) { count.write(0u32) }\n"
+            "    }\n"
+            "    hr\n"
+            "}\n"
+            if core_releases_partial_iids
+            else (
+                "func releaseFailedCoreInspectableIidsOutSlots(hr: Int32, count: CPointer<UInt32>, values: CPointer<CPointer<GUID>>): Int32 {\n"
+                "    unsafe {\n"
+                "        if (values.isNotNull()) { values.write(CPointer<GUID>()) }\n"
+                "        if (count.isNotNull()) { count.write(0u32) }\n"
+                "    }\n"
+                "    hr\n"
+                "}\n"
+            )
+        )
+        core_release_after_dispatch = (
+            "        releaseFailedCoreInspectableIidsOutSlots(hr, count, values)\n"
+            if core_thunk_releases_partial_iids
+            else "        hr\n"
+        )
+        core_catch_release = (
+            "    } catch (error: WindowsException) {\n"
+            "        releaseFailedCoreInspectableIidsOutSlots(error.code().value, count, values)\n"
+            "    } catch (_: Exception) {\n"
+            "        releaseFailedCoreInspectableIidsOutSlots(E_FAIL.value, count, values)\n"
+            if core_thunk_releases_partial_iids
+            else (
+                "    } catch (error: WindowsException) {\n"
+                "        error.code().value\n"
+                "    } catch (_: Exception) {\n"
+                "        E_FAIL.value\n"
+            )
+        )
+        implement_partial_iid_markers = (
+            "testIInspectableGetIidsThunkReleasesPartialIidArrayOnFailedHRESULT\n"
+            "testIInspectableGetIidsThunkReleasesPartialIidArrayOnThrownException\n"
+            if implement_partial_iid_test_markers
+            else ""
+        )
+        core_partial_iid_markers = (
+            "testCoreIInspectableGetIidsThunkReleasesPartialIidArrayOnFailedHRESULT\n"
+            "testCoreIInspectableGetIidsThunkReleasesPartialIidArrayOnThrownException\n"
+            if core_partial_iid_test_markers
+            else ""
+        )
+        core_runtime_name_thunk = (
+            "func coreIInspectableGetRuntimeClassNameThunk(instanceRaw: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32 {\n"
+            "    try {\n"
+            "        value.write(CPointer<Unit>())\n"
+            "        let hr = match (lookupComImpl<IInspectableImpl>(instanceRaw)) {\n"
+            "            case Some(value) => value.getRuntimeClassNameBase(value)\n"
+            "            case None => E_NOINTERFACE.value\n"
+            "        }\n"
+            "        releaseFailedRuntimeClassNameSlot(hr, value)\n"
+            "    } catch (error: WindowsException) {\n"
+            "        releaseFailedRuntimeClassNameSlot(error.code().value, value)\n"
+            "    } catch (_: Exception) {\n"
+            "        releaseFailedRuntimeClassNameSlot(E_FAIL.value, value)\n"
+            "    }\n"
+            "}\n"
+            if core_runtime_name_thunk_translates
+            else (
+                "func coreIInspectableGetRuntimeClassNameThunk(instanceRaw: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32 {\n"
+                "    value.write(CPointer<Unit>())\n"
+                "    let hr = match (lookupComImpl<IInspectableImpl>(instanceRaw)) {\n"
+                "        case Some(value) => value.getRuntimeClassNameBase(value)\n"
+                "        case None => E_NOINTERFACE.value\n"
+                "    }\n"
+                "    releaseFailedRuntimeClassNameSlot(hr, value)\n"
+                "}\n"
+            )
+        )
+        core_trust_level_thunk = (
+            "func clearInspectableTrustLevelOutSlot(value: CPointer<Int32>): Unit {\n"
+            "    if (value.isNotNull()) { value.write(0i32) }\n"
+            "}\n"
+            "func coreIInspectableGetTrustLevelThunk(instanceRaw: CPointer<Unit>, value: CPointer<Int32>): Int32 {\n"
+            "    try {\n"
+            "        clearInspectableTrustLevelOutSlot(value)\n"
+            "        match (lookupComImpl<IInspectableImpl>(instanceRaw)) {\n"
+            "            case Some(value) => value.getTrustLevelBase(value)\n"
+            "            case None => E_NOINTERFACE.value\n"
+            "        }\n"
+            "    } catch (error: WindowsException) {\n"
+            "        clearInspectableTrustLevelOutSlot(value)\n"
+            "        error.code().value\n"
+            "    } catch (_: Exception) {\n"
+            "        clearInspectableTrustLevelOutSlot(value)\n"
+            "        E_FAIL.value\n"
+            "    }\n"
+            "}\n"
+            if core_trust_level_thunk_translates
+            else (
+                "func clearInspectableTrustLevelOutSlot(value: CPointer<Int32>): Unit {\n"
+                "    if (value.isNotNull()) { value.write(0i32) }\n"
+                "}\n"
+                "func coreIInspectableGetTrustLevelThunk(instanceRaw: CPointer<Unit>, value: CPointer<Int32>): Int32 {\n"
+                "    clearInspectableTrustLevelOutSlot(value)\n"
+                "    match (lookupComImpl<IInspectableImpl>(instanceRaw)) {\n"
+                "        case Some(value) => value.getTrustLevelBase(value)\n"
+                "        case None => E_NOINTERFACE.value\n"
+                "    }\n"
+                "}\n"
+            )
+        )
+        core_runtime_name_markers = (
+            "testCoreIInspectableGetRuntimeClassNameThunkReleasesPartialHandleOnThrownWindowsException\n"
+            "testCoreIInspectableGetRuntimeClassNameThunkReleasesPartialHandleOnThrownPlainException\n"
+            "coreIInspectableGetRuntimeClassNameThunk(\n"
+            "@Expect(nameRaw.isNull(), true)\n"
+            if core_runtime_name_test_markers
+            else ""
+        )
+        core_trust_level_markers = (
+            "testCoreIInspectableGetTrustLevelThunkTranslatesExceptionsAndClearsOutSlot\n"
+            "coreIInspectableGetTrustLevelThunk(\n"
+            "@Expect(trustLevel, 0i32)\n"
+            if core_trust_level_test_markers
+            else ""
+        )
+        surface_clear = (
+            "            if (count.isNotNull()) { count.write(0u32) }\n"
+            "            if (values.isNotNull()) { values.write(CPointer<GUID>()) }\n"
+            if surface_clears
+            else ""
+        )
+        paths = {
+            "windows-interface/src/interface_wrapper.cj": (
+                "func clearDefaultObjectOutSlot(slot: CPointer<CPointer<Unit>>): Unit {\n"
+                "    if (slot.isNotNull()) { slot.write(CPointer<Unit>()) }\n"
+                "}\n"
+                "func clearDefaultGuidOutSlot(slot: CPointer<GUID>): Unit {\n"
+                "    if (slot.isNotNull()) { slot.write(GUID_ZERO) }\n"
+                "}\n"
+                "func clearDefaultUInt32OutSlot(slot: CPointer<UInt32>): Unit {\n"
+                "    if (slot.isNotNull()) { slot.write(0u32) }\n"
+                "}\n"
+                "public struct IUnknownVtbl {\n"
+                "    public var QueryInterface: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, resultPtr =>\n"
+                f"{iunknown_null_guard}"
+                f"{iunknown_clear}"
+                "        E_NOINTERFACE.value\n"
+                "    }\n"
+                "    public var AddRef: CFunc<(CPointer<Unit>) -> UInt32>\n"
+                "}\n"
+                "public struct IInspectableVtbl {\n"
+                "    public var GetIids: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<GUID>>) -> Int32> = { _, countPtr, iidsPtr =>\n"
+                "        if (countPtr.isNull() || iidsPtr.isNull()) {\n"
+                f"{wrapper_clear}"
+                "            return E_POINTER.value\n"
+                "        }\n"
+                "        0i32\n"
+                "    }\n"
+                "    public var GetRuntimeClassName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>\n"
+                "}\n"
+                "public struct IAgileObjectVtbl {}\n"
+                "public struct IAgileReferenceVtbl {\n"
+                "    public var Resolve: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, resultPtr =>\n"
+                f"{unsupported_object_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    public init() {}\n"
+                "}\n"
+                "public struct IMarshalVtbl {\n"
+                "    public var GetUnmarshalClass: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<GUID>) -> Int32> = { _, _, _, _, _, _, classId =>\n"
+                f"{unsupported_guid_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    public var GetMarshalSizeMax: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32> = { _, _, _, _, _, _, size =>\n"
+                f"{unsupported_uint_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    public var MarshalInterface: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<Unit>, UInt32, CPointer<Unit>, UInt32) -> Int32> = { _, _, _, _, _, _, _ => E_NOTIMPL.value }\n"
+                "    public var UnmarshalInterface: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, resultPtr =>\n"
+                f"{unsupported_object_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    public var ReleaseMarshalData: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }\n"
+                "    public init() {}\n"
+                "}\n"
+                "public struct IWeakReferenceVtbl {\n"
+                "    public var Resolve: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, resultPtr =>\n"
+                f"{unsupported_object_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    public init() {}\n"
+                "}\n"
+                "public struct IWeakReferenceSourceVtbl {\n"
+                "    public var GetWeakReference: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, resultPtr =>\n"
+                f"{unsupported_object_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    public init() {}\n"
+                "}\n"
+                "func iunknownDescriptorMethods(): Unit {}\n"
+                "public struct IActivationFactoryVtbl {\n"
+                "    public var ActivateInstance: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, resultPtr =>\n"
+                f"{unsupported_object_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    public init() {}\n"
+                "}\n"
+                "func takeIActivationFactoryFromAbi(): Unit {}\n"
+            ),
+            "windows-implement/src/thunk_builder.cj": (
+                "func clearInspectableIidsOutSlots(count: CPointer<UInt32>, values: CPointer<CPointer<GUID>>): Unit {\n"
+                "    if (count.isNotNull()) { count.write(0u32) }\n"
+                "    if (values.isNotNull()) { values.write(CPointer<GUID>()) }\n"
+                "}\n"
+                f"{thunk_iid_release_helper}"
+                "func clearTrustLevelOutSlot(value: CPointer<Int32>): Unit {\n"
+                "    if (value.isNotNull()) { value.write(0i32) }\n"
+                "}\n"
+                "public func iinspectableGetIidsThunk(instanceRaw: CPointer<Unit>, count: CPointer<UInt32>, values: CPointer<CPointer<GUID>>): Int32 {\n"
+                "    try {\n"
+                "        unsafe {\n"
+                "        if (count.isNull() || values.isNull()) {\n"
+                f"{thunk_clear}"
+                "            return E_POINTER\n"
+                "        }\n"
+                "            var hr = E_NOINTERFACE.value\n"
+                f"{thunk_valid_clear}"
+                "            match (lookupRegistryObject(instanceRaw))\n"
+                "        case inspectable: IInspectableBase => hr = inspectable.getIidsBase(count, values)\n"
+                f"{thunk_release_call}"
+                "        }\n"
+                "    } catch (error: WindowsException) {\n"
+                f"{thunk_catch_clear}"
+                f"{thunk_catch_release_call}"
+                "    }\n"
+                "}\n"
+                "public func iinspectableGetRuntimeClassNameThunk(instanceRaw: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32 {\n"
+                "    try {\n"
+                "        0i32\n"
+                "    } catch (error: WindowsException) {\n"
+                "        releaseFailedRuntimeClassNameSlot(error.code().value, value)\n"
+                "    } catch (_: Exception) {\n"
+                "        releaseFailedRuntimeClassNameSlot(E_FAIL.value, value)\n"
+                "    }\n"
+                "}\n"
+                "public func iinspectableGetTrustLevelThunk(instanceRaw: CPointer<Unit>, value: CPointer<Int32>): Int32 {\n"
+                "    try {\n"
+                "        clearTrustLevelOutSlot(value)\n"
+                "        0i32\n"
+                "    } catch (error: WindowsException) {\n"
+                "        clearTrustLevelOutSlot(value)\n"
+                "        error.code().value\n"
+                "    } catch (_: Exception) {\n"
+                "        clearTrustLevelOutSlot(value)\n"
+                "        E_FAIL.value\n"
+                "    }\n"
+                "}\n"
+            ),
+            "windows-core/src/inspectable.cj": (
+                f"{core_iid_release_helper}"
+                "func releaseFailedRuntimeClassNameSlot(hr: Int32, value: CPointer<CPointer<Unit>>): Int32 {\n"
+                "    if (hr < 0 && value.isNotNull()) { value.write(CPointer<Unit>()) }\n"
+                "    hr\n"
+                "}\n"
+                "func coreIInspectableGetIidsThunk(instanceRaw: CPointer<Unit>, count: CPointer<UInt32>, values: CPointer<CPointer<GUID>>): Int32 {\n"
+                "    try {\n"
+                "        if (count.isNull() || values.isNull()) {\n"
+                "            return E_POINTER.value\n"
+                "        }\n"
+                "        unsafe {\n"
+                "            count.write(0u32)\n"
+                "            values.write(CPointer<GUID>())\n"
+                "        }\n"
+                "        let hr = match (lookupComImpl<IInspectableImpl>(instanceRaw)) {\n"
+                "            case Some(value) => value.getIidsBase(count, values)\n"
+                "            case None => E_NOINTERFACE.value\n"
+                "        }\n"
+                f"{core_release_after_dispatch}"
+                f"{core_catch_release}"
+                "    }\n"
+                "}\n"
+                f"{core_runtime_name_thunk}"
+                f"{core_trust_level_thunk}"
+            ),
+            "windows-implement/src/interface_impl_surface.cj": (
+                "public class ComObjectRuntime<T> {\n"
+                "    let supportedIids = []\n"
+                "    public func getIidsBase(count: CPointer<UInt32>, values: CPointer<CPointer<GUID>>): Int32 {\n"
+                "        if (count.isNull() || values.isNull()) {\n"
+                f"{surface_clear}"
+                "            return E_POINTER\n"
+                "        }\n"
+                "        for (iid in supportedIids) { let _ = iid }\n"
+                "        S_OK\n"
+                "    }\n"
+                "}\n"
+            ),
+            "windows-implement/src/com_object_lifetime_test.cj": (
+                "testInspectableGetIidsClearsSiblingOutSlotsOnPointerFailure\n"
+                "testIInspectableThunksTranslateWindowsExceptionsAndClearOutSlots\n"
+                "testIInspectableThunksTranslatePlainExceptionsAndClearOutSlots\n"
+                f"{implement_partial_iid_markers}"
+                "testIInspectableRuntimeClassNameThunkReleasesPartialHandleOnThrownWindowsException\n"
+                "iinspectableGetIidsThunk(\n"
+                "iinspectableGetTrustLevelThunk(\n"
+                "iinspectableGetRuntimeClassNameThunk(\n"
+                "owner.runtime.getIidsBase(\n"
+                "@Expect(iids.isNull(), true)\n"
+                "@Expect(count, 0u32)\n"
+                "@Expect(trustLevel, 0i32)\n"
+            ),
+            "windows-interface/src/descriptor_basics_test.cj": (
+                "testDefaultIUnknownVtblQueryInterfaceRejectsNullAndClearsStaleOutPointer\n"
+                "vtbl.QueryInterface\n"
+                "@Expect(nullResultHr, E_POINTER)\n"
+                "@Expect(unsupportedHr, E_NOINTERFACE)\n"
+                "@Expect(result.isNull(), true)\n"
+                "testDefaultUnsupportedVtblsClearFailedOutPointers\n"
+                "IAgileReferenceVtbl\n"
+                "IWeakReferenceVtbl\n"
+                "IWeakReferenceSourceVtbl\n"
+                "IActivationFactoryVtbl\n"
+                "IMarshalVtbl\n"
+                "@Expect(agileResolveHr, E_NOTIMPL)\n"
+                "@Expect(classId == GUID_ZERO, true)\n"
+                "@Expect(size, 0u32)\n"
+                "testDefaultIInspectableVtblRejectsNullOutPointers\n"
+                "@Expect(iids.isNull(), true)\n"
+                "@Expect(count, 0u32)\n"
+            ),
+            "windows-core/src/core_descriptor_test.cj": (
+                f"{core_partial_iid_markers}"
+                f"{core_runtime_name_markers}"
+                f"{core_trust_level_markers}"
+                "coreIInspectableGetIidsThunk(\n"
+                "@Expect(iids.isNull(), true)\n"
+                "@Expect(count, 0u32)\n"
+            ),
+        }
+        for relative, text in paths.items():
+            path = workspace / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(text, encoding="utf-8")
+
+    def assert_iinspectable_get_iids_fail(self, workspace: Path, expected: str) -> None:
+        stderr = io.StringIO()
+        with contextlib.redirect_stderr(stderr):
+            with self.assertRaises(SystemExit) as raised:
+                setup.check_iinspectable_get_iids_clears_sibling_out_slots(workspace)
+        self.assertEqual(raised.exception.code, 1)
+        self.assertIn(expected, stderr.getvalue())
+
+    def test_accepts_get_iids_sibling_out_slot_clears(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace)
+
+            setup.check_iinspectable_get_iids_clears_sibling_out_slots(workspace)
+
+    def test_rejects_default_vtbl_get_iids_without_sibling_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, wrapper_clears=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "default IInspectableVtbl.GetIids")
+
+    def test_rejects_default_iunknown_query_interface_without_result_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, iunknown_clears=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "default IUnknownVtbl.QueryInterface")
+
+    def test_rejects_default_iunknown_query_interface_without_null_result_guard(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, iunknown_rejects_null=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "default IUnknownVtbl.QueryInterface")
+
+    def test_rejects_default_unsupported_vtable_stubs_without_failed_out_clears(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, unsupported_stubs_clear=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "default IAgileReferenceVtbl.Resolve")
+
+    def test_rejects_implement_get_iids_without_sibling_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, thunk_clears=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "iinspectableGetIidsThunk")
+
+    def test_rejects_implement_get_iids_helper_without_partial_iid_free(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, thunk_releases_partial_iids=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "failed IInspectable.GetIids helper")
+
+    def test_rejects_core_get_iids_helper_without_partial_iid_free(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, core_releases_partial_iids=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "inspectable.cj")
+
+    def test_rejects_core_get_iids_thunk_without_partial_iid_release_calls(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, core_thunk_releases_partial_iids=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "coreIInspectableGetIidsThunk")
+
+    def test_rejects_core_runtime_class_name_thunk_without_exception_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, core_runtime_name_thunk_translates=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "coreIInspectableGetRuntimeClassNameThunk")
+
+    def test_rejects_core_trust_level_thunk_without_exception_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, core_trust_level_thunk_translates=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "coreIInspectableGetTrustLevelThunk")
+
+    def test_rejects_implement_get_iids_without_partial_iid_regression_markers(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, implement_partial_iid_test_markers=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "windows-implement tests")
+
+    def test_rejects_core_get_iids_without_partial_iid_regression_markers(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, core_partial_iid_test_markers=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "windows-core tests")
+
+    def test_rejects_core_runtime_class_name_without_regression_markers(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, core_runtime_name_test_markers=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "windows-core tests")
+
+    def test_rejects_core_trust_level_without_regression_markers(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_iinspectable_workspace(workspace, core_trust_level_test_markers=False)
+
+            self.assert_iinspectable_get_iids_fail(workspace, "windows-core tests")
+
+
+class DefaultVtableFailedOutSlotGateTests(unittest.TestCase):
+    def write_default_vtable_workspace(
+        self,
+        workspace: Path,
+        *,
+        factory_clears: bool = True,
+        result_query_rejects_null: bool = True,
+        result_error_info_clears: bool = True,
+    ) -> None:
+        factory_clear = (
+            "        if (result.isNotNull()) {\n"
+            "            unsafe { result.write(CPointer<Unit>()) }\n"
+            "        }\n"
+            if factory_clears
+            else ""
+        )
+        query_null_guard = (
+            "        if (resultPtr.isNull()) {\n"
+            "            return E_POINTER.value\n"
+            "        }\n"
+            if result_query_rejects_null
+            else ""
+        )
+        result_unknown_clear = "        clearDefaultUnknownOutSlot(resultPtr)\n" if result_error_info_clears else ""
+        result_guid_clear = "        clearDefaultGuidOutSlot(result)\n" if result_error_info_clears else ""
+        result_bstr_clear = "        clearDefaultBstrOutSlot(result)\n" if result_error_info_clears else ""
+        result_uint_clear = "        clearDefaultUInt32OutSlot(result)\n" if result_error_info_clears else ""
+        result_details_clear = (
+            "        clearDefaultBstrOutSlot(fallback)\n"
+            "        clearDefaultInt32OutSlot(errorCode)\n"
+            "        clearDefaultBstrOutSlot(description)\n"
+            "        clearDefaultBstrOutSlot(reference)\n"
+            if result_error_info_clears
+            else ""
+        )
+        paths = {
+            "windows-core/src/generic_factory.cj": (
+                "public struct IGenericFactoryVtbl {\n"
+                "    public var ActivateInstance: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>\n"
+                f"{factory_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    public init() {}\n"
+                "}\n"
+                "public class IGenericFactory {}\n"
+            ),
+            "windows-core/src/generic_factory_lifetime_test.cj": (
+                "testGenericFactoryDefaultActivateInstanceClearsStaleOutPointerOnENotImpl\n"
+                "IGenericFactoryVtbl\n"
+                "@Expect(hr, E_NOTIMPL)\n"
+                "@Expect(result.isNull(), true)\n"
+            ),
+            "windows-result/src/bindings.cj": (
+                "func clearDefaultUnknownOutSlot(slot: CPointer<CPointer<Unit>>): Unit {\n"
+                "    if (slot.isNotNull()) { slot.write(CPointer<Unit>()) }\n"
+                "}\n"
+                "func clearDefaultBstrOutSlot(slot: CPointer<CPointer<UInt16>>): Unit {\n"
+                "    if (slot.isNotNull()) { slot.write(CPointer<UInt16>()) }\n"
+                "}\n"
+                "func clearDefaultGuidOutSlot(slot: CPointer<GUID>): Unit {\n"
+                "    if (slot.isNotNull()) { slot.write(GUID.zeroed()) }\n"
+                "}\n"
+                "func clearDefaultInt32OutSlot(slot: CPointer<Int32>): Unit {\n"
+                "    if (slot.isNotNull()) { slot.write(0i32) }\n"
+                "}\n"
+                "func clearDefaultUInt32OutSlot(slot: CPointer<UInt32>): Unit {\n"
+                "    if (slot.isNotNull()) { slot.write(0u32) }\n"
+                "}\n"
+                "struct IUnknownVtbl {\n"
+                "    var QueryInterface: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, resultPtr =>\n"
+                f"{query_null_guard}"
+                f"{result_unknown_clear}"
+                "        E_NOINTERFACE.value\n"
+                "    }\n"
+                "    var AddRef: CFunc<(CPointer<Unit>) -> UInt32>\n"
+                "}\n"
+                "@C\n"
+                "struct IErrorInfoVtbl {\n"
+                "    var GetGUID: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, result =>\n"
+                f"{result_guid_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    var GetSource: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, result =>\n"
+                f"{result_bstr_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    var GetDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, result =>\n"
+                f"{result_bstr_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    var GetHelpFile: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, result =>\n"
+                f"{result_bstr_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    var GetHelpContext: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result =>\n"
+                f"{result_uint_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    init() {}\n"
+                "}\n"
+                "@C\n"
+                "struct IRestrictedErrorInfoVtbl {\n"
+                "    var GetErrorDetails: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<Int32>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>) -> Int32> = { _, fallback, errorCode, description, reference =>\n"
+                f"{result_details_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    var GetReference: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, result =>\n"
+                f"{result_bstr_clear}"
+                "        E_NOTIMPL.value\n"
+                "    }\n"
+                "    init() {}\n"
+                "}\n"
+                "func GetErrorInfo(): Unit {}\n"
+            ),
+            "windows-result/src/internal_test.cj": (
+                "defaultErrorInfoVtablesClearFailedOutSlots\n"
+                "IErrorInfoVtbl\n"
+                "IRestrictedErrorInfoVtbl\n"
+                "require(queryResult.isNull()\n"
+                "require(guidResult == GUID.zeroed()\n"
+                "require(helpContextResult == 0u32\n"
+                "require(errorCodeResult == 0i32\n"
+            ),
+        }
+        for relative, text in paths.items():
+            path = workspace / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(text, encoding="utf-8")
+
+    def assert_default_vtables_fail(self, workspace: Path, expected: str) -> None:
+        stderr = io.StringIO()
+        with contextlib.redirect_stderr(stderr):
+            with self.assertRaises(SystemExit) as raised:
+                setup.check_default_vtable_stubs_clear_failed_out_slots(workspace)
+        self.assertEqual(raised.exception.code, 1)
+        self.assertIn(expected, stderr.getvalue())
+
+    def test_accepts_default_vtable_failed_out_slot_clears(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_default_vtable_workspace(workspace)
+
+            setup.check_default_vtable_stubs_clear_failed_out_slots(workspace)
+
+    def test_rejects_generic_factory_default_without_failed_result_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_default_vtable_workspace(workspace, factory_clears=False)
+
+            self.assert_default_vtables_fail(workspace, "default IGenericFactoryVtbl.ActivateInstance")
+
+    def test_rejects_result_iunknown_default_without_null_result_guard(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_default_vtable_workspace(workspace, result_query_rejects_null=False)
+
+            self.assert_default_vtables_fail(workspace, "default IUnknownVtbl.QueryInterface")
+
+    def test_rejects_result_error_info_defaults_without_failed_out_clears(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_default_vtable_workspace(workspace, result_error_info_clears=False)
+
+            self.assert_default_vtables_fail(workspace, "default IUnknownVtbl.QueryInterface")
+
+
+class DescriptorGeneratedThunkGateTests(unittest.TestCase):
+    def write_descriptor_workspace(
+        self,
+        workspace: Path,
+        *,
+        omit_try: bool = False,
+        omit_test_marker: bool = False,
+    ) -> None:
+        generator = workspace / "windows-implement" / "src" / "descriptor_codegen.cj"
+        generator.parent.mkdir(parents=True, exist_ok=True)
+        try_line = "" if omit_try else '    sb.append("    try {\\n")\n'
+        generator.write_text(
+            (
+                "func thunkWindowsExceptionReturn(returnType: String): String { error.code().value }\n"
+                "func thunkPlainExceptionReturn(returnType: String): String { E_FAIL }\n"
+                "func appendDispatchExceptionOutSlotCleanup(sb: StringBuilder, method: InterfaceMethodSchema): Unit {\n"
+                "    unsafe { result__.write(CPointer<Unit>()) }\n"
+                "}\n"
+                "func appendDispatchThunk(sb: StringBuilder, descriptor: ResolvedDescriptor, method: InterfaceMethodSchema): Unit {\n"
+                "    sb.append(\"public func FixtureThunk() {\\n\")\n"
+                f"{try_line}"
+                "    sb.append(\"    match (unsafe { asImplFromRaw<\")\n"
+                "    sb.append(\"    }\\n\")\n"
+                "    sb.append(\"    } catch (error: windows_result.WindowsException) {\\n\")\n"
+                "    appendDispatchExceptionOutSlotCleanup(sb, method)\n"
+                "    thunkWindowsExceptionReturn(method.returnType)\n"
+                "    sb.append(\"    } catch (_: Exception) {\\n\")\n"
+                "    appendDispatchExceptionOutSlotCleanup(sb, method)\n"
+                "    thunkPlainExceptionReturn(method.returnType)\n"
+                "    sb.append(\"    }\\n\")\n"
+                "    sb.append(\"}\\n\")\n"
+                "}\n"
+            ),
+            encoding="utf-8",
+        )
+        tests = workspace / "windows-implement" / "src" / "descriptor_codegen_test.cj"
+        tests.write_text(
+            (
+                "testGeneratedResultBridgeCleansFailedPointerOutputs\n"
+                + ("" if omit_test_marker else "testGeneratedNonResultThunkTranslatesThrownExceptions\n")
+                + "catch (error: windows_result.WindowsException)\n"
+                "error.code().value\n"
+                "E_FAIL\n"
+                "unsafe { result__.write(CPointer<Unit>()) }\n"
+            ),
+            encoding="utf-8",
+        )
+
+    def assert_descriptor_gate_fails(self, workspace: Path, expected: str) -> None:
+        stderr = io.StringIO()
+        with contextlib.redirect_stderr(stderr):
+            with self.assertRaises(SystemExit) as raised:
+                setup.check_descriptor_generated_thunks_translate_exceptions(workspace)
+        self.assertEqual(raised.exception.code, 1)
+        self.assertIn(expected, stderr.getvalue())
+
+    def test_accepts_descriptor_generated_thunk_exception_translation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_descriptor_workspace(workspace)
+
+            setup.check_descriptor_generated_thunks_translate_exceptions(workspace)
+
+    def test_rejects_descriptor_generated_thunk_without_try_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_descriptor_workspace(workspace, omit_try=True)
+
+            self.assert_descriptor_gate_fails(workspace, "wrap ABI dispatch in try/catch")
+
+    def test_rejects_descriptor_generated_thunk_without_runtime_test_marker(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_descriptor_workspace(workspace, omit_test_marker=True)
+
+            self.assert_descriptor_gate_fails(workspace, "descriptor codegen tests")
+
+
 class CollectionThunkGateTests(unittest.TestCase):
     def write_runtime_source(self, workspace: Path, text: str) -> None:
         path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text, encoding="utf-8")
+
+    def write_generated_common_impl(self, workspace: Path, text: str) -> None:
+        path = workspace / "windows-common" / "src" / "impl" / "symbols_0.cj"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+
+    def generated_collection_abi_source(
+        self,
+        *,
+        bad_index: bool = False,
+        bad_get_many: bool = False,
+    ) -> str:
+        index_type = "CPointer<CPointer<Unit>>" if bad_index else "CPointer<UInt32>"
+        iterator_many = (
+            "public var GetMany: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>, CPointer<UInt32>) -> Int32>"
+            if bad_get_many
+            else "public var GetMany: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32>"
+        )
+        vector_many = (
+            "public var GetMany: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>, CPointer<UInt32>) -> Int32>"
+            if bad_get_many
+            else "public var GetMany: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32>"
+        )
+        vector_many_method = (
+            "public unsafe func GetMany(startIndex: UInt32, itemsSize: CPointer<UInt32>, items: CPointer<CPointer<CPointer<Unit>>>, result: CPointer<UInt32>): windows_core.HRESULT"
+            if bad_get_many
+            else "public unsafe func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>, result: CPointer<UInt32>): windows_core.HRESULT"
+        )
+        return (
+            f"{iterator_many}\n"
+            f"public var IndexOf: CFunc<(CPointer<Unit>, CPointer<Unit>, {index_type}, CPointer<Bool>) -> Int32>\n"
+            f"{vector_many}\n"
+            f"public unsafe func IndexOf(value: CPointer<Unit>, index: {index_type}, result: CPointer<Bool>): windows_core.HRESULT\n"
+            f"{vector_many_method}\n"
+        )
+
+    def write_collection_cleanup_test(self, workspace: Path, text: str | None = None) -> None:
+        path = workspace / "windows-runtime" / "src" / "collection_get_many_cleanup_test.cj"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if text is None:
+            text = (
+                "testIIteratorProducerBoolThunksClearStaleOutputsBeforeFailure\n"
+                "testIIteratorProducerBoolThunksClearStaleOutputsBeforeThrownExceptions\n"
+                "testCollectionChangedProducerScalarThunksClearStaleOutputsBeforeFailure\n"
+                "testCollectionProducerSizeThunksClearStaleOutputsBeforeFailure\n"
+                "testIVectorProducerManualThunksTranslateThrownExceptions\n"
+                "testCollectionGenericOutThunkCleansStoreFailure\n"
+            )
+        path.write_text(text, encoding="utf-8")
+        default_vtable_path = workspace / "windows-runtime" / "src" / "collection_default_vtable_abi_test.cj"
+        default_vtable_path.write_text(
+            "func testCollectionDefaultIteratorAndEventVtablesClearOutSlotsBeforeNotImpl() {\n"
+            "    IIteratorVtbl()\n"
+            "    @Expect(current.isNull(), true)\n"
+            "}\n"
+            "func testCollectionDefaultMapAndVectorVtablesClearOutSlotsBeforeNotImpl() {\n"
+            "    IMapViewVtbl()\n"
+            "    IVectorVtbl()\n"
+            "    @Expect(vectorMany, 0u32)\n"
+            "}\n"
+            "func testCollectionDefaultObservableVtablesClearTokenOutSlotsBeforeNotImpl() {\n"
+            "    IObservableMapVtbl()\n"
+            "    @Expect(vectorToken.Value, 0i64)\n"
+            "}\n",
+            encoding="utf-8",
+        )
+        null_buffer_path = workspace / "windows-runtime" / "src" / "collection_null_buffer_thunk_test.cj"
+        null_buffer_path.write_text(
+            (
+                "testGeneratedIteratorGetManyThunkRejectsNullBufferWithNonZeroCapacity\n"
+                "testGeneratedMapViewSplitThunkClearsSiblingOutSlotOnPointerFailure\n"
+                "@Expect(copied, 0u32)\n"
+            ),
+            encoding="utf-8",
+        )
+
+    def guarded_generic_input_thunk(self, name: str, *, bool_out: bool = False, indexof: bool = False) -> str:
+        params = {
+            "Lookup": "arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>",
+            "HasKey": "arg0: CPointer<Unit>, result__: CPointer<Bool>",
+            "Insert": "arg0: CPointer<Unit>, arg1: CPointer<Unit>, result__: CPointer<Bool>",
+            "Remove": "arg0: CPointer<Unit>",
+            "IndexOf": "arg0: CPointer<Unit>, arg1: CPointer<UInt32>, result__: CPointer<Bool>",
+            "SetAt": "arg0: UInt32, arg1: CPointer<Unit>",
+            "InsertAt": "arg0: UInt32, arg1: CPointer<Unit>",
+            "Append": "arg0: CPointer<Unit>",
+        }[name]
+        prefix = ""
+        if indexof:
+            prefix = "    clearCollectionIndexOutSlot(arg1)\n    clearCollectionBoolOutSlot(result__)\n"
+        elif bool_out:
+            prefix = "    clearCollectionBoolOutSlot(result__)\n"
+        return (
+            f"public func __winrtThunk_{name}({params}): Int32 {{\n"
+            f"{prefix}"
+            "    try {\n"
+            "        match (this.Call(windows_core.winrtProjectGenericIn<T>(arg0))) { case _ => S_OK.value }\n"
+            "    } catch (error: windows_core.WindowsException) {\n"
+            "        error.code().value\n"
+            "    } catch (_: Exception) {\n"
+            "        windows_core.E_FAIL.value\n"
+            "    }\n"
+            "}\n"
+        )
+
+    def guarded_scalar_output_thunk(self, name: str) -> str:
+        params = {
+            "HasCurrent": "result__: CPointer<Bool>",
+            "MoveNext": "result__: CPointer<Bool>",
+            "get_CollectionChange": "result__: CPointer<CollectionChangeAbi>",
+            "Index": "result__: CPointer<UInt32>",
+            "Size": "result__: CPointer<UInt32>",
+        }[name]
+        clear = {
+            "HasCurrent": "    clearCollectionBoolOutSlot(result__)\n",
+            "MoveNext": "    clearCollectionBoolOutSlot(result__)\n",
+            "get_CollectionChange": "    unsafe { result__.write(CollectionChangeAbi()) }\n",
+            "Index": "    clearCollectionIndexOutSlot(result__)\n",
+            "Size": "    clearCollectionIndexOutSlot(result__)\n",
+        }[name]
+        dispatch = {
+            "HasCurrent": "this.HasCurrent()",
+            "MoveNext": "this.MoveNext()",
+            "get_CollectionChange": "this.get_CollectionChange()",
+            "Index": "this.Index()",
+            "Size": "this.Size()",
+        }[name]
+        result_type = {
+            "HasCurrent": "Bool",
+            "MoveNext": "Bool",
+            "get_CollectionChange": "CollectionChange",
+            "Index": "UInt32",
+            "Size": "UInt32",
+        }[name]
+        return (
+            f"public func __winrtThunk_{name}({params}): Int32 {{\n"
+            "    if (result__.isNull()) { return E_POINTER.value }\n"
+            f"{clear}"
+            "    try {\n"
+            f"        match ({dispatch}) {{\n"
+            f"            case Result<{result_type}>.Ok(value) => S_OK.value\n"
+            f"            case Result<{result_type}>.Err(error) => error.code().value\n"
+            "        }\n"
+            "    } catch (error: windows_core.WindowsException) {\n"
+            "        error.code().value\n"
+            "    } catch (_: Exception) {\n"
+            "        windows_core.E_FAIL.value\n"
+            "    }\n"
+            "}\n"
+        )
+
+    def guarded_scalar_output_thunks(self) -> str:
+        return (
+            "func collectionNotImplGenericOut(result: CPointer<CPointer<Unit>>): Int32 { E_NOTIMPL.value }\n"
+            "func collectionNotImplBoolOut(result: CPointer<Bool>): Int32 { E_NOTIMPL.value }\n"
+            "func collectionNotImplUInt32Out(result: CPointer<UInt32>): Int32 { E_NOTIMPL.value }\n"
+            "func collectionNotImplValueOut<T>(result: CPointer<T>, value: T): Int32 where T <: CType { E_NOTIMPL.value }\n"
+            "func collectionNotImplIndexBoolOut(index: CPointer<UInt32>, result: CPointer<Bool>): Int32 { E_NOTIMPL.value }\n"
+            "func collectionNotImplSplitOut(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Int32 { E_NOTIMPL.value }\n"
+            "func collectionGenericOutThunk<T>() {\n"
+            "    windows_core.releaseFailedComOutSlot(result)\n"
+            "    let hr = windows_core.winrtStoreGenericOut<T>(result, value)\n"
+            "    if (HRESULT(hr).failed()) {\n"
+            "        releaseCollectionGenericOutRangeNoThrow<T>(CPointer<Unit>(result), 1u32)\n"
+            "    }\n"
+            "}\n"
+            "func collectionUnitThunk(action: () -> Result<Unit>): Int32 { S_OK.value }\n"
+            "func collectionGenericOutRangeThunk<T>(itemsSize: UInt32, items: CPointer<Unit>, result: CPointer<UInt32>): Int32 {\n"
+            "    if (result.isNull()) { return E_POINTER.value }\n"
+            "    clearCollectionIndexOutSlot(result)\n"
+            "    if (itemsSize > 0u32 && items.isNull()) { return E_POINTER.value }\n"
+            "    releaseCollectionGenericOutRangeNoThrow<T>(items, itemsSize)\n"
+            "}\n"
+            "func collectionSplitOutThunk(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Int32 {\n"
+            "    if (first.isNull() || second.isNull()) {\n"
+            "        if (first.isNotNull()) { clearCollectionGenericOutSlot(first) }\n"
+            "        if (second.isNotNull()) { clearCollectionGenericOutSlot(second) }\n"
+            "        return E_POINTER.value\n"
+            "    }\n"
+            "    clearCollectionGenericOutSlot(first)\n"
+            "    clearCollectionGenericOutSlot(second)\n"
+            "}\n"
+            "func manualHelperCalls(): Unit {\n"
+            "    collectionGenericOutThunk<T>(result__, { => this.Current() })\n"
+            "    collectionGenericOutRangeThunk<T>(itemsSize, items, result__, { => this.GetMany(itemsSize, items) })\n"
+            "    collectionUnitThunk({ => this.Clear() })\n"
+            "    collectionSplitOutThunk(arg0, arg1, { => this.Split(arg0, arg1) })\n"
+            "}\n"
+            + self.guarded_scalar_output_thunk("HasCurrent")
+            + self.guarded_scalar_output_thunk("MoveNext")
+            + self.guarded_scalar_output_thunk("get_CollectionChange")
+            + self.guarded_scalar_output_thunk("get_CollectionChange")
+            + self.guarded_scalar_output_thunk("Index")
+            + (self.guarded_scalar_output_thunk("Size") * 7)
+        )
+
+    def test_accepts_generated_collection_vtable_abi_parity(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_generated_common_impl(workspace, self.generated_collection_abi_source())
+
+            setup.check_generated_collection_vtable_abi_parity(workspace)
+
+    def test_rejects_generated_collection_indexof_pointer_to_pointer_index(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_generated_common_impl(workspace, self.generated_collection_abi_source(bad_index=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_generated_collection_vtable_abi_parity(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("pointer-to-pointer index", stderr.getvalue())
+
+    def test_rejects_generated_collection_getmany_allocated_array_abi(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_generated_common_impl(workspace, self.generated_collection_abi_source(bad_get_many=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_generated_collection_vtable_abi_parity(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("allocated-array ABI", stderr.getvalue())
 
     def test_rejects_indexof_thunk_without_null_index_guard(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -132,6 +1442,3128 @@ class CollectionThunkGateTests(unittest.TestCase):
             self.write_runtime_source(workspace, body + body + body)
 
             setup.check_collection_indexof_thunks_reject_null_index(workspace)
+
+    def test_rejects_generic_input_thunk_without_exception_translation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                (
+                    "public func __winrtThunk_Append(arg0: CPointer<Unit>): Int32 {\n"
+                    "    match (this.Append(windows_core.winrtProjectGenericIn<T>(arg0))) { case _ => S_OK.value }\n"
+                    "}\n"
+                    + self.guarded_generic_input_thunk("Lookup")
+                    + self.guarded_generic_input_thunk("HasKey", bool_out=True)
+                    + self.guarded_generic_input_thunk("Insert", bool_out=True)
+                    + self.guarded_generic_input_thunk("Remove")
+                    + self.guarded_generic_input_thunk("IndexOf", indexof=True)
+                    + self.guarded_generic_input_thunk("SetAt")
+                    + self.guarded_generic_input_thunk("InsertAt")
+                    + self.guarded_generic_input_thunk("Append")
+                    + self.guarded_generic_input_thunk("Lookup")
+                    + self.guarded_generic_input_thunk("HasKey", bool_out=True)
+                    + self.guarded_generic_input_thunk("Insert", bool_out=True)
+                    + self.guarded_generic_input_thunk("Remove")
+                    + self.guarded_generic_input_thunk("IndexOf", indexof=True)
+                    + self.guarded_generic_input_thunk("SetAt")
+                    + self.guarded_generic_input_thunk("InsertAt")
+                    + self.guarded_generic_input_thunk("Append")
+                    + self.guarded_generic_input_thunk("Lookup")
+                    + self.guarded_generic_input_thunk("HasKey", bool_out=True)
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_generic_input_thunks_translate_projection_failures(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("projection exceptions", stderr.getvalue())
+
+    def test_rejects_generic_input_bool_thunk_without_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                self.guarded_generic_input_thunk("Lookup")
+                + (
+                    "public func __winrtThunk_HasKey(arg0: CPointer<Unit>, result__: CPointer<Bool>): Int32 {\n"
+                    "    try {\n"
+                    "        match (this.HasKey(windows_core.winrtProjectGenericIn<T>(arg0))) { case _ => S_OK.value }\n"
+                    "    } catch (error: windows_core.WindowsException) { error.code().value }\n"
+                    "      catch (_: Exception) { windows_core.E_FAIL.value }\n"
+                    "}\n"
+                )
+                + self.guarded_generic_input_thunk("Insert", bool_out=True)
+                + self.guarded_generic_input_thunk("Remove")
+                + self.guarded_generic_input_thunk("IndexOf", indexof=True)
+                + self.guarded_generic_input_thunk("SetAt")
+                + self.guarded_generic_input_thunk("InsertAt")
+                + self.guarded_generic_input_thunk("Append")
+                + self.guarded_generic_input_thunk("Lookup")
+                + self.guarded_generic_input_thunk("HasKey", bool_out=True)
+                + self.guarded_generic_input_thunk("Insert", bool_out=True)
+                + self.guarded_generic_input_thunk("Remove")
+                + self.guarded_generic_input_thunk("IndexOf", indexof=True)
+                + self.guarded_generic_input_thunk("SetAt")
+                + self.guarded_generic_input_thunk("InsertAt")
+                + self.guarded_generic_input_thunk("Append")
+                + self.guarded_generic_input_thunk("Lookup")
+                + self.guarded_generic_input_thunk("HasKey", bool_out=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_generic_input_thunks_translate_projection_failures(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("clear Bool out slots", stderr.getvalue())
+
+    def test_accepts_generic_input_thunks_with_exception_translation_and_preclear(self) -> None:
+        body = (
+            self.guarded_generic_input_thunk("Lookup")
+            + self.guarded_generic_input_thunk("HasKey", bool_out=True)
+            + self.guarded_generic_input_thunk("Insert", bool_out=True)
+            + self.guarded_generic_input_thunk("Remove")
+            + self.guarded_generic_input_thunk("IndexOf", indexof=True)
+            + self.guarded_generic_input_thunk("SetAt")
+            + self.guarded_generic_input_thunk("InsertAt")
+            + self.guarded_generic_input_thunk("Append")
+            + self.guarded_generic_input_thunk("Lookup")
+            + self.guarded_generic_input_thunk("HasKey", bool_out=True)
+            + self.guarded_generic_input_thunk("Insert", bool_out=True)
+            + self.guarded_generic_input_thunk("Remove")
+            + self.guarded_generic_input_thunk("IndexOf", indexof=True)
+            + self.guarded_generic_input_thunk("SetAt")
+            + self.guarded_generic_input_thunk("InsertAt")
+            + self.guarded_generic_input_thunk("Append")
+            + self.guarded_generic_input_thunk("Lookup")
+            + self.guarded_generic_input_thunk("HasKey", bool_out=True)
+        )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(workspace, body)
+
+            setup.check_collection_generic_input_thunks_translate_projection_failures(workspace)
+
+    def test_rejects_scalar_output_thunk_without_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                self.guarded_scalar_output_thunks().replace(
+                    "    clearCollectionBoolOutSlot(result__)\n",
+                    "",
+                    1,
+                ),
+            )
+            self.write_collection_cleanup_test(workspace)
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_scalar_output_thunks_clear_outputs(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("HasCurrent thunk must clear scalar out slots", stderr.getvalue())
+
+    def test_rejects_scalar_output_thunk_without_exception_translation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                self.guarded_scalar_output_thunks().replace(
+                    "        windows_core.E_FAIL.value\n",
+                    "        S_OK.value\n",
+                    1,
+                ),
+            )
+            self.write_collection_cleanup_test(workspace)
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_scalar_output_thunks_clear_outputs(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("HasCurrent thunk must translate thrown exceptions", stderr.getvalue())
+
+    def test_rejects_generic_out_range_helper_without_null_buffer_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                self.guarded_scalar_output_thunks().replace(
+                    "    clearCollectionIndexOutSlot(result)\n"
+                    "    if (itemsSize > 0u32 && items.isNull())",
+                    "    if (itemsSize > 0u32 && items.isNull())",
+                    1,
+                ),
+            )
+            self.write_collection_cleanup_test(workspace)
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_scalar_output_thunks_clear_outputs(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("GetMany helper must clear written out slots", stderr.getvalue())
+
+    def test_rejects_generic_out_helper_without_store_failure_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                self.guarded_scalar_output_thunks().replace(
+                    "    if (HRESULT(hr).failed()) {\n"
+                    "        releaseCollectionGenericOutRangeNoThrow<T>(CPointer<Unit>(result), 1u32)\n"
+                    "    }\n",
+                    "",
+                    1,
+                ),
+            )
+            self.write_collection_cleanup_test(workspace)
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_scalar_output_thunks_clear_outputs(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("collection manual thunks", stderr.getvalue())
+
+    def test_rejects_split_helper_without_e_pointer_sibling_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                self.guarded_scalar_output_thunks().replace(
+                    "        if (first.isNotNull()) { clearCollectionGenericOutSlot(first) }\n"
+                    "        if (second.isNotNull()) { clearCollectionGenericOutSlot(second) }\n",
+                    "",
+                    1,
+                ),
+            )
+            self.write_collection_cleanup_test(workspace)
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_scalar_output_thunks_clear_outputs(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("Split helper must clear non-null sibling out slots", stderr.getvalue())
+
+    def test_rejects_scalar_output_thunks_without_runtime_coverage(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(workspace, self.guarded_scalar_output_thunks())
+            self.write_collection_cleanup_test(
+                workspace,
+                "testIIteratorProducerBoolThunksClearStaleOutputsBeforeFailure\n",
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_scalar_output_thunks_clear_outputs(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("collection scalar output thunk cleanup tests", stderr.getvalue())
+
+    def test_accepts_scalar_output_thunks_with_preclear_exception_translation_and_tests(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(workspace, self.guarded_scalar_output_thunks())
+            self.write_collection_cleanup_test(workspace)
+
+            setup.check_collection_scalar_output_thunks_clear_outputs(workspace)
+
+    def test_rejects_specialized_bool_thunk_without_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                (
+                    "let hasKeyAbi = { instanceRaw, arg0, result__ =>\n"
+                    "    if (result__.isNull()) { E_POINTER.value } else {\n"
+                    "        match (impl.HasKey(arg0)) { case _ => S_OK.value }\n"
+                    "    }\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_specialized_bool_thunks_clear_outputs(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("specialized HasKey thunk must clear Bool out slots", stderr.getvalue())
+
+    def test_accepts_specialized_bool_thunks_with_preclear(self) -> None:
+        branch = (
+            "let hasKeyAbi = { instanceRaw, arg0, result__ =>\n"
+            "    if (result__.isNull()) { E_POINTER.value } else {\n"
+            "        clearCollectionBoolOutSlot(result__)\n"
+            "        match (impl.HasKey(arg0)) { case _ => S_OK.value }\n"
+            "    }\n"
+            "}\n"
+            "let insertAbi = { instanceRaw, arg0, arg1, result__ =>\n"
+            "    if (result__.isNull()) { E_POINTER.value } else {\n"
+            "        clearCollectionBoolOutSlot(result__)\n"
+            "        match (impl.Insert(arg0, arg1)) { case _ => S_OK.value }\n"
+            "    }\n"
+            "}\n"
+        )
+        result_helper_branch = (
+            "let hasKeyAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = {\n"
+            "    instanceRaw, arg0, result__ =>\n"
+            "    if (result__.isNull()) { E_POINTER.value } else {\n"
+            "        clearCollectionBoolOutSlot(result__)\n"
+            "        try {\n"
+            "            collectionBoolOutResult(result__, impl.HasKey(arg0))\n"
+            "        } catch (_: Exception) { E_FAIL.value }\n"
+            "    }\n"
+            "}\n"
+            "let insertAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Bool>) -> Int32> = {\n"
+            "    instanceRaw, arg0, arg1, result__ =>\n"
+            "    if (result__.isNull()) { E_POINTER.value } else {\n"
+            "        clearCollectionBoolOutSlot(result__)\n"
+            "        try {\n"
+            "            collectionBoolOutResult(\n"
+            "                result__,\n"
+            "                impl.Insert(arg0, arg1)\n"
+            "            )\n"
+            "        } catch (_: Exception) { E_FAIL.value }\n"
+            "    }\n"
+            "}\n"
+        )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(workspace, (branch * 12) + result_helper_branch)
+
+            setup.check_collection_specialized_bool_thunks_clear_outputs(workspace)
+
+    def test_rejects_specialized_indexof_thunk_without_null_index_guard(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                (
+                    "let indexOfAbi: CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, "
+                    "CPointer<Bool>) -> Int32> = { instanceRaw, arg0, arg1, result__ =>\n"
+                    "    if (result__.isNull()) { E_POINTER.value } else {\n"
+                    "        clearCollectionIndexOutSlot(arg1)\n"
+                    "        clearCollectionBoolOutSlot(result__)\n"
+                    "        match (impl.IndexOf(arg0, arg1)) { case _ => S_OK.value }\n"
+                    "    }\n"
+                    "}\n"
+                    "vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, "
+                    "CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_specialized_indexof_thunks_clear_outputs(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("specialized IndexOf thunk must reject null found/index out slots", stderr.getvalue())
+
+    def test_rejects_specialized_indexof_thunk_without_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                (
+                    "let indexOfAbi: CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, "
+                    "CPointer<Bool>) -> Int32> = { instanceRaw, arg0, arg1, result__ =>\n"
+                    "    if (result__.isNull() || arg1.isNull()) { E_POINTER.value } else {\n"
+                    "        clearCollectionBoolOutSlot(result__)\n"
+                    "        match (impl.IndexOf(arg0, arg1)) { case _ => S_OK.value }\n"
+                    "    }\n"
+                    "}\n"
+                    "vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, "
+                    "CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_specialized_indexof_thunks_clear_outputs(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("specialized IndexOf thunk must clear index out slots", stderr.getvalue())
+
+    def test_accepts_specialized_indexof_thunks_with_preclear(self) -> None:
+        branch = (
+            "let indexOfAbi: CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, "
+            "CPointer<Bool>) -> Int32> = { instanceRaw, arg0, arg1, result__ =>\n"
+            "    if (result__.isNull() || arg1.isNull()) { E_POINTER.value } else {\n"
+            "        clearCollectionIndexOutSlot(arg1)\n"
+            "        clearCollectionBoolOutSlot(result__)\n"
+            "        match (impl.IndexOf(arg0, arg1)) { case _ => S_OK.value }\n"
+            "    }\n"
+            "}\n"
+            "vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, "
+            "CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))\n"
+        )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(workspace, branch * 35)
+
+            setup.check_collection_specialized_indexof_thunks_clear_outputs(workspace)
+
+    def test_rejects_specialized_scalar_lookup_thunk_without_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                (
+                    "let lookupAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32> = {\n"
+                    "    instanceRaw, arg0, result__ =>\n"
+                    "    if (result__.isNull()) { E_POINTER.value } else {\n"
+                    "        match (impl.Lookup(arg0)) { case _ => S_OK.value }\n"
+                    "    }\n"
+                    "}\n"
+                    "vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, "
+                    "CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_specialized_lookup_thunks_clear_outputs(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("specialized scalar Lookup thunk must clear value out slots", stderr.getvalue())
+
+    def test_rejects_specialized_generic_lookup_thunk_without_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                (
+                    "let lookupAbi: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = {\n"
+                    "    instanceRaw, arg0, result__ =>\n"
+                    "    if (result__.isNull()) { E_POINTER.value } else {\n"
+                    "        match (impl.Lookup(arg0)) { case _ => S_OK.value }\n"
+                    "    }\n"
+                    "}\n"
+                    "vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, "
+                    "CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_specialized_lookup_thunks_clear_outputs(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("specialized Lookup thunk must clear generic out slots", stderr.getvalue())
+
+    def test_accepts_specialized_lookup_thunks_with_preclear(self) -> None:
+        scalar_branch = (
+            "let lookupAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32> = {\n"
+            "    instanceRaw, arg0, result__ =>\n"
+            "    if (result__.isNull()) { E_POINTER.value } else {\n"
+            "        unsafe { result__.write(0i32) }\n"
+            "        match (impl.Lookup(arg0)) { case _ => S_OK.value }\n"
+            "    }\n"
+            "}\n"
+            "vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, "
+            "CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))\n"
+        )
+        generic_branch = (
+            "let lookupAbi: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = {\n"
+            "    instanceRaw, arg0, result__ =>\n"
+            "    if (result__.isNull()) { E_POINTER.value } else {\n"
+            "        clearCollectionGenericOutSlot(result__)\n"
+            "        match (impl.Lookup(arg0)) { case _ => S_OK.value }\n"
+            "    }\n"
+            "}\n"
+            "vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, "
+            "CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))\n"
+        )
+        result_helper_branch = (
+            "let lookupAbi: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = {\n"
+            "    instanceRaw, arg0, result__ =>\n"
+            "    if (result__.isNull()) { E_POINTER.value } else {\n"
+            "        clearCollectionGenericOutSlot(result__)\n"
+            "        try {\n"
+            "            collectionHStringOutResult(result__, impl.Lookup(arg0))\n"
+            "        } catch (_: Exception) { E_FAIL.value }\n"
+            "    }\n"
+            "}\n"
+            "vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, "
+            "CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))\n"
+        )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(workspace, (scalar_branch * 10) + (generic_branch * 9) + result_helper_branch)
+
+            setup.check_collection_specialized_lookup_thunks_clear_outputs(workspace)
+
+    def test_rejects_specialized_vector_thunk_without_exception_translation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                (
+                    "let setAtAbi: CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32> = {\n"
+                    "    instanceRaw, arg0, arg1 =>\n"
+                    "    match (impl.SetAt(arg0, arg1)) { case _ => S_OK.value }\n"
+                    "}\n"
+                    "vtbl.SetAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(setAtAbi))\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_specialized_vector_thunks_translate_exceptions(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("specialized vector SetAt thunk must translate thrown exceptions", stderr.getvalue())
+
+    def test_accepts_specialized_vector_thunks_with_exception_translation(self) -> None:
+        branch = (
+            "let indexOfAbi: CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {\n"
+            "    instanceRaw, arg0, arg1, result__ =>\n"
+            "    try {\n"
+            "        match (impl.IndexOf(arg0, arg1)) { case _ => S_OK.value }\n"
+            "    } catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "      catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+            "vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))\n"
+            "let setAtAbi: CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32> = {\n"
+            "    instanceRaw, arg0, arg1 =>\n"
+            "    try {\n"
+            "        match (impl.SetAt(arg0, arg1)) { case _ => S_OK.value }\n"
+            "    } catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "      catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+            "vtbl.SetAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(setAtAbi))\n"
+            "let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32> = {\n"
+            "    instanceRaw, arg0, arg1 =>\n"
+            "    try {\n"
+            "        match (impl.InsertAt(arg0, arg1)) { case _ => S_OK.value }\n"
+            "    } catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "      catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+            "vtbl.InsertAt = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>(insertAtAbi))\n"
+            "let appendAbi: CFunc<(CPointer<Unit>, Int32) -> Int32> = {\n"
+            "    instanceRaw, arg0 =>\n"
+            "    try {\n"
+            "        match (impl.Append(arg0)) { case _ => S_OK.value }\n"
+            "    } catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "      catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+            "vtbl.Append = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>(appendAbi))\n"
+        )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(workspace, branch * 20)
+
+            setup.check_collection_specialized_vector_thunks_translate_exceptions(workspace)
+
+    def guarded_event_thunks(self) -> str:
+        return (
+            "public func __winrtThunk_MapChanged(arg0: CPointer<Unit>, result__: CPointer<EventRegistrationTokenAbi>): Int32 {\n"
+            "    if (result__.isNull()) { return E_POINTER.value }\n"
+            "    unsafe { result__.write(EventRegistrationTokenAbi()) }\n"
+            "    try {\n"
+            "        match (this.MapChanged(handler)) { case _ => S_OK.value }\n"
+            "    } catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "      catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+            "public func __winrtThunk_VectorChanged(arg0: CPointer<Unit>, result__: CPointer<EventRegistrationTokenAbi>): Int32 {\n"
+            "    if (result__.isNull()) { return E_POINTER.value }\n"
+            "    unsafe { result__.write(EventRegistrationTokenAbi()) }\n"
+            "    try {\n"
+            "        match (this.VectorChanged(handler)) { case _ => S_OK.value }\n"
+            "    } catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "      catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+            "public func __winrtThunk_Closed(arg0: CPointer<Unit>, result__: CPointer<EventRegistrationTokenAbi>): Int32 {\n"
+            "    if (result__.isNull()) { return E_POINTER.value }\n"
+            "    unsafe { result__.write(EventRegistrationTokenAbi()) }\n"
+            "    try {\n"
+            "        match (this.Closed(handler)) { case _ => S_OK.value }\n"
+            "    } catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "      catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+            "public func __winrtThunk_RemoveMapChanged(arg0: EventRegistrationTokenAbi): Int32 {\n"
+            "    try {\n"
+            "        match (this.RemoveMapChanged(token)) { case _ => S_OK.value }\n"
+            "    } catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "      catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+            "public func __winrtThunk_RemoveVectorChanged(arg0: EventRegistrationTokenAbi): Int32 {\n"
+            "    try {\n"
+            "        match (this.RemoveVectorChanged(token)) { case _ => S_OK.value }\n"
+            "    } catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "      catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+            "public func __winrtThunk_RemoveClosed(arg0: EventRegistrationTokenAbi): Int32 {\n"
+            "    try {\n"
+            "        match (this.RemoveClosed(token)) { case _ => S_OK.value }\n"
+            "    } catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "      catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+        )
+
+    def test_rejects_event_add_thunk_without_token_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                (
+                    "public func __winrtThunk_MapChanged(arg0: CPointer<Unit>, result__: CPointer<EventRegistrationTokenAbi>): Int32 {\n"
+                    "    if (result__.isNull()) { return E_POINTER.value }\n"
+                    "    try {\n"
+                    "        match (this.MapChanged(handler)) { case _ => S_OK.value }\n"
+                    "    } catch (error: windows_core.WindowsException) { error.code().value }\n"
+                    "      catch (_: Exception) { windows_core.E_FAIL.value }\n"
+                    "}\n"
+                    + self.guarded_event_thunks()
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_event_thunks_translate_exceptions_and_clear_tokens(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("MapChanged thunk must clear EventRegistrationToken out slots", stderr.getvalue())
+
+    def test_rejects_event_remove_thunk_without_exception_translation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(
+                workspace,
+                self.guarded_event_thunks()
+                + (
+                    "public func __winrtThunk_RemoveVectorChanged(arg0: EventRegistrationTokenAbi): Int32 {\n"
+                    "    match (this.RemoveVectorChanged(token)) { case _ => S_OK.value }\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_collection_event_thunks_translate_exceptions_and_clear_tokens(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("RemoveVectorChanged thunk must translate thrown exceptions", stderr.getvalue())
+
+    def test_accepts_event_thunks_with_token_preclear_and_exception_translation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_runtime_source(workspace, self.guarded_event_thunks() + self.guarded_event_thunks())
+
+            setup.check_collection_event_thunks_translate_exceptions_and_clear_tokens(workspace)
+
+    def write_common_symbols(self, workspace: Path, text: str) -> None:
+        path = workspace / "windows-common" / "src" / "impl" / "symbols_0.cj"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+
+    def write_foundation_source(self, workspace: Path, text: str) -> None:
+        path = workspace / "windows-runtime" / "src" / "foundation_runtime.cj"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+        property_tests = workspace / "windows-runtime" / "src" / "property_value_array_thunk_cleanup_test.cj"
+        property_tests.write_text(
+            "func testIPropertyValueScalarThunksClearOutputsAndTranslateThrownExceptions() {}\n"
+            "func testInheritedPropertyValueScalarThunksClearOutputsAndTranslateThrownExceptions() {}\n"
+            "func assertPropertyValueScalarThunksClearThrownOutputs() {}\n"
+            "func testIPropertyValueArrayThunksCleanThrownPartialOutputs() {}\n"
+            "func testInheritedPropertyValueArrayThunksCleanThrownPartialOutputs() {}\n"
+            "func assertPropertyValueArrayThunksCleanThrownPartialOutputs() {}\n"
+            "func assertReferenceValueThunksClearOutputsAndTranslateThrownExceptions() {}\n"
+            "func testPropertyValueArrayThunksClearSiblingOutSlotsOnPointerFailure() {\n"
+            "    primitiveNullSizeHr\n"
+            "    referenceNullDataHr\n"
+            "}\n",
+            encoding="utf-8",
+        )
+        property_abi_tests = workspace / "windows-runtime" / "src" / "property_value_array_abi_test.cj"
+        property_abi_tests.write_text(
+            "func testIPropertyValueDefaultVtblClearsOutSlotsBeforeNotImpl() {\n"
+            "    IPropertyValueVtbl()\n"
+            "    @Expect(stringRaw.isNull(), true)\n"
+            "    @Expect(intSize, 0u32)\n"
+            "}\n"
+            "func testIPropertyValueStaticsDefaultVtblClearsResultBeforeNotImpl() {\n"
+            "    IPropertyValueStaticsVtbl()\n"
+            "    @Expect(stringResult.isNull(), true)\n"
+            "}\n",
+            encoding="utf-8",
+        )
+        default_vtable_tests = workspace / "windows-runtime" / "src" / "foundation_default_vtable_abi_test.cj"
+        default_vtable_tests.write_text(
+            "func assertFoundationDefaultComOut1Cleared() { @Expect(raw.isNull(), true) }\n"
+            "func assertFoundationDefaultUnitArrayOutCleared() { @Expect(size, 0u32) }\n"
+            "func testFoundationDefaultScalarFactoryAndReferenceVtablesClearOutSlotsBeforeNotImpl() {\n"
+            "    IAsyncInfoVtbl()\n"
+            "    IReferenceArrayVtbl()\n"
+            "    @Expect(token.Value, 0i64)\n"
+            "}\n"
+            "func testFoundationDefaultAsyncVtablesClearOutSlotsBeforeNotImpl() {\n"
+            "    IAsyncOperationWithProgressVtbl()\n"
+            "}\n"
+            "func testFoundationDefaultUriAndDecoderVtablesClearOutSlotsBeforeNotImpl() {\n"
+            "    IUriRuntimeClassVtbl()\n"
+            "    IWwwFormUrlDecoderRuntimeClassFactoryVtbl()\n"
+            "}\n",
+            encoding="utf-8",
+        )
+        async_tests = workspace / "windows-runtime" / "src" / "async_helpers_test.cj"
+        async_tests.write_text(
+            "func testDerivedAsyncInfoThunksClearOutputsAndTranslateThrownExceptions() {}\n"
+            "func testFoundationGenericOutThunkCleansStoreExceptions() {}\n"
+            "func testAsyncManualThunksClearOutputsAndTranslateThrownExceptions() {}\n"
+            "func testSpawnedActionPreservesWindowsExceptionHRESULT() { throw WindowsException(E_POINTER) }\n"
+            "func testSpawnedOperationPreservesWindowsExceptionHRESULT() { throw WindowsException(E_POINTER) }\n"
+            "func testSpawnedActionWithProgressPreservesWindowsExceptionHRESULT() { throw WindowsException(E_POINTER) }\n"
+            "func testSpawnedOperationWithProgressPreservesWindowsExceptionHRESULT() { throw WindowsException(E_POINTER) }\n"
+            "func expectAsyncJoinError() {}\n"
+            "func asyncTestToCoreHRESULT() {}\n"
+            "func assertAsyncManualComOutThunkClearsOutputsAndTranslatesThrownExceptions() {}\n"
+            "class AsyncActionWithProgressThrowingInfoImpl {}\n"
+            "class AsyncOperationWithProgressThrowingInfoImpl {}\n",
+            encoding="utf-8",
+        )
+        async_helpers = workspace / "windows-runtime" / "src" / "async_helpers.cj"
+        async_helpers.write_text(
+            "public static func spawnAsync(work: () -> Unit): IAsyncAction {\n"
+            "    let worker = spawn {\n"
+            "        try { work() }\n"
+            "        catch (error: windows_core.WindowsException) { impl.fail(toFoundationHResult(error.code())) }\n"
+            "        catch (_: Exception) { impl.fail(asyncFailureCode) }\n"
+            "    }\n"
+            "    impl.attachWorker(worker)\n"
+            "}\n"
+            "public static func spawnAsync(work: () -> TResult): IAsyncOperation<TResult> {\n"
+            "    let worker = spawn {\n"
+            "        try { work() }\n"
+            "        catch (error: windows_core.WindowsException) { impl.fail(toFoundationHResult(error.code())) }\n"
+            "        catch (_: Exception) { impl.fail(asyncFailureCode) }\n"
+            "    }\n"
+            "    impl.attachWorker(worker)\n"
+            "}\n"
+            "public static func spawnAsync(work: (ProgressReporter<TProgress>) -> Unit): IAsyncActionWithProgress<TProgress> {\n"
+            "    let worker = spawn {\n"
+            "        try { work(reporter) }\n"
+            "        catch (error: windows_core.WindowsException) { impl.fail(toFoundationHResult(error.code())) }\n"
+            "        catch (_: Exception) { impl.fail(asyncFailureCode) }\n"
+            "    }\n"
+            "    impl.attachWorker(worker)\n"
+            "}\n"
+            "public static func spawnAsync(\n"
+            "        work: (ProgressReporter<TProgress>) -> TResult\n"
+            "    ): IAsyncOperationWithProgress<TResult, TProgress> {\n"
+            "    let worker = spawn {\n"
+            "        try { work(reporter) }\n"
+            "        catch (error: windows_core.WindowsException) { impl.fail(toFoundationHResult(error.code())) }\n"
+            "        catch (_: Exception) { impl.fail(asyncFailureCode) }\n"
+            "    }\n"
+            "    impl.attachWorker(worker)\n"
+            "}\n",
+            encoding="utf-8",
+        )
+        memory_tests = workspace / "windows-runtime" / "src" / "memory_buffer_close_forwarding_test.cj"
+        memory_tests.write_text(
+            "var throwWindowsOnCapacity = true\n"
+            "func testIMemoryBufferCreateReferenceThunkClearsOutputAndTranslatesExceptions() {}\n",
+            encoding="utf-8",
+        )
+
+    def guarded_foundation_manual_thunks(self) -> str:
+        array_helper_calls = (
+            "    foundationPropertyValueArrayOutThunk(prepareResult, { => this.GetUInt16Array(arg0Size, arg0) }, { => cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0) })\n"
+            * 6
+            + "    foundationPropertyValueArrayOutThunk(prepareResult, { => this.GetStringArray(arg0Size, arg0) }, { => cleanupFailedPropertyValueStringArrayOut(arg0Size, arg0) })\n"
+            * 3
+            + "    foundationPropertyValueArrayOutThunk(prepareResult, { => this.GetInspectableArray(arg0Size, arg0) }, { => cleanupFailedPropertyValueInspectableArrayOut(arg0Size, arg0) })\n"
+            * 3
+            + "    foundationPropertyValueArrayOutThunk(prepareResult, { => this.GetUInt8Array(arg0Size, arg0) }, { => cleanupFailedPropertyValueAbiArrayOut<UInt8>(arg0Size, arg0) })\n"
+            * 45
+        )
+        hstring_helper_calls = (
+            "    foundationHStringOutThunk(result__, { => this.GetString() })\n"
+            * 3
+            + "    foundationHStringOutThunk(result__, { => this.ToString() })\n"
+            + "    foundationHStringOutThunk(result__, { => this.Name() })\n"
+            + "    foundationHStringOutThunk(result__, { => this.Value() })\n"
+        )
+        generic_helper_calls = (
+            "    foundationGenericOutThunk<T>(result__, { => this.Value() })\n"
+            + "    foundationReferenceArrayValueThunk(resultSize__, result__, { => this.Value() })\n"
+            + "    foundationGenericOutThunk<IMemoryBufferReference>(result__, { => this.CreateReference() })\n"
+            + "    foundationGenericOutThunk<AsyncActionCompletedHandler>(result__, { => this.Completed() })\n"
+            + "    foundationGenericOutThunk<AsyncActionProgressHandler<TProgress>>(result__, { => this.Progress() })\n"
+            + "    foundationGenericOutThunk<AsyncOperationCompletedHandler<TResult>>(result__, { => this.Completed() })\n"
+            + "    foundationGenericOutThunk<TResult>(result__, { => this.GetResults() })\n"
+            * 2
+        )
+        memory_scalar_calls = "    foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Capacity() })\n"
+        unit_helper_calls = (
+            "    foundationUnitThunk({ => this.SetCompleted(handler) })\n"
+            * 3
+            + "    foundationUnitThunk({ => this.SetProgress(handler) })\n"
+            * 2
+            + "    foundationUnitThunk({ => this.GetResults() })\n"
+            * 2
+        )
+        return (
+            "func foundationNotImplValueOut<T>(result: CPointer<T>, value: T): Int32 where T <: CType { E_NOTIMPL.value }\n"
+            "func foundationNotImplArrayOut<T>(valueSize: CPointer<UInt32>, value: CPointer<CPointer<T>>): Int32 where T <: CType { E_NOTIMPL.value }\n"
+            "func foundationNotImplUnitArrayOut(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Unit>>): Int32 { E_NOTIMPL.value }\n"
+            "func foundationNotImplComOut(result: CPointer<CPointer<Unit>>): Int32 { E_NOTIMPL.value }\n"
+            "func foundationDirectScalarOutThunk<T>(result: CPointer<T>, defaultValue: T, action: () -> Result<T>): Int32 {\n"
+            "    unsafe { result.write(defaultValue) }\n"
+            "    try { match (action()) { case _ => S_OK.value } }\n"
+            "    catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "    catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+            "func foundationProjectedScalarOutThunk<TProjected, TAbi, TDefault>(result: CPointer<TAbi>, defaultValue: TAbi, action: () -> Result<TProjected>): Int32 {\n"
+            "    unsafe { result.write(defaultValue) }\n"
+            "    windows_core.projectTypedAbi(value, windows_core.typeMarker<TProjected>())\n"
+            "    try { match (action()) { case _ => S_OK.value } }\n"
+            "    catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "    catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+            "func foundationUnitThunk(action: () -> Result<Unit>): Int32 {\n"
+            "    try { match (action()) { case _ => S_OK.value } }\n"
+            "    catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "    catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+            "func cleanupFoundationHStringOutSlot(result: CPointer<CPointer<Unit>>): Unit {\n"
+            "    cleanup()\n"
+            "}\n"
+            "func foundationHStringOutThunk(result: CPointer<CPointer<Unit>>, action: () -> Result<windows_core.HString>): Int32 {\n"
+            "    try { match (action()) { case _ => S_OK.value } }\n"
+            "    catch (error: windows_core.WindowsException) { cleanupFoundationHStringOutSlot(result); error.code().value }\n"
+            "    catch (_: Exception) { cleanupFoundationHStringOutSlot(result); windows_core.E_FAIL.value }\n"
+            "}\n"
+            "func cleanupFoundationGenericOutSlot<T>(result: CPointer<CPointer<Unit>>): Unit {\n"
+            "    windows_core.winrtReleaseGenericOutRange<T>(CPointer<Unit>(result), 1u32)\n"
+            "}\n"
+            "func foundationGenericOutThunk<T>(result: CPointer<CPointer<Unit>>, action: () -> Result<T>): Int32 {\n"
+            "    try { match (action()) { case _ => S_OK.value } }\n"
+            "    catch (error: windows_core.WindowsException) { cleanupFoundationGenericOutSlot<T>(result); error.code().value }\n"
+            "    catch (_: Exception) { cleanupFoundationGenericOutSlot<T>(result); windows_core.E_FAIL.value }\n"
+            "}\n"
+            "func clearFoundationArrayOut<T>(valueSize: CPointer<UInt32>, value: CPointer<CPointer<T>>): Unit {\n"
+            "    if (valueSize.isNotNull()) { valueSize.write(0u32) }\n"
+            "    if (value.isNotNull()) { value.write(CPointer<T>()) }\n"
+            "}\n"
+            "func clearFoundationUnitArrayOut(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Unit>>): Unit {\n"
+            "    if (valueSize.isNotNull()) { valueSize.write(0u32) }\n"
+            "    if (value.isNotNull()) { value.write(CPointer<Unit>()) }\n"
+            "}\n"
+            "func foundationReferenceArrayValueThunk(resultSize: CPointer<UInt32>, result: CPointer<CPointer<Unit>>, action: () -> Result<(UInt32, CPointer<Unit>)>): Int32 {\n"
+            "    if (resultSize.isNull() || result.isNull()) {\n"
+            "        clearFoundationUnitArrayOut(resultSize, result)\n"
+            "        return E_POINTER.value\n"
+            "    }\n"
+            "    try { match (action()) { case _ => S_OK.value } }\n"
+            "    catch (error: windows_core.WindowsException) { error.code().value }\n"
+            "    catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "}\n"
+            "func preparePropertyValueArrayOut<T>(valueSize: CPointer<UInt32>, value: CPointer<CPointer<T>>): Int32 {\n"
+            "    if (valueSize.isNull() || value.isNull()) {\n"
+            "        clearFoundationArrayOut<T>(valueSize, value)\n"
+            "        return E_POINTER.value\n"
+            "    }\n"
+            "    S_OK.value\n"
+            "}\n"
+            "func foundationPropertyValueArrayOutThunk(prepareResult: Int32, action: () -> Result<Unit>, cleanup: () -> Unit): Int32 {\n"
+            "    if (prepareResult != S_OK.value) { return prepareResult }\n"
+            "    try { match (action()) { case Result<Unit>.Err(_) => cleanup(); windows_core.E_FAIL.value case _ => S_OK.value } }\n"
+            "    catch (error: windows_core.WindowsException) { cleanup(); error.code().value }\n"
+            "    catch (_: Exception) { cleanup(); windows_core.E_FAIL.value }\n"
+            "}\n"
+            "public interface IAsyncInfo_Impl <: IAsyncInfo_ImplErased {\n"
+            "    public func __winrtThunk_Id(result__: CPointer<UInt32>): Int32 {\n"
+            "        foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })\n"
+            "    }\n"
+            "    public func __winrtThunk_Status(result__: CPointer<AsyncStatusAbi>): Int32 {\n"
+            "        foundationProjectedScalarOutThunk<AsyncStatus, AsyncStatusAbi, AsyncStatus>(result__, AsyncStatusAbi(), { => this.Status() })\n"
+            "    }\n"
+            "    public func __winrtThunk_ErrorCode(result__: CPointer<HResultAbi>): Int32 {\n"
+            "        foundationProjectedScalarOutThunk<HResult, HResultAbi, HResult>(result__, HResultAbi(), { => this.ErrorCode() })\n"
+            "    }\n"
+            "    public func __winrtThunk_Cancel(): Int32 {\n"
+            "        foundationUnitThunk({ => this.Cancel() })\n"
+            "    }\n"
+            "    public func __winrtThunk_Close(): Int32 {\n"
+            "        foundationUnitThunk({ => this.Close() })\n"
+            "    }\n"
+            "}\n"
+            "public class IAsyncInfo <: Marker {}\n"
+            "func derivedAsyncHelpers(): Unit {\n"
+            "    foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })\n"
+            "    foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })\n"
+            "    foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })\n"
+            "    foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })\n"
+            "    foundationProjectedScalarOutThunk<AsyncStatus, AsyncStatusAbi, AsyncStatus>(result__, AsyncStatusAbi(), { => this.Status() })\n"
+            "    foundationProjectedScalarOutThunk<AsyncStatus, AsyncStatusAbi, AsyncStatus>(result__, AsyncStatusAbi(), { => this.Status() })\n"
+            "    foundationProjectedScalarOutThunk<AsyncStatus, AsyncStatusAbi, AsyncStatus>(result__, AsyncStatusAbi(), { => this.Status() })\n"
+            "    foundationProjectedScalarOutThunk<AsyncStatus, AsyncStatusAbi, AsyncStatus>(result__, AsyncStatusAbi(), { => this.Status() })\n"
+            "    foundationProjectedScalarOutThunk<HResult, HResultAbi, HResult>(result__, HResultAbi(), { => this.ErrorCode() })\n"
+            "    foundationProjectedScalarOutThunk<HResult, HResultAbi, HResult>(result__, HResultAbi(), { => this.ErrorCode() })\n"
+            "    foundationProjectedScalarOutThunk<HResult, HResultAbi, HResult>(result__, HResultAbi(), { => this.ErrorCode() })\n"
+            "    foundationProjectedScalarOutThunk<HResult, HResultAbi, HResult>(result__, HResultAbi(), { => this.ErrorCode() })\n"
+            "}\n"
+            "func propertyValueScalarHelpers(): Unit {\n"
+            "    foundationProjectedScalarOutThunk<PropertyType, PropertyTypeAbi, PropertyType>(result__, PropertyTypeAbi(), { => this.Type() })\n"
+            "    foundationProjectedScalarOutThunk<PropertyType, PropertyTypeAbi, PropertyType>(result__, PropertyTypeAbi(), { => this.Type() })\n"
+            "    foundationProjectedScalarOutThunk<PropertyType, PropertyTypeAbi, PropertyType>(result__, PropertyTypeAbi(), { => this.Type() })\n"
+            "    foundationDirectScalarOutThunk<Bool>(result__, false, { => this.IsNumericScalar() })\n"
+            "    foundationDirectScalarOutThunk<Bool>(result__, false, { => this.IsNumericScalar() })\n"
+            "    foundationDirectScalarOutThunk<Bool>(result__, false, { => this.IsNumericScalar() })\n"
+            "    foundationProjectedScalarOutThunk<GuidValue, GUID, GuidValue>(result__, GUID(), { => this.GetGuid() })\n"
+            "    foundationProjectedScalarOutThunk<GuidValue, GUID, GuidValue>(result__, GUID(), { => this.GetGuid() })\n"
+            "    foundationProjectedScalarOutThunk<GuidValue, GUID, GuidValue>(result__, GUID(), { => this.GetGuid() })\n"
+            "    foundationProjectedScalarOutThunk<Point, PointAbi, Point>(result__, PointAbi(), { => this.GetPoint() })\n"
+            "    foundationProjectedScalarOutThunk<Point, PointAbi, Point>(result__, PointAbi(), { => this.GetPoint() })\n"
+            "    foundationProjectedScalarOutThunk<Point, PointAbi, Point>(result__, PointAbi(), { => this.GetPoint() })\n"
+            "}\n"
+            "func propertyValueArrayHelpers(): Unit {\n"
+            + array_helper_calls +
+            "}\n"
+            "func hstringHelpers(): Unit {\n"
+            + hstring_helper_calls +
+            "}\n"
+            "func genericOutHelpers(): Unit {\n"
+            + generic_helper_calls +
+            "}\n"
+            "func memoryScalarHelpers(): Unit {\n"
+            + memory_scalar_calls +
+            "}\n"
+            "func asyncUnitHelpers(): Unit {\n"
+            + unit_helper_calls +
+            "}\n"
+            "public interface IGetActivationFactory_Impl <: IGetActivationFactory_ImplErased {\n"
+            "    public func __winrtThunk_GetActivationFactory(arg0: CPointer<Unit>, result__: CPointer<CPointer<Unit>>): Int32 {\n"
+            "        if (result__.isNull()) { return E_POINTER.value }\n"
+            "        unsafe { result__.write(CPointer<Unit>()) }\n"
+            "        try { match (this.GetActivationFactory(handler)) { case _ => S_OK.value } }\n"
+            "        catch (error: windows_core.WindowsException) { return error.code().value }\n"
+            "        catch (_: Exception) { return windows_core.E_FAIL.value }\n"
+            "    }\n"
+            "}\n"
+            "public class IGetActivationFactory <: Marker {}\n"
+        )
+
+    def test_rejects_foundation_manual_output_thunk_without_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_foundation_source(
+                workspace,
+                self.guarded_foundation_manual_thunks().replace(
+                    "        foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })\n",
+                    "        this.Id()\n",
+                    1,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_foundation_manual_thunks_translate_exceptions(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("IAsyncInfo Id thunk must use scalar helper", stderr.getvalue())
+
+    def test_rejects_foundation_manual_thunk_without_exception_translation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_foundation_source(
+                workspace,
+                self.guarded_foundation_manual_thunks().replace(
+                    "        try { match (this.GetActivationFactory(handler)) { case _ => S_OK.value } }\n"
+                    "        catch (error: windows_core.WindowsException) { return error.code().value }\n"
+                    "        catch (_: Exception) { return windows_core.E_FAIL.value }\n",
+                    "        match (this.GetActivationFactory(handler)) { case _ => S_OK.value }\n",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_foundation_manual_thunks_translate_exceptions(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("IGetActivationFactory thunk must translate thrown exceptions", stderr.getvalue())
+
+    def test_rejects_foundation_array_thunk_without_cleanup_helper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_foundation_source(
+                workspace,
+                self.guarded_foundation_manual_thunks().replace(
+                    "func foundationPropertyValueArrayOutThunk",
+                    "func staleFoundationPropertyValueArrayOutThunk",
+                    1,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_foundation_manual_thunks_translate_exceptions(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("foundation thunk helpers must clear outputs", stderr.getvalue())
+
+    def test_rejects_foundation_array_pointer_failure_without_sibling_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_foundation_source(
+                workspace,
+                self.guarded_foundation_manual_thunks().replace(
+                    "        clearFoundationArrayOut<T>(valueSize, value)\n",
+                    "",
+                    1,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_foundation_manual_thunks_translate_exceptions(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("IPropertyValue array prepare helper", stderr.getvalue())
+
+    def test_accepts_foundation_manual_thunks_with_preclear_and_exception_translation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_foundation_source(workspace, self.guarded_foundation_manual_thunks())
+
+            setup.check_foundation_manual_thunks_translate_exceptions(workspace)
+
+    def test_rejects_spawn_async_workers_without_windows_exception_preservation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_foundation_source(workspace, self.guarded_foundation_manual_thunks())
+            async_helpers = workspace / "windows-runtime" / "src" / "async_helpers.cj"
+            async_helpers.write_text(
+                async_helpers.read_text(encoding="utf-8").replace(
+                    "        catch (error: windows_core.WindowsException) { impl.fail(toFoundationHResult(error.code())) }\n",
+                    "",
+                    1,
+                ),
+                encoding="utf-8",
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_foundation_manual_thunks_translate_exceptions(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("spawnAsync must preserve WindowsException HRESULTs", stderr.getvalue())
+
+    def raw_event_add_wrapper(self, name: str, *, clear: bool = True, out_name: str = "result") -> str:
+        clear_line = f"        unsafe {{ {out_name}.write(0i64) }}\n" if clear else ""
+        return (
+            f"    public unsafe func {name}(vhnd: CPointer<Unit>, {out_name}: CPointer<Int64>): windows_core.HRESULT {{\n"
+            "        let liveRaw = asRaw()\n"
+            f"        if ({out_name}.isNotNull()) {{\n"
+            f"{clear_line}"
+            "        }\n"
+            "        if (liveRaw.isNull()) {\n"
+            "            return windows_core.E_POINTER\n"
+            "        }\n"
+            "        let v = vtbl()\n"
+            f"        windows_core.HRESULT(v.{name}(liveRaw, vhnd, {out_name}))\n"
+            "    }\n"
+        )
+
+    def test_rejects_generated_raw_event_add_wrapper_without_token_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_common_symbols(
+                workspace,
+                (
+                    "public open class Observable {\n"
+                    "    public unsafe func MapChanged(vhnd: CPointer<Unit>, result: CPointer<Int64>): windows_core.HRESULT {\n"
+                    "        let liveRaw = asRaw()\n"
+                    "        if (liveRaw.isNull()) {\n"
+                    "            return windows_core.E_POINTER\n"
+                    "        }\n"
+                    "        let v = vtbl()\n"
+                    "        windows_core.HRESULT(v.MapChanged(liveRaw, vhnd, result))\n"
+                    "    }\n"
+                    f"{self.raw_event_add_wrapper('VectorChanged')}"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_generated_raw_event_add_wrappers_clear_tokens(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("raw event add wrapper MapChanged must pre-clear", stderr.getvalue())
+
+    def test_rejects_generated_raw_event_add_wrapper_clear_after_early_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_common_symbols(
+                workspace,
+                (
+                    "public open class Observable {\n"
+                    "    public unsafe func MapChanged(vhnd: CPointer<Unit>, result: CPointer<Int64>): windows_core.HRESULT {\n"
+                    "        let liveRaw = asRaw()\n"
+                    "        if (liveRaw.isNull()) {\n"
+                    "            return windows_core.E_POINTER\n"
+                    "        }\n"
+                    "        if (!result.isNull()) {\n"
+                    "            unsafe { result.write(0i64) }\n"
+                    "        }\n"
+                    "        let v = vtbl()\n"
+                    "        windows_core.HRESULT(v.MapChanged(liveRaw, vhnd, result))\n"
+                    "    }\n"
+                    f"{self.raw_event_add_wrapper('VectorChanged')}"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_generated_raw_event_add_wrappers_clear_tokens(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("raw event add wrapper MapChanged must pre-clear", stderr.getvalue())
+
+    def test_accepts_generated_raw_event_add_wrappers_with_token_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_common_symbols(
+                workspace,
+                (
+                    "public open class Observable {\n"
+                    f"{self.raw_event_add_wrapper('MapChanged')}"
+                    f"{self.raw_event_add_wrapper('VectorChanged', out_name='token')}"
+                    "}\n"
+                ),
+            )
+
+            setup.check_generated_raw_event_add_wrappers_clear_tokens(workspace)
+
+
+class VtableNoneBranchGateTests(unittest.TestCase):
+    def write_vtable_sources(
+        self,
+        workspace: Path,
+        *,
+        foundation: str | None = None,
+        collections: str | None = None,
+        marshaler: str | None = None,
+        core_agile: str | None = None,
+        core_reference: str | None = None,
+        core_descriptor_tests: str | None = None,
+        core_weak: str | None = None,
+        implement_weak: str | None = None,
+        implement_surface: str | None = None,
+        implement_composable: str | None = None,
+        implement_thunk: str | None = None,
+        implement_weak_tests: str | None = None,
+        interface_macro: str | None = None,
+        interface_macro_fixture: str | None = None,
+        bindgen_render: str | None = None,
+        bindgen_tests: str | None = None,
+        common: str | None = None,
+    ) -> None:
+        foundation_path = workspace / "windows-runtime" / "src" / "foundation_runtime.cj"
+        collections_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+        marshaler_path = workspace / "windows-core" / "src" / "marshaler.cj"
+        core_agile_path = workspace / "windows-core" / "src" / "agile_reference.cj"
+        core_reference_path = workspace / "windows-core" / "src" / "weak.cj"
+        core_descriptor_test_path = workspace / "windows-core" / "src" / "core_descriptor_test.cj"
+        core_weak_path = workspace / "windows-core" / "src" / "weak_ref_count.cj"
+        implement_weak_path = workspace / "windows-implement" / "src" / "weak_ref_count.cj"
+        implement_surface_path = workspace / "windows-implement" / "src" / "interface_impl_surface.cj"
+        implement_composable_path = workspace / "windows-implement" / "src" / "composable_activation.cj"
+        implement_thunk_path = workspace / "windows-implement" / "src" / "thunk_builder.cj"
+        implement_weak_tests_path = workspace / "windows-implement" / "src" / "weak_ref_count_test.cj"
+        interface_macro_path = workspace / "windows-interface" / "src" / "macros" / "windows_interface_macros.cj"
+        interface_macro_fixture_path = workspace / "windows-interface" / "tests" / "macros" / "generated_interface_fixture.cj"
+        bindgen_render_path = workspace / "windows-bindgen" / "src" / "render_symbol.cj"
+        bindgen_tests_path = workspace / "windows-bindgen" / "src" / "main_test.cj"
+        common_path = workspace / "windows-common" / "src" / "impl" / "symbols_1.cj"
+        foundation_path.parent.mkdir(parents=True, exist_ok=True)
+        collections_path.parent.mkdir(parents=True, exist_ok=True)
+        marshaler_path.parent.mkdir(parents=True, exist_ok=True)
+        core_agile_path.parent.mkdir(parents=True, exist_ok=True)
+        core_reference_path.parent.mkdir(parents=True, exist_ok=True)
+        core_descriptor_test_path.parent.mkdir(parents=True, exist_ok=True)
+        core_weak_path.parent.mkdir(parents=True, exist_ok=True)
+        implement_weak_path.parent.mkdir(parents=True, exist_ok=True)
+        implement_surface_path.parent.mkdir(parents=True, exist_ok=True)
+        implement_composable_path.parent.mkdir(parents=True, exist_ok=True)
+        implement_thunk_path.parent.mkdir(parents=True, exist_ok=True)
+        implement_weak_tests_path.parent.mkdir(parents=True, exist_ok=True)
+        interface_macro_path.parent.mkdir(parents=True, exist_ok=True)
+        interface_macro_fixture_path.parent.mkdir(parents=True, exist_ok=True)
+        bindgen_render_path.parent.mkdir(parents=True, exist_ok=True)
+        bindgen_tests_path.parent.mkdir(parents=True, exist_ok=True)
+        common_path.parent.mkdir(parents=True, exist_ok=True)
+        foundation_path.write_text(foundation if foundation is not None else self.foundation_source(), encoding="utf-8")
+        collections_path.write_text(collections if collections is not None else self.collections_source(), encoding="utf-8")
+        marshaler_path.write_text(marshaler if marshaler is not None else self.marshaler_source(), encoding="utf-8")
+        core_agile_path.write_text(
+            core_agile if core_agile is not None else self.core_agile_reference_source(),
+            encoding="utf-8",
+        )
+        core_reference_path.write_text(
+            core_reference if core_reference is not None else self.core_reference_source(),
+            encoding="utf-8",
+        )
+        core_descriptor_test_path.write_text(
+            core_descriptor_tests if core_descriptor_tests is not None else self.core_descriptor_tests_source(),
+            encoding="utf-8",
+        )
+        core_weak_path.write_text(core_weak if core_weak is not None else self.core_weak_source(), encoding="utf-8")
+        implement_weak_path.write_text(
+            implement_weak if implement_weak is not None else self.implement_weak_source(),
+            encoding="utf-8",
+        )
+        implement_surface_path.write_text(
+            implement_surface if implement_surface is not None else self.implement_surface_source(),
+            encoding="utf-8",
+        )
+        implement_composable_path.write_text(
+            implement_composable if implement_composable is not None else self.implement_composable_source(),
+            encoding="utf-8",
+        )
+        implement_thunk_path.write_text(
+            implement_thunk if implement_thunk is not None else self.implement_thunk_source(),
+            encoding="utf-8",
+        )
+        implement_weak_tests_path.write_text(
+            implement_weak_tests if implement_weak_tests is not None else self.implement_weak_tests_source(),
+            encoding="utf-8",
+        )
+        interface_macro_path.write_text(
+            interface_macro if interface_macro is not None else self.interface_macro_source(),
+            encoding="utf-8",
+        )
+        interface_macro_fixture_path.write_text(
+            interface_macro_fixture if interface_macro_fixture is not None else self.interface_macro_fixture_source(),
+            encoding="utf-8",
+        )
+        bindgen_render_path.write_text(
+            bindgen_render if bindgen_render is not None else self.bindgen_render_source(),
+            encoding="utf-8",
+        )
+        bindgen_tests_path.write_text(
+            bindgen_tests if bindgen_tests is not None else self.bindgen_tests_source(),
+            encoding="utf-8",
+        )
+        common_path.write_text(common if common is not None else self.common_source(), encoding="utf-8")
+
+    def foundation_source(self) -> str:
+        return (
+            "func foundationNoInterfaceValueOut<T>() {}\n"
+            "func foundationNoInterfaceArrayOut<T>() {}\n"
+            "func foundationNoInterfaceUnitArrayOut() {}\n"
+            "func vtblNoneBranches(): Unit {\n"
+            "    foundationNoInterfaceComOut(result__)\n"
+            "    foundationNoInterfaceValueOut<Bool>(result__, false)\n"
+            "    foundationNoInterfaceArrayOut<UInt16>(arg0Size, arg0)\n"
+            "    foundationNoInterfaceUnitArrayOut(resultSize__, result__)\n"
+            "}\n"
+            "func manuallyClearedNoneBranch(): Unit {\n"
+            "    vtbl.Status = { instanceRaw, result__ =>\n"
+            "        match (instanceRaw) {\n"
+            "            case None =>\n"
+            "                unsafe { result__.write(AsyncStatusAbi()) }\n"
+            "                E_NOINTERFACE.value\n"
+            "        }\n"
+            "    }\n"
+            "}\n"
+            "public unsafe func ValueRaw(): (UInt32, CPointer<Unit>) {\n"
+            "    let status__ = HRESULT(hr)\n"
+            "    if (status__.failed()) {\n"
+            "        windows_core.winrtReleaseGenericArrayOut<T>(result__, resultSize__)\n"
+            "        resultSize__ = 0u32\n"
+            "        result__ = CPointer<Unit>()\n"
+            "    }\n"
+            "    status__.check()\n"
+            "    return (resultSize__, result__)\n"
+            "}\n"
+        )
+
+    def collections_source(self) -> str:
+        return (
+            "func collectionNoInterfaceGenericOut() {}\n"
+            "func collectionNoInterfaceValueOut<T>() {}\n"
+            "func collectionNoInterfaceIndexBoolOut() {}\n"
+            "func vtblNoneBranches(): Unit {\n"
+            "    collectionNoInterfaceGenericOut(result__)\n"
+            "    collectionNoInterfaceUInt32Out(result__)\n"
+            "    collectionNoInterfaceValueOut<Int32>(result__, 0i32)\n"
+            "    collectionNoInterfaceIndexBoolOut(arg1, result__)\n"
+            "    collectionNoInterfaceSplitOut(arg0, arg1)\n"
+            "}\n"
+            "func noOutNoneBranches(): Unit {\n"
+            "    vtbl.Clear = { instanceRaw =>\n"
+            "        case None =>\n"
+            "            E_NOINTERFACE.value\n"
+            "    }\n"
+            "}\n"
+        )
+
+    def marshaler_source(self) -> str:
+        return (
+            "func aggregatedMarshalerGetUnmarshalClassThunk() {\n"
+            "    match (lookupAggregatedMarshaler(instanceRaw)) {\n"
+            "        case None =>\n"
+            "            if (pcid.isNotNull()) {\n"
+            "                unsafe { pcid.write(GUID()) }\n"
+            "            }\n"
+            "            E_NOINTERFACE.value\n"
+            "    }\n"
+            "}\n"
+            "func aggregatedMarshalerGetMarshalSizeMaxThunk() {\n"
+            "    match (lookupAggregatedMarshaler(instanceRaw)) {\n"
+            "        case None =>\n"
+            "            if (psize.isNotNull()) {\n"
+            "                unsafe { psize.write(0u32) }\n"
+            "            }\n"
+            "            E_NOINTERFACE.value\n"
+            "    }\n"
+            "}\n"
+            "func aggregatedMarshalerUnmarshalInterfaceThunk() {\n"
+            "    match (lookupAggregatedMarshaler(instanceRaw)) {\n"
+            "        case None =>\n"
+            "            if (ppv.isNotNull()) {\n"
+            "                unsafe { ppv.write(CPointer<Unit>()) }\n"
+            "            }\n"
+            "            E_NOINTERFACE.value\n"
+            "    }\n"
+            "}\n"
+            "func getUnmarshalClass() {\n"
+            "    if (pcid.isNotNull()) {\n"
+            "        unsafe { pcid.write(GUID()) }\n"
+            "    }\n"
+            "    let hr = unsafe { innerMarshaler.vtbl().GetUnmarshalClass(raw, riid, pv, dwdestcontext, pvdestcontext, mshlflags, pcid) }\n"
+            "    if (hr < 0 && pcid.isNotNull()) {\n"
+            "        unsafe { pcid.write(GUID()) }\n"
+            "    }\n"
+            "}\n"
+            "func getMarshalSizeMax() {\n"
+            "    if (psize.isNotNull()) {\n"
+            "        unsafe { psize.write(0u32) }\n"
+            "    }\n"
+            "    let hr = unsafe { innerMarshaler.vtbl().GetMarshalSizeMax(raw, riid, pv, dwdestcontext, pvdestcontext, mshlflags, psize) }\n"
+            "    if (hr < 0 && psize.isNotNull()) {\n"
+            "        unsafe { psize.write(0u32) }\n"
+            "    }\n"
+            "}\n"
+        )
+
+    def weak_source(self, prefix: str, lookup: str) -> str:
+        return (
+            f"func {prefix}SourceQueryInterfaceThunk(instanceRaw: CPointer<Unit>, iid: CPointer<GUID>, resultSlot: CPointer<CPointer<Unit>>): Int32 {{\n"
+            "    unsafe {\n"
+            "        if (resultSlot.isNull()) { return E_POINTER.value }\n"
+            "        resultSlot.write(CPointer<Unit>())\n"
+            "        if (iid.isNull()) { return E_POINTER.value }\n"
+            "    }\n"
+            f"    match ({lookup}(instanceRaw)) {{ case None => E_NOINTERFACE.value }}\n"
+            "}\n"
+            f"func {prefix}SourceGetWeakReferenceThunk(instanceRaw: CPointer<Unit>, resultSlot: CPointer<CPointer<Unit>>): Int32 {{\n"
+            "    unsafe {\n"
+            "        if (resultSlot.isNull()) { return E_POINTER.value }\n"
+            "        resultSlot.write(CPointer<Unit>())\n"
+            "    }\n"
+            f"    match ({lookup}(instanceRaw)) {{ case None => E_NOINTERFACE.value }}\n"
+            "}\n"
+            f"func {prefix}QueryInterfaceThunk(instanceRaw: CPointer<Unit>, iid: CPointer<GUID>, resultSlot: CPointer<CPointer<Unit>>): Int32 {{\n"
+            "    unsafe {\n"
+            "        if (resultSlot.isNull()) { return E_POINTER.value }\n"
+            "        resultSlot.write(CPointer<Unit>())\n"
+            "        if (iid.isNull()) { return E_POINTER.value }\n"
+            "    }\n"
+            f"    match ({lookup}(instanceRaw)) {{ case None => E_NOINTERFACE.value }}\n"
+            "}\n"
+            f"func {prefix}ResolveThunk(instanceRaw: CPointer<Unit>, iid: CPointer<GUID>, resultSlot: CPointer<CPointer<Unit>>): Int32 {{\n"
+            "    unsafe {\n"
+            "        if (resultSlot.isNull()) { return E_POINTER.value }\n"
+            "        resultSlot.write(CPointer<Unit>())\n"
+            "        if (iid.isNull()) { return E_POINTER.value }\n"
+            "    }\n"
+            f"    match ({lookup}(instanceRaw)) {{ case None => E_NOINTERFACE.value }}\n"
+            "}\n"
+            "private func queryOwner(iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32 {\n"
+            "    var iidCopy = iid\n"
+            "    let hr = unsafe {\n"
+            "        let vtblPtr = CPointer<CPointer<IUnknownVtbl>>(ownerRaw).read()\n"
+            "        resultSlot.write(CPointer<Unit>())\n"
+            "        vtblPtr.read().QueryInterface(ownerRaw, CPointer<GUID>(inout iidCopy), resultSlot)\n"
+            "    }\n"
+            "    if (hr < 0) { releaseFailedComOutSlot(resultSlot) }\n"
+            "    hr\n"
+            "}\n"
+        )
+
+    def core_weak_source(self) -> str:
+        return self.weak_source("localWeakReference", "lookupLocalWeakReferenceTearOff")
+
+    def core_agile_reference_source(self) -> str:
+        return (
+            "func agileReferenceResolveThunk(instanceRaw: CPointer<Unit>, riid: CPointer<GUID>, ppvobjectreference: CPointer<CPointer<Unit>>): Int32 {\n"
+            "    try {\n"
+            "        match (lookupComInnerImpl<IAgileReference_Impl>(instanceRaw)) {\n"
+            "            case Some(value) => match (value.Resolve(riid, ppvobjectreference)) { case _ => S_OK.value }\n"
+            "            case None => E_NOINTERFACE.value\n"
+            "        }\n"
+            "    } catch (error: WindowsException) {\n"
+            "        releaseFailedComOutSlot(ppvobjectreference)\n"
+            "        error.code().value\n"
+            "    } catch (_: Exception) {\n"
+            "        releaseFailedComOutSlot(ppvobjectreference)\n"
+            "        E_FAIL.value\n"
+            "    }\n"
+            "}\n"
+        )
+
+    def core_reference_source(self) -> str:
+        return (
+            "func coreWeakReferenceResolveThunk(instanceRaw: CPointer<Unit>, riid: CPointer<GUID>, objectreference: CPointer<CPointer<Unit>>): Int32 {\n"
+            "    try {\n"
+            "        match (lookupComInnerImpl<IWeakReference_Impl>(instanceRaw)) {\n"
+            "            case Some(value) => match (value.Resolve(riid, objectreference)) { case _ => S_OK.value }\n"
+            "            case None => E_NOINTERFACE.value\n"
+            "        }\n"
+            "    } catch (error: WindowsException) {\n"
+            "        releaseFailedComOutSlot(objectreference)\n"
+            "        error.code().value\n"
+            "    } catch (_: Exception) {\n"
+            "        releaseFailedComOutSlot(objectreference)\n"
+            "        E_FAIL.value\n"
+            "    }\n"
+            "}\n"
+            "func coreWeakReferenceSourceGetWeakReferenceThunk(instanceRaw: CPointer<Unit>, weakreference: CPointer<CPointer<Unit>>): Int32 {\n"
+            "    try {\n"
+            "        match (lookupComInnerImpl<IWeakReferenceSource_Impl>(instanceRaw)) {\n"
+            "            case Some(value) => match (value.GetWeakReference()) { case _ => S_OK.value }\n"
+            "            case None => E_NOINTERFACE.value\n"
+            "        }\n"
+            "    } catch (error: WindowsException) {\n"
+            "        releaseFailedComOutSlot(weakreference)\n"
+            "        error.code().value\n"
+            "    } catch (_: Exception) {\n"
+            "        releaseFailedComOutSlot(weakreference)\n"
+            "        E_FAIL.value\n"
+            "    }\n"
+            "}\n"
+        )
+
+    def core_descriptor_tests_source(self) -> str:
+        return (
+            "func testCoreAgileReferenceResolveThunkCleansThrownPartialOutputs() {}\n"
+            "func testCoreWeakReferenceResolveThunkCleansThrownPartialOutputs() {}\n"
+            "func testCoreWeakReferenceSourceThunkTranslatesThrownExceptions() {}\n"
+        )
+
+    def implement_weak_source(self) -> str:
+        return self.weak_source("weakReference", "lookupWeakReferenceTearOff")
+
+    def implement_surface_source(self) -> str:
+        return (
+            "public func queryInterfaceBase(_: CPointer<Unit>, iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32 {\n"
+            "    match (queryInterfaceFallback) {\n"
+            "        case Some(callback) =>\n"
+            "            let delegated = try {\n"
+            "                callback(iid, resultSlot)\n"
+            "            } catch (error: WindowsException) {\n"
+            "                releaseFailedComOutSlot(resultSlot)\n"
+            "                return error.code().value\n"
+            "            } catch (_: Exception) {\n"
+            "                releaseFailedComOutSlot(resultSlot)\n"
+            "                return E_FAIL.value\n"
+            "            }\n"
+            "        case None => ()\n"
+            "    }\n"
+            "    E_NOINTERFACE\n"
+            "}\n"
+        )
+
+    def implement_composable_source(self) -> str:
+        return (
+            "public func activateComposable<TOuter, TBase>(\n"
+            "    outer: ComObject<TOuter>,\n"
+            "    activate: (IInspectable, CPointer<CPointer<Unit>>) -> TBase\n"
+            "): ComposableActivation<TOuter, TBase> where TBase <: ComInterface & Resource {\n"
+            "    var innerRaw = CPointer<Unit>()\n"
+            "    let baseObject: TBase\n"
+            "    try {\n"
+            "        baseObject = activate(IInspectable.viewOf(outer.asRaw()), CPointer<CPointer<Unit>>(inout innerRaw))\n"
+            "    } catch (e: Exception) {\n"
+            "        if (innerRaw.isNotNull()) {\n"
+            "            let _ = releaseComRaw(innerRaw)\n"
+            "            innerRaw = CPointer<Unit>()\n"
+            "        }\n"
+            "        outer.runtime.clearQueryInterfaceFallback()\n"
+            "        let _ = outer.releaseBase()\n"
+            "        throw e\n"
+            "    }\n"
+            "    try {\n"
+            "        let innerObject = if (innerRaw.isNull()) { IInspectable.viewOf(CPointer<Unit>()) } else {\n"
+            "            let rawToTake = innerRaw\n"
+            "            innerRaw = CPointer<Unit>()\n"
+            "            IInspectable.fromAbiTake(rawToTake)\n"
+            "        }\n"
+            "        try {\n"
+            "            ComposableActivation<TOuter, TBase>(outer, baseObject, innerObject)\n"
+            "        } catch (e: Exception) {\n"
+            "            innerObject.close()\n"
+            "            throw e\n"
+            "        }\n"
+            "    } catch (e: Exception) {\n"
+            "        if (innerRaw.isNotNull()) {\n"
+            "            let _ = releaseComRaw(innerRaw)\n"
+            "            innerRaw = CPointer<Unit>()\n"
+            "        }\n"
+            "        outer.runtime.clearQueryInterfaceFallback()\n"
+            "        baseObject.close()\n"
+            "        let _ = outer.releaseBase()\n"
+            "        throw e\n"
+            "    }\n"
+            "}\n"
+        )
+
+    def implement_thunk_source(self) -> str:
+        return (
+            "func iunknownQueryInterfaceThunk(instanceRaw: CPointer<Unit>, iid: CPointer<GUID>, resultSlot: CPointer<CPointer<Unit>>): Int32 {\n"
+            "    try {\n"
+            "        match (lookupRegistryObject(instanceRaw)) {\n"
+            "            case Some(comObj) => comObj.queryInterfaceBase(instanceRaw, iid.read(), resultSlot)\n"
+            "            case None => E_NOINTERFACE\n"
+            "        }\n"
+            "    } catch (error: WindowsException) {\n"
+            "        releaseFailedComOutSlot(resultSlot)\n"
+            "        error.code().value\n"
+            "    } catch (_: Exception) {\n"
+            "        releaseFailedComOutSlot(resultSlot)\n"
+            "        E_FAIL.value\n"
+            "    }\n"
+            "}\n"
+        )
+
+    def implement_weak_tests_source(self) -> str:
+        return (
+            "func testIunknownQueryInterfaceThunkTranslatesThrownFallbackAndReleasesPartialOutput() {\n"
+            "    throw WindowsException(windows_result.E_POINTER)\n"
+            "    throw Exception(\"query fallback failure\")\n"
+            "}\n"
+            "func throwingComposableInnerOutActivator() {}\n"
+            "func testActivateComposableReleasesOuterWhenActivatorThrows() {\n"
+            "    outer.runtime.isDestroyed(), true\n"
+            "}\n"
+            "func testActivateComposableReleasesInnerOutAndOuterWhenActivatorThrows() {\n"
+            "    partialCleanupReleaseCount.load(), 1\n"
+            "    outer.runtime.isDestroyed(), true\n"
+            "}\n"
+        )
+
+    def interface_macro_source(self) -> str:
+        return (
+            "let cleanupKind: String = \"\"\n"
+            "func compactTypeName(value: String): String {\n"
+            "    let compactValue = compactTypeName(value)\n"
+            "    compactValue\n"
+            "}\n"
+            "func interfaceCleanupValue(cleanupSpecs: String, methodName: String, paramName: String): String { \"\" }\n"
+            "func interfaceCleanupKind(cleanupSpecs: String, methodName: String, paramName: String): String {\n"
+            "    let cleanupValue = interfaceCleanupValue(cleanupSpecs, methodName, paramName)\n"
+            "    cleanupValue.startsWith(\"Array<\")\n"
+            "}\n"
+            "func parseMethod(cleanupSpecs: String, methodName: String, paramName: String): Unit {\n"
+            "    interfaceCleanupKind(cleanupSpecs, methodName, paramName)\n"
+            "}\n"
+            "func outSlotDefaultExpr(method: AbiMethod, param: AbiParam): Option<String> {\n"
+            "    Some(\"CPointer<Unit>()\")\n"
+            "}\n"
+            "func isLikelyOutSlotParam(method: AbiMethod, param: AbiParam, valueType: String): Bool {\n"
+            "    if (!param.cleanupKind.isEmpty()) {}\n"
+            "    true\n"
+            "}\n"
+            "func appendVtblNoneBranchOutSlotClears(sb: StringBuilder, method: AbiMethod): Unit {\n"
+            "    appendVtblOutSlotClears(sb, method, \"                    \")\n"
+            "}\n"
+            "func appendDefaultVtblClosureParams(sb: StringBuilder, params: Array<AbiParam>): Unit {\n"
+            "    appendDefaultVtblClosureParams(sb, method.params)\n"
+            "}\n"
+            "func appendVtblOutSlotClears(sb: StringBuilder, method: AbiMethod, indent: String): Unit {\n"
+            "    sb.append(\".write(\")\n"
+            "}\n"
+            "func methodHasVtblOutSlots(method: AbiMethod): Bool {\n"
+            "    true\n"
+            "}\n"
+            "func appendVtblSomeBranchOutSlotGuard(sb: StringBuilder, method: AbiMethod): Bool {\n"
+            "    appendVtblOutSlotClears(sb, method, \"                        \")\n"
+            "    windows_core.E_POINTER.value\n"
+            "    true\n"
+            "}\n"
+            "func appendVtblFailureOutSlotCleanup(sb: StringBuilder, method: AbiMethod, indent: String): Unit {\n"
+            "    match (unwrapGenericType(param.cleanupKind, \"Array\")) {\n"
+            "        case Some(elementProjectedType) => appendVtblFailureArrayOutSlotCleanup(sb, method, param, elementProjectedType, indent)\n"
+            "        case None => ()\n"
+            "    }\n"
+            "    match (outSlotDefaultExpr(method, param)) {}\n"
+            "    param.cleanupKind == \"HString\"\n"
+            "    windows_core.releaseFailedComOutSlot(result)\n"
+            "}\n"
+            "func appendVtblFailureArrayOutSlotCleanup(sb: StringBuilder, method: AbiMethod, param: AbiParam, elementProjectedType: String, indent: String): Unit {\n"
+            "    windows_core.winrtReleaseGenericArrayOut<T>(CPointer<Unit>(rawArray__), rawSize__)\n"
+            "    windows_core.coTaskMemFree(CPointer<Unit>(rawArray__))\n"
+            "}\n"
+            "func appendVtblStruct(): Unit {\n"
+            "    let exceptionAlias = \"${interfaceName}_ExceptionBase\"\n"
+            "    sb.append(\" = Exception\\n\\n\")\n"
+            "    sb.append(exceptionAlias)\n"
+            "    if (methodHasVtblOutSlots(method)) {\n"
+            "        appendDefaultVtblClosureParams(sb, method.params)\n"
+            "        appendVtblOutSlotClears(sb, method, \"        \")\n"
+            "        sb.append(\"        windows_core.E_NOTIMPL.value\\n\")\n"
+            "    }\n"
+            "    try {\n"
+            "        let resultHr__ = impl.__winrtThunk_First(result)\n"
+            "        if (windows_core.HRESULT(resultHr__).failed()) {\n"
+            "            appendVtblFailureOutSlotCleanup(sb, method, bodyIndent + \"        \")\n"
+            "        }\n"
+            "        resultHr__\n"
+            "    } catch (error: windows_core.WindowsException) {\n"
+            "        error.code().value\n"
+            "    } catch (_: Example_ExceptionBase) {\n"
+            "        windows_core.E_FAIL.value\n"
+            "    }\n"
+            "    windows_core.E_NOINTERFACE.value\n"
+            "}\n"
+            "func Interface(attrTokens: Tokens): Unit {\n"
+            "    let cleanupSpecs = attrSourcePart(attrTokens, 2)\n"
+            "    parseMethods(interfaceDecl, cleanupSpecs)\n"
+            "}\n"
+        )
+
+    def interface_macro_fixture_source(self) -> str:
+        return (
+            "func requireVtblNoneBranchClearsOutSlots(): Int64 {\n"
+            "    innerInterface.isNull()\n"
+            "    result.isNull()\n"
+            "    token.value != 0\n"
+            "    0\n"
+            "}\n"
+            "func requireDefaultVtblConstructorClearsOutSlotsBeforeNotImpl(): Int64 {\n"
+            "    Example_Foundation_IWidgetVtbl()\n"
+            "    windows_core.E_NOTIMPL.value\n"
+            "    innerInterface.isNull()\n"
+            "    result.isNull()\n"
+            "    token.value != 0\n"
+            "    0\n"
+            "}\n"
+            "func requireVtblSomeBranchClearsOutSlotsAndTranslatesThrownExceptions(): Int64 {\n"
+            "    innerInterface.isNull()\n"
+            "    result.isNull()\n"
+            "    token.value != 0\n"
+            "    throw Exception(\"CreateInstance failure\")\n"
+            "    throw windows_core.WindowsException(windows_core.E_INVALIDARG)\n"
+            "    windows_core.E_FAIL.value\n"
+            "    windows_core.E_INVALIDARG.value\n"
+            "    0\n"
+            "}\n"
+            "func requireVtblFailedHRESULTReleasesPartialOutSlots(): Int64 {\n"
+            "    vtbl.TryCreate(raw, CPointer<CPointer<Unit>>(inout result))\n"
+            "    failedOutputReleaseCount.load() != 1\n"
+            "    result.isNull()\n"
+            "    windows_core.E_FAIL.value\n"
+            "    0\n"
+            "}\n"
+            "GetTitle.value=HString\n"
+            "func requireVtblFailedHRESULTReleasesPartialHStringOutSlot(): Int64 {\n"
+            "    vtbl.GetTitle(raw, CPointer<CPointer<Unit>>(inout value))\n"
+            "    debugObservedWindowsDeleteStringCount() - deleteBefore != 1\n"
+            "    0\n"
+            "}\n"
+            "GetNames.names=Array<windows_core.HString>\n"
+            "func requireVtblFailedHRESULTReleasesPartialHStringArrayOutSlot(): Int64 {\n"
+            "    vtbl.GetNames(raw, CPointer<UInt32>(inout namesSize), CPointer<CPointer<CPointer<Unit>>>(inout names))\n"
+            "    windows_core.coTaskMemAllocationSize(failedOutputArrayRaw).isNone()\n"
+            "    0\n"
+            "}\n"
+            "TryAlias.aliasOut=Com\n"
+            "GetAliasText.textOut=HString\n"
+            "func requireExplicitComCleanupSpecMarksAtypicalOutSlot(): Int64 {\n"
+            "    failedOutputReleaseCount.load() != 1\n"
+            "    0\n"
+            "}\n"
+            "func requireExplicitHStringCleanupSpecMarksAtypicalOutSlot(): Int64 { 0 }\n"
+        )
+
+    def bindgen_render_source(self) -> str:
+        return (
+            "func renderGenericWinrtInterfaceVtbl(): Unit {\n"
+            "    interfaceDefaultVtblStub(method, pairs, symbolsByName, symbol.fullName)\n"
+            "}\n"
+            "func interfaceDefaultVtblStub(\n"
+            "    method: MethodRecord,\n"
+            "    pairs: ArrayList<ParameterPair>,\n"
+            "    symbolsByName: HashMap<String, SymbolRecord>,\n"
+            "    ownerFullName: String\n"
+            "): String {\n"
+            "    let clears = interfaceDispatcherClearOutSlots(method, pairs, symbolsByName, ownerFullName, 2)\n"
+            "    if (clears.isEmpty()) {\n"
+            "        return \"{ ${interfaceClosurePlaceholders(Int64(pairs.size) + 1)} => windows_core.E_NOTIMPL.value }\\n\"\n"
+            "    }\n"
+            "    return \"{ _${interfaceClosureParameterNames(pairs)} =>\\n\"\n"
+            "    windows_core.E_NOTIMPL.value\n"
+            "}\n"
+        )
+
+    def bindgen_tests_source(self) -> str:
+        return (
+            "func testGenericWinrtVtblNoneBranchClearsOutSlots(): Unit {\n"
+            "    public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>\n"
+            "    public var IndexOf: CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<Bool>) -> Int32> = { _, value, index, result =>\n"
+            "    public var Items: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Int32>>) -> Int32> = { _, resultSize, result =>\n"
+            "    public var Names: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, resultSize, result =>\n"
+            "    windows_core.winrtReleaseGenericArrayOut<windows_core.HString>(CPointer<Unit>(rawArray__), rawSize__)\n"
+            "    windows_core.coTaskMemFree(CPointer<Unit>(rawArray__))\n"
+            "    windows_core.E_NOTIMPL.value\n"
+            "}\n"
+        )
+
+    def common_source(self) -> str:
+        return (
+            "@C\n"
+            "public struct Windows_Foundation_Collections_IIterable_1Vtbl {\n"
+            "    public var First: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>\n"
+            "        if (result.isNotNull()) {\n"
+            "            unsafe { result.write(CPointer<Unit>()) }\n"
+            "        }\n"
+            "        windows_core.E_NOTIMPL.value\n"
+            "    }\n"
+            "\n"
+            "    public init() {}\n"
+            "\n"
+            "    public static func new(offset!: Int64 = 0): Windows_Foundation_Collections_IIterable_1Vtbl {\n"
+            "        let _ = offset\n"
+            "        var vtbl = Windows_Foundation_Collections_IIterable_1Vtbl()\n"
+            "        vtbl.base_ = windows_core.buildIInspectableVtbl()\n"
+            "        vtbl.First = { instanceRaw, result =>\n"
+            "            match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IIterable_1_ImplErased>(instanceRaw) }) {\n"
+            "                case Some(impl) =>\n"
+            "                    if (result.isNull()) {\n"
+            "                        if (result.isNotNull()) {\n"
+            "                            unsafe { result.write(CPointer<Unit>()) }\n"
+            "                        }\n"
+            "                        windows_core.E_POINTER.value\n"
+            "                    } else {\n"
+            "                        if (result.isNotNull()) {\n"
+            "                            unsafe { result.write(CPointer<Unit>()) }\n"
+            "                        }\n"
+            "                        try {\n"
+            "                            impl.First(result)\n"
+            "                        } catch (error: windows_core.WindowsException) {\n"
+            "                            if (result.isNotNull()) {\n"
+            "                                unsafe { result.write(CPointer<Unit>()) }\n"
+            "                            }\n"
+            "                            error.code().value\n"
+            "                        } catch (_: Windows_Foundation_Collections_IIterable_1ExceptionBase) {\n"
+            "                            if (result.isNotNull()) {\n"
+            "                                unsafe { result.write(CPointer<Unit>()) }\n"
+            "                            }\n"
+            "                            windows_core.E_FAIL.value\n"
+            "                        }\n"
+            "                    }\n"
+            "                case None =>\n"
+            "                    if (result.isNotNull()) {\n"
+            "                        unsafe { result.write(CPointer<Unit>()) }\n"
+            "                    }\n"
+            "                    windows_core.E_NOINTERFACE.value\n"
+            "            }\n"
+            "        }\n"
+            "        return vtbl\n"
+            "    }\n"
+            "}\n"
+            "type Windows_Foundation_Collections_IIterable_1ExceptionBase = Exception\n"
+            "func generatedNoneBranches(): Unit {\n"
+            "    case Some(impl) =>\n"
+            "                    if (result.isNull()) {\n"
+            "                        if (result.isNotNull()) {\n"
+            "                            unsafe { result.write(CPointer<Unit>()) }\n"
+            "                        }\n"
+            "                        windows_core.E_POINTER.value\n"
+            "                    } else {\n"
+            "                        if (result.isNotNull()) {\n"
+            "                            unsafe { result.write(CPointer<Unit>()) }\n"
+            "                        }\n"
+            "                        try {\n"
+            "                            impl.First(result)\n"
+            "                        } catch (error: windows_core.WindowsException) {\n"
+            "                            if (result.isNotNull()) {\n"
+            "                                unsafe { result.write(CPointer<Unit>()) }\n"
+            "                            }\n"
+            "                            error.code().value\n"
+            "                        } catch (_: Windows_Foundation_Collections_IIterable_1ExceptionBase) {\n"
+            "                            if (result.isNotNull()) {\n"
+            "                                unsafe { result.write(CPointer<Unit>()) }\n"
+            "                            }\n"
+            "                            windows_core.E_FAIL.value\n"
+            "                        }\n"
+            "                    }\n"
+            "    if (items.isNull() || result.isNull()) {\n"
+            "        unsafe { result.write(0u32) }\n"
+            "        windows_core.E_POINTER.value\n"
+            "    } else {\n"
+            "        unsafe { result.write(0u32) }\n"
+            "        try {\n"
+            "            impl.GetMany(itemsSize, items, result)\n"
+            "        } catch (error: windows_core.WindowsException) {\n"
+            "            unsafe { result.write(0u32) }\n"
+            "            error.code().value\n"
+            "        } catch (_: Windows_Foundation_Collections_IIterable_1ExceptionBase) {\n"
+            "            unsafe { result.write(0u32) }\n"
+            "            windows_core.E_FAIL.value\n"
+            "        }\n"
+            "    }\n"
+            "    if (first.isNull() || second.isNull()) {\n"
+            "        unsafe { first.write(CPointer<Unit>()) }\n"
+            "        unsafe { second.write(CPointer<Unit>()) }\n"
+            "        windows_core.E_POINTER.value\n"
+            "    } else {\n"
+            "        unsafe { first.write(CPointer<Unit>()) }\n"
+            "        unsafe { second.write(CPointer<Unit>()) }\n"
+            "        try {\n"
+            "            impl.Split(first, second)\n"
+            "        } catch (error: windows_core.WindowsException) {\n"
+            "            unsafe { first.write(CPointer<Unit>()) }\n"
+            "            unsafe { second.write(CPointer<Unit>()) }\n"
+            "            error.code().value\n"
+            "        } catch (_: Windows_Foundation_Collections_IIterable_1ExceptionBase) {\n"
+            "            unsafe { first.write(CPointer<Unit>()) }\n"
+            "            unsafe { second.write(CPointer<Unit>()) }\n"
+            "            windows_core.E_FAIL.value\n"
+            "        }\n"
+            "    }\n"
+            "    unsafe { result.write(CPointer<Unit>()) }\n"
+            "    unsafe { result.write(false) }\n"
+            "    unsafe { itemsSize.write(0u32) }\n"
+            "    unsafe { items.write(CPointer<CPointer<Unit>>()) }\n"
+            "    unsafe { first.write(CPointer<Unit>()) }\n"
+            "    unsafe { second.write(CPointer<Unit>()) }\n"
+            "    unsafe { result.write(0i64) }\n"
+            "    windows_core.E_NOINTERFACE.value\n"
+            "}\n"
+        )
+
+    def test_rejects_generated_vtable_stale_one_line_none_branch(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                common=self.common_source() + "case None => windows_core.E_NOINTERFACE.value\n",
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("generated vtable dispatcher None branch", stderr.getvalue())
+
+    def test_rejects_generated_vtable_stale_one_line_live_out_branch(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                common=self.common_source() + "case Some(impl) => impl.First(result)\n",
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("generated vtable dispatcher live impl branch", stderr.getvalue())
+
+    def test_rejects_generated_default_vtable_notimpl_stub_without_out_slot_clear(self) -> None:
+        safe_default = (
+            "    public var First: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>\n"
+            "        if (result.isNotNull()) {\n"
+            "            unsafe { result.write(CPointer<Unit>()) }\n"
+            "        }\n"
+            "        windows_core.E_NOTIMPL.value\n"
+            "    }\n"
+        )
+        stale_default = (
+            "    public var First: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = "
+            "{ _, _ => windows_core.E_NOTIMPL.value }\n"
+        )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                common=self.common_source().replace(safe_default, stale_default, 1),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("generated default vtable stub", stderr.getvalue())
+
+    def test_rejects_generated_multiline_default_vtable_notimpl_stub_without_out_slot_clear(self) -> None:
+        safe_default = (
+            "    public var First: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>\n"
+            "        if (result.isNotNull()) {\n"
+            "            unsafe { result.write(CPointer<Unit>()) }\n"
+            "        }\n"
+            "        windows_core.E_NOTIMPL.value\n"
+            "    }\n"
+        )
+        stale_default = (
+            "    public var First: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>\n"
+            "        windows_core.E_NOTIMPL.value\n"
+            "    }\n"
+        )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                common=self.common_source().replace(safe_default, stale_default, 1),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("generated default vtable stub", stderr.getvalue())
+
+    def test_rejects_generated_vtable_live_branch_without_exception_translation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                common=self.common_source().replace(
+                    "                        } catch (error: windows_core.WindowsException) {\n"
+                    "                            if (result.isNotNull()) {\n"
+                    "                                unsafe { result.write(CPointer<Unit>()) }\n"
+                    "                            }\n"
+                    "                            error.code().value\n"
+                    "                        } catch (_: Windows_Foundation_Collections_IIterable_1ExceptionBase) {\n"
+                    "                            if (result.isNotNull()) {\n"
+                    "                                unsafe { result.write(CPointer<Unit>()) }\n"
+                    "                            }\n"
+                    "                            windows_core.E_FAIL.value\n"
+                    "                        }\n",
+                    "",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("must translate WindowsException", stderr.getvalue())
+
+    def test_rejects_generated_vtable_e_pointer_branch_without_out_slot_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                common=self.common_source().replace(
+                    "        unsafe { result.write(0u32) }\n"
+                    "        windows_core.E_POINTER.value\n",
+                    "        windows_core.E_POINTER.value\n",
+                    1,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("E_POINTER branch must clear non-null out slots", stderr.getvalue())
+
+    def test_rejects_runtime_foundation_vtable_none_branch_without_array_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                foundation=self.foundation_source().replace(
+                    "    foundationNoInterfaceArrayOut<UInt16>(arg0Size, arg0)\n",
+                    "",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("foundation vtable None branches", stderr.getvalue())
+
+    def test_rejects_runtime_foundation_vtable_none_branch_with_uncleared_result(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                foundation=self.foundation_source()
+                + (
+                    "func staleFoundationOutBranch(): Unit {\n"
+                    "    vtbl.Name = { instanceRaw, result__ =>\n"
+                    "        match (instanceRaw) {\n"
+                    "            case None =>\n"
+                    "                E_NOINTERFACE.value\n"
+                    "        }\n"
+                    "    }\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("foundation vtable dispatcher None branch", stderr.getvalue())
+
+    def test_rejects_runtime_collection_vtable_none_branch_with_out_slot(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                collections=self.collections_source()
+                + (
+                    "func staleCollectionOutBranch(): Unit {\n"
+                    "    vtbl.Lookup = { instanceRaw, result__ =>\n"
+                    "        match (instanceRaw) {\n"
+                    "            case None =>\n"
+                    "                E_NOINTERFACE.value\n"
+                    "        }\n"
+                    "    }\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("collection vtable dispatcher None branch", stderr.getvalue())
+
+    def test_rejects_core_marshaled_lookup_miss_without_out_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                marshaler=self.marshaler_source().replace(
+                    "                unsafe { ppv.write(CPointer<Unit>()) }\n",
+                    "",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("aggregatedMarshalerUnmarshalInterfaceThunk", stderr.getvalue())
+
+    def test_rejects_core_marshaler_state_without_scalar_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                marshaler=self.marshaler_source().replace(
+                    "func getUnmarshalClass() {\n"
+                    "    if (pcid.isNotNull()) {\n"
+                    "        unsafe { pcid.write(GUID()) }\n"
+                    "    }\n"
+                    "    let hr = unsafe { innerMarshaler.vtbl().GetUnmarshalClass(raw, riid, pv, dwdestcontext, pvdestcontext, mshlflags, pcid) }\n",
+                    "func getUnmarshalClass() {\n"
+                    "    let hr = unsafe { innerMarshaler.vtbl().GetUnmarshalClass(raw, riid, pv, dwdestcontext, pvdestcontext, mshlflags, pcid) }\n",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("getUnmarshalClass", stderr.getvalue())
+            self.assertIn("before inner dispatch", stderr.getvalue())
+
+    def test_rejects_core_marshaler_state_without_failed_hresult_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                marshaler=self.marshaler_source().replace(
+                    "    if (hr < 0 && psize.isNotNull()) {\n"
+                    "        unsafe { psize.write(0u32) }\n"
+                    "    }\n",
+                    "",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("getMarshalSizeMax", stderr.getvalue())
+            self.assertIn("after failed inner HRESULT", stderr.getvalue())
+
+    def test_rejects_reference_array_value_raw_without_failed_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                foundation=self.foundation_source().replace(
+                    "        windows_core.winrtReleaseGenericArrayOut<T>(result__, resultSize__)\n",
+                    "",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("IReferenceArray.ValueRaw", stderr.getvalue())
+
+    def test_rejects_core_weak_lookup_before_out_slot_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                core_weak=self.core_weak_source().replace(
+                    "        resultSlot.write(CPointer<Unit>())\n",
+                    "",
+                    1,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("localWeakReferenceSourceQueryInterfaceThunk", stderr.getvalue())
+
+    def test_rejects_implement_weak_lookup_before_iid_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                implement_weak=self.implement_weak_source().replace(
+                    "        if (iid.isNull()) { return E_POINTER.value }\n",
+                    "",
+                    1,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("weakReferenceSourceQueryInterfaceThunk", stderr.getvalue())
+
+    def test_rejects_core_weak_query_owner_without_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                core_weak=self.core_weak_source().replace(
+                    "        resultSlot.write(CPointer<Unit>())\n"
+                    "        vtblPtr.read().QueryInterface(ownerRaw, CPointer<GUID>(inout iidCopy), resultSlot)\n",
+                    "        vtblPtr.read().QueryInterface(ownerRaw, CPointer<GUID>(inout iidCopy), resultSlot)\n",
+                    1,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("queryOwner", stderr.getvalue())
+            self.assertIn("before delegating owner QueryInterface", stderr.getvalue())
+
+    def test_rejects_iunknown_query_interface_thunk_without_exception_translation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                implement_thunk=self.implement_thunk_source().replace(
+                    "    } catch (error: WindowsException) {\n"
+                    "        releaseFailedComOutSlot(resultSlot)\n"
+                    "        error.code().value\n"
+                    "    } catch (_: Exception) {\n"
+                    "        releaseFailedComOutSlot(resultSlot)\n"
+                    "        E_FAIL.value\n"
+                    "    }\n",
+                    "",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("iunknownQueryInterfaceThunk", stderr.getvalue())
+
+    def test_rejects_query_interface_fallback_without_exception_translation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                implement_surface=self.implement_surface_source().replace(
+                    "            } catch (error: WindowsException) {\n"
+                    "                releaseFailedComOutSlot(resultSlot)\n"
+                    "                return error.code().value\n"
+                    "            } catch (_: Exception) {\n"
+                    "                releaseFailedComOutSlot(resultSlot)\n"
+                    "                return E_FAIL.value\n"
+                    "            }\n",
+                    "",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("queryInterfaceBase", stderr.getvalue())
+
+    def test_rejects_activate_composable_without_throw_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                implement_composable=self.implement_composable_source().replace(
+                    "            let _ = releaseComRaw(innerRaw)\n",
+                    "",
+                    1,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("activateComposable", stderr.getvalue())
+
+    def test_rejects_activate_composable_tests_without_inner_out_cleanup_case(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                implement_weak_tests=self.implement_weak_tests_source().replace(
+                    "func testActivateComposableReleasesInnerOutAndOuterWhenActivatorThrows",
+                    "func missingActivateComposableInnerOutCleanupCoverage",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("activateComposable", stderr.getvalue())
+
+    def test_rejects_interface_macro_bare_none_branch(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                interface_macro=self.interface_macro_source()
+                + "case None => windows_core.E_NOINTERFACE.value\n",
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("@Interface vtable None branch", stderr.getvalue())
+
+    def test_rejects_interface_macro_without_default_vtable_out_slot_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                interface_macro=self.interface_macro_source().replace(
+                    "func methodHasVtblOutSlots",
+                    "func missingMethodHasVtblOutSlots",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("@Interface macro vtable branches", stderr.getvalue())
+
+    def test_rejects_interface_macro_fixture_without_lookup_miss_out_slot_test(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                interface_macro_fixture=self.interface_macro_fixture_source().replace(
+                    "    result.isNull()\n",
+                    "",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("macro fixture", stderr.getvalue())
+
+    def test_rejects_interface_macro_fixture_without_default_vtable_notimpl_test(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                interface_macro_fixture=self.interface_macro_fixture_source().replace(
+                    "func requireDefaultVtblConstructorClearsOutSlotsBeforeNotImpl",
+                    "func missingDefaultVtblConstructorCoverage",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("macro fixture", stderr.getvalue())
+
+    def test_rejects_interface_macro_without_live_branch_exception_translation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                interface_macro=self.interface_macro_source().replace(
+                    "    } catch (error: windows_core.WindowsException) {\n"
+                    "        error.code().value\n"
+                    "    } catch (_: Example_ExceptionBase) {\n"
+                    "        windows_core.E_FAIL.value\n"
+                    "    }\n",
+                    "",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("@Interface macro vtable branches", stderr.getvalue())
+
+    def test_rejects_interface_macro_without_failed_hresult_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                interface_macro=self.interface_macro_source().replace(
+                    "        if (windows_core.HRESULT(resultHr__).failed()) {\n"
+                    "            appendVtblFailureOutSlotCleanup(sb, method, bodyIndent + \"        \")\n"
+                    "        }\n",
+                    "",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("@Interface macro vtable branches", stderr.getvalue())
+
+    def test_rejects_interface_macro_fixture_without_live_throwing_out_slot_test(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                interface_macro_fixture=self.interface_macro_fixture_source().replace(
+                    "func requireVtblSomeBranchClearsOutSlotsAndTranslatesThrownExceptions",
+                    "func missingLiveThrowingOutSlotCoverage",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("macro fixture", stderr.getvalue())
+
+    def test_rejects_interface_macro_fixture_without_failed_hresult_out_slot_test(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                interface_macro_fixture=self.interface_macro_fixture_source().replace(
+                    "func requireVtblFailedHRESULTReleasesPartialOutSlots",
+                    "func missingFailedHRESULTCoverage",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("macro fixture", stderr.getvalue())
+
+    def test_rejects_bindgen_render_without_default_vtable_out_slot_helper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                bindgen_render=self.bindgen_render_source().replace(
+                    "interfaceDefaultVtblStub(method, pairs, symbolsByName, symbol.fullName)",
+                    "{ ${interfaceClosurePlaceholders(Int64(pairs.size) + 1)} => windows_core.E_NOTIMPL.value }",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("generic WinRT vtable defaults", stderr.getvalue())
+
+    def test_rejects_bindgen_tests_without_default_vtable_notimpl_coverage(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(
+                workspace,
+                bindgen_tests=self.bindgen_tests_source().replace(
+                    "public var IndexOf: CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<Bool>) -> Int32> = { _, value, index, result =>\n",
+                    "",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("windows-bindgen tests", stderr.getvalue())
+
+    def test_accepts_vtable_none_branches_with_out_slot_clears(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_vtable_sources(workspace)
+
+            setup.check_vtable_none_branches_clear_out_slots(workspace)
+
+
+class PInvokeStringOutCleanupGateTests(unittest.TestCase):
+    def render_source(self) -> str:
+        return (
+            "class PInvokeStringOutSlot {}\n"
+            "func pinvokeStringHandlePointerKind(): Unit {}\n"
+            "func pinvokeStringOutSlotParameters(): Unit {\n"
+            "    contains(parameter.attributes, \"Out\") && !contains(parameter.attributes, \"Retval\")\n"
+            "}\n"
+            "func pinvokePreclearOutSlots(): Unit {\n"
+            "    var nullOutSlot__ = false\n"
+            "    nullOutSlot__ = true\n"
+            "}\n"
+            "func pinvokeClearStringOutSlot(): Unit {}\n"
+            "func pinvokeReleaseFailedStringOutSlot(): Unit {\n"
+            "    windows_core.releaseSystemHStringHandle(failedString__)\n"
+            "    windows_strings.BSTR.fromRawTake(CPointer<UInt16>(failedString__))\n"
+            "}\n"
+            "func renderPInvokeResultVoidWrapper(): Unit {\n"
+            "    let stringOutSlots = pinvokeStringOutSlotParameters(method, pairs, symbolsByName)\n"
+            "    pinvokePreclearOutSlots(comOutPairs, stringOutSlots, \"        \")\n"
+            "}\n"
+            "func renderPInvokeResultValueWrapper(): Unit {\n"
+            "    let leadingStringOutSlots = pinvokeStringOutSlotParameters(method, leadingPairs, symbolsByName)\n"
+            "    pinvokePreclearOutSlots(leadingComOutPairs, leadingStringOutSlots, \"        \")\n"
+            "}\n"
+        )
+
+    def bindgen_test_source(self) -> str:
+        return (
+            "func testPInvokeErgonomicWrappersReleaseLeadingStringHandleOutsOnFailedHRESULT(): Unit {\n"
+            "    \"Name\": \"FillStrings\"\n"
+            "    \"Name\": \"TryFillStrings\"\n"
+            "    var nullOutSlot__ = false\\n        if (name.isNull())\n"
+            "    windows_core.releaseSystemHStringHandle(failedString__)\n"
+            "    failedBstr__.close()\n"
+            "    cliTestCountOccurrences(source, \"windows_core.releaseSystemHStringHandle(failedString__)\")\n"
+            "}\n"
+        )
+
+    def write_sources(self, workspace: Path, *, render: str | None = None, tests: str | None = None) -> None:
+        render_path = workspace / "windows-bindgen" / "src" / "render_symbol.cj"
+        test_path = workspace / "windows-bindgen" / "src" / "main_test.cj"
+        render_path.parent.mkdir(parents=True, exist_ok=True)
+        render_path.write_text(render if render is not None else self.render_source(), encoding="utf-8")
+        test_path.write_text(tests if tests is not None else self.bindgen_test_source(), encoding="utf-8")
+
+    def test_accepts_pinvoke_string_out_cleanup_gate(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_sources(workspace)
+
+            setup.check_pinvoke_string_out_cleanup_gate(workspace)
+
+    def test_rejects_missing_pinvoke_string_out_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_sources(
+                workspace,
+                render=self.render_source().replace("func pinvokeReleaseFailedStringOutSlot", "func missingStringOutCleanup"),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_pinvoke_string_out_cleanup_gate(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("P/Invoke wrappers", stderr.getvalue())
+
+    def test_rejects_missing_pinvoke_preclear_sibling_out_gate(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_sources(
+                workspace,
+                render=self.render_source().replace("func pinvokePreclearOutSlots", "func missingPInvokePreclearOutSlots"),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_pinvoke_string_out_cleanup_gate(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("P/Invoke wrappers", stderr.getvalue())
+
+    def test_rejects_missing_pinvoke_string_out_test_coverage(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_sources(
+                workspace,
+                tests=self.bindgen_test_source().replace(
+                    "testPInvokeErgonomicWrappersReleaseLeadingStringHandleOutsOnFailedHRESULT",
+                    "testMissingStringOutCoverage",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_pinvoke_string_out_cleanup_gate(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("tests must cover", stderr.getvalue())
+
+
+class InterfaceDispatcherExceptionOutCleanupGateTests(unittest.TestCase):
+    def render_source(self) -> str:
+        return (
+            "class InterfaceDispatcherOutSlotCleanupSpec {}\n"
+            "func interfaceDispatcherOutSlotCleanupSpecs(): Unit {}\n"
+            "func interfaceMacroCleanupSpecs(): Unit {\n"
+            "    interfaceAttr += \", \\\"${cjStringContent(cleanupSpecs)}\\\"\"\n"
+            "}\n"
+            "func interfaceDispatcherOutSlotCleanupKind(signature): Unit {\n"
+            "    runtimeReferenceTargetSignature(signature)\n"
+            "    winrtProjectedTypeName(targetSignature, symbolsByName, ownerFullName)\n"
+            "}\n"
+            "func interfaceDispatcherArrayCleanupElementType(cleanupKind: String): String { \"\" }\n"
+            "func collectArrayCleanup(): Unit {\n"
+            "    !isCallerAllocatedOutArrayParameter(parameter)\n"
+            "    \"Array<${winrtProjectedTypeName(elementSignature, symbolsByName, ownerFullName)}>\"\n"
+            "}\n"
+            "func interfaceDispatcherInvoke(): Unit {\n"
+            "    let resultHr__ = impl.${slotName}(${argumentPairListText(pairs)})\n"
+            "    if (windows_core.HRESULT(resultHr__).failed()) {}\n"
+            "    interfaceDispatcherReleaseFailedOutSlots(cleanupSpecs, indentLevel + 2)\n"
+            "    interfaceDispatcherReleaseFailedOutSlots(cleanupSpecs, indentLevel + 1)\n"
+            "    interfaceDispatcherClearPairs(outPairs, indentLevel + 1)\n"
+            "}\n"
+            "func interfaceDispatcherReleaseFailedOutSlot(): Unit {\n"
+            "    windows_core.releaseFailedComOutSlot(${slotName})\n"
+            "    windows_core.releaseSystemHStringHandle(failedString__)\n"
+            "    windows_core.winrtReleaseGenericArrayOut<${arrayElementType}>(CPointer<Unit>(rawArray__), rawSize__)\n"
+            "    windows_core.coTaskMemFree(CPointer<Unit>(rawArray__))\n"
+            "    unsafe { ${slotName}.write(${dataPointerType}()) }\n"
+            "    unsafe { ${sizeSlotName}.write(0u32) }\n"
+            "}\n"
+        )
+
+    def bindgen_test_source(self) -> str:
+        return (
+            "func testGenericWinrtVtblNoneBranchClearsOutSlots(): Unit {\n"
+            "    impl.Name(result)\n"
+            "    windows_core.releaseSystemHStringHandle(failedString__)\n"
+            "    let resultHr__ = impl.CreateObject(result)\n"
+            "    if (windows_core.HRESULT(resultHr__).failed())\n"
+            "    windows_core.releaseFailedComOutSlot(result)\n"
+            "    Title.value=HString\n"
+            "    External.value=Com\n"
+            "    GetNames.names=Array<windows_core.HString>\n"
+            "    windows_core.winrtReleaseGenericArrayOut<windows_core.HString>(CPointer<Unit>(rawArray__), rawSize__)\n"
+            "    windows_core.coTaskMemFree(CPointer<Unit>(rawArray__))\n"
+            "}\n"
+        )
+
+    def write_sources(self, workspace: Path, *, render: str | None = None, tests: str | None = None) -> None:
+        render_path = workspace / "windows-bindgen" / "src" / "render_symbol.cj"
+        test_path = workspace / "windows-bindgen" / "src" / "main_test.cj"
+        render_path.parent.mkdir(parents=True, exist_ok=True)
+        render_path.write_text(render if render is not None else self.render_source(), encoding="utf-8")
+        test_path.write_text(tests if tests is not None else self.bindgen_test_source(), encoding="utf-8")
+
+    def test_accepts_interface_dispatcher_exception_out_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_sources(workspace)
+
+            setup.check_interface_dispatcher_exception_out_cleanup(workspace)
+
+    def test_rejects_missing_interface_dispatcher_partial_out_release(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_sources(
+                workspace,
+                render=self.render_source().replace(
+                    "windows_core.releaseFailedComOutSlot(${slotName})",
+                    "unsafe { slotName.write(CPointer<Unit>()) }",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_interface_dispatcher_exception_out_cleanup(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("interface dispatchers", stderr.getvalue())
+
+    def test_rejects_missing_interface_dispatcher_failed_hresult_release(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_sources(
+                workspace,
+                render=self.render_source().replace("if (windows_core.HRESULT(resultHr__).failed())", "if (resultHr__ == 0)"),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_interface_dispatcher_exception_out_cleanup(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("interface dispatchers", stderr.getvalue())
+
+    def test_rejects_missing_interface_macro_cleanup_side_table(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_sources(
+                workspace,
+                render=self.render_source().replace("func interfaceMacroCleanupSpecs", "func missingMacroCleanupSpecs"),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_interface_dispatcher_exception_out_cleanup(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("interface dispatchers", stderr.getvalue())
+
+    def test_rejects_missing_interface_dispatcher_cleanup_test_coverage(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_sources(
+                workspace,
+                tests=self.bindgen_test_source().replace(
+                    "windows_core.releaseFailedComOutSlot(result)",
+                    "unsafe { result.write(CPointer<Unit>()) }",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_interface_dispatcher_exception_out_cleanup(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("tests must cover", stderr.getvalue())
+
+
+class GeneratedInterfaceDispatcherFailedHResultCleanupGateTests(unittest.TestCase):
+    def generated_impl_source(self) -> str:
+        return (
+            "package windows_common.impl\n"
+            "// Windows.Foundation.Collections.IIterable`1 (synthetic:Windows_Foundation_Collections_IIterable_1)\n"
+            "public struct Windows_Foundation_Collections_IIterable_1Vtbl {\n"
+            "    public static func new(): Windows_Foundation_Collections_IIterable_1Vtbl {\n"
+            "        var vtbl = Windows_Foundation_Collections_IIterable_1Vtbl()\n"
+            "        vtbl.First = { instanceRaw, result =>\n"
+            "            match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IIterable_1_ImplErased>(instanceRaw) }) {\n"
+            "                case Some(impl) =>\n"
+            "                    if (result.isNull()) {\n"
+            "                        windows_core.E_POINTER.value\n"
+            "                    } else {\n"
+            "                        try {\n"
+            "                            let resultHr__ = impl.First(result)\n"
+            "                            if (windows_core.HRESULT(resultHr__).failed()) {\n"
+            "                                windows_core.releaseFailedComOutSlot(result)\n"
+            "                                if (result.isNotNull()) {\n"
+            "                                    unsafe { result.write(CPointer<Unit>()) }\n"
+            "                                }\n"
+            "                            }\n"
+            "                            resultHr__\n"
+            "                        } catch (error: windows_core.WindowsException) {\n"
+            "                            windows_core.releaseFailedComOutSlot(result)\n"
+            "                            if (result.isNotNull()) {\n"
+            "                                unsafe { result.write(CPointer<Unit>()) }\n"
+            "                            }\n"
+            "                            error.code().value\n"
+            "                        }\n"
+            "                    }\n"
+            "                case None =>\n"
+            "                    windows_core.E_NOINTERFACE.value\n"
+            "            }\n"
+            "        }\n"
+            "        vtbl\n"
+            "    }\n"
+            "}\n"
+        )
+
+    def write_generated_impl(self, workspace: Path, source: str | None = None) -> None:
+        path = workspace / "windows-common" / "src" / "impl" / "symbols_0.cj"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(source if source is not None else self.generated_impl_source(), encoding="utf-8")
+
+    def test_accepts_generated_dispatcher_failed_hresult_out_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_generated_impl(workspace)
+
+            setup.check_generated_interface_dispatcher_failed_hresult_out_cleanup(workspace)
+
+    def test_rejects_generated_dispatcher_without_failed_hresult_cleanup(self) -> None:
+        stale_source = self.generated_impl_source().replace(
+            "let resultHr__ = impl.First(result)\n"
+            "                            if (windows_core.HRESULT(resultHr__).failed()) {\n"
+            "                                windows_core.releaseFailedComOutSlot(result)\n"
+            "                                if (result.isNotNull()) {\n"
+            "                                    unsafe { result.write(CPointer<Unit>()) }\n"
+            "                                }\n"
+            "                            }\n"
+            "                            resultHr__",
+            "impl.First(result)",
+        )
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_generated_impl(workspace, stale_source)
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_generated_interface_dispatcher_failed_hresult_out_cleanup(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("failed-HRESULT out slots", stderr.getvalue())
+
+
+class RuntimeClassRawAbiArrayOutPreclearGateTests(unittest.TestCase):
+    def render_source(self) -> str:
+        return (
+            "func renderRuntimeClassFactoryRawAbiMethod(): Unit {\n"
+            "    renderRuntimeClassRawAbiPreDispatchOutSlotClears(method, symbolsByName, symbol.fullName, 2)\n"
+            "    try (factory__ = windows_core.factory<${symbol.implName}, ${factorySpec.typeName}>().unwrap()) {}\n"
+            "    hr__ = unsafe { factory__.${methodName}(${args}) }\n"
+            "    renderRuntimeClassRawAbiFailureCleanup(method, symbolsByName, symbol.fullName, 2)\n"
+            "}\n"
+            "func renderRuntimeOutSlotGuards(): Unit {\n"
+            "    var nullOutSlot__ = false\n"
+            "    nullOutSlot__ = true\n"
+            "    if (nullOutSlot__) {}\n"
+            "    throw windows_core.WindowsException(windows_core.E_POINTER)\n"
+            "}\n"
+            "func renderRuntimeClassRawAbiPreDispatchOutSlotClears(): Unit {\n"
+            "    let arrayCleanupSpecs = runtimeClassRawAbiFailedArrayOutSlotCleanupSpecs(method, symbolsByName, ownerFullName)\n"
+            "    if (${spec.sizeSlotName}.isNotNull()) {}\n"
+            "    unsafe { ${spec.sizeSlotName}.write(0u32) }\n"
+            "    if (${spec.dataSlotName}.isNotNull()) {}\n"
+            "    unsafe { ${spec.dataSlotName}.write(CPointer<${spec.elementAbiType}>()) }\n"
+            "}\n"
+            "func renderRuntimeClassRawAbiFailureCleanup(): Unit {\n"
+            "    let arrayCleanupSpecs = runtimeClassRawAbiFailedArrayOutSlotCleanupSpecs(method, symbolsByName, ownerFullName)\n"
+            "    if (hr__.failed()) {}\n"
+            "    let ${sizeName} = unsafe { ${spec.sizeSlotName}.read() }\n"
+            "    let ${dataName} = unsafe { ${spec.dataSlotName}.read() }\n"
+            "    windows_core.winrtReleaseGenericArrayOut<${spec.elementProjectedType}>(CPointer<Unit>(${dataName}), ${sizeName})\n"
+            "    windows_core.coTaskMemFree(CPointer<Unit>(${dataName}))\n"
+            "    unsafe { ${spec.dataSlotName}.write(CPointer<${spec.elementAbiType}>()) }\n"
+            "    unsafe { ${spec.sizeSlotName}.write(0u32) }\n"
+            "}\n"
+            "func renderRuntimeClassInstanceRawAbiMethod(): Unit {\n"
+            "    renderRuntimeClassRawAbiPreDispatchOutSlotClears(method, symbolsByName, symbol.fullName, 2)\n"
+            "    try (interface__ = defaultInterface()) {}\n"
+            "    hr__ = unsafe { interface__.${slotName}(${args}) }\n"
+            "    renderRuntimeClassRawAbiFailureCleanup(method, symbolsByName, symbol.fullName, 2)\n"
+            "}\n"
+        )
+
+    def bindgen_test_source(self) -> str:
+        return (
+            "func testWinrtRuntimeClassRawAbiFailureCleanupReleasesArrayOutSlots(): Unit {\n"
+            "    public static func GetPairOut(firstValue: windows_core.OutSlot<windows_interface.IInspectable>, secondValue: windows_core.OutSlot<windows_core.HString>): Unit\n"
+            "    var nullOutSlot__ = false\\n        if (firstValue.isNull())\n"
+            "    @Expect(classSource.contains(\"var hr__ = windows_core.E_POINTER\\n        if (namesSize.isNotNull()) {\\n            unsafe { namesSize.write(0u32) }\\n        }\\n        if (names.isNotNull()) {\\n            unsafe { names.write(CPointer<CPointer<Unit>>()) }\\n        }\\n        try (interface__ = defaultInterface()) {\\n            hr__ = unsafe { interface__.CollectNamesWithRawInput(rawValuesSize, rawValues, namesSize, names) }\"), true)\n"
+            "    @Expect(classSource.contains(\"var hr__ = windows_core.E_POINTER\\n        if (namesSize.isNotNull()) {\\n            unsafe { namesSize.write(0u32) }\\n        }\\n        if (names.isNotNull()) {\\n            unsafe { names.write(CPointer<CPointer<Unit>>()) }\\n        }\\n        try (interface__ = defaultInterface()) {\\n            hr__ = unsafe { interface__.ReturnNamesWithRawInput(rawValuesSize, rawValues, namesSize, names) }\"), true)\n"
+            "    windows_core.winrtReleaseGenericArrayOut<windows_core.HString>(CPointer<Unit>(__rawAbiArrayOut0Data), __rawAbiArrayOut0Size)\n"
+            "    windows_core.coTaskMemFree(CPointer<Unit>(__rawAbiArrayOut0Data))\n"
+            "}\n"
+        )
+
+    def write_sources(self, workspace: Path, *, render: str | None = None, tests: str | None = None) -> None:
+        render_path = workspace / "windows-bindgen" / "src" / "render_symbol.cj"
+        test_path = workspace / "windows-bindgen" / "src" / "main_test.cj"
+        render_path.parent.mkdir(parents=True, exist_ok=True)
+        render_path.write_text(render if render is not None else self.render_source(), encoding="utf-8")
+        test_path.write_text(tests if tests is not None else self.bindgen_test_source(), encoding="utf-8")
+
+    def test_accepts_runtime_class_raw_abi_array_preclear_gate(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_sources(workspace)
+
+            setup.check_runtime_class_raw_abi_array_out_preclear(workspace)
+
+    def test_rejects_missing_runtime_class_raw_abi_array_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_sources(
+                workspace,
+                render=self.render_source().replace(
+                    "unsafe { ${spec.dataSlotName}.write(CPointer<${spec.elementAbiType}>()) }",
+                    "unsafe { ${spec.dataSlotName}.read() }",
+                    1,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_runtime_class_raw_abi_array_out_preclear(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("pre-clear array out slots", stderr.getvalue())
+
+    def test_rejects_missing_runtime_class_outslot_sibling_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_sources(
+                workspace,
+                render=self.render_source().replace("var nullOutSlot__ = false\n", ""),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_runtime_class_raw_abi_array_out_preclear(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("projected wrappers", stderr.getvalue())
+
+    def test_rejects_missing_runtime_class_raw_abi_array_preclear_marker(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_sources(
+                workspace,
+                tests=self.bindgen_test_source().replace(
+                    "interface__.CollectNamesWithRawInput(rawValuesSize, rawValues, namesSize, names)",
+                    "interface__.CollectNamesWithoutPreclearMarker(rawValuesSize, rawValues, namesSize, names)",
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_runtime_class_raw_abi_array_out_preclear(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("tests must mark", stderr.getvalue())
+
+
+class ArrayMaterializationCleanupGateTests(unittest.TestCase):
+    def write_required_sources(
+        self,
+        workspace: Path,
+        *,
+        descriptor_codegen_text: str = (
+            "windows_core.winrtStoreGenericOut<Fixture_IOutput>(result__, value)\n"
+            "\"${descriptor.wrapperTypeName}_${method.name}Thunk\"\n"
+            "\" <: windows_core.Interface<\"\n"
+        ),
+    ) -> None:
+        required_files = {
+            "windows-core/src/array.cj": (
+                "public static func withLen(length: Int64): NativeAbiArrayStorage<T> {\n"
+                "    let raw = coTaskMemAlloc(totalBytes)\n"
+                "    if (raw.isNull()) { throw WindowsException(E_OUTOFMEMORY) }\n"
+                "}\n"
+                "public func len(): UInt32 { 0u32 }\n"
+                "public func clear(): Unit { coTaskMemFree(CPointer<Unit>(data)) }\n"
+                "public func rawOrNull(): CPointer<T> { CPointer<T>() }\n"
+                "public func intoAbi(): (CPointer<T>, UInt32) {\n"
+                "    native.detach()\n"
+                "    closed = true\n"
+                "}\n"
+            ),
+            "windows-core/src/array_proxy.cj": (
+                "func releasePublishedObjectSlots() {\n"
+                "    releaseSystemHStringHandle(raw)\n"
+                "    interfaceHandleReleaseRaw(raw)\n"
+                "}\n"
+                "func publishCopyArray() {}\n"
+                "func publishObjectArray() {\n"
+                "    let slots = allocateUnitPointerSlots(values.size)\n"
+                "    try {}\n"
+                "    catch (error: Exception) { releasePublishedObjectSlots(values, slots, index); CoTaskMemFree(CPointer<Unit>(slots)); throw error }\n"
+                "    dataTarget.write(CPointer<Unit>(slots))\n"
+                "}\n"
+                "// ArrayProxy stages an ABI array\n"
+            ),
+            "windows-core/src/winrt_generic.cj": (
+                "static func takeWinrtHandleSlot() {\n"
+                "    slot.write(CPointer<Unit>())\n"
+                "}\n"
+                "static func releaseWinrtHandle() {}\n"
+                "func releaseOwnedWinrtHandleSlots<T>(slots, length) {\n"
+                "    while (index < Int64(length)) {\n"
+                "        let slot = unsafe { slots + index }\n"
+                "        let raw = unsafe { slot.read() }\n"
+                "        unsafe { slot.write(CPointer<Unit>()) }\n"
+                "        releaseOwnedWinrtHandle<T>(raw)\n"
+                "        firstError\n"
+                "    }\n"
+                "}\n"
+                "public open class WinrtOutputBridge<T>\n"
+                "class HandleWinrtOutputBridge<T>\n"
+                "public override func takeArrayOut() {\n"
+                "    var valuesOption: Option<ArrayList<T>> = None\n"
+                "    var completed = false\n"
+                "    T.takeWinrtHandleSlot(slot)\n"
+                "    closeWinrtArrayValues<T>(values)\n"
+                "    releaseOwnedWinrtHandleSlots<T>(slots, length)\n"
+                "    coTaskMemFree(data)\n"
+                "}\n"
+                "public override func storeOut() {}\n"
+                "public func winrtCallGenericOut<T>() {}\n"
+                "class CopyWinrtOutputBridge<T>\n"
+                "public override func takeArrayOut() {\n"
+                "    if (length > 0u32 && data.isNull()) {}\n"
+                "    var owned: Option<AbiArray<T>> = None\n"
+                "    array.close()\n"
+                "    coTaskMemFree(data)\n"
+                "}\n"
+                "public override func storeOut() {}\n"
+                "public class ProjectedCopyWinrtOutputBridge<T, A, D>\n"
+                "public override func takeArrayOut() {\n"
+                "    if (length > 0u32 && data.isNull()) {}\n"
+                "    var owned: Option<AbiArray<T>> = None\n"
+                "    array.close()\n"
+                "    coTaskMemFree(data)\n"
+                "}\n"
+                "public override func storeOut() {}\n"
+            ),
+            "windows-runtime/src/foundation_runtime.cj": (
+                "func projectPropertyValueStringHandleArray() {\n"
+                "    try {}\n"
+                "    catch (error: Exception) { releaseSystemHStringHandle(handles[releaseIndex]); throw error }\n"
+                "}\n"
+                "func releasePropertyValueStringHandleArray() {}\n"
+                "func releasePropertyValueStringRawSlots() {\n"
+                "    releaseSystemHStringHandle(raw)\n"
+                "    slot.write(CPointer<Unit>())\n"
+                "}\n"
+                "func releasePropertyValueInspectableRaw() {}\n"
+                "func propertyValueStringTakeArray() {\n"
+                "    placeholder\n"
+                "}\n"
+                "func takePropertyValueStringArray() {\n"
+                "    var result: Option<Array<windows_core.HString>> = None\n"
+                "    var pending: Option<windows_core.HString> = None\n"
+                "    slot.write(CPointer<Unit>())\n"
+                "    closePropertyValueStringArray(values)\n"
+                "    releasePropertyValueStringRawSlots(data, length)\n"
+                "    freePropertyValueHandleArraySlots(data)\n"
+                "}\n"
+                "func releasePropertyValueInspectableRawSlots() {\n"
+                "    releasePropertyValueInspectableRaw(raw)\n"
+                "    slot.write(CPointer<Unit>())\n"
+                "}\n"
+                "func closePropertyValueInspectableArray() {}\n"
+                "func takePropertyValueInspectableArray() {\n"
+                "    var result: Option<Array<Option<IInspectable>>> = None\n"
+                "    var pending: Option<IInspectable> = None\n"
+                "    IInspectable.fromAbiTake(raw)\n"
+                "    slot.write(CPointer<Unit>())\n"
+                "    closePropertyValueInspectableArray(values)\n"
+                "    releasePropertyValueInspectableRawSlots(data, length)\n"
+                "    freePropertyValueHandleArraySlots(data)\n"
+                "}\n"
+                "func takePropertyValueGuidArray() {}\n"
+            ),
+            "windows-implement/src/descriptor_codegen.cj": descriptor_codegen_text,
+        }
+        for relative, text in required_files.items():
+            path = workspace / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(text, encoding="utf-8")
+
+    def test_rejects_descriptor_codegen_that_consumes_returned_wrapper_into_abi(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_required_sources(workspace, descriptor_codegen_text="let raw = value.intoAbi()\n")
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_array_materialization_cleanup(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("descriptor return thunks must retain returned wrappers", stderr.getvalue())
+
+    def test_rejects_descriptor_codegen_without_generic_out_storage(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_required_sources(
+                workspace,
+                descriptor_codegen_text=(
+                    "case Ok(value) => S_OK\n"
+                    "\"${descriptor.wrapperTypeName}_${method.name}Thunk\"\n"
+                    "\" <: windows_core.Interface<\"\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_array_materialization_cleanup(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("winrtStoreGenericOut", stderr.getvalue())
+
+    def test_rejects_descriptor_codegen_with_runtime_name_thunk_identifiers(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_required_sources(
+                workspace,
+                descriptor_codegen_text=(
+                    "windows_core.winrtStoreGenericOut<Fixture_IOutput>(result__, value)\n"
+                    "\"${descriptor.name}_${method.name}Thunk\"\n"
+                    "\" <: windows_core.Interface<\"\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_array_materialization_cleanup(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("Cangjie-safe wrapper identifiers", stderr.getvalue())
+
+    def test_rejects_descriptor_codegen_without_interface_marker_extension(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_required_sources(
+                workspace,
+                descriptor_codegen_text=(
+                    "windows_core.winrtStoreGenericOut<Fixture_IOutput>(result__, value)\n"
+                    "\"${descriptor.wrapperTypeName}_${method.name}Thunk\"\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_array_materialization_cleanup(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("Interface<T> marker extensions", stderr.getvalue())
 
 
 class GeneratedCommonImplInvariantTests(unittest.TestCase):
@@ -216,6 +4648,25 @@ class WindowsCommonCodegenSubsetTests(unittest.TestCase):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text, encoding="utf-8")
         return path
+
+    def test_generator_build_removes_stale_binary_before_requiring_new_output(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            binary = root / "target" / "release" / "bin" / "windows_bindgen.exe"
+            binary.parent.mkdir(parents=True)
+            binary.write_text("stale\n", encoding="utf-8")
+            binary.with_suffix(".cjo").write_text("stale\n", encoding="utf-8")
+
+            with (
+                mock.patch.object(codegen, "GENERATOR_BINARY", binary),
+                mock.patch.object(codegen, "run_command", return_value=codegen.CommandResult(0, "")),
+            ):
+                with self.assertRaises(RuntimeError) as raised:
+                    codegen.build_generator(timeout_seconds=1)
+
+            self.assertIn("generator binary was not produced", str(raised.exception))
+            self.assertFalse(binary.exists())
+            self.assertFalse(binary.with_suffix(".cjo").exists())
 
     def test_subset_compare_rejects_extra_checked_facade_payload(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -543,8 +4994,36 @@ class WindowsCommonCodegenSubsetTests(unittest.TestCase):
             self.assertEqual(plan.blocked_winui, ["Microsoft.UI.Xaml.Application"])
             self.assertEqual(
                 plan.available,
+                ["Windows.Foundation.EventRegistrationToken"],
+            )
+            self.assertEqual(
+                plan.subset_features,
                 ["Windows.Foundation.EventRegistrationToken", "Windows.Foundation.Uri"],
             )
+
+    def test_full_regeneration_rejects_blocked_winui_without_explicit_allow(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            write_file(root, "Windows.Foundation.json")
+            manifest = {
+                "requested_features": [
+                    "Microsoft.UI.Xaml.Window",
+                    "Windows.Foundation",
+                ],
+                "selected_symbols": [
+                    "Microsoft.UI.Xaml.Window",
+                    "Windows.Foundation.Uri",
+                ],
+            }
+            source_index = codegen.WinmdSourceIndex({}, {}, {})
+
+            with self.assertRaises(RuntimeError) as raised:
+                codegen.regenerate_and_diff(manifest, [root], source_index, timeout_seconds=1)
+
+            message = str(raised.exception)
+            self.assertIn("cannot silently skip missing WinUI/WindowsAppSDK metadata", message)
+            self.assertIn("Microsoft.UI.Xaml.Window", message)
+            self.assertIn("--allow-missing-winui-metadata", message)
 
     def test_codegen_command_env_forces_cj_heap_size(self) -> None:
         self.assertEqual(codegen.command_env()["cjHeapSize"], "32GB")
@@ -648,7 +5127,6720 @@ class WindowsCommonCodegenSubsetTests(unittest.TestCase):
             self.assertTrue(any("Windows.Foundation.Kept" in issue for issue in issues))
 
 
+class WindowsCommonNativeCheckedWrapperGateTests(unittest.TestCase):
+    def write_native_helper(self, workspace: Path, text: str) -> None:
+        source = workspace / "windows-common" / "src" / "Win32" / "Foo" / "native_helpers.cj"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(text, encoding="utf-8")
+
+    def write_threading_native_helper(self, workspace: Path, text: str) -> None:
+        source = workspace / "windows-common" / "src" / "Win32" / "System" / "Threading" / "native_helpers.cj"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(text, encoding="utf-8")
+
+    def write_services_native_helper(self, workspace: Path, text: str) -> None:
+        source = workspace / "windows-common" / "src" / "Win32" / "System" / "Services" / "native_helpers.cj"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(text, encoding="utf-8")
+
+    def write_foundation_native_helper(self, workspace: Path, text: str) -> None:
+        source = workspace / "windows-common" / "src" / "Win32" / "Foundation" / "native_helpers.cj"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(text, encoding="utf-8")
+
+    def write_com_native_helper(self, workspace: Path, text: str) -> None:
+        source = workspace / "windows-common" / "src" / "Win32" / "System" / "Com" / "native_helpers.cj"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(text, encoding="utf-8")
+
+    def write_filesystem_native_helper(self, workspace: Path, text: str) -> None:
+        source = workspace / "windows-common" / "src" / "Win32" / "Storage" / "FileSystem" / "native_helpers.cj"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(text, encoding="utf-8")
+
+    def write_cryptography_native_helper(self, workspace: Path, text: str) -> None:
+        source = workspace / "windows-common" / "src" / "Win32" / "Security" / "Cryptography" / "native_helpers.cj"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(text, encoding="utf-8")
+
+    def write_ui_native_helper(self, workspace: Path, text: str) -> None:
+        source = workspace / "windows-common" / "src" / "Win32" / "UI" / "WindowsAndMessaging" / "native_helpers.cj"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(text, encoding="utf-8")
+
+    def write_winsock_native_helper(self, workspace: Path, text: str) -> None:
+        source = workspace / "windows-common" / "src" / "Win32" / "Networking" / "WinSock" / "native_helpers.cj"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(text, encoding="utf-8")
+
+    def write_httpserver_native_helper(self, workspace: Path, text: str) -> None:
+        source = workspace / "windows-common" / "src" / "Win32" / "Networking" / "HttpServer" / "native_helpers.cj"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(text, encoding="utf-8")
+
+    def write_winhttp_native_helper(self, workspace: Path, text: str) -> None:
+        source = workspace / "windows-common" / "src" / "Win32" / "Networking" / "WinHttp" / "native_helpers.cj"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(text, encoding="utf-8")
+
+    def write_dns_native_helper(self, workspace: Path, text: str) -> None:
+        source = workspace / "windows-common" / "src" / "Win32" / "NetworkManagement" / "Dns" / "native_helpers.cj"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(text, encoding="utf-8")
+
+    def write_windows_common_manifest(self, workspace: Path, requested_features: list[str] | None = None) -> None:
+        manifest = workspace / "windows-common" / "codegen-manifest.json"
+        manifest.parent.mkdir(parents=True, exist_ok=True)
+        manifest.write_text(
+            json.dumps(
+                {
+                    "generated_by": setup.GENERATED_MANIFEST_HEADER,
+                    "package_name": "windows_common",
+                    "requested_features": requested_features or ["Windows.Win32.System.Threading"],
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    def write_threading_metadata(self, workspace: Path, methods: list[dict]) -> None:
+        metadata = workspace / ".generated" / "winmd-json" / "Windows.Win32.System.Threading.json"
+        metadata.parent.mkdir(parents=True, exist_ok=True)
+        metadata.write_text(
+            json.dumps(
+                {
+                    "types": [
+                        {
+                            "Namespace": "Windows.Win32.System.Threading",
+                            "Name": "Apis",
+                            "Methods": methods,
+                        }
+                    ]
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    def write_services_metadata(self, workspace: Path, methods: list[dict]) -> None:
+        metadata = workspace / ".generated" / "winmd-json" / "Windows.Win32.System.Services.json"
+        metadata.parent.mkdir(parents=True, exist_ok=True)
+        metadata.write_text(
+            json.dumps(
+                {
+                    "types": [
+                        {
+                            "Namespace": "Windows.Win32.System.Services",
+                            "Name": "Apis",
+                            "Methods": methods,
+                        }
+                    ]
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    def write_foundation_metadata(self, workspace: Path, methods: list[dict]) -> None:
+        metadata = workspace / ".generated" / "winmd-json" / "Windows.Win32.Foundation.json"
+        metadata.parent.mkdir(parents=True, exist_ok=True)
+        metadata.write_text(
+            json.dumps(
+                {
+                    "types": [
+                        {
+                            "Namespace": "Windows.Win32.Foundation",
+                            "Name": "Apis",
+                            "Methods": methods,
+                        }
+                    ]
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    def write_com_metadata(self, workspace: Path, methods: list[dict]) -> None:
+        metadata = workspace / ".generated" / "winmd-json" / "Windows.Win32.System.Com.json"
+        metadata.parent.mkdir(parents=True, exist_ok=True)
+        metadata.write_text(
+            json.dumps(
+                {
+                    "types": [
+                        {
+                            "Namespace": "Windows.Win32.System.Com",
+                            "Name": "Apis",
+                            "Methods": methods,
+                        },
+                        {
+                            "Namespace": "Windows.Win32.System.Com",
+                            "Name": "IDataAdviseHolder",
+                            "Attributes": ["Public", "AutoLayout", "Interface", "Abstract"],
+                            "Methods": [],
+                        },
+                    ]
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    def write_filesystem_metadata(self, workspace: Path, methods: list[dict]) -> None:
+        metadata = workspace / ".generated" / "winmd-json" / "Windows.Win32.Storage.FileSystem.json"
+        metadata.parent.mkdir(parents=True, exist_ok=True)
+        metadata.write_text(
+            json.dumps(
+                {
+                    "types": [
+                        {
+                            "Namespace": "Windows.Win32.Storage.FileSystem",
+                            "Name": "Apis",
+                            "Methods": methods,
+                        }
+                    ]
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    def write_cryptography_metadata(self, workspace: Path, methods: list[dict]) -> None:
+        metadata = workspace / ".generated" / "winmd-json" / "Windows.Win32.Security.Cryptography.json"
+        metadata.parent.mkdir(parents=True, exist_ok=True)
+        metadata.write_text(
+            json.dumps(
+                {
+                    "types": [
+                        {
+                            "Namespace": "Windows.Win32.Security.Cryptography",
+                            "Name": "Apis",
+                            "Methods": methods,
+                        }
+                    ]
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    def write_ui_metadata(self, workspace: Path, methods: list[dict]) -> None:
+        metadata = workspace / ".generated" / "winmd-json" / "Windows.Win32.UI.WindowsAndMessaging.json"
+        metadata.parent.mkdir(parents=True, exist_ok=True)
+        metadata.write_text(
+            json.dumps(
+                {
+                    "types": [
+                        {
+                            "Namespace": "Windows.Win32.UI.WindowsAndMessaging",
+                            "Name": "Apis",
+                            "Methods": methods,
+                        }
+                    ]
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    def write_winsock_metadata(self, workspace: Path, methods: list[dict]) -> None:
+        metadata = workspace / ".generated" / "winmd-json" / "Windows.Win32.Networking.WinSock.json"
+        metadata.parent.mkdir(parents=True, exist_ok=True)
+        metadata.write_text(
+            json.dumps(
+                {
+                    "types": [
+                        {
+                            "Namespace": "Windows.Win32.Networking.WinSock",
+                            "Name": "Apis",
+                            "Methods": methods,
+                        }
+                    ]
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    def write_httpserver_metadata(self, workspace: Path, methods: list[dict]) -> None:
+        metadata = workspace / ".generated" / "winmd-json" / "Windows.Win32.Networking.HttpServer.json"
+        metadata.parent.mkdir(parents=True, exist_ok=True)
+        metadata.write_text(
+            json.dumps(
+                {
+                    "types": [
+                        {
+                            "Namespace": "Windows.Win32.Networking.HttpServer",
+                            "Name": "Apis",
+                            "Methods": methods,
+                        }
+                    ]
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    def write_winhttp_metadata(self, workspace: Path, methods: list[dict]) -> None:
+        metadata = workspace / ".generated" / "winmd-json" / "Windows.Win32.Networking.WinHttp.json"
+        metadata.parent.mkdir(parents=True, exist_ok=True)
+        metadata.write_text(
+            json.dumps(
+                {
+                    "types": [
+                        {
+                            "Namespace": "Windows.Win32.Networking.WinHttp",
+                            "Name": "Apis",
+                            "Methods": methods,
+                        }
+                    ]
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    def write_dns_metadata(self, workspace: Path, methods: list[dict]) -> None:
+        metadata = workspace / ".generated" / "winmd-json" / "Windows.Win32.NetworkManagement.Dns.json"
+        metadata.parent.mkdir(parents=True, exist_ok=True)
+        metadata.write_text(
+            json.dumps(
+                {
+                    "types": [
+                        {
+                            "Namespace": "Windows.Win32.NetworkManagement.Dns",
+                            "Name": "Apis",
+                            "Methods": methods,
+                        }
+                    ]
+                },
+                indent=2,
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+
+    def set_last_error_bool_method(
+        self,
+        name: str,
+        *,
+        return_name: str = "BOOL",
+        parameters: list[dict] | None = None,
+        custom_attributes: list[dict] | None = None,
+    ) -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [] if custom_attributes is None else custom_attributes,
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": return_name,
+                }
+            },
+            "Parameters": parameters
+            if parameters is not None
+            else [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "handle", "SequenceNumber": 1, "Attributes": ["In"]},
+            ],
+        }
+
+    def attach_thread_input_method(self) -> dict:
+        return {
+            "Name": "AttachThreadInput",
+            "CustomAttributes": [
+                {
+                    "Type": "Windows.Win32.Foundation.Metadata.CanReturnMultipleSuccessValuesAttribute",
+                    "FixedArguments": [],
+                    "NamedArguments": [],
+                }
+            ],
+            "Import": {"Attributes": ["ExactSpelling", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": "BOOL",
+                }
+            },
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "idAttach", "SequenceNumber": 1, "Attributes": ["In"]},
+                {"Name": "idAttachTo", "SequenceNumber": 2, "Attributes": ["In"]},
+                {"Name": "fAttach", "SequenceNumber": 3, "Attributes": ["In"]},
+            ],
+        }
+
+    def set_last_error_handle_method(
+        self,
+        name: str = "OpenProcess",
+        *,
+        custom_attributes: list[dict] | None = None,
+    ) -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [] if custom_attributes is None else custom_attributes,
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": "HANDLE",
+                }
+            },
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "dwDesiredAccess", "SequenceNumber": 1, "Attributes": ["In"]},
+                {"Name": "bInheritHandle", "SequenceNumber": 2, "Attributes": ["In"]},
+                {"Name": "dwProcessId", "SequenceNumber": 3, "Attributes": ["In"]},
+            ],
+        }
+
+    def set_last_error_handle_wrapper_text(
+        self,
+        *,
+        omit_null_check: bool = False,
+        omit_error_from_thread: bool = False,
+    ) -> str:
+        null_check = (
+            ""
+            if omit_null_check
+            else (
+                "    if (result__.Value.isNull()) {\n"
+                "        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        )
+        failure = (
+            "    if (result__.Value.isNull()) {\n"
+            "        return windows_core.Result<HANDLE>.Err(windows_core.Error(1))\n"
+            "    }\n"
+            if omit_error_from_thread
+            else null_check
+        )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Threading\n"
+            "import windows_common.Win32.Foundation.HANDLE\n"
+            "import windows_core as windows_core\n"
+            "public func OpenProcess(dwDesiredAccess: UInt32, bInheritHandle: Bool, dwProcessId: UInt32): HANDLE {\n"
+            "    HANDLE()\n"
+            "}\n"
+            "public func OpenProcessChecked(dwDesiredAccess: UInt32, bInheritHandle: Bool, dwProcessId: UInt32): windows_core.Result<HANDLE> {\n"
+            "    let result__ = OpenProcess(dwDesiredAccess, bInheritHandle, dwProcessId)\n"
+            f"{failure}"
+            "    windows_core.Result<HANDLE>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def set_last_error_invalid_handle_method(
+        self,
+        name: str = "CreateFileW",
+        *,
+        custom_attributes: list[dict] | None = None,
+    ) -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [] if custom_attributes is None else custom_attributes,
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": "HANDLE",
+                }
+            },
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def set_last_error_invalid_handle_wrapper_text(
+        self,
+        *,
+        name: str = "CreateFileW",
+        omit_invalid_check: bool = False,
+        use_null_check: bool = False,
+        include_header: bool = True,
+    ) -> str:
+        if omit_invalid_check:
+            failure = ""
+        else:
+            predicate = (
+                "result__.Value.isNull()"
+                if use_null_check
+                else "windows_polyfill.handlePointerIsMinusOne(result__.Value)"
+            )
+            failure = (
+                f"    if ({predicate}) {{\n"
+                "        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        header = (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Storage.FileSystem\n"
+            "import windows_common.Win32.Foundation.HANDLE\n"
+            "import windows_core as windows_core\n"
+            "import windows_polyfill as windows_polyfill\n"
+            if include_header
+            else ""
+        )
+        return (
+            header +
+            f"public func {name}(): HANDLE {{\n"
+            "    HANDLE()\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<HANDLE> {{\n"
+            f"    let result__ = {name}()\n"
+            f"{failure}"
+            "    windows_core.Result<HANDLE>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def set_last_error_service_handle_method(
+        self,
+        name: str = "OpenSCManagerW",
+        *,
+        return_name: str = "SC_HANDLE",
+        custom_attributes: list[dict] | None = None,
+    ) -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [] if custom_attributes is None else custom_attributes,
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.System.Services",
+                    "Name": return_name,
+                }
+            },
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "lpMachineName", "SequenceNumber": 1, "Attributes": ["In"]},
+                {"Name": "lpDatabaseName", "SequenceNumber": 2, "Attributes": ["In"]},
+                {"Name": "dwDesiredAccess", "SequenceNumber": 3, "Attributes": ["In"]},
+            ],
+        }
+
+    def set_last_error_service_handle_wrapper_text(
+        self,
+        *,
+        return_name: str = "SC_HANDLE",
+        omit_null_check: bool = False,
+    ) -> str:
+        null_check = (
+            ""
+            if omit_null_check
+            else (
+                "    if (result__.Value.isNull()) {\n"
+                f"        return windows_core.Result<{return_name}>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Services\n"
+            "import windows_core as windows_core\n"
+            f"public func OpenSCManagerW(lpMachineName: windows_strings.PWSTR, lpDatabaseName: windows_strings.PWSTR, dwDesiredAccess: UInt32): {return_name} {{\n"
+            f"    {return_name}()\n"
+            "}\n"
+            f"public func OpenSCManagerWChecked(lpMachineName: windows_strings.PWSTR, lpDatabaseName: windows_strings.PWSTR, dwDesiredAccess: UInt32): windows_core.Result<{return_name}> {{\n"
+            "    let result__ = OpenSCManagerW(lpMachineName, lpDatabaseName, dwDesiredAccess)\n"
+            f"{null_check}"
+            f"    windows_core.Result<{return_name}>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def set_last_error_threading_pointer_handle_method(
+        self,
+        name: str = "CreateThreadpool",
+        *,
+        return_name: str = "PTP_POOL",
+        custom_attributes: list[dict] | None = None,
+    ) -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [] if custom_attributes is None else custom_attributes,
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.System.Threading",
+                    "Name": return_name,
+                }
+            },
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def set_last_error_threading_pointer_handle_wrapper_text(self, *, return_name: str = "PTP_POOL") -> str:
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Threading\n"
+            "import windows_core as windows_core\n"
+            f"public func CreateThreadpool(): {return_name} {{\n"
+            f"    {return_name}()\n"
+            "}\n"
+            f"public func CreateThreadpoolChecked(): windows_core.Result<{return_name}> {{\n"
+            "    let result__ = CreateThreadpool()\n"
+            "    if (result__.Value.isNull()) {\n"
+            f"        return windows_core.Result<{return_name}>.Err(windows_core.errorFromThread())\n"
+            "    }\n"
+            f"    windows_core.Result<{return_name}>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def set_last_error_wait_event_method(
+        self,
+        name: str = "WaitForSingleObject",
+        *,
+        custom_attributes: list[dict] | None = None,
+    ) -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": (
+                [{"Type": "Windows.Win32.Foundation.Metadata.CanReturnMultipleSuccessValuesAttribute"}]
+                if custom_attributes is None
+                else custom_attributes
+            ),
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": "WAIT_EVENT",
+                }
+            },
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "hHandle", "SequenceNumber": 1, "Attributes": ["In"]},
+                {"Name": "dwMilliseconds", "SequenceNumber": 2, "Attributes": ["In"]},
+            ],
+        }
+
+    def set_last_error_wait_event_wrapper_text(
+        self,
+        *,
+        name: str = "WaitForSingleObject",
+        omit_failed_check: bool = False,
+        check_timeout: bool = False,
+    ) -> str:
+        failure = (
+            ""
+            if omit_failed_check
+            else (
+                "    if (result__ == 0xFFFFFFFFu32) {\n"
+                "        return windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        )
+        timeout_branch = (
+            "    if (result__ == WAIT_TIMEOUT) {\n"
+            "        return windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())\n"
+            "    }\n"
+            if check_timeout
+            else ""
+        )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Threading\n"
+            "import windows_common.Win32.Foundation.HANDLE\n"
+            "import windows_common.Win32.Foundation.WAIT_EVENT\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}(hHandle: HANDLE, dwMilliseconds: UInt32): UInt32 {{\n"
+            "    0u32\n"
+            "}\n"
+            f"public func {name}Checked(hHandle: HANDLE, dwMilliseconds: UInt32): windows_core.Result<WAIT_EVENT> {{\n"
+            f"    let result__ = {name}(hHandle, dwMilliseconds)\n"
+            f"{failure}"
+            f"{timeout_branch}"
+            "    windows_core.Result<WAIT_EVENT>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def wait_failed_uint32_method(self) -> dict:
+        return {
+            "Name": "WaitForInputIdle",
+            "CustomAttributes": [],
+            "Import": {"Attributes": ["ExactSpelling", "CallingConventionWinApi"]},
+            "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "UInt32"}},
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "hProcess", "SequenceNumber": 1, "Attributes": ["In"]},
+                {"Name": "dwMilliseconds", "SequenceNumber": 2, "Attributes": ["In"]},
+            ],
+        }
+
+    def wait_failed_uint32_wrapper_text(
+        self,
+        *,
+        omit_failed_check: bool = False,
+        check_timeout: bool = False,
+    ) -> str:
+        failure = (
+            ""
+            if omit_failed_check
+            else (
+                "    if (result__ == 0xFFFFFFFFu32) {\n"
+                "        return windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        )
+        timeout_branch = (
+            "    if (result__ == WAIT_TIMEOUT) {\n"
+            "        return windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())\n"
+            "    }\n"
+            if check_timeout
+            else ""
+        )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Threading\n"
+            "import windows_common.Win32.Foundation.HANDLE\n"
+            "import windows_common.Win32.Foundation.WAIT_EVENT\n"
+            "import windows_core as windows_core\n"
+            "public func WaitForInputIdle(hProcess: HANDLE, dwMilliseconds: UInt32): UInt32 {\n"
+            "    0u32\n"
+            "}\n"
+            "public func WaitForInputIdleChecked(hProcess: HANDLE, dwMilliseconds: UInt32): windows_core.Result<WAIT_EVENT> {\n"
+            "    let result__ = WaitForInputIdle(hProcess, dwMilliseconds)\n"
+            f"{failure}"
+            f"{timeout_branch}"
+            "    windows_core.Result<WAIT_EVENT>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def uint32_less_than_or_equal_method(self) -> dict:
+        return {
+            "Name": "WinExec",
+            "CustomAttributes": [],
+            "Import": {"Attributes": ["ExactSpelling", "CallingConventionWinApi"]},
+            "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "UInt32"}},
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "lpCmdLine", "SequenceNumber": 1, "Attributes": ["In"]},
+                {"Name": "uCmdShow", "SequenceNumber": 2, "Attributes": ["In"]},
+            ],
+        }
+
+    def uint32_less_than_or_equal_wrapper_text(
+        self,
+        *,
+        omit_failed_check: bool = False,
+        use_error_from_thread: bool = False,
+    ) -> str:
+        if omit_failed_check:
+            failure = ""
+        else:
+            error = "windows_core.errorFromThread()" if use_error_from_thread else "windows_core.errorFromWin32(result__)"
+            failure = (
+                "    if (result__ <= 31u32) {\n"
+                f"        return windows_core.Result<UInt32>.Err({error})\n"
+                "    }\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Threading\n"
+            "import windows_strings as windows_strings\n"
+            "import windows_core as windows_core\n"
+            "public func WinExec(lpCmdLine: windows_strings.PSTR, uCmdShow: UInt32): UInt32 {\n"
+            "    32u32\n"
+            "}\n"
+            "public func WinExecChecked(lpCmdLine: windows_strings.PSTR, uCmdShow: UInt32): windows_core.Result<UInt32> {\n"
+            "    let result__ = WinExec(lpCmdLine, uCmdShow)\n"
+            f"{failure}"
+            "    windows_core.Result<UInt32>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def direct_win32_error_code_uint32_method(
+        self,
+        name: str,
+        module: str,
+        return_type: dict | None = None,
+    ) -> dict:
+        method_return_type = (
+            return_type
+            if return_type is not None
+            else {"Kind": "Primitive", "Name": "UInt32"}
+        )
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {
+                "Attributes": ["ExactSpelling", "CallingConventionWinApi"],
+                "Module": {"Name": module, "CustomAttributes": []},
+            },
+            "Signature": {"ReturnType": method_return_type},
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def direct_win32_error_code_int32_method(self, name: str, module: str) -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {
+                "Attributes": ["ExactSpelling", "CallingConventionWinApi"],
+                "Module": {"Name": module, "CustomAttributes": []},
+            },
+            "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "Int32"}},
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def direct_win32_error_code_int32_wrapper_text(
+        self,
+        *,
+        name: str,
+        package: str,
+        omit_failed_check: bool = False,
+        use_error_from_thread: bool = False,
+        return_int32: bool = False,
+    ) -> str:
+        result_type = "Int32" if return_int32 else "Unit"
+        if omit_failed_check:
+            failure = ""
+        elif use_error_from_thread:
+            failure = (
+                "    if (result__ != 0) {\n"
+                f"        return windows_core.Result<{result_type}>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        elif return_int32:
+            failure = (
+                "    if (result__ != 0) {\n"
+                "        return windows_core.Result<Int32>.Err(windows_core.errorFromWin32(UInt32(result__)))\n"
+                "    }\n"
+            )
+        else:
+            failure = (
+                "    if (result__ != 0) {\n"
+                "        return windows_core.Result<Unit>.Err(windows_core.errorFromWin32(UInt32(result__)))\n"
+                "    }\n"
+            )
+        success = "windows_core.Result<Int32>.Ok(result__)" if return_int32 else "windows_core.Result<Unit>.Ok(())"
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            f"package {package}\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}(): Int32 {{\n"
+            "    0\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<{result_type}> {{\n"
+            f"    let result__ = {name}()\n"
+            f"{failure}"
+            f"    {success}\n"
+            "}\n"
+        )
+
+    def direct_win32_error_code_int32_status_wrapper_text(
+        self,
+        *,
+        name: str,
+        package: str,
+        success_statuses: tuple[int, ...],
+        omit_status: int | None = None,
+        extra_status: int | None = None,
+        use_error_from_thread: bool = False,
+        return_unit: bool = False,
+    ) -> str:
+        statuses = [status for status in success_statuses if status != omit_status]
+        if extra_status is not None:
+            statuses.append(extra_status)
+        success_condition = " || ".join(f"result__ == {status}" for status in statuses)
+        result_type = "Unit" if return_unit else "Int32"
+        success_value = "()" if return_unit else "result__"
+        error = (
+            "windows_core.errorFromThread()"
+            if use_error_from_thread
+            else "windows_core.errorFromWin32(UInt32(result__))"
+        )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            f"package {package}\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}(): Int32 {{\n"
+            "    0\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<{result_type}> {{\n"
+            f"    let result__ = {name}()\n"
+            f"    if ({success_condition}) {{\n"
+            f"        return windows_core.Result<{result_type}>.Ok({success_value})\n"
+            "    }\n"
+            f"    windows_core.Result<{result_type}>.Err({error})\n"
+            "}\n"
+        )
+
+    def direct_win32_error_code_uint32_wrapper_text(
+        self,
+        *,
+        name: str,
+        package: str,
+        omit_failed_check: bool = False,
+        use_error_from_thread: bool = False,
+        return_uint32: bool = False,
+        use_wsa_get_last_error: bool = False,
+    ) -> str:
+        result_type = "UInt32" if return_uint32 else "Unit"
+        if omit_failed_check:
+            failure = ""
+        elif use_error_from_thread:
+            failure = (
+                "    if (result__ != 0u32) {\n"
+                f"        return windows_core.Result<{result_type}>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        elif use_wsa_get_last_error:
+            failure = (
+                "    if (result__ != 0u32) {\n"
+                "        let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n"
+                "        let error__ = unsafe { errorProc__() }\n"
+                f"        return windows_core.Result<{result_type}>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+                "    }\n"
+            )
+        elif return_uint32:
+            failure = (
+                "    if (result__ != 0u32) {\n"
+                "        return windows_core.Result<UInt32>.Err(windows_core.errorFromWin32(result__))\n"
+                "    }\n"
+            )
+        else:
+            failure = (
+                "    if (result__ != 0u32) {\n"
+                "        return windows_core.Result<Unit>.Err(windows_core.errorFromWin32(result__))\n"
+                "    }\n"
+            )
+        success = "windows_core.Result<UInt32>.Ok(result__)" if return_uint32 else "windows_core.Result<Unit>.Ok(())"
+        imports = "import windows_core as windows_core\n"
+        if use_wsa_get_last_error:
+            imports = "import windows_libloading as windows_libloading\n" + imports
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            f"package {package}\n"
+            f"{imports}"
+            f"public func {name}(): UInt32 {{\n"
+            "    0u32\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<{result_type}> {{\n"
+            f"    let result__ = {name}()\n"
+            f"{failure}"
+            f"    {success}\n"
+            "}\n"
+        )
+
+    def direct_win32_error_code_uint32_status_wrapper_text(
+        self,
+        *,
+        name: str,
+        package: str,
+        success_statuses: tuple[int, ...],
+        omit_status: int | None = None,
+        extra_status: int | None = None,
+        use_error_from_thread: bool = False,
+        return_unit: bool = False,
+    ) -> str:
+        statuses = [status for status in success_statuses if status != omit_status]
+        if extra_status is not None:
+            statuses.append(extra_status)
+        success_condition = " || ".join(f"result__ == {status}u32" for status in statuses)
+        result_type = "Unit" if return_unit else "UInt32"
+        success_value = "()" if return_unit else "result__"
+        error = "windows_core.errorFromThread()" if use_error_from_thread else "windows_core.errorFromWin32(result__)"
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            f"package {package}\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}(): UInt32 {{\n"
+            "    0u32\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<{result_type}> {{\n"
+            f"    let result__ = {name}()\n"
+            f"    if ({success_condition}) {{\n"
+            f"        return windows_core.Result<{result_type}>.Ok({success_value})\n"
+            "    }\n"
+            f"    windows_core.Result<{result_type}>.Err({error})\n"
+            "}\n"
+        )
+
+    def set_last_error_null_pointer_method(self, name: str = "CreateFiberEx") -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Pointer",
+                    "Type": {"Kind": "Primitive", "Name": "Void"},
+                }
+            },
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def set_last_error_typed_null_pointer_method(self) -> dict:
+        return {
+            "Name": "CertCreateCertificateContext",
+            "CustomAttributes": [
+                {"Type": "Windows.Win32.Foundation.Metadata.CanReturnMultipleSuccessValuesAttribute"}
+            ],
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Pointer",
+                    "Type": {
+                        "Kind": "Type",
+                        "Namespace": "Windows.Win32.Security.Cryptography",
+                        "Name": "CERT_CONTEXT",
+                    },
+                }
+            },
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "dwCertEncodingType", "SequenceNumber": 1, "Attributes": ["In"]},
+                {"Name": "pbCertEncoded", "SequenceNumber": 2, "Attributes": ["In"]},
+                {"Name": "cbCertEncoded", "SequenceNumber": 3, "Attributes": ["In"]},
+            ],
+        }
+
+    def set_last_error_null_pointer_wrapper_text(
+        self,
+        *,
+        name: str = "CreateFiberEx",
+        omit_null_check: bool = False,
+    ) -> str:
+        failure = (
+            ""
+            if omit_null_check
+            else (
+                "    if (result__.isNull()) {\n"
+                "        return windows_core.Result<CPointer<Unit>>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Threading\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}(): CPointer<Unit> {{\n"
+            "    CPointer<Unit>()\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<CPointer<Unit>> {{\n"
+            f"    let result__ = {name}()\n"
+            f"{failure}"
+            "    windows_core.Result<CPointer<Unit>>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def set_last_error_typed_null_pointer_wrapper_text(
+        self,
+        *,
+        return_type: str = "CPointer<CERT_CONTEXT>",
+        omit_null_check: bool = False,
+    ) -> str:
+        failure = (
+            ""
+            if omit_null_check
+            else (
+                "    if (result__.isNull()) {\n"
+                f"        return windows_core.Result<{return_type}>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Security.Cryptography\n"
+            "import windows_core as windows_core\n"
+            "public struct CERT_CONTEXT {\n"
+            "    public let dwCertEncodingType: UInt32\n"
+            "}\n"
+            "public func CertCreateCertificateContext(dwCertEncodingType: UInt32, pbCertEncoded: CPointer<UInt8>, cbCertEncoded: UInt32): CPointer<CERT_CONTEXT> {\n"
+            "    CPointer<CERT_CONTEXT>()\n"
+            "}\n"
+            f"public func CertCreateCertificateContextChecked(dwCertEncodingType: UInt32, pbCertEncoded: CPointer<UInt8>, cbCertEncoded: UInt32): windows_core.Result<{return_type}> {{\n"
+            "    let result__ = CertCreateCertificateContext(dwCertEncodingType, pbCertEncoded, cbCertEncoded)\n"
+            f"{failure}"
+            f"    windows_core.Result<{return_type}>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def set_last_error_tls_value_method(self, name: str = "TlsGetValue", parameter_name: str = "dwTlsIndex") -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Pointer",
+                    "Type": {"Kind": "Primitive", "Name": "Void"},
+                }
+            },
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": parameter_name, "SequenceNumber": 1, "Attributes": ["In"]},
+            ],
+        }
+
+    def set_last_error_tls_value_wrapper_text(
+        self,
+        *,
+        name: str = "TlsGetValue",
+        parameter_name: str = "dwTlsIndex",
+        omit_last_error: bool = False,
+        omit_set_last_error: bool = False,
+    ) -> str:
+        preclear = "" if omit_set_last_error else "    SetLastError(0u32)\n"
+        if omit_last_error:
+            null_branch = (
+                "    if (result__.isNull()) {\n"
+                "        return windows_core.Result<CPointer<Unit>>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        else:
+            null_branch = (
+                "    let lastError__ = GetLastError()\n"
+                "    if (lastError__ == 0u32) {\n"
+                "        return windows_core.Result<CPointer<Unit>>.Ok(result__)\n"
+                "    }\n"
+                "    windows_core.Result<CPointer<Unit>>.Err(windows_core.errorFromWin32(lastError__))\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Threading\n"
+            "import windows_common.Win32.Foundation.GetLastError\n"
+            "import windows_common.Win32.Foundation.SetLastError\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}({parameter_name}: UInt32): CPointer<Unit> {{\n"
+            "    CPointer<Unit>()\n"
+            "}\n"
+            f"public func {name}Checked({parameter_name}: UInt32): windows_core.Result<CPointer<Unit>> {{\n"
+            f"{preclear}"
+            f"    let result__ = {name}({parameter_name})\n"
+            "    if (result__.isNotNull()) {\n"
+            "        return windows_core.Result<CPointer<Unit>>.Ok(result__)\n"
+            "    }\n"
+            f"{null_branch}"
+            "}\n"
+        )
+
+    def set_last_error_uint32_minus_one_method(self, name: str = "FlsAlloc") -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "UInt32"}},
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def set_last_error_uint32_minus_one_wrapper_text(
+        self,
+        *,
+        name: str = "FlsAlloc",
+        package: str = "windows_common.Win32.System.Threading",
+        omit_failed_check: bool = False,
+    ) -> str:
+        failure = (
+            ""
+            if omit_failed_check
+            else (
+                "    if (result__ == 0xFFFFFFFFu32) {\n"
+                "        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            f"package {package}\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}(): UInt32 {{\n"
+            "    0u32\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<UInt32> {{\n"
+            f"    let result__ = {name}()\n"
+            f"{failure}"
+            "    windows_core.Result<UInt32>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def set_last_error_uint32_zero_method(self, name: str = "GetPriorityClass") -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "UInt32"}},
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "hProcess", "SequenceNumber": 1, "Attributes": ["In"]},
+            ],
+        }
+
+    def set_last_error_uint32_zero_wrapper_text(
+        self,
+        *,
+        name: str = "GetPriorityClass",
+        package: str = "windows_common.Win32.System.Threading",
+        omit_failed_check: bool = False,
+    ) -> str:
+        failure = (
+            ""
+            if omit_failed_check
+            else (
+                "    if (result__ == 0u32) {\n"
+                "        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            f"package {package}\n"
+            "import windows_common.Win32.Foundation.HANDLE\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}(hProcess: HANDLE): UInt32 {{\n"
+            "    1u32\n"
+            "}\n"
+            f"public func {name}Checked(hProcess: HANDLE): windows_core.Result<UInt32> {{\n"
+            f"    let result__ = {name}(hProcess)\n"
+            f"{failure}"
+            "    windows_core.Result<UInt32>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def set_last_error_uint32_zero_last_error_method(self) -> dict:
+        return {
+            "Name": "GetGuiResources",
+            "CustomAttributes": [],
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "UInt32"}},
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "hProcess", "SequenceNumber": 1, "Attributes": ["In"]},
+                {"Name": "uiFlags", "SequenceNumber": 2, "Attributes": ["In"]},
+            ],
+        }
+
+    def set_last_error_uint32_zero_last_error_wrapper_text(
+        self,
+        *,
+        omit_last_error: bool = False,
+        treat_zero_as_failure: bool = False,
+    ) -> str:
+        if omit_last_error:
+            zero_branch = ""
+        elif treat_zero_as_failure:
+            zero_branch = (
+                "    if (result__ == 0u32) {\n"
+                "        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        else:
+            zero_branch = (
+                "    let lastError__ = GetLastError()\n"
+                "    if (lastError__ == 0u32) {\n"
+                "        return windows_core.Result<UInt32>.Ok(result__)\n"
+                "    }\n"
+                "    windows_core.Result<UInt32>.Err(windows_core.errorFromWin32(lastError__))\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Threading\n"
+            "import windows_common.Win32.Foundation.HANDLE\n"
+            "import windows_common.Win32.Foundation.GetLastError\n"
+            "import windows_common.Win32.Foundation.SetLastError\n"
+            "import windows_core as windows_core\n"
+            "public func GetGuiResources(hProcess: HANDLE, uiFlags: UInt32): UInt32 {\n"
+            "    0u32\n"
+            "}\n"
+            "public func GetGuiResourcesChecked(hProcess: HANDLE, uiFlags: UInt32): windows_core.Result<UInt32> {\n"
+            "    SetLastError(0u32)\n"
+            "    let result__ = GetGuiResources(hProcess, uiFlags)\n"
+            "    if (result__ != 0u32) {\n"
+            "        return windows_core.Result<UInt32>.Ok(result__)\n"
+            "    }\n"
+            f"{zero_branch}"
+            "}\n"
+        )
+
+    def set_last_error_uintnative_zero_method(self) -> dict:
+        return {
+            "Name": "SetThreadAffinityMask",
+            "CustomAttributes": [],
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "UIntPtr"}},
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "hThread", "SequenceNumber": 1, "Attributes": ["In"]},
+                {"Name": "dwThreadAffinityMask", "SequenceNumber": 2, "Attributes": ["In"]},
+            ],
+        }
+
+    def set_last_error_uintnative_zero_wrapper_text(self, *, omit_failed_check: bool = False) -> str:
+        failure = (
+            ""
+            if omit_failed_check
+            else (
+                "    if (result__ == 0) {\n"
+                "        return windows_core.Result<UIntNative>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Threading\n"
+            "import windows_common.Win32.Foundation.HANDLE\n"
+            "import windows_core as windows_core\n"
+            "public func SetThreadAffinityMask(hThread: HANDLE, dwThreadAffinityMask: UIntNative): UIntNative {\n"
+            "    1\n"
+            "}\n"
+            "public func SetThreadAffinityMaskChecked(hThread: HANDLE, dwThreadAffinityMask: UIntNative): windows_core.Result<UIntNative> {\n"
+            "    let result__ = SetThreadAffinityMask(hThread, dwThreadAffinityMask)\n"
+            f"{failure}"
+            "    windows_core.Result<UIntNative>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def set_last_error_intnative_zero_last_error_method(self, name: str = "SendMessageTimeoutW") -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [{"Type": "Windows.Win32.Foundation.Metadata.CanReturnMultipleSuccessValuesAttribute"}],
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": "LRESULT",
+                }
+            },
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "hWnd", "SequenceNumber": 1, "Attributes": ["In"]},
+                {"Name": "Msg", "SequenceNumber": 2, "Attributes": ["In"]},
+                {"Name": "wParam", "SequenceNumber": 3, "Attributes": ["In"]},
+                {"Name": "lParam", "SequenceNumber": 4, "Attributes": ["In"]},
+                {"Name": "fuFlags", "SequenceNumber": 5, "Attributes": ["In"]},
+                {"Name": "uTimeout", "SequenceNumber": 6, "Attributes": ["In"]},
+                {"Name": "lpdwResult", "SequenceNumber": 7, "Attributes": ["Out", "Optional"]},
+            ],
+        }
+
+    def set_last_error_intnative_zero_last_error_wrapper_text(
+        self,
+        *,
+        name: str = "SendMessageTimeoutW",
+        use_error_from_thread: bool = False,
+    ) -> str:
+        if use_error_from_thread:
+            body = (
+                f"    let result__ = {name}()\n"
+                "    if (result__ == 0) {\n"
+                "        return windows_core.Result<IntNative>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+                "    windows_core.Result<IntNative>.Ok(result__)\n"
+            )
+        else:
+            body = (
+                "    SetLastError(0u32)\n"
+                f"    let result__ = {name}()\n"
+                "    if (result__ != 0) {\n"
+                "        return windows_core.Result<IntNative>.Ok(result__)\n"
+                "    }\n"
+                "    let lastError__ = GetLastError()\n"
+                "    if (lastError__ == 0u32) {\n"
+                "        return windows_core.Result<IntNative>.Err(windows_core.errorFromHRESULT(windows_core.E_FAIL))\n"
+                "    }\n"
+                "    windows_core.Result<IntNative>.Err(windows_core.errorFromWin32(lastError__))\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.UI.WindowsAndMessaging\n"
+            "import windows_common.Win32.Foundation.GetLastError\n"
+            "import windows_common.Win32.Foundation.SetLastError\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}(): IntNative {{\n"
+            "    1\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<IntNative> {{\n"
+            f"{body}"
+            "}\n"
+        )
+
+    def set_last_error_int32_max_method(self) -> dict:
+        return {
+            "Name": "GetThreadPriority",
+            "CustomAttributes": [],
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "Int32"}},
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "hThread", "SequenceNumber": 1, "Attributes": ["In"]},
+            ],
+        }
+
+    def set_last_error_int32_max_wrapper_text(self, *, omit_failed_check: bool = False) -> str:
+        failure = (
+            ""
+            if omit_failed_check
+            else (
+                "    if (result__ == 2147483647) {\n"
+                "        return windows_core.Result<Int32>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Threading\n"
+            "import windows_common.Win32.Foundation.HANDLE\n"
+            "import windows_core as windows_core\n"
+            "public func GetThreadPriority(hThread: HANDLE): Int32 {\n"
+            "    0\n"
+            "}\n"
+            "public func GetThreadPriorityChecked(hThread: HANDLE): windows_core.Result<Int32> {\n"
+            "    let result__ = GetThreadPriority(hThread)\n"
+            f"{failure}"
+            "    windows_core.Result<Int32>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def winsock_socket_error_int32_method(
+        self,
+        name: str = "recv",
+        *,
+        set_last_error: bool = True,
+        module: str = "WS2_32.dll",
+    ) -> dict:
+        import_attributes = ["ExactSpelling", "CallingConventionWinApi"]
+        if set_last_error:
+            import_attributes.insert(1, "SetLastError")
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {
+                "Attributes": import_attributes,
+                "Module": {"Name": module, "CustomAttributes": []},
+            },
+            "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "Int32"}},
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "s", "SequenceNumber": 1, "Attributes": ["In"]},
+                {"Name": "buf", "SequenceNumber": 2, "Attributes": ["In"]},
+                {"Name": "len", "SequenceNumber": 3, "Attributes": ["In"]},
+                {"Name": "flags", "SequenceNumber": 4, "Attributes": ["In"]},
+            ],
+        }
+
+    def winsock_socket_error_int32_wrapper_text(
+        self,
+        *,
+        name: str = "recv",
+        preserves_status: bool = True,
+        pending_success_status: int | None = None,
+        omit_failed_check: bool = False,
+        use_error_from_thread: bool = False,
+    ) -> str:
+        result_type = "Int32" if preserves_status else "Unit"
+        if omit_failed_check:
+            failure = ""
+        elif use_error_from_thread:
+            failure = (
+                "    if (result__ == -1) {\n"
+                f"        return windows_core.Result<{result_type}>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        else:
+            failure = (
+                "    if (result__ == -1) {\n"
+                "        let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n"
+                "        let error__ = unsafe { errorProc__() }\n"
+                + (
+                    f"        if (error__ == {pending_success_status}) {{\n"
+                    "            return windows_core.Result<Unit>.Ok(())\n"
+                    "        }\n"
+                    if pending_success_status is not None
+                    else ""
+                )
+                + f"        return windows_core.Result<{result_type}>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+                + "    }\n"
+            )
+        success = (
+            "    windows_core.Result<Int32>.Ok(result__)\n"
+            if preserves_status
+            else "    windows_core.Result<Unit>.Ok(())\n"
+        )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Networking.WinSock\n"
+            "import windows_libloading as windows_libloading\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}(s: UIntNative, buf: CPointer<Unit>, len: Int32, flags: Int32): Int32 {{\n"
+            "    0\n"
+            "}\n"
+            f"public func {name}Checked(s: UIntNative, buf: CPointer<Unit>, len: Int32, flags: Int32): windows_core.Result<{result_type}> {{\n"
+            f"    let result__ = {name}(s, buf, len, flags)\n"
+            f"{failure}"
+            f"{success}"
+            "}\n"
+        )
+
+    def mswinsock_get_last_error_socket_error_int32_wrapper_text(
+        self,
+        *,
+        name: str = "EnumProtocolsA",
+        preserves_status: bool = True,
+        omit_failed_check: bool = False,
+        use_wsa_get_last_error: bool = False,
+    ) -> str:
+        result_type = "Int32" if preserves_status else "Unit"
+        if omit_failed_check:
+            failure = ""
+        elif use_wsa_get_last_error:
+            failure = (
+                "    if (result__ == -1) {\n"
+                "        let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n"
+                "        let error__ = unsafe { errorProc__() }\n"
+                f"        return windows_core.Result<{result_type}>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+                "    }\n"
+            )
+        else:
+            failure = (
+                "    if (result__ == -1) {\n"
+                f"        return windows_core.Result<{result_type}>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        success = (
+            "    windows_core.Result<Int32>.Ok(result__)\n"
+            if preserves_status
+            else "    windows_core.Result<Unit>.Ok(())\n"
+        )
+        imports = "import windows_core as windows_core\n"
+        if use_wsa_get_last_error:
+            imports = "import windows_libloading as windows_libloading\n" + imports
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Networking.WinSock\n"
+            f"{imports}"
+            f"public func {name}(s: UIntNative, buf: CPointer<Unit>, len: Int32, flags: Int32): Int32 {{\n"
+            "    0\n"
+            "}\n"
+            f"public func {name}Checked(s: UIntNative, buf: CPointer<Unit>, len: Int32, flags: Int32): windows_core.Result<{result_type}> {{\n"
+            f"    let result__ = {name}(s, buf, len, flags)\n"
+            f"{failure}"
+            f"{success}"
+            "}\n"
+        )
+
+    def winsock_direct_error_int32_method(self, name: str = "WSAStartup") -> dict:
+        import_attributes = ["ExactSpelling", "CallingConventionWinApi"]
+        if name in {"WSAStartup", "getaddrinfo", "getnameinfo"}:
+            import_attributes.insert(1, "SetLastError")
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {
+                "Attributes": import_attributes,
+                "Module": {"Name": "WS2_32.dll", "CustomAttributes": []},
+            },
+            "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "Int32"}},
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def winsock_direct_error_int32_wrapper_text(
+        self,
+        *,
+        name: str = "WSAStartup",
+        omit_failed_check: bool = False,
+        use_wsa_get_last_error: bool = False,
+        use_error_from_thread: bool = False,
+        return_int32: bool = False,
+    ) -> str:
+        result_type = "Int32" if return_int32 else "Unit"
+        if omit_failed_check:
+            failure = ""
+        elif use_wsa_get_last_error:
+            failure = (
+                "    if (result__ != 0) {\n"
+                "        let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n"
+                "        let error__ = unsafe { errorProc__() }\n"
+                "        return windows_core.Result<Unit>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+                "    }\n"
+            )
+        elif use_error_from_thread:
+            failure = (
+                "    if (result__ != 0) {\n"
+                "        return windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        elif return_int32:
+            failure = (
+                "    if (result__ != 0) {\n"
+                "        return windows_core.Result<Int32>.Err(windows_core.errorFromWin32(UInt32(result__)))\n"
+                "    }\n"
+            )
+        else:
+            failure = (
+                "    if (result__ != 0) {\n"
+                "        return windows_core.Result<Unit>.Err(windows_core.errorFromWin32(UInt32(result__)))\n"
+                "    }\n"
+            )
+        success = "windows_core.Result<Int32>.Ok(result__)" if return_int32 else "windows_core.Result<Unit>.Ok(())"
+        imports = "import windows_core as windows_core\n"
+        if use_wsa_get_last_error:
+            imports = "import windows_libloading as windows_libloading\n" + imports
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Networking.WinSock\n"
+            f"{imports}"
+            f"public func {name}(): Int32 {{\n"
+            "    0\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<{result_type}> {{\n"
+            f"    let result__ = {name}()\n"
+            f"{failure}"
+            f"    {success}\n"
+            "}\n"
+        )
+
+    def winsock_pending_status_int32_method(self, name: str = "GetAddrInfoExW") -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {
+                "Attributes": ["ExactSpelling", "CallingConventionWinApi"],
+                "Module": {"Name": "WS2_32.dll", "CustomAttributes": []},
+            },
+            "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "Int32"}},
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def winsock_pending_status_int32_wrapper_text(
+        self,
+        *,
+        name: str = "GetAddrInfoExW",
+        pending_status: int = 997,
+        omit_failed_check: bool = False,
+        use_wsa_get_last_error: bool = False,
+        use_error_from_thread: bool = False,
+        collapse_to_unit: bool = False,
+    ) -> str:
+        result_type = "Unit" if collapse_to_unit else "Int32"
+        if omit_failed_check:
+            failure = ""
+        elif use_wsa_get_last_error:
+            failure = (
+                f"    if (result__ != 0 && result__ != {pending_status}) {{\n"
+                "        let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n"
+                "        let error__ = unsafe { errorProc__() }\n"
+                "        return windows_core.Result<Int32>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+                "    }\n"
+            )
+        elif use_error_from_thread:
+            failure = (
+                f"    if (result__ != 0 && result__ != {pending_status}) {{\n"
+                "        return windows_core.Result<Int32>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        elif collapse_to_unit:
+            failure = (
+                "    if (result__ != 0) {\n"
+                "        return windows_core.Result<Unit>.Err(windows_core.errorFromWin32(UInt32(result__)))\n"
+                "    }\n"
+            )
+        else:
+            failure = (
+                f"    if (result__ != 0 && result__ != {pending_status}) {{\n"
+                "        return windows_core.Result<Int32>.Err(windows_core.errorFromWin32(UInt32(result__)))\n"
+                "    }\n"
+            )
+        success = "windows_core.Result<Unit>.Ok(())" if collapse_to_unit else "windows_core.Result<Int32>.Ok(result__)"
+        imports = "import windows_core as windows_core\n"
+        if use_wsa_get_last_error:
+            imports = "import windows_libloading as windows_libloading\n" + imports
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Networking.WinSock\n"
+            f"{imports}"
+            f"public func {name}(): Int32 {{\n"
+            "    0\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<{result_type}> {{\n"
+            f"    let result__ = {name}()\n"
+            f"{failure}"
+            f"    {success}\n"
+            "}\n"
+        )
+
+    def winsock_lperrno_int32_method(self, name: str = "WSCEnumProtocols") -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {
+                "Attributes": ["ExactSpelling", "CallingConventionWinApi"],
+                "Module": {"Name": "WS2_32.dll", "CustomAttributes": []},
+            },
+            "Signature": {"ReturnType": {"Kind": "Primitive", "Name": "Int32"}},
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "lpErrno", "SequenceNumber": 1, "Attributes": ["Out"]},
+            ],
+        }
+
+    def winsock_lperrno_int32_wrapper_text(
+        self,
+        *,
+        name: str = "WSCEnumProtocols",
+        preserves_status: bool = True,
+        omit_null_check: bool = False,
+        use_wsa_get_last_error: bool = False,
+        use_error_from_thread: bool = False,
+        collapse_to_unit: bool = False,
+    ) -> str:
+        result_type = "Unit" if collapse_to_unit else ("Int32" if preserves_status else "Unit")
+        if use_wsa_get_last_error:
+            failure = (
+                "    if (result__ == -1) {\n"
+                "        let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n"
+                "        let error__ = unsafe { errorProc__() }\n"
+                f"        return windows_core.Result<{result_type}>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+                "    }\n"
+            )
+        elif use_error_from_thread:
+            failure = (
+                "    if (result__ == -1) {\n"
+                f"        return windows_core.Result<{result_type}>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        else:
+            null_check = ""
+            if not omit_null_check:
+                null_check = (
+                    "        if (lpErrno.isNull()) {\n"
+                    f"            return windows_core.Result<{result_type}>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))\n"
+                    "        }\n"
+                )
+            failure = (
+                "    if (result__ == -1) {\n"
+                f"{null_check}"
+                "        let error__ = unsafe { lpErrno.read() }\n"
+                f"        return windows_core.Result<{result_type}>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+                "    }\n"
+            )
+        success = "windows_core.Result<Int32>.Ok(result__)" if result_type == "Int32" else "windows_core.Result<Unit>.Ok(())"
+        imports = "import windows_core as windows_core\n"
+        if use_wsa_get_last_error:
+            imports = "import windows_libloading as windows_libloading\n" + imports
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Networking.WinSock\n"
+            f"{imports}"
+            f"public func {name}(lpErrno: CPointer<Int32>): Int32 {{\n"
+            "    0\n"
+            "}\n"
+            f"public func {name}Checked(lpErrno: CPointer<Int32>): windows_core.Result<{result_type}> {{\n"
+            f"    let result__ = {name}(lpErrno)\n"
+            f"{failure}"
+            f"    {success}\n"
+            "}\n"
+        )
+
+    def winsock_invalid_socket_method(self, name: str = "socket") -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {
+                "Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"],
+                "Module": {"Name": "WS2_32.dll", "CustomAttributes": []},
+            },
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Networking.WinSock",
+                    "Name": "SOCKET",
+                }
+            },
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def winsock_invalid_socket_wrapper_text(
+        self,
+        *,
+        name: str = "socket",
+        omit_failed_check: bool = False,
+        use_null_check: bool = False,
+        use_error_from_thread: bool = False,
+        use_uintnative_compare: bool = False,
+    ) -> str:
+        if omit_failed_check:
+            failure = ""
+        elif use_null_check:
+            failure = (
+                "    if (result__.Value.isNull()) {\n"
+                "        return windows_core.Result<SOCKET>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        elif use_error_from_thread:
+            failure = (
+                "    if (windows_polyfill.handlePointerIsMinusOne(result__.Value)) {\n"
+                "        return windows_core.Result<SOCKET>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        elif use_uintnative_compare:
+            failure = (
+                "    if (result__.Value == windows_polyfill.handlePointerFromInt(-1i64).toUIntNative()) {\n"
+                "        let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n"
+                "        let error__ = unsafe { errorProc__() }\n"
+                "        return windows_core.Result<SOCKET>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+                "    }\n"
+            )
+        else:
+            failure = (
+                "    if (windows_polyfill.handlePointerIsMinusOne(result__.Value)) {\n"
+                "        let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n"
+                "        let error__ = unsafe { errorProc__() }\n"
+                "        return windows_core.Result<SOCKET>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+                "    }\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Networking.WinSock\n"
+            "import windows_libloading as windows_libloading\n"
+            "import windows_polyfill as windows_polyfill\n"
+            "import windows_core as windows_core\n"
+            "public struct SOCKET {\n"
+            "    public var Value: UIntNative = 0\n"
+            "}\n"
+            f"public func {name}(): SOCKET {{\n"
+            "    SOCKET()\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<SOCKET> {{\n"
+            f"    let result__ = {name}()\n"
+            f"{failure}"
+            "    windows_core.Result<SOCKET>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def winsock_bool_method(
+        self,
+        name: str = "WSAResetEvent",
+        *,
+        module: str = "WS2_32.dll",
+        set_last_error: bool = True,
+    ) -> dict:
+        attributes = ["ExactSpelling", "CallingConventionWinApi"]
+        if set_last_error:
+            attributes.insert(1, "SetLastError")
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {
+                "Attributes": attributes,
+                "Module": {"Name": module, "CustomAttributes": []},
+            },
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": "BOOL",
+                }
+            },
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def winsock_bool_wrapper_text(
+        self,
+        *,
+        name: str = "WSAResetEvent",
+        omit_failed_check: bool = False,
+        use_error_from_thread: bool = False,
+        pending_success_status: int | None = None,
+        omit_pending_success_check: bool = False,
+    ) -> str:
+        result_type = "Bool" if pending_success_status is not None else "Unit"
+        if omit_failed_check:
+            failure = ""
+        elif use_error_from_thread:
+            failure = (
+                f"    windows_core.Result<{result_type}>.Err(windows_core.errorFromThread())\n"
+            )
+        else:
+            failure = (
+                "    let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n"
+                "    let error__ = unsafe { errorProc__() }\n"
+            )
+            if pending_success_status is not None and not omit_pending_success_check:
+                failure += (
+                    f"    if (error__ == {pending_success_status}) {{\n"
+                    "        return windows_core.Result<Bool>.Ok(false)\n"
+                    "    }\n"
+                )
+            failure += (
+                f"    windows_core.Result<{result_type}>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+            )
+        if pending_success_status is not None:
+            success_check = (
+                f"    let result__ = {name}()\n"
+                "    if (result__) {\n"
+                "        return windows_core.Result<Bool>.Ok(true)\n"
+                "    }\n"
+            )
+        else:
+            success_check = (
+                f"    if ({name}()) {{\n"
+                "        return windows_core.Result<Unit>.Ok(())\n"
+                "    }\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Networking.WinSock\n"
+            "import windows_libloading as windows_libloading\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}(): Bool {{\n"
+            "    true\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<{result_type}> {{\n"
+            f"{success_check}"
+            f"{failure}"
+            "}\n"
+        )
+
+    def winsock_wait_event_method(self, name: str = "WSAWaitForMultipleEvents") -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {
+                "Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"],
+                "Module": {"Name": "WS2_32.dll", "CustomAttributes": []},
+            },
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": "WAIT_EVENT",
+                }
+            },
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def winsock_wait_event_wrapper_text(
+        self,
+        *,
+        name: str = "WSAWaitForMultipleEvents",
+        omit_failed_check: bool = False,
+        use_error_from_thread: bool = False,
+    ) -> str:
+        if omit_failed_check:
+            failure = ""
+        elif use_error_from_thread:
+            failure = (
+                "    if (result__ == 0xFFFFFFFFu32) {\n"
+                "        return windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        else:
+            failure = (
+                "    if (result__ == 0xFFFFFFFFu32) {\n"
+                "        let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n"
+                "        let error__ = unsafe { errorProc__() }\n"
+                "        return windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+                "    }\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Networking.WinSock\n"
+            "import windows_common.Win32.Foundation.WAIT_EVENT\n"
+            "import windows_libloading as windows_libloading\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}(): WAIT_EVENT {{\n"
+            "    0u32\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<WAIT_EVENT> {{\n"
+            f"    let result__ = {name}()\n"
+            f"{failure}"
+            "    windows_core.Result<WAIT_EVENT>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def winsock_invalid_event_method(self, name: str = "WSACreateEvent") -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {
+                "Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"],
+                "Module": {"Name": "WS2_32.dll", "CustomAttributes": []},
+            },
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Networking.WinSock",
+                    "Name": "WSAEVENT",
+                }
+            },
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def winsock_invalid_event_wrapper_text(
+        self,
+        *,
+        name: str = "WSACreateEvent",
+        omit_failed_check: bool = False,
+        use_error_from_thread: bool = False,
+    ) -> str:
+        if omit_failed_check:
+            failure = ""
+        elif use_error_from_thread:
+            failure = (
+                "    if (result__.Value.isNull()) {\n"
+                "        return windows_core.Result<WSAEVENT>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        else:
+            failure = (
+                "    if (result__.Value.isNull()) {\n"
+                "        let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n"
+                "        let error__ = unsafe { errorProc__() }\n"
+                "        return windows_core.Result<WSAEVENT>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+                "    }\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Networking.WinSock\n"
+            "import windows_libloading as windows_libloading\n"
+            "import windows_core as windows_core\n"
+            "public struct WSAEVENT {\n"
+            "    public var Value: CPointer<Unit> = CPointer<Unit>()\n"
+            "}\n"
+            f"public func {name}(): WSAEVENT {{\n"
+            "    WSAEVENT()\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<WSAEVENT> {{\n"
+            f"    let result__ = {name}()\n"
+            f"{failure}"
+            "    windows_core.Result<WSAEVENT>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def winsock_null_handle_method(self, name: str = "WSAAsyncGetHostByName") -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {
+                "Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"],
+                "Module": {"Name": "WS2_32.dll", "CustomAttributes": []},
+            },
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": "HANDLE",
+                }
+            },
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def winsock_null_pointer_method(self, name: str = "gethostbyname") -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [],
+            "Import": {
+                "Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"],
+                "Module": {"Name": "WS2_32.dll", "CustomAttributes": []},
+            },
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Pointer",
+                    "Type": {
+                        "Kind": "Type",
+                        "Namespace": "Windows.Win32.Networking.WinSock",
+                        "Name": "HOSTENT",
+                    },
+                }
+            },
+            "Parameters": [{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}],
+        }
+
+    def winsock_null_wrapper_text(
+        self,
+        *,
+        name: str = "gethostbyname",
+        return_type: str = "CPointer<HOSTENT>",
+        omit_failed_check: bool = False,
+        use_error_from_thread: bool = False,
+    ) -> str:
+        if omit_failed_check:
+            failure = ""
+        elif use_error_from_thread:
+            failure = (
+                "    if (result__.isNull()) {\n"
+                f"        return windows_core.Result<{return_type}>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        else:
+            failure = (
+                "    if (result__.isNull()) {\n"
+                "        let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n"
+                "        let error__ = unsafe { errorProc__() }\n"
+                f"        return windows_core.Result<{return_type}>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+                "    }\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Networking.WinSock\n"
+            "import windows_libloading as windows_libloading\n"
+            "import windows_core as windows_core\n"
+            "public struct HOSTENT {\n"
+            "    public let h_name: CPointer<UInt8>\n"
+            "}\n"
+            f"public func {name}(): {return_type} {{\n"
+            f"    {return_type}()\n"
+            "}\n"
+            f"public func {name}Checked(): windows_core.Result<{return_type}> {{\n"
+            f"    let result__ = {name}()\n"
+            f"{failure}"
+            f"    windows_core.Result<{return_type}>.Ok(result__)\n"
+            "}\n"
+        )
+
+    def set_last_error_null_success_handle_method(
+        self,
+        name: str = "GlobalFree",
+        *,
+        return_name: str = "HGLOBAL",
+        custom_attributes: list[dict] | None = None,
+    ) -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [] if custom_attributes is None else custom_attributes,
+            "Import": {"Attributes": ["ExactSpelling", "SetLastError", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": return_name,
+                }
+            },
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "hMem", "SequenceNumber": 1, "Attributes": ["In"]},
+            ],
+        }
+
+    def set_last_error_null_success_handle_wrapper_text(
+        self,
+        *,
+        name: str = "GlobalFree",
+        return_name: str = "HGLOBAL",
+        omit_non_null_check: bool = False,
+        use_null_check: bool = False,
+    ) -> str:
+        if omit_non_null_check:
+            failure = ""
+        else:
+            predicate = "result__.Value.isNull()" if use_null_check else "result__.Value.isNotNull()"
+            failure = (
+                f"    if ({predicate}) {{\n"
+                "        return windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                "    }\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Foundation\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}(hMem: {return_name}): {return_name} {{\n"
+            f"    {return_name}()\n"
+            "}\n"
+            f"public func {name}Checked(hMem: {return_name}): windows_core.Result<Unit> {{\n"
+            f"    let result__ = {name}(hMem)\n"
+            f"{failure}"
+            "    windows_core.Result<Unit>.Ok(())\n"
+            "}\n"
+        )
+
+    def hresult_com_out_method(
+        self,
+        name: str = "CreateDataAdviseHolder",
+        *,
+        slot_name: str = "ppDAHolder",
+        custom_attributes: list[dict] | None = None,
+    ) -> dict:
+        return {
+            "Name": name,
+            "Import": {"Name": name, "Attributes": ["ExactSpelling", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": "HRESULT",
+                },
+                "ParameterTypes": [
+                    {
+                        "Kind": "Pointer",
+                        "Type": {
+                            "Kind": "Type",
+                            "Namespace": "Windows.Win32.System.Com",
+                            "Name": "IDataAdviseHolder",
+                        },
+                    }
+                ],
+            },
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {
+                    "Name": slot_name,
+                    "SequenceNumber": 1,
+                    "Attributes": ["Out"],
+                    "CustomAttributes": [] if custom_attributes is None else custom_attributes,
+                },
+            ],
+        }
+
+    def hresult_multi_com_out_method(self, name: str = "CreatePair") -> dict:
+        com_slot_type = {
+            "Kind": "Pointer",
+            "Type": {
+                "Kind": "Type",
+                "Namespace": "Windows.Win32.System.Com",
+                "Name": "IDataAdviseHolder",
+            },
+        }
+        return {
+            "Name": name,
+            "Import": {"Name": name, "Attributes": ["ExactSpelling", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": "HRESULT",
+                },
+                "ParameterTypes": [com_slot_type, com_slot_type],
+            },
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "first", "SequenceNumber": 1, "Attributes": ["Out"], "CustomAttributes": []},
+                {"Name": "second", "SequenceNumber": 2, "Attributes": ["Out"], "CustomAttributes": []},
+            ],
+        }
+
+    def hresult_owned_pwstr_out_method(self, name: str = "GetThreadDescription") -> dict:
+        return {
+            "Name": name,
+            "Import": {"Name": name, "Attributes": ["ExactSpelling", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": "HRESULT",
+                },
+                "ParameterTypes": [
+                    {"Kind": "Pointer", "Type": {"Kind": "Primitive", "Name": "Void"}},
+                    {
+                        "Kind": "Pointer",
+                        "Type": {
+                            "Kind": "Type",
+                            "Namespace": "Windows.Win32.Foundation",
+                            "Name": "PWSTR",
+                        },
+                    },
+                ],
+            },
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "hThread", "SequenceNumber": 1, "Attributes": ["In"]},
+                {"Name": "ppszThreadDescription", "SequenceNumber": 2, "Attributes": ["Out"]},
+            ],
+        }
+
+    def hresult_owned_pointer_out_method(self, name: str = "CoGetSystemSecurityPermissions") -> dict:
+        if name == "CoGetSystemSecurityPermissions":
+            return {
+                "Name": name,
+                "Import": {"Name": name, "Attributes": ["ExactSpelling", "CallingConventionWinApi"]},
+                "Signature": {
+                    "ReturnType": {
+                        "Kind": "Type",
+                        "Namespace": "Windows.Win32.Foundation",
+                        "Name": "HRESULT",
+                    },
+                    "ParameterTypes": [
+                        {"Kind": "Primitive", "Name": "Int32"},
+                        {
+                            "Kind": "Pointer",
+                            "Type": {
+                                "Kind": "Type",
+                                "Namespace": "Windows.Win32.Security",
+                                "Name": "PSECURITY_DESCRIPTOR",
+                            },
+                        },
+                    ],
+                },
+                "Parameters": [
+                    {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                    {"Name": "comSDType", "SequenceNumber": 1, "Attributes": ["In"]},
+                    {"Name": "ppSD", "SequenceNumber": 2, "Attributes": ["In", "Out"]},
+                ],
+            }
+        if name == "CoQueryAuthenticationServices":
+            return {
+                "Name": name,
+                "Import": {"Name": name, "Attributes": ["ExactSpelling", "CallingConventionWinApi"]},
+                "Signature": {
+                    "ReturnType": {
+                        "Kind": "Type",
+                        "Namespace": "Windows.Win32.Foundation",
+                        "Name": "HRESULT",
+                    },
+                    "ParameterTypes": [
+                        {"Kind": "Pointer", "Type": {"Kind": "Primitive", "Name": "UInt32"}},
+                        {
+                            "Kind": "Pointer",
+                            "Type": {
+                                "Kind": "Pointer",
+                                "Type": {
+                                    "Kind": "Type",
+                                    "Namespace": "Windows.Win32.System.Com",
+                                    "Name": "SOLE_AUTHENTICATION_SERVICE",
+                                },
+                            },
+                        },
+                    ],
+                },
+                "Parameters": [
+                    {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                    {"Name": "pcAuthSvc", "SequenceNumber": 1, "Attributes": ["Out"]},
+                    {"Name": "asAuthSvc", "SequenceNumber": 2, "Attributes": ["Out"]},
+                ],
+            }
+        raise ValueError(f"unsupported owned pointer out method: {name}")
+
+    def multiple_success_hresult_method(self, name: str = "CoInitializeEx") -> dict:
+        return {
+            "Name": name,
+            "CustomAttributes": [
+                {
+                    "Type": "Windows.Win32.Foundation.Metadata.CanReturnMultipleSuccessValuesAttribute",
+                    "FixedArguments": [],
+                    "NamedArguments": [],
+                }
+            ],
+            "Import": {"Name": name, "Attributes": ["ExactSpelling", "CallingConventionWinApi"]},
+            "Signature": {
+                "ReturnType": {
+                    "Kind": "Type",
+                    "Namespace": "Windows.Win32.Foundation",
+                    "Name": "HRESULT",
+                },
+                "ParameterTypes": [{"Kind": "Primitive", "Name": "UInt32"}],
+            },
+            "Parameters": [
+                {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                {"Name": "dwCoInit", "SequenceNumber": 1, "Attributes": ["In"]},
+            ],
+        }
+
+    def multiple_success_hresult_missing_metadata_method(self, name: str = "CoCreateInstanceEx") -> dict:
+        method = self.multiple_success_hresult_method(name)
+        method["CustomAttributes"] = []
+        return method
+
+    def multiple_success_hresult_wrapper_text(
+        self,
+        *,
+        name: str = "CoInitializeEx",
+        collapse_to_unit: bool = False,
+    ) -> str:
+        if collapse_to_unit:
+            wrapper = (
+                f"public func {name}Checked(dwCoInit: UInt32): windows_core.Result<Unit> {{\n"
+                f"    windows_core.HRESULT({name}(dwCoInit)).ok()\n"
+                "}\n"
+            )
+        else:
+            wrapper = (
+                f"public func {name}Checked(dwCoInit: UInt32): windows_core.Result<windows_core.HRESULT> {{\n"
+                f"    let resultHr__ = windows_core.HRESULT({name}(dwCoInit))\n"
+                "    if (resultHr__.failed()) {\n"
+                "        return windows_core.Result<windows_core.HRESULT>.Err(windows_core.errorFromHRESULT(resultHr__))\n"
+                "    }\n"
+                "    windows_core.Result<windows_core.HRESULT>.Ok(resultHr__)\n"
+                "}\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Com\n"
+            "import windows_core as windows_core\n"
+            f"public func {name}(dwCoInit: UInt32): Int32 {{\n"
+            "    0\n"
+            "}\n"
+            f"{wrapper}"
+        )
+
+    def hresult_com_out_wrapper_text(
+        self,
+        *,
+        omit_preclear: bool = False,
+        omit_failed_cleanup: bool = False,
+        omit_success_null_check: bool = False,
+        bare_ok: bool = False,
+    ) -> str:
+        if bare_ok:
+            body = "    windows_core.HRESULT(CreateDataAdviseHolder(ppDAHolder)).ok()\n"
+        else:
+            preclear = "" if omit_preclear else "    unsafe { ppDAHolder.write(CPointer<Unit>()) }\n"
+            failed_cleanup = "" if omit_failed_cleanup else "        windows_core.releaseFailedComOutSlot(ppDAHolder)\n"
+            success_null_check = (
+                ""
+                if omit_success_null_check
+                else (
+                    "    if (unsafe { ppDAHolder.read() }.isNull()) {\n"
+                    "        windows_core.releaseFailedComOutSlot(ppDAHolder)\n"
+                    "        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))\n"
+                    "    }\n"
+                )
+            )
+            body = (
+                "    if (ppDAHolder.isNull()) {\n"
+                "        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))\n"
+                "    }\n"
+                f"{preclear}"
+                "    let resultHr__ = windows_core.HRESULT(CreateDataAdviseHolder(ppDAHolder))\n"
+                "    if (resultHr__.failed()) {\n"
+                f"{failed_cleanup}"
+                "        return resultHr__.ok()\n"
+                "    }\n"
+                f"{success_null_check}"
+                "    windows_core.Result<Unit>.Ok(())\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Com\n"
+            "import windows_core as windows_core\n"
+            "public func CreateDataAdviseHolder(ppDAHolder: CPointer<CPointer<Unit>>): Int32 {\n"
+            "    0\n"
+            "}\n"
+            "public func CreateDataAdviseHolderChecked(ppDAHolder: CPointer<CPointer<Unit>>): windows_core.Result<Unit> {\n"
+            f"{body}"
+            "}\n"
+        )
+
+    def hresult_owned_pwstr_out_wrapper_text(
+        self,
+        *,
+        omit_preclear: bool = False,
+        omit_failed_cleanup: bool = False,
+        omit_success_null_check: bool = False,
+        bare_ok: bool = False,
+    ) -> str:
+        slot = "CPointer<CPointer<Unit>>(ppszThreadDescription)"
+        if bare_ok:
+            body = "    windows_core.HRESULT(GetThreadDescription(hThread, ppszThreadDescription)).ok()\n"
+        else:
+            preclear = "" if omit_preclear else f"    unsafe {{ {slot}.write(CPointer<Unit>()) }}\n"
+            failed_cleanup = (
+                ""
+                if omit_failed_cleanup
+                else (
+                    f"        if ({slot}.isNotNull()) {{\n"
+                    f"            let failedString__ = unsafe {{ {slot}.read() }}\n"
+                    "            if (failedString__.isNotNull()) {\n"
+                    "                let localFreeString__ = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc(\"KERNEL32.dll\", \"LocalFree\"))\n"
+                    "                let _ = unsafe { localFreeString__(failedString__) }\n"
+                    f"                unsafe {{ {slot}.write(CPointer<Unit>()) }}\n"
+                    "            }\n"
+                    "        }\n"
+                )
+            )
+            success_null_check = (
+                ""
+                if omit_success_null_check
+                else (
+                    f"    if (unsafe {{ {slot}.read() }}.isNull()) {{\n"
+                    f"{failed_cleanup}"
+                    "        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))\n"
+                    "    }\n"
+                )
+            )
+            body = (
+                f"    if ({slot}.isNull()) {{\n"
+                "        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))\n"
+                "    }\n"
+                f"{preclear}"
+                "    let resultHr__ = windows_core.HRESULT(GetThreadDescription(hThread, ppszThreadDescription))\n"
+                "    if (resultHr__.failed()) {\n"
+                f"{failed_cleanup}"
+                "        return resultHr__.ok()\n"
+                "    }\n"
+                f"{success_null_check}"
+                "    windows_core.Result<Unit>.Ok(())\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Threading\n"
+            "import windows_core as windows_core\n"
+            "import windows_libloading as windows_libloading\n"
+            "public func GetThreadDescription(hThread: CPointer<Unit>, ppszThreadDescription: CPointer<CPointer<UInt16>>): Int32 {\n"
+            "    0\n"
+            "}\n"
+            "public func GetThreadDescriptionChecked(hThread: CPointer<Unit>, ppszThreadDescription: CPointer<CPointer<UInt16>>): windows_core.Result<Unit> {\n"
+            f"{body}"
+            "}\n"
+        )
+
+    def hresult_owned_pointer_out_wrapper_text(
+        self,
+        *,
+        name: str = "CoGetSystemSecurityPermissions",
+        omit_preclear: bool = False,
+        omit_failed_cleanup: bool = False,
+        omit_success_null_check: bool = False,
+        bare_ok: bool = False,
+    ) -> str:
+        if name == "CoGetSystemSecurityPermissions":
+            slot = "CPointer<CPointer<Unit>>(ppSD)"
+            allocator_func = "localFreePointer__"
+            allocator_cleanup = (
+                "                let localFreePointer__ = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc(\"KERNEL32.dll\", \"LocalFree\"))\n"
+                "                let _ = unsafe { localFreePointer__(failedPointer__) }\n"
+            )
+            signature = "comSDType: Int32, ppSD: CPointer<PSECURITY_DESCRIPTOR>"
+            call = "CoGetSystemSecurityPermissions(comSDType, ppSD)"
+            public_func = (
+                "public func CoGetSystemSecurityPermissions(comSDType: Int32, ppSD: CPointer<PSECURITY_DESCRIPTOR>): Int32 {\n"
+                "    0\n"
+                "}\n"
+            )
+        elif name == "CoQueryAuthenticationServices":
+            slot = "CPointer<CPointer<Unit>>(asAuthSvc)"
+            allocator_func = "coTaskMemFreePointer__"
+            allocator_cleanup = (
+                "                let coTaskMemFreePointer__ = CFunc<(CPointer<Unit>) -> Unit>(windows_libloading.resolveProc(\"OLE32.dll\", \"CoTaskMemFree\"))\n"
+                "                unsafe { coTaskMemFreePointer__(failedPointer__) }\n"
+            )
+            signature = "pcAuthSvc: CPointer<UInt32>, asAuthSvc: CPointer<CPointer<SOLE_AUTHENTICATION_SERVICE>>"
+            call = "CoQueryAuthenticationServices(pcAuthSvc, asAuthSvc)"
+            public_func = (
+                "public func CoQueryAuthenticationServices(pcAuthSvc: CPointer<UInt32>, asAuthSvc: CPointer<CPointer<SOLE_AUTHENTICATION_SERVICE>>): Int32 {\n"
+                "    0\n"
+                "}\n"
+            )
+        else:
+            raise ValueError(f"unsupported owned pointer out wrapper: {name}")
+        if bare_ok:
+            body = f"    windows_core.HRESULT({call}).ok()\n"
+        else:
+            preclear = "" if omit_preclear else f"    unsafe {{ {slot}.write(CPointer<Unit>()) }}\n"
+            failed_cleanup = (
+                ""
+                if omit_failed_cleanup
+                else (
+                    f"        if ({slot}.isNotNull()) {{\n"
+                    f"            let failedPointer__ = unsafe {{ {slot}.read() }}\n"
+                    "            if (failedPointer__.isNotNull()) {\n"
+                    f"{allocator_cleanup}"
+                    f"                unsafe {{ {slot}.write(CPointer<Unit>()) }}\n"
+                    "            }\n"
+                    "        }\n"
+                )
+            )
+            success_null_check = (
+                ""
+                if omit_success_null_check
+                else (
+                    f"    if (unsafe {{ {slot}.read() }}.isNull()) {{\n"
+                    f"{failed_cleanup}"
+                    "        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))\n"
+                    "    }\n"
+                )
+            )
+            body = (
+                f"    if ({slot}.isNull()) {{\n"
+                "        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))\n"
+                "    }\n"
+                f"{preclear}"
+                f"    let resultHr__ = windows_core.HRESULT({call})\n"
+                "    if (resultHr__.failed()) {\n"
+                f"{failed_cleanup}"
+                "        return resultHr__.ok()\n"
+                "    }\n"
+                f"{success_null_check}"
+                "    windows_core.Result<Unit>.Ok(())\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Com\n"
+            "import windows_core as windows_core\n"
+            "import windows_libloading as windows_libloading\n"
+            f"{public_func}"
+            f"public func {name}Checked({signature}): windows_core.Result<Unit> {{\n"
+            f"{body}"
+            "}\n"
+            f"// marker: {allocator_func}\n"
+        )
+
+    def hresult_multi_com_out_wrapper_text(self, *, stale_epointer_preclear: bool = False) -> str:
+        if stale_epointer_preclear:
+            preflight = (
+                "    if (first.isNull()) {\n"
+                "        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))\n"
+                "    }\n"
+                "    unsafe { first.write(CPointer<Unit>()) }\n"
+                "    if (second.isNull()) {\n"
+                "        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))\n"
+                "    }\n"
+                "    unsafe { second.write(CPointer<Unit>()) }\n"
+            )
+        else:
+            preflight = (
+                "    var nullComOutSlot__ = false\n"
+                "    if (first.isNull()) {\n"
+                "        nullComOutSlot__ = true\n"
+                "    } else {\n"
+                "        unsafe { first.write(CPointer<Unit>()) }\n"
+                "    }\n"
+                "    if (second.isNull()) {\n"
+                "        nullComOutSlot__ = true\n"
+                "    } else {\n"
+                "        unsafe { second.write(CPointer<Unit>()) }\n"
+                "    }\n"
+                "    if (nullComOutSlot__) {\n"
+                "        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))\n"
+                "    }\n"
+            )
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.System.Com\n"
+            "import windows_core as windows_core\n"
+            "public func CreatePair(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Int32 {\n"
+            "    0\n"
+            "}\n"
+            "public func CreatePairChecked(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): windows_core.Result<Unit> {\n"
+            f"{preflight}"
+            "    let resultHr__ = windows_core.HRESULT(CreatePair(first, second))\n"
+            "    if (resultHr__.failed()) {\n"
+            "        windows_core.releaseFailedComOutSlot(first)\n"
+            "        windows_core.releaseFailedComOutSlot(second)\n"
+            "        return resultHr__.ok()\n"
+            "    }\n"
+            "    if (unsafe { first.read() }.isNull()) {\n"
+            "        windows_core.releaseFailedComOutSlot(first)\n"
+            "        windows_core.releaseFailedComOutSlot(second)\n"
+            "        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))\n"
+            "    }\n"
+            "    if (unsafe { second.read() }.isNull()) {\n"
+            "        windows_core.releaseFailedComOutSlot(first)\n"
+            "        windows_core.releaseFailedComOutSlot(second)\n"
+            "        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))\n"
+            "    }\n"
+            "    windows_core.Result<Unit>.Ok(())\n"
+            "}\n"
+        )
+
+    def checked_wrapper_text(
+        self,
+        *,
+        omit_base: bool = False,
+        omit_success: bool = False,
+        omit_error_from_thread: bool = False,
+        call_base: bool = True,
+    ) -> str:
+        base = (
+            ""
+            if omit_base
+            else (
+                "public func CreateThing(handle: Int32): Bool {\n"
+                "    true\n"
+                "}\n"
+            )
+        )
+        success = "" if omit_success else "        return windows_core.Result<Unit>.Ok(())\n"
+        failure = (
+            "    windows_core.Result<Unit>.Err(windows_core.Error(1))\n"
+            if omit_error_from_thread
+            else "    windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+        )
+        predicate = "CreateThing(handle)" if call_base else "true"
+        return (
+            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+            "package windows_common.Win32.Foo\n"
+            "import windows_core as windows_core\n"
+            f"{base}"
+            "public func CreateThingChecked(handle: Int32): windows_core.Result<Unit> {\n"
+            f"    if ({predicate}) {{\n"
+            f"{success}"
+            "    }\n"
+            f"{failure}"
+            "}\n"
+        )
+
+    def test_accepts_canonical_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_native_helper(workspace, self.checked_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_hresult_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Foo\n"
+                    "import windows_core as windows_core\n"
+                    "public func SysAddRefString(value: Int32): Int32 {\n"
+                    "    value\n"
+                    "}\n"
+                    "public func SysAddRefStringChecked(value: Int32): windows_core.Result<Unit> {\n"
+                    "    windows_core.HRESULT(SysAddRefString(value)).ok()\n"
+                    "}\n"
+                ),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_rejects_hresult_checked_wrapper_without_ok(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Foo\n"
+                    "import windows_core as windows_core\n"
+                    "public func SysAddRefString(value: Int32): Int32 {\n"
+                    "    value\n"
+                    "}\n"
+                    "public func SysAddRefStringChecked(value: Int32): windows_core.Result<Unit> {\n"
+                    "    let hr = windows_core.HRESULT(SysAddRefString(value))\n"
+                    "    windows_core.Result<Unit>.Ok(())\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("ok()", stderr.getvalue())
+
+    def test_accepts_hresult_com_interface_out_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(workspace, [self.hresult_com_out_method()])
+            self.write_com_native_helper(workspace, self.hresult_com_out_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_hresult_com_interface_multi_out_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(workspace, [self.hresult_multi_com_out_method()])
+            self.write_com_native_helper(workspace, self.hresult_multi_com_out_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_hresult_owned_pwstr_out_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.hresult_owned_pwstr_out_method()])
+            self.write_threading_native_helper(workspace, self.hresult_owned_pwstr_out_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_hresult_owned_pointer_out_checked_wrapper_shapes(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(
+                workspace,
+                [
+                    self.hresult_owned_pointer_out_method("CoGetSystemSecurityPermissions"),
+                    self.hresult_owned_pointer_out_method("CoQueryAuthenticationServices"),
+                ],
+            )
+            self.write_com_native_helper(
+                workspace,
+                self.hresult_owned_pointer_out_wrapper_text(name="CoGetSystemSecurityPermissions")
+                + self.hresult_owned_pointer_out_wrapper_text(name="CoQueryAuthenticationServices"),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_multiple_success_hresult_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(workspace, [self.multiple_success_hresult_method()])
+            self.write_com_native_helper(workspace, self.multiple_success_hresult_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_missing_metadata_multi_qi_hresult_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(
+                workspace,
+                [self.multiple_success_hresult_missing_metadata_method("CoCreateInstanceEx")],
+            )
+            self.write_com_native_helper(workspace, self.multiple_success_hresult_wrapper_text(name="CoCreateInstanceEx"))
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_handle_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_handle_method()])
+            self.write_threading_native_helper(workspace, self.set_last_error_handle_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_does_not_require_handle_checked_wrapper_without_set_last_error_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            create_waitable_timer = self.set_last_error_handle_method("CreateWaitableTimerA")
+            create_waitable_timer["Import"] = {"Attributes": ["ExactSpelling", "CallingConventionWinApi"]}
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(
+                workspace,
+                [self.set_last_error_handle_method(), create_waitable_timer],
+            )
+            self.write_threading_native_helper(
+                workspace,
+                self.set_last_error_handle_wrapper_text()
+                + "public func CreateWaitableTimerA(): HANDLE {\n"
+                + "    HANDLE()\n"
+                + "}\n",
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_invalid_handle_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            invalid_handle_names = [
+                "CreateFileA",
+                "CreateFileW",
+                "FindFirstChangeNotificationA",
+                "FindFirstChangeNotificationW",
+                "FindFirstFileA",
+                "FindFirstFileW",
+                "FindFirstFileExA",
+                "FindFirstFileExW",
+                "FindFirstFileNameW",
+                "FindFirstFileNameTransactedW",
+                "FindFirstFileTransactedA",
+                "FindFirstFileTransactedW",
+                "FindFirstStreamW",
+                "FindFirstStreamTransactedW",
+                "FindFirstVolumeA",
+                "FindFirstVolumeW",
+                "FindFirstVolumeMountPointA",
+                "FindFirstVolumeMountPointW",
+            ]
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Storage.FileSystem"])
+            self.write_filesystem_metadata(
+                workspace,
+                [self.set_last_error_invalid_handle_method(name) for name in invalid_handle_names],
+            )
+            self.write_filesystem_native_helper(
+                workspace,
+                "".join(
+                    self.set_last_error_invalid_handle_wrapper_text(
+                        name=name,
+                        include_header=index == 0,
+                    )
+                    for index, name in enumerate(invalid_handle_names)
+                ),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_service_handle_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Services"])
+            self.write_services_metadata(workspace, [self.set_last_error_service_handle_method()])
+            self.write_services_native_helper(workspace, self.set_last_error_service_handle_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_service_status_handle_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Services"])
+            self.write_services_metadata(
+                workspace,
+                [self.set_last_error_service_handle_method(return_name="SERVICE_STATUS_HANDLE")],
+            )
+            self.write_services_native_helper(
+                workspace,
+                self.set_last_error_service_handle_wrapper_text(return_name="SERVICE_STATUS_HANDLE"),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_threadpool_handle_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_threading_pointer_handle_method()])
+            self.write_threading_native_helper(workspace, self.set_last_error_threading_pointer_handle_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_wait_event_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_wait_event_method()])
+            self.write_threading_native_helper(workspace, self.set_last_error_wait_event_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_null_pointer_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_null_pointer_method()])
+            self.write_threading_native_helper(workspace, self.set_last_error_null_pointer_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_typed_null_pointer_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Security.Cryptography"])
+            self.write_cryptography_metadata(workspace, [self.set_last_error_typed_null_pointer_method()])
+            self.write_cryptography_native_helper(
+                workspace,
+                self.set_last_error_typed_null_pointer_wrapper_text(),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_tls_value_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_tls_value_method()])
+            self.write_threading_native_helper(workspace, self.set_last_error_tls_value_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_uint32_minus_one_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_uint32_minus_one_method()])
+            self.write_threading_native_helper(workspace, self.set_last_error_uint32_minus_one_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_thread_ideal_processor_uint32_minus_one_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(
+                workspace,
+                [self.set_last_error_uint32_minus_one_method(name="SetThreadIdealProcessor")],
+            )
+            self.write_threading_native_helper(
+                workspace,
+                self.set_last_error_uint32_minus_one_wrapper_text(name="SetThreadIdealProcessor"),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_uint32_zero_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_uint32_zero_method()])
+            self.write_threading_native_helper(workspace, self.set_last_error_uint32_zero_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_filesystem_uint32_sentinel_checked_wrapper_shapes(self) -> None:
+        cases = [
+            (
+                "GetFileAttributesW",
+                self.set_last_error_uint32_minus_one_method,
+                self.set_last_error_uint32_minus_one_wrapper_text,
+            ),
+            (
+                "GetFileVersionInfoSizeW",
+                self.set_last_error_uint32_zero_method,
+                self.set_last_error_uint32_zero_wrapper_text,
+            ),
+            (
+                "QueryDosDeviceW",
+                self.set_last_error_uint32_zero_method,
+                self.set_last_error_uint32_zero_wrapper_text,
+            ),
+        ]
+        for name, method_factory, wrapper_factory in cases:
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.Storage.FileSystem"])
+                    self.write_filesystem_metadata(workspace, [method_factory(name=name)])
+                    self.write_filesystem_native_helper(
+                        workspace,
+                        wrapper_factory(name=name, package="windows_common.Win32.Storage.FileSystem"),
+                    )
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_processor_count_uint32_zero_checked_wrapper_shapes(self) -> None:
+        for name in ("GetActiveProcessorCount", "GetMaximumProcessorCount"):
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+                    self.write_threading_metadata(
+                        workspace,
+                        [self.set_last_error_uint32_zero_method(name=name)],
+                    )
+                    self.write_threading_native_helper(
+                        workspace,
+                        self.set_last_error_uint32_zero_wrapper_text(name=name),
+                    )
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_uint32_less_than_or_equal_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.uint32_less_than_or_equal_method()])
+            self.write_threading_native_helper(workspace, self.uint32_less_than_or_equal_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_direct_win32_error_code_uint32_checked_wrapper_shapes(self) -> None:
+        cases = (
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpInitialize",
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpCancelHttpRequest",
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpSetServiceConfiguration",
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpUpdateServiceConfiguration",
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpDeleteServiceConfiguration",
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.WinHttp",
+                "WINHTTP.dll",
+                "WinHttpReadDataEx",
+                self.write_winhttp_metadata,
+                self.write_winhttp_native_helper,
+                "windows_common.Win32.Networking.WinHttp",
+            ),
+            (
+                "Windows.Win32.Networking.WinHttp",
+                "WINHTTP.dll",
+                "WinHttpAddRequestHeadersEx",
+                self.write_winhttp_metadata,
+                self.write_winhttp_native_helper,
+                "windows_common.Win32.Networking.WinHttp",
+            ),
+            (
+                "Windows.Win32.Networking.WinHttp",
+                "WINHTTP.dll",
+                "WinHttpWebSocketSend",
+                self.write_winhttp_metadata,
+                self.write_winhttp_native_helper,
+                "windows_common.Win32.Networking.WinHttp",
+            ),
+            (
+                "Windows.Win32.Networking.WinHttp",
+                "WINHTTP.dll",
+                "WinHttpWebSocketReceive",
+                self.write_winhttp_metadata,
+                self.write_winhttp_native_helper,
+                "windows_common.Win32.Networking.WinHttp",
+            ),
+            (
+                "Windows.Win32.NetworkManagement.Dns",
+                "DNSAPI.dll",
+                "DnsSetApplicationSettings",
+                self.write_dns_metadata,
+                self.write_dns_native_helper,
+                "windows_common.Win32.NetworkManagement.Dns",
+            ),
+            (
+                "Windows.Win32.NetworkManagement.Dns",
+                "DNSAPI.dll",
+                "DnsGetApplicationSettings",
+                self.write_dns_metadata,
+                self.write_dns_native_helper,
+                "windows_common.Win32.NetworkManagement.Dns",
+            ),
+            (
+                "Windows.Win32.NetworkManagement.Dns",
+                "DNSAPI.dll",
+                "DnsGetProxyInformation",
+                self.write_dns_metadata,
+                self.write_dns_native_helper,
+                "windows_common.Win32.NetworkManagement.Dns",
+            ),
+        )
+        for feature, module, name, write_metadata, write_native_helper, package in cases:
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, [feature])
+                    write_metadata(workspace, [self.direct_win32_error_code_uint32_method(name, module)])
+                    write_native_helper(
+                        workspace,
+                        self.direct_win32_error_code_uint32_wrapper_text(name=name, package=package),
+                    )
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_direct_win32_error_code_uint32_status_checked_wrapper_shapes(self) -> None:
+        cases = (
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpQueryRequestQueueProperty",
+                (0, 234),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpSetRequestProperty",
+                (0, 997),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpQueryRequestProperty",
+                (0, 997, 234),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpReceiveClientCertificate",
+                (0, 997, 122, 234),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpQueryServerSessionProperty",
+                (0, 234),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpQueryUrlGroupProperty",
+                (0, 234),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpReceiveHttpRequest",
+                (0, 997, 234, 38),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpReceiveRequestEntityBody",
+                (0, 997, 38),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpSendHttpResponse",
+                (0, 997),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpWaitForDisconnect",
+                (0, 997),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpWaitForDisconnectEx",
+                (0, 997),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpWaitForDemandStart",
+                (0, 997),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpFlushResponseCache",
+                (0, 997),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpAddFragmentToCache",
+                (0, 997),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpReadFragmentFromCache",
+                (0, 997, 122, 234),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.HttpServer",
+                "HTTPAPI.dll",
+                "HttpQueryServiceConfiguration",
+                (0, 122, 234, 259),
+                self.write_httpserver_metadata,
+                self.write_httpserver_native_helper,
+                "windows_common.Win32.Networking.HttpServer",
+            ),
+            (
+                "Windows.Win32.Networking.WinHttp",
+                "WINHTTP.dll",
+                "WinHttpGetProxyForUrlEx",
+                (997,),
+                self.write_winhttp_metadata,
+                self.write_winhttp_native_helper,
+                "windows_common.Win32.Networking.WinHttp",
+            ),
+            (
+                "Windows.Win32.Networking.WinHttp",
+                "WINHTTP.dll",
+                "WinHttpGetProxyForUrlEx2",
+                (997,),
+                self.write_winhttp_metadata,
+                self.write_winhttp_native_helper,
+                "windows_common.Win32.Networking.WinHttp",
+            ),
+            (
+                "Windows.Win32.Networking.WinHttp",
+                "WINHTTP.dll",
+                "WinHttpGetProxySettingsEx",
+                (997,),
+                self.write_winhttp_metadata,
+                self.write_winhttp_native_helper,
+                "windows_common.Win32.Networking.WinHttp",
+            ),
+            (
+                "Windows.Win32.Networking.WinHttp",
+                "WINHTTP.dll",
+                "WinHttpQueryHeadersEx",
+                (0, 122, 12150),
+                self.write_winhttp_metadata,
+                self.write_winhttp_native_helper,
+                "windows_common.Win32.Networking.WinHttp",
+            ),
+            (
+                "Windows.Win32.Networking.WinHttp",
+                "WINHTTP.dll",
+                "WinHttpWebSocketQueryCloseStatus",
+                (0, 122),
+                self.write_winhttp_metadata,
+                self.write_winhttp_native_helper,
+                "windows_common.Win32.Networking.WinHttp",
+            ),
+            (
+                "Windows.Win32.Networking.WinSock",
+                "WS2_32.dll",
+                "ProcessSocketNotifications",
+                (0, 258),
+                self.write_winsock_metadata,
+                self.write_winsock_native_helper,
+                "windows_common.Win32.Networking.WinSock",
+            ),
+            (
+                "Windows.Win32.NetworkManagement.Dns",
+                "DNSAPI.dll",
+                "DnsQuery_A",
+                (0, 9501),
+                self.write_dns_metadata,
+                self.write_dns_native_helper,
+                "windows_common.Win32.NetworkManagement.Dns",
+            ),
+            (
+                "Windows.Win32.NetworkManagement.Dns",
+                "DNSAPI.dll",
+                "DnsQuery_UTF8",
+                (0, 9501),
+                self.write_dns_metadata,
+                self.write_dns_native_helper,
+                "windows_common.Win32.NetworkManagement.Dns",
+            ),
+            (
+                "Windows.Win32.NetworkManagement.Dns",
+                "DNSAPI.dll",
+                "DnsQuery_W",
+                (0, 9501),
+                self.write_dns_metadata,
+                self.write_dns_native_helper,
+                "windows_common.Win32.NetworkManagement.Dns",
+            ),
+            (
+                "Windows.Win32.NetworkManagement.Dns",
+                "DNSAPI.dll",
+                "DnsServiceRegister",
+                (0, 9506),
+                self.write_dns_metadata,
+                self.write_dns_native_helper,
+                "windows_common.Win32.NetworkManagement.Dns",
+            ),
+            (
+                "Windows.Win32.NetworkManagement.Dns",
+                "DNSAPI.dll",
+                "DnsServiceDeRegister",
+                (0, 9506),
+                self.write_dns_metadata,
+                self.write_dns_native_helper,
+                "windows_common.Win32.NetworkManagement.Dns",
+            ),
+        )
+        for feature, module, name, statuses, write_metadata, write_native_helper, package in cases:
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, [feature])
+                    return_type = (
+                        {
+                            "Kind": "Type",
+                            "Namespace": "Windows.Win32.Foundation",
+                            "Name": "WIN32_ERROR",
+                        }
+                        if name.startswith("DnsQuery_")
+                        else None
+                    )
+                    write_metadata(
+                        workspace,
+                        [
+                            self.direct_win32_error_code_uint32_method(
+                                name,
+                                module,
+                                return_type=return_type,
+                            )
+                        ],
+                    )
+                    write_native_helper(
+                        workspace,
+                        self.direct_win32_error_code_uint32_status_wrapper_text(
+                            name=name,
+                            package=package,
+                            success_statuses=statuses,
+                        ),
+                    )
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_direct_win32_error_code_int32_checked_wrapper_shapes(self) -> None:
+        cases = (
+            "DnsCancelQuery",
+            "DnsCancelQueryRaw",
+            "DnsAcquireContextHandle_W",
+            "DnsAcquireContextHandle_A",
+            "DnsModifyRecordsInSet_W",
+            "DnsModifyRecordsInSet_A",
+            "DnsModifyRecordsInSet_UTF8",
+            "DnsReplaceRecordSetW",
+            "DnsReplaceRecordSetA",
+            "DnsReplaceRecordSetUTF8",
+            "DnsExtractRecordsFromMessage_W",
+            "DnsExtractRecordsFromMessage_UTF8",
+            "DnsIsFlatRecord",
+            "DnsServiceBrowseCancel",
+            "DnsServiceResolveCancel",
+            "DnsStartMulticastQuery",
+            "DnsStopMulticastQuery",
+        )
+        for name in cases:
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.NetworkManagement.Dns"])
+                    self.write_dns_metadata(
+                        workspace,
+                        [self.direct_win32_error_code_int32_method(name, "DNSAPI.dll")],
+                    )
+                    self.write_dns_native_helper(
+                        workspace,
+                        self.direct_win32_error_code_int32_wrapper_text(
+                            name=name,
+                            package="windows_common.Win32.NetworkManagement.Dns",
+                        ),
+                    )
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_direct_win32_error_code_int32_status_checked_wrapper_shapes(self) -> None:
+        cases = (
+            ("DnsQueryConfig", (0, 234)),
+            ("DnsQueryEx", (0, 9501, 9506)),
+            ("DnsQueryRaw", (0, 9506)),
+            ("DnsValidateName_W", (0, 9556)),
+            ("DnsValidateName_A", (0, 9556)),
+            ("DnsValidateName_UTF8", (0, 9556)),
+            ("DnsServiceBrowse", (9506,)),
+            ("DnsServiceResolve", (9506,)),
+        )
+        for name, statuses in cases:
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.NetworkManagement.Dns"])
+                    self.write_dns_metadata(
+                        workspace,
+                        [self.direct_win32_error_code_int32_method(name, "DNSAPI.dll")],
+                    )
+                    self.write_dns_native_helper(
+                        workspace,
+                        self.direct_win32_error_code_int32_status_wrapper_text(
+                            name=name,
+                            package="windows_common.Win32.NetworkManagement.Dns",
+                            success_statuses=statuses,
+                        ),
+                    )
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_rejects_classified_http_uint32_status_api_without_direct_error_code_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.HttpServer"])
+            self.write_httpserver_metadata(
+                workspace,
+                [
+                    self.direct_win32_error_code_uint32_method("HttpInitialize", "HTTPAPI.dll"),
+                    self.direct_win32_error_code_uint32_method("HttpQueryServiceConfiguration", "HTTPAPI.dll"),
+                ],
+            )
+            self.write_httpserver_native_helper(
+                workspace,
+                self.direct_win32_error_code_uint32_wrapper_text(
+                    name="HttpInitialize",
+                    package="windows_common.Win32.Networking.HttpServer",
+                )
+                + (
+                    "public func HttpQueryServiceConfiguration(): UInt32 {\n"
+                    "    0u32\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("missing direct Win32 error-code UInt32 checked wrapper", stderr.getvalue())
+
+    def test_accepts_set_last_error_uintnative_zero_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_uintnative_zero_method()])
+            self.write_threading_native_helper(workspace, self.set_last_error_uintnative_zero_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_intnative_zero_last_error_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.UI.WindowsAndMessaging"])
+            self.write_ui_metadata(workspace, [self.set_last_error_intnative_zero_last_error_method()])
+            self.write_ui_native_helper(workspace, self.set_last_error_intnative_zero_last_error_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_int32_max_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_int32_max_method()])
+            self.write_threading_native_helper(workspace, self.set_last_error_int32_max_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_winsock_socket_error_int32_checked_wrapper_shape(self) -> None:
+        socket_error_methods = (
+            "bind",
+            "closesocket",
+            "connect",
+            "getpeername",
+            "getsockname",
+            "getsockopt",
+            "ioctlsocket",
+            "listen",
+            "recv",
+            "recvfrom",
+            "select",
+            "send",
+            "sendto",
+            "setsockopt",
+            "shutdown",
+            "gethostname",
+            "GetHostNameW",
+            "WSACleanup",
+            "WSAUnhookBlockingHook",
+            "WSACancelBlockingCall",
+            "WSACancelAsyncRequest",
+            "WSAAsyncSelect",
+            "WSAConnect",
+            "WSADuplicateSocketA",
+            "WSADuplicateSocketW",
+            "WSAEnumNetworkEvents",
+            "WSAEnumProtocolsA",
+            "WSAEnumProtocolsW",
+            "WSAEventSelect",
+            "WSAHtonl",
+            "WSAHtons",
+            "WSAIoctl",
+            "WSANtohl",
+            "WSANtohs",
+            "WSARecv",
+            "WSARecvEx",
+            "WSARecvDisconnect",
+            "WSARecvFrom",
+            "WSASend",
+            "WSASendMsg",
+            "WSASendDisconnect",
+            "WSASendTo",
+            "WSAAddressToStringA",
+            "WSAAddressToStringW",
+            "WSAStringToAddressA",
+            "WSAStringToAddressW",
+            "WSALookupServiceBeginA",
+            "WSALookupServiceBeginW",
+            "WSALookupServiceNextA",
+            "WSALookupServiceNextW",
+            "WSANSPIoctl",
+            "WSALookupServiceEnd",
+            "WSAInstallServiceClassA",
+            "WSAInstallServiceClassW",
+            "WSARemoveServiceClass",
+            "WSAGetServiceClassInfoA",
+            "WSAGetServiceClassInfoW",
+            "WSAEnumNameSpaceProvidersA",
+            "WSAEnumNameSpaceProvidersW",
+            "WSAEnumNameSpaceProvidersExA",
+            "WSAEnumNameSpaceProvidersExW",
+            "WSAGetServiceClassNameByClassIdA",
+            "WSAGetServiceClassNameByClassIdW",
+            "WSASetServiceA",
+            "WSASetServiceW",
+            "WSAProviderConfigChange",
+            "WSAPoll",
+            "WSAAdvertiseProvider",
+            "WSAUnadvertiseProvider",
+            "WSAProviderCompleteAsyncCall",
+            "inet_pton",
+            "InetPtonW",
+            "WSCEnumNameSpaceProviders32",
+            "WSCEnumNameSpaceProvidersEx32",
+            "WSCInstallNameSpace",
+            "WSCInstallNameSpace32",
+            "WSCInstallNameSpaceEx",
+            "WSCInstallNameSpaceEx32",
+            "WSCUnInstallNameSpace",
+            "WSCUnInstallNameSpace32",
+            "WSCEnableNSProvider",
+            "WSCEnableNSProvider32",
+        )
+        unit_success_methods = {
+            "bind",
+            "closesocket",
+            "connect",
+            "getpeername",
+            "getsockname",
+            "getsockopt",
+            "ioctlsocket",
+            "listen",
+            "setsockopt",
+            "shutdown",
+            "gethostname",
+            "GetHostNameW",
+            "WSACleanup",
+            "WSAUnhookBlockingHook",
+            "WSACancelBlockingCall",
+            "WSACancelAsyncRequest",
+            "WSAAsyncSelect",
+            "WSAConnect",
+            "WSADuplicateSocketA",
+            "WSADuplicateSocketW",
+            "WSAEnumNetworkEvents",
+            "WSAEventSelect",
+            "WSAHtonl",
+            "WSAHtons",
+            "WSAIoctl",
+            "WSANtohl",
+            "WSANtohs",
+            "WSARecv",
+            "WSARecvDisconnect",
+            "WSARecvFrom",
+            "WSASend",
+            "WSASendMsg",
+            "WSASendDisconnect",
+            "WSASendTo",
+            "WSAAddressToStringA",
+            "WSAAddressToStringW",
+            "WSAStringToAddressA",
+            "WSAStringToAddressW",
+            "WSALookupServiceBeginA",
+            "WSALookupServiceBeginW",
+            "WSALookupServiceNextA",
+            "WSALookupServiceNextW",
+            "WSALookupServiceEnd",
+            "WSANSPIoctl",
+            "WSAInstallServiceClassA",
+            "WSAInstallServiceClassW",
+            "WSARemoveServiceClass",
+            "WSAGetServiceClassInfoA",
+            "WSAGetServiceClassInfoW",
+            "WSAGetServiceClassNameByClassIdA",
+            "WSAGetServiceClassNameByClassIdW",
+            "WSASetServiceA",
+            "WSASetServiceW",
+            "WSAProviderConfigChange",
+            "WSAAdvertiseProvider",
+            "WSAUnadvertiseProvider",
+            "WSAProviderCompleteAsyncCall",
+            "WSCInstallNameSpace",
+            "WSCInstallNameSpace32",
+            "WSCInstallNameSpaceEx",
+            "WSCInstallNameSpaceEx32",
+            "WSCUnInstallNameSpace",
+            "WSCUnInstallNameSpace32",
+            "WSCEnableNSProvider",
+            "WSCEnableNSProvider32",
+        }
+        pending_success_methods = {
+            "WSAIoctl": 997,
+            "WSARecv": 997,
+            "WSARecvFrom": 997,
+            "WSASend": 997,
+            "WSASendMsg": 997,
+            "WSASendTo": 997,
+            "WSAProviderConfigChange": 997,
+        }
+        for name in socket_error_methods:
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+                    self.write_winsock_metadata(
+                        workspace,
+                        [
+                            self.winsock_socket_error_int32_method(
+                                name,
+                                module="MSWSOCK.dll" if name == "WSARecvEx" else "WS2_32.dll",
+                                set_last_error=name
+                                not in {
+                                    "InetPtonW",
+                                    "WSCEnumNameSpaceProviders32",
+                                    "WSCEnumNameSpaceProvidersEx32",
+                                    "WSCInstallNameSpace",
+                                    "WSCInstallNameSpace32",
+                                    "WSCInstallNameSpaceEx",
+                                    "WSCInstallNameSpaceEx32",
+                                    "WSCUnInstallNameSpace",
+                                    "WSCUnInstallNameSpace32",
+                                    "WSCEnableNSProvider",
+                                    "WSCEnableNSProvider32",
+                                },
+                            )
+                        ],
+                    )
+                    self.write_winsock_native_helper(
+                        workspace,
+                        self.winsock_socket_error_int32_wrapper_text(
+                            name=name,
+                            preserves_status=name not in unit_success_methods,
+                            pending_success_status=pending_success_methods.get(name),
+                        ),
+                    )
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_mswinsock_get_last_error_socket_error_int32_checked_wrapper_shape(self) -> None:
+        status_methods = (
+            "EnumProtocolsA",
+            "EnumProtocolsW",
+            "GetAddressByNameA",
+            "GetAddressByNameW",
+            "GetNameByTypeA",
+            "GetNameByTypeW",
+            "GetServiceA",
+            "GetServiceW",
+        )
+        unit_methods = (
+            "GetTypeByNameA",
+            "GetTypeByNameW",
+            "SetServiceA",
+            "SetServiceW",
+        )
+        for name, preserves_status in tuple((name, True) for name in status_methods) + tuple(
+            (name, False) for name in unit_methods
+        ):
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+                    self.write_winsock_metadata(
+                        workspace,
+                        [self.winsock_socket_error_int32_method(name, module="MSWSOCK.dll")],
+                    )
+                    self.write_winsock_native_helper(
+                        workspace,
+                        self.mswinsock_get_last_error_socket_error_int32_wrapper_text(
+                            name=name,
+                            preserves_status=preserves_status,
+                        ),
+                    )
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_winsock_direct_error_int32_checked_wrapper_shape(self) -> None:
+        for name in (
+            "WSAStartup",
+            "getaddrinfo",
+            "getnameinfo",
+            "GetAddrInfoW",
+            "GetNameInfoW",
+            "GetAddrInfoExA",
+            "GetAddrInfoExCancel",
+            "SetAddrInfoExA",
+            "SetAddrInfoExW",
+            "WSCWriteProviderOrder",
+            "WSCWriteProviderOrder32",
+            "WSCWriteNameSpaceOrder",
+            "WSCWriteNameSpaceOrder32",
+        ):
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+                    self.write_winsock_metadata(workspace, [self.winsock_direct_error_int32_method(name)])
+                    self.write_winsock_native_helper(workspace, self.winsock_direct_error_int32_wrapper_text(name=name))
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_winsock_lperrno_int32_checked_wrapper_shape(self) -> None:
+        status_methods = (
+            "WSCEnumProtocols",
+            "WSCEnumProtocols32",
+        )
+        unit_methods = (
+            "WSCDeinstallProvider",
+            "WSCDeinstallProvider32",
+            "WSCInstallProvider",
+            "WSCInstallProvider64_32",
+            "WSCInstallProviderAndChains64_32",
+            "WSCGetProviderPath",
+            "WSCGetProviderPath32",
+            "WSCUpdateProvider",
+            "WSCUpdateProvider32",
+            "WSCSetProviderInfo",
+            "WSCSetProviderInfo32",
+            "WSCGetProviderInfo",
+            "WSCGetProviderInfo32",
+            "WSCSetApplicationCategory",
+            "WSCGetApplicationCategory",
+            "WPUCompleteOverlappedRequest",
+        )
+        for name, preserves_status in tuple((name, True) for name in status_methods) + tuple(
+            (name, False) for name in unit_methods
+        ):
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+                    self.write_winsock_metadata(workspace, [self.winsock_lperrno_int32_method(name)])
+                    self.write_winsock_native_helper(
+                        workspace,
+                        self.winsock_lperrno_int32_wrapper_text(name=name, preserves_status=preserves_status),
+                    )
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_winsock_pending_status_int32_checked_wrapper_shape(self) -> None:
+        for name, pending_status in (("GetAddrInfoExW", 997), ("GetAddrInfoExOverlappedResult", 10036)):
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+                    self.write_winsock_metadata(workspace, [self.winsock_pending_status_int32_method(name)])
+                    self.write_winsock_native_helper(
+                        workspace,
+                        self.winsock_pending_status_int32_wrapper_text(name=name, pending_status=pending_status),
+                    )
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_allows_winsock_non_socket_error_int32_without_socket_error_wrapper(self) -> None:
+        for name in (
+            "WSAGetLastError",
+            "__WSAFDIsSet",
+        ):
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+                    self.write_winsock_metadata(
+                        workspace,
+                        [self.winsock_socket_error_int32_method(name), self.winsock_bool_method("WSAResetEvent")],
+                    )
+                    self.write_winsock_native_helper(
+                        workspace,
+                        (
+                            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                            "package windows_common.Win32.Networking.WinSock\n"
+                            "import windows_libloading as windows_libloading\n"
+                            "import windows_core as windows_core\n"
+                            f"public func {name}(): Int32 {{\n"
+                            "    0\n"
+                            "}\n"
+                            "public func WSAResetEvent(): Bool {\n"
+                            "    true\n"
+                            "}\n"
+                            "public func WSAResetEventChecked(): windows_core.Result<Unit> {\n"
+                            "    if (WSAResetEvent()) {\n"
+                            "        return windows_core.Result<Unit>.Ok(())\n"
+                            "    }\n"
+                            "    let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n"
+                            "    let error__ = unsafe { errorProc__() }\n"
+                            "    windows_core.Result<Unit>.Err(windows_core.errorFromWin32(UInt32(error__)))\n"
+                            "}\n"
+                        ),
+                    )
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_winsock_invalid_socket_checked_wrapper_shape(self) -> None:
+        for name in ("accept", "socket", "WSAAccept", "WSAJoinLeaf", "WSASocketA", "WSASocketW"):
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+                    self.write_winsock_metadata(workspace, [self.winsock_invalid_socket_method(name)])
+                    self.write_winsock_native_helper(workspace, self.winsock_invalid_socket_wrapper_text(name=name))
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_winsock_bool_checked_wrapper_shape(self) -> None:
+        for name in (
+            "WSACloseEvent",
+            "WSAConnectByNameW",
+            "WSAConnectByNameA",
+            "WSAConnectByList",
+            "WSAGetOverlappedResult",
+            "WSAGetQOSByName",
+            "WSAResetEvent",
+            "WSASetEvent",
+        ):
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+                    self.write_winsock_metadata(workspace, [self.winsock_bool_method(name)])
+                    self.write_winsock_native_helper(workspace, self.winsock_bool_wrapper_text(name=name))
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_mswinsock_pending_bool_checked_wrapper_shape(self) -> None:
+        for name in ("AcceptEx", "TransmitFile"):
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+                    self.write_winsock_metadata(
+                        workspace,
+                        [self.winsock_bool_method(name, module="MSWSOCK.dll", set_last_error=False)],
+                    )
+                    self.write_winsock_native_helper(
+                        workspace,
+                        self.winsock_bool_wrapper_text(name=name, pending_success_status=997),
+                    )
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_winsock_wait_event_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_wait_event_method()])
+            self.write_winsock_native_helper(workspace, self.winsock_wait_event_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_winsock_invalid_event_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_invalid_event_method()])
+            self.write_winsock_native_helper(workspace, self.winsock_invalid_event_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_winsock_null_handle_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_null_handle_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_null_wrapper_text(name="WSAAsyncGetHostByName", return_type="CPointer<Unit>"),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_winsock_null_pointer_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_null_pointer_method()])
+            self.write_winsock_native_helper(workspace, self.winsock_null_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_null_success_handle_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Foundation"])
+            self.write_foundation_metadata(workspace, [self.set_last_error_null_success_handle_method()])
+            self.write_foundation_native_helper(workspace, self.set_last_error_null_success_handle_wrapper_text())
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_null_success_handle_with_can_return_errors_as_success(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Foundation"])
+            self.write_foundation_metadata(
+                workspace,
+                [
+                    self.set_last_error_null_success_handle_method(
+                        "LocalFree",
+                        return_name="HLOCAL",
+                        custom_attributes=[
+                            {"Type": "Windows.Win32.Foundation.Metadata.CanReturnErrorsAsSuccessAttribute"}
+                        ],
+                    )
+                ],
+            )
+            self.write_foundation_native_helper(
+                workspace,
+                self.set_last_error_null_success_handle_wrapper_text(name="LocalFree", return_name="HLOCAL"),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_rejects_missing_set_last_error_handle_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_handle_method()])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_common.Win32.Foundation.HANDLE\n"
+                    "public func OpenProcess(dwDesiredAccess: UInt32, bInheritHandle: Bool, dwProcessId: UInt32): HANDLE {\n"
+                    "    HANDLE()\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("SetLastError null-handle", stderr.getvalue())
+
+    def test_rejects_missing_set_last_error_service_handle_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Services"])
+            self.write_services_metadata(workspace, [self.set_last_error_service_handle_method()])
+            self.write_services_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Services\n"
+                    "public func OpenSCManagerW(lpMachineName: windows_strings.PWSTR, lpDatabaseName: windows_strings.PWSTR, dwDesiredAccess: UInt32): SC_HANDLE {\n"
+                    "    SC_HANDLE()\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("SetLastError null-handle", stderr.getvalue())
+
+    def test_rejects_missing_set_last_error_null_success_handle_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Foundation"])
+            self.write_foundation_metadata(workspace, [self.set_last_error_null_success_handle_method()])
+            self.write_foundation_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Foundation\n"
+                    "public func GlobalFree(hMem: HGLOBAL): HGLOBAL {\n"
+                    "    HGLOBAL()\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("SetLastError null-success handle", stderr.getvalue())
+
+    def test_rejects_missing_set_last_error_wait_event_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_wait_event_method()])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_common.Win32.Foundation.HANDLE\n"
+                    "public func WaitForSingleObject(hHandle: HANDLE, dwMilliseconds: UInt32): UInt32 {\n"
+                    "    0u32\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("SetLastError WAIT_EVENT", stderr.getvalue())
+
+    def test_rejects_set_last_error_handle_wrapper_without_null_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_handle_method()])
+            self.write_threading_native_helper(
+                workspace,
+                self.set_last_error_handle_wrapper_text(omit_null_check=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("null HANDLE", stderr.getvalue())
+
+    def test_rejects_set_last_error_service_handle_wrapper_without_null_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Services"])
+            self.write_services_metadata(workspace, [self.set_last_error_service_handle_method()])
+            self.write_services_native_helper(
+                workspace,
+                self.set_last_error_service_handle_wrapper_text(omit_null_check=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("null SC_HANDLE", stderr.getvalue())
+
+    def test_rejects_set_last_error_null_success_handle_wrapper_with_null_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Foundation"])
+            self.write_foundation_metadata(workspace, [self.set_last_error_null_success_handle_method()])
+            self.write_foundation_native_helper(
+                workspace,
+                self.set_last_error_null_success_handle_wrapper_text(use_null_check=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("non-null HGLOBAL", stderr.getvalue())
+
+    def test_rejects_set_last_error_wait_event_wrapper_without_wait_failed_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_wait_event_method()])
+            self.write_threading_native_helper(
+                workspace,
+                self.set_last_error_wait_event_wrapper_text(omit_failed_check=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WAIT_FAILED only", stderr.getvalue())
+
+    def test_rejects_set_last_error_wait_event_wrapper_that_treats_timeout_as_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_wait_event_method()])
+            self.write_threading_native_helper(
+                workspace,
+                self.set_last_error_wait_event_wrapper_text(check_timeout=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WAIT_TIMEOUT", stderr.getvalue())
+
+    def test_rejects_missing_set_last_error_null_pointer_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_null_pointer_method()])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "public func CreateFiberEx(): CPointer<Unit> {\n"
+                    "    CPointer<Unit>()\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("SetLastError null-pointer", stderr.getvalue())
+
+    def test_rejects_missing_set_last_error_typed_null_pointer_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Security.Cryptography"])
+            self.write_cryptography_metadata(workspace, [self.set_last_error_typed_null_pointer_method()])
+            self.write_cryptography_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Security.Cryptography\n"
+                    "public struct CERT_CONTEXT {\n"
+                    "    public let dwCertEncodingType: UInt32\n"
+                    "}\n"
+                    "public func CertCreateCertificateContext(dwCertEncodingType: UInt32, pbCertEncoded: CPointer<UInt8>, cbCertEncoded: UInt32): CPointer<CERT_CONTEXT> {\n"
+                    "    CPointer<CERT_CONTEXT>()\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("SetLastError null-pointer", stderr.getvalue())
+
+    def test_rejects_set_last_error_typed_null_pointer_wrapper_with_unit_result(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Security.Cryptography"])
+            self.write_cryptography_metadata(workspace, [self.set_last_error_typed_null_pointer_method()])
+            self.write_cryptography_native_helper(
+                workspace,
+                self.set_last_error_typed_null_pointer_wrapper_text(return_type="CPointer<Unit>"),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("Result<CPointer<CERT_CONTEXT>>", stderr.getvalue())
+
+    def test_rejects_set_last_error_tls_value_wrapper_without_get_last_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_tls_value_method()])
+            self.write_threading_native_helper(workspace, self.set_last_error_tls_value_wrapper_text(omit_last_error=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("GetLastError", stderr.getvalue())
+
+    def test_rejects_set_last_error_tls_value_wrapper_without_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_tls_value_method()])
+            self.write_threading_native_helper(
+                workspace,
+                self.set_last_error_tls_value_wrapper_text(omit_set_last_error=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("clear last error", stderr.getvalue())
+
+    def test_rejects_set_last_error_fls_value_wrapper_without_get_last_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(
+                workspace,
+                [self.set_last_error_tls_value_method("FlsGetValue", parameter_name="dwFlsIndex")],
+            )
+            self.write_threading_native_helper(
+                workspace,
+                self.set_last_error_tls_value_wrapper_text(
+                    name="FlsGetValue",
+                    parameter_name="dwFlsIndex",
+                    omit_last_error=True,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("GetLastError", stderr.getvalue())
+
+    def test_rejects_set_last_error_uint32_minus_one_wrapper_without_sentinel(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_uint32_minus_one_method()])
+            self.write_threading_native_helper(
+                workspace,
+                self.set_last_error_uint32_minus_one_wrapper_text(omit_failed_check=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("UInt32 -1", stderr.getvalue())
+
+    def test_rejects_set_last_error_uint32_zero_wrapper_without_sentinel(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_uint32_zero_method()])
+            self.write_threading_native_helper(
+                workspace,
+                self.set_last_error_uint32_zero_wrapper_text(omit_failed_check=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("UInt32 zero", stderr.getvalue())
+
+    def test_rejects_missing_filesystem_uint32_sentinel_checked_wrappers(self) -> None:
+        cases = [
+            ("GetFileAttributesW", self.set_last_error_uint32_minus_one_method, "UInt32 -1"),
+            ("GetFileVersionInfoSizeW", self.set_last_error_uint32_zero_method, "UInt32 zero"),
+            ("QueryDosDeviceW", self.set_last_error_uint32_zero_method, "UInt32 zero"),
+        ]
+        for name, method_factory, expected in cases:
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.Storage.FileSystem"])
+                    self.write_filesystem_metadata(workspace, [method_factory(name=name)])
+                    self.write_filesystem_native_helper(
+                        workspace,
+                        (
+                            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                            "package windows_common.Win32.Storage.FileSystem\n"
+                            f"public func {name}(): UInt32 {{\n"
+                            "    1u32\n"
+                            "}\n"
+                        ),
+                    )
+
+                    stderr = io.StringIO()
+                    with contextlib.redirect_stderr(stderr):
+                        with self.assertRaises(SystemExit) as raised:
+                            setup.check_windows_common_native_checked_wrappers(workspace)
+
+                    self.assertEqual(raised.exception.code, 1)
+                    self.assertIn(expected, stderr.getvalue())
+
+    def test_rejects_set_last_error_uint32_zero_last_error_wrapper_that_treats_zero_as_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_uint32_zero_last_error_method()])
+            self.write_threading_native_helper(
+                workspace,
+                self.set_last_error_uint32_zero_last_error_wrapper_text(treat_zero_as_failure=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("zero-last-error", stderr.getvalue())
+
+    def test_rejects_wait_failed_uint32_wrapper_without_wait_failed_sentinel(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.wait_failed_uint32_method()])
+            self.write_threading_native_helper(
+                workspace,
+                self.wait_failed_uint32_wrapper_text(omit_failed_check=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WAIT_FAILED", stderr.getvalue())
+
+    def test_rejects_wait_failed_uint32_wrapper_that_treats_timeout_as_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.wait_failed_uint32_method()])
+            self.write_threading_native_helper(
+                workspace,
+                self.wait_failed_uint32_wrapper_text(check_timeout=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WAIT_TIMEOUT", stderr.getvalue())
+
+    def test_rejects_missing_direct_win32_error_code_uint32_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.HttpServer"])
+            self.write_httpserver_metadata(
+                workspace,
+                [self.direct_win32_error_code_uint32_method("HttpInitialize", "HTTPAPI.dll")],
+            )
+            self.write_httpserver_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.HttpServer\n"
+                    "public func HttpInitialize(): UInt32 {\n"
+                    "    0u32\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("direct Win32 error-code UInt32", stderr.getvalue())
+
+    def test_rejects_missing_direct_win32_error_code_uint32_status_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.HttpServer"])
+            self.write_httpserver_metadata(
+                workspace,
+                [self.direct_win32_error_code_uint32_method("HttpReceiveHttpRequest", "HTTPAPI.dll")],
+            )
+            self.write_httpserver_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.HttpServer\n"
+                    "public func HttpReceiveHttpRequest(): UInt32 {\n"
+                    "    0u32\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("direct Win32 error-code UInt32", stderr.getvalue())
+
+    def test_rejects_missing_direct_win32_error_code_int32_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.NetworkManagement.Dns"])
+            self.write_dns_metadata(
+                workspace,
+                [self.direct_win32_error_code_int32_method("DnsCancelQuery", "DNSAPI.dll")],
+            )
+            self.write_dns_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.NetworkManagement.Dns\n"
+                    "public func DnsCancelQuery(): Int32 {\n"
+                    "    0\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("direct Win32 error-code Int32", stderr.getvalue())
+
+    def test_rejects_missing_direct_win32_error_code_int32_status_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.NetworkManagement.Dns"])
+            self.write_dns_metadata(
+                workspace,
+                [self.direct_win32_error_code_int32_method("DnsQueryEx", "DNSAPI.dll")],
+            )
+            self.write_dns_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.NetworkManagement.Dns\n"
+                    "public func DnsQueryEx(): Int32 {\n"
+                    "    0\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("direct Win32 error-code Int32", stderr.getvalue())
+
+    def test_rejects_direct_win32_error_code_uint32_wrapper_using_thread_last_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinHttp"])
+            self.write_winhttp_metadata(
+                workspace,
+                [self.direct_win32_error_code_uint32_method("WinHttpWebSocketSend", "WINHTTP.dll")],
+            )
+            self.write_winhttp_native_helper(
+                workspace,
+                self.direct_win32_error_code_uint32_wrapper_text(
+                    name="WinHttpWebSocketSend",
+                    package="windows_common.Win32.Networking.WinHttp",
+                    use_error_from_thread=True,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("returned-error-code", stderr.getvalue())
+
+    def test_rejects_direct_win32_error_code_uint32_wrapper_returning_status(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.NetworkManagement.Dns"])
+            self.write_dns_metadata(
+                workspace,
+                [self.direct_win32_error_code_uint32_method("DnsSetApplicationSettings", "DNSAPI.dll")],
+            )
+            self.write_dns_native_helper(
+                workspace,
+                self.direct_win32_error_code_uint32_wrapper_text(
+                    name="DnsSetApplicationSettings",
+                    package="windows_common.Win32.NetworkManagement.Dns",
+                    return_uint32=True,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("direct Win32 error-code UInt32", stderr.getvalue())
+
+    def test_rejects_direct_win32_error_code_uint32_status_wrapper_missing_success_status(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.HttpServer"])
+            self.write_httpserver_metadata(
+                workspace,
+                [self.direct_win32_error_code_uint32_method("HttpReceiveHttpRequest", "HTTPAPI.dll")],
+            )
+            self.write_httpserver_native_helper(
+                workspace,
+                self.direct_win32_error_code_uint32_status_wrapper_text(
+                    name="HttpReceiveHttpRequest",
+                    package="windows_common.Win32.Networking.HttpServer",
+                    success_statuses=(0, 997, 234, 38),
+                    omit_status=997,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("997u32", stderr.getvalue())
+
+    def test_rejects_direct_win32_error_code_int32_status_wrapper_missing_success_status(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.NetworkManagement.Dns"])
+            self.write_dns_metadata(
+                workspace,
+                [self.direct_win32_error_code_int32_method("DnsQueryEx", "DNSAPI.dll")],
+            )
+            self.write_dns_native_helper(
+                workspace,
+                self.direct_win32_error_code_int32_status_wrapper_text(
+                    name="DnsQueryEx",
+                    package="windows_common.Win32.NetworkManagement.Dns",
+                    success_statuses=(0, 9501, 9506),
+                    omit_status=9506,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("9506", stderr.getvalue())
+
+    def test_rejects_direct_win32_error_code_uint32_status_wrapper_with_unexpected_success_status(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.NetworkManagement.Dns"])
+            self.write_dns_metadata(
+                workspace,
+                [self.direct_win32_error_code_uint32_method("DnsServiceRegister", "DNSAPI.dll")],
+            )
+            self.write_dns_native_helper(
+                workspace,
+                self.direct_win32_error_code_uint32_status_wrapper_text(
+                    name="DnsServiceRegister",
+                    package="windows_common.Win32.NetworkManagement.Dns",
+                    success_statuses=(0, 9506),
+                    extra_status=1,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("unexpected status", stderr.getvalue())
+
+    def test_rejects_direct_win32_error_code_uint32_status_wrapper_collapsing_to_unit(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.NetworkManagement.Dns"])
+            self.write_dns_metadata(
+                workspace,
+                [self.direct_win32_error_code_uint32_method("DnsServiceDeRegister", "DNSAPI.dll")],
+            )
+            self.write_dns_native_helper(
+                workspace,
+                self.direct_win32_error_code_uint32_status_wrapper_text(
+                    name="DnsServiceDeRegister",
+                    package="windows_common.Win32.NetworkManagement.Dns",
+                    success_statuses=(0, 9506),
+                    return_unit=True,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("DnsServiceDeRegisterChecked", stderr.getvalue())
+
+    def test_rejects_uint32_less_than_or_equal_wrapper_without_threshold_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.uint32_less_than_or_equal_method()])
+            self.write_threading_native_helper(
+                workspace,
+                self.uint32_less_than_or_equal_wrapper_text(omit_failed_check=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("UInt32 <= threshold", stderr.getvalue())
+
+    def test_rejects_uint32_less_than_or_equal_wrapper_using_thread_last_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.uint32_less_than_or_equal_method()])
+            self.write_threading_native_helper(
+                workspace,
+                self.uint32_less_than_or_equal_wrapper_text(use_error_from_thread=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("returned-error-code", stderr.getvalue())
+
+    def test_rejects_set_last_error_uintnative_zero_wrapper_without_sentinel(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_uintnative_zero_method()])
+            self.write_threading_native_helper(
+                workspace,
+                self.set_last_error_uintnative_zero_wrapper_text(omit_failed_check=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("UIntNative zero", stderr.getvalue())
+
+    def test_rejects_missing_set_last_error_intnative_zero_last_error_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.UI.WindowsAndMessaging"])
+            self.write_ui_metadata(workspace, [self.set_last_error_intnative_zero_last_error_method()])
+            self.write_ui_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.UI.WindowsAndMessaging\n"
+                    "public func SendMessageTimeoutW(): IntNative {\n"
+                    "    1\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("IntNative zero-last-error", stderr.getvalue())
+
+    def test_rejects_set_last_error_intnative_zero_last_error_wrapper_using_thread_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.UI.WindowsAndMessaging"])
+            self.write_ui_metadata(workspace, [self.set_last_error_intnative_zero_last_error_method()])
+            self.write_ui_native_helper(
+                workspace,
+                self.set_last_error_intnative_zero_last_error_wrapper_text(use_error_from_thread=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("zero last-error", stderr.getvalue())
+
+    def test_rejects_set_last_error_int32_max_wrapper_without_sentinel(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_int32_max_method()])
+            self.write_threading_native_helper(workspace, self.set_last_error_int32_max_wrapper_text(omit_failed_check=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("THREAD_PRIORITY_ERROR_RETURN", stderr.getvalue())
+
+    def test_rejects_missing_winsock_socket_error_int32_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_socket_error_int32_method("connect")])
+            self.write_winsock_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.WinSock\n"
+                    "public func connect(s: UIntNative, buf: CPointer<Unit>, len: Int32, flags: Int32): Int32 {\n"
+                    "    0\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock SOCKET_ERROR Int32", stderr.getvalue())
+
+    def test_rejects_missing_mswinsock_socket_error_int32_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(
+                workspace,
+                [self.winsock_socket_error_int32_method("WSARecvEx", module="MSWSOCK.dll")],
+            )
+            self.write_winsock_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.WinSock\n"
+                    "public func WSARecvEx(s: UIntNative, buf: CPointer<Unit>, len: Int32, flags: Int32): Int32 {\n"
+                    "    0\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock SOCKET_ERROR Int32", stderr.getvalue())
+
+    def test_rejects_missing_mswinsock_get_last_error_socket_error_int32_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(
+                workspace,
+                [self.winsock_socket_error_int32_method("GetAddressByNameA", module="MSWSOCK.dll")],
+            )
+            self.write_winsock_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.WinSock\n"
+                    "public func GetAddressByNameA(s: UIntNative, buf: CPointer<Unit>, len: Int32, flags: Int32): Int32 {\n"
+                    "    0\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("MSWSOCK GetLastError SOCKET_ERROR Int32", stderr.getvalue())
+
+    def test_rejects_missing_winsock_direct_error_int32_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_direct_error_int32_method("WSAStartup")])
+            self.write_winsock_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.WinSock\n"
+                    "public func WSAStartup(): Int32 {\n"
+                    "    0\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock direct-error Int32", stderr.getvalue())
+
+    def test_rejects_missing_winsock_pending_status_int32_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_pending_status_int32_method("GetAddrInfoExW")])
+            self.write_winsock_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.WinSock\n"
+                    "public func GetAddrInfoExW(): Int32 {\n"
+                    "    0\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock pending-status Int32", stderr.getvalue())
+
+    def test_rejects_missing_winsock_lperrno_int32_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_lperrno_int32_method("WSCEnumProtocols")])
+            self.write_winsock_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.WinSock\n"
+                    "public func WSCEnumProtocols(lpErrno: CPointer<Int32>): Int32 {\n"
+                    "    0\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock lpErrno Int32", stderr.getvalue())
+
+    def test_rejects_missing_winsock_invalid_socket_checked_wrapper(self) -> None:
+        for name in ("accept", "WSAAccept", "WSAJoinLeaf"):
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+                    self.write_winsock_metadata(workspace, [self.winsock_invalid_socket_method(name)])
+                    self.write_winsock_native_helper(
+                        workspace,
+                        (
+                            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                            "package windows_common.Win32.Networking.WinSock\n"
+                            "public struct SOCKET {\n"
+                            "    public var Value: CPointer<Unit> = CPointer<Unit>()\n"
+                            "}\n"
+                            f"public func {name}(): SOCKET {{\n"
+                            "    SOCKET()\n"
+                            "}\n"
+                        ),
+                    )
+
+                    stderr = io.StringIO()
+                    with contextlib.redirect_stderr(stderr):
+                        with self.assertRaises(SystemExit) as raised:
+                            setup.check_windows_common_native_checked_wrappers(workspace)
+
+                    self.assertEqual(raised.exception.code, 1)
+                    self.assertIn("WinSock INVALID_SOCKET", stderr.getvalue())
+
+    def test_rejects_missing_winsock_bool_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_bool_method("WSAResetEvent")])
+            self.write_winsock_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.WinSock\n"
+                    "public func WSAResetEvent(): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock BOOL", stderr.getvalue())
+
+    def test_rejects_missing_winsock_wait_event_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_wait_event_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.WinSock\n"
+                    "import windows_common.Win32.Foundation.WAIT_EVENT\n"
+                    "public func WSAWaitForMultipleEvents(): WAIT_EVENT {\n"
+                    "    0u32\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock WAIT_EVENT", stderr.getvalue())
+
+    def test_rejects_missing_winsock_invalid_event_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_invalid_event_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.WinSock\n"
+                    "public struct WSAEVENT {\n"
+                    "    public var Value: CPointer<Unit> = CPointer<Unit>()\n"
+                    "}\n"
+                    "public func WSACreateEvent(): WSAEVENT {\n"
+                    "    WSAEVENT()\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock WSA_INVALID_EVENT", stderr.getvalue())
+
+    def test_rejects_missing_winsock_null_handle_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_null_handle_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.WinSock\n"
+                    "public func WSAAsyncGetHostByName(): CPointer<Unit> {\n"
+                    "    CPointer<Unit>()\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock null-handle", stderr.getvalue())
+
+    def test_rejects_missing_winsock_null_pointer_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_null_pointer_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.WinSock\n"
+                    "public struct HOSTENT {\n"
+                    "    public let h_name: CPointer<UInt8>\n"
+                    "}\n"
+                    "public func gethostbyname(): CPointer<HOSTENT> {\n"
+                    "    CPointer<HOSTENT>()\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock null-pointer", stderr.getvalue())
+
+    def test_rejects_winsock_socket_error_int32_wrapper_using_thread_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_socket_error_int32_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_socket_error_int32_wrapper_text(use_error_from_thread=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock SOCKET_ERROR", stderr.getvalue())
+
+    def test_rejects_winsock_socket_error_unit_wrapper_returning_status(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(
+                workspace,
+                [self.winsock_socket_error_int32_method("WSCInstallNameSpace", set_last_error=False)],
+            )
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_socket_error_int32_wrapper_text(name="WSCInstallNameSpace"),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("must not expose the zero success carrier", stderr.getvalue())
+
+    def test_rejects_winsock_socket_error_status_wrapper_collapsing_to_unit(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(
+                workspace,
+                [self.winsock_socket_error_int32_method("WSCEnumNameSpaceProviders32", set_last_error=False)],
+            )
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_socket_error_int32_wrapper_text(
+                    name="WSCEnumNameSpaceProviders32",
+                    preserves_status=False,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("must preserve the Int32 status", stderr.getvalue())
+
+    def test_rejects_winsock_socket_error_pending_wrapper_missing_success_path(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_socket_error_int32_method("WSARecv")])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_socket_error_int32_wrapper_text(
+                    name="WSARecv",
+                    preserves_status=False,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WSA_IO_PENDING", stderr.getvalue())
+
+    def test_rejects_mswinsock_get_last_error_socket_error_wrapper_using_wsa_get_last_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(
+                workspace,
+                [self.winsock_socket_error_int32_method("EnumProtocolsA", module="MSWSOCK.dll")],
+            )
+            self.write_winsock_native_helper(
+                workspace,
+                self.mswinsock_get_last_error_socket_error_int32_wrapper_text(
+                    name="EnumProtocolsA",
+                    use_wsa_get_last_error=True,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("not WSAGetLastError", stderr.getvalue())
+
+    def test_rejects_winsock_direct_error_int32_wrapper_using_wsa_get_last_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_direct_error_int32_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_direct_error_int32_wrapper_text(use_wsa_get_last_error=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("direct-return WinSock error codes", stderr.getvalue())
+
+    def test_rejects_winsock_direct_error_int32_wrapper_using_thread_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_direct_error_int32_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_direct_error_int32_wrapper_text(use_error_from_thread=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("direct-return WinSock error codes", stderr.getvalue())
+
+    def test_rejects_winsock_pending_status_int32_wrapper_using_wsa_get_last_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_pending_status_int32_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_pending_status_int32_wrapper_text(use_wsa_get_last_error=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("returned WinSock status codes", stderr.getvalue())
+
+    def test_rejects_winsock_pending_status_int32_wrapper_using_thread_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_pending_status_int32_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_pending_status_int32_wrapper_text(use_error_from_thread=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("returned WinSock status codes", stderr.getvalue())
+
+    def test_rejects_winsock_pending_status_int32_wrapper_collapsing_pending_to_unit(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_pending_status_int32_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_pending_status_int32_wrapper_text(collapse_to_unit=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("pending status", stderr.getvalue())
+
+    def test_rejects_winsock_lperrno_int32_wrapper_using_wsa_get_last_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_lperrno_int32_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_lperrno_int32_wrapper_text(use_wsa_get_last_error=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("lpErrno-returned WinSock errors", stderr.getvalue())
+
+    def test_rejects_winsock_lperrno_int32_wrapper_using_thread_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_lperrno_int32_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_lperrno_int32_wrapper_text(use_error_from_thread=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("lpErrno-returned WinSock errors", stderr.getvalue())
+
+    def test_rejects_winsock_lperrno_int32_wrapper_without_null_guard(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_lperrno_int32_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_lperrno_int32_wrapper_text(omit_null_check=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("guard the lpErrno", stderr.getvalue())
+
+    def test_rejects_winsock_lperrno_status_wrapper_collapsing_to_unit(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_lperrno_int32_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_lperrno_int32_wrapper_text(collapse_to_unit=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("preserve count/status", stderr.getvalue())
+
+    def test_rejects_winsock_lperrno_unit_wrapper_returning_status(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(
+                workspace,
+                [self.winsock_lperrno_int32_method("WSCDeinstallProvider")],
+            )
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_lperrno_int32_wrapper_text(
+                    name="WSCDeinstallProvider",
+                    preserves_status=True,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("zero success carrier", stderr.getvalue())
+
+    def test_rejects_winsock_invalid_socket_wrapper_using_thread_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_invalid_socket_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_invalid_socket_wrapper_text(use_error_from_thread=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock INVALID_SOCKET", stderr.getvalue())
+
+    def test_rejects_winsock_bool_wrapper_using_thread_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_bool_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_bool_wrapper_text(use_error_from_thread=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock BOOL", stderr.getvalue())
+
+    def test_rejects_mswinsock_pending_bool_wrapper_collapsed_to_unit(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(
+                workspace,
+                [self.winsock_bool_method("AcceptEx", module="MSWSOCK.dll", set_last_error=False)],
+            )
+            self.write_winsock_native_helper(workspace, self.winsock_bool_wrapper_text(name="AcceptEx"))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("Result<Bool>", stderr.getvalue())
+
+    def test_rejects_mswinsock_pending_bool_wrapper_missing_pending_branch(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(
+                workspace,
+                [self.winsock_bool_method("TransmitFile", module="MSWSOCK.dll", set_last_error=False)],
+            )
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_bool_wrapper_text(
+                    name="TransmitFile",
+                    pending_success_status=997,
+                    omit_pending_success_check=True,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WSA_IO_PENDING", stderr.getvalue())
+
+    def test_rejects_winsock_wait_event_wrapper_using_thread_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_wait_event_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_wait_event_wrapper_text(use_error_from_thread=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock WAIT_EVENT", stderr.getvalue())
+
+    def test_rejects_winsock_invalid_event_wrapper_using_thread_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_invalid_event_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_invalid_event_wrapper_text(use_error_from_thread=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock WSA_INVALID_EVENT", stderr.getvalue())
+
+    def test_rejects_winsock_null_handle_wrapper_using_thread_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_null_handle_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_null_wrapper_text(
+                    name="WSAAsyncGetHostByName",
+                    return_type="CPointer<Unit>",
+                    use_error_from_thread=True,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock null-handle", stderr.getvalue())
+
+    def test_rejects_winsock_null_pointer_wrapper_using_thread_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_null_pointer_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_null_wrapper_text(use_error_from_thread=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("WinSock null-pointer", stderr.getvalue())
+
+    def test_rejects_winsock_invalid_socket_wrapper_using_null_handle_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_invalid_socket_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_invalid_socket_wrapper_text(use_null_check=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("INVALID_SOCKET", stderr.getvalue())
+
+    def test_rejects_winsock_invalid_socket_wrapper_using_uintnative_compare(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinSock"])
+            self.write_winsock_metadata(workspace, [self.winsock_invalid_socket_method()])
+            self.write_winsock_native_helper(
+                workspace,
+                self.winsock_invalid_socket_wrapper_text(use_uintnative_compare=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("UIntNative", stderr.getvalue())
+
+    def test_rejects_missing_set_last_error_invalid_handle_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Storage.FileSystem"])
+            self.write_filesystem_metadata(workspace, [self.set_last_error_invalid_handle_method()])
+            self.write_filesystem_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Storage.FileSystem\n"
+                    "import windows_common.Win32.Foundation.HANDLE\n"
+                    "public func CreateFileW(): HANDLE {\n"
+                    "    HANDLE()\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("SetLastError invalid-handle", stderr.getvalue())
+
+    def test_rejects_set_last_error_invalid_handle_wrapper_with_null_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Storage.FileSystem"])
+            self.write_filesystem_metadata(workspace, [self.set_last_error_invalid_handle_method("FindFirstVolumeW")])
+            self.write_filesystem_native_helper(
+                workspace,
+                self.set_last_error_invalid_handle_wrapper_text(name="FindFirstVolumeW", use_null_check=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("INVALID_HANDLE_VALUE", stderr.getvalue())
+
+    def test_rejects_set_last_error_invalid_handle_wrapper_without_invalid_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Storage.FileSystem"])
+            self.write_filesystem_metadata(
+                workspace,
+                [self.set_last_error_invalid_handle_method("FindFirstVolumeMountPointW")],
+            )
+            self.write_filesystem_native_helper(
+                workspace,
+                self.set_last_error_invalid_handle_wrapper_text(
+                    name="FindFirstVolumeMountPointW",
+                    omit_invalid_check=True,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("INVALID_HANDLE_VALUE", stderr.getvalue())
+
+    def test_rejects_hresult_com_interface_out_wrapper_bare_ok(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(workspace, [self.hresult_com_out_method()])
+            self.write_com_native_helper(workspace, self.hresult_com_out_wrapper_text(bare_ok=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("bare HRESULT", stderr.getvalue())
+
+    def test_rejects_hresult_owned_pwstr_out_wrapper_bare_ok(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.hresult_owned_pwstr_out_method()])
+            self.write_threading_native_helper(workspace, self.hresult_owned_pwstr_out_wrapper_text(bare_ok=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("owned string", stderr.getvalue())
+
+    def test_rejects_hresult_owned_pointer_out_wrapper_bare_ok(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(workspace, [self.hresult_owned_pointer_out_method()])
+            self.write_com_native_helper(workspace, self.hresult_owned_pointer_out_wrapper_text(bare_ok=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("owned pointer", stderr.getvalue())
+
+    def test_rejects_multiple_success_hresult_wrapper_collapsed_to_unit(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(workspace, [self.multiple_success_hresult_method()])
+            self.write_com_native_helper(workspace, self.multiple_success_hresult_wrapper_text(collapse_to_unit=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("multiple-success HRESULT", stderr.getvalue())
+
+    def test_rejects_missing_metadata_multi_qi_hresult_wrapper_collapsed_to_unit(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(
+                workspace,
+                [self.multiple_success_hresult_missing_metadata_method("CoCreateInstanceFromApp")],
+            )
+            self.write_com_native_helper(
+                workspace,
+                self.multiple_success_hresult_wrapper_text(
+                    name="CoCreateInstanceFromApp",
+                    collapse_to_unit=True,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("multiple-success HRESULT", stderr.getvalue())
+
+    def test_rejects_hresult_com_interface_out_wrapper_without_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(workspace, [self.hresult_com_out_method()])
+            self.write_com_native_helper(workspace, self.hresult_com_out_wrapper_text(omit_preclear=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("pre-clear ppDAHolder", stderr.getvalue())
+
+    def test_rejects_hresult_com_interface_multi_out_wrapper_without_epointer_sibling_preclear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(workspace, [self.hresult_multi_com_out_method()])
+            self.write_com_native_helper(
+                workspace,
+                self.hresult_multi_com_out_wrapper_text(stale_epointer_preclear=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("before null out E_POINTER", stderr.getvalue())
+
+    def test_rejects_hresult_com_interface_out_wrapper_without_failed_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(workspace, [self.hresult_com_out_method()])
+            self.write_com_native_helper(workspace, self.hresult_com_out_wrapper_text(omit_failed_cleanup=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("release failed ppDAHolder", stderr.getvalue())
+
+    def test_rejects_hresult_owned_pwstr_out_wrapper_without_failed_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.hresult_owned_pwstr_out_method()])
+            self.write_threading_native_helper(
+                workspace,
+                self.hresult_owned_pwstr_out_wrapper_text(omit_failed_cleanup=True),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("LocalFree", stderr.getvalue())
+
+    def test_rejects_hresult_owned_pointer_out_wrapper_without_failed_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(
+                workspace,
+                [self.hresult_owned_pointer_out_method("CoQueryAuthenticationServices")],
+            )
+            self.write_com_native_helper(
+                workspace,
+                self.hresult_owned_pointer_out_wrapper_text(
+                    name="CoQueryAuthenticationServices",
+                    omit_failed_cleanup=True,
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("CoTaskMemFree", stderr.getvalue())
+
+    def test_rejects_hresult_com_interface_out_wrapper_without_success_null_check(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Com"])
+            self.write_com_metadata(workspace, [self.hresult_com_out_method()])
+            self.write_com_native_helper(workspace, self.hresult_com_out_wrapper_text(omit_success_null_check=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("successful HRESULT", stderr.getvalue())
+
+    def test_rejects_checked_wrapper_without_error_from_thread(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_native_helper(workspace, self.checked_wrapper_text(omit_error_from_thread=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("errorFromThread", stderr.getvalue())
+
+    def test_rejects_checked_wrapper_with_error_from_thread_only_in_comment(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            text = self.checked_wrapper_text(omit_error_from_thread=True).replace(
+                "    windows_core.Result<Unit>.Err(windows_core.Error(1))\n",
+                (
+                    "    // windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                    "    windows_core.Result<Unit>.Err(windows_core.Error(1))\n"
+                ),
+            )
+            self.write_native_helper(workspace, text)
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("errorFromThread", stderr.getvalue())
+
+    def test_rejects_checked_wrapper_with_success_result_only_in_raw_string(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            text = self.checked_wrapper_text(omit_success=True).replace(
+                "    if (CreateThing(handle)) {\n",
+                (
+                    "    let ignored = #\"return windows_core.Result<Unit>.Ok(())\"#\n"
+                    "    if (CreateThing(handle)) {\n"
+                ),
+            )
+            self.write_native_helper(workspace, text)
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("Ok(())", stderr.getvalue())
+
+    def test_rejects_checked_wrapper_without_same_file_base_helper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_native_helper(workspace, self.checked_wrapper_text(omit_base=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("same-file CreateThing native helper", stderr.getvalue())
+
+    def test_rejects_checked_wrapper_with_base_helper_only_in_block_comment(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            text = self.checked_wrapper_text(omit_base=True).replace(
+                "public func CreateThingChecked",
+                "/*\npublic func CreateThing(handle: Int32): Bool { true }\n*/\npublic func CreateThingChecked",
+            )
+            self.write_native_helper(workspace, text)
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("same-file CreateThing native helper", stderr.getvalue())
+
+    def test_rejects_checked_wrapper_that_does_not_branch_on_base_call(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_native_helper(workspace, self.checked_wrapper_text(call_base=False))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("must branch on CreateThing(...) success", stderr.getvalue())
+
+    def test_rejects_checked_wrapper_without_success_result(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_native_helper(workspace, self.checked_wrapper_text(omit_success=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("Ok(())", stderr.getvalue())
+
+    def test_rejects_cancel_waitable_timer_without_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace)
+            self.write_threading_metadata(workspace, [self.set_last_error_bool_method("CancelWaitableTimer")])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_core as windows_core\n"
+                    "public func ExistingChecked(): windows_core.Result<Unit> {\n"
+                    "    if (Existing()) {\n"
+                    "        return windows_core.Result<Unit>.Ok(())\n"
+                    "    }\n"
+                    "    windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                    "}\n"
+                    "public func Existing(): Bool {\n"
+                    "    true\n"
+                    "}\n"
+                    "public func CancelWaitableTimer(): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("CancelWaitableTimer", stderr.getvalue())
+
+    def test_rejects_set_last_error_boolean_method_without_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace)
+            self.write_threading_metadata(
+                workspace,
+                [self.set_last_error_bool_method("ClosePrivateNamespace", return_name="BOOLEAN")],
+            )
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_core as windows_core\n"
+                    "public func ExistingChecked(): windows_core.Result<Unit> {\n"
+                    "    if (Existing()) {\n"
+                    "        return windows_core.Result<Unit>.Ok(())\n"
+                    "    }\n"
+                    "    windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                    "}\n"
+                    "public func Existing(): Bool {\n"
+                    "    true\n"
+                    "}\n"
+                    "public func ClosePrivateNamespace(): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("ClosePrivateNamespace", stderr.getvalue())
+
+    def test_rejects_set_last_error_bool_false_success_wrapper_collapsed_to_unit(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_bool_method("SleepConditionVariableCS")])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_core as windows_core\n"
+                    "public func SleepConditionVariableCS(): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                    "public func SleepConditionVariableCSChecked(): windows_core.Result<Unit> {\n"
+                    "    if (SleepConditionVariableCS()) {\n"
+                    "        return windows_core.Result<Unit>.Ok(())\n"
+                    "    }\n"
+                    "    windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("false-success", stderr.getvalue())
+
+    def test_rejects_set_last_error_bool_false_success_wrapper_without_status_branch(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_bool_method("WaitOnAddress")])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_common.Win32.Foundation.GetLastError\n"
+                    "import windows_core as windows_core\n"
+                    "public func WaitOnAddress(): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                    "public func WaitOnAddressChecked(): windows_core.Result<Bool> {\n"
+                    "    let result__ = WaitOnAddress()\n"
+                    "    if (result__) {\n"
+                    "        return windows_core.Result<Bool>.Ok(true)\n"
+                    "    }\n"
+                    "    let lastError__ = GetLastError()\n"
+                    "    windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("status 1460", stderr.getvalue())
+
+    def test_rejects_set_last_error_bool_false_success_wrapper_without_pending_branch(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_bool_method("UnregisterWait")])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_common.Win32.Foundation.GetLastError\n"
+                    "import windows_core as windows_core\n"
+                    "public func UnregisterWait(): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                    "public func UnregisterWaitChecked(): windows_core.Result<Bool> {\n"
+                    "    let result__ = UnregisterWait()\n"
+                    "    if (result__) {\n"
+                    "        return windows_core.Result<Bool>.Ok(true)\n"
+                    "    }\n"
+                    "    let lastError__ = GetLastError()\n"
+                    "    windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("status 997", stderr.getvalue())
+
+    def test_rejects_set_last_error_bool_false_success_wrapper_without_second_status_branch(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_bool_method("ConnectNamedPipe")])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_common.Win32.Foundation.GetLastError\n"
+                    "import windows_core as windows_core\n"
+                    "public func ConnectNamedPipe(): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                    "public func ConnectNamedPipeChecked(): windows_core.Result<Bool> {\n"
+                    "    let result__ = ConnectNamedPipe()\n"
+                    "    if (result__) {\n"
+                    "        return windows_core.Result<Bool>.Ok(true)\n"
+                    "    }\n"
+                    "    let lastError__ = GetLastError()\n"
+                    "    if (lastError__ == 997u32) {\n"
+                    "        return windows_core.Result<Bool>.Ok(false)\n"
+                    "    }\n"
+                    "    windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("status 535", stderr.getvalue())
+
+    def test_rejects_checked_wrapper_for_multistate_set_last_error_bool_method(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.set_last_error_bool_method("GetQueuedCompletionStatus")])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_core as windows_core\n"
+                    "public func GetQueuedCompletionStatus(): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                    "public func GetQueuedCompletionStatusChecked(): windows_core.Result<Unit> {\n"
+                    "    if (GetQueuedCompletionStatus()) {\n"
+                    "        return windows_core.Result<Unit>.Ok(())\n"
+                    "    }\n"
+                    "    windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("must not collapse multi-state", stderr.getvalue())
+
+    def test_accepts_set_last_error_bool_method_with_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace)
+            self.write_threading_metadata(workspace, [self.set_last_error_bool_method("CancelWaitableTimer")])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_core as windows_core\n"
+                    "public func CancelWaitableTimer(): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                    "public func CancelWaitableTimerChecked(): windows_core.Result<Unit> {\n"
+                    "    if (CancelWaitableTimer()) {\n"
+                    "        return windows_core.Result<Unit>.Ok(())\n"
+                    "    }\n"
+                    "    windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                    "}\n"
+                ),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_bool_false_success_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            false_success_statuses = {
+                "SleepConditionVariableCS": (1460,),
+                "SleepConditionVariableSRW": (1460,),
+                "WaitOnAddress": (1460,),
+                "DeleteTimerQueueTimer": (997,),
+                "UnregisterWait": (997,),
+                "UnregisterWaitEx": (997,),
+                "ConnectNamedPipe": (997, 535),
+                "DeviceIoControl": (997,),
+                "GetThreadWaitChain": (997,),
+                "HandleLogFull": (997,),
+                "GetOverlappedResult": (996,),
+                "GetOverlappedResultEx": (996, 192, 258),
+                "GetQueuedCompletionStatusEx": (258,),
+                "LockFileEx": (997,),
+                "ReadFile": (997,),
+                "ReadFileScatter": (997,),
+                "TransactNamedPipe": (997,),
+                "WaitCommEvent": (997,),
+                "WinUsb_ReadPipe": (997,),
+                "WinUsb_WritePipe": (997,),
+                "WriteFile": (997,),
+                "WriteFileGather": (997,),
+            }
+            def false_success_wrapper(name: str, statuses: tuple[int, ...]) -> str:
+                status_branches = "".join(
+                    f"    if (lastError__ == {status}u32) {{\n"
+                    "        return windows_core.Result<Bool>.Ok(false)\n"
+                    "    }\n"
+                    for status in statuses
+                )
+                return (
+                    f"public func {name}(): Bool {{\n"
+                    "    false\n"
+                    "}\n"
+                    f"public func {name}Checked(): windows_core.Result<Bool> {{\n"
+                    f"    let result__ = {name}()\n"
+                    "    if (result__) {\n"
+                    "        return windows_core.Result<Bool>.Ok(true)\n"
+                    "    }\n"
+                    "    let lastError__ = GetLastError()\n"
+                    f"{status_branches}"
+                    "    windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))\n"
+                    "}\n"
+                )
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(
+                workspace,
+                [self.set_last_error_bool_method(name) for name in false_success_statuses],
+            )
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_common.Win32.Foundation.GetLastError\n"
+                    "import windows_core as windows_core\n"
+                    + "".join(
+                        false_success_wrapper(name, statuses)
+                        for name, statuses in false_success_statuses.items()
+                    )
+                ),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_set_last_error_bool_status_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            status_successes = {
+                "WinHttpCrackUrl": (122,),
+                "WinHttpCreateUrl": (122,),
+                "WinHttpQueryHeaders": (122, 12150),
+                "WinHttpQueryOption": (122,),
+                "WinHttpReceiveResponse": (12032,),
+                "WinHttpSendRequest": (12032,),
+            }
+
+            def winhttp_status_method(name: str) -> dict:
+                method = self.set_last_error_bool_method(name, parameters=[{"Name": "", "SequenceNumber": 0, "Attributes": ["None"]}])
+                method["Import"]["Module"] = {"Name": "WINHTTP.dll", "CustomAttributes": []}
+                return method
+
+            def status_wrapper(name: str, statuses: tuple[int, ...]) -> str:
+                status_branches = "".join(
+                    f"    if (lastError__ == {status}u32) {{\n"
+                    "        return windows_core.Result<UInt32>.Ok(lastError__)\n"
+                    "    }\n"
+                    for status in statuses
+                )
+                return (
+                    f"public func {name}(): Bool {{\n"
+                    "    false\n"
+                    "}\n"
+                    f"public func {name}Checked(): windows_core.Result<UInt32> {{\n"
+                    f"    let result__ = {name}()\n"
+                    "    if (result__) {\n"
+                    "        return windows_core.Result<UInt32>.Ok(0u32)\n"
+                    "    }\n"
+                    "    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc(\"KERNEL32.dll\", \"GetLastError\"))\n"
+                    "    let lastError__ = unsafe { getLastErrorProc__() }\n"
+                    f"{status_branches}"
+                    "    windows_core.Result<UInt32>.Err(windows_core.errorFromWin32(lastError__))\n"
+                    "}\n"
+                )
+
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.Networking.WinHttp"])
+            self.write_winhttp_metadata(
+                workspace,
+                [winhttp_status_method(name) for name in status_successes],
+            )
+            self.write_winhttp_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.Networking.WinHttp\n"
+                    "import windows_libloading as windows_libloading\n"
+                    "import windows_core as windows_core\n"
+                    + "".join(
+                        status_wrapper(name, statuses)
+                        for name, statuses in status_successes.items()
+                    )
+                ),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_attach_thread_input_checked_wrapper_without_set_last_error_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.attach_thread_input_method()])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_core as windows_core\n"
+                    "public func AttachThreadInput(idAttach: UInt32, idAttachTo: UInt32, fAttach: Bool): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                    "public func AttachThreadInputChecked(idAttach: UInt32, idAttachTo: UInt32, fAttach: Bool): windows_core.Result<Unit> {\n"
+                    "    if (AttachThreadInput(idAttach, idAttachTo, fAttach)) {\n"
+                    "        return windows_core.Result<Unit>.Ok(())\n"
+                    "    }\n"
+                    "    windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                    "}\n"
+                ),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_cached_signing_level_checked_wrapper_without_set_last_error_metadata(self) -> None:
+        for name in ("GetCachedSigningLevel", "SetCachedSigningLevel"):
+            with self.subTest(name=name):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir)
+                    self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+                    method = self.set_last_error_bool_method(name)
+                    method["Import"]["Attributes"] = ["ExactSpelling", "CallingConventionWinApi"]
+                    self.write_threading_metadata(workspace, [method])
+                    self.write_threading_native_helper(
+                        workspace,
+                        (
+                            "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                            "package windows_common.Win32.System.Threading\n"
+                            "import windows_core as windows_core\n"
+                            f"public func {name}(): Bool {{\n"
+                            "    false\n"
+                            "}\n"
+                            f"public func {name}Checked(): windows_core.Result<Unit> {{\n"
+                            f"    if ({name}()) {{\n"
+                            "        return windows_core.Result<Unit>.Ok(())\n"
+                            "    }\n"
+                            "    windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                            "}\n"
+                        ),
+                    )
+
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_allows_semantic_set_last_error_bool_method_without_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace)
+            self.write_threading_metadata(workspace, [self.set_last_error_bool_method("CanAccessToken")])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_core as windows_core\n"
+                    "public func Existing(): Bool {\n"
+                    "    true\n"
+                    "}\n"
+                    "public func ExistingChecked(): windows_core.Result<Unit> {\n"
+                    "    if (Existing()) {\n"
+                    "        return windows_core.Result<Unit>.Ok(())\n"
+                    "    }\n"
+                    "    windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                    "}\n"
+                    "public func CanAccessToken(): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                ),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_accepts_get_message_int32_minus_one_checked_wrapper_shape(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace)
+            self.write_threading_metadata(
+                workspace,
+                [
+                    self.set_last_error_bool_method(
+                        "GetMessageW",
+                        parameters=[
+                            {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                            {"Name": "lpMsg", "SequenceNumber": 1, "Attributes": ["Out"]},
+                        ],
+                        custom_attributes=[
+                            {
+                                "Type": "Windows.Win32.Foundation.Metadata.CanReturnMultipleSuccessValuesAttribute",
+                                "FixedArguments": [],
+                                "NamedArguments": [],
+                            }
+                        ],
+                    )
+                ],
+            )
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_core as windows_core\n"
+                    "public func GetMessageW(lpMsg: CPointer<Unit>): Int32 {\n"
+                    "    0\n"
+                    "}\n"
+                    "public func GetMessageWChecked(lpMsg: CPointer<Unit>): windows_core.Result<Int32> {\n"
+                    "    let result__ = GetMessageW(lpMsg)\n"
+                    "    if (result__ == -1) {\n"
+                    "        return windows_core.Result<Int32>.Err(windows_core.errorFromThread())\n"
+                    "    }\n"
+                    "    windows_core.Result<Int32>.Ok(result__)\n"
+                    "}\n"
+                ),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_rejects_get_message_bool_collapse_without_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace)
+            self.write_threading_metadata(
+                workspace,
+                [
+                    self.set_last_error_bool_method(
+                        "GetMessageW",
+                        parameters=[
+                            {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                            {"Name": "lpMsg", "SequenceNumber": 1, "Attributes": ["Out"]},
+                        ],
+                        custom_attributes=[
+                            {
+                                "Type": "Windows.Win32.Foundation.Metadata.CanReturnMultipleSuccessValuesAttribute",
+                                "FixedArguments": [],
+                                "NamedArguments": [],
+                            }
+                        ],
+                    )
+                ],
+            )
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "public func GetMessageW(lpMsg: CPointer<Unit>): Bool {\n"
+                    "    true\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("multi-success BOOL", stderr.getvalue())
+
+    def test_accepts_track_popup_menu_int32_status_without_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.UI.WindowsAndMessaging"])
+            self.write_ui_metadata(
+                workspace,
+                [
+                    self.set_last_error_bool_method(
+                        "TrackPopupMenu",
+                        custom_attributes=[
+                            {
+                                "Type": "Windows.Win32.Foundation.Metadata.CanReturnMultipleSuccessValuesAttribute",
+                                "FixedArguments": [],
+                                "NamedArguments": [],
+                            }
+                        ],
+                    )
+                ],
+            )
+            self.write_ui_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.UI.WindowsAndMessaging\n"
+                    "import windows_core as windows_core\n"
+                    "public func Existing(): Bool {\n"
+                    "    true\n"
+                    "}\n"
+                    "public func ExistingChecked(): windows_core.Result<Unit> {\n"
+                    "    if (Existing()) {\n"
+                    "        return windows_core.Result<Unit>.Ok(())\n"
+                    "    }\n"
+                    "    windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                    "}\n"
+                    "public func TrackPopupMenu(): Int32 {\n"
+                    "    0\n"
+                    "}\n"
+                ),
+            )
+
+            setup.check_windows_common_native_checked_wrappers(workspace)
+
+    def test_rejects_track_popup_menu_bool_collapse(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.UI.WindowsAndMessaging"])
+            self.write_ui_metadata(
+                workspace,
+                [
+                    self.set_last_error_bool_method(
+                        "TrackPopupMenu",
+                        custom_attributes=[
+                            {
+                                "Type": "Windows.Win32.Foundation.Metadata.CanReturnMultipleSuccessValuesAttribute",
+                                "FixedArguments": [],
+                                "NamedArguments": [],
+                            }
+                        ],
+                    )
+                ],
+            )
+            self.write_ui_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.UI.WindowsAndMessaging\n"
+                    "import windows_core as windows_core\n"
+                    "public func Existing(): Bool {\n"
+                    "    true\n"
+                    "}\n"
+                    "public func ExistingChecked(): windows_core.Result<Unit> {\n"
+                    "    if (Existing()) {\n"
+                    "        return windows_core.Result<Unit>.Ok(())\n"
+                    "    }\n"
+                    "    windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                    "}\n"
+                    "public func TrackPopupMenu(): Bool {\n"
+                    "    true\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("multi-success BOOL", stderr.getvalue())
+
+    def test_rejects_missing_attach_thread_input_checked_wrapper_without_set_last_error_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            self.write_threading_metadata(workspace, [self.attach_thread_input_method()])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "public func AttachThreadInput(idAttach: UInt32, idAttachTo: UInt32, fAttach: Bool): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("AttachThreadInput", stderr.getvalue())
+
+    def test_rejects_missing_cached_signing_level_checked_wrapper_without_set_last_error_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace, ["Windows.Win32.System.Threading"])
+            method = self.set_last_error_bool_method("GetCachedSigningLevel")
+            method["Import"]["Attributes"] = ["ExactSpelling", "CallingConventionWinApi"]
+            self.write_threading_metadata(workspace, [method])
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "public func GetCachedSigningLevel(): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("GetCachedSigningLevel", stderr.getvalue())
+
+    def test_rejects_set_last_error_bool_method_with_out_parameter_without_checked_wrapper(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_windows_common_manifest(workspace)
+            self.write_threading_metadata(
+                workspace,
+                [
+                    self.set_last_error_bool_method(
+                        "GetThreadTimes",
+                        parameters=[
+                            {"Name": "", "SequenceNumber": 0, "Attributes": ["None"]},
+                            {"Name": "hThread", "SequenceNumber": 1, "Attributes": ["In"]},
+                            {"Name": "lpCreationTime", "SequenceNumber": 2, "Attributes": ["Out"]},
+                        ],
+                    )
+                ],
+            )
+            self.write_threading_native_helper(
+                workspace,
+                (
+                    "// Generated by windows-bindgen. DO NOT EDIT.\n"
+                    "package windows_common.Win32.System.Threading\n"
+                    "import windows_core as windows_core\n"
+                    "public func Existing(): Bool {\n"
+                    "    true\n"
+                    "}\n"
+                    "public func ExistingChecked(): windows_core.Result<Unit> {\n"
+                    "    if (Existing()) {\n"
+                    "        return windows_core.Result<Unit>.Ok(())\n"
+                    "    }\n"
+                    "    windows_core.Result<Unit>.Err(windows_core.errorFromThread())\n"
+                    "}\n"
+                    "public func GetThreadTimes(): Bool {\n"
+                    "    false\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_windows_common_native_checked_wrappers(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("GetThreadTimes", stderr.getvalue())
+
+
 class AbiOwnershipAuditTests(unittest.TestCase):
+    def write_winui_xaml(self, workspace: Path, text: str) -> None:
+        source = workspace / "windows-winui3" / "src" / "xaml" / "mod.cj"
+        source.parent.mkdir(parents=True, exist_ok=True)
+        source.write_text(text, encoding="utf-8")
+
     def test_query_interface_raw_wrapped_in_local_is_not_consumed(self) -> None:
         body = (
             "\n"
@@ -1032,6 +12224,67 @@ class AbiOwnershipAuditTests(unittest.TestCase):
             self.assertEqual(raised.exception.code, 1)
             self.assertIn("owned ABI wrapper constructors must not be discarded", stderr.getvalue())
 
+    def test_query_required_bound_raw_must_be_released_or_wrapped(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_winui_xaml(
+                workspace,
+                (
+                    "package windows_winui3.xaml\n"
+                    "func leak(): Unit {\n"
+                    "    let raw = queryRequired(source, iid, \"Thing\")\n"
+                    "    println(\"leaked\")\n"
+                    "}\n"
+                ),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    abi.check_owned_raw_query_required_results_consumed(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("queryRequired result 'raw'", stderr.getvalue())
+
+    def test_query_required_bound_raw_release_is_consumed(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_winui_xaml(
+                workspace,
+                (
+                    "package windows_winui3.xaml\n"
+                    "func ok(): Unit {\n"
+                    "    let raw = queryRequired(source, iid, \"Thing\")\n"
+                    "    try {\n"
+                    "        use(raw)\n"
+                    "    } finally {\n"
+                    "        releaseRaw(raw)\n"
+                    "    }\n"
+                    "}\n"
+                ),
+            )
+
+            abi.check_owned_raw_query_required_results_consumed(workspace)
+
+    def test_query_required_bound_raw_returned_wrapper_is_consumed(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_winui_xaml(
+                workspace,
+                (
+                    "package windows_winui3.xaml\n"
+                    "func ok(): UIElementHandle {\n"
+                    "    let raw = queryRequired(source, iid, \"Thing\")\n"
+                    "    return UIElementHandle(raw)\n"
+                    "}\n"
+                    "func inlineOk(): ButtonBaseHandle {\n"
+                    "    ButtonBaseHandle(queryRequired(source, iid, \"Thing\"))\n"
+                    "}\n"
+                ),
+            )
+
+            abi.check_owned_raw_query_required_results_consumed(workspace)
+
 
 class IgnoredResultsAuditTests(unittest.TestCase):
     def test_constructor_receiver_ok_before_outer_work_is_rejected(self) -> None:
@@ -1361,11 +12614,12 @@ class IgnoredResultsAuditTests(unittest.TestCase):
 
 
 class ShellScriptGateTests(unittest.TestCase):
-    def test_rejects_power_shell_and_batch_scripts(self) -> None:
+    def test_rejects_power_shell_batch_and_cmd_scripts(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             workspace = Path(temp_dir)
             write_file(workspace, "tools/build.ps1")
             write_file(workspace, "tools/build.bat")
+            write_file(workspace, "tools/build.cmd")
             write_file(workspace, ".git/ignored.ps1")
             write_file(workspace, "target/ignored.bat")
 
@@ -1378,6 +12632,7 @@ class ShellScriptGateTests(unittest.TestCase):
             message = stderr.getvalue()
             self.assertIn("tools/build.ps1", message)
             self.assertIn("tools/build.bat", message)
+            self.assertIn("tools/build.cmd", message)
             self.assertNotIn("ignored.ps1", message)
             self.assertNotIn("ignored.bat", message)
 
@@ -1387,6 +12642,132 @@ class WinuiXamlHelperGateTests(unittest.TestCase):
         path = workspace / "windows-winui3" / "src" / "xaml" / "mod.cj"
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text, encoding="utf-8")
+
+    def callback_com_helper_text(
+        self,
+        *,
+        omit_add_ref: bool = False,
+        omit_clear_slot: bool = False,
+        omit_e_pointer_clear: bool = False,
+        unguarded_e_pointer_clear: bool = False,
+        omit_windows_exception_catch: bool = False,
+        generic_exception_catch_first: bool = False,
+        plain_check_hresult: bool = False,
+    ) -> str:
+        def callback(prefix: str, iid_name: str, clear_slot: str) -> str:
+            add_ref_line = "" if omit_add_ref and prefix == "applicationInitializationCallback" else f"    unsafe {{ {prefix}AddRef(thisPtr) }}\n"
+            clear_slot_line = "" if omit_clear_slot and prefix == "routedEventHandler" else f"            {clear_slot}(value.slot)\n"
+            if omit_e_pointer_clear and prefix == "applicationInitializationCallback":
+                e_pointer_clear_line = ""
+            elif unguarded_e_pointer_clear and prefix == "applicationInitializationCallback":
+                e_pointer_clear_line = "        unsafe { result.write(CPointer<Unit>()) }\n"
+            else:
+                e_pointer_clear_line = (
+                    "        if (result.isNotNull()) {\n"
+                    "            unsafe { result.write(CPointer<Unit>()) }\n"
+                    "        }\n"
+                )
+            windows_exception_catch = (
+                "    } catch (error: WindowsException) {\n"
+                "        return error.code().value\n"
+            )
+            generic_exception_catch = (
+                "    } catch (err: Exception) {\n"
+                "        return E_FAIL.value\n"
+                "    }\n"
+            )
+            if omit_windows_exception_catch and prefix == "applicationInitializationCallback":
+                catch_lines = generic_exception_catch
+            elif generic_exception_catch_first and prefix == "applicationInitializationCallback":
+                catch_lines = generic_exception_catch + windows_exception_catch
+            else:
+                catch_lines = windows_exception_catch + generic_exception_catch
+            return (
+                f"func {prefix}QueryInterface(thisPtr: CPointer<Unit>, iidPtr: CPointer<GUID>, result: CPointer<CPointer<Unit>>): Int32 {{\n"
+                "    if (thisPtr.isNull() || iidPtr.isNull() || result.isNull()) {\n"
+                f"{e_pointer_clear_line}"
+                "        return E_POINTER.value\n"
+                "    }\n"
+                "    let iid = unsafe { iidPtr.read() }\n"
+                f"    if (iid == IID_IUNKNOWN || iid == {iid_name}) {{\n"
+                "        unsafe { result.write(thisPtr) }\n"
+                f"{add_ref_line}"
+                "        return S_OK.value\n"
+                "    }\n"
+                "    unsafe { result.write(CPointer<Unit>()) }\n"
+                "    return E_NOINTERFACE.value\n"
+                "}\n"
+                f"func {prefix}AddRef(thisPtr: CPointer<Unit>): UInt32 {{ 1u32 }}\n"
+                f"func {prefix}Release(thisPtr: CPointer<Unit>): UInt32 {{\n"
+                "    let obj = CPointer<Object>(thisPtr)\n"
+                "    var value = unsafe { obj.read() }\n"
+                "    if (value.refCount == 0u32) {\n"
+                "        return 0u32\n"
+                "    }\n"
+                "    value.refCount -= 1u32\n"
+                "    let refCount = value.refCount\n"
+                "    if (refCount == 0u32) {\n"
+                "        if (value.slot >= 0) {\n"
+                f"{clear_slot_line}"
+                "            value.slot = -1\n"
+                "        }\n"
+                "        unsafe { obj.write(value) }\n"
+                "        coTaskMemFree(thisPtr)\n"
+                "        return 0u32\n"
+                "    }\n"
+                "    unsafe { obj.write(value) }\n"
+                "    return refCount\n"
+                "}\n"
+                f"func {prefix}Invoke(): Int32 {{\n"
+                "    try {\n"
+                "        return S_OK.value\n"
+                f"{catch_lines}"
+                "}\n"
+                f"func {prefix}Vtbl(): Unit {{}}\n"
+            )
+
+        check_hresult = (
+            "func checkHRESULT(hr: HRESULT, operation: String): Unit {\n"
+            "    if (hr.failed()) {\n"
+            + (
+                "        throw Exception(\"failed\")\n"
+                if plain_check_hresult
+                else "        throw WindowsException(hr)\n"
+            )
+            + "    }\n"
+            "}\n"
+            "func expectFactory(): Unit {}\n"
+        )
+        default_vtables = (
+            "struct ButtonBaseVtbl {\n"
+            "    public var AddClick: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<EventRegistrationToken>) -> Int32> = { _, _, result =>\n"
+            "        if (result.isNotNull()) {\n"
+            "            unsafe { result.write(0) }\n"
+            "        }\n"
+            "        E_NOTIMPL.value\n"
+            "    }\n"
+            "}\n"
+            "struct WindowVtbl {}\n"
+            "struct RoutedEventHandlerVtbl {\n"
+            "    public var QueryInterface: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result =>\n"
+            "        if (result.isNotNull()) {\n"
+            "            unsafe { result.write(CPointer<Unit>()) }\n"
+            "        }\n"
+            "        E_NOTIMPL.value\n"
+            "    }\n"
+            "}\n"
+            "struct RoutedEventHandlerObject {}\n"
+        )
+        return (
+            default_vtables
+            + check_hresult
+            + callback(
+                "applicationInitializationCallback",
+                "IID_APPLICATION_INITIALIZATION_CALLBACK",
+                "clearApplicationInitializationCallbackSlot",
+            )
+            + callback("routedEventHandler", "IID_ROUTED_EVENT_HANDLER", "clearRoutedEventHandlerSlot")
+        )
 
     def test_rejects_winui_failed_out_slot_check_before_cleanup(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -1436,6 +12817,104 @@ class WinuiXamlHelperGateTests(unittest.TestCase):
             )
 
             setup.check_winui_xaml_failed_out_cleanup(workspace)
+
+    def test_accepts_winui_callback_com_invariants(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_xaml_helper(workspace, self.callback_com_helper_text())
+
+            setup.check_winui_xaml_callback_com_invariants(workspace)
+
+    def test_rejects_winui_callback_query_interface_without_success_add_ref(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_xaml_helper(workspace, self.callback_com_helper_text(omit_add_ref=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_winui_xaml_callback_com_invariants(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("QueryInterface must preserve COM out-pointer/AddRef semantics", stderr.getvalue())
+
+    def test_rejects_winui_callback_query_interface_without_pointer_failure_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_xaml_helper(workspace, self.callback_com_helper_text(omit_e_pointer_clear=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_winui_xaml_callback_com_invariants(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("null-result guard", stderr.getvalue())
+
+    def test_rejects_winui_callback_query_interface_with_unguarded_pointer_failure_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_xaml_helper(workspace, self.callback_com_helper_text(unguarded_e_pointer_clear=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_winui_xaml_callback_com_invariants(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("null-result guard", stderr.getvalue())
+
+    def test_rejects_winui_callback_invoke_without_windows_exception_translation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_xaml_helper(workspace, self.callback_com_helper_text(omit_windows_exception_catch=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_winui_xaml_callback_com_invariants(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("Invoke must preserve WindowsException", stderr.getvalue())
+
+    def test_rejects_winui_callback_invoke_with_generic_exception_catch_first(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_xaml_helper(workspace, self.callback_com_helper_text(generic_exception_catch_first=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_winui_xaml_callback_com_invariants(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("catch WindowsException before generic Exception", stderr.getvalue())
+
+    def test_rejects_winui_callback_release_without_slot_clear(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_xaml_helper(workspace, self.callback_com_helper_text(omit_clear_slot=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_winui_xaml_callback_com_invariants(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("Release must clear slots", stderr.getvalue())
+
+    def test_rejects_winui_check_hresult_plain_exception(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_xaml_helper(workspace, self.callback_com_helper_text(plain_check_hresult=True))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_winui_xaml_callback_com_invariants(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("checkHRESULT must throw WindowsException", stderr.getvalue())
 
 
 class WindowsStringFinalizerGateTests(unittest.TestCase):
@@ -1716,6 +13195,247 @@ class FinalizerCleanupGateTests(unittest.TestCase):
             )
 
             setup.check_finalizers_do_not_block_on_locks(workspace)
+
+
+class PropVariantPropsysSmokeGateTests(unittest.TestCase):
+    def write_propvariant_test(self, workspace: Path, text: str) -> None:
+        path = workspace / "windows-propvariant" / "src" / "propvariant_test.cj"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+
+    def valid_source(self) -> str:
+        return (
+            "package windows_propvariant\n"
+            "func propVariantSmokePropsysProc(name: String): CPointer<Unit> {\n"
+            "    windows_libloading.resolveProc(\"propsys.dll\", name)\n"
+            "}\n"
+            "func propVariantSmokeToString(value: PROPVARIANT): String {\n"
+            "    propVariantSmokePropsysProc(\"PropVariantToString\")\n"
+            "    \"\"\n"
+            "}\n"
+            "func propVariantSmokeToInt32(value: PROPVARIANT): Int32 {\n"
+            "    propVariantSmokePropsysProc(\"PropVariantToInt32\")\n"
+            "    0\n"
+            "}\n"
+            "@When[os == \"Windows\"]\n"
+            "@Test\n"
+            "func propsysConsumesCangjiePropVariants(): Unit {\n"
+            "    let text = PropVariant(propVariantFromString(\"shell-property-roundtrip\"))\n"
+            "    let number = PropVariant(propVariantFromInt32(314i32))\n"
+            "    propVariantSmokeToString(text.get())\n"
+            "    propVariantSmokeToInt32(number.get())\n"
+            "}\n"
+        )
+
+    def test_accepts_propsys_smoke(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_propvariant_test(workspace, self.valid_source())
+
+            setup.check_propvariant_propsys_smoke(workspace)
+
+    def test_rejects_missing_propsys_loader(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_propvariant_test(workspace, self.valid_source().replace('"propsys.dll"', '"ole32.dll"'))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_propvariant_propsys_smoke(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("real Propsys PROPVARIANT smoke", stderr.getvalue())
+
+    def test_rejects_smoke_that_does_not_consume_cangjie_values(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_propvariant_test(
+                workspace,
+                self.valid_source()
+                .replace("PropVariant(propVariantFromString(\"shell-property-roundtrip\"))", "PropVariant()")
+                .replace("PropVariant(propVariantFromInt32(314i32))", "PropVariant()"),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_propvariant_propsys_smoke(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("no longer consumes Cangjie PROPVARIANTs", stderr.getvalue())
+
+
+class VariantOleautSmokeGateTests(unittest.TestCase):
+    def write_variant_test(self, workspace: Path, text: str) -> None:
+        path = workspace / "windows-variant" / "src" / "variant_test.cj"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+
+    def valid_source(self) -> str:
+        return (
+            "package windows_variant\n"
+            "func variantSmokeOleAut32Proc(name: String): CPointer<Unit> {\n"
+            "    windows_libloading.resolveProc(\"oleaut32.dll\", name)\n"
+            "}\n"
+            "func variantSmokeChangeType(value: VARIANT, target: VARENUM): Variant {\n"
+            "    let proc = variantSmokeOleAut32Proc(\"VariantChangeType\")\n"
+            "    let changeFn = CFunc<(CPointer<VARIANT>, CPointer<VARIANT>, UInt16, VARENUM) -> Int32>(proc)\n"
+            "    var result = VARIANT()\n"
+            "    let resultPtr = unsafe { CPointer<VARIANT>(inout result) }\n"
+            "    variantInit(resultPtr)\n"
+            "    if (failed) {\n"
+            "        variantClear(resultPtr)\n"
+            "    }\n"
+            "    Variant(result)\n"
+            "}\n"
+            "@When[os == \"Windows\"]\n"
+            "@Test\n"
+            "func oleautVariantChangeTypeConsumesCangjieVariants(): Unit {\n"
+            "    let textSource = Variant(variantFromString(\"42\"))\n"
+            "    let numberSource = Variant(variantFromI4(7i32))\n"
+            "    let numberResult = variantSmokeChangeType(textSource.get(), VT_I4)\n"
+            "    let textResult = variantSmokeChangeType(numberSource.get(), VT_BSTR)\n"
+            "    variantAsI4(numberResult.get())\n"
+            "    variantAsBstr(textResult.get())\n"
+            "}\n"
+        )
+
+    def test_accepts_oleaut_smoke(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_variant_test(workspace, self.valid_source())
+
+            setup.check_variant_oleaut_smoke(workspace)
+
+    def test_rejects_missing_variant_change_type(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_variant_test(workspace, self.valid_source().replace('"VariantChangeType"', '"VariantCopy"'))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_variant_oleaut_smoke(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("real OleAut32 VARIANT smoke", stderr.getvalue())
+
+    def test_rejects_helper_without_output_cleanup(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_variant_test(workspace, self.valid_source().replace("        variantClear(resultPtr)\n", ""))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_variant_oleaut_smoke(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("helper no longer owns output cleanup", stderr.getvalue())
+
+    def test_rejects_smoke_that_does_not_convert_both_directions(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_variant_test(
+                workspace,
+                self.valid_source().replace("variantSmokeChangeType(numberSource.get(), VT_BSTR)", "Variant()"),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_variant_oleaut_smoke(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("no longer consumes Cangjie VARIANTs", stderr.getvalue())
+
+
+class SafeArrayOleautSmokeGateTests(unittest.TestCase):
+    def write_safearray_test(self, workspace: Path, text: str) -> None:
+        path = workspace / "windows-safearray" / "src" / "safearray_test.cj"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+
+    def valid_source(self) -> str:
+        return (
+            "package windows_safearray\n"
+            "func resolveOleaut32Proc(name: String): CPointer<Unit> {\n"
+            "    windows_libloading.resolveProc(\"oleaut32.dll\", name)\n"
+            "}\n"
+            "func safeArraySmokeVectorFromBstr(value: String): SafeArray {\n"
+            "    let proc = resolveOleaut32Proc(\"VectorFromBstr\")\n"
+            "    let vectorFromBstrFn = CFunc<(CPointer<UInt16>, CPointer<CPointer<SAFEARRAY>>) -> Int32>(proc)\n"
+            "    let source = BSTR(value)\n"
+            "    var raw: CPointer<SAFEARRAY> = CPointer<SAFEARRAY>()\n"
+            "    source.close()\n"
+            "    SafeArray(raw)\n"
+            "}\n"
+            "func safeArraySmokeBstrFromVector(arr: SafeArray): BSTR {\n"
+            "    let proc = resolveOleaut32Proc(\"BstrFromVector\")\n"
+            "    let bstrFromVectorFn = CFunc<(CPointer<SAFEARRAY>, CPointer<CPointer<UInt16>>) -> Int32>(proc)\n"
+            "    let hr = unsafe { bstrFromVectorFn(arr.get(), rawPtr) }\n"
+            "    BSTR.fromRawTake(raw)\n"
+            "}\n"
+            "@When[os == \"Windows\"]\n"
+            "@Test\n"
+            "func oleautBstrVectorRoundTripsThroughSafeArray(): Unit {\n"
+            "    let arr = safeArraySmokeVectorFromBstr(\"safe-array-automation\")\n"
+            "    let roundtrip = safeArraySmokeBstrFromVector(arr)\n"
+            "    roundtrip.get()\n"
+            "    roundtrip.close()\n"
+            "    arr.close()\n"
+            "}\n"
+        )
+
+    def test_accepts_oleaut_safearray_smoke(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_safearray_test(workspace, self.valid_source())
+
+            setup.check_safearray_oleaut_smoke(workspace)
+
+    def test_rejects_missing_vector_from_bstr(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_safearray_test(workspace, self.valid_source().replace('"VectorFromBstr"', '"SafeArrayCopy"'))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_safearray_oleaut_smoke(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("real OleAut32 SAFEARRAY smoke", stderr.getvalue())
+
+    def test_rejects_missing_bstr_output_ownership(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_safearray_test(workspace, self.valid_source().replace("BSTR.fromRawTake(raw)", "BSTR.fromRawView(raw)"))
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_safearray_oleaut_smoke(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("owns BSTR output", stderr.getvalue())
+
+    def test_rejects_smoke_without_both_directions(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir)
+            self.write_safearray_test(
+                workspace,
+                self.valid_source().replace("safeArraySmokeBstrFromVector(arr)", "BSTR()"),
+            )
+
+            stderr = io.StringIO()
+            with contextlib.redirect_stderr(stderr):
+                with self.assertRaises(SystemExit) as raised:
+                    setup.check_safearray_oleaut_smoke(workspace)
+
+            self.assertEqual(raised.exception.code, 1)
+            self.assertIn("no longer roundtrips through SAFEARRAY", stderr.getvalue())
 
 
 if __name__ == "__main__":
