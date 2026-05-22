@@ -24,9 +24,13 @@ import argparse
 import json
 import re
 import sys
+from collections import Counter
 from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import Iterable, Iterator, Optional
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 # DLLs whose documented convention is a direct Win32/WSA error code or a sentinel
@@ -50,21 +54,11 @@ HIGH_CONFIDENCE_STATUS_BUCKETS = frozenset({"UInt32", "Int32", "WIN32_ERROR"})
 
 DOCUMENTATION_ATTRIBUTE = "Windows.Win32.Foundation.Metadata.DocumentationAttribute"
 
-# Method-name literal comparisons in the classification source. Matches both
-# `name == "Foo"` and `method.name == "Foo"`, and the `name != "Foo"` early-return
-# guard form ("if not this name, bail") which also means the name is special-cased.
+# `!=` counts too: a `name != "Foo"` early-return guard ("if not this name, bail")
+# still means the generator special-cases that name.
 CLASSIFIED_NAME_RE = re.compile(r'(?:method\.)?name\s*[=!]=\s*"([A-Za-z0-9_]+)"')
 
-# Typed handle return names that are not value-like. HRESULT is matched earlier
-# so the leading-H heuristic below does not capture it.
-KNOWN_HANDLE_TYPES = frozenset(
-    {
-        "HANDLE",
-        "SOCKET",
-        "HINTERNET",
-        "BOOLEAN",  # handled explicitly, listed for clarity only
-    }
-)
+KNOWN_HANDLE_TYPES = frozenset({"HANDLE", "SOCKET", "HINTERNET"})
 
 
 @dataclass(frozen=True)
@@ -131,8 +125,8 @@ def classify_return_bucket(return_type: dict) -> str:
 
 
 def _looks_like_handle(name: str) -> bool:
-    # HWND, HDC, HKEY, HMENU, HICON, HBITMAP, HRGN, HGLOBAL, ... but not HRESULT
-    # (matched earlier) and not HSTRING-style value types we never return raw.
+    # HWND, HDC, HKEY, HMENU, HICON, ... HRESULT is excluded because it is matched
+    # earlier; here the leading-H heuristic alone would otherwise capture it.
     return bool(re.match(r"^H[A-Z]", name)) and name != "HRESULT"
 
 
@@ -168,7 +162,7 @@ def build_record(
 ) -> MethodRecord:
     imp = method.get("Import") or {}
     dll = (imp.get("Module") or {}).get("Name") or "?"
-    return_type = method["Signature"]["ReturnType"]
+    return_type = (method.get("Signature") or {}).get("ReturnType") or {"Kind": None}
     name = method.get("Name") or "?"
     return MethodRecord(
         name=name,
@@ -204,10 +198,7 @@ def high_confidence_candidates(records: Iterable[MethodRecord]) -> list[MethodRe
 
 
 def _bucket_counts(records: Iterable[MethodRecord]) -> dict[str, int]:
-    counts: dict[str, int] = {}
-    for r in records:
-        counts[r.return_bucket] = counts.get(r.return_bucket, 0) + 1
-    return counts
+    return dict(Counter(r.return_bucket for r in records))
 
 
 def render_markdown(records: list[MethodRecord]) -> str:
@@ -246,41 +237,39 @@ def render_markdown(records: list[MethodRecord]) -> str:
     return "\n".join(lines)
 
 
-def render_json(records: list[MethodRecord]) -> str:
-    payload = {
+def render_json(records: list[MethodRecord], *, include_all_records: bool = False) -> str:
+    payload: dict = {
         "total": len(records),
         "bucket_counts": _bucket_counts(records),
         "high_confidence_unclassified": [
             asdict(r) for r in high_confidence_candidates(records)
         ],
-        "records": [asdict(r) for r in records],
     }
+    if include_all_records:
+        payload["records"] = [asdict(r) for r in records]
     return json.dumps(payload, indent=2, ensure_ascii=False)
 
 
 def load_baseline(path: Optional[Path]) -> set[str]:
-    """Method names reviewed and accepted as intentionally raw (not a regression)."""
+    """Method names reviewed and accepted as intentionally raw (not a regression).
+
+    The baseline is JSON: either a list of names or an object with an `accepted`
+    list (extra keys such as documentation are ignored).
+    """
     if path is None:
         return set()
-    text = path.read_text(encoding="utf-8")
-    try:
-        data = json.loads(text)
-    except json.JSONDecodeError:
-        return {
-            line.strip()
-            for line in text.splitlines()
-            if line.strip() and not line.strip().startswith("#")
-        }
+    data = json.loads(path.read_text(encoding="utf-8"))
     if isinstance(data, dict):
-        data = data.get("accepted") or data.get("names") or []
+        if "accepted" not in data:
+            raise ValueError(f"baseline {path} object is missing an 'accepted' key")
+        data = data["accepted"]
     return {str(name) for name in data}
 
 
 def default_paths() -> tuple[Path, Path]:
-    workspace = Path(__file__).resolve().parent.parent
     return (
-        workspace / ".generated" / "winmd-json",
-        workspace / "windows-bindgen" / "src" / "native_helpers.cj",
+        ROOT / ".generated" / "winmd-json",
+        ROOT / "windows-bindgen" / "src" / "native_helpers.cj",
     )
 
 
@@ -299,8 +288,13 @@ def main(argv: Optional[list[str]] = None) -> int:
         default=default_helpers,
         help="Path to native_helpers.cj classification source",
     )
-    parser.add_argument("--out-json", type=Path, help="Write the full JSON report here")
+    parser.add_argument("--out-json", type=Path, help="Write the JSON report here")
     parser.add_argument("--out-md", type=Path, help="Write the Markdown report here")
+    parser.add_argument(
+        "--full-records",
+        action="store_true",
+        help="Include every scanned export in the JSON report (default: summary only)",
+    )
     parser.add_argument(
         "--baseline",
         type=Path,
@@ -325,7 +319,9 @@ def main(argv: Optional[list[str]] = None) -> int:
     candidates = high_confidence_candidates(records)
 
     if args.out_json:
-        args.out_json.write_text(render_json(records), encoding="utf-8")
+        args.out_json.write_text(
+            render_json(records, include_all_records=args.full_records), encoding="utf-8"
+        )
     if args.out_md:
         args.out_md.write_text(render_markdown(records), encoding="utf-8")
 
