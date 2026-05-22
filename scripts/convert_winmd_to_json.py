@@ -20,7 +20,16 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PROJECT = ROOT / "winmd-to-json" / "winmd-to-json.csproj"
 DEFAULT_TIMEOUT_SECONDS = 300
 WINMD_TO_JSON_EXE = "winmd-to-json.exe" if os.name == "nt" else "winmd-to-json"
-WINUI_PACKAGE_NAMES = ("microsoft.windowsappsdk", "microsoft.ui.xaml")
+WINUI_PACKAGE_NAMES = ("microsoft.windowsappsdk", "microsoft.ui.xaml", "microsoft.ui.winui")
+CHECKED_WINUI_REQUIRED_SYMBOLS = (
+    "Microsoft.UI.Xaml.DispatcherShutdownMode",
+    "Microsoft.UI.Xaml.IApplication3",
+    "Microsoft.UI.Xaml.IDebugSettings3",
+    "Microsoft.UI.Xaml.IXamlRoot3",
+    "Microsoft.UI.Xaml.IXamlRoot4",
+    "Microsoft.UI.Xaml.LayoutCycleDebugBreakLevel",
+    "Microsoft.UI.Xaml.LayoutCycleTracingLevel",
+)
 JSON_HEADER_RE = {
     "winmd_file": re.compile(r'"winmd_file"\s*:\s*"([^"]+)"'),
     "winmd_sha256": re.compile(r'"winmd_sha256"\s*:\s*"([0-9a-fA-F]+)"'),
@@ -121,6 +130,24 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         help="Maximum number of candidate roots to print with --list-candidates.",
     )
     parser.add_argument(
+        "--require-symbol",
+        action="append",
+        default=[],
+        metavar="TYPE",
+        help=(
+            "With --list-candidates, also report which candidate roots contain the given full metadata type name. "
+            "Can be repeated."
+        ),
+    )
+    parser.add_argument(
+        "--require-known-winui-missing-symbols",
+        action="store_true",
+        help=(
+            "With --list-candidates, probe for the checked-in WinUI selected symbols "
+            "that are known to be absent from older WindowsAppSDK roots."
+        ),
+    )
+    parser.add_argument(
         "--timeout-seconds",
         type=positive_int,
         default=DEFAULT_TIMEOUT_SECONDS,
@@ -160,12 +187,43 @@ def unique_paths(paths: Sequence[Path]) -> list[Path]:
     return unique
 
 
+def unique_strings(values: Sequence[str]) -> list[str]:
+    unique: list[str] = []
+    seen: set[str] = set()
+    for value in values:
+        if value in seen:
+            continue
+        seen.add(value)
+        unique.append(value)
+    return unique
+
+
+def validate_required_symbol(symbol: str) -> str:
+    normalized = symbol.strip()
+    if not normalized:
+        fail("--require-symbol values must not be empty")
+    parts = normalized.split(".")
+    if len(parts) < 2 or any(not part for part in parts):
+        fail(f"--require-symbol must be a full metadata type name: {symbol!r}")
+    if any(any(ch.isspace() for ch in part) for part in parts):
+        fail(f"--require-symbol must not contain whitespace: {symbol!r}")
+    return normalized
+
+
+def candidate_required_symbols(required_symbols: Sequence[str], include_known_winui_missing: bool) -> list[str]:
+    symbols = [validate_required_symbol(symbol) for symbol in required_symbols]
+    if include_known_winui_missing:
+        symbols.extend(CHECKED_WINUI_REQUIRED_SYMBOLS)
+    return unique_strings(symbols)
+
+
 def quote_command(command: Sequence[object]) -> str:
     return subprocess.list2cmdline([str(part) for part in command])
 
 
-def run_command(command: Sequence[object], label: str, timeout_seconds: int) -> CommandResult:
-    print(f"+ {quote_command(command)}")
+def run_command(command: Sequence[object], label: str, timeout_seconds: int, quiet: bool = False) -> CommandResult:
+    if not quiet:
+        print(f"+ {quote_command(command)}")
     completed = subprocess.run(
         [str(part) for part in command],
         cwd=str(ROOT),
@@ -177,9 +235,11 @@ def run_command(command: Sequence[object], label: str, timeout_seconds: int) -> 
         timeout=timeout_seconds,
     )
     output = completed.stdout or ""
-    if output.strip():
+    if output.strip() and not quiet:
         print(output.rstrip())
     if completed.returncode != 0:
+        if quiet and output.strip():
+            print(output.rstrip(), file=sys.stderr)
         fail(f"{label} failed with exit code {completed.returncode}")
     return CommandResult(completed.returncode, output)
 
@@ -202,7 +262,7 @@ def resolve_tool_exe(path: Path) -> Path:
     return tool
 
 
-def publish_tool(project: Path, tool_dir: Path, configuration: str, timeout_seconds: int) -> Path:
+def publish_tool(project: Path, tool_dir: Path, configuration: str, timeout_seconds: int, quiet: bool = False) -> Path:
     tool_dir.mkdir(parents=True, exist_ok=True)
     command = [
         "dotnet",
@@ -214,7 +274,7 @@ def publish_tool(project: Path, tool_dir: Path, configuration: str, timeout_seco
         "-o",
         tool_dir,
     ]
-    run_command(command, "winmd-to-json publish", timeout_seconds)
+    run_command(command, "winmd-to-json publish", timeout_seconds, quiet=quiet)
     tool = tool_dir / WINMD_TO_JSON_EXE
     if not tool.exists():
         fail(f"winmd-to-json executable was not produced: {tool}")
@@ -295,9 +355,9 @@ def validate_json_headers(json_dir: Path, winmd_files: Sequence[Path]) -> int:
     return len(json_files)
 
 
-def convert_winmds(tool: Path, json_dir: Path, winmd_files: Sequence[Path], timeout_seconds: int) -> None:
+def convert_winmds(tool: Path, json_dir: Path, winmd_files: Sequence[Path], timeout_seconds: int, quiet: bool = False) -> None:
     command = [tool, "-d", json_dir, *winmd_files]
-    run_command(command, "winmd-to-json conversion", timeout_seconds)
+    run_command(command, "winmd-to-json conversion", timeout_seconds, quiet=quiet)
 
 
 def nuget_package_roots() -> list[Path]:
@@ -336,19 +396,78 @@ def discover_candidates(limit: int) -> list[CandidateRoot]:
     return candidates
 
 
-def print_candidates(limit: int) -> None:
+def candidate_symbol_hits(
+    candidate: CandidateRoot,
+    symbols: Sequence[str],
+    tool: Path,
+    timeout_seconds: int,
+) -> tuple[list[str], list[str]]:
+    winmd_files = collect_winmd_files([candidate.path])
+    command: list[object] = [tool]
+    for symbol in symbols:
+        command.extend(["--contains-type", symbol])
+    command.extend(winmd_files)
+    result = run_command(command, "winmd-to-json type probe", timeout_seconds, quiet=True)
+    return parse_contains_type_output(result.output, symbols)
+
+
+def parse_contains_type_output(output: str, symbols: Sequence[str]) -> tuple[list[str], list[str]]:
+    requested = set(symbols)
+    found: set[str] = set()
+    missing: set[str] = set()
+    for line in output.splitlines():
+        if line.startswith("CONTAINS_TYPE_FOUND "):
+            symbol = line.removeprefix("CONTAINS_TYPE_FOUND ").strip()
+            if symbol in requested:
+                found.add(symbol)
+        elif line.startswith("CONTAINS_TYPE_MISSING "):
+            symbol = line.removeprefix("CONTAINS_TYPE_MISSING ").strip()
+            if symbol in requested:
+                missing.add(symbol)
+    return sorted(found), sorted((requested - found) | missing)
+
+
+def print_candidates(limit: int, required_symbols: Sequence[str], timeout_seconds: int, tool: Path | None = None) -> None:
     candidates = discover_candidates(limit)
     if not candidates:
         print("No local WinUI/WindowsAppSDK WinMD candidate roots found.")
         print("Conversion still requires an explicit --winmd-root path.")
         return
     print("Local WinUI/WindowsAppSDK WinMD candidate roots:")
-    for candidate in candidates:
-        print(
-            f"  {candidate.path} "
-            f"({candidate.package_name} {candidate.version}, {candidate.winmd_count} winmd file(s))"
-        )
+    if required_symbols:
+        if tool is None:
+            fail("candidate symbol probing requires a winmd-to-json tool")
+        for candidate in candidates:
+            print_candidate(candidate, required_symbols, tool, timeout_seconds)
+    else:
+        for candidate in candidates:
+            print_candidate(candidate, required_symbols, None, timeout_seconds)
     print("Pass one or more paths back with --winmd-root; no candidate is used automatically.")
+
+
+def print_candidate(
+    candidate: CandidateRoot,
+    required_symbols: Sequence[str],
+    tool: Path | None,
+    timeout_seconds: int,
+) -> None:
+    suffix = ""
+    if required_symbols:
+        if tool is None:
+            fail("candidate symbol probing requires a published winmd-to-json tool")
+        try:
+            found, missing = candidate_symbol_hits(candidate, required_symbols, tool, timeout_seconds)
+            suffix = f", symbols {len(found)}/{len(required_symbols)}"
+            if found:
+                suffix += f", found: {', '.join(found)}"
+            if missing:
+                suffix += f", missing: {', '.join(missing[:8])}"
+        except (RuntimeError, subprocess.TimeoutExpired) as exc:
+            suffix = f", symbol probe failed: {exc}"
+    print(
+        f"  {candidate.path} "
+        f"({candidate.package_name} {candidate.version}, {candidate.winmd_count} winmd file(s){suffix})"
+    )
 
 
 def print_plan(winmd_files: Sequence[Path], json_dir: Path, roots: Sequence[Path]) -> None:
@@ -391,12 +510,105 @@ def self_test() -> None:
     assert collect_winmd_files([]) == []
     command = quote_command(["tool", "-d", "out", "input.winmd"])
     assert "tool" in command and "input.winmd" in command
+    assert validate_required_symbol(" Example.Widget ") == "Example.Widget"
+    expanded = candidate_required_symbols(
+        [
+            "Microsoft.UI.Xaml.IApplication3",
+            "Example.Widget",
+            "Example.Widget",
+        ],
+        include_known_winui_missing=True,
+    )
+    assert expanded[:2] == ["Microsoft.UI.Xaml.IApplication3", "Example.Widget"]
+    assert len(expanded) == len(CHECKED_WINUI_REQUIRED_SYMBOLS) + 1
+    assert expanded.count("Microsoft.UI.Xaml.IApplication3") == 1
+    try:
+        validate_required_symbol("")
+        raise AssertionError("empty --require-symbol was accepted")
+    except RuntimeError as exc:
+        assert "must not be empty" in str(exc)
+    try:
+        validate_required_symbol("Widget")
+        raise AssertionError("short --require-symbol was accepted")
+    except RuntimeError as exc:
+        assert "full metadata type name" in str(exc)
+    try:
+        validate_args(
+            parse_args(
+                [
+                    "--winmd-root",
+                    "input.winmd",
+                    "--json-dir",
+                    "out",
+                    "--require-known-winui-missing-symbols",
+                ]
+            )
+        )
+        raise AssertionError("--require-known-winui-missing-symbols was accepted without --list-candidates")
+    except RuntimeError as exc:
+        assert "requires --list-candidates" in str(exc)
+    validate_args(parse_args(["--list-candidates", "--require-symbol", "Example.Widget"]))
+    original_resolve_project = resolve_project
+    original_publish_tool = publish_tool
+    original_print_candidates = print_candidates
+    captured_candidate_calls: list[tuple[int, list[str], int, Path | None]] = []
+
+    def fake_resolve_project(path: Path) -> Path:
+        return path
+
+    def fake_publish_tool(
+        project: Path,
+        tool_dir: Path,
+        configuration: str,
+        timeout_seconds: int,
+        quiet: bool = False,
+    ) -> Path:
+        return tool_dir / WINMD_TO_JSON_EXE
+
+    def fake_print_candidates(
+        limit: int,
+        required_symbols: Sequence[str],
+        timeout_seconds: int,
+        tool: Path | None = None,
+    ) -> None:
+        captured_candidate_calls.append((limit, list(required_symbols), timeout_seconds, tool))
+
+    try:
+        globals()["resolve_project"] = fake_resolve_project
+        globals()["publish_tool"] = fake_publish_tool
+        globals()["print_candidates"] = fake_print_candidates
+        assert main(["--list-candidates", "--candidate-limit", "3", "--require-known-winui-missing-symbols"]) == 0
+    finally:
+        globals()["resolve_project"] = original_resolve_project
+        globals()["publish_tool"] = original_publish_tool
+        globals()["print_candidates"] = original_print_candidates
+
+    assert len(captured_candidate_calls) == 1
+    captured_limit, captured_symbols, captured_timeout, captured_tool = captured_candidate_calls[0]
+    assert captured_limit == 3
+    assert captured_symbols == list(CHECKED_WINUI_REQUIRED_SYMBOLS)
+    assert captured_timeout == DEFAULT_TIMEOUT_SECONDS
+    assert captured_tool is not None and captured_tool.name == WINMD_TO_JSON_EXE
+    found, missing = parse_contains_type_output(
+        "CONTAINS_TYPE_FOUND Example.Widget\n"
+        "CONTAINS_TYPE_MISSING Example.Missing\n"
+        "CONTAINS_TYPE_SUMMARY 1/2\n",
+        ["Example.Widget", "Example.Missing", "Example.Unreported"],
+    )
+    assert found == ["Example.Widget"]
+    assert missing == ["Example.Missing", "Example.Unreported"]
     print("OK: convert_winmd_to_json self-test completed")
 
 
 def validate_args(args: argparse.Namespace) -> None:
     if args.tool_dir is not None and args.tool_exe is not None:
         fail("--tool-dir and --tool-exe are mutually exclusive")
+    if args.require_known_winui_missing_symbols and not args.list_candidates:
+        fail("--require-known-winui-missing-symbols requires --list-candidates")
+    if args.require_symbol and not args.list_candidates:
+        fail("--require-symbol requires --list-candidates")
+    if args.list_candidates:
+        candidate_required_symbols(args.require_symbol, args.require_known_winui_missing_symbols)
     if not args.winmd_root and not args.list_candidates and not args.self_test:
         fail("add --winmd-root <file-or-dir> or use --list-candidates")
     if args.winmd_root and args.json_dir is None:
@@ -410,8 +622,23 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.self_test:
             self_test()
             return 0
+        required_symbols = candidate_required_symbols(args.require_symbol, args.require_known_winui_missing_symbols)
         if args.list_candidates:
-            print_candidates(args.candidate_limit)
+            if required_symbols:
+                project = resolve_project(args.project)
+                tool_exe = resolve_tool_exe(args.tool_exe) if args.tool_exe is not None else None
+                tool_dir = resolve_path(args.tool_dir) if args.tool_dir is not None else None
+                if tool_exe is not None:
+                    print_candidates(args.candidate_limit, required_symbols, args.timeout_seconds, tool_exe)
+                elif tool_dir is not None:
+                    tool = publish_tool(project, tool_dir, args.configuration, args.timeout_seconds, quiet=True)
+                    print_candidates(args.candidate_limit, required_symbols, args.timeout_seconds, tool)
+                else:
+                    with tempfile.TemporaryDirectory(prefix="winmd-to-json-candidate-tool-") as temp:
+                        tool = publish_tool(project, Path(temp), args.configuration, args.timeout_seconds, quiet=True)
+                        print_candidates(args.candidate_limit, required_symbols, args.timeout_seconds, tool)
+            else:
+                print_candidates(args.candidate_limit, required_symbols, args.timeout_seconds)
             if not args.winmd_root:
                 return 0
 

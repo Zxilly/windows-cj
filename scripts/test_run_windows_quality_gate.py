@@ -12,15 +12,25 @@ class QualityGatePlanTests(unittest.TestCase):
     def step_names(self, args: list[str]) -> list[str]:
         return [step.name for step in gate.build_steps(gate.parse_args(args))]
 
-    def test_quick_mode_runs_static_gate_only(self) -> None:
+    def test_quick_mode_runs_generator_and_static_gate(self) -> None:
         self.assertEqual(
             self.step_names(["--mode", "quick"]),
             [
                 "py_compile",
+                "python unit tests",
+                "winmd conversion helper self-test",
+                "winmd-to-json self-test",
+                "windows-common codegen self-test",
+                "vector input ABI generator check",
+                "windows-runtime runner self-test",
+                "windows-runtime smoke test",
+                "workspace runner self-test",
+                "quick workspace Cangjie tests",
                 "windows-common codegen gate",
                 "workspace setup audit",
                 "ignored results audit",
                 "ABI ownership audit",
+                "macro fixtures",
             ],
         )
 
@@ -29,6 +39,14 @@ class QualityGatePlanTests(unittest.TestCase):
             self.step_names([]),
             [
                 "py_compile",
+                "python unit tests",
+                "winmd conversion helper self-test",
+                "winmd-to-json self-test",
+                "windows-common codegen self-test",
+                "vector input ABI generator check",
+                "windows-runtime runner self-test",
+                "windows-runtime smoke test",
+                "workspace runner self-test",
                 "windows-common codegen gate",
                 "workspace setup audit",
                 "ignored results audit",
@@ -65,6 +83,7 @@ class QualityGatePlanTests(unittest.TestCase):
                 "--codegen-timeout-seconds",
                 "23",
                 "--skip-codegen-regenerate",
+                "--allow-missing-winui-metadata",
             ]
         )
         steps = {step.name: step for step in gate.build_steps(args)}
@@ -72,6 +91,19 @@ class QualityGatePlanTests(unittest.TestCase):
         self.assertIn("--timeout-seconds", command)
         self.assertIn("23", command)
         self.assertIn("--skip-regenerate", command)
+        self.assertIn("--allow-missing-winui-metadata", command)
+
+    def test_full_codegen_gate_defaults_to_available_winui_metadata_subset(self) -> None:
+        steps = {step.name: step for step in gate.build_steps(gate.parse_args(["--mode", "full"]))}
+        command = steps["windows-common codegen gate"].command
+
+        self.assertIn("--allow-missing-winui-metadata", command)
+
+    def test_quick_codegen_gate_keeps_missing_winui_metadata_opt_in(self) -> None:
+        steps = {step.name: step for step in gate.build_steps(gate.parse_args(["--mode", "quick"]))}
+        command = steps["windows-common codegen gate"].command
+
+        self.assertNotIn("--allow-missing-winui-metadata", command)
 
     def test_codegen_gate_uses_common_bindgen_script(self) -> None:
         removed_subset_gate = "check_" + "windows" + "_sys_subset.py"
@@ -81,13 +113,63 @@ class QualityGatePlanTests(unittest.TestCase):
         self.assertTrue(command[1].endswith("check_windows_common_codegen.py"))
         self.assertNotIn(removed_subset_gate, command)
 
+    def test_quick_gate_runs_focused_cangjie_tests(self) -> None:
+        args = gate.parse_args(["--mode", "quick", "--workspace-timeout-seconds", "29"])
+        steps = {step.name: step for step in gate.build_steps(args)}
+        command = steps["quick workspace Cangjie tests"].command
+
+        self.assertTrue(command[1].endswith("run_windows_workspace_tests.py"))
+        self.assertIn("--timeout-seconds", command)
+        self.assertIn("29", command)
+        self.assertEqual(
+            command[-5:],
+            ["windows-bindgen", "windows-core", "windows-implement", "windows-interface", "windows-runtime"],
+        )
+
+    def test_quick_gate_runs_runtime_smoke_test(self) -> None:
+        args = gate.parse_args(["--mode", "quick", "--workspace-timeout-seconds", "31"])
+        steps = {step.name: step for step in gate.build_steps(args)}
+        command = steps["windows-runtime smoke test"].command
+
+        self.assertEqual(
+            gate.QUICK_RUNTIME_SMOKE_FILTERS,
+            [
+                "testRealActivationFactoryReportsUnavailableClass",
+                "testRealPropertyValueInt32ArrayRoundTrip",
+                "testRealUriDecoderRoundTripsHStringAndCollectionProjection",
+            ],
+        )
+        self.assertTrue(command[1].endswith("run_windows_runtime_tests.py"))
+        self.assertIn("--timeout-seconds", command)
+        self.assertIn("31", command)
+        self.assertEqual(command.count("--filter"), 3)
+        for filter_name in gate.QUICK_RUNTIME_SMOKE_FILTERS:
+            self.assertIn(filter_name, command)
+
+    def test_vector_input_abi_generator_check_uses_full_runtime_drift_check(self) -> None:
+        steps = {step.name: step for step in gate.build_steps(gate.parse_args(["--mode", "quick"]))}
+        command = steps["vector input ABI generator check"].command
+
+        self.assertTrue(command[1].endswith("generate_vector_input_abi.py"))
+        self.assertEqual(command[-1], "--check-all")
+        self.assertNotIn("--type", command)
+
+    def test_mode_help_mentions_generator_tests(self) -> None:
+        stdout = io.StringIO()
+        with contextlib.redirect_stdout(stdout):
+            with self.assertRaises(SystemExit) as raised:
+                gate.parse_args(["--help"])
+
+        self.assertEqual(raised.exception.code, 0)
+        self.assertIn("focused Cangjie workspace", stdout.getvalue())
+
     def test_macro_timeout_is_forwarded_as_environment(self) -> None:
         args = gate.parse_args(["--macro-timeout-seconds", "19"])
         steps = {step.name: step for step in gate.build_steps(args)}
         self.assertEqual(steps["macro fixtures"].env["WINDOWS_CJ_MACRO_CHECK_TIMEOUT_SECONDS"], "19")
 
     def test_all_steps_receive_cj_heap_size(self) -> None:
-        step = gate.Step("sample", ["python", "-V"], env={"EXTRA": "1"})
+        step = gate.Step("sample", ["python", "-V"], env={"EXTRA": "1", "cjHeapSize": "1GB"})
         env = gate.merged_env(step, {"PATH": "x", "cjHeapSize": "1GB"})
         self.assertEqual(env["cjHeapSize"], "32GB")
         self.assertEqual(env["EXTRA"], "1")
@@ -100,7 +182,21 @@ class QualityGatePlanTests(unittest.TestCase):
         self.assertEqual(result, 0)
         output = stdout.getvalue()
         self.assertIn("mode = quick", output)
+        self.assertIn("winmd-to-json.csproj", output)
+        self.assertIn("convert_winmd_to_json.py", output)
+        self.assertIn("--self-test", output)
+        self.assertIn("unittest", output)
         self.assertIn("check_windows_common_codegen.py", output)
+        self.assertIn("generate_vector_input_abi.py", output)
+        self.assertIn("--check-all", output)
+        self.assertIn("run_windows_runtime_tests.py", output)
+        for filter_name in gate.QUICK_RUNTIME_SMOKE_FILTERS:
+            self.assertIn(filter_name, output)
+        self.assertIn("run_windows_workspace_tests.py", output)
+        self.assertIn("windows-bindgen", output)
+        self.assertIn("windows-core", output)
+        self.assertIn("windows-implement", output)
+        self.assertIn("windows-interface", output)
         self.assertIn("check_workspace_setup.py", output)
         self.assertIn("check_ignored_results.py", output)
         self.assertIn("check_abi_ownership.py", output)

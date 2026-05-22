@@ -5,7 +5,7 @@ Default mode is the full non-UI gate:
 
     python scripts/run_windows_quality_gate.py
 
-Use quick mode for static/script checks only:
+Use quick mode for script checks plus focused Cangjie/codegen smoke paths:
 
     python scripts/run_windows_quality_gate.py --mode quick
 
@@ -31,6 +31,11 @@ ROOT = Path(__file__).resolve().parents[1]
 DEMO_ROOT = ROOT.parent / "windows-cj-demo"
 DEFAULT_WORKSPACE_TIMEOUT_SECONDS = 240
 DEFAULT_CODEGEN_TIMEOUT_SECONDS = 300
+QUICK_RUNTIME_SMOKE_FILTERS = [
+    "testRealActivationFactoryReportsUnavailableClass",
+    "testRealPropertyValueInt32ArrayRoundTrip",
+    "testRealUriDecoderRoundTripsHStringAndCollectionProjection",
+]
 
 
 @dataclass(frozen=True)
@@ -54,7 +59,10 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         "--mode",
         choices=("quick", "full"),
         default="full",
-        help="quick runs static/script checks; full also runs generated subset gates, workspace tests, and macro fixtures.",
+        help=(
+            "quick runs script checks, focused Cangjie workspace tests, macro fixtures, and the windows-common codegen gate; "
+            "full also runs complete workspace tests."
+        ),
     )
     parser.add_argument("--dry-run", action="store_true", help="Print the planned gate commands without running them.")
     parser.add_argument(
@@ -85,6 +93,11 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         "--skip-codegen-regenerate",
         action="store_true",
         help="Skip the full-mode temporary windows-common regeneration/diff step.",
+    )
+    parser.add_argument(
+        "--allow-missing-winui-metadata",
+        action="store_true",
+        help="Forward --allow-missing-winui-metadata to the windows-common codegen gate.",
     )
     parser.add_argument(
         "--macro-timeout-seconds",
@@ -139,21 +152,119 @@ def build_steps(args: argparse.Namespace) -> list[Step]:
             [sys.executable, "-m", "py_compile", *[str(path) for path in py_files]],
         ),
         Step(
-            "windows-common codegen gate",
+            "python unit tests",
+            [
+                sys.executable,
+                "-m",
+                "unittest",
+                "discover",
+                "-s",
+                str(ROOT / "scripts"),
+                "-p",
+                "test_*.py",
+            ],
+        ),
+        Step(
+            "winmd conversion helper self-test",
+            [
+                sys.executable,
+                script("scripts/convert_winmd_to_json.py"),
+                "--self-test",
+            ],
+        ),
+        Step(
+            "winmd-to-json self-test",
+            [
+                "dotnet",
+                "run",
+                "--project",
+                str(ROOT / "winmd-to-json" / "winmd-to-json.csproj"),
+                "--",
+                "--self-test",
+            ],
+        ),
+        Step(
+            "windows-common codegen self-test",
             [
                 sys.executable,
                 script("scripts/check_windows_common_codegen.py"),
-                "--mode",
-                args.mode,
-                "--timeout-seconds",
-                str(args.codegen_timeout_seconds),
-                *(["--skip-regenerate"] if args.skip_codegen_regenerate else []),
+                "--self-test",
             ],
         ),
-        Step("workspace setup audit", [sys.executable, script("scripts/check_workspace_setup.py")]),
-        Step("ignored results audit", [sys.executable, script("scripts/check_ignored_results.py")]),
-        Step("ABI ownership audit", [sys.executable, script("scripts/check_abi_ownership.py")]),
+        Step(
+            "vector input ABI generator check",
+            [
+                sys.executable,
+                script("scripts/generate_vector_input_abi.py"),
+                "--check-all",
+            ],
+        ),
+        Step(
+            "windows-runtime runner self-test",
+            [
+                sys.executable,
+                script("scripts/run_windows_runtime_tests.py"),
+                "--self-test",
+            ],
+        ),
+        Step(
+            "windows-runtime smoke test",
+                [
+                    sys.executable,
+                    script("scripts/run_windows_runtime_tests.py"),
+                    "--timeout-seconds",
+                    str(args.workspace_timeout_seconds),
+                    *[token for filter_name in QUICK_RUNTIME_SMOKE_FILTERS for token in ("--filter", filter_name)],
+                ],
+            ),
+        Step(
+            "workspace runner self-test",
+            [
+                sys.executable,
+                script("scripts/run_windows_workspace_tests.py"),
+                "--self-test",
+            ],
+        ),
     ]
+
+    if args.mode == "quick":
+        steps.append(
+            Step(
+                "quick workspace Cangjie tests",
+                [
+                    sys.executable,
+                    script("scripts/run_windows_workspace_tests.py"),
+                    "--timeout-seconds",
+                    str(args.workspace_timeout_seconds),
+                    "windows-bindgen",
+                    "windows-core",
+                    "windows-implement",
+                    "windows-interface",
+                    "windows-runtime",
+                ],
+            )
+        )
+
+    steps.extend(
+        [
+            Step(
+                "windows-common codegen gate",
+                [
+                    sys.executable,
+                    script("scripts/check_windows_common_codegen.py"),
+                    "--mode",
+                    args.mode,
+                    "--timeout-seconds",
+                    str(args.codegen_timeout_seconds),
+                    *(["--skip-regenerate"] if args.skip_codegen_regenerate else []),
+                    *(["--allow-missing-winui-metadata"] if args.allow_missing_winui_metadata or args.mode == "full" else []),
+                ],
+            ),
+            Step("workspace setup audit", [sys.executable, script("scripts/check_workspace_setup.py")]),
+            Step("ignored results audit", [sys.executable, script("scripts/check_ignored_results.py")]),
+            Step("ABI ownership audit", [sys.executable, script("scripts/check_abi_ownership.py")]),
+        ]
+    )
 
     if args.mode == "full":
         workspace_command = [
@@ -167,16 +278,16 @@ def build_steps(args: argparse.Namespace) -> list[Step]:
         workspace_command.extend(args.workspace_member)
         steps.append(Step("workspace tests", workspace_command))
 
-        macro_env: dict[str, str] = {}
-        if args.macro_timeout_seconds is not None:
-            macro_env["WINDOWS_CJ_MACRO_CHECK_TIMEOUT_SECONDS"] = str(args.macro_timeout_seconds)
-        steps.append(
-            Step(
-                "macro fixtures",
-                [sys.executable, script("windows-interface/scripts/check_macros.py")],
-                env=macro_env,
-            )
+    macro_env: dict[str, str] = {}
+    if args.macro_timeout_seconds is not None:
+        macro_env["WINDOWS_CJ_MACRO_CHECK_TIMEOUT_SECONDS"] = str(args.macro_timeout_seconds)
+    steps.append(
+        Step(
+            "macro fixtures",
+            [sys.executable, script("windows-interface/scripts/check_macros.py")],
+            env=macro_env,
         )
+    )
 
     if args.include_winui_demo_smoke:
         smoke = DEMO_ROOT / "tools" / "smoke_winui3.py"
@@ -193,8 +304,8 @@ def display_command(command: Sequence[str]) -> str:
 
 def merged_env(step: Step, parent_env: dict[str, str] | None = None) -> dict[str, str]:
     env = dict(os.environ if parent_env is None else parent_env)
-    env["cjHeapSize"] = "32GB"
     env.update(step.env)
+    env["cjHeapSize"] = "32GB"
     return env
 
 

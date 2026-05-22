@@ -4,7 +4,8 @@
 Quick mode verifies the checked-in manifest, the real WinMD JSON source hashes,
 and the windows-common build entry. Full mode additionally rebuilds the
 generator and regenerates windows-common into a temporary directory for a
-non-destructive manifest/file diff.
+non-destructive manifest/file diff. Full regeneration requires all requested
+WinUI metadata unless the missing-WinUI subset mode is explicitly enabled.
 """
 
 from __future__ import annotations
@@ -38,6 +39,7 @@ IGNORED_GENERATED_FILES = {"codegen-manifest.json", "cjpm.lock"}
 WINUI_FEATURE_PREFIXES = ("Microsoft.UI.", "Microsoft.Windows.")
 WINUI_WINMD_JSON_DIRS_ENV = "WINDOWS_CJ_WINUI_WINMD_JSON_DIRS"
 WINUI_WINMD_ROOTS_ENV = "WINDOWS_CJ_WINUI_WINMD_ROOTS"
+CONTRACT_VERSION_ATTRIBUTE = "Windows.Foundation.Metadata.ContractVersionAttribute"
 IMPL_SYMBOLS_FILE_RE = re.compile(r"src/impl/symbols_\d+\.cj$")
 SYMBOL_SECTION_RE = re.compile(r"^// (.+?) \((?:0x|synthetic:)")
 FACADE_FILE_RE = re.compile(r"(^|/)facade_\d+\.cj$")
@@ -56,6 +58,7 @@ class CommandResult:
 @dataclass(frozen=True)
 class FeaturePlan:
     available: list[str]
+    subset_features: list[str]
     blocked_winui: list[str]
 
 
@@ -63,6 +66,17 @@ class FeaturePlan:
 class WinmdSourceIndex:
     hashes_by_name: dict[str, set[str]]
     paths_by_name: dict[str, list[Path]]
+    paths_by_name_hash: dict[tuple[str, str], list[Path]]
+
+
+@dataclass(frozen=True)
+class TypeProvenance:
+    json_path: Path
+    winmd_file: str
+    winmd_sha256: str
+    source_set: str | None
+    contract_versions: tuple[str, ...]
+    raw_sources: tuple[Path, ...]
 
 
 @dataclass(frozen=True)
@@ -143,6 +157,40 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         "--skip-regenerate",
         action="store_true",
         help="In full mode, skip the temporary generator rerun/diff.",
+    )
+    parser.add_argument(
+        "--allow-missing-winui-metadata",
+        action="store_true",
+        help=(
+            "In full mode, allow regeneration/diff of only the metadata-backed subset when optional "
+            "WinUI/WindowsAppSDK metadata is unavailable."
+        ),
+    )
+    parser.add_argument(
+        "--report-selected-symbol-provenance",
+        action="store_true",
+        help=(
+            "After metadata source validation, print where checked-in selected symbols "
+            "come from in the supplied winmd-json inputs and exit."
+        ),
+    )
+    parser.add_argument(
+        "--provenance-symbol",
+        action="append",
+        default=[],
+        metavar="TYPE",
+        help=(
+            "Limit --report-selected-symbol-provenance to one selected symbol; repeat for multiple symbols. "
+            "Also enables the report."
+        ),
+    )
+    parser.add_argument(
+        "--report-missing-winui-selected-symbols",
+        action="store_true",
+        help=(
+            "After metadata source validation, print checked-in WinUI selected symbols "
+            "that are absent from the supplied winmd-json inputs, including same-short-name candidates."
+        ),
     )
     parser.add_argument(
         "--timeout-seconds",
@@ -306,6 +354,7 @@ def add_winmd_source(index: WinmdSourceIndex, path: Path) -> None:
     digest = hashlib.sha256(path.read_bytes()).hexdigest()
     index.hashes_by_name.setdefault(name, set()).add(digest)
     index.paths_by_name.setdefault(name, []).append(path)
+    index.paths_by_name_hash.setdefault((name, digest), []).append(path)
 
 
 def iter_winmd_sources(paths: Sequence[Path]) -> list[Path]:
@@ -321,7 +370,7 @@ def iter_winmd_sources(paths: Sequence[Path]) -> list[Path]:
 def winmd_sources(extra_roots: Sequence[Path]) -> WinmdSourceIndex:
     if not WINMD_ROOT.exists():
         fail(f"missing WinMD source directory: {WINMD_ROOT}")
-    index = WinmdSourceIndex({}, {})
+    index = WinmdSourceIndex({}, {}, {})
     default_sources = sorted(WINMD_ROOT.glob("*.winmd"))
     for path in default_sources:
         add_winmd_source(index, path)
@@ -389,6 +438,10 @@ def print_winui_metadata_guidance() -> None:
         "HINT: candidate cache roots are only listed on request: "
         f"python {helper} --list-candidates"
     )
+    print(
+        "HINT: probe candidate roots for known checked-in WinUI selected-symbol gaps with "
+        f"python {helper} --list-candidates --require-known-winui-missing-symbols"
+    )
     print("HINT: native .winmd parsing is not supported by this generator or gate.")
 
 
@@ -399,6 +452,233 @@ def winmd_json_names(dirs: Sequence[Path]) -> set[str]:
     if not names:
         fail("no winmd-json names available after source validation")
     return names
+
+
+def winmd_json_type_names(dirs: Sequence[Path]) -> set[str]:
+    names: set[str] = set()
+    for root in dirs:
+        for path in sorted(root.glob("*.json")):
+            with path.open("r", encoding="utf-8") as f:
+                payload = json.load(f)
+            types = payload.get("types", [])
+            if not isinstance(types, list):
+                fail(f"{display_path(path)} has a non-array types payload")
+            for entry in types:
+                if not isinstance(entry, dict):
+                    continue
+                namespace = entry.get("Namespace")
+                name = entry.get("Name")
+                if isinstance(namespace, str) and isinstance(name, str):
+                    names.add(f"{namespace}.{name}" if namespace else name)
+    if not names:
+        fail("no winmd-json type names available after source validation")
+    return names
+
+
+def type_definition_name(entry: dict) -> str | None:
+    namespace = entry.get("Namespace")
+    name = entry.get("Name")
+    if not isinstance(namespace, str) or not isinstance(name, str):
+        return None
+    return f"{namespace}.{name}" if namespace else name
+
+
+def custom_attribute_fixed_values(attribute: object) -> list[object]:
+    if not isinstance(attribute, dict):
+        return []
+    arguments = attribute.get("FixedArguments")
+    if not isinstance(arguments, list):
+        return []
+    values: list[object] = []
+    for argument in arguments:
+        if isinstance(argument, dict):
+            values.append(argument.get("Value"))
+    return values
+
+
+def contract_versions_for_type(entry: dict) -> tuple[str, ...]:
+    attributes = entry.get("CustomAttributes")
+    if not isinstance(attributes, list):
+        return ()
+    versions: list[str] = []
+    for attribute in attributes:
+        if not isinstance(attribute, dict) or attribute.get("Type") != CONTRACT_VERSION_ATTRIBUTE:
+            continue
+        values = custom_attribute_fixed_values(attribute)
+        if len(values) < 2:
+            continue
+        contract, version = values[0], values[1]
+        if isinstance(contract, str) and isinstance(version, int):
+            versions.append(f"{contract}@0x{version:08x}({version})")
+    return tuple(sorted(versions))
+
+
+def selected_symbol_provenance_index(
+    input_dirs: Sequence[Path],
+    source_index: WinmdSourceIndex,
+) -> dict[str, list[TypeProvenance]]:
+    index: dict[str, list[TypeProvenance]] = {}
+    for root in input_dirs:
+        for path in sorted(root.glob("*.json")):
+            winmd_file, winmd_sha256 = extract_json_header(path)
+            with path.open("r", encoding="utf-8") as f:
+                payload = json.load(f)
+            types = payload.get("types", [])
+            if not isinstance(types, list):
+                fail(f"{display_path(path)} has a non-array types payload")
+            raw_sources = tuple(source_index.paths_by_name_hash.get((winmd_file, winmd_sha256), ()))
+            for entry in types:
+                if not isinstance(entry, dict):
+                    continue
+                symbol = type_definition_name(entry)
+                if symbol is None:
+                    continue
+                source_set = entry.get("SourceSet")
+                index.setdefault(symbol, []).append(
+                    TypeProvenance(
+                        json_path=path,
+                        winmd_file=winmd_file,
+                        winmd_sha256=winmd_sha256,
+                        source_set=source_set if isinstance(source_set, str) else None,
+                        contract_versions=contract_versions_for_type(entry),
+                        raw_sources=raw_sources,
+                    )
+                )
+    return index
+
+
+def format_raw_sources(paths: Sequence[Path]) -> str:
+    if not paths:
+        return "<unregistered>"
+    rendered = [display_path(path) for path in paths[:3]]
+    if len(paths) > 3:
+        rendered.append(f"...(+{len(paths) - 3})")
+    return ";".join(rendered)
+
+
+def format_provenance_record(record: TypeProvenance) -> str:
+    contracts = ",".join(record.contract_versions) if record.contract_versions else "-"
+    source_set = record.source_set if record.source_set is not None else "-"
+    return (
+        f"json={display_path(record.json_path)} "
+        f"winmd={record.winmd_file} "
+        f"sha256={record.winmd_sha256} "
+        f"source_set={source_set} "
+        f"contract_versions={contracts} "
+        f"raw={format_raw_sources(record.raw_sources)}"
+    )
+
+
+def print_selected_symbol_provenance(
+    symbols: Sequence[str],
+    input_dirs: Sequence[Path],
+    source_index: WinmdSourceIndex,
+) -> None:
+    provenance = selected_symbol_provenance_index(input_dirs, source_index)
+    found = 0
+    missing = 0
+    for symbol in symbols:
+        records = provenance.get(symbol, [])
+        if not records:
+            missing += 1
+            print(f"PROVENANCE MISSING {symbol}")
+            continue
+        found += 1
+        for record in records:
+            print(f"PROVENANCE FOUND {symbol} {format_provenance_record(record)}")
+    print(f"PROVENANCE SUMMARY found={found}/{len(symbols)} missing={missing}")
+
+
+def short_type_name(symbol: str) -> str:
+    return symbol.rsplit(".", 1)[-1]
+
+
+def provenance_symbols_with_short_name(
+    provenance: dict[str, list[TypeProvenance]],
+    symbol: str,
+) -> list[str]:
+    short_name = short_type_name(symbol)
+    return sorted(candidate for candidate in provenance if short_type_name(candidate) == short_name and candidate != symbol)
+
+
+def missing_winui_selected_symbol_report_lines(
+    manifest: dict,
+    input_dirs: Sequence[Path],
+    source_index: WinmdSourceIndex,
+) -> list[str]:
+    plan = plan_features(manifest, input_dirs)
+    available_features = [feature for feature in plan.available if is_winui_feature(feature)]
+    provenance = selected_symbol_provenance_index(input_dirs, source_index)
+    symbols = [
+        symbol
+        for symbol in manifest_selected_symbols(manifest)
+        if is_winui_feature(symbol)
+        and symbol not in provenance
+        and (
+            (available_features and not plan.blocked_winui)
+            or any(symbol_matches_requested_feature(symbol, feature) for feature in available_features)
+        )
+    ]
+    lines: list[str] = []
+    for symbol in symbols:
+        same_short_name = provenance_symbols_with_short_name(provenance, symbol)
+        candidates = ",".join(same_short_name[:5]) if same_short_name else "-"
+        if len(same_short_name) > 5:
+            candidates += f",...(+{len(same_short_name) - 5})"
+        lines.append(f"WINUI_MISSING_SELECTED_SYMBOL symbol={symbol} same_short_name={candidates}")
+        for candidate in same_short_name[:3]:
+            for record in provenance[candidate][:2]:
+                lines.append(
+                    "WINUI_MISSING_SELECTED_SYMBOL_CANDIDATE "
+                    f"symbol={symbol} "
+                    f"candidate={candidate} "
+                    f"{format_provenance_record(record)}"
+                )
+    lines.append(
+        "WINUI_MISSING_SELECTED_SYMBOL_SUMMARY "
+        f"missing={len(symbols)} "
+        f"checked_features={len(available_features)} "
+        f"blocked_features={len(plan.blocked_winui)}"
+    )
+    if plan.blocked_winui:
+        lines.append(f"WINUI_MISSING_SELECTED_SYMBOL_BLOCKED_FEATURES {', '.join(plan.blocked_winui)}")
+    return lines
+
+
+def print_missing_winui_selected_symbols(
+    manifest: dict,
+    input_dirs: Sequence[Path],
+    source_index: WinmdSourceIndex,
+) -> None:
+    for line in missing_winui_selected_symbol_report_lines(manifest, input_dirs, source_index):
+        print(line)
+
+
+def report_excerpt(lines: Sequence[str], limit: int) -> list[str]:
+    if limit <= 0 or len(lines) <= limit:
+        return list(lines)
+    return [
+        *lines[:limit],
+        f"... (+{len(lines) - limit} more; run --report-missing-winui-selected-symbols for full report)",
+    ]
+
+
+def missing_winui_selected_symbol_error_report(
+    manifest: dict,
+    input_dirs: Sequence[Path],
+    source_index: WinmdSourceIndex,
+) -> str:
+    lines = missing_winui_selected_symbol_report_lines(manifest, input_dirs, source_index)
+    return "\n".join(report_excerpt(lines, 20))
+
+
+def report_missing_symbol(line: str) -> str | None:
+    prefix = "WINUI_MISSING_SELECTED_SYMBOL symbol="
+    if not line.startswith(prefix):
+        return None
+    remainder = line[len(prefix) :]
+    symbol, _, _ = remainder.partition(" ")
+    return symbol
 
 
 def feature_has_metadata(feature: str, names: set[str]) -> bool:
@@ -487,12 +767,13 @@ def plan_features(manifest: dict, input_dirs: Sequence[Path]) -> FeaturePlan:
         fail(f"requested features missing winmd-json metadata: {missing}")
     if not available:
         fail("no requested features can be checked with the available winmd-json metadata")
+    subset_features = list(available)
     for symbol in manifest_selected_symbols(manifest):
-        if any(symbol_matches_requested_feature(symbol, feature) for feature in available):
+        if any(symbol_matches_requested_feature(symbol, feature) for feature in subset_features):
             continue
         if feature_has_metadata(symbol, names):
-            available.append(symbol)
-    return FeaturePlan(available, blocked_winui)
+            subset_features.append(symbol)
+    return FeaturePlan(available, subset_features, blocked_winui)
 
 
 def display_command(command: Sequence[str]) -> str:
@@ -565,7 +846,19 @@ def build_windows_common(timeout_seconds: int) -> None:
     print("OK: windows-common build completed")
 
 
+def generator_binary_outputs(binary: Path | None = None) -> tuple[Path, ...]:
+    resolved = GENERATOR_BINARY if binary is None else binary
+    return (resolved, resolved.with_suffix(".cjo"))
+
+
+def remove_expected_generator_binary(binary: Path | None = None) -> None:
+    for stale in generator_binary_outputs(binary):
+        if stale.exists():
+            stale.unlink()
+
+
 def build_generator(timeout_seconds: int) -> None:
+    remove_expected_generator_binary()
     result = run_command(
         ["cjpm", "build", "-m", "windows-bindgen"],
         timeout_seconds=timeout_seconds,
@@ -596,8 +889,52 @@ def compare_manifest_values(checked: dict, regenerated: dict) -> list[str]:
     mismatches: list[str] = []
     for key in ("generated_by", "package_name", "requested_features", "selected_symbols", "files", "file_hashes"):
         if checked.get(key) != regenerated.get(key):
-            mismatches.append(key)
+            mismatches.append(manifest_mismatch_message(key, checked.get(key), regenerated.get(key)))
     return mismatches
+
+
+def missing_selected_symbols(checked: dict, regenerated: dict) -> list[str]:
+    checked_symbols = checked.get("selected_symbols")
+    regenerated_symbols = regenerated.get("selected_symbols")
+    if not isinstance(checked_symbols, list) or not isinstance(regenerated_symbols, list):
+        return []
+    checked_set = {symbol for symbol in checked_symbols if isinstance(symbol, str)}
+    regenerated_set = {symbol for symbol in regenerated_symbols if isinstance(symbol, str)}
+    return sorted(checked_set - regenerated_set)
+
+
+def selected_symbols_absent_from_metadata(manifest: dict, input_dirs: Sequence[Path]) -> list[str]:
+    source_names = winmd_json_type_names(input_dirs)
+    return sorted(
+        symbol
+        for symbol in manifest_selected_symbols(manifest)
+        if is_winui_feature(symbol) and symbol not in source_names
+    )
+
+
+def manifest_mismatch_message(key: str, checked_value: object, regenerated_value: object) -> str:
+    if key in {"selected_symbols", "files"} and isinstance(checked_value, list) and isinstance(regenerated_value, list):
+        checked_set = {entry for entry in checked_value if isinstance(entry, str)}
+        regenerated_set = {entry for entry in regenerated_value if isinstance(entry, str)}
+        missing = sorted(checked_set - regenerated_set)
+        extra = sorted(regenerated_set - checked_set)
+        if not missing and not extra:
+            return f"{key} order differs"
+        return f"{key} differs; missing={missing[:20]}, extra={extra[:20]}"
+
+    if key == "file_hashes" and isinstance(checked_value, dict) and isinstance(regenerated_value, dict):
+        checked_keys = {entry for entry in checked_value if isinstance(entry, str)}
+        regenerated_keys = {entry for entry in regenerated_value if isinstance(entry, str)}
+        missing = sorted(checked_keys - regenerated_keys)
+        extra = sorted(regenerated_keys - checked_keys)
+        changed = sorted(
+            entry
+            for entry in checked_keys & regenerated_keys
+            if checked_value.get(entry) != regenerated_value.get(entry)
+        )
+        return f"file_hashes differ; missing={missing[:20]}, extra={extra[:20]}, changed={changed[:20]}"
+
+    return f"{key} differs"
 
 
 def comparable_tree_files(root: Path) -> set[str]:
@@ -711,6 +1048,322 @@ def self_test_normalization() -> None:
     assert normalize_impl_symbol_section("body \nnext\n") != normalize_impl_symbol_section("body\nnext\n")
     assert normalize_impl_symbol_section("body\nnext\n") != normalize_impl_symbol_section("body\nother\n")
     assert env_path_list("__WINDOWS_CJ_DOES_NOT_EXIST__") == []
+    assert report_excerpt(["a", "b", "c"], 2) == [
+        "a",
+        "b",
+        "... (+1 more; run --report-missing-winui-selected-symbols for full report)",
+    ]
+    mismatch_messages = compare_manifest_values(
+        {
+            "generated_by": GENERATED_BY,
+            "package_name": "windows_common",
+            "requested_features": ["A"],
+            "selected_symbols": ["A", "B"],
+            "files": ["src/a.cj"],
+            "file_hashes": {"src/a.cj": "old", "src/missing.cj": "same"},
+        },
+        {
+            "generated_by": GENERATED_BY,
+            "package_name": "windows_common",
+            "requested_features": ["A"],
+            "selected_symbols": ["A", "C"],
+            "files": ["src/a.cj"],
+            "file_hashes": {"src/a.cj": "new", "src/extra.cj": "same"},
+        },
+    )
+    assert "selected_symbols differs; missing=['B'], extra=['C']" in mismatch_messages
+    assert "file_hashes differ; missing=['src/missing.cj'], extra=['src/extra.cj'], changed=['src/a.cj']" in mismatch_messages
+    assert missing_selected_symbols(
+        {"selected_symbols": ["A", "B"]},
+        {"selected_symbols": ["A", "C"]},
+    ) == ["B"]
+    with tempfile.TemporaryDirectory(prefix="windows-common-plan-test-") as temp:
+        metadata_dir = Path(temp)
+        (metadata_dir / "Microsoft.UI.Xaml.json").write_text(
+            json.dumps({"types": [{"Namespace": "Microsoft.UI.Xaml", "Name": "Window"}]}),
+            encoding="utf-8",
+        )
+        (metadata_dir / "Windows.Foundation.json").write_text(
+            json.dumps({"types": [{"Namespace": "Windows.Foundation", "Name": "IStringable"}]}),
+            encoding="utf-8",
+        )
+        (metadata_dir / "Windows.Storage.json").write_text(
+            json.dumps({"types": [{"Namespace": "Windows.Storage", "Name": "StorageFile"}]}),
+            encoding="utf-8",
+        )
+        manifest = {
+            "requested_features": ["Microsoft.UI.Xaml.Window", "Windows.Foundation"],
+            "selected_symbols": [
+                "Microsoft.UI.Xaml.Window",
+                "Windows.Foundation.IStringable",
+                "Windows.Storage.StorageFile",
+            ],
+        }
+        complete_plan = plan_features(manifest, [metadata_dir])
+        assert complete_plan.blocked_winui == []
+        assert complete_plan.available == ["Microsoft.UI.Xaml.Window", "Windows.Foundation"]
+        assert "Windows.Storage.StorageFile" in complete_plan.subset_features
+        assert selected_symbols_absent_from_metadata(manifest, [metadata_dir]) == []
+        stale_manifest = {
+            "requested_features": ["Microsoft.UI.Xaml.Window"],
+            "selected_symbols": [
+                "Microsoft.UI.Xaml.Window",
+                "Microsoft.UI.Xaml.FutureType",
+                "Windows.Win32.Foundation.SyntheticNestedType",
+            ],
+        }
+        assert selected_symbols_absent_from_metadata(stale_manifest, [metadata_dir]) == ["Microsoft.UI.Xaml.FutureType"]
+        provenance_dir = metadata_dir / "provenance"
+        provenance_dir.mkdir()
+        winmd_sha256 = "a" * 64
+        (provenance_dir / "Microsoft.UI.Xaml.json").write_text(
+            json.dumps(
+                {
+                    "winmd_file": "Fake.WinUI.winmd",
+                    "winmd_sha256": winmd_sha256,
+                    "types": [
+                        {
+                            "Namespace": "Microsoft.UI.Xaml",
+                            "Name": "Window",
+                            "SourceSet": "winmd_winui",
+                            "CustomAttributes": [
+                                {
+                                    "Type": CONTRACT_VERSION_ATTRIBUTE,
+                                    "FixedArguments": [
+                                        {"Value": "Microsoft.UI.Xaml.WinUIContract"},
+                                        {"Value": 393216},
+                                    ],
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        fake_source = Path("C:/fake/Fake.WinUI.winmd")
+        provenance_index = selected_symbol_provenance_index(
+            [provenance_dir],
+            WinmdSourceIndex(
+                {"Fake.WinUI.winmd": {winmd_sha256}},
+                {"Fake.WinUI.winmd": [fake_source]},
+                {("Fake.WinUI.winmd", winmd_sha256): [fake_source]},
+            ),
+        )
+        record = provenance_index["Microsoft.UI.Xaml.Window"][0]
+        assert record.source_set == "winmd_winui"
+        assert record.contract_versions == ("Microsoft.UI.Xaml.WinUIContract@0x00060000(393216)",)
+        assert record.raw_sources == (fake_source,)
+        assert provenance_symbols_with_short_name(provenance_index, "Windows.UI.Xaml.Window") == [
+            "Microsoft.UI.Xaml.Window"
+        ]
+        blocked_report_dir = metadata_dir / "blocked-report"
+        blocked_report_dir.mkdir()
+        blocked_sha256 = "b" * 64
+        (blocked_report_dir / "Windows.Foundation.json").write_text(
+            json.dumps(
+                {
+                    "winmd_file": "Fake.Windows.winmd",
+                    "winmd_sha256": blocked_sha256,
+                    "types": [{"Namespace": "Windows.Foundation", "Name": "IStringable"}],
+                }
+            ),
+            encoding="utf-8",
+        )
+        blocked_source = Path("C:/fake/Fake.Windows.winmd")
+        blocked_manifest = {
+            "requested_features": ["Microsoft.UI.Xaml.Window", "Windows.Foundation"],
+            "selected_symbols": [
+                "Microsoft.UI.Xaml.Window",
+                "Microsoft.UI.Xaml.IApplication3",
+                "Windows.Foundation.IStringable",
+            ],
+        }
+        blocked_report = missing_winui_selected_symbol_report_lines(
+            blocked_manifest,
+            [blocked_report_dir],
+            WinmdSourceIndex(
+                {"Fake.Windows.winmd": {blocked_sha256}},
+                {"Fake.Windows.winmd": [blocked_source]},
+                {("Fake.Windows.winmd", blocked_sha256): [blocked_source]},
+            ),
+        )
+        assert blocked_report == [
+            "WINUI_MISSING_SELECTED_SYMBOL_SUMMARY missing=0 checked_features=0 blocked_features=1",
+            "WINUI_MISSING_SELECTED_SYMBOL_BLOCKED_FEATURES Microsoft.UI.Xaml.Window",
+        ]
+
+        full_report_dir = metadata_dir / "full-report"
+        full_report_dir.mkdir()
+        full_winui_sha256 = "c" * 64
+        full_windows_sha256 = "d" * 64
+        (full_report_dir / "Microsoft.UI.Xaml.json").write_text(
+            json.dumps(
+                {
+                    "winmd_file": "Fake.WinUI.winmd",
+                    "winmd_sha256": full_winui_sha256,
+                    "types": [
+                        {
+                            "Namespace": "Microsoft.UI.Xaml",
+                            "Name": "Window",
+                            "SourceSet": "winmd_winui",
+                            "CustomAttributes": [
+                                {
+                                    "Type": CONTRACT_VERSION_ATTRIBUTE,
+                                    "FixedArguments": [
+                                        {"Value": "Microsoft.UI.Xaml.WinUIContract"},
+                                        {"Value": 393216},
+                                    ],
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        (full_report_dir / "Windows.UI.Xaml.json").write_text(
+            json.dumps(
+                {
+                    "winmd_file": "Fake.Windows.winmd",
+                    "winmd_sha256": full_windows_sha256,
+                    "types": [
+                        {
+                            "Namespace": "Windows.UI.Xaml",
+                            "Name": "IApplication3",
+                            "SourceSet": "winmd_main",
+                            "CustomAttributes": [
+                                {
+                                    "Type": CONTRACT_VERSION_ATTRIBUTE,
+                                    "FixedArguments": [
+                                        {"Value": "Windows.Foundation.UniversalApiContract"},
+                                        {"Value": 262144},
+                                    ],
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        full_winui_source = Path("C:/fake/Fake.WinUI.winmd")
+        full_windows_source = Path("C:/fake/Fake.Windows.winmd")
+        full_report = missing_winui_selected_symbol_report_lines(
+            {
+                "requested_features": ["Microsoft.UI.Xaml.Window"],
+                "selected_symbols": [
+                    "Microsoft.UI.Xaml.Window",
+                    "Microsoft.UI.Xaml.IApplication3",
+                    "Microsoft.UI.Xaml.Controls.Window",
+                ],
+            },
+            [full_report_dir],
+            WinmdSourceIndex(
+                {"Fake.WinUI.winmd": {full_winui_sha256}, "Fake.Windows.winmd": {full_windows_sha256}},
+                {"Fake.WinUI.winmd": [full_winui_source], "Fake.Windows.winmd": [full_windows_source]},
+                {
+                    ("Fake.WinUI.winmd", full_winui_sha256): [full_winui_source],
+                    ("Fake.Windows.winmd", full_windows_sha256): [full_windows_source],
+                },
+            ),
+        )
+        assert full_report[0] == (
+            "WINUI_MISSING_SELECTED_SYMBOL symbol=Microsoft.UI.Xaml.IApplication3 "
+            "same_short_name=Windows.UI.Xaml.IApplication3"
+        )
+        assert "candidate=Windows.UI.Xaml.IApplication3" in full_report[1]
+        assert "source_set=winmd_main" in full_report[1]
+        assert "contract_versions=Windows.Foundation.UniversalApiContract@0x00040000(262144)" in full_report[1]
+        assert full_report[2] == (
+            "WINUI_MISSING_SELECTED_SYMBOL symbol=Microsoft.UI.Xaml.Controls.Window "
+            "same_short_name=Microsoft.UI.Xaml.Window"
+        )
+        assert "candidate=Microsoft.UI.Xaml.Window" in full_report[3]
+        assert "winmd=Fake.WinUI.winmd" in full_report[3]
+        assert "source_set=winmd_winui" in full_report[3]
+        assert "contract_versions=Microsoft.UI.Xaml.WinUIContract@0x00060000(393216)" in full_report[3]
+        assert "raw=" in full_report[3] and "Fake.WinUI.winmd" in full_report[3]
+        assert full_report[-1] == "WINUI_MISSING_SELECTED_SYMBOL_SUMMARY missing=2 checked_features=1 blocked_features=0"
+        known_gap_dir = metadata_dir / "known-gap-report"
+        known_gap_dir.mkdir()
+        known_gap_sha256 = "e" * 64
+        (known_gap_dir / "Microsoft.UI.Xaml.json").write_text(
+            json.dumps(
+                {
+                    "winmd_file": "Fake.WinUI.winmd",
+                    "winmd_sha256": known_gap_sha256,
+                    "types": [
+                        {"Namespace": "Microsoft.UI.Xaml", "Name": "Application"},
+                        {"Namespace": "Microsoft.UI.Xaml.Controls", "Name": "ContentControl"},
+                        {"Namespace": "Microsoft.UI.Xaml", "Name": "IApplicationStatics"},
+                        {"Namespace": "Microsoft.UI.Xaml", "Name": "IFrameworkElement"},
+                        {"Namespace": "Microsoft.UI.Xaml", "Name": "IUIElement"},
+                        {"Namespace": "Microsoft.UI.Xaml", "Name": "IWindowFactory"},
+                        {"Namespace": "Microsoft.UI.Xaml.Markup", "Name": "IXamlReaderStatics"},
+                        {"Namespace": "Microsoft.UI.Xaml.Markup", "Name": "XamlReader"},
+                        {"Namespace": "Microsoft.UI.Xaml", "Name": "UIElement"},
+                        {"Namespace": "Microsoft.UI.Xaml", "Name": "Window"},
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        known_gap_symbols = [
+            "Microsoft.UI.Xaml.DispatcherShutdownMode",
+            "Microsoft.UI.Xaml.IApplication3",
+            "Microsoft.UI.Xaml.IDebugSettings3",
+            "Microsoft.UI.Xaml.IXamlRoot3",
+            "Microsoft.UI.Xaml.IXamlRoot4",
+            "Microsoft.UI.Xaml.LayoutCycleDebugBreakLevel",
+            "Microsoft.UI.Xaml.LayoutCycleTracingLevel",
+        ]
+        known_gap_report = missing_winui_selected_symbol_report_lines(
+            {
+                "requested_features": [
+                    "Microsoft.UI.Xaml.Application",
+                    "Microsoft.UI.Xaml.Controls.ContentControl",
+                    "Microsoft.UI.Xaml.IApplicationStatics",
+                    "Microsoft.UI.Xaml.IFrameworkElement",
+                    "Microsoft.UI.Xaml.IUIElement",
+                    "Microsoft.UI.Xaml.IWindowFactory",
+                    "Microsoft.UI.Xaml.Markup.IXamlReaderStatics",
+                    "Microsoft.UI.Xaml.Markup.XamlReader",
+                    "Microsoft.UI.Xaml.UIElement",
+                    "Microsoft.UI.Xaml.Window",
+                ],
+                "selected_symbols": [
+                    "Microsoft.UI.Xaml.Application",
+                    "Microsoft.UI.Xaml.Controls.ContentControl",
+                    "Microsoft.UI.Xaml.IApplicationStatics",
+                    "Microsoft.UI.Xaml.IFrameworkElement",
+                    "Microsoft.UI.Xaml.IUIElement",
+                    "Microsoft.UI.Xaml.IWindowFactory",
+                    "Microsoft.UI.Xaml.Markup.IXamlReaderStatics",
+                    "Microsoft.UI.Xaml.Markup.XamlReader",
+                    "Microsoft.UI.Xaml.UIElement",
+                    "Microsoft.UI.Xaml.Window",
+                    *known_gap_symbols,
+                ],
+            },
+            [known_gap_dir],
+            WinmdSourceIndex(
+                {"Fake.WinUI.winmd": {known_gap_sha256}},
+                {"Fake.WinUI.winmd": [full_winui_source]},
+                {("Fake.WinUI.winmd", known_gap_sha256): [full_winui_source]},
+            ),
+        )
+        assert {
+            symbol
+            for line in known_gap_report
+            if (symbol := report_missing_symbol(line)) is not None
+        } == set(known_gap_symbols)
+        assert known_gap_report[-1] == "WINUI_MISSING_SELECTED_SYMBOL_SUMMARY missing=7 checked_features=10 blocked_features=0"
+        (metadata_dir / "Microsoft.UI.Xaml.json").unlink()
+        blocked_plan = plan_features(manifest, [metadata_dir])
+        assert blocked_plan.blocked_winui == ["Microsoft.UI.Xaml.Window"]
+        assert blocked_plan.available == ["Windows.Foundation"]
+        assert "Windows.Storage.StorageFile" in blocked_plan.subset_features
     print("OK: windows-common codegen normalization self-test completed")
 
 
@@ -966,26 +1619,65 @@ def compare_generated_subset(checked_manifest: dict, regenerated_root: Path, req
         fail("regenerated available-metadata subset differs from checked-in windows-common:\n" + "\n".join(issues))
 
 
-def regenerate_and_diff(manifest: dict, input_dirs: Sequence[Path], timeout_seconds: int) -> None:
+def regenerate_and_diff(
+    manifest: dict,
+    input_dirs: Sequence[Path],
+    source_index: WinmdSourceIndex,
+    timeout_seconds: int,
+    allow_missing_winui_metadata: bool = False,
+) -> None:
     plan = plan_features(manifest, input_dirs)
     if plan.blocked_winui:
+        if not allow_missing_winui_metadata:
+            fail(
+                "full windows-common regeneration cannot silently skip missing WinUI/WindowsAppSDK metadata; "
+                f"blocked requested feature(s): {', '.join(plan.blocked_winui)}. "
+                "Provide --winui-winmd-json-dir and --winui-winmd-root, or pass "
+                "--allow-missing-winui-metadata to explicitly diff only the available metadata subset."
+            )
         print(
             "BLOCKED/SKIPPED: WinUI metadata is unavailable for "
             f"{len(plan.blocked_winui)} requested feature(s): {', '.join(plan.blocked_winui)}"
         )
         print_winui_metadata_guidance()
         print(f"OK: regenerating available metadata subset with {len(plan.available)} requested feature(s)")
+    else:
+        absent_from_input = selected_symbols_absent_from_metadata(manifest, input_dirs)
+        if absent_from_input:
+            report = missing_winui_selected_symbol_error_report(manifest, input_dirs, source_index)
+            fail(
+                "input metadata does not contain checked-in selected symbols; "
+                f"absent={absent_from_input[:20]}. "
+                "Use the same Windows/WindowsAppSDK metadata version and root that produced the checked-in windows-common package. "
+                "Compact supplied-metadata gap report:\n"
+                f"{report}\n"
+                "Run with --report-missing-winui-selected-symbols to inspect the full report."
+            )
     with tempfile.TemporaryDirectory(prefix="windows-common-codegen-") as temp:
         output_dir = Path(temp) / "windows-common"
-        result = run_command(generator_command(plan.available, input_dirs, output_dir), timeout_seconds=timeout_seconds)
+        generator_features = plan.subset_features if plan.blocked_winui else plan.available
+        result = run_command(generator_command(generator_features, input_dirs, output_dir), timeout_seconds=timeout_seconds)
         require_success(result, "windows-bindgen regeneration")
 
         if plan.blocked_winui:
-            compare_generated_subset(manifest, output_dir, plan.available)
+            compare_generated_subset(manifest, output_dir, generator_features)
         else:
             regenerated_manifest = load_manifest(output_dir)
             mismatches = compare_manifest_values(manifest, regenerated_manifest)
             if mismatches:
+                missing_symbols = missing_selected_symbols(manifest, regenerated_manifest)
+                if missing_symbols:
+                    source_names = winmd_json_type_names(input_dirs)
+                    absent_from_input = sorted(symbol for symbol in missing_symbols if symbol not in source_names)
+                    if absent_from_input:
+                        report = missing_winui_selected_symbol_error_report(manifest, input_dirs, source_index)
+                        mismatches.append(
+                            "input metadata does not contain checked-in selected symbols; "
+                            f"absent={absent_from_input[:20]}; "
+                            "compact supplied-metadata gap report:\n"
+                            f"{report}\n"
+                            "run with --report-missing-winui-selected-symbols for the full report"
+                        )
                 fail(f"regenerated windows-common manifest differs in keys: {mismatches}")
             compare_generated_tree(WINDOWS_COMMON, output_dir)
     if plan.blocked_winui:
@@ -1004,13 +1696,27 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         input_dirs, extra_winmd_roots = resolve_metadata_inputs(args)
         manifest = check_manifest_hashes()
-        check_winmd_json_sources(input_dirs, winmd_sources(extra_winmd_roots))
+        source_index = winmd_sources(extra_winmd_roots)
+        check_winmd_json_sources(input_dirs, source_index)
+        if args.report_selected_symbol_provenance or args.provenance_symbol:
+            symbols = args.provenance_symbol if args.provenance_symbol else manifest_selected_symbols(manifest)
+            print_selected_symbol_provenance(symbols, input_dirs, source_index)
+            return 0
+        if args.report_missing_winui_selected_symbols:
+            print_missing_winui_selected_symbols(manifest, input_dirs, source_index)
+            return 0
         if args.mode == "full" and not args.skip_regenerate:
             if args.skip_build:
                 require_existing_generator()
             else:
                 build_generator(args.timeout_seconds)
-            regenerate_and_diff(manifest, input_dirs, args.timeout_seconds)
+            regenerate_and_diff(
+                manifest,
+                input_dirs,
+                source_index,
+                args.timeout_seconds,
+                allow_missing_winui_metadata=args.allow_missing_winui_metadata,
+            )
         if not args.skip_build:
             build_windows_common(args.timeout_seconds)
     except RuntimeError as exc:

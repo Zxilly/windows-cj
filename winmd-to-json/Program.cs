@@ -5,7 +5,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text.Json;
@@ -266,13 +268,21 @@ class TypeProvider : ISignatureTypeProvider<TType, TGenericContext>, ICustomAttr
     public TType GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind)
     {
         var tr = reader.GetTypeReference(handle);
-        return new TType()
+        var type = new TType()
         {
             Kind = "Type",
             Namespace = reader.GetString(tr.Namespace),
             Name = reader.GetString(tr.Name),
             Comment = "TypeReference"
         };
+
+        if (TryResolveSameModuleTypeReference(reader, handle, out var definitionHandle) &&
+            TryGetEnumUnderlyingType(reader, definitionHandle, out var underlyingType))
+        {
+            type.UnderlyingEnumType = underlyingType;
+        }
+
+        return type;
     }
 
     public TType GetTypeFromSpecification(MetadataReader reader, TGenericContext genericContext, TypeSpecificationHandle handle, byte rawTypeKind)
@@ -355,6 +365,13 @@ class TypeProvider : ISignatureTypeProvider<TType, TGenericContext>, ICustomAttr
         return false;
     }
 
+    private static readonly ConditionalWeakTable<MetadataReader, SameModuleTypeIndex> SameModuleTypeIndexes = new();
+
+    private static bool TryResolveSameModuleTypeReference(MetadataReader reader, TypeReferenceHandle reference, out TypeDefinitionHandle handle)
+    {
+        return SameModuleTypeIndexes.GetValue(reader, r => new SameModuleTypeIndex(r)).TryResolve(reference, out handle);
+    }
+
     private static bool IsSystemEnum(MetadataReader reader, EntityHandle handle)
     {
         if (handle.IsNil)
@@ -405,6 +422,368 @@ class TypeProvider : ISignatureTypeProvider<TType, TGenericContext>, ICustomAttr
     public bool IsSystemType(TType type)
     {
         return type.Kind == "System.Type";
+    }
+}
+
+sealed class SameModuleTypeIndex
+{
+    readonly MetadataReader _reader;
+    readonly Dictionary<string, TypeDefinitionHandle> _topLevelTypes = new(StringComparer.Ordinal);
+    readonly Dictionary<TypeDefinitionHandle, Dictionary<string, TypeDefinitionHandle>> _nestedTypes = new();
+    readonly Dictionary<TypeReferenceHandle, TypeDefinitionHandle> _resolvedReferences = new();
+    readonly HashSet<TypeReferenceHandle> _unresolvedReferences = new();
+
+    public SameModuleTypeIndex(MetadataReader reader)
+    {
+        _reader = reader;
+
+        foreach (var handle in reader.TypeDefinitions)
+        {
+            var definition = reader.GetTypeDefinition(handle);
+            if (definition.IsNested)
+            {
+                var declaringType = definition.GetDeclaringType();
+                if (declaringType.IsNil)
+                {
+                    continue;
+                }
+
+                if (!_nestedTypes.TryGetValue(declaringType, out var nested))
+                {
+                    nested = new Dictionary<string, TypeDefinitionHandle>(StringComparer.Ordinal);
+                    _nestedTypes.Add(declaringType, nested);
+                }
+
+                nested[_reader.GetString(definition.Name)] = handle;
+                continue;
+            }
+
+            _topLevelTypes[TopLevelKey(definition)] = handle;
+        }
+    }
+
+    public bool TryResolve(TypeReferenceHandle reference, out TypeDefinitionHandle handle)
+    {
+        if (_resolvedReferences.TryGetValue(reference, out handle))
+        {
+            return true;
+        }
+
+        if (_unresolvedReferences.Contains(reference))
+        {
+            handle = default;
+            return false;
+        }
+
+        if (TryResolveCore(reference, new HashSet<TypeReferenceHandle>(), out handle))
+        {
+            _resolvedReferences.Add(reference, handle);
+            return true;
+        }
+
+        _unresolvedReferences.Add(reference);
+        handle = default;
+        return false;
+    }
+
+    bool TryResolveCore(TypeReferenceHandle referenceHandle, HashSet<TypeReferenceHandle> visiting, out TypeDefinitionHandle handle)
+    {
+        if (!visiting.Add(referenceHandle))
+        {
+            handle = default;
+            return false;
+        }
+
+        var reference = _reader.GetTypeReference(referenceHandle);
+        switch (reference.ResolutionScope.Kind)
+        {
+            case HandleKind.ModuleDefinition:
+                return _topLevelTypes.TryGetValue(TopLevelKey(reference), out handle);
+            case HandleKind.TypeDefinition:
+                return TryResolveNested((TypeDefinitionHandle)reference.ResolutionScope, reference, out handle);
+            case HandleKind.TypeReference:
+                if (TryResolveCore((TypeReferenceHandle)reference.ResolutionScope, visiting, out var declaringType))
+                {
+                    return TryResolveNested(declaringType, reference, out handle);
+                }
+                break;
+        }
+
+        handle = default;
+        return false;
+    }
+
+    bool TryResolveNested(TypeDefinitionHandle declaringType, TypeReference reference, out TypeDefinitionHandle handle)
+    {
+        if (_nestedTypes.TryGetValue(declaringType, out var nested) &&
+            nested.TryGetValue(_reader.GetString(reference.Name), out handle))
+        {
+            return true;
+        }
+
+        handle = default;
+        return false;
+    }
+
+    string TopLevelKey(TypeDefinition definition)
+    {
+        return $"{_reader.GetString(definition.Namespace)}\0{_reader.GetString(definition.Name)}";
+    }
+
+    string TopLevelKey(TypeReference reference)
+    {
+        return $"{_reader.GetString(reference.Namespace)}\0{_reader.GetString(reference.Name)}";
+    }
+}
+
+sealed record WinmdToJsonSelfTestFixture(
+    MetadataReaderProvider Provider,
+    TypeReferenceHandle TopLevelEnumReference,
+    TypeReferenceHandle NestedEnumReference,
+    TypeReferenceHandle ExternalSameNameReference,
+    TypeDefinitionHandle SubjectType) : IDisposable
+{
+    public void Dispose()
+    {
+        Provider.Dispose();
+    }
+}
+
+static class WinmdToJsonSelfTest
+{
+    public static void Run()
+    {
+        using var fixture = BuildFixture();
+        var reader = fixture.Provider.GetMetadataReader();
+        var typeProvider = new TypeProvider();
+
+        AssertUnderlyingType(typeProvider, reader, fixture.TopLevelEnumReference, PrimitiveTypeCode.Int32, "top-level enum");
+        AssertUnderlyingType(typeProvider, reader, fixture.NestedEnumReference, PrimitiveTypeCode.UInt16, "nested enum");
+        AssertExternalReferenceIsNotResolved(typeProvider, reader, fixture.ExternalSameNameReference);
+        AssertCustomAttributeFixedArguments(reader, fixture.SubjectType);
+        AssertContainsTypeNames(reader);
+
+        Console.WriteLine("OK: winmd-to-json metadata self-test completed");
+    }
+
+    static WinmdToJsonSelfTestFixture BuildFixture()
+    {
+        var metadata = new MetadataBuilder();
+        var module = metadata.AddModule(
+            0,
+            metadata.GetOrAddString("EnumTypeReferenceRegression.winmd"),
+            metadata.GetOrAddGuid(Guid.Parse("3f4d7066-815f-4815-aa39-747ac0a98366")),
+            default,
+            default);
+        metadata.AddAssembly(
+            metadata.GetOrAddString("EnumTypeReferenceRegression"),
+            new Version(1, 0, 0, 0),
+            default,
+            default,
+            (AssemblyFlags)0,
+            AssemblyHashAlgorithm.None);
+
+        var ns = metadata.GetOrAddString("SelfTest");
+        var empty = metadata.GetOrAddString("");
+        var systemEnumReference = metadata.AddTypeReference(module, metadata.GetOrAddString("System"), metadata.GetOrAddString("Enum"));
+
+        var topLevelEnumReference = metadata.AddTypeReference(module, ns, metadata.GetOrAddString("Mode"));
+        var outerReference = metadata.AddTypeReference(module, ns, metadata.GetOrAddString("Outer"));
+        var nestedEnumReference = metadata.AddTypeReference(outerReference, empty, metadata.GetOrAddString("NestedMode"));
+        var externalAssembly = metadata.AddAssemblyReference(
+            metadata.GetOrAddString("ExternalTypes"),
+            new Version(1, 0, 0, 0),
+            default,
+            default,
+            (AssemblyFlags)0,
+            default);
+        var externalSameNameReference = metadata.AddTypeReference(
+            externalAssembly,
+            ns,
+            metadata.GetOrAddString("Mode"));
+
+        var topLevelAttributeReference = metadata.AddTypeReference(module, ns, metadata.GetOrAddString("TopLevelModeAttribute"));
+        var nestedAttributeReference = metadata.AddTypeReference(module, ns, metadata.GetOrAddString("NestedModeAttribute"));
+        var topLevelAttributeConstructor = metadata.AddMemberReference(
+            topLevelAttributeReference,
+            metadata.GetOrAddString(".ctor"),
+            MethodSignatureWithEnumParameter(metadata, topLevelEnumReference));
+        var nestedAttributeConstructor = metadata.AddMemberReference(
+            nestedAttributeReference,
+            metadata.GetOrAddString(".ctor"),
+            MethodSignatureWithEnumParameter(metadata, nestedEnumReference));
+
+        var topLevelValueField = metadata.AddFieldDefinition(
+            FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName,
+            metadata.GetOrAddString("value__"),
+            FieldSignature(metadata, SignatureTypeCode.Int32));
+        var nestedValueField = metadata.AddFieldDefinition(
+            FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName,
+            metadata.GetOrAddString("value__"),
+            FieldSignature(metadata, SignatureTypeCode.UInt16));
+        var noFields = MetadataTokens.FieldDefinitionHandle(MetadataTokens.GetRowNumber(nestedValueField) + 1);
+        var noMethods = MetadataTokens.MethodDefinitionHandle(1);
+
+        metadata.AddTypeDefinition(
+            TypeAttributes.NotPublic,
+            empty,
+            metadata.GetOrAddString("<Module>"),
+            default,
+            topLevelValueField,
+            noMethods);
+        metadata.AddTypeDefinition(
+            TypeAttributes.Public | TypeAttributes.Sealed,
+            ns,
+            metadata.GetOrAddString("Mode"),
+            systemEnumReference,
+            topLevelValueField,
+            noMethods);
+        var outerType = metadata.AddTypeDefinition(
+            TypeAttributes.Public,
+            ns,
+            metadata.GetOrAddString("Outer"),
+            default,
+            nestedValueField,
+            noMethods);
+        var nestedEnumType = metadata.AddTypeDefinition(
+            TypeAttributes.NestedPublic | TypeAttributes.Sealed,
+            empty,
+            metadata.GetOrAddString("NestedMode"),
+            systemEnumReference,
+            nestedValueField,
+            noMethods);
+        var subjectType = metadata.AddTypeDefinition(
+            TypeAttributes.Public,
+            ns,
+            metadata.GetOrAddString("Subject"),
+            default,
+            noFields,
+            noMethods);
+        metadata.AddNestedType(nestedEnumType, outerType);
+        metadata.AddCustomAttribute(subjectType, topLevelAttributeConstructor, CustomAttributeInt32(metadata, 7));
+        metadata.AddCustomAttribute(subjectType, nestedAttributeConstructor, CustomAttributeUInt16(metadata, 9));
+
+        var blob = new BlobBuilder();
+        new MetadataRootBuilder(metadata, "v4.0.30319", suppressValidation: false).Serialize(
+            blob,
+            methodBodyStreamRva: 0,
+            mappedFieldDataStreamRva: 0);
+        return new WinmdToJsonSelfTestFixture(
+            MetadataReaderProvider.FromMetadataImage(blob.ToImmutableArray()),
+            topLevelEnumReference,
+            nestedEnumReference,
+            externalSameNameReference,
+            subjectType);
+    }
+
+    static BlobHandle FieldSignature(MetadataBuilder metadata, SignatureTypeCode typeCode)
+    {
+        var blob = new BlobBuilder();
+        blob.WriteByte(0x06);
+        blob.WriteByte((byte)typeCode);
+        return metadata.GetOrAddBlob(blob);
+    }
+
+    static BlobHandle MethodSignatureWithEnumParameter(MetadataBuilder metadata, TypeReferenceHandle enumType)
+    {
+        var blob = new BlobBuilder();
+        blob.WriteByte(0x20);
+        blob.WriteCompressedInteger(1);
+        blob.WriteByte((byte)SignatureTypeCode.Void);
+        blob.WriteByte((byte)SignatureTypeKind.ValueType);
+        blob.WriteCompressedInteger((MetadataTokens.GetRowNumber(enumType) << 2) | 1);
+        return metadata.GetOrAddBlob(blob);
+    }
+
+    static BlobHandle CustomAttributeInt32(MetadataBuilder metadata, int value)
+    {
+        var blob = new BlobBuilder();
+        blob.WriteUInt16(1);
+        blob.WriteInt32(value);
+        blob.WriteUInt16(0);
+        return metadata.GetOrAddBlob(blob);
+    }
+
+    static BlobHandle CustomAttributeUInt16(MetadataBuilder metadata, ushort value)
+    {
+        var blob = new BlobBuilder();
+        blob.WriteUInt16(1);
+        blob.WriteUInt16(value);
+        blob.WriteUInt16(0);
+        return metadata.GetOrAddBlob(blob);
+    }
+
+    static void AssertUnderlyingType(
+        TypeProvider typeProvider,
+        MetadataReader reader,
+        TypeReferenceHandle reference,
+        PrimitiveTypeCode expected,
+        string label)
+    {
+        var type = typeProvider.GetTypeFromReference(reader, reference, rawTypeKind: 0);
+        var actual = typeProvider.GetUnderlyingEnumType(type);
+        if (actual != expected)
+        {
+            throw new InvalidOperationException($"{label} resolved to {actual}; expected {expected}");
+        }
+    }
+
+    static void AssertExternalReferenceIsNotResolved(
+        TypeProvider typeProvider,
+        MetadataReader reader,
+        TypeReferenceHandle reference)
+    {
+        var type = typeProvider.GetTypeFromReference(reader, reference, rawTypeKind: 0);
+        try
+        {
+            _ = typeProvider.GetUnderlyingEnumType(type);
+        }
+        catch (UnsupportedMetadataException)
+        {
+            return;
+        }
+
+        throw new InvalidOperationException("external same-name TypeReference was resolved as a same-module enum");
+    }
+
+    static void AssertCustomAttributeFixedArguments(MetadataReader reader, TypeDefinitionHandle subjectType)
+    {
+        var subject = reader.GetTypeDefinition(subjectType);
+        var fixedArguments = subject.GetCustomAttributes()
+            .SelectMany(handle => new JsCustomAttribute(reader, reader.GetCustomAttribute(handle)).FixedArguments)
+            .ToArray();
+        AssertFixedArgument(fixedArguments, "Mode", "TypeReference", 7);
+        AssertFixedArgument(fixedArguments, "NestedMode", "TypeReference", 9);
+    }
+
+    static void AssertFixedArgument(
+        JsCustomAttributeFixedArgument[] fixedArguments,
+        string typeName,
+        string comment,
+        ulong expectedValue)
+    {
+        foreach (var argument in fixedArguments)
+        {
+            if (argument.Type.Name == typeName &&
+                argument.Type.Comment == comment &&
+                Convert.ToUInt64(argument.Value) == expectedValue)
+            {
+                return;
+            }
+        }
+
+        throw new InvalidOperationException($"missing fixed argument {typeName}={expectedValue}");
+    }
+
+    static void AssertContainsTypeNames(MetadataReader reader)
+    {
+        var names = MetadataPrinter.MetadataTypeNames(reader).ToHashSet(StringComparer.Ordinal);
+        if (!names.Contains("SelfTest.Mode") ||
+            !names.Contains("SelfTest.Outer") ||
+            !names.Contains("SelfTest.Outer.NestedMode"))
+        {
+            throw new InvalidOperationException("metadata type-name probe did not include expected top-level and nested names");
+        }
     }
 }
 
@@ -1565,7 +1944,7 @@ class MetadataPrinter
 {
     public static void usage()
     {
-        Console.WriteLine("winmd-printer [-h] [-o output.json] [-d outdir] input.winmd ...");
+        Console.WriteLine("winmd-printer [-h] [--self-test] [--contains-type full.name] [-o output.json] [-d outdir] input.winmd ...");
     }
 
     private static string ComputeSha256Hex(string path)
@@ -1578,6 +1957,7 @@ class MetadataPrinter
     public static void Main(string[] args)
     {
         var inputs = new List<string>();
+        var containsTypes = new List<string>();
         string? output = null;
         string? outdir = null;
 
@@ -1585,6 +1965,12 @@ class MetadataPrinter
         {
             switch (args[i])
             {
+                case "--self-test":
+                    WinmdToJsonSelfTest.Run();
+                    return;
+                case "--contains-type":
+                    containsTypes.Add(args[++i]);
+                    break;
                 case "-h":
                     usage();
                     return;
@@ -1603,6 +1989,12 @@ class MetadataPrinter
         if (inputs.Count == 0)
         {
             usage();
+            return;
+        }
+
+        if (containsTypes.Count > 0)
+        {
+            PrintContainsTypeReport(inputs, containsTypes);
             return;
         }
 
@@ -1683,5 +2075,55 @@ class MetadataPrinter
         {
             outputWriter.Close();
         }
+    }
+
+    public static void PrintContainsTypeReport(IEnumerable<string> inputs, IEnumerable<string> requiredTypes)
+    {
+        var required = new HashSet<string>(requiredTypes);
+        var found = new HashSet<string>();
+        foreach (var input in inputs)
+        {
+            using var fs = new FileStream(input, FileMode.Open, FileAccess.Read, FileShare.Read);
+            using var pe = new PEReader(fs);
+            var reader = pe.GetMetadataReader(MetadataReaderOptions.None);
+            foreach (var typeName in MetadataTypeNames(reader))
+            {
+                if (required.Contains(typeName))
+                {
+                    found.Add(typeName);
+                }
+            }
+        }
+
+        foreach (var typeName in required.OrderBy(name => name, StringComparer.Ordinal))
+        {
+            Console.WriteLine($"{(found.Contains(typeName) ? "CONTAINS_TYPE_FOUND" : "CONTAINS_TYPE_MISSING")} {typeName}");
+        }
+        Console.WriteLine($"CONTAINS_TYPE_SUMMARY {found.Count}/{required.Count}");
+    }
+
+    public static IEnumerable<string> MetadataTypeNames(MetadataReader reader)
+    {
+        foreach (var handle in reader.TypeDefinitions)
+        {
+            var definition = reader.GetTypeDefinition(handle);
+            if (reader.GetString(definition.Name) == "<Module>")
+            {
+                continue;
+            }
+            yield return MetadataTypeName(reader, handle);
+        }
+    }
+
+    private static string MetadataTypeName(MetadataReader reader, TypeDefinitionHandle handle)
+    {
+        var definition = reader.GetTypeDefinition(handle);
+        var name = reader.GetString(definition.Name);
+        if (definition.IsNested)
+        {
+            return $"{MetadataTypeName(reader, definition.GetDeclaringType())}.{name}";
+        }
+        var ns = reader.GetString(definition.Namespace);
+        return string.IsNullOrEmpty(ns) ? name : $"{ns}.{name}";
     }
 }

@@ -86,11 +86,27 @@ NuGet cache roots without using them automatically:
 python .\scripts\convert_winmd_to_json.py --list-candidates
 ```
 
+To check whether a candidate root can reproduce a checked-in WinUI surface,
+probe for the known checked-in WinUI selected-symbol gaps before converting it
+for the gate:
+
+```pwsh
+python .\scripts\convert_winmd_to_json.py --list-candidates --candidate-limit 50 `
+  --require-known-winui-missing-symbols
+```
+
+The symbol probe publishes the local `winmd-to-json` converter once, then uses
+its native `--contains-type` metadata scan for each listed candidate root. A
+root that misses checked-in WinUI selected symbols is not a full parity source
+for the current `windows-common` package. Add repeated `--require-symbol`
+arguments when checking extra metadata types outside the known WinUI gap set.
+
 Typical explicit roots are:
 
 - `%USERPROFILE%\.nuget\packages\microsoft.windowsappsdk\<version>\lib\uap10.0`
 - `%USERPROFILE%\.nuget\packages\microsoft.windowsappsdk\<version>\lib\uap10.0.18362`
 - `%USERPROFILE%\.nuget\packages\microsoft.ui.xaml\<version>\lib\uap10.0`
+- `%USERPROFILE%\.nuget\packages\microsoft.ui.winui\<version>\lib\uap10.0`
 
 Example from the `windows-cj` repository root, using an already-restored local
 WindowsAppSDK package and avoiding network restore:
@@ -99,20 +115,51 @@ WindowsAppSDK package and avoiding network restore:
 $appsdk = "$env:USERPROFILE\.nuget\packages\microsoft.windowsappsdk\1.4.231219000"
 $jsonDir = ".generated\winui-winmd-json"
 $rootA = (Resolve-Path "$appsdk\lib\uap10.0").Path
-$rootB = (Resolve-Path "$appsdk\lib\uap10.0.18362").Path
 
-python .\scripts\convert_winmd_to_json.py --winmd-root $rootA --winmd-root $rootB --json-dir $jsonDir --dry-run
-python .\scripts\convert_winmd_to_json.py --winmd-root $rootA --winmd-root $rootB --json-dir $jsonDir --overwrite
+python .\scripts\convert_winmd_to_json.py --winmd-root $rootA --json-dir $jsonDir --dry-run
+python .\scripts\convert_winmd_to_json.py --winmd-root $rootA --json-dir $jsonDir --overwrite
 
 $jsonDirFull = (Resolve-Path $jsonDir).Path
 $env:WINDOWS_CJ_WINUI_WINMD_JSON_DIRS = $jsonDirFull
-$env:WINDOWS_CJ_WINUI_WINMD_ROOTS = "$rootA;$rootB"
+$env:WINDOWS_CJ_WINUI_WINMD_ROOTS = $rootA
 python .\scripts\check_windows_common_codegen.py --mode full
 ```
 
 If these variables are unset, WinUI requested features remain
 `BLOCKED/SKIPPED` and the full gate compares the available Windows/Win32/Wdk
 metadata subset only.
+
+If WinUI metadata is supplied but does not contain checked-in WinUI selected
+symbols, the full gate fails before regeneration with an `input metadata does
+not contain checked-in selected symbols` message and an inline compact
+`WINUI_MISSING_SELECTED_SYMBOL` report. Use the symbol probe above to find a
+metadata root that contains the missing symbols, then convert only the matching
+explicit root(s). Mixing additional TFM roots can expand the selected surface
+and produce unrelated extra symbols/files.
+
+To inspect exactly which supplied JSON/root contributes a checked-in selected
+symbol, use the provenance reports:
+
+```pwsh
+python .\scripts\check_windows_common_codegen.py --report-missing-winui-selected-symbols
+```
+
+When optional WinUI metadata is present, this prints only checked-in WinUI
+selected symbols missing from the supplied WinUI feature roots, plus any
+same-short-name candidates and their source JSON/root/hash/contract details. If
+no WinUI metadata root is present, it reports the blocked requested features
+instead of dumping the whole checked-in WinUI closure.
+
+```pwsh
+python .\scripts\check_windows_common_codegen.py `
+  --provenance-symbol Microsoft.UI.Xaml.IApplication3 `
+  --provenance-symbol Windows.UI.Xaml.IApplication3
+```
+
+The per-symbol report prints `PROVENANCE FOUND/MISSING`, source JSON, raw
+`.winmd` hash, `SourceSet`, contract/version attributes, and the matching raw
+root path. This is useful when a Windows SDK type with the same short name
+exists but does not match a checked-in `Microsoft.UI.Xaml` type.
 
 Generate from converted metadata:
 
