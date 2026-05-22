@@ -296,6 +296,13 @@ func testGenericInt32VectorBuilderUsesDirectValueAbiForSpecialization() {
     @Expect(directFound, true)
     @Expect(directIndex, 3u32)
 
+    var nullIndexFound = true
+    let nullIndexHr = unsafe {
+        directIndexOf(vector.asRaw(), 6i32, CPointer<UInt32>(), CPointer<Bool>(inout nullIndexFound))
+    }
+    @Expect(nullIndexHr, E_POINTER.value)
+    @Expect(nullIndexFound, true)
+
     let directSetAt = CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32>(CPointer<Unit>(vtbl.SetAt))
     let setHr = unsafe { directSetAt(vector.asRaw(), 2u32, 5i32) }
     @Expect(setHr, S_OK.value)
@@ -370,6 +377,13 @@ func testGenericInt32VectorViewBuilderUsesDirectValueAbiForSpecialization() {
     @Expect(indexHr, S_OK.value)
     @Expect(directFound, true)
     @Expect(directIndex, 2u32)
+
+    var nullIndexFound = true
+    let nullIndexHr = unsafe {
+        directIndexOf(view.asRaw(), 5i32, CPointer<UInt32>(), CPointer<Bool>(inout nullIndexFound))
+    }
+    @Expect(nullIndexHr, E_POINTER.value)
+    @Expect(nullIndexFound, true)
 
     let directGetMany = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32>(
         CPointer<Unit>(vtbl.GetMany)

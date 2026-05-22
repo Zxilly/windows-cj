@@ -4,7 +4,7 @@ import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{HString, InParam, Result, createComObjectFromSchemas}
+import windows_core.{E_FAIL, E_POINTER, HString, InParam, Result, WinError, WindowsException, createComObjectFromSchemas}
 
 class ObservableInt32HStringMapForwardingTestImpl <: IObservableMap_Impl<Int32, HString> & Resource {
     private let entries: ArrayList<(Int32, HString)>
@@ -12,6 +12,9 @@ class ObservableInt32HStringMapForwardingTestImpl <: IObservableMap_Impl<Int32, 
     private let mapVtblHandle: CPointer<IMapVtbl>
     private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
+    public var failMapChanged: Bool = false
+    public var throwWindowsOnMapChanged: Bool = false
+    public var throwPlainOnRemoveMapChanged: Bool = false
 
     public init(entries: ArrayList<(Int32, HString)>) {
         this.entries = entries
@@ -135,6 +138,12 @@ class ObservableInt32HStringMapForwardingTestImpl <: IObservableMap_Impl<Int32, 
 
     public func MapChanged(vhnd: InParam<MapChangedEventHandler<Int32, HString>>): Result<EventRegistrationToken> {
         let _ = vhnd
+        if (throwWindowsOnMapChanged) {
+            throw WindowsException(E_POINTER)
+        }
+        if (failMapChanged) {
+            return Result<EventRegistrationToken>.Err(WinError.fromHRESULT(E_FAIL))
+        }
         var token = EventRegistrationToken()
         token.Value = 11i64
         Result<EventRegistrationToken>.Ok(token)
@@ -142,6 +151,9 @@ class ObservableInt32HStringMapForwardingTestImpl <: IObservableMap_Impl<Int32, 
 
     public func RemoveMapChanged(token: EventRegistrationToken): Result<Unit> {
         let _ = token
+        if (throwPlainOnRemoveMapChanged) {
+            throw Exception("RemoveMapChanged failure")
+        }
         Result<Unit>.Ok(())
     }
 }
@@ -205,5 +217,51 @@ func testObservableMapForwardsInheritedMapOperations() {
         two.close()
         replacement.close()
         three.close()
+    }
+}
+
+@Test
+func testObservableMapEventThunksClearTokenAndTranslateExceptions() {
+    let impl = ObservableInt32HStringMapForwardingTestImpl(ArrayList<(Int32, HString)>([]))
+    let schemas = [
+        IIterable<IKeyValuePair<Int32, HString>>.descriptorSchema(),
+        IMap<Int32, HString>.descriptorSchema(),
+        IObservableMap<Int32, HString>.descriptorSchema()
+    ]
+    let vtbls = [impl.iterableVtblPtr(), impl.mapVtblPtr(), impl.observableVtblPtr()]
+    let object = createComObjectFromSchemas(impl, schemas, vtbls)
+    let map = object.toInterface(IObservableMap<Int32, HString>.descriptor())
+    object.close()
+
+    try {
+        let vtbl = unsafe { map.vtbl() }
+
+        impl.failMapChanged = true
+        var failToken = EventRegistrationTokenAbi()
+        failToken.Value = 123i64
+        let failHr = unsafe {
+            vtbl.MapChanged(map.asRaw(), CPointer<Unit>(), CPointer<EventRegistrationTokenAbi>(inout failToken))
+        }
+        @Expect(failHr, E_FAIL.value)
+        @Expect(failToken.Value, 0i64)
+        impl.failMapChanged = false
+
+        impl.throwWindowsOnMapChanged = true
+        var throwToken = EventRegistrationTokenAbi()
+        throwToken.Value = 456i64
+        let throwHr = unsafe {
+            vtbl.MapChanged(map.asRaw(), CPointer<Unit>(), CPointer<EventRegistrationTokenAbi>(inout throwToken))
+        }
+        @Expect(throwHr, E_POINTER.value)
+        @Expect(throwToken.Value, 0i64)
+        impl.throwWindowsOnMapChanged = false
+
+        impl.throwPlainOnRemoveMapChanged = true
+        var token = EventRegistrationTokenAbi()
+        token.Value = 11i64
+        @Expect(unsafe { vtbl.RemoveMapChanged(map.asRaw(), token) }, E_FAIL.value)
+        impl.throwPlainOnRemoveMapChanged = false
+    } finally {
+        map.close()
     }
 }

@@ -4,13 +4,17 @@ import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_POINTER, Result, S_OK, WinError, createComObjectFromSchemas}
+import windows_core.{E_FAIL, E_POINTER, Result, S_OK, WinError, WindowsException, createComObjectFromSchemas}
 
 class Int32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
     private let items: ArrayList<Int32>
     private let vtblHandle: CPointer<IVectorVtbl>
     private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
+    public var throwWindowsOnIndexOf: Bool = false
+    public var throwPlainOnSetAt: Bool = false
+    public var throwPlainOnInsertAt: Bool = false
+    public var throwPlainOnAppend: Bool = false
 
     public init(items: ArrayList<Int32>) {
         this.items = items
@@ -76,6 +80,9 @@ class Int32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
     }
 
     public func IndexOf(value: Int32, indexSlot: CPointer<UInt32>): Result<Bool> {
+        if (throwWindowsOnIndexOf) {
+            throw WindowsException(E_POINTER)
+        }
         var offset = 0
         while (offset < items.size) {
             match (items.get(offset)) {
@@ -97,6 +104,9 @@ class Int32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
     }
 
     public func SetAt(index: UInt32, value: Int32): Result<Unit> {
+        if (throwPlainOnSetAt) {
+            throw Exception("SetAt failure")
+        }
         let resolved = Int64(index)
         if (resolved < 0 || resolved >= items.size) {
             return Result<Unit>.Err(stockBoundsError())
@@ -106,6 +116,9 @@ class Int32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
     }
 
     public func InsertAt(index: UInt32, value: Int32): Result<Unit> {
+        if (throwPlainOnInsertAt) {
+            throw Exception("InsertAt failure")
+        }
         let resolved = Int64(index)
         if (resolved < 0 || resolved > items.size) {
             return Result<Unit>.Err(stockBoundsError())
@@ -124,6 +137,9 @@ class Int32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
     }
 
     public func Append(value: Int32): Result<Unit> {
+        if (throwPlainOnAppend) {
+            throw Exception("Append failure")
+        }
         items.add(value)
         Result<Unit>.Ok(())
     }
@@ -198,6 +214,13 @@ func testInt32VectorUsesDirectValueAbiForMutableSlots() {
     @Expect(directFound, true)
     @Expect(directIndex, 3u32)
 
+    var nullIndexFound = true
+    let nullIndexHr = unsafe {
+        directIndexOf(vector.asRaw(), 6i32, CPointer<UInt32>(), CPointer<Bool>(inout nullIndexFound))
+    }
+    @Expect(nullIndexHr, E_POINTER.value)
+    @Expect(nullIndexFound, true)
+
     let directSetAt = CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32>(CPointer<Unit>(vtbl.SetAt))
     let setHr = unsafe { directSetAt(vector.asRaw(), 2u32, 5i32) }
     @Expect(setHr, S_OK.value)
@@ -212,6 +235,49 @@ func testInt32VectorUsesDirectValueAbiForMutableSlots() {
     let appendHr = unsafe { directAppend(vector.asRaw(), 8i32) }
     @Expect(appendHr, S_OK.value)
     @Expect(unsafe { vector.GetAt(5u32) }, 8i32)
+
+    vector.close()
+}
+
+@Test
+func testInt32VectorDirectValueVtableTranslatesThrownExceptions() {
+    let impl = Int32VectorAbiTestImpl(ArrayList<Int32>([1i32]))
+    let schemas = [IIterable<Int32>.descriptorSchema(), IVector<Int32>.descriptorSchema()]
+    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
+    let object = createComObjectFromSchemas(impl, schemas, vtbls)
+    let vector = object.toInterface(IVector<Int32>.descriptor())
+    object.close()
+
+    let vtbl = unsafe { vector.vtbl() }
+    let directIndexOf = CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<Bool>) -> Int32>(
+        CPointer<Unit>(vtbl.IndexOf)
+    )
+    let directSetAt = CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32>(CPointer<Unit>(vtbl.SetAt))
+    let directInsertAt = CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32>(CPointer<Unit>(vtbl.InsertAt))
+    let directAppend = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>(vtbl.Append))
+
+    impl.throwWindowsOnIndexOf = true
+    var directIndex = 123u32
+    var directFound = true
+    let indexHr = unsafe {
+        directIndexOf(vector.asRaw(), 1i32, CPointer<UInt32>(inout directIndex), CPointer<Bool>(inout directFound))
+    }
+    @Expect(indexHr, E_POINTER.value)
+    @Expect(directIndex, 0u32)
+    @Expect(directFound, false)
+    impl.throwWindowsOnIndexOf = false
+
+    impl.throwPlainOnSetAt = true
+    @Expect(unsafe { directSetAt(vector.asRaw(), 0u32, 2i32) }, E_FAIL.value)
+    impl.throwPlainOnSetAt = false
+
+    impl.throwPlainOnInsertAt = true
+    @Expect(unsafe { directInsertAt(vector.asRaw(), 0u32, 2i32) }, E_FAIL.value)
+    impl.throwPlainOnInsertAt = false
+
+    impl.throwPlainOnAppend = true
+    @Expect(unsafe { directAppend(vector.asRaw(), 2i32) }, E_FAIL.value)
+    impl.throwPlainOnAppend = false
 
     vector.close()
 }

@@ -301,6 +301,43 @@ func withDecoderIterableForwardingRaw(action: (CPointer<Unit>) -> Unit): Unit {
     }
 }
 
+class WwwFormUrlDecoderEntryNoneBranchTestImpl <: IWwwFormUrlDecoderEntry_Impl {
+    public func Name(): windows_core.Result<windows_core.HString> {
+        windows_core.Result<windows_core.HString>.Ok(windows_core.HString("unused-name"))
+    }
+
+    public func Value(): windows_core.Result<windows_core.HString> {
+        windows_core.Result<windows_core.HString>.Ok(windows_core.HString("unused-value"))
+    }
+}
+
+@Test
+func testWwwFormUrlDecoderEntryVtblNoneBranchClearsNameValueOutputs() {
+    let vtbl = IWwwFormUrlDecoderEntryVtbl.new<WwwFormUrlDecoderEntryNoneBranchTestImpl>()
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IWwwFormUrlDecoderEntryVtbl>(vtbl) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IWwwFormUrlDecoderEntryVtbl>>(vtblHandle) }
+    let sentinel = unsafe { windows_interface.allocateNativeValue<Int32>(321i32) }
+    let raw = CPointer<Unit>(objectHandle)
+    var nameValue = CPointer<Unit>(sentinel)
+    var valueValue = CPointer<Unit>(sentinel)
+
+    try {
+        let nameHr = unsafe { vtbl.Name(raw, CPointer<CPointer<Unit>>(inout nameValue)) }
+        @Expect(nameHr, E_NOINTERFACE.value)
+        @Expect(nameValue.isNull(), true)
+
+        let valueHr = unsafe { vtbl.Value(raw, CPointer<CPointer<Unit>>(inout valueValue)) }
+        @Expect(valueHr, E_NOINTERFACE.value)
+        @Expect(valueValue.isNull(), true)
+    } finally {
+        unsafe {
+            windows_interface.freeNativeValue(sentinel)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
+        }
+    }
+}
+
 @Test
 func testUriRuntimeAbsoluteUriReleasesTemporaryDefaultInterface() {
     resetUriDecoderForwardingCounters()

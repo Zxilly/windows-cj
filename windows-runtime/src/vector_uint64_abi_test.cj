@@ -248,6 +248,13 @@ func testUInt64VectorUsesDirectValueAbiForMutableSlots() {
     @Expect(directFound, true)
     @Expect(directIndex, 1u32)
 
+    var nullIndexFound = true
+    let nullIndexHr = unsafe {
+        directIndexOf(vector.asRaw(), 6u64, CPointer<UInt32>(), CPointer<Bool>(inout nullIndexFound))
+    }
+    @Expect(nullIndexHr, E_POINTER.value)
+    @Expect(nullIndexFound, true)
+
     let directSetAt = CFunc<(CPointer<Unit>, UInt32, UInt64) -> Int32>(CPointer<Unit>(vtbl.SetAt))
     let setAtHr = unsafe { directSetAt(vector.asRaw(), 0u32, 40u64) }
     @Expect(setAtHr, S_OK.value)
@@ -288,6 +295,13 @@ func testGenericUInt64VectorBuilderUsesDirectValueAbiForSpecialization() {
     @Expect(indexOfHr, S_OK.value)
     @Expect(directFound, true)
     @Expect(directIndex, 1u32)
+
+    var nullIndexFound = true
+    let nullIndexHr = unsafe {
+        directIndexOf(vector.asRaw(), 6u64, CPointer<UInt32>(), CPointer<Bool>(inout nullIndexFound))
+    }
+    @Expect(nullIndexHr, E_POINTER.value)
+    @Expect(nullIndexFound, true)
 
     let directAppend = CFunc<(CPointer<Unit>, UInt64) -> Int32>(CPointer<Unit>(vtbl.Append))
     let appendHr = unsafe { directAppend(vector.asRaw(), 7u64) }

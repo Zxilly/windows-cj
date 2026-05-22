@@ -2,7 +2,7 @@ package windows_runtime
 
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{InParam, S_OK}
+import windows_core.{E_FAIL, InParam, S_OK, WindowsException}
 import windows_interface.{IAgileObject, IInspectable, IMarshal}
 
 class DelegateNullObservation {
@@ -23,6 +23,56 @@ func delegateAsIInspectableThrows(handler: AsyncActionCompletedHandler): Bool {
         return true
     }
     false
+}
+
+@Test
+func testDelegateThunkMapsThrownWindowsExceptionToHRESULT() {
+    let handler = AsyncActionCompletedHandler.new({ info: InParam<IAsyncAction>, status: AsyncStatus =>
+        let _ = info
+        let _ = status
+        throw WindowsException(E_FAIL)
+    })
+
+    let vtbl = unsafe { handler.vtbl() }
+    let hr = unsafe { vtbl.Invoke(handler.asRaw(), CPointer<Unit>(), AsyncStatus.projectAbi(AsyncStatus_Completed)) }
+
+    @Expect(hr, E_FAIL.value)
+
+    handler.close()
+}
+
+@Test
+func testDelegateThunkMapsPlainExceptionToEFail() {
+    let handler = AsyncActionCompletedHandler.new({ info: InParam<IAsyncAction>, status: AsyncStatus =>
+        let _ = info
+        let _ = status
+        throw Exception("delegate failure")
+    })
+
+    let vtbl = unsafe { handler.vtbl() }
+    let hr = unsafe { vtbl.Invoke(handler.asRaw(), CPointer<Unit>(), AsyncStatus.projectAbi(AsyncStatus_Completed)) }
+
+    @Expect(hr, E_FAIL.value)
+
+    handler.close()
+}
+
+@Test
+func testCollectionDelegateThunkMapsThrownWindowsExceptionToHRESULT() {
+    let handler = MapChangedEventHandler<Int32, Int32>.new({
+        sender: InParam<IObservableMap<Int32, Int32>>,
+        event: InParam<IMapChangedEventArgs<Int32>> =>
+        let _ = sender
+        let _ = event
+        throw WindowsException(E_FAIL)
+    })
+
+    let vtbl = unsafe { handler.vtbl() }
+    let hr = unsafe { vtbl.Invoke(handler.asRaw(), CPointer<Unit>(), CPointer<Unit>()) }
+
+    @Expect(hr, E_FAIL.value)
+
+    handler.close()
 }
 
 @Test

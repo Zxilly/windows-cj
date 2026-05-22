@@ -4,7 +4,8 @@ import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{HString, Result, S_OK, createComObjectFromSchemas}
+import windows_core.{E_FAIL, E_POINTER, HString, Result, S_OK, WindowsException, createComObjectFromSchemas}
+import windows_core as windows_core
 
 class GenericBuilderInt32MapViewAbiTestImpl <: IMapView_Impl<Int32, Int32> & Resource {
     private let entries: ArrayList<(Int32, Int32)>
@@ -176,6 +177,75 @@ class GenericBuilderInt32HStringMapViewAbiTestImpl <: IMapView_Impl<Int32, HStri
     }
 }
 
+class ThrowingInt32HStringMapViewAbiTestImpl <: IMapView_Impl<Int32, HString> & Resource {
+    private let vtblHandle: CPointer<IMapViewVtbl>
+    private var closed: Bool = false
+    public var throwWindows: Bool = true
+
+    public init() {
+        this.vtblHandle = unsafe {
+            windows_interface.allocateNativeValue<IMapViewVtbl>(IMapViewVtbl.newInt32HString<ThrowingInt32HStringMapViewAbiTestImpl>())
+        }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (closed) {
+            return
+        }
+        closed = true
+    }
+
+    public func First(): Result<IIterator<IKeyValuePair<Int32, HString>>> {
+        Result<IIterator<IKeyValuePair<Int32, HString>>>.Err(stockBoundsError())
+    }
+
+    public func Lookup(key: Int32): Result<HString> {
+        let _ = key
+        if (throwWindows) {
+            throw WindowsException(E_POINTER)
+        }
+        throw Exception("plain Lookup failure")
+    }
+
+    public func Size(): Result<UInt32> {
+        Result<UInt32>.Ok(0u32)
+    }
+
+    public func HasKey(key: Int32): Result<Bool> {
+        let _ = key
+        if (throwWindows) {
+            throw WindowsException(E_POINTER)
+        }
+        throw Exception("plain HasKey failure")
+    }
+
+    public func Split(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Result<Unit> {
+        if (first.isNotNull()) {
+            unsafe { first.write(CPointer<Unit>()) }
+        }
+        if (second.isNotNull()) {
+            unsafe { second.write(CPointer<Unit>()) }
+        }
+        Result<Unit>.Ok(())
+    }
+}
+
 func createGenericBuilderInt32MapViewAbiTest(entries: ArrayList<(Int32, Int32)>): IMapView<Int32, Int32> {
     let impl = GenericBuilderInt32MapViewAbiTestImpl(entries)
     let schemas = [IIterable<IKeyValuePair<Int32, Int32>>.descriptorSchema(), IMapView<Int32, Int32>.descriptorSchema()]
@@ -196,6 +266,61 @@ func createGenericBuilderInt32HStringMapViewAbiTest(entries: ArrayList<(Int32, H
     result
 }
 
+func createThrowingInt32HStringMapViewAbiTest(
+    impl: ThrowingInt32HStringMapViewAbiTestImpl
+): IMapView<Int32, HString> {
+    let object = createComObjectFromSchemas(impl, [IMapView<Int32, HString>.descriptorSchema()], impl.vtblPtr())
+    let result = object.toInterface(IMapView<Int32, HString>.descriptor())
+    object.close()
+    result
+}
+
+func assertMapViewMissingHStringLookupClearsStaleSlot(view: IMapView<Int32, HString>): Unit {
+    let stale = HString("stale-map-view-lookup")
+    let staleRaw = stale.toSystemHandleCopy()
+    stale.close()
+    var directRaw = staleRaw
+    try {
+        let vtbl = unsafe { view.vtbl() }
+        let directLookup = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(vtbl.Lookup))
+        let lookupHr = unsafe { directLookup(view.asRaw(), 404i32, CPointer<CPointer<Unit>>(inout directRaw)) }
+        @Expect(lookupHr != S_OK.value, true)
+        @Expect(directRaw.isNull(), true)
+    } finally {
+        if (directRaw.isNull()) {
+            windows_core.releaseSystemHStringHandle(staleRaw)
+        } else {
+            windows_core.releaseSystemHStringHandle(directRaw)
+        }
+    }
+}
+
+func assertThrowingInt32HStringMapViewDirectThunks(view: IMapView<Int32, HString>, expectedHr: Int32): Unit {
+    let vtbl = unsafe { view.vtbl() }
+    let stale = HString("throwing-map-view-lookup")
+    let staleRaw = stale.toSystemHandleCopy()
+    stale.close()
+    var directRaw = staleRaw
+    var directFound = true
+    try {
+        let directLookup = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(vtbl.Lookup))
+        let lookupHr = unsafe { directLookup(view.asRaw(), 9i32, CPointer<CPointer<Unit>>(inout directRaw)) }
+        @Expect(lookupHr, expectedHr)
+        @Expect(directRaw.isNull(), true)
+
+        let directHasKey = CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(vtbl.HasKey))
+        let hasKeyHr = unsafe { directHasKey(view.asRaw(), 9i32, CPointer<Bool>(inout directFound)) }
+        @Expect(hasKeyHr, expectedHr)
+        @Expect(directFound, false)
+    } finally {
+        if (directRaw.isNotNull()) {
+            windows_core.releaseSystemHStringHandle(directRaw)
+        } else {
+            windows_core.releaseSystemHStringHandle(staleRaw)
+        }
+    }
+}
+
 @Test
 func testGenericInt32MapViewBuilderUsesDirectValueAbiForSpecialization() {
     let entries = ArrayList<(Int32, Int32)>([(1i32, 10i32), (2i32, 20i32)])
@@ -209,6 +334,10 @@ func testGenericInt32MapViewBuilderUsesDirectValueAbiForSpecialization() {
     let lookupHr = unsafe { directLookup(view.asRaw(), 1i32, CPointer<Int32>(inout directValue)) }
     @Expect(lookupHr, S_OK.value)
     @Expect(directValue, 10i32)
+    directValue = 99i32
+    let missingLookupHr = unsafe { directLookup(view.asRaw(), 404i32, CPointer<Int32>(inout directValue)) }
+    @Expect(missingLookupHr != S_OK.value, true)
+    @Expect(directValue, 0i32)
 
     var directFound = false
     let directHasKey = CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(vtbl.HasKey))
@@ -244,8 +373,23 @@ func testGenericInt32HStringMapViewBuilderUsesDirectKeyAbiForSpecialization() {
     let hasKeyHr = unsafe { directHasKey(view.asRaw(), 2i32, CPointer<Bool>(inout directFound)) }
     @Expect(hasKeyHr, S_OK.value)
     @Expect(directFound, true)
+    assertMapViewMissingHStringLookupClearsStaleSlot(view)
 
     view.close()
     one.close()
     two.close()
+}
+
+@Test
+func testInt32HStringMapViewSpecializedThunksTranslateThrownExceptions() {
+    let impl = ThrowingInt32HStringMapViewAbiTestImpl()
+    let view = createThrowingInt32HStringMapViewAbiTest(impl)
+    try {
+        impl.throwWindows = true
+        assertThrowingInt32HStringMapViewDirectThunks(view, E_POINTER.value)
+        impl.throwWindows = false
+        assertThrowingInt32HStringMapViewDirectThunks(view, E_FAIL.value)
+    } finally {
+        view.close()
+    }
 }

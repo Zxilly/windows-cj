@@ -4,7 +4,7 @@ import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_POINTER, InParam, Result, WinError, createComObjectFromSchemas}
+import windows_core.{E_FAIL, E_POINTER, InParam, Result, WinError, WindowsException, createComObjectFromSchemas}
 
 class ObservableInt32VectorForwardingTestImpl <: IObservableVector_Impl<Int32> & Resource {
     private let items: ArrayList<Int32>
@@ -12,6 +12,9 @@ class ObservableInt32VectorForwardingTestImpl <: IObservableVector_Impl<Int32> &
     private let vectorVtblHandle: CPointer<IVectorVtbl>
     private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
+    public var failVectorChanged: Bool = false
+    public var throwWindowsOnVectorChanged: Bool = false
+    public var throwPlainOnRemoveVectorChanged: Bool = false
 
     public init(items: ArrayList<Int32>) {
         this.items = items
@@ -170,6 +173,12 @@ class ObservableInt32VectorForwardingTestImpl <: IObservableVector_Impl<Int32> &
 
     public func VectorChanged(vhnd: InParam<VectorChangedEventHandler<Int32>>): Result<EventRegistrationToken> {
         let _ = vhnd
+        if (throwWindowsOnVectorChanged) {
+            throw WindowsException(E_POINTER)
+        }
+        if (failVectorChanged) {
+            return Result<EventRegistrationToken>.Err(WinError.fromHRESULT(E_FAIL))
+        }
         var token = EventRegistrationToken()
         token.Value = 7i64
         Result<EventRegistrationToken>.Ok(token)
@@ -177,6 +186,9 @@ class ObservableInt32VectorForwardingTestImpl <: IObservableVector_Impl<Int32> &
 
     public func RemoveVectorChanged(token: EventRegistrationToken): Result<Unit> {
         let _ = token
+        if (throwPlainOnRemoveVectorChanged) {
+            throw Exception("RemoveVectorChanged failure")
+        }
         Result<Unit>.Ok(())
     }
 }
@@ -219,6 +231,52 @@ func testObservableVectorForwardsInheritedVectorOperations() {
 
         unsafe { vector.Clear() }
         @Expect(unsafe { vector.Size() }, 0u32)
+    } finally {
+        vector.close()
+    }
+}
+
+@Test
+func testObservableVectorEventThunksClearTokenAndTranslateExceptions() {
+    let impl = ObservableInt32VectorForwardingTestImpl(ArrayList<Int32>([]))
+    let schemas = [
+        IIterable<Int32>.descriptorSchema(),
+        IVector<Int32>.descriptorSchema(),
+        IObservableVector<Int32>.descriptorSchema()
+    ]
+    let vtbls = [impl.iterableVtblPtr(), impl.vectorVtblPtr(), impl.observableVtblPtr()]
+    let object = createComObjectFromSchemas(impl, schemas, vtbls)
+    let vector = object.toInterface(IObservableVector<Int32>.descriptor())
+    object.close()
+
+    try {
+        let vtbl = unsafe { vector.vtbl() }
+
+        impl.failVectorChanged = true
+        var failToken = EventRegistrationTokenAbi()
+        failToken.Value = 123i64
+        let failHr = unsafe {
+            vtbl.VectorChanged(vector.asRaw(), CPointer<Unit>(), CPointer<EventRegistrationTokenAbi>(inout failToken))
+        }
+        @Expect(failHr, E_FAIL.value)
+        @Expect(failToken.Value, 0i64)
+        impl.failVectorChanged = false
+
+        impl.throwWindowsOnVectorChanged = true
+        var throwToken = EventRegistrationTokenAbi()
+        throwToken.Value = 456i64
+        let throwHr = unsafe {
+            vtbl.VectorChanged(vector.asRaw(), CPointer<Unit>(), CPointer<EventRegistrationTokenAbi>(inout throwToken))
+        }
+        @Expect(throwHr, E_POINTER.value)
+        @Expect(throwToken.Value, 0i64)
+        impl.throwWindowsOnVectorChanged = false
+
+        impl.throwPlainOnRemoveVectorChanged = true
+        var token = EventRegistrationTokenAbi()
+        token.Value = 7i64
+        @Expect(unsafe { vtbl.RemoveVectorChanged(vector.asRaw(), token) }, E_FAIL.value)
+        impl.throwPlainOnRemoveVectorChanged = false
     } finally {
         vector.close()
     }

@@ -4,7 +4,8 @@ import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{HString, Result, S_OK, createComObjectFromSchemas, winrtBorrowGenericIn}
+import windows_core.{E_FAIL, E_NOINTERFACE, E_POINTER, HString, Result, S_OK, WindowsException, createComObjectFromSchemas, winrtBorrowGenericIn}
+import windows_core as windows_core
 
 class Int32HStringMapAbiTestImpl <: IMap_Impl<Int32, HString> & Resource {
     private let entries: ArrayList<(Int32, HString)>
@@ -164,6 +165,157 @@ func createGenericBuilderInt32HStringMapAbiTest(entries: ArrayList<(Int32, HStri
     result
 }
 
+class ThrowingInt32HStringMapAbiTestImpl <: IMap_Impl<Int32, HString> & Resource {
+    private let vtblHandle: CPointer<IMapVtbl>
+    private var closed: Bool = false
+    public var throwWindows: Bool = true
+
+    public init() {
+        this.vtblHandle = unsafe {
+            windows_interface.allocateNativeValue<IMapVtbl>(IMapVtbl.newInt32HString<ThrowingInt32HStringMapAbiTestImpl>())
+        }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (closed) {
+            return
+        }
+        closed = true
+    }
+
+    public func First(): Result<IIterator<IKeyValuePair<Int32, HString>>> {
+        Result<IIterator<IKeyValuePair<Int32, HString>>>.Err(stockBoundsError())
+    }
+
+    public func Lookup(key: Int32): Result<HString> {
+        let _ = key
+        if (throwWindows) {
+            throw WindowsException(E_POINTER)
+        }
+        throw Exception("plain Lookup failure")
+    }
+
+    public func Size(): Result<UInt32> {
+        Result<UInt32>.Ok(0u32)
+    }
+
+    public func HasKey(key: Int32): Result<Bool> {
+        let _ = key
+        if (throwWindows) {
+            throw WindowsException(E_POINTER)
+        }
+        throw Exception("plain HasKey failure")
+    }
+
+    public func GetView(): Result<IMapView<Int32, HString>> {
+        Result<IMapView<Int32, HString>>.Err(stockBoundsError())
+    }
+
+    public func Insert(key: Int32, value: HString): Result<Bool> {
+        let _ = key
+        let _ = value
+        if (throwWindows) {
+            throw WindowsException(E_POINTER)
+        }
+        throw Exception("plain Insert failure")
+    }
+
+    public func Remove(key: Int32): Result<Unit> {
+        let _ = key
+        if (throwWindows) {
+            throw WindowsException(E_POINTER)
+        }
+        throw Exception("plain Remove failure")
+    }
+
+    public func Clear(): Result<Unit> {
+        Result<Unit>.Ok(())
+    }
+}
+
+func createThrowingInt32HStringMapAbiTest(impl: ThrowingInt32HStringMapAbiTestImpl): IMap<Int32, HString> {
+    let object = createComObjectFromSchemas(impl, [IMap<Int32, HString>.descriptorSchema()], impl.vtblPtr())
+    let result = object.toInterface(IMap<Int32, HString>.descriptor())
+    object.close()
+    result
+}
+
+func assertMapMissingHStringLookupClearsStaleSlot(map: IMap<Int32, HString>): Unit {
+    let stale = HString("stale-map-lookup")
+    let staleRaw = stale.toSystemHandleCopy()
+    stale.close()
+    var directRaw = staleRaw
+    try {
+        let vtbl = unsafe { map.vtbl() }
+        let directLookup = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(vtbl.Lookup))
+        let lookupHr = unsafe { directLookup(map.asRaw(), 404i32, CPointer<CPointer<Unit>>(inout directRaw)) }
+        @Expect(lookupHr != S_OK.value, true)
+        @Expect(directRaw.isNull(), true)
+    } finally {
+        if (directRaw.isNull()) {
+            windows_core.releaseSystemHStringHandle(staleRaw)
+        } else {
+            windows_core.releaseSystemHStringHandle(directRaw)
+        }
+    }
+}
+
+func assertThrowingInt32HStringMapDirectThunks(map: IMap<Int32, HString>, expectedHr: Int32): Unit {
+    let vtbl = unsafe { map.vtbl() }
+    let stale = HString("throwing-map-lookup")
+    let staleRaw = stale.toSystemHandleCopy()
+    stale.close()
+    var directRaw = staleRaw
+    var directFound = true
+    var directReplaced = true
+    let insertValue = HString("throwing-map-insert")
+    try {
+        let directLookup = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(vtbl.Lookup))
+        let lookupHr = unsafe { directLookup(map.asRaw(), 7i32, CPointer<CPointer<Unit>>(inout directRaw)) }
+        @Expect(lookupHr, expectedHr)
+        @Expect(directRaw.isNull(), true)
+
+        let directHasKey = CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(vtbl.HasKey))
+        let hasKeyHr = unsafe { directHasKey(map.asRaw(), 7i32, CPointer<Bool>(inout directFound)) }
+        @Expect(hasKeyHr, expectedHr)
+        @Expect(directFound, false)
+
+        try (borrow = winrtBorrowGenericIn<HString>(insertValue)) {
+            let directInsert = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(vtbl.Insert))
+            let insertHr = unsafe { directInsert(map.asRaw(), 7i32, borrow.asRaw(), CPointer<Bool>(inout directReplaced)) }
+            @Expect(insertHr, expectedHr)
+            @Expect(directReplaced, false)
+        }
+
+        let directRemove = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>(vtbl.Remove))
+        let removeHr = unsafe { directRemove(map.asRaw(), 7i32) }
+        @Expect(removeHr, expectedHr)
+    } finally {
+        if (directRaw.isNotNull()) {
+            windows_core.releaseSystemHStringHandle(directRaw)
+        } else {
+            windows_core.releaseSystemHStringHandle(staleRaw)
+        }
+        insertValue.close()
+    }
+}
+
 @Test
 func testInt32HStringMapUsesDirectKeyAndHStringValueAbiForMutableSlots() {
     let one = HString("one")
@@ -217,6 +369,7 @@ func testInt32HStringMapUsesDirectKeyAndHStringValueAbiForMutableSlots() {
     let removeHr = unsafe { directRemove(map.asRaw(), 2i32) }
     @Expect(removeHr, S_OK.value)
     @Expect(unsafe { map.HasKey(2i32) }, false)
+    assertMapMissingHStringLookupClearsStaleSlot(map)
 
     map.close()
     one.close()
@@ -257,9 +410,69 @@ func testGenericInt32HStringMapBuilderUsesDirectAbiForSpecialization() {
     let directValue = HString.fromSystemHandleTake(directRaw)
     @Expect(directValue.get(), "one")
     directValue.close()
+    assertMapMissingHStringLookupClearsStaleSlot(map)
 
     map.close()
     one.close()
     two.close()
     replacement.close()
+}
+
+@Test
+func testInt32HStringMapSpecializedThunksTranslateThrownExceptions() {
+    let impl = ThrowingInt32HStringMapAbiTestImpl()
+    let map = createThrowingInt32HStringMapAbiTest(impl)
+    try {
+        impl.throwWindows = true
+        assertThrowingInt32HStringMapDirectThunks(map, E_POINTER.value)
+        impl.throwWindows = false
+        assertThrowingInt32HStringMapDirectThunks(map, E_FAIL.value)
+    } finally {
+        map.close()
+    }
+}
+
+@Test
+func testInt32HStringMapVtblNoneBranchClearsSpecializedOutSlots() {
+    let vtbl = IMapVtbl.newInt32HString<Int32HStringMapAbiTestImpl>()
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IMapVtbl>(vtbl) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IMapVtbl>>(vtblHandle) }
+    let sentinel = unsafe { windows_interface.allocateNativeValue<Int32>(456i32) }
+    let raw = CPointer<Unit>(objectHandle)
+    var lookupValue = CPointer<Unit>(sentinel)
+    var sizeValue = 77u32
+    var foundValue = true
+    var viewValue = CPointer<Unit>(sentinel)
+    var replacedValue = true
+
+    try {
+        let directLookup = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(vtbl.Lookup))
+        let lookupHr = unsafe { directLookup(raw, 1i32, CPointer<CPointer<Unit>>(inout lookupValue)) }
+        @Expect(lookupHr, E_NOINTERFACE.value)
+        @Expect(lookupValue.isNull(), true)
+
+        let sizeHr = unsafe { vtbl.Size(raw, CPointer<UInt32>(inout sizeValue)) }
+        @Expect(sizeHr, E_NOINTERFACE.value)
+        @Expect(sizeValue, 0u32)
+
+        let directHasKey = CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(vtbl.HasKey))
+        let hasKeyHr = unsafe { directHasKey(raw, 1i32, CPointer<Bool>(inout foundValue)) }
+        @Expect(hasKeyHr, E_NOINTERFACE.value)
+        @Expect(foundValue, false)
+
+        let getViewHr = unsafe { vtbl.GetView(raw, CPointer<CPointer<Unit>>(inout viewValue)) }
+        @Expect(getViewHr, E_NOINTERFACE.value)
+        @Expect(viewValue.isNull(), true)
+
+        let directInsert = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(vtbl.Insert))
+        let insertHr = unsafe { directInsert(raw, 1i32, CPointer<Unit>(), CPointer<Bool>(inout replacedValue)) }
+        @Expect(insertHr, E_NOINTERFACE.value)
+        @Expect(replacedValue, false)
+    } finally {
+        unsafe {
+            windows_interface.freeNativeValue(sentinel)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
+        }
+    }
 }

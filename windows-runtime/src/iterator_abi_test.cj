@@ -5,7 +5,7 @@ import std.collection.*
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_FAIL, E_POINTER, HString, Result, RuntimeType, S_OK, WindowsException, WinrtGenericType, createComObjectFromSchemas}
+import windows_core.{E_FAIL, E_NOINTERFACE, E_POINTER, HString, Result, RuntimeType, S_OK, WindowsException, WinrtGenericType, createComObjectFromSchemas}
 import windows_interface.IInspectable
 import windows_strings.releaseSystemHStringHandle
 
@@ -158,6 +158,37 @@ func createCopyIteratorAbiTest<T>(values: ArrayList<T>): IIterator<T> where T <:
     let result = object.toInterface(IIterator<T>.descriptor())
     object.close()
     result
+}
+
+@Test
+func testIteratorVtblNoneBranchClearsGenericOutputs() {
+    let vtbl = IIteratorVtbl.new<CopyIteratorAbiTestImpl<Int32>, Int32>()
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IIteratorVtbl>(vtbl) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IIteratorVtbl>>(vtblHandle) }
+    let currentSentinel = unsafe { windows_interface.allocateNativeValue<Int32>(111i32) }
+    var currentRaw = CPointer<Unit>(currentSentinel)
+    var copied = 77u32
+
+    try {
+        let currentHr = unsafe { vtbl.Current(CPointer<Unit>(objectHandle), CPointer<CPointer<Unit>>(inout currentRaw)) }
+        @Expect(currentHr, E_NOINTERFACE.value)
+        @Expect(currentRaw.isNull(), true)
+
+        let manyHr = unsafe { vtbl.GetMany(
+            CPointer<Unit>(objectHandle),
+            1u32,
+            CPointer<Unit>(),
+            CPointer<UInt32>(inout copied)
+        ) }
+        @Expect(manyHr, E_NOINTERFACE.value)
+        @Expect(copied, 0u32)
+    } finally {
+        unsafe {
+            windows_interface.freeNativeValue(currentSentinel)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
+        }
+    }
 }
 
 class HStringIteratorAbiTestImpl <: IIterator_Impl<HString> & Resource {
@@ -396,7 +427,7 @@ func testInt32IteratorUsesDirectValueAbi() {
             directGetMany(iterator.asRaw(), 1u32, CPointer<Int32>(), CPointer<UInt32>(inout invalidCopied))
         }
         @Expect(nullBufferHr, E_POINTER.value)
-        @Expect(invalidCopied, 99u32)
+        @Expect(invalidCopied, 0u32)
     } finally {
         iterator.close()
     }
@@ -500,7 +531,7 @@ func testHStringIteratorUsesHandleAbi() {
             directGetMany(iterator.asRaw(), 1u32, CPointer<Unit>(), CPointer<UInt32>(inout invalidCopied))
         }
         @Expect(nullBufferHr, E_POINTER.value)
-        @Expect(invalidCopied, 99u32)
+        @Expect(invalidCopied, 0u32)
     } finally {
         iterator.close()
         third.close()
@@ -568,7 +599,7 @@ func testInterfaceIteratorUsesHandleAbi() {
             directGetMany(iterator.asRaw(), 1u32, CPointer<Unit>(), CPointer<UInt32>(inout invalidCopied))
         }
         @Expect(nullBufferHr, E_POINTER.value)
-        @Expect(invalidCopied, 99u32)
+        @Expect(invalidCopied, 0u32)
     } finally {
         iterator.close()
         third.close()

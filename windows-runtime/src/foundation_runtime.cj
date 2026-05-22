@@ -17,14 +17,285 @@ func checkFoundationComOutHRESULT(hr: HRESULT, result: CPointer<CPointer<Unit>>)
 }
 
 func checkFoundationHStringOutHRESULT(hr: HRESULT, result: CPointer<CPointer<Unit>>): Unit {
-    if (hr.failed() && result.isNotNull()) {
+    if (hr.failed()) {
+        cleanupFoundationHStringOutSlot(result)
+    }
+    hr.check()
+}
+
+func cleanupFoundationHStringOutSlot(result: CPointer<CPointer<Unit>>): Unit {
+    if (result.isNotNull()) {
         let raw = unsafe { result.read() }
         if (raw.isNotNull()) {
             windows_core.releaseSystemHStringHandle(raw)
             unsafe { result.write(CPointer<Unit>()) }
         }
     }
-    hr.check()
+}
+
+func clearFoundationComOutSlot(result: CPointer<CPointer<Unit>>): Unit {
+    unsafe { result.write(CPointer<Unit>()) }
+}
+
+func foundationNotImplValueOut<T>(result: CPointer<T>, value: T): Int32 where T <: CType {
+    if (result.isNotNull()) {
+        unsafe { result.write(value) }
+    }
+    E_NOTIMPL.value
+}
+
+func foundationNotImplArrayOut<T>(valueSize: CPointer<UInt32>, value: CPointer<CPointer<T>>): Int32 where T <: CType {
+    clearFoundationArrayOut<T>(valueSize, value)
+    E_NOTIMPL.value
+}
+
+func foundationNotImplUnitArrayOut(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Unit>>): Int32 {
+    clearFoundationUnitArrayOut(valueSize, value)
+    E_NOTIMPL.value
+}
+
+func foundationNotImplComOut(result: CPointer<CPointer<Unit>>): Int32 {
+    if (result.isNotNull()) {
+        clearFoundationComOutSlot(result)
+    }
+    E_NOTIMPL.value
+}
+
+func foundationNoInterfaceValueOut<T>(result: CPointer<T>, value: T): Int32 where T <: CType {
+    if (result.isNotNull()) {
+        unsafe { result.write(value) }
+    }
+    E_NOINTERFACE.value
+}
+
+func clearFoundationArrayOut<T>(valueSize: CPointer<UInt32>, value: CPointer<CPointer<T>>): Unit where T <: CType {
+    if (valueSize.isNotNull()) {
+        unsafe { valueSize.write(0u32) }
+    }
+    if (value.isNotNull()) {
+        unsafe { value.write(CPointer<T>()) }
+    }
+}
+
+func clearFoundationUnitArrayOut(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Unit>>): Unit {
+    if (valueSize.isNotNull()) {
+        unsafe { valueSize.write(0u32) }
+    }
+    if (value.isNotNull()) {
+        unsafe { value.write(CPointer<Unit>()) }
+    }
+}
+
+func foundationNoInterfaceArrayOut<T>(valueSize: CPointer<UInt32>, value: CPointer<CPointer<T>>): Int32 where T <: CType {
+    clearFoundationArrayOut<T>(valueSize, value)
+    E_NOINTERFACE.value
+}
+
+func foundationNoInterfaceUnitArrayOut(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Unit>>): Int32 {
+    clearFoundationUnitArrayOut(valueSize, value)
+    E_NOINTERFACE.value
+}
+
+func foundationNoInterfaceComOut(result: CPointer<CPointer<Unit>>): Int32 {
+    if (result.isNotNull()) {
+        clearFoundationComOutSlot(result)
+    }
+    E_NOINTERFACE.value
+}
+
+func foundationNoInterfaceUInt32Out(result: CPointer<UInt32>): Int32 {
+    if (result.isNotNull()) {
+        unsafe { result.write(0u32) }
+    }
+    E_NOINTERFACE.value
+}
+
+func foundationNoInterfaceBoolOut(result: CPointer<Bool>): Int32 {
+    if (result.isNotNull()) {
+        unsafe { result.write(false) }
+    }
+    E_NOINTERFACE.value
+}
+
+func foundationDirectScalarOutThunk<T>(
+    result: CPointer<T>,
+    defaultValue: T,
+    action: () -> Result<T>
+): Int32 where T <: CType {
+    if (result.isNull()) {
+        return E_POINTER.value
+    }
+    unsafe { result.write(defaultValue) }
+    try {
+        match (action()) {
+            case Result<T>.Ok(value) =>
+                unsafe { result.write(value) }
+                S_OK.value
+            case Result<T>.Err(error) =>
+                error.code().value
+        }
+    } catch (error: windows_core.WindowsException) {
+        error.code().value
+    } catch (_: Exception) {
+        windows_core.E_FAIL.value
+    }
+}
+
+func foundationProjectedScalarOutThunk<TProjected, TAbi, TDefault>(
+    result: CPointer<TAbi>,
+    defaultValue: TAbi,
+    action: () -> Result<TProjected>
+): Int32 where TProjected <: windows_core.Type<TProjected, TAbi, TDefault>, TAbi <: CType {
+    if (result.isNull()) {
+        return E_POINTER.value
+    }
+    unsafe { result.write(defaultValue) }
+    try {
+        match (action()) {
+            case Result<TProjected>.Ok(value) =>
+                unsafe { result.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<TProjected>())) }
+                S_OK.value
+            case Result<TProjected>.Err(error) =>
+                error.code().value
+        }
+    } catch (error: windows_core.WindowsException) {
+        error.code().value
+    } catch (_: Exception) {
+        windows_core.E_FAIL.value
+    }
+}
+
+func foundationUnitThunk(action: () -> Result<Unit>): Int32 {
+    try {
+        match (action()) {
+            case Result<Unit>.Ok(_) =>
+                S_OK.value
+            case Result<Unit>.Err(error) =>
+                error.code().value
+        }
+    } catch (error: windows_core.WindowsException) {
+        error.code().value
+    } catch (_: Exception) {
+        windows_core.E_FAIL.value
+    }
+}
+
+func foundationHStringOutThunk(
+    result: CPointer<CPointer<Unit>>,
+    action: () -> Result<windows_core.HString>
+): Int32 {
+    if (result.isNull()) {
+        return E_POINTER.value
+    }
+    unsafe { result.write(CPointer<Unit>()) }
+    try {
+        match (action()) {
+            case Result<windows_core.HString>.Ok(value) =>
+                windows_core.winrtStoreGenericOut<windows_core.HString>(result, value)
+            case Result<windows_core.HString>.Err(error) =>
+                error.code().value
+        }
+    } catch (error: windows_core.WindowsException) {
+        cleanupFoundationHStringOutSlot(result)
+        error.code().value
+    } catch (_: Exception) {
+        cleanupFoundationHStringOutSlot(result)
+        windows_core.E_FAIL.value
+    }
+}
+
+func cleanupFoundationGenericOutSlot<T>(result: CPointer<CPointer<Unit>>): Unit where T <: windows_core.WinrtGenericType<T> {
+    if (result.isNull()) {
+        return
+    }
+    try {
+        windows_core.winrtReleaseGenericOutRange<T>(CPointer<Unit>(result), 1u32)
+    } catch (_: Exception) {
+        ()
+    }
+}
+
+func foundationGenericOutThunk<T>(
+    result: CPointer<CPointer<Unit>>,
+    action: () -> Result<T>
+): Int32 where T <: windows_core.WinrtGenericType<T> {
+    if (result.isNull()) {
+        return E_POINTER.value
+    }
+    unsafe { result.write(CPointer<Unit>()) }
+    try {
+        match (action()) {
+            case Result<T>.Ok(value) =>
+                let hr = windows_core.winrtStoreGenericOut<T>(result, value)
+                if (HRESULT(hr).failed()) {
+                    cleanupFoundationGenericOutSlot<T>(result)
+                }
+                hr
+            case Result<T>.Err(error) =>
+                error.code().value
+        }
+    } catch (error: windows_core.WindowsException) {
+        cleanupFoundationGenericOutSlot<T>(result)
+        error.code().value
+    } catch (_: Exception) {
+        cleanupFoundationGenericOutSlot<T>(result)
+        windows_core.E_FAIL.value
+    }
+}
+
+func foundationReferenceArrayValueThunk(
+    resultSize: CPointer<UInt32>,
+    result: CPointer<CPointer<Unit>>,
+    action: () -> Result<(UInt32, CPointer<Unit>)>
+): Int32 {
+    if (resultSize.isNull() || result.isNull()) {
+        clearFoundationUnitArrayOut(resultSize, result)
+        return E_POINTER.value
+    }
+    unsafe {
+        resultSize.write(0u32)
+        result.write(CPointer<Unit>())
+    }
+    try {
+        match (action()) {
+            case Result<(UInt32, CPointer<Unit>)>.Ok(value) =>
+                let (size, data) = value
+                unsafe { resultSize.write(size) }
+                unsafe { result.write(CPointer<Unit>(data)) }
+                S_OK.value
+            case Result<(UInt32, CPointer<Unit>)>.Err(error) =>
+                error.code().value
+        }
+    } catch (error: windows_core.WindowsException) {
+        error.code().value
+    } catch (_: Exception) {
+        windows_core.E_FAIL.value
+    }
+}
+
+func foundationPropertyValueArrayOutThunk(
+    prepareResult: Int32,
+    action: () -> Result<Unit>,
+    cleanup: () -> Unit
+): Int32 {
+    if (prepareResult != S_OK.value) {
+        return prepareResult
+    }
+    try {
+        match (action()) {
+            case Result<Unit>.Ok(_) =>
+                S_OK.value
+            case Result<Unit>.Err(error) =>
+                cleanup()
+                error.code().value
+        }
+    } catch (error: windows_core.WindowsException) {
+        cleanup()
+        error.code().value
+    } catch (_: Exception) {
+        cleanup()
+        windows_core.E_FAIL.value
+    }
 }
 
 func delegateAsInspectable(raw: CPointer<Unit>, typeName: String): IInspectable {
@@ -204,8 +475,14 @@ public interface DeferralCompletedHandlerInvoker <: DeferralCompletedHandlerInvo
     }
 
     public func __winrtThunk_Invoke(): Int32 {
-        this.Invoke()
-        return S_OK.value
+        try {
+            this.Invoke()
+            return S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -359,13 +636,19 @@ public interface EventHandlerInvoker<T> <: EventHandlerInvokerErased where T <: 
     }
 
     public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        let sender = if (arg0.isNull()) {
-            InParam<IInspectable>()
-        } else {
-            InParam<IInspectable>(IInspectable.viewOf(arg0))
+        try {
+            let sender = if (arg0.isNull()) {
+                InParam<IInspectable>()
+            } else {
+                InParam<IInspectable>(IInspectable.viewOf(arg0))
+            }
+            this.Invoke(sender, windows_core.winrtProjectGenericIn<T>(arg1))
+            return S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
         }
-        this.Invoke(sender, windows_core.winrtProjectGenericIn<T>(arg1))
-        return S_OK.value
     }
 }
 
@@ -515,9 +798,9 @@ extend HResult <: windows_core.CopyType & windows_core.RuntimeType & windows_cor
 @C
 public struct IAsyncInfoVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var Id: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Status: CFunc<(CPointer<Unit>, CPointer<AsyncStatusAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var ErrorCode: CFunc<(CPointer<Unit>, CPointer<HResultAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Id: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result__ => foundationNotImplValueOut<UInt32>(result__, 0u32) }
+    public var Status: CFunc<(CPointer<Unit>, CPointer<AsyncStatusAbi>) -> Int32> = { _, result__ => foundationNotImplValueOut<AsyncStatusAbi>(result__, AsyncStatusAbi()) }
+    public var ErrorCode: CFunc<(CPointer<Unit>, CPointer<HResultAbi>) -> Int32> = { _, result__ => foundationNotImplValueOut<HResultAbi>(result__, HResultAbi()) }
     public var Cancel: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var Close: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public init() {}
@@ -531,7 +814,7 @@ public struct IAsyncInfoVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Id(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceUInt32Out(result__)
             }
         }
         vtbl.Status = { instanceRaw, result__ =>
@@ -539,6 +822,9 @@ public struct IAsyncInfoVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Status(result__)
                 case None =>
+                    if (result__.isNotNull()) {
+                        unsafe { result__.write(AsyncStatusAbi()) }
+                    }
                     E_NOINTERFACE.value
             }
         }
@@ -547,6 +833,9 @@ public struct IAsyncInfoVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_ErrorCode(result__)
                 case None =>
+                    if (result__.isNotNull()) {
+                        unsafe { result__.write(HResultAbi()) }
+                    }
                     E_NOINTERFACE.value
             }
         }
@@ -593,68 +882,31 @@ public interface IAsyncInfo_Impl <: IAsyncInfo_ImplErased {
     public func Id(): windows_core.Result<UInt32>
 
     public func __winrtThunk_Id(result__: CPointer<UInt32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Id()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })
     }
 
     public func Status(): windows_core.Result<AsyncStatus>
 
     public func __winrtThunk_Status(result__: CPointer<AsyncStatusAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Status()) {
-            case Result<AsyncStatus>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<AsyncStatus>())) }
-                S_OK.value
-            case Result<AsyncStatus>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<AsyncStatus, AsyncStatusAbi, AsyncStatus>(result__, AsyncStatusAbi(), { => this.Status() })
     }
 
     public func ErrorCode(): windows_core.Result<HResult>
 
     public func __winrtThunk_ErrorCode(result__: CPointer<HResultAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.ErrorCode()) {
-            case Result<HResult>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<HResult>())) }
-                S_OK.value
-            case Result<HResult>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<HResult, HResultAbi, HResult>(result__, HResultAbi(), { => this.ErrorCode() })
     }
 
     public func Cancel(): windows_core.Result<Unit>
 
     public func __winrtThunk_Cancel(): Int32 {
-        match (this.Cancel()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.Cancel() })
     }
 
     public func Close(): windows_core.Result<Unit>
 
     public func __winrtThunk_Close(): Int32 {
-        match (this.Close()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.Close() })
     }
 }
 
@@ -798,12 +1050,7 @@ public interface IClosable_Impl <: IClosable_ImplErased {
     public func Close(): windows_core.Result<Unit>
 
     public func __winrtThunk_Close(): Int32 {
-        match (this.Close()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.Close() })
     }
 }
 
@@ -975,7 +1222,7 @@ extend IDeferral <: windows_core.Interface<IDeferral> {}
 @C
 public struct IGetActivationFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var GetActivationFactory: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var GetActivationFactory: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 
     public static func new<Identity>(offset!: Int64 = 0): IGetActivationFactoryVtbl where Identity <: IGetActivationFactory_Impl {
@@ -987,7 +1234,7 @@ public struct IGetActivationFactoryVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetActivationFactory(arg0, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         return vtbl
@@ -1013,19 +1260,19 @@ public interface IGetActivationFactory_Impl <: IGetActivationFactory_ImplErased 
             return E_POINTER.value
         }
         unsafe { result__.write(CPointer<Unit>()) }
-        try (classId = windows_core.HString.fromSystemHandleCopy(arg0)) {
-            match (this.GetActivationFactory(InParam<windows_core.HString>(classId))) {
-                case Result<IInspectable>.Ok(value) =>
-                    let raw = value.intoAbi()
-                    if (raw.isNull()) {
-                        return E_POINTER.value
-                    } else {
-                        unsafe { result__.write(raw) }
-                        return S_OK.value
-                    }
-                case Result<IInspectable>.Err(error) =>
-                    return error.code().value
+        try {
+            try (classId = windows_core.HString.fromSystemHandleCopy(arg0)) {
+                match (this.GetActivationFactory(InParam<windows_core.HString>(classId))) {
+                    case Result<IInspectable>.Ok(value) =>
+                        return windows_core.winrtStoreGenericOut<IInspectable>(result__, value)
+                    case Result<IInspectable>.Err(error) =>
+                        return error.code().value
+                }
             }
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
         }
         E_POINTER.value
     }
@@ -1112,9 +1359,9 @@ extend IGetActivationFactory <: windows_core.Interface<IGetActivationFactory> {}
 @C
 public struct IGuidHelperStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var CreateNewGuid: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Empty: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Equals: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<GUID>, CPointer<Bool>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateNewGuid: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, result__ => foundationNotImplValueOut<GUID>(result__, GUID()) }
+    public var Empty: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, result__ => foundationNotImplValueOut<GUID>(result__, GUID()) }
+    public var Equals: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<GUID>, CPointer<Bool>) -> Int32> = { _, _, _, result__ => foundationNotImplValueOut<Bool>(result__, false) }
     public init() {}
 }
 
@@ -1214,7 +1461,7 @@ extend IGuidHelperStatics <: windows_core.Interface<IGuidHelperStatics> {}
 @C
 public struct IStringableVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var ToString: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var ToString: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 
     public static func new<Identity>(offset!: Int64 = 0): IStringableVtbl where Identity <: IStringable_Impl {
@@ -1226,7 +1473,7 @@ public struct IStringableVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_ToString(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         return vtbl
@@ -1248,16 +1495,7 @@ public interface IStringable_Impl <: IStringable_ImplErased {
     public func ToString(): windows_core.Result<windows_core.HString>
 
     public func __winrtThunk_ToString(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.ToString()) {
-            case Result<windows_core.HString>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
-            case Result<windows_core.HString>.Err(error) =>
-                error.code().value
-        }
+        foundationHStringOutThunk(result__, { => this.ToString() })
     }
 }
 
@@ -1339,8 +1577,8 @@ extend IStringable <: windows_core.Interface<IStringable> {}
 @C
 public struct IUriEscapeStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var UnescapeComponent: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var EscapeComponent: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var UnescapeComponent: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var EscapeComponent: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 }
 
@@ -1436,8 +1674,8 @@ extend IUriEscapeStatics <: windows_core.Interface<IUriEscapeStatics> {}
 @C
 public struct IUriRuntimeClassWithAbsoluteCanonicalUriVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var AbsoluteCanonicalUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var DisplayIri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var AbsoluteCanonicalUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var DisplayIri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 }
 
@@ -1527,8 +1765,8 @@ extend IUriRuntimeClassWithAbsoluteCanonicalUri <: windows_core.Interface<IUriRu
 @C
 public struct IWwwFormUrlDecoderEntryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 
     public static func new<Identity>(offset!: Int64 = 0): IWwwFormUrlDecoderEntryVtbl where Identity <: IWwwFormUrlDecoderEntry_Impl {
@@ -1540,7 +1778,7 @@ public struct IWwwFormUrlDecoderEntryVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Name(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         vtbl.Value = { instanceRaw, result__ =>
@@ -1548,7 +1786,7 @@ public struct IWwwFormUrlDecoderEntryVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Value(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         return vtbl
@@ -1572,31 +1810,13 @@ public interface IWwwFormUrlDecoderEntry_Impl <: IWwwFormUrlDecoderEntry_ImplEra
     public func Name(): windows_core.Result<windows_core.HString>
 
     public func __winrtThunk_Name(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Name()) {
-            case Result<windows_core.HString>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
-            case Result<windows_core.HString>.Err(error) =>
-                error.code().value
-        }
+        foundationHStringOutThunk(result__, { => this.Name() })
     }
 
     public func Value(): windows_core.Result<windows_core.HString>
 
     public func __winrtThunk_Value(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Value()) {
-            case Result<windows_core.HString>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
-            case Result<windows_core.HString>.Err(error) =>
-                error.code().value
-        }
+        foundationHStringOutThunk(result__, { => this.Value() })
     }
 }
 
@@ -1686,7 +1906,7 @@ extend IWwwFormUrlDecoderEntry <: windows_core.Interface<IWwwFormUrlDecoderEntry
 @C
 public struct IWwwFormUrlDecoderRuntimeClassVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var GetFirstValueByName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var GetFirstValueByName: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 }
 
@@ -2172,8 +2392,14 @@ public interface TypedEventHandlerInvoker<TSender, TResult> <: TypedEventHandler
     }
 
     public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        this.Invoke(windows_core.winrtProjectGenericIn<TSender>(arg0), windows_core.winrtProjectGenericIn<TResult>(arg1))
-        return S_OK.value
+        try {
+            this.Invoke(windows_core.winrtProjectGenericIn<TSender>(arg0), windows_core.winrtProjectGenericIn<TResult>(arg1))
+            return S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -2412,8 +2638,8 @@ public class GuidHelper <: windows_interface.RuntimeName & windows_core.RuntimeN
 @C
 public struct IMemoryBufferReferenceVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var Capacity: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Closed: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var Capacity: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result__ => foundationNotImplValueOut<UInt32>(result__, 0u32) }
+    public var Closed: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<EventRegistrationTokenAbi>) -> Int32> = { _, _, result__ => foundationNotImplValueOut<EventRegistrationTokenAbi>(result__, EventRegistrationTokenAbi()) }
     public var RemoveClosed: CFunc<(CPointer<Unit>, EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
@@ -2426,7 +2652,7 @@ public struct IMemoryBufferReferenceVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Capacity(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceUInt32Out(result__)
             }
         }
         vtbl.Closed = { instanceRaw, arg0, result__ =>
@@ -2434,6 +2660,9 @@ public struct IMemoryBufferReferenceVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Closed(arg0, result__)
                 case None =>
+                    if (result__.isNotNull()) {
+                        unsafe { result__.write(EventRegistrationTokenAbi()) }
+                    }
                     E_NOINTERFACE.value
             }
         }
@@ -2473,16 +2702,7 @@ public interface IMemoryBufferReference_Impl <: IMemoryBufferReference_ImplErase
     public func Capacity(): windows_core.Result<UInt32>
 
     public func __winrtThunk_Capacity(result__: CPointer<UInt32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Capacity()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Capacity() })
     }
 
     public func Closed(handler: InParam<TypedEventHandler<IMemoryBufferReference, IInspectable>>): windows_core.Result<EventRegistrationToken>
@@ -2491,38 +2711,46 @@ public interface IMemoryBufferReference_Impl <: IMemoryBufferReference_ImplErase
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        let handler = if (arg0.isNull()) {
-            InParam<TypedEventHandler<IMemoryBufferReference, IInspectable>>()
-        } else {
-            InParam<TypedEventHandler<IMemoryBufferReference, IInspectable>>(TypedEventHandler<IMemoryBufferReference, IInspectable>.viewOf(arg0))
-        }
-        match (this.Closed(handler)) {
-            case Result<EventRegistrationToken>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<EventRegistrationToken>())) }
-                S_OK.value
-            case Result<EventRegistrationToken>.Err(error) =>
-                error.code().value
+        unsafe { result__.write(EventRegistrationTokenAbi()) }
+        try {
+            let handler = if (arg0.isNull()) {
+                InParam<TypedEventHandler<IMemoryBufferReference, IInspectable>>()
+            } else {
+                InParam<TypedEventHandler<IMemoryBufferReference, IInspectable>>(TypedEventHandler<IMemoryBufferReference, IInspectable>.viewOf(arg0))
+            }
+            match (this.Closed(handler)) {
+                case Result<EventRegistrationToken>.Ok(value) =>
+                    unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<EventRegistrationToken>())) }
+                    S_OK.value
+                case Result<EventRegistrationToken>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func RemoveClosed(cookie: EventRegistrationToken): windows_core.Result<Unit>
 
     public func __winrtThunk_RemoveClosed(arg0: EventRegistrationTokenAbi): Int32 {
-        match (this.RemoveClosed(windows_core.assumeInitTypedAbi(arg0, windows_core.typeMarker<EventRegistrationToken>()))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
+        try {
+            match (this.RemoveClosed(windows_core.assumeInitTypedAbi(arg0, windows_core.typeMarker<EventRegistrationToken>()))) {
+                case Result<Unit>.Ok(_) =>
+                    S_OK.value
+                case Result<Unit>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_Close(): Int32 {
-        match (this.Close()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.Close() })
     }
 }
 
@@ -2847,6 +3075,7 @@ func preparePropertyValueArrayOut<T>(
     value: CPointer<CPointer<T>>
 ): Int32 where T <: CType {
     if (valueSize.isNull() || value.isNull()) {
+        clearFoundationArrayOut<T>(valueSize, value)
         return E_POINTER.value
     }
     unsafe {
@@ -3036,45 +3265,45 @@ func takePropertyValueRectArray(data: CPointer<RectAbi>, length: UInt32): Array<
 @C
 public struct IPropertyValueVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var Type: CFunc<(CPointer<Unit>, CPointer<PropertyTypeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var IsNumericScalar: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetUInt8: CFunc<(CPointer<Unit>, CPointer<UInt8>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetInt16: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetUInt16: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetInt32: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetUInt32: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetInt64: CFunc<(CPointer<Unit>, CPointer<Int64>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetUInt64: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetSingle: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetDouble: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetChar16: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetBoolean: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetString: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetGuid: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetDateTime: CFunc<(CPointer<Unit>, CPointer<DateTimeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetTimeSpan: CFunc<(CPointer<Unit>, CPointer<TimeSpanAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetPoint: CFunc<(CPointer<Unit>, CPointer<PointAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetSize: CFunc<(CPointer<Unit>, CPointer<SizeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetRect: CFunc<(CPointer<Unit>, CPointer<RectAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetUInt8Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetInt16Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Int16>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetUInt16Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetInt32Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Int32>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetUInt32Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt32>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetInt64Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Int64>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetUInt64Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt64>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetSingleArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Float32>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetDoubleArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Float64>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetChar16Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetBooleanArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Bool>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetStringArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetInspectableArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetGuidArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<GUID>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetDateTimeArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<DateTimeAbi>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetTimeSpanArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<TimeSpanAbi>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetPointArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<PointAbi>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetSizeArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<SizeAbi>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetRectArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<RectAbi>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var Type: CFunc<(CPointer<Unit>, CPointer<PropertyTypeAbi>) -> Int32> = { _, result__ => foundationNotImplValueOut<PropertyTypeAbi>(result__, PropertyTypeAbi()) }
+    public var IsNumericScalar: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, result__ => foundationNotImplValueOut<Bool>(result__, false) }
+    public var GetUInt8: CFunc<(CPointer<Unit>, CPointer<UInt8>) -> Int32> = { _, result__ => foundationNotImplValueOut<UInt8>(result__, 0u8) }
+    public var GetInt16: CFunc<(CPointer<Unit>, CPointer<Int16>) -> Int32> = { _, result__ => foundationNotImplValueOut<Int16>(result__, 0i16) }
+    public var GetUInt16: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, result__ => foundationNotImplValueOut<UInt16>(result__, 0u16) }
+    public var GetInt32: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, result__ => foundationNotImplValueOut<Int32>(result__, 0i32) }
+    public var GetUInt32: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result__ => foundationNotImplValueOut<UInt32>(result__, 0u32) }
+    public var GetInt64: CFunc<(CPointer<Unit>, CPointer<Int64>) -> Int32> = { _, result__ => foundationNotImplValueOut<Int64>(result__, 0i64) }
+    public var GetUInt64: CFunc<(CPointer<Unit>, CPointer<UInt64>) -> Int32> = { _, result__ => foundationNotImplValueOut<UInt64>(result__, 0u64) }
+    public var GetSingle: CFunc<(CPointer<Unit>, CPointer<Float32>) -> Int32> = { _, result__ => foundationNotImplValueOut<Float32>(result__, 0.0f32) }
+    public var GetDouble: CFunc<(CPointer<Unit>, CPointer<Float64>) -> Int32> = { _, result__ => foundationNotImplValueOut<Float64>(result__, 0.0) }
+    public var GetChar16: CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32> = { _, result__ => foundationNotImplValueOut<UInt16>(result__, 0u16) }
+    public var GetBoolean: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, result__ => foundationNotImplValueOut<Bool>(result__, false) }
+    public var GetString: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var GetGuid: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, result__ => foundationNotImplValueOut<GUID>(result__, GUID()) }
+    public var GetDateTime: CFunc<(CPointer<Unit>, CPointer<DateTimeAbi>) -> Int32> = { _, result__ => foundationNotImplValueOut<DateTimeAbi>(result__, DateTimeAbi()) }
+    public var GetTimeSpan: CFunc<(CPointer<Unit>, CPointer<TimeSpanAbi>) -> Int32> = { _, result__ => foundationNotImplValueOut<TimeSpanAbi>(result__, TimeSpanAbi()) }
+    public var GetPoint: CFunc<(CPointer<Unit>, CPointer<PointAbi>) -> Int32> = { _, result__ => foundationNotImplValueOut<PointAbi>(result__, PointAbi()) }
+    public var GetSize: CFunc<(CPointer<Unit>, CPointer<SizeAbi>) -> Int32> = { _, result__ => foundationNotImplValueOut<SizeAbi>(result__, SizeAbi()) }
+    public var GetRect: CFunc<(CPointer<Unit>, CPointer<RectAbi>) -> Int32> = { _, result__ => foundationNotImplValueOut<RectAbi>(result__, RectAbi()) }
+    public var GetUInt8Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt8>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<UInt8>(valueSize__, value__) }
+    public var GetInt16Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Int16>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<Int16>(valueSize__, value__) }
+    public var GetUInt16Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt16>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<UInt16>(valueSize__, value__) }
+    public var GetInt32Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Int32>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<Int32>(valueSize__, value__) }
+    public var GetUInt32Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt32>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<UInt32>(valueSize__, value__) }
+    public var GetInt64Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Int64>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<Int64>(valueSize__, value__) }
+    public var GetUInt64Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt64>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<UInt64>(valueSize__, value__) }
+    public var GetSingleArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Float32>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<Float32>(valueSize__, value__) }
+    public var GetDoubleArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Float64>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<Float64>(valueSize__, value__) }
+    public var GetChar16Array: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<UInt16>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<UInt16>(valueSize__, value__) }
+    public var GetBooleanArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Bool>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<Bool>(valueSize__, value__) }
+    public var GetStringArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<CPointer<Unit>>(valueSize__, value__) }
+    public var GetInspectableArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<CPointer<Unit>>(valueSize__, value__) }
+    public var GetGuidArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<GUID>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<GUID>(valueSize__, value__) }
+    public var GetDateTimeArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<DateTimeAbi>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<DateTimeAbi>(valueSize__, value__) }
+    public var GetTimeSpanArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<TimeSpanAbi>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<TimeSpanAbi>(valueSize__, value__) }
+    public var GetPointArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<PointAbi>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<PointAbi>(valueSize__, value__) }
+    public var GetSizeArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<SizeAbi>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<SizeAbi>(valueSize__, value__) }
+    public var GetRectArray: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<RectAbi>>) -> Int32> = { _, valueSize__, value__ => foundationNotImplArrayOut<RectAbi>(valueSize__, value__) }
     public init() {}
 
     public static func new<Identity>(offset!: Int64 = 0): IPropertyValueVtbl where Identity <: IPropertyValue_Impl {
@@ -3086,7 +3315,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Type(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<PropertyTypeAbi>(result__, PropertyTypeAbi())
             }
         }
         vtbl.IsNumericScalar = { instanceRaw, result__ =>
@@ -3094,7 +3323,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_IsNumericScalar(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<Bool>(result__, false)
             }
         }
         vtbl.GetUInt8 = { instanceRaw, result__ =>
@@ -3102,7 +3331,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetUInt8(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<UInt8>(result__, 0u8)
             }
         }
         vtbl.GetInt16 = { instanceRaw, result__ =>
@@ -3110,7 +3339,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetInt16(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<Int16>(result__, 0i16)
             }
         }
         vtbl.GetUInt16 = { instanceRaw, result__ =>
@@ -3118,7 +3347,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetUInt16(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<UInt16>(result__, 0u16)
             }
         }
         vtbl.GetInt32 = { instanceRaw, result__ =>
@@ -3126,7 +3355,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetInt32(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<Int32>(result__, 0i32)
             }
         }
         vtbl.GetUInt32 = { instanceRaw, result__ =>
@@ -3134,7 +3363,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetUInt32(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<UInt32>(result__, 0u32)
             }
         }
         vtbl.GetInt64 = { instanceRaw, result__ =>
@@ -3142,7 +3371,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetInt64(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<Int64>(result__, 0i64)
             }
         }
         vtbl.GetUInt64 = { instanceRaw, result__ =>
@@ -3150,7 +3379,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetUInt64(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<UInt64>(result__, 0u64)
             }
         }
         vtbl.GetSingle = { instanceRaw, result__ =>
@@ -3158,7 +3387,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetSingle(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<Float32>(result__, 0.0f32)
             }
         }
         vtbl.GetDouble = { instanceRaw, result__ =>
@@ -3166,7 +3395,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetDouble(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<Float64>(result__, 0.0)
             }
         }
         vtbl.GetChar16 = { instanceRaw, result__ =>
@@ -3174,7 +3403,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetChar16(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<UInt16>(result__, 0u16)
             }
         }
         vtbl.GetBoolean = { instanceRaw, result__ =>
@@ -3182,7 +3411,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetBoolean(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<Bool>(result__, false)
             }
         }
         vtbl.GetString = { instanceRaw, result__ =>
@@ -3190,7 +3419,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetString(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         vtbl.GetGuid = { instanceRaw, result__ =>
@@ -3198,7 +3427,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetGuid(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<GUID>(result__, GUID())
             }
         }
         vtbl.GetDateTime = { instanceRaw, result__ =>
@@ -3206,7 +3435,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetDateTime(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<DateTimeAbi>(result__, DateTimeAbi())
             }
         }
         vtbl.GetTimeSpan = { instanceRaw, result__ =>
@@ -3214,7 +3443,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetTimeSpan(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<TimeSpanAbi>(result__, TimeSpanAbi())
             }
         }
         vtbl.GetPoint = { instanceRaw, result__ =>
@@ -3222,7 +3451,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetPoint(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<PointAbi>(result__, PointAbi())
             }
         }
         vtbl.GetSize = { instanceRaw, result__ =>
@@ -3230,7 +3459,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetSize(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<SizeAbi>(result__, SizeAbi())
             }
         }
         vtbl.GetRect = { instanceRaw, result__ =>
@@ -3238,7 +3467,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetRect(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceValueOut<RectAbi>(result__, RectAbi())
             }
         }
         vtbl.GetUInt8Array = { instanceRaw, arg0Size, arg0 =>
@@ -3246,7 +3475,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetUInt8Array(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<UInt8>(arg0Size, arg0)
             }
         }
         vtbl.GetInt16Array = { instanceRaw, arg0Size, arg0 =>
@@ -3254,7 +3483,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetInt16Array(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<Int16>(arg0Size, arg0)
             }
         }
         vtbl.GetUInt16Array = { instanceRaw, arg0Size, arg0 =>
@@ -3262,7 +3491,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetUInt16Array(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<UInt16>(arg0Size, arg0)
             }
         }
         vtbl.GetInt32Array = { instanceRaw, arg0Size, arg0 =>
@@ -3270,7 +3499,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetInt32Array(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<Int32>(arg0Size, arg0)
             }
         }
         vtbl.GetUInt32Array = { instanceRaw, arg0Size, arg0 =>
@@ -3278,7 +3507,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetUInt32Array(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<UInt32>(arg0Size, arg0)
             }
         }
         vtbl.GetInt64Array = { instanceRaw, arg0Size, arg0 =>
@@ -3286,7 +3515,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetInt64Array(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<Int64>(arg0Size, arg0)
             }
         }
         vtbl.GetUInt64Array = { instanceRaw, arg0Size, arg0 =>
@@ -3294,7 +3523,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetUInt64Array(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<UInt64>(arg0Size, arg0)
             }
         }
         vtbl.GetSingleArray = { instanceRaw, arg0Size, arg0 =>
@@ -3302,7 +3531,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetSingleArray(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<Float32>(arg0Size, arg0)
             }
         }
         vtbl.GetDoubleArray = { instanceRaw, arg0Size, arg0 =>
@@ -3310,7 +3539,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetDoubleArray(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<Float64>(arg0Size, arg0)
             }
         }
         vtbl.GetChar16Array = { instanceRaw, arg0Size, arg0 =>
@@ -3318,7 +3547,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetChar16Array(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<UInt16>(arg0Size, arg0)
             }
         }
         vtbl.GetBooleanArray = { instanceRaw, arg0Size, arg0 =>
@@ -3326,7 +3555,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetBooleanArray(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<Bool>(arg0Size, arg0)
             }
         }
         vtbl.GetStringArray = { instanceRaw, arg0Size, arg0 =>
@@ -3334,7 +3563,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetStringArray(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<CPointer<Unit>>(arg0Size, arg0)
             }
         }
         vtbl.GetInspectableArray = { instanceRaw, arg0Size, arg0 =>
@@ -3342,7 +3571,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetInspectableArray(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<CPointer<Unit>>(arg0Size, arg0)
             }
         }
         vtbl.GetGuidArray = { instanceRaw, arg0Size, arg0 =>
@@ -3350,7 +3579,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetGuidArray(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<GUID>(arg0Size, arg0)
             }
         }
         vtbl.GetDateTimeArray = { instanceRaw, arg0Size, arg0 =>
@@ -3358,7 +3587,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetDateTimeArray(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<DateTimeAbi>(arg0Size, arg0)
             }
         }
         vtbl.GetTimeSpanArray = { instanceRaw, arg0Size, arg0 =>
@@ -3366,7 +3595,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetTimeSpanArray(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<TimeSpanAbi>(arg0Size, arg0)
             }
         }
         vtbl.GetPointArray = { instanceRaw, arg0Size, arg0 =>
@@ -3374,7 +3603,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetPointArray(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<PointAbi>(arg0Size, arg0)
             }
         }
         vtbl.GetSizeArray = { instanceRaw, arg0Size, arg0 =>
@@ -3382,7 +3611,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetSizeArray(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<SizeAbi>(arg0Size, arg0)
             }
         }
         vtbl.GetRectArray = { instanceRaw, arg0Size, arg0 =>
@@ -3390,7 +3619,7 @@ public struct IPropertyValueVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetRectArray(arg0Size, arg0)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceArrayOut<RectAbi>(arg0Size, arg0)
             }
         }
         return vtbl
@@ -3488,605 +3717,330 @@ public interface IPropertyValue_Impl <: IPropertyValue_ImplErased {
     public func Type(): windows_core.Result<PropertyType>
 
     public func __winrtThunk_Type(result__: CPointer<PropertyTypeAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Type()) {
-            case Result<PropertyType>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<PropertyType>())) }
-                S_OK.value
-            case Result<PropertyType>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<PropertyType, PropertyTypeAbi, PropertyType>(result__, PropertyTypeAbi(), { => this.Type() })
     }
 
     public func IsNumericScalar(): windows_core.Result<Bool>
 
     public func __winrtThunk_IsNumericScalar(result__: CPointer<Bool>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.IsNumericScalar()) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Bool>(result__, false, { => this.IsNumericScalar() })
     }
 
     public func GetUInt8(): windows_core.Result<UInt8>
 
     public func __winrtThunk_GetUInt8(result__: CPointer<UInt8>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetUInt8()) {
-            case Result<UInt8>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt8>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt8>(result__, 0u8, { => this.GetUInt8() })
     }
 
     public func GetInt16(): windows_core.Result<Int16>
 
     public func __winrtThunk_GetInt16(result__: CPointer<Int16>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetInt16()) {
-            case Result<Int16>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Int16>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Int16>(result__, 0i16, { => this.GetInt16() })
     }
 
     public func GetUInt16(): windows_core.Result<UInt16>
 
     public func __winrtThunk_GetUInt16(result__: CPointer<UInt16>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetUInt16()) {
-            case Result<UInt16>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt16>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt16>(result__, 0u16, { => this.GetUInt16() })
     }
 
     public func GetInt32(): windows_core.Result<Int32>
 
     public func __winrtThunk_GetInt32(result__: CPointer<Int32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetInt32()) {
-            case Result<Int32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Int32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Int32>(result__, 0i32, { => this.GetInt32() })
     }
 
     public func GetUInt32(): windows_core.Result<UInt32>
 
     public func __winrtThunk_GetUInt32(result__: CPointer<UInt32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetUInt32()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.GetUInt32() })
     }
 
     public func GetInt64(): windows_core.Result<Int64>
 
     public func __winrtThunk_GetInt64(result__: CPointer<Int64>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetInt64()) {
-            case Result<Int64>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Int64>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Int64>(result__, 0i64, { => this.GetInt64() })
     }
 
     public func GetUInt64(): windows_core.Result<UInt64>
 
     public func __winrtThunk_GetUInt64(result__: CPointer<UInt64>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetUInt64()) {
-            case Result<UInt64>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt64>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt64>(result__, 0u64, { => this.GetUInt64() })
     }
 
     public func GetSingle(): windows_core.Result<Float32>
 
     public func __winrtThunk_GetSingle(result__: CPointer<Float32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetSingle()) {
-            case Result<Float32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Float32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Float32>(result__, 0.0f32, { => this.GetSingle() })
     }
 
     public func GetDouble(): windows_core.Result<Float64>
 
     public func __winrtThunk_GetDouble(result__: CPointer<Float64>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetDouble()) {
-            case Result<Float64>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Float64>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Float64>(result__, 0.0, { => this.GetDouble() })
     }
 
     public func GetChar16(): windows_core.Result<UInt16>
 
     public func __winrtThunk_GetChar16(result__: CPointer<UInt16>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetChar16()) {
-            case Result<UInt16>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt16>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt16>(result__, 0u16, { => this.GetChar16() })
     }
 
     public func GetBoolean(): windows_core.Result<Bool>
 
     public func __winrtThunk_GetBoolean(result__: CPointer<Bool>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetBoolean()) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Bool>(result__, false, { => this.GetBoolean() })
     }
 
     public func GetString(): windows_core.Result<windows_core.HString>
 
     public func __winrtThunk_GetString(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.GetString()) {
-            case Result<windows_core.HString>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
-            case Result<windows_core.HString>.Err(error) =>
-                error.code().value
-        }
+        foundationHStringOutThunk(result__, { => this.GetString() })
     }
 
     public func GetGuid(): windows_core.Result<GuidValue>
 
     public func __winrtThunk_GetGuid(result__: CPointer<GUID>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetGuid()) {
-            case Result<GuidValue>.Ok(value) =>
-                unsafe { result__.write(value.toRaw()) }
-                S_OK.value
-            case Result<GuidValue>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<GuidValue, GUID, GuidValue>(result__, GUID(), { => this.GetGuid() })
     }
 
     public func GetDateTime(): windows_core.Result<DateTime>
 
     public func __winrtThunk_GetDateTime(result__: CPointer<DateTimeAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetDateTime()) {
-            case Result<DateTime>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<DateTime>())) }
-                S_OK.value
-            case Result<DateTime>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<DateTime, DateTimeAbi, DateTime>(result__, DateTimeAbi(), { => this.GetDateTime() })
     }
 
     public func GetTimeSpan(): windows_core.Result<TimeSpan>
 
     public func __winrtThunk_GetTimeSpan(result__: CPointer<TimeSpanAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetTimeSpan()) {
-            case Result<TimeSpan>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<TimeSpan>())) }
-                S_OK.value
-            case Result<TimeSpan>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<TimeSpan, TimeSpanAbi, TimeSpan>(result__, TimeSpanAbi(), { => this.GetTimeSpan() })
     }
 
     public func GetPoint(): windows_core.Result<Point>
 
     public func __winrtThunk_GetPoint(result__: CPointer<PointAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetPoint()) {
-            case Result<Point>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<Point>())) }
-                S_OK.value
-            case Result<Point>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<Point, PointAbi, Point>(result__, PointAbi(), { => this.GetPoint() })
     }
 
     public func GetSize(): windows_core.Result<Size>
 
     public func __winrtThunk_GetSize(result__: CPointer<SizeAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetSize()) {
-            case Result<Size>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<Size>())) }
-                S_OK.value
-            case Result<Size>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<Size, SizeAbi, Size>(result__, SizeAbi(), { => this.GetSize() })
     }
 
     public func GetRect(): windows_core.Result<Rect>
 
     public func __winrtThunk_GetRect(result__: CPointer<RectAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetRect()) {
-            case Result<Rect>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<Rect>())) }
-                S_OK.value
-            case Result<Rect>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<Rect, RectAbi, Rect>(result__, RectAbi(), { => this.GetRect() })
     }
 
     public func GetUInt8Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt8>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetUInt8Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt8>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt8>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetUInt8Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt8>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetUInt8Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt8>(arg0Size, arg0) }
+        )
     }
 
     public func GetInt16Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Int16>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetInt16Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Int16>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Int16>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetInt16Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Int16>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetInt16Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Int16>(arg0Size, arg0) }
+        )
     }
 
     public func GetUInt16Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt16>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetUInt16Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt16>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt16>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetUInt16Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetUInt16Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0) }
+        )
     }
 
     public func GetInt32Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Int32>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetInt32Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Int32>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Int32>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetInt32Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Int32>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetInt32Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Int32>(arg0Size, arg0) }
+        )
     }
 
     public func GetUInt32Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt32>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetUInt32Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt32>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt32>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetUInt32Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt32>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetUInt32Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt32>(arg0Size, arg0) }
+        )
     }
 
     public func GetInt64Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Int64>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetInt64Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Int64>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Int64>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetInt64Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Int64>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetInt64Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Int64>(arg0Size, arg0) }
+        )
     }
 
     public func GetUInt64Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt64>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetUInt64Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt64>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt64>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetUInt64Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt64>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetUInt64Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt64>(arg0Size, arg0) }
+        )
     }
 
     public func GetSingleArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Float32>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetSingleArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Float32>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Float32>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetSingleArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Float32>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetSingleArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Float32>(arg0Size, arg0) }
+        )
     }
 
     public func GetDoubleArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Float64>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetDoubleArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Float64>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Float64>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetDoubleArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Float64>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetDoubleArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Float64>(arg0Size, arg0) }
+        )
     }
 
     public func GetChar16Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt16>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetChar16Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt16>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt16>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetChar16Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetChar16Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0) }
+        )
     }
 
     public func GetBooleanArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Bool>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetBooleanArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Bool>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Bool>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetBooleanArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Bool>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetBooleanArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Bool>(arg0Size, arg0) }
+        )
     }
 
     public func GetStringArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetStringArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<CPointer<Unit>>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<CPointer<Unit>>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetStringArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueStringArrayOut(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetStringArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueStringArrayOut(arg0Size, arg0) }
+        )
     }
 
     public func GetInspectableArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetInspectableArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<CPointer<Unit>>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<CPointer<Unit>>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetInspectableArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueInspectableArrayOut(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetInspectableArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueInspectableArrayOut(arg0Size, arg0) }
+        )
     }
 
     public func GetGuidArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<GUID>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetGuidArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<GUID>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<GUID>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetGuidArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<GUID>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetGuidArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<GUID>(arg0Size, arg0) }
+        )
     }
 
     public func GetDateTimeArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<DateTimeAbi>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetDateTimeArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<DateTimeAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<DateTimeAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetDateTimeArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<DateTimeAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetDateTimeArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<DateTimeAbi>(arg0Size, arg0) }
+        )
     }
 
     public func GetTimeSpanArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<TimeSpanAbi>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetTimeSpanArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<TimeSpanAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<TimeSpanAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetTimeSpanArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<TimeSpanAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetTimeSpanArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<TimeSpanAbi>(arg0Size, arg0) }
+        )
     }
 
     public func GetPointArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<PointAbi>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetPointArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<PointAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<PointAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetPointArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<PointAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetPointArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<PointAbi>(arg0Size, arg0) }
+        )
     }
 
     public func GetSizeArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<SizeAbi>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetSizeArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<SizeAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<SizeAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetSizeArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<SizeAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetSizeArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<SizeAbi>(arg0Size, arg0) }
+        )
     }
 
     public func GetRectArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<RectAbi>>): windows_core.Result<Unit>
 
     public func __winrtThunk_GetRectArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<RectAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<RectAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetRectArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<RectAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetRectArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<RectAbi>(arg0Size, arg0) }
+        )
     }
 }
 
@@ -4662,45 +4616,45 @@ extend IPropertyValue <: windows_core.Interface<IPropertyValue> {}
 @C
 public struct IPropertyValueStaticsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var CreateEmpty: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var CreateUInt8: CFunc<(CPointer<Unit>, UInt8, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateInt16: CFunc<(CPointer<Unit>, Int16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateUInt16: CFunc<(CPointer<Unit>, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateInt32: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateUInt32: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateInt64: CFunc<(CPointer<Unit>, Int64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateUInt64: CFunc<(CPointer<Unit>, UInt64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateSingle: CFunc<(CPointer<Unit>, Float32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateDouble: CFunc<(CPointer<Unit>, Float64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateChar16: CFunc<(CPointer<Unit>, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateBoolean: CFunc<(CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateString: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateInspectable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateGuid: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateDateTime: CFunc<(CPointer<Unit>, DateTimeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateTimeSpan: CFunc<(CPointer<Unit>, TimeSpanAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreatePoint: CFunc<(CPointer<Unit>, PointAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateSize: CFunc<(CPointer<Unit>, SizeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateRect: CFunc<(CPointer<Unit>, RectAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateUInt8Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateInt16Array: CFunc<(CPointer<Unit>, UInt32, CPointer<Int16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateUInt16Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateInt32Array: CFunc<(CPointer<Unit>, UInt32, CPointer<Int32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateUInt32Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateInt64Array: CFunc<(CPointer<Unit>, UInt32, CPointer<Int64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateUInt64Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateSingleArray: CFunc<(CPointer<Unit>, UInt32, CPointer<Float32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateDoubleArray: CFunc<(CPointer<Unit>, UInt32, CPointer<Float64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateChar16Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateBooleanArray: CFunc<(CPointer<Unit>, UInt32, CPointer<Bool>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateStringArray: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateInspectableArray: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateGuidArray: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateDateTimeArray: CFunc<(CPointer<Unit>, UInt32, CPointer<DateTimeAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateTimeSpanArray: CFunc<(CPointer<Unit>, UInt32, CPointer<TimeSpanAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreatePointArray: CFunc<(CPointer<Unit>, UInt32, CPointer<PointAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateSizeArray: CFunc<(CPointer<Unit>, UInt32, CPointer<SizeAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var CreateRectArray: CFunc<(CPointer<Unit>, UInt32, CPointer<RectAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateEmpty: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var CreateUInt8: CFunc<(CPointer<Unit>, UInt8, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateInt16: CFunc<(CPointer<Unit>, Int16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateUInt16: CFunc<(CPointer<Unit>, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateInt32: CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateUInt32: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateInt64: CFunc<(CPointer<Unit>, Int64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateUInt64: CFunc<(CPointer<Unit>, UInt64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateSingle: CFunc<(CPointer<Unit>, Float32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateDouble: CFunc<(CPointer<Unit>, Float64, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateChar16: CFunc<(CPointer<Unit>, UInt16, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateBoolean: CFunc<(CPointer<Unit>, Bool, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateString: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateInspectable: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateGuid: CFunc<(CPointer<Unit>, GUID, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateDateTime: CFunc<(CPointer<Unit>, DateTimeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateTimeSpan: CFunc<(CPointer<Unit>, TimeSpanAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreatePoint: CFunc<(CPointer<Unit>, PointAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateSize: CFunc<(CPointer<Unit>, SizeAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateRect: CFunc<(CPointer<Unit>, RectAbi, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateUInt8Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateInt16Array: CFunc<(CPointer<Unit>, UInt32, CPointer<Int16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateUInt16Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateInt32Array: CFunc<(CPointer<Unit>, UInt32, CPointer<Int32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateUInt32Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateInt64Array: CFunc<(CPointer<Unit>, UInt32, CPointer<Int64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateUInt64Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateSingleArray: CFunc<(CPointer<Unit>, UInt32, CPointer<Float32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateDoubleArray: CFunc<(CPointer<Unit>, UInt32, CPointer<Float64>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateChar16Array: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt16>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateBooleanArray: CFunc<(CPointer<Unit>, UInt32, CPointer<Bool>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateStringArray: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateInspectableArray: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateGuidArray: CFunc<(CPointer<Unit>, UInt32, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateDateTimeArray: CFunc<(CPointer<Unit>, UInt32, CPointer<DateTimeAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateTimeSpanArray: CFunc<(CPointer<Unit>, UInt32, CPointer<TimeSpanAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreatePointArray: CFunc<(CPointer<Unit>, UInt32, CPointer<PointAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateSizeArray: CFunc<(CPointer<Unit>, UInt32, CPointer<SizeAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateRectArray: CFunc<(CPointer<Unit>, UInt32, CPointer<RectAbi>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 }
 
@@ -5447,7 +5401,7 @@ extend IPropertyValueStatics <: windows_core.Interface<IPropertyValueStatics> {}
 @C
 public struct IReferenceVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 
     public static func new<Identity, T>(offset!: Int64 = 0): IReferenceVtbl where Identity <: IReference_Impl<T>, T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
@@ -5459,7 +5413,7 @@ public struct IReferenceVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Value(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         return vtbl
@@ -5486,542 +5440,258 @@ public interface IReference_Impl<T> <: IReference_ImplErased & IPropertyValue_Im
     public func Value(): windows_core.Result<T>
 
     public func __winrtThunk_Value(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Value()) {
-            case Result<T>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<T>(result__, value)
-            case Result<T>.Err(error) =>
-                error.code().value
-        }
+        foundationGenericOutThunk<T>(result__, { => this.Value() })
     }
 
     public func __winrtThunk_Type(result__: CPointer<PropertyTypeAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Type()) {
-            case Result<PropertyType>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<PropertyType>())) }
-                S_OK.value
-            case Result<PropertyType>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<PropertyType, PropertyTypeAbi, PropertyType>(result__, PropertyTypeAbi(), { => this.Type() })
     }
 
     public func __winrtThunk_IsNumericScalar(result__: CPointer<Bool>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.IsNumericScalar()) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Bool>(result__, false, { => this.IsNumericScalar() })
     }
 
     public func __winrtThunk_GetUInt8(result__: CPointer<UInt8>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetUInt8()) {
-            case Result<UInt8>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt8>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt8>(result__, 0u8, { => this.GetUInt8() })
     }
 
     public func __winrtThunk_GetInt16(result__: CPointer<Int16>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetInt16()) {
-            case Result<Int16>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Int16>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Int16>(result__, 0i16, { => this.GetInt16() })
     }
 
     public func __winrtThunk_GetUInt16(result__: CPointer<UInt16>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetUInt16()) {
-            case Result<UInt16>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt16>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt16>(result__, 0u16, { => this.GetUInt16() })
     }
 
     public func __winrtThunk_GetInt32(result__: CPointer<Int32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetInt32()) {
-            case Result<Int32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Int32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Int32>(result__, 0i32, { => this.GetInt32() })
     }
 
     public func __winrtThunk_GetUInt32(result__: CPointer<UInt32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetUInt32()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.GetUInt32() })
     }
 
     public func __winrtThunk_GetInt64(result__: CPointer<Int64>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetInt64()) {
-            case Result<Int64>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Int64>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Int64>(result__, 0i64, { => this.GetInt64() })
     }
 
     public func __winrtThunk_GetUInt64(result__: CPointer<UInt64>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetUInt64()) {
-            case Result<UInt64>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt64>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt64>(result__, 0u64, { => this.GetUInt64() })
     }
 
     public func __winrtThunk_GetSingle(result__: CPointer<Float32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetSingle()) {
-            case Result<Float32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Float32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Float32>(result__, 0.0f32, { => this.GetSingle() })
     }
 
     public func __winrtThunk_GetDouble(result__: CPointer<Float64>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetDouble()) {
-            case Result<Float64>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Float64>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Float64>(result__, 0.0, { => this.GetDouble() })
     }
 
     public func __winrtThunk_GetChar16(result__: CPointer<UInt16>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetChar16()) {
-            case Result<UInt16>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt16>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt16>(result__, 0u16, { => this.GetChar16() })
     }
 
     public func __winrtThunk_GetBoolean(result__: CPointer<Bool>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetBoolean()) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Bool>(result__, false, { => this.GetBoolean() })
     }
 
     public func __winrtThunk_GetString(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.GetString()) {
-            case Result<windows_core.HString>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
-            case Result<windows_core.HString>.Err(error) =>
-                error.code().value
-        }
+        foundationHStringOutThunk(result__, { => this.GetString() })
     }
 
     public func __winrtThunk_GetGuid(result__: CPointer<GUID>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetGuid()) {
-            case Result<GuidValue>.Ok(value) =>
-                unsafe { result__.write(value.toRaw()) }
-                S_OK.value
-            case Result<GuidValue>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<GuidValue, GUID, GuidValue>(result__, GUID(), { => this.GetGuid() })
     }
 
     public func __winrtThunk_GetDateTime(result__: CPointer<DateTimeAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetDateTime()) {
-            case Result<DateTime>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<DateTime>())) }
-                S_OK.value
-            case Result<DateTime>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<DateTime, DateTimeAbi, DateTime>(result__, DateTimeAbi(), { => this.GetDateTime() })
     }
 
     public func __winrtThunk_GetTimeSpan(result__: CPointer<TimeSpanAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetTimeSpan()) {
-            case Result<TimeSpan>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<TimeSpan>())) }
-                S_OK.value
-            case Result<TimeSpan>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<TimeSpan, TimeSpanAbi, TimeSpan>(result__, TimeSpanAbi(), { => this.GetTimeSpan() })
     }
 
     public func __winrtThunk_GetPoint(result__: CPointer<PointAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetPoint()) {
-            case Result<Point>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<Point>())) }
-                S_OK.value
-            case Result<Point>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<Point, PointAbi, Point>(result__, PointAbi(), { => this.GetPoint() })
     }
 
     public func __winrtThunk_GetSize(result__: CPointer<SizeAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetSize()) {
-            case Result<Size>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<Size>())) }
-                S_OK.value
-            case Result<Size>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<Size, SizeAbi, Size>(result__, SizeAbi(), { => this.GetSize() })
     }
 
     public func __winrtThunk_GetRect(result__: CPointer<RectAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetRect()) {
-            case Result<Rect>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<Rect>())) }
-                S_OK.value
-            case Result<Rect>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<Rect, RectAbi, Rect>(result__, RectAbi(), { => this.GetRect() })
     }
 
     public func __winrtThunk_GetUInt8Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt8>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt8>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetUInt8Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt8>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetUInt8Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt8>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetInt16Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Int16>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Int16>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetInt16Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Int16>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetInt16Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Int16>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetUInt16Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt16>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt16>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetUInt16Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetUInt16Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetInt32Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Int32>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Int32>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetInt32Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Int32>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetInt32Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Int32>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetUInt32Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt32>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt32>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetUInt32Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt32>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetUInt32Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt32>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetInt64Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Int64>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Int64>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetInt64Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Int64>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetInt64Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Int64>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetUInt64Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt64>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt64>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetUInt64Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt64>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetUInt64Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt64>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetSingleArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Float32>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Float32>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetSingleArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Float32>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetSingleArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Float32>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetDoubleArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Float64>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Float64>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetDoubleArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Float64>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetDoubleArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Float64>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetChar16Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt16>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt16>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetChar16Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetChar16Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetBooleanArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Bool>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Bool>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetBooleanArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Bool>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetBooleanArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Bool>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetStringArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<CPointer<Unit>>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<CPointer<Unit>>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetStringArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueStringArrayOut(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetStringArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueStringArrayOut(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetInspectableArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<CPointer<Unit>>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<CPointer<Unit>>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetInspectableArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueInspectableArrayOut(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetInspectableArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueInspectableArrayOut(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetGuidArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<GUID>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<GUID>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetGuidArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<GUID>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetGuidArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<GUID>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetDateTimeArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<DateTimeAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<DateTimeAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetDateTimeArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<DateTimeAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetDateTimeArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<DateTimeAbi>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetTimeSpanArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<TimeSpanAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<TimeSpanAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetTimeSpanArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<TimeSpanAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetTimeSpanArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<TimeSpanAbi>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetPointArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<PointAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<PointAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetPointArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<PointAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetPointArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<PointAbi>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetSizeArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<SizeAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<SizeAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetSizeArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<SizeAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetSizeArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<SizeAbi>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetRectArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<RectAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<RectAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetRectArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<RectAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetRectArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<RectAbi>(arg0Size, arg0) }
+        )
     }
 }
 
@@ -6542,7 +6212,7 @@ extend<T> IReference<T> <: windows_core.Interface<IReference<T>> where T <: wind
 @C
 public struct IReferenceArrayVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var Value: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Int32> = { _, resultSize__, result__ => foundationNotImplUnitArrayOut(resultSize__, result__) }
     public init() {}
 
     public static func new<Identity, T>(offset!: Int64 = 0): IReferenceArrayVtbl where Identity <: IReferenceArray_Impl<T>, T <: windows_core.RuntimeType {
@@ -6554,7 +6224,7 @@ public struct IReferenceArrayVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Value(resultSize__, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceUnitArrayOut(resultSize__, result__)
             }
         }
         return vtbl
@@ -6581,548 +6251,258 @@ public interface IReferenceArray_Impl<T> <: IReferenceArray_ImplErased & IProper
     public func Value(): windows_core.Result<(UInt32, CPointer<Unit>)>
 
     public func __winrtThunk_Value(resultSize__: CPointer<UInt32>, result__: CPointer<CPointer<Unit>>): Int32 {
-        if (resultSize__.isNull() || result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe {
-            resultSize__.write(0u32)
-            result__.write(CPointer<Unit>())
-        }
-        match (this.Value()) {
-            case Result<(UInt32, CPointer<Unit>)>.Ok(value) =>
-                let (size, data) = value
-                unsafe { resultSize__.write(size) }
-                unsafe { result__.write(CPointer<Unit>(data)) }
-                S_OK.value
-            case Result<(UInt32, CPointer<Unit>)>.Err(error) =>
-                error.code().value
-        }
+        foundationReferenceArrayValueThunk(resultSize__, result__, { => this.Value() })
     }
 
     public func __winrtThunk_Type(result__: CPointer<PropertyTypeAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Type()) {
-            case Result<PropertyType>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<PropertyType>())) }
-                S_OK.value
-            case Result<PropertyType>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<PropertyType, PropertyTypeAbi, PropertyType>(result__, PropertyTypeAbi(), { => this.Type() })
     }
 
     public func __winrtThunk_IsNumericScalar(result__: CPointer<Bool>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.IsNumericScalar()) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Bool>(result__, false, { => this.IsNumericScalar() })
     }
 
     public func __winrtThunk_GetUInt8(result__: CPointer<UInt8>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetUInt8()) {
-            case Result<UInt8>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt8>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt8>(result__, 0u8, { => this.GetUInt8() })
     }
 
     public func __winrtThunk_GetInt16(result__: CPointer<Int16>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetInt16()) {
-            case Result<Int16>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Int16>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Int16>(result__, 0i16, { => this.GetInt16() })
     }
 
     public func __winrtThunk_GetUInt16(result__: CPointer<UInt16>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetUInt16()) {
-            case Result<UInt16>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt16>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt16>(result__, 0u16, { => this.GetUInt16() })
     }
 
     public func __winrtThunk_GetInt32(result__: CPointer<Int32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetInt32()) {
-            case Result<Int32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Int32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Int32>(result__, 0i32, { => this.GetInt32() })
     }
 
     public func __winrtThunk_GetUInt32(result__: CPointer<UInt32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetUInt32()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.GetUInt32() })
     }
 
     public func __winrtThunk_GetInt64(result__: CPointer<Int64>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetInt64()) {
-            case Result<Int64>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Int64>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Int64>(result__, 0i64, { => this.GetInt64() })
     }
 
     public func __winrtThunk_GetUInt64(result__: CPointer<UInt64>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetUInt64()) {
-            case Result<UInt64>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt64>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt64>(result__, 0u64, { => this.GetUInt64() })
     }
 
     public func __winrtThunk_GetSingle(result__: CPointer<Float32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetSingle()) {
-            case Result<Float32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Float32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Float32>(result__, 0.0f32, { => this.GetSingle() })
     }
 
     public func __winrtThunk_GetDouble(result__: CPointer<Float64>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetDouble()) {
-            case Result<Float64>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Float64>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Float64>(result__, 0.0, { => this.GetDouble() })
     }
 
     public func __winrtThunk_GetChar16(result__: CPointer<UInt16>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetChar16()) {
-            case Result<UInt16>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt16>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt16>(result__, 0u16, { => this.GetChar16() })
     }
 
     public func __winrtThunk_GetBoolean(result__: CPointer<Bool>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetBoolean()) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<Bool>(result__, false, { => this.GetBoolean() })
     }
 
     public func __winrtThunk_GetString(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.GetString()) {
-            case Result<windows_core.HString>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
-            case Result<windows_core.HString>.Err(error) =>
-                error.code().value
-        }
+        foundationHStringOutThunk(result__, { => this.GetString() })
     }
 
     public func __winrtThunk_GetGuid(result__: CPointer<GUID>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetGuid()) {
-            case Result<GuidValue>.Ok(value) =>
-                unsafe { result__.write(value.toRaw()) }
-                S_OK.value
-            case Result<GuidValue>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<GuidValue, GUID, GuidValue>(result__, GUID(), { => this.GetGuid() })
     }
 
     public func __winrtThunk_GetDateTime(result__: CPointer<DateTimeAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetDateTime()) {
-            case Result<DateTime>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<DateTime>())) }
-                S_OK.value
-            case Result<DateTime>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<DateTime, DateTimeAbi, DateTime>(result__, DateTimeAbi(), { => this.GetDateTime() })
     }
 
     public func __winrtThunk_GetTimeSpan(result__: CPointer<TimeSpanAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetTimeSpan()) {
-            case Result<TimeSpan>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<TimeSpan>())) }
-                S_OK.value
-            case Result<TimeSpan>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<TimeSpan, TimeSpanAbi, TimeSpan>(result__, TimeSpanAbi(), { => this.GetTimeSpan() })
     }
 
     public func __winrtThunk_GetPoint(result__: CPointer<PointAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetPoint()) {
-            case Result<Point>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<Point>())) }
-                S_OK.value
-            case Result<Point>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<Point, PointAbi, Point>(result__, PointAbi(), { => this.GetPoint() })
     }
 
     public func __winrtThunk_GetSize(result__: CPointer<SizeAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetSize()) {
-            case Result<Size>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<Size>())) }
-                S_OK.value
-            case Result<Size>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<Size, SizeAbi, Size>(result__, SizeAbi(), { => this.GetSize() })
     }
 
     public func __winrtThunk_GetRect(result__: CPointer<RectAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.GetRect()) {
-            case Result<Rect>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<Rect>())) }
-                S_OK.value
-            case Result<Rect>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<Rect, RectAbi, Rect>(result__, RectAbi(), { => this.GetRect() })
     }
 
     public func __winrtThunk_GetUInt8Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt8>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt8>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetUInt8Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt8>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetUInt8Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt8>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetInt16Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Int16>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Int16>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetInt16Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Int16>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetInt16Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Int16>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetUInt16Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt16>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt16>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetUInt16Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetUInt16Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetInt32Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Int32>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Int32>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetInt32Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Int32>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetInt32Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Int32>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetUInt32Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt32>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt32>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetUInt32Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt32>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetUInt32Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt32>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetInt64Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Int64>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Int64>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetInt64Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Int64>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetInt64Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Int64>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetUInt64Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt64>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt64>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetUInt64Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt64>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetUInt64Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt64>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetSingleArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Float32>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Float32>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetSingleArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Float32>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetSingleArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Float32>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetDoubleArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Float64>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Float64>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetDoubleArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Float64>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetDoubleArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Float64>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetChar16Array(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<UInt16>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<UInt16>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetChar16Array(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetChar16Array(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<UInt16>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetBooleanArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<Bool>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<Bool>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetBooleanArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<Bool>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetBooleanArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<Bool>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetStringArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<CPointer<Unit>>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<CPointer<Unit>>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetStringArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueStringArrayOut(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetStringArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueStringArrayOut(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetInspectableArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<CPointer<Unit>>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<CPointer<Unit>>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetInspectableArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueInspectableArrayOut(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetInspectableArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueInspectableArrayOut(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetGuidArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<GUID>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<GUID>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetGuidArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<GUID>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetGuidArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<GUID>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetDateTimeArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<DateTimeAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<DateTimeAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetDateTimeArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<DateTimeAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetDateTimeArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<DateTimeAbi>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetTimeSpanArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<TimeSpanAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<TimeSpanAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetTimeSpanArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<TimeSpanAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetTimeSpanArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<TimeSpanAbi>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetPointArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<PointAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<PointAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetPointArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<PointAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetPointArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<PointAbi>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetSizeArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<SizeAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<SizeAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetSizeArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<SizeAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetSizeArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<SizeAbi>(arg0Size, arg0) }
+        )
     }
 
     public func __winrtThunk_GetRectArray(arg0Size: CPointer<UInt32>, arg0: CPointer<CPointer<RectAbi>>): Int32 {
         let prepareResult = preparePropertyValueArrayOut<RectAbi>(arg0Size, arg0)
-        if (prepareResult != S_OK.value) {
-            return prepareResult
-        }
-        match (this.GetRectArray(arg0Size, arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                cleanupFailedPropertyValueAbiArrayOut<RectAbi>(arg0Size, arg0)
-                error.code().value
-        }
+        foundationPropertyValueArrayOutThunk(
+            prepareResult,
+            { => this.GetRectArray(arg0Size, arg0) },
+            { => cleanupFailedPropertyValueAbiArrayOut<RectAbi>(arg0Size, arg0) }
+        )
     }
 }
 
@@ -7205,15 +6585,6 @@ public class IReferenceArray<T> <: InterfaceWrapperBase & ComInterface & Runtime
 
     public unsafe func vtbl(): IReferenceArrayVtbl {
         readVtbl<IReferenceArrayVtbl>(IReferenceArrayVtbl())
-    }
-
-    public unsafe func ValueRaw(): (UInt32, CPointer<Unit>) {
-        let v = vtbl()
-        var resultSize__: UInt32 = 0u32
-        var result__: CPointer<Unit> = CPointer<Unit>()
-        let hr = v.Value(asRaw(), CPointer<UInt32>(inout resultSize__), CPointer<CPointer<Unit>>(inout result__))
-        HRESULT(hr).check()
-        return (resultSize__, result__)
     }
 
     public unsafe func Type(): PropertyType {
@@ -7644,7 +7015,7 @@ public class IReferenceArray<T> <: InterfaceWrapperBase & ComInterface & Runtime
 }
 
 extend<T> IReferenceArray<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
-    unsafe func ValueRawChecked(): (UInt32, CPointer<Unit>) {
+    public unsafe func ValueRaw(): (UInt32, CPointer<Unit>) {
         let v = vtbl()
         var resultSize__: UInt32 = 0u32
         var result__: CPointer<Unit> = CPointer<Unit>()
@@ -7657,6 +7028,10 @@ extend<T> IReferenceArray<T> where T <: windows_core.RuntimeType & windows_core.
         }
         status__.check()
         return (resultSize__, result__)
+    }
+
+    unsafe func ValueRawChecked(): (UInt32, CPointer<Unit>) {
+        ValueRaw()
     }
 
     public unsafe func Value(): Array<T> {
@@ -8333,7 +7708,7 @@ public class PropertyValue <: windows_interface.RuntimeName & windows_core.Runti
 @C
 public struct IMemoryBufferVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var CreateReference: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var CreateReference: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 
     public static func new<Identity>(offset!: Int64 = 0): IMemoryBufferVtbl where Identity <: IMemoryBuffer_Impl {
@@ -8345,7 +7720,7 @@ public struct IMemoryBufferVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_CreateReference(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         return vtbl
@@ -8372,31 +7747,11 @@ public interface IMemoryBuffer_Impl <: IMemoryBuffer_ImplErased & IClosable_Impl
     public func CreateReference(): windows_core.Result<IMemoryBufferReference>
 
     public func __winrtThunk_CreateReference(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.CreateReference()) {
-            case Result<IMemoryBufferReference>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IMemoryBufferReference>.Err(error) =>
-                error.code().value
-        }
+        foundationGenericOutThunk<IMemoryBufferReference>(result__, { => this.CreateReference() })
     }
 
     public func __winrtThunk_Close(): Int32 {
-        match (this.Close()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.Close() })
     }
 }
 
@@ -8582,13 +7937,19 @@ public interface AsyncActionCompletedHandlerInvoker <: AsyncActionCompletedHandl
     }
 
     public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
-        let asyncInfo = if (arg0.isNull()) {
-            InParam<IAsyncAction>()
-        } else {
-            InParam<IAsyncAction>(IAsyncAction.viewOf(arg0))
+        try {
+            let asyncInfo = if (arg0.isNull()) {
+                InParam<IAsyncAction>()
+            } else {
+                InParam<IAsyncAction>(IAsyncAction.viewOf(arg0))
+            }
+            this.Invoke(asyncInfo, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
+            return S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
         }
-        this.Invoke(asyncInfo, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
-        return S_OK.value
     }
 }
 
@@ -8742,13 +8103,19 @@ public interface AsyncActionProgressHandlerInvoker<TProgress> <: AsyncActionProg
     }
 
     public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        let asyncInfo = if (arg0.isNull()) {
-            InParam<IAsyncActionWithProgress<TProgress>>()
-        } else {
-            InParam<IAsyncActionWithProgress<TProgress>>(IAsyncActionWithProgress<TProgress>.viewOf(arg0))
+        try {
+            let asyncInfo = if (arg0.isNull()) {
+                InParam<IAsyncActionWithProgress<TProgress>>()
+            } else {
+                InParam<IAsyncActionWithProgress<TProgress>>(IAsyncActionWithProgress<TProgress>.viewOf(arg0))
+            }
+            this.Invoke(asyncInfo, windows_core.winrtProjectGenericIn<TProgress>(arg1))
+            return S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
         }
-        this.Invoke(asyncInfo, windows_core.winrtProjectGenericIn<TProgress>(arg1))
-        return S_OK.value
     }
 }
 
@@ -8895,13 +8262,19 @@ public interface AsyncActionWithProgressCompletedHandlerInvoker<TProgress> <: As
     }
 
     public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
-        let asyncInfo = if (arg0.isNull()) {
-            InParam<IAsyncActionWithProgress<TProgress>>()
-        } else {
-            InParam<IAsyncActionWithProgress<TProgress>>(IAsyncActionWithProgress<TProgress>.viewOf(arg0))
+        try {
+            let asyncInfo = if (arg0.isNull()) {
+                InParam<IAsyncActionWithProgress<TProgress>>()
+            } else {
+                InParam<IAsyncActionWithProgress<TProgress>>(IAsyncActionWithProgress<TProgress>.viewOf(arg0))
+            }
+            this.Invoke(asyncInfo, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
+            return S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
         }
-        this.Invoke(asyncInfo, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
-        return S_OK.value
     }
 }
 
@@ -9048,13 +8421,19 @@ public interface AsyncOperationCompletedHandlerInvoker<TResult> <: AsyncOperatio
     }
 
     public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
-        let asyncInfo = if (arg0.isNull()) {
-            InParam<IAsyncOperation<TResult>>()
-        } else {
-            InParam<IAsyncOperation<TResult>>(IAsyncOperation<TResult>.viewOf(arg0))
+        try {
+            let asyncInfo = if (arg0.isNull()) {
+                InParam<IAsyncOperation<TResult>>()
+            } else {
+                InParam<IAsyncOperation<TResult>>(IAsyncOperation<TResult>.viewOf(arg0))
+            }
+            this.Invoke(asyncInfo, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
+            return S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
         }
-        this.Invoke(asyncInfo, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
-        return S_OK.value
     }
 }
 
@@ -9210,13 +8589,19 @@ public interface AsyncOperationProgressHandlerInvoker<TResult, TProgress> <: Asy
     }
 
     public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        let asyncInfo = if (arg0.isNull()) {
-            InParam<IAsyncOperationWithProgress<TResult, TProgress>>()
-        } else {
-            InParam<IAsyncOperationWithProgress<TResult, TProgress>>(IAsyncOperationWithProgress<TResult, TProgress>.viewOf(arg0))
+        try {
+            let asyncInfo = if (arg0.isNull()) {
+                InParam<IAsyncOperationWithProgress<TResult, TProgress>>()
+            } else {
+                InParam<IAsyncOperationWithProgress<TResult, TProgress>>(IAsyncOperationWithProgress<TResult, TProgress>.viewOf(arg0))
+            }
+            this.Invoke(asyncInfo, windows_core.winrtProjectGenericIn<TProgress>(arg1))
+            return S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
         }
-        this.Invoke(asyncInfo, windows_core.winrtProjectGenericIn<TProgress>(arg1))
-        return S_OK.value
     }
 }
 
@@ -9365,13 +8750,19 @@ public interface AsyncOperationWithProgressCompletedHandlerInvoker<TResult, TPro
     }
 
     public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: AsyncStatusAbi): Int32 {
-        let asyncInfo = if (arg0.isNull()) {
-            InParam<IAsyncOperationWithProgress<TResult, TProgress>>()
-        } else {
-            InParam<IAsyncOperationWithProgress<TResult, TProgress>>(IAsyncOperationWithProgress<TResult, TProgress>.viewOf(arg0))
+        try {
+            let asyncInfo = if (arg0.isNull()) {
+                InParam<IAsyncOperationWithProgress<TResult, TProgress>>()
+            } else {
+                InParam<IAsyncOperationWithProgress<TResult, TProgress>>(IAsyncOperationWithProgress<TResult, TProgress>.viewOf(arg0))
+            }
+            this.Invoke(asyncInfo, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
+            return S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
         }
-        this.Invoke(asyncInfo, windows_core.assumeInitTypedAbi(arg1, windows_core.typeMarker<AsyncStatus>()))
-        return S_OK.value
     }
 }
 
@@ -9550,7 +8941,7 @@ extend Deferral <: windows_core.HandleWinrtType<Deferral> {
 public struct IAsyncActionVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var SetCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Completed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Completed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
     public var GetResults: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public init() {}
 
@@ -9571,7 +8962,7 @@ public struct IAsyncActionVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Completed(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         vtbl.GetResults = { instanceRaw =>
@@ -9615,101 +9006,39 @@ public interface IAsyncAction_Impl <: IAsyncAction_ImplErased & IAsyncInfo_Impl 
         } else {
             InParam<AsyncActionCompletedHandler>(AsyncActionCompletedHandler.viewOf(arg0))
         }
-        match (this.SetCompleted(handler)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.SetCompleted(handler) })
     }
 
     public func Completed(): windows_core.Result<AsyncActionCompletedHandler>
 
     public func __winrtThunk_Completed(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Completed()) {
-            case Result<AsyncActionCompletedHandler>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<AsyncActionCompletedHandler>.Err(error) =>
-                error.code().value
-        }
+        foundationGenericOutThunk<AsyncActionCompletedHandler>(result__, { => this.Completed() })
     }
 
     public func GetResults(): windows_core.Result<Unit>
 
     public func __winrtThunk_GetResults(): Int32 {
-        match (this.GetResults()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.GetResults() })
     }
 
     public func __winrtThunk_Id(result__: CPointer<UInt32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Id()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })
     }
 
     public func __winrtThunk_Status(result__: CPointer<AsyncStatusAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Status()) {
-            case Result<AsyncStatus>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<AsyncStatus>())) }
-                S_OK.value
-            case Result<AsyncStatus>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<AsyncStatus, AsyncStatusAbi, AsyncStatus>(result__, AsyncStatusAbi(), { => this.Status() })
     }
 
     public func __winrtThunk_ErrorCode(result__: CPointer<HResultAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.ErrorCode()) {
-            case Result<HResult>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<HResult>())) }
-                S_OK.value
-            case Result<HResult>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<HResult, HResultAbi, HResult>(result__, HResultAbi(), { => this.ErrorCode() })
     }
 
     public func __winrtThunk_Cancel(): Int32 {
-        match (this.Cancel()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.Cancel() })
     }
 
     public func __winrtThunk_Close(): Int32 {
-        match (this.Close()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.Close() })
     }
 }
 
@@ -9816,9 +9145,9 @@ extend IAsyncAction <: windows_core.Interface<IAsyncAction> {}
 public struct IAsyncActionWithProgressVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var SetProgress: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Progress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Progress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
     public var SetCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Completed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Completed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
     public var GetResults: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public init() {}
 
@@ -9839,7 +9168,7 @@ public struct IAsyncActionWithProgressVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Progress(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         vtbl.SetCompleted = { instanceRaw, arg0 =>
@@ -9855,7 +9184,7 @@ public struct IAsyncActionWithProgressVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Completed(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         vtbl.GetResults = { instanceRaw =>
@@ -9903,33 +9232,13 @@ public interface IAsyncActionWithProgress_Impl<TProgress> <: IAsyncActionWithPro
         } else {
             InParam<AsyncActionProgressHandler<TProgress>>(AsyncActionProgressHandler<TProgress>.viewOf(arg0))
         }
-        match (this.SetProgress(handler)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.SetProgress(handler) })
     }
 
     public func Progress(): windows_core.Result<AsyncActionProgressHandler<TProgress>>
 
     public func __winrtThunk_Progress(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Progress()) {
-            case Result<AsyncActionProgressHandler<TProgress>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<AsyncActionProgressHandler<TProgress>>.Err(error) =>
-                error.code().value
-        }
+        foundationGenericOutThunk<AsyncActionProgressHandler<TProgress>>(result__, { => this.Progress() })
     }
 
     public func SetCompleted(handler: InParam<AsyncActionWithProgressCompletedHandler<TProgress>>): windows_core.Result<Unit>
@@ -9940,101 +9249,39 @@ public interface IAsyncActionWithProgress_Impl<TProgress> <: IAsyncActionWithPro
         } else {
             InParam<AsyncActionWithProgressCompletedHandler<TProgress>>(AsyncActionWithProgressCompletedHandler<TProgress>.viewOf(arg0))
         }
-        match (this.SetCompleted(handler)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.SetCompleted(handler) })
     }
 
     public func Completed(): windows_core.Result<AsyncActionWithProgressCompletedHandler<TProgress>>
 
     public func __winrtThunk_Completed(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Completed()) {
-            case Result<AsyncActionWithProgressCompletedHandler<TProgress>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<AsyncActionWithProgressCompletedHandler<TProgress>>.Err(error) =>
-                error.code().value
-        }
+        foundationGenericOutThunk<AsyncActionWithProgressCompletedHandler<TProgress>>(result__, { => this.Completed() })
     }
 
     public func GetResults(): windows_core.Result<Unit>
 
     public func __winrtThunk_GetResults(): Int32 {
-        match (this.GetResults()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.GetResults() })
     }
 
     public func __winrtThunk_Id(result__: CPointer<UInt32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Id()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })
     }
 
     public func __winrtThunk_Status(result__: CPointer<AsyncStatusAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Status()) {
-            case Result<AsyncStatus>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<AsyncStatus>())) }
-                S_OK.value
-            case Result<AsyncStatus>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<AsyncStatus, AsyncStatusAbi, AsyncStatus>(result__, AsyncStatusAbi(), { => this.Status() })
     }
 
     public func __winrtThunk_ErrorCode(result__: CPointer<HResultAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.ErrorCode()) {
-            case Result<HResult>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<HResult>())) }
-                S_OK.value
-            case Result<HResult>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<HResult, HResultAbi, HResult>(result__, HResultAbi(), { => this.ErrorCode() })
     }
 
     public func __winrtThunk_Cancel(): Int32 {
-        match (this.Cancel()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.Cancel() })
     }
 
     public func __winrtThunk_Close(): Int32 {
-        match (this.Close()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.Close() })
     }
 }
 
@@ -10160,8 +9407,8 @@ extend<TProgress> IAsyncActionWithProgress<TProgress> <: windows_core.Interface<
 public struct IAsyncOperationVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var SetCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Completed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Completed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var GetResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 
     public static func new<Identity, TResult>(offset!: Int64 = 0): IAsyncOperationVtbl where Identity <: IAsyncOperation_Impl<TResult>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
@@ -10181,7 +9428,7 @@ public struct IAsyncOperationVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Completed(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         vtbl.GetResults = { instanceRaw, result__ =>
@@ -10189,7 +9436,7 @@ public struct IAsyncOperationVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetResults(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         return vtbl
@@ -10225,105 +9472,39 @@ public interface IAsyncOperation_Impl<TResult> <: IAsyncOperation_ImplErased & I
         } else {
             InParam<AsyncOperationCompletedHandler<TResult>>(AsyncOperationCompletedHandler<TResult>.viewOf(arg0))
         }
-        match (this.SetCompleted(handler)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.SetCompleted(handler) })
     }
 
     public func Completed(): windows_core.Result<AsyncOperationCompletedHandler<TResult>>
 
     public func __winrtThunk_Completed(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Completed()) {
-            case Result<AsyncOperationCompletedHandler<TResult>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<AsyncOperationCompletedHandler<TResult>>.Err(error) =>
-                error.code().value
-        }
+        foundationGenericOutThunk<AsyncOperationCompletedHandler<TResult>>(result__, { => this.Completed() })
     }
 
     public func GetResults(): windows_core.Result<TResult>
 
     public func __winrtThunk_GetResults(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.GetResults()) {
-            case Result<TResult>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<TResult>(result__, value)
-            case Result<TResult>.Err(error) =>
-                error.code().value
-        }
+        foundationGenericOutThunk<TResult>(result__, { => this.GetResults() })
     }
 
     public func __winrtThunk_Id(result__: CPointer<UInt32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Id()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })
     }
 
     public func __winrtThunk_Status(result__: CPointer<AsyncStatusAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Status()) {
-            case Result<AsyncStatus>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<AsyncStatus>())) }
-                S_OK.value
-            case Result<AsyncStatus>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<AsyncStatus, AsyncStatusAbi, AsyncStatus>(result__, AsyncStatusAbi(), { => this.Status() })
     }
 
     public func __winrtThunk_ErrorCode(result__: CPointer<HResultAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.ErrorCode()) {
-            case Result<HResult>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<HResult>())) }
-                S_OK.value
-            case Result<HResult>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<HResult, HResultAbi, HResult>(result__, HResultAbi(), { => this.ErrorCode() })
     }
 
     public func __winrtThunk_Cancel(): Int32 {
-        match (this.Cancel()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.Cancel() })
     }
 
     public func __winrtThunk_Close(): Int32 {
-        match (this.Close()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.Close() })
     }
 }
 
@@ -10434,10 +9615,10 @@ extend<TResult> IAsyncOperation<TResult> <: windows_core.Interface<IAsyncOperati
 public struct IAsyncOperationWithProgressVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
     public var SetProgress: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Progress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Progress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
     public var SetCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Completed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Completed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var GetResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 
     public static func new<Identity, TResult, TProgress>(offset!: Int64 = 0): IAsyncOperationWithProgressVtbl where Identity <: IAsyncOperationWithProgress_Impl<TResult, TProgress>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
@@ -10457,7 +9638,7 @@ public struct IAsyncOperationWithProgressVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Progress(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         vtbl.SetCompleted = { instanceRaw, arg0 =>
@@ -10473,7 +9654,7 @@ public struct IAsyncOperationWithProgressVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Completed(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         vtbl.GetResults = { instanceRaw, result__ =>
@@ -10481,7 +9662,7 @@ public struct IAsyncOperationWithProgressVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetResults(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    foundationNoInterfaceComOut(result__)
             }
         }
         return vtbl
@@ -10521,33 +9702,13 @@ public interface IAsyncOperationWithProgress_Impl<TResult, TProgress> <: IAsyncO
         } else {
             InParam<AsyncOperationProgressHandler<TResult, TProgress>>(AsyncOperationProgressHandler<TResult, TProgress>.viewOf(arg0))
         }
-        match (this.SetProgress(handler)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.SetProgress(handler) })
     }
 
     public func Progress(): windows_core.Result<AsyncOperationProgressHandler<TResult, TProgress>>
 
     public func __winrtThunk_Progress(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Progress()) {
-            case Result<AsyncOperationProgressHandler<TResult, TProgress>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<AsyncOperationProgressHandler<TResult, TProgress>>.Err(error) =>
-                error.code().value
-        }
+        foundationGenericOutThunk<AsyncOperationProgressHandler<TResult, TProgress>>(result__, { => this.Progress() })
     }
 
     public func SetCompleted(handler: InParam<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>): windows_core.Result<Unit>
@@ -10558,105 +9719,39 @@ public interface IAsyncOperationWithProgress_Impl<TResult, TProgress> <: IAsyncO
         } else {
             InParam<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>(AsyncOperationWithProgressCompletedHandler<TResult, TProgress>.viewOf(arg0))
         }
-        match (this.SetCompleted(handler)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.SetCompleted(handler) })
     }
 
     public func Completed(): windows_core.Result<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>
 
     public func __winrtThunk_Completed(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Completed()) {
-            case Result<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>.Err(error) =>
-                error.code().value
-        }
+        foundationGenericOutThunk<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>(result__, { => this.Completed() })
     }
 
     public func GetResults(): windows_core.Result<TResult>
 
     public func __winrtThunk_GetResults(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.GetResults()) {
-            case Result<TResult>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<TResult>(result__, value)
-            case Result<TResult>.Err(error) =>
-                error.code().value
-        }
+        foundationGenericOutThunk<TResult>(result__, { => this.GetResults() })
     }
 
     public func __winrtThunk_Id(result__: CPointer<UInt32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Id()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
-        }
+        foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })
     }
 
     public func __winrtThunk_Status(result__: CPointer<AsyncStatusAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.Status()) {
-            case Result<AsyncStatus>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<AsyncStatus>())) }
-                S_OK.value
-            case Result<AsyncStatus>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<AsyncStatus, AsyncStatusAbi, AsyncStatus>(result__, AsyncStatusAbi(), { => this.Status() })
     }
 
     public func __winrtThunk_ErrorCode(result__: CPointer<HResultAbi>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        match (this.ErrorCode()) {
-            case Result<HResult>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<HResult>())) }
-                S_OK.value
-            case Result<HResult>.Err(error) =>
-                error.code().value
-        }
+        foundationProjectedScalarOutThunk<HResult, HResultAbi, HResult>(result__, HResultAbi(), { => this.ErrorCode() })
     }
 
     public func __winrtThunk_Cancel(): Int32 {
-        match (this.Cancel()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.Cancel() })
     }
 
     public func __winrtThunk_Close(): Int32 {
-        match (this.Close()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        foundationUnitThunk({ => this.Close() })
     }
 }
 
@@ -10782,7 +9877,7 @@ extend<TResult, TProgress> IAsyncOperationWithProgress<TResult, TProgress> <: wi
 @C
 public struct IDeferralFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var Create: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 }
 
@@ -10864,7 +9959,7 @@ extend IDeferralFactory <: windows_core.Interface<IDeferralFactory> {}
 @C
 public struct IMemoryBufferFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var Create: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var Create: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 }
 
@@ -10946,23 +10041,23 @@ extend IMemoryBufferFactory <: windows_core.Interface<IMemoryBufferFactory> {}
 @C
 public struct IUriRuntimeClassVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var AbsoluteUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var DisplayUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Domain: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Extension: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Fragment: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Host: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Password: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Query: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var QueryParsed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var RawUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var SchemeName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var UserName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Port: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Suspicious: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Equals: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CombineUri: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var AbsoluteUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var DisplayUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var Domain: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var Extension: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var Fragment: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var Host: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var Password: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var Path: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var Query: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var QueryParsed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var RawUri: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var SchemeName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var UserName: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => foundationNotImplComOut(result__) }
+    public var Port: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, result__ => foundationNotImplValueOut<Int32>(result__, 0i32) }
+    public var Suspicious: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, result__ => foundationNotImplValueOut<Bool>(result__, false) }
+    public var Equals: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, result__ => foundationNotImplValueOut<Bool>(result__, false) }
+    public var CombineUri: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 }
 
@@ -11175,8 +10270,8 @@ extend IUriRuntimeClass <: windows_core.Interface<IUriRuntimeClass> {}
 @C
 public struct IUriRuntimeClassFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var CreateUri: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var CreateWithRelativeUri: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var CreateUri: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
+    public var CreateWithRelativeUri: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 }
 
@@ -11274,7 +10369,7 @@ extend IUriRuntimeClassFactory <: windows_core.Interface<IUriRuntimeClassFactory
 @C
 public struct IWwwFormUrlDecoderRuntimeClassFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var CreateWwwFormUrlDecoder: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var CreateWwwFormUrlDecoder: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => foundationNotImplComOut(result__) }
     public init() {}
 }
 

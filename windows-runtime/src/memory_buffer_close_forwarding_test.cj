@@ -4,13 +4,85 @@ import windows_interface as windows_interface
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_NOINTERFACE, E_POINTER, S_OK}
+import windows_core.{E_FAIL, E_NOINTERFACE, E_POINTER, InParam, Result, S_OK, WinError, WindowsException}
 import windows_interface.{GUID, IInspectable, IUnknown}
 
 let memoryBufferCloseForwardingQueryCalls = AtomicInt64(0)
 let memoryBufferCloseForwardingAddRefCalls = AtomicInt64(0)
 let memoryBufferCloseForwardingReleaseCalls = AtomicInt64(0)
 let memoryBufferCloseForwardingCloseCalls = AtomicInt64(0)
+
+class MemoryBufferReferenceEventThunkTestImpl <: IMemoryBufferReference_Impl {
+    public var throwWindowsOnCapacity: Bool = false
+    public var throwPlainOnCapacity: Bool = false
+    public var failClosed: Bool = false
+    public var throwWindowsOnClosed: Bool = false
+    public var throwPlainOnClosed: Bool = false
+    public var throwWindowsOnRemoveClosed: Bool = false
+    public var throwPlainOnRemoveClosed: Bool = false
+
+    public init() {}
+
+    public func Capacity(): Result<UInt32> {
+        if (throwWindowsOnCapacity) {
+            throw WindowsException(E_POINTER)
+        }
+        if (throwPlainOnCapacity) {
+            throw Exception("Capacity failure")
+        }
+        Result<UInt32>.Ok(0u32)
+    }
+
+    public func Closed(handler: InParam<TypedEventHandler<IMemoryBufferReference, IInspectable>>): Result<EventRegistrationToken> {
+        let _ = handler
+        if (throwWindowsOnClosed) {
+            throw WindowsException(E_POINTER)
+        }
+        if (throwPlainOnClosed) {
+            throw Exception("Closed failure")
+        }
+        if (failClosed) {
+            return Result<EventRegistrationToken>.Err(WinError.fromHRESULT(E_FAIL))
+        }
+        var token = EventRegistrationToken()
+        token.Value = 17i64
+        Result<EventRegistrationToken>.Ok(token)
+    }
+
+    public func RemoveClosed(cookie: EventRegistrationToken): Result<Unit> {
+        let _ = cookie
+        if (throwWindowsOnRemoveClosed) {
+            throw WindowsException(E_POINTER)
+        }
+        if (throwPlainOnRemoveClosed) {
+            throw Exception("RemoveClosed failure")
+        }
+        Result<Unit>.Ok(())
+    }
+
+    public func Close(): Result<Unit> {
+        Result<Unit>.Ok(())
+    }
+}
+
+class MemoryBufferCreateReferenceThunkTestImpl <: IMemoryBuffer_Impl {
+    public var throwWindowsOnCreateReference: Bool = false
+    public var throwPlainOnCreateReference: Bool = false
+
+    public func CreateReference(): Result<IMemoryBufferReference> {
+        if (throwWindowsOnCreateReference) {
+            throw WindowsException(E_POINTER)
+        }
+        if (throwPlainOnCreateReference) {
+            throw Exception("CreateReference failure")
+        }
+        Result<IMemoryBufferReference>.Err(WinError.fromHRESULT(E_FAIL))
+    }
+
+    public func Close(): Result<Unit> {
+        Result<Unit>.Ok(())
+    }
+}
 
 @C
 func memoryBufferCloseForwardingQueryInterfaceThunk(
@@ -83,6 +155,86 @@ func withMemoryBufferCloseForwardingRaw(action: (CPointer<Unit>) -> Unit): Unit 
             windows_interface.freeNativeValue(objectHandle)
             windows_interface.freeNativeValue(vtblHandle)
         }
+    }
+}
+
+@Test
+func testIMemoryBufferReferenceEventThunksClearTokenAndTranslateExceptions() {
+    let impl = MemoryBufferReferenceEventThunkTestImpl()
+
+    impl.throwWindowsOnCapacity = true
+    var windowsCapacity = 123u32
+    @Expect(impl.__winrtThunk_Capacity(CPointer<UInt32>(inout windowsCapacity)), E_POINTER.value)
+    @Expect(windowsCapacity, 0u32)
+    impl.throwWindowsOnCapacity = false
+
+    impl.throwPlainOnCapacity = true
+    var plainCapacity = 456u32
+    @Expect(impl.__winrtThunk_Capacity(CPointer<UInt32>(inout plainCapacity)), E_FAIL.value)
+    @Expect(plainCapacity, 0u32)
+    impl.throwPlainOnCapacity = false
+
+    impl.failClosed = true
+    var failToken = EventRegistrationTokenAbi()
+    failToken.Value = 123i64
+    let failHr = impl.__winrtThunk_Closed(CPointer<Unit>(), CPointer<EventRegistrationTokenAbi>(inout failToken))
+    @Expect(failHr, E_FAIL.value)
+    @Expect(failToken.Value, 0i64)
+    impl.failClosed = false
+
+    impl.throwWindowsOnClosed = true
+    var windowsToken = EventRegistrationTokenAbi()
+    windowsToken.Value = 456i64
+    let windowsHr = impl.__winrtThunk_Closed(CPointer<Unit>(), CPointer<EventRegistrationTokenAbi>(inout windowsToken))
+    @Expect(windowsHr, E_POINTER.value)
+    @Expect(windowsToken.Value, 0i64)
+    impl.throwWindowsOnClosed = false
+
+    impl.throwPlainOnClosed = true
+    var plainToken = EventRegistrationTokenAbi()
+    plainToken.Value = 789i64
+    let plainHr = impl.__winrtThunk_Closed(CPointer<Unit>(), CPointer<EventRegistrationTokenAbi>(inout plainToken))
+    @Expect(plainHr, E_FAIL.value)
+    @Expect(plainToken.Value, 0i64)
+    impl.throwPlainOnClosed = false
+
+    var token = EventRegistrationTokenAbi()
+    token.Value = 17i64
+    impl.throwWindowsOnRemoveClosed = true
+    @Expect(impl.__winrtThunk_RemoveClosed(token), E_POINTER.value)
+    impl.throwWindowsOnRemoveClosed = false
+
+    impl.throwPlainOnRemoveClosed = true
+    @Expect(impl.__winrtThunk_RemoveClosed(token), E_FAIL.value)
+    impl.throwPlainOnRemoveClosed = false
+}
+
+@Test
+func testIMemoryBufferCreateReferenceThunkClearsOutputAndTranslatesExceptions() {
+    let impl = MemoryBufferCreateReferenceThunkTestImpl()
+    let sentinel = unsafe { windows_interface.allocateNativeValue<Int32>(987i32) }
+    try {
+        impl.throwWindowsOnCreateReference = true
+        var windowsRaw = CPointer<Unit>(sentinel)
+        @Expect(
+            impl.__winrtThunk_CreateReference(CPointer<CPointer<Unit>>(inout windowsRaw)),
+            E_POINTER.value
+        )
+        @Expect(windowsRaw.isNull(), true)
+        impl.throwWindowsOnCreateReference = false
+
+        impl.throwPlainOnCreateReference = true
+        var plainRaw = CPointer<Unit>(sentinel)
+        @Expect(
+            impl.__winrtThunk_CreateReference(CPointer<CPointer<Unit>>(inout plainRaw)),
+            E_FAIL.value
+        )
+        @Expect(plainRaw.isNull(), true)
+        impl.throwPlainOnCreateReference = false
+    } finally {
+        impl.throwWindowsOnCreateReference = false
+        impl.throwPlainOnCreateReference = false
+        unsafe { windows_interface.freeNativeValue(sentinel) }
     }
 }
 

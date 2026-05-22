@@ -41,6 +41,116 @@ func checkCollectionHStringOutHRESULT(hr: HRESULT, result: CPointer<CPointer<Uni
     hr.check()
 }
 
+func clearCollectionGenericOutSlot(result: CPointer<CPointer<Unit>>): Unit {
+    unsafe { result.write(CPointer<Unit>()) }
+}
+
+func clearCollectionBoolOutSlot(result: CPointer<Bool>): Unit {
+    unsafe { result.write(false) }
+}
+
+func clearCollectionIndexOutSlot(result: CPointer<UInt32>): Unit {
+    unsafe { result.write(0u32) }
+}
+
+func collectionNoInterfaceGenericOut(result: CPointer<CPointer<Unit>>): Int32 {
+    if (result.isNotNull()) {
+        clearCollectionGenericOutSlot(result)
+    }
+    E_NOINTERFACE.value
+}
+
+func collectionNotImplGenericOut(result: CPointer<CPointer<Unit>>): Int32 {
+    if (result.isNotNull()) {
+        clearCollectionGenericOutSlot(result)
+    }
+    E_NOTIMPL.value
+}
+
+func collectionNoInterfaceBoolOut(result: CPointer<Bool>): Int32 {
+    if (result.isNotNull()) {
+        clearCollectionBoolOutSlot(result)
+    }
+    E_NOINTERFACE.value
+}
+
+func collectionNotImplBoolOut(result: CPointer<Bool>): Int32 {
+    if (result.isNotNull()) {
+        clearCollectionBoolOutSlot(result)
+    }
+    E_NOTIMPL.value
+}
+
+func collectionNoInterfaceUInt32Out(result: CPointer<UInt32>): Int32 {
+    if (result.isNotNull()) {
+        clearCollectionIndexOutSlot(result)
+    }
+    E_NOINTERFACE.value
+}
+
+func collectionNotImplUInt32Out(result: CPointer<UInt32>): Int32 {
+    if (result.isNotNull()) {
+        clearCollectionIndexOutSlot(result)
+    }
+    E_NOTIMPL.value
+}
+
+func collectionNoInterfaceValueOut<T>(result: CPointer<T>, value: T): Int32 where T <: CType {
+    if (result.isNotNull()) {
+        unsafe { result.write(value) }
+    }
+    E_NOINTERFACE.value
+}
+
+func collectionNotImplValueOut<T>(result: CPointer<T>, value: T): Int32 where T <: CType {
+    if (result.isNotNull()) {
+        unsafe { result.write(value) }
+    }
+    E_NOTIMPL.value
+}
+
+func collectionNoInterfaceIndexBoolOut(index: CPointer<UInt32>, result: CPointer<Bool>): Int32 {
+    if (index.isNotNull()) {
+        clearCollectionIndexOutSlot(index)
+    }
+    if (result.isNotNull()) {
+        clearCollectionBoolOutSlot(result)
+    }
+    E_NOINTERFACE.value
+}
+
+func collectionNotImplIndexBoolOut(index: CPointer<UInt32>, result: CPointer<Bool>): Int32 {
+    if (index.isNotNull()) {
+        clearCollectionIndexOutSlot(index)
+    }
+    if (result.isNotNull()) {
+        clearCollectionBoolOutSlot(result)
+    }
+    E_NOTIMPL.value
+}
+
+func collectionNoInterfaceSplitOut(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Int32 {
+    if (first.isNotNull()) {
+        clearCollectionGenericOutSlot(first)
+    }
+    if (second.isNotNull()) {
+        clearCollectionGenericOutSlot(second)
+    }
+    E_NOINTERFACE.value
+}
+
+func collectionNotImplSplitOut(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Int32 {
+    if (first.isNotNull()) {
+        clearCollectionGenericOutSlot(first)
+    }
+    if (second.isNotNull()) {
+        clearCollectionGenericOutSlot(second)
+    }
+    E_NOTIMPL.value
+}
+
+
+
 func checkCollectionGenericOutRangeHRESULT<T>(
     hr: HRESULT,
     items: CPointer<Unit>,
@@ -62,6 +172,148 @@ func releaseCollectionGenericOutRangeNoThrow<T>(
         windows_core.winrtReleaseGenericOutRange<T>(items, itemsSize)
     } catch (_: Exception) {
         ()
+    }
+}
+
+func collectionGenericOutThunk<T>(
+    result: CPointer<CPointer<Unit>>,
+    action: () -> Result<T>
+): Int32 where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
+    if (result.isNull()) {
+        return E_POINTER.value
+    }
+    clearCollectionGenericOutSlot(result)
+    try {
+        match (action()) {
+            case Result<T>.Ok(value) =>
+                let hr = windows_core.winrtStoreGenericOut<T>(result, value)
+                if (HRESULT(hr).failed()) {
+                    releaseCollectionGenericOutRangeNoThrow<T>(CPointer<Unit>(result), 1u32)
+                }
+                hr
+            case Result<T>.Err(error) =>
+                error.code().value
+        }
+    } catch (error: windows_core.WindowsException) {
+        windows_core.releaseFailedComOutSlot(result)
+        error.code().value
+    } catch (_: Exception) {
+        windows_core.releaseFailedComOutSlot(result)
+        windows_core.E_FAIL.value
+    }
+}
+
+func collectionUnitThunk(action: () -> Result<Unit>): Int32 {
+    try {
+        match (action()) {
+            case Result<Unit>.Ok(_) =>
+                S_OK.value
+            case Result<Unit>.Err(error) =>
+                error.code().value
+        }
+    } catch (error: windows_core.WindowsException) {
+        error.code().value
+    } catch (_: Exception) {
+        windows_core.E_FAIL.value
+    }
+}
+
+func collectionBoolOutResult(result: CPointer<Bool>, value: Result<Bool>): Int32 {
+    match (value) {
+        case Result<Bool>.Ok(resolved) =>
+            unsafe { result.write(resolved) }
+            S_OK.value
+        case Result<Bool>.Err(error) =>
+            error.code().value
+    }
+}
+
+func collectionHStringOutResult(
+    result: CPointer<CPointer<Unit>>,
+    value: Result<windows_core.HString>
+): Int32 {
+    match (value) {
+        case Result<windows_core.HString>.Ok(resolved) =>
+            windows_core.winrtStoreGenericOut<windows_core.HString>(result, resolved)
+        case Result<windows_core.HString>.Err(error) =>
+            error.code().value
+    }
+}
+
+func collectionUnitResult(value: Result<Unit>): Int32 {
+    match (value) {
+        case Result<Unit>.Ok(_) =>
+            S_OK.value
+        case Result<Unit>.Err(error) =>
+            error.code().value
+    }
+}
+
+func collectionGenericOutRangeThunk<T>(
+    itemsSize: UInt32,
+    items: CPointer<Unit>,
+    result: CPointer<UInt32>,
+    action: () -> Result<UInt32>
+): Int32 where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
+    if (result.isNull()) {
+        return E_POINTER.value
+    }
+    clearCollectionIndexOutSlot(result)
+    if (itemsSize > 0u32 && items.isNull()) {
+        return E_POINTER.value
+    }
+    try {
+        windows_core.winrtPrepareGenericOutRange<T>(items, itemsSize)
+        match (action()) {
+            case Result<UInt32>.Ok(value) =>
+                unsafe { result.write(value) }
+                S_OK.value
+            case Result<UInt32>.Err(error) =>
+                releaseCollectionGenericOutRangeNoThrow<T>(items, itemsSize)
+                error.code().value
+        }
+    } catch (error: windows_core.WindowsException) {
+        releaseCollectionGenericOutRangeNoThrow<T>(items, itemsSize)
+        error.code().value
+    } catch (_: Exception) {
+        releaseCollectionGenericOutRangeNoThrow<T>(items, itemsSize)
+        windows_core.E_FAIL.value
+    }
+}
+
+func collectionSplitOutThunk(
+    first: CPointer<CPointer<Unit>>,
+    second: CPointer<CPointer<Unit>>,
+    action: () -> Result<Unit>
+): Int32 {
+    if (first.isNull() || second.isNull()) {
+        if (first.isNotNull()) {
+            clearCollectionGenericOutSlot(first)
+        }
+        if (second.isNotNull()) {
+            clearCollectionGenericOutSlot(second)
+        }
+        return E_POINTER.value
+    }
+    clearCollectionGenericOutSlot(first)
+    clearCollectionGenericOutSlot(second)
+    try {
+        match (action()) {
+            case Result<Unit>.Ok(_) =>
+                S_OK.value
+            case Result<Unit>.Err(error) =>
+                windows_core.releaseFailedComOutSlot(first)
+                windows_core.releaseFailedComOutSlot(second)
+                error.code().value
+        }
+    } catch (error: windows_core.WindowsException) {
+        windows_core.releaseFailedComOutSlot(first)
+        windows_core.releaseFailedComOutSlot(second)
+        error.code().value
+    } catch (_: Exception) {
+        windows_core.releaseFailedComOutSlot(first)
+        windows_core.releaseFailedComOutSlot(second)
+        windows_core.E_FAIL.value
     }
 }
 
@@ -129,10 +381,10 @@ extend CollectionChange <: windows_core.CopyType & windows_core.RuntimeType & wi
 @C
 public struct IIteratorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var Current: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var HasCurrent: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var MoveNext: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetMany: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var Current: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => collectionNotImplGenericOut(result__) }
+    public var HasCurrent: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, result__ => collectionNotImplBoolOut(result__) }
+    public var MoveNext: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, result__ => collectionNotImplBoolOut(result__) }
+    public var GetMany: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _, result__ => collectionNotImplUInt32Out(result__) }
     public init() {}
 
     public static func new<Identity, T>(offset!: Int64 = 0): IIteratorVtbl where Identity <: IIterator_Impl<T>, T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
@@ -144,7 +396,7 @@ public struct IIteratorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Current(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         vtbl.HasCurrent = { instanceRaw, result__ =>
@@ -152,7 +404,7 @@ public struct IIteratorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_HasCurrent(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceBoolOut(result__)
             }
         }
         vtbl.MoveNext = { instanceRaw, result__ =>
@@ -160,7 +412,7 @@ public struct IIteratorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_MoveNext(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceBoolOut(result__)
             }
         }
         vtbl.GetMany = { instanceRaw, arg0Size, arg0, result__ =>
@@ -168,7 +420,7 @@ public struct IIteratorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetMany(arg0Size, arg0, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         return vtbl
@@ -196,16 +448,7 @@ public interface IIterator_Impl<T> <: IIterator_ImplErased where T <: windows_co
     public func Current(): windows_core.Result<T>
 
     public func __winrtThunk_Current(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Current()) {
-            case Result<T>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<T>(result__, value)
-            case Result<T>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<T>(result__, { => this.Current() })
     }
 
     public func HasCurrent(): windows_core.Result<Bool>
@@ -214,12 +457,19 @@ public interface IIterator_Impl<T> <: IIterator_ImplErased where T <: windows_co
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.HasCurrent()) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
+        clearCollectionBoolOutSlot(result__)
+        try {
+            match (this.HasCurrent()) {
+                case Result<Bool>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<Bool>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
@@ -229,34 +479,31 @@ public interface IIterator_Impl<T> <: IIterator_ImplErased where T <: windows_co
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.MoveNext()) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
+        clearCollectionBoolOutSlot(result__)
+        try {
+            match (this.MoveNext()) {
+                case Result<Bool>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<Bool>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func GetMany(itemsSize: UInt32, items: CPointer<Unit>): windows_core.Result<UInt32>
 
     public func __winrtThunk_GetMany(arg0Size: UInt32, arg0: CPointer<Unit>, result__: CPointer<UInt32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        if (arg0Size > 0u32 && arg0.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(0u32) }
-        windows_core.winrtPrepareGenericOutRange<T>(arg0, arg0Size)
-        match (this.GetMany(arg0Size, CPointer<Unit>(arg0))) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                releaseCollectionGenericOutRangeNoThrow<T>(arg0, arg0Size)
-                error.code().value
-        }
+        collectionGenericOutRangeThunk<T>(
+            arg0Size,
+            arg0,
+            result__,
+            { => this.GetMany(arg0Size, CPointer<Unit>(arg0)) }
+        )
     }
 }
 
@@ -398,8 +645,8 @@ public class IIteratorIterator<T> <: Iterator<T> where T <: windows_core.Runtime
 @C
 public struct IKeyValuePairVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var Key: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Key: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => collectionNotImplGenericOut(result__) }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => collectionNotImplGenericOut(result__) }
     public init() {}
 
     public static func new<Identity, K, V>(offset!: Int64 = 0): IKeyValuePairVtbl where Identity <: IKeyValuePair_Impl<K, V>, K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
@@ -411,7 +658,7 @@ public struct IKeyValuePairVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Key(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         vtbl.Value = { instanceRaw, result__ =>
@@ -419,7 +666,7 @@ public struct IKeyValuePairVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Value(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         return vtbl
@@ -443,31 +690,13 @@ public interface IKeyValuePair_Impl<K, V> <: IKeyValuePair_ImplErased where K <:
     public func Key(): windows_core.Result<K>
 
     public func __winrtThunk_Key(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Key()) {
-            case Result<K>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<K>(result__, value)
-            case Result<K>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<K>(result__, { => this.Key() })
     }
 
     public func Value(): windows_core.Result<V>
 
     public func __winrtThunk_Value(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Value()) {
-            case Result<V>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<V>(result__, value)
-            case Result<V>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<V>(result__, { => this.Value() })
     }
 }
 
@@ -558,8 +787,8 @@ extend<K, V> IKeyValuePair<K, V> <: windows_core.Interface<IKeyValuePair<K, V>> 
 @C
 public struct IMapChangedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var get_CollectionChange: CFunc<(CPointer<Unit>, CPointer<CollectionChangeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Key: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var get_CollectionChange: CFunc<(CPointer<Unit>, CPointer<CollectionChangeAbi>) -> Int32> = { _, result__ => collectionNotImplValueOut<CollectionChangeAbi>(result__, CollectionChangeAbi()) }
+    public var Key: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => collectionNotImplGenericOut(result__) }
     public init() {}
 
     public static func new<Identity, K>(offset!: Int64 = 0): IMapChangedEventArgsVtbl where Identity <: IMapChangedEventArgs_Impl<K>, K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K> {
@@ -571,6 +800,9 @@ public struct IMapChangedEventArgsVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_get_CollectionChange(result__)
                 case None =>
+                    if (result__.isNotNull()) {
+                        unsafe { result__.write(CollectionChangeAbi()) }
+                    }
                     E_NOINTERFACE.value
             }
         }
@@ -579,7 +811,7 @@ public struct IMapChangedEventArgsVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Key(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         return vtbl
@@ -606,28 +838,26 @@ public interface IMapChangedEventArgs_Impl<K> <: IMapChangedEventArgs_ImplErased
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.get_CollectionChange()) {
-            case Result<CollectionChange>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<CollectionChange>())) }
-                S_OK.value
-            case Result<CollectionChange>.Err(error) =>
-                error.code().value
+        unsafe { result__.write(CollectionChangeAbi()) }
+        try {
+            match (this.get_CollectionChange()) {
+                case Result<CollectionChange>.Ok(value) =>
+                    unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<CollectionChange>())) }
+                    S_OK.value
+                case Result<CollectionChange>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func Key(): windows_core.Result<K>
 
     public func __winrtThunk_Key(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Key()) {
-            case Result<K>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<K>(result__, value)
-            case Result<K>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<K>(result__, { => this.Key() })
     }
 }
 
@@ -719,8 +949,8 @@ extend<K> IMapChangedEventArgs<K> <: windows_core.Interface<IMapChangedEventArgs
 @C
 public struct IVectorChangedEventArgsVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var get_CollectionChange: CFunc<(CPointer<Unit>, CPointer<CollectionChangeAbi>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Index: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var get_CollectionChange: CFunc<(CPointer<Unit>, CPointer<CollectionChangeAbi>) -> Int32> = { _, result__ => collectionNotImplValueOut<CollectionChangeAbi>(result__, CollectionChangeAbi()) }
+    public var Index: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result__ => collectionNotImplUInt32Out(result__) }
     public init() {}
 
     public static func new<Identity>(offset!: Int64 = 0): IVectorChangedEventArgsVtbl where Identity <: IVectorChangedEventArgs_Impl {
@@ -732,6 +962,9 @@ public struct IVectorChangedEventArgsVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_get_CollectionChange(result__)
                 case None =>
+                    if (result__.isNotNull()) {
+                        unsafe { result__.write(CollectionChangeAbi()) }
+                    }
                     E_NOINTERFACE.value
             }
         }
@@ -740,7 +973,7 @@ public struct IVectorChangedEventArgsVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Index(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         return vtbl
@@ -767,12 +1000,19 @@ public interface IVectorChangedEventArgs_Impl <: IVectorChangedEventArgs_ImplEra
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.get_CollectionChange()) {
-            case Result<CollectionChange>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<CollectionChange>())) }
-                S_OK.value
-            case Result<CollectionChange>.Err(error) =>
-                error.code().value
+        unsafe { result__.write(CollectionChangeAbi()) }
+        try {
+            match (this.get_CollectionChange()) {
+                case Result<CollectionChange>.Ok(value) =>
+                    unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<CollectionChange>())) }
+                    S_OK.value
+                case Result<CollectionChange>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
@@ -782,12 +1022,19 @@ public interface IVectorChangedEventArgs_Impl <: IVectorChangedEventArgs_ImplEra
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.Index()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
+        clearCollectionIndexOutSlot(result__)
+        try {
+            match (this.Index()) {
+                case Result<UInt32>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<UInt32>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 }
@@ -878,7 +1125,7 @@ extend IVectorChangedEventArgs <: windows_core.Interface<IVectorChangedEventArgs
 @C
 public struct IIterableVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var First: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var First: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => collectionNotImplGenericOut(result__) }
     public init() {}
 
     public static func new<Identity, T>(offset!: Int64 = 0): IIterableVtbl where Identity <: IIterable_Impl<T>, T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
@@ -890,7 +1137,7 @@ public struct IIterableVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_First(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         return vtbl
@@ -912,22 +1159,7 @@ public interface IIterable_Impl<T> <: IIterable_ImplErased where T <: windows_co
     public func First(): windows_core.Result<IIterator<T>>
 
     public func __winrtThunk_First(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.First()) {
-            case Result<IIterator<T>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IIterator<T>>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<IIterator<T>>(result__, { => this.First() })
     }
 }
 
@@ -1154,10 +1386,10 @@ func callMapViewHasKeyUInt32(
 @C
 public struct IMapViewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var Lookup: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var HasKey: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var Split: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var Lookup: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => collectionNotImplGenericOut(result__) }
+    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result__ => collectionNotImplUInt32Out(result__) }
+    public var HasKey: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, result__ => collectionNotImplBoolOut(result__) }
+    public var Split: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, first__, second__ => collectionNotImplSplitOut(first__, second__) }
     public init() {}
 
     public static func new<Identity, K, V>(offset!: Int64 = 0): IMapViewVtbl where Identity <: IMapView_Impl<K, V>, K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
@@ -1169,7 +1401,7 @@ public struct IMapViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Lookup(arg0, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         vtbl.Size = { instanceRaw, result__ =>
@@ -1177,7 +1409,7 @@ public struct IMapViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Size(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         vtbl.HasKey = { instanceRaw, arg0, result__ =>
@@ -1185,7 +1417,7 @@ public struct IMapViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_HasKey(arg0, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceBoolOut(result__)
             }
         }
         vtbl.Split = { instanceRaw, arg0, arg1 =>
@@ -1193,7 +1425,7 @@ public struct IMapViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Split(arg0, arg1)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceSplitOut(arg0, arg1)
             }
         }
         match (0i32 as K) {
@@ -1207,6 +1439,7 @@ public struct IMapViewVtbl {
                                     if (result__.isNull()) {
                                         E_POINTER.value
                                     } else {
+                                        unsafe { result__.write(0i32) }
                                         match (impl.Lookup(arg0)) {
                                             case Result<Int32>.Ok(value) =>
                                                 unsafe { result__.write(value) }
@@ -1216,7 +1449,7 @@ public struct IMapViewVtbl {
                                         }
                                     }
                                 case None =>
-                                    E_NOINTERFACE.value
+                                    collectionNoInterfaceValueOut<Int32>(result__, 0i32)
                             }
                         }
                         vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -1227,6 +1460,7 @@ public struct IMapViewVtbl {
                                     if (result__.isNull()) {
                                         E_POINTER.value
                                     } else {
+                                        clearCollectionBoolOutSlot(result__)
                                         match (impl.HasKey(arg0)) {
                                             case Result<Bool>.Ok(value) =>
                                                 unsafe { result__.write(value) }
@@ -1236,7 +1470,7 @@ public struct IMapViewVtbl {
                                         }
                                     }
                                 case None =>
-                                    E_NOINTERFACE.value
+                                    collectionNoInterfaceBoolOut(result__)
                             }
                         }
                         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -1250,6 +1484,7 @@ public struct IMapViewVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
+                                                unsafe { result__.write(0.0f32) }
                                                 match (impl.Lookup(arg0)) {
                                                     case Result<Float32>.Ok(value) =>
                                                         unsafe { result__.write(value) }
@@ -1259,7 +1494,7 @@ public struct IMapViewVtbl {
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceValueOut<Float32>(result__, 0.0f32)
                                     }
                                 }
                                 vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -1270,6 +1505,7 @@ public struct IMapViewVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
+                                                clearCollectionBoolOutSlot(result__)
                                                 match (impl.HasKey(arg0)) {
                                                     case Result<Bool>.Ok(value) =>
                                                         unsafe { result__.write(value) }
@@ -1279,7 +1515,7 @@ public struct IMapViewVtbl {
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceBoolOut(result__)
                                     }
                                 }
                                 vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -1293,6 +1529,7 @@ public struct IMapViewVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
+                                                unsafe { result__.write(0u64) }
                                                 match (impl.Lookup(arg0)) {
                                                     case Result<UInt64>.Ok(value) =>
                                                         unsafe { result__.write(value) }
@@ -1302,7 +1539,7 @@ public struct IMapViewVtbl {
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceValueOut<UInt64>(result__, 0u64)
                                     }
                                 }
                                 vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -1313,6 +1550,7 @@ public struct IMapViewVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
+                                                clearCollectionBoolOutSlot(result__)
                                                 match (impl.HasKey(arg0)) {
                                                     case Result<Bool>.Ok(value) =>
                                                         unsafe { result__.write(value) }
@@ -1322,7 +1560,7 @@ public struct IMapViewVtbl {
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceBoolOut(result__)
                                     }
                                 }
                                 vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -1336,6 +1574,7 @@ public struct IMapViewVtbl {
                                                     if (result__.isNull()) {
                                                         E_POINTER.value
                                                     } else {
+                                                        unsafe { result__.write(DateTimeAbi()) }
                                                         match (impl.Lookup(arg0)) {
                                                             case Result<DateTime>.Ok(value) =>
                                                                 unsafe { result__.write(DateTime.projectAbi(value)) }
@@ -1345,7 +1584,7 @@ public struct IMapViewVtbl {
                                                         }
                                                     }
                                                 case None =>
-                                                    E_NOINTERFACE.value
+                                                    collectionNoInterfaceValueOut<DateTimeAbi>(result__, DateTimeAbi())
                                             }
                                         }
                                         vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -1356,6 +1595,7 @@ public struct IMapViewVtbl {
                                                     if (result__.isNull()) {
                                                         E_POINTER.value
                                                     } else {
+                                                        clearCollectionBoolOutSlot(result__)
                                                         match (impl.HasKey(arg0)) {
                                                             case Result<Bool>.Ok(value) =>
                                                                 unsafe { result__.write(value) }
@@ -1365,7 +1605,7 @@ public struct IMapViewVtbl {
                                                         }
                                                     }
                                                 case None =>
-                                                    E_NOINTERFACE.value
+                                                    collectionNoInterfaceBoolOut(result__)
                                             }
                                         }
                                         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -1379,15 +1619,17 @@ public struct IMapViewVtbl {
                                                     if (result__.isNull()) {
                                                         E_POINTER.value
                                                     } else {
-                                                        match (impl.Lookup(arg0)) {
-                                                            case Result<windows_core.HString>.Ok(value) =>
-                                                                windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
-                                                            case Result<windows_core.HString>.Err(error) =>
-                                                                error.code().value
+                                                        clearCollectionGenericOutSlot(result__)
+                                                        try {
+                                                            collectionHStringOutResult(result__, impl.Lookup(arg0))
+                                                        } catch (error: windows_core.WindowsException) {
+                                                            error.code().value
+                                                        } catch (_: Exception) {
+                                                            windows_core.E_FAIL.value
                                                         }
                                                     }
                                                 case None =>
-                                                    E_NOINTERFACE.value
+                                                    collectionNoInterfaceGenericOut(result__)
                                             }
                                         }
                                         vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -1398,16 +1640,17 @@ public struct IMapViewVtbl {
                                                     if (result__.isNull()) {
                                                         E_POINTER.value
                                                     } else {
-                                                        match (impl.HasKey(arg0)) {
-                                                            case Result<Bool>.Ok(value) =>
-                                                                unsafe { result__.write(value) }
-                                                                S_OK.value
-                                                            case Result<Bool>.Err(error) =>
-                                                                error.code().value
+                                                        clearCollectionBoolOutSlot(result__)
+                                                        try {
+                                                            collectionBoolOutResult(result__, impl.HasKey(arg0))
+                                                        } catch (error: windows_core.WindowsException) {
+                                                            error.code().value
+                                                        } catch (_: Exception) {
+                                                            windows_core.E_FAIL.value
                                                         }
                                                     }
                                                 case None =>
-                                                    E_NOINTERFACE.value
+                                                    collectionNoInterfaceBoolOut(result__)
                                             }
                                         }
                                         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -1421,6 +1664,7 @@ public struct IMapViewVtbl {
                                                             if (result__.isNull()) {
                                                                 E_POINTER.value
                                                             } else {
+                                                                clearCollectionGenericOutSlot(result__)
                                                                 match (impl.Lookup(arg0)) {
                                                                     case Result<IInspectable>.Ok(value) =>
                                                                         windows_core.winrtStoreGenericOut<IInspectable>(result__, value)
@@ -1429,7 +1673,7 @@ public struct IMapViewVtbl {
                                                                 }
                                                             }
                                                         case None =>
-                                                            E_NOINTERFACE.value
+                                                            collectionNoInterfaceGenericOut(result__)
                                                     }
                                                 }
                                                 vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -1440,6 +1684,7 @@ public struct IMapViewVtbl {
                                                             if (result__.isNull()) {
                                                                 E_POINTER.value
                                                             } else {
+                                                                clearCollectionBoolOutSlot(result__)
                                                                 match (impl.HasKey(arg0)) {
                                                                     case Result<Bool>.Ok(value) =>
                                                                         unsafe { result__.write(value) }
@@ -1449,7 +1694,7 @@ public struct IMapViewVtbl {
                                                                 }
                                                             }
                                                         case None =>
-                                                            E_NOINTERFACE.value
+                                                            collectionNoInterfaceBoolOut(result__)
                                                     }
                                                 }
                                                 vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -1463,6 +1708,7 @@ public struct IMapViewVtbl {
                                                                     if (result__.isNull()) {
                                                                         E_POINTER.value
                                                                     } else {
+                                                                        clearCollectionGenericOutSlot(result__)
                                                                         match (impl.Lookup(arg0)) {
                                                                             case Result<IVectorView<Int32>>.Ok(value) =>
                                                                                 windows_core.winrtStoreGenericOut<IVectorView<Int32>>(result__, value)
@@ -1471,7 +1717,7 @@ public struct IMapViewVtbl {
                                                                         }
                                                                     }
                                                                 case None =>
-                                                                    E_NOINTERFACE.value
+                                                                    collectionNoInterfaceGenericOut(result__)
                                                             }
                                                         }
                                                         vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -1482,6 +1728,7 @@ public struct IMapViewVtbl {
                                                                     if (result__.isNull()) {
                                                                         E_POINTER.value
                                                                     } else {
+                                                                        clearCollectionBoolOutSlot(result__)
                                                                         match (impl.HasKey(arg0)) {
                                                                             case Result<Bool>.Ok(value) =>
                                                                                 unsafe { result__.write(value) }
@@ -1491,7 +1738,7 @@ public struct IMapViewVtbl {
                                                                         }
                                                                     }
                                                                 case None =>
-                                                                    E_NOINTERFACE.value
+                                                                    collectionNoInterfaceBoolOut(result__)
                                                             }
                                                         }
                                                         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -1516,6 +1763,7 @@ public struct IMapViewVtbl {
                                     if (result__.isNull()) {
                                         E_POINTER.value
                                     } else {
+                                        unsafe { result__.write(0u32) }
                                         match (impl.Lookup(arg0)) {
                                             case Result<UInt32>.Ok(value) =>
                                                 unsafe { result__.write(value) }
@@ -1525,7 +1773,7 @@ public struct IMapViewVtbl {
                                         }
                                     }
                                 case None =>
-                                    E_NOINTERFACE.value
+                                    collectionNoInterfaceUInt32Out(result__)
                             }
                         }
                         vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -1536,6 +1784,7 @@ public struct IMapViewVtbl {
                                     if (result__.isNull()) {
                                         E_POINTER.value
                                     } else {
+                                        clearCollectionBoolOutSlot(result__)
                                         match (impl.HasKey(arg0)) {
                                             case Result<Bool>.Ok(value) =>
                                                 unsafe { result__.write(value) }
@@ -1545,7 +1794,7 @@ public struct IMapViewVtbl {
                                         }
                                     }
                                 case None =>
-                                    E_NOINTERFACE.value
+                                    collectionNoInterfaceBoolOut(result__)
                             }
                         }
                         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -1559,15 +1808,17 @@ public struct IMapViewVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
-                                                match (impl.Lookup(arg0)) {
-                                                    case Result<windows_core.HString>.Ok(value) =>
-                                                        windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
-                                                    case Result<windows_core.HString>.Err(error) =>
-                                                        error.code().value
+                                                clearCollectionGenericOutSlot(result__)
+                                                try {
+                                                    collectionHStringOutResult(result__, impl.Lookup(arg0))
+                                                } catch (error: windows_core.WindowsException) {
+                                                    error.code().value
+                                                } catch (_: Exception) {
+                                                    windows_core.E_FAIL.value
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceGenericOut(result__)
                                     }
                                 }
                                 vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -1578,16 +1829,17 @@ public struct IMapViewVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
-                                                match (impl.HasKey(arg0)) {
-                                                    case Result<Bool>.Ok(value) =>
-                                                        unsafe { result__.write(value) }
-                                                        S_OK.value
-                                                    case Result<Bool>.Err(error) =>
-                                                        error.code().value
+                                                clearCollectionBoolOutSlot(result__)
+                                                try {
+                                                    collectionBoolOutResult(result__, impl.HasKey(arg0))
+                                                } catch (error: windows_core.WindowsException) {
+                                                    error.code().value
+                                                } catch (_: Exception) {
+                                                    windows_core.E_FAIL.value
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceBoolOut(result__)
                                     }
                                 }
                                 vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -1610,6 +1862,7 @@ public struct IMapViewVtbl {
                     if (result__.isNull()) {
                         E_POINTER.value
                     } else {
+                        unsafe { result__.write(0i32) }
                         match (impl.Lookup(arg0)) {
                             case Result<Int32>.Ok(value) =>
                                 unsafe { result__.write(value) }
@@ -1619,6 +1872,9 @@ public struct IMapViewVtbl {
                         }
                     }
                 case None =>
+                    if (result__.isNotNull()) {
+                        unsafe { result__.write(0i32) }
+                    }
                     E_NOINTERFACE.value
             }
         }
@@ -1628,7 +1884,7 @@ public struct IMapViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Size(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         let hasKeyAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = {
@@ -1638,6 +1894,7 @@ public struct IMapViewVtbl {
                     if (result__.isNull()) {
                         E_POINTER.value
                     } else {
+                        clearCollectionBoolOutSlot(result__)
                         match (impl.HasKey(arg0)) {
                             case Result<Bool>.Ok(value) =>
                                 unsafe { result__.write(value) }
@@ -1647,7 +1904,7 @@ public struct IMapViewVtbl {
                         }
                     }
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceBoolOut(result__)
             }
         }
         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -1656,7 +1913,7 @@ public struct IMapViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Split(arg0, arg1)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceSplitOut(arg0, arg1)
             }
         }
         return vtbl
@@ -1673,15 +1930,17 @@ public struct IMapViewVtbl {
                     if (result__.isNull()) {
                         E_POINTER.value
                     } else {
-                        match (impl.Lookup(arg0)) {
-                            case Result<windows_core.HString>.Ok(value) =>
-                                windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
-                            case Result<windows_core.HString>.Err(error) =>
-                                error.code().value
+                        clearCollectionGenericOutSlot(result__)
+                        try {
+                            collectionHStringOutResult(result__, impl.Lookup(arg0))
+                        } catch (error: windows_core.WindowsException) {
+                            error.code().value
+                        } catch (_: Exception) {
+                            windows_core.E_FAIL.value
                         }
                     }
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -1690,7 +1949,7 @@ public struct IMapViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Size(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         let hasKeyAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = {
@@ -1700,16 +1959,17 @@ public struct IMapViewVtbl {
                     if (result__.isNull()) {
                         E_POINTER.value
                     } else {
-                        match (impl.HasKey(arg0)) {
-                            case Result<Bool>.Ok(value) =>
-                                unsafe { result__.write(value) }
-                                S_OK.value
-                            case Result<Bool>.Err(error) =>
-                                error.code().value
+                        clearCollectionBoolOutSlot(result__)
+                        try {
+                            collectionBoolOutResult(result__, impl.HasKey(arg0))
+                        } catch (error: windows_core.WindowsException) {
+                            error.code().value
+                        } catch (_: Exception) {
+                            windows_core.E_FAIL.value
                         }
                     }
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceBoolOut(result__)
             }
         }
         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -1718,7 +1978,7 @@ public struct IMapViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Split(arg0, arg1)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceSplitOut(arg0, arg1)
             }
         }
         return vtbl
@@ -1771,11 +2031,17 @@ public interface IMapView_Impl<K, V> <: IMapView_ImplErased & IIterable_Impl<IKe
             return E_POINTER.value
         }
         unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Lookup(windows_core.winrtProjectGenericIn<K>(arg0))) {
-            case Result<V>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<V>(result__, value)
-            case Result<V>.Err(error) =>
-                error.code().value
+        try {
+            match (this.Lookup(windows_core.winrtProjectGenericIn<K>(arg0))) {
+                case Result<V>.Ok(value) =>
+                    windows_core.winrtStoreGenericOut<V>(result__, value)
+                case Result<V>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
@@ -1785,12 +2051,19 @@ public interface IMapView_Impl<K, V> <: IMapView_ImplErased & IIterable_Impl<IKe
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.Size()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
+        clearCollectionIndexOutSlot(result__)
+        try {
+            match (this.Size()) {
+                case Result<UInt32>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<UInt32>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
@@ -1800,52 +2073,30 @@ public interface IMapView_Impl<K, V> <: IMapView_ImplErased & IIterable_Impl<IKe
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.HasKey(windows_core.winrtProjectGenericIn<K>(arg0))) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
+        clearCollectionBoolOutSlot(result__)
+        try {
+            match (this.HasKey(windows_core.winrtProjectGenericIn<K>(arg0))) {
+                case Result<Bool>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<Bool>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func Split(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): windows_core.Result<Unit>
 
     public func __winrtThunk_Split(arg0: CPointer<CPointer<Unit>>, arg1: CPointer<CPointer<Unit>>): Int32 {
-        if (arg0.isNull() || arg1.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe {
-            arg0.write(CPointer<Unit>())
-            arg1.write(CPointer<Unit>())
-        }
-        match (this.Split(arg0, arg1)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                windows_core.releaseFailedComOutSlot(arg0)
-                windows_core.releaseFailedComOutSlot(arg1)
-                error.code().value
-        }
+        collectionSplitOutThunk(arg0, arg1, { => this.Split(arg0, arg1) })
     }
 
     public func __winrtThunk_First(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.First()) {
-            case Result<IIterator<IKeyValuePair<K, V>>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IIterator<IKeyValuePair<K, V>>>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<IIterator<IKeyValuePair<K, V>>>(result__, { => this.First() })
     }
 }
 
@@ -2374,10 +2625,10 @@ func callVectorViewIndexOfRect(
 @C
 public struct IVectorViewVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var IndexOf: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
-    public var GetMany: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => collectionNotImplGenericOut(result__) }
+    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result__ => collectionNotImplUInt32Out(result__) }
+    public var IndexOf: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32> = { _, _, index__, result__ => collectionNotImplIndexBoolOut(index__, result__) }
+    public var GetMany: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _, _, result__ => collectionNotImplUInt32Out(result__) }
     public init() {}
 
     public static func new<Identity, T>(offset!: Int64 = 0): IVectorViewVtbl where Identity <: IVectorView_Impl<T>, T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
@@ -2389,7 +2640,7 @@ public struct IVectorViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetAt(arg0, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         vtbl.Size = { instanceRaw, result__ =>
@@ -2397,7 +2648,7 @@ public struct IVectorViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Size(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         vtbl.IndexOf = { instanceRaw, arg0, arg1, result__ =>
@@ -2405,7 +2656,7 @@ public struct IVectorViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_IndexOf(arg0, arg1, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceIndexBoolOut(arg1, result__)
             }
         }
         vtbl.GetMany = { instanceRaw, arg0, arg1Size, arg1, result__ =>
@@ -2413,7 +2664,7 @@ public struct IVectorViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetMany(arg0, arg1Size, arg1, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         match (0i32 as T) {
@@ -2422,19 +2673,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<Int32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2446,19 +2705,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<UInt32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2470,19 +2737,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<Int16>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2494,19 +2769,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<UInt8>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2518,19 +2801,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<UInt16>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2542,19 +2833,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<UInt64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2566,19 +2865,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<Int64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2590,19 +2897,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<Bool>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2614,19 +2929,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<Float32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2638,19 +2961,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<Float64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2662,19 +2993,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<DateTime>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(DateTime.assumeInitRef(arg0), arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(DateTime.assumeInitRef(arg0), arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2686,19 +3025,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<TimeSpan>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(TimeSpan.assumeInitRef(arg0), arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(TimeSpan.assumeInitRef(arg0), arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2710,19 +3057,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<GuidValue>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(GuidValue.assumeInitRef(arg0), arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(GuidValue.assumeInitRef(arg0), arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2734,19 +3089,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<Point>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(Point.assumeInitRef(arg0), arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(Point.assumeInitRef(arg0), arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2758,19 +3121,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<WinrtSize>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(assumeInitWinrtSize(arg0), arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(assumeInitWinrtSize(arg0), arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2782,19 +3153,27 @@ public struct IVectorViewVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVectorView_Impl<Rect>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(Rect.assumeInitRef(arg0), arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(Rect.assumeInitRef(arg0), arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2812,7 +3191,7 @@ public struct IVectorViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetAt(arg0, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         vtbl.Size = { instanceRaw, result__ =>
@@ -2820,26 +3199,34 @@ public struct IVectorViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Size(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         let indexOfAbi: CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {
             instanceRaw, arg0, arg1, result__ =>
             match (unsafe { asImplFromRaw<IVectorView_Impl<Int32>>(instanceRaw) }) {
                 case Some(impl) =>
-                    if (result__.isNull()) {
+                    if (result__.isNull() || arg1.isNull()) {
                         E_POINTER.value
                     } else {
-                        match (impl.IndexOf(arg0, arg1)) {
-                            case Result<Bool>.Ok(value) =>
-                                unsafe { result__.write(value) }
-                                S_OK.value
-                            case Result<Bool>.Err(error) =>
-                                error.code().value
+                        clearCollectionIndexOutSlot(arg1)
+                        clearCollectionBoolOutSlot(result__)
+                        try {
+                            match (impl.IndexOf(arg0, arg1)) {
+                                case Result<Bool>.Ok(value) =>
+                                    unsafe { result__.write(value) }
+                                    S_OK.value
+                                case Result<Bool>.Err(error) =>
+                                    error.code().value
+                            }
+                        } catch (error: windows_core.WindowsException) {
+                            error.code().value
+                        } catch (_: Exception) {
+                            windows_core.E_FAIL.value
                         }
                     }
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceIndexBoolOut(arg1, result__)
             }
         }
         vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2848,7 +3235,7 @@ public struct IVectorViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetMany(arg0, arg1Size, arg1, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         return vtbl
@@ -2863,7 +3250,7 @@ public struct IVectorViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetAt(arg0, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         vtbl.Size = { instanceRaw, result__ =>
@@ -2871,26 +3258,34 @@ public struct IVectorViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Size(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         let indexOfAbi: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {
             instanceRaw, arg0, arg1, result__ =>
             match (unsafe { asImplFromRaw<IVectorView_Impl<UInt32>>(instanceRaw) }) {
                 case Some(impl) =>
-                    if (result__.isNull()) {
+                    if (result__.isNull() || arg1.isNull()) {
                         E_POINTER.value
                     } else {
-                        match (impl.IndexOf(arg0, arg1)) {
-                            case Result<Bool>.Ok(value) =>
-                                unsafe { result__.write(value) }
-                                S_OK.value
-                            case Result<Bool>.Err(error) =>
-                                error.code().value
+                        clearCollectionIndexOutSlot(arg1)
+                        clearCollectionBoolOutSlot(result__)
+                        try {
+                            match (impl.IndexOf(arg0, arg1)) {
+                                case Result<Bool>.Ok(value) =>
+                                    unsafe { result__.write(value) }
+                                    S_OK.value
+                                case Result<Bool>.Err(error) =>
+                                    error.code().value
+                            }
+                        } catch (error: windows_core.WindowsException) {
+                            error.code().value
+                        } catch (_: Exception) {
+                            windows_core.E_FAIL.value
                         }
                     }
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceIndexBoolOut(arg1, result__)
             }
         }
         vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -2899,7 +3294,7 @@ public struct IVectorViewVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetMany(arg0, arg1Size, arg1, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         return vtbl
@@ -2988,16 +3383,7 @@ public interface IVectorView_Impl<T> <: IVectorView_ImplErased & IIterable_Impl<
     public func GetAt(index: UInt32): windows_core.Result<T>
 
     public func __winrtThunk_GetAt(arg0: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.GetAt(arg0)) {
-            case Result<T>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<T>(result__, value)
-            case Result<T>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<T>(result__, { => this.GetAt(arg0) })
     }
 
     public func Size(): windows_core.Result<UInt32>
@@ -3006,12 +3392,19 @@ public interface IVectorView_Impl<T> <: IVectorView_ImplErased & IIterable_Impl<
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.Size()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
+        clearCollectionIndexOutSlot(result__)
+        try {
+            match (this.Size()) {
+                case Result<UInt32>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<UInt32>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
@@ -3024,53 +3417,36 @@ public interface IVectorView_Impl<T> <: IVectorView_ImplErased & IIterable_Impl<
         if (arg1.isNull()) {
             return E_POINTER.value
         }
-        match (this.IndexOf(windows_core.winrtProjectGenericIn<T>(arg0), arg1)) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
+        clearCollectionIndexOutSlot(arg1)
+        clearCollectionBoolOutSlot(result__)
+        try {
+            match (this.IndexOf(windows_core.winrtProjectGenericIn<T>(arg0), arg1)) {
+                case Result<Bool>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<Bool>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>): windows_core.Result<UInt32>
 
     public func __winrtThunk_GetMany(arg0: UInt32, arg1Size: UInt32, arg1: CPointer<Unit>, result__: CPointer<UInt32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        if (arg1Size > 0u32 && arg1.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(0u32) }
-        windows_core.winrtPrepareGenericOutRange<T>(arg1, arg1Size)
-        match (this.GetMany(arg0, arg1Size, CPointer<Unit>(arg1))) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                releaseCollectionGenericOutRangeNoThrow<T>(arg1, arg1Size)
-                error.code().value
-        }
+        collectionGenericOutRangeThunk<T>(
+            arg1Size,
+            arg1,
+            result__,
+            { => this.GetMany(arg0, arg1Size, CPointer<Unit>(arg1)) }
+        )
     }
 
     public func __winrtThunk_First(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.First()) {
-            case Result<IIterator<T>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IIterator<T>>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<IIterator<T>>(result__, { => this.First() })
     }
 }
 
@@ -3468,11 +3844,11 @@ func callMapRemoveInt32(
 @C
 public struct IMapVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var Lookup: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var HasKey: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var GetView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var Insert: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var Lookup: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => collectionNotImplGenericOut(result__) }
+    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result__ => collectionNotImplUInt32Out(result__) }
+    public var HasKey: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, result__ => collectionNotImplBoolOut(result__) }
+    public var GetView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => collectionNotImplGenericOut(result__) }
+    public var Insert: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _, result__ => collectionNotImplBoolOut(result__) }
     public var Remove: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public init() {}
@@ -3486,7 +3862,7 @@ public struct IMapVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Lookup(arg0, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         vtbl.Size = { instanceRaw, result__ =>
@@ -3494,7 +3870,7 @@ public struct IMapVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Size(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         vtbl.HasKey = { instanceRaw, arg0, result__ =>
@@ -3502,7 +3878,7 @@ public struct IMapVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_HasKey(arg0, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceBoolOut(result__)
             }
         }
         vtbl.GetView = { instanceRaw, result__ =>
@@ -3510,7 +3886,7 @@ public struct IMapVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetView(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         vtbl.Insert = { instanceRaw, arg0, arg1, result__ =>
@@ -3518,7 +3894,7 @@ public struct IMapVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Insert(arg0, arg1, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceBoolOut(result__)
             }
         }
         vtbl.Remove = { instanceRaw, arg0 =>
@@ -3548,6 +3924,7 @@ public struct IMapVtbl {
                                     if (result__.isNull()) {
                                         E_POINTER.value
                                     } else {
+                                        unsafe { result__.write(0i32) }
                                         match (impl.Lookup(arg0)) {
                                             case Result<Int32>.Ok(value) =>
                                                 unsafe { result__.write(value) }
@@ -3557,7 +3934,7 @@ public struct IMapVtbl {
                                         }
                                     }
                                 case None =>
-                                    E_NOINTERFACE.value
+                                    collectionNoInterfaceValueOut<Int32>(result__, 0i32)
                             }
                         }
                         vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -3568,6 +3945,7 @@ public struct IMapVtbl {
                                     if (result__.isNull()) {
                                         E_POINTER.value
                                     } else {
+                                        clearCollectionBoolOutSlot(result__)
                                         match (impl.HasKey(arg0)) {
                                             case Result<Bool>.Ok(value) =>
                                                 unsafe { result__.write(value) }
@@ -3577,7 +3955,7 @@ public struct IMapVtbl {
                                         }
                                     }
                                 case None =>
-                                    E_NOINTERFACE.value
+                                    collectionNoInterfaceBoolOut(result__)
                             }
                         }
                         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -3588,6 +3966,7 @@ public struct IMapVtbl {
                                     if (result__.isNull()) {
                                         E_POINTER.value
                                     } else {
+                                        clearCollectionBoolOutSlot(result__)
                                         match (impl.Insert(arg0, arg1)) {
                                             case Result<Bool>.Ok(replaced) =>
                                                 unsafe { result__.write(replaced) }
@@ -3597,7 +3976,7 @@ public struct IMapVtbl {
                                         }
                                     }
                                 case None =>
-                                    E_NOINTERFACE.value
+                                    collectionNoInterfaceBoolOut(result__)
                             }
                         }
                         vtbl.Insert = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(insertAbi))
@@ -3625,6 +4004,7 @@ public struct IMapVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
+                                                unsafe { result__.write(0.0f32) }
                                                 match (impl.Lookup(arg0)) {
                                                     case Result<Float32>.Ok(value) =>
                                                         unsafe { result__.write(value) }
@@ -3634,7 +4014,7 @@ public struct IMapVtbl {
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceValueOut<Float32>(result__, 0.0f32)
                                     }
                                 }
                                 vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -3645,6 +4025,7 @@ public struct IMapVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
+                                                clearCollectionBoolOutSlot(result__)
                                                 match (impl.HasKey(arg0)) {
                                                     case Result<Bool>.Ok(value) =>
                                                         unsafe { result__.write(value) }
@@ -3654,7 +4035,7 @@ public struct IMapVtbl {
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceBoolOut(result__)
                                     }
                                 }
                                 vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -3665,6 +4046,7 @@ public struct IMapVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
+                                                clearCollectionBoolOutSlot(result__)
                                                 match (impl.Insert(arg0, arg1)) {
                                                     case Result<Bool>.Ok(replaced) =>
                                                         unsafe { result__.write(replaced) }
@@ -3674,18 +4056,19 @@ public struct IMapVtbl {
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceBoolOut(result__)
                                     }
                                 }
                                 vtbl.Insert = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(insertAbi))
                                 let removeAbi: CFunc<(CPointer<Unit>, Int32) -> Int32> = { instanceRaw, arg0 =>
                                     match (unsafe { asImplFromRaw<IMap_Impl<Int32, Float32>>(instanceRaw) }) {
                                         case Some(impl) =>
-                                            match (impl.Remove(arg0)) {
-                                                case Result<Unit>.Ok(_) =>
-                                                    S_OK.value
-                                                case Result<Unit>.Err(error) =>
-                                                    error.code().value
+                                            try {
+                                                collectionUnitResult(impl.Remove(arg0))
+                                            } catch (error: windows_core.WindowsException) {
+                                                error.code().value
+                                            } catch (_: Exception) {
+                                                windows_core.E_FAIL.value
                                             }
                                         case None =>
                                             E_NOINTERFACE.value
@@ -3702,6 +4085,7 @@ public struct IMapVtbl {
                                                     if (result__.isNull()) {
                                                         E_POINTER.value
                                                     } else {
+                                                        unsafe { result__.write(DateTimeAbi()) }
                                                         match (impl.Lookup(arg0)) {
                                                             case Result<DateTime>.Ok(value) =>
                                                                 unsafe { result__.write(DateTime.projectAbi(value)) }
@@ -3711,7 +4095,7 @@ public struct IMapVtbl {
                                                         }
                                                     }
                                                 case None =>
-                                                    E_NOINTERFACE.value
+                                                    collectionNoInterfaceValueOut<DateTimeAbi>(result__, DateTimeAbi())
                                             }
                                         }
                                         vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -3722,6 +4106,7 @@ public struct IMapVtbl {
                                                     if (result__.isNull()) {
                                                         E_POINTER.value
                                                     } else {
+                                                        clearCollectionBoolOutSlot(result__)
                                                         match (impl.HasKey(arg0)) {
                                                             case Result<Bool>.Ok(value) =>
                                                                 unsafe { result__.write(value) }
@@ -3731,7 +4116,7 @@ public struct IMapVtbl {
                                                         }
                                                     }
                                                 case None =>
-                                                    E_NOINTERFACE.value
+                                                    collectionNoInterfaceBoolOut(result__)
                                             }
                                         }
                                         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -3742,6 +4127,7 @@ public struct IMapVtbl {
                                                     if (result__.isNull()) {
                                                         E_POINTER.value
                                                     } else {
+                                                        clearCollectionBoolOutSlot(result__)
                                                         match (impl.Insert(arg0, DateTime.assumeInitRef(arg1))) {
                                                             case Result<Bool>.Ok(replaced) =>
                                                                 unsafe { result__.write(replaced) }
@@ -3751,7 +4137,7 @@ public struct IMapVtbl {
                                                         }
                                                     }
                                                 case None =>
-                                                    E_NOINTERFACE.value
+                                                    collectionNoInterfaceBoolOut(result__)
                                             }
                                         }
                                         vtbl.Insert = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(insertAbi))
@@ -3779,15 +4165,17 @@ public struct IMapVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
-                                                match (impl.Lookup(arg0)) {
-                                                    case Result<windows_core.HString>.Ok(value) =>
-                                                        windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
-                                                    case Result<windows_core.HString>.Err(error) =>
-                                                        error.code().value
+                                                clearCollectionGenericOutSlot(result__)
+                                                try {
+                                                    collectionHStringOutResult(result__, impl.Lookup(arg0))
+                                                } catch (error: windows_core.WindowsException) {
+                                                    error.code().value
+                                                } catch (_: Exception) {
+                                                    windows_core.E_FAIL.value
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceGenericOut(result__)
                                     }
                                 }
                                 vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -3798,16 +4186,17 @@ public struct IMapVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
-                                                match (impl.HasKey(arg0)) {
-                                                    case Result<Bool>.Ok(value) =>
-                                                        unsafe { result__.write(value) }
-                                                        S_OK.value
-                                                    case Result<Bool>.Err(error) =>
-                                                        error.code().value
+                                                clearCollectionBoolOutSlot(result__)
+                                                try {
+                                                    collectionBoolOutResult(result__, impl.HasKey(arg0))
+                                                } catch (error: windows_core.WindowsException) {
+                                                    error.code().value
+                                                } catch (_: Exception) {
+                                                    windows_core.E_FAIL.value
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceBoolOut(result__)
                                     }
                                 }
                                 vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -3818,27 +4207,32 @@ public struct IMapVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
-                                                match (impl.Insert(arg0, windows_core.winrtProjectGenericIn<windows_core.HString>(arg1))) {
-                                                    case Result<Bool>.Ok(replaced) =>
-                                                        unsafe { result__.write(replaced) }
-                                                        S_OK.value
-                                                    case Result<Bool>.Err(error) =>
-                                                        error.code().value
+                                                clearCollectionBoolOutSlot(result__)
+                                                try {
+                                                    collectionBoolOutResult(
+                                                        result__,
+                                                        impl.Insert(arg0, windows_core.winrtProjectGenericIn<windows_core.HString>(arg1))
+                                                    )
+                                                } catch (error: windows_core.WindowsException) {
+                                                    error.code().value
+                                                } catch (_: Exception) {
+                                                    windows_core.E_FAIL.value
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceBoolOut(result__)
                                     }
                                 }
                                 vtbl.Insert = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(insertAbi))
                                 let removeAbi: CFunc<(CPointer<Unit>, Int32) -> Int32> = { instanceRaw, arg0 =>
                                     match (unsafe { asImplFromRaw<IMap_Impl<Int32, windows_core.HString>>(instanceRaw) }) {
                                         case Some(impl) =>
-                                            match (impl.Remove(arg0)) {
-                                                case Result<Unit>.Ok(_) =>
-                                                    S_OK.value
-                                                case Result<Unit>.Err(error) =>
-                                                    error.code().value
+                                            try {
+                                                collectionUnitResult(impl.Remove(arg0))
+                                            } catch (error: windows_core.WindowsException) {
+                                                error.code().value
+                                            } catch (_: Exception) {
+                                                windows_core.E_FAIL.value
                                             }
                                         case None =>
                                             E_NOINTERFACE.value
@@ -3855,6 +4249,7 @@ public struct IMapVtbl {
                                                     if (result__.isNull()) {
                                                         E_POINTER.value
                                                     } else {
+                                                        clearCollectionGenericOutSlot(result__)
                                                         match (impl.Lookup(arg0)) {
                                                             case Result<IInspectable>.Ok(value) =>
                                                                 windows_core.winrtStoreGenericOut<IInspectable>(result__, value)
@@ -3863,7 +4258,7 @@ public struct IMapVtbl {
                                                         }
                                                     }
                                                 case None =>
-                                                    E_NOINTERFACE.value
+                                                    collectionNoInterfaceGenericOut(result__)
                                             }
                                         }
                                         vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -3874,6 +4269,7 @@ public struct IMapVtbl {
                                                     if (result__.isNull()) {
                                                         E_POINTER.value
                                                     } else {
+                                                        clearCollectionBoolOutSlot(result__)
                                                         match (impl.HasKey(arg0)) {
                                                             case Result<Bool>.Ok(value) =>
                                                                 unsafe { result__.write(value) }
@@ -3883,7 +4279,7 @@ public struct IMapVtbl {
                                                         }
                                                     }
                                                 case None =>
-                                                    E_NOINTERFACE.value
+                                                    collectionNoInterfaceBoolOut(result__)
                                             }
                                         }
                                         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -3894,16 +4290,23 @@ public struct IMapVtbl {
                                                     if (result__.isNull()) {
                                                         E_POINTER.value
                                                     } else {
-                                                        match (impl.Insert(arg0, windows_core.winrtProjectGenericIn<IInspectable>(arg1))) {
-                                                            case Result<Bool>.Ok(replaced) =>
-                                                                unsafe { result__.write(replaced) }
-                                                                S_OK.value
-                                                            case Result<Bool>.Err(error) =>
-                                                                error.code().value
+                                                        clearCollectionBoolOutSlot(result__)
+                                                        try {
+                                                            match (impl.Insert(arg0, windows_core.winrtProjectGenericIn<IInspectable>(arg1))) {
+                                                                case Result<Bool>.Ok(replaced) =>
+                                                                    unsafe { result__.write(replaced) }
+                                                                    S_OK.value
+                                                                case Result<Bool>.Err(error) =>
+                                                                    error.code().value
+                                                            }
+                                                        } catch (error: windows_core.WindowsException) {
+                                                            error.code().value
+                                                        } catch (_: Exception) {
+                                                            windows_core.E_FAIL.value
                                                         }
                                                     }
                                                 case None =>
-                                                    E_NOINTERFACE.value
+                                                    collectionNoInterfaceBoolOut(result__)
                                             }
                                         }
                                         vtbl.Insert = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(insertAbi))
@@ -3940,6 +4343,7 @@ public struct IMapVtbl {
                                     if (result__.isNull()) {
                                         E_POINTER.value
                                     } else {
+                                        unsafe { result__.write(0u32) }
                                         match (impl.Lookup(arg0)) {
                                             case Result<UInt32>.Ok(value) =>
                                                 unsafe { result__.write(value) }
@@ -3949,7 +4353,7 @@ public struct IMapVtbl {
                                         }
                                     }
                                 case None =>
-                                    E_NOINTERFACE.value
+                                    collectionNoInterfaceUInt32Out(result__)
                             }
                         }
                         vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -3960,6 +4364,7 @@ public struct IMapVtbl {
                                     if (result__.isNull()) {
                                         E_POINTER.value
                                     } else {
+                                        clearCollectionBoolOutSlot(result__)
                                         match (impl.HasKey(arg0)) {
                                             case Result<Bool>.Ok(value) =>
                                                 unsafe { result__.write(value) }
@@ -3969,7 +4374,7 @@ public struct IMapVtbl {
                                         }
                                     }
                                 case None =>
-                                    E_NOINTERFACE.value
+                                    collectionNoInterfaceBoolOut(result__)
                             }
                         }
                         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -3980,6 +4385,7 @@ public struct IMapVtbl {
                                     if (result__.isNull()) {
                                         E_POINTER.value
                                     } else {
+                                        clearCollectionBoolOutSlot(result__)
                                         match (impl.Insert(arg0, arg1)) {
                                             case Result<Bool>.Ok(replaced) =>
                                                 unsafe { result__.write(replaced) }
@@ -3989,7 +4395,7 @@ public struct IMapVtbl {
                                         }
                                     }
                                 case None =>
-                                    E_NOINTERFACE.value
+                                    collectionNoInterfaceBoolOut(result__)
                             }
                         }
                         vtbl.Insert = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(insertAbi))
@@ -4017,6 +4423,7 @@ public struct IMapVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
+                                                clearCollectionGenericOutSlot(result__)
                                                 match (impl.Lookup(arg0)) {
                                                     case Result<windows_core.HString>.Ok(value) =>
                                                         windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
@@ -4025,7 +4432,7 @@ public struct IMapVtbl {
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceGenericOut(result__)
                                     }
                                 }
                                 vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -4036,6 +4443,7 @@ public struct IMapVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
+                                                clearCollectionBoolOutSlot(result__)
                                                 match (impl.HasKey(arg0)) {
                                                     case Result<Bool>.Ok(value) =>
                                                         unsafe { result__.write(value) }
@@ -4045,7 +4453,7 @@ public struct IMapVtbl {
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceBoolOut(result__)
                                     }
                                 }
                                 vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -4056,16 +4464,23 @@ public struct IMapVtbl {
                                             if (result__.isNull()) {
                                                 E_POINTER.value
                                             } else {
-                                                match (impl.Insert(arg0, windows_core.winrtProjectGenericIn<windows_core.HString>(arg1))) {
-                                                    case Result<Bool>.Ok(replaced) =>
-                                                        unsafe { result__.write(replaced) }
-                                                        S_OK.value
-                                                    case Result<Bool>.Err(error) =>
-                                                        error.code().value
+                                                clearCollectionBoolOutSlot(result__)
+                                                try {
+                                                    match (impl.Insert(arg0, windows_core.winrtProjectGenericIn<windows_core.HString>(arg1))) {
+                                                        case Result<Bool>.Ok(replaced) =>
+                                                            unsafe { result__.write(replaced) }
+                                                            S_OK.value
+                                                        case Result<Bool>.Err(error) =>
+                                                            error.code().value
+                                                    }
+                                                } catch (error: windows_core.WindowsException) {
+                                                    error.code().value
+                                                } catch (_: Exception) {
+                                                    windows_core.E_FAIL.value
                                                 }
                                             }
                                         case None =>
-                                            E_NOINTERFACE.value
+                                            collectionNoInterfaceBoolOut(result__)
                                     }
                                 }
                                 vtbl.Insert = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(insertAbi))
@@ -4102,6 +4517,7 @@ public struct IMapVtbl {
                     if (result__.isNull()) {
                         E_POINTER.value
                     } else {
+                        unsafe { result__.write(0i32) }
                         match (impl.Lookup(arg0)) {
                             case Result<Int32>.Ok(value) =>
                                 unsafe { result__.write(value) }
@@ -4111,7 +4527,7 @@ public struct IMapVtbl {
                         }
                     }
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceValueOut<Int32>(result__, 0i32)
             }
         }
         vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -4120,7 +4536,7 @@ public struct IMapVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Size(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         let hasKeyAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = {
@@ -4130,6 +4546,7 @@ public struct IMapVtbl {
                     if (result__.isNull()) {
                         E_POINTER.value
                     } else {
+                        clearCollectionBoolOutSlot(result__)
                         match (impl.HasKey(arg0)) {
                             case Result<Bool>.Ok(value) =>
                                 unsafe { result__.write(value) }
@@ -4139,7 +4556,7 @@ public struct IMapVtbl {
                         }
                     }
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceBoolOut(result__)
             }
         }
         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -4148,7 +4565,7 @@ public struct IMapVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetView(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         let insertAbi: CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Bool>) -> Int32> = {
@@ -4158,6 +4575,7 @@ public struct IMapVtbl {
                     if (result__.isNull()) {
                         E_POINTER.value
                     } else {
+                        clearCollectionBoolOutSlot(result__)
                         match (impl.Insert(arg0, arg1)) {
                             case Result<Bool>.Ok(value) =>
                                 unsafe { result__.write(value) }
@@ -4167,7 +4585,7 @@ public struct IMapVtbl {
                         }
                     }
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceBoolOut(result__)
             }
         }
         vtbl.Insert = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(insertAbi))
@@ -4207,15 +4625,17 @@ public struct IMapVtbl {
                     if (result__.isNull()) {
                         E_POINTER.value
                     } else {
-                        match (impl.Lookup(arg0)) {
-                            case Result<windows_core.HString>.Ok(value) =>
-                                windows_core.winrtStoreGenericOut<windows_core.HString>(result__, value)
-                            case Result<windows_core.HString>.Err(error) =>
-                                error.code().value
+                        clearCollectionGenericOutSlot(result__)
+                        try {
+                            collectionHStringOutResult(result__, impl.Lookup(arg0))
+                        } catch (error: windows_core.WindowsException) {
+                            error.code().value
+                        } catch (_: Exception) {
+                            windows_core.E_FAIL.value
                         }
                     }
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         vtbl.Lookup = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(CPointer<Unit>(lookupAbi))
@@ -4224,7 +4644,7 @@ public struct IMapVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Size(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         let hasKeyAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32> = {
@@ -4234,16 +4654,17 @@ public struct IMapVtbl {
                     if (result__.isNull()) {
                         E_POINTER.value
                     } else {
-                        match (impl.HasKey(arg0)) {
-                            case Result<Bool>.Ok(value) =>
-                                unsafe { result__.write(value) }
-                                S_OK.value
-                            case Result<Bool>.Err(error) =>
-                                error.code().value
+                        clearCollectionBoolOutSlot(result__)
+                        try {
+                            collectionBoolOutResult(result__, impl.HasKey(arg0))
+                        } catch (error: windows_core.WindowsException) {
+                            error.code().value
+                        } catch (_: Exception) {
+                            windows_core.E_FAIL.value
                         }
                     }
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceBoolOut(result__)
             }
         }
         vtbl.HasKey = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(hasKeyAbi))
@@ -4252,7 +4673,7 @@ public struct IMapVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetView(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         let insertAbi: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<Bool>) -> Int32> = {
@@ -4262,27 +4683,32 @@ public struct IMapVtbl {
                     if (result__.isNull()) {
                         E_POINTER.value
                     } else {
-                        match (impl.Insert(arg0, windows_core.winrtProjectGenericIn<windows_core.HString>(arg1))) {
-                            case Result<Bool>.Ok(value) =>
-                                unsafe { result__.write(value) }
-                                S_OK.value
-                            case Result<Bool>.Err(error) =>
-                                error.code().value
+                        clearCollectionBoolOutSlot(result__)
+                        try {
+                            collectionBoolOutResult(
+                                result__,
+                                impl.Insert(arg0, windows_core.winrtProjectGenericIn<windows_core.HString>(arg1))
+                            )
+                        } catch (error: windows_core.WindowsException) {
+                            error.code().value
+                        } catch (_: Exception) {
+                            windows_core.E_FAIL.value
                         }
                     }
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceBoolOut(result__)
             }
         }
         vtbl.Insert = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32>(CPointer<Unit>(insertAbi))
         let removeAbi: CFunc<(CPointer<Unit>, Int32) -> Int32> = { instanceRaw, arg0 =>
             match (unsafe { asImplFromRaw<IMap_Impl<Int32, windows_core.HString>>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.Remove(arg0)) {
-                        case Result<Unit>.Ok(_) =>
-                            S_OK.value
-                        case Result<Unit>.Err(error) =>
-                            error.code().value
+                    try {
+                        collectionUnitResult(impl.Remove(arg0))
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Exception) {
+                        windows_core.E_FAIL.value
                     }
                 case None =>
                     E_NOINTERFACE.value
@@ -4349,11 +4775,17 @@ public interface IMap_Impl<K, V> <: IMap_ImplErased & IIterable_Impl<IKeyValuePa
             return E_POINTER.value
         }
         unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Lookup(windows_core.winrtProjectGenericIn<K>(arg0))) {
-            case Result<V>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<V>(result__, value)
-            case Result<V>.Err(error) =>
-                error.code().value
+        try {
+            match (this.Lookup(windows_core.winrtProjectGenericIn<K>(arg0))) {
+                case Result<V>.Ok(value) =>
+                    windows_core.winrtStoreGenericOut<V>(result__, value)
+                case Result<V>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
@@ -4363,12 +4795,19 @@ public interface IMap_Impl<K, V> <: IMap_ImplErased & IIterable_Impl<IKeyValuePa
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.Size()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
+        clearCollectionIndexOutSlot(result__)
+        try {
+            match (this.Size()) {
+                case Result<UInt32>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<UInt32>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
@@ -4378,34 +4817,26 @@ public interface IMap_Impl<K, V> <: IMap_ImplErased & IIterable_Impl<IKeyValuePa
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.HasKey(windows_core.winrtProjectGenericIn<K>(arg0))) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
+        clearCollectionBoolOutSlot(result__)
+        try {
+            match (this.HasKey(windows_core.winrtProjectGenericIn<K>(arg0))) {
+                case Result<Bool>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<Bool>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func GetView(): windows_core.Result<IMapView<K, V>>
 
     public func __winrtThunk_GetView(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.GetView()) {
-            case Result<IMapView<K, V>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IMapView<K, V>>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<IMapView<K, V>>(result__, { => this.GetView() })
     }
 
     public func Insert(key: K, value: V): windows_core.Result<Bool>
@@ -4414,54 +4845,47 @@ public interface IMap_Impl<K, V> <: IMap_ImplErased & IIterable_Impl<IKeyValuePa
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.Insert(windows_core.winrtProjectGenericIn<K>(arg0), windows_core.winrtProjectGenericIn<V>(arg1))) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
+        clearCollectionBoolOutSlot(result__)
+        try {
+            match (this.Insert(windows_core.winrtProjectGenericIn<K>(arg0), windows_core.winrtProjectGenericIn<V>(arg1))) {
+                case Result<Bool>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<Bool>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func Remove(key: K): windows_core.Result<Unit>
 
     public func __winrtThunk_Remove(arg0: CPointer<Unit>): Int32 {
-        match (this.Remove(windows_core.winrtProjectGenericIn<K>(arg0))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
+        try {
+            match (this.Remove(windows_core.winrtProjectGenericIn<K>(arg0))) {
+                case Result<Unit>.Ok(_) =>
+                    S_OK.value
+                case Result<Unit>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func Clear(): windows_core.Result<Unit>
 
     public func __winrtThunk_Clear(): Int32 {
-        match (this.Clear()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        collectionUnitThunk({ => this.Clear() })
     }
 
     public func __winrtThunk_First(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.First()) {
-            case Result<IIterator<IKeyValuePair<K, V>>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IIterator<IKeyValuePair<K, V>>>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<IIterator<IKeyValuePair<K, V>>>(result__, { => this.First() })
     }
 }
 
@@ -5422,17 +5846,17 @@ func callVectorAppendRect(
 @C
 public struct IVectorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
-    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var GetView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    public var IndexOf: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32> = { _, _, _, _ => E_NOTIMPL.value }
+    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ => collectionNotImplGenericOut(result__) }
+    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result__ => collectionNotImplUInt32Out(result__) }
+    public var GetView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ => collectionNotImplGenericOut(result__) }
+    public var IndexOf: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32> = { _, _, index__, result__ => collectionNotImplIndexBoolOut(index__, result__) }
     public var SetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var InsertAt: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public var RemoveAt: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var Append: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
     public var RemoveAtEnd: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
-    public var GetMany: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
+    public var GetMany: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _, _, result__ => collectionNotImplUInt32Out(result__) }
     public var ReplaceAll: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
     public init() {}
 
@@ -5445,7 +5869,7 @@ public struct IVectorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetAt(arg0, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         vtbl.Size = { instanceRaw, result__ =>
@@ -5453,7 +5877,7 @@ public struct IVectorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Size(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         vtbl.GetView = { instanceRaw, result__ =>
@@ -5461,7 +5885,7 @@ public struct IVectorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetView(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         vtbl.IndexOf = { instanceRaw, arg0, arg1, result__ =>
@@ -5469,7 +5893,7 @@ public struct IVectorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_IndexOf(arg0, arg1, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceIndexBoolOut(arg1, result__)
             }
         }
         vtbl.SetAt = { instanceRaw, arg0, arg1 =>
@@ -5525,7 +5949,7 @@ public struct IVectorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetMany(arg0, arg1Size, arg1, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         vtbl.ReplaceAll = { instanceRaw, arg0Size, arg0 =>
@@ -5542,30 +5966,44 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Int32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
                 let setAtAbi: CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Int32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.SetAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5575,11 +6013,17 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Int32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5589,11 +6033,17 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, Int32) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Int32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(arg0)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.Append(arg0)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5608,19 +6058,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -5628,11 +6086,17 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.SetAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5642,11 +6106,17 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5656,11 +6126,17 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(arg0)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.Append(arg0)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5675,19 +6151,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Int64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -5695,11 +6179,17 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Int64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.SetAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5709,11 +6199,17 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, Int64) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Int64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5723,11 +6219,17 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, Int64) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Int64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(arg0)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.Append(arg0)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5742,19 +6244,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt8>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -5762,11 +6272,17 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt8>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.SetAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5776,11 +6292,17 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, UInt8) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt8>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5790,11 +6312,17 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, UInt8) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt8>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(arg0)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.Append(arg0)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5809,19 +6337,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt16>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -5829,11 +6365,17 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt16>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.SetAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5843,11 +6385,17 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, UInt16) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt16>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5857,11 +6405,17 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, UInt16) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt16>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(arg0)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.Append(arg0)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5876,19 +6430,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Int16>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -5896,11 +6458,17 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Int16>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.SetAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5910,11 +6478,17 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, Int16) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Int16>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5924,11 +6498,17 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, Int16) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Int16>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(arg0)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.Append(arg0)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5943,19 +6523,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -5963,11 +6551,17 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.SetAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5977,11 +6571,17 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, UInt64) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -5991,11 +6591,17 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, UInt64) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<UInt64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(arg0)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.Append(arg0)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -6010,19 +6616,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Bool>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -6030,11 +6644,17 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Bool>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.SetAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -6044,11 +6664,17 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, Bool) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Bool>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -6058,11 +6684,17 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, Bool) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Bool>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(arg0)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.Append(arg0)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -6077,19 +6709,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Float32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -6097,11 +6737,17 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Float32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.SetAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -6111,11 +6757,17 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, Float32) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Float32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -6125,11 +6777,17 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, Float32) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Float32>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(arg0)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.Append(arg0)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -6144,19 +6802,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Float64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(arg0, arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(arg0, arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -6164,11 +6830,17 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Float64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.SetAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -6178,11 +6850,17 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, Float64) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Float64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, arg1)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, arg1)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -6192,11 +6870,17 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, Float64) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Float64>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(arg0)) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.Append(arg0)) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -6211,19 +6895,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<DateTime>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(DateTime.assumeInitRef(arg0), arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(DateTime.assumeInitRef(arg0), arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -6231,11 +6923,17 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<DateTime>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, DateTime.assumeInitRef(arg1))) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.SetAt(arg0, DateTime.assumeInitRef(arg1))) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -6245,11 +6943,17 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, DateTimeAbi) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<DateTime>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, DateTime.assumeInitRef(arg1))) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, DateTime.assumeInitRef(arg1))) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -6259,11 +6963,17 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, DateTimeAbi) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<DateTime>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(DateTime.assumeInitRef(arg0))) {
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {
+                                match (impl.Append(DateTime.assumeInitRef(arg0))) {
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None =>
                             E_NOINTERFACE.value
@@ -6278,19 +6988,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<TimeSpan>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(TimeSpan.assumeInitRef(arg0), arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(TimeSpan.assumeInitRef(arg0), arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -6298,9 +7016,15 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<TimeSpan>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, TimeSpan.assumeInitRef(arg1))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.SetAt(arg0, TimeSpan.assumeInitRef(arg1))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6309,9 +7033,15 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, TimeSpanAbi) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<TimeSpan>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, TimeSpan.assumeInitRef(arg1))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, TimeSpan.assumeInitRef(arg1))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6320,9 +7050,15 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, TimeSpanAbi) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<TimeSpan>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(TimeSpan.assumeInitRef(arg0))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.Append(TimeSpan.assumeInitRef(arg0))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6336,19 +7072,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<GuidValue>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(GuidValue.assumeInitRef(arg0), arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(GuidValue.assumeInitRef(arg0), arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -6356,9 +7100,15 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<GuidValue>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, GuidValue.assumeInitRef(arg1))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.SetAt(arg0, GuidValue.assumeInitRef(arg1))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6367,9 +7117,15 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, GUID) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<GuidValue>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, GuidValue.assumeInitRef(arg1))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, GuidValue.assumeInitRef(arg1))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6378,9 +7134,15 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, GUID) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<GuidValue>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(GuidValue.assumeInitRef(arg0))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.Append(GuidValue.assumeInitRef(arg0))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6394,19 +7156,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Point>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(Point.assumeInitRef(arg0), arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(Point.assumeInitRef(arg0), arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -6414,9 +7184,15 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Point>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, Point.assumeInitRef(arg1))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.SetAt(arg0, Point.assumeInitRef(arg1))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6425,9 +7201,15 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, PointAbi) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Point>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, Point.assumeInitRef(arg1))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, Point.assumeInitRef(arg1))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6436,9 +7218,15 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, PointAbi) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Point>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(Point.assumeInitRef(arg0))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.Append(Point.assumeInitRef(arg0))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6452,19 +7240,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<WinrtSize>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(assumeInitWinrtSize(arg0), arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(assumeInitWinrtSize(arg0), arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -6472,9 +7268,15 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<WinrtSize>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, assumeInitWinrtSize(arg1))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.SetAt(arg0, assumeInitWinrtSize(arg1))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6483,9 +7285,15 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, SizeAbi) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<WinrtSize>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, assumeInitWinrtSize(arg1))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, assumeInitWinrtSize(arg1))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6494,9 +7302,15 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, SizeAbi) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<WinrtSize>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(assumeInitWinrtSize(arg0))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.Append(assumeInitWinrtSize(arg0))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6510,19 +7324,27 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Rect>>(instanceRaw) }) {
                         case Some(impl) =>
-                            if (result__.isNull()) {
+                            if (result__.isNull() || arg1.isNull()) {
                                 E_POINTER.value
                             } else {
-                                match (impl.IndexOf(Rect.assumeInitRef(arg0), arg1)) {
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe { result__.write(value) }
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {
+                                    match (impl.IndexOf(Rect.assumeInitRef(arg0), arg1)) {
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe { result__.write(value) }
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }
+                                } catch (error: windows_core.WindowsException) {
+                                    error.code().value
+                                } catch (_: Exception) {
+                                    windows_core.E_FAIL.value
                                 }
                             }
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }
                 }
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -6530,9 +7352,15 @@ public struct IVectorVtbl {
                     instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Rect>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, Rect.assumeInitRef(arg1))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.SetAt(arg0, Rect.assumeInitRef(arg1))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6541,9 +7369,15 @@ public struct IVectorVtbl {
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, RectAbi) -> Int32> = { instanceRaw, arg0, arg1 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Rect>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, Rect.assumeInitRef(arg1))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.InsertAt(arg0, Rect.assumeInitRef(arg1))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6552,9 +7386,15 @@ public struct IVectorVtbl {
                 let appendAbi: CFunc<(CPointer<Unit>, RectAbi) -> Int32> = { instanceRaw, arg0 =>
                     match (unsafe { asImplFromRaw<IVector_Impl<Rect>>(instanceRaw) }) {
                         case Some(impl) =>
-                            match (impl.Append(Rect.assumeInitRef(arg0))) {
-                                case Result<Unit>.Ok(_) => S_OK.value
-                                case Result<Unit>.Err(error) => error.code().value
+                            try {
+                                match (impl.Append(Rect.assumeInitRef(arg0))) {
+                                    case Result<Unit>.Ok(_) => S_OK.value
+                                    case Result<Unit>.Err(error) => error.code().value
+                                }
+                            } catch (error: windows_core.WindowsException) {
+                                error.code().value
+                            } catch (_: Exception) {
+                                windows_core.E_FAIL.value
                             }
                         case None => E_NOINTERFACE.value
                     }
@@ -6574,7 +7414,7 @@ public struct IVectorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetAt(arg0, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         vtbl.Size = { instanceRaw, result__ =>
@@ -6582,7 +7422,7 @@ public struct IVectorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_Size(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         vtbl.GetView = { instanceRaw, result__ =>
@@ -6590,26 +7430,34 @@ public struct IVectorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetView(result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceGenericOut(result__)
             }
         }
         let indexOfAbi: CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<Bool>) -> Int32> = {
             instanceRaw, arg0, arg1, result__ =>
             match (unsafe { asImplFromRaw<IVector_Impl<Int32>>(instanceRaw) }) {
                 case Some(impl) =>
-                    if (result__.isNull()) {
+                    if (result__.isNull() || arg1.isNull()) {
                         E_POINTER.value
                     } else {
-                        match (impl.IndexOf(arg0, arg1)) {
-                            case Result<Bool>.Ok(value) =>
-                                unsafe { result__.write(value) }
-                                S_OK.value
-                            case Result<Bool>.Err(error) =>
-                                error.code().value
+                        clearCollectionIndexOutSlot(arg1)
+                        clearCollectionBoolOutSlot(result__)
+                        try {
+                            match (impl.IndexOf(arg0, arg1)) {
+                                case Result<Bool>.Ok(value) =>
+                                    unsafe { result__.write(value) }
+                                    S_OK.value
+                                case Result<Bool>.Err(error) =>
+                                    error.code().value
+                            }
+                        } catch (error: windows_core.WindowsException) {
+                            error.code().value
+                        } catch (_: Exception) {
+                            windows_core.E_FAIL.value
                         }
                     }
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceIndexBoolOut(arg1, result__)
             }
         }
         vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -6617,11 +7465,17 @@ public struct IVectorVtbl {
             instanceRaw, arg0, arg1 =>
             match (unsafe { asImplFromRaw<IVector_Impl<Int32>>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.SetAt(arg0, arg1)) {
-                        case Result<Unit>.Ok(_) =>
-                            S_OK.value
-                        case Result<Unit>.Err(error) =>
-                            error.code().value
+                    try {
+                        match (impl.SetAt(arg0, arg1)) {
+                            case Result<Unit>.Ok(_) =>
+                                S_OK.value
+                            case Result<Unit>.Err(error) =>
+                                error.code().value
+                        }
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Exception) {
+                        windows_core.E_FAIL.value
                     }
                 case None =>
                     E_NOINTERFACE.value
@@ -6632,11 +7486,17 @@ public struct IVectorVtbl {
             instanceRaw, arg0, arg1 =>
             match (unsafe { asImplFromRaw<IVector_Impl<Int32>>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.InsertAt(arg0, arg1)) {
-                        case Result<Unit>.Ok(_) =>
-                            S_OK.value
-                        case Result<Unit>.Err(error) =>
-                            error.code().value
+                    try {
+                        match (impl.InsertAt(arg0, arg1)) {
+                            case Result<Unit>.Ok(_) =>
+                                S_OK.value
+                            case Result<Unit>.Err(error) =>
+                                error.code().value
+                        }
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Exception) {
+                        windows_core.E_FAIL.value
                     }
                 case None =>
                     E_NOINTERFACE.value
@@ -6655,11 +7515,17 @@ public struct IVectorVtbl {
             instanceRaw, arg0 =>
             match (unsafe { asImplFromRaw<IVector_Impl<Int32>>(instanceRaw) }) {
                 case Some(impl) =>
-                    match (impl.Append(arg0)) {
-                        case Result<Unit>.Ok(_) =>
-                            S_OK.value
-                        case Result<Unit>.Err(error) =>
-                            error.code().value
+                    try {
+                        match (impl.Append(arg0)) {
+                            case Result<Unit>.Ok(_) =>
+                                S_OK.value
+                            case Result<Unit>.Err(error) =>
+                                error.code().value
+                        }
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Exception) {
+                        windows_core.E_FAIL.value
                     }
                 case None =>
                     E_NOINTERFACE.value
@@ -6687,7 +7553,7 @@ public struct IVectorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_GetMany(arg0, arg1Size, arg1, result__)
                 case None =>
-                    E_NOINTERFACE.value
+                    collectionNoInterfaceUInt32Out(result__)
             }
         }
         vtbl.ReplaceAll = { instanceRaw, arg0Size, arg0 =>
@@ -6804,16 +7670,7 @@ public interface IVector_Impl<T> <: IVector_ImplErased & IIterable_Impl<T> where
     public func GetAt(index: UInt32): windows_core.Result<T>
 
     public func __winrtThunk_GetAt(arg0: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.GetAt(arg0)) {
-            case Result<T>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<T>(result__, value)
-            case Result<T>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<T>(result__, { => this.GetAt(arg0) })
     }
 
     public func Size(): windows_core.Result<UInt32>
@@ -6822,34 +7679,26 @@ public interface IVector_Impl<T> <: IVector_ImplErased & IIterable_Impl<T> where
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.Size()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
+        clearCollectionIndexOutSlot(result__)
+        try {
+            match (this.Size()) {
+                case Result<UInt32>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<UInt32>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func GetView(): windows_core.Result<IVectorView<T>>
 
     public func __winrtThunk_GetView(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.GetView()) {
-            case Result<IVectorView<T>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IVectorView<T>>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<IVectorView<T>>(result__, { => this.GetView() })
     }
 
     public func IndexOf(value: T, index: CPointer<UInt32>): windows_core.Result<Bool>
@@ -6861,100 +7710,101 @@ public interface IVector_Impl<T> <: IVector_ImplErased & IIterable_Impl<T> where
         if (arg1.isNull()) {
             return E_POINTER.value
         }
-        match (this.IndexOf(windows_core.winrtProjectGenericIn<T>(arg0), arg1)) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
+        clearCollectionIndexOutSlot(arg1)
+        clearCollectionBoolOutSlot(result__)
+        try {
+            match (this.IndexOf(windows_core.winrtProjectGenericIn<T>(arg0), arg1)) {
+                case Result<Bool>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<Bool>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func SetAt(index: UInt32, value: T): windows_core.Result<Unit>
 
     public func __winrtThunk_SetAt(arg0: UInt32, arg1: CPointer<Unit>): Int32 {
-        match (this.SetAt(arg0, windows_core.winrtProjectGenericIn<T>(arg1))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
+        try {
+            match (this.SetAt(arg0, windows_core.winrtProjectGenericIn<T>(arg1))) {
+                case Result<Unit>.Ok(_) =>
+                    S_OK.value
+                case Result<Unit>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func InsertAt(index: UInt32, value: T): windows_core.Result<Unit>
 
     public func __winrtThunk_InsertAt(arg0: UInt32, arg1: CPointer<Unit>): Int32 {
-        match (this.InsertAt(arg0, windows_core.winrtProjectGenericIn<T>(arg1))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
+        try {
+            match (this.InsertAt(arg0, windows_core.winrtProjectGenericIn<T>(arg1))) {
+                case Result<Unit>.Ok(_) =>
+                    S_OK.value
+                case Result<Unit>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func RemoveAt(index: UInt32): windows_core.Result<Unit>
 
     public func __winrtThunk_RemoveAt(arg0: UInt32): Int32 {
-        match (this.RemoveAt(arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        collectionUnitThunk({ => this.RemoveAt(arg0) })
     }
 
     public func Append(value: T): windows_core.Result<Unit>
 
     public func __winrtThunk_Append(arg0: CPointer<Unit>): Int32 {
-        match (this.Append(windows_core.winrtProjectGenericIn<T>(arg0))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
+        try {
+            match (this.Append(windows_core.winrtProjectGenericIn<T>(arg0))) {
+                case Result<Unit>.Ok(_) =>
+                    S_OK.value
+                case Result<Unit>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func RemoveAtEnd(): windows_core.Result<Unit>
 
     public func __winrtThunk_RemoveAtEnd(): Int32 {
-        match (this.RemoveAtEnd()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        collectionUnitThunk({ => this.RemoveAtEnd() })
     }
 
     public func Clear(): windows_core.Result<Unit>
 
     public func __winrtThunk_Clear(): Int32 {
-        match (this.Clear()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        collectionUnitThunk({ => this.Clear() })
     }
 
     public func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>): windows_core.Result<UInt32>
 
     public func __winrtThunk_GetMany(arg0: UInt32, arg1Size: UInt32, arg1: CPointer<Unit>, result__: CPointer<UInt32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        if (arg1Size > 0u32 && arg1.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(0u32) }
-        windows_core.winrtPrepareGenericOutRange<T>(arg1, arg1Size)
-        match (this.GetMany(arg0, arg1Size, CPointer<Unit>(arg1))) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                releaseCollectionGenericOutRangeNoThrow<T>(arg1, arg1Size)
-                error.code().value
-        }
+        collectionGenericOutRangeThunk<T>(
+            arg1Size,
+            arg1,
+            result__,
+            { => this.GetMany(arg0, arg1Size, CPointer<Unit>(arg1)) }
+        )
     }
 
     public func ReplaceAll(itemsSize: UInt32, items: CPointer<Unit>): windows_core.Result<Unit>
@@ -6963,31 +7813,11 @@ public interface IVector_Impl<T> <: IVector_ImplErased & IIterable_Impl<T> where
         if (arg0Size > 0u32 && arg0.isNull()) {
             return E_POINTER.value
         }
-        match (this.ReplaceAll(arg0Size, CPointer<Unit>(arg0))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        collectionUnitThunk({ => this.ReplaceAll(arg0Size, CPointer<Unit>(arg0)) })
     }
 
     public func __winrtThunk_First(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.First()) {
-            case Result<IIterator<T>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IIterator<T>>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<IIterator<T>>(result__, { => this.First() })
     }
 }
 
@@ -7369,7 +8199,7 @@ extend<T> IVector<T> <: windows_core.Interface<IVector<T>> where T <: windows_co
 @C
 public struct IObservableMapVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var MapChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var MapChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<EventRegistrationTokenAbi>) -> Int32> = { _, _, result__ => collectionNotImplValueOut<EventRegistrationTokenAbi>(result__, EventRegistrationTokenAbi()) }
     public var RemoveMapChanged: CFunc<(CPointer<Unit>, EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
@@ -7382,6 +8212,9 @@ public struct IObservableMapVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_MapChanged(arg0, result__)
                 case None =>
+                    if (result__.isNotNull()) {
+                        unsafe { result__.write(EventRegistrationTokenAbi()) }
+                    }
                     E_NOINTERFACE.value
             }
         }
@@ -7422,28 +8255,41 @@ public interface IObservableMap_Impl<K, V> <: IObservableMap_ImplErased & IMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        let handler = if (arg0.isNull()) {
-            InParam<MapChangedEventHandler<K, V>>()
-        } else {
-            InParam<MapChangedEventHandler<K, V>>(MapChangedEventHandler<K, V>.viewOf(arg0))
-        }
-        match (this.MapChanged(handler)) {
-            case Result<EventRegistrationToken>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<EventRegistrationToken>())) }
-                S_OK.value
-            case Result<EventRegistrationToken>.Err(error) =>
-                error.code().value
+        unsafe { result__.write(EventRegistrationTokenAbi()) }
+        try {
+            let handler = if (arg0.isNull()) {
+                InParam<MapChangedEventHandler<K, V>>()
+            } else {
+                InParam<MapChangedEventHandler<K, V>>(MapChangedEventHandler<K, V>.viewOf(arg0))
+            }
+            match (this.MapChanged(handler)) {
+                case Result<EventRegistrationToken>.Ok(value) =>
+                    unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<EventRegistrationToken>())) }
+                    S_OK.value
+                case Result<EventRegistrationToken>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func RemoveMapChanged(token: EventRegistrationToken): windows_core.Result<Unit>
 
     public func __winrtThunk_RemoveMapChanged(arg0: EventRegistrationTokenAbi): Int32 {
-        match (this.RemoveMapChanged(windows_core.assumeInitTypedAbi(arg0, windows_core.typeMarker<EventRegistrationToken>()))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
+        try {
+            match (this.RemoveMapChanged(windows_core.assumeInitTypedAbi(arg0, windows_core.typeMarker<EventRegistrationToken>()))) {
+                case Result<Unit>.Ok(_) =>
+                    S_OK.value
+                case Result<Unit>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
@@ -7452,11 +8298,17 @@ public interface IObservableMap_Impl<K, V> <: IObservableMap_ImplErased & IMap_I
             return E_POINTER.value
         }
         unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Lookup(windows_core.winrtProjectGenericIn<K>(arg0))) {
-            case Result<V>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<V>(result__, value)
-            case Result<V>.Err(error) =>
-                error.code().value
+        try {
+            match (this.Lookup(windows_core.winrtProjectGenericIn<K>(arg0))) {
+                case Result<V>.Ok(value) =>
+                    windows_core.winrtStoreGenericOut<V>(result__, value)
+                case Result<V>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
@@ -7464,12 +8316,19 @@ public interface IObservableMap_Impl<K, V> <: IObservableMap_ImplErased & IMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.Size()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
+        clearCollectionIndexOutSlot(result__)
+        try {
+            match (this.Size()) {
+                case Result<UInt32>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<UInt32>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
@@ -7477,82 +8336,67 @@ public interface IObservableMap_Impl<K, V> <: IObservableMap_ImplErased & IMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.HasKey(windows_core.winrtProjectGenericIn<K>(arg0))) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
+        clearCollectionBoolOutSlot(result__)
+        try {
+            match (this.HasKey(windows_core.winrtProjectGenericIn<K>(arg0))) {
+                case Result<Bool>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<Bool>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_GetView(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.GetView()) {
-            case Result<IMapView<K, V>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IMapView<K, V>>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<IMapView<K, V>>(result__, { => this.GetView() })
     }
 
     public func __winrtThunk_Insert(arg0: CPointer<Unit>, arg1: CPointer<Unit>, result__: CPointer<Bool>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.Insert(windows_core.winrtProjectGenericIn<K>(arg0), windows_core.winrtProjectGenericIn<V>(arg1))) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
+        clearCollectionBoolOutSlot(result__)
+        try {
+            match (this.Insert(windows_core.winrtProjectGenericIn<K>(arg0), windows_core.winrtProjectGenericIn<V>(arg1))) {
+                case Result<Bool>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<Bool>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_Remove(arg0: CPointer<Unit>): Int32 {
-        match (this.Remove(windows_core.winrtProjectGenericIn<K>(arg0))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
+        try {
+            match (this.Remove(windows_core.winrtProjectGenericIn<K>(arg0))) {
+                case Result<Unit>.Ok(_) =>
+                    S_OK.value
+                case Result<Unit>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_Clear(): Int32 {
-        match (this.Clear()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        collectionUnitThunk({ => this.Clear() })
     }
 
     public func __winrtThunk_First(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.First()) {
-            case Result<IIterator<IKeyValuePair<K, V>>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IIterator<IKeyValuePair<K, V>>>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<IIterator<IKeyValuePair<K, V>>>(result__, { => this.First() })
     }
 }
 
@@ -7728,7 +8572,7 @@ extend<K, V> IObservableMap<K, V> <: windows_core.Interface<IObservableMap<K, V>
 @C
 public struct IObservableVectorVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var VectorChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<EventRegistrationTokenAbi>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var VectorChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<EventRegistrationTokenAbi>) -> Int32> = { _, _, result__ => collectionNotImplValueOut<EventRegistrationTokenAbi>(result__, EventRegistrationTokenAbi()) }
     public var RemoveVectorChanged: CFunc<(CPointer<Unit>, EventRegistrationTokenAbi) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 
@@ -7741,6 +8585,9 @@ public struct IObservableVectorVtbl {
                 case Some(impl) =>
                     impl.__winrtThunk_VectorChanged(arg0, result__)
                 case None =>
+                    if (result__.isNotNull()) {
+                        unsafe { result__.write(EventRegistrationTokenAbi()) }
+                    }
                     E_NOINTERFACE.value
             }
         }
@@ -7781,74 +8628,70 @@ public interface IObservableVector_Impl<T> <: IObservableVector_ImplErased & IVe
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        let handler = if (arg0.isNull()) {
-            InParam<VectorChangedEventHandler<T>>()
-        } else {
-            InParam<VectorChangedEventHandler<T>>(VectorChangedEventHandler<T>.viewOf(arg0))
-        }
-        match (this.VectorChanged(handler)) {
-            case Result<EventRegistrationToken>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<EventRegistrationToken>())) }
-                S_OK.value
-            case Result<EventRegistrationToken>.Err(error) =>
-                error.code().value
+        unsafe { result__.write(EventRegistrationTokenAbi()) }
+        try {
+            let handler = if (arg0.isNull()) {
+                InParam<VectorChangedEventHandler<T>>()
+            } else {
+                InParam<VectorChangedEventHandler<T>>(VectorChangedEventHandler<T>.viewOf(arg0))
+            }
+            match (this.VectorChanged(handler)) {
+                case Result<EventRegistrationToken>.Ok(value) =>
+                    unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<EventRegistrationToken>())) }
+                    S_OK.value
+                case Result<EventRegistrationToken>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func RemoveVectorChanged(token: EventRegistrationToken): windows_core.Result<Unit>
 
     public func __winrtThunk_RemoveVectorChanged(arg0: EventRegistrationTokenAbi): Int32 {
-        match (this.RemoveVectorChanged(windows_core.assumeInitTypedAbi(arg0, windows_core.typeMarker<EventRegistrationToken>()))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
+        try {
+            match (this.RemoveVectorChanged(windows_core.assumeInitTypedAbi(arg0, windows_core.typeMarker<EventRegistrationToken>()))) {
+                case Result<Unit>.Ok(_) =>
+                    S_OK.value
+                case Result<Unit>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_GetAt(arg0: UInt32, result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.GetAt(arg0)) {
-            case Result<T>.Ok(value) =>
-                windows_core.winrtStoreGenericOut<T>(result__, value)
-            case Result<T>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<T>(result__, { => this.GetAt(arg0) })
     }
 
     public func __winrtThunk_Size(result__: CPointer<UInt32>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.Size()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
+        clearCollectionIndexOutSlot(result__)
+        try {
+            match (this.Size()) {
+                case Result<UInt32>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<UInt32>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_GetView(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.GetView()) {
-            case Result<IVectorView<T>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IVectorView<T>>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<IVectorView<T>>(result__, { => this.GetView() })
     }
 
     public func __winrtThunk_IndexOf(arg0: CPointer<Unit>, arg1: CPointer<UInt32>, result__: CPointer<Bool>): Int32 {
@@ -7858,117 +8701,98 @@ public interface IObservableVector_Impl<T> <: IObservableVector_ImplErased & IVe
         if (arg1.isNull()) {
             return E_POINTER.value
         }
-        match (this.IndexOf(windows_core.winrtProjectGenericIn<T>(arg0), arg1)) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
+        clearCollectionIndexOutSlot(arg1)
+        clearCollectionBoolOutSlot(result__)
+        try {
+            match (this.IndexOf(windows_core.winrtProjectGenericIn<T>(arg0), arg1)) {
+                case Result<Bool>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<Bool>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_SetAt(arg0: UInt32, arg1: CPointer<Unit>): Int32 {
-        match (this.SetAt(arg0, windows_core.winrtProjectGenericIn<T>(arg1))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
+        try {
+            match (this.SetAt(arg0, windows_core.winrtProjectGenericIn<T>(arg1))) {
+                case Result<Unit>.Ok(_) =>
+                    S_OK.value
+                case Result<Unit>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_InsertAt(arg0: UInt32, arg1: CPointer<Unit>): Int32 {
-        match (this.InsertAt(arg0, windows_core.winrtProjectGenericIn<T>(arg1))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
+        try {
+            match (this.InsertAt(arg0, windows_core.winrtProjectGenericIn<T>(arg1))) {
+                case Result<Unit>.Ok(_) =>
+                    S_OK.value
+                case Result<Unit>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_RemoveAt(arg0: UInt32): Int32 {
-        match (this.RemoveAt(arg0)) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        collectionUnitThunk({ => this.RemoveAt(arg0) })
     }
 
     public func __winrtThunk_Append(arg0: CPointer<Unit>): Int32 {
-        match (this.Append(windows_core.winrtProjectGenericIn<T>(arg0))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
+        try {
+            match (this.Append(windows_core.winrtProjectGenericIn<T>(arg0))) {
+                case Result<Unit>.Ok(_) =>
+                    S_OK.value
+                case Result<Unit>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_RemoveAtEnd(): Int32 {
-        match (this.RemoveAtEnd()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        collectionUnitThunk({ => this.RemoveAtEnd() })
     }
 
     public func __winrtThunk_Clear(): Int32 {
-        match (this.Clear()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        collectionUnitThunk({ => this.Clear() })
     }
 
     public func __winrtThunk_GetMany(arg0: UInt32, arg1Size: UInt32, arg1: CPointer<Unit>, result__: CPointer<UInt32>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        if (arg1Size > 0u32 && arg1.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(0u32) }
-        windows_core.winrtPrepareGenericOutRange<T>(arg1, arg1Size)
-        match (this.GetMany(arg0, arg1Size, CPointer<Unit>(arg1))) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                releaseCollectionGenericOutRangeNoThrow<T>(arg1, arg1Size)
-                error.code().value
-        }
+        collectionGenericOutRangeThunk<T>(
+            arg1Size,
+            arg1,
+            result__,
+            { => this.GetMany(arg0, arg1Size, CPointer<Unit>(arg1)) }
+        )
     }
 
     public func __winrtThunk_ReplaceAll(arg0Size: UInt32, arg0: CPointer<Unit>): Int32 {
         if (arg0Size > 0u32 && arg0.isNull()) {
             return E_POINTER.value
         }
-        match (this.ReplaceAll(arg0Size, CPointer<Unit>(arg0))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        collectionUnitThunk({ => this.ReplaceAll(arg0Size, CPointer<Unit>(arg0)) })
     }
 
     public func __winrtThunk_First(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.First()) {
-            case Result<IIterator<T>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IIterator<T>>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<IIterator<T>>(result__, { => this.First() })
     }
 }
 
@@ -8212,26 +9036,39 @@ public interface IPropertySet_Impl <: IPropertySet_ImplErased & IObservableMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        let handler = if (arg0.isNull()) {
-            InParam<MapChangedEventHandler<windows_core.HString, IInspectable>>()
-        } else {
-            InParam<MapChangedEventHandler<windows_core.HString, IInspectable>>(MapChangedEventHandler<windows_core.HString, IInspectable>.viewOf(arg0))
-        }
-        match (this.MapChanged(handler)) {
-            case Result<EventRegistrationToken>.Ok(value) =>
-                unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<EventRegistrationToken>())) }
-                S_OK.value
-            case Result<EventRegistrationToken>.Err(error) =>
-                error.code().value
+        unsafe { result__.write(EventRegistrationTokenAbi()) }
+        try {
+            let handler = if (arg0.isNull()) {
+                InParam<MapChangedEventHandler<windows_core.HString, IInspectable>>()
+            } else {
+                InParam<MapChangedEventHandler<windows_core.HString, IInspectable>>(MapChangedEventHandler<windows_core.HString, IInspectable>.viewOf(arg0))
+            }
+            match (this.MapChanged(handler)) {
+                case Result<EventRegistrationToken>.Ok(value) =>
+                    unsafe { result__.write(windows_core.projectTypedAbi(value, windows_core.typeMarker<EventRegistrationToken>())) }
+                    S_OK.value
+                case Result<EventRegistrationToken>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_RemoveMapChanged(arg0: EventRegistrationTokenAbi): Int32 {
-        match (this.RemoveMapChanged(windows_core.assumeInitTypedAbi(arg0, windows_core.typeMarker<EventRegistrationToken>()))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
+        try {
+            match (this.RemoveMapChanged(windows_core.assumeInitTypedAbi(arg0, windows_core.typeMarker<EventRegistrationToken>()))) {
+                case Result<Unit>.Ok(_) =>
+                    S_OK.value
+                case Result<Unit>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
@@ -8240,17 +9077,17 @@ public interface IPropertySet_Impl <: IPropertySet_ImplErased & IObservableMap_I
             return E_POINTER.value
         }
         unsafe { result__.write(CPointer<Unit>()) }
-        match (this.Lookup(windows_core.winrtProjectGenericIn<windows_core.HString>(arg0))) {
-            case Result<IInspectable>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IInspectable>.Err(error) =>
-                error.code().value
+        try {
+            match (this.Lookup(windows_core.winrtProjectGenericIn<windows_core.HString>(arg0))) {
+                case Result<IInspectable>.Ok(value) =>
+                    windows_core.winrtStoreGenericOut<IInspectable>(result__, value)
+                case Result<IInspectable>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
@@ -8258,12 +9095,19 @@ public interface IPropertySet_Impl <: IPropertySet_ImplErased & IObservableMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.Size()) {
-            case Result<UInt32>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<UInt32>.Err(error) =>
-                error.code().value
+        clearCollectionIndexOutSlot(result__)
+        try {
+            match (this.Size()) {
+                case Result<UInt32>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<UInt32>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
@@ -8271,82 +9115,67 @@ public interface IPropertySet_Impl <: IPropertySet_ImplErased & IObservableMap_I
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.HasKey(windows_core.winrtProjectGenericIn<windows_core.HString>(arg0))) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
+        clearCollectionBoolOutSlot(result__)
+        try {
+            match (this.HasKey(windows_core.winrtProjectGenericIn<windows_core.HString>(arg0))) {
+                case Result<Bool>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<Bool>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_GetView(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.GetView()) {
-            case Result<IMapView<windows_core.HString, IInspectable>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IMapView<windows_core.HString, IInspectable>>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<IMapView<windows_core.HString, IInspectable>>(result__, { => this.GetView() })
     }
 
     public func __winrtThunk_Insert(arg0: CPointer<Unit>, arg1: CPointer<Unit>, result__: CPointer<Bool>): Int32 {
         if (result__.isNull()) {
             return E_POINTER.value
         }
-        match (this.Insert(windows_core.winrtProjectGenericIn<windows_core.HString>(arg0), windows_core.winrtProjectGenericIn<IInspectable>(arg1))) {
-            case Result<Bool>.Ok(value) =>
-                unsafe { result__.write(value) }
-                S_OK.value
-            case Result<Bool>.Err(error) =>
-                error.code().value
+        clearCollectionBoolOutSlot(result__)
+        try {
+            match (this.Insert(windows_core.winrtProjectGenericIn<windows_core.HString>(arg0), windows_core.winrtProjectGenericIn<IInspectable>(arg1))) {
+                case Result<Bool>.Ok(value) =>
+                    unsafe { result__.write(value) }
+                    S_OK.value
+                case Result<Bool>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_Remove(arg0: CPointer<Unit>): Int32 {
-        match (this.Remove(windows_core.winrtProjectGenericIn<windows_core.HString>(arg0))) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
+        try {
+            match (this.Remove(windows_core.winrtProjectGenericIn<windows_core.HString>(arg0))) {
+                case Result<Unit>.Ok(_) =>
+                    S_OK.value
+                case Result<Unit>.Err(error) =>
+                    error.code().value
+            }
+        } catch (error: windows_core.WindowsException) {
+            error.code().value
+        } catch (_: Exception) {
+            windows_core.E_FAIL.value
         }
     }
 
     public func __winrtThunk_Clear(): Int32 {
-        match (this.Clear()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
+        collectionUnitThunk({ => this.Clear() })
     }
 
     public func __winrtThunk_First(result__: CPointer<CPointer<Unit>>): Int32 {
-        if (result__.isNull()) {
-            return E_POINTER.value
-        }
-        unsafe { result__.write(CPointer<Unit>()) }
-        match (this.First()) {
-            case Result<IIterator<IKeyValuePair<windows_core.HString, IInspectable>>>.Ok(value) =>
-                let raw = value.intoAbi()
-                if (raw.isNull()) {
-                    E_POINTER.value
-                } else {
-                    unsafe { result__.write(raw) }
-                    S_OK.value
-                }
-            case Result<IIterator<IKeyValuePair<windows_core.HString, IInspectable>>>.Err(error) =>
-                error.code().value
-        }
+        collectionGenericOutThunk<IIterator<IKeyValuePair<windows_core.HString, IInspectable>>>(result__, { => this.First() })
     }
 }
 
@@ -8618,18 +9447,24 @@ public interface MapChangedEventHandlerInvoker<K, V> <: MapChangedEventHandlerIn
     }
 
     public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        let sender = if (arg0.isNull()) {
-            InParam<IObservableMap<K, V>>()
-        } else {
-            InParam<IObservableMap<K, V>>(IObservableMap<K, V>.viewOf(arg0))
+        try {
+            let sender = if (arg0.isNull()) {
+                InParam<IObservableMap<K, V>>()
+            } else {
+                InParam<IObservableMap<K, V>>(IObservableMap<K, V>.viewOf(arg0))
+            }
+            let event = if (arg1.isNull()) {
+                InParam<IMapChangedEventArgs<K>>()
+            } else {
+                InParam<IMapChangedEventArgs<K>>(IMapChangedEventArgs<K>.viewOf(arg1))
+            }
+            this.Invoke(sender, event)
+            return S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
         }
-        let event = if (arg1.isNull()) {
-            InParam<IMapChangedEventArgs<K>>()
-        } else {
-            InParam<IMapChangedEventArgs<K>>(IMapChangedEventArgs<K>.viewOf(arg1))
-        }
-        this.Invoke(sender, event)
-        return S_OK.value
     }
 }
 
@@ -8683,7 +9518,6 @@ func buildMapChangedEventHandlerBoxVtbl<K, V>(): MapChangedEventHandlerVtbl wher
     }
     return vtbl
 }
-
 public class PropertySet <: InterfaceWrapperBase & ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9366,18 +10200,24 @@ public interface VectorChangedEventHandlerInvoker<T> <: VectorChangedEventHandle
     }
 
     public func __winrtThunk_Invoke(arg0: CPointer<Unit>, arg1: CPointer<Unit>): Int32 {
-        let sender = if (arg0.isNull()) {
-            InParam<IObservableVector<T>>()
-        } else {
-            InParam<IObservableVector<T>>(IObservableVector<T>.viewOf(arg0))
+        try {
+            let sender = if (arg0.isNull()) {
+                InParam<IObservableVector<T>>()
+            } else {
+                InParam<IObservableVector<T>>(IObservableVector<T>.viewOf(arg0))
+            }
+            let event = if (arg1.isNull()) {
+                InParam<IVectorChangedEventArgs>()
+            } else {
+                InParam<IVectorChangedEventArgs>(IVectorChangedEventArgs.viewOf(arg1))
+            }
+            this.Invoke(sender, event)
+            return S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
         }
-        let event = if (arg1.isNull()) {
-            InParam<IVectorChangedEventArgs>()
-        } else {
-            InParam<IVectorChangedEventArgs>(IVectorChangedEventArgs.viewOf(arg1))
-        }
-        this.Invoke(sender, event)
-        return S_OK.value
     }
 }
 

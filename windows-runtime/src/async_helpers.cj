@@ -225,6 +225,10 @@ private func fallbackError(): WinError {
     WinError.fromHRESULT(E_FAIL)
 }
 
+private func windowsExceptionError(error: windows_core.WindowsException): WinError {
+    WinError.fromHRESULT(error.code())
+}
+
 private func emptyError(): WinError {
     WinError.fromHRESULT(S_OK)
 }
@@ -419,7 +423,12 @@ private class NativeAsyncActionImpl <: IAsyncAction_Impl & Resource {
     }
 
     public func Completed(): Result<AsyncActionCompletedHandler> {
-        Result<AsyncActionCompletedHandler>.Err(emptyError())
+        synchronized(mutex) {
+            match (completedHandler) {
+                case Some(value) => Result<AsyncActionCompletedHandler>.Ok(value)
+                case None => Result<AsyncActionCompletedHandler>.Err(emptyError())
+            }
+        }
     }
 
     public func GetResults(): Result<Unit> {
@@ -617,7 +626,12 @@ private class NativeAsyncOperationImpl<TResult> <: IAsyncOperation_Impl<TResult>
     }
 
     public func Completed(): Result<AsyncOperationCompletedHandler<TResult>> {
-        Result<AsyncOperationCompletedHandler<TResult>>.Err(emptyError())
+        synchronized(mutex) {
+            match (completedHandler) {
+                case Some(value) => Result<AsyncOperationCompletedHandler<TResult>>.Ok(value)
+                case None => Result<AsyncOperationCompletedHandler<TResult>>.Err(emptyError())
+            }
+        }
     }
 
     public func GetResults(): Result<TResult> {
@@ -855,7 +869,12 @@ private class NativeAsyncActionWithProgressImpl<TProgress> <: IAsyncActionWithPr
     }
 
     public func Completed(): Result<AsyncActionWithProgressCompletedHandler<TProgress>> {
-        Result<AsyncActionWithProgressCompletedHandler<TProgress>>.Err(emptyError())
+        synchronized(mutex) {
+            match (completedHandler) {
+                case Some(value) => Result<AsyncActionWithProgressCompletedHandler<TProgress>>.Ok(value)
+                case None => Result<AsyncActionWithProgressCompletedHandler<TProgress>>.Err(emptyError())
+            }
+        }
     }
 
     public func GetResults(): Result<Unit> {
@@ -1103,7 +1122,12 @@ private class NativeAsyncOperationWithProgressImpl<TResult, TProgress> <: IAsync
     }
 
     public func Completed(): Result<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>> {
-        Result<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>.Err(emptyError())
+        synchronized(mutex) {
+            match (completedHandler) {
+                case Some(value) => Result<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>.Ok(value)
+                case None => Result<AsyncOperationWithProgressCompletedHandler<TResult, TProgress>>.Err(emptyError())
+            }
+        }
     }
 
     public func GetResults(): Result<TResult> {
@@ -1192,6 +1216,8 @@ extend IAsyncAction {
                 return Result<Unit>.Err(canceledError())
             }
             throw IllegalStateException("IAsyncAction.join async-info call did not execute")
+        } catch (error: windows_core.WindowsException) {
+            Result<Unit>.Err(windowsExceptionError(error))
         } catch (_: Exception) {
             Result<Unit>.Err(fallbackError())
         }
@@ -1216,6 +1242,12 @@ extend IAsyncAction {
                     impl.cancelFromWorker()
                 } else {
                     impl.complete()
+                }
+            } catch (error: windows_core.WindowsException) {
+                if (Thread.currentThread.hasPendingCancellation) {
+                    impl.cancelFromWorker()
+                } else {
+                    impl.fail(toFoundationHResult(error.code()))
                 }
             } catch (_: Exception) {
                 if (Thread.currentThread.hasPendingCancellation) {
@@ -1244,6 +1276,8 @@ extend<TResult> IAsyncOperation<TResult> where TResult <: windows_core.RuntimeTy
                 return Result<TResult>.Err(canceledError())
             }
             throw IllegalStateException("IAsyncOperation.join async-info call did not execute")
+        } catch (error: windows_core.WindowsException) {
+            Result<TResult>.Err(windowsExceptionError(error))
         } catch (_: Exception) {
             Result<TResult>.Err(fallbackError())
         }
@@ -1268,6 +1302,12 @@ extend<TResult> IAsyncOperation<TResult> where TResult <: windows_core.RuntimeTy
                     impl.cancelFromWorker()
                 } else {
                     impl.complete(result)
+                }
+            } catch (error: windows_core.WindowsException) {
+                if (Thread.currentThread.hasPendingCancellation) {
+                    impl.cancelFromWorker()
+                } else {
+                    impl.fail(toFoundationHResult(error.code()))
                 }
             } catch (_: Exception) {
                 if (Thread.currentThread.hasPendingCancellation) {
@@ -1297,6 +1337,8 @@ extend<TProgress> IAsyncActionWithProgress<TProgress> where TProgress <: windows
                 return Result<Unit>.Err(canceledError())
             }
             throw IllegalStateException("IAsyncActionWithProgress.join async-info call did not execute")
+        } catch (error: windows_core.WindowsException) {
+            Result<Unit>.Err(windowsExceptionError(error))
         } catch (_: Exception) {
             Result<Unit>.Err(fallbackError())
         }
@@ -1328,6 +1370,12 @@ extend<TProgress> IAsyncActionWithProgress<TProgress> where TProgress <: windows
                 } else {
                     impl.complete()
                 }
+            } catch (error: windows_core.WindowsException) {
+                if (Thread.currentThread.hasPendingCancellation) {
+                    impl.cancelFromWorker()
+                } else {
+                    impl.fail(toFoundationHResult(error.code()))
+                }
             } catch (_: Exception) {
                 if (Thread.currentThread.hasPendingCancellation) {
                     impl.cancelFromWorker()
@@ -1357,6 +1405,8 @@ extend<TResult, TProgress> IAsyncOperationWithProgress<TResult, TProgress>
                 return Result<TResult>.Err(canceledError())
             }
             throw IllegalStateException("IAsyncOperationWithProgress.join async-info call did not execute")
+        } catch (error: windows_core.WindowsException) {
+            Result<TResult>.Err(windowsExceptionError(error))
         } catch (_: Exception) {
             Result<TResult>.Err(fallbackError())
         }
@@ -1390,6 +1440,12 @@ extend<TResult, TProgress> IAsyncOperationWithProgress<TResult, TProgress>
                     impl.cancelFromWorker()
                 } else {
                     impl.complete(result)
+                }
+            } catch (error: windows_core.WindowsException) {
+                if (Thread.currentThread.hasPendingCancellation) {
+                    impl.cancelFromWorker()
+                } else {
+                    impl.fail(toFoundationHResult(error.code()))
                 }
             } catch (_: Exception) {
                 if (Thread.currentThread.hasPendingCancellation) {

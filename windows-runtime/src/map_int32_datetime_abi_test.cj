@@ -4,7 +4,7 @@ import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{Result, S_OK, createComObjectFromSchemas}
+import windows_core.{E_NOINTERFACE, Result, S_OK, createComObjectFromSchemas}
 
 func findInt32DateTimeMapEntry(entries: ArrayList<(Int32, DateTime)>, key: Int32): ?Int64 {
     var offset = 0
@@ -302,5 +302,49 @@ func testInt32DateTimeMapUsesDirectCopyStructValueAbiForMutableSlots() {
         @Expect(unsafe { map.HasKey(1i32) }, false)
     } finally {
         map.close()
+    }
+}
+
+@Test
+func testInt32DateTimeMapViewVtblNoneBranchClearsSpecializedOutSlots() {
+    let vtbl = IMapViewVtbl.new<Int32DateTimeMapViewAbiTestImpl, Int32, DateTime>()
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IMapViewVtbl>(vtbl) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IMapViewVtbl>>(vtblHandle) }
+    let sentinel = unsafe { windows_interface.allocateNativeValue<Int32>(654i32) }
+    let raw = CPointer<Unit>(objectHandle)
+    var lookupValue = DateTimeAbi()
+    lookupValue.UniversalTime = 999i64
+    var sizeValue = 77u32
+    var foundValue = true
+    var firstValue = CPointer<Unit>(sentinel)
+    var secondValue = CPointer<Unit>(sentinel)
+
+    try {
+        let directLookup = CFunc<(CPointer<Unit>, Int32, CPointer<DateTimeAbi>) -> Int32>(CPointer<Unit>(vtbl.Lookup))
+        let lookupHr = unsafe { directLookup(raw, 1i32, CPointer<DateTimeAbi>(inout lookupValue)) }
+        @Expect(lookupHr, E_NOINTERFACE.value)
+        @Expect(lookupValue.UniversalTime, 0i64)
+
+        let sizeHr = unsafe { vtbl.Size(raw, CPointer<UInt32>(inout sizeValue)) }
+        @Expect(sizeHr, E_NOINTERFACE.value)
+        @Expect(sizeValue, 0u32)
+
+        let directHasKey = CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(vtbl.HasKey))
+        let hasKeyHr = unsafe { directHasKey(raw, 1i32, CPointer<Bool>(inout foundValue)) }
+        @Expect(hasKeyHr, E_NOINTERFACE.value)
+        @Expect(foundValue, false)
+
+        let splitHr = unsafe {
+            vtbl.Split(raw, CPointer<CPointer<Unit>>(inout firstValue), CPointer<CPointer<Unit>>(inout secondValue))
+        }
+        @Expect(splitHr, E_NOINTERFACE.value)
+        @Expect(firstValue.isNull(), true)
+        @Expect(secondValue.isNull(), true)
+    } finally {
+        unsafe {
+            windows_interface.freeNativeValue(sentinel)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
+        }
     }
 }

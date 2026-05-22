@@ -2,7 +2,7 @@ package windows_runtime
 
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{HString, Result}
+import windows_core.{HString, REGDB_E_CLASSNOTREG, Result}
 import windows_core as windows_core
 import windows_interface.{IActivationFactory, IInspectable}
 
@@ -25,7 +25,7 @@ func testRealActivationFactoryReportsUnavailableClass() {
         case Result<IActivationFactory>.Ok(factory) =>
             factory.close()
             throw Exception("missing activation factory unexpectedly resolved")
-        case Result<IActivationFactory>.Err(_) => ()
+        case Result<IActivationFactory>.Err(error) => @Expect(error.code(), REGDB_E_CLASSNOTREG)
     }
 }
 

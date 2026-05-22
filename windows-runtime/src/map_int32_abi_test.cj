@@ -4,7 +4,7 @@ import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{Result, S_OK, createComObjectFromSchemas}
+import windows_core.{E_NOINTERFACE, Result, S_OK, createComObjectFromSchemas}
 
 class Int32MapAbiTestImpl <: IMap_Impl<Int32, Int32> & Resource {
     private let entries: ArrayList<(Int32, Int32)>
@@ -184,6 +184,10 @@ func testInt32MapUsesDirectValueAbiForMutableSlots() {
     let lookupHr = unsafe { directLookup(map.asRaw(), 2i32, CPointer<Int32>(inout directValue)) }
     @Expect(lookupHr, S_OK.value)
     @Expect(directValue, 22i32)
+    directValue = 99i32
+    let missingLookupHr = unsafe { directLookup(map.asRaw(), 404i32, CPointer<Int32>(inout directValue)) }
+    @Expect(missingLookupHr != S_OK.value, true)
+    @Expect(directValue, 0i32)
 
     var directFound = true
     let directHasKey = CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(vtbl.HasKey))
@@ -219,6 +223,10 @@ func testGenericInt32MapBuilderUsesDirectValueAbiForSpecialization() {
     let lookupHr = unsafe { directLookup(map.asRaw(), 7i32, CPointer<Int32>(inout directValue)) }
     @Expect(lookupHr, S_OK.value)
     @Expect(directValue, 70i32)
+    directValue = 99i32
+    let missingLookupHr = unsafe { directLookup(map.asRaw(), 404i32, CPointer<Int32>(inout directValue)) }
+    @Expect(missingLookupHr != S_OK.value, true)
+    @Expect(directValue, 0i32)
 
     var replaced = false
     let directInsert = CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(vtbl.Insert))
@@ -228,4 +236,49 @@ func testGenericInt32MapBuilderUsesDirectValueAbiForSpecialization() {
     @Expect(unsafe { map.Lookup(7i32) }, 77i32)
 
     map.close()
+}
+
+@Test
+func testInt32MapVtblNoneBranchClearsSpecializedOutSlots() {
+    let vtbl = IMapVtbl.newInt32Int32<Int32MapAbiTestImpl>()
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IMapVtbl>(vtbl) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IMapVtbl>>(vtblHandle) }
+    let sentinel = unsafe { windows_interface.allocateNativeValue<Int32>(123i32) }
+    let raw = CPointer<Unit>(objectHandle)
+    var lookupValue = 99i32
+    var sizeValue = 77u32
+    var foundValue = true
+    var viewValue = CPointer<Unit>(sentinel)
+    var replacedValue = true
+
+    try {
+        let directLookup = CFunc<(CPointer<Unit>, Int32, CPointer<Int32>) -> Int32>(CPointer<Unit>(vtbl.Lookup))
+        let lookupHr = unsafe { directLookup(raw, 1i32, CPointer<Int32>(inout lookupValue)) }
+        @Expect(lookupHr, E_NOINTERFACE.value)
+        @Expect(lookupValue, 0i32)
+
+        let sizeHr = unsafe { vtbl.Size(raw, CPointer<UInt32>(inout sizeValue)) }
+        @Expect(sizeHr, E_NOINTERFACE.value)
+        @Expect(sizeValue, 0u32)
+
+        let directHasKey = CFunc<(CPointer<Unit>, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(vtbl.HasKey))
+        let hasKeyHr = unsafe { directHasKey(raw, 1i32, CPointer<Bool>(inout foundValue)) }
+        @Expect(hasKeyHr, E_NOINTERFACE.value)
+        @Expect(foundValue, false)
+
+        let getViewHr = unsafe { vtbl.GetView(raw, CPointer<CPointer<Unit>>(inout viewValue)) }
+        @Expect(getViewHr, E_NOINTERFACE.value)
+        @Expect(viewValue.isNull(), true)
+
+        let directInsert = CFunc<(CPointer<Unit>, Int32, Int32, CPointer<Bool>) -> Int32>(CPointer<Unit>(vtbl.Insert))
+        let insertHr = unsafe { directInsert(raw, 1i32, 2i32, CPointer<Bool>(inout replacedValue)) }
+        @Expect(insertHr, E_NOINTERFACE.value)
+        @Expect(replacedValue, false)
+    } finally {
+        unsafe {
+            windows_interface.freeNativeValue(sentinel)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
+        }
+    }
 }

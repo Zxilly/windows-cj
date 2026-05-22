@@ -4,7 +4,7 @@ import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_POINTER, HString, Result, S_OK, comRegistryLookup, rootRegistryKeyFromRaw}
+import windows_core.{E_NOINTERFACE, E_POINTER, HString, Result, S_OK, comRegistryLookup, rootRegistryKeyFromRaw}
 
 class StockTestStringableImpl <: IStringable_Impl & Resource {
     private let value: HString
@@ -55,6 +55,28 @@ func createStockTestStringable(text: String): IStringable {
         IStringable.descriptor(),
         impl.vtblPtr()
     )
+}
+
+@Test
+func testStringableVtblNoneBranchClearsHStringOutput() {
+    let vtbl = IStringableVtbl.new<StockTestStringableImpl>()
+    let vtblHandle = unsafe { windows_interface.allocateNativeValue<IStringableVtbl>(vtbl) }
+    let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IStringableVtbl>>(vtblHandle) }
+    let sentinel = unsafe { windows_interface.allocateNativeValue<Int32>(321i32) }
+    var result = CPointer<Unit>(sentinel)
+
+    try {
+        let hr = unsafe { vtbl.ToString(CPointer<Unit>(objectHandle), CPointer<CPointer<Unit>>(inout result)) }
+
+        @Expect(hr, E_NOINTERFACE.value)
+        @Expect(result.isNull(), true)
+    } finally {
+        unsafe {
+            windows_interface.freeNativeValue(sentinel)
+            windows_interface.freeNativeValue(objectHandle)
+            windows_interface.freeNativeValue(vtblHandle)
+        }
+    }
 }
 
 @Test
@@ -310,7 +332,7 @@ func testStockGetManyRejectsNullBufferWithNonZeroCapacity() {
         CPointer<UInt32>(inout vectorCount)
     ) }
     @Expect(vectorHr, E_POINTER.value)
-    @Expect(vectorCount, 99u32)
+    @Expect(vectorCount, 0u32)
 
     vectorCount = 99u32
     let vectorEmptyHr = unsafe { vectorVtbl.GetMany(
@@ -332,7 +354,7 @@ func testStockGetManyRejectsNullBufferWithNonZeroCapacity() {
         CPointer<UInt32>(inout iteratorCount)
     ) }
     @Expect(iteratorHr, E_POINTER.value)
-    @Expect(iteratorCount, 99u32)
+    @Expect(iteratorCount, 0u32)
 
     iteratorCount = 99u32
     let iteratorEmptyHr = unsafe { iteratorVtbl.GetMany(

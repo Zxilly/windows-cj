@@ -342,6 +342,44 @@ func testIReferenceArrayValueCleansFailedPartialOutputs() {
 }
 
 @Test
+func testIReferenceArrayValueRawCleansFailedPartialOutputs() {
+    referenceArrayValueFailingStringCalls.store(0)
+    referenceArrayValueFailingInspectableCalls.store(0)
+    referenceArrayValueInspectableReleaseCalls.store(0)
+
+    withReferenceArrayValueRaw(referenceArrayValueVtbl(referenceArrayValueFailingStringThunk), { raw: CPointer<Unit> =>
+        let reference = IReferenceArray<windows_core.HString>.viewOf(raw)
+        let deleteBefore = windows_core.debugObservedWindowsDeleteStringCount()
+        var failed = false
+        try {
+            let rawValues = unsafe { reference.ValueRaw() }
+            let _ = rawValues
+            throw Exception("expected failing IReferenceArray<HString>.ValueRaw")
+        } catch (_: WindowsException) {
+            failed = true
+        }
+        @Expect(failed, true)
+        @Expect(windows_core.debugObservedWindowsDeleteStringCount() - deleteBefore, 2)
+        @Expect(referenceArrayValueFailingStringCalls.load(), 1)
+    })
+
+    withReferenceArrayValueRaw(referenceArrayValueVtbl(referenceArrayValueFailingInspectableThunk), { raw: CPointer<Unit> =>
+        let reference = IReferenceArray<IInspectable>.viewOf(raw)
+        var failed = false
+        try {
+            let rawValues = unsafe { reference.ValueRaw() }
+            let _ = rawValues
+            throw Exception("expected failing IReferenceArray<IInspectable>.ValueRaw")
+        } catch (_: WindowsException) {
+            failed = true
+        }
+        @Expect(failed, true)
+        @Expect(referenceArrayValueInspectableReleaseCalls.load(), 2)
+        @Expect(referenceArrayValueFailingInspectableCalls.load(), 1)
+    })
+}
+
+@Test
 func testIReferenceArrayValueReturnsCopyArray() {
     referenceArrayValueInt32Calls.store(0)
     withReferenceArrayValueRaw(referenceArrayValueVtbl(referenceArrayValueInt32Thunk), { raw: CPointer<Unit> =>
