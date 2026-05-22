@@ -190,3 +190,104 @@ The remaining generation limit is input coverage, not a current
 Windows/Win32/Wdk subset diff: full WinUI/WindowsAppSDK regeneration needs
 external converted metadata JSON plus matching raw `.winmd` files, and this
 generator will continue to consume only converted JSON.
+
+## Native wrapper return-value classification
+
+A native function's raw return value does not, by itself, tell you whether it is
+a status code, a sentinel, or an ordinary value. The same `UInt32`/`Int32`/`BOOL`
+ABI is used for all three across Win32. The generator therefore classifies each
+P/Invoke export's return convention and only then decides what `Result` shape (if
+any) to expose.
+
+### Opt-in model: raw default plus an appended checked wrapper
+
+Every P/Invoke renders first as a thin function that returns the native value
+verbatim (`renderNativeFunction` in `src/native_helpers.cj`). A checked
+`...Checked` overload returning `windows_core.Result<...>` is *appended* only when
+the method matches a return-convention allowlist. An export that matches no
+allowlist keeps the raw value, which is always safe: the caller receives the
+exact native return and interprets it. Because of this, the failure mode to guard
+against is not "a missing wrapper" but "a wrong wrapper" — for example, collapsing
+a status that has a non-error success value into a `Result<Unit>` that rejects
+that value.
+
+### Why some status APIs become `Result<Unit>` and others preserve the value
+
+Some DLLs return a Win32/WSA error code *directly* in the return value (not via a
+thread last-error). For those, the classification splits two ways:
+
+- `Result<Unit>` when `ERROR_SUCCESS` (`0`) is the only success value. Examples:
+  `HttpInitialize`, `WinHttpReadDataEx`, `DnsSetApplicationSettings`
+  (the `...UsesDirectErrorCodeUnit` allowlists).
+- `Result<UInt32>`/`Result<Int32>` preserving a closed set of non-error statuses
+  when the API documents probe/async/timeout success codes. Examples:
+  `WinHttpWebSocketQueryCloseStatus` keeps `0`/`122`, `ProcessSocketNotifications`
+  keeps `0`/`258`, `DnsValidateName_*` keeps `0`/`9556`, `HttpReceiveHttpRequest`
+  keeps `0`/`997`/`234`/`38` (the `...UsesDirectErrorCodeStatus` allowlists).
+
+Collapsing the second group to `Result<Unit>` would turn `ERROR_INSUFFICIENT_BUFFER`
+(`122`), `ERROR_IO_PENDING` (`997`), `WAIT_TIMEOUT` (`258`), or a DNS warning into a
+spurious failure. That is why a status return is never auto-mapped on the return
+type alone; the success-value set must be proven first.
+
+### WinSock has several incompatible conventions, kept separate on purpose
+
+A WS2_32 export can use any of these, and the generator routes each to a distinct
+wrapper:
+
+- `SOCKET_ERROR` (`-1`) sentinel, then the real error comes from `WSAGetLastError`
+  (`renderNativeWinSockSocketErrorInt32CheckedWrapper`): `bind`, `connect`, `recv`,
+  `send`, ...
+- direct WSA error code *in the return value* — the return is the error, no
+  `WSAGetLastError` call (`renderNativeWinSockDirectErrorInt32CheckedWrapper`).
+- error in an `lpErrno` out-parameter, read on `-1`
+  (`renderNativeWinSockLpErrnoInt32CheckedWrapper`).
+- `INVALID_SOCKET` / `WSA_INVALID_EVENT` handle sentinels.
+- `BOOL`-style success/failure.
+
+Treating a direct-error return as if it were `SOCKET_ERROR` (or vice versa) reads
+the wrong error source and reports a wrong or stale error. The conventions must
+stay separate even though they share the `Int32` ABI.
+
+### Returns that are values, not statuses
+
+Some integer returns are ordinary values and must keep the raw type — wrapping
+them in a `Result` would be wrong. Examples: `htonl`/`ntohl` (byte-swapped value),
+`inet_addr` (packed address with an `INADDR_NONE` sentinel), `__WSAFDIsSet` (a
+predicate). Type-driven returns (`HRESULT`, `NTSTATUS`, `BOOL` via last-error
+families) are handled by their own type rules, not by these per-name allowlists.
+
+### Proving a classification before adding an allowlist entry
+
+Adding an unproven entry is the wrong-wrapper risk above, so a new classification
+needs evidence, in roughly this order of strength: metadata (DLL, return type,
+parameter shape), official documentation success-value text, SDK header
+declarations, and a runtime probe where one is safe. When the evidence is
+incomplete or internally ambiguous, do not guess — leave the export on the safe
+raw default and record it as a watchlist item with the documented gap.
+
+`scripts/scan_native_return_classification.py` enumerates every P/Invoke export
+over `.generated/winmd-json`, buckets the return type, and flags high-confidence
+unclassified status candidates (integer returns from the direct-status /
+sentinel-convention DLLs that are not yet special-cased). Reviewed candidates that
+intentionally keep the raw default are recorded in
+`scripts/native_return_classification_baseline.json`, so
+`scan_native_return_classification.py --check --baseline <file>` ratchets only on
+newly introduced unclassified status exports.
+
+### Evidence sources are different for syntax vs behavior
+
+These are separate obligations:
+
+- Cangjie syntax and stdlib APIs used in generator or generated code must be
+  confirmed against the Cangjie documentation, not written from memory.
+- Win32/WinRT *behavior* (success-value sets, error sources, ownership) must be
+  backed by metadata, official docs, SDK headers, or runtime proof.
+
+### Stay in the Cangjie paradigm
+
+The classification exists to reproduce Win32 ABI behavior, not to recreate an
+external language's type system. Do not introduce ownership/borrow/lifetime
+markers, value-vs-reference rewrites, or trait shapes from another language to
+"match" a reference implementation. Behavior equivalence at the ABI boundary is
+the goal; API surface differences that preserve that behavior are not bugs.
