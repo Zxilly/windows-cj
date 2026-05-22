@@ -17,6 +17,22 @@ func variantSmokeOleAut32Proc(name: String): CPointer<Unit> {
     }
 }
 
+func variantSmokeChangeType(value: VARIANT, target: VARENUM): Variant {
+    let proc = variantSmokeOleAut32Proc("VariantChangeType")
+    let changeFn = CFunc<(CPointer<VARIANT>, CPointer<VARIANT>, UInt16, VARENUM) -> Int32>(proc)
+    var source = value
+    var result = VARIANT()
+    let sourcePtr = unsafe { CPointer<VARIANT>(inout source) }
+    let resultPtr = unsafe { CPointer<VARIANT>(inout result) }
+    variantInit(resultPtr)
+    let hr = unsafe { changeFn(resultPtr, sourcePtr, 0u16, target) }
+    if (hr < 0) {
+        let _ = variantClear(resultPtr)
+        throw VariantAbiException("VariantChangeType failed in VARIANT smoke test with HRESULT ${hr}")
+    }
+    Variant(result)
+}
+
 func variantSmokeSafeArrayCreateVector(vt: VARENUM, count: Int64): CPointer<Unit> {
     let proc = variantSmokeOleAut32Proc("SafeArrayCreateVector")
     let createFn = CFunc<(UInt16, Int32, UInt32) -> CPointer<Unit>>(proc)
@@ -285,6 +301,26 @@ func variantClearReleasesBstrAllocation(): Unit {
     @Expect(afterClose > before, true)
     owned.close()
     @Expect(debugObservedVariantClearCount(), afterClose)
+}
+
+@When[os == "Windows"]
+@Test
+func oleautVariantChangeTypeConsumesCangjieVariants(): Unit {
+    let textSource = Variant(variantFromString("42"))
+    let numberSource = Variant(variantFromI4(7i32))
+    let numberResult = variantSmokeChangeType(textSource.get(), VT_I4)
+    let textResult = variantSmokeChangeType(numberSource.get(), VT_BSTR)
+    try {
+        @Expect(numberResult.vt(), VT_I4)
+        @Expect(variantAsI4(numberResult.get()), Some(42i32))
+        @Expect(textResult.vt(), VT_BSTR)
+        @Expect(variantAsBstr(textResult.get()).getOrThrow().get(), "7")
+    } finally {
+        textSource.close()
+        numberSource.close()
+        numberResult.close()
+        textResult.close()
+    }
 }
 
 @Test

@@ -10,6 +10,7 @@ public class SafeArrayAbiException <: Exception {
 }
 
 let observedSafeArrayCreateCount = AtomicInt32(0)
+let observedSafeArrayCreateAttemptCount = AtomicInt32(0)
 let observedSafeArrayDestroyCount = AtomicInt32(0)
 let observedSafeArrayLockCount = AtomicInt32(0)
 let observedSafeArrayUnlockCount = AtomicInt32(0)
@@ -18,6 +19,10 @@ let observedSafeArrayUnaccessCount = AtomicInt32(0)
 
 public func debugObservedSafeArrayCreateCount(): Int32 {
     observedSafeArrayCreateCount.load()
+}
+
+public func debugObservedSafeArrayCreateAttemptCount(): Int32 {
+    observedSafeArrayCreateAttemptCount.load()
 }
 
 public func debugObservedSafeArrayDestroyCount(): Int32 {
@@ -62,6 +67,7 @@ public func safeArrayCreate(vt: UInt16, dims: UInt32, bounds: CPointer<SAFEARRAY
     ensureSafeArrayDestroyAbiResolved()
     let proc = resolveOleaut32Proc("SafeArrayCreate")
     let createFn = CFunc<(UInt16, UInt32, CPointer<SAFEARRAYBOUND>) -> CPointer<SAFEARRAY>>(proc)
+    observedSafeArrayCreateAttemptCount.fetchAdd(1)
     let raw = unsafe { createFn(vt, dims, bounds) }
     if (raw.isNull()) {
         throw SafeArrayAbiException("SafeArrayCreate returned null")
@@ -74,6 +80,7 @@ public func safeArrayCreateVector(vt: UInt16, lLbound: Int32, cElements: UInt32)
     ensureSafeArrayDestroyAbiResolved()
     let proc = resolveOleaut32Proc("SafeArrayCreateVector")
     let createFn = CFunc<(UInt16, Int32, UInt32) -> CPointer<SAFEARRAY>>(proc)
+    observedSafeArrayCreateAttemptCount.fetchAdd(1)
     let raw = unsafe { createFn(vt, lLbound, cElements) }
     if (raw.isNull()) {
         throw SafeArrayAbiException("SafeArrayCreateVector returned null")

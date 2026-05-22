@@ -27,6 +27,48 @@ func safeArrayTestThrows(action: () -> Unit): Bool {
     false
 }
 
+func safeArraySmokeVectorFromBstr(value: String): SafeArray {
+    let proc = resolveOleaut32Proc("VectorFromBstr")
+    let vectorFromBstrFn = CFunc<(CPointer<UInt16>, CPointer<CPointer<SAFEARRAY>>) -> Int32>(proc)
+    let source = BSTR(value)
+    var raw: CPointer<SAFEARRAY> = CPointer<SAFEARRAY>()
+    let rawPtr = unsafe { CPointer<CPointer<SAFEARRAY>>(inout raw) }
+    var hr: Int32 = 0
+    try {
+        hr = unsafe { vectorFromBstrFn(source.asPtr(), rawPtr) }
+    } finally {
+        source.close()
+    }
+    if (hr < 0) {
+        if (raw.isNotNull()) {
+            SafeArray(raw).close()
+        }
+        throw SafeArrayAbiException("VectorFromBstr failed in SAFEARRAY smoke test with HRESULT ${hr}")
+    }
+    if (raw.isNull()) {
+        throw SafeArrayAbiException("VectorFromBstr returned null SAFEARRAY")
+    }
+    SafeArray(raw)
+}
+
+func safeArraySmokeBstrFromVector(arr: SafeArray): BSTR {
+    let proc = resolveOleaut32Proc("BstrFromVector")
+    let bstrFromVectorFn = CFunc<(CPointer<SAFEARRAY>, CPointer<CPointer<UInt16>>) -> Int32>(proc)
+    var raw: CPointer<UInt16> = CPointer<UInt16>()
+    let rawPtr = unsafe { CPointer<CPointer<UInt16>>(inout raw) }
+    let hr = unsafe { bstrFromVectorFn(arr.get(), rawPtr) }
+    if (hr < 0) {
+        if (raw.isNotNull()) {
+            BSTR.fromRawTake(raw).close()
+        }
+        throw SafeArrayAbiException("BstrFromVector failed in SAFEARRAY smoke test with HRESULT ${hr}")
+    }
+    if (raw.isNull()) {
+        throw SafeArrayAbiException("BstrFromVector returned null BSTR")
+    }
+    BSTR.fromRawTake(raw)
+}
+
 @C
 struct ReentrantSafeArrayUnknown {
     var lpVtbl: CPointer<IUnknownVtbl> = CPointer<IUnknownVtbl>()
@@ -65,6 +107,18 @@ func boundHelperPopulatesFields(): Unit {
     let bound = makeBound(7u32, lowerBound: 3i32)
     @Expect(bound.cElements, 7u32)
     @Expect(bound.lLbound, 3i32)
+}
+
+@Test
+func typedWithLengthRejectsCountsOutsideSafeArrayAbiRangeBeforeAllocation(): Unit {
+    let createAttemptsBefore = debugObservedSafeArrayCreateAttemptCount()
+    let tooLarge = Int64(UInt32.Max) + 1
+
+    @Expect(safeArrayTestThrows({ => let _ = SafeArrayOfInt32.withLength(tooLarge) }), true)
+    @Expect(safeArrayTestThrows({ => let _ = SafeArrayOfFloat64.withLength(tooLarge) }), true)
+    @Expect(safeArrayTestThrows({ => let _ = SafeArrayOfStrings.withLength(tooLarge) }), true)
+    @Expect(safeArrayTestThrows({ => let _ = SafeArrayOfVariants.withLength(tooLarge) }), true)
+    @Expect(debugObservedSafeArrayCreateAttemptCount(), createAttemptsBefore)
 }
 
 @Test
@@ -159,6 +213,24 @@ func withSafeArrayDataExposesDataPointer(): Unit {
     @Expect(debugObservedSafeArrayAccessCount() > accessesBefore, true)
     @Expect(debugObservedSafeArrayUnaccessCount() > unaccessesBefore, true)
     arr.close()
+}
+
+@When[os == "Windows"]
+@Test
+func oleautBstrVectorRoundTripsThroughSafeArray(): Unit {
+    let destroysBefore = debugObservedSafeArrayDestroyCount()
+    let arr = safeArraySmokeVectorFromBstr("safe-array-automation")
+    let roundtrip = safeArraySmokeBstrFromVector(arr)
+    try {
+        @Expect(arr.isNull(), false)
+        @Expect(arr.dim(), 1u32)
+        @Expect(arr.length() > 0, true)
+        @Expect(roundtrip.get(), "safe-array-automation")
+    } finally {
+        roundtrip.close()
+        arr.close()
+    }
+    @Expect(debugObservedSafeArrayDestroyCount() > destroysBefore, true)
 }
 
 @Test

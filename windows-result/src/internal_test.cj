@@ -231,6 +231,16 @@ func allocateTestBstr(text: String): CPointer<UInt16> {
 }
 
 @When[test && os == "Windows"]
+func staleDefaultUnitPointerForTesting(): CPointer<Unit> {
+    unsafe { CPointer<Unit>(CPointer<UInt8>() + 0x1234) }
+}
+
+@When[test && os == "Windows"]
+func staleDefaultBstrPointerForTesting(): CPointer<UInt16> {
+    unsafe { CPointer<UInt16>(CPointer<UInt8>() + 0x1234) }
+}
+
+@When[test && os == "Windows"]
 @C
 func fakeGetDescriptionFailingPartial(
     _: CPointer<Unit>,
@@ -526,6 +536,85 @@ class WindowsResultInternalTests {
         require(fakeIdentityAddRefCalls == 1u32, "fake QueryInterface should publish one partial reference")
         require(fakeIdentityReleaseCalls == 1u32, "failed partial QueryInterface output should be released")
         require(fakeIdentityRefCount == 1u32, "partial release should restore the original reference count")
+    }
+
+    @TestCase
+    public func defaultErrorInfoVtablesClearFailedOutSlots(): Unit {
+        var unknownVtbl = IUnknownVtbl()
+        var queryIid = IID_IErrorInfo
+        var queryResult = staleDefaultUnitPointerForTesting()
+
+        let nullQueryHr = unsafe {
+            HRESULT(unknownVtbl.QueryInterface(CPointer<Unit>(), CPointer<GUID>(inout queryIid), CPointer<CPointer<Unit>>()))
+        }
+        require(nullQueryHr == E_POINTER, "default IUnknownVtbl.QueryInterface should reject null result slots")
+
+        let unsupportedQueryHr = unsafe {
+            HRESULT(unknownVtbl.QueryInterface(CPointer<Unit>(), CPointer<GUID>(inout queryIid), CPointer<CPointer<Unit>>(inout queryResult)))
+        }
+        require(unsupportedQueryHr == E_NOINTERFACE, "default IUnknownVtbl.QueryInterface should return E_NOINTERFACE")
+        require(queryResult.isNull(), "default IUnknownVtbl.QueryInterface should clear stale result slots")
+
+        var errorInfoVtbl = IErrorInfoVtbl()
+        var guidResult = IID_IErrorInfo
+        let guidHr = unsafe { HRESULT(errorInfoVtbl.GetGUID(CPointer<Unit>(), CPointer<GUID>(inout guidResult))) }
+        require(guidHr == E_NOTIMPL, "default IErrorInfoVtbl.GetGUID should return E_NOTIMPL")
+        require(guidResult == GUID.zeroed(), "default IErrorInfoVtbl.GetGUID should clear stale GUID slots")
+
+        var sourceResult = staleDefaultBstrPointerForTesting()
+        let sourceHr = unsafe {
+            HRESULT(errorInfoVtbl.GetSource(CPointer<Unit>(), CPointer<CPointer<UInt16>>(inout sourceResult)))
+        }
+        require(sourceHr == E_NOTIMPL, "default IErrorInfoVtbl.GetSource should return E_NOTIMPL")
+        require(sourceResult.isNull(), "default IErrorInfoVtbl.GetSource should clear stale BSTR slots")
+
+        var descriptionResult = staleDefaultBstrPointerForTesting()
+        let descriptionHr = unsafe {
+            HRESULT(errorInfoVtbl.GetDescription(CPointer<Unit>(), CPointer<CPointer<UInt16>>(inout descriptionResult)))
+        }
+        require(descriptionHr == E_NOTIMPL, "default IErrorInfoVtbl.GetDescription should return E_NOTIMPL")
+        require(descriptionResult.isNull(), "default IErrorInfoVtbl.GetDescription should clear stale BSTR slots")
+
+        var helpFileResult = staleDefaultBstrPointerForTesting()
+        let helpFileHr = unsafe {
+            HRESULT(errorInfoVtbl.GetHelpFile(CPointer<Unit>(), CPointer<CPointer<UInt16>>(inout helpFileResult)))
+        }
+        require(helpFileHr == E_NOTIMPL, "default IErrorInfoVtbl.GetHelpFile should return E_NOTIMPL")
+        require(helpFileResult.isNull(), "default IErrorInfoVtbl.GetHelpFile should clear stale BSTR slots")
+
+        var helpContextResult = 123u32
+        let helpContextHr = unsafe {
+            HRESULT(errorInfoVtbl.GetHelpContext(CPointer<Unit>(), CPointer<UInt32>(inout helpContextResult)))
+        }
+        require(helpContextHr == E_NOTIMPL, "default IErrorInfoVtbl.GetHelpContext should return E_NOTIMPL")
+        require(helpContextResult == 0u32, "default IErrorInfoVtbl.GetHelpContext should clear stale context slots")
+
+        var restrictedVtbl = IRestrictedErrorInfoVtbl()
+        var fallbackResult = staleDefaultBstrPointerForTesting()
+        var errorCodeResult = E_FAIL.value
+        var restrictedDescriptionResult = staleDefaultBstrPointerForTesting()
+        var referenceResult = staleDefaultBstrPointerForTesting()
+        let detailsHr = unsafe {
+            HRESULT(restrictedVtbl.GetErrorDetails(
+                CPointer<Unit>(),
+                CPointer<CPointer<UInt16>>(inout fallbackResult),
+                CPointer<Int32>(inout errorCodeResult),
+                CPointer<CPointer<UInt16>>(inout restrictedDescriptionResult),
+                CPointer<CPointer<UInt16>>(inout referenceResult)
+            ))
+        }
+        require(detailsHr == E_NOTIMPL, "default IRestrictedErrorInfoVtbl.GetErrorDetails should return E_NOTIMPL")
+        require(fallbackResult.isNull(), "default IRestrictedErrorInfoVtbl.GetErrorDetails should clear fallback")
+        require(errorCodeResult == 0i32, "default IRestrictedErrorInfoVtbl.GetErrorDetails should clear error code")
+        require(restrictedDescriptionResult.isNull(), "default IRestrictedErrorInfoVtbl.GetErrorDetails should clear description")
+        require(referenceResult.isNull(), "default IRestrictedErrorInfoVtbl.GetErrorDetails should clear reference")
+
+        var restrictedReferenceResult = staleDefaultBstrPointerForTesting()
+        let referenceHr = unsafe {
+            HRESULT(restrictedVtbl.GetReference(CPointer<Unit>(), CPointer<CPointer<UInt16>>(inout restrictedReferenceResult)))
+        }
+        require(referenceHr == E_NOTIMPL, "default IRestrictedErrorInfoVtbl.GetReference should return E_NOTIMPL")
+        require(restrictedReferenceResult.isNull(), "default IRestrictedErrorInfoVtbl.GetReference should clear reference")
     }
 
     @TestCase

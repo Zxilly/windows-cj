@@ -34,6 +34,13 @@ func testHResultCheckThrowsWindowsExceptionOnFailure() {
 }
 
 @Test
+func testWindowsExceptionExposesHRESULTCode() {
+    let error = WindowsException(E_ACCESSDENIED)
+
+    @Expect(error.code(), E_ACCESSDENIED)
+}
+
+@Test
 func testResultCombinatorsPreserveOkAndErr() {
     let ok = Result<Int64>.Ok(2)
     let mapped = ok.map({ value => value + 3 })

@@ -34,6 +34,17 @@ func ensureIndexInRange(arr: SafeArray, index: Int64): Int32 {
     Int32(index)
 }
 
+func checkedSafeArrayElementCount(count: Int64, owner: String): UInt32 {
+    if (count < 0) {
+        throw SafeArrayAbiException("${owner}.withLength requires non-negative count")
+    }
+    let maxCount = Int64(UInt32.Max)
+    if (count > maxCount) {
+        throw SafeArrayAbiException("${owner}.withLength count ${count} exceeds SAFEARRAY UInt32 ABI limit ${maxCount}")
+    }
+    UInt32(count)
+}
+
 /// 1-d SAFEARRAY of VT_I4 (Int32). Wrapper retains exclusive ownership of
 /// the underlying descriptor via its embedded SafeArray.
 public class SafeArrayOfInt32 <: Resource {
@@ -44,10 +55,8 @@ public class SafeArrayOfInt32 <: Resource {
     }
 
     public static func withLength(count: Int64): SafeArrayOfInt32 {
-        if (count < 0) {
-            throw SafeArrayAbiException("SafeArrayOfInt32.withLength requires non-negative count")
-        }
-        let arr = SafeArray.createVector(VT_I4, 0i32, UInt32(count))
+        let abiCount = checkedSafeArrayElementCount(count, "SafeArrayOfInt32")
+        let arr = SafeArray.createVector(VT_I4, 0i32, abiCount)
         SafeArrayOfInt32(arr)
     }
 
@@ -137,10 +146,8 @@ public class SafeArrayOfFloat64 <: Resource {
     }
 
     public static func withLength(count: Int64): SafeArrayOfFloat64 {
-        if (count < 0) {
-            throw SafeArrayAbiException("SafeArrayOfFloat64.withLength requires non-negative count")
-        }
-        let arr = SafeArray.createVector(VT_R8, 0i32, UInt32(count))
+        let abiCount = checkedSafeArrayElementCount(count, "SafeArrayOfFloat64")
+        let arr = SafeArray.createVector(VT_R8, 0i32, abiCount)
         SafeArrayOfFloat64(arr)
     }
 
@@ -231,10 +238,8 @@ public class SafeArrayOfStrings <: Resource {
     }
 
     public static func withLength(count: Int64): SafeArrayOfStrings {
-        if (count < 0) {
-            throw SafeArrayAbiException("SafeArrayOfStrings.withLength requires non-negative count")
-        }
-        let arr = SafeArray.createVector(VT_BSTR, 0i32, UInt32(count))
+        let abiCount = checkedSafeArrayElementCount(count, "SafeArrayOfStrings")
+        let arr = SafeArray.createVector(VT_BSTR, 0i32, abiCount)
         SafeArrayOfStrings(arr)
     }
 
@@ -338,10 +343,8 @@ public class SafeArrayOfVariants <: Resource {
     }
 
     public static func withLength(count: Int64): SafeArrayOfVariants {
-        if (count < 0) {
-            throw SafeArrayAbiException("SafeArrayOfVariants.withLength requires non-negative count")
-        }
-        let arr = SafeArray.createVector(VT_VARIANT, 0i32, UInt32(count))
+        let abiCount = checkedSafeArrayElementCount(count, "SafeArrayOfVariants")
+        let arr = SafeArray.createVector(VT_VARIANT, 0i32, abiCount)
         SafeArrayOfVariants(arr)
     }
 

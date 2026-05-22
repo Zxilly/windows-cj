@@ -69,6 +69,13 @@ func testHandleIsMinusOneRawValid() {
     @Expect(handleIsMinusOneRaw(IntNative(0x1234)), false)
 }
 
+@Test
+func testHandlePointerIsMinusOne() {
+    @Expect(handlePointerIsMinusOne(handlePointerFromInt(-1i64)), true)
+    @Expect(handlePointerIsMinusOne(CPointer<Unit>()), false)
+    @Expect(handlePointerIsMinusOne(handlePointerFromInt(0x1234i64)), false)
+}
+
 // ---------------------------------------------------------------------------
 // INVALID_HANDLE_VALUE_RAW constant test
 // ---------------------------------------------------------------------------

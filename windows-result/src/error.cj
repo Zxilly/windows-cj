@@ -431,6 +431,10 @@ public open class WindowsException <: Exception {
         this.error = Error.fromHRESULT(hr)
         this.hr = hr
     }
+
+    public func code(): HRESULT {
+        errorToHRESULT(error)
+    }
 }
 
 public class Win32Exception <: WindowsException {

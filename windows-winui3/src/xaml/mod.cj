@@ -30,6 +30,7 @@ import windows_core.{
     IUnknown,
     Result,
     S_OK,
+    WindowsException,
     coTaskMemAlloc,
     coTaskMemFree,
     loadFactoryByName,
@@ -67,7 +68,12 @@ struct ButtonBaseVtbl {
     public var SetCommand: CPointer<Unit> = CPointer<Unit>()
     public var CommandParameter: CPointer<Unit> = CPointer<Unit>()
     public var SetCommandParameter: CPointer<Unit> = CPointer<Unit>()
-    public var AddClick: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<EventRegistrationToken>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var AddClick: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<EventRegistrationToken>) -> Int32> = { _, _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(0) }
+        }
+        E_NOTIMPL.value
+    }
     public var RemoveClick: CFunc<(CPointer<Unit>, EventRegistrationToken) -> Int32> = { _, _ => E_NOTIMPL.value }
     public init() {}
 }
@@ -108,7 +114,12 @@ struct WindowVtbl {
 
 @C
 struct RoutedEventHandlerVtbl {
-    public var QueryInterface: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var QueryInterface: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        E_NOTIMPL.value
+    }
     public var AddRef: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 1u32 }
     public var Release: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 1u32 }
     public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
@@ -669,7 +680,8 @@ func loadXamlInspectable(xaml: HString): CPointer<Unit> {
 
 func checkHRESULT(hr: HRESULT, operation: String): Unit {
     if (hr.failed()) {
-        throw Exception("${operation} failed: ${hr}")
+        let _ = operation
+        throw WindowsException(hr)
     }
 }
 
@@ -792,6 +804,9 @@ func deactivateRoutedEventHandlerObject(raw: CPointer<Unit>): Unit {
 @C
 func applicationInitializationCallbackQueryInterface(thisPtr: CPointer<Unit>, iidPtr: CPointer<GUID>, result: CPointer<CPointer<Unit>>): Int32 {
     if (thisPtr.isNull() || iidPtr.isNull() || result.isNull()) {
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
         return E_POINTER.value
     }
     let iid = unsafe { iidPtr.read() }
@@ -853,6 +868,8 @@ func applicationInitializationCallbackInvoke(thisPtr: CPointer<Unit>, _: CPointe
             return E_POINTER.value
         }
         return S_OK.value
+    } catch (error: WindowsException) {
+        return error.code().value
     } catch (err: Exception) {
         println("ApplicationInitializationCallback failed: ${err}")
         return E_FAIL.value
@@ -881,6 +898,9 @@ func applicationInitializationCallbackVtbl(): CPointer<ApplicationInitialization
 @C
 func routedEventHandlerQueryInterface(thisPtr: CPointer<Unit>, iidPtr: CPointer<GUID>, result: CPointer<CPointer<Unit>>): Int32 {
     if (thisPtr.isNull() || iidPtr.isNull() || result.isNull()) {
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
         return E_POINTER.value
     }
     let iid = unsafe { iidPtr.read() }
@@ -942,6 +962,8 @@ func routedEventHandlerInvoke(thisPtr: CPointer<Unit>, _: CPointer<Unit>, _: CPo
             return E_POINTER.value
         }
         return S_OK.value
+    } catch (error: WindowsException) {
+        return error.code().value
     } catch (err: Exception) {
         println("RoutedEventHandler failed: ${err}")
         return E_FAIL.value

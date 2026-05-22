@@ -163,6 +163,36 @@ let IID_IUnknown = IID_IUNKNOWN
 let IID_IErrorInfo = IID_IERRORINFO
 let IID_IRestrictedErrorInfo = IID_IRESTRICTEDERRORINFO
 
+func clearDefaultUnknownOutSlot(slot: CPointer<CPointer<Unit>>): Unit {
+    if (slot.isNotNull()) {
+        unsafe { slot.write(CPointer<Unit>()) }
+    }
+}
+
+func clearDefaultBstrOutSlot(slot: CPointer<CPointer<UInt16>>): Unit {
+    if (slot.isNotNull()) {
+        unsafe { slot.write(CPointer<UInt16>()) }
+    }
+}
+
+func clearDefaultGuidOutSlot(slot: CPointer<GUID>): Unit {
+    if (slot.isNotNull()) {
+        unsafe { slot.write(GUID.zeroed()) }
+    }
+}
+
+func clearDefaultInt32OutSlot(slot: CPointer<Int32>): Unit {
+    if (slot.isNotNull()) {
+        unsafe { slot.write(0i32) }
+    }
+}
+
+func clearDefaultUInt32OutSlot(slot: CPointer<UInt32>): Unit {
+    if (slot.isNotNull()) {
+        unsafe { slot.write(0u32) }
+    }
+}
+
 @C
 struct IUnknown {
     var lpVtbl: CPointer<IUnknownVtbl> = CPointer<IUnknownVtbl>()
@@ -183,7 +213,13 @@ struct IRestrictedErrorInfo {
 
 @C
 struct IUnknownVtbl {
-    var QueryInterface: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => E_NOINTERFACE.value }
+    var QueryInterface: CFunc<(CPointer<Unit>, CPointer<GUID>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, resultPtr =>
+        if (resultPtr.isNull()) {
+            return E_POINTER.value
+        }
+        clearDefaultUnknownOutSlot(resultPtr)
+        E_NOINTERFACE.value
+    }
     var AddRef: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0u32 }
     var Release: CFunc<(CPointer<Unit>) -> UInt32> = { _ => 0u32 }
 
@@ -193,11 +229,26 @@ struct IUnknownVtbl {
 @C
 struct IErrorInfoVtbl {
     var base__: IUnknownVtbl = IUnknownVtbl()
-    var GetGUID: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    var GetSource: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    var GetDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    var GetHelpFile: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => E_NOTIMPL.value }
-    var GetHelpContext: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    var GetGUID: CFunc<(CPointer<Unit>, CPointer<GUID>) -> Int32> = { _, result =>
+        clearDefaultGuidOutSlot(result)
+        E_NOTIMPL.value
+    }
+    var GetSource: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, result =>
+        clearDefaultBstrOutSlot(result)
+        E_NOTIMPL.value
+    }
+    var GetDescription: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, result =>
+        clearDefaultBstrOutSlot(result)
+        E_NOTIMPL.value
+    }
+    var GetHelpFile: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, result =>
+        clearDefaultBstrOutSlot(result)
+        E_NOTIMPL.value
+    }
+    var GetHelpContext: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result =>
+        clearDefaultUInt32OutSlot(result)
+        E_NOTIMPL.value
+    }
 
     init() {}
 }
@@ -205,8 +256,17 @@ struct IErrorInfoVtbl {
 @C
 struct IRestrictedErrorInfoVtbl {
     var base__: IUnknownVtbl = IUnknownVtbl()
-    var GetErrorDetails: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<Int32>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _, _, _, _ => E_NOTIMPL.value }
-    var GetReference: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    var GetErrorDetails: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>, CPointer<Int32>, CPointer<CPointer<UInt16>>, CPointer<CPointer<UInt16>>) -> Int32> = { _, fallback, errorCode, description, reference =>
+        clearDefaultBstrOutSlot(fallback)
+        clearDefaultInt32OutSlot(errorCode)
+        clearDefaultBstrOutSlot(description)
+        clearDefaultBstrOutSlot(reference)
+        E_NOTIMPL.value
+    }
+    var GetReference: CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32> = { _, result =>
+        clearDefaultBstrOutSlot(result)
+        E_NOTIMPL.value
+    }
 
     init() {}
 }

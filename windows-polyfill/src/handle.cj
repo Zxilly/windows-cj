@@ -34,6 +34,10 @@ public func handleIsMinusOneRaw(v: IntNative): Bool {
     return v == INVALID_HANDLE_VALUE_RAW
 }
 
+public func handlePointerIsMinusOne(value: CPointer<Unit>): Bool {
+    return value.toUIntNative() == handlePointerFromInt(-1i64).toUIntNative()
+}
+
 // handlePointerFromInt builds an opaque CPointer<Unit> from a numeric address.
 // Used by bindgen to materialize handle-typed constants (e.g. BCRYPT_*_ALG_HANDLE = 49
 // or INVALID_HANDLE_VALUE = -1) where the source metadata expresses the value as a

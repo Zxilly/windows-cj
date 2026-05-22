@@ -2,7 +2,8 @@ package windows_winui3.xaml
 
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_FAIL, E_POINTER, GUID, HRESULT, IID_IUNKNOWN, IUnknownVtbl, S_OK, coTaskMemAlloc, coTaskMemFree}
+import windows_common.Foundation.{EventRegistrationToken}
+import windows_core.{E_FAIL, E_INVALIDARG, E_NOTIMPL, E_POINTER, GUID, HRESULT, IID_IUNKNOWN, IUnknownVtbl, S_OK, WindowsException, coTaskMemAlloc, coTaskMemFree}
 
 class XamlTestFlag {
     var value = false
@@ -126,6 +127,22 @@ func testFailedWinuiOutSlotCleanupReleasesAndClearsPartialResult() {
 }
 
 @Test
+func testCheckHRESULTThrowsWindowsExceptionWithOriginalCode() {
+    var status = 0
+    try {
+        checkHRESULT(HRESULT(E_INVALIDARG.value), "test HRESULT")
+    } catch (error: WindowsException) {
+        if (error.code().value == E_INVALIDARG.value) {
+            status = 1
+        }
+    } catch (_: Exception) {
+        status = 2
+    }
+
+    @Expect(status, 1)
+}
+
+@Test
 func testFailedWinuiOutSlotCleanupReleasesBothCreateInstanceOutputs() {
     xamlTestComReleaseCount = 0
     var inner = xamlTestCreateComObject()
@@ -235,6 +252,46 @@ func testApplicationCallbackInvokesAndClearsHandler() {
 }
 
 @Test
+func testApplicationCallbackQueryInterfaceClearsResultOnPointerFailure() {
+    let callback = ApplicationCallback({ => () })
+    var stale = callback.asRaw()
+    var iid = IID_APPLICATION_INITIALIZATION_CALLBACK
+
+    let nullIidResult = unsafe {
+        applicationInitializationCallbackQueryInterface(
+            callback.asRaw(),
+            CPointer<GUID>(),
+            CPointer<CPointer<Unit>>(inout stale)
+        )
+    }
+    @Expect(nullIidResult, E_POINTER.value)
+    @Expect(stale.isNull(), true)
+
+    stale = callback.asRaw()
+    let nullThisResult = unsafe {
+        applicationInitializationCallbackQueryInterface(
+            CPointer<Unit>(),
+            CPointer<GUID>(inout iid),
+            CPointer<CPointer<Unit>>(inout stale)
+        )
+    }
+    @Expect(nullThisResult, E_POINTER.value)
+    @Expect(stale.isNull(), true)
+
+    callback.close()
+}
+
+@Test
+func testApplicationCallbackInvokePreservesWindowsExceptionHRESULT() {
+    let callback = ApplicationCallback({ => throw WindowsException(E_INVALIDARG) })
+
+    let result = unsafe { applicationInitializationCallbackInvoke(callback.asRaw(), CPointer<Unit>()) }
+    @Expect(result, E_INVALIDARG.value)
+
+    callback.close()
+}
+
+@Test
 func testRawHandleCloseStateReleasesOnce() {
     xamlTestComReleaseCount = 0
     let raw = xamlTestCreateComObject()
@@ -303,6 +360,33 @@ func testHandleConstructorsRejectNullPointers() {
     @Expect(xamlTestThrows({ => let _ = UIElementHandle(CPointer<Unit>()) }), true)
     @Expect(xamlTestThrows({ => let _ = XamlObjectHandle(CPointer<Unit>()) }), true)
     @Expect(xamlTestThrows({ => let _ = ButtonBaseHandle(CPointer<Unit>()) }), true)
+}
+
+@Test
+func testDefaultWinuiVtablesClearOutSlotsBeforeNotImpl() {
+    var button = ButtonBaseVtbl()
+    var token: EventRegistrationToken = 123
+    @Expect(
+        unsafe { button.AddClick(CPointer<Unit>(), CPointer<Unit>(), CPointer<EventRegistrationToken>(inout token)) },
+        E_NOTIMPL.value
+    )
+    @Expect(token, 0)
+
+    let sentinel = coTaskMemAlloc(sizeOf<UInt8>())
+    if (sentinel.isNull()) {
+        throw Exception("failed to allocate default vtable sentinel")
+    }
+    try {
+        var routed = RoutedEventHandlerVtbl()
+        var result = sentinel
+        @Expect(
+            unsafe { routed.QueryInterface(CPointer<Unit>(), CPointer<GUID>(), CPointer<CPointer<Unit>>(inout result)) },
+            E_NOTIMPL.value
+        )
+        @Expect(result.isNull(), true)
+    } finally {
+        coTaskMemFree(sentinel)
+    }
 }
 
 @Test
@@ -391,4 +475,44 @@ func testRoutedEventHandlerObjectDispatchAndClose() {
 
     @Expect(handle.isClosed(), true)
     @Expect(handle.asRaw().isNull(), true)
+}
+
+@Test
+func testRoutedEventHandlerQueryInterfaceClearsResultOnPointerFailure() {
+    let handle = RoutedEventHandlerHandle({ => () })
+    var stale = handle.asRaw()
+    var iid = IID_ROUTED_EVENT_HANDLER
+
+    let nullIidResult = unsafe {
+        routedEventHandlerQueryInterface(
+            handle.asRaw(),
+            CPointer<GUID>(),
+            CPointer<CPointer<Unit>>(inout stale)
+        )
+    }
+    @Expect(nullIidResult, E_POINTER.value)
+    @Expect(stale.isNull(), true)
+
+    stale = handle.asRaw()
+    let nullThisResult = unsafe {
+        routedEventHandlerQueryInterface(
+            CPointer<Unit>(),
+            CPointer<GUID>(inout iid),
+            CPointer<CPointer<Unit>>(inout stale)
+        )
+    }
+    @Expect(nullThisResult, E_POINTER.value)
+    @Expect(stale.isNull(), true)
+
+    handle.close()
+}
+
+@Test
+func testRoutedEventHandlerInvokePreservesWindowsExceptionHRESULT() {
+    let handle = RoutedEventHandlerHandle({ => throw WindowsException(E_INVALIDARG) })
+
+    let result = unsafe { routedEventHandlerInvoke(handle.asRaw(), CPointer<Unit>(), CPointer<Unit>()) }
+    @Expect(result, E_INVALIDARG.value)
+
+    handle.close()
 }

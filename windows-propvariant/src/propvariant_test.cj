@@ -6,6 +6,7 @@ import windows_interface.GUID
 import windows_interface.IUnknownVtbl
 import windows_strings.BSTR
 import windows_strings.HString
+import windows_strings.decodeWideFromPointer
 import windows_strings.debugObservedWindowsCreateStringCount
 import windows_strings.debugObservedWindowsDeleteStringCount
 import windows_libloading as windows_libloading
@@ -16,6 +17,46 @@ func propVariantSmokeOleAut32Proc(name: String): CPointer<Unit> {
     } catch (_: Exception) {
         throw PropVariantAbiException("failed to resolve OleAut32 smoke ABI '${name}'")
     }
+}
+
+func propVariantSmokePropsysProc(name: String): CPointer<Unit> {
+    try {
+        windows_libloading.resolveProc("propsys.dll", name)
+    } catch (_: Exception) {
+        throw PropVariantAbiException("failed to resolve Propsys smoke ABI '${name}'")
+    }
+}
+
+func propVariantSmokeToString(value: PROPVARIANT): String {
+    let proc = propVariantSmokePropsysProc("PropVariantToString")
+    let toStringFn = CFunc<(CPointer<PROPVARIANT>, CPointer<UInt16>, UInt32) -> Int32>(proc)
+    var local = value
+    var buffer = Array<UInt16>(128, { _ => 0u16 })
+    let valuePtr = unsafe { CPointer<PROPVARIANT>(inout local) }
+    let handle = unsafe { acquireArrayRawData(buffer) }
+    try {
+        let hr = unsafe { toStringFn(valuePtr, handle.pointer, UInt32(buffer.size)) }
+        if (hr < 0) {
+            throw PropVariantAbiException("PropVariantToString failed in PROPVARIANT smoke test with HRESULT ${hr}")
+        }
+        decodeWideFromPointer(handle.pointer)
+    } finally {
+        unsafe { releaseArrayRawData(handle) }
+    }
+}
+
+func propVariantSmokeToInt32(value: PROPVARIANT): Int32 {
+    let proc = propVariantSmokePropsysProc("PropVariantToInt32")
+    let toInt32Fn = CFunc<(CPointer<PROPVARIANT>, CPointer<Int32>) -> Int32>(proc)
+    var local = value
+    var result: Int32 = 0
+    let valuePtr = unsafe { CPointer<PROPVARIANT>(inout local) }
+    let resultPtr = unsafe { CPointer<Int32>(inout result) }
+    let hr = unsafe { toInt32Fn(valuePtr, resultPtr) }
+    if (hr < 0) {
+        throw PropVariantAbiException("PropVariantToInt32 failed in PROPVARIANT smoke test with HRESULT ${hr}")
+    }
+    result
 }
 
 func propVariantSmokeSafeArrayCreateVector(vt: VARENUM, count: Int64): CPointer<Unit> {
@@ -338,6 +379,20 @@ func propVariantClearReleasesLpwstrAllocation(): Unit {
     @Expect(afterClose > before, true)
     owned.close()
     @Expect(debugObservedPropVariantClearCount(), afterClose)
+}
+
+@When[os == "Windows"]
+@Test
+func propsysConsumesCangjiePropVariants(): Unit {
+    let text = PropVariant(propVariantFromString("shell-property-roundtrip"))
+    let number = PropVariant(propVariantFromInt32(314i32))
+    try {
+        @Expect(propVariantSmokeToString(text.get()), "shell-property-roundtrip")
+        @Expect(propVariantSmokeToInt32(number.get()), 314i32)
+    } finally {
+        text.close()
+        number.close()
+    }
 }
 
 @Test
