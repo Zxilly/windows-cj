@@ -991,9 +991,23 @@ public func SetCachedSigningLevel(SourceFiles: CPointer<HANDLE>, SourceFileCount
     return unsafe { proc(CPointer<CPointer<Unit>>(SourceFiles), SourceFileCount, Flags, TargetFile.Value) } != 0
 }
 
+public func SetCachedSigningLevelChecked(SourceFiles: CPointer<HANDLE>, SourceFileCount: UInt32, Flags: UInt32, TargetFile: HANDLE): windows_core.Result<Unit> {
+    if (SetCachedSigningLevel(SourceFiles, SourceFileCount, Flags, TargetFile)) {
+        return windows_core.Result<Unit>.Ok(())
+    }
+    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+}
+
 public func GetCachedSigningLevel(File: HANDLE, Flags: CPointer<UInt32>, SigningLevel: CPointer<UInt32>, Thumbprint: CPointer<UInt8>, ThumbprintSize: CPointer<UInt32>, ThumbprintAlgorithm: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt8>, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetCachedSigningLevel"))
     return unsafe { proc(File.Value, Flags, SigningLevel, Thumbprint, ThumbprintSize, ThumbprintAlgorithm) } != 0
+}
+
+public func GetCachedSigningLevelChecked(File: HANDLE, Flags: CPointer<UInt32>, SigningLevel: CPointer<UInt32>, Thumbprint: CPointer<UInt8>, ThumbprintSize: CPointer<UInt32>, ThumbprintAlgorithm: CPointer<UInt32>): windows_core.Result<Unit> {
+    if (GetCachedSigningLevel(File, Flags, SigningLevel, Thumbprint, ThumbprintSize, ThumbprintAlgorithm)) {
+        return windows_core.Result<Unit>.Ok(())
+    }
+    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
 public func DeriveCapabilitySidsFromName(CapName: windows_strings.PWSTR, CapabilityGroupSids: CPointer<CPointer<PSID>>, CapabilityGroupSidCount: CPointer<UInt32>, CapabilitySids: CPointer<CPointer<PSID>>, CapabilitySidCount: CPointer<UInt32>): Bool {

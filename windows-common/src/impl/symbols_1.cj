@@ -36,7 +36,7 @@ public let Windows_ApplicationModel_Activation_ApplicationExecutionState_Termina
 public let Windows_ApplicationModel_Activation_ApplicationExecutionState_ClosedByUser = Windows_ApplicationModel_Activation_ApplicationExecutionState(4)
 
 // Windows.ApplicationModel.Activation.IActivatedEventArgs (synthetic:Windows_ApplicationModel_Activation_IActivatedEventArgs)
-@Interface["cf651713-cd08-4fd8-b697-a281b6544e2e", "Windows.ApplicationModel.Activation.IActivatedEventArgs"]
+@Interface["cf651713-cd08-4fd8-b697-a281b6544e2e", "Windows.ApplicationModel.Activation.IActivatedEventArgs", "SplashScreen.value=Com"]
 public interface Windows_ApplicationModel_Activation_IActivatedEventArgs <: IInspectable {
     func Kind(value: CPointer<Int32>): Int32
     func PreviousExecutionState(value: CPointer<Int32>): Int32
@@ -44,7 +44,7 @@ public interface Windows_ApplicationModel_Activation_IActivatedEventArgs <: IIns
 }
 
 // Windows.ApplicationModel.Activation.IActivatedEventArgsWithUser (synthetic:Windows_ApplicationModel_Activation_IActivatedEventArgsWithUser)
-@Interface["1cf09b9e-9962-4936-80ff-afc8e8ae5c8c", "Windows.ApplicationModel.Activation.IActivatedEventArgsWithUser"]
+@Interface["1cf09b9e-9962-4936-80ff-afc8e8ae5c8c", "Windows.ApplicationModel.Activation.IActivatedEventArgsWithUser", "User.value=Com"]
 public interface Windows_ApplicationModel_Activation_IActivatedEventArgsWithUser <: IInspectable {
     func User(value: CPointer<CPointer<Unit>>): Int32
 }
@@ -56,14 +56,14 @@ public interface Windows_ApplicationModel_Activation_IApplicationViewActivatedEv
 }
 
 // Windows.ApplicationModel.Activation.ILaunchActivatedEventArgs (synthetic:Windows_ApplicationModel_Activation_ILaunchActivatedEventArgs)
-@Interface["fbc93e26-a14a-4b4f-82b0-33bed920af52", "Windows.ApplicationModel.Activation.ILaunchActivatedEventArgs"]
+@Interface["fbc93e26-a14a-4b4f-82b0-33bed920af52", "Windows.ApplicationModel.Activation.ILaunchActivatedEventArgs", "Arguments.value=HString;TileId.value=HString"]
 public interface Windows_ApplicationModel_Activation_ILaunchActivatedEventArgs <: IInspectable {
     func Arguments(value: CPointer<CPointer<Unit>>): Int32
     func TileId(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.Activation.ILaunchActivatedEventArgs2 (synthetic:Windows_ApplicationModel_Activation_ILaunchActivatedEventArgs2)
-@Interface["0fd37ebc-9dc9-46b5-9ace-bd95d4565345", "Windows.ApplicationModel.Activation.ILaunchActivatedEventArgs2"]
+@Interface["0fd37ebc-9dc9-46b5-9ace-bd95d4565345", "Windows.ApplicationModel.Activation.ILaunchActivatedEventArgs2", "TileActivatedInfo.value=Com"]
 public interface Windows_ApplicationModel_Activation_ILaunchActivatedEventArgs2 <: IInspectable {
     func TileActivatedInfo(value: CPointer<CPointer<Unit>>): Int32
 }
@@ -83,13 +83,13 @@ public interface Windows_ApplicationModel_Activation_ISplashScreen <: IInspectab
 }
 
 // Windows.ApplicationModel.Activation.ITileActivatedInfo (synthetic:Windows_ApplicationModel_Activation_ITileActivatedInfo)
-@Interface["80e4a3b1-3980-4f17-b738-89194e0b8f65", "Windows.ApplicationModel.Activation.ITileActivatedInfo"]
+@Interface["80e4a3b1-3980-4f17-b738-89194e0b8f65", "Windows.ApplicationModel.Activation.ITileActivatedInfo", "RecentlyShownNotifications.value=Com"]
 public interface Windows_ApplicationModel_Activation_ITileActivatedInfo <: IInspectable {
     func RecentlyShownNotifications(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.Activation.IViewSwitcherProvider (synthetic:Windows_ApplicationModel_Activation_IViewSwitcherProvider)
-@Interface["33f288a6-5c2c-4d27-bac7-7536088f1219", "Windows.ApplicationModel.Activation.IViewSwitcherProvider"]
+@Interface["33f288a6-5c2c-4d27-bac7-7536088f1219", "Windows.ApplicationModel.Activation.IViewSwitcherProvider", "ViewSwitcher.value=Com"]
 public interface Windows_ApplicationModel_Activation_IViewSwitcherProvider <: IInspectable {
     func ViewSwitcher(value: CPointer<CPointer<Unit>>): Int32
 }
@@ -1729,8 +1729,14 @@ public interface Windows_ApplicationModel_DataTransfer_DataProviderHandlerInvoke
     }
 
     func __winrtThunk_Invoke(request: CPointer<Unit>): Int32 {
-        this.Invoke(request)
-        return windows_core.S_OK.value
+        try {
+            this.Invoke(request)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -1948,7 +1954,7 @@ public let Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers_Midd
 public let Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers_RightButton = Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers(32)
 
 // Windows.ApplicationModel.DataTransfer.IDataPackage (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackage)
-@Interface["61ebf5c7-efea-4346-9554-981d7e198ffe", "Windows.ApplicationModel.DataTransfer.IDataPackage"]
+@Interface["61ebf5c7-efea-4346-9554-981d7e198ffe", "Windows.ApplicationModel.DataTransfer.IDataPackage", "GetView.result=Com;Properties.value=Com;ResourceMap.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackage <: IInspectable {
     func GetView(result: CPointer<CPointer<Unit>>): Int32
     func Properties(value: CPointer<CPointer<Unit>>): Int32
@@ -1992,7 +1998,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackage4 <: IInspect
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet)
-@Interface["cd1c93eb-4c4c-443a-a8d3-f5c241e91689", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet"]
+@Interface["cd1c93eb-4c4c-443a-a8d3-f5c241e91689", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet", "Title.value=HString;Description.value=HString;Thumbnail.value=Com;FileTypes.value=Com;ApplicationName.value=HString;ApplicationListingUri.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet <: IInspectable {
     func Title(value: CPointer<CPointer<Unit>>): Int32
     func SetTitle(value: CPointer<Unit>): Int32
@@ -2008,7 +2014,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet <
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet2 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2)
-@Interface["eb505d4a-9800-46aa-b181-7b6f0f2b919a", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet2"]
+@Interface["eb505d4a-9800-46aa-b181-7b6f0f2b919a", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet2", "ContentSourceWebLink.value=Com;ContentSourceApplicationLink.value=Com;PackageFamilyName.value=HString;Square30x30Logo.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2 <: IInspectable {
     func ContentSourceWebLink(value: CPointer<CPointer<Unit>>): Int32
     func SetContentSourceWebLink(value: CPointer<Unit>): Int32
@@ -2023,21 +2029,21 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2 
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet3 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet3)
-@Interface["9e87fd9b-5205-401b-874a-455653bd39e8", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet3"]
+@Interface["9e87fd9b-5205-401b-874a-455653bd39e8", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet3", "EnterpriseId.value=HString"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet3 <: IInspectable {
     func EnterpriseId(value: CPointer<CPointer<Unit>>): Int32
     func SetEnterpriseId(value: CPointer<Unit>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet4 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet4)
-@Interface["6390ebf5-1739-4c74-b22f-865fab5e8545", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet4"]
+@Interface["6390ebf5-1739-4c74-b22f-865fab5e8545", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet4", "ContentSourceUserActivityJson.value=HString"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet4 <: IInspectable {
     func ContentSourceUserActivityJson(value: CPointer<CPointer<Unit>>): Int32
     func SetContentSourceUserActivityJson(value: CPointer<Unit>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView)
-@Interface["b94cec01-0c1a-4c57-be55-75d01289735d", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView"]
+@Interface["b94cec01-0c1a-4c57-be55-75d01289735d", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView", "Title.value=HString;Description.value=HString;Thumbnail.value=Com;FileTypes.value=Com;ApplicationName.value=HString;ApplicationListingUri.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView <: IInspectable {
     func Title(value: CPointer<CPointer<Unit>>): Int32
     func Description(value: CPointer<CPointer<Unit>>): Int32
@@ -2048,7 +2054,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetVi
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView2 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView2)
-@Interface["6054509b-8ebe-4feb-9c1e-75e69de54b84", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView2"]
+@Interface["6054509b-8ebe-4feb-9c1e-75e69de54b84", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView2", "PackageFamilyName.value=HString;ContentSourceWebLink.value=Com;ContentSourceApplicationLink.value=Com;Square30x30Logo.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView2 <: IInspectable {
     func PackageFamilyName(value: CPointer<CPointer<Unit>>): Int32
     func ContentSourceWebLink(value: CPointer<CPointer<Unit>>): Int32
@@ -2058,13 +2064,13 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetVi
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView3 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView3)
-@Interface["db764ce5-d174-495c-84fc-1a51f6ab45d7", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView3"]
+@Interface["db764ce5-d174-495c-84fc-1a51f6ab45d7", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView3", "EnterpriseId.value=HString"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView3 <: IInspectable {
     func EnterpriseId(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView4 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView4)
-@Interface["4474c80d-d16f-40ae-9580-6f8562b94235", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView4"]
+@Interface["4474c80d-d16f-40ae-9580-6f8562b94235", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView4", "ContentSourceUserActivityJson.value=HString"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView4 <: IInspectable {
     func ContentSourceUserActivityJson(value: CPointer<CPointer<Unit>>): Int32
 }
@@ -2076,7 +2082,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetVi
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackageView (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackageView)
-@Interface["7b840471-5900-4d85-a90b-10cb85fe3552", "Windows.ApplicationModel.DataTransfer.IDataPackageView"]
+@Interface["7b840471-5900-4d85-a90b-10cb85fe3552", "Windows.ApplicationModel.DataTransfer.IDataPackageView", "Properties.value=Com;AvailableFormats.formatIds=Com;GetDataAsync.operation=Com;GetTextAsync.operation=Com;GetCustomTextAsync.operation=Com;GetUriAsync.operation=Com;GetHtmlFormatAsync.operation=Com;GetResourceMapAsync.operation=Com;GetRtfAsync.operation=Com;GetBitmapAsync.operation=Com;GetStorageItemsAsync.operation=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackageView <: IInspectable {
     func Properties(value: CPointer<CPointer<Unit>>): Int32
     func RequestedOperation(value: CPointer<UInt32>): Int32
@@ -2095,14 +2101,14 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackageView <: IInsp
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackageView2 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackageView2)
-@Interface["40ecba95-2450-4c1d-b6b4-ed45463dee9c", "Windows.ApplicationModel.DataTransfer.IDataPackageView2"]
+@Interface["40ecba95-2450-4c1d-b6b4-ed45463dee9c", "Windows.ApplicationModel.DataTransfer.IDataPackageView2", "GetApplicationLinkAsync.operation=Com;GetWebLinkAsync.operation=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackageView2 <: IInspectable {
     func GetApplicationLinkAsync(operation: CPointer<CPointer<Unit>>): Int32
     func GetWebLinkAsync(operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackageView3 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackageView3)
-@Interface["d37771a8-ddad-4288-8428-d1cae394128b", "Windows.ApplicationModel.DataTransfer.IDataPackageView3"]
+@Interface["d37771a8-ddad-4288-8428-d1cae394128b", "Windows.ApplicationModel.DataTransfer.IDataPackageView3", "RequestAccessAsync.operation=Com;RequestAccessWithEnterpriseIdAsync.operation=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackageView3 <: IInspectable {
     func RequestAccessAsync(operation: CPointer<CPointer<Unit>>): Int32
     func RequestAccessWithEnterpriseIdAsync(enterpriseId: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
@@ -2122,7 +2128,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataProviderDeferral <: 
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataProviderRequest (synthetic:Windows_ApplicationModel_DataTransfer_IDataProviderRequest)
-@Interface["ebbc7157-d3c8-47da-acde-f82388d5f716", "Windows.ApplicationModel.DataTransfer.IDataProviderRequest"]
+@Interface["ebbc7157-d3c8-47da-acde-f82388d5f716", "Windows.ApplicationModel.DataTransfer.IDataProviderRequest", "FormatId.value=HString;GetDeferral.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataProviderRequest <: IInspectable {
     func FormatId(value: CPointer<CPointer<Unit>>): Int32
     func Deadline(value: CPointer<Windows_Foundation_DateTime>): Int32
@@ -2137,19 +2143,19 @@ public interface Windows_ApplicationModel_DataTransfer_IOperationCompletedEventA
 }
 
 // Windows.ApplicationModel.DataTransfer.IOperationCompletedEventArgs2 (synthetic:Windows_ApplicationModel_DataTransfer_IOperationCompletedEventArgs2)
-@Interface["858fa073-1e19-4105-b2f7-c8478808d562", "Windows.ApplicationModel.DataTransfer.IOperationCompletedEventArgs2"]
+@Interface["858fa073-1e19-4105-b2f7-c8478808d562", "Windows.ApplicationModel.DataTransfer.IOperationCompletedEventArgs2", "AcceptedFormatId.value=HString"]
 public interface Windows_ApplicationModel_DataTransfer_IOperationCompletedEventArgs2 <: IInspectable {
     func AcceptedFormatId(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IShareCompletedEventArgs (synthetic:Windows_ApplicationModel_DataTransfer_IShareCompletedEventArgs)
-@Interface["4574c442-f913-4f60-9df7-cc4060ab1916", "Windows.ApplicationModel.DataTransfer.IShareCompletedEventArgs"]
+@Interface["4574c442-f913-4f60-9df7-cc4060ab1916", "Windows.ApplicationModel.DataTransfer.IShareCompletedEventArgs", "ShareTarget.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IShareCompletedEventArgs <: IInspectable {
     func ShareTarget(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IShareProvider (synthetic:Windows_ApplicationModel_DataTransfer_IShareProvider)
-@Interface["2fabe026-443e-4cda-af25-8d81070efd80", "Windows.ApplicationModel.DataTransfer.IShareProvider"]
+@Interface["2fabe026-443e-4cda-af25-8d81070efd80", "Windows.ApplicationModel.DataTransfer.IShareProvider", "Title.value=HString;DisplayIcon.value=Com;Tag.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IShareProvider <: IInspectable {
     func Title(value: CPointer<CPointer<Unit>>): Int32
     func DisplayIcon(value: CPointer<CPointer<Unit>>): Int32
@@ -2159,13 +2165,13 @@ public interface Windows_ApplicationModel_DataTransfer_IShareProvider <: IInspec
 }
 
 // Windows.ApplicationModel.DataTransfer.IShareProviderFactory (synthetic:Windows_ApplicationModel_DataTransfer_IShareProviderFactory)
-@Interface["172a174c-e79e-4f6d-b07d-128f469e0296", "Windows.ApplicationModel.DataTransfer.IShareProviderFactory"]
+@Interface["172a174c-e79e-4f6d-b07d-128f469e0296", "Windows.ApplicationModel.DataTransfer.IShareProviderFactory", "Create.result=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IShareProviderFactory <: IInspectable {
     func Create(title: CPointer<Unit>, displayIcon: CPointer<Unit>, backgroundColor: Windows_UI_Color, handler: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IShareProviderOperation (synthetic:Windows_ApplicationModel_DataTransfer_IShareProviderOperation)
-@Interface["19cef937-d435-4179-b6af-14e0492b69f6", "Windows.ApplicationModel.DataTransfer.IShareProviderOperation"]
+@Interface["19cef937-d435-4179-b6af-14e0492b69f6", "Windows.ApplicationModel.DataTransfer.IShareProviderOperation", "Data.value=Com;Provider.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IShareProviderOperation <: IInspectable {
     func Data(value: CPointer<CPointer<Unit>>): Int32
     func Provider(value: CPointer<CPointer<Unit>>): Int32
@@ -2173,7 +2179,7 @@ public interface Windows_ApplicationModel_DataTransfer_IShareProviderOperation <
 }
 
 // Windows.ApplicationModel.DataTransfer.IShareTargetInfo (synthetic:Windows_ApplicationModel_DataTransfer_IShareTargetInfo)
-@Interface["385be607-c6e8-4114-b294-28f3bb6f9904", "Windows.ApplicationModel.DataTransfer.IShareTargetInfo"]
+@Interface["385be607-c6e8-4114-b294-28f3bb6f9904", "Windows.ApplicationModel.DataTransfer.IShareTargetInfo", "AppUserModelId.value=HString;ShareProvider.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IShareTargetInfo <: IInspectable {
     func AppUserModelId(value: CPointer<CPointer<Unit>>): Int32
     func ShareProvider(value: CPointer<CPointer<Unit>>): Int32
@@ -2624,8 +2630,14 @@ public interface Windows_ApplicationModel_DataTransfer_ShareProviderHandlerInvok
     }
 
     func __winrtThunk_Invoke(operation: CPointer<Unit>): Int32 {
-        this.Invoke(operation)
-        return windows_core.S_OK.value
+        try {
+            this.Invoke(operation)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -2913,7 +2925,7 @@ public struct Windows_Data_Text_TextSegment {
 }
 
 // Windows.Devices.Input.IPointerDevice (synthetic:Windows_Devices_Input_IPointerDevice)
-@Interface["93c9bafc-ebcb-467e-82c6-276feae36b5a", "Windows.Devices.Input.IPointerDevice"]
+@Interface["93c9bafc-ebcb-467e-82c6-276feae36b5a", "Windows.Devices.Input.IPointerDevice", "SupportedUsages.value=Com"]
 public interface Windows_Devices_Input_IPointerDevice <: IInspectable {
     func PointerDeviceType(value: CPointer<Int32>): Int32
     func IsIntegrated(value: CPointer<Bool>): Int32
@@ -2930,7 +2942,7 @@ public interface Windows_Devices_Input_IPointerDevice2 <: IInspectable {
 }
 
 // Windows.Devices.Input.IPointerDeviceStatics (synthetic:Windows_Devices_Input_IPointerDeviceStatics)
-@Interface["d8b89aa1-d1c6-416e-bd8d-5790914dc563", "Windows.Devices.Input.IPointerDeviceStatics"]
+@Interface["d8b89aa1-d1c6-416e-bd8d-5790914dc563", "Windows.Devices.Input.IPointerDeviceStatics", "GetPointerDevice.pointerDevice=Com;GetPointerDevices.pointerDevices=Com"]
 public interface Windows_Devices_Input_IPointerDeviceStatics <: IInspectable {
     func GetPointerDevice(pointerId: UInt32, pointerDevice: CPointer<CPointer<Unit>>): Int32
     func GetPointerDevices(pointerDevices: CPointer<CPointer<Unit>>): Int32
@@ -3244,8 +3256,14 @@ public interface Windows_Foundation_AsyncActionCompletedHandlerInvoker <: Window
     }
 
     func __winrtThunk_Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Int32 {
-        this.Invoke(asyncInfo, asyncStatus)
-        return windows_core.S_OK.value
+        try {
+            this.Invoke(asyncInfo, asyncStatus)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -3399,8 +3417,14 @@ public interface Windows_Foundation_AsyncOperationCompletedHandler_1Invoker<TRes
     }
 
     func __winrtThunk_Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Int32 {
-        this.Invoke(asyncInfo, asyncStatus)
-        return windows_core.S_OK.value
+        try {
+            this.Invoke(asyncInfo, asyncStatus)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -3556,8 +3580,14 @@ public interface Windows_Foundation_AsyncOperationProgressHandler_2Invoker<TResu
     }
 
     func __winrtThunk_Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Int32 {
-        this.Invoke(asyncInfo, progressInfo)
-        return windows_core.S_OK.value
+        try {
+            this.Invoke(asyncInfo, progressInfo)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -3713,8 +3743,14 @@ public interface Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2
     }
 
     func __winrtThunk_Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Int32 {
-        this.Invoke(asyncInfo, asyncStatus)
-        return windows_core.S_OK.value
+        try {
+            this.Invoke(asyncInfo, asyncStatus)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -3801,10 +3837,17 @@ public let Windows_Foundation_Collections_CollectionChange_ItemRemoved = Windows
 public let Windows_Foundation_Collections_CollectionChange_ItemChanged = Windows_Foundation_Collections_CollectionChange(3)
 
 // Windows.Foundation.Collections.IIterable`1 (synthetic:Windows_Foundation_Collections_IIterable_1)
+type Windows_Foundation_Collections_IIterable_1ExceptionBase = Exception
+
 @C
 public struct Windows_Foundation_Collections_IIterable_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    public var First: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
+    public var First: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
 
     public init() {}
 
@@ -3814,8 +3857,44 @@ public struct Windows_Foundation_Collections_IIterable_1Vtbl {
         vtbl.base_ = windows_core.buildIInspectableVtbl()
         vtbl.First = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IIterable_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.First(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.First(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IIterable_1ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl
@@ -3856,7 +3935,7 @@ public open class Windows_Foundation_Collections_IIterable_1<T> <: windows_inter
     }
 
     public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IIterable", Windows_Foundation_Collections_IIterable_1<T>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IIterable_1Vtbl", "Windows_Foundation_Collections_IIterable_1", "Windows_Foundation_Collections_IIterable_1_Impl", [windows_interface.InterfaceMethodSchema("First", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IIterable", Windows_Foundation_Collections_IIterable_1<T>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IIterable_1Vtbl", "Windows_Foundation_Collections_IIterable_1", "Windows_Foundation_Collections_IIterable_1_Impl", [windows_interface.InterfaceMethodSchema("First", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Windows_Foundation_Collections_IIterator_1<T>>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(Windows_Foundation_Collections_IIterable_1<T>.runtimeType())
         return schema
     }
@@ -3922,13 +4001,35 @@ private class OwnedWindows_Foundation_Collections_IIterable_1<T> <: Windows_Foun
 
 
 // Windows.Foundation.Collections.IIterator`1 (synthetic:Windows_Foundation_Collections_IIterator_1)
+type Windows_Foundation_Collections_IIterator_1ExceptionBase = Exception
+
 @C
 public struct Windows_Foundation_Collections_IIterator_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    public var Current: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var HasCurrent: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var MoveNext: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var GetMany: CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>, CPointer<UInt32>) -> Int32> = { _, _, _, _ => windows_core.E_NOTIMPL.value }
+    public var Current: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var HasCurrent: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(false) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var MoveNext: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(false) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var GetMany: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, itemsSize, items, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(0u32) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
 
     public init() {}
 
@@ -3938,26 +4039,161 @@ public struct Windows_Foundation_Collections_IIterator_1Vtbl {
         vtbl.base_ = windows_core.buildIInspectableVtbl()
         vtbl.Current = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IIterator_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Current(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Current(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IIterator_1ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.HasCurrent = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IIterator_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.HasCurrent(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        try {
+                            let resultHr__ = impl.HasCurrent(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(false) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IIterator_1ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(false) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.MoveNext = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IIterator_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.MoveNext(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        try {
+                            let resultHr__ = impl.MoveNext(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(false) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IIterator_1ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(false) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.GetMany = { instanceRaw, itemsSize, items, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IIterator_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.GetMany(itemsSize, items, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (items.isNull() || result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        try {
+                            let resultHr__ = impl.GetMany(itemsSize, items, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(0u32) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IIterator_1ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(0u32) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl
@@ -3968,7 +4204,7 @@ public interface Windows_Foundation_Collections_IIterator_1_ImplErased {
     func Current(result: CPointer<CPointer<Unit>>): Int32
     func HasCurrent(result: CPointer<Bool>): Int32
     func MoveNext(result: CPointer<Bool>): Int32
-    func GetMany(itemsSize: CPointer<UInt32>, items: CPointer<CPointer<CPointer<Unit>>>, result: CPointer<UInt32>): Int32
+    func GetMany(itemsSize: UInt32, items: CPointer<Unit>, result: CPointer<UInt32>): Int32
 }
 
 public interface Windows_Foundation_Collections_IIterator_1_Impl<T> <: Windows_Foundation_Collections_IIterator_1_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
@@ -4001,7 +4237,7 @@ public open class Windows_Foundation_Collections_IIterator_1<T> <: windows_inter
     }
 
     public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IIterator", Windows_Foundation_Collections_IIterator_1<T>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IIterator_1Vtbl", "Windows_Foundation_Collections_IIterator_1", "Windows_Foundation_Collections_IIterator_1_Impl", [windows_interface.InterfaceMethodSchema("Current", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("HasCurrent", [windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "CPointer<Bool>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("MoveNext", [windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "CPointer<Bool>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("GetMany", [windows_interface.InterfaceParameterSchema("itemsSize", "CPointer<UInt32>", "CPointer<UInt32>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("items", "CPointer<CPointer<CPointer<Unit>>>", "CPointer<CPointer<CPointer<Unit>>>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "CPointer<UInt32>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IIterator", Windows_Foundation_Collections_IIterator_1<T>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IIterator_1Vtbl", "Windows_Foundation_Collections_IIterator_1", "Windows_Foundation_Collections_IIterator_1_Impl", [windows_interface.InterfaceMethodSchema("Current", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<T>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("HasCurrent", [windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("MoveNext", [windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("GetMany", [windows_interface.InterfaceParameterSchema("itemsSize", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("items", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(Windows_Foundation_Collections_IIterator_1<T>.runtimeType())
         return schema
     }
@@ -4070,7 +4306,7 @@ public open class Windows_Foundation_Collections_IIterator_1<T> <: windows_inter
         windows_core.HRESULT(v.MoveNext(liveRaw, result))
     }
 
-    public unsafe func GetMany(itemsSize: CPointer<UInt32>, items: CPointer<CPointer<CPointer<Unit>>>, result: CPointer<UInt32>): windows_core.HRESULT {
+    public unsafe func GetMany(itemsSize: UInt32, items: CPointer<Unit>, result: CPointer<UInt32>): windows_core.HRESULT {
         let liveRaw = asRaw()
         if (liveRaw.isNull()) {
             return windows_core.E_POINTER
@@ -4094,11 +4330,23 @@ private class OwnedWindows_Foundation_Collections_IIterator_1<T> <: Windows_Foun
 
 
 // Windows.Foundation.Collections.IKeyValuePair`2 (synthetic:Windows_Foundation_Collections_IKeyValuePair_2)
+type Windows_Foundation_Collections_IKeyValuePair_2ExceptionBase = Exception
+
 @C
 public struct Windows_Foundation_Collections_IKeyValuePair_2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    public var Key: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
+    public var Key: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
 
     public init() {}
 
@@ -4108,14 +4356,86 @@ public struct Windows_Foundation_Collections_IKeyValuePair_2Vtbl {
         vtbl.base_ = windows_core.buildIInspectableVtbl()
         vtbl.Key = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IKeyValuePair_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Key(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Key(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IKeyValuePair_2ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Value = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IKeyValuePair_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Value(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Value(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IKeyValuePair_2ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl
@@ -4157,7 +4477,7 @@ public open class Windows_Foundation_Collections_IKeyValuePair_2<K, V> <: window
     }
 
     public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IKeyValuePair", Windows_Foundation_Collections_IKeyValuePair_2<K, V>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IKeyValuePair_2Vtbl", "Windows_Foundation_Collections_IKeyValuePair_2", "Windows_Foundation_Collections_IKeyValuePair_2_Impl", [windows_interface.InterfaceMethodSchema("Key", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Value", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IKeyValuePair", Windows_Foundation_Collections_IKeyValuePair_2<K, V>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IKeyValuePair_2Vtbl", "Windows_Foundation_Collections_IKeyValuePair_2", "Windows_Foundation_Collections_IKeyValuePair_2_Impl", [windows_interface.InterfaceMethodSchema("Key", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<K>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("Value", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<V>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(Windows_Foundation_Collections_IKeyValuePair_2<K, V>.runtimeType())
         return schema
     }
@@ -4234,11 +4554,23 @@ private class OwnedWindows_Foundation_Collections_IKeyValuePair_2<K, V> <: Windo
 
 
 // Windows.Foundation.Collections.IMapChangedEventArgs`1 (synthetic:Windows_Foundation_Collections_IMapChangedEventArgs_1)
+type Windows_Foundation_Collections_IMapChangedEventArgs_1ExceptionBase = Exception
+
 @C
 public struct Windows_Foundation_Collections_IMapChangedEventArgs_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    public var CollectionChange: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var Key: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
+    public var CollectionChange: CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(0i32) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var Key: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
 
     public init() {}
 
@@ -4248,14 +4580,83 @@ public struct Windows_Foundation_Collections_IMapChangedEventArgs_1Vtbl {
         vtbl.base_ = windows_core.buildIInspectableVtbl()
         vtbl.CollectionChange = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IMapChangedEventArgs_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.CollectionChange(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0i32) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0i32) }
+                        }
+                        try {
+                            let resultHr__ = impl.CollectionChange(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(0i32) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0i32) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IMapChangedEventArgs_1ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0i32) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(0i32) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Key = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IMapChangedEventArgs_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Key(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Key(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IMapChangedEventArgs_1ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl
@@ -4297,7 +4698,7 @@ public open class Windows_Foundation_Collections_IMapChangedEventArgs_1<K> <: wi
     }
 
     public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IMapChangedEventArgs", Windows_Foundation_Collections_IMapChangedEventArgs_1<K>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IMapChangedEventArgs_1Vtbl", "Windows_Foundation_Collections_IMapChangedEventArgs_1", "Windows_Foundation_Collections_IMapChangedEventArgs_1_Impl", [windows_interface.InterfaceMethodSchema("CollectionChange", [windows_interface.InterfaceParameterSchema("result", "CPointer<Int32>", "CPointer<Int32>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Key", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IMapChangedEventArgs", Windows_Foundation_Collections_IMapChangedEventArgs_1<K>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IMapChangedEventArgs_1Vtbl", "Windows_Foundation_Collections_IMapChangedEventArgs_1", "Windows_Foundation_Collections_IMapChangedEventArgs_1_Impl", [windows_interface.InterfaceMethodSchema("CollectionChange", [windows_interface.InterfaceParameterSchema("result", "CPointer<Int32>", "OutSlot<Int32>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("Key", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<K>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(Windows_Foundation_Collections_IMapChangedEventArgs_1<K>.runtimeType())
         return schema
     }
@@ -4372,13 +4773,38 @@ private class OwnedWindows_Foundation_Collections_IMapChangedEventArgs_1<K> <: W
 
 
 // Windows.Foundation.Collections.IMapView`2 (synthetic:Windows_Foundation_Collections_IMapView_2)
+type Windows_Foundation_Collections_IMapView_2ExceptionBase = Exception
+
 @C
 public struct Windows_Foundation_Collections_IMapView_2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    public var Lookup: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
-    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var HasKey: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
-    public var Split: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
+    public var Lookup: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, key, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(0u32) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var HasKey: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, key, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(false) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var Split: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>) -> Int32> = { _, first, second =>
+        if (first.isNotNull()) {
+            unsafe { first.write(CPointer<Unit>()) }
+        }
+        if (second.isNotNull()) {
+            unsafe { second.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
 
     public init() {}
 
@@ -4388,26 +4814,185 @@ public struct Windows_Foundation_Collections_IMapView_2Vtbl {
         vtbl.base_ = windows_core.buildIInspectableVtbl()
         vtbl.Lookup = { instanceRaw, key, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IMapView_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Lookup(key, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Lookup(key, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IMapView_2ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Size = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IMapView_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Size(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        try {
+                            let resultHr__ = impl.Size(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(0u32) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IMapView_2ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(0u32) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.HasKey = { instanceRaw, key, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IMapView_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.HasKey(key, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        try {
+                            let resultHr__ = impl.HasKey(key, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(false) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IMapView_2ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(false) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Split = { instanceRaw, first, second =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IMapView_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Split(first, second)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (first.isNull() || second.isNull()) {
+                        if (first.isNotNull()) {
+                            unsafe { first.write(CPointer<Unit>()) }
+                        }
+                        if (second.isNotNull()) {
+                            unsafe { second.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (first.isNotNull()) {
+                            unsafe { first.write(CPointer<Unit>()) }
+                        }
+                        if (second.isNotNull()) {
+                            unsafe { second.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Split(first, second)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(first)
+                                windows_core.releaseFailedComOutSlot(second)
+                                if (first.isNotNull()) {
+                                    unsafe { first.write(CPointer<Unit>()) }
+                                }
+                                if (second.isNotNull()) {
+                                    unsafe { second.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(first)
+                            windows_core.releaseFailedComOutSlot(second)
+                            if (first.isNotNull()) {
+                                unsafe { first.write(CPointer<Unit>()) }
+                            }
+                            if (second.isNotNull()) {
+                                unsafe { second.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IMapView_2ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(first)
+                            windows_core.releaseFailedComOutSlot(second)
+                            if (first.isNotNull()) {
+                                unsafe { first.write(CPointer<Unit>()) }
+                            }
+                            if (second.isNotNull()) {
+                                unsafe { second.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (first.isNotNull()) {
+                        unsafe { first.write(CPointer<Unit>()) }
+                    }
+                    if (second.isNotNull()) {
+                        unsafe { second.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl
@@ -4451,7 +5036,7 @@ public open class Windows_Foundation_Collections_IMapView_2<K, V> <: windows_int
     }
 
     public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IMapView", Windows_Foundation_Collections_IMapView_2<K, V>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IMapView_2Vtbl", "Windows_Foundation_Collections_IMapView_2", "Windows_Foundation_Collections_IMapView_2_Impl", [windows_interface.InterfaceMethodSchema("Lookup", [windows_interface.InterfaceParameterSchema("key", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Size", [windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "CPointer<UInt32>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("HasKey", [windows_interface.InterfaceParameterSchema("key", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "CPointer<Bool>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Split", [windows_interface.InterfaceParameterSchema("first", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("second", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IMapView", Windows_Foundation_Collections_IMapView_2<K, V>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IMapView_2Vtbl", "Windows_Foundation_Collections_IMapView_2", "Windows_Foundation_Collections_IMapView_2_Impl", [windows_interface.InterfaceMethodSchema("Lookup", [windows_interface.InterfaceParameterSchema("key", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<V>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("Size", [windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("HasKey", [windows_interface.InterfaceParameterSchema("key", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("Split", [windows_interface.InterfaceParameterSchema("first", "CPointer<CPointer<Unit>>", "OutSlot<Windows_Foundation_Collections_IMapView_2<K, V>>", windows_interface.InterfaceParameterBridgeKind.OutSlot), windows_interface.InterfaceParameterSchema("second", "CPointer<CPointer<Unit>>", "OutSlot<Windows_Foundation_Collections_IMapView_2<K, V>>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(Windows_Foundation_Collections_IMapView_2<K, V>.runtimeType())
         return schema
     }
@@ -4546,14 +5131,41 @@ private class OwnedWindows_Foundation_Collections_IMapView_2<K, V> <: Windows_Fo
 
 
 // Windows.Foundation.Collections.IMap`2 (synthetic:Windows_Foundation_Collections_IMap_2)
+type Windows_Foundation_Collections_IMap_2ExceptionBase = Exception
+
 @C
 public struct Windows_Foundation_Collections_IMap_2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    public var Lookup: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
-    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var HasKey: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
-    public var GetView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var Insert: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, _, _, _ => windows_core.E_NOTIMPL.value }
+    public var Lookup: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, key, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(0u32) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var HasKey: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, key, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(false) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var GetView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var Insert: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, key, value, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(false) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
     public var Remove: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => windows_core.E_NOTIMPL.value }
 
@@ -4565,44 +5177,233 @@ public struct Windows_Foundation_Collections_IMap_2Vtbl {
         vtbl.base_ = windows_core.buildIInspectableVtbl()
         vtbl.Lookup = { instanceRaw, key, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IMap_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Lookup(key, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Lookup(key, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IMap_2ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Size = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IMap_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Size(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        try {
+                            let resultHr__ = impl.Size(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(0u32) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IMap_2ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(0u32) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.HasKey = { instanceRaw, key, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IMap_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.HasKey(key, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        try {
+                            let resultHr__ = impl.HasKey(key, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(false) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IMap_2ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(false) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.GetView = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IMap_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.GetView(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.GetView(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IMap_2ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Insert = { instanceRaw, key, value, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IMap_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Insert(key, value, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        try {
+                            let resultHr__ = impl.Insert(key, value, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(false) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IMap_2ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(false) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Remove = { instanceRaw, key =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IMap_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Remove(key)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.Remove(key)
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_Collections_IMap_2ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Clear = { instanceRaw =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IMap_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Clear()
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.Clear()
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_Collections_IMap_2ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl
@@ -4649,7 +5450,7 @@ public open class Windows_Foundation_Collections_IMap_2<K, V> <: windows_interfa
     }
 
     public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IMap", Windows_Foundation_Collections_IMap_2<K, V>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IMap_2Vtbl", "Windows_Foundation_Collections_IMap_2", "Windows_Foundation_Collections_IMap_2_Impl", [windows_interface.InterfaceMethodSchema("Lookup", [windows_interface.InterfaceParameterSchema("key", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Size", [windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "CPointer<UInt32>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("HasKey", [windows_interface.InterfaceParameterSchema("key", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "CPointer<Bool>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("GetView", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Insert", [windows_interface.InterfaceParameterSchema("key", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("value", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "CPointer<Bool>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Remove", [windows_interface.InterfaceParameterSchema("key", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Clear", Array<windows_interface.InterfaceParameterSchema>(0, { _ => windows_interface.InterfaceParameterSchema("", "", "", windows_interface.InterfaceParameterBridgeKind.Value) }), "Int32")])
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IMap", Windows_Foundation_Collections_IMap_2<K, V>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IMap_2Vtbl", "Windows_Foundation_Collections_IMap_2", "Windows_Foundation_Collections_IMap_2_Impl", [windows_interface.InterfaceMethodSchema("Lookup", [windows_interface.InterfaceParameterSchema("key", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<V>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("Size", [windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("HasKey", [windows_interface.InterfaceParameterSchema("key", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("GetView", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Windows_Foundation_Collections_IMapView_2<K, V>>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("Insert", [windows_interface.InterfaceParameterSchema("key", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("value", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("Remove", [windows_interface.InterfaceParameterSchema("key", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Clear", Array<windows_interface.InterfaceParameterSchema>(0, { _ => windows_interface.InterfaceParameterSchema("", "", "", windows_interface.InterfaceParameterBridgeKind.Value) }), "Int32")])
         schema.runtimeTypeContract = Some(Windows_Foundation_Collections_IMap_2<K, V>.runtimeType())
         return schema
     }
@@ -4771,10 +5572,17 @@ private class OwnedWindows_Foundation_Collections_IMap_2<K, V> <: Windows_Founda
 
 
 // Windows.Foundation.Collections.IObservableMap`2 (synthetic:Windows_Foundation_Collections_IObservableMap_2)
+type Windows_Foundation_Collections_IObservableMap_2ExceptionBase = Exception
+
 @C
 public struct Windows_Foundation_Collections_IObservableMap_2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    public var MapChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int64>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
+    public var MapChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int64>) -> Int32> = { _, vhnd, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(0i64) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
     public var RemoveMapChanged: CFunc<(CPointer<Unit>, Int64) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
 
     public init() {}
@@ -4785,14 +5593,56 @@ public struct Windows_Foundation_Collections_IObservableMap_2Vtbl {
         vtbl.base_ = windows_core.buildIInspectableVtbl()
         vtbl.MapChanged = { instanceRaw, vhnd, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IObservableMap_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.MapChanged(vhnd, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0i64) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0i64) }
+                        }
+                        try {
+                            let resultHr__ = impl.MapChanged(vhnd, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(0i64) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0i64) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IObservableMap_2ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0i64) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(0i64) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.RemoveMapChanged = { instanceRaw, token =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IObservableMap_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.RemoveMapChanged(token)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.RemoveMapChanged(token)
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_Collections_IObservableMap_2ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl
@@ -4834,7 +5684,7 @@ public open class Windows_Foundation_Collections_IObservableMap_2<K, V> <: windo
     }
 
     public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IObservableMap", Windows_Foundation_Collections_IObservableMap_2<K, V>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IObservableMap_2Vtbl", "Windows_Foundation_Collections_IObservableMap_2", "Windows_Foundation_Collections_IObservableMap_2_Impl", [windows_interface.InterfaceMethodSchema("MapChanged", [windows_interface.InterfaceParameterSchema("vhnd", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<Int64>", "CPointer<Int64>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("RemoveMapChanged", [windows_interface.InterfaceParameterSchema("token", "Int64", "Int64", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IObservableMap", Windows_Foundation_Collections_IObservableMap_2<K, V>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IObservableMap_2Vtbl", "Windows_Foundation_Collections_IObservableMap_2", "Windows_Foundation_Collections_IObservableMap_2_Impl", [windows_interface.InterfaceMethodSchema("MapChanged", [windows_interface.InterfaceParameterSchema("vhnd", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("RemoveMapChanged", [windows_interface.InterfaceParameterSchema("token", "Int64", "Int64", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(Windows_Foundation_Collections_IObservableMap_2<K, V>.runtimeType())
         return schema
     }
@@ -4879,6 +5729,9 @@ public open class Windows_Foundation_Collections_IObservableMap_2<K, V> <: windo
     }
 
     public unsafe func MapChanged(vhnd: CPointer<Unit>, result: CPointer<Int64>): windows_core.HRESULT {
+        if (result.isNotNull()) {
+            unsafe { result.write(0i64) }
+        }
         let liveRaw = asRaw()
         if (liveRaw.isNull()) {
             return windows_core.E_POINTER
@@ -4911,10 +5764,17 @@ private class OwnedWindows_Foundation_Collections_IObservableMap_2<K, V> <: Wind
 
 
 // Windows.Foundation.Collections.IObservableVector`1 (synthetic:Windows_Foundation_Collections_IObservableVector_1)
+type Windows_Foundation_Collections_IObservableVector_1ExceptionBase = Exception
+
 @C
 public struct Windows_Foundation_Collections_IObservableVector_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    public var VectorChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int64>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
+    public var VectorChanged: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int64>) -> Int32> = { _, vhnd, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(0i64) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
     public var RemoveVectorChanged: CFunc<(CPointer<Unit>, Int64) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
 
     public init() {}
@@ -4925,14 +5785,56 @@ public struct Windows_Foundation_Collections_IObservableVector_1Vtbl {
         vtbl.base_ = windows_core.buildIInspectableVtbl()
         vtbl.VectorChanged = { instanceRaw, vhnd, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IObservableVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.VectorChanged(vhnd, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0i64) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0i64) }
+                        }
+                        try {
+                            let resultHr__ = impl.VectorChanged(vhnd, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(0i64) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0i64) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IObservableVector_1ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0i64) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(0i64) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.RemoveVectorChanged = { instanceRaw, token =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IObservableVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.RemoveVectorChanged(token)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.RemoveVectorChanged(token)
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_Collections_IObservableVector_1ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl
@@ -4974,7 +5876,7 @@ public open class Windows_Foundation_Collections_IObservableVector_1<T> <: windo
     }
 
     public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IObservableVector", Windows_Foundation_Collections_IObservableVector_1<T>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IObservableVector_1Vtbl", "Windows_Foundation_Collections_IObservableVector_1", "Windows_Foundation_Collections_IObservableVector_1_Impl", [windows_interface.InterfaceMethodSchema("VectorChanged", [windows_interface.InterfaceParameterSchema("vhnd", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<Int64>", "CPointer<Int64>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("RemoveVectorChanged", [windows_interface.InterfaceParameterSchema("token", "Int64", "Int64", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IObservableVector", Windows_Foundation_Collections_IObservableVector_1<T>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IObservableVector_1Vtbl", "Windows_Foundation_Collections_IObservableVector_1", "Windows_Foundation_Collections_IObservableVector_1_Impl", [windows_interface.InterfaceMethodSchema("VectorChanged", [windows_interface.InterfaceParameterSchema("vhnd", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<Int64>", "OutSlot<Int64>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("RemoveVectorChanged", [windows_interface.InterfaceParameterSchema("token", "Int64", "Int64", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(Windows_Foundation_Collections_IObservableVector_1<T>.runtimeType())
         return schema
     }
@@ -5017,6 +5919,9 @@ public open class Windows_Foundation_Collections_IObservableVector_1<T> <: windo
     }
 
     public unsafe func VectorChanged(vhnd: CPointer<Unit>, result: CPointer<Int64>): windows_core.HRESULT {
+        if (result.isNotNull()) {
+            unsafe { result.write(0i64) }
+        }
         let liveRaw = asRaw()
         if (liveRaw.isNull()) {
             return windows_core.E_POINTER
@@ -5061,13 +5966,38 @@ public interface Windows_Foundation_Collections_IVectorChangedEventArgs <: IInsp
 }
 
 // Windows.Foundation.Collections.IVectorView`1 (synthetic:Windows_Foundation_Collections_IVectorView_1)
+type Windows_Foundation_Collections_IVectorView_1ExceptionBase = Exception
+
 @C
 public struct Windows_Foundation_Collections_IVectorView_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
-    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var IndexOf: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Bool>) -> Int32> = { _, _, _, _ => windows_core.E_NOTIMPL.value }
-    public var GetMany: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => windows_core.E_NOTIMPL.value }
+    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, index, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(0u32) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var IndexOf: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32> = { _, value, index, result =>
+        if (index.isNotNull()) {
+            unsafe { index.write(0u32) }
+        }
+        if (result.isNotNull()) {
+            unsafe { result.write(false) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var GetMany: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, startIndex, itemsSize, items, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(0u32) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
 
     public init() {}
 
@@ -5077,26 +6007,179 @@ public struct Windows_Foundation_Collections_IVectorView_1Vtbl {
         vtbl.base_ = windows_core.buildIInspectableVtbl()
         vtbl.GetAt = { instanceRaw, index, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVectorView_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.GetAt(index, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.GetAt(index, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IVectorView_1ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Size = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVectorView_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Size(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        try {
+                            let resultHr__ = impl.Size(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(0u32) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IVectorView_1ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(0u32) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.IndexOf = { instanceRaw, value, index, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVectorView_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.IndexOf(value, index, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (index.isNull() || result.isNull()) {
+                        if (index.isNotNull()) {
+                            unsafe { index.write(0u32) }
+                        }
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (index.isNotNull()) {
+                            unsafe { index.write(0u32) }
+                        }
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        try {
+                            let resultHr__ = impl.IndexOf(value, index, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (index.isNotNull()) {
+                                    unsafe { index.write(0u32) }
+                                }
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(false) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (index.isNotNull()) {
+                                unsafe { index.write(0u32) }
+                            }
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IVectorView_1ExceptionBase) {
+                            if (index.isNotNull()) {
+                                unsafe { index.write(0u32) }
+                            }
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (index.isNotNull()) {
+                        unsafe { index.write(0u32) }
+                    }
+                    if (result.isNotNull()) {
+                        unsafe { result.write(false) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.GetMany = { instanceRaw, startIndex, itemsSize, items, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVectorView_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.GetMany(startIndex, itemsSize, items, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (items.isNull() || result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        try {
+                            let resultHr__ = impl.GetMany(startIndex, itemsSize, items, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(0u32) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IVectorView_1ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(0u32) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl
@@ -5106,8 +6189,8 @@ public struct Windows_Foundation_Collections_IVectorView_1Vtbl {
 public interface Windows_Foundation_Collections_IVectorView_1_ImplErased {
     func GetAt(index: UInt32, result: CPointer<CPointer<Unit>>): Int32
     func Size(result: CPointer<UInt32>): Int32
-    func IndexOf(value: CPointer<Unit>, index: CPointer<CPointer<Unit>>, result: CPointer<Bool>): Int32
-    func GetMany(startIndex: UInt32, itemsSize: CPointer<UInt32>, items: CPointer<CPointer<CPointer<Unit>>>, result: CPointer<UInt32>): Int32
+    func IndexOf(value: CPointer<Unit>, index: CPointer<UInt32>, result: CPointer<Bool>): Int32
+    func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>, result: CPointer<UInt32>): Int32
 }
 
 public interface Windows_Foundation_Collections_IVectorView_1_Impl<T> <: Windows_Foundation_Collections_IVectorView_1_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
@@ -5140,7 +6223,7 @@ public open class Windows_Foundation_Collections_IVectorView_1<T> <: windows_int
     }
 
     public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IVectorView", Windows_Foundation_Collections_IVectorView_1<T>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IVectorView_1Vtbl", "Windows_Foundation_Collections_IVectorView_1", "Windows_Foundation_Collections_IVectorView_1_Impl", [windows_interface.InterfaceMethodSchema("GetAt", [windows_interface.InterfaceParameterSchema("index", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Size", [windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "CPointer<UInt32>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("IndexOf", [windows_interface.InterfaceParameterSchema("value", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("index", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "CPointer<Bool>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("GetMany", [windows_interface.InterfaceParameterSchema("startIndex", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("itemsSize", "CPointer<UInt32>", "CPointer<UInt32>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("items", "CPointer<CPointer<CPointer<Unit>>>", "CPointer<CPointer<CPointer<Unit>>>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "CPointer<UInt32>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IVectorView", Windows_Foundation_Collections_IVectorView_1<T>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IVectorView_1Vtbl", "Windows_Foundation_Collections_IVectorView_1", "Windows_Foundation_Collections_IVectorView_1_Impl", [windows_interface.InterfaceMethodSchema("GetAt", [windows_interface.InterfaceParameterSchema("index", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<T>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("Size", [windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("IndexOf", [windows_interface.InterfaceParameterSchema("value", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("index", "CPointer<UInt32>", "OutSlot<UInt32>", windows_interface.InterfaceParameterBridgeKind.OutSlot), windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("GetMany", [windows_interface.InterfaceParameterSchema("startIndex", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("itemsSize", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("items", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(Windows_Foundation_Collections_IVectorView_1<T>.runtimeType())
         return schema
     }
@@ -5200,7 +6283,7 @@ public open class Windows_Foundation_Collections_IVectorView_1<T> <: windows_int
         windows_core.HRESULT(v.Size(liveRaw, result))
     }
 
-    public unsafe func IndexOf(value: CPointer<Unit>, index: CPointer<CPointer<Unit>>, result: CPointer<Bool>): windows_core.HRESULT {
+    public unsafe func IndexOf(value: CPointer<Unit>, index: CPointer<UInt32>, result: CPointer<Bool>): windows_core.HRESULT {
         let liveRaw = asRaw()
         if (liveRaw.isNull()) {
             return windows_core.E_POINTER
@@ -5209,7 +6292,7 @@ public open class Windows_Foundation_Collections_IVectorView_1<T> <: windows_int
         windows_core.HRESULT(v.IndexOf(liveRaw, value, index, result))
     }
 
-    public unsafe func GetMany(startIndex: UInt32, itemsSize: CPointer<UInt32>, items: CPointer<CPointer<CPointer<Unit>>>, result: CPointer<UInt32>): windows_core.HRESULT {
+    public unsafe func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>, result: CPointer<UInt32>): windows_core.HRESULT {
         let liveRaw = asRaw()
         if (liveRaw.isNull()) {
             return windows_core.E_POINTER
@@ -5233,20 +6316,50 @@ private class OwnedWindows_Foundation_Collections_IVectorView_1<T> <: Windows_Fo
 
 
 // Windows.Foundation.Collections.IVector`1 (synthetic:Windows_Foundation_Collections_IVector_1)
+type Windows_Foundation_Collections_IVector_1ExceptionBase = Exception
+
 @C
 public struct Windows_Foundation_Collections_IVector_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
-    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var GetView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var IndexOf: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Bool>) -> Int32> = { _, _, _, _ => windows_core.E_NOTIMPL.value }
+    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, index, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(0u32) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var GetView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var IndexOf: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32> = { _, value, index, result =>
+        if (index.isNotNull()) {
+            unsafe { index.write(0u32) }
+        }
+        if (result.isNotNull()) {
+            unsafe { result.write(false) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
     public var SetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
     public var InsertAt: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
     public var RemoveAt: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
     public var Append: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
     public var RemoveAtEnd: CFunc<(CPointer<Unit>) -> Int32> = { _ => windows_core.E_NOTIMPL.value }
     public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => windows_core.E_NOTIMPL.value }
-    public var GetMany: CFunc<(CPointer<Unit>, UInt32, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>, CPointer<UInt32>) -> Int32> = { _, _, _, _, _ => windows_core.E_NOTIMPL.value }
+    public var GetMany: CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, startIndex, itemsSize, items, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(0u32) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
     public var ReplaceAll: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
 
     public init() {}
@@ -5257,74 +6370,326 @@ public struct Windows_Foundation_Collections_IVector_1Vtbl {
         vtbl.base_ = windows_core.buildIInspectableVtbl()
         vtbl.GetAt = { instanceRaw, index, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.GetAt(index, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.GetAt(index, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IVector_1ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Size = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Size(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        try {
+                            let resultHr__ = impl.Size(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(0u32) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IVector_1ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(0u32) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.GetView = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.GetView(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.GetView(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IVector_1ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.IndexOf = { instanceRaw, value, index, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.IndexOf(value, index, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (index.isNull() || result.isNull()) {
+                        if (index.isNotNull()) {
+                            unsafe { index.write(0u32) }
+                        }
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (index.isNotNull()) {
+                            unsafe { index.write(0u32) }
+                        }
+                        if (result.isNotNull()) {
+                            unsafe { result.write(false) }
+                        }
+                        try {
+                            let resultHr__ = impl.IndexOf(value, index, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (index.isNotNull()) {
+                                    unsafe { index.write(0u32) }
+                                }
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(false) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (index.isNotNull()) {
+                                unsafe { index.write(0u32) }
+                            }
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IVector_1ExceptionBase) {
+                            if (index.isNotNull()) {
+                                unsafe { index.write(0u32) }
+                            }
+                            if (result.isNotNull()) {
+                                unsafe { result.write(false) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (index.isNotNull()) {
+                        unsafe { index.write(0u32) }
+                    }
+                    if (result.isNotNull()) {
+                        unsafe { result.write(false) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.SetAt = { instanceRaw, index, value =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.SetAt(index, value)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.SetAt(index, value)
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_Collections_IVector_1ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.InsertAt = { instanceRaw, index, value =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.InsertAt(index, value)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.InsertAt(index, value)
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_Collections_IVector_1ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.RemoveAt = { instanceRaw, index =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.RemoveAt(index)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.RemoveAt(index)
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_Collections_IVector_1ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Append = { instanceRaw, value =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Append(value)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.Append(value)
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_Collections_IVector_1ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.RemoveAtEnd = { instanceRaw =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.RemoveAtEnd()
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.RemoveAtEnd()
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_Collections_IVector_1ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Clear = { instanceRaw =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Clear()
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.Clear()
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_Collections_IVector_1ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.GetMany = { instanceRaw, startIndex, itemsSize, items, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.GetMany(startIndex, itemsSize, items, result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (items.isNull() || result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(0u32) }
+                        }
+                        try {
+                            let resultHr__ = impl.GetMany(startIndex, itemsSize, items, result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(0u32) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_Collections_IVector_1ExceptionBase) {
+                            if (result.isNotNull()) {
+                                unsafe { result.write(0u32) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(0u32) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.ReplaceAll = { instanceRaw, itemsSize, items =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_Collections_IVector_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.ReplaceAll(itemsSize, items)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.ReplaceAll(itemsSize, items)
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_Collections_IVector_1ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl
@@ -5335,14 +6700,14 @@ public interface Windows_Foundation_Collections_IVector_1_ImplErased {
     func GetAt(index: UInt32, result: CPointer<CPointer<Unit>>): Int32
     func Size(result: CPointer<UInt32>): Int32
     func GetView(result: CPointer<CPointer<Unit>>): Int32
-    func IndexOf(value: CPointer<Unit>, index: CPointer<CPointer<Unit>>, result: CPointer<Bool>): Int32
+    func IndexOf(value: CPointer<Unit>, index: CPointer<UInt32>, result: CPointer<Bool>): Int32
     func SetAt(index: UInt32, value: CPointer<Unit>): Int32
     func InsertAt(index: UInt32, value: CPointer<Unit>): Int32
     func RemoveAt(index: UInt32): Int32
     func Append(value: CPointer<Unit>): Int32
     func RemoveAtEnd(): Int32
     func Clear(): Int32
-    func GetMany(startIndex: UInt32, itemsSize: CPointer<UInt32>, items: CPointer<CPointer<CPointer<Unit>>>, result: CPointer<UInt32>): Int32
+    func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>, result: CPointer<UInt32>): Int32
     func ReplaceAll(itemsSize: UInt32, items: CPointer<CPointer<Unit>>): Int32
 }
 
@@ -5376,7 +6741,7 @@ public open class Windows_Foundation_Collections_IVector_1<T> <: windows_interfa
     }
 
     public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IVector", Windows_Foundation_Collections_IVector_1<T>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IVector_1Vtbl", "Windows_Foundation_Collections_IVector_1", "Windows_Foundation_Collections_IVector_1_Impl", [windows_interface.InterfaceMethodSchema("GetAt", [windows_interface.InterfaceParameterSchema("index", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Size", [windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "CPointer<UInt32>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("GetView", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("IndexOf", [windows_interface.InterfaceParameterSchema("value", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("index", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "CPointer<Bool>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("SetAt", [windows_interface.InterfaceParameterSchema("index", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("value", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("InsertAt", [windows_interface.InterfaceParameterSchema("index", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("value", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("RemoveAt", [windows_interface.InterfaceParameterSchema("index", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Append", [windows_interface.InterfaceParameterSchema("value", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("RemoveAtEnd", Array<windows_interface.InterfaceParameterSchema>(0, { _ => windows_interface.InterfaceParameterSchema("", "", "", windows_interface.InterfaceParameterBridgeKind.Value) }), "Int32"), windows_interface.InterfaceMethodSchema("Clear", Array<windows_interface.InterfaceParameterSchema>(0, { _ => windows_interface.InterfaceParameterSchema("", "", "", windows_interface.InterfaceParameterBridgeKind.Value) }), "Int32"), windows_interface.InterfaceMethodSchema("GetMany", [windows_interface.InterfaceParameterSchema("startIndex", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("itemsSize", "CPointer<UInt32>", "CPointer<UInt32>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("items", "CPointer<CPointer<CPointer<Unit>>>", "CPointer<CPointer<CPointer<Unit>>>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "CPointer<UInt32>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("ReplaceAll", [windows_interface.InterfaceParameterSchema("itemsSize", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("items", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.Collections.IVector", Windows_Foundation_Collections_IVector_1<T>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_Collections_IVector_1Vtbl", "Windows_Foundation_Collections_IVector_1", "Windows_Foundation_Collections_IVector_1_Impl", [windows_interface.InterfaceMethodSchema("GetAt", [windows_interface.InterfaceParameterSchema("index", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<T>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("Size", [windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("GetView", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Windows_Foundation_Collections_IVectorView_1<T>>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("IndexOf", [windows_interface.InterfaceParameterSchema("value", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("index", "CPointer<UInt32>", "OutSlot<UInt32>", windows_interface.InterfaceParameterBridgeKind.OutSlot), windows_interface.InterfaceParameterSchema("result", "CPointer<Bool>", "OutSlot<Bool>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("SetAt", [windows_interface.InterfaceParameterSchema("index", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("value", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("InsertAt", [windows_interface.InterfaceParameterSchema("index", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("value", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("RemoveAt", [windows_interface.InterfaceParameterSchema("index", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Append", [windows_interface.InterfaceParameterSchema("value", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("RemoveAtEnd", Array<windows_interface.InterfaceParameterSchema>(0, { _ => windows_interface.InterfaceParameterSchema("", "", "", windows_interface.InterfaceParameterBridgeKind.Value) }), "Int32"), windows_interface.InterfaceMethodSchema("Clear", Array<windows_interface.InterfaceParameterSchema>(0, { _ => windows_interface.InterfaceParameterSchema("", "", "", windows_interface.InterfaceParameterBridgeKind.Value) }), "Int32"), windows_interface.InterfaceMethodSchema("GetMany", [windows_interface.InterfaceParameterSchema("startIndex", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("itemsSize", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("items", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("result", "CPointer<UInt32>", "OutSlot<UInt32>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("ReplaceAll", [windows_interface.InterfaceParameterSchema("itemsSize", "UInt32", "UInt32", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("items", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
         schema.runtimeTypeContract = Some(Windows_Foundation_Collections_IVector_1<T>.runtimeType())
         return schema
     }
@@ -5445,7 +6810,7 @@ public open class Windows_Foundation_Collections_IVector_1<T> <: windows_interfa
         windows_core.HRESULT(v.GetView(liveRaw, result))
     }
 
-    public unsafe func IndexOf(value: CPointer<Unit>, index: CPointer<CPointer<Unit>>, result: CPointer<Bool>): windows_core.HRESULT {
+    public unsafe func IndexOf(value: CPointer<Unit>, index: CPointer<UInt32>, result: CPointer<Bool>): windows_core.HRESULT {
         let liveRaw = asRaw()
         if (liveRaw.isNull()) {
             return windows_core.E_POINTER
@@ -5508,7 +6873,7 @@ public open class Windows_Foundation_Collections_IVector_1<T> <: windows_interfa
         windows_core.HRESULT(v.Clear(liveRaw))
     }
 
-    public unsafe func GetMany(startIndex: UInt32, itemsSize: CPointer<UInt32>, items: CPointer<CPointer<CPointer<Unit>>>, result: CPointer<UInt32>): windows_core.HRESULT {
+    public unsafe func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>, result: CPointer<UInt32>): windows_core.HRESULT {
         let liveRaw = asRaw()
         if (liveRaw.isNull()) {
             return windows_core.E_POINTER
@@ -5640,8 +7005,14 @@ public interface Windows_Foundation_Collections_MapChangedEventHandler_2Invoker<
     }
 
     func __winrtThunk_Invoke(sender: CPointer<Unit>, event: CPointer<Unit>): Int32 {
-        this.Invoke(sender, event)
-        return windows_core.S_OK.value
+        try {
+            this.Invoke(sender, event)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -5795,8 +7166,14 @@ public interface Windows_Foundation_Collections_VectorChangedEventHandler_1Invok
     }
 
     func __winrtThunk_Invoke(sender: CPointer<Unit>, event: CPointer<Unit>): Int32 {
-        this.Invoke(sender, event)
-        return windows_core.S_OK.value
+        try {
+            this.Invoke(sender, event)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -6058,8 +7435,14 @@ public interface Windows_Foundation_DeferralCompletedHandlerInvoker <: Windows_F
     }
 
     func __winrtThunk_Invoke(): Int32 {
-        this.Invoke()
-        return windows_core.S_OK.value
+        try {
+            this.Invoke()
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -6213,8 +7596,14 @@ public interface Windows_Foundation_EventHandler_1Invoker<T> <: Windows_Foundati
     }
 
     func __winrtThunk_Invoke(sender: CPointer<Unit>, args: CPointer<Unit>): Int32 {
-        this.Invoke(sender, args)
-        return windows_core.S_OK.value
+        try {
+            this.Invoke(sender, args)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -6283,7 +7672,7 @@ public struct Windows_Foundation_FoundationContract {
 public type Windows_Foundation_HResult = Int32
 
 // Windows.Foundation.IAsyncAction (synthetic:Windows_Foundation_IAsyncAction)
-@Interface["5a648006-843a-4da9-865b-9d26e5dfad7b", "Windows.Foundation.IAsyncAction"]
+@Interface["5a648006-843a-4da9-865b-9d26e5dfad7b", "Windows.Foundation.IAsyncAction", "Completed.handler=Com"]
 public interface Windows_Foundation_IAsyncAction <: IInspectable {
     func SetCompleted(handler: CPointer<Unit>): Int32
     func Completed(handler: CPointer<CPointer<Unit>>): Int32
@@ -6301,14 +7690,31 @@ public interface Windows_Foundation_IAsyncInfo <: IInspectable {
 }
 
 // Windows.Foundation.IAsyncOperationWithProgress`2 (synthetic:Windows_Foundation_IAsyncOperationWithProgress_2)
+type Windows_Foundation_IAsyncOperationWithProgress_2ExceptionBase = Exception
+
 @C
 public struct Windows_Foundation_IAsyncOperationWithProgress_2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var SetProgress: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var Progress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
+    public var Progress: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
     public var SetCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var Completed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var GetResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
+    public var Completed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var GetResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
 
     public init() {}
 
@@ -6318,32 +7724,158 @@ public struct Windows_Foundation_IAsyncOperationWithProgress_2Vtbl {
         vtbl.base_ = windows_core.buildIInspectableVtbl()
         vtbl.SetProgress = { instanceRaw, handler =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_IAsyncOperationWithProgress_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.SetProgress(handler)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.SetProgress(handler)
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_IAsyncOperationWithProgress_2ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Progress = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_IAsyncOperationWithProgress_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Progress(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Progress(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_IAsyncOperationWithProgress_2ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.SetCompleted = { instanceRaw, handler =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_IAsyncOperationWithProgress_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.SetCompleted(handler)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.SetCompleted(handler)
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_IAsyncOperationWithProgress_2ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Completed = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_IAsyncOperationWithProgress_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Completed(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Completed(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_IAsyncOperationWithProgress_2ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.GetResults = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_IAsyncOperationWithProgress_2_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.GetResults(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.GetResults(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_IAsyncOperationWithProgress_2ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl
@@ -6388,7 +7920,7 @@ public open class Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TPro
     }
 
     public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.IAsyncOperationWithProgress", Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_IAsyncOperationWithProgress_2Vtbl", "Windows_Foundation_IAsyncOperationWithProgress_2", "Windows_Foundation_IAsyncOperationWithProgress_2_Impl", [windows_interface.InterfaceMethodSchema("SetProgress", [windows_interface.InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Progress", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("SetCompleted", [windows_interface.InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Completed", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("GetResults", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.IAsyncOperationWithProgress", Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_IAsyncOperationWithProgress_2Vtbl", "Windows_Foundation_IAsyncOperationWithProgress_2", "Windows_Foundation_IAsyncOperationWithProgress_2_Impl", [windows_interface.InterfaceMethodSchema("SetProgress", [windows_interface.InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Progress", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Windows_Foundation_AsyncOperationProgressHandler_2<TResult, TProgress>>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("SetCompleted", [windows_interface.InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Completed", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2<TResult, TProgress>>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("GetResults", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TResult>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>.runtimeType())
         return schema
     }
@@ -6492,12 +8024,24 @@ private class OwnedWindows_Foundation_IAsyncOperationWithProgress_2<TResult, TPr
 
 
 // Windows.Foundation.IAsyncOperation`1 (synthetic:Windows_Foundation_IAsyncOperation_1)
+type Windows_Foundation_IAsyncOperation_1ExceptionBase = Exception
+
 @C
 public struct Windows_Foundation_IAsyncOperation_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
     public var SetCompleted: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var Completed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
-    public var GetResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
+    public var Completed: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
+    public var GetResults: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
 
     public init() {}
 
@@ -6507,20 +8051,101 @@ public struct Windows_Foundation_IAsyncOperation_1Vtbl {
         vtbl.base_ = windows_core.buildIInspectableVtbl()
         vtbl.SetCompleted = { instanceRaw, handler =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_IAsyncOperation_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.SetCompleted(handler)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    try {
+                        let resultHr__ = impl.SetCompleted(handler)
+                        resultHr__
+                    } catch (error: windows_core.WindowsException) {
+                        error.code().value
+                    } catch (_: Windows_Foundation_IAsyncOperation_1ExceptionBase) {
+                        windows_core.E_FAIL.value
+                    }
+                case None =>
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.Completed = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_IAsyncOperation_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Completed(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Completed(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_IAsyncOperation_1ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl.GetResults = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_IAsyncOperation_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.GetResults(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.GetResults(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_IAsyncOperation_1ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl
@@ -6563,7 +8188,7 @@ public open class Windows_Foundation_IAsyncOperation_1<TResult> <: windows_inter
     }
 
     public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.IAsyncOperation", Windows_Foundation_IAsyncOperation_1<TResult>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_IAsyncOperation_1Vtbl", "Windows_Foundation_IAsyncOperation_1", "Windows_Foundation_IAsyncOperation_1_Impl", [windows_interface.InterfaceMethodSchema("SetCompleted", [windows_interface.InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Completed", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("GetResults", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.IAsyncOperation", Windows_Foundation_IAsyncOperation_1<TResult>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_IAsyncOperation_1Vtbl", "Windows_Foundation_IAsyncOperation_1", "Windows_Foundation_IAsyncOperation_1_Impl", [windows_interface.InterfaceMethodSchema("SetCompleted", [windows_interface.InterfaceParameterSchema("handler", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32"), windows_interface.InterfaceMethodSchema("Completed", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<Windows_Foundation_AsyncOperationCompletedHandler_1<TResult>>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32"), windows_interface.InterfaceMethodSchema("GetResults", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<TResult>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(Windows_Foundation_IAsyncOperation_1<TResult>.runtimeType())
         return schema
     }
@@ -6659,13 +8284,13 @@ public interface Windows_Foundation_IDeferral <: IInspectable {
 }
 
 // Windows.Foundation.IDeferralFactory (synthetic:Windows_Foundation_IDeferralFactory)
-@Interface["65a1ecc5-3fb5-4832-8ca9-f061b281d13a", "Windows.Foundation.IDeferralFactory"]
+@Interface["65a1ecc5-3fb5-4832-8ca9-f061b281d13a", "Windows.Foundation.IDeferralFactory", "Create.result=Com"]
 public interface Windows_Foundation_IDeferralFactory <: IInspectable {
     func Create(handler: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Foundation.IMemoryBuffer (synthetic:Windows_Foundation_IMemoryBuffer)
-@Interface["fbc4dd2a-245b-11e4-af98-689423260cf8", "Windows.Foundation.IMemoryBuffer"]
+@Interface["fbc4dd2a-245b-11e4-af98-689423260cf8", "Windows.Foundation.IMemoryBuffer", "CreateReference.reference=Com"]
 public interface Windows_Foundation_IMemoryBuffer <: IInspectable {
     func CreateReference(reference: CPointer<CPointer<Unit>>): Int32
 }
@@ -6679,7 +8304,7 @@ public interface Windows_Foundation_IMemoryBufferReference <: IInspectable {
 }
 
 // Windows.Foundation.IPropertyValue (synthetic:Windows_Foundation_IPropertyValue)
-@Interface["4bd682dd-7554-40e9-9a9b-82654ede7e62", "Windows.Foundation.IPropertyValue"]
+@Interface["4bd682dd-7554-40e9-9a9b-82654ede7e62", "Windows.Foundation.IPropertyValue", "GetString.value=HString;GetUInt8Array.value=Array<UInt8>;GetInt16Array.value=Array<Int16>;GetUInt16Array.value=Array<UInt16>;GetInt32Array.value=Array<Int32>;GetUInt32Array.value=Array<UInt32>;GetInt64Array.value=Array<Int64>;GetUInt64Array.value=Array<UInt64>;GetSingleArray.value=Array<Float32>;GetDoubleArray.value=Array<Float64>;GetChar16Array.value=Array<UInt16>;GetBooleanArray.value=Array<Bool>;GetStringArray.value=Array<windows_core.HString>;GetInspectableArray.value=Array<windows_interface.IInspectable>;GetGuidArray.value=Array<windows_core.GuidValue>;GetDateTimeArray.value=Array<Windows_Foundation_DateTime>;GetTimeSpanArray.value=Array<Windows_Foundation_TimeSpan>;GetPointArray.value=Array<Windows_Foundation_Point>;GetSizeArray.value=Array<Windows_Foundation_Size>;GetRectArray.value=Array<Windows_Foundation_Rect>"]
 public interface Windows_Foundation_IPropertyValue <: IInspectable {
     func Type(value: CPointer<Int32>): Int32
     func IsNumericScalar(value: CPointer<Bool>): Int32
@@ -6723,10 +8348,17 @@ public interface Windows_Foundation_IPropertyValue <: IInspectable {
 }
 
 // Windows.Foundation.IReference`1 (synthetic:Windows_Foundation_IReference_1)
+type Windows_Foundation_IReference_1ExceptionBase = Exception
+
 @C
 public struct Windows_Foundation_IReference_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
-    public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => windows_core.E_NOTIMPL.value }
+    public var Value: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        windows_core.E_NOTIMPL.value
+    }
 
     public init() {}
 
@@ -6736,8 +8368,44 @@ public struct Windows_Foundation_IReference_1Vtbl {
         vtbl.base_ = windows_core.buildIInspectableVtbl()
         vtbl.Value = { instanceRaw, result =>
             match (unsafe { windows_core.asImplFromRaw<Windows_Foundation_IReference_1_ImplErased>(instanceRaw) }) {
-                case Some(impl) => impl.Value(result)
-                case None => windows_core.E_NOINTERFACE.value
+                case Some(impl) =>
+                    if (result.isNull()) {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        windows_core.E_POINTER.value
+                    } else {
+                        if (result.isNotNull()) {
+                            unsafe { result.write(CPointer<Unit>()) }
+                        }
+                        try {
+                            let resultHr__ = impl.Value(result)
+                            if (windows_core.HRESULT(resultHr__).failed()) {
+                                windows_core.releaseFailedComOutSlot(result)
+                                if (result.isNotNull()) {
+                                    unsafe { result.write(CPointer<Unit>()) }
+                                }
+                            }
+                            resultHr__
+                        } catch (error: windows_core.WindowsException) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            error.code().value
+                        } catch (_: Windows_Foundation_IReference_1ExceptionBase) {
+                            windows_core.releaseFailedComOutSlot(result)
+                            if (result.isNotNull()) {
+                                unsafe { result.write(CPointer<Unit>()) }
+                            }
+                            windows_core.E_FAIL.value
+                        }
+                    }
+                case None =>
+                    if (result.isNotNull()) {
+                        unsafe { result.write(CPointer<Unit>()) }
+                    }
+                    windows_core.E_NOINTERFACE.value
             }
         }
         vtbl
@@ -6778,7 +8446,7 @@ public open class Windows_Foundation_IReference_1<T> <: windows_interface.Interf
     }
 
     public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.IReference", Windows_Foundation_IReference_1<T>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_IReference_1Vtbl", "Windows_Foundation_IReference_1", "Windows_Foundation_IReference_1_Impl", [windows_interface.InterfaceMethodSchema("Value", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "CPointer<CPointer<Unit>>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        var schema = windows_interface.InterfaceDescriptorSchema("Windows.Foundation.IReference", Windows_Foundation_IReference_1<T>.iid(), windows_interface.IInspectable.descriptorSchema(), "Windows_Foundation_IReference_1Vtbl", "Windows_Foundation_IReference_1", "Windows_Foundation_IReference_1_Impl", [windows_interface.InterfaceMethodSchema("Value", [windows_interface.InterfaceParameterSchema("result", "CPointer<CPointer<Unit>>", "OutSlot<T>", windows_interface.InterfaceParameterBridgeKind.OutSlot)], "Int32")])
         schema.runtimeTypeContract = Some(Windows_Foundation_IReference_1<T>.runtimeType())
         return schema
     }
@@ -6844,20 +8512,20 @@ private class OwnedWindows_Foundation_IReference_1<T> <: Windows_Foundation_IRef
 
 
 // Windows.Foundation.IStringable (synthetic:Windows_Foundation_IStringable)
-@Interface["96369f54-8eb6-48f0-abce-c1b211e627c3", "Windows.Foundation.IStringable"]
+@Interface["96369f54-8eb6-48f0-abce-c1b211e627c3", "Windows.Foundation.IStringable", "ToString.value=HString"]
 public interface Windows_Foundation_IStringable <: IInspectable {
     func ToString(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Foundation.IUriEscapeStatics (synthetic:Windows_Foundation_IUriEscapeStatics)
-@Interface["c1d432ba-c824-4452-a7fd-512bc3bbe9a1", "Windows.Foundation.IUriEscapeStatics"]
+@Interface["c1d432ba-c824-4452-a7fd-512bc3bbe9a1", "Windows.Foundation.IUriEscapeStatics", "UnescapeComponent.value=HString;EscapeComponent.value=HString"]
 public interface Windows_Foundation_IUriEscapeStatics <: IInspectable {
     func UnescapeComponent(toUnescape: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
     func EscapeComponent(toEscape: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Foundation.IUriRuntimeClass (synthetic:Windows_Foundation_IUriRuntimeClass)
-@Interface["9e365e57-48b2-4160-956f-c7385120bbfc", "Windows.Foundation.IUriRuntimeClass"]
+@Interface["9e365e57-48b2-4160-956f-c7385120bbfc", "Windows.Foundation.IUriRuntimeClass", "AbsoluteUri.value=HString;DisplayUri.value=HString;Domain.value=HString;Extension.value=HString;Fragment.value=HString;Host.value=HString;Password.value=HString;Path.value=HString;Query.value=HString;QueryParsed.ppWwwFormUrlDecoder=Com;RawUri.value=HString;SchemeName.value=HString;UserName.value=HString;CombineUri.instance=Com"]
 public interface Windows_Foundation_IUriRuntimeClass <: IInspectable {
     func AbsoluteUri(value: CPointer<CPointer<Unit>>): Int32
     func DisplayUri(value: CPointer<CPointer<Unit>>): Int32
@@ -6879,34 +8547,34 @@ public interface Windows_Foundation_IUriRuntimeClass <: IInspectable {
 }
 
 // Windows.Foundation.IUriRuntimeClassFactory (synthetic:Windows_Foundation_IUriRuntimeClassFactory)
-@Interface["44a9796f-723e-4fdf-a218-033e75b0c084", "Windows.Foundation.IUriRuntimeClassFactory"]
+@Interface["44a9796f-723e-4fdf-a218-033e75b0c084", "Windows.Foundation.IUriRuntimeClassFactory", "CreateUri.instance=Com;CreateWithRelativeUri.instance=Com"]
 public interface Windows_Foundation_IUriRuntimeClassFactory <: IInspectable {
     func CreateUri(uri: CPointer<Unit>, instance: CPointer<CPointer<Unit>>): Int32
     func CreateWithRelativeUri(baseUri: CPointer<Unit>, relativeUri: CPointer<Unit>, instance: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Foundation.IUriRuntimeClassWithAbsoluteCanonicalUri (synthetic:Windows_Foundation_IUriRuntimeClassWithAbsoluteCanonicalUri)
-@Interface["758d9661-221c-480f-a339-50656673f46f", "Windows.Foundation.IUriRuntimeClassWithAbsoluteCanonicalUri"]
+@Interface["758d9661-221c-480f-a339-50656673f46f", "Windows.Foundation.IUriRuntimeClassWithAbsoluteCanonicalUri", "AbsoluteCanonicalUri.value=HString;DisplayIri.value=HString"]
 public interface Windows_Foundation_IUriRuntimeClassWithAbsoluteCanonicalUri <: IInspectable {
     func AbsoluteCanonicalUri(value: CPointer<CPointer<Unit>>): Int32
     func DisplayIri(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Foundation.IWwwFormUrlDecoderEntry (synthetic:Windows_Foundation_IWwwFormUrlDecoderEntry)
-@Interface["125e7431-f678-4e8e-b670-20a9b06c512d", "Windows.Foundation.IWwwFormUrlDecoderEntry"]
+@Interface["125e7431-f678-4e8e-b670-20a9b06c512d", "Windows.Foundation.IWwwFormUrlDecoderEntry", "Name.value=HString;Value.value=HString"]
 public interface Windows_Foundation_IWwwFormUrlDecoderEntry <: IInspectable {
     func Name(value: CPointer<CPointer<Unit>>): Int32
     func Value(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Foundation.IWwwFormUrlDecoderRuntimeClass (synthetic:Windows_Foundation_IWwwFormUrlDecoderRuntimeClass)
-@Interface["d45a0451-f225-4542-9296-0e1df5d254df", "Windows.Foundation.IWwwFormUrlDecoderRuntimeClass"]
+@Interface["d45a0451-f225-4542-9296-0e1df5d254df", "Windows.Foundation.IWwwFormUrlDecoderRuntimeClass", "GetFirstValueByName.phstrValue=HString"]
 public interface Windows_Foundation_IWwwFormUrlDecoderRuntimeClass <: IInspectable {
     func GetFirstValueByName(name: CPointer<Unit>, phstrValue: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Foundation.IWwwFormUrlDecoderRuntimeClassFactory (synthetic:Windows_Foundation_IWwwFormUrlDecoderRuntimeClassFactory)
-@Interface["5b8c6b3d-24ae-41b5-a1bf-f0c3d544845b", "Windows.Foundation.IWwwFormUrlDecoderRuntimeClassFactory"]
+@Interface["5b8c6b3d-24ae-41b5-a1bf-f0c3d544845b", "Windows.Foundation.IWwwFormUrlDecoderRuntimeClassFactory", "CreateWwwFormUrlDecoder.instance=Com"]
 public interface Windows_Foundation_IWwwFormUrlDecoderRuntimeClassFactory <: IInspectable {
     func CreateWwwFormUrlDecoder(query: CPointer<Unit>, instance: CPointer<CPointer<Unit>>): Int32
 }
@@ -7148,8 +8816,14 @@ public interface Windows_Foundation_TypedEventHandler_2Invoker<TSender, TResult>
     }
 
     func __winrtThunk_Invoke(sender: CPointer<Unit>, args: CPointer<Unit>): Int32 {
-        this.Invoke(sender, args)
-        return windows_core.S_OK.value
+        try {
+            this.Invoke(sender, args)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -8079,7 +9753,7 @@ public interface Windows_Graphics_Imaging_IBitmapBuffer <: IInspectable {
 }
 
 // Windows.Graphics.Imaging.ISoftwareBitmap (synthetic:Windows_Graphics_Imaging_ISoftwareBitmap)
-@Interface["689e0708-7eef-483f-963f-da938818e073", "Windows.Graphics.Imaging.ISoftwareBitmap"]
+@Interface["689e0708-7eef-483f-963f-da938818e073", "Windows.Graphics.Imaging.ISoftwareBitmap", "LockBuffer.value=Com;GetReadOnlyView.value=Com"]
 public interface Windows_Graphics_Imaging_ISoftwareBitmap <: IInspectable {
     func BitmapPixelFormat(value: CPointer<Int32>): Int32
     func BitmapAlphaMode(value: CPointer<Int32>): Int32
@@ -8098,14 +9772,14 @@ public interface Windows_Graphics_Imaging_ISoftwareBitmap <: IInspectable {
 }
 
 // Windows.Graphics.Imaging.ISoftwareBitmapFactory (synthetic:Windows_Graphics_Imaging_ISoftwareBitmapFactory)
-@Interface["c99feb69-2d62-4d47-a6b3-4fdb6a07fdf8", "Windows.Graphics.Imaging.ISoftwareBitmapFactory"]
+@Interface["c99feb69-2d62-4d47-a6b3-4fdb6a07fdf8", "Windows.Graphics.Imaging.ISoftwareBitmapFactory", "Create.value=Com;CreateWithAlpha.value=Com"]
 public interface Windows_Graphics_Imaging_ISoftwareBitmapFactory <: IInspectable {
     func Create(format: Int32, width: Int32, height: Int32, value: CPointer<CPointer<Unit>>): Int32
     func CreateWithAlpha(format: Int32, width: Int32, height: Int32, alpha: Int32, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Graphics.Imaging.ISoftwareBitmapStatics (synthetic:Windows_Graphics_Imaging_ISoftwareBitmapStatics)
-@Interface["df0385db-672f-4a9d-806e-c2442f343e86", "Windows.Graphics.Imaging.ISoftwareBitmapStatics"]
+@Interface["df0385db-672f-4a9d-806e-c2442f343e86", "Windows.Graphics.Imaging.ISoftwareBitmapStatics", "Copy.value=Com;Convert.value=Com;ConvertWithAlpha.value=Com;CreateCopyFromBuffer.value=Com;CreateCopyWithAlphaFromBuffer.value=Com;CreateCopyFromSurfaceAsync.value=Com;CreateCopyWithAlphaFromSurfaceAsync.value=Com"]
 public interface Windows_Graphics_Imaging_ISoftwareBitmapStatics <: IInspectable {
     func Copy(source: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
     func Convert(source: CPointer<Unit>, format: Int32, value: CPointer<CPointer<Unit>>): Int32
@@ -8862,7 +10536,7 @@ public interface Windows_Storage_FileProperties_IBasicProperties <: IInspectable
 }
 
 // Windows.Storage.FileProperties.IDocumentProperties (synthetic:Windows_Storage_FileProperties_IDocumentProperties)
-@Interface["7eab19bc-1821-4923-b4a9-0aea404d0070", "Windows.Storage.FileProperties.IDocumentProperties"]
+@Interface["7eab19bc-1821-4923-b4a9-0aea404d0070", "Windows.Storage.FileProperties.IDocumentProperties", "Author.value=Com;Title.value=HString;Keywords.value=Com;Comment.value=HString"]
 public interface Windows_Storage_FileProperties_IDocumentProperties <: IInspectable {
     func Author(value: CPointer<CPointer<Unit>>): Int32
     func Title(value: CPointer<CPointer<Unit>>): Int32
@@ -8873,7 +10547,7 @@ public interface Windows_Storage_FileProperties_IDocumentProperties <: IInspecta
 }
 
 // Windows.Storage.FileProperties.IImageProperties (synthetic:Windows_Storage_FileProperties_IImageProperties)
-@Interface["523c9424-fcff-4275-afee-ecdb9ab47973", "Windows.Storage.FileProperties.IImageProperties"]
+@Interface["523c9424-fcff-4275-afee-ecdb9ab47973", "Windows.Storage.FileProperties.IImageProperties", "Keywords.value=Com;Title.value=HString;Latitude.value=Com;Longitude.value=Com;CameraManufacturer.value=HString;CameraModel.value=HString;PeopleNames.value=Com"]
 public interface Windows_Storage_FileProperties_IImageProperties <: IInspectable {
     func Rating(value: CPointer<UInt32>): Int32
     func SetRating(value: UInt32): Int32
@@ -8895,7 +10569,7 @@ public interface Windows_Storage_FileProperties_IImageProperties <: IInspectable
 }
 
 // Windows.Storage.FileProperties.IMusicProperties (synthetic:Windows_Storage_FileProperties_IMusicProperties)
-@Interface["bc8aab62-66ec-419a-bc5d-ca65a4cb46da", "Windows.Storage.FileProperties.IMusicProperties"]
+@Interface["bc8aab62-66ec-419a-bc5d-ca65a4cb46da", "Windows.Storage.FileProperties.IMusicProperties", "Album.value=HString;Artist.value=HString;Genre.value=Com;Title.value=HString;AlbumArtist.value=HString;Composers.value=Com;Conductors.value=Com;Subtitle.value=HString;Producers.value=Com;Publisher.value=HString;Writers.value=Com"]
 public interface Windows_Storage_FileProperties_IMusicProperties <: IInspectable {
     func Album(value: CPointer<CPointer<Unit>>): Int32
     func SetAlbum(value: CPointer<Unit>): Int32
@@ -8925,7 +10599,7 @@ public interface Windows_Storage_FileProperties_IMusicProperties <: IInspectable
 }
 
 // Windows.Storage.FileProperties.IStorageItemContentProperties (synthetic:Windows_Storage_FileProperties_IStorageItemContentProperties)
-@Interface["05294bad-bc38-48bf-85d7-770e0e2ae0ba", "Windows.Storage.FileProperties.IStorageItemContentProperties"]
+@Interface["05294bad-bc38-48bf-85d7-770e0e2ae0ba", "Windows.Storage.FileProperties.IStorageItemContentProperties", "GetMusicPropertiesAsync.operation=Com;GetVideoPropertiesAsync.operation=Com;GetImagePropertiesAsync.operation=Com;GetDocumentPropertiesAsync.operation=Com"]
 public interface Windows_Storage_FileProperties_IStorageItemContentProperties <: IInspectable {
     func GetMusicPropertiesAsync(operation: CPointer<CPointer<Unit>>): Int32
     func GetVideoPropertiesAsync(operation: CPointer<CPointer<Unit>>): Int32
@@ -8934,7 +10608,7 @@ public interface Windows_Storage_FileProperties_IStorageItemContentProperties <:
 }
 
 // Windows.Storage.FileProperties.IStorageItemExtraProperties (synthetic:Windows_Storage_FileProperties_IStorageItemExtraProperties)
-@Interface["c54361b2-54cd-432b-bdbc-4b19c4b470d7", "Windows.Storage.FileProperties.IStorageItemExtraProperties"]
+@Interface["c54361b2-54cd-432b-bdbc-4b19c4b470d7", "Windows.Storage.FileProperties.IStorageItemExtraProperties", "RetrievePropertiesAsync.operation=Com;SavePropertiesAsync.operation=Com;SavePropertiesAsyncOverloadDefault.operation=Com"]
 public interface Windows_Storage_FileProperties_IStorageItemExtraProperties <: IInspectable {
     func RetrievePropertiesAsync(propertiesToRetrieve: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
     func SavePropertiesAsync(propertiesToSave: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
@@ -8951,7 +10625,7 @@ public interface Windows_Storage_FileProperties_IThumbnailProperties <: IInspect
 }
 
 // Windows.Storage.FileProperties.IVideoProperties (synthetic:Windows_Storage_FileProperties_IVideoProperties)
-@Interface["719ae507-68de-4db8-97de-49998c059f2f", "Windows.Storage.FileProperties.IVideoProperties"]
+@Interface["719ae507-68de-4db8-97de-49998c059f2f", "Windows.Storage.FileProperties.IVideoProperties", "Keywords.value=Com;Latitude.value=Com;Longitude.value=Com;Title.value=HString;Subtitle.value=HString;Producers.value=Com;Publisher.value=HString;Writers.value=Com;Directors.value=Com"]
 public interface Windows_Storage_FileProperties_IVideoProperties <: IInspectable {
     func Rating(value: CPointer<UInt32>): Int32
     func SetRating(value: UInt32): Int32
@@ -10403,7 +12077,7 @@ extend Windows_Storage_FileProperties_VideoProperties <: windows_core.HandleWinr
 }
 
 // Windows.Storage.IStorageFile (synthetic:Windows_Storage_IStorageFile)
-@Interface["fa3f6186-4214-428c-a64c-14c9ac7315ea", "Windows.Storage.IStorageFile"]
+@Interface["fa3f6186-4214-428c-a64c-14c9ac7315ea", "Windows.Storage.IStorageFile", "FileType.value=HString;ContentType.value=HString;OpenAsync.operation=Com;OpenTransactedWriteAsync.operation=Com;CopyOverloadDefaultNameAndOptions.operation=Com;CopyOverloadDefaultOptions.operation=Com;CopyOverload.operation=Com;CopyAndReplaceAsync.operation=Com;MoveOverloadDefaultNameAndOptions.operation=Com;MoveOverloadDefaultOptions.operation=Com;MoveOverload.operation=Com;MoveAndReplaceAsync.operation=Com"]
 public interface Windows_Storage_IStorageFile <: IInspectable {
     func FileType(value: CPointer<CPointer<Unit>>): Int32
     func ContentType(value: CPointer<CPointer<Unit>>): Int32
@@ -10420,7 +12094,7 @@ public interface Windows_Storage_IStorageFile <: IInspectable {
 }
 
 // Windows.Storage.IStorageFile2 (synthetic:Windows_Storage_IStorageFile2)
-@Interface["954e4bcf-0a77-42fb-b777-c2ed58a52e44", "Windows.Storage.IStorageFile2"]
+@Interface["954e4bcf-0a77-42fb-b777-c2ed58a52e44", "Windows.Storage.IStorageFile2", "OpenWithOptionsAsync.operation=Com;OpenTransactedWriteWithOptionsAsync.operation=Com"]
 public interface Windows_Storage_IStorageFile2 <: IInspectable {
     func OpenWithOptionsAsync(accessMode: Int32, options: UInt32, operation: CPointer<CPointer<Unit>>): Int32
     func OpenTransactedWriteWithOptionsAsync(options: UInt32, operation: CPointer<CPointer<Unit>>): Int32
@@ -10433,7 +12107,7 @@ public interface Windows_Storage_IStorageFilePropertiesWithAvailability <: IInsp
 }
 
 // Windows.Storage.IStorageFileStatics (synthetic:Windows_Storage_IStorageFileStatics)
-@Interface["5984c710-daf2-43c8-8bb4-a4d3eacfd03f", "Windows.Storage.IStorageFileStatics"]
+@Interface["5984c710-daf2-43c8-8bb4-a4d3eacfd03f", "Windows.Storage.IStorageFileStatics", "GetFileFromPathAsync.operation=Com;GetFileFromApplicationUriAsync.operation=Com;CreateStreamedFileAsync.operation=Com;ReplaceWithStreamedFileAsync.operation=Com;CreateStreamedFileFromUriAsync.operation=Com;ReplaceWithStreamedFileFromUriAsync.operation=Com"]
 public interface Windows_Storage_IStorageFileStatics <: IInspectable {
     func GetFileFromPathAsync(path: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
     func GetFileFromApplicationUriAsync(uri: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
@@ -10444,13 +12118,13 @@ public interface Windows_Storage_IStorageFileStatics <: IInspectable {
 }
 
 // Windows.Storage.IStorageFileStatics2 (synthetic:Windows_Storage_IStorageFileStatics2)
-@Interface["5c76a781-212e-4af9-8f04-740cae108974", "Windows.Storage.IStorageFileStatics2"]
+@Interface["5c76a781-212e-4af9-8f04-740cae108974", "Windows.Storage.IStorageFileStatics2", "GetFileFromPathForUserAsync.operation=Com"]
 public interface Windows_Storage_IStorageFileStatics2 <: IInspectable {
     func GetFileFromPathForUserAsync(user: CPointer<Unit>, path: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageFolder (synthetic:Windows_Storage_IStorageFolder)
-@Interface["72d1cb78-b3ef-4f75-a80b-6fd9dae2944b", "Windows.Storage.IStorageFolder"]
+@Interface["72d1cb78-b3ef-4f75-a80b-6fd9dae2944b", "Windows.Storage.IStorageFolder", "CreateFileAsyncOverloadDefaultOptions.operation=Com;CreateFileAsync.operation=Com;CreateFolderAsyncOverloadDefaultOptions.operation=Com;CreateFolderAsync.operation=Com;GetFileAsync.operation=Com;GetFolderAsync.operation=Com;GetItemAsync.operation=Com;GetFilesAsyncOverloadDefaultOptionsStartAndCount.operation=Com;GetFoldersAsyncOverloadDefaultOptionsStartAndCount.operation=Com;GetItemsAsyncOverloadDefaultStartAndCount.operation=Com"]
 public interface Windows_Storage_IStorageFolder <: IInspectable {
     func CreateFileAsyncOverloadDefaultOptions(desiredName: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
     func CreateFileAsync(desiredName: CPointer<Unit>, options: Int32, operation: CPointer<CPointer<Unit>>): Int32
@@ -10465,31 +12139,31 @@ public interface Windows_Storage_IStorageFolder <: IInspectable {
 }
 
 // Windows.Storage.IStorageFolder2 (synthetic:Windows_Storage_IStorageFolder2)
-@Interface["e827e8b9-08d9-4a8e-a0ac-fe5ed3cbbbd3", "Windows.Storage.IStorageFolder2"]
+@Interface["e827e8b9-08d9-4a8e-a0ac-fe5ed3cbbbd3", "Windows.Storage.IStorageFolder2", "TryGetItemAsync.operation=Com"]
 public interface Windows_Storage_IStorageFolder2 <: IInspectable {
     func TryGetItemAsync(name: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageFolder3 (synthetic:Windows_Storage_IStorageFolder3)
-@Interface["9f617899-bde1-4124-aeb3-b06ad96f98d4", "Windows.Storage.IStorageFolder3"]
+@Interface["9f617899-bde1-4124-aeb3-b06ad96f98d4", "Windows.Storage.IStorageFolder3", "TryGetChangeTracker.result=Com"]
 public interface Windows_Storage_IStorageFolder3 <: IInspectable {
     func TryGetChangeTracker(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageFolderStatics (synthetic:Windows_Storage_IStorageFolderStatics)
-@Interface["08f327ff-85d5-48b9-aee9-28511e339f9f", "Windows.Storage.IStorageFolderStatics"]
+@Interface["08f327ff-85d5-48b9-aee9-28511e339f9f", "Windows.Storage.IStorageFolderStatics", "GetFolderFromPathAsync.operation=Com"]
 public interface Windows_Storage_IStorageFolderStatics <: IInspectable {
     func GetFolderFromPathAsync(path: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageFolderStatics2 (synthetic:Windows_Storage_IStorageFolderStatics2)
-@Interface["b4656dc3-71d2-467d-8b29-371f0f62bf6f", "Windows.Storage.IStorageFolderStatics2"]
+@Interface["b4656dc3-71d2-467d-8b29-371f0f62bf6f", "Windows.Storage.IStorageFolderStatics2", "GetFolderFromPathForUserAsync.operation=Com"]
 public interface Windows_Storage_IStorageFolderStatics2 <: IInspectable {
     func GetFolderFromPathForUserAsync(user: CPointer<Unit>, path: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageItem (synthetic:Windows_Storage_IStorageItem)
-@Interface["4207a996-ca2f-42f7-bde8-8b10457a7f30", "Windows.Storage.IStorageItem"]
+@Interface["4207a996-ca2f-42f7-bde8-8b10457a7f30", "Windows.Storage.IStorageItem", "RenameAsyncOverloadDefaultOptions.operation=Com;RenameAsync.operation=Com;DeleteAsyncOverloadDefaultOptions.operation=Com;DeleteAsync.operation=Com;GetBasicPropertiesAsync.operation=Com;Name.value=HString;Path.value=HString"]
 public interface Windows_Storage_IStorageItem <: IInspectable {
     func RenameAsyncOverloadDefaultOptions(desiredName: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
     func RenameAsync(desiredName: CPointer<Unit>, option: Int32, operation: CPointer<CPointer<Unit>>): Int32
@@ -10504,14 +12178,14 @@ public interface Windows_Storage_IStorageItem <: IInspectable {
 }
 
 // Windows.Storage.IStorageItem2 (synthetic:Windows_Storage_IStorageItem2)
-@Interface["53f926d2-083c-4283-b45b-81c007237e44", "Windows.Storage.IStorageItem2"]
+@Interface["53f926d2-083c-4283-b45b-81c007237e44", "Windows.Storage.IStorageItem2", "GetParentAsync.operation=Com"]
 public interface Windows_Storage_IStorageItem2 <: IInspectable {
     func GetParentAsync(operation: CPointer<CPointer<Unit>>): Int32
     func IsEqual(item: CPointer<Unit>, value: CPointer<Bool>): Int32
 }
 
 // Windows.Storage.IStorageItemProperties (synthetic:Windows_Storage_IStorageItemProperties)
-@Interface["86664478-8029-46fe-a789-1c2f3e2ffb5c", "Windows.Storage.IStorageItemProperties"]
+@Interface["86664478-8029-46fe-a789-1c2f3e2ffb5c", "Windows.Storage.IStorageItemProperties", "GetThumbnailAsyncOverloadDefaultSizeDefaultOptions.operation=Com;GetThumbnailAsyncOverloadDefaultOptions.operation=Com;GetThumbnailAsync.operation=Com;DisplayName.value=HString;DisplayType.value=HString;FolderRelativeId.value=HString;Properties.value=Com"]
 public interface Windows_Storage_IStorageItemProperties <: IInspectable {
     func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: Int32, operation: CPointer<CPointer<Unit>>): Int32
     func GetThumbnailAsyncOverloadDefaultOptions(mode: Int32, requestedSize: UInt32, operation: CPointer<CPointer<Unit>>): Int32
@@ -10523,7 +12197,7 @@ public interface Windows_Storage_IStorageItemProperties <: IInspectable {
 }
 
 // Windows.Storage.IStorageItemProperties2 (synthetic:Windows_Storage_IStorageItemProperties2)
-@Interface["8e86a951-04b9-4bd2-929d-fef3f71621d0", "Windows.Storage.IStorageItemProperties2"]
+@Interface["8e86a951-04b9-4bd2-929d-fef3f71621d0", "Windows.Storage.IStorageItemProperties2", "GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions.operation=Com;GetScaledImageAsThumbnailAsyncOverloadDefaultOptions.operation=Com;GetScaledImageAsThumbnailAsync.operation=Com"]
 public interface Windows_Storage_IStorageItemProperties2 <: IInspectable {
     func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: Int32, operation: CPointer<CPointer<Unit>>): Int32
     func GetScaledImageAsThumbnailAsyncOverloadDefaultOptions(mode: Int32, requestedSize: UInt32, operation: CPointer<CPointer<Unit>>): Int32
@@ -10531,13 +12205,13 @@ public interface Windows_Storage_IStorageItemProperties2 <: IInspectable {
 }
 
 // Windows.Storage.IStorageItemPropertiesWithProvider (synthetic:Windows_Storage_IStorageItemPropertiesWithProvider)
-@Interface["861bf39b-6368-4dee-b40e-74684a5ce714", "Windows.Storage.IStorageItemPropertiesWithProvider"]
+@Interface["861bf39b-6368-4dee-b40e-74684a5ce714", "Windows.Storage.IStorageItemPropertiesWithProvider", "Provider.value=Com"]
 public interface Windows_Storage_IStorageItemPropertiesWithProvider <: IInspectable {
     func Provider(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageLibraryChange (synthetic:Windows_Storage_IStorageLibraryChange)
-@Interface["00980b23-2be2-4909-aa48-159f5203a51e", "Windows.Storage.IStorageLibraryChange"]
+@Interface["00980b23-2be2-4909-aa48-159f5203a51e", "Windows.Storage.IStorageLibraryChange", "Path.value=HString;PreviousPath.value=HString;GetStorageItemAsync.operation=Com"]
 public interface Windows_Storage_IStorageLibraryChange <: IInspectable {
     func ChangeType(value: CPointer<Int32>): Int32
     func Path(value: CPointer<CPointer<Unit>>): Int32
@@ -10547,7 +12221,7 @@ public interface Windows_Storage_IStorageLibraryChange <: IInspectable {
 }
 
 // Windows.Storage.IStorageLibraryChangeReader (synthetic:Windows_Storage_IStorageLibraryChangeReader)
-@Interface["f205bc83-fca2-41f9-8954-ee2e991eb96f", "Windows.Storage.IStorageLibraryChangeReader"]
+@Interface["f205bc83-fca2-41f9-8954-ee2e991eb96f", "Windows.Storage.IStorageLibraryChangeReader", "ReadBatchAsync.operation=Com;AcceptChangesAsync.operation=Com"]
 public interface Windows_Storage_IStorageLibraryChangeReader <: IInspectable {
     func ReadBatchAsync(operation: CPointer<CPointer<Unit>>): Int32
     func AcceptChangesAsync(operation: CPointer<CPointer<Unit>>): Int32
@@ -10560,7 +12234,7 @@ public interface Windows_Storage_IStorageLibraryChangeReader2 <: IInspectable {
 }
 
 // Windows.Storage.IStorageLibraryChangeTracker (synthetic:Windows_Storage_IStorageLibraryChangeTracker)
-@Interface["9e157316-6073-44f6-9681-7492d1286c90", "Windows.Storage.IStorageLibraryChangeTracker"]
+@Interface["9e157316-6073-44f6-9681-7492d1286c90", "Windows.Storage.IStorageLibraryChangeTracker", "GetChangeReader.value=Com"]
 public interface Windows_Storage_IStorageLibraryChangeTracker <: IInspectable {
     func GetChangeReader(value: CPointer<CPointer<Unit>>): Int32
     func Enable(): Int32
@@ -10582,20 +12256,20 @@ public interface Windows_Storage_IStorageLibraryChangeTrackerOptions <: IInspect
 }
 
 // Windows.Storage.IStorageProvider (synthetic:Windows_Storage_IStorageProvider)
-@Interface["e705eed4-d478-47d6-ba46-1a8ebe114a20", "Windows.Storage.IStorageProvider"]
+@Interface["e705eed4-d478-47d6-ba46-1a8ebe114a20", "Windows.Storage.IStorageProvider", "Id.value=HString;DisplayName.value=HString"]
 public interface Windows_Storage_IStorageProvider <: IInspectable {
     func Id(value: CPointer<CPointer<Unit>>): Int32
     func DisplayName(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageProvider2 (synthetic:Windows_Storage_IStorageProvider2)
-@Interface["010d1917-3404-414b-9fd7-cd44472eaa39", "Windows.Storage.IStorageProvider2"]
+@Interface["010d1917-3404-414b-9fd7-cd44472eaa39", "Windows.Storage.IStorageProvider2", "IsPropertySupportedForPartialFileAsync.operation=Com"]
 public interface Windows_Storage_IStorageProvider2 <: IInspectable {
     func IsPropertySupportedForPartialFileAsync(propertyCanonicalName: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageStreamTransaction (synthetic:Windows_Storage_IStorageStreamTransaction)
-@Interface["f67cf363-a53d-4d94-ae2c-67232d93acdd", "Windows.Storage.IStorageStreamTransaction"]
+@Interface["f67cf363-a53d-4d94-ae2c-67232d93acdd", "Windows.Storage.IStorageStreamTransaction", "Stream.value=Com;CommitAsync.operation=Com"]
 public interface Windows_Storage_IStorageStreamTransaction <: IInspectable {
     func Stream(value: CPointer<CPointer<Unit>>): Int32
     func CommitAsync(operation: CPointer<CPointer<Unit>>): Int32
@@ -10690,7 +12364,7 @@ public let Windows_Storage_Search_FolderDepth_Shallow = Windows_Storage_Search_F
 public let Windows_Storage_Search_FolderDepth_Deep = Windows_Storage_Search_FolderDepth(1)
 
 // Windows.Storage.Search.IQueryOptions (synthetic:Windows_Storage_Search_IQueryOptions)
-@Interface["1e5e46ee-0f45-4838-a8e9-d0479d446c30", "Windows.Storage.Search.IQueryOptions"]
+@Interface["1e5e46ee-0f45-4838-a8e9-d0479d446c30", "Windows.Storage.Search.IQueryOptions", "FileTypeFilter.value=Com;ApplicationSearchFilter.value=HString;UserSearchFilter.value=HString;Language.value=HString;SortOrder.value=Com;GroupPropertyName.value=HString;SaveToString.value=HString"]
 public interface Windows_Storage_Search_IQueryOptions <: IInspectable {
     func FileTypeFilter(value: CPointer<CPointer<Unit>>): Int32
     func FolderDepth(value: CPointer<Int32>): Int32
@@ -10713,33 +12387,33 @@ public interface Windows_Storage_Search_IQueryOptions <: IInspectable {
 }
 
 // Windows.Storage.Search.IQueryOptionsFactory (synthetic:Windows_Storage_Search_IQueryOptionsFactory)
-@Interface["032e1f8c-a9c1-4e71-8011-0dee9d4811a3", "Windows.Storage.Search.IQueryOptionsFactory"]
+@Interface["032e1f8c-a9c1-4e71-8011-0dee9d4811a3", "Windows.Storage.Search.IQueryOptionsFactory", "CreateCommonFileQuery.queryOptions=Com;CreateCommonFolderQuery.queryOptions=Com"]
 public interface Windows_Storage_Search_IQueryOptionsFactory <: IInspectable {
     func CreateCommonFileQuery(query: Int32, fileTypeFilter: CPointer<Unit>, queryOptions: CPointer<CPointer<Unit>>): Int32
     func CreateCommonFolderQuery(query: Int32, queryOptions: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Search.IQueryOptionsWithProviderFilter (synthetic:Windows_Storage_Search_IQueryOptionsWithProviderFilter)
-@Interface["5b9d1026-15c4-44dd-b89a-47a59b7d7c4f", "Windows.Storage.Search.IQueryOptionsWithProviderFilter"]
+@Interface["5b9d1026-15c4-44dd-b89a-47a59b7d7c4f", "Windows.Storage.Search.IQueryOptionsWithProviderFilter", "StorageProviderIdFilter.value=Com"]
 public interface Windows_Storage_Search_IQueryOptionsWithProviderFilter <: IInspectable {
     func StorageProviderIdFilter(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Search.IStorageFileQueryResult (synthetic:Windows_Storage_Search_IStorageFileQueryResult)
-@Interface["52fda447-2baa-412c-b29f-d4b1778efa1e", "Windows.Storage.Search.IStorageFileQueryResult"]
+@Interface["52fda447-2baa-412c-b29f-d4b1778efa1e", "Windows.Storage.Search.IStorageFileQueryResult", "GetFilesAsync.operation=Com;GetFilesAsyncDefaultStartAndCount.operation=Com"]
 public interface Windows_Storage_Search_IStorageFileQueryResult <: IInspectable {
     func GetFilesAsync(startIndex: UInt32, maxNumberOfItems: UInt32, operation: CPointer<CPointer<Unit>>): Int32
     func GetFilesAsyncDefaultStartAndCount(operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Search.IStorageFileQueryResult2 (synthetic:Windows_Storage_Search_IStorageFileQueryResult2)
-@Interface["4e5db9dd-7141-46c4-8be3-e9dc9e27275c", "Windows.Storage.Search.IStorageFileQueryResult2"]
+@Interface["4e5db9dd-7141-46c4-8be3-e9dc9e27275c", "Windows.Storage.Search.IStorageFileQueryResult2", "GetMatchingPropertiesWithRanges.result=Com"]
 public interface Windows_Storage_Search_IStorageFileQueryResult2 <: IInspectable {
     func GetMatchingPropertiesWithRanges(file: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Search.IStorageFolderQueryOperations (synthetic:Windows_Storage_Search_IStorageFolderQueryOperations)
-@Interface["cb43ccc9-446b-4a4f-be97-757771be5203", "Windows.Storage.Search.IStorageFolderQueryOperations"]
+@Interface["cb43ccc9-446b-4a4f-be97-757771be5203", "Windows.Storage.Search.IStorageFolderQueryOperations", "GetIndexedStateAsync.operation=Com;CreateFileQueryOverloadDefault.value=Com;CreateFileQuery.value=Com;CreateFileQueryWithOptions.value=Com;CreateFolderQueryOverloadDefault.value=Com;CreateFolderQuery.value=Com;CreateFolderQueryWithOptions.value=Com;CreateItemQuery.value=Com;CreateItemQueryWithOptions.value=Com;GetFilesAsync.operation=Com;GetFilesAsyncOverloadDefaultStartAndCount.operation=Com;GetFoldersAsync.operation=Com;GetFoldersAsyncOverloadDefaultStartAndCount.operation=Com;GetItemsAsync.operation=Com"]
 public interface Windows_Storage_Search_IStorageFolderQueryOperations <: IInspectable {
     func GetIndexedStateAsync(operation: CPointer<CPointer<Unit>>): Int32
     func CreateFileQueryOverloadDefault(value: CPointer<CPointer<Unit>>): Int32
@@ -10761,21 +12435,21 @@ public interface Windows_Storage_Search_IStorageFolderQueryOperations <: IInspec
 }
 
 // Windows.Storage.Search.IStorageFolderQueryResult (synthetic:Windows_Storage_Search_IStorageFolderQueryResult)
-@Interface["6654c911-7d66-46fa-aecf-e4a4baa93ab8", "Windows.Storage.Search.IStorageFolderQueryResult"]
+@Interface["6654c911-7d66-46fa-aecf-e4a4baa93ab8", "Windows.Storage.Search.IStorageFolderQueryResult", "GetFoldersAsync.operation=Com;GetFoldersAsyncDefaultStartAndCount.operation=Com"]
 public interface Windows_Storage_Search_IStorageFolderQueryResult <: IInspectable {
     func GetFoldersAsync(startIndex: UInt32, maxNumberOfItems: UInt32, operation: CPointer<CPointer<Unit>>): Int32
     func GetFoldersAsyncDefaultStartAndCount(operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Search.IStorageItemQueryResult (synthetic:Windows_Storage_Search_IStorageItemQueryResult)
-@Interface["e8948079-9d58-47b8-b2b2-41b07f4795f9", "Windows.Storage.Search.IStorageItemQueryResult"]
+@Interface["e8948079-9d58-47b8-b2b2-41b07f4795f9", "Windows.Storage.Search.IStorageItemQueryResult", "GetItemsAsync.operation=Com;GetItemsAsyncDefaultStartAndCount.operation=Com"]
 public interface Windows_Storage_Search_IStorageItemQueryResult <: IInspectable {
     func GetItemsAsync(startIndex: UInt32, maxNumberOfItems: UInt32, operation: CPointer<CPointer<Unit>>): Int32
     func GetItemsAsyncDefaultStartAndCount(operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Search.IStorageQueryResultBase (synthetic:Windows_Storage_Search_IStorageQueryResultBase)
-@Interface["c297d70d-7353-47ab-ba58-8c61425dc54b", "Windows.Storage.Search.IStorageQueryResultBase"]
+@Interface["c297d70d-7353-47ab-ba58-8c61425dc54b", "Windows.Storage.Search.IStorageQueryResultBase", "GetItemCountAsync.operation=Com;Folder.container=Com;FindStartIndexAsync.operation=Com;GetCurrentQueryOptions.value=Com"]
 public interface Windows_Storage_Search_IStorageQueryResultBase <: IInspectable {
     func GetItemCountAsync(operation: CPointer<CPointer<Unit>>): Int32
     func Folder(container: CPointer<CPointer<Unit>>): Int32
@@ -13296,8 +14970,14 @@ public interface Windows_Storage_StreamedFileDataRequestedHandlerInvoker <: Wind
     }
 
     func __winrtThunk_Invoke(stream: CPointer<Unit>): Int32 {
-        this.Invoke(stream)
-        return windows_core.S_OK.value
+        try {
+            this.Invoke(stream)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -13376,32 +15056,32 @@ public interface Windows_Storage_Streams_IBuffer <: IInspectable {
 }
 
 // Windows.Storage.Streams.IContentTypeProvider (synthetic:Windows_Storage_Streams_IContentTypeProvider)
-@Interface["97d098a5-3b99-4de9-88a5-e11d2f50c795", "Windows.Storage.Streams.IContentTypeProvider"]
+@Interface["97d098a5-3b99-4de9-88a5-e11d2f50c795", "Windows.Storage.Streams.IContentTypeProvider", "ContentType.value=HString"]
 public interface Windows_Storage_Streams_IContentTypeProvider <: IInspectable {
     func ContentType(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Streams.IInputStream (synthetic:Windows_Storage_Streams_IInputStream)
-@Interface["905a0fe2-bc53-11df-8c49-001e4fc686da", "Windows.Storage.Streams.IInputStream"]
+@Interface["905a0fe2-bc53-11df-8c49-001e4fc686da", "Windows.Storage.Streams.IInputStream", "ReadAsync.operation=Com"]
 public interface Windows_Storage_Streams_IInputStream <: IInspectable {
     func ReadAsync(buffer: CPointer<Unit>, count: UInt32, options: UInt32, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Streams.IInputStreamReference (synthetic:Windows_Storage_Streams_IInputStreamReference)
-@Interface["43929d18-5ec9-4b5a-919c-4205b0c804b6", "Windows.Storage.Streams.IInputStreamReference"]
+@Interface["43929d18-5ec9-4b5a-919c-4205b0c804b6", "Windows.Storage.Streams.IInputStreamReference", "OpenSequentialReadAsync.operation=Com"]
 public interface Windows_Storage_Streams_IInputStreamReference <: IInspectable {
     func OpenSequentialReadAsync(operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Streams.IOutputStream (synthetic:Windows_Storage_Streams_IOutputStream)
-@Interface["905a0fe6-bc53-11df-8c49-001e4fc686da", "Windows.Storage.Streams.IOutputStream"]
+@Interface["905a0fe6-bc53-11df-8c49-001e4fc686da", "Windows.Storage.Streams.IOutputStream", "WriteAsync.operation=Com;FlushAsync.operation=Com"]
 public interface Windows_Storage_Streams_IOutputStream <: IInspectable {
     func WriteAsync(buffer: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
     func FlushAsync(operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Streams.IRandomAccessStream (synthetic:Windows_Storage_Streams_IRandomAccessStream)
-@Interface["905a0fe1-bc53-11df-8c49-001e4fc686da", "Windows.Storage.Streams.IRandomAccessStream"]
+@Interface["905a0fe1-bc53-11df-8c49-001e4fc686da", "Windows.Storage.Streams.IRandomAccessStream", "GetInputStreamAt.stream=Com;GetOutputStreamAt.stream=Com;CloneStream.stream=Com"]
 public interface Windows_Storage_Streams_IRandomAccessStream <: IInspectable {
     func Size(value: CPointer<UInt64>): Int32
     func SetSize(value: UInt64): Int32
@@ -13415,13 +15095,13 @@ public interface Windows_Storage_Streams_IRandomAccessStream <: IInspectable {
 }
 
 // Windows.Storage.Streams.IRandomAccessStreamReference (synthetic:Windows_Storage_Streams_IRandomAccessStreamReference)
-@Interface["33ee3134-1dd6-4e3a-8067-d1c162e8642b", "Windows.Storage.Streams.IRandomAccessStreamReference"]
+@Interface["33ee3134-1dd6-4e3a-8067-d1c162e8642b", "Windows.Storage.Streams.IRandomAccessStreamReference", "OpenReadAsync.operation=Com"]
 public interface Windows_Storage_Streams_IRandomAccessStreamReference <: IInspectable {
     func OpenReadAsync(operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Streams.IRandomAccessStreamReferenceStatics (synthetic:Windows_Storage_Streams_IRandomAccessStreamReferenceStatics)
-@Interface["857309dc-3fbf-4e7d-986f-ef3b1a07a964", "Windows.Storage.Streams.IRandomAccessStreamReferenceStatics"]
+@Interface["857309dc-3fbf-4e7d-986f-ef3b1a07a964", "Windows.Storage.Streams.IRandomAccessStreamReferenceStatics", "CreateFromFile.streamReference=Com;CreateFromUri.streamReference=Com;CreateFromStream.streamReference=Com"]
 public interface Windows_Storage_Streams_IRandomAccessStreamReferenceStatics <: IInspectable {
     func CreateFromFile(file: CPointer<Unit>, streamReference: CPointer<CPointer<Unit>>): Int32
     func CreateFromUri(uri: CPointer<Unit>, streamReference: CPointer<CPointer<Unit>>): Int32
@@ -13868,8 +15548,14 @@ public interface Windows_System_DispatcherQueueHandlerInvoker <: Windows_System_
     }
 
     func __winrtThunk_Invoke(): Int32 {
-        this.Invoke()
-        return windows_core.S_OK.value
+        try {
+            this.Invoke()
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -14192,7 +15878,7 @@ extend Windows_System_DispatcherQueueTimer <: windows_core.HandleWinrtType<Windo
 }
 
 // Windows.System.IDispatcherQueue (synthetic:Windows_System_IDispatcherQueue)
-@Interface["603e88e4-a338-4ffe-a457-a5cfb9ceb899", "Windows.System.IDispatcherQueue"]
+@Interface["603e88e4-a338-4ffe-a457-a5cfb9ceb899", "Windows.System.IDispatcherQueue", "CreateTimer.result=Com"]
 public interface Windows_System_IDispatcherQueue <: IInspectable {
     func CreateTimer(result: CPointer<CPointer<Unit>>): Int32
     func TryEnqueue(callback: CPointer<Unit>, result: CPointer<Bool>): Int32
@@ -14210,13 +15896,13 @@ public interface Windows_System_IDispatcherQueue2 <: IInspectable {
 }
 
 // Windows.System.IDispatcherQueueShutdownStartingEventArgs (synthetic:Windows_System_IDispatcherQueueShutdownStartingEventArgs)
-@Interface["c4724c4c-ff97-40c0-a226-cc0aaa545e89", "Windows.System.IDispatcherQueueShutdownStartingEventArgs"]
+@Interface["c4724c4c-ff97-40c0-a226-cc0aaa545e89", "Windows.System.IDispatcherQueueShutdownStartingEventArgs", "GetDeferral.result=Com"]
 public interface Windows_System_IDispatcherQueueShutdownStartingEventArgs <: IInspectable {
     func GetDeferral(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.System.IDispatcherQueueStatics (synthetic:Windows_System_IDispatcherQueueStatics)
-@Interface["a96d83d7-9371-4517-9245-d0824ac12c74", "Windows.System.IDispatcherQueueStatics"]
+@Interface["a96d83d7-9371-4517-9245-d0824ac12c74", "Windows.System.IDispatcherQueueStatics", "GetForCurrentThread.result=Com"]
 public interface Windows_System_IDispatcherQueueStatics <: IInspectable {
     func GetForCurrentThread(result: CPointer<CPointer<Unit>>): Int32
 }
@@ -14236,7 +15922,7 @@ public interface Windows_System_IDispatcherQueueTimer <: IInspectable {
 }
 
 // Windows.System.IUser (synthetic:Windows_System_IUser)
-@Interface["df9a26c6-e746-4bcd-b5d4-120103c4209b", "Windows.System.IUser"]
+@Interface["df9a26c6-e746-4bcd-b5d4-120103c4209b", "Windows.System.IUser", "NonRoamableId.value=HString;GetPropertyAsync.operation=Com;GetPropertiesAsync.operation=Com;GetPictureAsync.operation=Com"]
 public interface Windows_System_IUser <: IInspectable {
     func NonRoamableId(value: CPointer<CPointer<Unit>>): Int32
     func AuthenticationStatus(value: CPointer<Int32>): Int32
@@ -14247,7 +15933,7 @@ public interface Windows_System_IUser <: IInspectable {
 }
 
 // Windows.System.IUser2 (synthetic:Windows_System_IUser2)
-@Interface["98ba5628-a6e3-518e-89d9-d3b2b1991a10", "Windows.System.IUser2"]
+@Interface["98ba5628-a6e3-518e-89d9-d3b2b1991a10", "Windows.System.IUser2", "CheckUserAgeConsentGroupAsync.operation=Com"]
 public interface Windows_System_IUser2 <: IInspectable {
     func CheckUserAgeConsentGroupAsync(consentGroup: Int32, operation: CPointer<CPointer<Unit>>): Int32
 }
@@ -14259,7 +15945,7 @@ public interface Windows_System_IUserAuthenticationStatusChangeDeferral <: IInsp
 }
 
 // Windows.System.IUserAuthenticationStatusChangingEventArgs (synthetic:Windows_System_IUserAuthenticationStatusChangingEventArgs)
-@Interface["8c030f28-a711-4c1e-ab48-04179c15938f", "Windows.System.IUserAuthenticationStatusChangingEventArgs"]
+@Interface["8c030f28-a711-4c1e-ab48-04179c15938f", "Windows.System.IUserAuthenticationStatusChangingEventArgs", "GetDeferral.result=Com;User.value=Com"]
 public interface Windows_System_IUserAuthenticationStatusChangingEventArgs <: IInspectable {
     func GetDeferral(result: CPointer<CPointer<Unit>>): Int32
     func User(value: CPointer<CPointer<Unit>>): Int32
@@ -14268,19 +15954,19 @@ public interface Windows_System_IUserAuthenticationStatusChangingEventArgs <: II
 }
 
 // Windows.System.IUserChangedEventArgs (synthetic:Windows_System_IUserChangedEventArgs)
-@Interface["086459dc-18c6-48db-bc99-724fb9203ccc", "Windows.System.IUserChangedEventArgs"]
+@Interface["086459dc-18c6-48db-bc99-724fb9203ccc", "Windows.System.IUserChangedEventArgs", "User.value=Com"]
 public interface Windows_System_IUserChangedEventArgs <: IInspectable {
     func User(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.System.IUserChangedEventArgs2 (synthetic:Windows_System_IUserChangedEventArgs2)
-@Interface["6b2ccb44-6f01-560c-97ad-fc7f32ec581f", "Windows.System.IUserChangedEventArgs2"]
+@Interface["6b2ccb44-6f01-560c-97ad-fc7f32ec581f", "Windows.System.IUserChangedEventArgs2", "ChangedPropertyKinds.value=Com"]
 public interface Windows_System_IUserChangedEventArgs2 <: IInspectable {
     func ChangedPropertyKinds(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.System.IUserStatics (synthetic:Windows_System_IUserStatics)
-@Interface["155eb23b-242a-45e0-a2e9-3171fc6a7fdd", "Windows.System.IUserStatics"]
+@Interface["155eb23b-242a-45e0-a2e9-3171fc6a7fdd", "Windows.System.IUserStatics", "CreateWatcher.result=Com;FindAllAsync.operation=Com;FindAllAsyncByType.operation=Com;FindAllAsyncByTypeAndStatus.operation=Com;GetFromId.result=Com"]
 public interface Windows_System_IUserStatics <: IInspectable {
     func CreateWatcher(result: CPointer<CPointer<Unit>>): Int32
     func FindAllAsync(operation: CPointer<CPointer<Unit>>): Int32
@@ -14290,7 +15976,7 @@ public interface Windows_System_IUserStatics <: IInspectable {
 }
 
 // Windows.System.IUserStatics2 (synthetic:Windows_System_IUserStatics2)
-@Interface["74a37e11-2eb5-4487-b0d5-2c6790e013e9", "Windows.System.IUserStatics2"]
+@Interface["74a37e11-2eb5-4487-b0d5-2c6790e013e9", "Windows.System.IUserStatics2", "GetDefault.result=Com"]
 public interface Windows_System_IUserStatics2 <: IInspectable {
     func GetDefault(result: CPointer<CPointer<Unit>>): Int32
 }
@@ -17205,8 +18891,14 @@ public interface Windows_UI_Core_DispatchedHandlerInvoker <: Windows_UI_Core_Dis
     }
 
     func __winrtThunk_Invoke(): Int32 {
-        this.Invoke()
-        return windows_core.S_OK.value
+        try {
+            this.Invoke()
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -17271,13 +18963,13 @@ public interface Windows_UI_Core_IAcceleratorKeyEventArgs <: IInspectable {
 }
 
 // Windows.UI.Core.IAcceleratorKeyEventArgs2 (synthetic:Windows_UI_Core_IAcceleratorKeyEventArgs2)
-@Interface["d300a9f6-2f7e-4873-a555-166e596ee1c5", "Windows.UI.Core.IAcceleratorKeyEventArgs2"]
+@Interface["d300a9f6-2f7e-4873-a555-166e596ee1c5", "Windows.UI.Core.IAcceleratorKeyEventArgs2", "DeviceId.value=HString"]
 public interface Windows_UI_Core_IAcceleratorKeyEventArgs2 <: IInspectable {
     func DeviceId(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.UI.Core.IAutomationProviderRequestedEventArgs (synthetic:Windows_UI_Core_IAutomationProviderRequestedEventArgs)
-@Interface["961ff258-21bf-4b42-a298-fa479d4c52e2", "Windows.UI.Core.IAutomationProviderRequestedEventArgs"]
+@Interface["961ff258-21bf-4b42-a298-fa479d4c52e2", "Windows.UI.Core.IAutomationProviderRequestedEventArgs", "AutomationProvider.value=Com"]
 public interface Windows_UI_Core_IAutomationProviderRequestedEventArgs <: IInspectable {
     func AutomationProvider(value: CPointer<CPointer<Unit>>): Int32
     func SetAutomationProvider(value: CPointer<Unit>): Int32
@@ -17314,13 +19006,13 @@ public interface Windows_UI_Core_ICoreCursor <: IInspectable {
 }
 
 // Windows.UI.Core.ICoreCursorFactory (synthetic:Windows_UI_Core_ICoreCursorFactory)
-@Interface["f6359621-a79d-4ed3-8c32-a9ef9d6b76a4", "Windows.UI.Core.ICoreCursorFactory"]
+@Interface["f6359621-a79d-4ed3-8c32-a9ef9d6b76a4", "Windows.UI.Core.ICoreCursorFactory", "CreateCursor.cursor=Com"]
 public interface Windows_UI_Core_ICoreCursorFactory <: IInspectable {
     func CreateCursor(type_: Int32, id: UInt32, cursor: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.UI.Core.ICoreDispatcher (synthetic:Windows_UI_Core_ICoreDispatcher)
-@Interface["60db2fa8-b705-4fde-a7d6-ebbb1891d39e", "Windows.UI.Core.ICoreDispatcher"]
+@Interface["60db2fa8-b705-4fde-a7d6-ebbb1891d39e", "Windows.UI.Core.ICoreDispatcher", "RunAsync.asyncAction=Com;RunIdleAsync.asyncAction=Com"]
 public interface Windows_UI_Core_ICoreDispatcher <: IInspectable {
     func HasThreadAccess(value: CPointer<Bool>): Int32
     func ProcessEvents(options: Int32): Int32
@@ -17329,7 +19021,7 @@ public interface Windows_UI_Core_ICoreDispatcher <: IInspectable {
 }
 
 // Windows.UI.Core.ICoreDispatcher2 (synthetic:Windows_UI_Core_ICoreDispatcher2)
-@Interface["6f5e63c7-e3aa-4eae-b0e0-dcf321ca4b2f", "Windows.UI.Core.ICoreDispatcher2"]
+@Interface["6f5e63c7-e3aa-4eae-b0e0-dcf321ca4b2f", "Windows.UI.Core.ICoreDispatcher2", "TryRunAsync.asyncOperation=Com;TryRunIdleAsync.asyncOperation=Com"]
 public interface Windows_UI_Core_ICoreDispatcher2 <: IInspectable {
     func TryRunAsync(priority: Int32, agileCallback: CPointer<Unit>, asyncOperation: CPointer<CPointer<Unit>>): Int32
     func TryRunIdleAsync(agileCallback: CPointer<Unit>, asyncOperation: CPointer<CPointer<Unit>>): Int32
@@ -17357,7 +19049,7 @@ public interface Windows_UI_Core_ICorePointerRedirector <: IInspectable {
 }
 
 // Windows.UI.Core.ICoreWindow (synthetic:Windows_UI_Core_ICoreWindow)
-@Interface["79b9d5f2-879e-4b89-b798-79e47598030c", "Windows.UI.Core.ICoreWindow"]
+@Interface["79b9d5f2-879e-4b89-b798-79e47598030c", "Windows.UI.Core.ICoreWindow", "AutomationHostProvider.value=Com;CustomProperties.value=Com;Dispatcher.value=Com;PointerCursor.value=Com"]
 public interface Windows_UI_Core_ICoreWindow <: IInspectable {
     func AutomationHostProvider(value: CPointer<CPointer<Unit>>): Int32
     func Bounds(value: CPointer<Windows_Foundation_Rect>): Int32
@@ -17420,7 +19112,7 @@ public interface Windows_UI_Core_ICoreWindow2 <: IInspectable {
 }
 
 // Windows.UI.Core.ICoreWindow3 (synthetic:Windows_UI_Core_ICoreWindow3)
-@Interface["32c20dd8-faef-4375-a2ab-32640e4815c7", "Windows.UI.Core.ICoreWindow3"]
+@Interface["32c20dd8-faef-4375-a2ab-32640e4815c7", "Windows.UI.Core.ICoreWindow3", "GetCurrentKeyEventDeviceId.value=HString"]
 public interface Windows_UI_Core_ICoreWindow3 <: IInspectable {
     func ClosestInteractiveBoundsRequested(handler: CPointer<Unit>, pCookie: CPointer<Int64>): Int32
     func RemoveClosestInteractiveBoundsRequested(cookie: Int64): Int32
@@ -17437,7 +19129,7 @@ public interface Windows_UI_Core_ICoreWindow4 <: IInspectable {
 }
 
 // Windows.UI.Core.ICoreWindow5 (synthetic:Windows_UI_Core_ICoreWindow5)
-@Interface["4b4ae1e1-2e6d-4eaa-bda1-1c5cc1bee141", "Windows.UI.Core.ICoreWindow5"]
+@Interface["4b4ae1e1-2e6d-4eaa-bda1-1c5cc1bee141", "Windows.UI.Core.ICoreWindow5", "DispatcherQueue.value=Com"]
 public interface Windows_UI_Core_ICoreWindow5 <: IInspectable {
     func DispatcherQueue(value: CPointer<CPointer<Unit>>): Int32
     func ActivationMode(value: CPointer<Int32>): Int32
@@ -17451,13 +19143,13 @@ public interface Windows_UI_Core_ICoreWindowEventArgs <: IInspectable {
 }
 
 // Windows.UI.Core.ICoreWindowStatic (synthetic:Windows_UI_Core_ICoreWindowStatic)
-@Interface["4d239005-3c2a-41b1-9022-536bb9cf93b1", "Windows.UI.Core.ICoreWindowStatic"]
+@Interface["4d239005-3c2a-41b1-9022-536bb9cf93b1", "Windows.UI.Core.ICoreWindowStatic", "GetForCurrentThread.ppWindow=Com"]
 public interface Windows_UI_Core_ICoreWindowStatic <: IInspectable {
     func GetForCurrentThread(ppWindow: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.UI.Core.ICoreWindowWithContext (synthetic:Windows_UI_Core_ICoreWindowWithContext)
-@Interface["9ac40241-3575-4c3b-af66-e8c529d4d06c", "Windows.UI.Core.ICoreWindowWithContext"]
+@Interface["9ac40241-3575-4c3b-af66-e8c529d4d06c", "Windows.UI.Core.ICoreWindowWithContext", "UIContext.value=Com"]
 public interface Windows_UI_Core_ICoreWindowWithContext <: IInspectable {
     func UIContext(value: CPointer<CPointer<Unit>>): Int32
 }
@@ -17482,13 +19174,13 @@ public interface Windows_UI_Core_IKeyEventArgs <: IInspectable {
 }
 
 // Windows.UI.Core.IKeyEventArgs2 (synthetic:Windows_UI_Core_IKeyEventArgs2)
-@Interface["583add98-0790-4571-9b12-645ef9d79e42", "Windows.UI.Core.IKeyEventArgs2"]
+@Interface["583add98-0790-4571-9b12-645ef9d79e42", "Windows.UI.Core.IKeyEventArgs2", "DeviceId.value=HString"]
 public interface Windows_UI_Core_IKeyEventArgs2 <: IInspectable {
     func DeviceId(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.UI.Core.IPointerEventArgs (synthetic:Windows_UI_Core_IPointerEventArgs)
-@Interface["920d9cb1-a5fc-4a21-8c09-49dfe6ffe25f", "Windows.UI.Core.IPointerEventArgs"]
+@Interface["920d9cb1-a5fc-4a21-8c09-49dfe6ffe25f", "Windows.UI.Core.IPointerEventArgs", "CurrentPoint.value=Com;GetIntermediatePoints.value=Com"]
 public interface Windows_UI_Core_IPointerEventArgs <: IInspectable {
     func CurrentPoint(value: CPointer<CPointer<Unit>>): Int32
     func KeyModifiers(value: CPointer<UInt32>): Int32
@@ -17617,8 +19309,14 @@ public interface Windows_UI_Core_IdleDispatchedHandlerInvoker <: Windows_UI_Core
     }
 
     func __winrtThunk_Invoke(e: CPointer<Unit>): Int32 {
-        this.Invoke(e)
-        return windows_core.S_OK.value
+        try {
+            this.Invoke(e)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
     }
 }
 
@@ -18540,7 +20238,7 @@ public interface Windows_UI_IUIContext <: IInspectable {
 }
 
 // Windows.UI.Input.IPointerPoint (synthetic:Windows_UI_Input_IPointerPoint)
-@Interface["e995317d-7296-42d9-8233-c5be73b74a4a", "Windows.UI.Input.IPointerPoint"]
+@Interface["e995317d-7296-42d9-8233-c5be73b74a4a", "Windows.UI.Input.IPointerPoint", "PointerDevice.value=Com;Properties.value=Com"]
 public interface Windows_UI_Input_IPointerPoint <: IInspectable {
     func PointerDevice(value: CPointer<CPointer<Unit>>): Int32
     func Position(value: CPointer<Windows_Foundation_Point>): Int32
@@ -18589,13 +20287,13 @@ public interface Windows_UI_Input_IPointerPointProperties <: IInspectable {
 }
 
 // Windows.UI.Input.IPointerPointProperties2 (synthetic:Windows_UI_Input_IPointerPointProperties2)
-@Interface["22c3433a-c83b-41c0-a296-5e232d64d6af", "Windows.UI.Input.IPointerPointProperties2"]
+@Interface["22c3433a-c83b-41c0-a296-5e232d64d6af", "Windows.UI.Input.IPointerPointProperties2", "ZDistance.value=Com"]
 public interface Windows_UI_Input_IPointerPointProperties2 <: IInspectable {
     func ZDistance(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.UI.Input.IPointerPointStatics (synthetic:Windows_UI_Input_IPointerPointStatics)
-@Interface["a506638d-2a1a-413e-bc75-9f38381cc069", "Windows.UI.Input.IPointerPointStatics"]
+@Interface["a506638d-2a1a-413e-bc75-9f38381cc069", "Windows.UI.Input.IPointerPointStatics", "GetCurrentPoint.pointerPoint=Com;GetIntermediatePoints.pointerPoints=Com;GetCurrentPointTransformed.pointerPoint=Com;GetIntermediatePointsTransformed.pointerPoints=Com"]
 public interface Windows_UI_Input_IPointerPointStatics <: IInspectable {
     func GetCurrentPoint(pointerId: UInt32, pointerPoint: CPointer<CPointer<Unit>>): Int32
     func GetIntermediatePoints(pointerId: UInt32, pointerPoints: CPointer<CPointer<Unit>>): Int32
@@ -18604,10 +20302,10 @@ public interface Windows_UI_Input_IPointerPointStatics <: IInspectable {
 }
 
 // Windows.UI.Input.IPointerPointTransform (synthetic:Windows_UI_Input_IPointerPointTransform)
-@Interface["4d5fe14f-b87c-4028-bc9c-59e9947fb056", "Windows.UI.Input.IPointerPointTransform"]
+@Interface["4d5fe14f-b87c-4028-bc9c-59e9947fb056", "Windows.UI.Input.IPointerPointTransform", "Inverse.value=Com"]
 public interface Windows_UI_Input_IPointerPointTransform <: IInspectable {
     func Inverse(value: CPointer<CPointer<Unit>>): Int32
-    func TryTransform(inPoint: Windows_Foundation_Point, outPoint: CPointer<CPointer<Unit>>, returnValue: CPointer<Bool>): Int32
+    func TryTransform(inPoint: Windows_Foundation_Point, outPoint: CPointer<Windows_Foundation_Point>, returnValue: CPointer<Bool>): Int32
     func TransformBounds(rect: Windows_Foundation_Rect, returnValue: CPointer<Windows_Foundation_Rect>): Int32
 }
 
@@ -19248,7 +20946,7 @@ public let Windows_UI_Input_PointerUpdateKind_XButton2Pressed = Windows_UI_Input
 public let Windows_UI_Input_PointerUpdateKind_XButton2Released = Windows_UI_Input_PointerUpdateKind(10)
 
 // Windows.UI.Notifications.IShownTileNotification (synthetic:Windows_UI_Notifications_IShownTileNotification)
-@Interface["342d8988-5af2-481a-a6a3-f2fdc78de88e", "Windows.UI.Notifications.IShownTileNotification"]
+@Interface["342d8988-5af2-481a-a6a3-f2fdc78de88e", "Windows.UI.Notifications.IShownTileNotification", "Arguments.value=HString"]
 public interface Windows_UI_Notifications_IShownTileNotification <: IInspectable {
     func Arguments(value: CPointer<CPointer<Unit>>): Int32
 }
@@ -19577,7 +21275,7 @@ extend Windows_UI_ViewManagement_ActivationViewSwitcher <: windows_core.HandleWi
 }
 
 // Windows.UI.ViewManagement.IActivationViewSwitcher (synthetic:Windows_UI_ViewManagement_IActivationViewSwitcher)
-@Interface["dca71bb6-7350-492b-aac7-c8a13d7224ad", "Windows.UI.ViewManagement.IActivationViewSwitcher"]
+@Interface["dca71bb6-7350-492b-aac7-c8a13d7224ad", "Windows.UI.ViewManagement.IActivationViewSwitcher", "ShowAsStandaloneAsync.operation=Com;ShowAsStandaloneWithSizePreferenceAsync.operation=Com"]
 public interface Windows_UI_ViewManagement_IActivationViewSwitcher <: IInspectable {
     func ShowAsStandaloneAsync(viewId: Int32, operation: CPointer<CPointer<Unit>>): Int32
     func ShowAsStandaloneWithSizePreferenceAsync(viewId: Int32, sizePreference: Int32, operation: CPointer<CPointer<Unit>>): Int32

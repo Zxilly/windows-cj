@@ -100,11 +100,27 @@ public func CreateServiceA(hSCManager: SC_HANDLE, lpServiceName: windows_strings
     result
 }
 
+public func CreateServiceAChecked(hSCManager: SC_HANDLE, lpServiceName: windows_strings.PSTR, lpDisplayName: windows_strings.PSTR, dwDesiredAccess: UInt32, dwServiceType: UInt32, dwStartType: UInt32, dwErrorControl: UInt32, lpBinaryPathName: windows_strings.PSTR, lpLoadOrderGroup: windows_strings.PSTR, lpdwTagId: CPointer<UInt32>, lpDependencies: windows_strings.PSTR, lpServiceStartName: windows_strings.PSTR, lpPassword: windows_strings.PSTR): windows_core.Result<SC_HANDLE> {
+    let result__ = CreateServiceA(hSCManager, lpServiceName, lpDisplayName, dwDesiredAccess, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName, lpLoadOrderGroup, lpdwTagId, lpDependencies, lpServiceStartName, lpPassword)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<SC_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<SC_HANDLE>.Ok(result__)
+}
+
 public func CreateServiceW(hSCManager: SC_HANDLE, lpServiceName: windows_strings.PWSTR, lpDisplayName: windows_strings.PWSTR, dwDesiredAccess: UInt32, dwServiceType: UInt32, dwStartType: UInt32, dwErrorControl: UInt32, lpBinaryPathName: windows_strings.PWSTR, lpLoadOrderGroup: windows_strings.PWSTR, lpdwTagId: CPointer<UInt32>, lpDependencies: windows_strings.PWSTR, lpServiceStartName: windows_strings.PWSTR, lpPassword: windows_strings.PWSTR): SC_HANDLE {
     let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, UInt32, UInt32, UInt32, UInt32, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "CreateServiceW"))
     var result = SC_HANDLE()
     result.Value = unsafe { proc(hSCManager.Value, lpServiceName.asPtr(), lpDisplayName.asPtr(), dwDesiredAccess, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName.asPtr(), lpLoadOrderGroup.asPtr(), lpdwTagId, lpDependencies.asPtr(), lpServiceStartName.asPtr(), lpPassword.asPtr()) }
     result
+}
+
+public func CreateServiceWChecked(hSCManager: SC_HANDLE, lpServiceName: windows_strings.PWSTR, lpDisplayName: windows_strings.PWSTR, dwDesiredAccess: UInt32, dwServiceType: UInt32, dwStartType: UInt32, dwErrorControl: UInt32, lpBinaryPathName: windows_strings.PWSTR, lpLoadOrderGroup: windows_strings.PWSTR, lpdwTagId: CPointer<UInt32>, lpDependencies: windows_strings.PWSTR, lpServiceStartName: windows_strings.PWSTR, lpPassword: windows_strings.PWSTR): windows_core.Result<SC_HANDLE> {
+    let result__ = CreateServiceW(hSCManager, lpServiceName, lpDisplayName, dwDesiredAccess, dwServiceType, dwStartType, dwErrorControl, lpBinaryPathName, lpLoadOrderGroup, lpdwTagId, lpDependencies, lpServiceStartName, lpPassword)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<SC_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<SC_HANDLE>.Ok(result__)
 }
 
 public func DeleteService(hService: SC_HANDLE): Bool {
@@ -244,6 +260,14 @@ public func LockServiceDatabase(hSCManager: SC_HANDLE): CPointer<Unit> {
     return unsafe { proc(hSCManager.Value) }
 }
 
+public func LockServiceDatabaseChecked(hSCManager: SC_HANDLE): windows_core.Result<CPointer<Unit>> {
+    let result__ = LockServiceDatabase(hSCManager)
+    if (result__.isNull()) {
+        return windows_core.Result<CPointer<Unit>>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<CPointer<Unit>>.Ok(result__)
+}
+
 public func NotifyBootConfigStatus(BootAcceptable: Bool): Bool {
     let proc = CFunc<(Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "NotifyBootConfigStatus"))
     return unsafe { proc(if (BootAcceptable) { 1 } else { 0 }) } != 0
@@ -263,11 +287,27 @@ public func OpenSCManagerA(lpMachineName: windows_strings.PSTR, lpDatabaseName: 
     result
 }
 
+public func OpenSCManagerAChecked(lpMachineName: windows_strings.PSTR, lpDatabaseName: windows_strings.PSTR, dwDesiredAccess: UInt32): windows_core.Result<SC_HANDLE> {
+    let result__ = OpenSCManagerA(lpMachineName, lpDatabaseName, dwDesiredAccess)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<SC_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<SC_HANDLE>.Ok(result__)
+}
+
 public func OpenSCManagerW(lpMachineName: windows_strings.PWSTR, lpDatabaseName: windows_strings.PWSTR, dwDesiredAccess: UInt32): SC_HANDLE {
     let proc = CFunc<(CPointer<UInt16>, CPointer<UInt16>, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "OpenSCManagerW"))
     var result = SC_HANDLE()
     result.Value = unsafe { proc(lpMachineName.asPtr(), lpDatabaseName.asPtr(), dwDesiredAccess) }
     result
+}
+
+public func OpenSCManagerWChecked(lpMachineName: windows_strings.PWSTR, lpDatabaseName: windows_strings.PWSTR, dwDesiredAccess: UInt32): windows_core.Result<SC_HANDLE> {
+    let result__ = OpenSCManagerW(lpMachineName, lpDatabaseName, dwDesiredAccess)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<SC_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<SC_HANDLE>.Ok(result__)
 }
 
 public func OpenServiceA(hSCManager: SC_HANDLE, lpServiceName: windows_strings.PSTR, dwDesiredAccess: UInt32): SC_HANDLE {
@@ -277,11 +317,27 @@ public func OpenServiceA(hSCManager: SC_HANDLE, lpServiceName: windows_strings.P
     result
 }
 
+public func OpenServiceAChecked(hSCManager: SC_HANDLE, lpServiceName: windows_strings.PSTR, dwDesiredAccess: UInt32): windows_core.Result<SC_HANDLE> {
+    let result__ = OpenServiceA(hSCManager, lpServiceName, dwDesiredAccess)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<SC_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<SC_HANDLE>.Ok(result__)
+}
+
 public func OpenServiceW(hSCManager: SC_HANDLE, lpServiceName: windows_strings.PWSTR, dwDesiredAccess: UInt32): SC_HANDLE {
     let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "OpenServiceW"))
     var result = SC_HANDLE()
     result.Value = unsafe { proc(hSCManager.Value, lpServiceName.asPtr(), dwDesiredAccess) }
     result
+}
+
+public func OpenServiceWChecked(hSCManager: SC_HANDLE, lpServiceName: windows_strings.PWSTR, dwDesiredAccess: UInt32): windows_core.Result<SC_HANDLE> {
+    let result__ = OpenServiceW(hSCManager, lpServiceName, dwDesiredAccess)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<SC_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<SC_HANDLE>.Ok(result__)
 }
 
 public func QueryServiceConfigA(hService: SC_HANDLE, lpServiceConfig: CPointer<QUERY_SERVICE_CONFIGA>, cbBufSize: UInt32, pcbBytesNeeded: CPointer<UInt32>): Bool {
@@ -399,11 +455,27 @@ public func RegisterServiceCtrlHandlerA(lpServiceName: windows_strings.PSTR, lpH
     result
 }
 
+public func RegisterServiceCtrlHandlerAChecked(lpServiceName: windows_strings.PSTR, lpHandlerProc: CFunc<(UInt32) -> Unit>): windows_core.Result<SERVICE_STATUS_HANDLE> {
+    let result__ = RegisterServiceCtrlHandlerA(lpServiceName, lpHandlerProc)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<SERVICE_STATUS_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<SERVICE_STATUS_HANDLE>.Ok(result__)
+}
+
 public func RegisterServiceCtrlHandlerW(lpServiceName: windows_strings.PWSTR, lpHandlerProc: CFunc<(UInt32) -> Unit>): SERVICE_STATUS_HANDLE {
     let proc = CFunc<(CPointer<UInt16>, CFunc<(UInt32) -> Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "RegisterServiceCtrlHandlerW"))
     var result = SERVICE_STATUS_HANDLE()
     result.Value = unsafe { proc(lpServiceName.asPtr(), lpHandlerProc) }
     result
+}
+
+public func RegisterServiceCtrlHandlerWChecked(lpServiceName: windows_strings.PWSTR, lpHandlerProc: CFunc<(UInt32) -> Unit>): windows_core.Result<SERVICE_STATUS_HANDLE> {
+    let result__ = RegisterServiceCtrlHandlerW(lpServiceName, lpHandlerProc)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<SERVICE_STATUS_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<SERVICE_STATUS_HANDLE>.Ok(result__)
 }
 
 public func RegisterServiceCtrlHandlerExA(lpServiceName: windows_strings.PSTR, lpHandlerProc: CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>, lpContext: CPointer<Unit>): SERVICE_STATUS_HANDLE {
@@ -413,11 +485,27 @@ public func RegisterServiceCtrlHandlerExA(lpServiceName: windows_strings.PSTR, l
     result
 }
 
+public func RegisterServiceCtrlHandlerExAChecked(lpServiceName: windows_strings.PSTR, lpHandlerProc: CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>, lpContext: CPointer<Unit>): windows_core.Result<SERVICE_STATUS_HANDLE> {
+    let result__ = RegisterServiceCtrlHandlerExA(lpServiceName, lpHandlerProc, lpContext)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<SERVICE_STATUS_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<SERVICE_STATUS_HANDLE>.Ok(result__)
+}
+
 public func RegisterServiceCtrlHandlerExW(lpServiceName: windows_strings.PWSTR, lpHandlerProc: CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>, lpContext: CPointer<Unit>): SERVICE_STATUS_HANDLE {
     let proc = CFunc<(CPointer<UInt16>, CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>, CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "RegisterServiceCtrlHandlerExW"))
     var result = SERVICE_STATUS_HANDLE()
     result.Value = unsafe { proc(lpServiceName.asPtr(), lpHandlerProc, lpContext) }
     result
+}
+
+public func RegisterServiceCtrlHandlerExWChecked(lpServiceName: windows_strings.PWSTR, lpHandlerProc: CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>, lpContext: CPointer<Unit>): windows_core.Result<SERVICE_STATUS_HANDLE> {
+    let result__ = RegisterServiceCtrlHandlerExW(lpServiceName, lpHandlerProc, lpContext)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<SERVICE_STATUS_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<SERVICE_STATUS_HANDLE>.Ok(result__)
 }
 
 public func SetServiceObjectSecurity(hService: SC_HANDLE, dwSecurityInformation: UInt32, lpSecurityDescriptor: PSECURITY_DESCRIPTOR): Bool {

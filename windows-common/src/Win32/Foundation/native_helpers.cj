@@ -31,6 +31,10 @@ public func SysAddRefString(bstrString: windows_strings.BSTR): Int32 {
     return unsafe { proc(CPointer<Unit>(bstrString.asPtr())) }
 }
 
+public func SysAddRefStringChecked(bstrString: windows_strings.BSTR): windows_core.Result<Unit> {
+    windows_core.HRESULT(SysAddRefString(bstrString)).ok()
+}
+
 public func SysReleaseString(bstrString: windows_strings.BSTR): Unit {
     let proc = CFunc<(CPointer<Unit>) -> Unit>(windows_libloading.resolveProc("OLEAUT32.dll", "SysReleaseString"))
     unsafe { proc(CPointer<Unit>(bstrString.intoRaw())) }
@@ -143,11 +147,27 @@ public func GlobalFree(hMem: HGLOBAL): HGLOBAL {
     result
 }
 
+public func GlobalFreeChecked(hMem: HGLOBAL): windows_core.Result<Unit> {
+    let result__ = GlobalFree(hMem)
+    if (result__.Value.isNotNull()) {
+        return windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<Unit>.Ok(())
+}
+
 public func LocalFree(hMem: HLOCAL): HLOCAL {
     let proc = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "LocalFree"))
     var result = HLOCAL()
     result.Value = unsafe { proc(hMem.Value) }
     result
+}
+
+public func LocalFreeChecked(hMem: HLOCAL): windows_core.Result<Unit> {
+    let result__ = LocalFree(hMem)
+    if (result__.Value.isNotNull()) {
+        return windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<Unit>.Ok(())
 }
 
 public func RtlNtStatusToDosError(Status: Int32): UInt32 {

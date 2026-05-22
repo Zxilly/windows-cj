@@ -112,9 +112,25 @@ public func GetSystemDirectoryA(lpBuffer: windows_strings.PSTR, uSize: UInt32): 
     return unsafe { proc(lpBuffer.asPtr(), uSize) }
 }
 
+public func GetSystemDirectoryAChecked(lpBuffer: windows_strings.PSTR, uSize: UInt32): windows_core.Result<UInt32> {
+    let result__ = GetSystemDirectoryA(lpBuffer, uSize)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func GetSystemDirectoryW(lpBuffer: windows_strings.PWSTR, uSize: UInt32): UInt32 {
     let proc = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemDirectoryW"))
     return unsafe { proc(lpBuffer.asPtr(), uSize) }
+}
+
+public func GetSystemDirectoryWChecked(lpBuffer: windows_strings.PWSTR, uSize: UInt32): windows_core.Result<UInt32> {
+    let result__ = GetSystemDirectoryW(lpBuffer, uSize)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
 }
 
 public func GetWindowsDirectoryA(lpBuffer: windows_strings.PSTR, uSize: UInt32): UInt32 {
@@ -122,9 +138,25 @@ public func GetWindowsDirectoryA(lpBuffer: windows_strings.PSTR, uSize: UInt32):
     return unsafe { proc(lpBuffer.asPtr(), uSize) }
 }
 
+public func GetWindowsDirectoryAChecked(lpBuffer: windows_strings.PSTR, uSize: UInt32): windows_core.Result<UInt32> {
+    let result__ = GetWindowsDirectoryA(lpBuffer, uSize)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func GetWindowsDirectoryW(lpBuffer: windows_strings.PWSTR, uSize: UInt32): UInt32 {
     let proc = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetWindowsDirectoryW"))
     return unsafe { proc(lpBuffer.asPtr(), uSize) }
+}
+
+public func GetWindowsDirectoryWChecked(lpBuffer: windows_strings.PWSTR, uSize: UInt32): windows_core.Result<UInt32> {
+    let result__ = GetWindowsDirectoryW(lpBuffer, uSize)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
 }
 
 public func GetSystemWindowsDirectoryA(lpBuffer: windows_strings.PSTR, uSize: UInt32): UInt32 {
@@ -132,9 +164,25 @@ public func GetSystemWindowsDirectoryA(lpBuffer: windows_strings.PSTR, uSize: UI
     return unsafe { proc(lpBuffer.asPtr(), uSize) }
 }
 
+public func GetSystemWindowsDirectoryAChecked(lpBuffer: windows_strings.PSTR, uSize: UInt32): windows_core.Result<UInt32> {
+    let result__ = GetSystemWindowsDirectoryA(lpBuffer, uSize)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func GetSystemWindowsDirectoryW(lpBuffer: windows_strings.PWSTR, uSize: UInt32): UInt32 {
     let proc = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemWindowsDirectoryW"))
     return unsafe { proc(lpBuffer.asPtr(), uSize) }
+}
+
+public func GetSystemWindowsDirectoryWChecked(lpBuffer: windows_strings.PWSTR, uSize: UInt32): windows_core.Result<UInt32> {
+    let result__ = GetSystemWindowsDirectoryW(lpBuffer, uSize)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
 }
 
 public func GetComputerNameExA(NameType: Int32, lpBuffer: windows_strings.PSTR, nSize: CPointer<UInt32>): Bool {
@@ -263,9 +311,25 @@ public func EnumSystemFirmwareTables(FirmwareTableProviderSignature: UInt32, pFi
     return unsafe { proc(FirmwareTableProviderSignature, pFirmwareTableEnumBuffer, BufferSize) }
 }
 
+public func EnumSystemFirmwareTablesChecked(FirmwareTableProviderSignature: UInt32, pFirmwareTableEnumBuffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.Result<UInt32> {
+    let result__ = EnumSystemFirmwareTables(FirmwareTableProviderSignature, pFirmwareTableEnumBuffer, BufferSize)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func GetSystemFirmwareTable(FirmwareTableProviderSignature: UInt32, FirmwareTableID: UInt32, pFirmwareTableBuffer: CPointer<UInt8>, BufferSize: UInt32): UInt32 {
     let proc = CFunc<(UInt32, UInt32, CPointer<UInt8>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemFirmwareTable"))
     return unsafe { proc(FirmwareTableProviderSignature, FirmwareTableID, pFirmwareTableBuffer, BufferSize) }
+}
+
+public func GetSystemFirmwareTableChecked(FirmwareTableProviderSignature: UInt32, FirmwareTableID: UInt32, pFirmwareTableBuffer: CPointer<UInt8>, BufferSize: UInt32): windows_core.Result<UInt32> {
+    let result__ = GetSystemFirmwareTable(FirmwareTableProviderSignature, FirmwareTableID, pFirmwareTableBuffer, BufferSize)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
 }
 
 public func DnsHostnameToComputerNameExW(Hostname: windows_strings.PWSTR, ComputerName: windows_strings.PWSTR, nSize: CPointer<UInt32>): Bool {
@@ -336,6 +400,10 @@ public func GetIntegratedDisplaySize(sizeInInches: CPointer<Float64>): Int32 {
     return unsafe { proc(sizeInInches) }
 }
 
+public func GetIntegratedDisplaySizeChecked(sizeInInches: CPointer<Float64>): windows_core.Result<Unit> {
+    windows_core.HRESULT(GetIntegratedDisplaySize(sizeInInches)).ok()
+}
+
 public func SetComputerNameA(lpComputerName: windows_strings.PSTR): Bool {
     let proc = CFunc<(CPointer<UInt8>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetComputerNameA"))
     return unsafe { proc(lpComputerName.asPtr()) } != 0
@@ -392,9 +460,25 @@ public func GetSystemWow64DirectoryA(lpBuffer: windows_strings.PSTR, uSize: UInt
     return unsafe { proc(lpBuffer.asPtr(), uSize) }
 }
 
+public func GetSystemWow64DirectoryAChecked(lpBuffer: windows_strings.PSTR, uSize: UInt32): windows_core.Result<UInt32> {
+    let result__ = GetSystemWow64DirectoryA(lpBuffer, uSize)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func GetSystemWow64DirectoryW(lpBuffer: windows_strings.PWSTR, uSize: UInt32): UInt32 {
     let proc = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetSystemWow64DirectoryW"))
     return unsafe { proc(lpBuffer.asPtr(), uSize) }
+}
+
+public func GetSystemWow64DirectoryWChecked(lpBuffer: windows_strings.PWSTR, uSize: UInt32): windows_core.Result<UInt32> {
+    let result__ = GetSystemWow64DirectoryW(lpBuffer, uSize)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
 }
 
 public func GetSystemWow64Directory2A(lpBuffer: windows_strings.PSTR, uSize: UInt32, ImageFileMachineType: UInt16): UInt32 {
@@ -402,14 +486,34 @@ public func GetSystemWow64Directory2A(lpBuffer: windows_strings.PSTR, uSize: UIn
     return unsafe { proc(lpBuffer.asPtr(), uSize, ImageFileMachineType) }
 }
 
+public func GetSystemWow64Directory2AChecked(lpBuffer: windows_strings.PSTR, uSize: UInt32, ImageFileMachineType: UInt16): windows_core.Result<UInt32> {
+    let result__ = GetSystemWow64Directory2A(lpBuffer, uSize, ImageFileMachineType)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func GetSystemWow64Directory2W(lpBuffer: windows_strings.PWSTR, uSize: UInt32, ImageFileMachineType: UInt16): UInt32 {
     let proc = CFunc<(CPointer<UInt16>, UInt32, UInt16) -> UInt32>(windows_libloading.resolveProc("api-ms-win-core-wow64-l1-1-1.dll", "GetSystemWow64Directory2W"))
     return unsafe { proc(lpBuffer.asPtr(), uSize, ImageFileMachineType) }
 }
 
+public func GetSystemWow64Directory2WChecked(lpBuffer: windows_strings.PWSTR, uSize: UInt32, ImageFileMachineType: UInt16): windows_core.Result<UInt32> {
+    let result__ = GetSystemWow64Directory2W(lpBuffer, uSize, ImageFileMachineType)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func IsWow64GuestMachineSupported(WowGuestMachine: UInt16, MachineIsSupported: CPointer<Int32>): Int32 {
     let proc = CFunc<(UInt16, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "IsWow64GuestMachineSupported"))
     return unsafe { proc(WowGuestMachine, MachineIsSupported) }
+}
+
+public func IsWow64GuestMachineSupportedChecked(WowGuestMachine: UInt16, MachineIsSupported: CPointer<Int32>): windows_core.Result<Unit> {
+    windows_core.HRESULT(IsWow64GuestMachineSupported(WowGuestMachine, MachineIsSupported)).ok()
 }
 
 public func RtlGetProductInfo(OSMajorVersion: UInt32, OSMinorVersion: UInt32, SpMajorVersion: UInt32, SpMinorVersion: UInt32, ReturnedProductType: CPointer<UInt32>): Bool {

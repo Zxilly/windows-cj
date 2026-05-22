@@ -4,9 +4,12 @@ package windows_common.Win32.System.Threading
 
 import windows_libloading as windows_libloading
 import windows_common.Win32.Foundation.FILETIME
+import windows_common.Win32.Foundation.GetLastError
 import windows_common.Win32.Foundation.HANDLE
 import windows_common.Win32.Foundation.HMODULE
 import windows_common.Win32.Foundation.HWND
+import windows_common.Win32.Foundation.SetLastError
+import windows_common.Win32.Foundation.WAIT_EVENT
 import windows_common.Win32.Security.PSID
 import windows_common.Win32.Security.SECURITY_ATTRIBUTES
 import windows_common.Win32.System.Kernel.PROCESSOR_NUMBER
@@ -47,9 +50,30 @@ public func FlsAlloc(lpCallback: CFunc<(CPointer<Unit>) -> Unit>): UInt32 {
     return unsafe { proc(lpCallback) }
 }
 
+public func FlsAllocChecked(lpCallback: CFunc<(CPointer<Unit>) -> Unit>): windows_core.Result<UInt32> {
+    let result__ = FlsAlloc(lpCallback)
+    if (result__ == 0xFFFFFFFFu32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func FlsGetValue(dwFlsIndex: UInt32): CPointer<Unit> {
     let proc = CFunc<(UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "FlsGetValue"))
     return unsafe { proc(dwFlsIndex) }
+}
+
+public func FlsGetValueChecked(dwFlsIndex: UInt32): windows_core.Result<CPointer<Unit>> {
+    SetLastError(0u32)
+    let result__ = FlsGetValue(dwFlsIndex)
+    if (result__.isNotNull()) {
+        return windows_core.Result<CPointer<Unit>>.Ok(result__)
+    }
+    let lastError__ = GetLastError()
+    if (lastError__ == 0u32) {
+        return windows_core.Result<CPointer<Unit>>.Ok(result__)
+    }
+    windows_core.Result<CPointer<Unit>>.Err(windows_core.errorFromWin32(lastError__))
 }
 
 public func FlsSetValue(dwFlsIndex: UInt32, lpFlsData: CPointer<Unit>): Bool {
@@ -236,11 +260,16 @@ public func SleepConditionVariableCS(ConditionVariable: CPointer<CONDITION_VARIA
     return unsafe { proc(ConditionVariable, CriticalSection, dwMilliseconds) } != 0
 }
 
-public func SleepConditionVariableCSChecked(ConditionVariable: CPointer<CONDITION_VARIABLE>, CriticalSection: CPointer<CRITICAL_SECTION>, dwMilliseconds: UInt32): windows_core.Result<Unit> {
-    if (SleepConditionVariableCS(ConditionVariable, CriticalSection, dwMilliseconds)) {
-        return windows_core.Result<Unit>.Ok(())
+public func SleepConditionVariableCSChecked(ConditionVariable: CPointer<CONDITION_VARIABLE>, CriticalSection: CPointer<CRITICAL_SECTION>, dwMilliseconds: UInt32): windows_core.Result<Bool> {
+    let result__ = SleepConditionVariableCS(ConditionVariable, CriticalSection, dwMilliseconds)
+    if (result__) {
+        return windows_core.Result<Bool>.Ok(true)
     }
-    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+    let lastError__ = GetLastError()
+    if (lastError__ == 1460u32) {
+        return windows_core.Result<Bool>.Ok(false)
+    }
+    windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))
 }
 
 public func SleepConditionVariableSRW(ConditionVariable: CPointer<CONDITION_VARIABLE>, SRWLock: CPointer<SRWLOCK>, dwMilliseconds: UInt32, Flags: UInt32): Bool {
@@ -248,11 +277,16 @@ public func SleepConditionVariableSRW(ConditionVariable: CPointer<CONDITION_VARI
     return unsafe { proc(ConditionVariable, SRWLock, dwMilliseconds, Flags) } != 0
 }
 
-public func SleepConditionVariableSRWChecked(ConditionVariable: CPointer<CONDITION_VARIABLE>, SRWLock: CPointer<SRWLOCK>, dwMilliseconds: UInt32, Flags: UInt32): windows_core.Result<Unit> {
-    if (SleepConditionVariableSRW(ConditionVariable, SRWLock, dwMilliseconds, Flags)) {
-        return windows_core.Result<Unit>.Ok(())
+public func SleepConditionVariableSRWChecked(ConditionVariable: CPointer<CONDITION_VARIABLE>, SRWLock: CPointer<SRWLOCK>, dwMilliseconds: UInt32, Flags: UInt32): windows_core.Result<Bool> {
+    let result__ = SleepConditionVariableSRW(ConditionVariable, SRWLock, dwMilliseconds, Flags)
+    if (result__) {
+        return windows_core.Result<Bool>.Ok(true)
     }
-    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+    let lastError__ = GetLastError()
+    if (lastError__ == 1460u32) {
+        return windows_core.Result<Bool>.Ok(false)
+    }
+    windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))
 }
 
 public func SetEvent(hEvent: HANDLE): Bool {
@@ -308,6 +342,14 @@ public func WaitForSingleObject(hHandle: HANDLE, dwMilliseconds: UInt32): UInt32
     return unsafe { proc(hHandle.Value, dwMilliseconds) }
 }
 
+public func WaitForSingleObjectChecked(hHandle: HANDLE, dwMilliseconds: UInt32): windows_core.Result<WAIT_EVENT> {
+    let result__ = WaitForSingleObject(hHandle, dwMilliseconds)
+    if (result__ == 0xFFFFFFFFu32) {
+        return windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<WAIT_EVENT>.Ok(result__)
+}
+
 public func SleepEx(dwMilliseconds: UInt32, bAlertable: Bool): UInt32 {
     let proc = CFunc<(UInt32, Int32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "SleepEx"))
     return unsafe { proc(dwMilliseconds, if (bAlertable) { 1 } else { 0 }) }
@@ -318,9 +360,25 @@ public func WaitForSingleObjectEx(hHandle: HANDLE, dwMilliseconds: UInt32, bAler
     return unsafe { proc(hHandle.Value, dwMilliseconds, if (bAlertable) { 1 } else { 0 }) }
 }
 
+public func WaitForSingleObjectExChecked(hHandle: HANDLE, dwMilliseconds: UInt32, bAlertable: Bool): windows_core.Result<WAIT_EVENT> {
+    let result__ = WaitForSingleObjectEx(hHandle, dwMilliseconds, bAlertable)
+    if (result__ == 0xFFFFFFFFu32) {
+        return windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<WAIT_EVENT>.Ok(result__)
+}
+
 public func WaitForMultipleObjectsEx(nCount: UInt32, lpHandles: CPointer<HANDLE>, bWaitAll: Bool, dwMilliseconds: UInt32, bAlertable: Bool): UInt32 {
     let proc = CFunc<(UInt32, CPointer<CPointer<Unit>>, Int32, UInt32, Int32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "WaitForMultipleObjectsEx"))
     return unsafe { proc(nCount, CPointer<CPointer<Unit>>(lpHandles), if (bWaitAll) { 1 } else { 0 }, dwMilliseconds, if (bAlertable) { 1 } else { 0 }) }
+}
+
+public func WaitForMultipleObjectsExChecked(nCount: UInt32, lpHandles: CPointer<HANDLE>, bWaitAll: Bool, dwMilliseconds: UInt32, bAlertable: Bool): windows_core.Result<WAIT_EVENT> {
+    let result__ = WaitForMultipleObjectsEx(nCount, lpHandles, bWaitAll, dwMilliseconds, bAlertable)
+    if (result__ == 0xFFFFFFFFu32) {
+        return windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<WAIT_EVENT>.Ok(result__)
 }
 
 public func CreateMutexA(lpMutexAttributes: CPointer<SECURITY_ATTRIBUTES>, bInitialOwner: Bool, lpName: windows_strings.PSTR): HANDLE {
@@ -330,11 +388,27 @@ public func CreateMutexA(lpMutexAttributes: CPointer<SECURITY_ATTRIBUTES>, bInit
     result
 }
 
+public func CreateMutexAChecked(lpMutexAttributes: CPointer<SECURITY_ATTRIBUTES>, bInitialOwner: Bool, lpName: windows_strings.PSTR): windows_core.Result<HANDLE> {
+    let result__ = CreateMutexA(lpMutexAttributes, bInitialOwner, lpName)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
+}
+
 public func CreateMutexW(lpMutexAttributes: CPointer<SECURITY_ATTRIBUTES>, bInitialOwner: Bool, lpName: windows_strings.PWSTR): HANDLE {
     let proc = CFunc<(CPointer<SECURITY_ATTRIBUTES>, Int32, CPointer<UInt16>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateMutexW"))
     var result = HANDLE()
     result.Value = unsafe { proc(lpMutexAttributes, if (bInitialOwner) { 1 } else { 0 }, lpName.asPtr()) }
     result
+}
+
+public func CreateMutexWChecked(lpMutexAttributes: CPointer<SECURITY_ATTRIBUTES>, bInitialOwner: Bool, lpName: windows_strings.PWSTR): windows_core.Result<HANDLE> {
+    let result__ = CreateMutexW(lpMutexAttributes, bInitialOwner, lpName)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func OpenMutexW(dwDesiredAccess: UInt32, bInheritHandle: Bool, lpName: windows_strings.PWSTR): HANDLE {
@@ -344,11 +418,27 @@ public func OpenMutexW(dwDesiredAccess: UInt32, bInheritHandle: Bool, lpName: wi
     result
 }
 
+public func OpenMutexWChecked(dwDesiredAccess: UInt32, bInheritHandle: Bool, lpName: windows_strings.PWSTR): windows_core.Result<HANDLE> {
+    let result__ = OpenMutexW(dwDesiredAccess, bInheritHandle, lpName)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
+}
+
 public func CreateEventA(lpEventAttributes: CPointer<SECURITY_ATTRIBUTES>, bManualReset: Bool, bInitialState: Bool, lpName: windows_strings.PSTR): HANDLE {
     let proc = CFunc<(CPointer<SECURITY_ATTRIBUTES>, Int32, Int32, CPointer<UInt8>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateEventA"))
     var result = HANDLE()
     result.Value = unsafe { proc(lpEventAttributes, if (bManualReset) { 1 } else { 0 }, if (bInitialState) { 1 } else { 0 }, lpName.asPtr()) }
     result
+}
+
+public func CreateEventAChecked(lpEventAttributes: CPointer<SECURITY_ATTRIBUTES>, bManualReset: Bool, bInitialState: Bool, lpName: windows_strings.PSTR): windows_core.Result<HANDLE> {
+    let result__ = CreateEventA(lpEventAttributes, bManualReset, bInitialState, lpName)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func CreateEventW(lpEventAttributes: CPointer<SECURITY_ATTRIBUTES>, bManualReset: Bool, bInitialState: Bool, lpName: windows_strings.PWSTR): HANDLE {
@@ -358,11 +448,27 @@ public func CreateEventW(lpEventAttributes: CPointer<SECURITY_ATTRIBUTES>, bManu
     result
 }
 
+public func CreateEventWChecked(lpEventAttributes: CPointer<SECURITY_ATTRIBUTES>, bManualReset: Bool, bInitialState: Bool, lpName: windows_strings.PWSTR): windows_core.Result<HANDLE> {
+    let result__ = CreateEventW(lpEventAttributes, bManualReset, bInitialState, lpName)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
+}
+
 public func OpenEventA(dwDesiredAccess: UInt32, bInheritHandle: Bool, lpName: windows_strings.PSTR): HANDLE {
     let proc = CFunc<(UInt32, Int32, CPointer<UInt8>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "OpenEventA"))
     var result = HANDLE()
     result.Value = unsafe { proc(dwDesiredAccess, if (bInheritHandle) { 1 } else { 0 }, lpName.asPtr()) }
     result
+}
+
+public func OpenEventAChecked(dwDesiredAccess: UInt32, bInheritHandle: Bool, lpName: windows_strings.PSTR): windows_core.Result<HANDLE> {
+    let result__ = OpenEventA(dwDesiredAccess, bInheritHandle, lpName)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func OpenEventW(dwDesiredAccess: UInt32, bInheritHandle: Bool, lpName: windows_strings.PWSTR): HANDLE {
@@ -372,6 +478,14 @@ public func OpenEventW(dwDesiredAccess: UInt32, bInheritHandle: Bool, lpName: wi
     result
 }
 
+public func OpenEventWChecked(dwDesiredAccess: UInt32, bInheritHandle: Bool, lpName: windows_strings.PWSTR): windows_core.Result<HANDLE> {
+    let result__ = OpenEventW(dwDesiredAccess, bInheritHandle, lpName)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
+}
+
 public func OpenSemaphoreW(dwDesiredAccess: UInt32, bInheritHandle: Bool, lpName: windows_strings.PWSTR): HANDLE {
     let proc = CFunc<(UInt32, Int32, CPointer<UInt16>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "OpenSemaphoreW"))
     var result = HANDLE()
@@ -379,11 +493,27 @@ public func OpenSemaphoreW(dwDesiredAccess: UInt32, bInheritHandle: Bool, lpName
     result
 }
 
+public func OpenSemaphoreWChecked(dwDesiredAccess: UInt32, bInheritHandle: Bool, lpName: windows_strings.PWSTR): windows_core.Result<HANDLE> {
+    let result__ = OpenSemaphoreW(dwDesiredAccess, bInheritHandle, lpName)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
+}
+
 public func OpenWaitableTimerW(dwDesiredAccess: UInt32, bInheritHandle: Bool, lpTimerName: windows_strings.PWSTR): HANDLE {
     let proc = CFunc<(UInt32, Int32, CPointer<UInt16>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "OpenWaitableTimerW"))
     var result = HANDLE()
     result.Value = unsafe { proc(dwDesiredAccess, if (bInheritHandle) { 1 } else { 0 }, lpTimerName.asPtr()) }
     result
+}
+
+public func OpenWaitableTimerWChecked(dwDesiredAccess: UInt32, bInheritHandle: Bool, lpTimerName: windows_strings.PWSTR): windows_core.Result<HANDLE> {
+    let result__ = OpenWaitableTimerW(dwDesiredAccess, bInheritHandle, lpTimerName)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func SetWaitableTimerEx(hTimer: HANDLE, lpDueTime: CPointer<Int64>, lPeriod: Int32, pfnCompletionRoutine: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Unit>, lpArgToCompletionRoutine: CPointer<Unit>, WakeContext: CPointer<REASON_CONTEXT>, TolerableDelay: UInt32): Bool {
@@ -415,11 +545,26 @@ public func CancelWaitableTimer(hTimer: HANDLE): Bool {
     return unsafe { proc(hTimer.Value) } != 0
 }
 
+public func CancelWaitableTimerChecked(hTimer: HANDLE): windows_core.Result<Unit> {
+    if (CancelWaitableTimer(hTimer)) {
+        return windows_core.Result<Unit>.Ok(())
+    }
+    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+}
+
 public func CreateMutexExA(lpMutexAttributes: CPointer<SECURITY_ATTRIBUTES>, lpName: windows_strings.PSTR, dwFlags: UInt32, dwDesiredAccess: UInt32): HANDLE {
     let proc = CFunc<(CPointer<SECURITY_ATTRIBUTES>, CPointer<UInt8>, UInt32, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateMutexExA"))
     var result = HANDLE()
     result.Value = unsafe { proc(lpMutexAttributes, lpName.asPtr(), dwFlags, dwDesiredAccess) }
     result
+}
+
+public func CreateMutexExAChecked(lpMutexAttributes: CPointer<SECURITY_ATTRIBUTES>, lpName: windows_strings.PSTR, dwFlags: UInt32, dwDesiredAccess: UInt32): windows_core.Result<HANDLE> {
+    let result__ = CreateMutexExA(lpMutexAttributes, lpName, dwFlags, dwDesiredAccess)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func CreateMutexExW(lpMutexAttributes: CPointer<SECURITY_ATTRIBUTES>, lpName: windows_strings.PWSTR, dwFlags: UInt32, dwDesiredAccess: UInt32): HANDLE {
@@ -429,11 +574,27 @@ public func CreateMutexExW(lpMutexAttributes: CPointer<SECURITY_ATTRIBUTES>, lpN
     result
 }
 
+public func CreateMutexExWChecked(lpMutexAttributes: CPointer<SECURITY_ATTRIBUTES>, lpName: windows_strings.PWSTR, dwFlags: UInt32, dwDesiredAccess: UInt32): windows_core.Result<HANDLE> {
+    let result__ = CreateMutexExW(lpMutexAttributes, lpName, dwFlags, dwDesiredAccess)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
+}
+
 public func CreateEventExA(lpEventAttributes: CPointer<SECURITY_ATTRIBUTES>, lpName: windows_strings.PSTR, dwFlags: UInt32, dwDesiredAccess: UInt32): HANDLE {
     let proc = CFunc<(CPointer<SECURITY_ATTRIBUTES>, CPointer<UInt8>, UInt32, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateEventExA"))
     var result = HANDLE()
     result.Value = unsafe { proc(lpEventAttributes, lpName.asPtr(), dwFlags, dwDesiredAccess) }
     result
+}
+
+public func CreateEventExAChecked(lpEventAttributes: CPointer<SECURITY_ATTRIBUTES>, lpName: windows_strings.PSTR, dwFlags: UInt32, dwDesiredAccess: UInt32): windows_core.Result<HANDLE> {
+    let result__ = CreateEventExA(lpEventAttributes, lpName, dwFlags, dwDesiredAccess)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func CreateEventExW(lpEventAttributes: CPointer<SECURITY_ATTRIBUTES>, lpName: windows_strings.PWSTR, dwFlags: UInt32, dwDesiredAccess: UInt32): HANDLE {
@@ -443,6 +604,14 @@ public func CreateEventExW(lpEventAttributes: CPointer<SECURITY_ATTRIBUTES>, lpN
     result
 }
 
+public func CreateEventExWChecked(lpEventAttributes: CPointer<SECURITY_ATTRIBUTES>, lpName: windows_strings.PWSTR, dwFlags: UInt32, dwDesiredAccess: UInt32): windows_core.Result<HANDLE> {
+    let result__ = CreateEventExW(lpEventAttributes, lpName, dwFlags, dwDesiredAccess)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
+}
+
 public func CreateSemaphoreExW(lpSemaphoreAttributes: CPointer<SECURITY_ATTRIBUTES>, lInitialCount: Int32, lMaximumCount: Int32, lpName: windows_strings.PWSTR, dwDesiredAccess: UInt32): HANDLE {
     let proc = CFunc<(CPointer<SECURITY_ATTRIBUTES>, Int32, Int32, CPointer<UInt16>, UInt32, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateSemaphoreExW"))
     var result = HANDLE()
@@ -450,11 +619,27 @@ public func CreateSemaphoreExW(lpSemaphoreAttributes: CPointer<SECURITY_ATTRIBUT
     result
 }
 
+public func CreateSemaphoreExWChecked(lpSemaphoreAttributes: CPointer<SECURITY_ATTRIBUTES>, lInitialCount: Int32, lMaximumCount: Int32, lpName: windows_strings.PWSTR, dwDesiredAccess: UInt32): windows_core.Result<HANDLE> {
+    let result__ = CreateSemaphoreExW(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName, dwDesiredAccess)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
+}
+
 public func CreateWaitableTimerExW(lpTimerAttributes: CPointer<SECURITY_ATTRIBUTES>, lpTimerName: windows_strings.PWSTR, dwFlags: UInt32, dwDesiredAccess: UInt32): HANDLE {
     let proc = CFunc<(CPointer<SECURITY_ATTRIBUTES>, CPointer<UInt16>, UInt32, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateWaitableTimerExW"))
     var result = HANDLE()
     result.Value = unsafe { proc(lpTimerAttributes, lpTimerName.asPtr(), dwFlags, dwDesiredAccess) }
     result
+}
+
+public func CreateWaitableTimerExWChecked(lpTimerAttributes: CPointer<SECURITY_ATTRIBUTES>, lpTimerName: windows_strings.PWSTR, dwFlags: UInt32, dwDesiredAccess: UInt32): windows_core.Result<HANDLE> {
+    let result__ = CreateWaitableTimerExW(lpTimerAttributes, lpTimerName, dwFlags, dwDesiredAccess)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func EnterSynchronizationBarrier(lpBarrier: CPointer<SYNCHRONIZATION_BARRIER>, dwFlags: UInt32): Bool {
@@ -489,11 +674,16 @@ public func WaitOnAddress(Address: CPointer<Unit>, CompareAddress: CPointer<Unit
     return unsafe { proc(Address, CompareAddress, AddressSize, dwMilliseconds) } != 0
 }
 
-public func WaitOnAddressChecked(Address: CPointer<Unit>, CompareAddress: CPointer<Unit>, AddressSize: UIntNative, dwMilliseconds: UInt32): windows_core.Result<Unit> {
-    if (WaitOnAddress(Address, CompareAddress, AddressSize, dwMilliseconds)) {
-        return windows_core.Result<Unit>.Ok(())
+public func WaitOnAddressChecked(Address: CPointer<Unit>, CompareAddress: CPointer<Unit>, AddressSize: UIntNative, dwMilliseconds: UInt32): windows_core.Result<Bool> {
+    let result__ = WaitOnAddress(Address, CompareAddress, AddressSize, dwMilliseconds)
+    if (result__) {
+        return windows_core.Result<Bool>.Ok(true)
     }
-    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+    let lastError__ = GetLastError()
+    if (lastError__ == 1460u32) {
+        return windows_core.Result<Bool>.Ok(false)
+    }
+    windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))
 }
 
 public func WakeByAddressSingle(Address: CPointer<Unit>): Unit {
@@ -511,6 +701,14 @@ public func WaitForMultipleObjects(nCount: UInt32, lpHandles: CPointer<HANDLE>, 
     return unsafe { proc(nCount, CPointer<CPointer<Unit>>(lpHandles), if (bWaitAll) { 1 } else { 0 }, dwMilliseconds) }
 }
 
+public func WaitForMultipleObjectsChecked(nCount: UInt32, lpHandles: CPointer<HANDLE>, bWaitAll: Bool, dwMilliseconds: UInt32): windows_core.Result<WAIT_EVENT> {
+    let result__ = WaitForMultipleObjects(nCount, lpHandles, bWaitAll, dwMilliseconds)
+    if (result__ == 0xFFFFFFFFu32) {
+        return windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<WAIT_EVENT>.Ok(result__)
+}
+
 public func CreateSemaphoreW(lpSemaphoreAttributes: CPointer<SECURITY_ATTRIBUTES>, lInitialCount: Int32, lMaximumCount: Int32, lpName: windows_strings.PWSTR): HANDLE {
     let proc = CFunc<(CPointer<SECURITY_ATTRIBUTES>, Int32, Int32, CPointer<UInt16>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateSemaphoreW"))
     var result = HANDLE()
@@ -518,11 +716,27 @@ public func CreateSemaphoreW(lpSemaphoreAttributes: CPointer<SECURITY_ATTRIBUTES
     result
 }
 
+public func CreateSemaphoreWChecked(lpSemaphoreAttributes: CPointer<SECURITY_ATTRIBUTES>, lInitialCount: Int32, lMaximumCount: Int32, lpName: windows_strings.PWSTR): windows_core.Result<HANDLE> {
+    let result__ = CreateSemaphoreW(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
+}
+
 public func CreateWaitableTimerW(lpTimerAttributes: CPointer<SECURITY_ATTRIBUTES>, bManualReset: Bool, lpTimerName: windows_strings.PWSTR): HANDLE {
     let proc = CFunc<(CPointer<SECURITY_ATTRIBUTES>, Int32, CPointer<UInt16>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateWaitableTimerW"))
     var result = HANDLE()
     result.Value = unsafe { proc(lpTimerAttributes, if (bManualReset) { 1 } else { 0 }, lpTimerName.asPtr()) }
     result
+}
+
+public func CreateWaitableTimerWChecked(lpTimerAttributes: CPointer<SECURITY_ATTRIBUTES>, bManualReset: Bool, lpTimerName: windows_strings.PWSTR): windows_core.Result<HANDLE> {
+    let result__ = CreateWaitableTimerW(lpTimerAttributes, bManualReset, lpTimerName)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func InitializeSListHead(ListHead: CPointer<SLIST_HEADER>): Unit {
@@ -558,6 +772,14 @@ public func QueryDepthSList(ListHead: CPointer<SLIST_HEADER>): UInt16 {
 public func QueueUserAPC(pfnAPC: CFunc<(UIntNative) -> Unit>, hThread: HANDLE, dwData: UIntNative): UInt32 {
     let proc = CFunc<(CFunc<(UIntNative) -> Unit>, CPointer<Unit>, UIntNative) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "QueueUserAPC"))
     return unsafe { proc(pfnAPC, hThread.Value, dwData) }
+}
+
+public func QueueUserAPCChecked(pfnAPC: CFunc<(UIntNative) -> Unit>, hThread: HANDLE, dwData: UIntNative): windows_core.Result<UInt32> {
+    let result__ = QueueUserAPC(pfnAPC, hThread, dwData)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
 }
 
 public func QueueUserAPC2(ApcRoutine: CFunc<(UIntNative) -> Unit>, Thread: HANDLE, Data: UIntNative, Flags: Int32): Bool {
@@ -630,11 +852,27 @@ public func CreateThread(lpThreadAttributes: CPointer<SECURITY_ATTRIBUTES>, dwSt
     result
 }
 
+public func CreateThreadChecked(lpThreadAttributes: CPointer<SECURITY_ATTRIBUTES>, dwStackSize: UIntNative, lpStartAddress: CFunc<(CPointer<Unit>) -> UInt32>, lpParameter: CPointer<Unit>, dwCreationFlags: UInt32, lpThreadId: CPointer<UInt32>): windows_core.Result<HANDLE> {
+    let result__ = CreateThread(lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpThreadId)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
+}
+
 public func CreateRemoteThread(hProcess: HANDLE, lpThreadAttributes: CPointer<SECURITY_ATTRIBUTES>, dwStackSize: UIntNative, lpStartAddress: CFunc<(CPointer<Unit>) -> UInt32>, lpParameter: CPointer<Unit>, dwCreationFlags: UInt32, lpThreadId: CPointer<UInt32>): HANDLE {
     let proc = CFunc<(CPointer<Unit>, CPointer<SECURITY_ATTRIBUTES>, UIntNative, CFunc<(CPointer<Unit>) -> UInt32>, CPointer<Unit>, UInt32, CPointer<UInt32>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "CreateRemoteThread"))
     var result = HANDLE()
     result.Value = unsafe { proc(hProcess.Value, lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpThreadId) }
     result
+}
+
+public func CreateRemoteThreadChecked(hProcess: HANDLE, lpThreadAttributes: CPointer<SECURITY_ATTRIBUTES>, dwStackSize: UIntNative, lpStartAddress: CFunc<(CPointer<Unit>) -> UInt32>, lpParameter: CPointer<Unit>, dwCreationFlags: UInt32, lpThreadId: CPointer<UInt32>): windows_core.Result<HANDLE> {
+    let result__ = CreateRemoteThread(hProcess, lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpThreadId)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func GetCurrentThread(): HANDLE {
@@ -654,6 +892,14 @@ public func OpenThread(dwDesiredAccess: UInt32, bInheritHandle: Bool, dwThreadId
     var result = HANDLE()
     result.Value = unsafe { proc(dwDesiredAccess, if (bInheritHandle) { 1 } else { 0 }, dwThreadId) }
     result
+}
+
+public func OpenThreadChecked(dwDesiredAccess: UInt32, bInheritHandle: Bool, dwThreadId: UInt32): windows_core.Result<HANDLE> {
+    let result__ = OpenThread(dwDesiredAccess, bInheritHandle, dwThreadId)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func SetThreadPriority(hThread: HANDLE, nPriority: Int32): Bool {
@@ -697,6 +943,14 @@ public func GetThreadPriority(hThread: HANDLE): Int32 {
     return unsafe { proc(hThread.Value) }
 }
 
+public func GetThreadPriorityChecked(hThread: HANDLE): windows_core.Result<Int32> {
+    let result__ = GetThreadPriority(hThread)
+    if (result__ == 2147483647) {
+        return windows_core.Result<Int32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<Int32>.Ok(result__)
+}
+
 public func ExitThread(dwExitCode: UInt32): Unit {
     let proc = CFunc<(UInt32) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "ExitThread"))
     unsafe { proc(dwExitCode) }
@@ -731,9 +985,25 @@ public func SuspendThread(hThread: HANDLE): UInt32 {
     return unsafe { proc(hThread.Value) }
 }
 
+public func SuspendThreadChecked(hThread: HANDLE): windows_core.Result<UInt32> {
+    let result__ = SuspendThread(hThread)
+    if (result__ == 0xFFFFFFFFu32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func ResumeThread(hThread: HANDLE): UInt32 {
     let proc = CFunc<(CPointer<Unit>) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "ResumeThread"))
     return unsafe { proc(hThread.Value) }
+}
+
+public func ResumeThreadChecked(hThread: HANDLE): windows_core.Result<UInt32> {
+    let result__ = ResumeThread(hThread)
+    if (result__ == 0xFFFFFFFFu32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
 }
 
 public func TlsAlloc(): UInt32 {
@@ -741,9 +1011,30 @@ public func TlsAlloc(): UInt32 {
     return unsafe { proc() }
 }
 
+public func TlsAllocChecked(): windows_core.Result<UInt32> {
+    let result__ = TlsAlloc()
+    if (result__ == 0xFFFFFFFFu32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func TlsGetValue(dwTlsIndex: UInt32): CPointer<Unit> {
     let proc = CFunc<(UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "TlsGetValue"))
     return unsafe { proc(dwTlsIndex) }
+}
+
+public func TlsGetValueChecked(dwTlsIndex: UInt32): windows_core.Result<CPointer<Unit>> {
+    SetLastError(0u32)
+    let result__ = TlsGetValue(dwTlsIndex)
+    if (result__.isNotNull()) {
+        return windows_core.Result<CPointer<Unit>>.Ok(result__)
+    }
+    let lastError__ = GetLastError()
+    if (lastError__ == 0u32) {
+        return windows_core.Result<CPointer<Unit>>.Ok(result__)
+    }
+    windows_core.Result<CPointer<Unit>>.Err(windows_core.errorFromWin32(lastError__))
 }
 
 public func TlsSetValue(dwTlsIndex: UInt32, lpTlsValue: CPointer<Unit>): Bool {
@@ -809,6 +1100,14 @@ public func SetProcessShutdownParametersChecked(dwLevel: UInt32, dwFlags: UInt32
 public func GetProcessVersion(ProcessId: UInt32): UInt32 {
     let proc = CFunc<(UInt32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetProcessVersion"))
     return unsafe { proc(ProcessId) }
+}
+
+public func GetProcessVersionChecked(ProcessId: UInt32): windows_core.Result<UInt32> {
+    let result__ = GetProcessVersion(ProcessId)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
 }
 
 public func GetStartupInfoW(lpStartupInfo: CPointer<STARTUPINFOW>): Unit {
@@ -881,6 +1180,14 @@ public func GetPriorityClass(hProcess: HANDLE): UInt32 {
     return unsafe { proc(hProcess.Value) }
 }
 
+public func GetPriorityClassChecked(hProcess: HANDLE): windows_core.Result<UInt32> {
+    let result__ = GetPriorityClass(hProcess)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func SetThreadStackGuarantee(StackSizeInBytes: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetThreadStackGuarantee"))
     return unsafe { proc(StackSizeInBytes) } != 0
@@ -898,9 +1205,25 @@ public func GetProcessId(Process: HANDLE): UInt32 {
     return unsafe { proc(Process.Value) }
 }
 
+public func GetProcessIdChecked(Process: HANDLE): windows_core.Result<UInt32> {
+    let result__ = GetProcessId(Process)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func GetThreadId(Thread: HANDLE): UInt32 {
     let proc = CFunc<(CPointer<Unit>) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetThreadId"))
     return unsafe { proc(Thread.Value) }
+}
+
+public func GetThreadIdChecked(Thread: HANDLE): windows_core.Result<UInt32> {
+    let result__ = GetThreadId(Thread)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
 }
 
 public func FlushProcessWriteBuffers(): Unit {
@@ -911,6 +1234,14 @@ public func FlushProcessWriteBuffers(): Unit {
 public func GetProcessIdOfThread(Thread: HANDLE): UInt32 {
     let proc = CFunc<(CPointer<Unit>) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetProcessIdOfThread"))
     return unsafe { proc(Thread.Value) }
+}
+
+public func GetProcessIdOfThreadChecked(Thread: HANDLE): windows_core.Result<UInt32> {
+    let result__ = GetProcessIdOfThread(Thread)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
 }
 
 public func InitializeProcThreadAttributeList(lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST, dwAttributeCount: UInt32, lpSize: CPointer<UIntNative>): Bool {
@@ -990,6 +1321,14 @@ public func CreateRemoteThreadEx(hProcess: HANDLE, lpThreadAttributes: CPointer<
     result
 }
 
+public func CreateRemoteThreadExChecked(hProcess: HANDLE, lpThreadAttributes: CPointer<SECURITY_ATTRIBUTES>, dwStackSize: UIntNative, lpStartAddress: CFunc<(CPointer<Unit>) -> UInt32>, lpParameter: CPointer<Unit>, dwCreationFlags: UInt32, lpAttributeList: LPPROC_THREAD_ATTRIBUTE_LIST, lpThreadId: CPointer<UInt32>): windows_core.Result<HANDLE> {
+    let result__ = CreateRemoteThreadEx(hProcess, lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpAttributeList, lpThreadId)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
+}
+
 public func GetCurrentThreadStackLimits(LowLimit: CPointer<UIntNative>, HighLimit: CPointer<UIntNative>): Unit {
     let proc = CFunc<(CPointer<UIntNative>, CPointer<UIntNative>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "GetCurrentThreadStackLimits"))
     unsafe { proc(LowLimit, HighLimit) }
@@ -1036,6 +1375,14 @@ public func OpenProcess(dwDesiredAccess: UInt32, bInheritHandle: Bool, dwProcess
     var result = HANDLE()
     result.Value = unsafe { proc(dwDesiredAccess, if (bInheritHandle) { 1 } else { 0 }, dwProcessId) }
     result
+}
+
+public func OpenProcessChecked(dwDesiredAccess: UInt32, bInheritHandle: Bool, dwProcessId: UInt32): windows_core.Result<HANDLE> {
+    let result__ = OpenProcess(dwDesiredAccess, bInheritHandle, dwProcessId)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func IsProcessorFeaturePresent(ProcessorFeature: UInt32): Bool {
@@ -1195,6 +1542,14 @@ public func SetThreadIdealProcessor(hThread: HANDLE, dwIdealProcessor: UInt32): 
     return unsafe { proc(hThread.Value, dwIdealProcessor) }
 }
 
+public func SetThreadIdealProcessorChecked(hThread: HANDLE, dwIdealProcessor: UInt32): windows_core.Result<UInt32> {
+    let result__ = SetThreadIdealProcessor(hThread, dwIdealProcessor)
+    if (result__ == 0xFFFFFFFFu32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func SetProcessInformation(hProcess: HANDLE, ProcessInformationClass: Int32, ProcessInformation: CPointer<Unit>, ProcessInformationSize: UInt32): Bool {
     let proc = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, UInt32) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetProcessInformation"))
     return unsafe { proc(hProcess.Value, ProcessInformationClass, ProcessInformation, ProcessInformationSize) } != 0
@@ -1288,14 +1643,53 @@ public func GetMachineTypeAttributes(Machine: UInt16, MachineTypeAttributes: CPo
     return unsafe { proc(Machine, MachineTypeAttributes) }
 }
 
+public func GetMachineTypeAttributesChecked(Machine: UInt16, MachineTypeAttributes: CPointer<Int32>): windows_core.Result<Unit> {
+    windows_core.HRESULT(GetMachineTypeAttributes(Machine, MachineTypeAttributes)).ok()
+}
+
 public func SetThreadDescription(hThread: HANDLE, lpThreadDescription: windows_strings.PWSTR): Int32 {
     let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetThreadDescription"))
     return unsafe { proc(hThread.Value, lpThreadDescription.asPtr()) }
 }
 
+public func SetThreadDescriptionChecked(hThread: HANDLE, lpThreadDescription: windows_strings.PWSTR): windows_core.Result<Unit> {
+    windows_core.HRESULT(SetThreadDescription(hThread, lpThreadDescription)).ok()
+}
+
 public func GetThreadDescription(hThread: HANDLE, ppszThreadDescription: CPointer<CPointer<UInt16>>): Int32 {
     let proc = CFunc<(CPointer<Unit>, CPointer<CPointer<UInt16>>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetThreadDescription"))
     return unsafe { proc(hThread.Value, ppszThreadDescription) }
+}
+
+public func GetThreadDescriptionChecked(hThread: HANDLE, ppszThreadDescription: CPointer<CPointer<UInt16>>): windows_core.Result<Unit> {
+    if (CPointer<CPointer<Unit>>(ppszThreadDescription).isNull()) {
+        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))
+    }
+    unsafe { CPointer<CPointer<Unit>>(ppszThreadDescription).write(CPointer<Unit>()) }
+    let resultHr__ = windows_core.HRESULT(GetThreadDescription(hThread, ppszThreadDescription))
+    if (resultHr__.failed()) {
+        if (CPointer<CPointer<Unit>>(ppszThreadDescription).isNotNull()) {
+            let failedString__ = unsafe { CPointer<CPointer<Unit>>(ppszThreadDescription).read() }
+            if (failedString__.isNotNull()) {
+                let localFreeString__ = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "LocalFree"))
+                let _ = unsafe { localFreeString__(failedString__) }
+                unsafe { CPointer<CPointer<Unit>>(ppszThreadDescription).write(CPointer<Unit>()) }
+            }
+        }
+        return resultHr__.ok()
+    }
+    if (unsafe { CPointer<CPointer<Unit>>(ppszThreadDescription).read() }.isNull()) {
+        if (CPointer<CPointer<Unit>>(ppszThreadDescription).isNotNull()) {
+            let failedString__ = unsafe { CPointer<CPointer<Unit>>(ppszThreadDescription).read() }
+            if (failedString__.isNotNull()) {
+                let localFreeString__ = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "LocalFree"))
+                let _ = unsafe { localFreeString__(failedString__) }
+                unsafe { CPointer<CPointer<Unit>>(ppszThreadDescription).write(CPointer<Unit>()) }
+            }
+        }
+        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))
+    }
+    windows_core.Result<Unit>.Ok(())
 }
 
 public func TlsGetValue2(dwTlsIndex: UInt32): CPointer<Unit> {
@@ -1320,11 +1714,16 @@ public func UnregisterWaitEx(WaitHandle: HANDLE, CompletionEvent: HANDLE): Bool 
     return unsafe { proc(WaitHandle.Value, CompletionEvent.Value) } != 0
 }
 
-public func UnregisterWaitExChecked(WaitHandle: HANDLE, CompletionEvent: HANDLE): windows_core.Result<Unit> {
-    if (UnregisterWaitEx(WaitHandle, CompletionEvent)) {
-        return windows_core.Result<Unit>.Ok(())
+public func UnregisterWaitExChecked(WaitHandle: HANDLE, CompletionEvent: HANDLE): windows_core.Result<Bool> {
+    let result__ = UnregisterWaitEx(WaitHandle, CompletionEvent)
+    if (result__) {
+        return windows_core.Result<Bool>.Ok(true)
     }
-    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+    let lastError__ = GetLastError()
+    if (lastError__ == 997u32) {
+        return windows_core.Result<Bool>.Ok(false)
+    }
+    windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))
 }
 
 public func CreateTimerQueue(): HANDLE {
@@ -1332,6 +1731,14 @@ public func CreateTimerQueue(): HANDLE {
     var result = HANDLE()
     result.Value = unsafe { proc() }
     result
+}
+
+public func CreateTimerQueueChecked(): windows_core.Result<HANDLE> {
+    let result__ = CreateTimerQueue()
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func CreateTimerQueueTimer(phNewTimer: CPointer<HANDLE>, TimerQueue: HANDLE, Callback: CFunc<(CPointer<Unit>, UInt8) -> Unit>, Parameter: CPointer<Unit>, DueTime: UInt32, Period: UInt32, Flags: UInt32): Bool {
@@ -1363,11 +1770,16 @@ public func DeleteTimerQueueTimer(TimerQueue: HANDLE, Timer: HANDLE, CompletionE
     return unsafe { proc(TimerQueue.Value, Timer.Value, CompletionEvent.Value) } != 0
 }
 
-public func DeleteTimerQueueTimerChecked(TimerQueue: HANDLE, Timer: HANDLE, CompletionEvent: HANDLE): windows_core.Result<Unit> {
-    if (DeleteTimerQueueTimer(TimerQueue, Timer, CompletionEvent)) {
-        return windows_core.Result<Unit>.Ok(())
+public func DeleteTimerQueueTimerChecked(TimerQueue: HANDLE, Timer: HANDLE, CompletionEvent: HANDLE): windows_core.Result<Bool> {
+    let result__ = DeleteTimerQueueTimer(TimerQueue, Timer, CompletionEvent)
+    if (result__) {
+        return windows_core.Result<Bool>.Ok(true)
     }
-    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+    let lastError__ = GetLastError()
+    if (lastError__ == 997u32) {
+        return windows_core.Result<Bool>.Ok(false)
+    }
+    windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))
 }
 
 public func DeleteTimerQueue(TimerQueue: HANDLE): Bool {
@@ -1399,6 +1811,14 @@ public func CreateThreadpool(): PTP_POOL {
     var result = PTP_POOL()
     result.Value = unsafe { proc(CPointer<Unit>()) }
     result
+}
+
+public func CreateThreadpoolChecked(): windows_core.Result<PTP_POOL> {
+    let result__ = CreateThreadpool()
+    if (result__.Value.isNull()) {
+        return windows_core.Result<PTP_POOL>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<PTP_POOL>.Ok(result__)
 }
 
 public func SetThreadpoolThreadMaximum(ptpp: PTP_POOL, cthrdMost: UInt32): Unit {
@@ -1452,6 +1872,14 @@ public func CreateThreadpoolCleanupGroup(): PTP_CLEANUP_GROUP {
     var result = PTP_CLEANUP_GROUP()
     result.Value = unsafe { proc() }
     result
+}
+
+public func CreateThreadpoolCleanupGroupChecked(): windows_core.Result<PTP_CLEANUP_GROUP> {
+    let result__ = CreateThreadpoolCleanupGroup()
+    if (result__.Value.isNull()) {
+        return windows_core.Result<PTP_CLEANUP_GROUP>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<PTP_CLEANUP_GROUP>.Ok(result__)
 }
 
 public func CloseThreadpoolCleanupGroupMembers(ptpcg: PTP_CLEANUP_GROUP, fCancelPendingCallbacks: Bool, pvCleanupContext: CPointer<Unit>): Unit {
@@ -1518,6 +1946,14 @@ public func CreateThreadpoolWork(pfnwk: CFunc<(CPointer<Unit>, CPointer<Unit>, C
     result
 }
 
+public func CreateThreadpoolWorkChecked(pfnwk: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Unit>, pv: CPointer<Unit>, pcbe: CPointer<TP_CALLBACK_ENVIRON_V3>): windows_core.Result<PTP_WORK> {
+    let result__ = CreateThreadpoolWork(pfnwk, pv, pcbe)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<PTP_WORK>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<PTP_WORK>.Ok(result__)
+}
+
 public func SubmitThreadpoolWork(pwk: PTP_WORK): Unit {
     let proc = CFunc<(CPointer<Unit>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "SubmitThreadpoolWork"))
     unsafe { proc(pwk.Value) }
@@ -1538,6 +1974,14 @@ public func CreateThreadpoolTimer(pfnti: CFunc<(CPointer<Unit>, CPointer<Unit>, 
     var result = PTP_TIMER()
     result.Value = unsafe { proc(pfnti, pv, pcbe) }
     result
+}
+
+public func CreateThreadpoolTimerChecked(pfnti: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Unit>, pv: CPointer<Unit>, pcbe: CPointer<TP_CALLBACK_ENVIRON_V3>): windows_core.Result<PTP_TIMER> {
+    let result__ = CreateThreadpoolTimer(pfnti, pv, pcbe)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<PTP_TIMER>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<PTP_TIMER>.Ok(result__)
 }
 
 public func SetThreadpoolTimer(pti: PTP_TIMER, pftDueTime: CPointer<FILETIME>, msPeriod: UInt32, msWindowLength: UInt32): Unit {
@@ -1567,6 +2011,14 @@ public func CreateThreadpoolWait(pfnwa: CFunc<(CPointer<Unit>, CPointer<Unit>, C
     result
 }
 
+public func CreateThreadpoolWaitChecked(pfnwa: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32) -> Unit>, pv: CPointer<Unit>, pcbe: CPointer<TP_CALLBACK_ENVIRON_V3>): windows_core.Result<PTP_WAIT> {
+    let result__ = CreateThreadpoolWait(pfnwa, pv, pcbe)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<PTP_WAIT>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<PTP_WAIT>.Ok(result__)
+}
+
 public func SetThreadpoolWait(pwa: PTP_WAIT, h: HANDLE, pftTimeout: CPointer<FILETIME>): Unit {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<FILETIME>) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "SetThreadpoolWait"))
     unsafe { proc(pwa.Value, h.Value, pftTimeout) }
@@ -1587,6 +2039,14 @@ public func CreateThreadpoolIo(fl: HANDLE, pfnio: CFunc<(CPointer<Unit>, CPointe
     var result = PTP_IO()
     result.Value = unsafe { proc(fl.Value, pfnio, pv, pcbe) }
     result
+}
+
+public func CreateThreadpoolIoChecked(fl: HANDLE, pfnio: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, UIntNative, CPointer<Unit>) -> Unit>, pv: CPointer<Unit>, pcbe: CPointer<TP_CALLBACK_ENVIRON_V3>): windows_core.Result<PTP_IO> {
+    let result__ = CreateThreadpoolIo(fl, pfnio, pv, pcbe)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<PTP_IO>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<PTP_IO>.Ok(result__)
 }
 
 public func StartThreadpoolIo(pio: PTP_IO): Unit {
@@ -1651,6 +2111,14 @@ public func IsWow64Process2Checked(hProcess: HANDLE, pProcessMachine: CPointer<U
 public func Wow64SuspendThread(hThread: HANDLE): UInt32 {
     let proc = CFunc<(CPointer<Unit>) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "Wow64SuspendThread"))
     return unsafe { proc(hThread.Value) }
+}
+
+public func Wow64SuspendThreadChecked(hThread: HANDLE): windows_core.Result<UInt32> {
+    let result__ = Wow64SuspendThread(hThread)
+    if (result__ == 0xFFFFFFFFu32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
 }
 
 public func CreatePrivateNamespaceW(lpPrivateNamespaceAttributes: CPointer<SECURITY_ATTRIBUTES>, lpBoundaryDescriptor: CPointer<Unit>, lpAliasPrefix: windows_strings.PWSTR): HANDLE {
@@ -1752,11 +2220,27 @@ public func AvSetMmThreadCharacteristicsA(TaskName: windows_strings.PSTR, TaskIn
     result
 }
 
+public func AvSetMmThreadCharacteristicsAChecked(TaskName: windows_strings.PSTR, TaskIndex: CPointer<UInt32>): windows_core.Result<AVRT_TASK_HANDLE> {
+    let result__ = AvSetMmThreadCharacteristicsA(TaskName, TaskIndex)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<AVRT_TASK_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<AVRT_TASK_HANDLE>.Ok(result__)
+}
+
 public func AvSetMmThreadCharacteristicsW(TaskName: windows_strings.PWSTR, TaskIndex: CPointer<UInt32>): AVRT_TASK_HANDLE {
     let proc = CFunc<(CPointer<UInt16>, CPointer<UInt32>) -> CPointer<Unit>>(windows_libloading.resolveProc("AVRT.dll", "AvSetMmThreadCharacteristicsW"))
     var result = AVRT_TASK_HANDLE()
     result.Value = unsafe { proc(TaskName.asPtr(), TaskIndex) }
     result
+}
+
+public func AvSetMmThreadCharacteristicsWChecked(TaskName: windows_strings.PWSTR, TaskIndex: CPointer<UInt32>): windows_core.Result<AVRT_TASK_HANDLE> {
+    let result__ = AvSetMmThreadCharacteristicsW(TaskName, TaskIndex)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<AVRT_TASK_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<AVRT_TASK_HANDLE>.Ok(result__)
 }
 
 public func AvSetMmMaxThreadCharacteristicsA(FirstTask: windows_strings.PSTR, SecondTask: windows_strings.PSTR, TaskIndex: CPointer<UInt32>): AVRT_TASK_HANDLE {
@@ -1766,11 +2250,27 @@ public func AvSetMmMaxThreadCharacteristicsA(FirstTask: windows_strings.PSTR, Se
     result
 }
 
+public func AvSetMmMaxThreadCharacteristicsAChecked(FirstTask: windows_strings.PSTR, SecondTask: windows_strings.PSTR, TaskIndex: CPointer<UInt32>): windows_core.Result<AVRT_TASK_HANDLE> {
+    let result__ = AvSetMmMaxThreadCharacteristicsA(FirstTask, SecondTask, TaskIndex)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<AVRT_TASK_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<AVRT_TASK_HANDLE>.Ok(result__)
+}
+
 public func AvSetMmMaxThreadCharacteristicsW(FirstTask: windows_strings.PWSTR, SecondTask: windows_strings.PWSTR, TaskIndex: CPointer<UInt32>): AVRT_TASK_HANDLE {
     let proc = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>) -> CPointer<Unit>>(windows_libloading.resolveProc("AVRT.dll", "AvSetMmMaxThreadCharacteristicsW"))
     var result = AVRT_TASK_HANDLE()
     result.Value = unsafe { proc(FirstTask.asPtr(), SecondTask.asPtr(), TaskIndex) }
     result
+}
+
+public func AvSetMmMaxThreadCharacteristicsWChecked(FirstTask: windows_strings.PWSTR, SecondTask: windows_strings.PWSTR, TaskIndex: CPointer<UInt32>): windows_core.Result<AVRT_TASK_HANDLE> {
+    let result__ = AvSetMmMaxThreadCharacteristicsW(FirstTask, SecondTask, TaskIndex)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<AVRT_TASK_HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<AVRT_TASK_HANDLE>.Ok(result__)
 }
 
 public func AvRevertMmThreadCharacteristics(AvrtHandle: AVRT_TASK_HANDLE): Bool {
@@ -1898,9 +2398,17 @@ public func RtwqStartup(): Int32 {
     return unsafe { proc() }
 }
 
+public func RtwqStartupChecked(): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqStartup()).ok()
+}
+
 public func RtwqShutdown(): Int32 {
     let proc = CFunc<() -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqShutdown"))
     return unsafe { proc() }
+}
+
+public func RtwqShutdownChecked(): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqShutdown()).ok()
 }
 
 public func RtwqLockWorkQueue(workQueueId: UInt32): Int32 {
@@ -1908,9 +2416,17 @@ public func RtwqLockWorkQueue(workQueueId: UInt32): Int32 {
     return unsafe { proc(workQueueId) }
 }
 
+public func RtwqLockWorkQueueChecked(workQueueId: UInt32): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqLockWorkQueue(workQueueId)).ok()
+}
+
 public func RtwqUnlockWorkQueue(workQueueId: UInt32): Int32 {
     let proc = CFunc<(UInt32) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqUnlockWorkQueue"))
     return unsafe { proc(workQueueId) }
+}
+
+public func RtwqUnlockWorkQueueChecked(workQueueId: UInt32): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqUnlockWorkQueue(workQueueId)).ok()
 }
 
 public func RtwqLockSharedWorkQueue(usageClass: windows_strings.PWSTR, basePriority: Int32, taskId: CPointer<UInt32>, id: CPointer<UInt32>): Int32 {
@@ -1918,9 +2434,17 @@ public func RtwqLockSharedWorkQueue(usageClass: windows_strings.PWSTR, basePrior
     return unsafe { proc(usageClass.asPtr(), basePriority, taskId, id) }
 }
 
+public func RtwqLockSharedWorkQueueChecked(usageClass: windows_strings.PWSTR, basePriority: Int32, taskId: CPointer<UInt32>, id: CPointer<UInt32>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqLockSharedWorkQueue(usageClass, basePriority, taskId, id)).ok()
+}
+
 public func RtwqJoinWorkQueue(workQueueId: UInt32, hFile: HANDLE, out: CPointer<HANDLE>): Int32 {
     let proc = CFunc<(UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqJoinWorkQueue"))
     return unsafe { proc(workQueueId, hFile.Value, CPointer<CPointer<Unit>>(out)) }
+}
+
+public func RtwqJoinWorkQueueChecked(workQueueId: UInt32, hFile: HANDLE, out: CPointer<HANDLE>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqJoinWorkQueue(workQueueId, hFile, out)).ok()
 }
 
 public func RtwqUnjoinWorkQueue(workQueueId: UInt32, hFile: HANDLE): Int32 {
@@ -1928,9 +2452,30 @@ public func RtwqUnjoinWorkQueue(workQueueId: UInt32, hFile: HANDLE): Int32 {
     return unsafe { proc(workQueueId, hFile.Value) }
 }
 
+public func RtwqUnjoinWorkQueueChecked(workQueueId: UInt32, hFile: HANDLE): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqUnjoinWorkQueue(workQueueId, hFile)).ok()
+}
+
 public func RtwqCreateAsyncResult(appObject: windows_interface.IUnknown, callback: CPointer<Unit>, appState: windows_interface.IUnknown, asyncResult: CPointer<CPointer<Unit>>): Int32 {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqCreateAsyncResult"))
     return unsafe { proc(appObject.asRaw(), callback, appState.asRaw(), asyncResult) }
+}
+
+public func RtwqCreateAsyncResultChecked(appObject: windows_interface.IUnknown, callback: CPointer<Unit>, appState: windows_interface.IUnknown, asyncResult: CPointer<CPointer<Unit>>): windows_core.Result<Unit> {
+    if (asyncResult.isNull()) {
+        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))
+    }
+    unsafe { asyncResult.write(CPointer<Unit>()) }
+    let resultHr__ = windows_core.HRESULT(RtwqCreateAsyncResult(appObject, callback, appState, asyncResult))
+    if (resultHr__.failed()) {
+        windows_core.releaseFailedComOutSlot(asyncResult)
+        return resultHr__.ok()
+    }
+    if (unsafe { asyncResult.read() }.isNull()) {
+        windows_core.releaseFailedComOutSlot(asyncResult)
+        return windows_core.Result<Unit>.Err(windows_core.errorFromHRESULT(windows_core.E_POINTER))
+    }
+    windows_core.Result<Unit>.Ok(())
 }
 
 public func RtwqInvokeCallback(result: CPointer<Unit>): Int32 {
@@ -1938,9 +2483,17 @@ public func RtwqInvokeCallback(result: CPointer<Unit>): Int32 {
     return unsafe { proc(result) }
 }
 
+public func RtwqInvokeCallbackChecked(result: CPointer<Unit>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqInvokeCallback(result)).ok()
+}
+
 public func RtwqLockPlatform(): Int32 {
     let proc = CFunc<() -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqLockPlatform"))
     return unsafe { proc() }
+}
+
+public func RtwqLockPlatformChecked(): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqLockPlatform()).ok()
 }
 
 public func RtwqUnlockPlatform(): Int32 {
@@ -1948,9 +2501,17 @@ public func RtwqUnlockPlatform(): Int32 {
     return unsafe { proc() }
 }
 
+public func RtwqUnlockPlatformChecked(): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqUnlockPlatform()).ok()
+}
+
 public func RtwqRegisterPlatformWithMMCSS(usageClass: windows_strings.PWSTR, taskId: CPointer<UInt32>, lPriority: Int32): Int32 {
     let proc = CFunc<(CPointer<UInt16>, CPointer<UInt32>, Int32) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqRegisterPlatformWithMMCSS"))
     return unsafe { proc(usageClass.asPtr(), taskId, lPriority) }
+}
+
+public func RtwqRegisterPlatformWithMMCSSChecked(usageClass: windows_strings.PWSTR, taskId: CPointer<UInt32>, lPriority: Int32): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqRegisterPlatformWithMMCSS(usageClass, taskId, lPriority)).ok()
 }
 
 public func RtwqUnregisterPlatformFromMMCSS(): Int32 {
@@ -1958,9 +2519,17 @@ public func RtwqUnregisterPlatformFromMMCSS(): Int32 {
     return unsafe { proc() }
 }
 
+public func RtwqUnregisterPlatformFromMMCSSChecked(): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqUnregisterPlatformFromMMCSS()).ok()
+}
+
 public func RtwqPutWorkItem(dwQueue: UInt32, lPriority: Int32, result: CPointer<Unit>): Int32 {
     let proc = CFunc<(UInt32, Int32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqPutWorkItem"))
     return unsafe { proc(dwQueue, lPriority, result) }
+}
+
+public func RtwqPutWorkItemChecked(dwQueue: UInt32, lPriority: Int32, result: CPointer<Unit>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqPutWorkItem(dwQueue, lPriority, result)).ok()
 }
 
 public func RtwqPutWaitingWorkItem(hEvent: HANDLE, lPriority: Int32, result: CPointer<Unit>, key: CPointer<UInt64>): Int32 {
@@ -1968,9 +2537,27 @@ public func RtwqPutWaitingWorkItem(hEvent: HANDLE, lPriority: Int32, result: CPo
     return unsafe { proc(hEvent.Value, lPriority, result, key) }
 }
 
+public func RtwqPutWaitingWorkItemChecked(hEvent: HANDLE, lPriority: Int32, result: CPointer<Unit>, key: CPointer<UInt64>): windows_core.Result<Unit> {
+    if (key.isNotNull()) {
+        unsafe { key.write(0u64) }
+    }
+    let resultHr__ = windows_core.HRESULT(RtwqPutWaitingWorkItem(hEvent, lPriority, result, key))
+    if (resultHr__.failed()) {
+        if (key.isNotNull()) {
+            unsafe { key.write(0u64) }
+        }
+        return resultHr__.ok()
+    }
+    windows_core.Result<Unit>.Ok(())
+}
+
 public func RtwqAllocateSerialWorkQueue(workQueueIdIn: UInt32, workQueueIdOut: CPointer<UInt32>): Int32 {
     let proc = CFunc<(UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqAllocateSerialWorkQueue"))
     return unsafe { proc(workQueueIdIn, workQueueIdOut) }
+}
+
+public func RtwqAllocateSerialWorkQueueChecked(workQueueIdIn: UInt32, workQueueIdOut: CPointer<UInt32>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqAllocateSerialWorkQueue(workQueueIdIn, workQueueIdOut)).ok()
 }
 
 public func RtwqScheduleWorkItem(result: CPointer<Unit>, Timeout: Int64, key: CPointer<UInt64>): Int32 {
@@ -1978,9 +2565,37 @@ public func RtwqScheduleWorkItem(result: CPointer<Unit>, Timeout: Int64, key: CP
     return unsafe { proc(result, Timeout, key) }
 }
 
+public func RtwqScheduleWorkItemChecked(result: CPointer<Unit>, Timeout: Int64, key: CPointer<UInt64>): windows_core.Result<Unit> {
+    if (key.isNotNull()) {
+        unsafe { key.write(0u64) }
+    }
+    let resultHr__ = windows_core.HRESULT(RtwqScheduleWorkItem(result, Timeout, key))
+    if (resultHr__.failed()) {
+        if (key.isNotNull()) {
+            unsafe { key.write(0u64) }
+        }
+        return resultHr__.ok()
+    }
+    windows_core.Result<Unit>.Ok(())
+}
+
 public func RtwqAddPeriodicCallback(Callback: CFunc<(CPointer<Unit>) -> Unit>, context: windows_interface.IUnknown, key: CPointer<UInt32>): Int32 {
     let proc = CFunc<(CFunc<(CPointer<Unit>) -> Unit>, CPointer<Unit>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqAddPeriodicCallback"))
     return unsafe { proc(Callback, context.asRaw(), key) }
+}
+
+public func RtwqAddPeriodicCallbackChecked(Callback: CFunc<(CPointer<Unit>) -> Unit>, context: windows_interface.IUnknown, key: CPointer<UInt32>): windows_core.Result<Unit> {
+    if (key.isNotNull()) {
+        unsafe { key.write(0u32) }
+    }
+    let resultHr__ = windows_core.HRESULT(RtwqAddPeriodicCallback(Callback, context, key))
+    if (resultHr__.failed()) {
+        if (key.isNotNull()) {
+            unsafe { key.write(0u32) }
+        }
+        return resultHr__.ok()
+    }
+    windows_core.Result<Unit>.Ok(())
 }
 
 public func RtwqRemovePeriodicCallback(dwKey: UInt32): Int32 {
@@ -1988,9 +2603,17 @@ public func RtwqRemovePeriodicCallback(dwKey: UInt32): Int32 {
     return unsafe { proc(dwKey) }
 }
 
+public func RtwqRemovePeriodicCallbackChecked(dwKey: UInt32): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqRemovePeriodicCallback(dwKey)).ok()
+}
+
 public func RtwqCancelWorkItem(Key: UInt64): Int32 {
     let proc = CFunc<(UInt64) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqCancelWorkItem"))
     return unsafe { proc(Key) }
+}
+
+public func RtwqCancelWorkItemChecked(Key: UInt64): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqCancelWorkItem(Key)).ok()
 }
 
 public func RtwqAllocateWorkQueue(WorkQueueType: Int32, workQueueId: CPointer<UInt32>): Int32 {
@@ -1998,9 +2621,17 @@ public func RtwqAllocateWorkQueue(WorkQueueType: Int32, workQueueId: CPointer<UI
     return unsafe { proc(WorkQueueType, workQueueId) }
 }
 
+public func RtwqAllocateWorkQueueChecked(WorkQueueType: Int32, workQueueId: CPointer<UInt32>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqAllocateWorkQueue(WorkQueueType, workQueueId)).ok()
+}
+
 public func RtwqBeginRegisterWorkQueueWithMMCSS(workQueueId: UInt32, usageClass: windows_strings.PWSTR, dwTaskId: UInt32, lPriority: Int32, doneCallback: CPointer<Unit>, doneState: windows_interface.IUnknown): Int32 {
     let proc = CFunc<(UInt32, CPointer<UInt16>, UInt32, Int32, CPointer<Unit>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqBeginRegisterWorkQueueWithMMCSS"))
     return unsafe { proc(workQueueId, usageClass.asPtr(), dwTaskId, lPriority, doneCallback, doneState.asRaw()) }
+}
+
+public func RtwqBeginRegisterWorkQueueWithMMCSSChecked(workQueueId: UInt32, usageClass: windows_strings.PWSTR, dwTaskId: UInt32, lPriority: Int32, doneCallback: CPointer<Unit>, doneState: windows_interface.IUnknown): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqBeginRegisterWorkQueueWithMMCSS(workQueueId, usageClass, dwTaskId, lPriority, doneCallback, doneState)).ok()
 }
 
 public func RtwqBeginUnregisterWorkQueueWithMMCSS(workQueueId: UInt32, doneCallback: CPointer<Unit>, doneState: windows_interface.IUnknown): Int32 {
@@ -2008,9 +2639,17 @@ public func RtwqBeginUnregisterWorkQueueWithMMCSS(workQueueId: UInt32, doneCallb
     return unsafe { proc(workQueueId, doneCallback, doneState.asRaw()) }
 }
 
+public func RtwqBeginUnregisterWorkQueueWithMMCSSChecked(workQueueId: UInt32, doneCallback: CPointer<Unit>, doneState: windows_interface.IUnknown): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqBeginUnregisterWorkQueueWithMMCSS(workQueueId, doneCallback, doneState)).ok()
+}
+
 public func RtwqEndRegisterWorkQueueWithMMCSS(result: CPointer<Unit>, taskId: CPointer<UInt32>): Int32 {
     let proc = CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqEndRegisterWorkQueueWithMMCSS"))
     return unsafe { proc(result, taskId) }
+}
+
+public func RtwqEndRegisterWorkQueueWithMMCSSChecked(result: CPointer<Unit>, taskId: CPointer<UInt32>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqEndRegisterWorkQueueWithMMCSS(result, taskId)).ok()
 }
 
 public func RtwqGetWorkQueueMMCSSClass(workQueueId: UInt32, usageClass: windows_strings.PWSTR, usageClassLength: CPointer<UInt32>): Int32 {
@@ -2018,9 +2657,17 @@ public func RtwqGetWorkQueueMMCSSClass(workQueueId: UInt32, usageClass: windows_
     return unsafe { proc(workQueueId, usageClass.asPtr(), usageClassLength) }
 }
 
+public func RtwqGetWorkQueueMMCSSClassChecked(workQueueId: UInt32, usageClass: windows_strings.PWSTR, usageClassLength: CPointer<UInt32>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqGetWorkQueueMMCSSClass(workQueueId, usageClass, usageClassLength)).ok()
+}
+
 public func RtwqGetWorkQueueMMCSSTaskId(workQueueId: UInt32, taskId: CPointer<UInt32>): Int32 {
     let proc = CFunc<(UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqGetWorkQueueMMCSSTaskId"))
     return unsafe { proc(workQueueId, taskId) }
+}
+
+public func RtwqGetWorkQueueMMCSSTaskIdChecked(workQueueId: UInt32, taskId: CPointer<UInt32>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqGetWorkQueueMMCSSTaskId(workQueueId, taskId)).ok()
 }
 
 public func RtwqGetWorkQueueMMCSSPriority(workQueueId: UInt32, priority: CPointer<Int32>): Int32 {
@@ -2028,9 +2675,17 @@ public func RtwqGetWorkQueueMMCSSPriority(workQueueId: UInt32, priority: CPointe
     return unsafe { proc(workQueueId, priority) }
 }
 
+public func RtwqGetWorkQueueMMCSSPriorityChecked(workQueueId: UInt32, priority: CPointer<Int32>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqGetWorkQueueMMCSSPriority(workQueueId, priority)).ok()
+}
+
 public func RtwqRegisterPlatformEvents(platformEvents: CPointer<Unit>): Int32 {
     let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqRegisterPlatformEvents"))
     return unsafe { proc(platformEvents) }
+}
+
+public func RtwqRegisterPlatformEventsChecked(platformEvents: CPointer<Unit>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqRegisterPlatformEvents(platformEvents)).ok()
 }
 
 public func RtwqUnregisterPlatformEvents(platformEvents: CPointer<Unit>): Int32 {
@@ -2038,9 +2693,17 @@ public func RtwqUnregisterPlatformEvents(platformEvents: CPointer<Unit>): Int32 
     return unsafe { proc(platformEvents) }
 }
 
+public func RtwqUnregisterPlatformEventsChecked(platformEvents: CPointer<Unit>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqUnregisterPlatformEvents(platformEvents)).ok()
+}
+
 public func RtwqSetLongRunning(workQueueId: UInt32, enable: Bool): Int32 {
     let proc = CFunc<(UInt32, Int32) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqSetLongRunning"))
     return unsafe { proc(workQueueId, if (enable) { 1 } else { 0 }) }
+}
+
+public func RtwqSetLongRunningChecked(workQueueId: UInt32, enable: Bool): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqSetLongRunning(workQueueId, enable)).ok()
 }
 
 public func RtwqSetDeadline(workQueueId: UInt32, deadlineInHNS: Int64, pRequest: CPointer<HANDLE>): Int32 {
@@ -2048,14 +2711,26 @@ public func RtwqSetDeadline(workQueueId: UInt32, deadlineInHNS: Int64, pRequest:
     return unsafe { proc(workQueueId, deadlineInHNS, CPointer<CPointer<Unit>>(pRequest)) }
 }
 
+public func RtwqSetDeadlineChecked(workQueueId: UInt32, deadlineInHNS: Int64, pRequest: CPointer<HANDLE>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqSetDeadline(workQueueId, deadlineInHNS, pRequest)).ok()
+}
+
 public func RtwqSetDeadline2(workQueueId: UInt32, deadlineInHNS: Int64, preDeadlineInHNS: Int64, pRequest: CPointer<HANDLE>): Int32 {
     let proc = CFunc<(UInt32, Int64, Int64, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqSetDeadline2"))
     return unsafe { proc(workQueueId, deadlineInHNS, preDeadlineInHNS, CPointer<CPointer<Unit>>(pRequest)) }
 }
 
+public func RtwqSetDeadline2Checked(workQueueId: UInt32, deadlineInHNS: Int64, preDeadlineInHNS: Int64, pRequest: CPointer<HANDLE>): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqSetDeadline2(workQueueId, deadlineInHNS, preDeadlineInHNS, pRequest)).ok()
+}
+
 public func RtwqCancelDeadline(pRequest: HANDLE): Int32 {
     let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("RTWorkQ.dll", "RtwqCancelDeadline"))
     return unsafe { proc(pRequest.Value) }
+}
+
+public func RtwqCancelDeadlineChecked(pRequest: HANDLE): windows_core.Result<Unit> {
+    windows_core.HRESULT(RtwqCancelDeadline(pRequest)).ok()
 }
 
 public func GetProcessHandleFromHwnd(hwnd: HWND): HANDLE {
@@ -2070,14 +2745,42 @@ public func AttachThreadInput(idAttach: UInt32, idAttachTo: UInt32, fAttach: Boo
     return unsafe { proc(idAttach, idAttachTo, if (fAttach) { 1 } else { 0 }) } != 0
 }
 
+public func AttachThreadInputChecked(idAttach: UInt32, idAttachTo: UInt32, fAttach: Bool): windows_core.Result<Unit> {
+    if (AttachThreadInput(idAttach, idAttachTo, fAttach)) {
+        return windows_core.Result<Unit>.Ok(())
+    }
+    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+}
+
 public func WaitForInputIdle(hProcess: HANDLE, dwMilliseconds: UInt32): UInt32 {
     let proc = CFunc<(CPointer<Unit>, UInt32) -> UInt32>(windows_libloading.resolveProc("USER32.dll", "WaitForInputIdle"))
     return unsafe { proc(hProcess.Value, dwMilliseconds) }
 }
 
+public func WaitForInputIdleChecked(hProcess: HANDLE, dwMilliseconds: UInt32): windows_core.Result<WAIT_EVENT> {
+    let result__ = WaitForInputIdle(hProcess, dwMilliseconds)
+    if (result__ == 0xFFFFFFFFu32) {
+        return windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<WAIT_EVENT>.Ok(result__)
+}
+
 public func GetGuiResources(hProcess: HANDLE, uiFlags: UInt32): UInt32 {
     let proc = CFunc<(CPointer<Unit>, UInt32) -> UInt32>(windows_libloading.resolveProc("USER32.dll", "GetGuiResources"))
     return unsafe { proc(hProcess.Value, uiFlags) }
+}
+
+public func GetGuiResourcesChecked(hProcess: HANDLE, uiFlags: UInt32): windows_core.Result<UInt32> {
+    SetLastError(0u32)
+    let result__ = GetGuiResources(hProcess, uiFlags)
+    if (result__ != 0u32) {
+        return windows_core.Result<UInt32>.Ok(result__)
+    }
+    let lastError__ = GetLastError()
+    if (lastError__ == 0u32) {
+        return windows_core.Result<UInt32>.Ok(result__)
+    }
+    windows_core.Result<UInt32>.Err(windows_core.errorFromWin32(lastError__))
 }
 
 public func IsImmersiveProcess(hProcess: HANDLE): Bool {
@@ -2160,9 +2863,25 @@ public func CreateFiberEx(dwStackCommitSize: UIntNative, dwStackReserveSize: UIn
     return unsafe { proc(dwStackCommitSize, dwStackReserveSize, dwFlags, lpStartAddress, lpParameter) }
 }
 
+public func CreateFiberExChecked(dwStackCommitSize: UIntNative, dwStackReserveSize: UIntNative, dwFlags: UInt32, lpStartAddress: CFunc<(CPointer<Unit>) -> Unit>, lpParameter: CPointer<Unit>): windows_core.Result<CPointer<Unit>> {
+    let result__ = CreateFiberEx(dwStackCommitSize, dwStackReserveSize, dwFlags, lpStartAddress, lpParameter)
+    if (result__.isNull()) {
+        return windows_core.Result<CPointer<Unit>>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<CPointer<Unit>>.Ok(result__)
+}
+
 public func ConvertThreadToFiberEx(lpParameter: CPointer<Unit>, dwFlags: UInt32): CPointer<Unit> {
     let proc = CFunc<(CPointer<Unit>, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "ConvertThreadToFiberEx"))
     return unsafe { proc(lpParameter, dwFlags) }
+}
+
+public func ConvertThreadToFiberExChecked(lpParameter: CPointer<Unit>, dwFlags: UInt32): windows_core.Result<CPointer<Unit>> {
+    let result__ = ConvertThreadToFiberEx(lpParameter, dwFlags)
+    if (result__.isNull()) {
+        return windows_core.Result<CPointer<Unit>>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<CPointer<Unit>>.Ok(result__)
 }
 
 public func CreateFiber(dwStackSize: UIntNative, lpStartAddress: CFunc<(CPointer<Unit>) -> Unit>, lpParameter: CPointer<Unit>): CPointer<Unit> {
@@ -2170,9 +2889,25 @@ public func CreateFiber(dwStackSize: UIntNative, lpStartAddress: CFunc<(CPointer
     return unsafe { proc(dwStackSize, lpStartAddress, lpParameter) }
 }
 
+public func CreateFiberChecked(dwStackSize: UIntNative, lpStartAddress: CFunc<(CPointer<Unit>) -> Unit>, lpParameter: CPointer<Unit>): windows_core.Result<CPointer<Unit>> {
+    let result__ = CreateFiber(dwStackSize, lpStartAddress, lpParameter)
+    if (result__.isNull()) {
+        return windows_core.Result<CPointer<Unit>>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<CPointer<Unit>>.Ok(result__)
+}
+
 public func ConvertThreadToFiber(lpParameter: CPointer<Unit>): CPointer<Unit> {
     let proc = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "ConvertThreadToFiber"))
     return unsafe { proc(lpParameter) }
+}
+
+public func ConvertThreadToFiberChecked(lpParameter: CPointer<Unit>): windows_core.Result<CPointer<Unit>> {
+    let result__ = ConvertThreadToFiber(lpParameter)
+    if (result__.isNull()) {
+        return windows_core.Result<CPointer<Unit>>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<CPointer<Unit>>.Ok(result__)
 }
 
 public func CreateUmsCompletionList(UmsCompletionList: CPointer<CPointer<Unit>>): Bool {
@@ -2327,6 +3062,14 @@ public func SetThreadAffinityMask(hThread: HANDLE, dwThreadAffinityMask: UIntNat
     return unsafe { proc(hThread.Value, dwThreadAffinityMask) }
 }
 
+public func SetThreadAffinityMaskChecked(hThread: HANDLE, dwThreadAffinityMask: UIntNative): windows_core.Result<UIntNative> {
+    let result__ = SetThreadAffinityMask(hThread, dwThreadAffinityMask)
+    if (result__ == 0) {
+        return windows_core.Result<UIntNative>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UIntNative>.Ok(result__)
+}
+
 public func SetProcessDEPPolicy(dwFlags: UInt32): Bool {
     let proc = CFunc<(UInt32) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetProcessDEPPolicy"))
     return unsafe { proc(dwFlags) } != 0
@@ -2368,9 +3111,25 @@ public func WinExec(lpCmdLine: windows_strings.PSTR, uCmdShow: UInt32): UInt32 {
     return unsafe { proc(lpCmdLine.asPtr(), uCmdShow) }
 }
 
+public func WinExecChecked(lpCmdLine: windows_strings.PSTR, uCmdShow: UInt32): windows_core.Result<UInt32> {
+    let result__ = WinExec(lpCmdLine, uCmdShow)
+    if (result__ <= 31u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromWin32(result__))
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func SignalObjectAndWait(hObjectToSignal: HANDLE, hObjectToWaitOn: HANDLE, dwMilliseconds: UInt32, bAlertable: Bool): UInt32 {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, Int32) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "SignalObjectAndWait"))
     return unsafe { proc(hObjectToSignal.Value, hObjectToWaitOn.Value, dwMilliseconds, if (bAlertable) { 1 } else { 0 }) }
+}
+
+public func SignalObjectAndWaitChecked(hObjectToSignal: HANDLE, hObjectToWaitOn: HANDLE, dwMilliseconds: UInt32, bAlertable: Bool): windows_core.Result<WAIT_EVENT> {
+    let result__ = SignalObjectAndWait(hObjectToSignal, hObjectToWaitOn, dwMilliseconds, bAlertable)
+    if (result__ == 0xFFFFFFFFu32) {
+        return windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<WAIT_EVENT>.Ok(result__)
 }
 
 public func CreateSemaphoreA(lpSemaphoreAttributes: CPointer<SECURITY_ATTRIBUTES>, lInitialCount: Int32, lMaximumCount: Int32, lpName: windows_strings.PSTR): HANDLE {
@@ -2378,6 +3137,14 @@ public func CreateSemaphoreA(lpSemaphoreAttributes: CPointer<SECURITY_ATTRIBUTES
     var result = HANDLE()
     result.Value = unsafe { proc(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName.asPtr()) }
     result
+}
+
+public func CreateSemaphoreAChecked(lpSemaphoreAttributes: CPointer<SECURITY_ATTRIBUTES>, lInitialCount: Int32, lMaximumCount: Int32, lpName: windows_strings.PSTR): windows_core.Result<HANDLE> {
+    let result__ = CreateSemaphoreA(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func CreateWaitableTimerA(lpTimerAttributes: CPointer<SECURITY_ATTRIBUTES>, bManualReset: Bool, lpTimerName: windows_strings.PSTR): HANDLE {
@@ -2399,6 +3166,14 @@ public func CreateSemaphoreExA(lpSemaphoreAttributes: CPointer<SECURITY_ATTRIBUT
     var result = HANDLE()
     result.Value = unsafe { proc(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName.asPtr(), 0u32, dwDesiredAccess) }
     result
+}
+
+public func CreateSemaphoreExAChecked(lpSemaphoreAttributes: CPointer<SECURITY_ATTRIBUTES>, lInitialCount: Int32, lMaximumCount: Int32, lpName: windows_strings.PSTR, dwDesiredAccess: UInt32): windows_core.Result<HANDLE> {
+    let result__ = CreateSemaphoreExA(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName, dwDesiredAccess)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func CreateWaitableTimerExA(lpTimerAttributes: CPointer<SECURITY_ATTRIBUTES>, lpTimerName: windows_strings.PSTR, dwFlags: UInt32, dwDesiredAccess: UInt32): HANDLE {
@@ -2478,11 +3253,16 @@ public func UnregisterWait(WaitHandle: HANDLE): Bool {
     return unsafe { proc(WaitHandle.Value) } != 0
 }
 
-public func UnregisterWaitChecked(WaitHandle: HANDLE): windows_core.Result<Unit> {
-    if (UnregisterWait(WaitHandle)) {
-        return windows_core.Result<Unit>.Ok(())
+public func UnregisterWaitChecked(WaitHandle: HANDLE): windows_core.Result<Bool> {
+    let result__ = UnregisterWait(WaitHandle)
+    if (result__) {
+        return windows_core.Result<Bool>.Ok(true)
     }
-    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+    let lastError__ = GetLastError()
+    if (lastError__ == 997u32) {
+        return windows_core.Result<Bool>.Ok(false)
+    }
+    windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))
 }
 
 public func SetTimerQueueTimer(TimerQueue: HANDLE, Callback: CFunc<(CPointer<Unit>, UInt8) -> Unit>, Parameter: CPointer<Unit>, DueTime: UInt32, Period: UInt32, PreferIo: Bool): HANDLE {
@@ -2504,6 +3284,14 @@ public func CreatePrivateNamespaceA(lpPrivateNamespaceAttributes: CPointer<SECUR
     result
 }
 
+public func CreatePrivateNamespaceAChecked(lpPrivateNamespaceAttributes: CPointer<SECURITY_ATTRIBUTES>, lpBoundaryDescriptor: CPointer<Unit>, lpAliasPrefix: windows_strings.PSTR): windows_core.Result<HANDLE> {
+    let result__ = CreatePrivateNamespaceA(lpPrivateNamespaceAttributes, lpBoundaryDescriptor, lpAliasPrefix)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
+}
+
 public func OpenPrivateNamespaceA(lpBoundaryDescriptor: CPointer<Unit>, lpAliasPrefix: windows_strings.PSTR): HANDLE {
     let proc = CFunc<(CPointer<Unit>, CPointer<UInt8>) -> CPointer<Unit>>(windows_libloading.resolveProc("KERNEL32.dll", "OpenPrivateNamespaceA"))
     var result = HANDLE()
@@ -2516,6 +3304,14 @@ public func CreateBoundaryDescriptorA(Name: windows_strings.PSTR, Flags: UInt32)
     var result = HANDLE()
     result.Value = unsafe { proc(Name.asPtr(), Flags) }
     result
+}
+
+public func CreateBoundaryDescriptorAChecked(Name: windows_strings.PSTR, Flags: UInt32): windows_core.Result<HANDLE> {
+    let result__ = CreateBoundaryDescriptorA(Name, Flags)
+    if (result__.Value.isNull()) {
+        return windows_core.Result<HANDLE>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<HANDLE>.Ok(result__)
 }
 
 public func AddIntegrityLabelToBoundaryDescriptor(BoundaryDescriptor: CPointer<HANDLE>, IntegrityLabel: PSID): Bool {
@@ -2545,9 +3341,25 @@ public func GetActiveProcessorCount(GroupNumber: UInt16): UInt32 {
     return unsafe { proc(GroupNumber) }
 }
 
+public func GetActiveProcessorCountChecked(GroupNumber: UInt16): windows_core.Result<UInt32> {
+    let result__ = GetActiveProcessorCount(GroupNumber)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
+}
+
 public func GetMaximumProcessorCount(GroupNumber: UInt16): UInt32 {
     let proc = CFunc<(UInt16) -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetMaximumProcessorCount"))
     return unsafe { proc(GroupNumber) }
+}
+
+public func GetMaximumProcessorCountChecked(GroupNumber: UInt16): windows_core.Result<UInt32> {
+    let result__ = GetMaximumProcessorCount(GroupNumber)
+    if (result__ == 0u32) {
+        return windows_core.Result<UInt32>.Err(windows_core.errorFromThread())
+    }
+    windows_core.Result<UInt32>.Ok(result__)
 }
 
 public func GetNumaProcessorNode(Processor: UInt8, NodeNumber: CPointer<UInt8>): Bool {
