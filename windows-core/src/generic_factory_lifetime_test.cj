@@ -51,6 +51,19 @@ func withGenericFactoryRaw(action: (CPointer<Unit>) -> Unit): Unit {
 }
 
 @Test
+func testGenericFactoryDefaultActivateInstanceClearsStaleOutPointerOnENotImpl() {
+    let vtbl = IGenericFactoryVtbl()
+    var result = unsafe { CPointer<Unit>(CPointer<UInt8>() + 0x1234) }
+
+    let hr = unsafe {
+        HRESULT(vtbl.ActivateInstance(CPointer<Unit>(), CPointer<CPointer<Unit>>(inout result)))
+    }
+
+    @Expect(hr, E_NOTIMPL)
+    @Expect(result.isNull(), true)
+}
+
+@Test
 func testGenericFactoryBorrowedViewCannotManualRelease() {
     resetGenericFactoryReleaseCount()
     withGenericFactoryRaw({ raw: CPointer<Unit> =>

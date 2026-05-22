@@ -3,6 +3,7 @@ package windows_core
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
+import windows_implement.{comRegistryInsert, comRegistryRemove}
 import windows_interface as windows_interface
 
 func coreTestThrows(action: () -> Unit): Bool {
@@ -118,6 +119,195 @@ public open class CoreOwnerInterface <: InterfaceWrapperBase & ComInterface {
 
 extend CoreOwnerInterface <: Interface<CoreOwnerInterface> {}
 
+class CoreThrowingInspectableImpl <: IInspectableImpl {
+    public var returnFailedIids: Bool = false
+    public var throwWindowsIids: Bool = false
+    public var throwWindowsRuntimeClassName: Bool = false
+    public var throwPlainRuntimeClassName: Bool = false
+    public var throwWindowsTrustLevel: Bool = false
+    public var throwPlainTrustLevel: Bool = false
+    public var partialIidsRaw = CPointer<Unit>()
+    public var partialRuntimeClassNameRaw = CPointer<Unit>()
+
+    public func getImpl<T>(): Option<T> {
+        None
+    }
+
+    public func getImplMut<T>(): Option<T> {
+        None
+    }
+
+    public func intoInner<T>(): Option<T> {
+        None
+    }
+
+    public func addRefBase(): UInt32 {
+        AddRef()
+    }
+
+    public func releaseBase(identityKey: UIntNative): UInt32 {
+        let _ = identityKey
+        Release()
+    }
+
+    public func queryInterfaceBase(
+        raw: CPointer<Unit>,
+        iid: GUID,
+        resultSlot: CPointer<CPointer<Unit>>
+    ): Int32 {
+        let _ = raw
+        QueryInterface(iid, resultSlot)
+    }
+
+    public func QueryInterface(iid: GUID, resultSlot: CPointer<CPointer<Unit>>): Int32 {
+        let _ = iid
+        if (resultSlot.isNotNull()) {
+            unsafe { resultSlot.write(CPointer<Unit>()) }
+        }
+        E_NOINTERFACE.value
+    }
+
+    public func AddRef(): UInt32 {
+        1u32
+    }
+
+    public func Release(): UInt32 {
+        1u32
+    }
+
+    public func isReferenceCountOne(): Bool {
+        true
+    }
+
+    public func GetTrustLevel(value: CPointer<Int32>): Int32 {
+        getTrustLevelBase(value)
+    }
+
+    public func asInterface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface & Interface<I> {
+        let _ = descriptor
+        throw Exception("CoreThrowingInspectableImpl.asInterface is not supported")
+    }
+
+    public func toInterface<I>(descriptor: InterfaceDescriptor<I>): I where I <: ComInterface & Interface<I> {
+        let _ = descriptor
+        throw Exception("CoreThrowingInspectableImpl.toInterface is not supported")
+    }
+
+    public func toObject<T>(): ComObject<T> {
+        throw Exception("CoreThrowingInspectableImpl.toObject is not supported")
+    }
+
+    public func getIidsBase(count: CPointer<UInt32>, values: CPointer<CPointer<GUID>>): Int32 {
+        let raw = coTaskMemAlloc(sizeOf<GUID>())
+        partialIidsRaw = raw
+        unsafe {
+            if (raw.isNotNull()) {
+                CPointer<GUID>(raw).write(windows_interface.IID_IINSPECTABLE)
+                count.write(1u32)
+                values.write(CPointer<GUID>(raw))
+            }
+        }
+        if (returnFailedIids) {
+            return E_FAIL.value
+        }
+        if (throwWindowsIids) {
+            throw WindowsException(E_POINTER)
+        }
+        throw Exception("core GetIids failure")
+    }
+
+    public func getRuntimeClassNameBase(value: CPointer<CPointer<Unit>>): Int32 {
+        if (value.isNotNull()) {
+            let source = HString("core-partial-runtime-class-thunk")
+            let raw = source.toSystemHandleCopy()
+            source.close()
+            partialRuntimeClassNameRaw = raw
+            unsafe { value.write(raw) }
+        }
+        if (throwWindowsRuntimeClassName) {
+            throw WindowsException(E_POINTER)
+        }
+        if (throwPlainRuntimeClassName) {
+            throw Exception("core GetRuntimeClassName failure")
+        }
+        E_NOTIMPL.value
+    }
+
+    public func getTrustLevelBase(value: CPointer<Int32>): Int32 {
+        if (value.isNotNull()) {
+            unsafe { value.write(77i32) }
+        }
+        if (throwWindowsTrustLevel) {
+            throw WindowsException(E_POINTER)
+        }
+        if (throwPlainTrustLevel) {
+            throw Exception("core GetTrustLevel failure")
+        }
+        E_NOTIMPL.value
+    }
+}
+
+class ThrowingCoreAgileReferenceImpl <: IAgileReference_Impl {
+    public var throwWindows: Bool = false
+    public var throwPlain: Bool = false
+    public var partialRaw: CPointer<Unit> = CPointer<Unit>()
+
+    public init() {}
+
+    public func Resolve(riid: CPointer<GUID>, ppvobjectreference: CPointer<CPointer<Unit>>): Result<Unit> {
+        let _ = riid
+        if (ppvobjectreference.isNotNull()) {
+            unsafe { ppvobjectreference.write(partialRaw) }
+        }
+        if (throwWindows) {
+            throw WindowsException(E_POINTER)
+        }
+        if (throwPlain) {
+            throw Exception("agile reference resolve failure")
+        }
+        Result<Unit>.Err(WinError.fromHRESULT(E_FAIL))
+    }
+}
+
+class ThrowingCoreWeakReferenceImpl <: IWeakReference_Impl {
+    public var throwWindows: Bool = false
+    public var throwPlain: Bool = false
+    public var partialRaw: CPointer<Unit> = CPointer<Unit>()
+
+    public init() {}
+
+    public func Resolve(riid: CPointer<GUID>, objectreference: CPointer<CPointer<Unit>>): Result<Unit> {
+        let _ = riid
+        if (objectreference.isNotNull()) {
+            unsafe { objectreference.write(partialRaw) }
+        }
+        if (throwWindows) {
+            throw WindowsException(E_POINTER)
+        }
+        if (throwPlain) {
+            throw Exception("weak reference resolve failure")
+        }
+        Result<Unit>.Err(WinError.fromHRESULT(E_FAIL))
+    }
+}
+
+class ThrowingCoreWeakReferenceSourceImpl <: IWeakReferenceSource_Impl {
+    public var throwWindows: Bool = false
+    public var throwPlain: Bool = false
+
+    public init() {}
+
+    public func GetWeakReference(): Result<IWeakReference> {
+        if (throwWindows) {
+            throw WindowsException(E_POINTER)
+        }
+        if (throwPlain) {
+            throw Exception("weak reference source failure")
+        }
+        Result<IWeakReference>.Err(WinError.fromHRESULT(E_FAIL))
+    }
+}
+
 @C
 func coreQueryFailureQueryInterfaceThunk(
     _: CPointer<Unit>,
@@ -143,6 +333,16 @@ func weakOwnerQueryFailureThunk(
     result: CPointer<CPointer<Unit>>
 ): Int32 {
     unsafe { result.write(weakOwnerPartialRaw) }
+    E_FAIL.value
+}
+
+@C
+func weakOwnerNoWriteQueryFailureThunk(
+    _: CPointer<Unit>,
+    _: CPointer<GUID>,
+    result: CPointer<CPointer<Unit>>
+): Int32 {
+    let _ = result
     E_FAIL.value
 }
 
@@ -228,6 +428,14 @@ func coreQueryFailureVtbl(): IUnknownVtbl {
 func weakOwnerFailureVtbl(): IUnknownVtbl {
     var vtbl = IUnknownVtbl()
     vtbl.QueryInterface = weakOwnerQueryFailureThunk
+    vtbl.AddRef = weakOwnerAddRefThunk
+    vtbl.Release = weakOwnerReleaseThunk
+    vtbl
+}
+
+func weakOwnerNoWriteFailureVtbl(): IUnknownVtbl {
+    var vtbl = IUnknownVtbl()
+    vtbl.QueryInterface = weakOwnerNoWriteQueryFailureThunk
     vtbl.AddRef = weakOwnerAddRefThunk
     vtbl.Release = weakOwnerReleaseThunk
     vtbl
@@ -610,6 +818,153 @@ func testFailedRuntimeClassNameSlotReleasesPartialSystemHandle() {
     source.close()
 }
 
+@When[os == "Windows"]
+@Test
+func testCoreIInspectableGetIidsThunkReleasesPartialIidArrayOnFailedHRESULT() {
+    let probe = CoreThrowingInspectableImpl()
+    probe.returnFailedIids = true
+    let raw = unsafe { CPointer<Unit>(CPointer<UInt8>() + 0x7711) }
+    comRegistryInsert(raw.toUIntNative(), probe)
+
+    try {
+        var count = 123u32
+        var iids = CPointer<GUID>()
+        let hr = unsafe {
+            coreIInspectableGetIidsThunk(
+                raw,
+                CPointer<UInt32>(inout count),
+                CPointer<CPointer<GUID>>(inout iids)
+            )
+        }
+
+        @Expect(hr, E_FAIL.value)
+        @Expect(count, 0u32)
+        @Expect(iids.isNull(), true)
+        @Expect(probe.partialIidsRaw.isNotNull(), true)
+        @Expect(coTaskMemAllocationSize(probe.partialIidsRaw).isNone(), true)
+    } finally {
+        comRegistryRemove(raw.toUIntNative())
+    }
+}
+
+@When[os == "Windows"]
+@Test
+func testCoreIInspectableGetIidsThunkReleasesPartialIidArrayOnThrownException() {
+    let probe = CoreThrowingInspectableImpl()
+    probe.throwWindowsIids = true
+    let raw = unsafe { CPointer<Unit>(CPointer<UInt8>() + 0x7721) }
+    comRegistryInsert(raw.toUIntNative(), probe)
+
+    try {
+        var count = 123u32
+        var iids = CPointer<GUID>()
+        let hr = unsafe {
+            coreIInspectableGetIidsThunk(
+                raw,
+                CPointer<UInt32>(inout count),
+                CPointer<CPointer<GUID>>(inout iids)
+            )
+        }
+
+        @Expect(hr, E_POINTER.value)
+        @Expect(count, 0u32)
+        @Expect(iids.isNull(), true)
+        @Expect(probe.partialIidsRaw.isNotNull(), true)
+        @Expect(coTaskMemAllocationSize(probe.partialIidsRaw).isNone(), true)
+    } finally {
+        comRegistryRemove(raw.toUIntNative())
+    }
+}
+
+@When[os == "Windows"]
+@Test
+func testCoreIInspectableGetRuntimeClassNameThunkReleasesPartialHandleOnThrownWindowsException() {
+    let probe = CoreThrowingInspectableImpl()
+    probe.throwWindowsRuntimeClassName = true
+    let raw = unsafe { CPointer<Unit>(CPointer<UInt8>() + 0x7731) }
+    comRegistryInsert(raw.toUIntNative(), probe)
+
+    try {
+        let deleteBefore = debugObservedWindowsDeleteStringCount()
+        var nameRaw = CPointer<Unit>()
+        let hr = unsafe {
+            coreIInspectableGetRuntimeClassNameThunk(
+                raw,
+                CPointer<CPointer<Unit>>(inout nameRaw)
+            )
+        }
+
+        @Expect(hr, E_POINTER.value)
+        @Expect(nameRaw.isNull(), true)
+        @Expect(probe.partialRuntimeClassNameRaw.isNotNull(), true)
+        @Expect(debugObservedWindowsDeleteStringCount() - deleteBefore, 1)
+    } finally {
+        comRegistryRemove(raw.toUIntNative())
+    }
+}
+
+@When[os == "Windows"]
+@Test
+func testCoreIInspectableGetRuntimeClassNameThunkReleasesPartialHandleOnThrownPlainException() {
+    let probe = CoreThrowingInspectableImpl()
+    probe.throwPlainRuntimeClassName = true
+    let raw = unsafe { CPointer<Unit>(CPointer<UInt8>() + 0x7741) }
+    comRegistryInsert(raw.toUIntNative(), probe)
+
+    try {
+        let deleteBefore = debugObservedWindowsDeleteStringCount()
+        var nameRaw = CPointer<Unit>()
+        let hr = unsafe {
+            coreIInspectableGetRuntimeClassNameThunk(
+                raw,
+                CPointer<CPointer<Unit>>(inout nameRaw)
+            )
+        }
+
+        @Expect(hr, E_FAIL.value)
+        @Expect(nameRaw.isNull(), true)
+        @Expect(probe.partialRuntimeClassNameRaw.isNotNull(), true)
+        @Expect(debugObservedWindowsDeleteStringCount() - deleteBefore, 1)
+    } finally {
+        comRegistryRemove(raw.toUIntNative())
+    }
+}
+
+@Test
+func testCoreIInspectableGetTrustLevelThunkTranslatesExceptionsAndClearsOutSlot() {
+    let windowsProbe = CoreThrowingInspectableImpl()
+    windowsProbe.throwWindowsTrustLevel = true
+    let windowsRaw = unsafe { CPointer<Unit>(CPointer<UInt8>() + 0x7751) }
+    comRegistryInsert(windowsRaw.toUIntNative(), windowsProbe)
+
+    try {
+        var trustLevel = 77i32
+        let hr = unsafe {
+            coreIInspectableGetTrustLevelThunk(windowsRaw, CPointer<Int32>(inout trustLevel))
+        }
+        @Expect(hr, E_POINTER.value)
+        @Expect(trustLevel, 0i32)
+    } finally {
+        comRegistryRemove(windowsRaw.toUIntNative())
+    }
+
+    let plainProbe = CoreThrowingInspectableImpl()
+    plainProbe.throwPlainTrustLevel = true
+    let plainRaw = unsafe { CPointer<Unit>(CPointer<UInt8>() + 0x7761) }
+    comRegistryInsert(plainRaw.toUIntNative(), plainProbe)
+
+    try {
+        var trustLevel = 77i32
+        let hr = unsafe {
+            coreIInspectableGetTrustLevelThunk(plainRaw, CPointer<Int32>(inout trustLevel))
+        }
+        @Expect(hr, E_FAIL.value)
+        @Expect(trustLevel, 0i32)
+    } finally {
+        comRegistryRemove(plainRaw.toUIntNative())
+    }
+}
+
 @Test
 func testWeakReferenceSourceQueryInterfaceReleasesFailedOwnerPartialOutput() {
     resetWeakOwnerFailureState()
@@ -655,6 +1010,337 @@ func testWeakReferenceSourceQueryInterfaceReleasesFailedOwnerPartialOutput() {
             windows_interface.freeNativeValue<IUnknownVtbl>(ownerVtblHandle)
         }
         resetWeakOwnerFailureState()
+    }
+}
+
+@Test
+func testWeakReferenceSourceQueryInterfaceClearsStaleOutputBeforeNoWriteOwnerFailure() {
+    resetWeakOwnerFailureState()
+    let ownerVtblHandle = unsafe { windows_interface.allocateNativeValue<IUnknownVtbl>(weakOwnerNoWriteFailureVtbl()) }
+    let ownerHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IUnknownVtbl>>(ownerVtblHandle) }
+    let staleVtblHandle = unsafe { windows_interface.allocateNativeValue<IUnknownVtbl>(weakPartialVtbl()) }
+    let staleHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IUnknownVtbl>>(staleVtblHandle) }
+    let weak = WeakRefCount.new(raw: CPointer<Unit>(ownerHandle))
+    var sourceRaw = CPointer<Unit>()
+
+    try {
+        let sourceHr = weak.writeWeakReferenceSource(CPointer<CPointer<Unit>>(inout sourceRaw))
+        @Expect(sourceHr, S_OK.value)
+        @Expect(sourceRaw.isNotNull(), true)
+
+        var resultRaw = CPointer<Unit>(staleHandle)
+        var iid = CORE_OWNER_IID
+        let sourceVtblPtr = unsafe { CPointer<CPointer<IWeakReferenceSourceVtbl>>(sourceRaw).read() }
+        let sourceVtbl = unsafe { sourceVtblPtr.read() }
+        let queryHr = unsafe {
+            sourceVtbl.base_.QueryInterface(
+                sourceRaw,
+                CPointer<GUID>(inout iid),
+                CPointer<CPointer<Unit>>(inout resultRaw)
+            )
+        }
+
+        @Expect(queryHr, E_FAIL.value)
+        @Expect(resultRaw.isNull(), true)
+        @Expect(weakPartialReleaseCount.load(), 0)
+    } finally {
+        if (sourceRaw.isNotNull()) {
+            let sourceVtblPtr = unsafe { CPointer<CPointer<IWeakReferenceSourceVtbl>>(sourceRaw).read() }
+            let sourceVtbl = unsafe { sourceVtblPtr.read() }
+            let _ = unsafe { sourceVtbl.base_.Release(sourceRaw) }
+        }
+        weak.onObjectDestroyed()
+        unsafe {
+            windows_interface.freeNativeValue<CPointer<IUnknownVtbl>>(staleHandle)
+            windows_interface.freeNativeValue<IUnknownVtbl>(staleVtblHandle)
+            windows_interface.freeNativeValue<CPointer<IUnknownVtbl>>(ownerHandle)
+            windows_interface.freeNativeValue<IUnknownVtbl>(ownerVtblHandle)
+        }
+        resetWeakOwnerFailureState()
+    }
+}
+
+@Test
+func testCoreWeakReferenceResolveClearsStaleOutputBeforeNoWriteOwnerFailure() {
+    resetWeakOwnerFailureState()
+    let ownerVtblHandle = unsafe { windows_interface.allocateNativeValue<IUnknownVtbl>(weakOwnerNoWriteFailureVtbl()) }
+    let ownerHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IUnknownVtbl>>(ownerVtblHandle) }
+    let staleVtblHandle = unsafe { windows_interface.allocateNativeValue<IUnknownVtbl>(weakPartialVtbl()) }
+    let staleHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IUnknownVtbl>>(staleVtblHandle) }
+    let weak = WeakRefCount.new(raw: CPointer<Unit>(ownerHandle))
+    var sourceRaw = CPointer<Unit>()
+    var weakRaw = CPointer<Unit>()
+
+    try {
+        let sourceHr = weak.writeWeakReferenceSource(CPointer<CPointer<Unit>>(inout sourceRaw))
+        @Expect(sourceHr, S_OK.value)
+        @Expect(sourceRaw.isNotNull(), true)
+
+        let sourceVtblPtr = unsafe { CPointer<CPointer<IWeakReferenceSourceVtbl>>(sourceRaw).read() }
+        let sourceVtbl = unsafe { sourceVtblPtr.read() }
+        let weakHr = unsafe { sourceVtbl.GetWeakReference(sourceRaw, CPointer<CPointer<Unit>>(inout weakRaw)) }
+        @Expect(weakHr, S_OK.value)
+        @Expect(weakRaw.isNotNull(), true)
+
+        var resultRaw = CPointer<Unit>(staleHandle)
+        var iid = CORE_OWNER_IID
+        let weakVtblPtr = unsafe { CPointer<CPointer<IWeakReferenceVtbl>>(weakRaw).read() }
+        let weakVtbl = unsafe { weakVtblPtr.read() }
+        let resolveHr = unsafe {
+            weakVtbl.Resolve(
+                weakRaw,
+                CPointer<GUID>(inout iid),
+                CPointer<CPointer<Unit>>(inout resultRaw)
+            )
+        }
+
+        @Expect(resolveHr, E_FAIL.value)
+        @Expect(resultRaw.isNull(), true)
+        @Expect(weakPartialReleaseCount.load(), 0)
+    } finally {
+        if (weakRaw.isNotNull()) {
+            let weakVtblPtr = unsafe { CPointer<CPointer<IWeakReferenceVtbl>>(weakRaw).read() }
+            let weakVtbl = unsafe { weakVtblPtr.read() }
+            let _ = unsafe { weakVtbl.base_.Release(weakRaw) }
+        }
+        if (sourceRaw.isNotNull()) {
+            let sourceVtblPtr = unsafe { CPointer<CPointer<IWeakReferenceSourceVtbl>>(sourceRaw).read() }
+            let sourceVtbl = unsafe { sourceVtblPtr.read() }
+            let _ = unsafe { sourceVtbl.base_.Release(sourceRaw) }
+        }
+        weak.onObjectDestroyed()
+        unsafe {
+            windows_interface.freeNativeValue<CPointer<IUnknownVtbl>>(staleHandle)
+            windows_interface.freeNativeValue<IUnknownVtbl>(staleVtblHandle)
+            windows_interface.freeNativeValue<CPointer<IUnknownVtbl>>(ownerHandle)
+            windows_interface.freeNativeValue<IUnknownVtbl>(ownerVtblHandle)
+        }
+        resetWeakOwnerFailureState()
+    }
+}
+
+@Test
+func testCoreAgileReferenceResolveThunkCleansThrownPartialOutputs() {
+    resetWeakOwnerFailureState()
+    let agileVtblHandle = unsafe {
+        windows_interface.allocateNativeValue<IAgileReferenceVtbl>(newIAgileReferenceVtbl<ThrowingCoreAgileReferenceImpl>())
+    }
+    let partialVtblHandle = unsafe { windows_interface.allocateNativeValue<IUnknownVtbl>(weakPartialVtbl()) }
+    let partialHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IUnknownVtbl>>(partialVtblHandle) }
+    let impl = ThrowingCoreAgileReferenceImpl()
+    impl.partialRaw = CPointer<Unit>(partialHandle)
+    let object = createComObject(impl, [IID_IAGILEREFERENCE], CPointer<Unit>(agileVtblHandle))
+    let reference = object.toInterface(IAgileReference.descriptor())
+
+    try {
+        let raw = reference.asRaw()
+        let vtblPtr = unsafe { CPointer<CPointer<IAgileReferenceVtbl>>(raw).read() }
+        let vtbl = unsafe { vtblPtr.read() }
+        var iid = IID_IUNKNOWN
+
+        impl.throwWindows = true
+        var resultRaw = CPointer<Unit>()
+        let windowsHr = unsafe {
+            vtbl.Resolve(raw, CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>(inout resultRaw))
+        }
+        @Expect(windowsHr, E_POINTER.value)
+        @Expect(resultRaw.isNull(), true)
+        @Expect(weakPartialReleaseCount.load(), 1)
+        impl.throwWindows = false
+
+        impl.throwPlain = true
+        iid = IID_IUNKNOWN
+        resultRaw = CPointer<Unit>()
+        let plainHr = unsafe {
+            vtbl.Resolve(raw, CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>(inout resultRaw))
+        }
+        @Expect(plainHr, E_FAIL.value)
+        @Expect(resultRaw.isNull(), true)
+        @Expect(weakPartialReleaseCount.load(), 2)
+        impl.throwPlain = false
+    } finally {
+        reference.close()
+        object.close()
+        unsafe {
+            windows_interface.freeNativeValue<CPointer<IUnknownVtbl>>(partialHandle)
+            windows_interface.freeNativeValue<IUnknownVtbl>(partialVtblHandle)
+            windows_interface.freeNativeValue<IAgileReferenceVtbl>(agileVtblHandle)
+        }
+        resetWeakOwnerFailureState()
+    }
+}
+
+@Test
+func testCoreWeakReferenceResolveThunkCleansThrownPartialOutputs() {
+    resetWeakOwnerFailureState()
+    let weakVtblHandle = unsafe {
+        windows_interface.allocateNativeValue<IWeakReferenceVtbl>(newIWeakReferenceVtbl<ThrowingCoreWeakReferenceImpl>())
+    }
+    let partialVtblHandle = unsafe { windows_interface.allocateNativeValue<IUnknownVtbl>(weakPartialVtbl()) }
+    let partialHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IUnknownVtbl>>(partialVtblHandle) }
+    let impl = ThrowingCoreWeakReferenceImpl()
+    impl.partialRaw = CPointer<Unit>(partialHandle)
+    let object = createComObject(impl, [IID_IWEAKREFERENCE], CPointer<Unit>(weakVtblHandle))
+    let reference = object.toInterface(IWeakReference.descriptor())
+
+    try {
+        let raw = reference.asRaw()
+        let vtblPtr = unsafe { CPointer<CPointer<IWeakReferenceVtbl>>(raw).read() }
+        let vtbl = unsafe { vtblPtr.read() }
+        var iid = IID_IUNKNOWN
+
+        impl.throwWindows = true
+        var resultRaw = CPointer<Unit>()
+        let windowsHr = unsafe {
+            vtbl.Resolve(raw, CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>(inout resultRaw))
+        }
+        @Expect(windowsHr, E_POINTER.value)
+        @Expect(resultRaw.isNull(), true)
+        @Expect(weakPartialReleaseCount.load(), 1)
+        impl.throwWindows = false
+
+        impl.throwPlain = true
+        iid = IID_IUNKNOWN
+        resultRaw = CPointer<Unit>()
+        let plainHr = unsafe {
+            vtbl.Resolve(raw, CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>(inout resultRaw))
+        }
+        @Expect(plainHr, E_FAIL.value)
+        @Expect(resultRaw.isNull(), true)
+        @Expect(weakPartialReleaseCount.load(), 2)
+        impl.throwPlain = false
+    } finally {
+        reference.close()
+        object.close()
+        unsafe {
+            windows_interface.freeNativeValue<CPointer<IUnknownVtbl>>(partialHandle)
+            windows_interface.freeNativeValue<IUnknownVtbl>(partialVtblHandle)
+            windows_interface.freeNativeValue<IWeakReferenceVtbl>(weakVtblHandle)
+        }
+        resetWeakOwnerFailureState()
+    }
+}
+
+@Test
+func testCoreWeakReferenceSourceThunkTranslatesThrownExceptions() {
+    let sourceVtblHandle = unsafe {
+        windows_interface.allocateNativeValue<IWeakReferenceSourceVtbl>(
+            newIWeakReferenceSourceVtbl<ThrowingCoreWeakReferenceSourceImpl>()
+        )
+    }
+    let impl = ThrowingCoreWeakReferenceSourceImpl()
+    let object = createComObject(impl, [IID_IWEAKREFERENCESOURCE], CPointer<Unit>(sourceVtblHandle))
+    let source = object.toInterface(IWeakReferenceSource.descriptor())
+
+    try {
+        let raw = source.asRaw()
+        let vtblPtr = unsafe { CPointer<CPointer<IWeakReferenceSourceVtbl>>(raw).read() }
+        let vtbl = unsafe { vtblPtr.read() }
+
+        impl.throwWindows = true
+        var resultRaw = CPointer<Unit>()
+        let windowsHr = unsafe { vtbl.GetWeakReference(raw, CPointer<CPointer<Unit>>(inout resultRaw)) }
+        @Expect(windowsHr, E_POINTER.value)
+        @Expect(resultRaw.isNull(), true)
+        impl.throwWindows = false
+
+        impl.throwPlain = true
+        resultRaw = CPointer<Unit>()
+        let plainHr = unsafe { vtbl.GetWeakReference(raw, CPointer<CPointer<Unit>>(inout resultRaw)) }
+        @Expect(plainHr, E_FAIL.value)
+        @Expect(resultRaw.isNull(), true)
+        impl.throwPlain = false
+    } finally {
+        source.close()
+        object.close()
+        unsafe { windows_interface.freeNativeValue<IWeakReferenceSourceVtbl>(sourceVtblHandle) }
+    }
+}
+
+@Test
+func testLocalWeakReferenceLookupMissRejectsNullAndClearsOutSlots() {
+    var iid = IID_IUNKNOWN
+    let staleHandle = unsafe { windows_interface.allocateNativeValue<Int32>(123i32) }
+    let staleRaw = CPointer<Unit>(staleHandle)
+    var resultRaw = staleRaw
+
+    try {
+        let nullSourceQueryHr = unsafe {
+            localWeakReferenceSourceQueryInterfaceThunk(
+                CPointer<Unit>(),
+                CPointer<GUID>(inout iid),
+                CPointer<CPointer<Unit>>()
+            )
+        }
+        @Expect(nullSourceQueryHr, E_POINTER.value)
+
+        resultRaw = staleRaw
+        let nullSourceQueryIidHr = unsafe {
+            localWeakReferenceSourceQueryInterfaceThunk(
+                CPointer<Unit>(),
+                CPointer<GUID>(),
+                CPointer<CPointer<Unit>>(inout resultRaw)
+            )
+        }
+        @Expect(nullSourceQueryIidHr, E_POINTER.value)
+        @Expect(resultRaw.isNull(), true)
+
+        resultRaw = staleRaw
+        let missingSourceQueryHr = unsafe {
+            localWeakReferenceSourceQueryInterfaceThunk(
+                CPointer<Unit>(),
+                CPointer<GUID>(inout iid),
+                CPointer<CPointer<Unit>>(inout resultRaw)
+            )
+        }
+        @Expect(missingSourceQueryHr, E_NOINTERFACE.value)
+        @Expect(resultRaw.isNull(), true)
+
+        resultRaw = staleRaw
+        let nullGetWeakReferenceHr = unsafe {
+            localWeakReferenceSourceGetWeakReferenceThunk(CPointer<Unit>(), CPointer<CPointer<Unit>>())
+        }
+        @Expect(nullGetWeakReferenceHr, E_POINTER.value)
+        let missingGetWeakReferenceHr = unsafe {
+            localWeakReferenceSourceGetWeakReferenceThunk(
+                CPointer<Unit>(),
+                CPointer<CPointer<Unit>>(inout resultRaw)
+            )
+        }
+        @Expect(missingGetWeakReferenceHr, E_NOINTERFACE.value)
+        @Expect(resultRaw.isNull(), true)
+
+        resultRaw = staleRaw
+        let nullWeakQueryHr = unsafe {
+            localWeakReferenceQueryInterfaceThunk(CPointer<Unit>(), CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>())
+        }
+        @Expect(nullWeakQueryHr, E_POINTER.value)
+        let missingWeakQueryHr = unsafe {
+            localWeakReferenceQueryInterfaceThunk(
+                CPointer<Unit>(),
+                CPointer<GUID>(inout iid),
+                CPointer<CPointer<Unit>>(inout resultRaw)
+            )
+        }
+        @Expect(missingWeakQueryHr, E_NOINTERFACE.value)
+        @Expect(resultRaw.isNull(), true)
+
+        resultRaw = staleRaw
+        let nullWeakResolveHr = unsafe {
+            localWeakReferenceResolveThunk(CPointer<Unit>(), CPointer<GUID>(inout iid), CPointer<CPointer<Unit>>())
+        }
+        @Expect(nullWeakResolveHr, E_POINTER.value)
+        let missingWeakResolveHr = unsafe {
+            localWeakReferenceResolveThunk(
+                CPointer<Unit>(),
+                CPointer<GUID>(inout iid),
+                CPointer<CPointer<Unit>>(inout resultRaw)
+            )
+        }
+        @Expect(missingWeakResolveHr, E_NOINTERFACE.value)
+        @Expect(resultRaw.isNull(), true)
+    } finally {
+        unsafe { windows_interface.freeNativeValue<Int32>(staleHandle) }
     }
 }
 
@@ -926,6 +1612,32 @@ func testHStringGenericArrayOutCallReleasesFailedPartialOutputs() {
 }
 
 @C
+func coreNoWriteFailingGetUnmarshalClassThunk(
+    _: CPointer<Unit>,
+    _: CPointer<GUID>,
+    _: CPointer<Unit>,
+    _: UInt32,
+    _: CPointer<Unit>,
+    _: UInt32,
+    _: CPointer<GUID>
+): Int32 {
+    E_FAIL.value
+}
+
+@C
+func coreNoWriteFailingGetMarshalSizeMaxThunk(
+    _: CPointer<Unit>,
+    _: CPointer<GUID>,
+    _: CPointer<Unit>,
+    _: UInt32,
+    _: CPointer<Unit>,
+    _: UInt32,
+    _: CPointer<UInt32>
+): Int32 {
+    E_FAIL.value
+}
+
+@C
 func coreNoWriteFailingUnmarshalInterfaceThunk(
     _: CPointer<Unit>,
     _: CPointer<Unit>,
@@ -937,6 +1649,8 @@ func coreNoWriteFailingUnmarshalInterfaceThunk(
 
 func coreNoWriteFailingMarshalVtbl(): IMarshalVtbl {
     var vtbl = IMarshalVtbl()
+    vtbl.GetUnmarshalClass = coreNoWriteFailingGetUnmarshalClassThunk
+    vtbl.GetMarshalSizeMax = coreNoWriteFailingGetMarshalSizeMaxThunk
     vtbl.UnmarshalInterface = coreNoWriteFailingUnmarshalInterfaceThunk
     vtbl
 }
@@ -961,6 +1675,33 @@ func testAggregatedMarshalerUnmarshalClearsStaleOutputBeforeNoWriteFailure() {
         @Expect(hr, E_FAIL.value)
         @Expect(resultRaw.isNull(), true)
         @Expect(coreQueryFailureReleaseCount.load(), 0)
+
+        var classId = GUID(1u32, 2u16, 3u16, 4u8, 5u8, 6u8, 7u8, 8u8, 9u8, 10u8, 11u8)
+        let classHr = state.getUnmarshalClass(
+            CPointer<GUID>(),
+            CPointer<Unit>(),
+            0u32,
+            CPointer<Unit>(),
+            0u32,
+            CPointer<GUID>(inout classId)
+        )
+        @Expect(classHr, E_FAIL.value)
+        @Expect(classId.data1, 0u32)
+        @Expect(classId.data2, 0u16)
+        @Expect(classId.data3, 0u16)
+        @Expect(classId.data4[0], 0u8)
+
+        var size = 99u32
+        let sizeHr = state.getMarshalSizeMax(
+            CPointer<GUID>(),
+            CPointer<Unit>(),
+            0u32,
+            CPointer<Unit>(),
+            0u32,
+            CPointer<UInt32>(inout size)
+        )
+        @Expect(sizeHr, E_FAIL.value)
+        @Expect(size, 0u32)
     } finally {
         let _ = state.release()
         unsafe {
@@ -970,6 +1711,64 @@ func testAggregatedMarshalerUnmarshalClearsStaleOutputBeforeNoWriteFailure() {
             windows_interface.freeNativeValue<IMarshalVtbl>(innerVtblHandle)
         }
         resetCoreQueryFailureState()
+    }
+}
+
+@Test
+func testAggregatedMarshalerLookupMissClearsOutSlots() {
+    let staleVtblHandle = unsafe { windows_interface.allocateNativeValue<IUnknownVtbl>(coreQueryFailureVtbl()) }
+    let staleHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IUnknownVtbl>>(staleVtblHandle) }
+    var pcid = GUID(1u32, 2u16, 3u16, 4u8, 5u8, 6u8, 7u8, 8u8, 9u8, 10u8, 11u8)
+    var size = 99u32
+    var ppv = CPointer<Unit>(staleHandle)
+
+    try {
+        let classHr = unsafe {
+            aggregatedMarshalerGetUnmarshalClassThunk(
+                CPointer<Unit>(),
+                CPointer<GUID>(),
+                CPointer<Unit>(),
+                0u32,
+                CPointer<Unit>(),
+                0u32,
+                CPointer<GUID>(inout pcid)
+            )
+        }
+        @Expect(classHr, E_NOINTERFACE.value)
+        @Expect(pcid.data1, 0u32)
+        @Expect(pcid.data2, 0u16)
+        @Expect(pcid.data3, 0u16)
+        @Expect(pcid.data4[0], 0u8)
+
+        let sizeHr = unsafe {
+            aggregatedMarshalerGetMarshalSizeMaxThunk(
+                CPointer<Unit>(),
+                CPointer<GUID>(),
+                CPointer<Unit>(),
+                0u32,
+                CPointer<Unit>(),
+                0u32,
+                CPointer<UInt32>(inout size)
+            )
+        }
+        @Expect(sizeHr, E_NOINTERFACE.value)
+        @Expect(size, 0u32)
+
+        let unmarshalHr = unsafe {
+            aggregatedMarshalerUnmarshalInterfaceThunk(
+                CPointer<Unit>(),
+                CPointer<Unit>(),
+                CPointer<GUID>(),
+                CPointer<CPointer<Unit>>(inout ppv)
+            )
+        }
+        @Expect(unmarshalHr, E_NOINTERFACE.value)
+        @Expect(ppv.isNull(), true)
+    } finally {
+        unsafe {
+            windows_interface.freeNativeValue<CPointer<IUnknownVtbl>>(staleHandle)
+            windows_interface.freeNativeValue<IUnknownVtbl>(staleVtblHandle)
+        }
     }
 }
 

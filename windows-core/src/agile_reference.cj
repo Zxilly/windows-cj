@@ -51,16 +51,24 @@ func agileReferenceResolveThunk(
         }
     }
 
-    match (lookupComInnerImpl<IAgileReference_Impl>(instanceRaw)) {
-        case Some(value) =>
-            match (value.Resolve(riid, ppvobjectreference)) {
-                case Result<Unit>.Ok(_) => S_OK.value
-                case Result<Unit>.Err(error) =>
-                    releaseFailedComOutSlot(ppvobjectreference)
-                    error.code().value
-            }
-        case None =>
-            E_NOINTERFACE.value
+    try {
+        match (lookupComInnerImpl<IAgileReference_Impl>(instanceRaw)) {
+            case Some(value) =>
+                match (value.Resolve(riid, ppvobjectreference)) {
+                    case Result<Unit>.Ok(_) => S_OK.value
+                    case Result<Unit>.Err(error) =>
+                        releaseFailedComOutSlot(ppvobjectreference)
+                        error.code().value
+                }
+            case None =>
+                E_NOINTERFACE.value
+        }
+    } catch (error: WindowsException) {
+        releaseFailedComOutSlot(ppvobjectreference)
+        error.code().value
+    } catch (_: Exception) {
+        releaseFailedComOutSlot(ppvobjectreference)
+        E_FAIL.value
     }
 }
 

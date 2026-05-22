@@ -51,6 +51,39 @@ func callCoIncrementMTAUsage(cookie: CPointer<CPointer<Unit>>): Int32 {
     }
 }
 
+class FactoryMTAUsageGuard {
+    private let mutex = Mutex()
+    private var cookie: Option<CPointer<Unit>> = None
+
+    public init() {}
+
+    public func ensure(incrementMTAUsageCall: (CPointer<CPointer<Unit>>) -> HRESULT): HRESULT {
+        var result = S_OK
+        synchronized(mutex) {
+            match (cookie) {
+                case Some(_) =>
+                    result = S_OK
+                case None =>
+                    var newCookie = CPointer<Unit>()
+                    let incrementHr = incrementMTAUsageCall(CPointer<CPointer<Unit>>(inout newCookie))
+                    if (incrementHr.failed()) {
+                        result = incrementHr
+                    } else if (newCookie.isNull()) {
+                        result = E_POINTER
+                    } else {
+                        cookie = Some(newCookie)
+                        result = S_OK
+                    }
+            }
+        }
+        result
+    }
+}
+
+// Process lifetime guard: CoDecrementMTAUsage is not safe during process shutdown,
+// so the projection keeps a single successful cookie instead of leaking one per fallback.
+let processFactoryMTAUsage = FactoryMTAUsageGuard()
+
 func queryFactoryInterface<I>(
     rawFactory: CPointer<Unit>,
     descriptor: InterfaceDescriptor<I>
@@ -89,47 +122,60 @@ func activationFactoryFromRaw<I>(
     queryFactoryInterface(rawFactory, descriptor)
 }
 
-func loadSystemActivationFactory<I>(
+func loadSystemActivationFactoryWithCalls<I>(
     runtimeName: String,
-    descriptor: InterfaceDescriptor<I>
+    descriptor: InterfaceDescriptor<I>,
+    loadFactoryCall: (HString, CPointer<GUID>, CPointer<CPointer<Unit>>) -> HRESULT,
+    incrementMTAUsageCall: (CPointer<CPointer<Unit>>) -> HRESULT,
+    mtaUsage!: FactoryMTAUsageGuard = processFactoryMTAUsage
 ): Result<I> where I <: ComInterface {
     let classId = HString(runtimeName)
     try {
         var iid = descriptor.iid
         var raw = CPointer<Unit>()
-        var hr = unsafe {
-            HRESULT(
-                callRoGetActivationFactoryWithClassId(
-                    classId,
-                    CPointer<GUID>(inout iid),
-                    CPointer<CPointer<Unit>>(inout raw)
-                )
-            )
-        }
+        var hr = loadFactoryCall(
+            classId,
+            CPointer<GUID>(inout iid),
+            CPointer<CPointer<Unit>>(inout raw)
+        )
 
         if (hr.value == CO_E_NOTINITIALIZED.value) {
             if (raw.isNotNull()) {
                 interfaceHandleReleaseRaw(raw)
             }
-            var cookie = CPointer<Unit>()
-            callCoIncrementMTAUsage(CPointer<CPointer<Unit>>(inout cookie))
+            let incrementHr = mtaUsage.ensure(incrementMTAUsageCall)
+            if (incrementHr.failed()) {
+                return Result<I>.Err(WinError.fromHRESULT(incrementHr))
+            }
             iid = descriptor.iid
             raw = CPointer<Unit>()
-            hr = unsafe {
-                HRESULT(
-                    callRoGetActivationFactoryWithClassId(
-                        classId,
-                        CPointer<GUID>(inout iid),
-                        CPointer<CPointer<Unit>>(inout raw)
-                    )
-                )
-            }
+            hr = loadFactoryCall(
+                classId,
+                CPointer<GUID>(inout iid),
+                CPointer<CPointer<Unit>>(inout raw)
+            )
         }
 
         activationFactoryFromRaw(raw, hr, descriptor)
     } finally {
         classId.close()
     }
+}
+
+func loadSystemActivationFactory<I>(
+    runtimeName: String,
+    descriptor: InterfaceDescriptor<I>
+): Result<I> where I <: ComInterface {
+    loadSystemActivationFactoryWithCalls<I>(
+        runtimeName,
+        descriptor,
+        { classId: HString, iid: CPointer<GUID>, factory: CPointer<CPointer<Unit>> =>
+            HRESULT(callRoGetActivationFactoryWithClassId(classId, iid, factory))
+        },
+        { cookie: CPointer<CPointer<Unit>> =>
+            HRESULT(callCoIncrementMTAUsage(cookie))
+        }
+    )
 }
 
 func findPreviousNamespaceDot(bytes: Array<UInt8>, fromIndex: Int64): Int64 {
@@ -172,16 +218,21 @@ func callDllGetActivationFactory(
     result
 }
 
+enum RegFreeFactoryLoad<I> {
+    | MissingCandidate
+    | Loaded(Result<I>)
+}
+
 func loadRegFreeFactoryFromDll<I>(
     runtimeName: String,
     libraryName: Array<UInt8>,
     descriptor: InterfaceDescriptor<I>
-): Result<I> where I <: ComInterface {
+): RegFreeFactoryLoad<I> where I <: ComInterface {
     var module = CPointer<Unit>()
     try {
         module = windows_libloading.loadLibraryUncached(libraryName)
     } catch (_: Exception) {
-        return Result<I>.Err(WinError(E_NOINTERFACE))
+        return RegFreeFactoryLoad<I>.MissingCandidate
     }
 
     var address = CPointer<Unit>()
@@ -189,7 +240,7 @@ func loadRegFreeFactoryFromDll<I>(
         address = windows_libloading.resolveProcUncached(module, DLL_GET_ACTIVATION_FACTORY_PROC_NAME)
     } catch (_: Exception) {
         windows_libloading.freeLibrary(module)
-        return Result<I>.Err(WinError(E_NOINTERFACE))
+        return RegFreeFactoryLoad<I>.MissingCandidate
     }
 
     let classId = HString(runtimeName)
@@ -210,22 +261,30 @@ func loadRegFreeFactoryFromDll<I>(
                 interfaceHandleReleaseRaw(rawFactory)
             }
             windows_libloading.freeLibrary(module)
-            return Result<I>.Err(WinError.fromHRESULT(hr))
+            return RegFreeFactoryLoad<I>.Loaded(Result<I>.Err(WinError.fromHRESULT(hr)))
         }
         if (rawFactory.isNull()) {
             windows_libloading.freeLibrary(module)
-            return Result<I>.Err(WinError(E_POINTER))
+            return RegFreeFactoryLoad<I>.Loaded(Result<I>.Err(WinError(E_POINTER)))
         }
 
-        queryFactoryInterface(rawFactory, descriptor)
+        let queryResult = queryFactoryInterface(rawFactory, descriptor)
+        match (queryResult) {
+            case Result<I>.Ok(value) =>
+                RegFreeFactoryLoad<I>.Loaded(Result<I>.Ok(value))
+            case Result<I>.Err(error) =>
+                windows_libloading.freeLibrary(module)
+                RegFreeFactoryLoad<I>.Loaded(Result<I>.Err(error))
+        }
     } finally {
         classId.close()
     }
 }
 
-func loadRegFreeActivationFactory<I>(
+func loadRegFreeActivationFactoryWithLoader<I>(
     runtimeName: String,
-    descriptor: InterfaceDescriptor<I>
+    descriptor: InterfaceDescriptor<I>,
+    loader: (String, Array<UInt8>, InterfaceDescriptor<I>) -> RegFreeFactoryLoad<I>
 ): Result<I> where I <: ComInterface {
     let runtimeNameBytes = runtimeName.toArray()
     var searchIndex = Int64(runtimeNameBytes.size) - 1
@@ -236,16 +295,34 @@ func loadRegFreeActivationFactory<I>(
         }
 
         let libraryName = makeDllName(runtimeNameBytes, dotIndex)
-        match (loadRegFreeFactoryFromDll(runtimeName, libraryName, descriptor)) {
-            case Result<I>.Ok(value) =>
-                return Result<I>.Ok(value)
-            case Result<I>.Err(_) =>
+        match (loader(runtimeName, libraryName, descriptor)) {
+            case RegFreeFactoryLoad<I>.Loaded(result) =>
+                match (result) {
+                    case Result<I>.Ok(value) =>
+                        return Result<I>.Ok(value)
+                    case Result<I>.Err(error) =>
+                        return Result<I>.Err(error)
+                }
+            case RegFreeFactoryLoad<I>.MissingCandidate =>
                 ()
         }
         searchIndex = dotIndex - 1
     }
 
     Result<I>.Err(WinError.fromHRESULT(REGDB_E_CLASSNOTREG))
+}
+
+func loadRegFreeActivationFactory<I>(
+    runtimeName: String,
+    descriptor: InterfaceDescriptor<I>
+): Result<I> where I <: ComInterface {
+    loadRegFreeActivationFactoryWithLoader<I>(
+        runtimeName,
+        descriptor,
+        { name: String, libraryName: Array<UInt8>, target: InterfaceDescriptor<I> =>
+            loadRegFreeFactoryFromDll<I>(name, libraryName, target)
+        }
+    )
 }
 
 func loadActivationFactory<I>(

@@ -23,25 +23,70 @@ func releaseFailedRuntimeClassNameSlot(hr: Int32, value: CPointer<CPointer<Unit>
     hr
 }
 
+func clearInspectableTrustLevelOutSlot(value: CPointer<Int32>): Unit {
+    unsafe {
+        if (value.isNotNull()) {
+            value.write(0i32)
+        }
+    }
+}
+
+func clearInspectableIidsOutSlots(count: CPointer<UInt32>, values: CPointer<CPointer<GUID>>): Unit {
+    unsafe {
+        if (count.isNotNull()) {
+            count.write(0u32)
+        }
+        if (values.isNotNull()) {
+            values.write(CPointer<GUID>())
+        }
+    }
+}
+
+func releaseFailedInspectableIidsOutSlots(
+    hr: Int32,
+    count: CPointer<UInt32>,
+    values: CPointer<CPointer<GUID>>
+): Int32 {
+    if (hr < 0 && values.isNotNull()) {
+        unsafe {
+            let raw = values.read()
+            if (raw.isNotNull()) {
+                coTaskMemFree(CPointer<Unit>(raw))
+            }
+        }
+    }
+    if (hr < 0) {
+        clearInspectableIidsOutSlots(count, values)
+    }
+    hr
+}
+
 @C
 func coreIInspectableGetIidsThunk(
     instanceRaw: CPointer<Unit>,
     count: CPointer<UInt32>,
     values: CPointer<CPointer<GUID>>
 ): Int32 {
-    unsafe {
-        if (count.isNull() || values.isNull()) {
-            return E_POINTER.value
+    try {
+        unsafe {
+            if (count.isNull() || values.isNull()) {
+                clearInspectableIidsOutSlots(count, values)
+                return E_POINTER.value
+            }
+            clearInspectableIidsOutSlots(count, values)
         }
-        count.write(0u32)
-        values.write(CPointer<GUID>())
-    }
 
-    match (lookupComImpl<IInspectableImpl>(instanceRaw)) {
-        case Some(value) =>
-            value.getIidsBase(count, values)
-        case None =>
-            E_NOINTERFACE.value
+        let hr = match (lookupComImpl<IInspectableImpl>(instanceRaw)) {
+            case Some(value) =>
+                value.getIidsBase(count, values)
+            case None =>
+                E_NOINTERFACE.value
+        }
+        releaseFailedInspectableIidsOutSlots(hr, count, values)
+    } catch (error: WindowsException) {
+        releaseFailedInspectableIidsOutSlots(error.code().value, count, values)
+    } catch (_: Exception) {
+        releaseFailedInspectableIidsOutSlots(E_FAIL.value, count, values)
     }
 }
 
@@ -50,20 +95,26 @@ func coreIInspectableGetRuntimeClassNameThunk(
     instanceRaw: CPointer<Unit>,
     value: CPointer<CPointer<Unit>>
 ): Int32 {
-    unsafe {
-        if (value.isNull()) {
-            return E_POINTER.value
+    try {
+        unsafe {
+            if (value.isNull()) {
+                return E_POINTER.value
+            }
+            value.write(CPointer<Unit>())
         }
-        value.write(CPointer<Unit>())
-    }
 
-    let hr = match (lookupComImpl<IInspectableImpl>(instanceRaw)) {
-        case Some(inspectable) =>
-            inspectable.getRuntimeClassNameBase(value)
-        case None =>
-            E_NOINTERFACE.value
+        let hr = match (lookupComImpl<IInspectableImpl>(instanceRaw)) {
+            case Some(inspectable) =>
+                inspectable.getRuntimeClassNameBase(value)
+            case None =>
+                E_NOINTERFACE.value
+        }
+        releaseFailedRuntimeClassNameSlot(hr, value)
+    } catch (error: WindowsException) {
+        releaseFailedRuntimeClassNameSlot(error.code().value, value)
+    } catch (_: Exception) {
+        releaseFailedRuntimeClassNameSlot(E_FAIL.value, value)
     }
-    releaseFailedRuntimeClassNameSlot(hr, value)
 }
 
 @C
@@ -71,18 +122,26 @@ func coreIInspectableGetTrustLevelThunk(
     instanceRaw: CPointer<Unit>,
     value: CPointer<Int32>
 ): Int32 {
-    unsafe {
-        if (value.isNull()) {
-            return E_POINTER.value
+    try {
+        unsafe {
+            if (value.isNull()) {
+                return E_POINTER.value
+            }
         }
-        value.write(0i32)
-    }
+        clearInspectableTrustLevelOutSlot(value)
 
-    match (lookupComImpl<IInspectableImpl>(instanceRaw)) {
-        case Some(inspectable) =>
-            inspectable.getTrustLevelBase(value)
-        case None =>
-            E_NOINTERFACE.value
+        match (lookupComImpl<IInspectableImpl>(instanceRaw)) {
+            case Some(inspectable) =>
+                inspectable.getTrustLevelBase(value)
+            case None =>
+                E_NOINTERFACE.value
+        }
+    } catch (error: WindowsException) {
+        clearInspectableTrustLevelOutSlot(value)
+        error.code().value
+    } catch (_: Exception) {
+        clearInspectableTrustLevelOutSlot(value)
+        E_FAIL.value
     }
 }
 

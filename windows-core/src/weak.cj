@@ -20,16 +20,24 @@ func coreWeakReferenceResolveThunk(
         }
     }
 
-    match (lookupComInnerImpl<IWeakReference_Impl>(instanceRaw)) {
-        case Some(value) =>
-            match (value.Resolve(riid, objectreference)) {
-                case Result<Unit>.Ok(_) => S_OK.value
-                case Result<Unit>.Err(error) =>
-                    releaseFailedComOutSlot(objectreference)
-                    error.code().value
-            }
-        case None =>
-            E_NOINTERFACE.value
+    try {
+        match (lookupComInnerImpl<IWeakReference_Impl>(instanceRaw)) {
+            case Some(value) =>
+                match (value.Resolve(riid, objectreference)) {
+                    case Result<Unit>.Ok(_) => S_OK.value
+                    case Result<Unit>.Err(error) =>
+                        releaseFailedComOutSlot(objectreference)
+                        error.code().value
+                }
+            case None =>
+                E_NOINTERFACE.value
+        }
+    } catch (error: WindowsException) {
+        releaseFailedComOutSlot(objectreference)
+        error.code().value
+    } catch (_: Exception) {
+        releaseFailedComOutSlot(objectreference)
+        E_FAIL.value
     }
 }
 
@@ -56,22 +64,30 @@ func coreWeakReferenceSourceGetWeakReferenceThunk(
         weakreference.write(CPointer<Unit>())
     }
 
-    match (lookupComInnerImpl<IWeakReferenceSource_Impl>(instanceRaw)) {
-        case Some(value) =>
-            match (value.GetWeakReference()) {
-                case Result<IWeakReference>.Ok(reference) =>
-                    let raw = reference.intoAbi()
-                    if (raw.isNull()) {
-                        reference.close()
-                        return E_POINTER.value
-                    }
-                    unsafe { weakreference.write(raw) }
-                    S_OK.value
-                case Result<IWeakReference>.Err(error) =>
-                    error.code().value
-            }
-        case None =>
-            E_NOINTERFACE.value
+    try {
+        match (lookupComInnerImpl<IWeakReferenceSource_Impl>(instanceRaw)) {
+            case Some(value) =>
+                match (value.GetWeakReference()) {
+                    case Result<IWeakReference>.Ok(reference) =>
+                        let raw = reference.intoAbi()
+                        if (raw.isNull()) {
+                            reference.close()
+                            return E_POINTER.value
+                        }
+                        unsafe { weakreference.write(raw) }
+                        S_OK.value
+                    case Result<IWeakReference>.Err(error) =>
+                        error.code().value
+                }
+            case None =>
+                E_NOINTERFACE.value
+        }
+    } catch (error: WindowsException) {
+        releaseFailedComOutSlot(weakreference)
+        error.code().value
+    } catch (_: Exception) {
+        releaseFailedComOutSlot(weakreference)
+        E_FAIL.value
     }
 }
 

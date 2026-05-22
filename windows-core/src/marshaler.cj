@@ -91,11 +91,18 @@ class AggregatedMarshalerState {
         mshlflags: UInt32,
         pcid: CPointer<GUID>
     ): Int32 {
+        if (pcid.isNotNull()) {
+            unsafe { pcid.write(GUID()) }
+        }
         let raw = innerMarshaler.asRaw()
         if (raw.isNull()) {
             return E_POINTER.value
         }
-        unsafe { innerMarshaler.vtbl().GetUnmarshalClass(raw, riid, pv, dwdestcontext, pvdestcontext, mshlflags, pcid) }
+        let hr = unsafe { innerMarshaler.vtbl().GetUnmarshalClass(raw, riid, pv, dwdestcontext, pvdestcontext, mshlflags, pcid) }
+        if (hr < 0 && pcid.isNotNull()) {
+            unsafe { pcid.write(GUID()) }
+        }
+        hr
     }
 
     public func getMarshalSizeMax(
@@ -106,11 +113,18 @@ class AggregatedMarshalerState {
         mshlflags: UInt32,
         psize: CPointer<UInt32>
     ): Int32 {
+        if (psize.isNotNull()) {
+            unsafe { psize.write(0u32) }
+        }
         let raw = innerMarshaler.asRaw()
         if (raw.isNull()) {
             return E_POINTER.value
         }
-        unsafe { innerMarshaler.vtbl().GetMarshalSizeMax(raw, riid, pv, dwdestcontext, pvdestcontext, mshlflags, psize) }
+        let hr = unsafe { innerMarshaler.vtbl().GetMarshalSizeMax(raw, riid, pv, dwdestcontext, pvdestcontext, mshlflags, psize) }
+        if (hr < 0 && psize.isNotNull()) {
+            unsafe { psize.write(0u32) }
+        }
+        hr
     }
 
     public func marshalInterface(
@@ -237,7 +251,11 @@ func aggregatedMarshalerGetUnmarshalClassThunk(
 ): Int32 {
     match (lookupAggregatedMarshaler(instanceRaw)) {
         case Some(state) => state.getUnmarshalClass(riid, pv, dwdestcontext, pvdestcontext, mshlflags, pcid)
-        case None => E_NOINTERFACE.value
+        case None =>
+            if (pcid.isNotNull()) {
+                unsafe { pcid.write(GUID()) }
+            }
+            E_NOINTERFACE.value
     }
 }
 
@@ -253,7 +271,11 @@ func aggregatedMarshalerGetMarshalSizeMaxThunk(
 ): Int32 {
     match (lookupAggregatedMarshaler(instanceRaw)) {
         case Some(state) => state.getMarshalSizeMax(riid, pv, dwdestcontext, pvdestcontext, mshlflags, psize)
-        case None => E_NOINTERFACE.value
+        case None =>
+            if (psize.isNotNull()) {
+                unsafe { psize.write(0u32) }
+            }
+            E_NOINTERFACE.value
     }
 }
 
@@ -282,7 +304,11 @@ func aggregatedMarshalerUnmarshalInterfaceThunk(
 ): Int32 {
     match (lookupAggregatedMarshaler(instanceRaw)) {
         case Some(state) => state.unmarshalInterface(pstm, riid, ppv)
-        case None => E_NOINTERFACE.value
+        case None =>
+            if (ppv.isNotNull()) {
+                unsafe { ppv.write(CPointer<Unit>()) }
+            }
+            E_NOINTERFACE.value
     }
 }
 

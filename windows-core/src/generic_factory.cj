@@ -13,7 +13,12 @@ func viewIGenericFactory(raw: CPointer<Unit>): IGenericFactory {
 @C
 public struct IGenericFactoryVtbl {
     public var base_: IInspectableVtbl = IInspectableVtbl()
-    public var ActivateInstance: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var ActivateInstance: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>
+        if (result.isNotNull()) {
+            unsafe { result.write(CPointer<Unit>()) }
+        }
+        E_NOTIMPL.value
+    }
 
     public init() {}
 }
