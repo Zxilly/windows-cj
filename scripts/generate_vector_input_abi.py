@@ -102,19 +102,27 @@ def render_vtbl_branch(spec: TypeSpec) -> str:
                     instanceRaw, arg0, arg1, result__ =>
                     match (unsafe {{ asImplFromRaw<IVector_Impl<{spec.name}>>(instanceRaw) }}) {{
                         case Some(impl) =>
-                            if (result__.isNull()) {{
+                            if (result__.isNull() || arg1.isNull()) {{
                                 E_POINTER.value
                             }} else {{
-                                match (impl.IndexOf(arg0, arg1)) {{
-                                    case Result<Bool>.Ok(value) =>
-                                        unsafe {{ result__.write(value) }}
-                                        S_OK.value
-                                    case Result<Bool>.Err(error) =>
-                                        error.code().value
+                                clearCollectionIndexOutSlot(arg1)
+                                clearCollectionBoolOutSlot(result__)
+                                try {{
+                                    match (impl.IndexOf(arg0, arg1)) {{
+                                        case Result<Bool>.Ok(value) =>
+                                            unsafe {{ result__.write(value) }}
+                                            S_OK.value
+                                        case Result<Bool>.Err(error) =>
+                                            error.code().value
+                                    }}
+                                }} catch (error: windows_core.WindowsException) {{
+                                    error.code().value
+                                }} catch (_: Exception) {{
+                                    windows_core.E_FAIL.value
                                 }}
                             }}
                         case None =>
-                            E_NOINTERFACE.value
+                            collectionNoInterfaceIndexBoolOut(arg1, result__)
                     }}
                 }}
                 vtbl.IndexOf = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32>(CPointer<Unit>(indexOfAbi))
@@ -122,11 +130,17 @@ def render_vtbl_branch(spec: TypeSpec) -> str:
                     instanceRaw, arg0, arg1 =>
                     match (unsafe {{ asImplFromRaw<IVector_Impl<{spec.name}>>(instanceRaw) }}) {{
                         case Some(impl) =>
-                            match (impl.SetAt(arg0, arg1)) {{
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {{
+                                match (impl.SetAt(arg0, arg1)) {{
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }}
+                            }} catch (error: windows_core.WindowsException) {{
+                                error.code().value
+                            }} catch (_: Exception) {{
+                                windows_core.E_FAIL.value
                             }}
                         case None =>
                             E_NOINTERFACE.value
@@ -136,11 +150,17 @@ def render_vtbl_branch(spec: TypeSpec) -> str:
                 let insertAtAbi: CFunc<(CPointer<Unit>, UInt32, {spec.name}) -> Int32> = {{ instanceRaw, arg0, arg1 =>
                     match (unsafe {{ asImplFromRaw<IVector_Impl<{spec.name}>>(instanceRaw) }}) {{
                         case Some(impl) =>
-                            match (impl.InsertAt(arg0, arg1)) {{
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {{
+                                match (impl.InsertAt(arg0, arg1)) {{
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }}
+                            }} catch (error: windows_core.WindowsException) {{
+                                error.code().value
+                            }} catch (_: Exception) {{
+                                windows_core.E_FAIL.value
                             }}
                         case None =>
                             E_NOINTERFACE.value
@@ -150,11 +170,17 @@ def render_vtbl_branch(spec: TypeSpec) -> str:
                 let appendAbi: CFunc<(CPointer<Unit>, {spec.name}) -> Int32> = {{ instanceRaw, arg0 =>
                     match (unsafe {{ asImplFromRaw<IVector_Impl<{spec.name}>>(instanceRaw) }}) {{
                         case Some(impl) =>
-                            match (impl.Append(arg0)) {{
-                                case Result<Unit>.Ok(_) =>
-                                    S_OK.value
-                                case Result<Unit>.Err(error) =>
-                                    error.code().value
+                            try {{
+                                match (impl.Append(arg0)) {{
+                                    case Result<Unit>.Ok(_) =>
+                                        S_OK.value
+                                    case Result<Unit>.Err(error) =>
+                                        error.code().value
+                                }}
+                            }} catch (error: windows_core.WindowsException) {{
+                                error.code().value
+                            }} catch (_: Exception) {{
+                                windows_core.E_FAIL.value
                             }}
                         case None =>
                             E_NOINTERFACE.value
@@ -172,6 +198,22 @@ def render_new_factory(spec: TypeSpec) -> str:
     }}
 
 """
+
+
+def render_index_of_wrapper_case(spec: TypeSpec) -> str:
+    return f"            case {spec.value_binding}: {spec.name} => return callVectorViewIndexOf{spec.name}(v.IndexOf, asRaw(), {spec.value_binding}, index)\n"
+
+
+def render_set_at_wrapper_case(spec: TypeSpec) -> str:
+    return f"            case {spec.value_binding}: {spec.name} =>\n                callVectorSetAt{spec.name}(v.SetAt, asRaw(), index, {spec.value_binding})\n                return\n"
+
+
+def render_insert_at_wrapper_case(spec: TypeSpec) -> str:
+    return f"            case {spec.value_binding}: {spec.name} =>\n                callVectorInsertAt{spec.name}(v.InsertAt, asRaw(), index, {spec.value_binding})\n                return\n"
+
+
+def render_append_wrapper_case(spec: TypeSpec) -> str:
+    return f"            case {spec.value_binding}: {spec.name} =>\n                callVectorAppend{spec.name}(v.Append, asRaw(), {spec.value_binding})\n                return\n"
 
 
 def insert_before(text: str, needle: str, snippet: str, exists_marker: str) -> str:
@@ -301,28 +343,28 @@ def update_collections_runtime(spec: TypeSpec) -> None:
         text,
         "IndexOf(value: T, index: CPointer<UInt32>): Bool",
         "            case boolValue: Bool => return callVectorViewIndexOfBool",
-        f"            case {spec.value_binding}: {spec.name} => return callVectorViewIndexOf{spec.name}(v.IndexOf, asRaw(), {spec.value_binding}, index)\n",
+        render_index_of_wrapper_case(spec),
         f"case {spec.value_binding}: {spec.name} => return callVectorViewIndexOf{spec.name}",
     )
     text = add_wrapper_case(
         text,
         "SetAt(index: UInt32, value: T): Unit",
         "            case boolValue: Bool =>",
-        f"            case {spec.value_binding}: {spec.name} =>\n                callVectorSetAt{spec.name}(v.SetAt, asRaw(), index, {spec.value_binding})\n                return\n",
+        render_set_at_wrapper_case(spec),
         f"callVectorSetAt{spec.name}(v.SetAt",
     )
     text = add_wrapper_case(
         text,
         "InsertAt(index: UInt32, value: T): Unit",
         "            case boolValue: Bool =>",
-        f"            case {spec.value_binding}: {spec.name} =>\n                callVectorInsertAt{spec.name}(v.InsertAt, asRaw(), index, {spec.value_binding})\n                return\n",
+        render_insert_at_wrapper_case(spec),
         f"callVectorInsertAt{spec.name}(v.InsertAt",
     )
     text = add_wrapper_case(
         text,
         "Append(value: T): Unit",
         "            case boolValue: Bool =>",
-        f"            case {spec.value_binding}: {spec.name} =>\n                callVectorAppend{spec.name}(v.Append, asRaw(), {spec.value_binding})\n                return\n",
+        render_append_wrapper_case(spec),
         f"callVectorAppend{spec.name}(v.Append",
     )
 
@@ -332,6 +374,7 @@ def update_collections_runtime(spec: TypeSpec) -> None:
 def render_vector_test(spec: TypeSpec) -> str:
     return f"""package windows_runtime
 
+import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
@@ -339,17 +382,17 @@ import windows_core.{{E_POINTER, Result, S_OK, WinError, createComObjectFromSche
 
 class {spec.name}VectorAbiTestImpl <: IVector_Impl<{spec.name}> & Resource {{
     private let items: ArrayList<{spec.name}>
-    private let vtblHandle: CPointerHandle<IVectorVtbl>
-    private let iterableVtblHandle: CPointerHandle<IIterableVtbl>
+    private let vtblHandle: CPointer<IVectorVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
     private var closed: Bool = false
 
     public init(items: ArrayList<{spec.name}>) {{
         this.items = items
         this.vtblHandle = unsafe {{
-            acquireArrayRawData(Array<IVectorVtbl>(1, {{ _ => IVectorVtbl.new{spec.name}<{spec.name}VectorAbiTestImpl>() }}))
+            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new{spec.name}<{spec.name}VectorAbiTestImpl>())
         }}
         this.iterableVtblHandle = unsafe {{
-            acquireArrayRawData(Array<IIterableVtbl>(1, {{ _ => IIterableVtbl.new<{spec.name}VectorAbiTestImpl, {spec.name}>() }}))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<{spec.name}VectorAbiTestImpl, {spec.name}>())
         }}
     }}
 
@@ -361,22 +404,22 @@ class {spec.name}VectorAbiTestImpl <: IVector_Impl<{spec.name}> & Resource {{
         this.items = items
         this.vtblHandle = unsafe {{
             if (genericVtbl) {{
-                acquireArrayRawData(Array<IVectorVtbl>(1, {{ _ => IVectorVtbl.new<{spec.name}VectorAbiTestImpl, {spec.name}>() }}))
+                windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new<{spec.name}VectorAbiTestImpl, {spec.name}>())
             }} else {{
-                acquireArrayRawData(Array<IVectorVtbl>(1, {{ _ => IVectorVtbl.new{spec.name}<{spec.name}VectorAbiTestImpl>() }}))
+                windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new{spec.name}<{spec.name}VectorAbiTestImpl>())
             }}
         }}
         this.iterableVtblHandle = unsafe {{
-            acquireArrayRawData(Array<IIterableVtbl>(1, {{ _ => IIterableVtbl.new<{spec.name}VectorAbiTestImpl, {spec.name}>() }}))
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<{spec.name}VectorAbiTestImpl, {spec.name}>())
         }}
     }}
 
     public func vtblPtr(): CPointer<Unit> {{
-        CPointer<Unit>(vtblHandle.pointer)
+        CPointer<Unit>(vtblHandle)
     }}
 
     public func iterableVtblPtr(): CPointer<Unit> {{
-        CPointer<Unit>(iterableVtblHandle.pointer)
+        CPointer<Unit>(iterableVtblHandle)
     }}
 
     public func close(): Unit {{
@@ -384,8 +427,8 @@ class {spec.name}VectorAbiTestImpl <: IVector_Impl<{spec.name}> & Resource {{
             return
         }}
         unsafe {{
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
         }}
         closed = true
     }}
@@ -397,10 +440,6 @@ class {spec.name}VectorAbiTestImpl <: IVector_Impl<{spec.name}> & Resource {{
     ~init() {{
         if (closed) {{
             return
-        }}
-        unsafe {{
-            releaseArrayRawData(iterableVtblHandle)
-            releaseArrayRawData(vtblHandle)
         }}
         closed = true
     }}
@@ -583,6 +622,13 @@ func test{spec.name}VectorUsesDirectValueAbiForMutableSlots() {{
     @Expect(directFound, true)
     @Expect(directIndex, 1u32)
 
+    var nullIndexFound = true
+    let nullIndexHr = unsafe {{
+        directIndexOf(vector.asRaw(), {spec.second}, CPointer<UInt32>(), CPointer<Bool>(inout nullIndexFound))
+    }}
+    @Expect(nullIndexHr, E_POINTER.value)
+    @Expect(nullIndexFound, true)
+
     let directSetAt = CFunc<(CPointer<Unit>, UInt32, {spec.name}) -> Int32>(CPointer<Unit>(vtbl.SetAt))
     let setAtHr = unsafe {{ directSetAt(vector.asRaw(), 0u32, {spec.set_value}) }}
     @Expect(setAtHr, S_OK.value)
@@ -624,6 +670,13 @@ func testGeneric{spec.name}VectorBuilderUsesDirectValueAbiForSpecialization() {{
     @Expect(directFound, true)
     @Expect(directIndex, 1u32)
 
+    var nullIndexFound = true
+    let nullIndexHr = unsafe {{
+        directIndexOf(vector.asRaw(), {spec.second}, CPointer<UInt32>(), CPointer<Bool>(inout nullIndexFound))
+    }}
+    @Expect(nullIndexHr, E_POINTER.value)
+    @Expect(nullIndexFound, true)
+
     let directAppend = CFunc<(CPointer<Unit>, {spec.name}) -> Int32>(CPointer<Unit>(vtbl.Append))
     let appendHr = unsafe {{ directAppend(vector.asRaw(), {spec.missing}) }}
     @Expect(appendHr, S_OK.value)
@@ -659,17 +712,79 @@ def check_vector_test(spec: TypeSpec) -> bool:
     return False
 
 
+def collections_runtime_fragments(spec: TypeSpec) -> list[tuple[str, str]]:
+    return [
+        (f"callVectorSetAt{spec.name}", render_set_at_helper(spec)),
+        (f"callVectorInsertAt{spec.name}", render_insert_at_helper(spec)),
+        (f"callVectorAppend{spec.name}", render_append_helper(spec)),
+        (f"IVectorVtbl.new<{spec.name}> branch", render_vtbl_branch(spec)),
+        (f"IVectorVtbl.new{spec.name}", render_new_factory(spec)),
+        (f"IndexOf wrapper case for {spec.name}", render_index_of_wrapper_case(spec)),
+        (f"SetAt wrapper case for {spec.name}", render_set_at_wrapper_case(spec)),
+        (f"InsertAt wrapper case for {spec.name}", render_insert_at_wrapper_case(spec)),
+        (f"Append wrapper case for {spec.name}", render_append_wrapper_case(spec)),
+    ]
+
+
+def check_collections_runtime(spec: TypeSpec) -> bool:
+    if not COLLECTIONS_RUNTIME.exists():
+        print(f"missing collections runtime: {COLLECTIONS_RUNTIME}")
+        return False
+    actual = COLLECTIONS_RUNTIME.read_text(encoding="utf-8")
+    ok = True
+    seen_labels: set[str] = set()
+    seen_snippets: set[str] = set()
+    for label, snippet in collections_runtime_fragments(spec):
+        if not label or label in seen_labels:
+            print(f"duplicate or empty collections runtime fragment label for {spec.name}: {label!r}")
+            ok = False
+        seen_labels.add(label)
+        if not snippet or snippet in seen_snippets:
+            print(f"duplicate or empty collections runtime fragment body for {spec.name}: {label}")
+            ok = False
+        seen_snippets.add(snippet)
+        count = actual.count(snippet) if snippet else 0
+        if count == 0:
+            print(f"missing generated collections runtime fragment for {spec.name}: {label}")
+            ok = False
+        elif count > 1 and "wrapper case" not in label:
+            print(f"duplicated generated collections runtime fragment for {spec.name}: {label} ({count} copies)")
+            ok = False
+    return ok
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate one WinRT IVector<T> direct input ABI specialization.")
-    parser.add_argument("--type", required=True, choices=sorted(SPECS), help="Cangjie scalar type to generate.")
+    parser.add_argument(
+        "--type",
+        choices=sorted(SPECS),
+        help="Cangjie scalar type to generate. Omit with --check-* to check every generated vector ABI specialization.",
+    )
     parser.add_argument("--collections", action="store_true", help="Update collections_runtime.cj for this one type.")
     parser.add_argument("--test", action="store_true", help="Generate the vector ABI test file for this one type.")
     parser.add_argument("--check-test", action="store_true", help="Check that the vector ABI test file matches the generator.")
+    parser.add_argument("--check-collections", action="store_true", help="Check collections_runtime.cj contains the generated specialization fragments.")
+    parser.add_argument("--check-all", action="store_true", help="Check both collections_runtime.cj and generated vector ABI tests.")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
+    if args.check_all and args.type is not None:
+        raise SystemExit("--check-all checks every specialization; do not combine it with --type")
+    if args.type is None:
+        if args.collections or args.test:
+            raise SystemExit("--type is required with --collections or --test")
+        if args.check_test or args.check_collections or args.check_all:
+            ok = True
+            for spec in SPECS.values():
+                if args.check_test or args.check_all:
+                    ok = check_vector_test(spec) and ok
+                if args.check_collections or args.check_all:
+                    ok = check_collections_runtime(spec) and ok
+            return 0 if ok else 1
+        raise SystemExit("choose at least one of --collections, --test, --check-test, --check-collections, or --check-all")
+
     spec = SPECS[args.type]
     did_work = False
     if args.collections:
@@ -682,8 +797,16 @@ def main() -> int:
         did_work = True
         if not check_vector_test(spec):
             return 1
+    if args.check_collections:
+        did_work = True
+        if not check_collections_runtime(spec):
+            return 1
+    if args.check_all:
+        did_work = True
+        if not check_vector_test(spec) or not check_collections_runtime(spec):
+            return 1
     if not did_work:
-        raise SystemExit("choose at least one of --collections, --test, or --check-test")
+        raise SystemExit("choose at least one of --collections, --test, --check-test, --check-collections, or --check-all")
     return 0
 
 

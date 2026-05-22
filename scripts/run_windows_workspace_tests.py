@@ -18,6 +18,7 @@ import re
 import signal
 import subprocess
 import sys
+import tempfile
 import tomllib
 from pathlib import Path
 
@@ -25,9 +26,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 UNITTEST_BIN = ROOT / "target" / "release" / "unittest_bin"
 DEFAULT_TIMEOUT_SECONDS = 240
-SUMMARY_COUNT_RE = re.compile(r"\b(PASSED|FAILED|ERROR):\s*(\d+)\b")
-SUMMARY_NAMES = ("PASSED", "FAILED", "ERROR")
+SUMMARY_HEADER_RE = re.compile(r"(?m)^\s*Summary:\s*TOTAL:\s*(?P<total>\d+)\s*$")
+SUMMARY_FOOTER_RE = re.compile(r"(?m)^\s*-{10,}\s*$")
+SUMMARY_COUNT_RE = re.compile(r"\b(PASSED|SKIPPED|FAILED|ERROR):\s*(\d+)\b")
+SUMMARY_NAMES = ("PASSED", "SKIPPED", "FAILED", "ERROR")
 PACKAGE_RE = re.compile(r"^\s*package\s+([A-Za-z_][A-Za-z0-9_.]*)", re.MULTILINE)
+
+
+def positive_int(value: str) -> int:
+    parsed = int(value)
+    if parsed <= 0:
+        raise argparse.ArgumentTypeError("must be greater than zero")
+    return parsed
 
 
 def load_toml(path: Path) -> dict:
@@ -145,17 +155,32 @@ def run_with_watchdog(
 
 
 def summary_counts(output: str) -> dict[str, int] | None:
-    matches = SUMMARY_COUNT_RE.findall(output)
-    if not matches:
+    headers = list(SUMMARY_HEADER_RE.finditer(output))
+    if not headers:
         return None
-    counts = {name: 0 for name in SUMMARY_NAMES}
-    for name, value in matches:
-        counts[name] = int(value)
-    return counts
+    for header in reversed(headers):
+        block = output[header.end():]
+        footer = SUMMARY_FOOTER_RE.search(block)
+        if footer:
+            block = block[:footer.start()]
+        matches = SUMMARY_COUNT_RE.findall(block)
+        counts = {name: int(value) for name, value in matches}
+        total = int(header.group("total"))
+        if all(name in counts for name in SUMMARY_NAMES) and sum(counts[name] for name in SUMMARY_NAMES) == total:
+            return {name: counts[name] for name in SUMMARY_NAMES}
+    return None
 
 
 def executed_test_count(counts: dict[str, int]) -> int:
     return counts.get("PASSED", 0) + counts.get("FAILED", 0) + counts.get("ERROR", 0)
+
+
+def workspace_build_command(member: str) -> list[str]:
+    return ["cjpm", "test", "-m", member, "--no-run", "--no-progress", "--no-color"]
+
+
+def workspace_test_command(binary: Path) -> list[str]:
+    return ["cjv", "exec", str(binary), "--no-color", "--progress-brief"]
 
 
 def parse_members(requested: list[str]) -> list[str]:
@@ -168,6 +193,22 @@ def parse_members(requested: list[str]) -> list[str]:
     return requested
 
 
+def dry_run_member(member: str, *, skip_build: bool) -> int:
+    name = package_name(member)
+    print(f"\n== {member} ({name}) ==", flush=True)
+    if skip_build:
+        print("# skip-build: existing unittest binaries")
+    else:
+        print(f"+ {' '.join(workspace_build_command(member))}")
+    binaries = test_binaries_for_member(member)
+    if not binaries:
+        print(f"{member} has no test packages", file=sys.stderr)
+        return 2
+    for binary in binaries:
+        print(f"+ {' '.join(workspace_test_command(binary))}")
+    return 0
+
+
 def run_member(member: str, *, skip_build: bool, env: dict[str, str], timeout_seconds: int) -> int:
     name = package_name(member)
     print(f"\n== {member} ({name}) ==", flush=True)
@@ -175,7 +216,7 @@ def run_member(member: str, *, skip_build: bool, env: dict[str, str], timeout_se
     if not skip_build:
         remove_expected_test_binaries(member)
         build_result, _ = run_with_watchdog(
-            ["cjpm", "test", "-m", member, "--no-run", "--no-progress", "--no-color"],
+            workspace_build_command(member),
             env=env,
             timeout_seconds=timeout_seconds,
         )
@@ -194,7 +235,7 @@ def run_member(member: str, *, skip_build: bool, env: dict[str, str], timeout_se
 
     for binary in binaries:
         test_result, output = run_with_watchdog(
-            ["cjv", "exec", str(binary), "--no-color", "--progress-brief"],
+            workspace_test_command(binary),
             env=env,
             timeout_seconds=timeout_seconds,
         )
@@ -217,18 +258,97 @@ def run_member(member: str, *, skip_build: bool, env: dict[str, str], timeout_se
     return 0
 
 
+def write_self_test_file(root: Path, relative: str, text: str) -> Path:
+    path = root / relative
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")
+    return path
+
+
+def self_test() -> None:
+    original_root = ROOT
+    original_unittest_bin = UNITTEST_BIN
+    with tempfile.TemporaryDirectory(prefix="workspace-runner-self-test-") as temp_dir:
+        workspace = Path(temp_dir)
+        globals()["ROOT"] = workspace
+        globals()["UNITTEST_BIN"] = workspace / "target" / "release" / "unittest_bin"
+        try:
+            write_self_test_file(
+                workspace,
+                "cjpm.toml",
+                '[workspace]\nmembers = ["windows-core", "windows-empty"]\n',
+            )
+            write_self_test_file(workspace, "windows-core/cjpm.toml", '[package]\nname = "windows_core"\n')
+            write_self_test_file(workspace, "windows-empty/cjpm.toml", '[package]\nname = "windows_empty"\n')
+            write_self_test_file(workspace, "windows-core/src/core_test.cj", "package windows_core.tests\n@Test\nclass T {}\n")
+            write_self_test_file(workspace, "windows-empty/src/lib.cj", "package windows_empty\n")
+            write_self_test_file(workspace, "windows-core/target/ignored_test.cj", "package ignored\n@Test\nclass T {}\n")
+
+            assert workspace_members() == ["windows-core", "windows-empty"]
+            assert package_name("windows-core") == "windows_core"
+            assert test_package_names("windows-core") == ["windows_core.tests"]
+            assert test_package_names("windows-empty") == []
+            assert parse_members([]) == ["windows-core"]
+            try:
+                parse_members(["missing"])
+                raise AssertionError("unknown workspace member was accepted")
+            except RuntimeError as exc:
+                assert "unknown workspace members" in str(exc)
+
+            binary = globals()["UNITTEST_BIN"] / "windows_core.tests.exe"
+            assert test_binaries_for_member("windows-core") == [binary]
+            assert workspace_build_command("windows-core") == [
+                "cjpm",
+                "test",
+                "-m",
+                "windows-core",
+                "--no-run",
+                "--no-progress",
+                "--no-color",
+            ]
+            assert workspace_test_command(binary) == ["cjv", "exec", str(binary), "--no-color", "--progress-brief"]
+
+            binary.parent.mkdir(parents=True, exist_ok=True)
+            stale_paths = (
+                binary,
+                binary.with_name(f"{binary.stem}$test.cjo"),
+                binary.with_name(f"{binary.stem}$test.cjo.flag"),
+            )
+            for stale in stale_paths:
+                stale.write_text("stale\n", encoding="utf-8")
+            remove_expected_test_binaries("windows-core")
+            assert not any(stale.exists() for stale in stale_paths)
+
+            counts = summary_counts("Summary: TOTAL: 4\n    PASSED: 4, SKIPPED: 0, ERROR: 0\n    FAILED: 0\n")
+            assert counts == {"PASSED": 4, "SKIPPED": 0, "FAILED": 0, "ERROR": 0}
+            assert executed_test_count(counts) == 4
+            assert summary_counts("missing summary") is None
+            assert summary_counts("Summary: TOTAL: 1\n    PASSED: 1\n") is None
+            assert summary_counts("Summary: TOTAL: 2\n    PASSED: 1, SKIPPED: 0, ERROR: 0\n    FAILED: 0\n") is None
+        finally:
+            globals()["ROOT"] = original_root
+            globals()["UNITTEST_BIN"] = original_unittest_bin
+    print("OK: workspace direct-binary runner self-test completed")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("members", nargs="*", help="Optional workspace members to test.")
     parser.add_argument("--skip-build", action="store_true", help="Run existing root unittest binaries.")
+    parser.add_argument("--dry-run", action="store_true", help="Print exact build and cjv exec commands without running them.")
     parser.add_argument("--list", action="store_true", help="List workspace members that contain tests.")
+    parser.add_argument("--self-test", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument(
         "--timeout-seconds",
-        type=int,
+        type=positive_int,
         default=DEFAULT_TIMEOUT_SECONDS,
         help="External process-tree watchdog per build/test step.",
     )
     args = parser.parse_args()
+
+    if args.self_test:
+        self_test()
+        return 0
 
     try:
         members = parse_members(args.members)
@@ -239,6 +359,13 @@ def main() -> int:
     if args.list:
         for member in members:
             print(member)
+        return 0
+
+    if args.dry_run:
+        for member in members:
+            result = dry_run_member(member, skip_build=args.skip_build)
+            if result != 0:
+                return result
         return 0
 
     env = os.environ.copy()
