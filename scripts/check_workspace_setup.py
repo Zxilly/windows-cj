@@ -729,15 +729,18 @@ def check_path_exists(path: Path, kind: str) -> None:
         fail(f"missing {kind}: {path}")
 
 
-def read_bindgen_tests_text(workspace: Path) -> str:
-    # windows-bindgen tests are split across multiple *_test.cj files (there is no
-    # single main_test.cj). Aggregate them so coverage gates can match fragments
-    # regardless of which split file holds them.
-    test_dir = workspace / "windows-bindgen" / "src"
+def read_tests_text(test_dir: Path) -> str:
+    # Coverage gates match fragments that may be split across multiple *_test.cj
+    # files in a package's src dir (e.g. a helper *_support_test.cj plus the @Test
+    # file). Aggregate them so the gate is location-agnostic.
     test_files = sorted(test_dir.rglob("*_test.cj"))
     if not test_files:
-        fail(f"missing windows-bindgen tests: no *_test.cj files under {test_dir}")
+        fail(f"missing tests: no *_test.cj files under {test_dir}")
     return "\n".join(path.read_text(encoding="utf-8") for path in test_files)
+
+
+def read_bindgen_tests_text(workspace: Path) -> str:
+    return read_tests_text(workspace / "windows-bindgen" / "src")
 
 
 def load_toml(path: Path) -> dict:
@@ -9358,7 +9361,9 @@ def check_runtime_smoke_bodies(workspace: Path, required_smokes: Sequence[str]) 
 def check_propvariant_propsys_smoke(workspace: Path) -> None:
     source = workspace / "windows-propvariant" / "src" / "propvariant_test.cj"
     check_path_exists(source, "windows-propvariant PROPVARIANT tests")
-    text = source.read_text(encoding="utf-8")
+    # Helpers (propVariantSmoke*) live in propvariant_support_test.cj while the
+    # @Test that consumes them lives in propvariant_test.cj; aggregate both.
+    text = read_tests_text(workspace / "windows-propvariant" / "src")
     required_file_markers = (
         "func propVariantSmokePropsysProc",
         '"propsys.dll"',
@@ -9389,7 +9394,9 @@ def check_propvariant_propsys_smoke(workspace: Path) -> None:
 def check_variant_oleaut_smoke(workspace: Path) -> None:
     source = workspace / "windows-variant" / "src" / "variant_test.cj"
     check_path_exists(source, "windows-variant VARIANT tests")
-    text = source.read_text(encoding="utf-8")
+    # Helpers (variantSmoke*) live in variant_support_test.cj while the @Test that
+    # consumes them lives in variant_test.cj; aggregate both.
+    text = read_tests_text(workspace / "windows-variant" / "src")
     required_file_markers = (
         "func variantSmokeChangeType",
         '"oleaut32.dll"',
@@ -9435,7 +9442,9 @@ def check_variant_oleaut_smoke(workspace: Path) -> None:
 def check_safearray_oleaut_smoke(workspace: Path) -> None:
     source = workspace / "windows-safearray" / "src" / "safearray_test.cj"
     check_path_exists(source, "windows-safearray SAFEARRAY tests")
-    text = source.read_text(encoding="utf-8")
+    # Helpers (safeArraySmoke*) live in safearray_support_test.cj while the @Test
+    # that consumes them lives in safearray_test.cj; aggregate both.
+    text = read_tests_text(workspace / "windows-safearray" / "src")
     required_file_markers = (
         "func safeArraySmokeVectorFromBstr",
         "func safeArraySmokeBstrFromVector",
