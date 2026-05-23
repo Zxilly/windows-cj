@@ -67,9 +67,7 @@ func testFloat32WriteRead() {
         let p = CPointer<UInt8>(inout storage)
         unionWriteFloat32(p, 0, 3.14f32)
         let v = unionReadFloat32(p, 0)
-        // Allow small epsilon for float comparison
-        let diff = if (v > 3.14f32) { v - 3.14f32 } else { 3.14f32 - v }
-        @Expect(diff < 0.0001f32, true)
+        @Expect(v, 3.14f32, delta: 0.0001f32)
     }
 }
 

@@ -32,15 +32,6 @@ func expectLifetimeCast(raw: CPointer<Unit>): ComObject<ComObjectLifetimeDummy> 
     }
 }
 
-func lifetimeActionThrows(action: () -> Unit): Bool {
-    try {
-        action()
-    } catch (_: Exception) {
-        return true
-    }
-    false
-}
-
 func fakeLifetimeGuidPointer(): CPointer<GUID> {
     unsafe { CPointer<GUID>(CPointer<UInt8>() + 0x1234) }
 }
@@ -352,8 +343,8 @@ func testComObjectObservesExternalVtableReleaseToZero() {
     @Expect(owner.asRaw().isNull(), true)
     @Expect(owner.queryInterfaceBase(IID_IUNKNOWN, CPointer<CPointer<Unit>>(inout result)), E_NOINTERFACE)
     @Expect(result.isNull(), true)
-    @Expect(lifetimeActionThrows({ => owner.close() }), false)
-    @Expect(lifetimeActionThrows({ => let _ = owner.releaseBase() }), false)
+    @Expect(implementActionThrows({ => owner.close() }), false)
+    @Expect(implementActionThrows({ => let _ = owner.releaseBase() }), false)
 }
 
 @Test

@@ -1,195 +1,23 @@
 package windows_runtime
 
-import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_FAIL, E_POINTER, Result, S_OK, WinError, WindowsException, createComObjectFromSchemas}
+import windows_core.{E_FAIL, E_POINTER, S_OK}
 
-class Int32VectorAbiTestImpl <: IVector_Impl<Int32> & Resource {
-    private let items: ArrayList<Int32>
-    private let vtblHandle: CPointer<IVectorVtbl>
-    private let iterableVtblHandle: CPointer<IIterableVtbl>
-    private var closed: Bool = false
-    public var throwWindowsOnIndexOf: Bool = false
-    public var throwPlainOnSetAt: Bool = false
-    public var throwPlainOnInsertAt: Bool = false
-    public var throwPlainOnAppend: Bool = false
-
-    public init(items: ArrayList<Int32>) {
-        this.items = items
-        this.vtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.newInt32<Int32VectorAbiTestImpl>())
-        }
-        this.iterableVtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Int32VectorAbiTestImpl, Int32>())
-        }
-    }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle)
-    }
-
-    public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle)
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        unsafe {
-            windows_interface.freeNativeValue(iterableVtblHandle)
-            windows_interface.freeNativeValue(vtblHandle)
-        }
-        closed = true
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    ~init() {
-        if (closed) {
-            return
-        }
-        closed = true
-    }
-
-    public func First(): Result<IIterator<Int32>> {
-        Result<IIterator<Int32>>.Ok(toIterator<Int32>(items))
-    }
-
-    public func GetAt(index: UInt32): Result<Int32> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<Int32>.Err(stockBoundsError())
-        }
-        match (items.get(resolved)) {
-            case Some(value) => Result<Int32>.Ok(value)
-            case None => Result<Int32>.Err(stockBoundsError())
-        }
-    }
-
-    public func Size(): Result<UInt32> {
-        Result<UInt32>.Ok(UInt32(items.size))
-    }
-
-    public func GetView(): Result<IVectorView<Int32>> {
-        Result<IVectorView<Int32>>.Ok(toVectorView(items))
-    }
-
-    public func IndexOf(value: Int32, indexSlot: CPointer<UInt32>): Result<Bool> {
-        if (throwWindowsOnIndexOf) {
-            throw WindowsException(E_POINTER)
-        }
-        var offset = 0
-        while (offset < items.size) {
-            match (items.get(offset)) {
-                case Some(candidate) =>
-                    if (candidate == value) {
-                        if (indexSlot.isNotNull()) {
-                            unsafe { indexSlot.write(UInt32(offset)) }
-                        }
-                        return Result<Bool>.Ok(true)
-                    }
-                case None => ()
-            }
-            offset += 1
-        }
-        if (indexSlot.isNotNull()) {
-            unsafe { indexSlot.write(0u32) }
-        }
-        Result<Bool>.Ok(false)
-    }
-
-    public func SetAt(index: UInt32, value: Int32): Result<Unit> {
-        if (throwPlainOnSetAt) {
-            throw Exception("SetAt failure")
-        }
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items[resolved] = value
-        Result<Unit>.Ok(())
-    }
-
-    public func InsertAt(index: UInt32, value: Int32): Result<Unit> {
-        if (throwPlainOnInsertAt) {
-            throw Exception("InsertAt failure")
-        }
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved > items.size) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items.add(value, at: resolved)
-        Result<Unit>.Ok(())
-    }
-
-    public func RemoveAt(index: UInt32): Result<Unit> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items.remove(at: resolved)
-        Result<Unit>.Ok(())
-    }
-
-    public func Append(value: Int32): Result<Unit> {
-        if (throwPlainOnAppend) {
-            throw Exception("Append failure")
-        }
-        items.add(value)
-        Result<Unit>.Ok(())
-    }
-
-    public func RemoveAtEnd(): Result<Unit> {
-        if (items.size == 0) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items.remove(at: items.size - 1)
-        Result<Unit>.Ok(())
-    }
-
-    public func Clear(): Result<Unit> {
-        items.clear()
-        Result<Unit>.Ok(())
-    }
-
-    public func GetMany(startIndex: UInt32, itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<UInt32> {
-        writeGenericManyRange<Int32>(itemsSize, itemsBuffer, items, Int64(startIndex))
-    }
-
-    public func ReplaceAll(itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<Unit> {
-        if (itemsSize > 0u32 && itemsBuffer.isNull()) {
-            return Result<Unit>.Err(WinError(E_POINTER))
-        }
-        items.clear()
-        let typed = CPointer<Int32>(itemsBuffer)
-        var offset = 0
-        while (offset < Int64(itemsSize)) {
-            items.add(unsafe { (typed + offset).read() })
-            offset += 1
-        }
-        Result<Unit>.Ok(())
-    }
-}
-
-func createInt32VectorAbiTest(values: ArrayList<Int32>): IVector<Int32> {
-    let impl = Int32VectorAbiTestImpl(values)
-    let schemas = [IIterable<Int32>.descriptorSchema(), IVector<Int32>.descriptorSchema()]
-    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
-    let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    let result = object.toInterface(IVector<Int32>.descriptor())
-    object.close()
-    result
+func createInt32VectorFixture(items: ArrayList<Int32>): GenericVectorAbiTestFixture<Int32> {
+    makeGenericVectorFixture<Int32>(
+        items,
+        { => IVectorVtbl.newInt32<GenericVectorAbiTestImpl<Int32>>() },
+        { a: Int32, b: Int32 => a == b },
+        { buffer: CPointer<Unit>, count: UInt32 => readDirectValueBuffer<Int32>(buffer, count) }
+    )
 }
 
 @Test
 func testInt32VectorUsesDirectValueAbiForMutableSlots() {
-    let source = ArrayList<Int32>([1i32, 3i32])
-    let vector = createInt32VectorAbiTest(source)
+    let fixture = createInt32VectorFixture(ArrayList<Int32>([1i32, 3i32]))
+    let vector = fixture.vector
 
     unsafe { vector.SetAt(0u32, 2i32) }
     unsafe { vector.InsertAt(1u32, 4i32) }
@@ -236,17 +64,14 @@ func testInt32VectorUsesDirectValueAbiForMutableSlots() {
     @Expect(appendHr, S_OK.value)
     @Expect(unsafe { vector.GetAt(5u32) }, 8i32)
 
-    vector.close()
+    fixture.close()
 }
 
 @Test
 func testInt32VectorDirectValueVtableTranslatesThrownExceptions() {
-    let impl = Int32VectorAbiTestImpl(ArrayList<Int32>([1i32]))
-    let schemas = [IIterable<Int32>.descriptorSchema(), IVector<Int32>.descriptorSchema()]
-    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
-    let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    let vector = object.toInterface(IVector<Int32>.descriptor())
-    object.close()
+    let fixture = createInt32VectorFixture(ArrayList<Int32>([1i32]))
+    let vector = fixture.vector
+    let faults = fixture.faults
 
     let vtbl = unsafe { vector.vtbl() }
     let directIndexOf = CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<Bool>) -> Int32>(
@@ -256,7 +81,7 @@ func testInt32VectorDirectValueVtableTranslatesThrownExceptions() {
     let directInsertAt = CFunc<(CPointer<Unit>, UInt32, Int32) -> Int32>(CPointer<Unit>(vtbl.InsertAt))
     let directAppend = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>(vtbl.Append))
 
-    impl.throwWindowsOnIndexOf = true
+    faults.throwWindowsOnIndexOf = true
     var directIndex = 123u32
     var directFound = true
     let indexHr = unsafe {
@@ -265,19 +90,19 @@ func testInt32VectorDirectValueVtableTranslatesThrownExceptions() {
     @Expect(indexHr, E_POINTER.value)
     @Expect(directIndex, 0u32)
     @Expect(directFound, false)
-    impl.throwWindowsOnIndexOf = false
+    faults.throwWindowsOnIndexOf = false
 
-    impl.throwPlainOnSetAt = true
+    faults.throwPlainOnSetAt = true
     @Expect(unsafe { directSetAt(vector.asRaw(), 0u32, 2i32) }, E_FAIL.value)
-    impl.throwPlainOnSetAt = false
+    faults.throwPlainOnSetAt = false
 
-    impl.throwPlainOnInsertAt = true
+    faults.throwPlainOnInsertAt = true
     @Expect(unsafe { directInsertAt(vector.asRaw(), 0u32, 2i32) }, E_FAIL.value)
-    impl.throwPlainOnInsertAt = false
+    faults.throwPlainOnInsertAt = false
 
-    impl.throwPlainOnAppend = true
+    faults.throwPlainOnAppend = true
     @Expect(unsafe { directAppend(vector.asRaw(), 2i32) }, E_FAIL.value)
-    impl.throwPlainOnAppend = false
+    faults.throwPlainOnAppend = false
 
-    vector.close()
+    fixture.close()
 }

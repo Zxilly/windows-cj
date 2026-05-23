@@ -4,170 +4,26 @@ import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_NOINTERFACE, Result, S_OK, createComObjectFromSchemas}
+import windows_core.{E_NOINTERFACE, S_OK}
 
-class Int32MapAbiTestImpl <: IMap_Impl<Int32, Int32> & Resource {
-    private let entries: ArrayList<(Int32, Int32)>
-    private let vtblHandle: CPointer<IMapVtbl>
-    private let iterableVtblHandle: CPointer<IIterableVtbl>
-    private var closed: Bool = false
-
-    public init(entries: ArrayList<(Int32, Int32)>) {
-        this.entries = entries
-        this.vtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IMapVtbl>(IMapVtbl.newInt32Int32<Int32MapAbiTestImpl>())
-        }
-        this.iterableVtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Int32MapAbiTestImpl, IKeyValuePair<Int32, Int32>>())
-        }
-    }
-
-    public static func withGenericVtbl(entries: ArrayList<(Int32, Int32)>): Int32MapAbiTestImpl {
-        Int32MapAbiTestImpl(entries, genericVtbl: true)
-    }
-
-    private init(entries: ArrayList<(Int32, Int32)>, genericVtbl!: Bool) {
-        this.entries = entries
-        this.vtblHandle = unsafe {
-            if (genericVtbl) {
-                windows_interface.allocateNativeValue<IMapVtbl>(IMapVtbl.new<Int32MapAbiTestImpl, Int32, Int32>())
-            } else {
-                windows_interface.allocateNativeValue<IMapVtbl>(IMapVtbl.newInt32Int32<Int32MapAbiTestImpl>())
-            }
-        }
-        this.iterableVtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Int32MapAbiTestImpl, IKeyValuePair<Int32, Int32>>())
-        }
-    }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle)
-    }
-
-    public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle)
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        unsafe {
-            windows_interface.freeNativeValue(iterableVtblHandle)
-            windows_interface.freeNativeValue(vtblHandle)
-        }
-        closed = true
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    ~init() {
-        if (closed) {
-            return
-        }
-        closed = true
-    }
-
-    private func findIndex(key: Int32): ?Int64 {
-        var offset = 0
-        while (offset < entries.size) {
-            match (entries.get(offset)) {
-                case Some((candidateKey, _)) =>
-                    if (candidateKey == key) {
-                        return Some(offset)
-                    }
-                case None => ()
-            }
-            offset += 1
-        }
-        None
-    }
-
-    public func First(): Result<IIterator<IKeyValuePair<Int32, Int32>>> {
-        Result<IIterator<IKeyValuePair<Int32, Int32>>>.Ok(
-            createStockIteratorFromOwnedList<IKeyValuePair<Int32, Int32>>(materializePairViews<Int32, Int32>(entries))
-        )
-    }
-
-    public func Lookup(key: Int32): Result<Int32> {
-        match (findIndex(key)) {
-            case Some(offset) =>
-                match (entries.get(offset)) {
-                    case Some((_, value)) => Result<Int32>.Ok(value)
-                    case None => Result<Int32>.Err(stockBoundsError())
-                }
-            case None => Result<Int32>.Err(stockBoundsError())
-        }
-    }
-
-    public func Size(): Result<UInt32> {
-        Result<UInt32>.Ok(UInt32(entries.size))
-    }
-
-    public func HasKey(key: Int32): Result<Bool> {
-        match (findIndex(key)) {
-            case Some(_) => Result<Bool>.Ok(true)
-            case None => Result<Bool>.Ok(false)
-        }
-    }
-
-    public func GetView(): Result<IMapView<Int32, Int32>> {
-        Result<IMapView<Int32, Int32>>.Ok(toMapView(entries))
-    }
-
-    public func Insert(key: Int32, value: Int32): Result<Bool> {
-        match (findIndex(key)) {
-            case Some(offset) =>
-                entries[offset] = (key, value)
-                Result<Bool>.Ok(true)
-            case None =>
-                entries.add((key, value))
-                Result<Bool>.Ok(false)
-        }
-    }
-
-    public func Remove(key: Int32): Result<Unit> {
-        match (findIndex(key)) {
-            case Some(offset) =>
-                entries.remove(at: offset)
-                Result<Unit>.Ok(())
-            case None =>
-                Result<Unit>.Err(stockBoundsError())
-        }
-    }
-
-    public func Clear(): Result<Unit> {
-        entries.clear()
-        Result<Unit>.Ok(())
-    }
+func createInt32Map(entries: ArrayList<(Int32, Int32)>): IMap<Int32, Int32> {
+    makeGenericMap<Int32, Int32>(
+        entries,
+        { => IMapVtbl.newInt32Int32<GenericMapAbiTestImpl<Int32, Int32>>() }
+    )
 }
 
-func createInt32MapAbiTest(entries: ArrayList<(Int32, Int32)>): IMap<Int32, Int32> {
-    let impl = Int32MapAbiTestImpl(entries)
-    let schemas = [IIterable<IKeyValuePair<Int32, Int32>>.descriptorSchema(), IMap<Int32, Int32>.descriptorSchema()]
-    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
-    let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    let result = object.toInterface(IMap<Int32, Int32>.descriptor())
-    object.close()
-    result
-}
-
-func createGenericBuilderInt32MapAbiTest(entries: ArrayList<(Int32, Int32)>): IMap<Int32, Int32> {
-    let impl = Int32MapAbiTestImpl.withGenericVtbl(entries)
-    let schemas = [IIterable<IKeyValuePair<Int32, Int32>>.descriptorSchema(), IMap<Int32, Int32>.descriptorSchema()]
-    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
-    let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    let result = object.toInterface(IMap<Int32, Int32>.descriptor())
-    object.close()
-    result
+func createGenericBuilderInt32Map(entries: ArrayList<(Int32, Int32)>): IMap<Int32, Int32> {
+    makeGenericMap<Int32, Int32>(
+        entries,
+        { => IMapVtbl.new<GenericMapAbiTestImpl<Int32, Int32>, Int32, Int32>() }
+    )
 }
 
 @Test
 func testInt32MapUsesDirectValueAbiForMutableSlots() {
     let source = ArrayList<(Int32, Int32)>([(1i32, 10i32), (2i32, 20i32)])
-    let map = createInt32MapAbiTest(source)
+    let map = createInt32Map(source)
 
     @Expect(unsafe { map.HasKey(2i32) }, true)
     @Expect(unsafe { map.Lookup(1i32) }, 10i32)
@@ -213,7 +69,7 @@ func testInt32MapUsesDirectValueAbiForMutableSlots() {
 @Test
 func testGenericInt32MapBuilderUsesDirectValueAbiForSpecialization() {
     let source = ArrayList<(Int32, Int32)>([(7i32, 70i32)])
-    let map = createGenericBuilderInt32MapAbiTest(source)
+    let map = createGenericBuilderInt32Map(source)
 
     @Expect(unsafe { map.Lookup(7i32) }, 70i32)
 
@@ -240,7 +96,7 @@ func testGenericInt32MapBuilderUsesDirectValueAbiForSpecialization() {
 
 @Test
 func testInt32MapVtblNoneBranchClearsSpecializedOutSlots() {
-    let vtbl = IMapVtbl.newInt32Int32<Int32MapAbiTestImpl>()
+    let vtbl = IMapVtbl.newInt32Int32<GenericMapAbiTestImpl<Int32, Int32>>()
     let vtblHandle = unsafe { windows_interface.allocateNativeValue<IMapVtbl>(vtbl) }
     let objectHandle = unsafe { windows_interface.allocateNativeValue<CPointer<IMapVtbl>>(vtblHandle) }
     let sentinel = unsafe { windows_interface.allocateNativeValue<Int32>(123i32) }

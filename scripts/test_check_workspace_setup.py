@@ -310,7 +310,7 @@ class ActiveToolGateTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            self.assert_active_tools_fail(workspace, "must check both vector ABI tests and collections_runtime fragments")
+            self.assert_active_tools_fail(workspace, "must check the injected collections_runtime ABI specialization fragments")
 
 
 class WorkspaceSetupParserTests(unittest.TestCase):

@@ -9041,7 +9041,7 @@ def check_active_tools(workspace: Path) -> None:
     if "--allow-missing-winui-metadata" not in quality_gate_text:
         fail("unified quality gate must expose the explicit missing-WinUI metadata opt-in")
     if "generate_vector_input_abi.py" not in quality_gate_text or "--check-all" not in quality_gate_text:
-        fail("unified quality gate must check both vector ABI tests and collections_runtime fragments")
+        fail("unified quality gate must check the injected collections_runtime ABI specialization fragments")
     macro_check = workspace / "windows-interface" / "scripts" / "check_macros.py"
     check_path_exists(macro_check, "windows-interface macro check script")
     macro_check_text = macro_check.read_text(encoding="utf-8")

@@ -1,308 +1,40 @@
 package windows_runtime
 
-import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_POINTER, Result, S_OK, WinError, createComObjectFromSchemas}
+import windows_core.S_OK
 
-class Float64VectorAbiTestImpl <: IVector_Impl<Float64> & Resource {
-    private let items: ArrayList<Float64>
-    private let vtblHandle: CPointer<IVectorVtbl>
-    private let iterableVtblHandle: CPointer<IIterableVtbl>
-    private var closed: Bool = false
-
-    public init(items: ArrayList<Float64>) {
-        this.items = items
-        this.vtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.newFloat64<Float64VectorAbiTestImpl>())
-        }
-        this.iterableVtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Float64VectorAbiTestImpl, Float64>())
-        }
-    }
-
-    public static func withGenericVtbl(items: ArrayList<Float64>): Float64VectorAbiTestImpl {
-        Float64VectorAbiTestImpl(items, genericVtbl: true)
-    }
-
-    private init(items: ArrayList<Float64>, genericVtbl!: Bool) {
-        this.items = items
-        this.vtblHandle = unsafe {
-            if (genericVtbl) {
-                windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new<Float64VectorAbiTestImpl, Float64>())
-            } else {
-                windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.newFloat64<Float64VectorAbiTestImpl>())
-            }
-        }
-        this.iterableVtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<Float64VectorAbiTestImpl, Float64>())
-        }
-    }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle)
-    }
-
-    public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle)
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        unsafe {
-            windows_interface.freeNativeValue(iterableVtblHandle)
-            windows_interface.freeNativeValue(vtblHandle)
-        }
-        closed = true
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    ~init() {
-        if (closed) {
-            return
-        }
-        closed = true
-    }
-
-    public func First(): Result<IIterator<Float64>> {
-        Result<IIterator<Float64>>.Ok(toIterator<Float64>(items))
-    }
-
-    public func GetAt(index: UInt32): Result<Float64> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<Float64>.Err(stockBoundsError())
-        }
-        match (items.get(resolved)) {
-            case Some(value) => Result<Float64>.Ok(value)
-            case None => Result<Float64>.Err(stockBoundsError())
-        }
-    }
-
-    public func Size(): Result<UInt32> {
-        Result<UInt32>.Ok(UInt32(items.size))
-    }
-
-    public func GetView(): Result<IVectorView<Float64>> {
-        Result<IVectorView<Float64>>.Ok(createGenericBuilderFloat64VectorViewAbiTest(items))
-    }
-
-    public func IndexOf(value: Float64, indexSlot: CPointer<UInt32>): Result<Bool> {
-        var offset = 0
-        while (offset < items.size) {
-            match (items.get(offset)) {
-                case Some(candidate) =>
-                    if (candidate == value) {
-                        if (indexSlot.isNotNull()) {
-                            unsafe { indexSlot.write(UInt32(offset)) }
-                        }
-                        return Result<Bool>.Ok(true)
-                    }
-                case None => ()
-            }
-            offset += 1
-        }
-        if (indexSlot.isNotNull()) {
-            unsafe { indexSlot.write(0u32) }
-        }
-        Result<Bool>.Ok(false)
-    }
-
-    public func SetAt(index: UInt32, value: Float64): Result<Unit> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items[resolved] = value
-        Result<Unit>.Ok(())
-    }
-
-    public func InsertAt(index: UInt32, value: Float64): Result<Unit> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved > items.size) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items.add(value, at: resolved)
-        Result<Unit>.Ok(())
-    }
-
-    public func RemoveAt(index: UInt32): Result<Unit> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items.remove(at: resolved)
-        Result<Unit>.Ok(())
-    }
-
-    public func Append(value: Float64): Result<Unit> {
-        items.add(value)
-        Result<Unit>.Ok(())
-    }
-
-    public func RemoveAtEnd(): Result<Unit> {
-        if (items.size == 0) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items.remove(at: items.size - 1)
-        Result<Unit>.Ok(())
-    }
-
-    public func Clear(): Result<Unit> {
-        items.clear()
-        Result<Unit>.Ok(())
-    }
-
-    public func GetMany(startIndex: UInt32, itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<UInt32> {
-        writeGenericManyRange<Float64>(itemsSize, itemsBuffer, items, Int64(startIndex))
-    }
-
-    public func ReplaceAll(itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<Unit> {
-        if (itemsSize > 0u32 && itemsBuffer.isNull()) {
-            return Result<Unit>.Err(WinError(E_POINTER))
-        }
-        items.clear()
-        let typed = CPointer<Float64>(itemsBuffer)
-        var offset = 0u32
-        while (offset < itemsSize) {
-            items.add(unsafe { (typed + Int64(offset)).read() })
-            offset += 1u32
-        }
-        Result<Unit>.Ok(())
-    }
+func createFloat64VectorFixture(items: ArrayList<Float64>): GenericVectorAbiTestFixture<Float64> {
+    makeGenericVectorFixture<Float64>(
+        items,
+        { => IVectorVtbl.newFloat64<GenericVectorAbiTestImpl<Float64>>() },
+        { a: Float64, b: Float64 => a == b },
+        { buffer: CPointer<Unit>, count: UInt32 => readDirectValueBuffer<Float64>(buffer, count) }
+    )
 }
 
-class GenericBuilderFloat64VectorViewAbiTestImpl <: IVectorView_Impl<Float64> & Resource {
-    private let items: ArrayList<Float64>
-    private let vtblHandle: CPointer<IVectorViewVtbl>
-    private let iterableVtblHandle: CPointer<IIterableVtbl>
-    private var closed: Bool = false
-
-    public init(items: ArrayList<Float64>) {
-        this.items = items
-        this.vtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IVectorViewVtbl>(IVectorViewVtbl.new<GenericBuilderFloat64VectorViewAbiTestImpl, Float64>())
-        }
-        this.iterableVtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<GenericBuilderFloat64VectorViewAbiTestImpl, Float64>())
-        }
-    }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle)
-    }
-
-    public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle)
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        unsafe {
-            windows_interface.freeNativeValue(iterableVtblHandle)
-            windows_interface.freeNativeValue(vtblHandle)
-        }
-        closed = true
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    ~init() {
-        if (closed) {
-            return
-        }
-        closed = true
-    }
-
-    public func First(): Result<IIterator<Float64>> {
-        Result<IIterator<Float64>>.Ok(toIterator<Float64>(items))
-    }
-
-    public func GetAt(index: UInt32): Result<Float64> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<Float64>.Err(stockBoundsError())
-        }
-        match (items.get(resolved)) {
-            case Some(value) => Result<Float64>.Ok(value)
-            case None => Result<Float64>.Err(stockBoundsError())
-        }
-    }
-
-    public func Size(): Result<UInt32> {
-        Result<UInt32>.Ok(UInt32(items.size))
-    }
-
-    public func IndexOf(value: Float64, indexSlot: CPointer<UInt32>): Result<Bool> {
-        var offset = 0
-        while (offset < items.size) {
-            match (items.get(offset)) {
-                case Some(candidate) =>
-                    if (candidate == value) {
-                        if (indexSlot.isNotNull()) {
-                            unsafe { indexSlot.write(UInt32(offset)) }
-                        }
-                        return Result<Bool>.Ok(true)
-                    }
-                case None => ()
-            }
-            offset += 1
-        }
-        if (indexSlot.isNotNull()) {
-            unsafe { indexSlot.write(0u32) }
-        }
-        Result<Bool>.Ok(false)
-    }
-
-    public func GetMany(startIndex: UInt32, itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<UInt32> {
-        writeGenericManyRange<Float64>(itemsSize, itemsBuffer, items, Int64(startIndex))
-    }
+func createGenericBuilderFloat64VectorFixture(items: ArrayList<Float64>): GenericVectorAbiTestFixture<Float64> {
+    makeGenericVectorFixture<Float64>(
+        items,
+        { => IVectorVtbl.new<GenericVectorAbiTestImpl<Float64>, Float64>() },
+        { a: Float64, b: Float64 => a == b },
+        { buffer: CPointer<Unit>, count: UInt32 => readDirectValueBuffer<Float64>(buffer, count) }
+    )
 }
 
-func createFloat64VectorAbiTest(items: ArrayList<Float64>): IVector<Float64> {
-    let impl = Float64VectorAbiTestImpl(items)
-    let schemas = [IIterable<Float64>.descriptorSchema(), IVector<Float64>.descriptorSchema()]
-    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
-    let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    let result = object.toInterface(IVector<Float64>.descriptor())
-    object.close()
-    result
-}
-
-func createGenericBuilderFloat64VectorAbiTest(items: ArrayList<Float64>): IVector<Float64> {
-    let impl = Float64VectorAbiTestImpl.withGenericVtbl(items)
-    let schemas = [IIterable<Float64>.descriptorSchema(), IVector<Float64>.descriptorSchema()]
-    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
-    let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    let result = object.toInterface(IVector<Float64>.descriptor())
-    object.close()
-    result
-}
-
-func createGenericBuilderFloat64VectorViewAbiTest(items: ArrayList<Float64>): IVectorView<Float64> {
-    let impl = GenericBuilderFloat64VectorViewAbiTestImpl(items)
-    let schemas = [IIterable<Float64>.descriptorSchema(), IVectorView<Float64>.descriptorSchema()]
-    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
-    let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    let result = object.toInterface(IVectorView<Float64>.descriptor())
-    object.close()
-    result
+func createGenericBuilderFloat64VectorView(items: ArrayList<Float64>): IVectorView<Float64> {
+    makeGenericVectorView<Float64>(
+        items,
+        { => IVectorViewVtbl.new<GenericVectorViewAbiTestImpl<Float64>, Float64>() },
+        { a: Float64, b: Float64 => a == b }
+    )
 }
 
 @Test
 func testFloat64VectorUsesDirectValueAbiForMutableSlots() {
-    let source = ArrayList<Float64>([4.5f64, 6.25f64])
-    let vector = createFloat64VectorAbiTest(source)
+    let fixture = createFloat64VectorFixture(ArrayList<Float64>([4.5f64, 6.25f64]))
+    let vector = fixture.vector
 
     @Expect(unsafe { vector.GetAt(1u32) }, 6.25f64)
     var wrapperIndex = 99u32
@@ -340,13 +72,13 @@ func testFloat64VectorUsesDirectValueAbiForMutableSlots() {
     @Expect(appendHr, S_OK.value)
     @Expect(unsafe { vector.GetAt(3u32) }, 60.5f64)
 
-    vector.close()
+    fixture.close()
 }
 
 @Test
 func testGenericFloat64VectorBuilderUsesDirectValueAbiForSpecialization() {
-    let source = ArrayList<Float64>([1.25f64, 2.5f64])
-    let vector = createGenericBuilderFloat64VectorAbiTest(source)
+    let fixture = createGenericBuilderFloat64VectorFixture(ArrayList<Float64>([1.25f64, 2.5f64]))
+    let vector = fixture.vector
 
     let vtbl = unsafe { vector.vtbl() }
     var directIndex = 99u32
@@ -369,13 +101,12 @@ func testGenericFloat64VectorBuilderUsesDirectValueAbiForSpecialization() {
     @Expect(appendHr, S_OK.value)
     @Expect(unsafe { vector.GetAt(2u32) }, 3.75f64)
 
-    vector.close()
+    fixture.close()
 }
 
 @Test
 func testGenericFloat64VectorViewBuilderUsesDirectValueAbiForSpecialization() {
-    let source = ArrayList<Float64>([7.25f64, 9.5f64])
-    let view = createGenericBuilderFloat64VectorViewAbiTest(source)
+    let view = createGenericBuilderFloat64VectorView(ArrayList<Float64>([7.25f64, 9.5f64]))
 
     let vtbl = unsafe { view.vtbl() }
     var directIndex = 99u32

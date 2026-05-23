@@ -1,10 +1,9 @@
 package windows_runtime
 
-import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_POINTER, Result, S_OK, WinError, createComObjectFromSchemas}
+import windows_core.{E_POINTER, S_OK}
 
 func dateTimeTestValue(value: Int64): DateTime {
     var result = DateTime()
@@ -16,275 +15,39 @@ func sameDateTimeValue(left: DateTime, right: DateTime): Bool {
     left.UniversalTime == right.UniversalTime
 }
 
-class DateTimeVectorAbiTestImpl <: IVector_Impl<DateTime> & Resource {
-    private let items: ArrayList<DateTime>
-    private let vtblHandle: CPointer<IVectorVtbl>
-    private let iterableVtblHandle: CPointer<IIterableVtbl>
-    private var closed: Bool = false
-
-    public init(items: ArrayList<DateTime>) {
-        this.items = items
-        this.vtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.newDateTime<DateTimeVectorAbiTestImpl>())
-        }
-        this.iterableVtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<DateTimeVectorAbiTestImpl, DateTime>())
-        }
+func readDateTimeAbiBuffer(buffer: CPointer<Unit>, count: UInt32): ArrayList<DateTime> {
+    let result = ArrayList<DateTime>()
+    let typed = CPointer<DateTimeAbi>(buffer)
+    var offset = 0u32
+    while (offset < count) {
+        result.add(DateTime.assumeInitRef(unsafe { (typed + Int64(offset)).read() }))
+        offset += 1u32
     }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle)
-    }
-
-    public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle)
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        unsafe {
-            windows_interface.freeNativeValue(iterableVtblHandle)
-            windows_interface.freeNativeValue(vtblHandle)
-        }
-        closed = true
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    ~init() {
-        if (closed) {
-            return
-        }
-        closed = true
-    }
-
-    public func First(): Result<IIterator<DateTime>> {
-        Result<IIterator<DateTime>>.Ok(toIterator<DateTime>(items))
-    }
-
-    public func GetAt(index: UInt32): Result<DateTime> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<DateTime>.Err(stockBoundsError())
-        }
-        match (items.get(resolved)) {
-            case Some(value) => Result<DateTime>.Ok(value)
-            case None => Result<DateTime>.Err(stockBoundsError())
-        }
-    }
-
-    public func Size(): Result<UInt32> {
-        Result<UInt32>.Ok(UInt32(items.size))
-    }
-
-    public func GetView(): Result<IVectorView<DateTime>> {
-        Result<IVectorView<DateTime>>.Ok(createDateTimeVectorViewAbiTest(items))
-    }
-
-    public func IndexOf(value: DateTime, indexSlot: CPointer<UInt32>): Result<Bool> {
-        var offset = 0
-        while (offset < items.size) {
-            match (items.get(offset)) {
-                case Some(candidate) =>
-                    if (sameDateTimeValue(candidate, value)) {
-                        if (indexSlot.isNotNull()) {
-                            unsafe { indexSlot.write(UInt32(offset)) }
-                        }
-                        return Result<Bool>.Ok(true)
-                    }
-                case None => ()
-            }
-            offset += 1
-        }
-        if (indexSlot.isNotNull()) {
-            unsafe { indexSlot.write(0u32) }
-        }
-        Result<Bool>.Ok(false)
-    }
-
-    public func SetAt(index: UInt32, value: DateTime): Result<Unit> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items[resolved] = value
-        Result<Unit>.Ok(())
-    }
-
-    public func InsertAt(index: UInt32, value: DateTime): Result<Unit> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved > items.size) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items.add(value, at: resolved)
-        Result<Unit>.Ok(())
-    }
-
-    public func RemoveAt(index: UInt32): Result<Unit> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items.remove(at: resolved)
-        Result<Unit>.Ok(())
-    }
-
-    public func Append(value: DateTime): Result<Unit> {
-        items.add(value)
-        Result<Unit>.Ok(())
-    }
-
-    public func RemoveAtEnd(): Result<Unit> {
-        if (items.size == 0) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items.remove(at: items.size - 1)
-        Result<Unit>.Ok(())
-    }
-
-    public func Clear(): Result<Unit> {
-        items.clear()
-        Result<Unit>.Ok(())
-    }
-
-    public func GetMany(startIndex: UInt32, itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<UInt32> {
-        writeGenericManyRange<DateTime>(itemsSize, itemsBuffer, items, Int64(startIndex))
-    }
-
-    public func ReplaceAll(itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<Unit> {
-        if (itemsSize > 0u32 && itemsBuffer.isNull()) {
-            return Result<Unit>.Err(WinError(E_POINTER))
-        }
-        items.clear()
-        let typed = CPointer<DateTimeAbi>(itemsBuffer)
-        var offset = 0u32
-        while (offset < itemsSize) {
-            items.add(DateTime.assumeInitRef(unsafe { (typed + Int64(offset)).read() }))
-            offset += 1u32
-        }
-        Result<Unit>.Ok(())
-    }
-}
-
-class DateTimeVectorViewAbiTestImpl <: IVectorView_Impl<DateTime> & Resource {
-    private let items: ArrayList<DateTime>
-    private let vtblHandle: CPointer<IVectorViewVtbl>
-    private let iterableVtblHandle: CPointer<IIterableVtbl>
-    private var closed: Bool = false
-
-    public init(items: ArrayList<DateTime>) {
-        this.items = items
-        this.vtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IVectorViewVtbl>(IVectorViewVtbl.newDateTime<DateTimeVectorViewAbiTestImpl>())
-        }
-        this.iterableVtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<DateTimeVectorViewAbiTestImpl, DateTime>())
-        }
-    }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle)
-    }
-
-    public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle)
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        unsafe {
-            windows_interface.freeNativeValue(iterableVtblHandle)
-            windows_interface.freeNativeValue(vtblHandle)
-        }
-        closed = true
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    ~init() {
-        if (closed) {
-            return
-        }
-        closed = true
-    }
-
-    public func First(): Result<IIterator<DateTime>> {
-        Result<IIterator<DateTime>>.Ok(toIterator<DateTime>(items))
-    }
-
-    public func GetAt(index: UInt32): Result<DateTime> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<DateTime>.Err(stockBoundsError())
-        }
-        match (items.get(resolved)) {
-            case Some(value) => Result<DateTime>.Ok(value)
-            case None => Result<DateTime>.Err(stockBoundsError())
-        }
-    }
-
-    public func Size(): Result<UInt32> {
-        Result<UInt32>.Ok(UInt32(items.size))
-    }
-
-    public func IndexOf(value: DateTime, indexSlot: CPointer<UInt32>): Result<Bool> {
-        var offset = 0
-        while (offset < items.size) {
-            match (items.get(offset)) {
-                case Some(candidate) =>
-                    if (sameDateTimeValue(candidate, value)) {
-                        if (indexSlot.isNotNull()) {
-                            unsafe { indexSlot.write(UInt32(offset)) }
-                        }
-                        return Result<Bool>.Ok(true)
-                    }
-                case None => ()
-            }
-            offset += 1
-        }
-        if (indexSlot.isNotNull()) {
-            unsafe { indexSlot.write(0u32) }
-        }
-        Result<Bool>.Ok(false)
-    }
-
-    public func GetMany(startIndex: UInt32, itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<UInt32> {
-        writeGenericManyRange<DateTime>(itemsSize, itemsBuffer, items, Int64(startIndex))
-    }
-}
-
-func createDateTimeVectorAbiTest(values: ArrayList<DateTime>): IVector<DateTime> {
-    let impl = DateTimeVectorAbiTestImpl(values)
-    let schemas = [IIterable<DateTime>.descriptorSchema(), IVector<DateTime>.descriptorSchema()]
-    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
-    let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    let result = object.toInterface(IVector<DateTime>.descriptor())
-    object.close()
     result
 }
 
-func createDateTimeVectorViewAbiTest(values: ArrayList<DateTime>): IVectorView<DateTime> {
-    let impl = DateTimeVectorViewAbiTestImpl(values)
-    let schemas = [IIterable<DateTime>.descriptorSchema(), IVectorView<DateTime>.descriptorSchema()]
-    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
-    let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    let result = object.toInterface(IVectorView<DateTime>.descriptor())
-    object.close()
-    result
+func createDateTimeVectorFixture(items: ArrayList<DateTime>): GenericVectorAbiTestFixture<DateTime> {
+    makeGenericVectorFixture<DateTime>(
+        items,
+        { => IVectorVtbl.newDateTime<GenericVectorAbiTestImpl<DateTime>>() },
+        sameDateTimeValue,
+        readDateTimeAbiBuffer
+    )
+}
+
+func createDateTimeVectorView(items: ArrayList<DateTime>): IVectorView<DateTime> {
+    makeGenericVectorView<DateTime>(
+        items,
+        { => IVectorViewVtbl.newDateTime<GenericVectorViewAbiTestImpl<DateTime>>() },
+        sameDateTimeValue
+    )
 }
 
 @Test
 func testDateTimeVectorViewUsesDirectValueAbiForSpecialization() {
-    let source = ArrayList<DateTime>([dateTimeTestValue(10i64), dateTimeTestValue(20i64), dateTimeTestValue(30i64)])
-    let view = createDateTimeVectorViewAbiTest(source)
+    let view = createDateTimeVectorView(
+        ArrayList<DateTime>([dateTimeTestValue(10i64), dateTimeTestValue(20i64), dateTimeTestValue(30i64)])
+    )
 
     var wrapperIndex = 99u32
     @Expect(unsafe { view.IndexOf(dateTimeTestValue(20i64), CPointer<UInt32>(inout wrapperIndex)) }, true)
@@ -326,8 +89,10 @@ func testDateTimeVectorViewUsesDirectValueAbiForSpecialization() {
 
 @Test
 func testDateTimeVectorUsesDirectValueAbiForMutableSlots() {
-    let source = ArrayList<DateTime>([dateTimeTestValue(1i64), dateTimeTestValue(3i64)])
-    let vector = createDateTimeVectorAbiTest(source)
+    let fixture = createDateTimeVectorFixture(
+        ArrayList<DateTime>([dateTimeTestValue(1i64), dateTimeTestValue(3i64)])
+    )
+    let vector = fixture.vector
 
     unsafe { vector.SetAt(0u32, dateTimeTestValue(2i64)) }
     unsafe { vector.InsertAt(1u32, dateTimeTestValue(4i64)) }
@@ -399,5 +164,5 @@ func testDateTimeVectorUsesDirectValueAbiForMutableSlots() {
     let nullReplaceHr = unsafe { directReplaceAll(vector.asRaw(), 1u32, CPointer<Unit>()) }
     @Expect(nullReplaceHr, E_POINTER.value)
 
-    vector.close()
+    fixture.close()
 }

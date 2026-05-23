@@ -1,307 +1,40 @@
 package windows_runtime
 
-import windows_interface as windows_interface
 import std.collection.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_POINTER, Result, S_OK, WinError, createComObjectFromSchemas}
+import windows_core.S_OK
 
-class BoolVectorAbiTestImpl <: IVector_Impl<Bool> & Resource {
-    private let items: ArrayList<Bool>
-    private let vtblHandle: CPointer<IVectorVtbl>
-    private let iterableVtblHandle: CPointer<IIterableVtbl>
-    private var closed: Bool = false
-
-    public init(items: ArrayList<Bool>) {
-        this.items = items
-        this.vtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.newBool<BoolVectorAbiTestImpl>())
-        }
-        this.iterableVtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<BoolVectorAbiTestImpl, Bool>())
-        }
-    }
-
-    public static func withGenericVtbl(items: ArrayList<Bool>): BoolVectorAbiTestImpl {
-        BoolVectorAbiTestImpl(items, genericVtbl: true)
-    }
-
-    private init(items: ArrayList<Bool>, genericVtbl!: Bool) {
-        this.items = items
-        this.vtblHandle = unsafe {
-            if (genericVtbl) {
-                windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new<BoolVectorAbiTestImpl, Bool>())
-            } else {
-                windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.newBool<BoolVectorAbiTestImpl>())
-            }
-        }
-        this.iterableVtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<BoolVectorAbiTestImpl, Bool>())
-        }
-    }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle)
-    }
-
-    public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle)
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        unsafe {
-            windows_interface.freeNativeValue(iterableVtblHandle)
-            windows_interface.freeNativeValue(vtblHandle)
-        }
-        closed = true
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    ~init() {
-        if (closed) {
-            return
-        }
-        closed = true
-    }
-
-    public func First(): Result<IIterator<Bool>> {
-        Result<IIterator<Bool>>.Ok(toIterator<Bool>(items))
-    }
-
-    public func GetAt(index: UInt32): Result<Bool> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<Bool>.Err(stockBoundsError())
-        }
-        match (items.get(resolved)) {
-            case Some(value) => Result<Bool>.Ok(value)
-            case None => Result<Bool>.Err(stockBoundsError())
-        }
-    }
-
-    public func Size(): Result<UInt32> {
-        Result<UInt32>.Ok(UInt32(items.size))
-    }
-
-    public func GetView(): Result<IVectorView<Bool>> {
-        Result<IVectorView<Bool>>.Ok(createGenericBuilderBoolVectorViewAbiTest(items))
-    }
-
-    public func IndexOf(value: Bool, indexSlot: CPointer<UInt32>): Result<Bool> {
-        var offset = 0
-        while (offset < items.size) {
-            match (items.get(offset)) {
-                case Some(candidate) =>
-                    if (candidate == value) {
-                        if (indexSlot.isNotNull()) {
-                            unsafe { indexSlot.write(UInt32(offset)) }
-                        }
-                        return Result<Bool>.Ok(true)
-                    }
-                case None => ()
-            }
-            offset += 1
-        }
-        if (indexSlot.isNotNull()) {
-            unsafe { indexSlot.write(0u32) }
-        }
-        Result<Bool>.Ok(false)
-    }
-
-    public func SetAt(index: UInt32, value: Bool): Result<Unit> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items[resolved] = value
-        Result<Unit>.Ok(())
-    }
-
-    public func InsertAt(index: UInt32, value: Bool): Result<Unit> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved > items.size) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items.add(value, at: resolved)
-        Result<Unit>.Ok(())
-    }
-
-    public func RemoveAt(index: UInt32): Result<Unit> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items.remove(at: resolved)
-        Result<Unit>.Ok(())
-    }
-
-    public func Append(value: Bool): Result<Unit> {
-        items.add(value)
-        Result<Unit>.Ok(())
-    }
-
-    public func RemoveAtEnd(): Result<Unit> {
-        if (items.size == 0) {
-            return Result<Unit>.Err(stockBoundsError())
-        }
-        items.remove(at: items.size - 1)
-        Result<Unit>.Ok(())
-    }
-
-    public func Clear(): Result<Unit> {
-        items.clear()
-        Result<Unit>.Ok(())
-    }
-
-    public func GetMany(startIndex: UInt32, itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<UInt32> {
-        writeGenericManyRange<Bool>(itemsSize, itemsBuffer, items, Int64(startIndex))
-    }
-
-    public func ReplaceAll(itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<Unit> {
-        if (itemsSize > 0u32 && itemsBuffer.isNull()) {
-            return Result<Unit>.Err(WinError(E_POINTER))
-        }
-        items.clear()
-        let typed = CPointer<Bool>(itemsBuffer)
-        var offset = 0u32
-        while (offset < itemsSize) {
-            items.add(unsafe { (typed + Int64(offset)).read() })
-            offset += 1u32
-        }
-        Result<Unit>.Ok(())
-    }
+func createBoolVectorFixture(items: ArrayList<Bool>): GenericVectorAbiTestFixture<Bool> {
+    makeGenericVectorFixture<Bool>(
+        items,
+        { => IVectorVtbl.newBool<GenericVectorAbiTestImpl<Bool>>() },
+        { a: Bool, b: Bool => a == b },
+        { buffer: CPointer<Unit>, count: UInt32 => readDirectValueBuffer<Bool>(buffer, count) }
+    )
 }
 
-class GenericBuilderBoolVectorViewAbiTestImpl <: IVectorView_Impl<Bool> & Resource {
-    private let items: ArrayList<Bool>
-    private let vtblHandle: CPointer<IVectorViewVtbl>
-    private let iterableVtblHandle: CPointer<IIterableVtbl>
-    private var closed: Bool = false
-
-    public init(items: ArrayList<Bool>) {
-        this.items = items
-        this.vtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IVectorViewVtbl>(IVectorViewVtbl.new<GenericBuilderBoolVectorViewAbiTestImpl, Bool>())
-        }
-        this.iterableVtblHandle = unsafe {
-            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<GenericBuilderBoolVectorViewAbiTestImpl, Bool>())
-        }
-    }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle)
-    }
-
-    public func iterableVtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(iterableVtblHandle)
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        unsafe {
-            windows_interface.freeNativeValue(iterableVtblHandle)
-            windows_interface.freeNativeValue(vtblHandle)
-        }
-        closed = true
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    ~init() {
-        if (closed) {
-            return
-        }
-        closed = true
-    }
-
-    public func First(): Result<IIterator<Bool>> {
-        Result<IIterator<Bool>>.Ok(toIterator<Bool>(items))
-    }
-
-    public func GetAt(index: UInt32): Result<Bool> {
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {
-            return Result<Bool>.Err(stockBoundsError())
-        }
-        match (items.get(resolved)) {
-            case Some(value) => Result<Bool>.Ok(value)
-            case None => Result<Bool>.Err(stockBoundsError())
-        }
-    }
-
-    public func Size(): Result<UInt32> {
-        Result<UInt32>.Ok(UInt32(items.size))
-    }
-
-    public func IndexOf(value: Bool, indexSlot: CPointer<UInt32>): Result<Bool> {
-        var offset = 0
-        while (offset < items.size) {
-            match (items.get(offset)) {
-                case Some(candidate) =>
-                    if (candidate == value) {
-                        if (indexSlot.isNotNull()) {
-                            unsafe { indexSlot.write(UInt32(offset)) }
-                        }
-                        return Result<Bool>.Ok(true)
-                    }
-                case None => ()
-            }
-            offset += 1
-        }
-        if (indexSlot.isNotNull()) {
-            unsafe { indexSlot.write(0u32) }
-        }
-        Result<Bool>.Ok(false)
-    }
-
-    public func GetMany(startIndex: UInt32, itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<UInt32> {
-        writeGenericManyRange<Bool>(itemsSize, itemsBuffer, items, Int64(startIndex))
-    }
+func createGenericBuilderBoolVectorFixture(items: ArrayList<Bool>): GenericVectorAbiTestFixture<Bool> {
+    makeGenericVectorFixture<Bool>(
+        items,
+        { => IVectorVtbl.new<GenericVectorAbiTestImpl<Bool>, Bool>() },
+        { a: Bool, b: Bool => a == b },
+        { buffer: CPointer<Unit>, count: UInt32 => readDirectValueBuffer<Bool>(buffer, count) }
+    )
 }
 
-func createBoolVectorAbiTest(items: ArrayList<Bool>): IVector<Bool> {
-    let impl = BoolVectorAbiTestImpl(items)
-    let schemas = [IIterable<Bool>.descriptorSchema(), IVector<Bool>.descriptorSchema()]
-    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
-    let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    let result = object.toInterface(IVector<Bool>.descriptor())
-    object.close()
-    result
-}
-
-func createGenericBuilderBoolVectorAbiTest(items: ArrayList<Bool>): IVector<Bool> {
-    let impl = BoolVectorAbiTestImpl.withGenericVtbl(items)
-    let schemas = [IIterable<Bool>.descriptorSchema(), IVector<Bool>.descriptorSchema()]
-    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
-    let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    let result = object.toInterface(IVector<Bool>.descriptor())
-    object.close()
-    result
-}
-
-func createGenericBuilderBoolVectorViewAbiTest(items: ArrayList<Bool>): IVectorView<Bool> {
-    let impl = GenericBuilderBoolVectorViewAbiTestImpl(items)
-    let schemas = [IIterable<Bool>.descriptorSchema(), IVectorView<Bool>.descriptorSchema()]
-    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
-    let object = createComObjectFromSchemas(impl, schemas, vtbls)
-    let result = object.toInterface(IVectorView<Bool>.descriptor())
-    object.close()
-    result
+func createGenericBuilderBoolVectorView(items: ArrayList<Bool>): IVectorView<Bool> {
+    makeGenericVectorView<Bool>(
+        items,
+        { => IVectorViewVtbl.new<GenericVectorViewAbiTestImpl<Bool>, Bool>() },
+        { a: Bool, b: Bool => a == b }
+    )
 }
 
 @Test
 func testBoolVectorUsesDirectValueAbiForMutableSlots() {
-    let vector = createBoolVectorAbiTest(ArrayList<Bool>([true, false]))
+    let fixture = createBoolVectorFixture(ArrayList<Bool>([true, false]))
+    let vector = fixture.vector
 
     @Expect(unsafe { vector.GetAt(0u32) }, true)
     @Expect(unsafe { vector.GetAt(1u32) }, false)
@@ -340,12 +73,13 @@ func testBoolVectorUsesDirectValueAbiForMutableSlots() {
     @Expect(directFound, true)
     @Expect(directIndex, 1u32)
 
-    vector.close()
+    fixture.close()
 }
 
 @Test
 func testGenericBoolVectorBuilderUsesDirectValueAbiForSpecialization() {
-    let vector = createGenericBuilderBoolVectorAbiTest(ArrayList<Bool>([false]))
+    let fixture = createGenericBuilderBoolVectorFixture(ArrayList<Bool>([false]))
+    let vector = fixture.vector
 
     unsafe { vector.Append(true) }
     @Expect(unsafe { vector.GetAt(1u32) }, true)
@@ -356,12 +90,12 @@ func testGenericBoolVectorBuilderUsesDirectValueAbiForSpecialization() {
     @Expect(appendHr, S_OK.value)
     @Expect(unsafe { vector.GetAt(2u32) }, false)
 
-    vector.close()
+    fixture.close()
 }
 
 @Test
 func testGenericBoolVectorViewBuilderUsesDirectValueAbiForSpecialization() {
-    let view = createGenericBuilderBoolVectorViewAbiTest(ArrayList<Bool>([true, false]))
+    let view = createGenericBuilderBoolVectorView(ArrayList<Bool>([true, false]))
 
     var directIndex = 99u32
     var directFound = false

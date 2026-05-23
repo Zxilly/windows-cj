@@ -23,8 +23,7 @@ func testPackedFloat64UnalignedOffset3() {
         let p = CPointer<UInt8>(inout storage)
         packedWriteFloat64(p, 3, 1.23456789f64)
         let v = packedReadFloat64(p, 3)
-        let diff = if (v > 1.23456789f64) { v - 1.23456789f64 } else { 1.23456789f64 - v }
-        @Expect(diff < 1e-10f64, true)
+        @Expect(v, 1.23456789f64, delta: 1e-10f64)
     }
 }
 
@@ -87,7 +86,6 @@ func testPackedFloat32UnalignedOffset1() {
         let p = CPointer<UInt8>(inout storage)
         packedWriteFloat32(p, 1, 3.14f32)
         let v = packedReadFloat32(p, 1)
-        let diff = if (v > 3.14f32) { v - 3.14f32 } else { 3.14f32 - v }
-        @Expect(diff < 0.0001f32, true)
+        @Expect(v, 3.14f32, delta: 0.0001f32)
     }
 }

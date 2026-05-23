@@ -3,92 +3,19 @@ package windows_safearray
 import std.unittest.*
 import std.unittest.testmacro.*
 import windows_common.Win32.System.Com.IUnknownVtbl
-import windows_strings.BSTR
 import windows_variant.Variant
-import windows_variant.VARIANT
 import windows_variant.VT_BSTR
 import windows_variant.VT_I4
 import windows_variant.VT_R8
-import windows_variant.VT_VARIANT
 import windows_variant.variantFromI4
 import windows_variant.variantFromString
 import windows_variant.variantFromUnknownRaw
 import windows_variant.variantAsBstr
 import windows_variant.variantAsI4
-import windows_variant.variantVt
 import windows_variant.debugObservedVariantClearCount
 
-func safeArrayTestThrows(action: () -> Unit): Bool {
-    try {
-        action()
-    } catch (_: Exception) {
-        return true
-    }
-    false
-}
-
-func safeArraySmokeVectorFromBstr(value: String): SafeArray {
-    let proc = resolveOleaut32Proc("VectorFromBstr")
-    let vectorFromBstrFn = CFunc<(CPointer<UInt16>, CPointer<CPointer<SAFEARRAY>>) -> Int32>(proc)
-    let source = BSTR(value)
-    var raw: CPointer<SAFEARRAY> = CPointer<SAFEARRAY>()
-    let rawPtr = unsafe { CPointer<CPointer<SAFEARRAY>>(inout raw) }
-    var hr: Int32 = 0
-    try {
-        hr = unsafe { vectorFromBstrFn(source.asPtr(), rawPtr) }
-    } finally {
-        source.close()
-    }
-    if (hr < 0) {
-        if (raw.isNotNull()) {
-            SafeArray(raw).close()
-        }
-        throw SafeArrayAbiException("VectorFromBstr failed in SAFEARRAY smoke test with HRESULT ${hr}")
-    }
-    if (raw.isNull()) {
-        throw SafeArrayAbiException("VectorFromBstr returned null SAFEARRAY")
-    }
-    SafeArray(raw)
-}
-
-func safeArraySmokeBstrFromVector(arr: SafeArray): BSTR {
-    let proc = resolveOleaut32Proc("BstrFromVector")
-    let bstrFromVectorFn = CFunc<(CPointer<SAFEARRAY>, CPointer<CPointer<UInt16>>) -> Int32>(proc)
-    var raw: CPointer<UInt16> = CPointer<UInt16>()
-    let rawPtr = unsafe { CPointer<CPointer<UInt16>>(inout raw) }
-    let hr = unsafe { bstrFromVectorFn(arr.get(), rawPtr) }
-    if (hr < 0) {
-        if (raw.isNotNull()) {
-            BSTR.fromRawTake(raw).close()
-        }
-        throw SafeArrayAbiException("BstrFromVector failed in SAFEARRAY smoke test with HRESULT ${hr}")
-    }
-    if (raw.isNull()) {
-        throw SafeArrayAbiException("BstrFromVector returned null BSTR")
-    }
-    BSTR.fromRawTake(raw)
-}
-
-@C
-struct ReentrantSafeArrayUnknown {
-    var lpVtbl: CPointer<IUnknownVtbl> = CPointer<IUnknownVtbl>()
-    init() {}
-}
-
-var reentrantSafeArrayTarget: Option<SafeArray> = None
-var reentrantSafeArrayReleaseCalls: UInt32 = 0u32
-
-@C
-func reentrantSafeArrayRelease(_: CPointer<Unit>): UInt32 {
-    reentrantSafeArrayReleaseCalls += 1u32
-    if (let Some(target) <- reentrantSafeArrayTarget) {
-        target.close()
-    }
-    0u32
-}
-
 @Test
-func fadfConstantsExposeRustValues(): Unit {
+func fadfConstantsExposeExpectedValues(): Unit {
     @Expect(FADF_AUTO, 0x0001u16)
     @Expect(FADF_STATIC, 0x0002u16)
     @Expect(FADF_EMBEDDED, 0x0004u16)

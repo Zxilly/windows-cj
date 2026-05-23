@@ -72,15 +72,6 @@ func resetPartialCleanupState(): Unit {
     partialCleanupReentrantSlot = CPointer<CPointer<Unit>>()
 }
 
-func composableActivationActionThrows(action: () -> Unit): Bool {
-    try {
-        action()
-    } catch (_: Exception) {
-        return true
-    }
-    false
-}
-
 func throwingComposableActivator(_: IInspectable, _: CPointer<CPointer<Unit>>): IInspectable {
     throw Exception("composable activation failed")
 }
@@ -239,7 +230,7 @@ func testActivateComposableReleasesOuterWhenActivatorThrows() {
     let outer = createComObject(WeakReferenceResolveRaceDummy(), [IID_IINSPECTABLE])
 
     try {
-        let threw = composableActivationActionThrows({ =>
+        let threw = implementActionThrows({ =>
             let activation = activateComposable(outer, throwingComposableActivator)
             activation.close()
         })
@@ -264,7 +255,7 @@ func testActivateComposableReleasesInnerOutAndOuterWhenActivatorThrows() {
     let outer = createComObject(WeakReferenceResolveRaceDummy(), [IID_IINSPECTABLE])
 
     try {
-        let threw = composableActivationActionThrows({ =>
+        let threw = implementActionThrows({ =>
             let activation = activateComposable(outer, throwingComposableInnerOutActivator)
             activation.close()
         })

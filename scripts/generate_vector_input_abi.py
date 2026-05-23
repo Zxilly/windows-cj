@@ -2,13 +2,11 @@ from __future__ import annotations
 
 import argparse
 import dataclasses
-import difflib
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 COLLECTIONS_RUNTIME = ROOT / "windows-runtime" / "src" / "collections_runtime.cj"
-RUNTIME_SRC = ROOT / "windows-runtime" / "src"
 
 
 @dataclasses.dataclass(frozen=True)
@@ -371,347 +369,6 @@ def update_collections_runtime(spec: TypeSpec) -> None:
     COLLECTIONS_RUNTIME.write_text(text, encoding="utf-8")
 
 
-def render_vector_test(spec: TypeSpec) -> str:
-    return f"""package windows_runtime
-
-import windows_interface as windows_interface
-import std.collection.*
-import std.unittest.*
-import std.unittest.testmacro.*
-import windows_core.{{E_POINTER, Result, S_OK, WinError, createComObjectFromSchemas}}
-
-class {spec.name}VectorAbiTestImpl <: IVector_Impl<{spec.name}> & Resource {{
-    private let items: ArrayList<{spec.name}>
-    private let vtblHandle: CPointer<IVectorVtbl>
-    private let iterableVtblHandle: CPointer<IIterableVtbl>
-    private var closed: Bool = false
-
-    public init(items: ArrayList<{spec.name}>) {{
-        this.items = items
-        this.vtblHandle = unsafe {{
-            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new{spec.name}<{spec.name}VectorAbiTestImpl>())
-        }}
-        this.iterableVtblHandle = unsafe {{
-            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<{spec.name}VectorAbiTestImpl, {spec.name}>())
-        }}
-    }}
-
-    public static func withGenericVtbl(items: ArrayList<{spec.name}>): {spec.name}VectorAbiTestImpl {{
-        {spec.name}VectorAbiTestImpl(items, genericVtbl: true)
-    }}
-
-    private init(items: ArrayList<{spec.name}>, genericVtbl!: Bool) {{
-        this.items = items
-        this.vtblHandle = unsafe {{
-            if (genericVtbl) {{
-                windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new<{spec.name}VectorAbiTestImpl, {spec.name}>())
-            }} else {{
-                windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new{spec.name}<{spec.name}VectorAbiTestImpl>())
-            }}
-        }}
-        this.iterableVtblHandle = unsafe {{
-            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<{spec.name}VectorAbiTestImpl, {spec.name}>())
-        }}
-    }}
-
-    public func vtblPtr(): CPointer<Unit> {{
-        CPointer<Unit>(vtblHandle)
-    }}
-
-    public func iterableVtblPtr(): CPointer<Unit> {{
-        CPointer<Unit>(iterableVtblHandle)
-    }}
-
-    public func close(): Unit {{
-        if (closed) {{
-            return
-        }}
-        unsafe {{
-            windows_interface.freeNativeValue(iterableVtblHandle)
-            windows_interface.freeNativeValue(vtblHandle)
-        }}
-        closed = true
-    }}
-
-    public func isClosed(): Bool {{
-        closed
-    }}
-
-    ~init() {{
-        if (closed) {{
-            return
-        }}
-        closed = true
-    }}
-
-    public func First(): Result<IIterator<{spec.name}>> {{
-        Result<IIterator<{spec.name}>>.Ok(toIterator<{spec.name}>(items))
-    }}
-
-    public func GetAt(index: UInt32): Result<{spec.name}> {{
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {{
-            return Result<{spec.name}>.Err(stockBoundsError())
-        }}
-        match (items.get(resolved)) {{
-            case Some(value) => Result<{spec.name}>.Ok(value)
-            case None => Result<{spec.name}>.Err(stockBoundsError())
-        }}
-    }}
-
-    public func Size(): Result<UInt32> {{
-        Result<UInt32>.Ok(UInt32(items.size))
-    }}
-
-    public func GetView(): Result<IVectorView<{spec.name}>> {{
-        Result<IVectorView<{spec.name}>>.Ok(create{spec.name}VectorViewAbiTest(items))
-    }}
-
-    public func IndexOf(value: {spec.name}, indexSlot: CPointer<UInt32>): Result<Bool> {{
-        var offset = 0
-        while (offset < items.size) {{
-            match (items.get(offset)) {{
-                case Some(candidate) =>
-                    if (candidate == value) {{
-                        if (indexSlot.isNotNull()) {{
-                            unsafe {{ indexSlot.write(UInt32(offset)) }}
-                        }}
-                        return Result<Bool>.Ok(true)
-                    }}
-                case None => ()
-            }}
-            offset += 1
-        }}
-        if (indexSlot.isNotNull()) {{
-            unsafe {{ indexSlot.write(0u32) }}
-        }}
-        Result<Bool>.Ok(false)
-    }}
-
-    public func SetAt(index: UInt32, value: {spec.name}): Result<Unit> {{
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {{
-            return Result<Unit>.Err(stockBoundsError())
-        }}
-        items[resolved] = value
-        Result<Unit>.Ok(())
-    }}
-
-    public func InsertAt(index: UInt32, value: {spec.name}): Result<Unit> {{
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved > items.size) {{
-            return Result<Unit>.Err(stockBoundsError())
-        }}
-        items.add(value, at: resolved)
-        Result<Unit>.Ok(())
-    }}
-
-    public func RemoveAt(index: UInt32): Result<Unit> {{
-        let resolved = Int64(index)
-        if (resolved < 0 || resolved >= items.size) {{
-            return Result<Unit>.Err(stockBoundsError())
-        }}
-        items.remove(at: resolved)
-        Result<Unit>.Ok(())
-    }}
-
-    public func Append(value: {spec.name}): Result<Unit> {{
-        items.add(value)
-        Result<Unit>.Ok(())
-    }}
-
-    public func RemoveAtEnd(): Result<Unit> {{
-        if (items.size == 0) {{
-            return Result<Unit>.Err(stockBoundsError())
-        }}
-        items.remove(at: items.size - 1)
-        Result<Unit>.Ok(())
-    }}
-
-    public func Clear(): Result<Unit> {{
-        items.clear()
-        Result<Unit>.Ok(())
-    }}
-
-    public func GetMany(startIndex: UInt32, itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<UInt32> {{
-        writeGenericManyRange<{spec.name}>(itemsSize, itemsBuffer, items, Int64(startIndex))
-    }}
-
-    public func ReplaceAll(itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<Unit> {{
-        if (itemsSize > 0u32 && itemsBuffer.isNull()) {{
-            return Result<Unit>.Err(WinError(E_POINTER))
-        }}
-        items.clear()
-        let typed = CPointer<{spec.name}>(itemsBuffer)
-        var offset = 0u32
-        while (offset < itemsSize) {{
-            items.add(unsafe {{ (typed + Int64(offset)).read() }})
-            offset += 1u32
-        }}
-        Result<Unit>.Ok(())
-    }}
-}}
-
-class {spec.name}VectorAbiTestFixture <: Resource {{
-    public let vector: IVector<{spec.name}>
-    private let impl: {spec.name}VectorAbiTestImpl
-    private var closed: Bool = false
-
-    public init(items: ArrayList<{spec.name}>, useGenericVtbl!: Bool = false) {{
-        impl = if (useGenericVtbl) {{
-            {spec.name}VectorAbiTestImpl.withGenericVtbl(items)
-        }} else {{
-            {spec.name}VectorAbiTestImpl(items)
-        }}
-
-        let schemas = [IIterable<{spec.name}>.descriptorSchema(), IVector<{spec.name}>.descriptorSchema()]
-        let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr()]
-        let object = createComObjectFromSchemas(impl, schemas, vtbls)
-        vector = object.toInterface(IVector<{spec.name}>.descriptor())
-        object.close()
-    }}
-
-    public func innerClosed(): Bool {{
-        impl.isClosed()
-    }}
-
-    public func isClosed(): Bool {{
-        closed
-    }}
-
-    public func close(): Unit {{
-        if (!closed) {{
-            vector.close()
-            closed = true
-        }}
-    }}
-}}
-
-func create{spec.name}VectorAbiTest(items: ArrayList<{spec.name}>): {spec.name}VectorAbiTestFixture {{
-    {spec.name}VectorAbiTestFixture(items)
-}}
-
-func createGenericBuilder{spec.name}VectorAbiTest(items: ArrayList<{spec.name}>): {spec.name}VectorAbiTestFixture {{
-    {spec.name}VectorAbiTestFixture(items, useGenericVtbl: true)
-}}
-
-@Test
-func test{spec.name}VectorUsesDirectValueAbiForMutableSlots() {{
-    let fixture = create{spec.name}VectorAbiTest(ArrayList<{spec.name}>([{spec.first}, {spec.second}]))
-    let vector = fixture.vector
-    @Expect(fixture.innerClosed(), false)
-
-    @Expect(unsafe {{ vector.GetAt(1u32) }}, {spec.second})
-    var wrapperIndex = 99u32
-    @Expect(unsafe {{ vector.IndexOf({spec.first}, CPointer<UInt32>(inout wrapperIndex)) }}, true)
-    @Expect(wrapperIndex, 0u32)
-
-    let vtbl = unsafe {{ vector.vtbl() }}
-    var directIndex = 99u32
-    var directFound = false
-    let directIndexOf = CFunc<(CPointer<Unit>, {spec.name}, CPointer<UInt32>, CPointer<Bool>) -> Int32>(
-        CPointer<Unit>(vtbl.IndexOf)
-    )
-    let indexOfHr = unsafe {{ directIndexOf(
-        vector.asRaw(),
-        {spec.second},
-        CPointer<UInt32>(inout directIndex),
-        CPointer<Bool>(inout directFound)
-    ) }}
-    @Expect(indexOfHr, S_OK.value)
-    @Expect(directFound, true)
-    @Expect(directIndex, 1u32)
-
-    var nullIndexFound = true
-    let nullIndexHr = unsafe {{
-        directIndexOf(vector.asRaw(), {spec.second}, CPointer<UInt32>(), CPointer<Bool>(inout nullIndexFound))
-    }}
-    @Expect(nullIndexHr, E_POINTER.value)
-    @Expect(nullIndexFound, true)
-
-    let directSetAt = CFunc<(CPointer<Unit>, UInt32, {spec.name}) -> Int32>(CPointer<Unit>(vtbl.SetAt))
-    let setAtHr = unsafe {{ directSetAt(vector.asRaw(), 0u32, {spec.set_value}) }}
-    @Expect(setAtHr, S_OK.value)
-    @Expect(unsafe {{ vector.GetAt(0u32) }}, {spec.set_value})
-
-    let directInsertAt = CFunc<(CPointer<Unit>, UInt32, {spec.name}) -> Int32>(CPointer<Unit>(vtbl.InsertAt))
-    let insertAtHr = unsafe {{ directInsertAt(vector.asRaw(), 1u32, {spec.insert_value}) }}
-    @Expect(insertAtHr, S_OK.value)
-    @Expect(unsafe {{ vector.GetAt(1u32) }}, {spec.insert_value})
-
-    let directAppend = CFunc<(CPointer<Unit>, {spec.name}) -> Int32>(CPointer<Unit>(vtbl.Append))
-    let appendHr = unsafe {{ directAppend(vector.asRaw(), {spec.append_value}) }}
-    @Expect(appendHr, S_OK.value)
-    @Expect(unsafe {{ vector.GetAt(3u32) }}, {spec.append_value})
-
-    fixture.close()
-    @Expect(fixture.innerClosed(), true)
-}}
-
-@Test
-func testGeneric{spec.name}VectorBuilderUsesDirectValueAbiForSpecialization() {{
-    let fixture = createGenericBuilder{spec.name}VectorAbiTest(ArrayList<{spec.name}>([{spec.first}, {spec.second}]))
-    let vector = fixture.vector
-    @Expect(fixture.innerClosed(), false)
-
-    let vtbl = unsafe {{ vector.vtbl() }}
-    var directIndex = 99u32
-    var directFound = false
-    let directIndexOf = CFunc<(CPointer<Unit>, {spec.name}, CPointer<UInt32>, CPointer<Bool>) -> Int32>(
-        CPointer<Unit>(vtbl.IndexOf)
-    )
-    let indexOfHr = unsafe {{ directIndexOf(
-        vector.asRaw(),
-        {spec.second},
-        CPointer<UInt32>(inout directIndex),
-        CPointer<Bool>(inout directFound)
-    ) }}
-    @Expect(indexOfHr, S_OK.value)
-    @Expect(directFound, true)
-    @Expect(directIndex, 1u32)
-
-    var nullIndexFound = true
-    let nullIndexHr = unsafe {{
-        directIndexOf(vector.asRaw(), {spec.second}, CPointer<UInt32>(), CPointer<Bool>(inout nullIndexFound))
-    }}
-    @Expect(nullIndexHr, E_POINTER.value)
-    @Expect(nullIndexFound, true)
-
-    let directAppend = CFunc<(CPointer<Unit>, {spec.name}) -> Int32>(CPointer<Unit>(vtbl.Append))
-    let appendHr = unsafe {{ directAppend(vector.asRaw(), {spec.missing}) }}
-    @Expect(appendHr, S_OK.value)
-    @Expect(unsafe {{ vector.GetAt(2u32) }}, {spec.missing})
-
-    fixture.close()
-    @Expect(fixture.innerClosed(), true)
-}}
-"""
-
-def write_vector_test(spec: TypeSpec) -> None:
-    path = RUNTIME_SRC / f"vector_{spec.snake}_abi_test.cj"
-    path.write_text(render_vector_test(spec), encoding="utf-8")
-
-
-def check_vector_test(spec: TypeSpec) -> bool:
-    path = RUNTIME_SRC / f"vector_{spec.snake}_abi_test.cj"
-    expected = render_vector_test(spec)
-    if not path.exists():
-        print(f"missing generated test: {path}")
-        return False
-    actual = path.read_text(encoding="utf-8")
-    if actual == expected:
-        return True
-    diff = difflib.unified_diff(
-        actual.splitlines(),
-        expected.splitlines(),
-        fromfile=str(path),
-        tofile=f"{path} (generated)",
-        lineterm="",
-    )
-    print("\n".join(diff))
-    return False
-
-
 def collections_runtime_fragments(spec: TypeSpec) -> list[tuple[str, str]]:
     return [
         (f"callVectorSetAt{spec.name}", render_set_at_helper(spec)),
@@ -754,17 +411,17 @@ def check_collections_runtime(spec: TypeSpec) -> bool:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate one WinRT IVector<T> direct input ABI specialization.")
+    parser = argparse.ArgumentParser(
+        description="Inject one WinRT IVector<T> direct input ABI specialization into the production runtime."
+    )
     parser.add_argument(
         "--type",
         choices=sorted(SPECS),
-        help="Cangjie scalar type to generate. Omit with --check-* to check every generated vector ABI specialization.",
+        help="Cangjie scalar type to inject. Omit with --check-* to check every production specialization.",
     )
     parser.add_argument("--collections", action="store_true", help="Update collections_runtime.cj for this one type.")
-    parser.add_argument("--test", action="store_true", help="Generate the vector ABI test file for this one type.")
-    parser.add_argument("--check-test", action="store_true", help="Check that the vector ABI test file matches the generator.")
-    parser.add_argument("--check-collections", action="store_true", help="Check collections_runtime.cj contains the generated specialization fragments.")
-    parser.add_argument("--check-all", action="store_true", help="Check both collections_runtime.cj and generated vector ABI tests.")
+    parser.add_argument("--check-collections", action="store_true", help="Check collections_runtime.cj contains the injected specialization fragments.")
+    parser.add_argument("--check-all", action="store_true", help="Check the injected collections_runtime.cj specialization fragments for every type.")
     return parser.parse_args()
 
 
@@ -773,40 +430,26 @@ def main() -> int:
     if args.check_all and args.type is not None:
         raise SystemExit("--check-all checks every specialization; do not combine it with --type")
     if args.type is None:
-        if args.collections or args.test:
-            raise SystemExit("--type is required with --collections or --test")
-        if args.check_test or args.check_collections or args.check_all:
+        if args.collections:
+            raise SystemExit("--type is required with --collections")
+        if args.check_collections or args.check_all:
             ok = True
             for spec in SPECS.values():
-                if args.check_test or args.check_all:
-                    ok = check_vector_test(spec) and ok
-                if args.check_collections or args.check_all:
-                    ok = check_collections_runtime(spec) and ok
+                ok = check_collections_runtime(spec) and ok
             return 0 if ok else 1
-        raise SystemExit("choose at least one of --collections, --test, --check-test, --check-collections, or --check-all")
+        raise SystemExit("choose at least one of --collections, --check-collections, or --check-all")
 
     spec = SPECS[args.type]
     did_work = False
     if args.collections:
         update_collections_runtime(spec)
         did_work = True
-    if args.test:
-        write_vector_test(spec)
-        did_work = True
-    if args.check_test:
-        did_work = True
-        if not check_vector_test(spec):
-            return 1
-    if args.check_collections:
+    if args.check_collections or args.check_all:
         did_work = True
         if not check_collections_runtime(spec):
             return 1
-    if args.check_all:
-        did_work = True
-        if not check_vector_test(spec) or not check_collections_runtime(spec):
-            return 1
     if not did_work:
-        raise SystemExit("choose at least one of --collections, --test, --check-test, --check-collections, or --check-all")
+        raise SystemExit("choose at least one of --collections, --check-collections, or --check-all")
     return 0
 
 

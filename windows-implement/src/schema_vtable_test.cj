@@ -40,15 +40,6 @@ class DescriptorAutoVtblProbe <: InterfaceWrapperBase & ComInterface {
     }
 }
 
-func schemaFactoryThrows(action: () -> Unit): Bool {
-    try {
-        action()
-    } catch (_: Exception) {
-        return true
-    }
-    false
-}
-
 func fakeVtbl(offset: Int64): CPointer<Unit> {
     unsafe { CPointer<Unit>(CPointer<UInt8>() + offset) }
 }
@@ -79,19 +70,19 @@ func testSchemaOnlyCustomInterfacesRequireExplicitVtables() {
         []
     )
 
-    @Expect(schemaFactoryThrows({ =>
+    @Expect(implementActionThrows({ =>
         let _ = createComObjectFromSchemas(SchemaOnlyDummy(), [schema])
     }), true)
-    @Expect(schemaFactoryThrows({ =>
+    @Expect(implementActionThrows({ =>
         let _ = createComObjectFromSchemas(SchemaOnlyDummy(), [schema], CPointer<Unit>())
     }), true)
-    @Expect(schemaFactoryThrows({ =>
+    @Expect(implementActionThrows({ =>
         let _ = createComObjectFromSchemas(SchemaOnlyDummy(), [schema], Array<CPointer<Unit>>(0, { _ => CPointer<Unit>() }))
     }), true)
-    @Expect(schemaFactoryThrows({ =>
+    @Expect(implementActionThrows({ =>
         let _ = createComObjectFromSchemas(SchemaOnlyDummy(), [schema], [CPointer<Unit>()])
     }), true)
-    @Expect(schemaFactoryThrows({ =>
+    @Expect(implementActionThrows({ =>
         let _ = createComObject(SchemaOnlyDummy(), [schema.iid])
     }), true)
 }
@@ -119,10 +110,10 @@ func testInheritedCustomInterfacesRequireLeafVtable() {
     let baseVtbl = fakeVtbl(0x1000)
     let derivedVtbl = fakeVtbl(0x2000)
 
-    @Expect(schemaFactoryThrows({ =>
+    @Expect(implementActionThrows({ =>
         let _ = createComObjectFromSchemas(SchemaOnlyDummy(), [base, derived], [baseVtbl])
     }), true)
-    @Expect(schemaFactoryThrows({ =>
+    @Expect(implementActionThrows({ =>
         let _ = createComObjectFromSchemas(SchemaOnlyDummy(), [base, derived], [baseVtbl, CPointer<Unit>()])
     }), true)
 
@@ -164,7 +155,7 @@ func testInheritedCustomInterfacesGroupThroughOmittedIntermediate() {
 
     @Expect(resolveSchemas([base, leaf])[0].slotIndex, 1)
     @Expect(resolveSchemas([base, leaf])[1].slotIndex, 1)
-    @Expect(schemaFactoryThrows({ =>
+    @Expect(implementActionThrows({ =>
         let _ = createComObjectFromSchemas(SchemaOnlyDummy(), [base, leaf], [baseVtbl])
     }), true)
 
@@ -220,7 +211,7 @@ func testDirectBaseIidSchemasGroupThroughListedIntermediate() {
     @Expect(resolved[0].slotIndex, 1)
     @Expect(resolved[1].slotIndex, 1)
     @Expect(resolved[2].slotIndex, 1)
-    @Expect(schemaFactoryThrows({ =>
+    @Expect(implementActionThrows({ =>
         let _ = createComObjectFromSchemas(SchemaOnlyDummy(), [base, mid, leaf], [baseVtbl, midVtbl])
     }), true)
 
