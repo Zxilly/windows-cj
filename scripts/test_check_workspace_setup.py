@@ -5018,7 +5018,15 @@ class WindowsCommonCodegenSubsetTests(unittest.TestCase):
             source_index = codegen.WinmdSourceIndex({}, {}, {})
 
             with self.assertRaises(RuntimeError) as raised:
-                codegen.regenerate_and_diff(manifest, [root], source_index, timeout_seconds=1)
+                # The blocked-WinUI guard fires before any generator run, so the
+                # raw winmd input list is not exercised here.
+                codegen.regenerate_and_diff(
+                    manifest,
+                    [root],
+                    [],
+                    source_index,
+                    timeout_seconds=1,
+                )
 
             message = str(raised.exception)
             self.assertIn("cannot silently skip missing WinUI/WindowsAppSDK metadata", message)

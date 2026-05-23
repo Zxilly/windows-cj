@@ -50,12 +50,12 @@ The native reader is the default and only `.winmd` path; there is no external
 converter. Use `--input-json` / `--input-dir` only to feed already-converted
 JSON (for example a checked-in offline metadata cache).
 
-To emit the same split JSON metadata that the gate consumes, use the built-in
-`--emit-winmd-json` mode:
+The built-in `--emit-winmd-json` mode can serialize the parsed metadata to JSON
+for ad-hoc inspection, but it is not part of any checked-in workflow:
 
 ```pwsh
 $env:cjHeapSize = "32GB"
-cjpm run -m windows-bindgen -- --emit-winmd-json .\winmd -d .generated\winmd-json
+cjpm run -m windows-bindgen -- --emit-winmd-json .\winmd -d <some-temp-dir>
 ```
 
 ## WinMD workflow
@@ -68,34 +68,18 @@ $env:cjHeapSize = "32GB"
 cjpm run -m windows-bindgen -- .\winmd --feature Windows.Foundation --out .generated\windows
 ```
 
-Or build a reusable offline JSON input directory once, then generate from it:
-
-```pwsh
-$env:cjHeapSize = "32GB"
-cjpm run -m windows-bindgen -- --emit-winmd-json .\winmd -d .generated\winmd-json
-cjpm test -m windows-bindgen
-```
-
-For `scripts/check_windows_common_codegen.py`, the default offline input remains
-`.generated/winmd-json` from the repository root and only covers the checked-in
-Windows/Win32/Wdk metadata.
+`scripts/check_windows_common_codegen.py` reads the bundled raw `.winmd` under
+`winmd/` natively; there is no JSON intermediate to build. The bundled metadata
+only covers the checked-in Windows/Win32/Wdk surface.
 
 ### Optional WinUI/WindowsAppSDK metadata
 
-WinUI/WindowsAppSDK metadata must be provided as converted JSON plus the matching
-raw `.winmd` files used for hash validation. The gate accepts:
+WinUI/WindowsAppSDK metadata is supplied as raw `.winmd` and parsed natively.
+The gate accepts:
 
-- `--winui-winmd-json-dir <dir>` or `WINDOWS_CJ_WINUI_WINMD_JSON_DIRS`
 - `--winui-winmd-root <file-or-dir>` or `WINDOWS_CJ_WINUI_WINMD_ROOTS`
 
-The environment variables are path lists, so use `;` between paths on Windows.
-Emit the JSON from an explicit raw root with the native reader so the gate can
-validate the JSON against the same `.winmd` source:
-
-```pwsh
-$env:cjHeapSize = "32GB"
-cjpm run -m windows-bindgen -- --emit-winmd-json <raw-root> -d <json-dir>
-```
+The environment variable is a path list, so use `;` between paths on Windows.
 
 Typical explicit roots are:
 
@@ -109,32 +93,26 @@ WindowsAppSDK package:
 
 ```pwsh
 $appsdk = "$env:USERPROFILE\.nuget\packages\microsoft.windowsappsdk\1.4.231219000"
-$jsonDir = ".generated\winui-winmd-json"
 $rootA = (Resolve-Path "$appsdk\lib\uap10.0").Path
 
 $env:cjHeapSize = "32GB"
-cjpm run -m windows-bindgen -- --emit-winmd-json $rootA -d $jsonDir
-
-$jsonDirFull = (Resolve-Path $jsonDir).Path
-$env:WINDOWS_CJ_WINUI_WINMD_JSON_DIRS = $jsonDirFull
 $env:WINDOWS_CJ_WINUI_WINMD_ROOTS = $rootA
 python .\scripts\check_windows_common_codegen.py --mode full
 ```
 
-If these variables are unset, WinUI requested features remain
-`BLOCKED/SKIPPED` and the full gate compares the available Windows/Win32/Wdk
-metadata subset only.
+If this variable is unset, WinUI requested features remain `BLOCKED/SKIPPED`
+and the full gate compares the available Windows/Win32/Wdk metadata subset only.
 
 If WinUI metadata is supplied but does not contain checked-in WinUI selected
 symbols, the full gate fails before regeneration with an `input metadata does
 not contain checked-in selected symbols` message and an inline compact
 `WINUI_MISSING_SELECTED_SYMBOL` report. Use the report to find a metadata root
-that contains the missing symbols, then emit JSON from only the matching
-explicit root(s). Mixing additional TFM roots can expand the selected surface
-and produce unrelated extra symbols/files.
+that contains the missing symbols, then pass only the matching explicit
+root(s). Mixing additional TFM roots can expand the selected surface and
+produce unrelated extra symbols/files.
 
-To inspect exactly which supplied JSON/root contributes a checked-in selected
-symbol, use the provenance reports:
+To inspect exactly which supplied `.winmd` root contributes a checked-in
+selected symbol, use the provenance reports:
 
 ```pwsh
 python .\scripts\check_windows_common_codegen.py --report-missing-winui-selected-symbols
@@ -142,8 +120,8 @@ python .\scripts\check_windows_common_codegen.py --report-missing-winui-selected
 
 When optional WinUI metadata is present, this prints only checked-in WinUI
 selected symbols missing from the supplied WinUI feature roots, plus any
-same-short-name candidates and their source JSON/root/hash/contract details. If
-no WinUI metadata root is present, it reports the blocked requested features
+same-short-name candidates and their source root/hash/contract details. If no
+WinUI metadata root is present, it reports the blocked requested features
 instead of dumping the whole checked-in WinUI closure.
 
 ```pwsh
@@ -152,30 +130,31 @@ python .\scripts\check_windows_common_codegen.py `
   --provenance-symbol Windows.UI.Xaml.IApplication3
 ```
 
-The per-symbol report prints `PROVENANCE FOUND/MISSING`, source JSON, raw
-`.winmd` hash, `SourceSet`, contract/version attributes, and the matching raw
-root path. This is useful when a Windows SDK type with the same short name
-exists but does not match a checked-in `Microsoft.UI.Xaml` type.
-
-Generate from converted metadata:
-
-```pwsh
-$env:cjHeapSize = "32GB"
-cjpm run -m windows-bindgen -- --input-dir .generated/winmd-json --feature Windows.Foundation --out .generated/windows
-```
+The per-symbol report prints `PROVENANCE FOUND/MISSING`, the originating
+namespace metadata, the raw `.winmd` hash, `SourceSet`, contract/version
+attributes, and the matching raw root path. This is useful when a Windows SDK
+type with the same short name exists but does not match a checked-in
+`Microsoft.UI.Xaml` type.
 
 ## windows-common codegen gate
 
 `../scripts/check_windows_common_codegen.py --mode full` regenerates the available
 metadata subset into a temporary package and compares it with checked-in
-`windows-common`.
+`windows-common`. Inputs are raw `.winmd` only; the gate reads the bundled
+`winmd/` metadata natively and verifies it against the checked-in source-hash
+record `winmd/winmd-source-hashes.json`. When type-level metadata is needed
+(feature planning, provenance reports, full regeneration) the gate emits
+transient per-namespace JSON from the raw `.winmd` into a temporary directory;
+nothing is persisted. Refresh the source-hash record after intentionally
+updating the bundled metadata with
+`python scripts/check_windows_common_codegen.py --update-source-hashes`.
 
 Current gate status:
 
 - `scripts/check_workspace_setup.py` passes the active workspace setup and
   generated-output invariant checks for `windows-common`.
 - `scripts/check_windows_common_codegen.py --mode quick` passes for the checked-in
-  manifest/file hashes and WinMD JSON source checksums.
+  manifest/file hashes and the bundled raw `.winmd` source-hash record.
 - `scripts/check_windows_common_codegen.py --mode full` passes for the available
   Windows/Win32/Wdk metadata subset. Older available-subset drift reports are
   closed: MsXml extra symbols (closed), DEVPROPKEY/PROPERTYKEY/BINDINFO GUID
@@ -184,8 +163,8 @@ Current gate status:
 
 The remaining generation limit is input coverage, not a current
 Windows/Win32/Wdk subset diff: full WinUI/WindowsAppSDK regeneration needs the
-external WinUI/WindowsAppSDK `.winmd` metadata (or JSON emitted from it) that is
-not bundled in this repository.
+external WinUI/WindowsAppSDK `.winmd` metadata that is not bundled in this
+repository.
 
 ## Native wrapper return-value classification
 
