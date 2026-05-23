@@ -68,63 +68,61 @@ func testParseArgsRecognizesWinmdInputsAndDefault() {
 }
 
 @Test
-func testParseArgsAcceptsExplicitWinmdConverter() {
+func testWinmdPositionalInputsAreAcceptedForNativeParsing() {
     let config = parseArgs([
-        "--winmd-to-json", "../winmd-to-json/bin/winmd-to-json.exe",
-        "Sample.winmd"
-    ])
-
-    @Expect(config.winmdToJsonPath, "../winmd-to-json/bin/winmd-to-json.exe")
-    @Expect(config.inputWinmdPaths.size, 1)
-    @Expect(config.inputWinmdPaths[0], "Sample.winmd")
-}
-
-@Test
-func testWinmdInputsAreAllowedWhenConverterIsExplicit() {
-    let config = parseArgs([
-        "--winmd-to-json", "../winmd-to-json/bin/winmd-to-json.exe",
         "default",
         "Sample.winmd"
     ])
 
-    @Expect(cliTestThrows({ => validateMetadataInputs(config, true) }), false)
+    @Expect(config.defaultWinmdInput, true)
+    @Expect(config.inputWinmdPaths.size, 1)
+    @Expect(config.inputWinmdPaths[0], "Sample.winmd")
+    @Expect(cliTestThrows({ => validateMetadataInputs(config) }), false)
 }
 
 @Test
-func testEnvironmentWinmdToJsonPathUsesDocumentedVariable() {
-    let resolved = environmentWinmdToJsonPath([
-        ("Path", "ignored"),
-        ("windows_cj_winmd_to_json", "converter.exe")
-    ])
-    let empty = environmentWinmdToJsonPath([
-        (WINMD_TO_JSON_ENV, "")
-    ])
+func testLoadSymbolRecordsParsesBundledWinmdNatively() {
+    // A real bundled .winmd is parsed via the native reader
+    // (loadWinmdFilesNative) and produces SymbolRecords. Skipped gracefully if
+    // the bundled metadata is not present in this checkout.
+    let winmd = "../winmd/Windows.Wdk.winmd"
+    if (cliTestThrows({ => let _ = File.readFrom(winmd) })) {
+        return
+    }
+    let config = parseArgs([winmd, "--feature", "Windows.Wdk.Devices.Bluetooth"])
 
-    match (resolved) {
-        case Some(path) => @Expect(path, "converter.exe")
-        case None => @Expect(true, false)
+    let records = loadSymbolRecords(config)
+    @Expect(records.isEmpty(), false)
+
+    var found = false
+    for (record in records) {
+        if (record.fullName == "Windows.Wdk.Devices.Bluetooth.Apis") {
+            found = true
+            break
+        }
     }
-    match (empty) {
-        case Some(_) => @Expect(true, false)
-        case None => @Expect(true, true)
-    }
+    @Expect(found, true)
 }
 
 @Test
-func testLoadSymbolRecordsRejectsWinmdInputsWithConverterPath() {
+func testLoadSymbolRecordsParsesWinmdInputsNativelyWithoutConverter() {
+    // A positional .winmd is parsed natively. A missing file fails inside the
+    // native reader, proving the native path is taken.
     let directMessage = cliTestExceptionMessage({ => let _ = loadSymbolRecords(parseArgs(["Sample.winmd"])) })
-    let defaultMessage = cliTestExceptionMessage({ => let _ = loadSymbolRecords(parseArgs(["default"])) })
+    // --input-json still expects already-converted JSON, never a raw .winmd.
     let jsonFlagMessage = cliTestExceptionMessage({ => let _ = loadSymbolRecords(parseArgs(["--input-json", "Sample.WINMD"])) })
 
-    @Expect(directMessage.contains("WinMD input 'Sample.winmd' requires an explicit converter"), true)
-    @Expect(directMessage.contains("--winmd-to-json ../winmd-to-json/bin/winmd-to-json.exe"), true)
-    @Expect(defaultMessage.contains("default WinMD input requires an explicit converter"), true)
-    @Expect(defaultMessage.contains(WINMD_TO_JSON_ENV), true)
+    @Expect(directMessage.contains("failed to read winmd file"), true)
+    @Expect(directMessage.contains("requires an explicit converter"), false)
     @Expect(jsonFlagMessage.contains("--input-json expects converted JSON"), true)
+    @Expect(jsonFlagMessage.contains("parse it natively"), true)
 }
 
 @Test
-func testInputDirRejectsWinmdOnlyDirectoryWithWorkflow() {
+func testInputDirWithWinmdOnlyDirectoryIsParsedNatively() {
+    // A directory holding only .winmd files (here an empty placeholder) is
+    // routed to the native reader. The empty file fails to parse, confirming the
+    // native path was taken.
     let dir = ".generated/cli-winmd-dir-test"
     removeIfExists(dir, recursive: true)
     Directory.create(dir, recursive: true)
@@ -133,16 +131,16 @@ func testInputDirRejectsWinmdOnlyDirectoryWithWorkflow() {
     let message = cliTestExceptionMessage({ => let _ = loadSymbolRecords(parseArgs(["--input-dir", dir])) })
     removeIfExists(dir, recursive: true)
 
-    @Expect(message.contains("WinMD directory '${dir}' requires an explicit converter"), true)
-    @Expect(message.contains("--winmd-to-json ../winmd-to-json/bin/winmd-to-json.exe"), true)
+    @Expect(message.contains("failed to read winmd file"), true)
+    @Expect(message.contains("requires an explicit converter"), false)
 }
 
 @Test
 func testLoadSymbolRecordsRejectsMissingInputWithDefaultWorkflow() {
     let message = cliTestExceptionMessage({ => let _ = loadSymbolRecords(parseArgs([])) })
 
-    @Expect(message.contains("no metadata JSON input provided"), true)
-    @Expect(message.contains("windows-bindgen default --winmd-to-json"), true)
+    @Expect(message.contains("no metadata input provided"), true)
+    @Expect(message.contains("windows-bindgen default --feature"), true)
 }
 
 @Test
@@ -150,9 +148,8 @@ func testUsageTextDocumentsJsonAndWinmdWorkflow() {
     let help = usageText()
 
     @Expect(help.contains("metadata.json | json-dir | default | metadata.winmd | winmd-dir"), true)
-    @Expect(help.contains("--winmd-to-json <converter>"), true)
-    @Expect(help.contains(WINMD_TO_JSON_ENV), true)
-    @Expect(help.contains("Native WinMD parsing is not implemented here"), true)
+    @Expect(help.contains("--winmd-to-json"), false)
+    @Expect(help.contains("Parsed natively by the built-in Cangjie .winmd reader"), true)
 }
 
 @Test
@@ -213,6 +210,7 @@ func testParseArgsRejectsBadArguments() {
     @Expect(cliTestThrows({ => let _ = parseArgs(["--input-json"]) }), true)
     @Expect(cliTestThrows({ => let _ = parseArgs(["--input-dir"]) }), true)
     @Expect(cliTestThrows({ => let _ = parseArgs(["--winmd-to-json"]) }), true)
+    @Expect(cliTestThrows({ => let _ = parseArgs(["--winmd-to-json", "x"]) }), true)
     @Expect(cliTestThrows({ => let _ = parseArgs(["--unknown"]) }), true)
 }
 

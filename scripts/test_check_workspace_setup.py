@@ -83,7 +83,7 @@ class ActiveToolGateTests(unittest.TestCase):
     ) -> None:
         self.write_text(workspace, "windows-bindgen/src/main.cj", "writer.fileHashes()\nfile_hashes\n")
         self.write_text(workspace, "windows-bindgen/src/json_loader.cj")
-        self.write_text(workspace, "winmd-to-json/Program.cs")
+        self.write_text(workspace, "windows-bindgen/src/winmd_adapter.cj")
         self.write_text(workspace, "windows-winui3/src/xaml/mod.cj")
         self.write_text(
             workspace,

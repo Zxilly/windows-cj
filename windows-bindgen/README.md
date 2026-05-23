@@ -4,9 +4,10 @@
 Its Cangjie package name is `windows_bindgen`; the user-facing CLI name is
 `windows-bindgen`.
 
-The generator consumes converted WinMD JSON metadata only. The only WinMD
-reader in the toolchain is the C#/.NET `winmd-to-json` converter. A native
-Cangjie `.winmd` reader is not planned.
+The generator reads `.winmd` metadata directly: a Cangjie-native `.winmd`
+reader is built into this package (`src/winmd/`, `src/winmd_adapter.cj`) and is
+the default and only path. It can also read already-converted WinMD JSON. The
+legacy C#/.NET `winmd-to-json` converter has been retired and removed.
 
 ## Delivery boundary
 
@@ -15,10 +16,9 @@ projection package.
 
 The checked-in importable generated surface is currently `windows-common`,
 whose Cangjie package name is `windows_common`. Its manifest records a selected
-feature set, not a full Windows API projection.
-
-- `windows-projection` / `windows_projection` is a tiny consumer facade over the
-  checked-in `windows_common` subset.
+feature set, not a full Windows API projection. Consumers import `windows_common`
+(and the runtime support packages) directly; there is no separate consumer facade
+package.
 
 The active workspace no longer contains `windows-sys` / `windows_sys`. Cangjie
 compile speed makes a full raw sys package the wrong deliverable for this
@@ -29,46 +29,56 @@ A small package alias is not the right near-term fix: Cangjie import aliases are
 source imports, not replacement package artifacts. The delivery roadmap is:
 
 1. Keep the generator role under `windows-bindgen` / `windows_bindgen`.
-2. Expand the high-level projection package beyond the scaffold facade.
+2. Promote `windows_common` toward a stable consumer-facing projection package.
 3. Expand selected generated/common support through deliberate feature sets.
 4. Add feature or package slicing so broad metadata does not force one
    monolithic compile unit.
 
 ## Supported inputs
 
-The bindgen input contract is JSON:
+The bindgen input contract accepts raw `.winmd` and converted JSON:
 
-- `--input-json <file>` loads one converted metadata JSON file.
+- A positional `metadata.winmd` file or a directory of `.winmd` files is parsed
+  natively by the built-in Cangjie reader.
+- `default` parses the bundled `.winmd` metadata under `../winmd`.
+- `--input-json <file>` loads one already-converted metadata JSON file.
 - `--input-dir <dir>` loads all `.json` files from a directory, sorted by file name.
 - Positional `metadata.json` is shorthand for `--input-json metadata.json`.
 - Positional JSON directories are shorthand for `--input-dir <dir>` when the directory contains `.json` files.
 
-Do not add a native `.winmd` parser to this package. `.winmd` inputs must be
-converted by `winmd-to-json` before `windows-bindgen` reads them. Any helper that
-accepts raw `.winmd` files is only allowed to orchestrate the C#/.NET converter
-and then pass JSON to bindgen.
+The native reader is the default and only `.winmd` path; there is no external
+converter. Use `--input-json` / `--input-dir` only to feed already-converted
+JSON (for example a checked-in offline metadata cache).
 
-## WinMD conversion workflow
-
-Run commands from the `windows-cj` repository root. The Python helper calls the
-local `winmd-to-json` dotnet project with `dotnet publish --no-restore`; it does
-not restore packages, parse WinMD in Cangjie, or choose a NuGet cache path
-implicitly.
-
-Create a reusable offline JSON input directory, then run bindgen against that
-directory:
+To emit the same split JSON metadata that the gate consumes, use the built-in
+`--emit-winmd-json` mode:
 
 ```pwsh
-python .\scripts\convert_winmd_to_json.py --winmd-root .\winmd --json-dir .generated\winmd-json --dry-run
-python .\scripts\convert_winmd_to_json.py --winmd-root .\winmd --json-dir .generated\winmd-json --overwrite
 $env:cjHeapSize = "32GB"
+cjpm run -m windows-bindgen -- --emit-winmd-json .\winmd -d .generated\winmd-json
+```
+
+## WinMD workflow
+
+Run commands from the `windows-cj` repository root. Generate directly from raw
+`.winmd`:
+
+```pwsh
+$env:cjHeapSize = "32GB"
+cjpm run -m windows-bindgen -- .\winmd --feature Windows.Foundation --out .generated\windows
+```
+
+Or build a reusable offline JSON input directory once, then generate from it:
+
+```pwsh
+$env:cjHeapSize = "32GB"
+cjpm run -m windows-bindgen -- --emit-winmd-json .\winmd -d .generated\winmd-json
 cjpm test -m windows-bindgen
 ```
 
 For `scripts/check_windows_common_codegen.py`, the default offline input remains
 `.generated/winmd-json` from the repository root and only covers the checked-in
-Windows/Win32/Wdk metadata. Native `.winmd` parsing is intentionally out of
-scope for the generator and the gate.
+Windows/Win32/Wdk metadata.
 
 ### Optional WinUI/WindowsAppSDK metadata
 
@@ -79,27 +89,13 @@ raw `.winmd` files used for hash validation. The gate accepts:
 - `--winui-winmd-root <file-or-dir>` or `WINDOWS_CJ_WINUI_WINMD_ROOTS`
 
 The environment variables are path lists, so use `;` between paths on Windows.
-The helper requires explicit roots for reproducibility. To inspect likely local
-NuGet cache roots without using them automatically:
+Emit the JSON from an explicit raw root with the native reader so the gate can
+validate the JSON against the same `.winmd` source:
 
 ```pwsh
-python .\scripts\convert_winmd_to_json.py --list-candidates
+$env:cjHeapSize = "32GB"
+cjpm run -m windows-bindgen -- --emit-winmd-json <raw-root> -d <json-dir>
 ```
-
-To check whether a candidate root can reproduce a checked-in WinUI surface,
-probe for the known checked-in WinUI selected-symbol gaps before converting it
-for the gate:
-
-```pwsh
-python .\scripts\convert_winmd_to_json.py --list-candidates --candidate-limit 50 `
-  --require-known-winui-missing-symbols
-```
-
-The symbol probe publishes the local `winmd-to-json` converter once, then uses
-its native `--contains-type` metadata scan for each listed candidate root. A
-root that misses checked-in WinUI selected symbols is not a full parity source
-for the current `windows-common` package. Add repeated `--require-symbol`
-arguments when checking extra metadata types outside the known WinUI gap set.
 
 Typical explicit roots are:
 
@@ -109,15 +105,15 @@ Typical explicit roots are:
 - `%USERPROFILE%\.nuget\packages\microsoft.ui.winui\<version>\lib\uap10.0`
 
 Example from the `windows-cj` repository root, using an already-restored local
-WindowsAppSDK package and avoiding network restore:
+WindowsAppSDK package:
 
 ```pwsh
 $appsdk = "$env:USERPROFILE\.nuget\packages\microsoft.windowsappsdk\1.4.231219000"
 $jsonDir = ".generated\winui-winmd-json"
 $rootA = (Resolve-Path "$appsdk\lib\uap10.0").Path
 
-python .\scripts\convert_winmd_to_json.py --winmd-root $rootA --json-dir $jsonDir --dry-run
-python .\scripts\convert_winmd_to_json.py --winmd-root $rootA --json-dir $jsonDir --overwrite
+$env:cjHeapSize = "32GB"
+cjpm run -m windows-bindgen -- --emit-winmd-json $rootA -d $jsonDir
 
 $jsonDirFull = (Resolve-Path $jsonDir).Path
 $env:WINDOWS_CJ_WINUI_WINMD_JSON_DIRS = $jsonDirFull
@@ -132,8 +128,8 @@ metadata subset only.
 If WinUI metadata is supplied but does not contain checked-in WinUI selected
 symbols, the full gate fails before regeneration with an `input metadata does
 not contain checked-in selected symbols` message and an inline compact
-`WINUI_MISSING_SELECTED_SYMBOL` report. Use the symbol probe above to find a
-metadata root that contains the missing symbols, then convert only the matching
+`WINUI_MISSING_SELECTED_SYMBOL` report. Use the report to find a metadata root
+that contains the missing symbols, then emit JSON from only the matching
 explicit root(s). Mixing additional TFM roots can expand the selected surface
 and produce unrelated extra symbols/files.
 
@@ -187,9 +183,9 @@ Current gate status:
   Com/Ole/Threading vtable aliases (closed).
 
 The remaining generation limit is input coverage, not a current
-Windows/Win32/Wdk subset diff: full WinUI/WindowsAppSDK regeneration needs
-external converted metadata JSON plus matching raw `.winmd` files, and this
-generator will continue to consume only converted JSON.
+Windows/Win32/Wdk subset diff: full WinUI/WindowsAppSDK regeneration needs the
+external WinUI/WindowsAppSDK `.winmd` metadata (or JSON emitted from it) that is
+not bundled in this repository.
 
 ## Native wrapper return-value classification
 

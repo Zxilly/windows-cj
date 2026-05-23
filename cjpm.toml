@@ -18,7 +18,6 @@ members = [
     "windows-registry",
     "windows-services",
     "windows-common",
-    "windows-projection",
     "windows-winui3",
     "windows-bindgen"
 ]

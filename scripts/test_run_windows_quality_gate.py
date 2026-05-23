@@ -18,8 +18,6 @@ class QualityGatePlanTests(unittest.TestCase):
             [
                 "py_compile",
                 "python unit tests",
-                "winmd conversion helper self-test",
-                "winmd-to-json self-test",
                 "windows-common codegen self-test",
                 "vector input ABI generator check",
                 "windows-runtime runner self-test",
@@ -40,8 +38,6 @@ class QualityGatePlanTests(unittest.TestCase):
             [
                 "py_compile",
                 "python unit tests",
-                "winmd conversion helper self-test",
-                "winmd-to-json self-test",
                 "windows-common codegen self-test",
                 "vector input ABI generator check",
                 "windows-runtime runner self-test",
@@ -182,8 +178,8 @@ class QualityGatePlanTests(unittest.TestCase):
         self.assertEqual(result, 0)
         output = stdout.getvalue()
         self.assertIn("mode = quick", output)
-        self.assertIn("winmd-to-json.csproj", output)
-        self.assertIn("convert_winmd_to_json.py", output)
+        self.assertNotIn("winmd-to-json.csproj", output)
+        self.assertNotIn("convert_winmd_to_json.py", output)
         self.assertIn("--self-test", output)
         self.assertIn("unittest", output)
         self.assertIn("check_windows_common_codegen.py", output)

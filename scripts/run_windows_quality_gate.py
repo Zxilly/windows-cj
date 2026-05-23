@@ -165,25 +165,6 @@ def build_steps(args: argparse.Namespace) -> list[Step]:
             ],
         ),
         Step(
-            "winmd conversion helper self-test",
-            [
-                sys.executable,
-                script("scripts/convert_winmd_to_json.py"),
-                "--self-test",
-            ],
-        ),
-        Step(
-            "winmd-to-json self-test",
-            [
-                "dotnet",
-                "run",
-                "--project",
-                str(ROOT / "winmd-to-json" / "winmd-to-json.csproj"),
-                "--",
-                "--self-test",
-            ],
-        ),
-        Step(
             "windows-common codegen self-test",
             [
                 sys.executable,

@@ -38,7 +38,6 @@ ACTIVE_WORKSPACE_MEMBERS = {
     "windows-registry",
     "windows-services",
     "windows-common",
-    "windows-projection",
     "windows-winui3",
     "windows-bindgen",
 }
@@ -85,9 +84,6 @@ PACKAGE_DEPENDENCIES = {
     "windows_libloading": set(),
     "windows_numerics": {"windows_common"},
     "windows_polyfill": set(),
-    "windows_projection": {
-        "windows_common",
-    },
     "windows_propvariant": {
         "windows_common",
         "windows_interface",
@@ -733,6 +729,17 @@ def check_path_exists(path: Path, kind: str) -> None:
         fail(f"missing {kind}: {path}")
 
 
+def read_bindgen_tests_text(workspace: Path) -> str:
+    # windows-bindgen tests are split across multiple *_test.cj files (there is no
+    # single main_test.cj). Aggregate them so coverage gates can match fragments
+    # regardless of which split file holds them.
+    test_dir = workspace / "windows-bindgen" / "src"
+    test_files = sorted(test_dir.rglob("*_test.cj"))
+    if not test_files:
+        fail(f"missing windows-bindgen tests: no *_test.cj files under {test_dir}")
+    return "\n".join(path.read_text(encoding="utf-8") for path in test_files)
+
+
 def load_toml(path: Path) -> dict:
     with path.open("rb") as f:
         return tomllib.load(f)
@@ -1078,9 +1085,7 @@ def check_winui_xaml_callback_com_invariants(workspace: Path) -> None:
 
 def check_pinvoke_string_out_cleanup_gate(workspace: Path) -> None:
     render_symbol = workspace / "windows-bindgen" / "src" / "render_symbol.cj"
-    bindgen_tests = workspace / "windows-bindgen" / "src" / "main_test.cj"
     check_path_exists(render_symbol, "windows-bindgen render_symbol")
-    check_path_exists(bindgen_tests, "windows-bindgen tests")
     render_text = render_symbol.read_text(encoding="utf-8")
     require_text_fragments(
         render_text,
@@ -1103,7 +1108,7 @@ def check_pinvoke_string_out_cleanup_gate(workspace: Path) -> None:
         ),
         "windows-bindgen P/Invoke wrappers must release failed non-retval string handle out slots",
     )
-    test_text = bindgen_tests.read_text(encoding="utf-8")
+    test_text = read_bindgen_tests_text(workspace)
     require_text_fragments(
         test_text,
         (
@@ -1121,9 +1126,7 @@ def check_pinvoke_string_out_cleanup_gate(workspace: Path) -> None:
 
 def check_native_hresult_optional_out_cleanup_gate(workspace: Path) -> None:
     native_helpers = workspace / "windows-bindgen" / "src" / "native_helpers.cj"
-    bindgen_tests = workspace / "windows-bindgen" / "src" / "main_test.cj"
     check_path_exists(native_helpers, "windows-bindgen native helpers")
-    check_path_exists(bindgen_tests, "windows-bindgen tests")
     native_text = native_helpers.read_text(encoding="utf-8")
     require_text_fragments(
         native_text,
@@ -1157,7 +1160,7 @@ def check_native_hresult_optional_out_cleanup_gate(workspace: Path) -> None:
         ),
         "windows-bindgen native HRESULT wrappers must model optional owned/borrowed/scalar out slots",
     )
-    test_text = bindgen_tests.read_text(encoding="utf-8")
+    test_text = read_bindgen_tests_text(workspace)
     require_text_fragments(
         test_text,
         (
@@ -1184,9 +1187,7 @@ def check_native_hresult_optional_out_cleanup_gate(workspace: Path) -> None:
 
 def check_interface_dispatcher_exception_out_cleanup(workspace: Path) -> None:
     render_symbol = workspace / "windows-bindgen" / "src" / "render_symbol.cj"
-    bindgen_tests = workspace / "windows-bindgen" / "src" / "main_test.cj"
     check_path_exists(render_symbol, "windows-bindgen render_symbol")
-    check_path_exists(bindgen_tests, "windows-bindgen tests")
     render_text = render_symbol.read_text(encoding="utf-8")
     require_text_fragments(
         render_text,
@@ -1220,7 +1221,7 @@ def check_interface_dispatcher_exception_out_cleanup(workspace: Path) -> None:
         "interfaceDispatcherClearPairs(outPairs, indentLevel + 1)",
         "windows-bindgen interface dispatcher catch paths must release partial out slots before clearing them",
     )
-    test_text = bindgen_tests.read_text(encoding="utf-8")
+    test_text = read_bindgen_tests_text(workspace)
     require_text_fragments(
         test_text,
         (
@@ -1285,9 +1286,7 @@ def check_generated_interface_dispatcher_failed_hresult_out_cleanup(workspace: P
 
 def check_runtime_class_raw_abi_array_out_preclear(workspace: Path) -> None:
     render_symbol = workspace / "windows-bindgen" / "src" / "render_symbol.cj"
-    bindgen_tests = workspace / "windows-bindgen" / "src" / "main_test.cj"
     check_path_exists(render_symbol, "windows-bindgen render_symbol")
-    check_path_exists(bindgen_tests, "windows-bindgen tests")
     render_text = render_symbol.read_text(encoding="utf-8")
     out_slot_guard_body = cj_function_body(
         render_text,
@@ -1369,7 +1368,7 @@ def check_runtime_class_raw_abi_array_out_preclear(workspace: Path) -> None:
         "windows-bindgen runtime-class interface raw ABI wrappers must keep failed-HRESULT cleanup after interface__ dispatch",
     )
 
-    test_text = bindgen_tests.read_text(encoding="utf-8")
+    test_text = read_bindgen_tests_text(workspace)
     require_text_fragments(
         test_text,
         (
@@ -3056,7 +3055,6 @@ def check_vtable_none_branches_clear_out_slots(workspace: Path) -> None:
     interface_macro = workspace / "windows-interface" / "src" / "macros" / "windows_interface_macros.cj"
     interface_macro_fixture = workspace / "windows-interface" / "tests" / "macros" / "generated_interface_fixture.cj"
     bindgen_render = workspace / "windows-bindgen" / "src" / "render_symbol.cj"
-    bindgen_tests = workspace / "windows-bindgen" / "src" / "main_test.cj"
     common_impl = workspace / "windows-common" / "src" / "impl"
     check_path_exists(foundation, "windows-runtime foundation runtime")
     check_path_exists(collections, "windows-runtime collections runtime")
@@ -3073,7 +3071,6 @@ def check_vtable_none_branches_clear_out_slots(workspace: Path) -> None:
     check_path_exists(interface_macro, "windows-interface Interface macro")
     check_path_exists(interface_macro_fixture, "windows-interface generated macro fixture")
     check_path_exists(bindgen_render, "windows-bindgen render_symbol")
-    check_path_exists(bindgen_tests, "windows-bindgen tests")
     check_path_exists(common_impl, "windows-common generated impl directory")
 
     foundation_text = foundation.read_text(encoding="utf-8")
@@ -3531,7 +3528,7 @@ def check_vtable_none_branches_clear_out_slots(workspace: Path) -> None:
         "windows-bindgen default vtable stubs must clear generated out slots before E_NOTIMPL",
     )
 
-    bindgen_tests_text = bindgen_tests.read_text(encoding="utf-8")
+    bindgen_tests_text = read_bindgen_tests_text(workspace)
     require_text_fragments(
         bindgen_tests_text,
         (
@@ -8984,7 +8981,7 @@ def check_active_tools(workspace: Path) -> None:
     if "writer.fileHashes()" not in generator_main_text or "file_hashes" not in generator_main_text:
         fail("windows-bindgen must generate manifest file_hashes for reproducible windows-common output")
     check_path_exists(workspace / "windows-bindgen" / "src" / "json_loader.cj", "JSON loader")
-    check_path_exists(workspace / "winmd-to-json" / "Program.cs", "winmd-to-json source")
+    check_path_exists(workspace / "windows-bindgen" / "src" / "winmd_adapter.cj", "native WinMD reader adapter")
     check_path_exists(workspace / "windows-winui3" / "src" / "xaml" / "mod.cj", "WinUI3 XAML helper")
     runtime_runner = workspace / "scripts" / "run_windows_runtime_tests.py"
     check_path_exists(runtime_runner, "windows-runtime watchdog test runner")
