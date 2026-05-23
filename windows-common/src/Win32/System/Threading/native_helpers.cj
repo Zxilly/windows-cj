@@ -4,11 +4,9 @@ package windows_common.Win32.System.Threading
 
 import windows_libloading as windows_libloading
 import windows_common.Win32.Foundation.FILETIME
-import windows_common.Win32.Foundation.GetLastError
 import windows_common.Win32.Foundation.HANDLE
 import windows_common.Win32.Foundation.HMODULE
 import windows_common.Win32.Foundation.HWND
-import windows_common.Win32.Foundation.SetLastError
 import windows_common.Win32.Foundation.WAIT_EVENT
 import windows_common.Win32.Security.PSID
 import windows_common.Win32.Security.SECURITY_ATTRIBUTES
@@ -64,12 +62,14 @@ public func FlsGetValue(dwFlsIndex: UInt32): CPointer<Unit> {
 }
 
 public func FlsGetValueChecked(dwFlsIndex: UInt32): windows_core.Result<CPointer<Unit>> {
-    SetLastError(0u32)
+    let setLastErrorProc__ = CFunc<(UInt32) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "SetLastError"))
+    unsafe { setLastErrorProc__(0u32) }
     let result__ = FlsGetValue(dwFlsIndex)
     if (result__.isNotNull()) {
         return windows_core.Result<CPointer<Unit>>.Ok(result__)
     }
-    let lastError__ = GetLastError()
+    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetLastError"))
+    let lastError__ = unsafe { getLastErrorProc__() }
     if (lastError__ == 0u32) {
         return windows_core.Result<CPointer<Unit>>.Ok(result__)
     }
@@ -265,7 +265,8 @@ public func SleepConditionVariableCSChecked(ConditionVariable: CPointer<CONDITIO
     if (result__) {
         return windows_core.Result<Bool>.Ok(true)
     }
-    let lastError__ = GetLastError()
+    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetLastError"))
+    let lastError__ = unsafe { getLastErrorProc__() }
     if (lastError__ == 1460u32) {
         return windows_core.Result<Bool>.Ok(false)
     }
@@ -282,7 +283,8 @@ public func SleepConditionVariableSRWChecked(ConditionVariable: CPointer<CONDITI
     if (result__) {
         return windows_core.Result<Bool>.Ok(true)
     }
-    let lastError__ = GetLastError()
+    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetLastError"))
+    let lastError__ = unsafe { getLastErrorProc__() }
     if (lastError__ == 1460u32) {
         return windows_core.Result<Bool>.Ok(false)
     }
@@ -679,7 +681,8 @@ public func WaitOnAddressChecked(Address: CPointer<Unit>, CompareAddress: CPoint
     if (result__) {
         return windows_core.Result<Bool>.Ok(true)
     }
-    let lastError__ = GetLastError()
+    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetLastError"))
+    let lastError__ = unsafe { getLastErrorProc__() }
     if (lastError__ == 1460u32) {
         return windows_core.Result<Bool>.Ok(false)
     }
@@ -1025,12 +1028,14 @@ public func TlsGetValue(dwTlsIndex: UInt32): CPointer<Unit> {
 }
 
 public func TlsGetValueChecked(dwTlsIndex: UInt32): windows_core.Result<CPointer<Unit>> {
-    SetLastError(0u32)
+    let setLastErrorProc__ = CFunc<(UInt32) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "SetLastError"))
+    unsafe { setLastErrorProc__(0u32) }
     let result__ = TlsGetValue(dwTlsIndex)
     if (result__.isNotNull()) {
         return windows_core.Result<CPointer<Unit>>.Ok(result__)
     }
-    let lastError__ = GetLastError()
+    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetLastError"))
+    let lastError__ = unsafe { getLastErrorProc__() }
     if (lastError__ == 0u32) {
         return windows_core.Result<CPointer<Unit>>.Ok(result__)
     }
@@ -1719,7 +1724,8 @@ public func UnregisterWaitExChecked(WaitHandle: HANDLE, CompletionEvent: HANDLE)
     if (result__) {
         return windows_core.Result<Bool>.Ok(true)
     }
-    let lastError__ = GetLastError()
+    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetLastError"))
+    let lastError__ = unsafe { getLastErrorProc__() }
     if (lastError__ == 997u32) {
         return windows_core.Result<Bool>.Ok(false)
     }
@@ -1775,7 +1781,8 @@ public func DeleteTimerQueueTimerChecked(TimerQueue: HANDLE, Timer: HANDLE, Comp
     if (result__) {
         return windows_core.Result<Bool>.Ok(true)
     }
-    let lastError__ = GetLastError()
+    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetLastError"))
+    let lastError__ = unsafe { getLastErrorProc__() }
     if (lastError__ == 997u32) {
         return windows_core.Result<Bool>.Ok(false)
     }
@@ -2771,12 +2778,14 @@ public func GetGuiResources(hProcess: HANDLE, uiFlags: UInt32): UInt32 {
 }
 
 public func GetGuiResourcesChecked(hProcess: HANDLE, uiFlags: UInt32): windows_core.Result<UInt32> {
-    SetLastError(0u32)
+    let setLastErrorProc__ = CFunc<(UInt32) -> Unit>(windows_libloading.resolveProc("KERNEL32.dll", "SetLastError"))
+    unsafe { setLastErrorProc__(0u32) }
     let result__ = GetGuiResources(hProcess, uiFlags)
     if (result__ != 0u32) {
         return windows_core.Result<UInt32>.Ok(result__)
     }
-    let lastError__ = GetLastError()
+    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetLastError"))
+    let lastError__ = unsafe { getLastErrorProc__() }
     if (lastError__ == 0u32) {
         return windows_core.Result<UInt32>.Ok(result__)
     }
@@ -3258,7 +3267,8 @@ public func UnregisterWaitChecked(WaitHandle: HANDLE): windows_core.Result<Bool>
     if (result__) {
         return windows_core.Result<Bool>.Ok(true)
     }
-    let lastError__ = GetLastError()
+    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("KERNEL32.dll", "GetLastError"))
+    let lastError__ = unsafe { getLastErrorProc__() }
     if (lastError__ == 997u32) {
         return windows_core.Result<Bool>.Ok(false)
     }

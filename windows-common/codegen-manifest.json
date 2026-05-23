@@ -1890,7 +1890,7 @@
     "src/Win32/System/SystemServices/mod.cj": "dcd09fe5730e8064122bfe54a4f117a988eaf8d6c63c3c789dea1e9f549b43ff",
     "src/Win32/System/Threading/facade_0.cj": "267d0b235dbc4e52e9fa28df6934c74cca5fbb2425e6b47db36402b780682938",
     "src/Win32/System/Threading/mod.cj": "a90f61a63096501c7deda211a452af2734480b33e9e97171c2089e72a39e2d87",
-    "src/Win32/System/Threading/native_helpers.cj": "977f16241fd26d4259a48cf00cc73a2137f72e804bc6578daded1b547322105d",
+    "src/Win32/System/Threading/native_helpers.cj": "c8c9710d35de640dfacf7ba1646179885fedf8134d7234c528369d69f180ca16",
     "src/Win32/System/Variant/facade_0.cj": "827b0b9807185d89dd5f32e73e85624e4df5083c4ec797a20e58ece5351f327f",
     "src/Win32/System/Variant/mod.cj": "3b23ba8bbf0e830df08c585dbe7f33232b20d1c22ec087f54cf39e7eac1e0575",
     "src/Win32/System/mod.cj": "7fb2477e3d2c6d2a40be4609a0f6a9fcd18e87929963edc7a35ae2e8014a781b",
