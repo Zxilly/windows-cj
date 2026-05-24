@@ -6098,7 +6098,6 @@ func testCommonSelectionOmitsPInvokeContainers() {
 func testCommonPackageCjpmOmitsUnusedSupportPackages() {
     let deps = ArrayList<String>()
     let cjpm = renderCjpmToml("windows_common", supportDeps: deps)
-    let supportDeps = renderSupportDependencyImports("windows_common", supportDeps: deps)
 
     @Expect(cjpm.contains("windows_core ="), false)
     @Expect(cjpm.contains("windows_polyfill ="), false)
@@ -6106,8 +6105,6 @@ func testCommonPackageCjpmOmitsUnusedSupportPackages() {
     @Expect(cjpm.contains("windows_libloading = { path = \"../windows-libloading\" }"), true)
     @Expect(cjpm.contains("[dependencies]"), true)
     @Expect(cjpm.contains(".generated/windows-common"), false)
-    @Expect(supportDeps.contains("import windows_common"), false)
-    @Expect(supportDeps.contains("import windows_polyfill as windows_polyfill"), false)
 }
 
 @Test

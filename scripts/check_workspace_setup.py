@@ -4230,8 +4230,6 @@ def check_generated_common_package(workspace: Path) -> None:
     generated = workspace / "windows-common"
     check_path_exists(generated / "cjpm.toml", "windows-common cjpm.toml")
     check_path_exists(generated / "codegen-manifest.json", "windows-common codegen-manifest.json")
-    support_deps = generated / "src" / "support_deps.cj"
-    check_path_exists(support_deps, "windows-common support_deps.cj")
     check_path_exists(generated / "src" / "mod.cj", "windows-common mod.cj")
     manifest = json.loads((generated / "codegen-manifest.json").read_text(encoding="utf-8"))
     if manifest.get("generated_by") != GENERATED_MANIFEST_HEADER:
@@ -4290,12 +4288,16 @@ def check_generated_common_package(workspace: Path) -> None:
         fail(f"windows-common package name must be windows_common, got {package.get('name')!r}")
     if manifest.get("package_name") != "windows_common":
         fail(f"windows-common manifest package name must be windows_common, got {manifest.get('package_name')!r}")
-    support_imports = set(WINDOWS_IMPORT_RE.findall(support_deps.read_text(encoding="utf-8")))
-    expected_support_imports = PACKAGE_DEPENDENCIES["windows_common"]
-    if support_imports != expected_support_imports:
-        missing = sorted(expected_support_imports - support_imports)
-        extra = sorted(support_imports - expected_support_imports)
-        fail(f"windows-common support_deps imports mismatch; missing={missing}, extra={extra}")
+    # The package's support-dependency contract is the cjpm.toml [dependencies]
+    # section (the actual link edges). The generated subpackages import what they
+    # use directly, so no redundant root-level import anchor file is emitted; the
+    # declared dependency set is validated here against the canonical map.
+    declared_deps = set(config.get("dependencies", {}))
+    expected_support_deps = PACKAGE_DEPENDENCIES["windows_common"]
+    if declared_deps != expected_support_deps:
+        missing = sorted(expected_support_deps - declared_deps)
+        extra = sorted(declared_deps - expected_support_deps)
+        fail(f"windows-common cjpm.toml dependencies mismatch; missing={missing}, extra={extra}")
     if "link-option" in (generated / "cjpm.toml").read_text(encoding="utf-8"):
         fail("windows-common must not emit static link options; native calls go through windows_libloading")
 

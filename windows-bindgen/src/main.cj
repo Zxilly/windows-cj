@@ -665,11 +665,11 @@ func generate(config: CliConfig, records: ArrayList<SymbolRecord>): Unit {
         collectSupportDependencyNamesFromGeneratedNativeHelpers(config.packageName, supportDeps, commonHelperFiles)
     }
     let writer = GeneratedPackageWriter(config.outputDir, config.dryRun, noComment: renderOptions.noComment)
+    // The support-dependency set is recorded as cjpm.toml [dependencies] (the
+    // real link edges); the generated subpackages import what they use directly,
+    // so no redundant root-level import anchor file is emitted.
     writer.writeFile("cjpm.toml", renderCjpmToml(config.packageName, supportDeps: supportDeps))
     writer.writeFile("src/mod.cj", "package ${config.packageName}\n")
-    if (!supportDeps.isEmpty()) {
-        writer.writeFile("src/support_deps.cj", renderSupportDependencyImports(config.packageName, supportDeps: supportDeps))
-    }
     if (config.common) {
         writeCommonNativeHelperFiles(writer, commonHelperFiles)
     }
@@ -1126,16 +1126,6 @@ func renderStableDependencyLines(prefix: String, supportDeps: ArrayList<String>)
     for (dependency in stableSupportDependencyNames()) {
         if (contains(supportDeps, dependency)) {
             content += "  ${dependency} = { path = \"${prefix}/${stableSupportDependencyPath(dependency)}\" }\n"
-        }
-    }
-    return content
-}
-
-func renderSupportDependencyImports(packageName: String, supportDeps!: ArrayList<String> = ArrayList<String>()): String {
-    var content = "package ${packageName}\n\n"
-    for (dependency in stableSupportDependencyNames()) {
-        if (contains(supportDeps, dependency)) {
-            content += "import ${dependency} as ${dependency}\n"
         }
     }
     return content

@@ -86,7 +86,6 @@ func testGeneratedPackageCjpmIncludesOnlyUsedSupportPackages() {
     let deps = ArrayList<String>()
     deps.add("windows_polyfill")
     let cjpm = renderCjpmToml("windows", supportDeps: deps)
-    let supportDeps = renderSupportDependencyImports("windows", supportDeps: deps)
 
     @Expect(cjpm.contains("name = \"windows\""), true)
     @Expect(cjpm.contains("link-option ="), false)
@@ -95,8 +94,6 @@ func testGeneratedPackageCjpmIncludesOnlyUsedSupportPackages() {
     @Expect(cjpm.contains("windows_core ="), false)
     @Expect(cjpm.contains("windows_interface ="), false)
     @Expect(cjpm.contains("windows_runtime"), false)
-    @Expect(supportDeps.contains("import windows_polyfill as windows_polyfill"), true)
-    @Expect(supportDeps.contains("import windows_common"), false)
 }
 
 @Test
@@ -120,7 +117,6 @@ func testRuntimeSupportDependencyReplacesSplitProjectionPackages() {
     let deps = ArrayList<String>()
     deps.add("windows_runtime")
     let cjpm = renderCjpmToml("windows", supportDeps: deps)
-    let supportDeps = renderSupportDependencyImports("windows", supportDeps: deps)
 
     @Expect(cliTestContainsString(names, "windows_runtime"), true)
     @Expect(cliTestContainsString(names, "windows_collections"), false)
@@ -129,7 +125,6 @@ func testRuntimeSupportDependencyReplacesSplitProjectionPackages() {
     @Expect(stableSupportDependencyPath("windows_runtime"), "windows-runtime")
     @Expect(cjpm.contains("windows_runtime = { path = \"../../windows-runtime\" }"), true)
     @Expect(cjpm.contains("link-option ="), false)
-    @Expect(supportDeps.contains("import windows_runtime as windows_runtime"), true)
 }
 
 @Test
