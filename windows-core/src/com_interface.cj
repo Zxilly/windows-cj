@@ -45,6 +45,18 @@ public unsafe func queryInterface(source: CPointer<Unit>, targetIid: GUID): Opti
     queryInterfaceRaw(source, targetIid)
 }
 
+// Query a raw COM pointer for IInspectable, throwing a descriptive error when the
+// object does not implement it. Shared by delegate/event-handler projections in
+// both the collections and foundation packages, so it lives in windows_core.
+public func delegateAsInspectable(raw: CPointer<Unit>, typeName: String): IInspectable {
+    match (unsafe { queryInterfaceAs(raw, IInspectable.descriptor()) }) {
+        case Some(value) =>
+            value
+        case None =>
+            throw Exception("${typeName} does not implement IInspectable")
+    }
+}
+
 public unsafe func queryInterfaceResult<U>(
     source: CPointer<Unit>,
     target: InterfaceDescriptor<U>
