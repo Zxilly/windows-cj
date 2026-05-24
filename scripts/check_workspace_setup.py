@@ -27,7 +27,9 @@ ACTIVE_WORKSPACE_MEMBERS = {
     "windows-implement",
     "windows-core",
     "windows-polyfill",
-    "windows-runtime",
+    "windows-foundation",
+    "windows-collections",
+    "windows-future",
     "windows-threading",
     "windows-version",
     "windows-numerics",
@@ -98,7 +100,19 @@ PACKAGE_DEPENDENCIES = {
         "windows_strings",
     },
     "windows_result": {"windows_libloading"},
-    "windows_runtime": {
+    "windows_collections": {
+        "windows_core",
+        "windows_interface",
+        "windows_strings",
+    },
+    "windows_foundation": {
+        "windows_collections",
+        "windows_common",
+        "windows_core",
+        "windows_interface",
+        "windows_strings",
+    },
+    "windows_future": {
         "windows_common",
         "windows_core",
         "windows_interface",
@@ -130,6 +144,64 @@ PACKAGE_DEPENDENCIES = {
         "windows_common",
         "windows_core",
     },
+}
+
+# Real-WinRT smoke coverage per split projection package. The monolithic
+# windows-runtime package was split into windows-foundation / windows-collections
+# / windows-future; each keeps a smoke file that exercises a real WinRT path so
+# the quick quality gate can confirm the projection actually round-trips, not
+# just compiles. Maps package directory -> (smoke source file, {test function:
+# required real-WinRT code markers}).
+SPLIT_SMOKE_TESTS = {
+    "windows-foundation": (
+        "windows_foundation_smoke_test.cj",
+        {
+            "testRealActivationFactoryReportsUnavailableClass": (
+                "activationFactory<",
+                "Result<IActivationFactory>.Err",
+                "error.code()",
+                "REGDB_E_CLASSNOTREG",
+            ),
+            "testRealPropertyValueInt32ArrayRoundTrip": (
+                "PropertyValue.CreateInt32Array",
+                "GetInt32Array",
+            ),
+            "testRealUriDecoderRoundTripsHStringAndCollectionProjection": (
+                "Uri.CreateUri",
+                "QueryParsed",
+                "GetFirstValueByName",
+                "GetAt",
+            ),
+        },
+    ),
+    "windows-collections": (
+        "windows_collections_smoke_test.cj",
+        {
+            "testStockInt32VectorViewRoundTripsThroughProjection": (
+                "toVectorView",
+                "view.Size()",
+                "view.GetAt(",
+                "view.IndexOf(",
+            ),
+        },
+    ),
+    "windows-future": (
+        "windows_future_smoke_test.cj",
+        {
+            "testReadyOperationProjectsCompletedResult": (
+                "IAsyncOperation<Int32>.ready",
+                "asIAsyncInfo()",
+                "info.Status()",
+                "operation.join()",
+            ),
+            "testSpawnedActionPropagatesWindowsExceptionThroughJoin": (
+                "IAsyncAction.spawnAsync",
+                "throw WindowsException(E_POINTER)",
+                "action.join()",
+                "info.Status()",
+            ),
+        },
+    ),
 }
 
 WINDOWS_IMPORT_RE = re.compile(
@@ -1389,7 +1461,9 @@ def check_runtime_class_raw_abi_array_out_preclear(workspace: Path) -> None:
 
 def check_test_com_object_owners_released(workspace: Path) -> None:
     source_roots = [
-        workspace / "windows-runtime" / "src",
+        workspace / "windows-foundation" / "src",
+        workspace / "windows-collections" / "src",
+        workspace / "windows-future" / "src",
         workspace / "windows-interface" / "tests" / "macros",
     ]
     for source_root in source_roots:
@@ -1413,7 +1487,9 @@ def check_test_com_object_owners_released(workspace: Path) -> None:
 
 def check_temporary_com_object_projection_ownership(workspace: Path) -> None:
     source_roots = [
-        workspace / "windows-runtime" / "src",
+        workspace / "windows-foundation" / "src",
+        workspace / "windows-collections" / "src",
+        workspace / "windows-future" / "src",
         workspace / "windows-implement" / "src",
         workspace / "windows-threading" / "src",
     ]
@@ -1447,7 +1523,9 @@ def check_threading_pools_use_scope_or_explicit_close(workspace: Path) -> None:
     source_roots = [
         workspace / "windows-core" / "src",
         workspace / "windows-implement" / "src",
-        workspace / "windows-runtime" / "src",
+        workspace / "windows-foundation" / "src",
+        workspace / "windows-collections" / "src",
+        workspace / "windows-future" / "src",
         workspace / "windows-services" / "src",
         workspace / "windows-threading" / "src",
     ]
@@ -1692,7 +1770,9 @@ def check_long_lived_vtables_are_unmanaged(workspace: Path) -> None:
         workspace / "windows-core" / "src",
         workspace / "windows-implement" / "src",
         workspace / "windows-interface" / "src",
-        workspace / "windows-runtime" / "src",
+        workspace / "windows-foundation" / "src",
+        workspace / "windows-collections" / "src",
+        workspace / "windows-future" / "src",
     ]
     for source_root in source_roots:
         if not source_root.exists():
@@ -1885,7 +1965,9 @@ def check_native_allocations_have_deterministic_owner(workspace: Path) -> None:
         workspace / "windows-core" / "src",
         workspace / "windows-implement" / "src",
         workspace / "windows-interface" / "src",
-        workspace / "windows-runtime" / "src",
+        workspace / "windows-foundation" / "src",
+        workspace / "windows-collections" / "src",
+        workspace / "windows-future" / "src",
     ]
     for source_root in source_roots:
         if not source_root.exists():
@@ -1917,11 +1999,11 @@ def check_native_allocations_have_deterministic_owner(workspace: Path) -> None:
 
 
 def check_collection_indexof_thunks_reject_null_index(workspace: Path) -> None:
-    runtime_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    runtime_path = workspace / "windows-collections" / "src" / "collections_runtime.cj"
     text = runtime_path.read_text(encoding="utf-8")
     bodies = iter_cj_function_bodies(text, "__winrtThunk_IndexOf")
     if len(bodies) < 3:
-        fail("windows-runtime collection IndexOf thunks are missing expected producer implementations")
+        fail("windows-collections collection IndexOf thunks are missing expected producer implementations")
     for line, body in bodies:
         dispatch = body.find("this.IndexOf(")
         prefix = body[:dispatch if dispatch >= 0 else len(body)]
@@ -1932,7 +2014,7 @@ def check_collection_indexof_thunks_reject_null_index(workspace: Path) -> None:
         )
         if has_index_guard is None:
             fail(
-                f"windows-runtime/src/collections_runtime.cj:{line} IndexOf thunk must reject null "
+                f"windows-collections/src/collections_runtime.cj:{line} IndexOf thunk must reject null "
                 "index out pointer before dispatch"
             )
 
@@ -1964,7 +2046,7 @@ def check_generated_collection_vtable_abi_parity(workspace: Path) -> None:
 
 
 def check_collection_generic_input_thunks_translate_projection_failures(workspace: Path) -> None:
-    runtime_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    runtime_path = workspace / "windows-collections" / "src" / "collections_runtime.cj"
     text = runtime_path.read_text(encoding="utf-8")
     thunk_names = ("Lookup", "HasKey", "Insert", "Remove", "IndexOf", "SetAt", "InsertAt", "Append")
     checked = 0
@@ -1975,36 +2057,36 @@ def check_collection_generic_input_thunks_translate_projection_failures(workspac
             checked += 1
             if "catch (error: windows_core.WindowsException)" not in body or "windows_core.E_FAIL.value" not in body:
                 fail(
-                    f"windows-runtime/src/collections_runtime.cj:{line} {name} thunk must translate "
+                    f"windows-collections/src/collections_runtime.cj:{line} {name} thunk must translate "
                     "generic input projection exceptions to HRESULT values"
                 )
             dispatch = body.find("winrtProjectGenericIn")
             prefix = body[:dispatch if dispatch >= 0 else len(body)]
             if "CPointer<Bool>" in body and "clearCollectionBoolOutSlot(result__)" not in prefix:
                 fail(
-                    f"windows-runtime/src/collections_runtime.cj:{line} {name} thunk must clear Bool "
+                    f"windows-collections/src/collections_runtime.cj:{line} {name} thunk must clear Bool "
                     "out slots before projecting generic inputs"
                 )
             if name == "IndexOf":
                 if "clearCollectionIndexOutSlot(arg1)" not in prefix:
                     fail(
-                        f"windows-runtime/src/collections_runtime.cj:{line} IndexOf thunk must clear "
+                        f"windows-collections/src/collections_runtime.cj:{line} IndexOf thunk must clear "
                         "index out slots before projecting generic inputs"
                     )
                 if "clearCollectionBoolOutSlot(result__)" not in prefix:
                     fail(
-                        f"windows-runtime/src/collections_runtime.cj:{line} IndexOf thunk must clear "
+                        f"windows-collections/src/collections_runtime.cj:{line} IndexOf thunk must clear "
                         "Bool out slots before projecting generic inputs"
                     )
     if checked < 18:
-        fail("windows-runtime collection generic input thunk audit saw too few guarded thunks")
+        fail("windows-collections collection generic input thunk audit saw too few guarded thunks")
 
 
 def check_collection_scalar_output_thunks_clear_outputs(workspace: Path) -> None:
-    runtime_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
-    test_path = workspace / "windows-runtime" / "src" / "collection_get_many_cleanup_test.cj"
-    default_vtable_test_path = workspace / "windows-runtime" / "src" / "collection_default_vtable_abi_test.cj"
-    null_buffer_test_path = workspace / "windows-runtime" / "src" / "collection_null_buffer_thunk_test.cj"
+    runtime_path = workspace / "windows-collections" / "src" / "collections_runtime.cj"
+    test_path = workspace / "windows-collections" / "src" / "collection_get_many_cleanup_test.cj"
+    default_vtable_test_path = workspace / "windows-collections" / "src" / "collection_default_vtable_abi_test.cj"
+    null_buffer_test_path = workspace / "windows-collections" / "src" / "collection_null_buffer_thunk_test.cj"
     text = runtime_path.read_text(encoding="utf-8")
     require_text_fragments(
         text,
@@ -2028,20 +2110,20 @@ def check_collection_scalar_output_thunks_clear_outputs(workspace: Path) -> None
             "collectionUnitThunk({ => this.Clear() })",
             "collectionSplitOutThunk(arg0, arg1, { => this.Split(arg0, arg1) })",
         ),
-        "windows-runtime collection manual thunks must use shared cleanup/translation helpers",
+        "windows-collections collection manual thunks must use shared cleanup/translation helpers",
     )
     range_body = cj_function_body(text, "collectionGenericOutRangeThunk", runtime_path, workspace)
     require_text_before(
         range_body,
         "clearCollectionIndexOutSlot(result)",
         "if (itemsSize > 0u32 && items.isNull())",
-        "windows-runtime collection GetMany helper must clear written out slots before E_POINTER buffer failures",
+        "windows-collections collection GetMany helper must clear written out slots before E_POINTER buffer failures",
     )
     split_body = cj_function_body(text, "collectionSplitOutThunk", runtime_path, workspace)
     split_failure_start = split_body.find("if (first.isNull() || second.isNull())")
     split_failure_return = split_body.find("return E_POINTER.value", split_failure_start)
     if split_failure_start < 0 or split_failure_return < 0:
-        fail("windows-runtime collection Split helper must reject null out pointers with E_POINTER")
+        fail("windows-collections collection Split helper must reject null out pointers with E_POINTER")
     split_failure_branch = split_body[split_failure_start:split_failure_return]
     require_text_fragments(
         split_failure_branch,
@@ -2051,7 +2133,7 @@ def check_collection_scalar_output_thunks_clear_outputs(workspace: Path) -> None
             "if (second.isNotNull())",
             "clearCollectionGenericOutSlot(second)",
         ),
-        "windows-runtime collection Split helper must clear non-null sibling out slots before E_POINTER",
+        "windows-collections collection Split helper must clear non-null sibling out slots before E_POINTER",
     )
     specs = (
         ("HasCurrent", "this.HasCurrent()", "clearCollectionBoolOutSlot(result__)", 1),
@@ -2070,7 +2152,7 @@ def check_collection_scalar_output_thunks_clear_outputs(workspace: Path) -> None
             prefix = body[:dispatch]
             if clear_fragment not in prefix:
                 fail(
-                    f"windows-runtime/src/collections_runtime.cj:{line} {name} thunk must clear "
+                    f"windows-collections/src/collections_runtime.cj:{line} {name} thunk must clear "
                     "scalar out slots before dispatch"
                 )
             if (
@@ -2080,13 +2162,13 @@ def check_collection_scalar_output_thunks_clear_outputs(workspace: Path) -> None
                 or "windows_core.E_FAIL.value" not in body
             ):
                 fail(
-                    f"windows-runtime/src/collections_runtime.cj:{line} {name} thunk must translate "
+                    f"windows-collections/src/collections_runtime.cj:{line} {name} thunk must translate "
                     "thrown exceptions to HRESULT values"
                 )
         if checked < minimum:
-            fail(f"windows-runtime collection scalar thunk audit saw too few {name} thunks")
+            fail(f"windows-collections collection scalar thunk audit saw too few {name} thunks")
 
-    check_path_exists(test_path, "windows-runtime collection scalar thunk cleanup tests")
+    check_path_exists(test_path, "windows-collections collection scalar thunk cleanup tests")
     test_text = test_path.read_text(encoding="utf-8")
     require_text_fragments(
         test_text,
@@ -2098,9 +2180,9 @@ def check_collection_scalar_output_thunks_clear_outputs(workspace: Path) -> None
             "testIVectorProducerManualThunksTranslateThrownExceptions",
             "testCollectionGenericOutThunkCleansStoreFailure",
         ),
-        "windows-runtime collection scalar output thunk cleanup tests must cover stale slots and exceptions",
+        "windows-collections collection scalar output thunk cleanup tests must cover stale slots and exceptions",
     )
-    check_path_exists(default_vtable_test_path, "windows-runtime collection default vtable ABI tests")
+    check_path_exists(default_vtable_test_path, "windows-collections collection default vtable ABI tests")
     default_vtable_test_text = default_vtable_test_path.read_text(encoding="utf-8")
     require_text_fragments(
         default_vtable_test_text,
@@ -2116,9 +2198,9 @@ def check_collection_scalar_output_thunks_clear_outputs(workspace: Path) -> None
             "@Expect(vectorMany, 0u32)",
             "@Expect(vectorToken.Value, 0i64)",
         ),
-        "windows-runtime collection default vtable ABI tests must cover E_NOTIMPL out-slot clearing",
+        "windows-collections collection default vtable ABI tests must cover E_NOTIMPL out-slot clearing",
     )
-    check_path_exists(null_buffer_test_path, "windows-runtime collection null-buffer thunk tests")
+    check_path_exists(null_buffer_test_path, "windows-collections collection null-buffer thunk tests")
     null_buffer_test_text = null_buffer_test_path.read_text(encoding="utf-8")
     require_text_fragments(
         null_buffer_test_text,
@@ -2127,7 +2209,7 @@ def check_collection_scalar_output_thunks_clear_outputs(workspace: Path) -> None
             "testGeneratedMapViewSplitThunkClearsSiblingOutSlotOnPointerFailure",
             "@Expect(copied, 0u32)",
         ),
-        "windows-runtime collection null-pointer thunk tests must cover E_POINTER sibling out-slot clearing",
+        "windows-collections collection null-pointer thunk tests must cover E_POINTER sibling out-slot clearing",
     )
 
 
@@ -2750,7 +2832,7 @@ def check_descriptor_generated_thunks_translate_exceptions(workspace: Path) -> N
 
 
 def check_collection_specialized_bool_thunks_clear_outputs(workspace: Path) -> None:
-    runtime_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    runtime_path = workspace / "windows-collections" / "src" / "collections_runtime.cj"
     text = runtime_path.read_text(encoding="utf-8")
     checked = 0
     for match in re.finditer(r"impl\.(HasKey|Insert)\s*\(", text):
@@ -2759,15 +2841,15 @@ def check_collection_specialized_bool_thunks_clear_outputs(workspace: Path) -> N
         if "clearCollectionBoolOutSlot(result__)" not in prefix:
             line = text[: match.start()].count("\n") + 1
             fail(
-                f"windows-runtime/src/collections_runtime.cj:{line} specialized {match.group(1)} "
+                f"windows-collections/src/collections_runtime.cj:{line} specialized {match.group(1)} "
                 "thunk must clear Bool out slots before dispatch"
             )
     if checked < 25:
-        fail("windows-runtime specialized collection Bool thunk audit saw too few vtable branches")
+        fail("windows-collections specialized collection Bool thunk audit saw too few vtable branches")
 
 
 def check_collection_specialized_indexof_thunks_clear_outputs(workspace: Path) -> None:
-    runtime_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    runtime_path = workspace / "windows-collections" / "src" / "collections_runtime.cj"
     text = runtime_path.read_text(encoding="utf-8")
     checked = 0
     pattern = re.compile(
@@ -2784,25 +2866,25 @@ def check_collection_specialized_indexof_thunks_clear_outputs(workspace: Path) -
         line = text[: match.start()].count("\n") + 1
         if "result__.isNull() || arg1.isNull()" not in prefix:
             fail(
-                f"windows-runtime/src/collections_runtime.cj:{line} specialized IndexOf thunk must "
+                f"windows-collections/src/collections_runtime.cj:{line} specialized IndexOf thunk must "
                 "reject null found/index out slots before dispatch"
             )
         if "clearCollectionIndexOutSlot(arg1)" not in prefix:
             fail(
-                f"windows-runtime/src/collections_runtime.cj:{line} specialized IndexOf thunk must "
+                f"windows-collections/src/collections_runtime.cj:{line} specialized IndexOf thunk must "
                 "clear index out slots before dispatch"
             )
         if "clearCollectionBoolOutSlot(result__)" not in prefix:
             fail(
-                f"windows-runtime/src/collections_runtime.cj:{line} specialized IndexOf thunk must "
+                f"windows-collections/src/collections_runtime.cj:{line} specialized IndexOf thunk must "
                 "clear Bool out slots before dispatch"
             )
     if checked < 35:
-        fail("windows-runtime specialized collection IndexOf thunk audit saw too few vtable branches")
+        fail("windows-collections specialized collection IndexOf thunk audit saw too few vtable branches")
 
 
 def check_collection_specialized_lookup_thunks_clear_outputs(workspace: Path) -> None:
-    runtime_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    runtime_path = workspace / "windows-collections" / "src" / "collections_runtime.cj"
     text = runtime_path.read_text(encoding="utf-8")
     checked = 0
     scalar_checked = 0
@@ -2824,22 +2906,22 @@ def check_collection_specialized_lookup_thunks_clear_outputs(workspace: Path) ->
         if "CPointer<CPointer<Unit>>" in signature:
             if "clearCollectionGenericOutSlot(result__)" not in prefix:
                 fail(
-                    f"windows-runtime/src/collections_runtime.cj:{line} specialized Lookup thunk must "
+                    f"windows-collections/src/collections_runtime.cj:{line} specialized Lookup thunk must "
                     "clear generic out slots before dispatch"
                 )
         else:
             scalar_checked += 1
             if "unsafe { result__.write(" not in prefix:
                 fail(
-                    f"windows-runtime/src/collections_runtime.cj:{line} specialized scalar Lookup thunk "
+                    f"windows-collections/src/collections_runtime.cj:{line} specialized scalar Lookup thunk "
                     "must clear value out slots before dispatch"
                 )
     if checked < 20 or scalar_checked < 10:
-        fail("windows-runtime specialized collection Lookup thunk audit saw too few vtable branches")
+        fail("windows-collections specialized collection Lookup thunk audit saw too few vtable branches")
 
 
 def check_collection_specialized_vector_thunks_translate_exceptions(workspace: Path) -> None:
-    runtime_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    runtime_path = workspace / "windows-collections" / "src" / "collections_runtime.cj"
     text = runtime_path.read_text(encoding="utf-8")
     checked = 0
     pattern = re.compile(
@@ -2863,17 +2945,17 @@ def check_collection_specialized_vector_thunks_translate_exceptions(workspace: P
         ):
             line = text[: match.start()].count("\n") + 1
             fail(
-                f"windows-runtime/src/collections_runtime.cj:{line} specialized vector {slot} "
+                f"windows-collections/src/collections_runtime.cj:{line} specialized vector {slot} "
                 "thunk must translate thrown exceptions to HRESULT values before returning"
             )
     if checked < 80:
-        fail("windows-runtime specialized vector exception thunk audit saw too few vtable branches")
+        fail("windows-collections specialized vector exception thunk audit saw too few vtable branches")
 
 
 def check_collection_event_thunks_translate_exceptions_and_clear_tokens(workspace: Path) -> None:
     sources = [
-        ("windows-runtime/src/collections_runtime.cj", workspace / "windows-runtime" / "src" / "collections_runtime.cj"),
-        ("windows-runtime/src/foundation_runtime.cj", workspace / "windows-runtime" / "src" / "foundation_runtime.cj"),
+        ("windows-collections/src/collections_runtime.cj", workspace / "windows-collections" / "src" / "collections_runtime.cj"),
+        ("windows-foundation/src/foundation_runtime.cj", workspace / "windows-foundation" / "src" / "foundation_runtime.cj"),
     ]
     checked_add = 0
     checked_remove = 0
@@ -2923,7 +3005,7 @@ def check_collection_event_thunks_translate_exceptions_and_clear_tokens(workspac
                     )
 
     if checked_add < 4 or checked_remove < 4:
-        fail("windows-runtime event thunk audit saw too few event branches")
+        fail("windows-foundation/windows-collections event thunk audit saw too few event branches")
 
 
 def check_generated_raw_event_add_wrappers_clear_tokens(workspace: Path) -> None:
@@ -3043,8 +3125,11 @@ def generated_default_notimpl_stub_issues(text: str) -> list[tuple[int, str]]:
 
 
 def check_vtable_none_branches_clear_out_slots(workspace: Path) -> None:
-    foundation = workspace / "windows-runtime" / "src" / "foundation_runtime.cj"
-    collections = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+    foundation = workspace / "windows-foundation" / "src" / "foundation_runtime.cj"
+    collections = workspace / "windows-collections" / "src" / "collections_runtime.cj"
+    # Shared WinRT-ABI No-interface helper definitions down-sinked to windows_core;
+    # the foundation projection only retains their call sites.
+    winrt_abi_thunks = workspace / "windows-core" / "src" / "winrt_abi_thunks.cj"
     marshaler = workspace / "windows-core" / "src" / "marshaler.cj"
     core_agile_ref = workspace / "windows-core" / "src" / "agile_reference.cj"
     core_reference_ref = workspace / "windows-core" / "src" / "weak.cj"
@@ -3059,8 +3144,8 @@ def check_vtable_none_branches_clear_out_slots(workspace: Path) -> None:
     interface_macro_fixture = workspace / "windows-interface" / "tests" / "macros" / "generated_interface_fixture.cj"
     bindgen_render = workspace / "windows-bindgen" / "src" / "render_symbol.cj"
     common_impl = workspace / "windows-common" / "src" / "impl"
-    check_path_exists(foundation, "windows-runtime foundation runtime")
-    check_path_exists(collections, "windows-runtime collections runtime")
+    check_path_exists(foundation, "windows-foundation foundation runtime")
+    check_path_exists(collections, "windows-collections collections runtime")
     check_path_exists(marshaler, "windows-core marshaler runtime")
     check_path_exists(core_agile_ref, "windows-core agile reference runtime")
     check_path_exists(core_reference_ref, "windows-core weak reference interface runtime")
@@ -3075,20 +3160,28 @@ def check_vtable_none_branches_clear_out_slots(workspace: Path) -> None:
     check_path_exists(interface_macro_fixture, "windows-interface generated macro fixture")
     check_path_exists(bindgen_render, "windows-bindgen render_symbol")
     check_path_exists(common_impl, "windows-common generated impl directory")
+    check_path_exists(winrt_abi_thunks, "windows-core WinRT-ABI thunk helpers")
 
-    foundation_text = foundation.read_text(encoding="utf-8")
+    winrt_abi_thunks_text = winrt_abi_thunks.read_text(encoding="utf-8")
     require_text_fragments(
-        foundation_text,
+        winrt_abi_thunks_text,
         (
             "func foundationNoInterfaceValueOut<T>",
             "func foundationNoInterfaceArrayOut<T>",
             "func foundationNoInterfaceUnitArrayOut",
+        ),
+        "windows-core WinRT-ABI No-interface helpers must clear stale out slots",
+    )
+    foundation_text = foundation.read_text(encoding="utf-8")
+    require_text_fragments(
+        foundation_text,
+        (
             "foundationNoInterfaceComOut(result__)",
             "foundationNoInterfaceValueOut<Bool>(result__, false)",
             "foundationNoInterfaceArrayOut<UInt16>(arg0Size, arg0)",
             "foundationNoInterfaceUnitArrayOut(resultSize__, result__)",
         ),
-        "windows-runtime foundation vtable None branches must clear stale out slots",
+        "windows-foundation vtable None branches must clear stale out slots",
     )
 
     foundation_lines = foundation_text.splitlines()
@@ -3126,11 +3219,11 @@ def check_vtable_none_branches_clear_out_slots(workspace: Path) -> None:
 
     value_raw_body = function_body(foundation_text, "ValueRaw")
     if value_raw_body is None:
-        fail("windows-runtime IReferenceArray must expose ValueRaw")
+        fail("windows-foundation IReferenceArray must expose ValueRaw")
     value_raw_check = value_raw_body.find("status__.check()")
     value_raw_release = value_raw_body.find("windows_core.winrtReleaseGenericArrayOut<T>(result__, resultSize__)")
     if value_raw_check < 0 or value_raw_release < 0 or value_raw_release > value_raw_check:
-        fail("windows-runtime IReferenceArray.ValueRaw must release failed generic array out before HRESULT check")
+        fail("windows-foundation IReferenceArray.ValueRaw must release failed generic array out before HRESULT check")
 
     collections_text = collections.read_text(encoding="utf-8")
     require_text_fragments(
@@ -3145,7 +3238,7 @@ def check_vtable_none_branches_clear_out_slots(workspace: Path) -> None:
             "collectionNoInterfaceIndexBoolOut(arg1, result__)",
             "collectionNoInterfaceSplitOut(arg0, arg1)",
         ),
-        "windows-runtime collection vtable None branches must clear stale out slots",
+        "windows-collections collection vtable None branches must clear stale out slots",
     )
 
     collection_lines = collections_text.splitlines()
@@ -3658,16 +3751,28 @@ def check_vtable_none_branches_clear_out_slots(workspace: Path) -> None:
 
 
 def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None:
-    runtime_path = workspace / "windows-runtime" / "src" / "foundation_runtime.cj"
-    check_path_exists(runtime_path, "windows-runtime foundation runtime")
+    runtime_path = workspace / "windows-foundation" / "src" / "foundation_runtime.cj"
+    check_path_exists(runtime_path, "windows-foundation foundation runtime")
+    # The shared WinRT-ABI thunk helpers were down-sinked from the foundation
+    # projection into windows_core so the foundation and future async packages
+    # can both consume them without a dependency cycle. The foundation package
+    # only keeps PropertyValue-specific helpers and call sites; the IAsyncInfo
+    # surface moved to windows_future.
+    thunks_path = workspace / "windows-core" / "src" / "winrt_abi_thunks.cj"
+    check_path_exists(thunks_path, "windows-core WinRT-ABI thunk helpers")
+    async_runtime_path = workspace / "windows-future" / "src" / "async_runtime.cj"
+    check_path_exists(async_runtime_path, "windows-future async runtime")
     text = runtime_path.read_text(encoding="utf-8")
+    thunks_text = thunks_path.read_text(encoding="utf-8")
+    async_text = async_runtime_path.read_text(encoding="utf-8")
+    # Helper definitions now live in windows-core/src/winrt_abi_thunks.cj.
     require_text_fragments(
-        text,
+        thunks_text,
         (
             "func foundationDirectScalarOutThunk<T>",
             "unsafe { result.write(defaultValue) }",
             "func foundationProjectedScalarOutThunk<TProjected, TAbi, TDefault>",
-            "windows_core.projectTypedAbi(value, windows_core.typeMarker<TProjected>())",
+            "projectTypedAbi(value, typeMarker<TProjected>())",
             "func foundationUnitThunk(action: () -> Result<Unit>): Int32",
             "func cleanupFoundationHStringOutSlot",
             "func foundationNotImplValueOut<T>",
@@ -3676,22 +3781,32 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
             "func foundationNotImplComOut",
             "func foundationHStringOutThunk",
             "func cleanupFoundationGenericOutSlot<T>",
-            "windows_core.winrtReleaseGenericOutRange<T>(CPointer<Unit>(result), 1u32)",
+            "winrtReleaseGenericOutRange<T>(CPointer<Unit>(result), 1u32)",
             "func foundationGenericOutThunk<T>",
             "cleanupFoundationGenericOutSlot<T>(result)",
             "func clearFoundationArrayOut<T>",
             "func clearFoundationUnitArrayOut",
             "func foundationReferenceArrayValueThunk",
-            "func preparePropertyValueArrayOut<T>",
             "func foundationPropertyValueArrayOutThunk",
             "cleanup()",
+            "catch (error: WindowsException)",
+            "catch (_: Exception)",
+            "E_FAIL.value",
+        ),
+        "windows-core WinRT-ABI thunk helpers must clear outputs and translate thrown exceptions",
+    )
+    # PropertyValue-specific prepare/cleanup helpers stay with the foundation
+    # projection that owns IPropertyValue.
+    require_text_fragments(
+        text,
+        (
+            "func preparePropertyValueArrayOut<T>",
             "catch (error: windows_core.WindowsException)",
             "catch (_: Exception)",
-            "windows_core.E_FAIL.value",
         ),
-        "windows-runtime foundation thunk helpers must clear outputs and translate thrown exceptions",
+        "windows-foundation PropertyValue helpers must translate thrown exceptions",
     )
-    array_clear_body = cj_function_body(text, "clearFoundationArrayOut", runtime_path, workspace)
+    array_clear_body = cj_function_body(thunks_text, "clearFoundationArrayOut", thunks_path, workspace)
     require_text_fragments(
         array_clear_body,
         (
@@ -3700,9 +3815,9 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
             "if (value.isNotNull())",
             "value.write(CPointer<T>())",
         ),
-        "windows-runtime clearFoundationArrayOut must clear non-null array size/data out slots",
+        "windows-core clearFoundationArrayOut must clear non-null array size/data out slots",
     )
-    unit_array_clear_body = cj_function_body(text, "clearFoundationUnitArrayOut", runtime_path, workspace)
+    unit_array_clear_body = cj_function_body(thunks_text, "clearFoundationUnitArrayOut", thunks_path, workspace)
     require_text_fragments(
         unit_array_clear_body,
         (
@@ -3711,9 +3826,9 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
             "if (value.isNotNull())",
             "value.write(CPointer<Unit>())",
         ),
-        "windows-runtime clearFoundationUnitArrayOut must clear non-null array size/data out slots",
+        "windows-core clearFoundationUnitArrayOut must clear non-null array size/data out slots",
     )
-    reference_array_body = cj_function_body(text, "foundationReferenceArrayValueThunk", runtime_path, workspace)
+    reference_array_body = cj_function_body(thunks_text, "foundationReferenceArrayValueThunk", thunks_path, workspace)
     require_text_fragments(
         reference_array_body,
         (
@@ -3721,13 +3836,13 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
             "clearFoundationUnitArrayOut(resultSize, result)",
             "return E_POINTER.value",
         ),
-        "windows-runtime IReferenceArray.Value helper must clear sibling out slots before E_POINTER",
+        "windows-core IReferenceArray.Value helper must clear sibling out slots before E_POINTER",
     )
     require_text_before(
         reference_array_body,
         "clearFoundationUnitArrayOut(resultSize, result)",
         "return E_POINTER.value",
-        "windows-runtime IReferenceArray.Value helper must clear sibling out slots before E_POINTER",
+        "windows-core IReferenceArray.Value helper must clear sibling out slots before E_POINTER",
     )
     property_array_prepare_body = cj_function_body(text, "preparePropertyValueArrayOut", runtime_path, workspace)
     require_text_fragments(
@@ -3737,20 +3852,21 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
             "clearFoundationArrayOut<T>(valueSize, value)",
             "return E_POINTER.value",
         ),
-        "windows-runtime IPropertyValue array prepare helper must clear sibling out slots before E_POINTER",
+        "windows-foundation IPropertyValue array prepare helper must clear sibling out slots before E_POINTER",
     )
     require_text_before(
         property_array_prepare_body,
         "clearFoundationArrayOut<T>(valueSize, value)",
         "return E_POINTER.value",
-        "windows-runtime IPropertyValue array prepare helper must clear sibling out slots before E_POINTER",
+        "windows-foundation IPropertyValue array prepare helper must clear sibling out slots before E_POINTER",
     )
 
+    # IAsyncInfo_Impl moved to windows-future/src/async_runtime.cj.
     async_info_section = section_between(
-        text,
+        async_text,
         "public interface IAsyncInfo_Impl <: IAsyncInfo_ImplErased",
         "public class IAsyncInfo <:",
-        "windows-runtime IAsyncInfo_Impl",
+        "windows-future IAsyncInfo_Impl",
     )
     output_thunks = {
         "Id": "foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })",
@@ -3760,16 +3876,16 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
     for name, helper_call in output_thunks.items():
         body = function_body(async_info_section, f"__winrtThunk_{name}")
         if body is None:
-            fail(f"windows-runtime IAsyncInfo_Impl must define __winrtThunk_{name}")
+            fail(f"windows-future IAsyncInfo_Impl must define __winrtThunk_{name}")
         if helper_call not in body:
-            fail(f"windows-runtime IAsyncInfo {name} thunk must use scalar helper cleanup/translation")
+            fail(f"windows-future IAsyncInfo {name} thunk must use scalar helper cleanup/translation")
 
     for name in ("Cancel", "Close"):
         body = function_body(async_info_section, f"__winrtThunk_{name}")
         if body is None:
-            fail(f"windows-runtime IAsyncInfo_Impl must define __winrtThunk_{name}")
+            fail(f"windows-future IAsyncInfo_Impl must define __winrtThunk_{name}")
         if f"foundationUnitThunk({{ => this.{name}() }})" not in body:
-            fail(f"windows-runtime IAsyncInfo {name} thunk must use Unit helper exception translation")
+            fail(f"windows-future IAsyncInfo {name} thunk must use Unit helper exception translation")
 
     for fragment, minimum in (
         ("foundationDirectScalarOutThunk<UInt32>(result__, 0u32, { => this.Id() })", 5),
@@ -3799,21 +3915,25 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
         ("{ => cleanupFailedPropertyValueStringArrayOut(arg0Size, arg0) }", 3),
         ("{ => cleanupFailedPropertyValueInspectableArrayOut(arg0Size, arg0) }", 3),
     ):
-        if text.count(fragment) < minimum:
-            fail("windows-runtime foundation thunks must use cleanup/translation helpers across inherited interfaces")
+        # Call sites now span the foundation projection (PropertyValue/Uri/etc.)
+        # and the future async projection (IAsyncInfo/IAsyncOperation thunks).
+        if (text.count(fragment) + async_text.count(fragment)) < minimum:
+            fail("windows-foundation/windows-future thunks must use cleanup/translation helpers across inherited interfaces")
 
-    property_cleanup_tests = workspace / "windows-runtime" / "src" / "property_value_array_thunk_cleanup_test.cj"
-    property_abi_tests = workspace / "windows-runtime" / "src" / "property_value_array_abi_test.cj"
-    default_vtable_tests = workspace / "windows-runtime" / "src" / "foundation_default_vtable_abi_test.cj"
-    async_tests = workspace / "windows-runtime" / "src" / "async_helpers_test.cj"
-    async_helpers = workspace / "windows-runtime" / "src" / "async_helpers.cj"
-    memory_tests = workspace / "windows-runtime" / "src" / "memory_buffer_close_forwarding_test.cj"
-    check_path_exists(property_cleanup_tests, "windows-runtime property value cleanup tests")
-    check_path_exists(property_abi_tests, "windows-runtime property value ABI tests")
-    check_path_exists(default_vtable_tests, "windows-runtime foundation default vtable ABI tests")
-    check_path_exists(async_tests, "windows-runtime async helper tests")
-    check_path_exists(async_helpers, "windows-runtime async helper implementation")
-    check_path_exists(memory_tests, "windows-runtime memory buffer thunk tests")
+    property_cleanup_tests = workspace / "windows-foundation" / "src" / "property_value_array_thunk_cleanup_test.cj"
+    property_abi_tests = workspace / "windows-foundation" / "src" / "property_value_array_abi_test.cj"
+    default_vtable_tests = workspace / "windows-foundation" / "src" / "foundation_default_vtable_abi_test.cj"
+    async_default_vtable_tests = workspace / "windows-future" / "src" / "async_default_vtable_abi_test.cj"
+    async_tests = workspace / "windows-future" / "src" / "async_helpers_test.cj"
+    async_helpers = workspace / "windows-future" / "src" / "async_helpers.cj"
+    memory_tests = workspace / "windows-foundation" / "src" / "memory_buffer_close_forwarding_test.cj"
+    check_path_exists(property_cleanup_tests, "windows-foundation property value cleanup tests")
+    check_path_exists(property_abi_tests, "windows-foundation property value ABI tests")
+    check_path_exists(default_vtable_tests, "windows-foundation foundation default vtable ABI tests")
+    check_path_exists(async_default_vtable_tests, "windows-future async default vtable ABI tests")
+    check_path_exists(async_tests, "windows-future async helper tests")
+    check_path_exists(async_helpers, "windows-future async helper implementation")
+    check_path_exists(memory_tests, "windows-foundation memory buffer thunk tests")
     require_text_fragments(
         property_cleanup_tests.read_text(encoding="utf-8"),
         (
@@ -3828,7 +3948,7 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
             "primitiveNullSizeHr",
             "referenceNullDataHr",
         ),
-        "windows-runtime property value thunk cleanup tests must cover direct and inherited thrown-exception paths",
+        "windows-foundation property value thunk cleanup tests must cover direct and inherited thrown-exception paths",
     )
     require_text_fragments(
         property_abi_tests.read_text(encoding="utf-8"),
@@ -3841,26 +3961,38 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
             "@Expect(intSize, 0u32)",
             "@Expect(stringResult.isNull(), true)",
         ),
-        "windows-runtime property value ABI tests must cover default vtable E_NOTIMPL out-slot clearing",
+        "windows-foundation property value ABI tests must cover default vtable E_NOTIMPL out-slot clearing",
     )
+    # The async default-vtable coverage moved to windows-future alongside the
+    # IAsyncInfo/IAsyncOperation projection; the foundation default-vtable test
+    # retains the scalar/factory/reference and Uri/decoder coverage.
     require_text_fragments(
         default_vtable_tests.read_text(encoding="utf-8"),
         (
             "testFoundationDefaultScalarFactoryAndReferenceVtablesClearOutSlotsBeforeNotImpl",
-            "testFoundationDefaultAsyncVtablesClearOutSlotsBeforeNotImpl",
             "testFoundationDefaultUriAndDecoderVtablesClearOutSlotsBeforeNotImpl",
             "assertFoundationDefaultComOut1Cleared",
             "assertFoundationDefaultUnitArrayOutCleared",
-            "IAsyncInfoVtbl()",
             "IReferenceArrayVtbl()",
-            "IAsyncOperationWithProgressVtbl()",
             "IUriRuntimeClassVtbl()",
             "IWwwFormUrlDecoderRuntimeClassFactoryVtbl()",
             "@Expect(raw.isNull(), true)",
             "@Expect(size, 0u32)",
             "@Expect(token.Value, 0i64)",
         ),
-        "windows-runtime foundation default vtable ABI tests must cover E_NOTIMPL out-slot clearing",
+        "windows-foundation foundation default vtable ABI tests must cover E_NOTIMPL out-slot clearing",
+    )
+    require_text_fragments(
+        async_default_vtable_tests.read_text(encoding="utf-8"),
+        (
+            "testAsyncInfoDefaultScalarVtableClearsOutSlotsBeforeNotImpl",
+            "testAsyncDefaultVtablesClearOutSlotsBeforeNotImpl",
+            "assertAsyncDefaultComOut1Cleared",
+            "IAsyncInfoVtbl()",
+            "IAsyncOperationWithProgressVtbl()",
+            "@Expect(raw.isNull(), true)",
+        ),
+        "windows-future async default vtable ABI tests must cover E_NOTIMPL out-slot clearing",
     )
     require_text_fragments(
         async_tests.read_text(encoding="utf-8"),
@@ -3872,7 +4004,7 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
             "AsyncActionWithProgressThrowingInfoImpl",
             "AsyncOperationWithProgressThrowingInfoImpl",
         ),
-        "windows-runtime async derived info thunk cleanup tests must cover derived paths",
+        "windows-future async derived info thunk cleanup tests must cover derived paths",
     )
     async_helper_text = async_helpers.read_text(encoding="utf-8")
     spawn_sections = (
@@ -3895,7 +4027,7 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
             async_helper_text,
             marker,
             "impl.attachWorker(worker)",
-            f"windows-runtime {label}",
+            f"windows-future {label}",
         )
         require_text_fragments(
             section,
@@ -3905,19 +4037,19 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
                 "catch (_: Exception)",
                 "impl.fail(asyncFailureCode)",
             ),
-            f"windows-runtime {label} must preserve WindowsException HRESULTs before generic E_FAIL fallback",
+            f"windows-future {label} must preserve WindowsException HRESULTs before generic E_FAIL fallback",
         )
         require_text_before(
             section,
             "catch (error: windows_core.WindowsException)",
             "catch (_: Exception)",
-            f"windows-runtime {label} must catch WindowsException before generic Exception",
+            f"windows-future {label} must catch WindowsException before generic Exception",
         )
         require_text_before(
             section,
             "impl.fail(toFoundationHResult(error.code()))",
             "impl.fail(asyncFailureCode)",
-            f"windows-runtime {label} must record the original WindowsException HRESULT before generic E_FAIL",
+            f"windows-future {label} must record the original WindowsException HRESULT before generic E_FAIL",
         )
     require_text_fragments(
         async_tests.read_text(encoding="utf-8"),
@@ -3930,7 +4062,7 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
             "asyncTestToCoreHRESULT",
             "throw WindowsException(E_POINTER)",
         ),
-        "windows-runtime async spawnAsync tests must cover WindowsException HRESULT preservation",
+        "windows-future async spawnAsync tests must cover WindowsException HRESULT preservation",
     )
     require_text_fragments(
         memory_tests.read_text(encoding="utf-8"),
@@ -3938,31 +4070,31 @@ def check_foundation_manual_thunks_translate_exceptions(workspace: Path) -> None
             "throwWindowsOnCapacity",
             "testIMemoryBufferCreateReferenceThunkClearsOutputAndTranslatesExceptions",
         ),
-        "windows-runtime memory buffer thunk tests must cover scalar and generic out exception paths",
+        "windows-foundation memory buffer thunk tests must cover scalar and generic out exception paths",
     )
 
     activation_section = section_between(
         text,
         "public interface IGetActivationFactory_Impl <: IGetActivationFactory_ImplErased",
         "public class IGetActivationFactory <:",
-        "windows-runtime IGetActivationFactory_Impl",
+        "windows-foundation IGetActivationFactory_Impl",
     )
     activation_body = function_body(activation_section, "__winrtThunk_GetActivationFactory")
     if activation_body is None:
-        fail("windows-runtime IGetActivationFactory_Impl must define __winrtThunk_GetActivationFactory")
+        fail("windows-foundation IGetActivationFactory_Impl must define __winrtThunk_GetActivationFactory")
     dispatch = activation_body.find("this.GetActivationFactory(")
     if dispatch < 0:
-        fail("windows-runtime IGetActivationFactory thunk must dispatch to the implementation")
+        fail("windows-foundation IGetActivationFactory thunk must dispatch to the implementation")
     prefix = activation_body[:dispatch]
     if "result__.write(CPointer<Unit>())" not in prefix:
-        fail("windows-runtime IGetActivationFactory thunk must clear its out slot before dispatch")
+        fail("windows-foundation IGetActivationFactory thunk must clear its out slot before dispatch")
     if (
         "try {" not in prefix
         or "catch (error: windows_core.WindowsException)" not in activation_body
         or "catch (_: Exception)" not in activation_body
         or "windows_core.E_FAIL.value" not in activation_body
     ):
-        fail("windows-runtime IGetActivationFactory thunk must translate thrown exceptions to HRESULT values")
+        fail("windows-foundation IGetActivationFactory thunk must translate thrown exceptions to HRESULT values")
 
 
 def check_array_materialization_cleanup(workspace: Path) -> None:
@@ -4089,9 +4221,9 @@ def check_array_materialization_cleanup(workspace: Path) -> None:
             if pattern not in bridge_section:
                 fail(f"windows-core {label}.takeArrayOut must free CoTaskMem arrays on all paths")
 
-    foundation_runtime_text = (workspace / "windows-runtime" / "src" / "foundation_runtime.cj").read_text(encoding="utf-8")
+    foundation_runtime_text = (workspace / "windows-foundation" / "src" / "foundation_runtime.cj").read_text(encoding="utf-8")
     if "let raw = value.intoAbi()" in foundation_runtime_text:
-        fail("windows-runtime Foundation interface-return thunks must retain returned wrappers instead of consuming intoAbi()")
+        fail("windows-foundation Foundation interface-return thunks must retain returned wrappers instead of consuming intoAbi()")
     descriptor_codegen_text = (workspace / "windows-implement" / "src" / "descriptor_codegen.cj").read_text(encoding="utf-8")
     if "value.intoAbi()" in descriptor_codegen_text:
         fail("windows-implement descriptor return thunks must retain returned wrappers instead of consuming intoAbi()")
@@ -4105,7 +4237,7 @@ def check_array_materialization_cleanup(workspace: Path) -> None:
         foundation_runtime_text,
         "func projectPropertyValueStringHandleArray",
         "func releasePropertyValueStringHandleArray",
-        "windows-runtime PropertyValue string input projector",
+        "windows-foundation PropertyValue string input projector",
     )
     for pattern in (
         "try {",
@@ -4114,24 +4246,24 @@ def check_array_materialization_cleanup(workspace: Path) -> None:
         "throw error",
     ):
         if pattern not in string_projector:
-            fail("windows-runtime PropertyValue string array projection must release partially copied HSTRINGs")
+            fail("windows-foundation PropertyValue string array projection must release partially copied HSTRINGs")
     string_raw_release = section_between(
         foundation_runtime_text,
         "func releasePropertyValueStringRawSlots",
         "func releasePropertyValueInspectableRaw",
-        "windows-runtime PropertyValue string raw slot cleanup",
+        "windows-foundation PropertyValue string raw slot cleanup",
     )
     for pattern in (
         "releaseSystemHStringHandle(raw)",
         "slot.write(CPointer<Unit>())",
     ):
         if pattern not in string_raw_release:
-            fail("windows-runtime PropertyValue string raw slot cleanup must release and clear slots")
+            fail("windows-foundation PropertyValue string raw slot cleanup must release and clear slots")
     string_take_array = section_between(
         foundation_runtime_text,
         "func takePropertyValueStringArray",
         "func releasePropertyValueInspectableRawSlots",
-        "windows-runtime PropertyValue string array materializer",
+        "windows-foundation PropertyValue string array materializer",
     )
     for pattern in (
         "var result: Option<Array<windows_core.HString>> = None",
@@ -4142,24 +4274,24 @@ def check_array_materialization_cleanup(workspace: Path) -> None:
         "freePropertyValueHandleArraySlots(data)",
     ):
         if pattern not in string_take_array:
-            fail("windows-runtime PropertyValue string array materializer must clean partial materialization failures")
+            fail("windows-foundation PropertyValue string array materializer must clean partial materialization failures")
     inspectable_raw_release = section_between(
         foundation_runtime_text,
         "func releasePropertyValueInspectableRawSlots",
         "func closePropertyValueInspectableArray",
-        "windows-runtime PropertyValue inspectable raw slot cleanup",
+        "windows-foundation PropertyValue inspectable raw slot cleanup",
     )
     for pattern in (
         "releasePropertyValueInspectableRaw(raw)",
         "slot.write(CPointer<Unit>())",
     ):
         if pattern not in inspectable_raw_release:
-            fail("windows-runtime PropertyValue inspectable raw slot cleanup must release and clear slots")
+            fail("windows-foundation PropertyValue inspectable raw slot cleanup must release and clear slots")
     inspectable_take_array = section_between(
         foundation_runtime_text,
         "func takePropertyValueInspectableArray",
         "func takePropertyValueGuidArray",
-        "windows-runtime PropertyValue inspectable array materializer",
+        "windows-foundation PropertyValue inspectable array materializer",
     )
     for pattern in (
         "var result: Option<Array<Option<IInspectable>>> = None",
@@ -4171,7 +4303,7 @@ def check_array_materialization_cleanup(workspace: Path) -> None:
         "freePropertyValueHandleArraySlots(data)",
     ):
         if pattern not in inspectable_take_array:
-            fail("windows-runtime PropertyValue inspectable array materializer must clean partial materialization failures")
+            fail("windows-foundation PropertyValue inspectable array materializer must clean partial materialization failures")
 
 
 def is_ignored_generated_path(path: Path, root: Path) -> bool:
@@ -8676,10 +8808,10 @@ def check_package_boundaries(workspace: Path) -> None:
     if ".lock()" in services_lib_text or ".unlock()" in services_lib_text:
         fail("windows-services state guards must use synchronized blocks")
 
-    runtime_async = workspace / "windows-runtime" / "src" / "async_helpers.cj"
+    runtime_async = workspace / "windows-future" / "src" / "async_helpers.cj"
     runtime_async_text = runtime_async.read_text(encoding="utf-8")
     if ".lock()" in runtime_async_text or ".unlock()" in runtime_async_text:
-        fail("windows-runtime async state guards must use synchronized blocks")
+        fail("windows-future async state guards must use synchronized blocks")
 
     core_type_impl = workspace / "windows-core" / "src" / "type_impl.cj"
     core_type_impl_text = core_type_impl.read_text(encoding="utf-8")
@@ -8876,7 +9008,7 @@ def check_package_boundaries(workspace: Path) -> None:
             fail("windows-winui3 Application.Start must not use function-pointer delegate shims")
     check_winui_xaml_failed_out_cleanup(workspace)
     check_winui_xaml_callback_com_invariants(workspace)
-    foundation_runtime_text = (workspace / "windows-runtime" / "src" / "foundation_runtime.cj").read_text(encoding="utf-8")
+    foundation_runtime_text = (workspace / "windows-foundation" / "src" / "foundation_runtime.cj").read_text(encoding="utf-8")
     for pattern in (
         "v.GetActivationFactory(asRaw(), activatableClassId.asRaw(),",
         "v.UnescapeComponent(asRaw(), toUnescape.asRaw(),",
@@ -8889,15 +9021,21 @@ def check_package_boundaries(workspace: Path) -> None:
         "v.CreateWwwFormUrlDecoder(asRaw(), query.asRaw(),",
     ):
         if pattern in foundation_runtime_text:
-            fail("windows-runtime direct HSTRING inputs must use system HSTRING input borrows")
-    for source in (workspace / "windows-runtime" / "src").rglob("*.cj"):
-        text = source.read_text(encoding="utf-8")
-        if "windows_core.HString.fromAbiTake(result__)" in text:
-            fail(f"{source.relative_to(workspace)} must consume returned HSTRING handles with fromSystemHandleTake")
-        if "windows_core.HString.viewOf(arg" in text:
-            fail(f"{source.relative_to(workspace)} must project borrowed HSTRING inputs with fromSystemHandleCopy")
-        if "let raw = value.intoRaw()" in text:
-            fail(f"{source.relative_to(workspace)} must publish HSTRING out parameters as system HSTRING copies")
+            fail("windows-foundation direct HSTRING inputs must use system HSTRING input borrows")
+    split_projection_sources = [
+        workspace / "windows-foundation" / "src",
+        workspace / "windows-collections" / "src",
+        workspace / "windows-future" / "src",
+    ]
+    for source_root in split_projection_sources:
+        for source in source_root.rglob("*.cj"):
+            text = source.read_text(encoding="utf-8")
+            if "windows_core.HString.fromAbiTake(result__)" in text:
+                fail(f"{source.relative_to(workspace)} must consume returned HSTRING handles with fromSystemHandleTake")
+            if "windows_core.HString.viewOf(arg" in text:
+                fail(f"{source.relative_to(workspace)} must project borrowed HSTRING inputs with fromSystemHandleCopy")
+            if "let raw = value.intoRaw()" in text:
+                fail(f"{source.relative_to(workspace)} must publish HSTRING out parameters as system HSTRING copies")
 
     common_com_helpers = workspace / "windows-common" / "src" / "Win32" / "System" / "Com" / "native_helpers.cj"
     if common_com_helpers.exists():
@@ -8997,29 +9135,33 @@ def check_active_tools(workspace: Path) -> None:
     check_path_exists(workspace / "windows-bindgen" / "src" / "winmd_adapter.cj", "native WinMD reader adapter")
     check_path_exists(workspace / "windows-winui3" / "src" / "xaml" / "mod.cj", "WinUI3 XAML helper")
     runtime_runner = workspace / "scripts" / "run_windows_runtime_tests.py"
-    check_path_exists(runtime_runner, "windows-runtime watchdog test runner")
+    check_path_exists(runtime_runner, "split projection watchdog test runner")
     runtime_runner_text = runtime_runner.read_text(encoding="utf-8")
     try:
         runtime_runner_tree = ast.parse(runtime_runner_text)
     except SyntaxError as exc:
-        fail(f"windows-runtime test runner must be valid Python: {exc}")
+        fail(f"split projection test runner must be valid Python: {exc}")
     if not python_has_command_list_prefix(runtime_runner_tree, ("cjv", "exec")):
-        fail("windows-runtime test runner must build with cjpm --no-run and execute binaries through cjv exec")
+        fail("split projection test runner must build with cjpm --no-run and execute binaries through cjv exec")
     if not python_has_command_list_prefix(runtime_runner_tree, ("cjpm", "test")) or not python_has_command_list_value(
         runtime_runner_tree,
         "--no-run",
     ):
-        fail("windows-runtime test runner must build with cjpm --no-run and execute binaries through cjv exec")
+        fail("split projection test runner must build with cjpm --no-run and execute binaries through cjv exec")
     if python_runner_directly_executes_name(runtime_runner_tree, "BINARY"):
-        fail("windows-runtime test runner must not execute produced .exe files directly")
+        fail("split projection test runner must not execute produced .exe files directly")
+    # The runner is parameterized by --package across the windows-foundation /
+    # windows-collections / windows-future projection packages.
+    if "--package" not in runtime_runner_text or "windows-collections" not in runtime_runner_text or "windows-future" not in runtime_runner_text:
+        fail("split projection test runner must accept --package for the foundation/collections/future packages")
     if "cjHeapSize" not in runtime_runner_text or "32GB" not in runtime_runner_text:
-        fail("windows-runtime test runner must force cjHeapSize=32GB")
+        fail("split projection test runner must force cjHeapSize=32GB")
     if "FAILED" not in runtime_runner_text or "ERROR" not in runtime_runner_text or "summary_counts" not in runtime_runner_text:
-        fail("windows-runtime test runner must fail on unittest FAILED/ERROR summary counts")
-    if "remove_expected_runtime_binary()" not in runtime_runner_text or "$test.cjo.flag" not in runtime_runner_text:
-        fail("windows-runtime test runner must clear stale unittest binaries before rebuilding")
+        fail("split projection test runner must fail on unittest FAILED/ERROR summary counts")
+    if "remove_expected_runtime_binary(" not in runtime_runner_text or "$test.cjo.flag" not in runtime_runner_text:
+        fail("split projection test runner must clear stale unittest binaries before rebuilding")
     if "do not pass --timeout-each" not in runtime_runner_text or "runtime_test_command" not in runtime_runner_text:
-        fail("windows-runtime test runner must use the external watchdog instead of unittest --timeout-each")
+        fail("split projection test runner must use the external watchdog instead of unittest --timeout-each")
     workspace_runner = workspace / "scripts" / "run_windows_workspace_tests.py"
     check_path_exists(workspace_runner, "workspace direct-binary test runner")
     workspace_runner_text = workspace_runner.read_text(encoding="utf-8")
@@ -9075,19 +9217,27 @@ def check_active_tools(workspace: Path) -> None:
         or '"windows-core"' not in quality_gate_text
         or '"windows-implement"' not in quality_gate_text
         or '"windows-interface"' not in quality_gate_text
-        or '"windows-runtime"' not in quality_gate_text
+        or '"windows-foundation"' not in quality_gate_text
+        or '"windows-collections"' not in quality_gate_text
+        or '"windows-future"' not in quality_gate_text
     ):
         fail("quick quality gate must run focused Cangjie workspace tests")
     if "macro fixtures" not in quality_gate_text or "windows-interface/scripts/check_macros.py" not in quality_gate_text:
         fail("quick quality gate must compile and execute macro fixtures")
-    required_runtime_smokes = (
-        "testRealActivationFactoryReportsUnavailableClass",
-        "testRealPropertyValueInt32ArrayRoundTrip",
-        "testRealUriDecoderRoundTripsHStringAndCollectionProjection",
-    )
-    if "windows-runtime smoke test" not in quality_gate_text or any(name not in quality_gate_text for name in required_runtime_smokes):
-        fail("quick quality gate must run a real windows-runtime smoke test")
-    check_runtime_smoke_bodies(workspace, required_runtime_smokes)
+    # Each split projection package keeps a real-WinRT smoke that the quick gate
+    # drives through the parameterized runner. The gate builds one smoke step per
+    # package from RUNTIME_SMOKE_FILTERS_BY_PACKAGE via an f"{package} smoke test"
+    # name and a "--package <name>" runner argument.
+    if (
+        "RUNTIME_SMOKE_FILTERS_BY_PACKAGE" not in quality_gate_text
+        or '"{package} smoke test"' not in quality_gate_text
+        or '"--package"' not in quality_gate_text
+    ):
+        fail("quick quality gate must build a per-package real-WinRT smoke step from RUNTIME_SMOKE_FILTERS_BY_PACKAGE")
+    for package, (_smoke_file, smoke_markers) in SPLIT_SMOKE_TESTS.items():
+        if f'"{package}"' not in quality_gate_text or any(name not in quality_gate_text for name in smoke_markers):
+            fail(f"quick quality gate must run a real {package} smoke test")
+    check_runtime_smoke_bodies(workspace)
     demo_root = workspace.parent / "windows-cj-demo"
     if demo_root.exists():
         demo_cjpm = (demo_root / "cjpm.toml").read_text(encoding="utf-8")
@@ -9336,36 +9486,22 @@ def python_runner_directly_executes_name(tree: ast.AST, name: str) -> bool:
     return False
 
 
-def check_runtime_smoke_bodies(workspace: Path, required_smokes: Sequence[str]) -> None:
-    smoke_source = workspace / "windows-runtime" / "src" / "windows_runtime_smoke_test.cj"
-    check_path_exists(smoke_source, "windows-runtime real smoke tests")
-    smoke_text = smoke_source.read_text(encoding="utf-8")
-    required_markers = {
-        "testRealActivationFactoryReportsUnavailableClass": (
-            "activationFactory<",
-            "Result<IActivationFactory>.Err",
-            "error.code()",
-            "REGDB_E_CLASSNOTREG",
-        ),
-        "testRealPropertyValueInt32ArrayRoundTrip": (
-            "PropertyValue.CreateInt32Array",
-            "GetInt32Array",
-        ),
-        "testRealUriDecoderRoundTripsHStringAndCollectionProjection": (
-            "Uri.CreateUri",
-            "QueryParsed",
-            "GetFirstValueByName",
-            "GetAt",
-        ),
-    }
-    for smoke in required_smokes:
-        body = function_body(smoke_text, smoke)
-        if body is None:
-            fail(f"windows-runtime smoke test is missing required function body: {smoke}")
-        code_body = mask_cj_strings_and_comments(body)
-        missing = [marker for marker in required_markers.get(smoke, ()) if marker not in code_body]
-        if missing:
-            fail(f"windows-runtime smoke test {smoke} no longer exercises real WinRT calls; missing={missing}")
+def check_runtime_smoke_bodies(workspace: Path) -> None:
+    # Each split projection package keeps its own real-WinRT smoke file. Verify
+    # the smoke functions still exercise real WinRT projection paths (not just
+    # constants) so the quick gate stays meaningful after the package split.
+    for package, (smoke_file, required_markers) in SPLIT_SMOKE_TESTS.items():
+        smoke_source = workspace / package / "src" / smoke_file
+        check_path_exists(smoke_source, f"{package} real smoke tests")
+        smoke_text = smoke_source.read_text(encoding="utf-8")
+        for smoke, markers in required_markers.items():
+            body = function_body(smoke_text, smoke)
+            if body is None:
+                fail(f"{package} smoke test is missing required function body: {smoke}")
+            code_body = mask_cj_strings_and_comments(body)
+            missing = [marker for marker in markers if marker not in code_body]
+            if missing:
+                fail(f"{package} smoke test {smoke} no longer exercises real WinRT calls; missing={missing}")
 
 
 def check_propvariant_propsys_smoke(workspace: Path) -> None:

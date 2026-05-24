@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
-"""Run windows-runtime tests without relying on unittest --timeout-each.
+"""Run a split WinRT projection package's tests without unittest --timeout-each.
 
 The Cangjie unittest timeout path starts a worker process and asks the worker
 to exit gracefully. On Windows that can hang while the runtime scheduler is
 shutting down. This runner keeps the timeout outside the Cangjie test process
 and kills the whole child process tree if the run exceeds the watchdog.
+
+The original monolithic ``windows-runtime`` package was split into the
+``windows-foundation`` / ``windows-collections`` / ``windows-future`` packages.
+This runner is parameterized by ``--package`` so the same watchdog/build/parse
+logic drives any of them; ``windows-foundation`` is the default because it
+carries the shared real-WinRT smoke tests.
 """
 
 from __future__ import annotations
@@ -20,8 +26,33 @@ from typing import Sequence
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE = ROOT / "windows-runtime"
-BINARY = PACKAGE / "target" / "release" / "unittest_bin" / "windows_runtime.exe"
+
+# Split projection packages and their produced unittest binary names. The
+# package directory name maps to the cjpm package name (dashes -> underscores).
+SPLIT_PACKAGES = (
+    "windows-foundation",
+    "windows-collections",
+    "windows-future",
+)
+DEFAULT_PACKAGE = "windows-foundation"
+
+
+def package_binary_name(package: str) -> str:
+    return package.replace("-", "_") + ".exe"
+
+
+def package_dir(package: str) -> Path:
+    return ROOT / package
+
+
+def package_binary(package: str) -> Path:
+    return package_dir(package) / "target" / "release" / "unittest_bin" / package_binary_name(package)
+
+
+# Module-level defaults preserve the historical PACKAGE/BINARY contract used by
+# tests and the workspace setup audit; --package overrides them at runtime.
+PACKAGE = package_dir(DEFAULT_PACKAGE)
+BINARY = package_binary(DEFAULT_PACKAGE)
 
 
 def kill_process_tree(process: subprocess.Popen[str]) -> None:
@@ -159,11 +190,22 @@ def self_test() -> None:
         Path("runtime$test.cjo"),
         Path("runtime$test.cjo.flag"),
     )
-    print("OK: windows-runtime runner self-test completed")
+    assert package_binary_name("windows-foundation") == "windows_foundation.exe"
+    assert package_binary_name("windows-collections") == "windows_collections.exe"
+    assert package_binary_name("windows-future") == "windows_future.exe"
+    for package in SPLIT_PACKAGES:
+        assert package_binary(package).name == package_binary_name(package)
+    print("OK: split projection runner self-test completed")
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--package",
+        choices=SPLIT_PACKAGES,
+        default=DEFAULT_PACKAGE,
+        help="Split projection package directory to build and test.",
+    )
     parser.add_argument("--skip-build", action="store_true", help="Run the existing unittest binary.")
     parser.add_argument("--timeout-seconds", type=positive_int, default=120, help="External process-tree watchdog.")
     parser.add_argument(
@@ -181,27 +223,30 @@ def main(argv: Sequence[str] | None = None) -> int:
         self_test()
         return 0
 
+    package = package_dir(args.package)
+    binary = package_binary(args.package)
+
     env = os.environ.copy()
     env["cjHeapSize"] = "32GB"
 
     if not args.skip_build:
-        remove_expected_runtime_binary()
+        remove_expected_runtime_binary(binary)
         build_result, _ = run_with_watchdog(
             ["cjpm", "test", "--no-run", "--no-progress", "--no-color"],
-            cwd=PACKAGE,
+            cwd=package,
             env=env,
             timeout_seconds=args.timeout_seconds,
         )
         if build_result != 0:
             return build_result
-    if not BINARY.exists():
-        print(f"missing unittest binary: {BINARY}", file=sys.stderr)
+    if not binary.exists():
+        print(f"missing unittest binary: {binary}", file=sys.stderr)
         return 2
 
     filters = args.filters if args.filters else [None]
     for filter_value in filters:
         try:
-            test_args = runtime_test_command(BINARY, filter_value, args.extra_args)
+            test_args = runtime_test_command(binary, filter_value, args.extra_args)
         except RuntimeError as exc:
             print(str(exc), file=sys.stderr)
             return 2

@@ -73,6 +73,39 @@ class ActiveToolGateTests(unittest.TestCase):
             "}\n"
         )
 
+    def collections_smoke_text(self) -> str:
+        return (
+            "func testStockInt32VectorViewRoundTripsThroughProjection() {\n"
+            "    let view = toVectorView(ArrayList<Int32>([10i32, 20i32, 30i32]))\n"
+            "    @Expect(unsafe { view.Size() }, 3u32)\n"
+            "    @Expect(unsafe { view.GetAt(0u32) }, 10i32)\n"
+            "    var foundIndex = 99u32\n"
+            "    @Expect(unsafe { view.IndexOf(20i32, CPointer<UInt32>(inout foundIndex)) }, true)\n"
+            "}\n"
+        )
+
+    def future_smoke_text(self) -> str:
+        return (
+            "func testReadyOperationProjectsCompletedResult() {\n"
+            "    let operation = IAsyncOperation<Int32>.ready(42i32)\n"
+            "    let info = operation.asIAsyncInfo()\n"
+            "    @Expect(unsafe { info.Status() } == AsyncStatus_Completed, true)\n"
+            "    match (operation.join()) {\n"
+            "        case Result<Int32>.Ok(value) => @Expect(value, 42i32)\n"
+            "        case _ => ()\n"
+            "    }\n"
+            "}\n"
+            "func testSpawnedActionPropagatesWindowsExceptionThroughJoin() {\n"
+            "    let action = IAsyncAction.spawnAsync({ => throw WindowsException(E_POINTER) })\n"
+            "    let info = action.asIAsyncInfo()\n"
+            "    match (action.join()) {\n"
+            "        case Result<Unit>.Err(error) => @Expect(error.code(), E_POINTER)\n"
+            "        case _ => ()\n"
+            "    }\n"
+            "    @Expect(unsafe { info.Status() } == AsyncStatus_Error, true)\n"
+            "}\n"
+        )
+
     def write_active_tools_workspace(
         self,
         workspace: Path,
@@ -91,24 +124,32 @@ class ActiveToolGateTests(unittest.TestCase):
             runtime_runner_text
             if runtime_runner_text is not None
             else (
+                "import argparse\n"
                 "from pathlib import Path\n"
-                "BINARY = Path('windows_runtime.exe')\n"
+                "SPLIT_PACKAGES = ('windows-foundation', 'windows-collections', 'windows-future')\n"
+                "BINARY = Path('windows_foundation.exe')\n"
                 "PACKAGE = Path('.')\n"
                 "ROOT = Path('.')\n"
+                "def package_binary(package):\n"
+                "    return Path(package.replace('-', '_') + '.exe')\n"
                 "def run_with_watchdog(command, *, cwd, env, timeout_seconds):\n"
                 "    return 0, 'PASSED: 1 FAILED: 0 ERROR: 0'\n"
                 "def summary_counts(output):\n"
                 "    return {'PASSED': 1, 'FAILED': 0, 'ERROR': 0}\n"
-                "def remove_expected_runtime_binary():\n"
+                "def remove_expected_runtime_binary(binary=BINARY):\n"
                 "    marker = '$test.cjo.flag'\n"
                 "def runtime_test_command(binary, filter_value, extra_args):\n"
                 "    # do not pass --timeout-each\n"
                 "    return ['cjv', 'exec', str(binary), '--no-color', '--progress-brief']\n"
                 "def main():\n"
+                "    parser = argparse.ArgumentParser()\n"
+                "    parser.add_argument('--package', choices=SPLIT_PACKAGES, default='windows-foundation')\n"
+                "    args = parser.parse_args()\n"
+                "    binary = package_binary(args.package)\n"
                 "    env = {'cjHeapSize': '32GB'}\n"
-                "    remove_expected_runtime_binary()\n"
+                "    remove_expected_runtime_binary(binary)\n"
                 "    run_with_watchdog(['cjpm', 'test', '--no-run'], cwd=PACKAGE, env=env, timeout_seconds=1)\n"
-                "    command = runtime_test_command(BINARY, None, [])\n"
+                "    command = runtime_test_command(binary, None, [])\n"
                 "    return run_with_watchdog(command, cwd=ROOT, env=env, timeout_seconds=1)\n"
             ),
         )
@@ -129,14 +170,28 @@ class ActiveToolGateTests(unittest.TestCase):
             workspace,
             "scripts/run_windows_quality_gate.py",
             '--allow-missing-winui-metadata\nquick workspace Cangjie tests\n"windows-bindgen"\n"windows-core"\n'
-            '"windows-implement"\n"windows-interface"\n"windows-runtime"\nwindows-runtime smoke test\ntestRealActivationFactoryReportsUnavailableClass\n'
+            '"windows-implement"\n"windows-interface"\n"windows-foundation"\n"windows-collections"\n"windows-future"\n'
+            'RUNTIME_SMOKE_FILTERS_BY_PACKAGE\nf"{package} smoke test"\n"--package"\n'
+            "testRealActivationFactoryReportsUnavailableClass\n"
             "testRealPropertyValueInt32ArrayRoundTrip\ntestRealUriDecoderRoundTripsHStringAndCollectionProjection\n"
+            "testStockInt32VectorViewRoundTripsThroughProjection\n"
+            "testReadyOperationProjectsCompletedResult\ntestSpawnedActionPropagatesWindowsExceptionThroughJoin\n"
             "generate_vector_input_abi.py\n--check-all\nmacro fixtures\nwindows-interface/scripts/check_macros.py\n",
         )
         self.write_text(
             workspace,
-            "windows-runtime/src/windows_runtime_smoke_test.cj",
+            "windows-foundation/src/windows_foundation_smoke_test.cj",
             runtime_smoke_text if runtime_smoke_text is not None else self.runtime_smoke_text(),
+        )
+        self.write_text(
+            workspace,
+            "windows-collections/src/windows_collections_smoke_test.cj",
+            self.collections_smoke_text(),
+        )
+        self.write_text(
+            workspace,
+            "windows-future/src/windows_future_smoke_test.cj",
+            self.future_smoke_text(),
         )
         self.write_text(
             workspace,
@@ -240,22 +295,26 @@ class ActiveToolGateTests(unittest.TestCase):
             self.write_active_tools_workspace(
                 workspace,
                 runtime_runner_text=(
+                    "import argparse\n"
                     "from pathlib import Path\n"
-                    "BINARY = Path('windows_runtime.exe')\n"
+                    "SPLIT_PACKAGES = ('windows-foundation', 'windows-collections', 'windows-future')\n"
+                    "BINARY = Path('windows_foundation.exe')\n"
                     "PACKAGE = Path('.')\n"
                     "ROOT = Path('.')\n"
                     "def run_with_watchdog(command, *, cwd, env, timeout_seconds):\n"
                     "    return 0, 'PASSED: 1 FAILED: 0 ERROR: 0'\n"
                     "def summary_counts(output):\n"
                     "    return {'PASSED': 1, 'FAILED': 0, 'ERROR': 0}\n"
-                    "def remove_expected_runtime_binary():\n"
+                    "def remove_expected_runtime_binary(binary=BINARY):\n"
                     "    marker = '$test.cjo.flag'\n"
                     "def runtime_test_command(binary, filter_value, extra_args):\n"
                     "    # do not pass --timeout-each\n"
                     "    return ['cjv', 'exec', str(binary), '--no-color', '--progress-brief']\n"
                     "def main():\n"
+                    "    parser = argparse.ArgumentParser()\n"
+                    "    parser.add_argument('--package', choices=SPLIT_PACKAGES, default='windows-foundation')\n"
                     "    env = {'cjHeapSize': '32GB'}\n"
-                    "    remove_expected_runtime_binary()\n"
+                    "    remove_expected_runtime_binary(BINARY)\n"
                     "    run_with_watchdog(['cjpm', 'test', '--no-run'], cwd=PACKAGE, env=env, timeout_seconds=1)\n"
                     "    return run_with_watchdog([str(BINARY)], cwd=ROOT, env=env, timeout_seconds=1)\n"
                 ),
@@ -301,10 +360,14 @@ class ActiveToolGateTests(unittest.TestCase):
             (workspace / "scripts" / "run_windows_quality_gate.py").write_text(
                 (
                     '--allow-missing-winui-metadata\nquick workspace Cangjie tests\n"windows-bindgen"\n'
-                    '"windows-core"\n"windows-implement"\n"windows-interface"\nwindows-runtime smoke test\n'
+                    '"windows-core"\n"windows-implement"\n"windows-interface"\n"windows-foundation"\n'
+                    '"windows-collections"\n"windows-future"\n'
+                    'RUNTIME_SMOKE_FILTERS_BY_PACKAGE\nf"{package} smoke test"\n"--package"\n'
                     "testRealActivationFactoryReportsUnavailableClass\n"
                     "testRealPropertyValueInt32ArrayRoundTrip\n"
                     "testRealUriDecoderRoundTripsHStringAndCollectionProjection\n"
+                    "testStockInt32VectorViewRoundTripsThroughProjection\n"
+                    "testReadyOperationProjectsCompletedResult\ntestSpawnedActionPropagatesWindowsExceptionThroughJoin\n"
                     "generate_vector_input_abi.py\n--check-test\nmacro fixtures\nwindows-interface/scripts/check_macros.py\n"
                 ),
                 encoding="utf-8",
@@ -1153,7 +1216,7 @@ class DescriptorGeneratedThunkGateTests(unittest.TestCase):
 
 class CollectionThunkGateTests(unittest.TestCase):
     def write_runtime_source(self, workspace: Path, text: str) -> None:
-        path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+        path = workspace / "windows-collections" / "src" / "collections_runtime.cj"
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text, encoding="utf-8")
 
@@ -1193,7 +1256,7 @@ class CollectionThunkGateTests(unittest.TestCase):
         )
 
     def write_collection_cleanup_test(self, workspace: Path, text: str | None = None) -> None:
-        path = workspace / "windows-runtime" / "src" / "collection_get_many_cleanup_test.cj"
+        path = workspace / "windows-collections" / "src" / "collection_get_many_cleanup_test.cj"
         path.parent.mkdir(parents=True, exist_ok=True)
         if text is None:
             text = (
@@ -1205,7 +1268,7 @@ class CollectionThunkGateTests(unittest.TestCase):
                 "testCollectionGenericOutThunkCleansStoreFailure\n"
             )
         path.write_text(text, encoding="utf-8")
-        default_vtable_path = workspace / "windows-runtime" / "src" / "collection_default_vtable_abi_test.cj"
+        default_vtable_path = workspace / "windows-collections" / "src" / "collection_default_vtable_abi_test.cj"
         default_vtable_path.write_text(
             "func testCollectionDefaultIteratorAndEventVtablesClearOutSlotsBeforeNotImpl() {\n"
             "    IIteratorVtbl()\n"
@@ -1222,7 +1285,7 @@ class CollectionThunkGateTests(unittest.TestCase):
             "}\n",
             encoding="utf-8",
         )
-        null_buffer_path = workspace / "windows-runtime" / "src" / "collection_null_buffer_thunk_test.cj"
+        null_buffer_path = workspace / "windows-collections" / "src" / "collection_null_buffer_thunk_test.cj"
         null_buffer_path.write_text(
             (
                 "testGeneratedIteratorGetManyThunkRejectsNullBufferWithNonZeroCapacity\n"
@@ -2080,10 +2143,20 @@ class CollectionThunkGateTests(unittest.TestCase):
         path.write_text(text, encoding="utf-8")
 
     def write_foundation_source(self, workspace: Path, text: str) -> None:
-        path = workspace / "windows-runtime" / "src" / "foundation_runtime.cj"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(text, encoding="utf-8")
-        property_tests = workspace / "windows-runtime" / "src" / "property_value_array_thunk_cleanup_test.cj"
+        # The shared WinRT-ABI thunk helpers were down-sinked to windows-core and
+        # the IAsyncInfo surface moved to windows-future, so the foundation manual
+        # thunk audit now reads three files. The fixture writes the same combined
+        # blob into each so a single .replace() mutation in a test propagates to
+        # whichever package the audit inspects for that symbol.
+        for relative in (
+            "windows-foundation/src/foundation_runtime.cj",
+            "windows-core/src/winrt_abi_thunks.cj",
+            "windows-future/src/async_runtime.cj",
+        ):
+            path = workspace / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(text, encoding="utf-8")
+        property_tests = workspace / "windows-foundation" / "src" / "property_value_array_thunk_cleanup_test.cj"
         property_tests.write_text(
             "func testIPropertyValueScalarThunksClearOutputsAndTranslateThrownExceptions() {}\n"
             "func testInheritedPropertyValueScalarThunksClearOutputsAndTranslateThrownExceptions() {}\n"
@@ -2098,7 +2171,7 @@ class CollectionThunkGateTests(unittest.TestCase):
             "}\n",
             encoding="utf-8",
         )
-        property_abi_tests = workspace / "windows-runtime" / "src" / "property_value_array_abi_test.cj"
+        property_abi_tests = workspace / "windows-foundation" / "src" / "property_value_array_abi_test.cj"
         property_abi_tests.write_text(
             "func testIPropertyValueDefaultVtblClearsOutSlotsBeforeNotImpl() {\n"
             "    IPropertyValueVtbl()\n"
@@ -2111,17 +2184,13 @@ class CollectionThunkGateTests(unittest.TestCase):
             "}\n",
             encoding="utf-8",
         )
-        default_vtable_tests = workspace / "windows-runtime" / "src" / "foundation_default_vtable_abi_test.cj"
+        default_vtable_tests = workspace / "windows-foundation" / "src" / "foundation_default_vtable_abi_test.cj"
         default_vtable_tests.write_text(
             "func assertFoundationDefaultComOut1Cleared() { @Expect(raw.isNull(), true) }\n"
             "func assertFoundationDefaultUnitArrayOutCleared() { @Expect(size, 0u32) }\n"
             "func testFoundationDefaultScalarFactoryAndReferenceVtablesClearOutSlotsBeforeNotImpl() {\n"
-            "    IAsyncInfoVtbl()\n"
             "    IReferenceArrayVtbl()\n"
             "    @Expect(token.Value, 0i64)\n"
-            "}\n"
-            "func testFoundationDefaultAsyncVtablesClearOutSlotsBeforeNotImpl() {\n"
-            "    IAsyncOperationWithProgressVtbl()\n"
             "}\n"
             "func testFoundationDefaultUriAndDecoderVtablesClearOutSlotsBeforeNotImpl() {\n"
             "    IUriRuntimeClassVtbl()\n"
@@ -2129,7 +2198,21 @@ class CollectionThunkGateTests(unittest.TestCase):
             "}\n",
             encoding="utf-8",
         )
-        async_tests = workspace / "windows-runtime" / "src" / "async_helpers_test.cj"
+        # Async default-vtable coverage moved to windows-future alongside the
+        # IAsyncInfo/IAsyncOperation projection.
+        async_default_vtable_tests = workspace / "windows-future" / "src" / "async_default_vtable_abi_test.cj"
+        async_default_vtable_tests.parent.mkdir(parents=True, exist_ok=True)
+        async_default_vtable_tests.write_text(
+            "func assertAsyncDefaultComOut1Cleared() { @Expect(raw.isNull(), true) }\n"
+            "func testAsyncInfoDefaultScalarVtableClearsOutSlotsBeforeNotImpl() {\n"
+            "    IAsyncInfoVtbl()\n"
+            "}\n"
+            "func testAsyncDefaultVtablesClearOutSlotsBeforeNotImpl() {\n"
+            "    IAsyncOperationWithProgressVtbl()\n"
+            "}\n",
+            encoding="utf-8",
+        )
+        async_tests = workspace / "windows-future" / "src" / "async_helpers_test.cj"
         async_tests.write_text(
             "func testDerivedAsyncInfoThunksClearOutputsAndTranslateThrownExceptions() {}\n"
             "func testFoundationGenericOutThunkCleansStoreExceptions() {}\n"
@@ -2145,7 +2228,7 @@ class CollectionThunkGateTests(unittest.TestCase):
             "class AsyncOperationWithProgressThrowingInfoImpl {}\n",
             encoding="utf-8",
         )
-        async_helpers = workspace / "windows-runtime" / "src" / "async_helpers.cj"
+        async_helpers = workspace / "windows-future" / "src" / "async_helpers.cj"
         async_helpers.write_text(
             "public static func spawnAsync(work: () -> Unit): IAsyncAction {\n"
             "    let worker = spawn {\n"
@@ -2183,7 +2266,7 @@ class CollectionThunkGateTests(unittest.TestCase):
             "}\n",
             encoding="utf-8",
         )
-        memory_tests = workspace / "windows-runtime" / "src" / "memory_buffer_close_forwarding_test.cj"
+        memory_tests = workspace / "windows-foundation" / "src" / "memory_buffer_close_forwarding_test.cj"
         memory_tests.write_text(
             "var throwWindowsOnCapacity = true\n"
             "func testIMemoryBufferCreateReferenceThunkClearsOutputAndTranslatesExceptions() {}\n",
@@ -2240,10 +2323,10 @@ class CollectionThunkGateTests(unittest.TestCase):
             "}\n"
             "func foundationProjectedScalarOutThunk<TProjected, TAbi, TDefault>(result: CPointer<TAbi>, defaultValue: TAbi, action: () -> Result<TProjected>): Int32 {\n"
             "    unsafe { result.write(defaultValue) }\n"
-            "    windows_core.projectTypedAbi(value, windows_core.typeMarker<TProjected>())\n"
+            "    projectTypedAbi(value, typeMarker<TProjected>())\n"
             "    try { match (action()) { case _ => S_OK.value } }\n"
-            "    catch (error: windows_core.WindowsException) { error.code().value }\n"
-            "    catch (_: Exception) { windows_core.E_FAIL.value }\n"
+            "    catch (error: WindowsException) { error.code().value }\n"
+            "    catch (_: Exception) { E_FAIL.value }\n"
             "}\n"
             "func foundationUnitThunk(action: () -> Result<Unit>): Int32 {\n"
             "    try { match (action()) { case _ => S_OK.value } }\n"
@@ -2428,7 +2511,7 @@ class CollectionThunkGateTests(unittest.TestCase):
                     setup.check_foundation_manual_thunks_translate_exceptions(workspace)
 
             self.assertEqual(raised.exception.code, 1)
-            self.assertIn("foundation thunk helpers must clear outputs", stderr.getvalue())
+            self.assertIn("WinRT-ABI thunk helpers must clear outputs", stderr.getvalue())
 
     def test_rejects_foundation_array_pointer_failure_without_sibling_clear(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -2461,7 +2544,7 @@ class CollectionThunkGateTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             workspace = Path(temp_dir)
             self.write_foundation_source(workspace, self.guarded_foundation_manual_thunks())
-            async_helpers = workspace / "windows-runtime" / "src" / "async_helpers.cj"
+            async_helpers = workspace / "windows-future" / "src" / "async_helpers.cj"
             async_helpers.write_text(
                 async_helpers.read_text(encoding="utf-8").replace(
                     "        catch (error: windows_core.WindowsException) { impl.fail(toFoundationHResult(error.code())) }\n",
@@ -2593,8 +2676,11 @@ class VtableNoneBranchGateTests(unittest.TestCase):
         bindgen_tests: str | None = None,
         common: str | None = None,
     ) -> None:
-        foundation_path = workspace / "windows-runtime" / "src" / "foundation_runtime.cj"
-        collections_path = workspace / "windows-runtime" / "src" / "collections_runtime.cj"
+        foundation_path = workspace / "windows-foundation" / "src" / "foundation_runtime.cj"
+        collections_path = workspace / "windows-collections" / "src" / "collections_runtime.cj"
+        # The foundationNoInterface* helper definitions were down-sinked to
+        # windows-core; the foundation projection keeps only their call sites.
+        winrt_abi_thunks_path = workspace / "windows-core" / "src" / "winrt_abi_thunks.cj"
         marshaler_path = workspace / "windows-core" / "src" / "marshaler.cj"
         core_agile_path = workspace / "windows-core" / "src" / "agile_reference.cj"
         core_reference_path = workspace / "windows-core" / "src" / "weak.cj"
@@ -2612,6 +2698,7 @@ class VtableNoneBranchGateTests(unittest.TestCase):
         common_path = workspace / "windows-common" / "src" / "impl" / "symbols_1.cj"
         foundation_path.parent.mkdir(parents=True, exist_ok=True)
         collections_path.parent.mkdir(parents=True, exist_ok=True)
+        winrt_abi_thunks_path.parent.mkdir(parents=True, exist_ok=True)
         marshaler_path.parent.mkdir(parents=True, exist_ok=True)
         core_agile_path.parent.mkdir(parents=True, exist_ok=True)
         core_reference_path.parent.mkdir(parents=True, exist_ok=True)
@@ -2627,7 +2714,12 @@ class VtableNoneBranchGateTests(unittest.TestCase):
         bindgen_render_path.parent.mkdir(parents=True, exist_ok=True)
         bindgen_tests_path.parent.mkdir(parents=True, exist_ok=True)
         common_path.parent.mkdir(parents=True, exist_ok=True)
-        foundation_path.write_text(foundation if foundation is not None else self.foundation_source(), encoding="utf-8")
+        foundation_blob = foundation if foundation is not None else self.foundation_source()
+        foundation_path.write_text(foundation_blob, encoding="utf-8")
+        # The shared foundationNoInterface* helper definitions live in
+        # windows-core; mirror the blob so the down-sinked definition gate can
+        # find them while foundation_path supplies the call sites/None-branches.
+        winrt_abi_thunks_path.write_text(foundation_blob, encoding="utf-8")
         collections_path.write_text(collections if collections is not None else self.collections_source(), encoding="utf-8")
         marshaler_path.write_text(marshaler if marshaler is not None else self.marshaler_source(), encoding="utf-8")
         core_agile_path.write_text(
@@ -4448,7 +4540,7 @@ class ArrayMaterializationCleanupGateTests(unittest.TestCase):
                 "}\n"
                 "public override func storeOut() {}\n"
             ),
-            "windows-runtime/src/foundation_runtime.cj": (
+            "windows-foundation/src/foundation_runtime.cj": (
                 "func projectPropertyValueStringHandleArray() {\n"
                 "    try {}\n"
                 "    catch (error: Exception) { releaseSystemHStringHandle(handles[releaseIndex]); throw error }\n"

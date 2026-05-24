@@ -31,11 +31,29 @@ ROOT = Path(__file__).resolve().parents[1]
 DEMO_ROOT = ROOT.parent / "windows-cj-demo"
 DEFAULT_WORKSPACE_TIMEOUT_SECONDS = 240
 DEFAULT_CODEGEN_TIMEOUT_SECONDS = 300
-QUICK_RUNTIME_SMOKE_FILTERS = [
-    "testRealActivationFactoryReportsUnavailableClass",
-    "testRealPropertyValueInt32ArrayRoundTrip",
-    "testRealUriDecoderRoundTripsHStringAndCollectionProjection",
-]
+
+# Real-WinRT smoke filters per split projection package. The monolithic
+# windows-runtime package was split into windows-foundation / windows-collections
+# / windows-future; each package keeps a real-WinRT smoke that the quick gate
+# drives through run_windows_runtime_tests.py --package.
+RUNTIME_SMOKE_FILTERS_BY_PACKAGE = {
+    "windows-foundation": [
+        "testRealActivationFactoryReportsUnavailableClass",
+        "testRealPropertyValueInt32ArrayRoundTrip",
+        "testRealUriDecoderRoundTripsHStringAndCollectionProjection",
+    ],
+    "windows-collections": [
+        "testStockInt32VectorViewRoundTripsThroughProjection",
+    ],
+    "windows-future": [
+        "testReadyOperationProjectsCompletedResult",
+        "testSpawnedActionPropagatesWindowsExceptionThroughJoin",
+    ],
+}
+
+# Backwards-compatible alias: the foundation package retains the shared
+# real-WinRT smoke filters that the quick gate originally exercised.
+QUICK_RUNTIME_SMOKE_FILTERS = RUNTIME_SMOKE_FILTERS_BY_PACKAGE["windows-foundation"]
 
 
 @dataclass(frozen=True)
@@ -188,16 +206,25 @@ def build_steps(args: argparse.Namespace) -> list[Step]:
                 "--self-test",
             ],
         ),
-        Step(
-            "windows-runtime smoke test",
+    ]
+
+    for package, filters in RUNTIME_SMOKE_FILTERS_BY_PACKAGE.items():
+        steps.append(
+            Step(
+                f"{package} smoke test",
                 [
                     sys.executable,
                     script("scripts/run_windows_runtime_tests.py"),
+                    "--package",
+                    package,
                     "--timeout-seconds",
                     str(args.workspace_timeout_seconds),
-                    *[token for filter_name in QUICK_RUNTIME_SMOKE_FILTERS for token in ("--filter", filter_name)],
+                    *[token for filter_name in filters for token in ("--filter", filter_name)],
                 ],
-            ),
+            )
+        )
+
+    steps.append(
         Step(
             "workspace runner self-test",
             [
@@ -205,8 +232,8 @@ def build_steps(args: argparse.Namespace) -> list[Step]:
                 script("scripts/run_windows_workspace_tests.py"),
                 "--self-test",
             ],
-        ),
-    ]
+        )
+    )
 
     if args.mode == "quick":
         steps.append(
@@ -221,7 +248,9 @@ def build_steps(args: argparse.Namespace) -> list[Step]:
                     "windows-core",
                     "windows-implement",
                     "windows-interface",
-                    "windows-runtime",
+                    "windows-foundation",
+                    "windows-collections",
+                    "windows-future",
                 ],
             )
         )

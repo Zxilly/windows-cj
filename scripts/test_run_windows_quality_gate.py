@@ -21,7 +21,9 @@ class QualityGatePlanTests(unittest.TestCase):
                 "windows-common codegen self-test",
                 "vector input ABI generator check",
                 "windows-runtime runner self-test",
-                "windows-runtime smoke test",
+                "windows-foundation smoke test",
+                "windows-collections smoke test",
+                "windows-future smoke test",
                 "workspace runner self-test",
                 "quick workspace Cangjie tests",
                 "windows-common codegen gate",
@@ -41,7 +43,9 @@ class QualityGatePlanTests(unittest.TestCase):
                 "windows-common codegen self-test",
                 "vector input ABI generator check",
                 "windows-runtime runner self-test",
-                "windows-runtime smoke test",
+                "windows-foundation smoke test",
+                "windows-collections smoke test",
+                "windows-future smoke test",
                 "workspace runner self-test",
                 "windows-common codegen gate",
                 "workspace setup audit",
@@ -118,14 +122,21 @@ class QualityGatePlanTests(unittest.TestCase):
         self.assertIn("--timeout-seconds", command)
         self.assertIn("29", command)
         self.assertEqual(
-            command[-5:],
-            ["windows-bindgen", "windows-core", "windows-implement", "windows-interface", "windows-runtime"],
+            command[-7:],
+            [
+                "windows-bindgen",
+                "windows-core",
+                "windows-implement",
+                "windows-interface",
+                "windows-foundation",
+                "windows-collections",
+                "windows-future",
+            ],
         )
 
-    def test_quick_gate_runs_runtime_smoke_test(self) -> None:
+    def test_quick_gate_runs_per_package_runtime_smoke_tests(self) -> None:
         args = gate.parse_args(["--mode", "quick", "--workspace-timeout-seconds", "31"])
         steps = {step.name: step for step in gate.build_steps(args)}
-        command = steps["windows-runtime smoke test"].command
 
         self.assertEqual(
             gate.QUICK_RUNTIME_SMOKE_FILTERS,
@@ -135,12 +146,21 @@ class QualityGatePlanTests(unittest.TestCase):
                 "testRealUriDecoderRoundTripsHStringAndCollectionProjection",
             ],
         )
-        self.assertTrue(command[1].endswith("run_windows_runtime_tests.py"))
-        self.assertIn("--timeout-seconds", command)
-        self.assertIn("31", command)
-        self.assertEqual(command.count("--filter"), 3)
-        for filter_name in gate.QUICK_RUNTIME_SMOKE_FILTERS:
-            self.assertIn(filter_name, command)
+        self.assertEqual(
+            list(gate.RUNTIME_SMOKE_FILTERS_BY_PACKAGE.keys()),
+            ["windows-foundation", "windows-collections", "windows-future"],
+        )
+
+        for package, filters in gate.RUNTIME_SMOKE_FILTERS_BY_PACKAGE.items():
+            command = steps[f"{package} smoke test"].command
+            self.assertTrue(command[1].endswith("run_windows_runtime_tests.py"))
+            self.assertIn("--package", command)
+            self.assertIn(package, command)
+            self.assertIn("--timeout-seconds", command)
+            self.assertIn("31", command)
+            self.assertEqual(command.count("--filter"), len(filters))
+            for filter_name in filters:
+                self.assertIn(filter_name, command)
 
     def test_vector_input_abi_generator_check_uses_full_runtime_drift_check(self) -> None:
         steps = {step.name: step for step in gate.build_steps(gate.parse_args(["--mode", "quick"]))}
@@ -186,8 +206,12 @@ class QualityGatePlanTests(unittest.TestCase):
         self.assertIn("generate_vector_input_abi.py", output)
         self.assertIn("--check-all", output)
         self.assertIn("run_windows_runtime_tests.py", output)
-        for filter_name in gate.QUICK_RUNTIME_SMOKE_FILTERS:
-            self.assertIn(filter_name, output)
+        for filters in gate.RUNTIME_SMOKE_FILTERS_BY_PACKAGE.values():
+            for filter_name in filters:
+                self.assertIn(filter_name, output)
+        self.assertIn("windows-foundation", output)
+        self.assertIn("windows-collections", output)
+        self.assertIn("windows-future", output)
         self.assertIn("run_windows_workspace_tests.py", output)
         self.assertIn("windows-bindgen", output)
         self.assertIn("windows-core", output)

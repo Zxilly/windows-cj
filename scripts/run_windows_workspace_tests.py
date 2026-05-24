@@ -2,7 +2,7 @@
 """Build and run workspace tests without the root std.testrunner worker path.
 
 The root `cjpm test` aggregation runs package test binaries as unittest workers.
-On Windows, the worker protocol can keep `windows_runtime.exe` alive after the
+On Windows, the worker protocol can keep `windows_foundation.exe` alive after the
 test body has completed. Captured `--no-progress` runtime output has shown the
 same shutdown issue, so direct execution uses `--progress-brief`, matching the
 runtime-specific watchdog runner. This runner still uses `cjpm test --no-run`

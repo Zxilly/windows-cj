@@ -26,16 +26,25 @@ class RuntimeRunnerTests(unittest.TestCase):
         )
 
     def test_runtime_command_uses_cjv_exec_and_filter(self) -> None:
-        command = runtime.runtime_test_command(Path("windows_runtime.exe"), "StringTests", ["--", "--seed=7"])
+        command = runtime.runtime_test_command(Path("windows_foundation.exe"), "StringTests", ["--", "--seed=7"])
 
-        self.assertEqual(command[0:3], ["cjv", "exec", "windows_runtime.exe"])
+        self.assertEqual(command[0:3], ["cjv", "exec", "windows_foundation.exe"])
         self.assertIn("--filter=StringTests", command)
         self.assertIn("--progress-brief", command)
         self.assertIn("--seed=7", command)
 
     def test_runtime_command_rejects_unittest_timeout_each(self) -> None:
         with self.assertRaisesRegex(RuntimeError, "do not pass --timeout-each"):
-            runtime.runtime_test_command(Path("windows_runtime.exe"), None, ["--", "--timeout-each=1"])
+            runtime.runtime_test_command(Path("windows_foundation.exe"), None, ["--", "--timeout-each=1"])
+
+    def test_package_binary_names_map_split_packages(self) -> None:
+        self.assertEqual(runtime.package_binary_name("windows-foundation"), "windows_foundation.exe")
+        self.assertEqual(runtime.package_binary_name("windows-collections"), "windows_collections.exe")
+        self.assertEqual(runtime.package_binary_name("windows-future"), "windows_future.exe")
+        self.assertEqual(
+            runtime.SPLIT_PACKAGES,
+            ("windows-foundation", "windows-collections", "windows-future"),
+        )
 
     def test_positive_int_rejects_non_positive_timeout(self) -> None:
         self.assertEqual(runtime.positive_int("1"), 1)
@@ -45,7 +54,7 @@ class RuntimeRunnerTests(unittest.TestCase):
     def test_removes_expected_stale_runtime_binary_outputs_only(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
-            binary = root / "windows_runtime.exe"
+            binary = root / "windows_foundation.exe"
             unrelated = root / "other.exe"
             stale_paths = (
                 binary,
@@ -64,30 +73,46 @@ class RuntimeRunnerTests(unittest.TestCase):
             self.assertTrue(unrelated.exists())
 
     def test_main_runs_repeated_filters_after_one_build(self) -> None:
-        original_binary = runtime.BINARY
         with tempfile.TemporaryDirectory() as temp_dir:
-            binary = Path(temp_dir) / "windows_runtime.exe"
+            binary = Path(temp_dir) / "windows_foundation.exe"
             binary.write_text("stub\n", encoding="utf-8")
-            runtime.BINARY = binary
             calls: list[list[str]] = []
 
             def fake_run(command: list[str], **_: object) -> tuple[int, str]:
                 calls.append(command)
                 return 0, "Summary: TOTAL: 1\n    PASSED: 1, SKIPPED: 0, ERROR: 0\n    FAILED: 0\n"
 
-            try:
+            with mock.patch.object(runtime, "package_binary", return_value=binary):
                 with mock.patch.object(runtime, "remove_expected_runtime_binary"):
                     with mock.patch.object(runtime, "run_with_watchdog", side_effect=fake_run):
                         with contextlib.redirect_stdout(io.StringIO()):
                             result = runtime.main(["--filter", "one", "--filter", "two"])
-            finally:
-                runtime.BINARY = original_binary
 
         self.assertEqual(result, 0)
         self.assertEqual(calls[0], ["cjpm", "test", "--no-run", "--no-progress", "--no-color"])
         self.assertIn("--filter=one", calls[1])
         self.assertIn("--filter=two", calls[2])
         self.assertEqual(len(calls), 3)
+
+    def test_main_targets_requested_split_package(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            binary = Path(temp_dir) / "windows_collections.exe"
+            binary.write_text("stub\n", encoding="utf-8")
+            seen: dict[str, object] = {}
+
+            def fake_run(command: list[str], **kwargs: object) -> tuple[int, str]:
+                seen["command"] = command
+                seen["cwd"] = kwargs.get("cwd")
+                return 0, "Summary: TOTAL: 1\n    PASSED: 1, SKIPPED: 0, ERROR: 0\n    FAILED: 0\n"
+
+            with mock.patch.object(runtime, "package_binary", return_value=binary) as pkg_binary:
+                with mock.patch.object(runtime, "remove_expected_runtime_binary"):
+                    with mock.patch.object(runtime, "run_with_watchdog", side_effect=fake_run):
+                        with contextlib.redirect_stdout(io.StringIO()):
+                            result = runtime.main(["--package", "windows-collections", "--skip-build"])
+
+        self.assertEqual(result, 0)
+        pkg_binary.assert_called_with("windows-collections")
 
 
 if __name__ == "__main__":
