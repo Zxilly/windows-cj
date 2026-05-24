@@ -1,0 +1,12 @@
+[package]
+  name = "windows_collections"
+  version = "0.1.0"
+  description = "WinRT collection projections and stock helpers for Cangjie"
+  output-type = "static"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused -Woff parser -Woff package-import"
+
+[dependencies]
+  windows_core = { path = "../windows-core" }
+  windows_interface = { path = "../windows-interface" }
+  windows_strings = { path = "../windows-strings" }
