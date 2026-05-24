@@ -1,0 +1,89 @@
+name: ci
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - "web/**"
+      - "docs/**"
+      - "**/*.md"
+      - ".github/workflows/docs.yml"
+  pull_request:
+    paths-ignore:
+      - "web/**"
+      - "docs/**"
+      - "**/*.md"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+
+jobs:
+  build:
+    name: build (windows)
+    runs-on: windows-latest
+    timeout-minutes: 90
+    env:
+      cjHeapSize: 32GB
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Cangjie
+        uses: Zxilly/setup-cangjie@v2
+        with:
+          channel: sts
+          version: 1.1.0
+
+      - name: Print toolchain version
+        run: cjc -v
+
+      - name: Build workspace
+        run: cjpm build
+
+  test:
+    name: test (windows)
+    runs-on: windows-latest
+    timeout-minutes: 90
+    env:
+      cjHeapSize: 32GB
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Cangjie
+        uses: Zxilly/setup-cangjie@v2
+        with:
+          channel: sts
+          version: 1.1.0
+
+      - name: Test core packages
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Continue'
+          $PSNativeCommandUseErrorActionPreference = $false
+          $members = @(
+            "windows-result", "windows-strings", "windows-core",
+            "windows-libloading", "windows-targets", "windows-version",
+            "windows-registry", "windows-interface", "windows-implement",
+            "windows-polyfill", "windows-numerics", "windows-variant",
+            "windows-propvariant", "windows-safearray", "windows-threading",
+            "windows-services"
+          )
+          $failed = @()
+          foreach ($m in $members) {
+            Write-Host "::group::cjpm test -m $m"
+            cjpm test -m $m --no-progress --no-color
+            if ($LASTEXITCODE -ne 0) { $failed += $m }
+            Write-Host "::endgroup::"
+          }
+          if ($failed.Count -gt 0) {
+            Write-Error "测试失败的包: $($failed -join ', ')"
+            exit 1
+          }
+          Write-Host "全部 $($members.Count) 个核心包测试通过"

@@ -1,0 +1,69 @@
+name: docs
+
+# 用 mdBook 构建 web/book 文档站点，并发布到 GitHub Pages。
+# 纯静态构建，不需要仓颉工具链，运行在 ubuntu-latest 上即可。
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "web/**"
+      - ".github/workflows/docs.yml"
+  pull_request:
+    paths:
+      - "web/**"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch:
+
+# GitHub Pages 部署所需的权限。
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同一时刻只允许一个 Pages 部署在跑，且不打断进行中的部署。
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: build book
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v6
+
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v2
+        with:
+          mdbook-version: latest
+
+      - name: Build book
+        run: mdbook build web/book
+
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          # book.toml 未改 build-dir，mdBook 默认输出到 <book 根>/book。
+          path: web/book/book
+
+  deploy:
+    name: deploy
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

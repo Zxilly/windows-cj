@@ -31,6 +31,9 @@ cfg.toml
 windows-cj-link-options.txt
 **/windows-cj-link-options.txt
 
+# mdBook 构建产物（由 docs CI 重新生成，仅提交 web/book/src 与 book.toml）。
+/web/book/book/
+
 # OS/editor noise.
 .DS_Store
 Thumbs.db

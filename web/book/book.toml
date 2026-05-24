@@ -1,0 +1,24 @@
+[book]
+title = "windows-cj 使用指南"
+description = "在仓颉（Cangjie）中调用 Windows API 的入门指南"
+authors = ["windows-cj contributors"]
+language = "zh-CN"
+src = "src"
+
+[output.html]
+default-theme = "rust"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/Zxilly/windows-cj"
+edit-url-template = "https://github.com/Zxilly/windows-cj/edit/master/web/book/{path}"
+no-section-label = false
+
+[output.html.search]
+enable = true
+limit-results = 30
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 2
+
+[output.html.fold]
+enable = true
+level = 1
