@@ -13,7 +13,9 @@ func testCommonModeScansNativeSupportPackages() {
     @Expect(contains(config.supportPackageDirs, "windows-registry"), true)
     @Expect(contains(config.supportPackageDirs, "windows-threading"), true)
     @Expect(contains(config.supportPackageDirs, "windows-services"), true)
-    @Expect(contains(config.supportPackageDirs, "windows-runtime"), true)
+    @Expect(contains(config.supportPackageDirs, "windows-foundation"), true)
+    @Expect(contains(config.supportPackageDirs, "windows-collections"), true)
+    @Expect(contains(config.supportPackageDirs, "windows-future"), true)
     @Expect(contains(config.supportPackageDirs, "windows-winui3"), true)
     @Expect(contains(config.supportPackageDirs, "windows-webview2"), false)
 }

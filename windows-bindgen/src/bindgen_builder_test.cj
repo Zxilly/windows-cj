@@ -10,7 +10,7 @@ func testBindgenBuilderBuildsConfigSnapshot() {
     let config = BindgenBuilder()
         .inputJson("metadata.json")
         .inputDir("winmd-json")
-        .supportPackageDir("windows-runtime")
+        .supportPackageDir("windows-foundation")
         .filter("Widget")
         .filter("!Hidden")
         .outputDir("out")
@@ -26,7 +26,7 @@ func testBindgenBuilderBuildsConfigSnapshot() {
     @Expect(config.filters[1], "!Hidden")
     @Expect(config.inputJsonPaths[0], "metadata.json")
     @Expect(config.inputJsonDirs[0], "winmd-json")
-    @Expect(config.supportPackageDirs[0], "windows-runtime")
+    @Expect(config.supportPackageDirs[0], "windows-foundation")
     @Expect(config.outputDir, "out")
     @Expect(config.packageName, "windows_generated")
     @Expect(config.manifestPath, "out/manifest.json")
@@ -93,7 +93,7 @@ func testGeneratedPackageCjpmIncludesOnlyUsedSupportPackages() {
     @Expect(cjpm.contains("windows_common ="), false)
     @Expect(cjpm.contains("windows_core ="), false)
     @Expect(cjpm.contains("windows_interface ="), false)
-    @Expect(cjpm.contains("windows_runtime"), false)
+    @Expect(cjpm.contains("windows_foundation"), false)
 }
 
 @Test
@@ -112,19 +112,71 @@ func testRawSlicePackageCjpmUsesGeneratedPackageDependencies() {
 }
 
 @Test
-func testRuntimeSupportDependencyReplacesSplitProjectionPackages() {
+func testSplitProjectionSupportDependenciesAreRegistered() {
     let names = stableSupportDependencyNames()
     let deps = ArrayList<String>()
-    deps.add("windows_runtime")
+    deps.add("windows_foundation")
     let cjpm = renderCjpmToml("windows", supportDeps: deps)
 
-    @Expect(cliTestContainsString(names, "windows_runtime"), true)
-    @Expect(cliTestContainsString(names, "windows_collections"), false)
-    @Expect(cliTestContainsString(names, "windows_future"), false)
+    @Expect(cliTestContainsString(names, "windows_foundation"), true)
+    @Expect(cliTestContainsString(names, "windows_collections"), true)
+    @Expect(cliTestContainsString(names, "windows_future"), true)
+    @Expect(cliTestContainsString(names, "windows_runtime"), false)
     @Expect(cliTestContainsString(names, "windows_numerics"), false)
-    @Expect(stableSupportDependencyPath("windows_runtime"), "windows-runtime")
-    @Expect(cjpm.contains("windows_runtime = { path = \"../../windows-runtime\" }"), true)
+    @Expect(stableSupportDependencyPath("windows_foundation"), "windows-foundation")
+    @Expect(stableSupportDependencyPath("windows_collections"), "windows-collections")
+    @Expect(stableSupportDependencyPath("windows_future"), "windows-future")
+    @Expect(cjpm.contains("windows_foundation = { path = \"../../windows-foundation\" }"), true)
+    @Expect(cjpm.contains("windows_collections ="), false)
+    @Expect(cjpm.contains("windows_future ="), false)
     @Expect(cjpm.contains("link-option ="), false)
+}
+
+@Test
+func testSupportDependenciesDetectedOnDemandFromSource() {
+    // Referencing windows_collections.* pulls in only windows_collections.
+    let collDeps = ArrayList<String>()
+    collectSupportDependencyNamesFromSource(
+        "windows_generated",
+        collDeps,
+        "public func touch(): Unit { windows_collections.IVector() }"
+    )
+    @Expect(cliTestContainsString(collDeps.toArray(), "windows_collections"), true)
+    @Expect(cliTestContainsString(collDeps.toArray(), "windows_future"), false)
+    @Expect(cliTestContainsString(collDeps.toArray(), "windows_foundation"), false)
+
+    // Referencing windows_future.* pulls in only windows_future.
+    let futDeps = ArrayList<String>()
+    collectSupportDependencyNamesFromSource(
+        "windows_generated",
+        futDeps,
+        "public func touch(): Unit { windows_future.IAsyncAction() }"
+    )
+    @Expect(cliTestContainsString(futDeps.toArray(), "windows_future"), true)
+    @Expect(cliTestContainsString(futDeps.toArray(), "windows_collections"), false)
+    @Expect(cliTestContainsString(futDeps.toArray(), "windows_foundation"), false)
+
+    // Referencing windows_foundation.* pulls in only windows_foundation.
+    let fdnDeps = ArrayList<String>()
+    collectSupportDependencyNamesFromSource(
+        "windows_generated",
+        fdnDeps,
+        "public func touch(): Unit { windows_foundation.PropertyValue() }"
+    )
+    @Expect(cliTestContainsString(fdnDeps.toArray(), "windows_foundation"), true)
+    @Expect(cliTestContainsString(fdnDeps.toArray(), "windows_collections"), false)
+    @Expect(cliTestContainsString(fdnDeps.toArray(), "windows_future"), false)
+
+    // A source touching none of the split packages pulls in none of them.
+    let noneDeps = ArrayList<String>()
+    collectSupportDependencyNamesFromSource(
+        "windows_generated",
+        noneDeps,
+        "public func touch(): Unit { let x = 0 }"
+    )
+    @Expect(cliTestContainsString(noneDeps.toArray(), "windows_collections"), false)
+    @Expect(cliTestContainsString(noneDeps.toArray(), "windows_future"), false)
+    @Expect(cliTestContainsString(noneDeps.toArray(), "windows_foundation"), false)
 }
 
 @Test
@@ -169,7 +221,7 @@ func testFeatureLinkOptionsUseSelectedFeatureDependencies() {
         "Vector",
         "Example_Other_Vector",
         [],
-        implSource: "public func touchRuntime(): Unit { windows_runtime.DateTime() }"
+        implSource: "public func touchFoundation(): Unit { windows_foundation.PropertyValue() }"
     ))
     let config = parseArgs([
         "--input-json", "metadata.json",

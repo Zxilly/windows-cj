@@ -498,7 +498,9 @@ func finalizeConfigDefaults(config: CliConfig): Unit {
         addUnique(config.supportPackageDirs, "windows-registry")
         addUnique(config.supportPackageDirs, "windows-threading")
         addUnique(config.supportPackageDirs, "windows-services")
-        addUnique(config.supportPackageDirs, "windows-runtime")
+        addUnique(config.supportPackageDirs, "windows-foundation")
+        addUnique(config.supportPackageDirs, "windows-collections")
+        addUnique(config.supportPackageDirs, "windows-future")
         addUnique(config.supportPackageDirs, "windows-winui3")
     }
     if (config.features.isEmpty() && config.filters.isEmpty() && !config.common && !config.listFeatures && !config.help) {
@@ -1197,28 +1199,32 @@ func collectSupportDependencyNamesFromSource(
 
 func stableSupportDependencyNames(): Array<String> {
     return [
+        "windows_collections",
         "windows_common",
         "windows_core",
+        "windows_foundation",
+        "windows_future",
         "windows_implement",
         "windows_interface",
         "windows_libloading",
         "windows_polyfill",
         "windows_result",
-        "windows_runtime",
         "windows_strings"
     ]
 }
 
 func stableSupportDependencyPath(dependency: String): String {
     match (dependency) {
+        case "windows_collections" => return "windows-collections"
         case "windows_common" => return "windows-common"
         case "windows_core" => return "windows-core"
+        case "windows_foundation" => return "windows-foundation"
+        case "windows_future" => return "windows-future"
         case "windows_implement" => return "windows-implement"
         case "windows_interface" => return "windows-interface"
         case "windows_libloading" => return "windows-libloading"
         case "windows_polyfill" => return "windows-polyfill"
         case "windows_result" => return "windows-result"
-        case "windows_runtime" => return "windows-runtime"
         case "windows_strings" => return "windows-strings"
         case _ => return dependency
     }
