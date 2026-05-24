@@ -6,7 +6,7 @@ language = "zh-CN"
 src = "src"
 
 [output.html]
-default-theme = "rust"
+default-theme = "light"
 preferred-dark-theme = "navy"
 git-repository-url = "https://github.com/Zxilly/windows-cj"
 edit-url-template = "https://github.com/Zxilly/windows-cj/edit/master/web/book/{path}"
