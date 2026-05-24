@@ -4575,8 +4575,10 @@ class GeneratedCommonImplInvariantTests(unittest.TestCase):
     def required_delegate_impl_text(self) -> str:
         return (
             "func Start(callback: CPointer<Unit>): Int32 { 0 }\n"
-            "extend Microsoft_UI_Xaml_ApplicationInitializationCallback <: "
-            "windows_core.HandleWinrtType<Microsoft_UI_Xaml_ApplicationInitializationCallback> {}\n"
+            "public open class Microsoft_UI_Xaml_ApplicationInitializationCallback <: "
+            "windows_interface.InterfaceWrapperBase & windows_interface.ComInterface {}\n"
+            "private class OwnedMicrosoft_UI_Xaml_ApplicationInitializationCallback <: "
+            "Microsoft_UI_Xaml_ApplicationInitializationCallback {}\n"
             "winrtBorrowGenericIn<Microsoft_UI_Xaml_ApplicationInitializationCallback>(callback)\n"
         )
 

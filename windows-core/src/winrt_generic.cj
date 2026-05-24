@@ -427,6 +427,28 @@ public open class WinrtOutputBridge<T> {
         throw IllegalStateException("WinrtOutputBridge.storeOutAt is not implemented")
     }
 
+    /// Take ownership of a single generic OUT value the callee wrote into the
+    /// type-erased slot at `slot` (a `T_abi*` reinterpreted as `void**`). The
+    /// runtime-class projection of a parameterized default interface reaches a
+    /// generic vtable slot whose element is type-erased to `CPointer<Unit>`;
+    /// this reads it back as the concrete projected `T` regardless of whether
+    /// `T` is a value, string, or reference element.
+    public open func takeOut(
+        slot: CPointer<CPointer<Unit>>
+    ): T {
+        let _ = slot
+        throw IllegalStateException("WinrtOutputBridge.takeOut is not implemented")
+    }
+
+    /// Release any owned resource a failed generic OUT call may have written
+    /// into `slot`, then clear it. Value elements own nothing, so the default
+    /// is a no-op; handle/string elements override to release and zero the slot.
+    public open func releaseFailedOut(
+        slot: CPointer<CPointer<Unit>>
+    ): Unit {
+        let _ = slot
+    }
+
     public open func eraseOut(
         action: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>
     ): CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> {
@@ -611,6 +633,15 @@ class CopyWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: CType {
         S_OK.value
     }
 
+    public override func takeOut(
+        slot: CPointer<CPointer<Unit>>
+    ): T {
+        if (slot.isNull()) {
+            throw WindowsException(E_POINTER)
+        }
+        return unsafe { CPointer<T>(slot).read() }
+    }
+
     public override func eraseOut(
         action: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>
     ): CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> {
@@ -789,6 +820,15 @@ public class ProjectedCopyWinrtOutputBridge<T, A, D> <: WinrtOutputBridge<T> whe
         let typed = CPointer<A>(buffer)
         unsafe { (typed + index).write(T.projectAbi(value)) }
         S_OK.value
+    }
+
+    public override func takeOut(
+        slot: CPointer<CPointer<Unit>>
+    ): T {
+        if (slot.isNull()) {
+            throw WindowsException(E_POINTER)
+        }
+        return T.assumeInitRef(unsafe { CPointer<A>(slot).read() })
     }
 
     public override func eraseOut(
@@ -1046,6 +1086,28 @@ class HandleWinrtOutputBridge<T> <: WinrtOutputBridge<T> where T <: HandleWinrtT
         S_OK.value
     }
 
+    public override func takeOut(
+        slot: CPointer<CPointer<Unit>>
+    ): T {
+        if (slot.isNull()) {
+            throw WindowsException(E_POINTER)
+        }
+        return T.takeWinrtHandleSlot(slot)
+    }
+
+    public override func releaseFailedOut(
+        slot: CPointer<CPointer<Unit>>
+    ): Unit {
+        if (slot.isNull()) {
+            return
+        }
+        let raw = unsafe { slot.read() }
+        if (raw.isNotNull()) {
+            T.releaseWinrtHandle(raw)
+            unsafe { slot.write(CPointer<Unit>()) }
+        }
+    }
+
     public override func eraseOut(
         action: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>
     ): CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> {
@@ -1097,6 +1159,28 @@ public func winrtTakeGenericArrayOut<T>(
     length: UInt32
 ): Array<T> where T <: WinrtGenericType<T> {
     T.winrtOutputBridge().takeArrayOut(data, length)
+}
+
+// Take ownership of one generic OUT value that a parameterized default
+// interface's type-erased vtable slot wrote into `slot`. Dispatches through the
+// element's output bridge so value, string, and reference elements are each
+// bridged with their correct ABI shape. Used by the runtime-class projection of
+// a parameterized default interface (e.g. IVector<Single>.GetAt -> Single,
+// IMap<String,String>.Lookup -> String, IVector<UIElement>.GetAt -> UIElement).
+public func winrtTakeGenericOut<T>(
+    slot: CPointer<CPointer<Unit>>
+): T where T <: WinrtGenericType<T> {
+    T.winrtOutputBridge().takeOut(slot)
+}
+
+// Release any owned resource a failed generic OUT call left in `slot`, then
+// clear it. Value elements own nothing (no-op); handle/string elements release
+// and zero the slot. Mirror of the per-element failure cleanup the interface
+// renderer performs, for the runtime-class generic OUT projection.
+public func winrtReleaseFailedGenericOut<T>(
+    slot: CPointer<CPointer<Unit>>
+): Unit where T <: WinrtGenericType<T> {
+    T.winrtOutputBridge().releaseFailedOut(slot)
 }
 
 public func winrtBorrowGenericIn<T>(

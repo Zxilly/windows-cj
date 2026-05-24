@@ -165,12 +165,37 @@ class RuntimeArrayOutputSpec {
     }
 }
 
+// A caller-allocated out array (IVector.GetMany style). The caller owns the
+// `items` buffer of `itemsSize` element slots; the callee fills it. For handle
+// element types the buffer is zeroed before the call and any handles written
+// before a failure are released afterward (value elements own nothing, so the
+// generic range helpers dispatch to no-ops for them).
+class RuntimeCallerAllocatedArraySpec {
+    public let sizeName: String
+    public let itemsName: String
+    public let elementProjectedType: String
+    public let elementAbiType: String
+
+    public init(
+        sizeName: String,
+        itemsName: String,
+        elementProjectedType: String,
+        elementAbiType: String
+    ) {
+        this.sizeName = sizeName
+        this.itemsName = itemsName
+        this.elementProjectedType = elementProjectedType
+        this.elementAbiType = elementAbiType
+    }
+}
+
 class RuntimeCallPlan {
     public let borrows: ArrayList<RuntimeBorrowSpec>
     public let args: ArrayList<String>
     public let arrayInputs: ArrayList<RuntimeArrayInputSpec>
     public let scalarOutputs: ArrayList<RuntimeScalarOutputSpec>
     public let arrayOutputs: ArrayList<RuntimeArrayOutputSpec>
+    public let callerAllocatedArrays: ArrayList<RuntimeCallerAllocatedArraySpec>
 
     public init(borrows: ArrayList<RuntimeBorrowSpec>, args: ArrayList<String>) {
         this.borrows = borrows
@@ -178,6 +203,7 @@ class RuntimeCallPlan {
         this.arrayInputs = ArrayList<RuntimeArrayInputSpec>()
         this.scalarOutputs = ArrayList<RuntimeScalarOutputSpec>()
         this.arrayOutputs = ArrayList<RuntimeArrayOutputSpec>()
+        this.callerAllocatedArrays = ArrayList<RuntimeCallerAllocatedArraySpec>()
     }
 
     public init(
@@ -192,6 +218,23 @@ class RuntimeCallPlan {
         this.arrayInputs = arrayInputs
         this.scalarOutputs = scalarOutputs
         this.arrayOutputs = arrayOutputs
+        this.callerAllocatedArrays = ArrayList<RuntimeCallerAllocatedArraySpec>()
+    }
+
+    public init(
+        borrows: ArrayList<RuntimeBorrowSpec>,
+        args: ArrayList<String>,
+        arrayInputs: ArrayList<RuntimeArrayInputSpec>,
+        scalarOutputs: ArrayList<RuntimeScalarOutputSpec>,
+        arrayOutputs: ArrayList<RuntimeArrayOutputSpec>,
+        callerAllocatedArrays: ArrayList<RuntimeCallerAllocatedArraySpec>
+    ) {
+        this.borrows = borrows
+        this.args = args
+        this.arrayInputs = arrayInputs
+        this.scalarOutputs = scalarOutputs
+        this.arrayOutputs = arrayOutputs
+        this.callerAllocatedArrays = callerAllocatedArrays
     }
 }
 
@@ -4957,18 +5000,43 @@ func runtimeClassFactoryCallPlan(
     let arrayInputs = ArrayList<RuntimeArrayInputSpec>()
     let scalarOutputs = ArrayList<RuntimeScalarOutputSpec>()
     let arrayOutputs = ArrayList<RuntimeArrayOutputSpec>()
+    let callerAllocatedArrays = ArrayList<RuntimeCallerAllocatedArraySpec>()
     let metadataParameters = metadataMethodParameters(method)
     var index: Int64 = 0
+    // `pairs` is the projected public parameter list. A caller-allocated out
+    // array contributes two projected pairs (`${name}Size`, `${name}`), so the
+    // pair cursor advances independently from the metadata-parameter index.
+    var pairIndex: Int64 = 0
     while (index < Int64(method.signature.parameters.size)) {
         let signature = method.signature.parameters[index]
         let parameter = metadataParameterAt(metadataParameters, index)
-        let pair = pairs[index]
+        let pair = pairs[pairIndex]
         if (isWinrtArraySignature(signature)) {
             match (runtimeArrayElementSignature(signature)) {
                 case Some(elementSignature) =>
                     let elementProjectedType = winrtProjectedTypeName(elementSignature, symbolsByName, ownerFullName)
                     let elementAbiType = interfaceSlotAbiType(elementSignature, symbolsByName, ownerFullName)
-                    if (isOutParameter(parameter)) {
+                    if (isCallerAllocatedOutArrayParameter(parameter)) {
+                        // Caller-allocated fill buffer: forward (size, items)
+                        // straight through; the caller owns the buffer. The
+                        // buffer is zeroed before the call and any handles
+                        // written before a failure are released afterward.
+                        let sizePair = pairs[pairIndex]
+                        let itemsPair = pairs[pairIndex + 1]
+                        args.add(sizePair.name)
+                        if (elementAbiType == "CPointer<Unit>") {
+                            args.add(itemsPair.name)
+                        } else {
+                            args.add("CPointer<Unit>(${itemsPair.name})")
+                        }
+                        callerAllocatedArrays.add(RuntimeCallerAllocatedArraySpec(
+                            sizePair.name,
+                            itemsPair.name,
+                            elementProjectedType,
+                            elementAbiType
+                        ))
+                        pairIndex += 2
+                    } else if (isOutParameter(parameter)) {
                         let localPrefix = "__arg${index}"
                         arrayOutputs.add(RuntimeArrayOutputSpec(
                             pair.name,
@@ -4981,6 +5049,7 @@ func runtimeClassFactoryCallPlan(
                         ))
                         args.add("CPointer<UInt32>(inout ${localPrefix}Size)")
                         args.add("CPointer<CPointer<${elementAbiType}>>(inout ${localPrefix}Data)")
+                        pairIndex += 1
                     } else {
                         let localPrefix = "__arg${index}"
                         arrayInputs.add(RuntimeArrayInputSpec(
@@ -4993,8 +5062,9 @@ func runtimeClassFactoryCallPlan(
                         ))
                         args.add("${localPrefix}Len")
                         args.add("${localPrefix}Raw")
+                        pairIndex += 1
                     }
-                case None => ()
+                case None => pairIndex += 1
             }
         } else if (isOutParameter(parameter)) {
             let targetSignature = runtimeReferenceTargetSignature(signature)
@@ -5003,8 +5073,10 @@ func runtimeClassFactoryCallPlan(
             let valueName = "__arg${index}Value"
             scalarOutputs.add(RuntimeScalarOutputSpec(pair.name, valueName, projectedType, abiType, targetSignature))
             args.add("${pair.name}.borrowMut<${abiType}>()")
+            pairIndex += 1
         } else if (isByReferenceSignature(signature)) {
             args.add(pair.name)
+            pairIndex += 1
         } else {
             let abiType = interfaceSlotAbiType(signature, symbolsByName, ownerFullName)
             if (runtimeCallNeedsHandleBorrow(pair.typeName, abiType)) {
@@ -5014,10 +5086,11 @@ func runtimeClassFactoryCallPlan(
             } else {
                 args.add(runtimeInputAbiExpression(pair.name, pair.typeName, abiType, signature, symbolsByName, ownerFullName))
             }
+            pairIndex += 1
         }
         index += 1
     }
-    return RuntimeCallPlan(borrows, args, arrayInputs, scalarOutputs, arrayOutputs)
+    return RuntimeCallPlan(borrows, args, arrayInputs, scalarOutputs, arrayOutputs, callerAllocatedArrays)
 }
 
 func runtimeCallNeedsHandleBorrow(typeName: String, abiType: String): Bool {
@@ -5224,6 +5297,24 @@ func runtimeRawPointerReturnCleanupType(signature: SignatureRecord): Option<Stri
     return None
 }
 
+// A generic OUT/return whose element is an open generic parameter of the
+// parameterized default interface (e.g. IVector<T>.GetAt -> T). The vtable slot
+// is type-erased to CPointer<Unit>, so the value must be bridged through the
+// element's output bridge rather than assuming a reference-handle shape. The
+// projected `T` is finalized to the concrete element type by
+// applyRuntimeClassGenericSubstitutions, so emitting winrtTakeGenericOut<T>
+// resolves to the correct value/string/reference bridge per closed argument.
+func isRuntimeGenericParameterSignature(signature: SignatureRecord): Bool {
+    match (signature.typeSpecification) {
+        case Some(typeSpec) => return isRuntimeGenericParameterSignature(typeSpec.signature)
+        case None => ()
+    }
+    if (signature.kind == "GenericParameter") {
+        return true
+    }
+    return false
+}
+
 func isEnumSignature(
     signature: SignatureRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
@@ -5338,7 +5429,19 @@ func runtimeProjectedMethodParameterPairs(
             match (runtimeArrayElementSignature(signature)) {
                 case Some(elementSignature) =>
                     let elementType = winrtProjectedTypeName(elementSignature, symbolsByName, ownerFullName)
-                    if (isOutParameter(parameter)) {
+                    if (isCallerAllocatedOutArrayParameter(parameter)) {
+                        // Caller-allocated fill buffer (IVector.GetMany style):
+                        // the caller owns the buffer and its capacity, the
+                        // callee fills it and returns the written count. Mirror
+                        // the interface renderer's caller-allocated ABI pair.
+                        let elementAbiType = interfaceArrayElementAbiType(signature, symbolsByName, ownerFullName)
+                        pairs.add(ParameterPair("${name}Size", "UInt32"))
+                        if (elementAbiType == "CPointer<Unit>") {
+                            pairs.add(ParameterPair(name, "CPointer<Unit>"))
+                        } else {
+                            pairs.add(ParameterPair(name, "CPointer<${elementAbiType}>"))
+                        }
+                    } else if (isOutParameter(parameter)) {
                         pairs.add(ParameterPair(name, "windows_core.OutSlot<Array<${elementType}>>"))
                     } else {
                         pairs.add(ParameterPair(name, "Array<${elementType}>"))
@@ -5553,9 +5656,67 @@ func renderRuntimeClassDefaultInterfaceMembers(
                     content += renderRuntimeClassInstanceMethod(symbol, method, runtimeInterfaceSlotName(slotNames, method), symbolsByName)
                 }
             }
-            return content
+            // The default-interface members above are rendered against the
+            // interface's own type definition, so any closed generic argument of
+            // a parameterized default interface (e.g. IObservableVector<T> closed
+            // as IObservableVector<UIElement>) is still emitted with the open
+            // generic parameter name. The runtime class itself is not generic, so
+            // those open parameters must be rewritten to the concrete reference
+            // types the default interface closes over before they leak into member
+            // bodies. The rewrite preserves the type-erased generic-handle ABI
+            // dispatch (winrtBorrowGenericIn / fromAbiTakeWinrtHandle), which is
+            // the correct shape for the WinRT generic interface vtable.
+            return applyRuntimeClassGenericSubstitutions(content, defaultInterface.substitutions)
         case None => return ""
     }
+}
+
+// Rewrite whole-identifier occurrences of each generic-parameter name in
+// `text` to its concrete substitution type. The scan is a single pass over the
+// UTF-8 bytes that only replaces a token when its full identifier span matches a
+// substitution name, so partial matches inside larger identifiers (e.g. the `T`
+// in `Token` or `winrtBorrowGenericIn`) are left untouched. With no
+// substitutions the input is returned unchanged.
+func applyRuntimeClassGenericSubstitutions(
+    text: String,
+    substitutions: ArrayList<RuntimeClassGenericSubstitution>
+): String {
+    if (substitutions.isEmpty()) {
+        return text
+    }
+    let bytes = text.toArray()
+    let total = Int64(bytes.size)
+    let builder = StringBuilder()
+    var index: Int64 = 0
+    while (index < total) {
+        if (!isIdentifierByte(bytes[index])) {
+            // Pass through a contiguous run of non-identifier bytes verbatim.
+            // Identifier bytes are all ASCII, so any multi-byte UTF-8 sequence
+            // (lead/continuation bytes are all >= 0x80) stays grouped in this run
+            // and is reconstructed losslessly.
+            var separatorEnd = index
+            while (separatorEnd < total && !isIdentifierByte(bytes[separatorEnd])) {
+                separatorEnd += 1
+            }
+            builder.append(String.fromUtf8(bytes[index..separatorEnd]))
+            index = separatorEnd
+            continue
+        }
+        // The preceding byte (if any) is a non-identifier byte here, so `index`
+        // starts a whole identifier token; consume its full span.
+        var end = index
+        while (end < total && isIdentifierByte(bytes[end])) {
+            end += 1
+        }
+        let token = String.fromUtf8(bytes[index..end])
+        builder.append(runtimeClassGenericSubstitutionTypeName(token, substitutions) ?? token)
+        index = end
+    }
+    return builder.toString()
+}
+
+func isIdentifierByte(byte: Byte): Bool {
+    return isAsciiAlphaNumeric(byte) || byte == b'_'
 }
 
 func runtimeInterfaceSlotNamesByMethod(typeDef: TypeDefinitionRecord): HashMap<String, String> {
@@ -5959,11 +6120,6 @@ func renderRuntimeArrayTakeValue(
         return "${runtimeIndent(indentLevel)}let ${output.valueName} = ${expression}\n"
     }
 
-    let assignmentPrefix = if (asReturn) {
-        "return "
-    } else {
-        "let ${output.valueName} = "
-    }
     let projectedName = "${output.valueName}Projected"
     let ownedName = "${output.valueName}Owned"
     let abiArrayName = "${output.valueName}AbiArray"
@@ -5976,27 +6132,44 @@ func renderRuntimeArrayTakeValue(
         symbolsByName,
         ownerFullName
     )
+    // Emit straight-line statements rather than an immediately-invoked closure.
+    // The data/size locals have their addresses taken earlier via `inout`, and
+    // capturing them inside a nested closure mixes managed and raw address
+    // spaces in a way the backend rejects; in-scope statements avoid that.
     var content = ""
-    content += "${runtimeIndent(indentLevel)}${assignmentPrefix}{ =>\n"
-    content += "${runtimeIndent(indentLevel + 1)}if (${output.sizeName} > 0u32 && ${output.dataName}.isNull()) {\n"
-    content += "${runtimeIndent(indentLevel + 2)}throw windows_core.WindowsException(windows_core.E_POINTER)\n"
+    content += "${runtimeIndent(indentLevel)}if (${output.sizeName} > 0u32 && ${output.dataName}.isNull()) {\n"
+    content += "${runtimeIndent(indentLevel + 1)}throw windows_core.WindowsException(windows_core.E_POINTER)\n"
+    content += "${runtimeIndent(indentLevel)}}\n"
+    content += "${runtimeIndent(indentLevel)}var ${projectedName} = Array<${output.elementProjectedType}>()\n"
+    content += "${runtimeIndent(indentLevel)}var ${ownedName}: Option<windows_core.AbiArray<${output.elementAbiType}>> = None\n"
+    content += "${runtimeIndent(indentLevel)}try {\n"
+    content += "${runtimeIndent(indentLevel + 1)}let ${abiArrayName} = unsafe { windows_core.AbiArray<${output.elementAbiType}>.fromRawParts(${output.dataName}, ${output.sizeName}) }\n"
+    content += "${runtimeIndent(indentLevel + 1)}${ownedName} = Some(${abiArrayName})\n"
+    content += "${runtimeIndent(indentLevel + 1)}let ${abiValuesName} = ${abiArrayName}.toArray()\n"
+    content += "${runtimeIndent(indentLevel + 1)}${projectedName} = Array<${output.elementProjectedType}>(${abiValuesName}.size, { index => ${projection} })\n"
+    content += "${runtimeIndent(indentLevel)}} finally {\n"
+    content += "${runtimeIndent(indentLevel + 1)}match (${ownedName}) {\n"
+    content += "${runtimeIndent(indentLevel + 2)}case Some(array) => array.close()\n"
+    content += "${runtimeIndent(indentLevel + 2)}case None => windows_core.coTaskMemFree(CPointer<Unit>(${output.dataName}))\n"
     content += "${runtimeIndent(indentLevel + 1)}}\n"
-    content += "${runtimeIndent(indentLevel + 1)}var ${projectedName} = Array<${output.elementProjectedType}>()\n"
-    content += "${runtimeIndent(indentLevel + 1)}var ${ownedName}: Option<windows_core.AbiArray<${output.elementAbiType}>> = None\n"
-    content += "${runtimeIndent(indentLevel + 1)}try {\n"
-    content += "${runtimeIndent(indentLevel + 2)}let ${abiArrayName} = unsafe { windows_core.AbiArray<${output.elementAbiType}>.fromRawParts(${output.dataName}, ${output.sizeName}) }\n"
-    content += "${runtimeIndent(indentLevel + 2)}${ownedName} = Some(${abiArrayName})\n"
-    content += "${runtimeIndent(indentLevel + 2)}let ${abiValuesName} = ${abiArrayName}.toArray()\n"
-    content += "${runtimeIndent(indentLevel + 2)}${projectedName} = Array<${output.elementProjectedType}>(${abiValuesName}.size, { index => ${projection} })\n"
-    content += "${runtimeIndent(indentLevel + 1)}} finally {\n"
-    content += "${runtimeIndent(indentLevel + 2)}match (${ownedName}) {\n"
-    content += "${runtimeIndent(indentLevel + 3)}case Some(array) => array.close()\n"
-    content += "${runtimeIndent(indentLevel + 3)}case None => windows_core.coTaskMemFree(CPointer<Unit>(${output.dataName}))\n"
-    content += "${runtimeIndent(indentLevel + 2)}}\n"
-    content += "${runtimeIndent(indentLevel + 1)}}\n"
-    content += "${runtimeIndent(indentLevel + 1)}${projectedName}\n"
-    content += "${runtimeIndent(indentLevel)}}()\n"
+    content += "${runtimeIndent(indentLevel)}}\n"
+    if (asReturn) {
+        content += "${runtimeIndent(indentLevel)}return ${projectedName}\n"
+    } else {
+        content += "${runtimeIndent(indentLevel)}let ${output.valueName} = ${projectedName}\n"
+    }
     return content
+}
+
+// The items buffer of a caller-allocated out array as a CPointer<Unit>, which
+// is what the type-erased generic range helpers accept. When the projected
+// parameter is already CPointer<Unit> (generic-erased element) it is passed
+// through unchanged; a concrete element pointer is reinterpreted.
+func runtimeCallerAllocatedItemsExpression(spec: RuntimeCallerAllocatedArraySpec): String {
+    if (spec.elementAbiType == "CPointer<Unit>") {
+        return spec.itemsName
+    }
+    return "CPointer<Unit>(${spec.itemsName})"
 }
 
 func renderRuntimeClassProjectedMethodBody(
@@ -6011,6 +6184,13 @@ func renderRuntimeClassProjectedMethodBody(
 ): String {
     let returnType = runtimeProjectedReturnTypeName(method.signature.returnType, symbolsByName, symbol.fullName)
     let returnAbiType = interfaceSlotAbiType(method.signature.returnType, symbolsByName, symbol.fullName)
+    // A non-array return whose element is an open generic parameter of the
+    // parameterized default interface (e.g. IVector<T>.GetAt -> T). The vtable
+    // slot is type-erased to CPointer<Unit>, so the value is bridged through the
+    // element's output bridge instead of assuming a reference-handle shape.
+    let hasArrayReturn = isWinrtArraySignature(method.signature.returnType)
+    let isGenericReturn = !hasArrayReturn &&
+        isRuntimeGenericParameterSignature(runtimeReferenceTargetSignature(method.signature.returnType))
     let extraArgs = ArrayList<String>()
     var content = ""
     match (runtimeReturnArrayOutputSpec(method, symbolsByName, symbol.fullName)) {
@@ -6029,6 +6209,11 @@ func renderRuntimeClassProjectedMethodBody(
     }
     content += "${runtimeIndent(indentLevel)}var hr__ = windows_core.E_POINTER\n"
     content += renderRuntimeOutSlotGuards(callPlan, indentLevel)
+    for (callerArray in callPlan.callerAllocatedArrays) {
+        // Zero the caller-allocated buffer so handle elements have a known state
+        // for the failure-release pass (value elements dispatch to a no-op).
+        content += "${runtimeIndent(indentLevel)}windows_core.winrtPrepareGenericOutRange<${callerArray.elementProjectedType}>(${runtimeCallerAllocatedItemsExpression(callerArray)}, ${callerArray.sizeName})\n"
+    }
     match (dispatchKind) {
         case RuntimeDispatchKind.Factory =>
             match (factorySpec) {
@@ -6055,13 +6240,20 @@ func renderRuntimeClassProjectedMethodBody(
                 symbol.fullName
             )
     }
-    if (returnType != "Unit" && runtimeArrayElementUsesHandleBorrow(returnType, returnAbiType)) {
+    if (isGenericReturn) {
+        // The slot holds a type-erased generic OUT value; release any owned
+        // resource (handle/string element) through the bridge and clear it.
+        // Value elements own nothing, so this dispatches to a no-op for them.
+        content += "${runtimeIndent(indentLevel)}if (hr__.failed()) {\n"
+        content += "${runtimeIndent(indentLevel + 1)}windows_core.winrtReleaseFailedGenericOut<${returnType}>(CPointer<CPointer<Unit>>(inout result__))\n"
+        content += "${runtimeIndent(indentLevel)}}\n"
+    } else if (!hasArrayReturn && returnType != "Unit" && runtimeArrayElementUsesHandleBorrow(returnType, returnAbiType)) {
         content += "${runtimeIndent(indentLevel)}if (hr__.failed() && result__.isNotNull()) {\n"
         content += "${runtimeIndent(indentLevel + 1)}windows_core.winrtReleaseGenericOut<${returnType}>(result__)\n"
         content += "${runtimeIndent(indentLevel + 1)}result__ = CPointer<Unit>()\n"
         content += "${runtimeIndent(indentLevel)}}\n"
     }
-    if (returnType == "CPointer<Unit>" && returnAbiType == "CPointer<Unit>") {
+    if (!hasArrayReturn && !isGenericReturn && returnType == "CPointer<Unit>" && returnAbiType == "CPointer<Unit>") {
         match (runtimeRawPointerReturnCleanupType(method.signature.returnType)) {
             case Some(cleanupType) =>
                 content += "${runtimeIndent(indentLevel)}if (hr__.failed() && result__.isNotNull()) {\n"
@@ -6082,6 +6274,13 @@ func renderRuntimeClassProjectedMethodBody(
     for (output in callPlan.arrayOutputs) {
         content += renderRuntimeArrayOutputFailureCleanup(output, indentLevel)
     }
+    for (callerArray in callPlan.callerAllocatedArrays) {
+        // On failure, release any element handles the callee wrote into the
+        // caller-allocated buffer before failing (no-op for value elements).
+        content += "${runtimeIndent(indentLevel)}if (hr__.failed()) {\n"
+        content += "${runtimeIndent(indentLevel + 1)}windows_core.winrtReleaseGenericOutRange<${callerArray.elementProjectedType}>(${runtimeCallerAllocatedItemsExpression(callerArray)}, ${callerArray.sizeName})\n"
+        content += "${runtimeIndent(indentLevel)}}\n"
+    }
     content += "${runtimeIndent(indentLevel)}hr__.check()\n"
     for (output in callPlan.scalarOutputs) {
         content += renderRuntimeScalarOutputPublish(output, symbolsByName, symbol.fullName, indentLevel)
@@ -6093,7 +6292,13 @@ func renderRuntimeClassProjectedMethodBody(
         case Some(arrayReturn) =>
             content += renderRuntimeArrayTakeValue(arrayReturn, symbolsByName, symbol.fullName, indentLevel, true)
         case None =>
-            if (returnType != "Unit") {
+            if (isGenericReturn) {
+                // Bridge the type-erased generic OUT slot to the concrete
+                // projected element. winrtTakeGenericOut<T> dispatches via the
+                // element output bridge; the projected `T` is finalized to the
+                // concrete element type by applyRuntimeClassGenericSubstitutions.
+                content += "${runtimeIndent(indentLevel)}return windows_core.winrtTakeGenericOut<${returnType}>(CPointer<CPointer<Unit>>(inout result__))\n"
+            } else if (returnType != "Unit") {
                 content += "${runtimeIndent(indentLevel)}return ${runtimeProjectedReturnExpression(returnType, returnAbiType, "result__", method.signature.returnType, symbolsByName, symbol.fullName)}\n"
             }
     }
@@ -6388,7 +6593,11 @@ func winrtGenericArgumentSatisfiesRuntimeConstraint(
                 case Some(symbol) =>
                     match (symbol.typeDef) {
                         case Some(typeDef) =>
-                            return !isValueType(typeDef)
+                            // Value structs and WinRT enums (projected as value
+                            // structs) do not implement the WinrtGenericType /
+                            // RuntimeType projection a closed generic argument
+                            // requires, so they fall back to IInspectable.
+                            return !isValueType(typeDef) && !isEnumType(typeDef)
                         case None => return true
                     }
                 case None => return true

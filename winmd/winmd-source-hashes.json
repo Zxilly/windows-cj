@@ -1,6 +1,12 @@
 {
   "_comment": "Checked-in integrity record for the bundled raw .winmd metadata. scripts/check_windows_common_codegen.py recomputes each file's sha256 and verifies it against this map so a swapped or corrupted .winmd is caught without any JSON intermediate. Regenerate with: python scripts/check_windows_common_codegen.py --update-source-hashes",
   "files": {
+    "Microsoft.Foundation.winmd": "90d85e0f9e1890696777e4aa5893b6d5f83e15c0b25d9d25821799c94abb2aba",
+    "Microsoft.Graphics.winmd": "dbcb55f2f7751fe0e0f20ffc6620b74d7443e26c001cc967cd31fc1f6c066733",
+    "Microsoft.UI.Text.winmd": "f97c9a7c7ee6841280d15b4012b15c0704f0315c835633e98e0634e5da67a040",
+    "Microsoft.UI.Xaml.winmd": "91a1c9c42b3834820be741e7412838c60e6d79f3a24e95259670e5d871ff1d2f",
+    "Microsoft.UI.winmd": "9a5babf4cf0bb2e6ec4241620457713a25f6e174297ca55345b7b0679d45d714",
+    "Microsoft.Windows.ApplicationModel.Resources.winmd": "df487e6a6b17e37e9a743a3c41ffe7f1a98165cea287b6bca65e4602a481f32f",
     "Windows.Wdk.winmd": "54b8e48866b0a7e066981b63bb6f82fc6947fe8c57e2b5cb4513b1537aa836c2",
     "Windows.Win32.winmd": "6aec29be3359468d9eba03c3ae932591b39960f1812b6d25d33c0d9f14a6d665",
     "Windows.winmd": "94eb4abdd6bc8effa8ba9e48f56156bab749b3402e2e5f7c3d18b2b5ab0fc72b"

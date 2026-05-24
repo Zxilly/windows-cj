@@ -2096,8 +2096,14 @@ func testWinrtRuntimeClassProjectsDefaultInterfaceMembersPropertiesAndEvents() {
     @Expect(classSource.contains("var __returnData = CPointer<GUID>()"), true)
     @Expect(classSource.contains("hr__ = unsafe { interface__.GetIds(CPointer<UInt32>(inout __returnSize), CPointer<CPointer<GUID>>(inout __returnData)) }"), true)
     @Expect(classSource.contains("if (hr__.failed() && __returnData.isNotNull()) {\n            windows_core.coTaskMemFree(CPointer<Unit>(__returnData))\n            __returnData = CPointer<GUID>()\n            __returnSize = 0u32\n        }\n        hr__.check()"), true)
-    @Expect(classSource.contains("return { =>\n            if (__returnSize > 0u32 && __returnData.isNull())"), true)
+    // The array-return value is materialized with straight-line statements
+    // (not an immediately-invoked closure), so the projected local is returned
+    // directly and there is no `return { => ... }()` wrapper to mix address
+    // spaces around the inout data/size slots.
+    @Expect(classSource.contains("return { =>"), false)
+    @Expect(classSource.contains("hr__.check()\n        if (__returnSize > 0u32 && __returnData.isNull()) {"), true)
     @Expect(classSource.contains("Array<windows_core.GuidValue>(__returnValueAbiValues.size, { index => windows_core.GuidValue.fromRaw(__returnValueAbiValues[index]) })"), true)
+    @Expect(classSource.contains("return __returnValueProjected"), true)
     @Expect(classSource.contains("public func GetPriority(priority: windows_core.OutSlot<Int32>): Unit"), true)
     @Expect(classSource.contains("hr__ = unsafe { interface__.GetPriority(priority.borrowMut<Int32>()) }"), true)
     @Expect(classSource.contains("if (priority.isNull()) {\n            throw windows_core.WindowsException(windows_core.E_POINTER)\n        }\n        priority.clear()\n        try (interface__ = defaultInterface())"), true)
@@ -3538,4 +3544,434 @@ func testWinrtDelegateHResultInvokeProjectsRuntimeClassParameter() {
     @Expect(delegateSource.contains("public interface Tiny_Storage_StreamedFileDataRequestedHandlerInvoker <: Tiny_Storage_StreamedFileDataRequestedHandlerInvokerErased {\n    func Invoke(stream: Tiny_Storage_StreamedFileDataRequest): Unit"), true)
     @Expect(delegateSource.contains("this.Invoke(windows_core.winrtProjectGenericIn<Tiny_Storage_StreamedFileDataRequest>(stream))"), true)
     @Expect(delegateSource.contains("public static func new(invoke: (CPointer<Unit>) -> Unit)"), false)
+}
+
+@Test
+func testApplyRuntimeClassGenericSubstitutionsRewritesWholeIdentifiers() {
+    let substitutions = ArrayList<RuntimeClassGenericSubstitution>()
+    substitutions.add(RuntimeClassGenericSubstitution("T", "windows_interface.IInspectable"))
+
+    // A whole-identifier `T` (parameter type, generic argument, and inside a
+    // generic call) is rewritten to the concrete substitution type, while
+    // `T` appearing as a sub-string of larger identifiers (`Token`,
+    // `winrtBorrowGenericIn`, `GetT`) is left untouched.
+    let rendered = "    public func addVectorChanged(vhnd: Windows_Foundation_Collections_VectorChangedEventHandler_1<T>): " +
+        "Windows_Foundation_EventRegistrationToken {\n" +
+        "        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<T>(vhnd)) {\n" +
+        "            let value: T = GetT()\n" +
+        "        }\n" +
+        "    }\n"
+    let result = applyRuntimeClassGenericSubstitutions(rendered, substitutions)
+
+    @Expect(result.contains("VectorChangedEventHandler_1<windows_interface.IInspectable>"), true)
+    @Expect(result.contains("winrtBorrowGenericIn<windows_interface.IInspectable>(vhnd)"), true)
+    @Expect(result.contains("let value: windows_interface.IInspectable = GetT()"), true)
+    // `Windows_Foundation_EventRegistrationToken` must keep its embedded `T`s.
+    @Expect(result.contains("Windows_Foundation_EventRegistrationToken"), true)
+    // No bare open generic parameter should survive.
+    @Expect(result.contains("<T>"), false)
+    @Expect(result.contains(": T "), false)
+    @Expect(result.contains(": T)"), false)
+}
+
+@Test
+func testApplyRuntimeClassGenericSubstitutionsNoOpWithoutSubstitutions() {
+    let rendered = "    public func GetAt(index: UInt32): T {\n        return defaultInterface()\n    }\n"
+    @Expect(
+        applyRuntimeClassGenericSubstitutions(rendered, ArrayList<RuntimeClassGenericSubstitution>()),
+        rendered
+    )
+}
+
+@Test
+func testRuntimeClassParameterizedDefaultInterfaceMembersUseConcreteType() {
+    // A runtime class whose DEFAULT interface is a parameterized collection
+    // (IObservableVector<T> closed over a concrete IThing) must render its
+    // inherited members with the concrete element type, not the open generic
+    // parameter that the interface definition uses.
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "Example.Collections",
+          "Name": "IThing",
+          "Attributes": ["Public", "Interface", "Abstract", "WindowsRuntime"],
+          "BaseType": null,
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Collections",
+          "Name": "IObservableVector",
+          "Attributes": ["Public", "Interface", "Abstract", "WindowsRuntime"],
+          "BaseType": null,
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "Append",
+              "Attributes": ["Public", "Virtual", "NewSlot", "Abstract"],
+              "Signature": {
+                "ReturnType": {"Kind": "Void"},
+                "Parameters": [
+                  {"Kind": "GenericParameter", "Name": "T"}
+                ]
+              },
+              "CustomAttributes": [],
+              "Parameters": [
+                {"Name": "value", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null}
+              ]
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [{"Name": "T"}],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Collections",
+          "Name": "Bag",
+          "MetadataToken": "0x02000008",
+          "Attributes": ["Public", "Class", "Sealed", "WindowsRuntime"],
+          "BaseType": "System.Object",
+          "IsNested": false,
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [
+            {
+              "Interface": {
+                "Kind": "TypeSpecification",
+                "TypeSpecification": {
+                  "Signature": {
+                    "Kind": "Type",
+                    "Namespace": "Example.Collections",
+                    "Name": "IObservableVector",
+                    "TypeArguments": [
+                      {"Kind": "Type", "Namespace": "Example.Collections", "Name": "IThing"}
+                    ]
+                  },
+                  "CustomAttributes": []
+                }
+              },
+              "CustomAttributes": [
+                {"Type": "Windows.Foundation.Metadata.DefaultAttribute", "FixedArguments": [], "NamedArguments": []}
+              ]
+            }
+          ],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    var classSource = ""
+    for (record in records) {
+        if (record.fullName == "Example.Collections.Bag") {
+            classSource = renderSymbolImpl(record, symbolsByName)
+        }
+    }
+
+    @Expect(classSource.contains("public class Example_Collections_Bag <: windows_interface.InterfaceWrapperBase"), true)
+    @Expect(classSource.contains("public func Append(value: Example_Collections_IThing): Unit"), true)
+    // The inherited member body must not leak the open generic parameter.
+    @Expect(classSource.contains("public func Append(value: T)"), false)
+    @Expect(classSource.contains("winrtBorrowGenericIn<Example_Collections_IThing>(value)"), true)
+    @Expect(classSource.contains("winrtBorrowGenericIn<T>(value)"), false)
+}
+
+// A runtime class whose parameterized default interface closes its generic
+// element over a primitive value (IVector<Single>) must bridge the type-erased
+// generic GetAt OUT slot through winrtTakeGenericOut<Float32>, not the
+// reference-handle fromAbiTakeWinrtHandle path (Float32 has no such method).
+@Test
+func testRuntimeClassGenericOutPrimitiveElementUsesGenericBridge() {
+    let classSource = renderGenericCollectionRuntimeClassSource(
+        "FloatBag",
+        "0x02000040",
+        ##"{"Kind": "Primitive", "Name": "Single"}"##
+    )
+
+    @Expect(classSource.contains("public func GetAt(index: UInt32): Float32"), true)
+    @Expect(classSource.contains("windows_core.winrtTakeGenericOut<Float32>(CPointer<CPointer<Unit>>(inout result__))"), true)
+    // The reference-handle bridge must not be used for a value element.
+    @Expect(classSource.contains("Float32.fromAbiTakeWinrtHandle"), false)
+    // Failure cleanup dispatches through the bridge (no-op for value elements).
+    @Expect(classSource.contains("windows_core.winrtReleaseFailedGenericOut<Float32>(CPointer<CPointer<Unit>>(inout result__))"), true)
+    // The slot must stay type-erased; no winrtReleaseGenericOut<Float32> handle release.
+    @Expect(classSource.contains("winrtReleaseGenericOut<Float32>"), false)
+}
+
+// IMap/IVector closed over String returns its generic OUT through the HString
+// handle bridge; winrtTakeGenericOut<windows_core.HString> resolves to the
+// system-handle take path, which is the correct string ABI.
+@Test
+func testRuntimeClassGenericOutStringElementUsesHStringBridge() {
+    let classSource = renderGenericCollectionRuntimeClassSource(
+        "StringBag",
+        "0x02000041",
+        ##"{"Kind": "Primitive", "Name": "String"}"##
+    )
+
+    @Expect(classSource.contains("public func GetAt(index: UInt32): windows_core.HString"), true)
+    @Expect(classSource.contains("windows_core.winrtTakeGenericOut<windows_core.HString>(CPointer<CPointer<Unit>>(inout result__))"), true)
+    @Expect(classSource.contains("windows_core.winrtReleaseFailedGenericOut<windows_core.HString>(CPointer<CPointer<Unit>>(inout result__))"), true)
+}
+
+// IVector.GetMany is a caller-allocated fill buffer: the projected method
+// exposes (itemsSize, items) and forwards them straight to the vtable slot,
+// rather than the allocate-and-return (CPointer<&size>, CPointer<&data>) shape.
+@Test
+func testRuntimeClassGenericGetManyUsesCallerAllocatedBuffer() {
+    let classSource = renderGenericCollectionRuntimeClassSource(
+        "FloatBag2",
+        "0x02000042",
+        ##"{"Kind": "Primitive", "Name": "Single"}"##
+    )
+
+    // Projected public signature is the caller-allocated fill buffer. The
+    // element is the open generic parameter, so the buffer is the type-erased
+    // CPointer<Unit> the generic vtable slot accepts, not an allocate-and-return
+    // pair.
+    @Expect(classSource.contains("public func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>): UInt32"), true)
+    // The buffer is forwarded straight through to the vtable slot.
+    @Expect(classSource.contains("interface__.GetMany(startIndex, itemsSize, items, CPointer<UInt32>(inout result__))"), true)
+    // No allocate-and-return OutSlot<Array<...>> shape for GetMany.
+    @Expect(classSource.contains("items: windows_core.OutSlot<Array<Float32>>"), false)
+    @Expect(classSource.contains("OutSlot<Array<"), false)
+    // The element's range helpers are concretized to the closed element type so
+    // value elements no-op and handle elements release.
+    @Expect(classSource.contains("windows_core.winrtPrepareGenericOutRange<Float32>(items, itemsSize)"), true)
+    @Expect(classSource.contains("windows_core.winrtReleaseGenericOutRange<Float32>(items, itemsSize)"), true)
+}
+
+// An array-returning runtime-class method must release its allocate-and-return
+// output through the array names (__returnData / __returnSize), never the
+// undeclared scalar result__ slot.
+@Test
+func testRuntimeClassArrayReturnFailureCleanupUsesArrayNames() {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "Example.Spatial",
+          "Name": "PointInt32",
+          "Attributes": ["Public", "SequentialLayout", "WindowsRuntime"],
+          "BaseType": "System.ValueType",
+          "CustomAttributes": [],
+          "Fields": [
+            {"Name": "X", "Attributes": ["Public"], "Signature": {"Kind": "Primitive", "Name": "Int32"}},
+            {"Name": "Y", "Attributes": ["Public"], "Signature": {"Kind": "Primitive", "Name": "Int32"}}
+          ],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Spatial",
+          "Name": "IConverter",
+          "Attributes": ["Public", "Interface", "Abstract", "WindowsRuntime"],
+          "BaseType": null,
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "Convert",
+              "Attributes": ["Public", "Virtual", "NewSlot", "Abstract"],
+              "Signature": {
+                "ReturnType": {"Kind": "SZArray", "Type": {"Kind": "Type", "Namespace": "Example.Spatial", "Name": "PointInt32"}},
+                "Parameters": []
+              },
+              "CustomAttributes": [],
+              "Parameters": [
+                {"Name": "result", "SequenceNumber": 0, "Attributes": [], "CustomAttributes": [], "DefaultValue": null}
+              ]
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Spatial",
+          "Name": "Converter",
+          "MetadataToken": "0x02000050",
+          "Attributes": ["Public", "Class", "Sealed", "WindowsRuntime"],
+          "BaseType": "System.Object",
+          "IsNested": false,
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [
+            {
+              "Interface": {
+                "Kind": "Type",
+                "Namespace": "Example.Spatial",
+                "Name": "IConverter"
+              },
+              "CustomAttributes": [
+                {"Type": "Windows.Foundation.Metadata.DefaultAttribute", "FixedArguments": [], "NamedArguments": []}
+              ]
+            }
+          ],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(json, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    var classSource = ""
+    for (record in records) {
+        if (record.fullName == "Example.Spatial.Converter") {
+            classSource = renderSymbolImpl(record, symbolsByName)
+        }
+    }
+
+    @Expect(classSource.contains("public func Convert(): Array<Example_Spatial_PointInt32>"), true)
+    @Expect(classSource.contains("var __returnData = CPointer<Example_Spatial_PointInt32>()"), true)
+    @Expect(classSource.contains("var __returnSize = 0u32"), true)
+    // The array-return failure cleanup must use the array names, never result__.
+    @Expect(classSource.contains("__returnData.isNotNull()"), true)
+    @Expect(classSource.contains("result__"), false)
+}
+
+// Build an IVector-shaped parameterized default interface (GetAt -> T,
+// GetMany caller-allocated) closed over `elementJson`, returning the rendered
+// runtime-class source for the wrapping sealed class.
+func renderGenericCollectionRuntimeClassSource(
+    className: String,
+    classToken: String,
+    elementJson: String
+): String {
+    let json = ##"{
+      "winmd_file": "Tiny.winmd",
+      "winmd_sha256": "abcd",
+      "tool_version": "1",
+      "schema_version": "1",
+      "source_set": "winmd_main",
+      "types": [
+        {
+          "Namespace": "Example.Collections",
+          "Name": "IVector",
+          "Attributes": ["Public", "Interface", "Abstract", "WindowsRuntime"],
+          "BaseType": null,
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [],
+          "Methods": [
+            {
+              "Name": "GetAt",
+              "Attributes": ["Public", "Virtual", "NewSlot", "Abstract"],
+              "Signature": {
+                "ReturnType": {"Kind": "GenericParameter", "Name": "T"},
+                "Parameters": [{"Kind": "Primitive", "Name": "UInt32"}]
+              },
+              "CustomAttributes": [],
+              "Parameters": [
+                {"Name": "index", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null},
+                {"Name": "result", "SequenceNumber": 0, "Attributes": [], "CustomAttributes": [], "DefaultValue": null}
+              ]
+            },
+            {
+              "Name": "GetMany",
+              "Attributes": ["Public", "Virtual", "NewSlot", "Abstract"],
+              "Signature": {
+                "ReturnType": {"Kind": "Primitive", "Name": "UInt32"},
+                "Parameters": [
+                  {"Kind": "Primitive", "Name": "UInt32"},
+                  {"Kind": "SZArray", "Type": {"Kind": "GenericParameter", "Name": "T"}}
+                ]
+              },
+              "CustomAttributes": [],
+              "Parameters": [
+                {"Name": "startIndex", "SequenceNumber": 1, "Attributes": ["In"], "CustomAttributes": [], "DefaultValue": null},
+                {"Name": "items", "SequenceNumber": 2, "Attributes": ["Out"], "CustomAttributes": [{"Type": "Windows.Foundation.Metadata.LengthIsAttribute", "FixedArguments": [], "NamedArguments": []}], "DefaultValue": null},
+                {"Name": "result", "SequenceNumber": 0, "Attributes": [], "CustomAttributes": [], "DefaultValue": null}
+              ]
+            }
+          ],
+          "NestedTypes": [],
+          "GenericParameters": [{"Name": "T"}],
+          "Events": [],
+          "Properties": []
+        },
+        {
+          "Namespace": "Example.Collections",
+          "Name": "__CLASS__",
+          "MetadataToken": "__TOKEN__",
+          "Attributes": ["Public", "Class", "Sealed", "WindowsRuntime"],
+          "BaseType": "System.Object",
+          "IsNested": false,
+          "CustomAttributes": [],
+          "Fields": [],
+          "InterfaceImplementations": [
+            {
+              "Interface": {
+                "Kind": "TypeSpecification",
+                "TypeSpecification": {
+                  "Signature": {
+                    "Kind": "Type",
+                    "Namespace": "Example.Collections",
+                    "Name": "IVector",
+                    "TypeArguments": [__ELEMENT__]
+                  },
+                  "CustomAttributes": []
+                }
+              },
+              "CustomAttributes": [
+                {"Type": "Windows.Foundation.Metadata.DefaultAttribute", "FixedArguments": [], "NamedArguments": []}
+              ]
+            }
+          ],
+          "Methods": [],
+          "NestedTypes": [],
+          "GenericParameters": [],
+          "Events": [],
+          "Properties": []
+        }
+      ]
+    }"##
+    let resolved = json
+        .replace("__CLASS__", className)
+        .replace("__TOKEN__", classToken)
+        .replace("__ELEMENT__", elementJson)
+    let files = ArrayList<WinmdFileRecord>()
+    files.add(parseWinmdJson(resolved, "tiny"))
+    let records = buildSymbolRecords(files)
+    let symbolsByName = cliTestRecordsByName(records)
+    for (record in records) {
+        if (record.fullName == "Example.Collections.${className}") {
+            return renderSymbolImpl(record, symbolsByName)
+        }
+    }
+    return ""
 }

@@ -4350,10 +4350,18 @@ def check_generated_common_impl_invariants(generated: Path) -> None:
         match = re.search(r"\bclass\s+([A-Za-z_][A-Za-z0-9_]*)", header)
         class_name = match.group(1) if match is not None else header.strip()
         fail(f"windows-common raw handle classes must be owning Resource wrappers: {class_name}")
-    if "extend Microsoft_UI_Xaml_ApplicationInitializationCallback <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_ApplicationInitializationCallback>" not in impl_text:
-        fail("windows-common raw WinRT delegate classes must implement HandleWinrtType")
+    # The WinUI metadata defines ApplicationInitializationCallback as a complete
+    # WinRT delegate (it carries an IID), so it projects as a full delegate
+    # ComInterface wrapper whose private owned-handle subclass takes ABI
+    # ownership (fromAbiTake -> Owned...), rather than the degraded raw-handle
+    # HandleWinrtType shape that incomplete delegate metadata produced. Verify
+    # the owning delegate projection and that Application.Start borrows its input.
+    if "public open class Microsoft_UI_Xaml_ApplicationInitializationCallback <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface" not in impl_text:
+        fail("windows-common WinRT delegate ApplicationInitializationCallback must project as a ComInterface delegate wrapper")
+    if "private class OwnedMicrosoft_UI_Xaml_ApplicationInitializationCallback <: Microsoft_UI_Xaml_ApplicationInitializationCallback" not in impl_text:
+        fail("windows-common WinRT delegate ApplicationInitializationCallback must provide an owned-handle variant for ABI cleanup")
     if "winrtBorrowGenericIn<Microsoft_UI_Xaml_ApplicationInitializationCallback>(callback)" not in impl_text:
-        fail("windows-common Application.Start must borrow delegate handles through HandleWinrtType")
+        fail("windows-common Application.Start must borrow the delegate handle through winrtBorrowGenericIn")
     if "Microsoft_UI_Xaml_IApplication.signature()" in impl_text:
         fail("windows-common runtime class signatures must not call ambiguous interface signature() members")
     if "let _ = hr__.ok()" in impl_text:
