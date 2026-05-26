@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-COLLECTIONS_RUNTIME = ROOT / "windows-collections" / "src" / "collections_runtime.cj"
+COLLECTIONS_RUNTIME = ROOT / "windows_collections" / "src" / "collections_runtime.cj"
 
 
 @dataclasses.dataclass(frozen=True)

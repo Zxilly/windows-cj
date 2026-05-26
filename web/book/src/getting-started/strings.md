@@ -1,6 +1,6 @@
 # 处理字符串
 
-Windows 内部几乎全用 UTF-16 宽字符（`UInt16`），而仓颉的 `String` 是 UTF-8。和 Windows 打交道时，几乎每一次跨边界都要做一次「UTF-8 ↔ UTF-16」的转换。`windows-strings` 把这件事封装成几个职责清晰的类型，你只要根据 API 期待的形态挑一个用就行。
+Windows 内部几乎全用 UTF-16 宽字符（`UInt16`），而仓颉的 `String` 是 UTF-8。和 Windows 打交道时，几乎每一次跨边界都要做一次「UTF-8 ↔ UTF-16」的转换。`windows_strings` 把这件事封装成几个职责清晰的类型，你只要根据 API 期待的形态挑一个用就行。
 
 越往下越底层、越接近裸 ABI；越往上越现代、越贴近仓颉习惯：
 
@@ -15,7 +15,7 @@ HString          ── WinRT 的 HSTRING，运行时投影最常用
 
 ## String 与 UTF-16 的关系
 
-仓颉 `String` 按 UTF-8 存储字节；Windows 想要的是 UTF-16 码元序列。`windows-strings` 在内部用一套编解码 helper 完成两边互转，并且对非法序列做了防御（遇到坏字节会替换成 `U+FFFD`，不会崩）。
+仓颉 `String` 按 UTF-8 存储字节；Windows 想要的是 UTF-16 码元序列。`windows_strings` 在内部用一套编解码 helper 完成两边互转，并且对非法序列做了防御（遇到坏字节会替换成 `U+FFFD`，不会崩）。
 
 大多数时候你不需要手动调编解码函数——构造一个 `HString` / `BSTR` / `CWideString` 时转换会自动发生；取回内容时再转回 `String`。关键是理解：**这些包装类型内部存的是 UTF-16，对外的「人话」接口才是仓颉 `String`。**
 
@@ -181,7 +181,7 @@ let back: String = CWideString.fromPointer(ptr)
 
 ## 字面量风格的构造（无编译期宏）
 
-仓颉没有编译期字面量宏，所以 `windows-strings` 用工厂 / 惰性单例来表达「写死的常量字符串」这件事。`literals.cj` 提供了一组工厂和便捷函数：
+仓颉没有编译期字面量宏，所以 `windows_strings` 用工厂 / 惰性单例来表达「写死的常量字符串」这件事。`literals.cj` 提供了一组工厂和便捷函数：
 
 ```cangjie
 // 工厂：先建一次，可重复借出指针

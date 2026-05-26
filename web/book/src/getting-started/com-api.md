@@ -21,12 +21,12 @@
 
 ### windows-cj 怎么映射
 
-底座类型定义在 `windows-interface` 包里，并由 `windows-core` 重导出（你通常 `import windows_core` 即可）。关键约定：
+底座类型定义在 `windows_interface` 包里，并由 `windows_core` 重导出（你通常 `import windows_core` 即可）。关键约定：
 
 - 接口契约 `ComInterface`：每个 COM 接口包装类都实现它，提供 `asRaw(): CPointer<Unit>`（拿到底层指针）和静态的 `iid()`。
-  （来源：`windows-interface/src/interface_descriptor.cj`）
+  （来源：`windows_interface/src/interface_descriptor.cj`）
 - vtable 用 `@C struct` 表达，例如 `IUnknownVtbl`、`IInspectableVtbl`。它们的字段是 `CFunc<...>`，第一个字段 `base_` 内联基接口的 vtable，从而复刻 C 的内存布局。
-  （来源：`windows-interface/src/interface_wrapper.cj`）
+  （来源：`windows_interface/src/interface_wrapper.cj`）
 - 接口包装类（`IUnknown`、`IInspectable` 等）继承自 `InterfaceWrapperBase`，它实现了 `Resource`，负责持有原生指针并在关闭时 `Release`。
 - `InterfaceDescriptor<T>` 是“调用侧契约”：它把一个接口名、IID、以及“如何从 ABI 指针构造仓颉包装”绑在一起。查询和投影都围绕它进行。
 
@@ -88,7 +88,7 @@ func tryAsAgile<T>(source: T): Option<IAgileObject> where T <: ComInterface & In
 }
 ```
 
-（`cast` 来源：`windows-core/src/interface.cj`；它内部调用 `queryInterfaceResult`，对失败结果会正确 `Release` 出参，避免泄漏。）
+（`cast` 来源：`windows_core/src/interface.cj`；它内部调用 `queryInterfaceResult`，对失败结果会正确 `Release` 出参，避免泄漏。）
 
 ### 从裸指针直接查询：返回 `Option`
 
@@ -102,7 +102,7 @@ match (unsafe { queryInterfaceAs(rawPointer, IInspectable.descriptor()) }) {
 }
 ```
 
-（来源：`windows-interface/src/interface_wrapper.cj` 的 `queryInterfaceRaw` / `queryInterfaceAs`，由 `windows-core` 重导出。）
+（来源：`windows_interface/src/interface_wrapper.cj` 的 `queryInterfaceRaw` / `queryInterfaceAs`，由 `windows_core` 重导出。）
 
 ### 包装对象上的 `.query(...)`
 
@@ -136,7 +136,7 @@ func useOnOtherThread<T>(reference: AgileReference<T>): Result<T> where T <: Com
 }
 ```
 
-（来源：`windows-core/src/agile_reference.cj`。签名为 `AgileReference<T>.new(object: T, descriptor: InterfaceDescriptor<T>): Result<AgileReference<T>>` 与 `resolve(): Result<T>`，其中 `T <: ComInterface`。）
+（来源：`windows_core/src/agile_reference.cj`。签名为 `AgileReference<T>.new(object: T, descriptor: InterfaceDescriptor<T>): Result<AgileReference<T>>` 与 `resolve(): Result<T>`，其中 `T <: ComInterface`。）
 
 `AgileReference<T>` 本身实现 `Resource`：用完后 `close()` 会释放它内部持有的敏捷引用。
 
@@ -145,7 +145,7 @@ func useOnOtherThread<T>(reference: AgileReference<T>): Result<T> where T <: Com
 这是与“GC 管理仓颉对象”相对的另一半：**原生 COM 引用不归 GC 管，必须确定性地释放。** windows-cj 的做法是让接口包装实现 `Resource`：
 
 - `InterfaceWrapperBase`（所有接口包装的基类）实现 `Resource`，提供 `close()`。它内部用 `closed_: Bool` 作回收标记，并对“拥有所有权的句柄”用一个带原子标志的 `OwnedHandleState` 兜底——这样 **析构器 `~init` 与显式 `close()` 不会重复 `Release`（避免 double free）**。
-  （来源：`windows-interface/src/interface_wrapper.cj`）
+  （来源：`windows_interface/src/interface_wrapper.cj`）
 - 取得所有权的包装（`fromAbiTake` 系列，对应 QueryInterface/激活返回的“已 AddRef”指针）在 `close()` 时正好做一次 `Release`；只是“借用视图”（`viewOf`）则不释放。
 - `closed_` 标记保证 `close()` 幂等：第二次调用直接返回，不会二次释放。
 

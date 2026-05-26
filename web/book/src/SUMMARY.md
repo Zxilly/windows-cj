@@ -15,6 +15,6 @@
 - [调用 WinRT API](getting-started/winrt-api.md)
 - [WinRT 集合](getting-started/collections.md)
 - [WinRT 异步操作](getting-started/async.md)
-- [链接与 windows-targets](getting-started/targets.md)
-- [用 windows-bindgen 生成绑定](getting-started/bindgen.md)
+- [链接与 windows_targets](getting-started/targets.md)
+- [用 windows_bindgen 生成绑定](getting-started/bindgen.md)
 - [WinUI 3 实战](getting-started/winui3.md)

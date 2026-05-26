@@ -1,12 +1,12 @@
-# 链接与 windows-targets
+# 链接与 windows_targets
 
 当你调用一个 Win32 / COM / WinRT 函数（比如 `RegGetValueW`、`CoCreateInstance`、`RoGetActivationFactory`）时，仓颉只知道这个符号的**声明**，并不知道它的机器码在哪。把"符号名"对应到"系统 DLL 里的导出地址"这件事，发生在**链接期**：链接器需要一份**导入库（import library）**，里面记录了每个导出符号属于哪个 DLL、怎么跳转过去。没有这份导入库，链接会以"undefined reference"失败。
 
-windows-cj 走的是 **GNU 工具链**（mingw 风格）。GNU 链接器用 `-l...` 选项来引入库：`-lkernel32` 找 `libkernel32.a`、`-l:libwindows.0.53.0.a` 直接按文件名引入某个归档。windows-cj 把所有需要的 Win32 导入符号都打包进了**一个**归档文件，由 `windows-targets` 包提供。
+windows-cj 走的是 **GNU 工具链**（mingw 风格）。GNU 链接器用 `-l...` 选项来引入库：`-lkernel32` 找 `libkernel32.a`、`-l:libwindows.0.53.0.a` 直接按文件名引入某个归档。windows-cj 把所有需要的 Win32 导入符号都打包进了**一个**归档文件，由 `windows_targets` 包提供。
 
-## `windows-targets` 是什么
+## `windows_targets` 是什么
 
-`windows-targets` 是一个**链接期资产包**，不是普通的源码依赖。它的职责只有一个：捆绑 GNU 导入库归档（`x86_64_gnu/lib/libwindows.0.53.0.a`），并提供一组 helper API，让链接工具能定位归档路径、生成正确的 `-L` / `-l` 选项。
+`windows_targets` 是一个**链接期资产包**，不是普通的源码依赖。它的职责只有一个：捆绑 GNU 导入库归档（`x86_64_gnu/lib/libwindows.0.53.0.a`），并提供一组 helper API，让链接工具能定位归档路径、生成正确的 `-L` / `-l` 选项。
 
 正因为它是资产包而非源码依赖，**普通源码包不应该**只为了拿到链接资产就把 `windows_targets` 写进自己的 `[dependencies]`。真正消费它的是链接 / 构建工具：它们找到包的根目录，再向 helper API 要归档路径或 GNU 链接选项。
 
@@ -14,7 +14,7 @@ windows-cj 走的是 **GNU 工具链**（mingw 风格）。GNU 链接器用 `-l.
 
 ## 支持矩阵
 
-`windows-targets` 只为真正捆绑了归档文件的 target 声明"支持"。下表是当前矩阵（见 `windows-targets/src/lib.cj` 与 `windows-targets/README.md`）：
+`windows_targets` 只为真正捆绑了归档文件的 target 声明"支持"。下表是当前矩阵（见 `windows_targets/src/lib.cj` 与 `windows_targets/README.md`）：
 
 ```text
 | Target key     | 架构    | 工具链 | 仓颉 env | 状态        | 归档载荷                              |
@@ -55,8 +55,8 @@ windows-cj 走的是 **GNU 工具链**（mingw 风格）。GNU 链接器用 `-l.
   link-option = "-lole32 -loleaut32 -lwindowsapp"
 
 [dependencies]
-  windows_core = { path = "../windows-cj/windows-core" }
-  windows_strings = { path = "../windows-cj/windows-strings" }
+  windows_core = { path = "../windows-cj/windows_core" }
+  windows_strings = { path = "../windows-cj/windows_strings" }
 ```
 
 为什么放在最终产物这一层？因为链接是在生成可执行文件 / 动态库时发生的——只有最终把所有 `.a` 拼到一起的那一步，链接器才需要知道全部系统库。中间的静态库包（`output-type = "static"`）只是把目标码攒起来，符号留到最后再解析。所以 `link-option` 写在 `output-type = "executable"` 的项目里。
@@ -65,7 +65,7 @@ windows-cj 走的是 **GNU 工具链**（mingw 风格）。GNU 链接器用 `-l.
 
 ## `ImportLibTarget` 的 helper API
 
-如果你在写自己的链接 / 构建工具、需要程序化地拿到归档路径或链接选项，`windows-targets` 暴露了下面这些函数（签名见 `windows-targets/src/lib.cj`）。它们分"探测式"（返回 `Option`，不抛异常）和"强制式"（拿不到就抛 `UnsupportedTarget`）两类。
+如果你在写自己的链接 / 构建工具、需要程序化地拿到归档路径或链接选项，`windows_targets` 暴露了下面这些函数（签名见 `windows_targets/src/lib.cj`）。它们分"探测式"（返回 `Option`，不抛异常）和"强制式"（拿不到就抛 `UnsupportedTarget`）两类。
 
 ### 查询 target
 
@@ -82,7 +82,7 @@ let target: ImportLibTarget = requireSupportedImportLibTarget("x86_64_gnu")
 let current: ImportLibTarget = requireCurrentImportLibTarget()
 ```
 
-`requireCurrentImportLibTarget()` 内部用 `@When[...]` 条件编译判断当前 `os` / `arch` / `env`：只有 `Windows && x86_64 && gnu` 才返回 `x86_64_gnu`，其它组合直接抛 `UnsupportedTarget("current", "windows-targets only bundles import libraries for x86_64 Windows GNU")`。
+`requireCurrentImportLibTarget()` 内部用 `@When[...]` 条件编译判断当前 `os` / `arch` / `env`：只有 `Windows && x86_64 && gnu` 才返回 `x86_64_gnu`，其它组合直接抛 `UnsupportedTarget("current", "windows_targets only bundles import libraries for x86_64 Windows GNU")`。
 
 ### 取归档路径与链接选项
 
@@ -99,13 +99,13 @@ target.requireArchiveRelativePath()
 // => "x86_64_gnu/lib/libwindows.0.53.0.a"，unsupported 时抛 UnsupportedTarget
 
 // 拼上调用方给定的包根目录
-let root = "E:/toolchain/windows-targets"
+let root = "E:/toolchain/windows_targets"
 target.requireArchivePath(root)
-// => "E:/toolchain/windows-targets/x86_64_gnu/lib/libwindows.0.53.0.a"
+// => "E:/toolchain/windows_targets/x86_64_gnu/lib/libwindows.0.53.0.a"
 
 // 生成 GNU 链接器需要的两个选项
 target.requireGnuLinkOptions(root)
-// => ["-LE:/toolchain/windows-targets/x86_64_gnu/lib", "-l:libwindows.0.53.0.a"]
+// => ["-LE:/toolchain/windows_targets/x86_64_gnu/lib", "-l:libwindows.0.53.0.a"]
 ```
 
 `requireGnuLinkOptions(root)` 返回的两项正是把一份归档喂给 GNU 链接器的标准组合：`-L<目录>` 指定搜索路径，`-l:<文件名>` 按精确文件名引入归档。注意它只对 `toolchain == "gnu"` 的 target 有效，对非 GNU target（即便受支持）会抛 `UnsupportedTarget`。
@@ -115,7 +115,7 @@ target.requireGnuLinkOptions(root)
 `UnsupportedTarget` 是一个 `<: Exception` 的公开异常类，带 `targetName` 和 `reason` 两个字段，消息形如：
 
 ```text
-unsupported windows-targets import library target `aarch64_gnu`: no bundled import library payload exists under aarch64_gnu/lib
+unsupported windows_targets import library target `aarch64_gnu`: no bundled import library payload exists under aarch64_gnu/lib
 ```
 
 所有 `require...` 系列都在拿到链接选项 / 做任何 ABI 假设**之前**就抛出它，让你尽早 fail-fast。如果你只是想检视矩阵、不想触发异常，就用 `findImportLibTarget` / `findSupportedImportLibTarget` / `archiveRelativePath()` 这些返回 `Option` 的探测式 API。
@@ -125,12 +125,12 @@ unsupported windows-targets import library target `aarch64_gnu`: no bundled impo
 ## 小结
 
 - 调用 Windows API 需要链接期的**导入库**把符号解析到系统 DLL；windows-cj 用 GNU 工具链 + 单一归档 `libwindows.0.53.0.a`。
-- `windows-targets` 是链接期资产包，目前只支持 `x86_64_gnu`；其余 target 在矩阵里列出但无载荷（unsupported）。
+- `windows_targets` 是链接期资产包，目前只支持 `x86_64_gnu`；其余 target 在矩阵里列出但无载荷（unsupported）。
 - COM / WinRT 在最终可执行项目的 `cjpm.toml` 里用 `link-option = "-lole32 -loleaut32 -lwindowsapp"` 补充系统库。
 - 用 `requireSupportedImportLibTarget` / `requireCurrentImportLibTarget` 解析 target，用 `requireGnuLinkOptions(root)` 拿链接选项；不支持的 target 会抛 `UnsupportedTarget`。
 
 ## 下一步 / 相关
 
-- [用 windows-bindgen 生成绑定](bindgen.md) —— 绑定生成器如何按需把元数据生成成仓颉源码包。
+- [用 windows_bindgen 生成绑定](bindgen.md) —— 绑定生成器如何按需把元数据生成成仓颉源码包。
 - [WinUI 3 实战](winui3.md) —— WinUI 3 / Windows App SDK 项目的链接与运行环境。
 - [安装与环境配置](installation.md) —— 工具链版本、`cjHeapSize`、`cjv exec` 运行约定。

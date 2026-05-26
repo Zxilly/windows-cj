@@ -33,19 +33,19 @@ DEFAULT_WORKSPACE_TIMEOUT_SECONDS = 240
 DEFAULT_CODEGEN_TIMEOUT_SECONDS = 300
 
 # Real-WinRT smoke filters per split projection package. The monolithic
-# windows-runtime package was split into windows-foundation / windows-collections
-# / windows-future; each package keeps a real-WinRT smoke that the quick gate
+# windows-runtime package was split into windows_foundation / windows_collections
+# / windows_future; each package keeps a real-WinRT smoke that the quick gate
 # drives through run_windows_runtime_tests.py --package.
 RUNTIME_SMOKE_FILTERS_BY_PACKAGE = {
-    "windows-foundation": [
+    "windows_foundation": [
         "testRealActivationFactoryReportsUnavailableClass",
         "testRealPropertyValueInt32ArrayRoundTrip",
         "testRealUriDecoderRoundTripsHStringAndCollectionProjection",
     ],
-    "windows-collections": [
+    "windows_collections": [
         "testStockInt32VectorViewRoundTripsThroughProjection",
     ],
-    "windows-future": [
+    "windows_future": [
         "testReadyOperationProjectsCompletedResult",
         "testSpawnedActionPropagatesWindowsExceptionThroughJoin",
     ],
@@ -53,7 +53,7 @@ RUNTIME_SMOKE_FILTERS_BY_PACKAGE = {
 
 # Backwards-compatible alias: the foundation package retains the shared
 # real-WinRT smoke filters that the quick gate originally exercised.
-QUICK_RUNTIME_SMOKE_FILTERS = RUNTIME_SMOKE_FILTERS_BY_PACKAGE["windows-foundation"]
+QUICK_RUNTIME_SMOKE_FILTERS = RUNTIME_SMOKE_FILTERS_BY_PACKAGE["windows_foundation"]
 
 
 @dataclass(frozen=True)
@@ -78,7 +78,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
         choices=("quick", "full"),
         default="full",
         help=(
-            "quick runs script checks, focused Cangjie workspace tests, macro fixtures, and the windows-common codegen gate; "
+            "quick runs script checks, focused Cangjie workspace tests, macro fixtures, and the windows_common codegen gate; "
             "full also runs complete workspace tests."
         ),
     )
@@ -110,12 +110,12 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--skip-codegen-regenerate",
         action="store_true",
-        help="Skip the full-mode temporary windows-common regeneration/diff step.",
+        help="Skip the full-mode temporary windows_common regeneration/diff step.",
     )
     parser.add_argument(
         "--allow-missing-winui-metadata",
         action="store_true",
-        help="Forward --allow-missing-winui-metadata to the windows-common codegen gate.",
+        help="Forward --allow-missing-winui-metadata to the windows_common codegen gate.",
     )
     parser.add_argument(
         "--macro-timeout-seconds",
@@ -133,7 +133,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 def python_sources(root: Path = ROOT) -> list[Path]:
     source_roots = [
         root / "scripts",
-        root / "windows-interface" / "scripts",
+        root / "windows_interface" / "scripts",
     ]
     demo_tools = root.parent / "windows-cj-demo" / "tools"
     if demo_tools.exists():
@@ -183,7 +183,7 @@ def build_steps(args: argparse.Namespace) -> list[Step]:
             ],
         ),
         Step(
-            "windows-common codegen self-test",
+            "windows_common codegen self-test",
             [
                 sys.executable,
                 script("scripts/check_windows_common_codegen.py"),
@@ -244,13 +244,13 @@ def build_steps(args: argparse.Namespace) -> list[Step]:
                     script("scripts/run_windows_workspace_tests.py"),
                     "--timeout-seconds",
                     str(args.workspace_timeout_seconds),
-                    "windows-bindgen",
-                    "windows-core",
-                    "windows-implement",
-                    "windows-interface",
-                    "windows-foundation",
-                    "windows-collections",
-                    "windows-future",
+                    "windows_bindgen",
+                    "windows_core",
+                    "windows_implement",
+                    "windows_interface",
+                    "windows_foundation",
+                    "windows_collections",
+                    "windows_future",
                 ],
             )
         )
@@ -258,7 +258,7 @@ def build_steps(args: argparse.Namespace) -> list[Step]:
     steps.extend(
         [
             Step(
-                "windows-common codegen gate",
+                "windows_common codegen gate",
                 [
                     sys.executable,
                     script("scripts/check_windows_common_codegen.py"),
@@ -294,7 +294,7 @@ def build_steps(args: argparse.Namespace) -> list[Step]:
     steps.append(
         Step(
             "macro fixtures",
-            [sys.executable, script("windows-interface/scripts/check_macros.py")],
+            [sys.executable, script("windows_interface/scripts/check_macros.py")],
             env=macro_env,
         )
     )

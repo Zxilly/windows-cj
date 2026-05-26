@@ -54,13 +54,13 @@ OWNED_CONSTRUCTOR_RE = re.compile(r"\bOwned[A-Za-z0-9_]*(?:\s*<[^{}\n]+>)?\s*\(\
 # New direct vtable QueryInterface calls should normally go through
 # queryInterfaceRaw/queryInterfaceAs and will need an explicit review here.
 DIRECT_QUERY_INTERFACE_ALLOWED_FILES = {
-    "windows-result/src/com.cj",
-    "windows-interface/src/interface_wrapper.cj",
-    "windows-implement/src/composable_activation.cj",
-    "windows-implement/src/weak_ref_count.cj",
-    "windows-core/src/com_interface.cj",
-    "windows-core/src/marshaler.cj",
-    "windows-core/src/weak_ref_count.cj",
+    "windows_result/src/com.cj",
+    "windows_interface/src/interface_wrapper.cj",
+    "windows_implement/src/composable_activation.cj",
+    "windows_implement/src/weak_ref_count.cj",
+    "windows_core/src/com_interface.cj",
+    "windows_core/src/marshaler.cj",
+    "windows_core/src/weak_ref_count.cj",
 }
 
 
@@ -488,7 +488,7 @@ def check_query_interface_results_consumed(workspace: Path) -> None:
 
 
 def check_owned_raw_query_required_results_consumed(workspace: Path) -> None:
-    xaml = workspace / "windows-winui3" / "src" / "xaml" / "mod.cj"
+    xaml = workspace / "windows_winui3" / "src" / "xaml" / "mod.cj"
     if not xaml.exists():
         return
     text = xaml.read_text(encoding="utf-8")
@@ -577,11 +577,11 @@ def check_discarded_owned_wrappers(workspace: Path) -> None:
 
 
 def check_interface_take_ownership_guard(workspace: Path) -> None:
-    interface_wrapper = workspace / "windows-interface" / "src" / "interface_wrapper.cj"
+    interface_wrapper = workspace / "windows_interface" / "src" / "interface_wrapper.cj"
     text = interface_wrapper.read_text(encoding="utf-8")
     guard = extract_braced_block(text, text.find("func requireOwnedInterfaceRaw"))
     if "raw.isNull()" not in guard or "throw WindowsException(E_POINTER)" not in guard:
-        fail("windows-interface requireOwnedInterfaceRaw must reject null owned COM pointers with E_POINTER")
+        fail("windows_interface requireOwnedInterfaceRaw must reject null owned COM pointers with E_POINTER")
     if text.count("let liveRaw = if (takeOwnership) { requireOwnedInterfaceRaw(raw) } else { raw }") < 2:
         fail("InterfaceWrapperBase takeOwnership constructors must route through requireOwnedInterfaceRaw")
 
@@ -591,10 +591,10 @@ def check_from_abi_take_routes_to_owned_guard(workspace: Path) -> None:
     for source in cj_sources(workspace, production_only=True):
         relative = rel(source, workspace)
         if (
-            relative.startswith("windows-bindgen/")
-            or relative.startswith("windows-strings/")
-            or relative.startswith("windows-interface/src/macros/")
-            or relative.startswith("windows-implement/src/descriptor_codegen")
+            relative.startswith("windows_bindgen/")
+            or relative.startswith("windows_strings/")
+            or relative.startswith("windows_interface/src/macros/")
+            or relative.startswith("windows_implement/src/descriptor_codegen")
         ):
             continue
         text = source.read_text(encoding="utf-8")

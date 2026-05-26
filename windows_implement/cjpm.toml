@@ -1,0 +1,12 @@
+[package]
+  name = "windows_implement"
+  version = "0.1.0"
+  description = "Windows interface implementation support for Cangjie bindings"
+  output-type = "static"
+  cjc-version = "1.1.0"
+
+[dependencies]
+  windows_interface = { path = "../windows_interface" }
+  windows_libloading = { path = "../windows_libloading" }
+  windows_result = { path = "../windows_result" }
+  windows_strings = { path = "../windows_strings" }

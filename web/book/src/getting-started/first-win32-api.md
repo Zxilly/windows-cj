@@ -16,11 +16,11 @@ Win32 是 Windows 最底层、也是历史最悠久的一层 API：它就是一�
 
 ## 路径一：用现成的高层封装（推荐）
 
-最省事的方式是找到对应子系统包，直接调用它的公开函数。以查询操作系统版本为例 —— `windows-version` 包已经把 `RtlGetVersion` 封装成了一个干净的值类型 `OsVersion`。
+最省事的方式是找到对应子系统包，直接调用它的公开函数。以查询操作系统版本为例 —— `windows_version` 包已经把 `RtlGetVersion` 封装成了一个干净的值类型 `OsVersion`。
 
 ### 写依赖：`cjpm.toml`
 
-注意 windows-cj 的命名约定：**目录名用连字符，仓颉包名用下划线**。引依赖时键名是包名（下划线），路径指向目录（连字符）。
+注意 windows-cj 的命名约定：**目录名和仓颉包名都用下划线**。引依赖时键名是包名，路径也指向同名目录。
 
 ```toml
 [package]
@@ -30,7 +30,7 @@ Win32 是 Windows 最底层、也是历史最悠久的一层 API：它就是一�
   cjc-version = "1.1.0"
 
 [dependencies]
-  windows_version = { path = "../windows-cj/windows-version" }
+  windows_version = { path = "../windows-cj/windows_version" }
 ```
 
 ### 写代码
@@ -56,15 +56,15 @@ main(): Int64 {
 }
 ```
 
-`OsVersion.current()` / `is_server()` / `revision()` 都是 `windows-version` 的公开 API（见 `windows-version/src/lib.cj`）。你完全看不到指针、句柄、宽字符——封装层已经把这些都吞掉了。`OsVersion` 是一个实现了 `ToString` 的值类型（`struct`），字符串插值时会得到 `major.minor.pack.build` 的形式。
+`OsVersion.current()` / `is_server()` / `revision()` 都是 `windows_version` 的公开 API（见 `windows_version/src/lib.cj`）。你完全看不到指针、句柄、宽字符——封装层已经把这些都吞掉了。`OsVersion` 是一个实现了 `ToString` 的值类型（`struct`），字符串插值时会得到 `major.minor.pack.build` 的形式。
 
 ### 高层 API 怎么报告错误
 
-更复杂的子系统会把"成功 / 失败"建模成返回值，而不是让你检查整数码。以 `windows-registry` 为例，它的读写函数返回 `Result<T>`：
+更复杂的子系统会把"成功 / 失败"建模成返回值，而不是让你检查整数码。以 `windows_registry` 为例，它的读写函数返回 `Result<T>`：
 
 ```toml
 [dependencies]
-  windows_registry = { path = "../windows-cj/windows-registry" }
+  windows_registry = { path = "../windows-cj/windows_registry" }
 ```
 
 ```cangjie
@@ -101,7 +101,7 @@ main(): Int64 {
 
 ## 路径二：自己声明 `foreign func`（进阶）
 
-如果某个 Win32 函数还没有现成封装，你可以照 C 头文件的签名，用仓颉 FFI 自己声明。底层的 `windows-libloading` 包本身就是这么写的，可以当模板参考（见 `windows-libloading/src/lib.cj`）。
+如果某个 Win32 函数还没有现成封装，你可以照 C 头文件的签名，用仓颉 FFI 自己声明。底层的 `windows_libloading` 包本身就是这么写的，可以当模板参考（见 `windows_libloading/src/lib.cj`）。
 
 ### 关键语法点（以仓颉官方 FFI 文档为准）
 
@@ -113,7 +113,7 @@ main(): Int64 {
 
 ### 声明骨架
 
-下面照搬 `windows-libloading` 里对三个 `kernel32` 导出函数的真实声明：
+下面照搬 `windows_libloading` 里对三个 `kernel32` 导出函数的真实声明：
 
 ```cangjie
 @CallingConv[STDCALL]
@@ -130,7 +130,7 @@ foreign {
 
 ### 调用骨架
 
-调用时，把仓颉数据转成 C 兼容形式，包进 `unsafe`，再判返回值。下面是 `windows-libloading` 里 `LoadLibraryExA` 的真实调用片段（保留要点）：
+调用时，把仓颉数据转成 C 兼容形式，包进 `unsafe`，再判返回值。下面是 `windows_libloading` 里 `LoadLibraryExA` 的真实调用片段（保留要点）：
 
 ```cangjie
 func loadLibraryWithFlags(moduleNameBytes: Array<UInt8>, flags: UInt32): CPointer<Unit> {
@@ -156,14 +156,14 @@ func loadLibraryWithFlags(moduleNameBytes: Array<UInt8>, flags: UInt32): CPointe
 - 返回的句柄用 `.isNull()` 判断是否失败——这正是 Win32"返回 NULL / 0 表示出错"的惯例。
 - 把仓颉 `Array` 的内存交给 C 时，要用 `acquireArrayRawData` / `releaseArrayRawData` 成对借出 / 归还，并放在 `try { ... } finally { ... }` 里保证释放。
 
-> 还有一条更动态的路径：`windows-libloading` 提供了 `resolveProc(moduleName, procName)`，运行时用 `LoadLibrary` + `GetProcAddress` 解析出函数地址，再用 `CFunc<...>` 把地址转成可调用的函数指针。`windows-result` 内部就用这种方式调用 `kernel32` / `oleaut32` 的函数（见 `windows-result/src/bindings.cj`）。当你不想在链接期绑定符号、或要按需加载时，这很有用。
+> 还有一条更动态的路径：`windows_libloading` 提供了 `resolveProc(moduleName, procName)`，运行时用 `LoadLibrary` + `GetProcAddress` 解析出函数地址，再用 `CFunc<...>` 把地址转成可调用的函数指针。`windows_result` 内部就用这种方式调用 `kernel32` / `oleaut32` 的函数（见 `windows_result/src/bindings.cj`）。当你不想在链接期绑定符号、或要按需加载时，这很有用。
 
 ### 返回值：BOOL 与 HRESULT
 
 自己声明 FFI 时要记住 Win32 的错误约定，并尽量翻译成仓颉的表达方式：
 
-- 返回 `BOOL` 的函数：`0` 是失败。`windows-result` 提供了 `BOOL` 值类型，`.as_bool()` 转成仓颉 `Bool`，`.ok()` 转成 `Result<Unit>`（失败时自动带上 `GetLastError` 的错误信息），`.unwrap()` 在失败时 panic。
-- 返回 `HRESULT` 的函数（COM 风格）：用 `windows-result` 的 `HRESULT` 类型表达，负值 / 高位置 1 表示失败。
+- 返回 `BOOL` 的函数：`0` 是失败。`windows_result` 提供了 `BOOL` 值类型，`.as_bool()` 转成仓颉 `Bool`，`.ok()` 转成 `Result<Unit>`（失败时自动带上 `GetLastError` 的错误信息），`.unwrap()` 在失败时 panic。
+- 返回 `HRESULT` 的函数（COM 风格）：用 `windows_result` 的 `HRESULT` 类型表达，负值 / 高位置 1 表示失败。
 - 返回 Win32 状态码（如注册表函数返回 `LSTATUS`）：`0` 成功，非 0 是错误码，可用 `errorFromWin32(code)` 翻成 `Error`。
 
 错误码到异常 / `Result` 的完整映射，参见 [错误处理与 HRESULT](error-handling.md)。
@@ -179,4 +179,4 @@ func loadLibraryWithFlags(moduleNameBytes: Array<UInt8>, flags: UInt32): CPointe
 - [处理字符串](strings.md) —— Win32 的 `W` 函数要求 UTF-16 宽字符串，这一节讲 `HString` / `PCWSTR` / `PWSTR` / `CWideString` 怎么用。
 - [错误处理与 HRESULT](error-handling.md) —— `BOOL` / `HRESULT` / `Error` / `Win32Exception` 的完整体系。
 - [调用 COM API 与查询接口](com-api.md) —— 从 C 风格函数进阶到 vtable 调用与 `QueryInterface`。
-- [链接与 windows-targets](targets.md) —— 这些导出符号在链接期是怎么被解析的。
+- [链接与 windows_targets](targets.md) —— 这些导出符号在链接期是怎么被解析的。

@@ -1,6 +1,6 @@
 # 实现 COM 接口
 
-上一页讲的是**消费**已有的 COM 接口；这一页讲反方向：**实现**一个 COM 接口，让你的仓颉对象能被系统或其它 COM 组件回调。windows-cj 用 `windows-interface`（声明接口）+ `windows-implement`（在仓颉类上实现）两个包配合完成。
+上一页讲的是**消费**已有的 COM 接口；这一页讲反方向：**实现**一个 COM 接口，让你的仓颉对象能被系统或其它 COM 组件回调。windows-cj 用 `windows_interface`（声明接口）+ `windows_implement`（在仓颉类上实现）两个包配合完成。
 
 这套机制不是“移植某门语言的 trait”，而是仓颉对 COM vtable ABI 的**等价表达**。当它的形态和你在别处见过的写法不同时，是因为它在 GC 语言里复刻了原生 vtable 的内存布局与路由，而不是缺了什么。
 
@@ -30,25 +30,25 @@ COM 要求暴露给原生侧的是一个 `@C struct` vtable（一排 `CFunc` 函
 ```
 
 - `ComBox` 是一个 `@C struct`，第一个字段就是 vtable 指针，所以这块槽可以被直接当成 COM 接口指针看待；额外字段（`rootOffset` / `slotIndex` / `slotCount` / `rootKey`）记录它在多接口对象里的位置和回查键。
-  （来源：`windows-implement/src/com_box.cj`）
+  （来源：`windows_implement/src/com_box.cj`）
 - vtable 里每个 `CFunc` thunk 收到原生调用时，第一个参数是这块槽的裸指针。thunk 先用 `rootRegistryKeyFromRaw(...)` 把它换算成根对象的注册表键，再去 `comRegistry`（一个受 `Mutex` 保护的 `HashMap<UIntNative, Object>`）里 `comRegistryLookup` 找回你的仓颉对象，最后把调用转发过去。
-  （来源：`windows-implement/src/com_registry.cj`、`windows-implement/src/com_box.cj`）
+  （来源：`windows_implement/src/com_registry.cj`、`windows_implement/src/com_box.cj`）
 
 引用计数和 `QueryInterface` 也由这套运行时统一处理：`ComObjectRuntime<T>` 用原子计数实现 `AddRef`/`Release`，`queryInterfaceBase` 按 IID 在已解析的描述符里查对应槽位返回指针；归零时从注册表里摘除并关闭内部资源。`IUnknown`/`IInspectable`/`IAgileObject`/`IMarshal`/`IWeakReferenceSource` 这些“系统接口”会被自动接住，无需你实现。
-（来源：`windows-implement/src/interface_impl_surface.cj`）
+（来源：`windows_implement/src/interface_impl_surface.cj`）
 
 ### 深继承链与 slot 计数
 
 当接口有继承链（`IDerived <: IBase`）或一个类实现多个接口时，运行时要为每个“自定义接口”分配一个独立的 vtable 槽（slot 0 永远留给身份/`IUnknown` 或 `IInspectable`）。
 
 - `InterfaceDescriptor` 通过 `ownMethodCount` / `descriptorOwnMethodCount()` 记录“本接口自己新增的方法数”，并把祖先 IID 展开进 `ancestorIids`，使 `QueryInterface` 能正确命中继承来的接口 IID。
-  （来源：`windows-interface/src/interface_descriptor.cj`）
+  （来源：`windows_interface/src/interface_descriptor.cj`）
 - 运行时按继承深度挑选每个槽该用哪个描述符（深度更大的派生接口优先占槽），保证派生接口的 vtable 覆盖到全部继承方法。
-  （来源：`windows-implement/src/interface_impl_surface.cj` 的 `requiredDescriptorIndicesForCustomSlots`）
+  （来源：`windows_implement/src/interface_impl_surface.cj` 的 `requiredDescriptorIndicesForCustomSlots`）
 
 好消息是：**这些你都不用手写**。下面两个宏会替你生成 vtable 结构、thunk、描述符和实现壳。
 
-## 第一步：用 `windows-interface` 声明接口
+## 第一步：用 `windows_interface` 声明接口
 
 用 `@Interface` 宏修饰一个 `interface`，把 IID 和（可选的）运行时类名写在方括号里。宏会自动生成对应的 `Vtbl`（`@C struct`）、`InterfaceDescriptor`、`descriptorSchema()`、包装类，以及给实现侧用的 `XXX_Impl` 接口。
 
@@ -77,7 +77,7 @@ public interface IFixtureDerived <: IFixtureBase {
 }
 ```
 
-（以上写法与 `windows-interface/tests/macros/interface_implement_fixture.cj` 的真实 fixture 完全一致。宏定义见 `windows-interface/src/macros/windows_interface_macros.cj` 的 `public macro Interface`。）
+（以上写法与 `windows_interface/tests/macros/interface_implement_fixture.cj` 的真实 fixture 完全一致。宏定义见 `windows_interface/src/macros/windows_interface_macros.cj` 的 `public macro Interface`。）
 
 宏生成的产物里有几个关键件，后面会用到：
 
@@ -86,7 +86,7 @@ public interface IFixtureDerived <: IFixtureBase {
 - `IFixtureCounter.vtablePtr()` —— 指向该接口 vtable 的原生指针（一份共享单例，`@C struct` 没有 const fn，所以用 lazy static 等价表达）。
 - `IFixtureCounter_Impl` —— 你的类需要实现的接口（由 `@Implement` 自动挂上）。
 
-## 第二步：用 `windows-implement` 在仓颉类上实现
+## 第二步：用 `windows_implement` 在仓颉类上实现
 
 用 `@Implement` 宏修饰你的 `class`，方括号里列出要实现的接口名（可多个）。宏会把对应的 `_Impl` 接口加到类的父类型上，并生成一个 `toComObject(...)` 扩展方法，帮你把这个对象包成可交给原生侧的 `ComObject<T>`。
 
@@ -122,7 +122,7 @@ public class CompositeFixtureCounter {
 }
 ```
 
-（以上同样来自真实 fixture。`@Implement` 宏定义见 `windows-interface/src/macros/windows_interface_macros.cj`；生成的 `toComObject` 内部调用 `windows_core.createImplementedComObject(this, schema(s), vtablePtr(s), agile: ...)`，该函数定义在 `windows-implement/src/class_factory.cj`。）
+（以上同样来自真实 fixture。`@Implement` 宏定义见 `windows_interface/src/macros/windows_interface_macros.cj`；生成的 `toComObject` 内部调用 `windows_core.createImplementedComObject(this, schema(s), vtablePtr(s), agile: ...)`，该函数定义在 `windows_implement/src/class_factory.cj`。）
 
 `toComObject` 默认 `agile: Bool = true`，即让对象额外支持 `IAgileObject` / `IMarshal`（自由线程封送），这通常是你想要的。
 
@@ -148,7 +148,7 @@ try {
 }
 ```
 
-（这正是 fixture `main()` 里的真实用法，见 `windows-interface/tests/macros/interface_implement_fixture.cj`。）
+（这正是 fixture `main()` 里的真实用法，见 `windows_interface/tests/macros/interface_implement_fixture.cj`。）
 
 要点：
 
@@ -158,14 +158,14 @@ try {
 
 ## 自由线程封送（Free-Threaded Marshaler）
 
-当 `agile: true` 时，运行时会在 `QueryInterface(IID_IMarshal)` 上提供一个自由线程封送器，使对象可以安全跨单元使用。windows-implement 通过 `CoCreateFreeThreadedMarshaler`（`ole32.dll`）按需创建它：
+当 `agile: true` 时，运行时会在 `QueryInterface(IID_IMarshal)` 上提供一个自由线程封送器，使对象可以安全跨单元使用。windows_implement 通过 `CoCreateFreeThreadedMarshaler`（`ole32.dll`）按需创建它：
 
 ```cangjie
-// windows-implement 内部封装：为 outer 创建自由线程封送器，失败返回 None
+// windows_implement 内部封装：为 outer 创建自由线程封送器，失败返回 None
 public func createFreeThreadedMarshaler(outer: CPointer<Unit>): Option<IMarshal>
 ```
 
-（来源：`windows-implement/src/agile_impl.cj` 与 `windows-implement/src/native.cj`。一般情况下你不直接调用它——`toComObject(agile: true)` 已经把这条路接好了。）
+（来源：`windows_implement/src/agile_impl.cj` 与 `windows_implement/src/native.cj`。一般情况下你不直接调用它——`toComObject(agile: true)` 已经把这条路接好了。）
 
 ## 一句话总结
 
@@ -176,4 +176,4 @@ public func createFreeThreadedMarshaler(outer: CPointer<Unit>): Option<IMarshal>
 - [调用 COM API 与查询接口](com-api.md)：消费侧的视角与 `QueryInterface`。
 - [调用 WinRT API](winrt-api.md)：基于本页机制的更高层 WinRT 投影。
 - [错误处理](error-handling.md)：`HRESULT` / `Result<T>` 与从 thunk 返回错误码。
-- [包结构总览](packages.md)：`windows-interface` / `windows-implement` 在工作区里的位置。
+- [包结构总览](packages.md)：`windows_interface` / `windows_implement` 在工作区里的位置。

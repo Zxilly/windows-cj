@@ -276,19 +276,19 @@ def self_test() -> None:
             write_self_test_file(
                 workspace,
                 "cjpm.toml",
-                '[workspace]\nmembers = ["windows-core", "windows-empty"]\n',
+                '[workspace]\nmembers = ["windows_core", "windows_empty"]\n',
             )
-            write_self_test_file(workspace, "windows-core/cjpm.toml", '[package]\nname = "windows_core"\n')
-            write_self_test_file(workspace, "windows-empty/cjpm.toml", '[package]\nname = "windows_empty"\n')
-            write_self_test_file(workspace, "windows-core/src/core_test.cj", "package windows_core.tests\n@Test\nclass T {}\n")
-            write_self_test_file(workspace, "windows-empty/src/lib.cj", "package windows_empty\n")
-            write_self_test_file(workspace, "windows-core/target/ignored_test.cj", "package ignored\n@Test\nclass T {}\n")
+            write_self_test_file(workspace, "windows_core/cjpm.toml", '[package]\nname = "windows_core"\n')
+            write_self_test_file(workspace, "windows_empty/cjpm.toml", '[package]\nname = "windows_empty"\n')
+            write_self_test_file(workspace, "windows_core/src/core_test.cj", "package windows_core.tests\n@Test\nclass T {}\n")
+            write_self_test_file(workspace, "windows_empty/src/lib.cj", "package windows_empty\n")
+            write_self_test_file(workspace, "windows_core/target/ignored_test.cj", "package ignored\n@Test\nclass T {}\n")
 
-            assert workspace_members() == ["windows-core", "windows-empty"]
-            assert package_name("windows-core") == "windows_core"
-            assert test_package_names("windows-core") == ["windows_core.tests"]
-            assert test_package_names("windows-empty") == []
-            assert parse_members([]) == ["windows-core"]
+            assert workspace_members() == ["windows_core", "windows_empty"]
+            assert package_name("windows_core") == "windows_core"
+            assert test_package_names("windows_core") == ["windows_core.tests"]
+            assert test_package_names("windows_empty") == []
+            assert parse_members([]) == ["windows_core"]
             try:
                 parse_members(["missing"])
                 raise AssertionError("unknown workspace member was accepted")
@@ -296,12 +296,12 @@ def self_test() -> None:
                 assert "unknown workspace members" in str(exc)
 
             binary = globals()["UNITTEST_BIN"] / "windows_core.tests.exe"
-            assert test_binaries_for_member("windows-core") == [binary]
-            assert workspace_build_command("windows-core") == [
+            assert test_binaries_for_member("windows_core") == [binary]
+            assert workspace_build_command("windows_core") == [
                 "cjpm",
                 "test",
                 "-m",
-                "windows-core",
+                "windows_core",
                 "--no-run",
                 "--no-progress",
                 "--no-color",
@@ -316,7 +316,7 @@ def self_test() -> None:
             )
             for stale in stale_paths:
                 stale.write_text("stale\n", encoding="utf-8")
-            remove_expected_test_binaries("windows-core")
+            remove_expected_test_binaries("windows_core")
             assert not any(stale.exists() for stale in stale_paths)
 
             counts = summary_counts("Summary: TOTAL: 4\n    PASSED: 4, SKIPPED: 0, ERROR: 0\n    FAILED: 0\n")

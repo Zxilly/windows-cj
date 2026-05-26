@@ -25,7 +25,7 @@ Usage
 -----
   python scripts/bench_winmd.py [bench|parity|both] [--repeat N] [--keep]
 
-The output directories live under windows-bindgen/.generated/bench and are
+The output directories live under windows_bindgen/.generated/bench and are
 cleaned at the end unless --keep is passed.
 """
 import argparse
@@ -37,8 +37,8 @@ import sys
 import time
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PKG = os.path.join(REPO, "windows-bindgen")
-EXE = os.path.join(PKG, "target", "release", "bin", "main.exe")
+PKG = os.path.join(REPO, "windows_bindgen")
+EXE = os.path.join(PKG, "target", "release", "bin", "windows_bindgen.exe")
 RUNTIME = r"C:\Users\12009\.cjv\toolchains\sts-1.1.0\runtime\lib\windows_x86_64_cjnative"
 DIFF = os.path.join(REPO, "scripts", "diff_generated_cj.py")
 
@@ -188,7 +188,7 @@ def main():
     opts = ap.parse_args()
 
     if not os.path.exists(EXE):
-        print(f"binary not found: {EXE}\nbuild first: cjpm build (in windows-bindgen)")
+        print(f"binary not found: {EXE}\nbuild first: cjpm build (in windows_bindgen)")
         return 2
 
     rc = 0

@@ -7,9 +7,9 @@ shutting down. This runner keeps the timeout outside the Cangjie test process
 and kills the whole child process tree if the run exceeds the watchdog.
 
 The original monolithic ``windows-runtime`` package was split into the
-``windows-foundation`` / ``windows-collections`` / ``windows-future`` packages.
+``windows_foundation`` / ``windows_collections`` / ``windows_future`` packages.
 This runner is parameterized by ``--package`` so the same watchdog/build/parse
-logic drives any of them; ``windows-foundation`` is the default because it
+logic drives any of them; ``windows_foundation`` is the default because it
 carries the shared real-WinRT smoke tests.
 """
 
@@ -27,18 +27,18 @@ from typing import Sequence
 
 ROOT = Path(__file__).resolve().parents[1]
 
-# Split projection packages and their produced unittest binary names. The
-# package directory name maps to the cjpm package name (dashes -> underscores).
+# Split projection packages and their produced unittest binary names. Package
+# directory names match cjpm package names.
 SPLIT_PACKAGES = (
-    "windows-foundation",
-    "windows-collections",
-    "windows-future",
+    "windows_foundation",
+    "windows_collections",
+    "windows_future",
 )
-DEFAULT_PACKAGE = "windows-foundation"
+DEFAULT_PACKAGE = "windows_foundation"
 
 
 def package_binary_name(package: str) -> str:
-    return package.replace("-", "_") + ".exe"
+    return package + ".exe"
 
 
 def package_dir(package: str) -> Path:
@@ -190,9 +190,9 @@ def self_test() -> None:
         Path("runtime$test.cjo"),
         Path("runtime$test.cjo.flag"),
     )
-    assert package_binary_name("windows-foundation") == "windows_foundation.exe"
-    assert package_binary_name("windows-collections") == "windows_collections.exe"
-    assert package_binary_name("windows-future") == "windows_future.exe"
+    assert package_binary_name("windows_foundation") == "windows_foundation.exe"
+    assert package_binary_name("windows_collections") == "windows_collections.exe"
+    assert package_binary_name("windows_future") == "windows_future.exe"
     for package in SPLIT_PACKAGES:
         assert package_binary(package).name == package_binary_name(package)
     print("OK: split projection runner self-test completed")

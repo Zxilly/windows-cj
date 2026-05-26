@@ -18,15 +18,15 @@ class QualityGatePlanTests(unittest.TestCase):
             [
                 "py_compile",
                 "python unit tests",
-                "windows-common codegen self-test",
+                "windows_common codegen self-test",
                 "vector input ABI generator check",
                 "windows-runtime runner self-test",
-                "windows-foundation smoke test",
-                "windows-collections smoke test",
-                "windows-future smoke test",
+                "windows_foundation smoke test",
+                "windows_collections smoke test",
+                "windows_future smoke test",
                 "workspace runner self-test",
                 "quick workspace Cangjie tests",
-                "windows-common codegen gate",
+                "windows_common codegen gate",
                 "workspace setup audit",
                 "ignored results audit",
                 "ABI ownership audit",
@@ -40,14 +40,14 @@ class QualityGatePlanTests(unittest.TestCase):
             [
                 "py_compile",
                 "python unit tests",
-                "windows-common codegen self-test",
+                "windows_common codegen self-test",
                 "vector input ABI generator check",
                 "windows-runtime runner self-test",
-                "windows-foundation smoke test",
-                "windows-collections smoke test",
-                "windows-future smoke test",
+                "windows_foundation smoke test",
+                "windows_collections smoke test",
+                "windows_future smoke test",
                 "workspace runner self-test",
-                "windows-common codegen gate",
+                "windows_common codegen gate",
                 "workspace setup audit",
                 "ignored results audit",
                 "ABI ownership audit",
@@ -67,7 +67,7 @@ class QualityGatePlanTests(unittest.TestCase):
                 "17",
                 "--skip-workspace-build",
                 "--workspace-member",
-                "windows-core",
+                "windows_core",
             ]
         )
         steps = {step.name: step for step in gate.build_steps(args)}
@@ -75,7 +75,7 @@ class QualityGatePlanTests(unittest.TestCase):
         self.assertIn("--timeout-seconds", command)
         self.assertIn("17", command)
         self.assertIn("--skip-build", command)
-        self.assertTrue(command[-1].endswith("windows-core"))
+        self.assertTrue(command[-1].endswith("windows_core"))
 
     def test_codegen_options_are_forwarded_to_codegen_gate(self) -> None:
         args = gate.parse_args(
@@ -87,7 +87,7 @@ class QualityGatePlanTests(unittest.TestCase):
             ]
         )
         steps = {step.name: step for step in gate.build_steps(args)}
-        command = steps["windows-common codegen gate"].command
+        command = steps["windows_common codegen gate"].command
         self.assertIn("--timeout-seconds", command)
         self.assertIn("23", command)
         self.assertIn("--skip-regenerate", command)
@@ -95,20 +95,20 @@ class QualityGatePlanTests(unittest.TestCase):
 
     def test_full_codegen_gate_defaults_to_available_winui_metadata_subset(self) -> None:
         steps = {step.name: step for step in gate.build_steps(gate.parse_args(["--mode", "full"]))}
-        command = steps["windows-common codegen gate"].command
+        command = steps["windows_common codegen gate"].command
 
         self.assertIn("--allow-missing-winui-metadata", command)
 
     def test_quick_codegen_gate_keeps_missing_winui_metadata_opt_in(self) -> None:
         steps = {step.name: step for step in gate.build_steps(gate.parse_args(["--mode", "quick"]))}
-        command = steps["windows-common codegen gate"].command
+        command = steps["windows_common codegen gate"].command
 
         self.assertNotIn("--allow-missing-winui-metadata", command)
 
     def test_codegen_gate_uses_common_bindgen_script(self) -> None:
         removed_subset_gate = "check_" + "windows" + "_sys_subset.py"
         steps = {step.name: step for step in gate.build_steps(gate.parse_args(["--mode", "quick"]))}
-        command = steps["windows-common codegen gate"].command
+        command = steps["windows_common codegen gate"].command
 
         self.assertTrue(command[1].endswith("check_windows_common_codegen.py"))
         self.assertNotIn(removed_subset_gate, command)
@@ -124,13 +124,13 @@ class QualityGatePlanTests(unittest.TestCase):
         self.assertEqual(
             command[-7:],
             [
-                "windows-bindgen",
-                "windows-core",
-                "windows-implement",
-                "windows-interface",
-                "windows-foundation",
-                "windows-collections",
-                "windows-future",
+                "windows_bindgen",
+                "windows_core",
+                "windows_implement",
+                "windows_interface",
+                "windows_foundation",
+                "windows_collections",
+                "windows_future",
             ],
         )
 
@@ -148,7 +148,7 @@ class QualityGatePlanTests(unittest.TestCase):
         )
         self.assertEqual(
             list(gate.RUNTIME_SMOKE_FILTERS_BY_PACKAGE.keys()),
-            ["windows-foundation", "windows-collections", "windows-future"],
+            ["windows_foundation", "windows_collections", "windows_future"],
         )
 
         for package, filters in gate.RUNTIME_SMOKE_FILTERS_BY_PACKAGE.items():
@@ -209,14 +209,14 @@ class QualityGatePlanTests(unittest.TestCase):
         for filters in gate.RUNTIME_SMOKE_FILTERS_BY_PACKAGE.values():
             for filter_name in filters:
                 self.assertIn(filter_name, output)
-        self.assertIn("windows-foundation", output)
-        self.assertIn("windows-collections", output)
-        self.assertIn("windows-future", output)
+        self.assertIn("windows_foundation", output)
+        self.assertIn("windows_collections", output)
+        self.assertIn("windows_future", output)
         self.assertIn("run_windows_workspace_tests.py", output)
-        self.assertIn("windows-bindgen", output)
-        self.assertIn("windows-core", output)
-        self.assertIn("windows-implement", output)
-        self.assertIn("windows-interface", output)
+        self.assertIn("windows_bindgen", output)
+        self.assertIn("windows_core", output)
+        self.assertIn("windows_implement", output)
+        self.assertIn("windows_interface", output)
         self.assertIn("check_workspace_setup.py", output)
         self.assertIn("check_ignored_results.py", output)
         self.assertIn("check_abi_ownership.py", output)

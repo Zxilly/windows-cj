@@ -3,7 +3,7 @@
 
 The generated P/Invoke wrappers return native status codes verbatim by default
 and only gain a checked `Result` wrapper when the method name is special-cased in
-the generator's classification source (`windows-bindgen/src/native_helpers.cj`).
+the generator's classification source (`windows_bindgen/src/native_helpers.cj`).
 That opt-in model is safe, but it is driven by hand-maintained allowlists, so it
 is hard to prove that no status-returning export was missed.
 
@@ -269,7 +269,7 @@ def load_baseline(path: Optional[Path]) -> set[str]:
 def default_paths() -> tuple[Path, Path]:
     return (
         ROOT / ".generated" / "winmd-json",
-        ROOT / "windows-bindgen" / "src" / "native_helpers.cj",
+        ROOT / "windows_bindgen" / "src" / "native_helpers.cj",
     )
 
 

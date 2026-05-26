@@ -27,12 +27,12 @@ class WorkspaceRunnerTests(unittest.TestCase):
         workspace.ROOT = self.root
         workspace.UNITTEST_BIN = self.root / "target" / "release" / "unittest_bin"
 
-        write_file(self.root, "cjpm.toml", '[workspace]\nmembers = ["windows-core", "windows-empty"]\n')
-        write_file(self.root, "windows-core/cjpm.toml", '[package]\nname = "windows_core"\n')
-        write_file(self.root, "windows-empty/cjpm.toml", '[package]\nname = "windows_empty"\n')
-        write_file(self.root, "windows-core/src/core_test.cj", "package windows_core.tests\n@Test\nclass T {}\n")
-        write_file(self.root, "windows-empty/src/lib.cj", "package windows_empty\n")
-        write_file(self.root, "windows-core/target/ignored_test.cj", "package ignored\n@Test\nclass T {}\n")
+        write_file(self.root, "cjpm.toml", '[workspace]\nmembers = ["windows_core", "windows_empty"]\n')
+        write_file(self.root, "windows_core/cjpm.toml", '[package]\nname = "windows_core"\n')
+        write_file(self.root, "windows_empty/cjpm.toml", '[package]\nname = "windows_empty"\n')
+        write_file(self.root, "windows_core/src/core_test.cj", "package windows_core.tests\n@Test\nclass T {}\n")
+        write_file(self.root, "windows_empty/src/lib.cj", "package windows_empty\n")
+        write_file(self.root, "windows_core/target/ignored_test.cj", "package ignored\n@Test\nclass T {}\n")
 
     def tearDown(self) -> None:
         workspace.ROOT = self.original_root
@@ -40,18 +40,18 @@ class WorkspaceRunnerTests(unittest.TestCase):
         self.temp.cleanup()
 
     def test_member_selection_uses_only_members_with_tests_by_default(self) -> None:
-        self.assertEqual(workspace.workspace_members(), ["windows-core", "windows-empty"])
-        self.assertEqual(workspace.test_package_names("windows-core"), ["windows_core.tests"])
-        self.assertEqual(workspace.test_package_names("windows-empty"), [])
-        self.assertEqual(workspace.parse_members([]), ["windows-core"])
+        self.assertEqual(workspace.workspace_members(), ["windows_core", "windows_empty"])
+        self.assertEqual(workspace.test_package_names("windows_core"), ["windows_core.tests"])
+        self.assertEqual(workspace.test_package_names("windows_empty"), [])
+        self.assertEqual(workspace.parse_members([]), ["windows_core"])
 
     def test_exact_binary_path_and_commands_are_stable(self) -> None:
         binary = workspace.UNITTEST_BIN / "windows_core.tests.exe"
 
-        self.assertEqual(workspace.test_binaries_for_member("windows-core"), [binary])
+        self.assertEqual(workspace.test_binaries_for_member("windows_core"), [binary])
         self.assertEqual(
-            workspace.workspace_build_command("windows-core"),
-            ["cjpm", "test", "-m", "windows-core", "--no-run", "--no-progress", "--no-color"],
+            workspace.workspace_build_command("windows_core"),
+            ["cjpm", "test", "-m", "windows_core", "--no-run", "--no-progress", "--no-color"],
         )
         self.assertEqual(workspace.workspace_test_command(binary), ["cjv", "exec", str(binary), "--no-color", "--progress-brief"])
 
@@ -68,7 +68,7 @@ class WorkspaceRunnerTests(unittest.TestCase):
             stale.parent.mkdir(parents=True, exist_ok=True)
             stale.write_text("stale\n", encoding="utf-8")
 
-        workspace.remove_expected_test_binaries("windows-core")
+        workspace.remove_expected_test_binaries("windows_core")
 
         self.assertFalse(binary.exists())
         self.assertFalse(binary.with_name(f"{binary.stem}$test.cjo").exists())
@@ -96,7 +96,7 @@ class WorkspaceRunnerTests(unittest.TestCase):
     def test_dry_run_skip_build_omits_build_command(self) -> None:
         stdout = io.StringIO()
         with contextlib.redirect_stdout(stdout):
-            result = workspace.dry_run_member("windows-core", skip_build=True)
+            result = workspace.dry_run_member("windows_core", skip_build=True)
 
         output = stdout.getvalue()
         self.assertEqual(result, 0)

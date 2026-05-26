@@ -1,0 +1,10 @@
+[package]
+  name = "windows_numerics"
+  version = "0.1.0"
+  description = "Windows numerics helpers for Cangjie bindings"
+  output-type = "static"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_common = { path = "../windows_common" }

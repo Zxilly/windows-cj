@@ -1,6 +1,6 @@
 # WinRT 异步操作
 
-WinRT 里凡是可能耗时的调用（读文件、访问网络、唤起设备）都返回一个**异步对象**，而不是直接阻塞。调用方拿到这个对象后，可以注册完成回调、查询状态、或阻塞等待结果。windows-cj 把这套模型投影在 `windows-future` 包里。
+WinRT 里凡是可能耗时的调用（读文件、访问网络、唤起设备）都返回一个**异步对象**，而不是直接阻塞。调用方拿到这个对象后，可以注册完成回调、查询状态、或阻塞等待结果。windows-cj 把这套模型投影在 `windows_future` 包里。
 
 越往上越贴近仓颉习惯：底层是 `IAsyncInfo` 状态机和 completed handler，往上 windows-cj 给了 `join()` / `when()` 这种直接拿结果的 helper，让异步代码读起来像同步。
 
@@ -23,7 +23,7 @@ WinRT 里凡是可能耗时的调用（读文件、访问网络、唤起设备�
 - `Cancel()` —— 请求取消。
 - `Close()` —— 释放。
 
-`AsyncStatus` 是一个薄封装的 `Int32`，有四个具名取值（来源：`windows-future/src/async_runtime.cj`）：
+`AsyncStatus` 是一个薄封装的 `Int32`，有四个具名取值（来源：`windows_future/src/async_runtime.cj`）：
 
 ```text
 AsyncStatus_Started    (0)  —— 进行中
@@ -47,7 +47,7 @@ if (unsafe { info.Status() } == AsyncStatus_Completed) {
 
 ## 等待结果：`join()` 与 `when()`
 
-最常见的需求是“等它完成、拿结果”。windows-cj 为每个异步接口扩展了两个 helper（来源：`windows-future/src/async_helpers.cj` 的 `extend` 块）：
+最常见的需求是“等它完成、拿结果”。windows-cj 为每个异步接口扩展了两个 helper（来源：`windows_future/src/async_helpers.cj` 的 `extend` 块）：
 
 - **`join(): Result<T>`** —— **阻塞**当前线程直到终态，然后把结果包成 `Result`：成功 `Ok(值)`、出错 `Err(对应 HRESULT)`、取消 `Err(E_ABORT)`。对 `IAsyncOperation<TResult>` 是 `Result<TResult>`，对 `IAsyncAction` 是 `Result<Unit>`。
 - **`when(): Future<Result<...>>`** —— **不阻塞**，把 `join()` 丢到一个仓颉线程里跑，返回仓颉的 `Future`，你之后再 `.get()`。
@@ -86,7 +86,7 @@ func awaitWithTimeout(operation: IAsyncOperation<Int32>): Unit {
 }
 ```
 
-（`join()` / `when()` 与 `future.get(Duration)` 的用法直接取自 `windows-future/src/async_helpers_test.cj` 里的 `testReadyOperationJoinAndWhenReturnValue`。）
+（`join()` / `when()` 与 `future.get(Duration)` 的用法直接取自 `windows_future/src/async_helpers_test.cj` 里的 `testReadyOperationJoinAndWhenReturnValue`。）
 
 `IAsyncAction`（无返回值）同理，只是结果类型是 `Result<Unit>`：
 
@@ -179,7 +179,7 @@ func cancelIt(action: IAsyncAction): Unit {
 
 ## 自己发起一个异步操作
 
-不只是消费——你也能把一段仓颉工作包成 WinRT 异步对象交出去。`windows-future` 提供静态 `spawnAsync(...)` 与 `ready(...)`：
+不只是消费——你也能把一段仓颉工作包成 WinRT 异步对象交出去。`windows_future` 提供静态 `spawnAsync(...)` 与 `ready(...)`：
 
 ```cangjie
 import windows_core.*

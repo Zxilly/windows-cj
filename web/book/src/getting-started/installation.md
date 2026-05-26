@@ -30,10 +30,10 @@ cd windows-cj
 ```toml
 [workspace]
 members = [
-    "windows-core",
-    "windows-strings",
-    "windows-result",
-    "windows-foundation",
+    "windows_core",
+    "windows_strings",
+    "windows_result",
+    "windows_foundation",
     # …其余包
 ]
 ```
@@ -61,7 +61,7 @@ cjpm build
 
 ## 4. 在项目中使用 windows-cj
 
-在你自己项目的 `cjpm.toml` 里，用路径依赖引入需要的包。注意**目录名用连字符、包名用下划线**：
+在你自己项目的 `cjpm.toml` 里，用路径依赖引入需要的包。注意**目录名和包名都用下划线**：
 
 ```toml
 [package]
@@ -73,8 +73,8 @@ cjpm build
   link-option = "-lole32 -loleaut32 -lwindowsapp"
 
 [dependencies]
-  windows_core = { path = "../windows-cj/windows-core" }
-  windows_strings = { path = "../windows-cj/windows-strings" }
+  windows_core = { path = "../windows-cj/windows_core" }
+  windows_strings = { path = "../windows-cj/windows_strings" }
 ```
 
 在仓颉源码中按包名（下划线）导入：

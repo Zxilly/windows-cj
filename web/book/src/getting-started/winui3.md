@@ -4,9 +4,9 @@
 
 WinUI 3 不是普通的 Win32 窗口。它运行在 Windows App SDK 之上，需要先用 bootstrap 机制把 App SDK 运行时挂载进进程，再初始化 COM 套间，最后通过 `Application.Start` 把控制权交给 XAML 框架。下面我们严格按照一个已经跑通的 demo（`windows-cj-demo`）走一遍这套启动序列。
 
-## 支持包：windows-winui3
+## 支持包：windows_winui3
 
-你不需要手写这套 ABI 胶水。`windows-winui3` 是一个**只面向运行时**的支持包，它把 WinUI 3 / Windows App SDK 的启动逻辑封装成了三个子模块：
+你不需要手写这套 ABI 胶水。`windows_winui3` 是一个**只面向运行时**的支持包，它把 WinUI 3 / Windows App SDK 的启动逻辑封装成了三个子模块：
 
 - `windows_winui3.appsdk` —— 挂载/卸载 Windows App SDK 运行时（bootstrap）。
 - `windows_winui3.win32` —— 初始化/反初始化 COM 套间。
@@ -171,7 +171,7 @@ demo 的包配置（取自 `windows-cj-demo/cjpm.toml`）：
   link-option = "-lole32 -loleaut32 -lwindowsapp"
 
 [dependencies]
-  windows_winui3 = { path = "../windows-cj/windows-winui3" }
+  windows_winui3 = { path = "../windows-cj/windows_winui3" }
 ```
 
 两点值得注意：

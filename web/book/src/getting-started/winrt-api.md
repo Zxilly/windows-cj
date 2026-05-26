@@ -14,7 +14,7 @@ WinRT（Windows Runtime）是 Win32 之上更现代的一层。如果说 Win32 �
 - **激活工厂。** 你不能直接 `new` 一个 WinRT 运行时类；而是先拿到它的**激活工厂**（一个静态接口），再调用工厂上的 `CreateXxx`。windows-cj 把这套流程封装好了。
 - **字符串用 `HSTRING`。** WinRT 方法收发字符串都用 `HSTRING`，在仓颉里对应 `HString`（见 [字符串](strings.md)）。
 
-windows-cj 把这些投影分散在几个包里：基础值类型与激活底座在 `windows-core`，Foundation 投影（`Uri`、`PropertyValue`、`MemoryBuffer`、`Deferral` 等）在 `windows-foundation`，集合在 `windows-collections`，异步在 `windows-future`。
+windows-cj 把这些投影分散在几个包里：基础值类型与激活底座在 `windows_core`，Foundation 投影（`Uri`、`PropertyValue`、`MemoryBuffer`、`Deferral` 等）在 `windows_foundation`，集合在 `windows_collections`，异步在 `windows_future`。
 
 ## 一个完整的例子：创建并使用 `Uri`
 
@@ -24,8 +24,8 @@ windows-cj 把这些投影分散在几个包里：基础值类型与激活底座
 
 ```toml
 [dependencies]
-  windows_core = { path = "../windows-core" }
-  windows_foundation = { path = "../windows-foundation" }
+  windows_core = { path = "../windows_core" }
+  windows_foundation = { path = "../windows_foundation" }
 ```
 
 然后：
@@ -71,18 +71,18 @@ func demoUri(): Unit {
 
 要点：
 
-- `Uri.CreateUri(...)` 是**激活工厂**调用的便捷封装。它内部用 `windows_core.factory<Uri, IUriRuntimeClassFactory>()` 取到工厂、调 `CreateUri`、`Uri.fromAbiTake(result)` 接管返回指针。（来源：`windows-foundation/src/foundation_runtime.cj` 的 `Uri.CreateUri` / `IUriRuntimeClassFactory.CreateUri`。）
+- `Uri.CreateUri(...)` 是**激活工厂**调用的便捷封装。它内部用 `windows_core.factory<Uri, IUriRuntimeClassFactory>()` 取到工厂、调 `CreateUri`、`Uri.fromAbiTake(result)` 接管返回指针。（来源：`windows_foundation/src/foundation_runtime.cj` 的 `Uri.CreateUri` / `IUriRuntimeClassFactory.CreateUri`。）
 - WinRT 投影方法标 `unsafe`，因为底层读裸指针、走 `CFunc`——在 `unsafe { }` 块里调用即可。
 - 收发字符串用 `HString`；返回的 `HString` 由你负责 `close()`。`HString.get()` 把它转成仓颉 `String`。
 - 错误以 `WindowsException`（HRESULT 失败）抛出，按 [错误处理](error-handling.md) 的方式接住。
 
 ### 这个 `Uri` 例子真实可信
 
-`windows-foundation` 的冒烟测试就跑了几乎一模一样的流程：`Uri.CreateUri(HString(...))` → `AbsoluteUri()` → `QueryParsed()` 拿到 `WwwFormUrlDecoder` → 遍历查询参数，全部跨真实 vtable ABI 往返。（来源：`windows-foundation/src/windows_foundation_smoke_test.cj`。）
+`windows_foundation` 的冒烟测试就跑了几乎一模一样的流程：`Uri.CreateUri(HString(...))` → `AbsoluteUri()` → `QueryParsed()` 拿到 `WwwFormUrlDecoder` → 遍历查询参数，全部跨真实 vtable ABI 往返。（来源：`windows_foundation/src/windows_foundation_smoke_test.cj`。）
 
 ## 激活工厂缓存做了什么
 
-“拿到工厂”这一步并不便宜——它要按运行时类名去 `combase.dll` 里查 DLL、解析激活工厂、`QueryInterface` 到你要的工厂接口。windows-cj 把这条路径集中在 `windows-core/src/factory_cache.cj` 里：
+“拿到工厂”这一步并不便宜——它要按运行时类名去 `combase.dll` 里查 DLL、解析激活工厂、`QueryInterface` 到你要的工厂接口。windows-cj 把这条路径集中在 `windows_core/src/factory_cache.cj` 里：
 
 - **`loadFactoryByName<I>(runtimeName, descriptor)` / `factory<C, I>()`**：核心入口。先调 `RoGetActivationFactory`（系统激活）；若返回“类未注册”，再回退到 reg-free 路径——按命名空间逐段截断猜 DLL 名（`Windows.Foundation.Uri` → `Windows.Foundation.dll` → `Windows.dll`），用 `DllGetActivationFactory` 取工厂。
 - **MTA 兜底**：若激活返回 `CO_E_NOTINITIALIZED`，会先 `CoIncrementMTAUsage` 把当前进程并入 MTA，再重试一次。这个 cookie 进程内只取一次（`FactoryMTAUsageGuard`），不会每次回退都泄漏。
@@ -92,7 +92,7 @@ func demoUri(): Unit {
 
 ## Type 投影：ABI 类型如何映射到仓颉
 
-WinRT 的每个参数/返回值在 ABI 层都有一个具体的 C 表示（`HSTRING`、`Int32`、内联结构体、接口指针……），而在仓颉侧你想用的是 `HString`、`Int32`、`Point`、接口包装类。把两者对应起来的，是 `windows-core/src/type_system.cj` 里的 `Type` 接口：
+WinRT 的每个参数/返回值在 ABI 层都有一个具体的 C 表示（`HSTRING`、`Int32`、内联结构体、接口指针……），而在仓颉侧你想用的是 `HString`、`Int32`、`Point`、接口包装类。把两者对应起来的，是 `windows_core/src/type_system.cj` 里的 `Type` 接口：
 
 ```cangjie
 public interface Type<TProjected, TAbi, TDefault> <: WindowsType {
@@ -114,7 +114,7 @@ public interface Type<TProjected, TAbi, TDefault> <: WindowsType {
 
 ## Foundation 值类型与 `IReference<T>` 装箱
 
-WinRT 有一批小的内联值类型，windows-cj 把它们定义在 `windows-core/src/foundation_values.cj`（放在 core 是为了让 collections 和 foundation 都能用而不形成依赖环）：
+WinRT 有一批小的内联值类型，windows-cj 把它们定义在 `windows_core/src/foundation_values.cj`（放在 core 是为了让 collections 和 foundation 都能用而不形成依赖环）：
 
 | 仓颉类型 | 字段 | WinRT 含义 |
 |---|---|---|
@@ -139,7 +139,7 @@ box.Height = 240.0
 
 ### 装箱：`PropertyValue` 与 `IReference<T>`
 
-WinRT 用 `IReference<T>`（“可空的盒子”）和 `PropertyValue`（装箱原语）在“需要 `IInspectable` 的地方传一个标量”。`windows-foundation` 的 `PropertyValue` 提供一组静态工厂，每个都返回装好的 `IInspectable`：
+WinRT 用 `IReference<T>`（“可空的盒子”）和 `PropertyValue`（装箱原语）在“需要 `IInspectable` 的地方传一个标量”。`windows_foundation` 的 `PropertyValue` 提供一组静态工厂，每个都返回装好的 `IInspectable`：
 
 ```cangjie
 import windows_core.*
@@ -156,7 +156,7 @@ try {
 }
 ```
 
-（来源：`windows-foundation/src/foundation_runtime.cj` 的 `PropertyValue.CreateInt32` / `CreateString` / `CreateGuid` / `CreateDateTime` / `CreatePoint` 等，以及它们背后的 `IPropertyValueStatics`。）
+（来源：`windows_foundation/src/foundation_runtime.cj` 的 `PropertyValue.CreateInt32` / `CreateString` / `CreateGuid` / `CreateDateTime` / `CreatePoint` 等，以及它们背后的 `IPropertyValueStatics`。）
 
 `IReference<T>` 是泛型版本：它的 `Value()` 方法按 `T` 投影出真实值，`Type()` 报告底层 `PropertyType`。它要求 `T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T>`——也就是 `T` 必须是能在运行时投影的 WinRT 类型。
 
@@ -164,7 +164,7 @@ try {
 
 ## 事件：`EventHandler<T>` 与 `TypedEventHandler<TSender, TResult>`
 
-WinRT 事件通过委托接口分发回调。windows-foundation 提供两个：
+WinRT 事件通过委托接口分发回调。windows_foundation 提供两个：
 
 - `EventHandler<T>`：经典事件，回调签名 `(sender: IInspectable, args: T)`。
 - `TypedEventHandler<TSender, TResult>`：强类型发送者与参数，回调签名 `(sender: TSender, args: TResult)`。
@@ -192,7 +192,7 @@ try {
 }
 ```
 
-（来源：`windows-foundation/src/foundation_runtime.cj` 的 `TypedEventHandler.new(invoke: (TSender, TResult) -> Unit)` 与 `EventHandler.new(invoke: (InParam<IInspectable>, T) -> Unit)`。两个泛型参数都受 `WinrtGenericType` 约束。）
+（来源：`windows_foundation/src/foundation_runtime.cj` 的 `TypedEventHandler.new(invoke: (TSender, TResult) -> Unit)` 与 `EventHandler.new(invoke: (InParam<IInspectable>, T) -> Unit)`。两个泛型参数都受 `WinrtGenericType` 约束。）
 
 注意 `new(...)` 构造出的 handler 是一个由仓颉对象支撑的 COM 对象——它的存活由 GC 管理，你**不需要**手写 AddRef/Release；只需在不再需要时 `close()` 释放底层 COM 包装。
 

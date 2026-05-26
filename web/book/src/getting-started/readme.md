@@ -12,27 +12,27 @@ Windows 平台的 API 大致分三层，windows-cj 对三者都提供支持：
 | **COM** | `IUnknown`、`IDXGIFactory`、Shell 接口 | 通过虚函数表（vtable）调用，需要 `QueryInterface` |
 | **WinRT** | `Windows.Foundation.Uri`、集合、异步 | 在 COM 之上，带运行时类型系统、激活工厂、泛型投影 |
 
-越往下越底层、越接近裸 ABI；越往上越现代、越贴近仓颉习惯。三层共享同一套底座类型（`GUID`、`HRESULT`、`BOOL`、字符串），它们集中在 `windows-core`、`windows-result`、`windows-strings` 等基础包里。
+越往下越底层、越接近裸 ABI；越往上越现代、越贴近仓颉习惯。三层共享同一套底座类型（`GUID`、`HRESULT`、`BOOL`、字符串），它们集中在 `windows_core`、`windows_result`、`windows_strings` 等基础包里。
 
 ## 一张依赖速写
 
 ```text
-windows-result   ── 错误码 / HRESULT / BOOL / GUID
-windows-strings  ── HString / BSTR / PCWSTR / PWSTR
+windows_result   ── 错误码 / HRESULT / BOOL / GUID
+windows_strings  ── HString / BSTR / PCWSTR / PWSTR
         │
         ▼
-windows-core     ── COM 接口底座、vtable、Type 投影、WinRT-ABI 底座
+windows_core     ── COM 接口底座、vtable、Type 投影、WinRT-ABI 底座
         │
-        ├── windows-interface / windows-implement  ── 声明并实现 COM 接口
-        ├── windows-collections                    ── WinRT 集合（IVector / IMap …）
-        ├── windows-future                         ── WinRT 异步（IAsyncOperation …）
-        └── windows-foundation                     ── Foundation 投影（Uri / PropertyValue …）
+        ├── windows_interface / windows_implement  ── 声明并实现 COM 接口
+        ├── windows_collections                    ── WinRT 集合（IVector / IMap …）
+        ├── windows_future                         ── WinRT 异步（IAsyncOperation …）
+        └── windows_foundation                     ── Foundation 投影（Uri / PropertyValue …）
                 │
                 ▼
-        windows-winui3   ── WinUI 3 / Windows App SDK 支持
+        windows_winui3   ── WinUI 3 / Windows App SDK 支持
 ```
 
-`windows-bindgen` 独立于运行时之外：它是一个命令行工具，按需把元数据生成成仓颉源码包，供上面这些层消费。
+`windows_bindgen` 独立于运行时之外：它是一个命令行工具，按需把元数据生成成仓颉源码包，供上面这些层消费。
 
 ## 我应该从哪里开始？
 

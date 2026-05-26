@@ -1,6 +1,6 @@
 # 错误处理与 HRESULT
 
-Windows API 报告成败的方式五花八门：COM 和 WinRT 用 `HRESULT`，传统 Win32 函数常返回 `BOOL` 再让你去查 `GetLastError`，内核 / 驱动用 `NTSTATUS`，注册表等子系统用 `WIN32_ERROR`。`windows-result` 把这些统一成几个可组合的类型，并提供 `Result<T>` 让你在「抛异常」和「显式传播」之间自由选择。
+Windows API 报告成败的方式五花八门：COM 和 WinRT 用 `HRESULT`，传统 Win32 函数常返回 `BOOL` 再让你去查 `GetLastError`，内核 / 驱动用 `NTSTATUS`，注册表等子系统用 `WIN32_ERROR`。`windows_result` 把这些统一成几个可组合的类型，并提供 `Result<T>` 让你在「抛异常」和「显式传播」之间自由选择。
 
 它们都来自 `windows_result` 包。
 
@@ -127,7 +127,7 @@ match (doWork()) {
 
 ## BOOL：和仓颉 Bool 互转
 
-很多 Win32 函数返回 `BOOL`（其实是 `Int32`，非零为真）。`windows-result` 的 `BOOL` 是值类型，提供了和仓颉 `Bool` 的双向转换：
+很多 Win32 函数返回 `BOOL`（其实是 `Int32`，非零为真）。`windows_result` 的 `BOOL` 是值类型，提供了和仓颉 `Bool` 的双向转换：
 
 ```cangjie
 // Bool -> BOOL

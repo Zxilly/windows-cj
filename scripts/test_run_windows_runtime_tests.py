@@ -38,12 +38,12 @@ class RuntimeRunnerTests(unittest.TestCase):
             runtime.runtime_test_command(Path("windows_foundation.exe"), None, ["--", "--timeout-each=1"])
 
     def test_package_binary_names_map_split_packages(self) -> None:
-        self.assertEqual(runtime.package_binary_name("windows-foundation"), "windows_foundation.exe")
-        self.assertEqual(runtime.package_binary_name("windows-collections"), "windows_collections.exe")
-        self.assertEqual(runtime.package_binary_name("windows-future"), "windows_future.exe")
+        self.assertEqual(runtime.package_binary_name("windows_foundation"), "windows_foundation.exe")
+        self.assertEqual(runtime.package_binary_name("windows_collections"), "windows_collections.exe")
+        self.assertEqual(runtime.package_binary_name("windows_future"), "windows_future.exe")
         self.assertEqual(
             runtime.SPLIT_PACKAGES,
-            ("windows-foundation", "windows-collections", "windows-future"),
+            ("windows_foundation", "windows_collections", "windows_future"),
         )
 
     def test_positive_int_rejects_non_positive_timeout(self) -> None:
@@ -109,10 +109,10 @@ class RuntimeRunnerTests(unittest.TestCase):
                 with mock.patch.object(runtime, "remove_expected_runtime_binary"):
                     with mock.patch.object(runtime, "run_with_watchdog", side_effect=fake_run):
                         with contextlib.redirect_stdout(io.StringIO()):
-                            result = runtime.main(["--package", "windows-collections", "--skip-build"])
+                            result = runtime.main(["--package", "windows_collections", "--skip-build"])
 
         self.assertEqual(result, 0)
-        pkg_binary.assert_called_with("windows-collections")
+        pkg_binary.assert_called_with("windows_collections")
 
 
 if __name__ == "__main__":

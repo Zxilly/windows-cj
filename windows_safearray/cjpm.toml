@@ -1,0 +1,13 @@
+[package]
+  name = "windows_safearray"
+  version = "0.1.0"
+  description = "Windows SAFEARRAY helpers for Cangjie bindings"
+  output-type = "static"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_common = { path = "../windows_common" }
+  windows_libloading = { path = "../windows_libloading" }
+  windows_strings = { path = "../windows_strings" }
+  windows_variant = { path = "../windows_variant" }

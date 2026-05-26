@@ -1,6 +1,6 @@
 # WinRT 集合
 
-WinRT 有一套自己的集合接口家族，命名空间是 `Windows.Foundation.Collections`。它们都是 WinRT 泛型接口——建立在 COM 之上、IID 由签名计算、元素按 `Type` 投影。windows-cj 把它们投影在 `windows-collections` 包里。
+WinRT 有一套自己的集合接口家族，命名空间是 `Windows.Foundation.Collections`。它们都是 WinRT 泛型接口——建立在 COM 之上、IID 由签名计算、元素按 `Type` 投影。windows-cj 把它们投影在 `windows_collections` 包里。
 
 这一页讲两件事：**消费**别人给你的 WinRT 集合（遍历、取元素），以及用 **stock 实现**把仓颉数据当作 WinRT 集合**交出去**。
 
@@ -20,7 +20,7 @@ WinRT 有一套自己的集合接口家族，命名空间是 `Windows.Foundation
 
 记忆方式：**View 结尾的是只读快照**，不带 View 的是可变集合，可变集合都能 `GetView()` 给出一份只读视图。`IVector`/`IVectorView`/`IMap`/`IMapView` 都继承 `IIterable<T>`，所以都能遍历。
 
-（来源：`windows-collections/src/collections_runtime.cj`，每个接口的 `descriptorSchema()` 列出了它的真实 vtable 槽位与方法名。）
+（来源：`windows_collections/src/collections_runtime.cj`，每个接口的 `descriptorSchema()` 列出了它的真实 vtable 槽位与方法名。）
 
 所有泛型参数都受同一套约束：`where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T>`——`T` 必须是可在运行时投影的 WinRT 类型（标量、`HString`、值类型、或接口）。
 
@@ -48,7 +48,7 @@ func sumView(view: IVectorView<Int32>): Int64 {
 }
 ```
 
-`windows-collections` 的冒烟测试就用了这条路径：构造一个 `IVectorView<Int32>`，断言 `Size()` 为 3、`GetAt(0)` 为 10、`IndexOf(20, ...)` 命中下标 1，全部跨真实 vtbl ABI 往返。（来源：`windows-collections/src/windows_collections_smoke_test.cj`。）
+`windows_collections` 的冒烟测试就用了这条路径：构造一个 `IVectorView<Int32>`，断言 `Size()` 为 3、`GetAt(0)` 为 10、`IndexOf(20, ...)` 命中下标 1，全部跨真实 vtbl ABI 往返。（来源：`windows_collections/src/windows_collections_smoke_test.cj`。）
 
 ### 方式二：迭代器（`First` / `IIterator`）
 
@@ -147,7 +147,7 @@ func mutate(vector: IVector<Int32>): Unit {
 
 ## stock 实现：把仓颉数据当作 WinRT 集合交出去
 
-反过来的需求也很常见：一个 WinRT API 要你传入一个 `IVectorView<Int32>` 或 `IMapView<K, V>`，而你手上是仓颉的 `Array` / `ArrayList`。这时不用自己实现 vtable——`windows-collections/src/stock.cj` 提供了一组 **stock（现成）转换函数**，把任意仓颉 `Iterable` 包成 WinRT 集合 COM 对象。
+反过来的需求也很常见：一个 WinRT API 要你传入一个 `IVectorView<Int32>` 或 `IMapView<K, V>`，而你手上是仓颉的 `Array` / `ArrayList`。这时不用自己实现 vtable——`windows_collections/src/stock.cj` 提供了一组 **stock（现成）转换函数**，把任意仓颉 `Iterable` 包成 WinRT 集合 COM 对象。
 
 | 函数 | 输入 | 产出 |
 |---|---|---|
