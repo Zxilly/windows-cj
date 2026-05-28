@@ -105,6 +105,18 @@ func testFindDefaultWinmdDirectoryChecksCandidateRoots() {
 }
 
 @Test
+func testDefaultWinmdInputErrorMentionsEmbeddedResourceFallback() {
+    let candidates = ArrayList<String>()
+    candidates.add("missing-a")
+    candidates.add("missing-b")
+
+    let message = defaultWinmdInputError(candidates)
+
+    @Expect(message.contains("embedded WinMD resources were not linked"), true)
+    @Expect(message.contains("missing-a, missing-b"), true)
+}
+
+@Test
 func testWinmdPositionalInputsAreAcceptedForNativeParsing() {
     let config = parseArgs([
         "default",
@@ -187,6 +199,7 @@ func testUsageTextDocumentsJsonAndWinmdWorkflow() {
     @Expect(help.contains("metadata.json | json-dir | default | metadata.winmd | winmd-dir"), true)
     @Expect(help.contains("--winmd-to-json"), false)
     @Expect(help.contains("Parsed natively by the built-in Cangjie .winmd reader"), true)
+    @Expect(help.contains("embedded WinMD resources"), true)
 }
 
 @Test

@@ -168,9 +168,18 @@ func emitWinmdJsonPerNamespace(inputs: ArrayList<String>, outDir: String): Unit 
 }
 
 func loadSingleWinmdFileNative(path: String): WinmdFileRecord {
-    let file = match (WinmdFile.read(path)) {
+    let bytes = try {
+        File.readFrom(path)
+    } catch (_: Exception) {
+        throw Exception("failed to read winmd file: ${path}")
+    }
+    return loadSingleWinmdBytesNative(baseName(path), bytes, "winmd file: ${path}")
+}
+
+func loadSingleWinmdBytesNative(fileName: String, bytes: Array<Byte>, sourceDescription: String): WinmdFileRecord {
+    let file = match (WinmdFile.parse(bytes)) {
         case Some(f) => f
-        case None => throw Exception("failed to read winmd file: ${path}")
+        case None => throw Exception("failed to read ${sourceDescription}")
     }
     // Build a single-file TypeIndex so we can reuse its high-level accessors.
     let files = ArrayList<WinmdFile>()
@@ -178,8 +187,7 @@ func loadSingleWinmdFileNative(path: String): WinmdFileRecord {
     let index = TypeIndex(files)
     let fileIdx: Int64 = 0
 
-    let sha = sha256HexOfFile(path)
-    let fileName = baseName(path)
+    let sha = sha256HexOfBytes(bytes)
 
     // Walk the full TypeDef range (includes <Module> + nested types, matching the
     // C# tool's reader.TypeDefinitions enumeration).
@@ -1700,9 +1708,7 @@ func stringListJson(values: ArrayList<String>): JsonValue {
     return JsonArray(elements)
 }
 
-// SHA-256 of the whole file as lowercase hex.
-func sha256HexOfFile(path: String): String {
-    let bytes = File.readFrom(path)
+func sha256HexOfBytes(bytes: Array<Byte>): String {
     let sha = SHA256()
     sha.write(bytes)
     let digest = sha.finish()

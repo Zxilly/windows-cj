@@ -522,6 +522,13 @@ func loadSymbolRecords(config: CliConfig): ArrayList<SymbolRecord> {
     // Records built directly from natively-parsed .winmd inputs. Combined with
     // any JSON-derived records below before symbol resolution.
     let winmdFileRecords = ArrayList<WinmdFileRecord>()
+    if (config.defaultWinmdInput) {
+        let defaultNativeStart = MonoTime.now()
+        for (record in loadDefaultWinmdFileRecordsNative()) {
+            winmdFileRecords.add(record)
+        }
+        benchMark("  default native winmd parse+adapt", defaultNativeStart)
+    }
     let winmdPaths = expandedInputWinmdPaths(config)
     if (!winmdPaths.isEmpty()) {
         let nativeStart = MonoTime.now()
@@ -582,9 +589,6 @@ func validateMetadataInputs(config: CliConfig): Unit {
 
 func expandedInputWinmdPaths(config: CliConfig): ArrayList<String> {
     let paths = ArrayList<String>()
-    if (config.defaultWinmdInput) {
-        addDefaultWinmdInput(paths)
-    }
     for (path in config.inputWinmdPaths) {
         addUnique(paths, path)
     }
@@ -598,6 +602,16 @@ func expandedInputWinmdPaths(config: CliConfig): ArrayList<String> {
     }
     sortStrings(paths)
     return paths
+}
+
+func loadDefaultWinmdFileRecordsNative(): ArrayList<WinmdFileRecord> {
+    match (loadEmbeddedWinmdFilesNative()) {
+        case Some(records) => return records
+        case None => ()
+    }
+    let paths = ArrayList<String>()
+    addDefaultWinmdInput(paths)
+    return loadWinmdFilesNative(paths)
 }
 
 func addDefaultWinmdInput(paths: ArrayList<String>): Unit {
@@ -658,7 +672,7 @@ func noMetadataInputError(): String {
 }
 
 func defaultWinmdInputError(candidates: ArrayList<String>): String {
-    return "bundled/default WinMD metadata directory not found. Tried: ${joinStrings(candidates, ", ")}. " +
+    return "embedded WinMD resources were not linked and bundled/default WinMD metadata directory was not found. Tried: ${joinStrings(candidates, ", ")}. " +
         "Run from the windows-cj repository root or windows_bindgen package directory, " +
         "or pass a .winmd directory explicitly."
 }
@@ -1574,8 +1588,8 @@ func usageText(): String {
         "  --input-dir <dir>    Load all .json files from a directory, sorted by file name.\n" +
         "  metadata.json        Positional shorthand for --input-json metadata.json.\n" +
         "  json-dir             Positional shorthand for --input-dir json-dir when the directory contains .json files.\n" +
-        "  metadata.winmd/dir   Parsed natively by the built-in Cangjie .winmd reader; a .winmd directory or 'default' loads every .winmd it contains.\n" +
-        "  default              Native parsing of bundled WinMD metadata under winmd or ../winmd.\n" +
+        "  metadata.winmd/dir   Parsed natively by the built-in Cangjie .winmd reader; a .winmd directory loads every .winmd it contains.\n" +
+        "  default              Native parsing of embedded WinMD resources, falling back to bundled metadata under winmd or ../winmd.\n" +
         "\n" +
         "Flag detail:\n" +
         "  --sys             Generate raw sys-style bindings only (no ergonomic throws wrappers).\n" +
