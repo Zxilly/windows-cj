@@ -93,6 +93,34 @@ func testSelectSymbolsFiltersByShortNameAndExpandsDependencies() {
 }
 
 @Test
+func testSelectSymbolsFiltersByMemberNameAndExpandsDependencies() {
+    let fields = ArrayList<FieldRecord>()
+    fields.add(FieldRecord("SERVICE_ACCEPT_TIMECHANGE", SignatureRecord("U4")))
+    let methods = ArrayList<MethodRecord>()
+    methods.add(MethodRecord("FileTimeToSystemTime", MethodSignatureRecord(SignatureRecord("Bool"))))
+    let serviceType = TypeDefinitionRecord("Example.Services", "ServiceApis", fields: fields, methods: methods)
+    let records = ArrayList<SymbolRecord>()
+    records.add(SymbolRecord(
+        "Example.Services.ServiceApis",
+        "Example.Services",
+        "ServiceApis",
+        "Example_Services_ServiceApis",
+        ["Example.Shared.FILETIME"],
+        typeDef: Some(serviceType)
+    ))
+    records.add(SymbolRecord("Example.Shared.FILETIME", "Example.Shared", "FILETIME", "Example_Shared_FILETIME", []))
+    records.add(SymbolRecord("Example.Other.Unrelated", "Example.Other", "Unrelated", "Example_Other_Unrelated", []))
+    let filters = ArrayList<String>()
+    filters.add("SERVICE_ACCEPT_TIMECHANGE")
+
+    let selected = selectSymbolsFromRecords(filters, records)
+
+    @Expect(cliTestContainsSymbol(selected, "Example.Services.ServiceApis"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Shared.FILETIME"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Other.Unrelated"), false)
+}
+
+@Test
 func testSelectSymbolsFiltersNamespacePrefixWildcardAndExclude() {
     let records = ArrayList<SymbolRecord>()
     records.add(SymbolRecord("Example.Foundation.Widget", "Example.Foundation", "Widget", "Example_Foundation_Widget", []))
@@ -191,12 +219,23 @@ func testGenerateUsesExactFeatureSelectionForWin32MsxmlDrift() {
 func testValidateRequestedFiltersAcceptKnownFormsAndRejectUnknown() {
     let records = ArrayList<SymbolRecord>()
     records.add(SymbolRecord("Example.Foundation.Widget", "Example.Foundation", "Widget", "Example_Foundation_Widget", []))
-    records.add(SymbolRecord("Example.Foundation.Controls.Button", "Example.Foundation.Controls", "Button", "Example_Foundation_Controls_Button", []))
+    let buttonMethods = ArrayList<MethodRecord>()
+    buttonMethods.add(MethodRecord("Click", MethodSignatureRecord(SignatureRecord("Void"))))
+    let buttonType = TypeDefinitionRecord("Example.Foundation.Controls", "Button", methods: buttonMethods)
+    records.add(SymbolRecord(
+        "Example.Foundation.Controls.Button",
+        "Example.Foundation.Controls",
+        "Button",
+        "Example_Foundation_Controls_Button",
+        [],
+        typeDef: Some(buttonType)
+    ))
     let valid = ArrayList<String>()
     valid.add("all")
     valid.add("Widget")
     valid.add("Example.Foundation.Controls.Button")
     valid.add("Example.Foundation.*")
+    valid.add("Click")
     valid.add("!Example.Foundation.Controls")
     let invalid = ArrayList<String>()
     invalid.add("MissingType")

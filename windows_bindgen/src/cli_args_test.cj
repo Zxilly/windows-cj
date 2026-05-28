@@ -68,6 +68,43 @@ func testParseArgsRecognizesWinmdInputsAndDefault() {
 }
 
 @Test
+func testParseArgsPrefersWinmdDirectoryWithAuxiliaryJson() {
+    let dir = ".generated/cli-mixed-winmd-input-test"
+    removeIfExists(dir, recursive: true)
+    Directory.create(dir, recursive: true)
+    File.writeTo("${dir}/Windows.winmd", "".toArray())
+    File.writeTo("${dir}/winmd-source-hashes.json", "{}".toArray())
+
+    let config = parseArgs([dir, "--feature", "Windows.Foundation"])
+    removeIfExists(dir, recursive: true)
+
+    @Expect(config.inputWinmdDirs.size, 1)
+    @Expect(config.inputWinmdDirs[0], dir)
+    @Expect(config.inputJsonDirs.isEmpty(), true)
+}
+
+@Test
+func testFindDefaultWinmdDirectoryChecksCandidateRoots() {
+    let dir = ".generated/cli-default-winmd-input-test"
+    removeIfExists(dir, recursive: true)
+    Directory.create(dir, recursive: true)
+    File.writeTo("${dir}/Windows.winmd", "".toArray())
+    File.writeTo("${dir}/winmd-source-hashes.json", "{}".toArray())
+
+    let candidates = ArrayList<String>()
+    candidates.add(".generated/missing-default-winmd-input-test")
+    candidates.add(dir)
+    var selected = ""
+    match (findDefaultWinmdDirectory(candidates)) {
+        case Some(found) => selected = found
+        case None => selected = ""
+    }
+    removeIfExists(dir, recursive: true)
+
+    @Expect(selected, dir)
+}
+
+@Test
 func testWinmdPositionalInputsAreAcceptedForNativeParsing() {
     let config = parseArgs([
         "default",

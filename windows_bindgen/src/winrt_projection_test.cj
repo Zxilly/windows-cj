@@ -189,6 +189,13 @@ func testGenericWinrtVtblNoneBranchClearsOutSlots() {
         attributes: methodAttributes
     ))
     methods.add(MethodRecord(
+        "Values",
+        MethodSignatureRecord(
+            SignatureRecord("SZArray", typeSig: Some(SignatureRecord("GenericParameter", name: "T")))
+        ),
+        attributes: methodAttributes
+    ))
+    methods.add(MethodRecord(
         "GetMany",
         MethodSignatureRecord(
             SignatureRecord("Primitive", name: "UInt32"),
@@ -234,6 +241,9 @@ func testGenericWinrtVtblNoneBranchClearsOutSlots() {
     @Expect(source.contains("windows_core.coTaskMemFree(CPointer<Unit>(rawArray__))\n                                    }\n                                    unsafe { result.write(CPointer<Int32>()) }\n                                }\n                                if (resultSize.isNotNull())"), true)
     @Expect(source.contains("let resultHr__ = impl.Names(resultSize, result)\n                            if (windows_core.HRESULT(resultHr__).failed()) {\n                                if (result.isNotNull()) {\n                                    var rawSize__ = 0u32"), true)
     @Expect(source.contains("windows_core.winrtReleaseGenericArrayOut<windows_core.HString>(CPointer<Unit>(rawArray__), rawSize__)\n                                    }\n                                    unsafe { result.write(CPointer<CPointer<Unit>>()) }\n                                }\n                                if (resultSize.isNotNull())"), true)
+    @Expect(source.contains("let resultHr__ = impl.Values(resultSize, result)\n                            if (windows_core.HRESULT(resultHr__).failed()) {\n                                if (result.isNotNull()) {\n                                    var rawSize__ = 0u32"), true)
+    @Expect(source.contains("impl.releaseTArrayOut(CPointer<Unit>(rawArray__), rawSize__)\n                                    }\n                                    unsafe { result.write(CPointer<CPointer<Unit>>()) }"), true)
+    @Expect(source.contains("windows_core.winrtReleaseGenericArrayOut<T>"), false)
     @Expect(source.contains("let resultHr__ = impl.GetMany(startIndex, itemsSize, items, result)\n                            if (windows_core.HRESULT(resultHr__).failed()) {\n                                if (result.isNotNull()) {\n                                    unsafe { result.write(0u32) }\n                                }\n                            }\n                            resultHr__"), true)
 }
 
@@ -548,7 +558,8 @@ func testGenericWinrtInterfaceUsesClosedSignatureIid() {
         }
     }
 
-    @Expect(source.contains("public interface Example_Foundation_IVector_1_Impl<T> <: Example_Foundation_IVector_1_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}"), true)
+    @Expect(source.contains("public interface Example_Foundation_IVector_1_Impl<T> <: Example_Foundation_IVector_1_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {"), true)
+    @Expect(source.contains("func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit {\n        windows_core.winrtReleaseGenericArrayOut<T>(data, length)\n    }"), true)
     @Expect(source.contains("public open class Example_Foundation_IVector_1<T> <: windows_interface.InterfaceWrapperBase"), true)
     @Expect(source.contains("windows_interface.GUID.from_signature(Example_Foundation_IVector_1<T>.signature())"), true)
     @Expect(source.contains("sb.append(\"pinterface({11111111-2222-3333-4455-66778899aabb}\")"), true)

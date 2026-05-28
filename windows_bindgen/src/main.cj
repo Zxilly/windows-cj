@@ -480,10 +480,10 @@ func parseInputArgument(config: CliConfig, arg: String): Unit {
         return
     }
     if (directoryExists(arg)) {
-        if (directoryContainsJsonFiles(arg)) {
-            addUnique(config.inputJsonDirs, arg)
-        } else if (directoryContainsWinmdFiles(arg)) {
+        if (directoryContainsWinmdFiles(arg)) {
             addUnique(config.inputWinmdDirs, arg)
+        } else if (directoryContainsJsonFiles(arg)) {
+            addUnique(config.inputJsonDirs, arg)
         } else {
             addUnique(config.inputJsonDirs, arg)
         }
@@ -583,7 +583,7 @@ func validateMetadataInputs(config: CliConfig): Unit {
 func expandedInputWinmdPaths(config: CliConfig): ArrayList<String> {
     let paths = ArrayList<String>()
     if (config.defaultWinmdInput) {
-        addWinmdFilesFromDirectory(paths, "../winmd")
+        addDefaultWinmdInput(paths)
     }
     for (path in config.inputWinmdPaths) {
         addUnique(paths, path)
@@ -598,6 +598,31 @@ func expandedInputWinmdPaths(config: CliConfig): ArrayList<String> {
     }
     sortStrings(paths)
     return paths
+}
+
+func addDefaultWinmdInput(paths: ArrayList<String>): Unit {
+    let candidates = defaultWinmdDirectoryCandidates()
+    match (findDefaultWinmdDirectory(candidates)) {
+        case Some(dir) => addWinmdFilesFromDirectory(paths, dir)
+        case None => throw Exception(defaultWinmdInputError(candidates))
+    }
+}
+
+func defaultWinmdDirectoryCandidates(): ArrayList<String> {
+    let candidates = ArrayList<String>()
+    candidates.add("winmd")
+    candidates.add("../winmd")
+    candidates.add("../../winmd")
+    return candidates
+}
+
+func findDefaultWinmdDirectory(candidates: ArrayList<String>): Option<String> {
+    for (dir in candidates) {
+        if (directoryExists(dir) && directoryContainsWinmdFiles(dir)) {
+            return Some(dir)
+        }
+    }
+    return None
 }
 
 func addWinmdFilesFromDirectory(paths: ArrayList<String>, dir: String): Unit {
@@ -630,6 +655,12 @@ func noMetadataInputError(): String {
     return "no metadata input provided. Pass a .winmd file/directory (parsed natively), " +
         "or --input-json <winmd.json> / --input-dir <json-dir> for pre-converted JSON. " +
         "For bundled/default WinMD metadata, run: windows_bindgen default --feature <namespace> --out .generated/windows."
+}
+
+func defaultWinmdInputError(candidates: ArrayList<String>): String {
+    return "bundled/default WinMD metadata directory not found. Tried: ${joinStrings(candidates, ", ")}. " +
+        "Run from the windows-cj repository root or windows_bindgen package directory, " +
+        "or pass a .winmd directory explicitly."
 }
 
 func winmdJsonFlagInputError(path: String): String {
@@ -1006,12 +1037,49 @@ func selectionPatternMatchesRecord(pattern: String, record: SymbolRecord): Bool 
     if (stringContainsByte(pattern, b'*')) {
         return wildcardMatchesString(pattern, record.fullName) ||
             wildcardMatchesString(pattern, record.namespace) ||
-            wildcardMatchesString(pattern, record.name)
+            wildcardMatchesString(pattern, record.name) ||
+            selectionPatternMatchesRecordMember(pattern, record)
     }
-    if (record.fullName == pattern || record.name == pattern) {
+    if (record.fullName == pattern || record.name == pattern || selectionPatternMatchesRecordMember(pattern, record)) {
         return true
     }
     return namespaceMatchesPrefix(record.namespace, pattern)
+}
+
+func selectionPatternMatchesRecordMember(pattern: String, record: SymbolRecord): Bool {
+    match (record.typeDef) {
+        case Some(typeDef) =>
+            for (field in typeDef.fields) {
+                if (selectionPatternMatchesMember(pattern, record.fullName, field.name)) {
+                    return true
+                }
+            }
+            for (method in typeDef.methods) {
+                if (selectionPatternMatchesMember(pattern, record.fullName, method.name)) {
+                    return true
+                }
+            }
+            for (property in typeDef.properties) {
+                if (selectionPatternMatchesMember(pattern, record.fullName, property.name)) {
+                    return true
+                }
+            }
+            for (event in typeDef.events) {
+                if (selectionPatternMatchesMember(pattern, record.fullName, event.name)) {
+                    return true
+                }
+            }
+        case None => ()
+    }
+    return false
+}
+
+func selectionPatternMatchesMember(pattern: String, containerFullName: String, memberName: String): Bool {
+    let memberFullName = "${containerFullName}.${memberName}"
+    if (stringContainsByte(pattern, b'*')) {
+        return wildcardMatchesString(pattern, memberName) || wildcardMatchesString(pattern, memberFullName)
+    }
+    return memberName == pattern || memberFullName == pattern
 }
 
 func namespaceMatchesPrefix(namespace: String, prefix: String): Bool {
@@ -1056,10 +1124,13 @@ func wildcardMatchesBytes(pattern: Array<Byte>, patternIndex: Int64, value: Arra
 }
 
 func stringContainsByte(value: String, needle: Byte): Bool {
-    for (byte in value.toArray()) {
-        if (byte == needle) {
+    let bytes = value.toArray()
+    var i: Int64 = 0
+    while (i < Int64(bytes.size)) {
+        if (bytes[i] == needle) {
             return true
         }
+        i += 1
     }
     return false
 }
@@ -1107,48 +1178,12 @@ func generatedPackageDependencyPrefix(packageName: String): String {
     return "../.."
 }
 
-func collectSupportLinkOptions(supportDeps: ArrayList<String>): ArrayList<String> {
-    let options = ArrayList<String>()
-    for (dependency in stableSupportDependencyNames()) {
-        if (contains(supportDeps, dependency)) {
-            for (option in stableSupportDependencyLinkOptions(dependency)) {
-                addUnique(options, option)
-            }
-        }
-    }
-    return options
-}
-
-func stableSupportDependencyLinkOptions(_: String): Array<String> {
-    []
-}
-
-func renderStableDependencyLines(prefix: String, supportDeps: ArrayList<String>): String {
-    var content = ""
-    for (dependency in stableSupportDependencyNames()) {
-        if (contains(supportDeps, dependency)) {
-            content += "  ${dependency} = { path = \"${prefix}/${stableSupportDependencyPath(dependency)}\" }\n"
-        }
-    }
-    return content
-}
-
 func writeCommonNativeHelperFiles(
     writer: GeneratedPackageWriter,
     files: ArrayList<GeneratedNativeHelperFile>
 ): Unit {
     for (file in files) {
         writer.writeFile(file.relativePath, file.content)
-    }
-}
-
-func collectSupportDependencyNamesFromGeneratedNativeHelpers(
-    packageName: String,
-    dependencies: ArrayList<String>,
-    files: ArrayList<GeneratedNativeHelperFile>
-): Unit {
-    for (file in files) {
-        collectSupportDependencyNamesFromSource(packageName, dependencies, file.content)
     }
 }
 
@@ -1172,62 +1207,6 @@ func collectSupportDependencyNames(
         collectSupportDependencyNamesFromSource(packageName, dependencies, source)
     }
     return dependencies
-}
-
-func collectSupportDependencyNamesFromSource(
-    packageName: String,
-    dependencies: ArrayList<String>,
-    source: String
-): Unit {
-    if (source.contains("@Interface[")) {
-        if (packageName != "windows_core") {
-            addUnique(dependencies, "windows_core")
-        }
-        if (packageName != "windows_interface") {
-            addUnique(dependencies, "windows_interface")
-        }
-    }
-    if (implChunkNeedsGuidImport(source) && packageName != "windows_interface") {
-        addUnique(dependencies, "windows_interface")
-    }
-    for (dependency in stableSupportDependencyNames()) {
-        if (dependency != packageName && source.contains("${dependency}.")) {
-            addUnique(dependencies, dependency)
-        }
-    }
-}
-
-func stableSupportDependencyNames(): Array<String> {
-    return [
-        "windows_collections",
-        "windows_common",
-        "windows_core",
-        "windows_foundation",
-        "windows_future",
-        "windows_implement",
-        "windows_interface",
-        "windows_libloading",
-        "windows_polyfill",
-        "windows_result",
-        "windows_strings"
-    ]
-}
-
-func stableSupportDependencyPath(dependency: String): String {
-    match (dependency) {
-        case "windows_collections" => return "windows_collections"
-        case "windows_common" => return "windows_common"
-        case "windows_core" => return "windows_core"
-        case "windows_foundation" => return "windows_foundation"
-        case "windows_future" => return "windows_future"
-        case "windows_implement" => return "windows_implement"
-        case "windows_interface" => return "windows_interface"
-        case "windows_libloading" => return "windows_libloading"
-        case "windows_polyfill" => return "windows_polyfill"
-        case "windows_result" => return "windows_result"
-        case "windows_strings" => return "windows_strings"
-        case _ => return dependency
-    }
 }
 
 func writeImplFiles(
@@ -1596,7 +1575,7 @@ func usageText(): String {
         "  metadata.json        Positional shorthand for --input-json metadata.json.\n" +
         "  json-dir             Positional shorthand for --input-dir json-dir when the directory contains .json files.\n" +
         "  metadata.winmd/dir   Parsed natively by the built-in Cangjie .winmd reader; a .winmd directory or 'default' loads every .winmd it contains.\n" +
-        "  default              Native parsing of the bundled WinMD metadata under ../winmd.\n" +
+        "  default              Native parsing of bundled WinMD metadata under winmd or ../winmd.\n" +
         "\n" +
         "Flag detail:\n" +
         "  --sys             Generate raw sys-style bindings only (no ergonomic throws wrappers).\n" +

@@ -140,6 +140,100 @@ func testPInvokeCDeclCallingConventionUsesDefaultCFunc() {
 }
 
 @Test
+func testPInvokeResolvedProcLocalAvoidsParameterNameCollision() {
+    let parameters = ArrayList<SignatureRecord>()
+    parameters.add(SignatureRecord("Primitive", name: "UInt32"))
+    let metadataParameters = ArrayList<ParameterRecord>()
+    metadataParameters.add(ParameterRecord("proc", sequenceNumber: 1))
+    let methods = ArrayList<MethodRecord>()
+    methods.add(MethodRecord(
+        "CallNative",
+        MethodSignatureRecord(
+            SignatureRecord("Primitive", name: "Int32"),
+            parameters: parameters,
+            requiredParameterCount: 1
+        ),
+        parameters: metadataParameters,
+        methodImport: Some(MethodImportRecord("CallNative", "native.dll", callingConvention: "CDecl"))
+    ))
+    let typeAttributes = ArrayList<String>()
+    typeAttributes.add("Public")
+    typeAttributes.add("Class")
+    let typeDef = TypeDefinitionRecord(
+        "Example.Native",
+        "Apis",
+        baseType: "System.Object",
+        hasBaseType: true,
+        attributes: typeAttributes,
+        methods: methods
+    )
+    let symbol = SymbolRecord(
+        "Example.Native.Apis",
+        "Example.Native",
+        "Apis",
+        "Example_Native_Apis",
+        [],
+        typeDef: Some(typeDef)
+    )
+    let records = ArrayList<SymbolRecord>()
+    records.add(symbol)
+    let symbolsByName = cliTestRecordsByName(records)
+    let source = renderSymbolImpl(symbol, symbolsByName)
+
+    @Expect(source.contains("public static func CallNative(proc: UInt32): Int32"), true)
+    @Expect(source.contains("let proc__ = CFunc<(UInt32) -> Int32>(windows_libloading.resolveProc(\"native.dll\", \"CallNative\"))"), true)
+    @Expect(source.contains("return unsafe { proc__(proc) }"), true)
+    @Expect(source.contains("let proc = CFunc<(UInt32) -> Int32>"), false)
+}
+
+@Test
+func testPInvokeParametersEscapeCangjieReservedIdentifiers() {
+    let parameters = ArrayList<SignatureRecord>()
+    parameters.add(SignatureRecord("Primitive", name: "Int32"))
+    parameters.add(SignatureRecord("Primitive", name: "Int32"))
+    let metadataParameters = ArrayList<ParameterRecord>()
+    metadataParameters.add(ParameterRecord("prop", sequenceNumber: 1))
+    metadataParameters.add(ParameterRecord("This", sequenceNumber: 2))
+    let methods = ArrayList<MethodRecord>()
+    methods.add(MethodRecord(
+        "CallNative",
+        MethodSignatureRecord(
+            SignatureRecord("Primitive", name: "Int32"),
+            parameters: parameters,
+            requiredParameterCount: 2
+        ),
+        parameters: metadataParameters,
+        methodImport: Some(MethodImportRecord("CallNative", "native.dll", callingConvention: "CDecl"))
+    ))
+    let typeAttributes = ArrayList<String>()
+    typeAttributes.add("Public")
+    typeAttributes.add("Class")
+    let typeDef = TypeDefinitionRecord(
+        "Example.Native",
+        "Apis",
+        baseType: "System.Object",
+        hasBaseType: true,
+        attributes: typeAttributes,
+        methods: methods
+    )
+    let symbol = SymbolRecord(
+        "Example.Native.Apis",
+        "Example.Native",
+        "Apis",
+        "Example_Native_Apis",
+        [],
+        typeDef: Some(typeDef)
+    )
+    let records = ArrayList<SymbolRecord>()
+    records.add(symbol)
+    let symbolsByName = cliTestRecordsByName(records)
+    let source = renderSymbolImpl(symbol, symbolsByName)
+
+    @Expect(source.contains("public static func CallNative(prop_: Int32, This_: Int32): Int32"), true)
+    @Expect(source.contains("return unsafe { proc(prop_, This_) }"), true)
+}
+
+@Test
 func testPInvokeUnsupportedCallingConventionIsRejected() {
     let symbol = cliTestPInvokeApiSymbol("CallingConventionStdCall")
     let records = ArrayList<SymbolRecord>()

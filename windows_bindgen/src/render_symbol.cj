@@ -2170,12 +2170,13 @@ func renderPInvokeSymbol(
                 let procType = pinvokeCFuncType(method, returnType, symbolsByName)
                 let moduleName = cjStringContent(methodImport.moduleName)
                 let importName = cjStringContent(pinvokeImportName(method))
+                let procLocalName = pinvokeProcLocalName(method, symbolsByName)
                 content += "    public static func ${safeName}(${params}): ${returnType} {\n"
-                content += "        let proc = ${procType}(windows_libloading.resolveProc(\"${moduleName}\", \"${importName}\"))\n"
+                content += "        let ${procLocalName} = ${procType}(windows_libloading.resolveProc(\"${moduleName}\", \"${importName}\"))\n"
                 if (returnType == "Unit") {
-                    content += "        unsafe { proc(${args}) }\n"
+                    content += "        unsafe { ${procLocalName}(${args}) }\n"
                 } else {
-                    content += "        return unsafe { proc(${args}) }\n"
+                    content += "        return unsafe { ${procLocalName}(${args}) }\n"
                 }
                 content += "    }\n"
                 if (options.ergonomicWrappers && !options.sys) {
@@ -2187,6 +2188,15 @@ func renderPInvokeSymbol(
     content += renderApisFieldConstants(typeDef, symbolsByName)
     content += "}"
     return content
+}
+
+func pinvokeProcLocalName(method: MethodRecord, symbolsByName: HashMap<String, SymbolRecord>): String {
+    for (pair in methodParameterPairs(method, true, symbolsByName)) {
+        if (pair.name == "proc") {
+            return "proc__"
+        }
+    }
+    return "proc"
 }
 
 func validatePInvokeCallingConvention(
@@ -3363,7 +3373,7 @@ func interfaceDispatcherOutSlotCleanupSpecs(
             if (isOutParameter(parameter) && !isCallerAllocatedOutArrayParameter(parameter)) {
                 match (runtimeArrayElementSignature(signature)) {
                     case Some(elementSignature) =>
-                        let cleanupKind = "Array<${winrtProjectedTypeName(elementSignature, symbolsByName, ownerFullName)}>"
+                        let cleanupKind = interfaceDispatcherArrayCleanupKind(elementSignature, symbolsByName, ownerFullName)
                         cleanupSpecs.add(InterfaceDispatcherOutSlotCleanupSpec(pairs[pairIndex + 1], cleanupKind))
                     case None => ()
                 }
@@ -3383,7 +3393,7 @@ func interfaceDispatcherOutSlotCleanupSpecs(
     if (isWinrtArraySignature(method.signature.returnType)) {
         match (runtimeArrayElementSignature(method.signature.returnType)) {
             case Some(elementSignature) =>
-                let cleanupKind = "Array<${winrtProjectedTypeName(elementSignature, symbolsByName, ownerFullName)}>"
+                let cleanupKind = interfaceDispatcherArrayCleanupKind(elementSignature, symbolsByName, ownerFullName)
                 cleanupSpecs.add(InterfaceDispatcherOutSlotCleanupSpec(pairs[pairIndex + 1], cleanupKind))
             case None => ()
         }
@@ -3420,8 +3430,26 @@ func interfaceDispatcherOutSlotCleanupKind(
     ""
 }
 
+func interfaceDispatcherArrayCleanupKind(
+    elementSignature: SignatureRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): String {
+    if (elementSignature.kind == "GenericParameter") {
+        return "GenericArray<${cjIdentifier(elementSignature.name)}>"
+    }
+    return "Array<${winrtProjectedTypeName(elementSignature, symbolsByName, ownerFullName)}>"
+}
+
 func interfaceDispatcherArrayCleanupElementType(cleanupKind: String): String {
-    let prefix = "Array<"
+    return interfaceDispatcherCleanupElementType(cleanupKind, "Array<")
+}
+
+func interfaceDispatcherGenericArrayCleanupElementType(cleanupKind: String): String {
+    return interfaceDispatcherCleanupElementType(cleanupKind, "GenericArray<")
+}
+
+func interfaceDispatcherCleanupElementType(cleanupKind: String, prefix: String): String {
     if (!startsWith(cleanupKind, prefix)) {
         return ""
     }
@@ -3496,7 +3524,12 @@ func interfaceDispatcherReleaseFailedOutSlot(
             "${innerIndent}}\n" +
             "${indent}}\n"
     }
-    let arrayElementType = interfaceDispatcherArrayCleanupElementType(spec.cleanupKind)
+    var arrayElementType = interfaceDispatcherArrayCleanupElementType(spec.cleanupKind)
+    let genericArrayElementType = interfaceDispatcherGenericArrayCleanupElementType(spec.cleanupKind)
+    let genericArrayCleanup = !genericArrayElementType.isEmpty()
+    if (genericArrayCleanup) {
+        arrayElementType = genericArrayElementType
+    }
     if (!arrayElementType.isEmpty()) {
         let dataPointerType = pointerElementType(spec.pair.typeName)
         let elementAbiType = pointerElementType(dataPointerType)
@@ -3512,7 +3545,11 @@ func interfaceDispatcherReleaseFailedOutSlot(
         content += "${innerIndent}let rawArray__ = unsafe { ${slotName}.read() }\n"
         content += "${innerIndent}if (rawArray__.isNotNull()) {\n"
         if (runtimeArrayElementUsesHandleBorrow(arrayElementType, elementAbiType)) {
-            content += "${nestedIndent}windows_core.winrtReleaseGenericArrayOut<${arrayElementType}>(CPointer<Unit>(rawArray__), rawSize__)\n"
+            if (genericArrayCleanup) {
+                content += "${nestedIndent}impl.${genericArrayOutReleaseMethodName(arrayElementType)}(CPointer<Unit>(rawArray__), rawSize__)\n"
+            } else {
+                content += "${nestedIndent}windows_core.winrtReleaseGenericArrayOut<${arrayElementType}>(CPointer<Unit>(rawArray__), rawSize__)\n"
+            }
         } else {
             content += "${nestedIndent}windows_core.coTaskMemFree(CPointer<Unit>(rawArray__))\n"
         }
@@ -3525,6 +3562,10 @@ func interfaceDispatcherReleaseFailedOutSlot(
         return content
     }
     ""
+}
+
+func genericArrayOutReleaseMethodName(genericName: String): String {
+    return "release${cjIdentifier(genericName)}ArrayOut"
 }
 
 func interfaceDispatcherClearPair(pair: ParameterPair, indentLevel: Int64): String {
@@ -3553,9 +3594,19 @@ func renderGenericWinrtInterfaceImplSurfaces(
         let pairs = interfaceMethodMacroParameterPairs(method, symbolsByName, symbol.fullName)
         content += "    func ${slotName}(${parameterPairListText(pairs)}): Int32\n"
     }
+    for (genericName in genericNames) {
+        content += "    func ${genericArrayOutReleaseMethodName(genericName)}(data: CPointer<Unit>, length: UInt32): Unit\n"
+    }
     content += "}\n\n"
     content += "public interface ${symbol.implName}_Impl${genericParameterList(genericNames)} <: " +
-        "${symbol.implName}_ImplErased${genericRuntimeWhereClause(genericNames)} {}\n\n"
+        "${symbol.implName}_ImplErased${genericRuntimeWhereClause(genericNames)} {\n"
+    for (genericName in genericNames) {
+        let safeGenericName = cjIdentifier(genericName)
+        content += "    func ${genericArrayOutReleaseMethodName(genericName)}(data: CPointer<Unit>, length: UInt32): Unit {\n"
+        content += "        windows_core.winrtReleaseGenericArrayOut<${safeGenericName}>(data, length)\n"
+        content += "    }\n"
+    }
+    content += "}\n\n"
     return content
 }
 

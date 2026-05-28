@@ -18,6 +18,98 @@ public func collectCommonFeatureNames(supportPackageDirs: ArrayList<String>): Ar
     return result
 }
 
+func collectSupportLinkOptions(supportDeps: ArrayList<String>): ArrayList<String> {
+    let options = ArrayList<String>()
+    for (dependency in stableSupportDependencyNames()) {
+        if (contains(supportDeps, dependency)) {
+            for (option in stableSupportDependencyLinkOptions(dependency)) {
+                addUnique(options, option)
+            }
+        }
+    }
+    return options
+}
+
+func stableSupportDependencyLinkOptions(_: String): Array<String> {
+    []
+}
+
+func renderStableDependencyLines(prefix: String, supportDeps: ArrayList<String>): String {
+    var content = ""
+    for (dependency in stableSupportDependencyNames()) {
+        if (contains(supportDeps, dependency)) {
+            content += "  ${dependency} = { path = \"${prefix}/${stableSupportDependencyPath(dependency)}\" }\n"
+        }
+    }
+    return content
+}
+
+func collectSupportDependencyNamesFromGeneratedNativeHelpers(
+    packageName: String,
+    dependencies: ArrayList<String>,
+    files: ArrayList<GeneratedNativeHelperFile>
+): Unit {
+    for (file in files) {
+        collectSupportDependencyNamesFromSource(packageName, dependencies, file.content)
+    }
+}
+
+func collectSupportDependencyNamesFromSource(
+    packageName: String,
+    dependencies: ArrayList<String>,
+    source: String
+): Unit {
+    if (source.contains("@Interface[")) {
+        if (packageName != "windows_core") {
+            addUnique(dependencies, "windows_core")
+        }
+        if (packageName != "windows_interface") {
+            addUnique(dependencies, "windows_interface")
+        }
+    }
+    if (implChunkNeedsGuidImport(source) && packageName != "windows_interface") {
+        addUnique(dependencies, "windows_interface")
+    }
+    for (dependency in stableSupportDependencyNames()) {
+        if (dependency != packageName && source.contains("${dependency}.")) {
+            addUnique(dependencies, dependency)
+        }
+    }
+}
+
+func stableSupportDependencyNames(): Array<String> {
+    return [
+        "windows_collections",
+        "windows_common",
+        "windows_core",
+        "windows_foundation",
+        "windows_future",
+        "windows_implement",
+        "windows_interface",
+        "windows_libloading",
+        "windows_polyfill",
+        "windows_result",
+        "windows_strings"
+    ]
+}
+
+func stableSupportDependencyPath(dependency: String): String {
+    match (dependency) {
+        case "windows_collections" => return "windows_collections"
+        case "windows_common" => return "windows_common"
+        case "windows_core" => return "windows_core"
+        case "windows_foundation" => return "windows_foundation"
+        case "windows_future" => return "windows_future"
+        case "windows_implement" => return "windows_implement"
+        case "windows_interface" => return "windows_interface"
+        case "windows_libloading" => return "windows_libloading"
+        case "windows_polyfill" => return "windows_polyfill"
+        case "windows_result" => return "windows_result"
+        case "windows_strings" => return "windows_strings"
+        case _ => return dependency
+    }
+}
+
 func supportSourceDir(supportDir: String): String {
     let direct = "${supportDir}/src"
     if (directoryExists(direct)) {

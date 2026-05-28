@@ -9,9 +9,9 @@ let CANGJIE_RESERVED_IDENTIFIERS: Array<String> = [
     "do", "else", "enum", "extend", "false", "finally", "foreign", "for",
     "func", "if", "import", "in", "init", "interface", "is", "let", "macro",
     "main", "match", "mut", "open", "operator", "override", "package",
-    "private", "protected", "public", "redef", "return", "sealed", "spawn",
+    "private", "prop", "protected", "public", "redef", "return", "sealed", "spawn",
     "static", "struct", "super", "synchronized", "this", "throw", "true",
-    "try", "type", "unsafe", "var", "where", "while"
+    "try", "type", "unsafe", "var", "where", "while", "This"
 ]
 
 public func buildSymbolRecords(winmdFiles: ArrayList<WinmdFileRecord>): ArrayList<SymbolRecord> {
