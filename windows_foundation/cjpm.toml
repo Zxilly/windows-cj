@@ -2,6 +2,9 @@
   name = "windows_foundation"
   version = "0.1.0"
   description = "WinRT Foundation projections (Uri, PropertyValue, MemoryBuffer, etc.) for Cangjie"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = []
   output-type = "static"
   cjc-version = "1.1.0"
   compile-option = "-Woff unused -Woff parser -Woff package-import"

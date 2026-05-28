@@ -2,6 +2,9 @@
   name = "windows_polyfill"
   version = "0.1.0"
   description = "Runtime polyfill for windows-cj bindgen-generated code"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = []
   output-type = "static"
   cjc-version = "1.1.0"
 

@@ -2,6 +2,9 @@
   name = "windows_strings"
   version = "0.1.0"
   description = "Windows string wrappers for Cangjie bindings"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = []
   output-type = "static"
   cjc-version = "1.1.0"
 

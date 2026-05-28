@@ -2,6 +2,9 @@
   name = "windows_winui3"
   version = "0.1.0"
   description = "Runtime-only WinUI 3 support package for generated Windows projections"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = []
   output-type = "static"
   cjc-version = "1.1.0"
   compile-option = "-Woff unused -Woff package-import"

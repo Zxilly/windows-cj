@@ -4,6 +4,9 @@
   name = "windows_common"
   version = "0.1.0"
   description = "Generated Windows API support symbols for Cangjie"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = []
   output-type = "static"
   cjc-version = "1.1.0"
   compile-option = "-Woff unused"

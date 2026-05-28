@@ -2,6 +2,9 @@
   name = "windows_propvariant"
   version = "0.1.0"
   description = "Windows PROPVARIANT helpers for Cangjie bindings"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = []
   output-type = "static"
   cjc-version = "1.1.0"
   compile-option = "-Woff unused"
