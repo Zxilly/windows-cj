@@ -4,7 +4,7 @@ import windows_interface as windows_interface
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_FAIL, E_NOINTERFACE, E_POINTER, EventRegistrationToken, EventRegistrationTokenAbi, InParam, Result, S_OK, WinError, WindowsException}
+import windows_core.{E_FAIL, E_NOINTERFACE, E_POINTER, EventRegistrationToken, EventRegistrationTokenAbi, InParam, Result, S_OK, WindowsException}
 import windows_interface.{GUID, IInspectable, IUnknown}
 
 let memoryBufferCloseForwardingQueryCalls = AtomicInt64(0)
@@ -42,7 +42,7 @@ class MemoryBufferReferenceEventThunkTestImpl <: IMemoryBufferReference_Impl {
             throw Exception("Closed failure")
         }
         if (failClosed) {
-            return Result<EventRegistrationToken>.Err(WinError.fromHRESULT(E_FAIL))
+            return foundationTestFail<EventRegistrationToken>()
         }
         var token = EventRegistrationToken()
         token.Value = 17i64
@@ -76,7 +76,7 @@ class MemoryBufferCreateReferenceThunkTestImpl <: IMemoryBuffer_Impl {
         if (throwPlainOnCreateReference) {
             throw Exception("CreateReference failure")
         }
-        Result<IMemoryBufferReference>.Err(WinError.fromHRESULT(E_FAIL))
+        foundationTestFail<IMemoryBufferReference>()
     }
 
     public func Close(): Result<Unit> {

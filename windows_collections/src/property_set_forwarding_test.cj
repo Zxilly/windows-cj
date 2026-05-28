@@ -3,7 +3,7 @@ import windows_interface as windows_interface
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_FAIL, E_NOINTERFACE, E_NOTIMPL, E_POINTER, EventRegistrationToken, EventRegistrationTokenAbi, InParam, Result, S_OK, WinError, WindowsException}
+import windows_core.{E_FAIL, E_NOINTERFACE, E_POINTER, EventRegistrationToken, EventRegistrationTokenAbi, InParam, Result, S_OK, WinError, WindowsException}
 import windows_core as windows_core
 import windows_interface.{GUID, IInspectable, IUnknown}
 
@@ -132,10 +132,6 @@ func resetPropertySetForwardingCounters(): Unit {
     propertySetForwardingLastTokenValue.store(0)
 }
 
-func propertySetLookupRetainNotImplemented<T>(): Result<T> {
-    Result<T>.Err(WinError.fromHRESULT(E_NOTIMPL))
-}
-
 class PropertySetLookupRetainTestImpl <: IPropertySet_Impl {
     private let value: IInspectable
     public var failMapChanged: Bool = false
@@ -156,7 +152,7 @@ class PropertySetLookupRetainTestImpl <: IPropertySet_Impl {
         if (failMapChanged) {
             return Result<EventRegistrationToken>.Err(WinError.fromHRESULT(E_FAIL))
         }
-        propertySetLookupRetainNotImplemented<EventRegistrationToken>()
+        collectionTestNotImplemented<EventRegistrationToken>()
     }
 
     public func RemoveMapChanged(token: EventRegistrationToken): Result<Unit> {
@@ -164,7 +160,7 @@ class PropertySetLookupRetainTestImpl <: IPropertySet_Impl {
         if (throwPlainOnRemoveMapChanged) {
             throw Exception("PropertySet RemoveMapChanged failure")
         }
-        propertySetLookupRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Lookup(key: windows_core.HString): Result<IInspectable> {
@@ -182,26 +178,26 @@ class PropertySetLookupRetainTestImpl <: IPropertySet_Impl {
     }
 
     public func GetView(): Result<IMapView<windows_core.HString, IInspectable>> {
-        propertySetLookupRetainNotImplemented<IMapView<windows_core.HString, IInspectable>>()
+        collectionTestNotImplemented<IMapView<windows_core.HString, IInspectable>>()
     }
 
     public func Insert(key: windows_core.HString, value: IInspectable): Result<Bool> {
         let _ = key
         let _ = value
-        propertySetLookupRetainNotImplemented<Bool>()
+        collectionTestNotImplemented<Bool>()
     }
 
     public func Remove(key: windows_core.HString): Result<Unit> {
         let _ = key
-        propertySetLookupRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Clear(): Result<Unit> {
-        propertySetLookupRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func First(): Result<IIterator<IKeyValuePair<windows_core.HString, IInspectable>>> {
-        propertySetLookupRetainNotImplemented<IIterator<IKeyValuePair<windows_core.HString, IInspectable>>>()
+        collectionTestNotImplemented<IIterator<IKeyValuePair<windows_core.HString, IInspectable>>>()
     }
 }
 

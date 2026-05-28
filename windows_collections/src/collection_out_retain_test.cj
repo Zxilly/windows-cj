@@ -1,12 +1,8 @@
 package windows_collections
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_NOTIMPL, EventRegistrationToken, InParam, Result, S_OK, WinError}
+import windows_core.{EventRegistrationToken, InParam, Result, S_OK}
 import windows_interface.IInspectable
-
-func collectionOutRetainNotImplemented<T>(): Result<T> {
-    Result<T>.Err(WinError.fromHRESULT(E_NOTIMPL))
-}
 
 func closeCollectionComOut(raw: CPointer<Unit>): Unit {
     if (raw.isNotNull()) {
@@ -39,7 +35,7 @@ class CachedVectorViewFirstRetainTestImpl <: IVectorView_Impl<Int32> {
 
     public func GetAt(index: UInt32): Result<Int32> {
         let _ = index
-        collectionOutRetainNotImplemented<Int32>()
+        collectionTestNotImplemented<Int32>()
     }
 
     public func Size(): Result<UInt32> {
@@ -49,14 +45,14 @@ class CachedVectorViewFirstRetainTestImpl <: IVectorView_Impl<Int32> {
     public func IndexOf(value: Int32, index: CPointer<UInt32>): Result<Bool> {
         let _ = value
         let _ = index
-        collectionOutRetainNotImplemented<Bool>()
+        collectionTestNotImplemented<Bool>()
     }
 
     public func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>): Result<UInt32> {
         let _ = startIndex
         let _ = itemsSize
         let _ = items
-        collectionOutRetainNotImplemented<UInt32>()
+        collectionTestNotImplemented<UInt32>()
     }
 }
 
@@ -73,7 +69,7 @@ class CachedMapViewFirstRetainTestImpl <: IMapView_Impl<Int32, Int32> {
 
     public func Lookup(key: Int32): Result<Int32> {
         let _ = key
-        collectionOutRetainNotImplemented<Int32>()
+        collectionTestNotImplemented<Int32>()
     }
 
     public func Size(): Result<UInt32> {
@@ -88,7 +84,7 @@ class CachedMapViewFirstRetainTestImpl <: IMapView_Impl<Int32, Int32> {
     public func Split(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Result<Unit> {
         let _ = first
         let _ = second
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 }
 
@@ -107,7 +103,7 @@ class CachedVectorOutRetainTestImpl <: IVector_Impl<Int32> {
 
     public func GetAt(index: UInt32): Result<Int32> {
         let _ = index
-        collectionOutRetainNotImplemented<Int32>()
+        collectionTestNotImplemented<Int32>()
     }
 
     public func Size(): Result<UInt32> {
@@ -121,50 +117,50 @@ class CachedVectorOutRetainTestImpl <: IVector_Impl<Int32> {
     public func IndexOf(value: Int32, index: CPointer<UInt32>): Result<Bool> {
         let _ = value
         let _ = index
-        collectionOutRetainNotImplemented<Bool>()
+        collectionTestNotImplemented<Bool>()
     }
 
     public func SetAt(index: UInt32, value: Int32): Result<Unit> {
         let _ = index
         let _ = value
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func InsertAt(index: UInt32, value: Int32): Result<Unit> {
         let _ = index
         let _ = value
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func RemoveAt(index: UInt32): Result<Unit> {
         let _ = index
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Append(value: Int32): Result<Unit> {
         let _ = value
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func RemoveAtEnd(): Result<Unit> {
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Clear(): Result<Unit> {
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>): Result<UInt32> {
         let _ = startIndex
         let _ = itemsSize
         let _ = items
-        collectionOutRetainNotImplemented<UInt32>()
+        collectionTestNotImplemented<UInt32>()
     }
 
     public func ReplaceAll(itemsSize: UInt32, items: CPointer<Unit>): Result<Unit> {
         let _ = itemsSize
         let _ = items
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 }
 
@@ -183,7 +179,7 @@ class CachedObservableVectorOutRetainTestImpl <: IObservableVector_Impl<Int32> {
 
     public func GetAt(index: UInt32): Result<Int32> {
         let _ = index
-        collectionOutRetainNotImplemented<Int32>()
+        collectionTestNotImplemented<Int32>()
     }
 
     public func Size(): Result<UInt32> {
@@ -197,60 +193,60 @@ class CachedObservableVectorOutRetainTestImpl <: IObservableVector_Impl<Int32> {
     public func IndexOf(value: Int32, index: CPointer<UInt32>): Result<Bool> {
         let _ = value
         let _ = index
-        collectionOutRetainNotImplemented<Bool>()
+        collectionTestNotImplemented<Bool>()
     }
 
     public func SetAt(index: UInt32, value: Int32): Result<Unit> {
         let _ = index
         let _ = value
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func InsertAt(index: UInt32, value: Int32): Result<Unit> {
         let _ = index
         let _ = value
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func RemoveAt(index: UInt32): Result<Unit> {
         let _ = index
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Append(value: Int32): Result<Unit> {
         let _ = value
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func RemoveAtEnd(): Result<Unit> {
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Clear(): Result<Unit> {
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>): Result<UInt32> {
         let _ = startIndex
         let _ = itemsSize
         let _ = items
-        collectionOutRetainNotImplemented<UInt32>()
+        collectionTestNotImplemented<UInt32>()
     }
 
     public func ReplaceAll(itemsSize: UInt32, items: CPointer<Unit>): Result<Unit> {
         let _ = itemsSize
         let _ = items
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func VectorChanged(vhnd: InParam<VectorChangedEventHandler<Int32>>): Result<EventRegistrationToken> {
         let _ = vhnd
-        collectionOutRetainNotImplemented<EventRegistrationToken>()
+        collectionTestNotImplemented<EventRegistrationToken>()
     }
 
     public func RemoveVectorChanged(token: EventRegistrationToken): Result<Unit> {
         let _ = token
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 }
 
@@ -269,7 +265,7 @@ class CachedMapOutRetainTestImpl <: IMap_Impl<Int32, Int32> {
 
     public func Lookup(key: Int32): Result<Int32> {
         let _ = key
-        collectionOutRetainNotImplemented<Int32>()
+        collectionTestNotImplemented<Int32>()
     }
 
     public func Size(): Result<UInt32> {
@@ -288,16 +284,16 @@ class CachedMapOutRetainTestImpl <: IMap_Impl<Int32, Int32> {
     public func Insert(key: Int32, value: Int32): Result<Bool> {
         let _ = key
         let _ = value
-        collectionOutRetainNotImplemented<Bool>()
+        collectionTestNotImplemented<Bool>()
     }
 
     public func Remove(key: Int32): Result<Unit> {
         let _ = key
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Clear(): Result<Unit> {
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 }
 
@@ -316,7 +312,7 @@ class CachedObservableMapOutRetainTestImpl <: IObservableMap_Impl<Int32, Int32> 
 
     public func Lookup(key: Int32): Result<Int32> {
         let _ = key
-        collectionOutRetainNotImplemented<Int32>()
+        collectionTestNotImplemented<Int32>()
     }
 
     public func Size(): Result<UInt32> {
@@ -335,26 +331,26 @@ class CachedObservableMapOutRetainTestImpl <: IObservableMap_Impl<Int32, Int32> 
     public func Insert(key: Int32, value: Int32): Result<Bool> {
         let _ = key
         let _ = value
-        collectionOutRetainNotImplemented<Bool>()
+        collectionTestNotImplemented<Bool>()
     }
 
     public func Remove(key: Int32): Result<Unit> {
         let _ = key
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Clear(): Result<Unit> {
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 
     public func MapChanged(vhnd: InParam<MapChangedEventHandler<Int32, Int32>>): Result<EventRegistrationToken> {
         let _ = vhnd
-        collectionOutRetainNotImplemented<EventRegistrationToken>()
+        collectionTestNotImplemented<EventRegistrationToken>()
     }
 
     public func RemoveMapChanged(token: EventRegistrationToken): Result<Unit> {
         let _ = token
-        collectionOutRetainNotImplemented<Unit>()
+        collectionTestNotImplemented<Unit>()
     }
 }
 

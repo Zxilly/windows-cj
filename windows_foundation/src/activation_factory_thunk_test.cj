@@ -2,7 +2,7 @@ package windows_foundation
 
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_FAIL, E_NOINTERFACE, E_NOTIMPL, InParam, Result, WinError, WindowsException}
+import windows_core.{E_FAIL, E_NOINTERFACE, E_NOTIMPL, InParam, Result, WindowsException}
 import windows_core as windows_core
 import windows_interface as windows_interface
 import windows_interface.IInspectable
@@ -20,7 +20,7 @@ class ActivationFactoryThunkCleanupImpl <: IGetActivationFactory_Impl {
         if (throwPlain) {
             throw Exception("activation factory thunk failure")
         }
-        Result<IInspectable>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        foundationTestNotImplemented<IInspectable>()
     }
 }
 

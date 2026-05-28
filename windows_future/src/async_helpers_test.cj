@@ -5,7 +5,7 @@ import std.sync.{AtomicBool, AtomicInt64}
 import std.time.*
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_ABORT, E_FAIL, E_NOTIMPL, E_POINTER, HResult, HResultAbi, InParam, Result, S_OK, WinError, WindowsException, createComObjectFromSchemas, foundationGenericOutThunk}
+import windows_core.{E_ABORT, E_FAIL, E_POINTER, HResult, HResultAbi, InParam, Result, S_OK, WindowsException, createComObjectFromSchemas, foundationGenericOutThunk}
 import windows_core as windows_core
 
 let asyncJoinInfoCleanupCloseCalls = AtomicInt64(0)
@@ -134,7 +134,7 @@ class AsyncJoinInfoCleanupActionImpl <: IAsyncAction_Impl & Resource {
     }
 
     public func Completed(): Result<AsyncActionCompletedHandler> {
-        Result<AsyncActionCompletedHandler>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        futureTestNotImplemented<AsyncActionCompletedHandler>()
     }
 
     public func GetResults(): Result<Unit> {
@@ -296,7 +296,7 @@ class AsyncActionThrowingInfoImpl <: AsyncDerivedThrowingInfoBase & IAsyncAction
         if (throwPlainOnCompleted) {
             throw Exception("Completed failure")
         }
-        Result<AsyncActionCompletedHandler>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        futureTestNotImplemented<AsyncActionCompletedHandler>()
     }
 
     public func GetResults(): Result<Unit> {
@@ -329,7 +329,7 @@ class AsyncActionWithProgressThrowingInfoImpl <: AsyncDerivedThrowingInfoBase & 
         if (throwPlainOnProgress) {
             throw Exception("Progress failure")
         }
-        Result<AsyncActionProgressHandler<UInt32>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        futureTestNotImplemented<AsyncActionProgressHandler<UInt32>>()
     }
 
     public func SetCompleted(handler: InParam<AsyncActionWithProgressCompletedHandler<UInt32>>): Result<Unit> {
@@ -350,7 +350,7 @@ class AsyncActionWithProgressThrowingInfoImpl <: AsyncDerivedThrowingInfoBase & 
         if (throwPlainOnCompleted) {
             throw Exception("Completed failure")
         }
-        Result<AsyncActionWithProgressCompletedHandler<UInt32>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        futureTestNotImplemented<AsyncActionWithProgressCompletedHandler<UInt32>>()
     }
 
     public func GetResults(): Result<Unit> {
@@ -383,7 +383,7 @@ class AsyncOperationThrowingInfoImpl <: AsyncDerivedThrowingInfoBase & IAsyncOpe
         if (throwPlainOnCompleted) {
             throw Exception("Completed failure")
         }
-        Result<AsyncOperationCompletedHandler<Int32>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        futureTestNotImplemented<AsyncOperationCompletedHandler<Int32>>()
     }
 
     public func GetResults(): Result<Int32> {
@@ -416,7 +416,7 @@ class AsyncOperationWithProgressThrowingInfoImpl <: AsyncDerivedThrowingInfoBase
         if (throwPlainOnProgress) {
             throw Exception("Progress failure")
         }
-        Result<AsyncOperationProgressHandler<Int32, UInt32>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        futureTestNotImplemented<AsyncOperationProgressHandler<Int32, UInt32>>()
     }
 
     public func SetCompleted(handler: InParam<AsyncOperationWithProgressCompletedHandler<Int32, UInt32>>): Result<Unit> {
@@ -437,7 +437,7 @@ class AsyncOperationWithProgressThrowingInfoImpl <: AsyncDerivedThrowingInfoBase
         if (throwPlainOnCompleted) {
             throw Exception("Completed failure")
         }
-        Result<AsyncOperationWithProgressCompletedHandler<Int32, UInt32>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        futureTestNotImplemented<AsyncOperationWithProgressCompletedHandler<Int32, UInt32>>()
     }
 
     public func GetResults(): Result<Int32> {

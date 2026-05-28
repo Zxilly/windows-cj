@@ -3,7 +3,7 @@ package windows_foundation
 import std.sync.{AtomicBool, AtomicInt64}
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_FAIL, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, Result, WinError, WindowsException}
+import windows_core.{E_FAIL, E_NOINTERFACE, E_NOTIMPL, E_POINTER, GuidValue, Result, WindowsException}
 import windows_core as windows_core
 import windows_core.{DateTime, DateTimeAbi, Point, PointAbi, Rect, RectAbi, Size, SizeAbi, TimeSpan, TimeSpanAbi}
 import windows_interface as windows_interface
@@ -17,14 +17,6 @@ let propertyValueArrayThunkWritePartialOutputs = AtomicBool(true)
 let propertyValueArrayThunkWritePartialSizes = AtomicBool(true)
 let propertyValueArrayThunkThrowWindowsAfterPartialOutputs = AtomicBool(false)
 let propertyValueArrayThunkThrowPlainAfterPartialOutputs = AtomicBool(false)
-
-func propertyValueArrayThunkNotImpl<T>(): Result<T> {
-    Result<T>.Err(WinError.fromHRESULT(E_NOTIMPL))
-}
-
-func propertyValueArrayThunkFail<T>(): Result<T> {
-    Result<T>.Err(WinError.fromHRESULT(E_FAIL))
-}
 
 func allocatePropertyValueArrayThunkData<T>(length: Int64): CPointer<T> where T <: CType {
     CPointer<T>(windows_core.coTaskMemAlloc(sizeOf<T>() * UIntNative(length)))
@@ -68,19 +60,19 @@ open class FailingPropertyValueArrayThunkImpl <: IPropertyValue_Impl {
         this.inspectableVtbl = inspectableVtbl
     }
 
-    public func Type(): Result<PropertyType> { propertyValueArrayThunkNotImpl<PropertyType>() }
-    public func IsNumericScalar(): Result<Bool> { propertyValueArrayThunkNotImpl<Bool>() }
-    public func GetUInt8(): Result<UInt8> { propertyValueArrayThunkNotImpl<UInt8>() }
-    public func GetInt16(): Result<Int16> { propertyValueArrayThunkNotImpl<Int16>() }
-    public func GetUInt16(): Result<UInt16> { propertyValueArrayThunkNotImpl<UInt16>() }
-    public func GetInt32(): Result<Int32> { propertyValueArrayThunkNotImpl<Int32>() }
-    public func GetUInt32(): Result<UInt32> { propertyValueArrayThunkNotImpl<UInt32>() }
-    public func GetInt64(): Result<Int64> { propertyValueArrayThunkNotImpl<Int64>() }
-    public func GetUInt64(): Result<UInt64> { propertyValueArrayThunkNotImpl<UInt64>() }
-    public func GetSingle(): Result<Float32> { propertyValueArrayThunkNotImpl<Float32>() }
-    public func GetDouble(): Result<Float64> { propertyValueArrayThunkNotImpl<Float64>() }
-    public func GetChar16(): Result<UInt16> { propertyValueArrayThunkNotImpl<UInt16>() }
-    public func GetBoolean(): Result<Bool> { propertyValueArrayThunkNotImpl<Bool>() }
+    public func Type(): Result<PropertyType> { foundationTestNotImplemented<PropertyType>() }
+    public func IsNumericScalar(): Result<Bool> { foundationTestNotImplemented<Bool>() }
+    public func GetUInt8(): Result<UInt8> { foundationTestNotImplemented<UInt8>() }
+    public func GetInt16(): Result<Int16> { foundationTestNotImplemented<Int16>() }
+    public func GetUInt16(): Result<UInt16> { foundationTestNotImplemented<UInt16>() }
+    public func GetInt32(): Result<Int32> { foundationTestNotImplemented<Int32>() }
+    public func GetUInt32(): Result<UInt32> { foundationTestNotImplemented<UInt32>() }
+    public func GetInt64(): Result<Int64> { foundationTestNotImplemented<Int64>() }
+    public func GetUInt64(): Result<UInt64> { foundationTestNotImplemented<UInt64>() }
+    public func GetSingle(): Result<Float32> { foundationTestNotImplemented<Float32>() }
+    public func GetDouble(): Result<Float64> { foundationTestNotImplemented<Float64>() }
+    public func GetChar16(): Result<UInt16> { foundationTestNotImplemented<UInt16>() }
+    public func GetBoolean(): Result<Bool> { foundationTestNotImplemented<Bool>() }
     public func GetString(): Result<windows_core.HString> {
         if (throwWindowsOnGetString) {
             throw WindowsException(E_POINTER)
@@ -88,35 +80,35 @@ open class FailingPropertyValueArrayThunkImpl <: IPropertyValue_Impl {
         if (throwPlainOnGetString) {
             throw Exception("GetString failure")
         }
-        propertyValueArrayThunkNotImpl<windows_core.HString>()
+        foundationTestNotImplemented<windows_core.HString>()
     }
     public func GetGuid(): Result<GuidValue> {
         if (throwWindowsOnGetGuid) {
             throw WindowsException(E_POINTER)
         }
-        propertyValueArrayThunkNotImpl<GuidValue>()
+        foundationTestNotImplemented<GuidValue>()
     }
-    public func GetDateTime(): Result<DateTime> { propertyValueArrayThunkNotImpl<DateTime>() }
-    public func GetTimeSpan(): Result<TimeSpan> { propertyValueArrayThunkNotImpl<TimeSpan>() }
+    public func GetDateTime(): Result<DateTime> { foundationTestNotImplemented<DateTime>() }
+    public func GetTimeSpan(): Result<TimeSpan> { foundationTestNotImplemented<TimeSpan>() }
     public func GetPoint(): Result<Point> {
         if (throwPlainOnGetPoint) {
             throw Exception("GetPoint failure")
         }
-        propertyValueArrayThunkNotImpl<Point>()
+        foundationTestNotImplemented<Point>()
     }
-    public func GetSize(): Result<Size> { propertyValueArrayThunkNotImpl<Size>() }
-    public func GetRect(): Result<Rect> { propertyValueArrayThunkNotImpl<Rect>() }
+    public func GetSize(): Result<Size> { foundationTestNotImplemented<Size>() }
+    public func GetRect(): Result<Rect> { foundationTestNotImplemented<Rect>() }
 
     public func GetUInt8Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt8>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetInt16Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Int16>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetUInt16Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt16>>): Result<Unit> {
@@ -134,62 +126,62 @@ open class FailingPropertyValueArrayThunkImpl <: IPropertyValue_Impl {
         if (propertyValueArrayThunkThrowPlainAfterPartialOutputs.load()) {
             throw Exception("GetUInt16Array failure")
         }
-        propertyValueArrayThunkFail<Unit>()
+        foundationTestFail<Unit>()
     }
 
     public func GetInt32Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Int32>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetUInt32Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt32>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetInt64Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Int64>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetUInt64Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt64>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetSingleArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Float32>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetDoubleArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Float64>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetChar16Array(valueSize: CPointer<UInt32>, value: CPointer<CPointer<UInt16>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetBooleanArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<Bool>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetStringArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): Result<Unit> {
         if (!propertyValueArrayThunkWritePartialOutputs.load()) {
             let _ = valueSize
             let _ = value
-            return propertyValueArrayThunkFail<Unit>()
+            return foundationTestFail<Unit>()
         }
         let data = allocatePropertyValueArrayThunkData<CPointer<Unit>>(2)
         unsafe {
@@ -207,14 +199,14 @@ open class FailingPropertyValueArrayThunkImpl <: IPropertyValue_Impl {
         if (propertyValueArrayThunkThrowPlainAfterPartialOutputs.load()) {
             throw Exception("GetStringArray failure")
         }
-        propertyValueArrayThunkFail<Unit>()
+        foundationTestFail<Unit>()
     }
 
     public func GetInspectableArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): Result<Unit> {
         if (!propertyValueArrayThunkWritePartialOutputs.load()) {
             let _ = valueSize
             let _ = value
-            return propertyValueArrayThunkFail<Unit>()
+            return foundationTestFail<Unit>()
         }
         let data = allocatePropertyValueArrayThunkData<CPointer<Unit>>(2)
         let first = propertyValueArrayThunkInspectableObject(inspectableVtbl)
@@ -234,43 +226,43 @@ open class FailingPropertyValueArrayThunkImpl <: IPropertyValue_Impl {
         if (propertyValueArrayThunkThrowPlainAfterPartialOutputs.load()) {
             throw Exception("GetInspectableArray failure")
         }
-        propertyValueArrayThunkFail<Unit>()
+        foundationTestFail<Unit>()
     }
 
     public func GetGuidArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<GUID>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetDateTimeArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<DateTimeAbi>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetTimeSpanArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<TimeSpanAbi>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetPointArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<PointAbi>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetSizeArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<SizeAbi>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 
     public func GetRectArray(valueSize: CPointer<UInt32>, value: CPointer<CPointer<RectAbi>>): Result<Unit> {
         let _ = valueSize
         let _ = value
-        propertyValueArrayThunkNotImpl<Unit>()
+        foundationTestNotImplemented<Unit>()
     }
 }
 
@@ -289,7 +281,7 @@ class FailingReferenceArrayPropertyValueArrayThunkImpl <: FailingPropertyValueAr
         if (throwPlainOnValue) {
             throw Exception("IReferenceArray.Value failure")
         }
-        propertyValueArrayThunkFail<(UInt32, CPointer<Unit>)>()
+        foundationTestFail<(UInt32, CPointer<Unit>)>()
     }
 }
 
@@ -308,7 +300,7 @@ class FailingReferencePropertyValueScalarThunkImpl <: FailingPropertyValueArrayT
         if (throwPlainOnValue) {
             throw Exception("IReference.Value failure")
         }
-        propertyValueArrayThunkFail<Float32>()
+        foundationTestFail<Float32>()
     }
 }
 

@@ -2,7 +2,7 @@ package windows_collections
 import std.sync.AtomicInt64
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_core.{E_FAIL, E_NOTIMPL, Result, WinError}
+import windows_core.{E_FAIL, Result, WinError}
 import windows_core as windows_core
 import windows_interface as windows_interface
 
@@ -33,7 +33,7 @@ class FailingSplitMapViewImpl <: IMapView_Impl<Int32, Int32> {
 
     public func Lookup(key: Int32): Result<Int32> {
         let _ = key
-        Result<Int32>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Int32>()
     }
 
     public func Size(): Result<UInt32> {
@@ -54,14 +54,14 @@ class FailingSplitMapViewImpl <: IMapView_Impl<Int32, Int32> {
     }
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, Int32>>> {
-        Result<IIterator<IKeyValuePair<Int32, Int32>>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IIterator<IKeyValuePair<Int32, Int32>>>()
     }
 }
 
 class NoWriteFailingSplitMapViewImpl <: IMapView_Impl<Int32, Int32> {
     public func Lookup(key: Int32): Result<Int32> {
         let _ = key
-        Result<Int32>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Int32>()
     }
 
     public func Size(): Result<UInt32> {
@@ -80,7 +80,7 @@ class NoWriteFailingSplitMapViewImpl <: IMapView_Impl<Int32, Int32> {
     }
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, Int32>>> {
-        Result<IIterator<IKeyValuePair<Int32, Int32>>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IIterator<IKeyValuePair<Int32, Int32>>>()
     }
 }
 
@@ -150,85 +150,92 @@ func withMapViewSplitClientRaw(
     }
 }
 
-@Test
-func testIMapViewSplitClientClearsStaleOutputsBeforeNoWriteFailure() {
-    mapSplitThunkReleaseCalls.store(0)
-    var releaseVtbl = windows_interface.IUnknownVtbl()
-    releaseVtbl.Release = mapSplitThunkReleaseThunk
-    let releaseVtblHandle = unsafe { windows_interface.allocateNativeValue<windows_interface.IUnknownVtbl>(releaseVtbl) }
-    let firstOwned = mapSplitThunkObject(releaseVtblHandle)
-    let secondOwned = mapSplitThunkObject(releaseVtblHandle)
-    try {
-        var mapVtbl = IMapViewVtbl()
-        mapVtbl.Split = noWriteFailingMapViewSplitClientThunk
-
-        withMapViewSplitClientRaw(mapVtbl, releaseVtblHandle, { raw: CPointer<Unit> =>
-            let view = IMapView<Int32, Int32>.viewOf(raw)
-            var first = firstOwned
-            var second = secondOwned
-            var failed = false
-            try {
-                unsafe {
-                    view.Split(CPointer<CPointer<Unit>>(inout first), CPointer<CPointer<Unit>>(inout second))
-                }
-                throw Exception("expected failing IMapView.Split")
-            } catch (_: windows_core.WindowsException) {
-                failed = true
-            }
-
-            @Expect(failed, true)
-            @Expect(first.isNull(), true)
-            @Expect(second.isNull(), true)
-            @Expect(mapSplitThunkReleaseCalls.load(), 0)
-        })
-    } finally {
-        if (firstOwned.isNotNull()) {
-            windows_core.coTaskMemFree(firstOwned)
-        }
-        if (secondOwned.isNotNull()) {
-            windows_core.coTaskMemFree(secondOwned)
-        }
-        unsafe { windows_interface.freeNativeValue(releaseVtblHandle) }
-    }
-}
-
-@Test
-func testIMapViewSplitThunkClearsStaleOutputsBeforeNoWriteFailure() {
+func withMapSplitReleaseVtbl(action: (CPointer<windows_interface.IUnknownVtbl>) -> Unit): Unit {
     mapSplitThunkReleaseCalls.store(0)
     var vtbl = windows_interface.IUnknownVtbl()
     vtbl.Release = mapSplitThunkReleaseThunk
     let vtblHandle = unsafe { windows_interface.allocateNativeValue<windows_interface.IUnknownVtbl>(vtbl) }
-    let firstOwned = mapSplitThunkObject(vtblHandle)
-    let secondOwned = mapSplitThunkObject(vtblHandle)
     try {
-        let impl = NoWriteFailingSplitMapViewImpl()
-        var first = firstOwned
-        var second = secondOwned
-
-        let hr = impl.__winrtThunk_Split(CPointer<CPointer<Unit>>(inout first), CPointer<CPointer<Unit>>(inout second))
-
-        @Expect(hr, E_FAIL.value)
-        @Expect(first.isNull(), true)
-        @Expect(second.isNull(), true)
-        @Expect(mapSplitThunkReleaseCalls.load(), 0)
+        action(vtblHandle)
     } finally {
-        if (firstOwned.isNotNull()) {
-            windows_core.coTaskMemFree(firstOwned)
-        }
-        if (secondOwned.isNotNull()) {
-            windows_core.coTaskMemFree(secondOwned)
-        }
         unsafe { windows_interface.freeNativeValue(vtblHandle) }
     }
 }
 
+func withOwnedMapSplitOutputs(
+    releaseVtbl: CPointer<windows_interface.IUnknownVtbl>,
+    action: (CPointer<Unit>, CPointer<Unit>) -> Unit
+): Unit {
+    let firstOwned = mapSplitThunkObject(releaseVtbl)
+    let secondOwned = mapSplitThunkObject(releaseVtbl)
+    try {
+        action(firstOwned, secondOwned)
+    } finally {
+        if (firstOwned.isNotNull()) {
+            windows_core.coTaskMemFree(firstOwned)
+        }
+        if (secondOwned.isNotNull()) {
+            windows_core.coTaskMemFree(secondOwned)
+        }
+    }
+}
+
+func expectMapSplitOutputsCleared(first: CPointer<Unit>, second: CPointer<Unit>, releaseCalls: Int64): Unit {
+    @Expect(first.isNull(), true)
+    @Expect(second.isNull(), true)
+    @Expect(mapSplitThunkReleaseCalls.load(), releaseCalls)
+}
+
+@Test
+func testIMapViewSplitClientClearsStaleOutputsBeforeNoWriteFailure() {
+    withMapSplitReleaseVtbl({ releaseVtblHandle: CPointer<windows_interface.IUnknownVtbl> =>
+        withOwnedMapSplitOutputs(releaseVtblHandle, { firstOwned: CPointer<Unit>, secondOwned: CPointer<Unit> =>
+            var mapVtbl = IMapViewVtbl()
+            mapVtbl.Split = noWriteFailingMapViewSplitClientThunk
+
+            withMapViewSplitClientRaw(mapVtbl, releaseVtblHandle, { raw: CPointer<Unit> =>
+                let view = IMapView<Int32, Int32>.viewOf(raw)
+                var first = firstOwned
+                var second = secondOwned
+                var failed = false
+                try {
+                    unsafe {
+                        view.Split(CPointer<CPointer<Unit>>(inout first), CPointer<CPointer<Unit>>(inout second))
+                    }
+                    throw Exception("expected failing IMapView.Split")
+                } catch (_: windows_core.WindowsException) {
+                    failed = true
+                }
+
+                @Expect(failed, true)
+                expectMapSplitOutputsCleared(first, second, 0)
+            })
+        })
+    })
+}
+
+@Test
+func testIMapViewSplitThunkClearsStaleOutputsBeforeNoWriteFailure() {
+    withMapSplitReleaseVtbl({ vtblHandle: CPointer<windows_interface.IUnknownVtbl> =>
+        withOwnedMapSplitOutputs(vtblHandle, { firstOwned: CPointer<Unit>, secondOwned: CPointer<Unit> =>
+            let impl = NoWriteFailingSplitMapViewImpl()
+            var first = firstOwned
+            var second = secondOwned
+
+            let hr = impl.__winrtThunk_Split(
+                CPointer<CPointer<Unit>>(inout first),
+                CPointer<CPointer<Unit>>(inout second)
+            )
+
+            @Expect(hr, E_FAIL.value)
+            expectMapSplitOutputsCleared(first, second, 0)
+        })
+    })
+}
+
 @Test
 func testIMapViewSplitThunkReleasesFailedPartialOutputs() {
-    mapSplitThunkReleaseCalls.store(0)
-    var vtbl = windows_interface.IUnknownVtbl()
-    vtbl.Release = mapSplitThunkReleaseThunk
-    let vtblHandle = unsafe { windows_interface.allocateNativeValue<windows_interface.IUnknownVtbl>(vtbl) }
-    try {
+    withMapSplitReleaseVtbl({ vtblHandle: CPointer<windows_interface.IUnknownVtbl> =>
         let impl = FailingSplitMapViewImpl(vtblHandle)
         var first = CPointer<Unit>()
         var second = CPointer<Unit>()
@@ -236,21 +243,13 @@ func testIMapViewSplitThunkReleasesFailedPartialOutputs() {
         let hr = impl.__winrtThunk_Split(CPointer<CPointer<Unit>>(inout first), CPointer<CPointer<Unit>>(inout second))
 
         @Expect(hr, E_FAIL.value)
-        @Expect(first.isNull(), true)
-        @Expect(second.isNull(), true)
-        @Expect(mapSplitThunkReleaseCalls.load(), 2)
-    } finally {
-        unsafe { windows_interface.freeNativeValue(vtblHandle) }
-    }
+        expectMapSplitOutputsCleared(first, second, 2)
+    })
 }
 
 @Test
 func testIMapViewSplitClientReleasesFailedPartialOutputs() {
-    mapSplitThunkReleaseCalls.store(0)
-    var releaseVtbl = windows_interface.IUnknownVtbl()
-    releaseVtbl.Release = mapSplitThunkReleaseThunk
-    let releaseVtblHandle = unsafe { windows_interface.allocateNativeValue<windows_interface.IUnknownVtbl>(releaseVtbl) }
-    try {
+    withMapSplitReleaseVtbl({ releaseVtblHandle: CPointer<windows_interface.IUnknownVtbl> =>
         var mapVtbl = IMapViewVtbl()
         mapVtbl.Split = failingMapViewSplitClientThunk
 
@@ -269,11 +268,7 @@ func testIMapViewSplitClientReleasesFailedPartialOutputs() {
             }
 
             @Expect(failed, true)
-            @Expect(first.isNull(), true)
-            @Expect(second.isNull(), true)
-            @Expect(mapSplitThunkReleaseCalls.load(), 2)
+            expectMapSplitOutputsCleared(first, second, 2)
         })
-    } finally {
-        unsafe { windows_interface.freeNativeValue(releaseVtblHandle) }
-    }
+    })
 }

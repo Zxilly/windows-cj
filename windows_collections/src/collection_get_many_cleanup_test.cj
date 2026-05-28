@@ -384,15 +384,15 @@ class FailingProducerIteratorGetManyImpl <: IIterator_Impl<HString> {
     }
 
     public func Current(): Result<HString> {
-        Result<HString>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<HString>()
     }
 
     public func HasCurrent(): Result<Bool> {
-        Result<Bool>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Bool>()
     }
 
     public func MoveNext(): Result<Bool> {
-        Result<Bool>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Bool>()
     }
 
     public func GetMany(itemsSize: UInt32, items: CPointer<Unit>): Result<UInt32> {
@@ -410,17 +410,17 @@ class FailingProducerVectorViewGetManyImpl <: IVectorView_Impl<HString> {
 
     public func GetAt(index: UInt32): Result<HString> {
         let _ = index
-        Result<HString>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<HString>()
     }
 
     public func Size(): Result<UInt32> {
-        Result<UInt32>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<UInt32>()
     }
 
     public func IndexOf(value: HString, index: CPointer<UInt32>): Result<Bool> {
         let _ = value
         let _ = index
-        Result<Bool>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Bool>()
     }
 
     public func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>): Result<UInt32> {
@@ -430,7 +430,7 @@ class FailingProducerVectorViewGetManyImpl <: IVectorView_Impl<HString> {
     }
 
     public func First(): Result<IIterator<HString>> {
-        Result<IIterator<HString>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IIterator<HString>>()
     }
 }
 
@@ -449,54 +449,54 @@ class FailingProducerVectorGetManyImpl <: IVector_Impl<HString> {
         if (throwWindowsOnGetAt) {
             throw WindowsException(E_POINTER)
         }
-        Result<HString>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<HString>()
     }
 
     public func Size(): Result<UInt32> {
-        Result<UInt32>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<UInt32>()
     }
 
     public func GetView(): Result<IVectorView<HString>> {
-        Result<IVectorView<HString>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IVectorView<HString>>()
     }
 
     public func IndexOf(value: HString, index: CPointer<UInt32>): Result<Bool> {
         let _ = value
         let _ = index
-        Result<Bool>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Bool>()
     }
 
     public func SetAt(index: UInt32, value: HString): Result<Unit> {
         let _ = index
         let _ = value
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func InsertAt(index: UInt32, value: HString): Result<Unit> {
         let _ = index
         let _ = value
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func RemoveAt(index: UInt32): Result<Unit> {
         let _ = index
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Append(value: HString): Result<Unit> {
         let _ = value
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func RemoveAtEnd(): Result<Unit> {
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Clear(): Result<Unit> {
         if (throwPlainOnClear) {
             throw Exception("Clear failure")
         }
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>): Result<UInt32> {
@@ -511,11 +511,11 @@ class FailingProducerVectorGetManyImpl <: IVector_Impl<HString> {
     public func ReplaceAll(itemsSize: UInt32, items: CPointer<Unit>): Result<Unit> {
         let _ = itemsSize
         let _ = items
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func First(): Result<IIterator<HString>> {
-        Result<IIterator<HString>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IIterator<HString>>()
     }
 }
 
@@ -528,61 +528,61 @@ class FailingProducerObservableVectorGetManyImpl <: IObservableVector_Impl<HStri
 
     public func VectorChanged(vhnd: InParam<VectorChangedEventHandler<HString>>): Result<EventRegistrationToken> {
         let _ = vhnd
-        Result<EventRegistrationToken>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<EventRegistrationToken>()
     }
 
     public func RemoveVectorChanged(token: EventRegistrationToken): Result<Unit> {
         let _ = token
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func GetAt(index: UInt32): Result<HString> {
         let _ = index
-        Result<HString>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<HString>()
     }
 
     public func Size(): Result<UInt32> {
-        Result<UInt32>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<UInt32>()
     }
 
     public func GetView(): Result<IVectorView<HString>> {
-        Result<IVectorView<HString>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IVectorView<HString>>()
     }
 
     public func IndexOf(value: HString, index: CPointer<UInt32>): Result<Bool> {
         let _ = value
         let _ = index
-        Result<Bool>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Bool>()
     }
 
     public func SetAt(index: UInt32, value: HString): Result<Unit> {
         let _ = index
         let _ = value
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func InsertAt(index: UInt32, value: HString): Result<Unit> {
         let _ = index
         let _ = value
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func RemoveAt(index: UInt32): Result<Unit> {
         let _ = index
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Append(value: HString): Result<Unit> {
         let _ = value
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func RemoveAtEnd(): Result<Unit> {
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Clear(): Result<Unit> {
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func GetMany(startIndex: UInt32, itemsSize: UInt32, items: CPointer<Unit>): Result<UInt32> {
@@ -594,17 +594,17 @@ class FailingProducerObservableVectorGetManyImpl <: IObservableVector_Impl<HStri
     public func ReplaceAll(itemsSize: UInt32, items: CPointer<Unit>): Result<Unit> {
         let _ = itemsSize
         let _ = items
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func First(): Result<IIterator<HString>> {
-        Result<IIterator<HString>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IIterator<HString>>()
     }
 }
 
 class ThrowingProducerIteratorScalarImpl <: IIterator_Impl<HString> {
     public func Current(): Result<HString> {
-        Result<HString>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<HString>()
     }
 
     public func HasCurrent(): Result<Bool> {
@@ -618,141 +618,141 @@ class ThrowingProducerIteratorScalarImpl <: IIterator_Impl<HString> {
     public func GetMany(itemsSize: UInt32, items: CPointer<Unit>): Result<UInt32> {
         let _ = itemsSize
         let _ = items
-        Result<UInt32>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<UInt32>()
     }
 }
 
 class FailingProducerMapChangedEventArgsScalarImpl <: IMapChangedEventArgs_Impl<HString> {
     public func get_CollectionChange(): Result<CollectionChange> {
-        Result<CollectionChange>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<CollectionChange>()
     }
 
     public func Key(): Result<HString> {
-        Result<HString>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<HString>()
     }
 }
 
 class FailingProducerVectorChangedEventArgsScalarImpl <: IVectorChangedEventArgs_Impl {
     public func get_CollectionChange(): Result<CollectionChange> {
-        Result<CollectionChange>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<CollectionChange>()
     }
 
     public func Index(): Result<UInt32> {
-        Result<UInt32>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<UInt32>()
     }
 }
 
 class FailingProducerMapViewScalarImpl <: IMapView_Impl<Int32, HString> {
     public func Lookup(key: Int32): Result<HString> {
         let _ = key
-        Result<HString>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<HString>()
     }
 
     public func Size(): Result<UInt32> {
-        Result<UInt32>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<UInt32>()
     }
 
     public func HasKey(key: Int32): Result<Bool> {
         let _ = key
-        Result<Bool>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Bool>()
     }
 
     public func Split(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Result<Unit> {
         let _ = first
         let _ = second
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, HString>>> {
-        Result<IIterator<IKeyValuePair<Int32, HString>>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IIterator<IKeyValuePair<Int32, HString>>>()
     }
 }
 
 class FailingProducerMapScalarImpl <: IMap_Impl<Int32, HString> {
     public func Lookup(key: Int32): Result<HString> {
         let _ = key
-        Result<HString>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<HString>()
     }
 
     public func Size(): Result<UInt32> {
-        Result<UInt32>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<UInt32>()
     }
 
     public func HasKey(key: Int32): Result<Bool> {
         let _ = key
-        Result<Bool>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Bool>()
     }
 
     public func GetView(): Result<IMapView<Int32, HString>> {
-        Result<IMapView<Int32, HString>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IMapView<Int32, HString>>()
     }
 
     public func Insert(key: Int32, value: HString): Result<Bool> {
         let _ = key
         let _ = value
-        Result<Bool>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Bool>()
     }
 
     public func Remove(key: Int32): Result<Unit> {
         let _ = key
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Clear(): Result<Unit> {
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, HString>>> {
-        Result<IIterator<IKeyValuePair<Int32, HString>>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IIterator<IKeyValuePair<Int32, HString>>>()
     }
 }
 
 class FailingProducerObservableMapScalarImpl <: IObservableMap_Impl<Int32, HString> {
     public func MapChanged(vhnd: InParam<MapChangedEventHandler<Int32, HString>>): Result<EventRegistrationToken> {
         let _ = vhnd
-        Result<EventRegistrationToken>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<EventRegistrationToken>()
     }
 
     public func RemoveMapChanged(token: EventRegistrationToken): Result<Unit> {
         let _ = token
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Lookup(key: Int32): Result<HString> {
         let _ = key
-        Result<HString>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<HString>()
     }
 
     public func Size(): Result<UInt32> {
-        Result<UInt32>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<UInt32>()
     }
 
     public func HasKey(key: Int32): Result<Bool> {
         let _ = key
-        Result<Bool>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Bool>()
     }
 
     public func GetView(): Result<IMapView<Int32, HString>> {
-        Result<IMapView<Int32, HString>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IMapView<Int32, HString>>()
     }
 
     public func Insert(key: Int32, value: HString): Result<Bool> {
         let _ = key
         let _ = value
-        Result<Bool>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Bool>()
     }
 
     public func Remove(key: Int32): Result<Unit> {
         let _ = key
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Clear(): Result<Unit> {
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func First(): Result<IIterator<IKeyValuePair<Int32, HString>>> {
-        Result<IIterator<IKeyValuePair<Int32, HString>>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IIterator<IKeyValuePair<Int32, HString>>>()
     }
 }
 
@@ -761,49 +761,49 @@ class FailingProducerPropertySetScalarImpl <: IPropertySet_Impl {
         vhnd: InParam<MapChangedEventHandler<HString, windows_interface.IInspectable>>
     ): Result<EventRegistrationToken> {
         let _ = vhnd
-        Result<EventRegistrationToken>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<EventRegistrationToken>()
     }
 
     public func RemoveMapChanged(token: EventRegistrationToken): Result<Unit> {
         let _ = token
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Lookup(key: HString): Result<windows_interface.IInspectable> {
         let _ = key
-        Result<windows_interface.IInspectable>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<windows_interface.IInspectable>()
     }
 
     public func Size(): Result<UInt32> {
-        Result<UInt32>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<UInt32>()
     }
 
     public func HasKey(key: HString): Result<Bool> {
         let _ = key
-        Result<Bool>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Bool>()
     }
 
     public func GetView(): Result<IMapView<HString, windows_interface.IInspectable>> {
-        Result<IMapView<HString, windows_interface.IInspectable>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IMapView<HString, windows_interface.IInspectable>>()
     }
 
     public func Insert(key: HString, value: windows_interface.IInspectable): Result<Bool> {
         let _ = key
         let _ = value
-        Result<Bool>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Bool>()
     }
 
     public func Remove(key: HString): Result<Unit> {
         let _ = key
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func Clear(): Result<Unit> {
-        Result<Unit>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<Unit>()
     }
 
     public func First(): Result<IIterator<IKeyValuePair<HString, windows_interface.IInspectable>>> {
-        Result<IIterator<IKeyValuePair<HString, windows_interface.IInspectable>>>.Err(WinError.fromHRESULT(E_NOTIMPL))
+        collectionTestNotImplemented<IIterator<IKeyValuePair<HString, windows_interface.IInspectable>>>()
     }
 }
 
