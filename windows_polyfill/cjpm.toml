@@ -4,7 +4,7 @@
   description = "Runtime polyfill for windows-cj bindgen-generated code"
   authors = ["Zxilly"]
   repository = "https://github.com/Zxilly/windows-cj"
-  license = []
+  license = ["MIT"]
   output-type = "static"
   cjc-version = "1.1.0"
 

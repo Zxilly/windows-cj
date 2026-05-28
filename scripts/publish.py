@@ -24,6 +24,7 @@ REPOSITORY = "https://github.com/Zxilly/windows-cj"
 DEFAULT_CJ_HEAP_SIZE = "32GB"
 EXCLUDED_NAMES = {"cjpm.lock", "cangjie-repo.toml"}
 EXCLUDED_PARTS = {"target", "__pycache__", ".generated"}
+COMMON_EXTRA_PACKAGE_FILES = ((ROOT / "LICENSE", Path("LICENSE")),)
 EXTRA_PACKAGE_PATHS = {
     "windows_bindgen": ((ROOT / "winmd", Path("winmd")),),
 }
@@ -177,6 +178,10 @@ def iter_bundle_entries(root: Path, info: PackageInfo, run: Run = subprocess.run
         if not should_bundle(path, member_dir):
             continue
         entries.append((path, path.relative_to(member_dir)))
+
+    for source, destination in COMMON_EXTRA_PACKAGE_FILES:
+        if source.exists():
+            entries.append((source, destination))
 
     for source_root, destination_root in EXTRA_PACKAGE_PATHS.get(info.member, ()):
         if not source_root.exists():
