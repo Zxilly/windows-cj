@@ -60,6 +60,15 @@ class QualityGatePlanTests(unittest.TestCase):
         self.assertNotIn("WinUI demo smoke", self.step_names([]))
         self.assertIn("WinUI demo smoke", self.step_names(["--include-winui-demo-smoke"]))
 
+    def test_python_unit_tests_are_discovered_from_script_tests(self) -> None:
+        steps = {step.name: step for step in gate.build_steps(gate.parse_args(["--mode", "quick"]))}
+        command = steps["python unit tests"].command
+
+        self.assertIn(str(gate.SCRIPT_TESTS_ROOT), command)
+        self.assertIn("-t", command)
+        self.assertIn(str(gate.ROOT), command)
+        self.assertNotIn(str(gate.ROOT / "scripts"), command)
+
     def test_workspace_options_are_forwarded_to_workspace_runner(self) -> None:
         args = gate.parse_args(
             [

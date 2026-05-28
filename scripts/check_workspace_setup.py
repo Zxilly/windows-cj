@@ -18,6 +18,8 @@ import re
 from pathlib import Path
 from typing import Sequence
 
+import workspace_test_contracts
+
 
 ACTIVE_WORKSPACE_MEMBERS = {
     "windows_libloading",
@@ -9125,7 +9127,22 @@ def check_package_boundaries(workspace: Path) -> None:
         fail("windows_result must reuse windows_libloading for module loading")
 
 
+def check_script_unit_tests_location(workspace: Path) -> None:
+    scripts_dir = workspace / "scripts"
+    if not scripts_dir.exists():
+        return
+    misplaced = sorted(path for path in scripts_dir.glob("test_*.py") if path.is_file())
+    if misplaced:
+        names = ", ".join(path.relative_to(workspace).as_posix() for path in misplaced)
+        fail(f"Python script unit tests must live under tests/script_tests, not scripts: {names}")
+
+
 def check_active_tools(workspace: Path) -> None:
+    try:
+        workspace_test_contracts.check_test_only_sources_stay_in_test_files(workspace)
+    except workspace_test_contracts.WorkspaceTestContractViolation as exc:
+        fail(str(exc))
+    check_script_unit_tests_location(workspace)
     generator_main = workspace / "windows_bindgen" / "src" / "main.cj"
     check_path_exists(generator_main, "Cangjie bindgen CLI")
     generator_main_text = generator_main.read_text(encoding="utf-8")

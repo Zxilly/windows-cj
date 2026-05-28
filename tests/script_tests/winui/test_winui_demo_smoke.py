@@ -11,7 +11,7 @@ from pathlib import Path
 from unittest import mock
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[3]
 SMOKE = ROOT.parent / "windows-cj-demo" / "tools" / "smoke_winui3.py"
 
 

@@ -29,6 +29,7 @@ from typing import Sequence
 
 ROOT = Path(__file__).resolve().parents[1]
 DEMO_ROOT = ROOT.parent / "windows-cj-demo"
+SCRIPT_TESTS_ROOT = ROOT / "tests" / "script_tests"
 DEFAULT_WORKSPACE_TIMEOUT_SECONDS = 240
 DEFAULT_CODEGEN_TIMEOUT_SECONDS = 300
 
@@ -133,6 +134,7 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
 def python_sources(root: Path = ROOT) -> list[Path]:
     source_roots = [
         root / "scripts",
+        root / "tests" / "script_tests",
         root / "windows_interface" / "scripts",
     ]
     demo_tools = root.parent / "windows-cj-demo" / "tools"
@@ -177,9 +179,11 @@ def build_steps(args: argparse.Namespace) -> list[Step]:
                 "unittest",
                 "discover",
                 "-s",
-                str(ROOT / "scripts"),
+                str(SCRIPT_TESTS_ROOT),
                 "-p",
                 "test_*.py",
+                "-t",
+                str(ROOT),
             ],
         ),
         Step(

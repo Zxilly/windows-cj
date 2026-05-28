@@ -13,6 +13,7 @@ import check_abi_ownership as abi
 import check_ignored_results as ignored
 import check_windows_common_codegen as codegen
 import check_workspace_setup as setup
+import workspace_test_contracts as contracts
 
 
 def write_file(root: Path, relative: str) -> None:
@@ -44,6 +45,56 @@ class ActiveWorkspaceLayoutTests(unittest.TestCase):
 
             self.assertEqual(ignored.workspace_members(workspace), ["windows_bindgen"])
             self.assertEqual(abi.workspace_members(workspace), ["windows_bindgen"])
+
+
+class WorkspaceTestContractTests(unittest.TestCase):
+    def write_text(self, root: Path, relative: str, text: str = "placeholder\n") -> Path:
+        path = root / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+        return path
+
+    def assert_contract_fail(self, workspace: Path, expected: str) -> None:
+        with self.assertRaises(contracts.WorkspaceTestContractViolation) as raised:
+            contracts.check_test_only_sources_stay_in_test_files(workspace)
+        self.assertIn(expected, str(raised.exception))
+
+    def test_rejects_test_support_names_in_production_sources(self) -> None:
+        cases = [
+            "windows_collections/src/test_support.cj",
+            "windows_collections/src/collection_test_support.cj",
+        ]
+        for relative in cases:
+            with self.subTest(relative=relative):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir) / "workspace"
+                    self.write_text(workspace, relative, "package windows_collections\nfunc supportHelper() {}\n")
+
+                    self.assert_contract_fail(workspace, "must be named *_support_test.cj")
+
+    def test_rejects_unittest_markers_in_non_test_sources(self) -> None:
+        cases = [
+            ("windows_core/src/production_import.cj", "package windows_core\nimport std.unittest.*\n"),
+            ("windows_core/src/production_annotation.cj", "package windows_core\n@Test\nfunc accidentalTest() {}\n"),
+        ]
+        for relative, text in cases:
+            with self.subTest(relative=relative):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir) / "workspace"
+                    self.write_text(workspace, relative, text)
+
+                    self.assert_contract_fail(workspace, "does not end with _test.cj")
+
+    def test_allows_support_test_sources(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir) / "workspace"
+            self.write_text(
+                workspace,
+                "windows_collections/src/collection_support_test.cj",
+                "package windows_collections\nimport std.unittest.*\n@Test\nfunc supportSmoke() {}\n",
+            )
+
+            contracts.check_test_only_sources_stay_in_test_files(workspace)
 
 
 class ActiveToolGateTests(unittest.TestCase):
@@ -238,6 +289,58 @@ class ActiveToolGateTests(unittest.TestCase):
             )
 
             self.assert_active_tools_fail(workspace, "descriptor_codegen WinRT out-slot output")
+
+    def test_active_tools_rejects_test_support_cj_in_production_sources(self) -> None:
+        cases = [
+            "windows_collections/src/test_support.cj",
+            "windows_collections/src/collection_test_support.cj",
+        ]
+        for relative in cases:
+            with self.subTest(relative=relative):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir) / "workspace"
+                    self.write_active_tools_workspace(workspace)
+                    self.write_text(
+                        workspace,
+                        relative,
+                        "package windows_collections\nfunc collectionTestNotImplemented<T>() {}\n",
+                    )
+
+                    self.assert_active_tools_fail(workspace, "must be named *_support_test.cj")
+
+    def test_active_tools_rejects_unittest_markers_in_non_test_source(self) -> None:
+        cases = [
+            ("windows_core/src/production_import.cj", "package windows_core\nimport std.unittest.*\n"),
+            ("windows_core/src/production_annotation.cj", "package windows_core\n@Test\nfunc accidentalTest() {}\n"),
+        ]
+        for relative, text in cases:
+            with self.subTest(relative=relative):
+                with tempfile.TemporaryDirectory() as temp_dir:
+                    workspace = Path(temp_dir) / "workspace"
+                    self.write_active_tools_workspace(workspace)
+                    self.write_text(workspace, relative, text)
+
+                    self.assert_active_tools_fail(workspace, "does not end with _test.cj")
+
+    def test_active_tools_allows_support_test_source(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir) / "workspace"
+            self.write_active_tools_workspace(workspace)
+            self.write_text(
+                workspace,
+                "windows_collections/src/collection_support_test.cj",
+                "package windows_collections\nimport std.unittest.*\n@Test\nfunc collectionSupportSmoke() {}\n",
+            )
+
+            setup.check_active_tools(workspace)
+
+    def test_active_tools_rejects_python_unit_tests_under_scripts(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir) / "workspace"
+            self.write_active_tools_workspace(workspace)
+            self.write_text(workspace, "scripts/test_check_workspace_setup.py", "import unittest\n")
+
+            self.assert_active_tools_fail(workspace, "must live under tests/script_tests")
 
     def test_active_tools_rejects_runtime_smoke_markers_only_in_comments_or_strings(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
