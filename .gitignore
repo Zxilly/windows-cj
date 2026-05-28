@@ -26,6 +26,7 @@ cfg.toml
 **/tmp/
 **/tmp_*/
 /windows-*-probe/
+/windows_bindgen/build/
 
 # cfggen output written into user-project / workspace root, not source.
 windows-cj-link-options.txt

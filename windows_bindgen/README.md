@@ -50,6 +50,10 @@ The native reader is the default and only `.winmd` path; there is no external
 converter. Use `--input-json` / `--input-dir` only to feed already-converted
 JSON (for example a checked-in offline metadata cache).
 
+`windows_bindgen default` first looks for WinMD metadata embedded in the
+executable as PE `RCDATA` resources. If no resource bundle is linked, it falls
+back to the checked-out `winmd/` directory.
+
 The built-in `--emit-winmd-json` mode can serialize the parsed metadata to JSON
 for ad-hoc inspection, but it is not part of any checked-in workflow:
 
@@ -67,6 +71,18 @@ Run commands from the `windows-cj` repository root. Generate directly from raw
 $env:cjHeapSize = "32GB"
 cjpm run -m windows_bindgen -- .\winmd --feature Windows.Foundation --out .generated\windows
 ```
+
+To build a standalone generator executable with the bundled WinMD files embedded
+as linker resources:
+
+```pwsh
+$env:cjHeapSize = "32GB"
+python .\scripts\embed_winmd_resources.py --build
+```
+
+The script writes ignored files under `windows_bindgen\build\embedded_winmd`,
+temporarily injects the generated resource object as a `link-option`, runs
+`cjpm build -m windows_bindgen`, and restores `windows_bindgen\cjpm.toml`.
 
 `scripts/check_windows_common_codegen.py` reads the bundled raw `.winmd` under
 `winmd/` natively; there is no JSON intermediate to build. The bundled metadata
