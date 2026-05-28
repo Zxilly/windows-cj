@@ -192,6 +192,26 @@ import windows_foundation.*
 mdbook build web/book
 ```
 
+## 发布
+
+维护者发布到仓颉中心仓时使用 Python 脚本：
+
+```powershell
+python .\scripts\publish.py --detect-and-publish
+```
+
+脚本会按 workspace 依赖顺序发布版本号有变化的包，临时把包内 `path` 依赖改写成对应的 `version` 依赖，生成中心仓需要的 `.cjp` 和 `meta-data.json`，然后执行 `cjpm publish`。显式发布某几个包：
+
+```powershell
+python .\scripts\publish.py windows_libloading windows_strings
+```
+
+本地检查发布计划但不真正发布：
+
+```powershell
+python .\scripts\publish.py --detect-and-publish --dry-run
+```
+
 ## 设计原则
 
 - 以 Win32 / COM / WinRT ABI 行为等价为目标。

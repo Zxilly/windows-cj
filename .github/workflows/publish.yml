@@ -1,0 +1,34 @@
+name: Publish
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      cjHeapSize: 32GB
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+
+      - name: Setup Cangjie
+        uses: Zxilly/setup-cangjie@v3
+        with:
+          channel: sts
+          version: 1.1.0
+          components: stdx
+          repo-token: ${{ secrets.CANGJIE_REPO_TOKEN }}
+
+      - name: Publish changed packages
+        run: python scripts/publish.py --detect-and-publish
+        env:
+          GH_TOKEN: ${{ github.token }}

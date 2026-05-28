@@ -9211,6 +9211,28 @@ def check_active_tools(workspace: Path) -> None:
         fail("unified quality gate must expose the explicit missing-WinUI metadata opt-in")
     if "generate_vector_input_abi.py" not in quality_gate_text or "--check-all" not in quality_gate_text:
         fail("unified quality gate must check the injected collections_runtime ABI specialization fragments")
+    publish_script = workspace / "scripts" / "publish.py"
+    check_path_exists(publish_script, "central repository publish script")
+    publish_script_text = publish_script.read_text(encoding="utf-8")
+    try:
+        publish_script_tree = ast.parse(publish_script_text)
+    except SyntaxError as exc:
+        fail(f"central repository publish script must be valid Python: {exc}")
+    if not python_has_command_list_prefix(publish_script_tree, ("cjpm", "publish")):
+        fail("central repository publish script must invoke cjpm publish")
+    if "DEFAULT_CJ_HEAP_SIZE = \"32GB\"" not in publish_script_text or "publish_env()" not in publish_script_text:
+        fail("central repository publish script must force cjHeapSize=32GB for cjpm publish")
+    if "replace_path_dependencies" not in publish_script_text or "make_bundle" not in publish_script_text:
+        fail("central repository publish script must rewrite workspace path dependencies and build source bundles")
+    if '"windows_bindgen"' not in publish_script_text or '"winmd"' not in publish_script_text:
+        fail("central repository publish script must include bundled WinMD metadata when publishing windows_bindgen")
+    publish_workflow = workspace / ".github" / "workflows" / "publish.yml"
+    check_path_exists(publish_workflow, "central repository publish workflow")
+    publish_workflow_text = publish_workflow.read_text(encoding="utf-8")
+    if "repo-token: ${{ secrets.CANGJIE_REPO_TOKEN }}" not in publish_workflow_text:
+        fail("central repository publish workflow must authenticate setup-cangjie with CANGJIE_REPO_TOKEN")
+    if "python scripts/publish.py --detect-and-publish" not in publish_workflow_text:
+        fail("central repository publish workflow must run version-change based publishing")
     macro_check = workspace / "windows_interface" / "scripts" / "check_macros.py"
     check_path_exists(macro_check, "windows_interface macro check script")
     macro_check_text = macro_check.read_text(encoding="utf-8")

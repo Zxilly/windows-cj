@@ -231,6 +231,30 @@ class ActiveToolGateTests(unittest.TestCase):
         )
         self.write_text(
             workspace,
+            "scripts/publish.py",
+            (
+                "import subprocess\n"
+                'DEFAULT_CJ_HEAP_SIZE = "32GB"\n'
+                'EXTRA_PACKAGE_PATHS = {"windows_bindgen": ("winmd",)}\n'
+                "def publish_env():\n"
+                "    return {'cjHeapSize': DEFAULT_CJ_HEAP_SIZE}\n"
+                "def replace_path_dependencies():\n"
+                "    pass\n"
+                "def make_bundle():\n"
+                "    pass\n"
+                "def main():\n"
+                "    replace_path_dependencies()\n"
+                "    make_bundle()\n"
+                "    subprocess.run(['cjpm', 'publish'], env=publish_env())\n"
+            ),
+        )
+        self.write_text(
+            workspace,
+            ".github/workflows/publish.yml",
+            "repo-token: ${{ secrets.CANGJIE_REPO_TOKEN }}\npython scripts/publish.py --detect-and-publish\n",
+        )
+        self.write_text(
+            workspace,
             "windows_foundation/src/windows_foundation_smoke_test.cj",
             runtime_smoke_text if runtime_smoke_text is not None else self.runtime_smoke_text(),
         )
@@ -477,6 +501,28 @@ class ActiveToolGateTests(unittest.TestCase):
             )
 
             self.assert_active_tools_fail(workspace, "must check the injected collections_runtime ABI specialization fragments")
+
+    def test_active_tools_rejects_publish_script_without_heap_override(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            workspace = Path(temp_dir) / "workspace"
+            self.write_active_tools_workspace(workspace)
+            (workspace / "scripts" / "publish.py").write_text(
+                (
+                    "import subprocess\n"
+                    'EXTRA_PACKAGE_PATHS = {"windows_bindgen": ("winmd",)}\n'
+                    "def publish_env():\n"
+                    "    return {}\n"
+                    "def replace_path_dependencies():\n"
+                    "    pass\n"
+                    "def make_bundle():\n"
+                    "    pass\n"
+                    "def main():\n"
+                    "    subprocess.run(['cjpm', 'publish'], env=publish_env())\n"
+                ),
+                encoding="utf-8",
+            )
+
+            self.assert_active_tools_fail(workspace, "must force cjHeapSize=32GB")
 
 
 class WorkspaceSetupParserTests(unittest.TestCase):
