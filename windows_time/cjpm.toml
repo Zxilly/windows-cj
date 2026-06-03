@@ -1,0 +1,13 @@
+[package]
+  name = "windows_time"
+  version = "0.1.0"
+  description = "Windows.Foundation DateTime and TimeSpan helpers for Cangjie"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "static"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_core = { path = "../windows_core" }

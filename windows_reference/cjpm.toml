@@ -1,0 +1,16 @@
+[package]
+  name = "windows_reference"
+  version = "0.1.0"
+  description = "Stock Windows.Foundation.IReference helpers for Cangjie"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "static"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_core = { path = "../windows_core" }
+  windows_foundation = { path = "../windows_foundation" }
+  windows_interface = { path = "../windows_interface" }
+  windows_time = { path = "../windows_time" }
