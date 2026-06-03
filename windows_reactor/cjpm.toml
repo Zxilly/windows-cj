@@ -1,0 +1,19 @@
+[package]
+  name = "windows_reactor"
+  version = "0.1.0"
+  description = "Headless reactive UI model for Windows projections in Cangjie"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "static"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_time = { path = "../windows_time" }
+  windows_common = { path = "../windows_common" }
+  windows_core = { path = "../windows_core" }
+  windows_interface = { path = "../windows_interface" }
+  windows_collections = { path = "../windows_collections" }
+  windows_reference = { path = "../windows_reference" }
+  windows_libloading = { path = "../windows_libloading" }
