@@ -1,21 +1,12 @@
 package windows_version
 
 import windows_common.Win32.System.SystemInformation as Win32SystemInformation
-import windows_common.Win32.System.Registry as Win32Registry
-import windows_strings.PSTR
+import windows_registry.*
+import windows_result.Result
 
 type OSVERSIONINFOEXW = Win32SystemInformation.OSVERSIONINFOEXW
-type HKEY = Win32Registry.HKEY
 
-let HKEY_LOCAL_MACHINE: HKEY = rawHKey(-2147483646)
-let RRF_RT_REG_DWORD: UInt32 = 16u32
 let VER_NT_WORKSTATION: UInt8 = 1u8
-
-private func rawHKey(value: Int64): HKEY {
-    var key = HKEY()
-    key.Value = unsafe { CPointer<Unit>(CPointer<UInt8>() + value) }
-    key
-}
 
 func readVersionInfo(): OSVERSIONINFOEXW {
     var info = OSVERSIONINFOEXW()
@@ -66,25 +57,13 @@ public func is_server(): Bool {
 }
 
 public func revision(): UInt32 {
-    let subKey = unsafe { LibC.mallocCString("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion") }
-    let valueName = unsafe { LibC.mallocCString("UBR") }
-    var value = 0u32
-    var length = UInt32(sizeOf<UInt32>())
-    try (subKeyResource = subKey.asResource()) {
-        try (valueNameResource = valueName.asResource()) {
-            let status = Win32Registry.RegGetValueA(
-                HKEY_LOCAL_MACHINE,
-                PSTR.fromRaw(subKeyResource.value.getChars()),
-                PSTR.fromRaw(valueNameResource.value.getChars()),
-                RRF_RT_REG_DWORD,
-                CPointer<UInt32>(),
-                CPointer<Unit>(CPointer<UInt32>(inout value)),
-                CPointer<UInt32>(inout length)
-            )
-            if (status == 0u32 && length == UInt32(sizeOf<UInt32>())) {
-                return value
+    match (LOCAL_MACHINE.open("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion")) {
+        case Result<Key>.Ok(key) =>
+            try {
+                key.getU32("UBR").unwrapOr(0u32)
+            } finally {
+                key.close()
             }
-        }
+        case Result<Key>.Err(_) => 0u32
     }
-    0u32
 }

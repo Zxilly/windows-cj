@@ -11,4 +11,5 @@
 
 [dependencies]
   windows_common = { path = "../windows_common" }
-  windows_strings = { path = "../windows_strings" }
+  windows_registry = { path = "../windows_registry" }
+  windows_result = { path = "../windows_result" }
