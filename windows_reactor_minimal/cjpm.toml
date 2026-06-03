@@ -1,0 +1,13 @@
+[package]
+  name = "windows_reactor_minimal"
+  version = "0.1.0"
+  description = "Single-binary runner that picks one minimal reactor example by command-line arg"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_reactor = { path = "../windows_reactor" }

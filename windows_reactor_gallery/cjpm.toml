@@ -1,0 +1,13 @@
+[package]
+  name = "windows_reactor_gallery"
+  version = "0.1.0"
+  description = "Runnable headless gallery for windows_reactor samples"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_reactor = { path = "../windows_reactor" }

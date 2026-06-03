@@ -1,0 +1,1391 @@
+[
+  {
+    "tag": "button",
+    "checks": [
+      {
+        "desc": "Click Basic Button 'Save' -> output text flips from Ready to Saved!",
+        "find": {
+          "name": "Save",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Saved!"
+        ]
+      },
+      {
+        "desc": "Click Accent 'Confirm' button -> output text flips to Confirmed!",
+        "find": {
+          "name": "Confirm",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Confirmed!"
+        ]
+      },
+      {
+        "desc": "Click Subtle 'Cancel' button -> output text flips to Cancelled.",
+        "find": {
+          "name": "Cancel",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Cancelled."
+        ]
+      },
+      {
+        "desc": "Click Text-link 'Learn more' button -> output text flips to Link clicked.",
+        "find": {
+          "name": "Learn more",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Link clicked."
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "check-box",
+    "checks": [
+      {
+        "desc": "Toggle 'I accept the terms and conditions' checkbox flips acceptance text to Accepted",
+        "find": {
+          "name": "I accept the terms and conditions",
+          "type": "CheckBox"
+        },
+        "action": "toggle",
+        "expect_present": [
+          "Accepted ✓"
+        ],
+        "expect_absent": [
+          "Not yet accepted"
+        ]
+      },
+      {
+        "desc": "Toggle 'SMS notifications' ON raises active channel count from 2 to 3 (initial email+push on)",
+        "find": {
+          "name": "SMS notifications",
+          "type": "CheckBox"
+        },
+        "action": "toggle",
+        "expect_present": [
+          "3 channel(s) active"
+        ],
+        "expect_absent": [
+          "2 channel(s) active"
+        ]
+      },
+      {
+        "desc": "Toggle 'Email notifications' OFF lowers active channel count from 3 to 2 (SMS now on, push on)",
+        "find": {
+          "name": "Email notifications",
+          "type": "CheckBox"
+        },
+        "action": "toggle",
+        "expect_present": [
+          "2 channel(s) active"
+        ],
+        "expect_absent": [
+          "3 channel(s) active"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "color-picker",
+    "checks": [
+      {
+        "desc": "Set the Full ColorPicker's Red channel Edit to 100; the RGBA state text should update from the initial value to reflect the new red channel (on_changed handler fires and reorders a,r,g,b -> r,g,b,a).",
+        "find": {
+          "name": "红色",
+          "type": "Edit",
+          "index": 0
+        },
+        "action": "setvalue",
+        "param": "100",
+        "expect_present": [
+          "RGBA(100,"
+        ],
+        "expect_absent": [
+          "RGBA(50, 120, 200, 255)"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "combo-box",
+    "checks": [
+      {
+        "desc": "Expand the Basic ComboBox dropdown; its color items become realized in the UIA tree (they are virtualized while collapsed). Selection has not changed yet, so the state text is still 'Selected: (none)'.",
+        "find": {
+          "type": "ComboBox",
+          "index": 0
+        },
+        "action": "expand",
+        "expect_present": [
+          "Blue",
+          "Yellow",
+          "Selected: (none)"
+        ],
+        "expect_absent": [
+          "Selected: Blue"
+        ]
+      },
+      {
+        "desc": "With the dropdown now open (from the previous check), select 'Blue'; on_selection_changed fires and the state text updates to 'Selected: Blue' while the initial '(none)' text disappears.",
+        "find": {
+          "name": "Blue",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selected: Blue"
+        ],
+        "expect_absent": [
+          "Selected: (none)"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "drop-down-button",
+    "checks": [],
+    "skip_reason": "The cj port faithfully reproduces both rs sample cards with equivalent observable behavior: Card 1 \"DropDownButton with Menu\" wires drop_down_button(\"File Actions\") with the same menu flyout (Open, Save, Separator, Exit) and the same onFlyoutItemClick -> setSelected handler, plus the \"Last action: ${selected}\" text_block; Card 2 \"Disabled DropDownButton\" renders the disabled button. The UIA dump confirms all of this renders: row 80 Button \"File Actions\", row 82 Text \"Last action: (none)\" (correct initial state), row 86 Button \"Disabled\" enabled=False. No parity divergences found. Not driveable for an observable text effect: the only state-changing interaction is invoking a menu-flyout item (Open/Save/Exit) which would flip \"Last action: (none)\" to e.g. \"Last action: Open\". Those flyout items only exist in the UIA tree AFTER the DropDownButton's flyout is expanded; they are absent from the current (closed-flyout) dump, so no item selector can be grounded. Expanding the DropDownButton via ExpandCollapsePattern alone produces no observable state-text change, so there is no groundable driveable check with an observable text effect."
+  },
+  {
+    "tag": "hyperlink-button",
+    "checks": [
+      {
+        "desc": "Invoke the 'Click me (no navigation)' HyperlinkButton; the click counter text should increment from 0 to 1.",
+        "find": {
+          "name": "Click me (no navigation)",
+          "type": "Hyperlink"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Clicked: 1 times"
+        ],
+        "expect_absent": [
+          "Clicked: 0 times"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "number-box",
+    "checks": [
+      {
+        "desc": "Basic NumberBox: set Quantity value to 7 then commit (Enter) fires on_value_changed and updates the bound state text 42->7",
+        "find": {
+          "type": "Edit",
+          "index": 1
+        },
+        "action": "setvalue",
+        "param": "7",
+        "expect_present": [
+          "Value: 7.000000"
+        ],
+        "expect_absent": [
+          "Value: 42.000000"
+        ]
+      },
+      {
+        "desc": "NumberBox with Range: set Rating value to 8 (within 1-10) then commit (Enter) fires on_value_changed and updates the clamped state text 5->8",
+        "find": {
+          "type": "Edit",
+          "index": 2
+        },
+        "action": "setvalue",
+        "param": "8",
+        "expect_present": [
+          "Clamped value: 8.000000"
+        ],
+        "expect_absent": [
+          "Clamped value: 5.000000"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "password-box",
+    "checks": [
+      {
+        "desc": "Type into the Basic PasswordBox (header 'Password'); the Length state text should update from 0 to the typed length.",
+        "find": {
+          "name": "Password",
+          "type": "Edit"
+        },
+        "action": "setvalue",
+        "param": "test",
+        "expect_present": [
+          "Length: 4 chars"
+        ],
+        "expect_absent": [
+          "Length: 0 chars"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "radio-button",
+    "checks": [
+      {
+        "desc": "Select Option B in the Basic RadioButtons group; state text updates from Option A to Option B",
+        "find": {
+          "name": "Option B",
+          "type": "RadioButton"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selected: Option B"
+        ],
+        "expect_absent": [
+          "Selected: Option A"
+        ]
+      },
+      {
+        "desc": "Select Option C in the Basic RadioButtons group; state text updates to Option C",
+        "find": {
+          "name": "Option C",
+          "type": "RadioButton"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selected: Option C"
+        ],
+        "expect_absent": [
+          "Selected: Option B"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "rating-control",
+    "checks": [],
+    "skip_reason": "not single-step UIA-driveable"
+  },
+  {
+    "tag": "repeat-button",
+    "checks": [
+      {
+        "desc": "Invoke the Basic RepeatButton 'Hold me' to increment count from 0 to 1",
+        "find": {
+          "name": "Hold me",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Count: 1"
+        ],
+        "expect_absent": [
+          "Count: 0"
+        ]
+      },
+      {
+        "desc": "Invoke the Fast Repeat 'Fast +1' button to increment fast count from 0 to 1",
+        "find": {
+          "name": "Fast +1",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Fast count: 1"
+        ],
+        "expect_absent": [
+          "Fast count: 0"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "slider",
+    "checks": [
+      {
+        "desc": "Basic Slider: drag Volume to 80 updates the state text to 'Volume: 80%'",
+        "find": {
+          "name": "Volume",
+          "type": "Slider"
+        },
+        "action": "setrange",
+        "param": "80",
+        "expect_present": [
+          "Volume: 80%"
+        ],
+        "expect_absent": [
+          "Volume: 35%"
+        ]
+      },
+      {
+        "desc": "Vertical Slider: drag Brightness to 80 updates the percentage label to '80%'",
+        "find": {
+          "name": "Brightness",
+          "type": "Slider"
+        },
+        "action": "setrange",
+        "param": "80",
+        "expect_present": [
+          "80%"
+        ],
+        "expect_absent": [
+          "60%"
+        ]
+      },
+      {
+        "desc": "Range with Value Label: drag Room temperature to 25 updates state text to 'Target: 25.0 °C'",
+        "find": {
+          "name": "Room temperature",
+          "type": "Slider"
+        },
+        "action": "setrange",
+        "param": "25",
+        "expect_present": [
+          "Target: 25.0 °C"
+        ],
+        "expect_absent": [
+          "Target: 21.0 °C"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "split-button",
+    "checks": [
+      {
+        "desc": "Invoke the primary action of the Basic SplitButton (\"Paste\") and confirm the click counter increments from 0 to 1.",
+        "find": {
+          "name": "Paste",
+          "type": "SplitButton"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Primary clicked: 1 times"
+        ],
+        "expect_absent": [
+          "Primary clicked: 0 times"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "text-box",
+    "checks": [
+      {
+        "desc": "Type into Basic TextBox (Name); character count updates to reflect length",
+        "find": {
+          "name": "Name",
+          "type": "Edit",
+          "index": 0
+        },
+        "action": "setvalue",
+        "param": "Hello",
+        "expect_present": [
+          "Characters: 5"
+        ],
+        "expect_absent": [
+          "Characters: 0"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "toggle-button",
+    "checks": [
+      {
+        "desc": "Toggle the Bold ToggleButton; state text flips Bold to ON",
+        "find": {
+          "name": "Bold",
+          "type": "Button"
+        },
+        "action": "toggle",
+        "expect_present": [
+          "Bold: ON, Italic: OFF"
+        ],
+        "expect_absent": [
+          "Bold: OFF, Italic: OFF"
+        ]
+      },
+      {
+        "desc": "Toggle the Italic ToggleButton; state text flips Italic to ON",
+        "find": {
+          "name": "Italic",
+          "type": "Button"
+        },
+        "action": "toggle",
+        "expect_present": [
+          "Bold: ON, Italic: ON"
+        ],
+        "expect_absent": [
+          "Bold: ON, Italic: OFF"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "toggle-switch",
+    "checks": [
+      {
+        "desc": "Basic Toggle: toggling the Wi-Fi ToggleSwitch (On) off flips the state text from connected to turned off",
+        "find": {
+          "name": "On",
+          "type": "Button"
+        },
+        "action": "toggle",
+        "expect_present": [
+          "Wi-Fi is turned off."
+        ],
+        "expect_absent": [
+          "Wi-Fi is connected."
+        ]
+      },
+      {
+        "desc": "Toggle with Header: toggling the Notifications ToggleSwitch (currently Muted) on flips the state text to priority alerts",
+        "find": {
+          "name": "Notifications Muted",
+          "type": "Button"
+        },
+        "action": "toggle",
+        "expect_present": [
+          "Priority alerts will appear on the desktop."
+        ],
+        "expect_absent": [
+          "Only badges and summaries will be shown."
+        ]
+      },
+      {
+        "desc": "Disabled State: toggling 'Enable scheduled updates' on changes the guidance text to the overnight-install message (overnight_updates defaults true)",
+        "find": {
+          "name": "Enable scheduled updates",
+          "type": "Button"
+        },
+        "action": "toggle",
+        "expect_present": [
+          "Updates will install automatically at 2:00 AM."
+        ],
+        "expect_absent": [
+          "Turn on scheduled updates to configure this option."
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "flip-view",
+    "checks": [],
+    "skip_reason": "The cj port faithfully reproduces the rs page: one sample card \"Interactive FlipView\" with a 4-item flip_view (\"Welcome\"/\"Features\"/\"Getting Started\"/\"Resources\"), each rendering the item name (bold, 24pt) plus \"Slide N of 4\", the on_selection_changed handler wired to update the selected state, and the observable \"Current slide: N\" text below. The UIA dump confirms all of this renders: row 87 \"FlipView\", row 88 description, row 89 \"Interactive FlipView\", row 92 \"Welcome\", row 93 \"Slide 1 of 4\", row 94 \"Current slide: 1\" (correct initial state, selected+1). No parity divergence found. Not UIA-driveable in this harness: the FlipView virtualizes its items so only the current slide is realized as a single ListItem (row 91) with an EMPTY name and selected=True; there is no named second/third item ListItem to target with selectitem, and no Next/Previous navigation buttons are exposed as named Buttons in the dump. There is no groundable element whose invoke/select/toggle would flip to another slide and change \"Current slide: N\", so no driveable check can be authored."
+  },
+  {
+    "tag": "grid-view",
+    "checks": [
+      {
+        "desc": "Select the first GridView item (ListItem index 34 = grid 'Item 1'; the 34 preceding ListItems are the nav-pane categories + Settings, since templated grid items carry no own Name). Expect the state label to change from 'No selection' to 'Selected: Item 1'.",
+        "find": {
+          "type": "ListItem",
+          "index": 34
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selected: Item 1"
+        ],
+        "expect_absent": [
+          "No selection"
+        ]
+      },
+      {
+        "desc": "Select the third GridView item (ListItem index 36 = grid 'Item 3') to confirm selection tracks the chosen item, not a fixed value. State carries over from the previous check (was 'Selected: Item 1').",
+        "find": {
+          "type": "ListItem",
+          "index": 36
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selected: Item 3"
+        ],
+        "expect_absent": [
+          "Selected: Item 1"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "list-box",
+    "checks": [
+      {
+        "desc": "Selecting 'Banana' in the Basic ListBox updates the state text to show the selected fruit",
+        "find": {
+          "name": "Banana",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selected: Banana"
+        ],
+        "expect_absent": [
+          "Selected: (none)"
+        ]
+      },
+      {
+        "desc": "Selecting 'Apple' (first item) updates the state text",
+        "find": {
+          "name": "Apple",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selected: Apple"
+        ],
+        "expect_absent": [
+          "Selected: (none)"
+        ]
+      },
+      {
+        "desc": "Selecting 'Elderberry' (last item) updates the state text",
+        "find": {
+          "name": "Elderberry",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selected: Elderberry"
+        ],
+        "expect_absent": [
+          "Selected: (none)"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "list-view",
+    "checks": [
+      {
+        "desc": "Selection Display: selecting the 'Harper' contact updates the state text from Diego to Harper",
+        "find": {
+          "name": "Harper",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selected contact: Harper"
+        ],
+        "expect_absent": [
+          "Selected contact: Diego"
+        ]
+      },
+      {
+        "desc": "Selection Display: selecting the 'Noah' contact updates the state text to Noah",
+        "find": {
+          "name": "Noah",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selected contact: Noah"
+        ],
+        "expect_absent": [
+          "Selected contact: Diego"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "tree-view",
+    "checks": [
+      {
+        "desc": "Invoking a tree item fires on_item_invoked, updating the 'Last invoked' state text to that item's name",
+        "find": {
+          "name": "Work",
+          "type": "TreeItem"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Last invoked: Work"
+        ],
+        "expect_absent": [
+          "Last invoked: (none)"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "calendar-date-picker",
+    "checks": [],
+    "skip_reason": "The cj port faithfully reproduces the rs reference: same initial state \"No date selected\", both sample cards (\"Basic CalendarDatePicker\" with header \"Appointment Date\"/placeholder \"Select a date\"/today-highlighted and the on_changed handler producing \"Selected: {date}\" or \"Selection cleared\"; \"Disabled CalendarDatePicker\" with header \"Locked Date\"/placeholder \"Cannot change\"/enabled(false)). UIA dump confirms all of it: row 98 Button \"Appointment Date\" (value \"Select a date\"), row 101 Text \"No date selected\", row 105 Button \"Locked Date\" (value \"Cannot change\", enabled=False). No parity divergences. Not driveable: the only observable text effect (\"Selected: {date}\" / \"Selection cleared\") is gated on .on_changed, which fires only when a calendar day cell is picked from the dropdown flyout. The CalendarDatePicker surfaces as a Button with ExpandCollapsePattern; the harness can expand the flyout but has no day-cell selection primitive, and merely expanding produces no state-text change. There is no invoke/toggle/setvalue/selectitem path that flips \"No date selected\" to another state, so no functional check can be authored."
+  },
+  {
+    "tag": "calendar-view",
+    "checks": [
+      {
+        "desc": "Select a date in the Basic CalendarView; the on_changed handler should increment the selection counter from 0 to 1.",
+        "find": {
+          "name": "15",
+          "type": "DataItem",
+          "index": 0
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selection changed 1 time(s)"
+        ],
+        "expect_absent": [
+          "Selection changed 0 time(s)"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "date-picker",
+    "checks": [],
+    "skip_reason": "The cj page faithfully reproduces both rs sample cards with equivalent observable behavior. Card 1 \"Full DatePicker\": date_picker().header(\"Select date\").on_changed(...) plus text_block showing initial \"No date selected\" — confirmed in UIA (row 98/99 \"Select date\" group/text, row 100 Button \"Select date  日期选取器\", row 101 Text \"No date selected\"). Card 2 \"Month and Year Only\": date_picker().header(\"Month/Year\").day_visible(false), no state text — confirmed in UIA (rows 105-107). No parity divergences found. Not driveable: the only observable state effect (selectedDate flipping from \"No date selected\" to \"Selected: {date}\") requires picking a date in the DatePicker. The DatePicker surfaces as a ControlType.Button (row 100) that exposes no InvokePattern/ValuePattern/TogglePattern at that level — invoking it would open a spinner-loop flyout that is not reachable via any of the harness's driveable patterns (invoke/toggle/setrange/setvalue/selectitem/expand/collapse). There is no UIA-driveable way to set the date and trigger on_changed, so no functional check can be authored."
+  },
+  {
+    "tag": "time-picker",
+    "checks": [],
+    "skip_reason": "The only observable text effect on this page is the \"No time selected\" -> \"Selected: HH:MM\" transition driven by the TimePicker's on_changed handler. The TimePicker surfaces in UIA as a single ControlType.Button (dump index 100, name \"Select time  时间选取器\") with no ValuePattern/RangeValuePattern/SelectionItemPattern on the picker itself; the only way to fire on_changed is to open its flyout and pick hour/minute via the spinner loops. None of the harness's driveable actions (invoke/toggle/setrange/setvalue/selectitem/expand/collapse) can manipulate the TimePicker flyout spinners to commit a time — invoke would merely open the flyout without selecting a value, so the handler never fires and the text never changes. The second card (\"15-Minute Increments\", dump index 107) has no handler and no state text. Hence there is no UIA-driveable interaction with an observable text effect."
+  },
+  {
+    "tag": "typography",
+    "checks": [],
+    "skip_reason": "Typography is a static Design Guidance page: a type ramp of 7 non-interactive text_block elements (Caption 12pt, Body 14pt, Body Strong 14pt, Subtitle 20pt, Title 28pt, Title Large 40pt, Display 68pt). There are no buttons, sliders, toggles, or any controls exposing a UIA pattern, and no event handlers or state-dependent text in either the rs reference or the cj port. The cj port reproduces all 7 type samples with identical names, font sizes, and bold flags, and the UIA dump confirms all seven \"Name — Npt\" text rows (111-117) plus the header (109) and description (110) render verbatim. Nothing to drive; full parity."
+  },
+  {
+    "tag": "color",
+    "checks": [],
+    "skip_reason": "Pure static design-guidance page. The rs reference defines 8 color swatch cards (Accent, Accent Light 1/2, Accent Dark 1/2, Success, Caution, Critical) each showing a bold name and a #RRGGBB hex code in a 4-column grid. There are no event handlers, no interactive controls, and no state-dependent text — nothing UIA-driveable. The cj port reproduces all 8 swatches with identical RGB values, identical hex formatting, and the same grid layout; the UIA dump (rows 109-126) confirms every name/hex pair renders correctly (e.g. Accent/#0078D4, Success/#0F7B0F, Critical/#C42B1C). Fully behaviorally equivalent, no divergences."
+  },
+  {
+    "tag": "spacing",
+    "checks": [],
+    "skip_reason": "Pure design-guidance page: a static list of 8 spacing tokens (XXSmall 2px through XXXLarge 48px), each rendered as a label text_block plus a colored border bar. No interactive controls, no event handlers (no on_click/on_changed/on_toggled/etc.), and no state-dependent text. The cj port reproduces all 8 rows with identical names, sizes, title, and description; the UIA dump confirms all 8 label texts render verbatim (\"XXSmall (2px)\" ... \"XXXLarge (48px)\") matching the rs source. Nothing UIA-driveable with an observable text effect."
+  },
+  {
+    "tag": "iconography",
+    "checks": [],
+    "skip_reason": "Purely visual design-guidance page: a 4-column grid of 16 icon catalog cards (Home, Setting, Find, Mail, Camera, Edit, Favorite, Flag, World, Help, More, People, Add, Delete, Save, Back), each a decorative icon Button plus a static caption text_block of the icon name. The cj port reproduces all 16 cards in identical order with identical structure (border + vstack(Button.icon(glyph), text_block(name)), 4-column grid, 4 rows). The UIA dump (rows 111-158) confirms all 16 Buttons and their name Texts render. There are NO event handlers (no on_click/on_changed/etc.) and NO state-dependent text in either rs or cj, so the icon Buttons produce no observable text change when invoked — nothing UIA-driveable. No parity divergences found."
+  },
+  {
+    "tag": "geometry",
+    "checks": [],
+    "skip_reason": "Pure design-guidance page. All four sample cards (Corner Radius Resources, ControlCornerRadius 4px, OverlayCornerRadius 8px, Comparing Radii) are static visual content: corner-radius swatches, bordered tag boxes, a dialog mockup, and descriptive text labels. The rs reference has no event handlers (.on_click/.on_changed/etc.) and no state-dependent text_block — nothing flips on interaction. The cj port reproduces all four cards with matching titles, intro texts, radius rows (Control — 4px, Overlay — 8px) with identical recommendations, the three bordered tags (Button/Input/Tag), the dialog mockup (Dialog Title + description), and the two comparison swatches; the UIA dump confirms every text renders. The only Buttons on the page are the shell's per-card \"Source code\" buttons (common chrome, no page-specific observable text effect). The Shape::rectangle vs bordered-box swatch is a documented behaviorally-equivalent paradigm difference. No UIA-driveable interaction with an observable text effect exists."
+  },
+  {
+    "tag": "theme",
+    "checks": [],
+    "skip_reason": "Pure design-guidance page. All 4 rs sample cards (\"Theme Token Reference\", \"Text Theme Tokens\", \"System Status Colors\", \"Stroke Tokens\") are faithfully reproduced in cj with equivalent static content, and the UIA dump confirms every token/text/status/stroke label renders (rows 111-144). There are no event handlers (no on_click/on_changed/on_toggled/etc.), no state-dependent text_blocks, and no UIA-driveable interactive controls — only static color swatches, theme-foreground text, status chips, and stroke swatches. The only Buttons present (rows 123/131/138/145 \"Source code\") are shell sample-card chrome, not page-specific interactions. No driveable observable text effect exists, so no functional spec is authored. No behavioral divergences found."
+  },
+  {
+    "tag": "materials",
+    "checks": [
+      {
+        "desc": "Select 'Mica Alt' in the backdrop list; description text switches to the Mica Alt blurb",
+        "find": {
+          "name": "Mica Alt",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Mica Alt uses a stronger tint - ideal for tab-based UIs and title bar regions."
+        ],
+        "expect_absent": [
+          "Mica samples the desktop wallpaper and applies a subtle tint. Default for app windows."
+        ]
+      },
+      {
+        "desc": "Select 'Acrylic' in the backdrop list; description text switches to the Acrylic blurb",
+        "find": {
+          "name": "Acrylic",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Acrylic provides translucent blur with noise. Falls back to solid when inactive."
+        ],
+        "expect_absent": [
+          "Mica samples the desktop wallpaper and applies a subtle tint. Default for app windows."
+        ]
+      },
+      {
+        "desc": "Select 'None (solid)' in the backdrop list; description text switches to the no-backdrop blurb",
+        "find": {
+          "name": "None (solid)",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "No system backdrop - solid color background."
+        ],
+        "expect_absent": [
+          "Mica samples the desktop wallpaper and applies a subtle tint. Default for app windows."
+        ]
+      },
+      {
+        "desc": "Re-select 'Mica' in the backdrop list; description text returns to the Mica blurb",
+        "find": {
+          "name": "Mica",
+          "type": "ListItem",
+          "index": 0
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Mica samples the desktop wallpaper and applies a subtle tint. Default for app windows."
+        ],
+        "expect_absent": [
+          "No system backdrop - solid color background."
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "command-bar-flyout",
+    "checks": [],
+    "skip_reason": "The page has two sample cards, both fully reproduced by the cj port with equivalent observable behavior: Card 1 \"Basic CommandBarFlyout\" (button \"Show Commands\" with primary commands Cut/Copy/Paste) and Card 2 \"CommandBarFlyout with Secondary Commands\" (button \"More Options\" with primary Share + secondary Select All/separator/Print). Both wire onCommandBarFlyoutClick(label) -> setLastAction, and the shared state text \"Last action: (none)\" renders correctly (UIA row 124). No parity divergences found. The page is NOT statically driveable for an observable text effect: the only observable state change (\"Last action: {label}\") requires (a) invoking the \"Show Commands\"/\"More Options\" button to OPEN the CommandBarFlyout, then (b) invoking one of the flyout command items (Cut/Copy/Paste/Share/Select All/Print). Those command items live in a transient popup and are absent from the static UIA dump (rows 119-131 contain only the two trigger buttons and the state text, no flyout commands). Simply invoking the trigger button opens the flyout but does NOT by itself change any state text, so no single dump-grounded invoke action produces an observable expect_present/expect_absent flip. Hence driveable=false."
+  },
+  {
+    "tag": "content-dialog",
+    "checks": [],
+    "skip_reason": "The only observable state text is \"Last result: ...\" in the Basic Confirmation Dialog card. Updating it is a multi-step modal interaction: invoke \"Show Dialog\" opens a modal ContentDialog, then the user must invoke the dialog's \"Yes\"/\"No\" button, which fires on_closed and writes the result text. The ContentDialog is closed in the snapshot, so its Yes/No (Primary/Close) buttons are absent from the UIA dump — there is no element to ground a selector on, and a single invoke of \"Show Dialog\" merely opens the modal without changing any page-content text. The harness supports only single snapshot-grounded actions, not the open-modal-then-click-inner-button chain. The Three-Button Dialog card's on_closed only closes the dialog and produces no observable text. Parity is intact: the cj port reproduces both sample cards, both trigger buttons, both ContentDialogs (identical titles/content/button texts), the on_closed result-text mapping with identical strings (\"Primary (Yes)\"/\"Secondary\"/\"Closed (No)\"), and the initial \"Last result: (none)\"; the dump confirms both buttons and the initial state text render. The ContentDialogClosed event is fully wired in event_dialog.cj (reads ContentDialogResult, dispatches invokeI32), not a no-op. No driveable single-action observable effect."
+  },
+  {
+    "tag": "flyout",
+    "checks": [
+      {
+        "desc": "Confirmation Flyout card: invoke the icon+text Delete item button (its own UIA Name is empty because the icon+text content is a composed StackPanel, so it is grounded via its visible 'Delete item' label child); invoking fires on_click -> setDeleted(true), flipping the state text from 'No action taken' to 'Item deleted!'. The attached Flyout also opens in a separate popup window but does not affect this main-window state-text assertion.",
+        "find": {
+          "name_contains": "Delete item",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Item deleted!"
+        ],
+        "expect_absent": [
+          "No action taken"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "teaching-tip",
+    "checks": [],
+    "skip_reason": "The cj port faithfully reproduces both rs sample cards with equivalent observable behavior: Card 1 \"Basic TeachingTip\" (button \"Show Tip\" -> set_basic(true); teaching_tip \"Did you know?\" with subtitle, is_open binding, on_closed -> set_basic(false)) and Card 2 \"TeachingTip with Action\" (button \"Show Action Tip\" -> set_action(true); teaching_tip \"Take Action\" with action_button \"Got it!\", close_button \"Dismiss\", on_action_click -> count+1, on_closed -> set_action(false); state text \"Action clicked: N times\"). UIA dump confirms both cards render: \"Show Tip\" (122), \"Show Action Tip\" (128), and state text \"Action clicked: 0 times\" (131). No parity divergences found. The only counter-driven observable text (\"Action clicked: N times\") can only change by clicking the nested action button \"Got it!\", which lives INSIDE the TeachingTip flyout and only materializes after first invoking \"Show Action Tip\". That nested \"Got it!\" button is absent from the initial UIA dump and cannot be grounded as a harness selector, so the increment effect is not single-step driveable. Invoking \"Show Tip\"/\"Show Action Tip\" alone only opens a flyout (no state-text change). Hence no driveable check with an observable text effect can be grounded in the dump."
+  },
+  {
+    "tag": "menu-flyout",
+    "checks": [],
+    "skip_reason": "The cj page faithfully reproduces both rs sample cards: \"Basic MenuFlyout\" (DropDownButton \"Open Menu\" with Cut/Copy/Paste items, onFlyoutItemClick -> setAction, state text \"Last action: (none)\") and \"MenuFlyout with Separators\" (DropDownButton \"Format\" with Bold/Italic/Separator/Underline/Strikethrough, onFlyoutItemClick -> setAction, state text \"Last format: (none)\"). Both share one lastAction state (\"(none)\"). The UIA dump confirms all content renders: idx122 Button \"Open Menu\", idx124 Text \"Last action: (none)\", idx128 Button \"Format\", idx130 Text \"Last format: (none)\". No parity divergence. Not driveable from this dump: the observable text only changes when a MenuFlyout item (Cut/Copy/Bold/etc.) is clicked, but those items live in a transient popup that opens only after expanding the DropDownButton — they are NOT present as rows in the static UIA dump, so the harness (invoke/expand/collapse/selectitem grounded in dump rows) cannot reach them. Merely invoking/expanding the \"Open Menu\"/\"Format\" buttons changes no state text. No driveable interaction with an observable text effect is groundable here."
+  },
+  {
+    "tag": "border",
+    "checks": [],
+    "skip_reason": "The cj port reproduces all three sample cards from the rs reference with equivalent observable behavior: \"Dynamic Border\" (border + Slider \"Corner radius\" range 0-32 + ToggleSwitch \"Thick border\", both with onChanged handlers updating state), \"Basic Border\" (\"Content inside a border\"), and \"Colored Border\" (\"Styled border\"). The UIA dump confirms every element renders (rows 139-153: Dynamic Border / Adjustable border / Slider \"Corner radius\" / Button \"Thick border\"; Basic Border / Content inside a border; Colored Border / Styled border). However, the slider's radius state and the toggle's thick state only drive VISUAL border properties (cornerRadius and borderThickness) — there is no text_block whose content depends on either state value, in rs or cj. Therefore no UIA interaction on this page produces an observable text effect to assert, so the page is not text-driveable per the harness criteria. No parity divergences found."
+  },
+  {
+    "tag": "canvas",
+    "checks": [],
+    "skip_reason": "The single sample card (\"Draggable Position\") contains two Sliders (X position 0-250, Y position 0-160) whose on_changed handlers update x/y state. That state only drives the canvas_left/canvas_top (absolute position) of the \"Move me!\" border element — a purely VISUAL repositioning on the Canvas. There is no text_block whose content depends on x/y, so no observable UIA text changes after a setrange interaction. The slider values themselves and the moved border position are not surfaced as assertable Text. The cj port reproduces all controls (canvas 320x200, both children \"Fixed\"@(10,10) and \"Move me!\"@(x,y), both sliders with matching ranges/headers and wired onChanged setX/setY) with equivalent behavior — confirmed in the UIA dump (rows 140 \"Fixed\", 141 \"Move me!\", 142 Slider \"X position\", 144 Slider \"Y position\"). No driveable observable text effect; parity is clean."
+  },
+  {
+    "tag": "expander",
+    "checks": [
+      {
+        "desc": "Collapse the Controlled Expander; State text flips from expanded to collapsed",
+        "find": {
+          "name": "Click to expand/collapse",
+          "type": "Button"
+        },
+        "action": "collapse",
+        "expect_present": [
+          "State: collapsed"
+        ],
+        "expect_absent": [
+          "State: expanded"
+        ]
+      },
+      {
+        "desc": "Expand the Controlled Expander again; State text flips back to expanded",
+        "find": {
+          "name": "Click to expand/collapse",
+          "type": "Button"
+        },
+        "action": "expand",
+        "expect_present": [
+          "State: expanded"
+        ],
+        "expect_absent": [
+          "State: collapsed"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "grid",
+    "checks": [
+      {
+        "desc": "Toggle the 'Wide layout (3 columns)' ToggleSwitch ON; the switchable grid should swap from the 2x2 layout (Row/Col labels) to the 3-column layout (Col 1/2/3).",
+        "find": {
+          "name": "Wide layout (3 columns)",
+          "type": "Button"
+        },
+        "action": "toggle",
+        "expect_present": [
+          "Col 1",
+          "Col 2",
+          "Col 3"
+        ],
+        "expect_absent": [
+          "Row 0, Col 0",
+          "Row 0, Col 1",
+          "Row 1, Col 0",
+          "Row 1, Col 1"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "relative-panel",
+    "checks": [
+      {
+        "desc": "Toggle 'Show bottom corners' ToggleSwitch ON; the RelativePanel in the Switch Layouts card should swap its items to show the bottom-corner layout (Bottom Left / Bottom Right appear, Center remains).",
+        "find": {
+          "name": "Show bottom corners",
+          "type": "Button"
+        },
+        "action": "toggle",
+        "expect_present": [
+          "Bottom Left",
+          "Bottom Right"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "scroll-view",
+    "checks": [
+      {
+        "desc": "More items raises count 30 -> 40",
+        "find": {
+          "name": "More items",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "40 items",
+          "Scrollable item 40"
+        ],
+        "expect_absent": [
+          "30 items"
+        ]
+      },
+      {
+        "desc": "Fewer items lowers count 40 -> 30 (state carried from prior check)",
+        "find": {
+          "name": "Fewer items",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "30 items"
+        ],
+        "expect_absent": [
+          "40 items"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "split-view",
+    "checks": [
+      {
+        "desc": "Toggle the 'Pane open' ToggleSwitch off; the SplitView pane (and its 'Pane content') should collapse/hide.",
+        "find": {
+          "name": "Pane open",
+          "type": "Button"
+        },
+        "action": "toggle",
+        "expect_absent": [
+          "Pane content"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "stack-panel",
+    "checks": [
+      {
+        "desc": "Click 'Add' (icon+text Button, global Button index 3 after the 3 shell-chrome buttons) in Dynamic Items card: 3 items -> 4 items",
+        "find": {
+          "name": "",
+          "type": "Button",
+          "index": 3
+        },
+        "action": "invoke",
+        "expect_present": [
+          "4 items"
+        ],
+        "expect_absent": [
+          "3 items"
+        ]
+      },
+      {
+        "desc": "Click 'Remove' (icon+text Button, global Button index 4) in Dynamic Items card: state-aware after Add, 4 items -> 3 items",
+        "find": {
+          "name": "",
+          "type": "Button",
+          "index": 4
+        },
+        "action": "invoke",
+        "expect_present": [
+          "3 items"
+        ],
+        "expect_absent": [
+          "4 items"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "viewbox",
+    "checks": [
+      {
+        "desc": "Drag the Content size slider to 80; the px label updates from 120 px to 80 px",
+        "find": {
+          "name": "Content size",
+          "type": "Slider"
+        },
+        "action": "setrange",
+        "param": "80",
+        "expect_present": [
+          "80 px"
+        ],
+        "expect_absent": [
+          "120 px"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "image",
+    "checks": [
+      {
+        "desc": "Click 'UniformToFill' button updates state text to Current: UniformToFill",
+        "find": {
+          "name": "UniformToFill",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Current: UniformToFill"
+        ],
+        "expect_absent": [
+          "Current: Uniform\n"
+        ]
+      },
+      {
+        "desc": "Click 'Fill' button updates state text to Current: Fill",
+        "find": {
+          "name": "Fill",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Current: Fill"
+        ],
+        "expect_absent": [
+          "Current: UniformToFill"
+        ]
+      },
+      {
+        "desc": "Click 'None' button updates state text to Current: None",
+        "find": {
+          "name": "None",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Current: None"
+        ],
+        "expect_absent": [
+          "Current: Fill"
+        ]
+      },
+      {
+        "desc": "Click 'Uniform' button restores state text to Current: Uniform",
+        "find": {
+          "name": "Uniform",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Current: Uniform"
+        ],
+        "expect_absent": [
+          "Current: None"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "person-picture",
+    "checks": [
+      {
+        "desc": "Toggle the 'Use display names' ToggleSwitch off; helper text should flip from display-name wording to direct-initials wording.",
+        "find": {
+          "name": "Use display names",
+          "type": "Button"
+        },
+        "action": "toggle",
+        "expect_present": [
+          "Initials can also be provided directly."
+        ],
+        "expect_absent": [
+          "Initials are generated from the display names."
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "command-bar",
+    "checks": [],
+    "skip_reason": "The CommandBar's Add/Edit/Delete primary command buttons are not surfaced as discrete, named AutomationElement rows in the live UIA dump. The page content rows (147-160) only expose the card titles, the empty-type command-bar host rows (150, 155), the status Text 'Choose a command' (151), and Source code buttons. There is no 'Add'/'Edit'/'Delete' Button row to ground an invoke selector on, so the on_click -> 'Last command: {label}' text effect cannot be reliably driven through the harness. The parity audit confirms the cj port matches rs intent, so no failing spec is needed to expose a gap."
+  },
+  {
+    "tag": "menu-bar",
+    "checks": [],
+    "skip_reason": "The only observable behavior is the on_item_click handler that sets the status text to \"Last clicked: {label}\". That text fires when a LEAF menu item (New/Open/Save/Undo/Cut/Copy/Paste) is clicked, but those leaf items live in closed flyout submenus and do NOT appear in the static UIA dump — only the top-level MenuItems \"File\" (index 151) and \"Edit\" (index 152) render. The top-level items expand a submenu rather than firing the click handler, so invoking/expanding them produces no \"Last clicked:\" text. No element grounded in the dump can drive the observable text effect via the harness actions, so this page is not reliably driveable. Parity is intact (cj reproduces the same card, menu items, handler, and initial state text \"Last clicked: (none)\" shown at index 153)."
+  },
+  {
+    "tag": "selector-bar",
+    "checks": [
+      {
+        "desc": "Select 'Shared' item in the SelectorBar; state text should update to 'Selected: Shared'.",
+        "find": {
+          "name": "Shared",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selected: Shared"
+        ],
+        "expect_absent": [
+          "Selected: Recent"
+        ]
+      },
+      {
+        "desc": "Select 'Favorites' item in the SelectorBar; state text should update to 'Selected: Favorites'.",
+        "find": {
+          "name": "Favorites",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selected: Favorites"
+        ],
+        "expect_absent": [
+          "Selected: Recent"
+        ]
+      },
+      {
+        "desc": "Select 'Recent' item in the SelectorBar; state text should read 'Selected: Recent'.",
+        "find": {
+          "name": "Recent",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Selected: Recent"
+        ],
+        "expect_absent": [
+          "Selected: Shared"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "breadcrumb-bar",
+    "checks": [],
+    "skip_reason": "The cj port faithfully reproduces both rs sample cards with equivalent observable behavior: Card 1 \"Basic BreadcrumbBar\" (Home/Documents/Report, display-only) and Card 2 \"Interactive BreadcrumbBar\" (Root/Users/Settings/Profile with onItemClicked wired to setClicked.call(i), plus \"Clicked index: ${clicked}\" state text initialized to -1). UIA dump confirms both card titles (rows 159, 163) and the state text \"Clicked index: -1\" (row 165) render correctly. No parity divergences found. The interactive behavior (clicking a breadcrumb item flips \"Clicked index: -1\" to \"Clicked index: N\") is NOT UIA-driveable here: the BreadcrumbBar's individual items (Root/Users/Settings/Profile, Home/Documents/Report) are not exposed as discrete targetable AutomationElement rows in the dump — there are no Button/ListItem/Hyperlink rows for the breadcrumb segments to ground a find selector on. The only rendered page rows are the static card titles, the \"Clicked index: -1\" Text, and the \"Source code\" buttons (which open source, not a page-state effect). With no targetable breadcrumb-item element, the click-to-update interaction cannot be driven through the available invoke/selectitem patterns."
+  },
+  {
+    "tag": "navigation-view",
+    "checks": [
+      {
+        "desc": "Left-pane NavigationView: select Browse item shows Browse page content",
+        "find": {
+          "name": "Browse",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Browse page content"
+        ],
+        "expect_absent": [
+          "Home page content"
+        ]
+      },
+      {
+        "desc": "Left-pane NavigationView: select Settings item shows Settings page content",
+        "find": {
+          "name": "Settings",
+          "type": "ListItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Settings page content"
+        ],
+        "expect_absent": [
+          "Home page content"
+        ]
+      },
+      {
+        "desc": "Top-mode NavigationView: select Documents tab shows Documents area",
+        "find": {
+          "name": "Documents",
+          "type": "TabItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Documents area"
+        ],
+        "expect_absent": [
+          "Home area"
+        ]
+      },
+      {
+        "desc": "Top-mode NavigationView: select Downloads tab shows Downloads area",
+        "find": {
+          "name": "Downloads",
+          "type": "TabItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Downloads area"
+        ],
+        "expect_absent": [
+          "Home area"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "pivot",
+    "checks": [
+      {
+        "desc": "Select the 'Details' tab in the selection-tracking Pivot; the active-index state text must update from 0 to 1.",
+        "find": {
+          "name": "Detail content",
+          "type": "TabItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Active tab index: 1"
+        ],
+        "expect_absent": [
+          "Active tab index: 0"
+        ]
+      },
+      {
+        "desc": "Select the 'History' tab in the selection-tracking Pivot; the active-index state text must update to 2.",
+        "find": {
+          "name": "History content",
+          "type": "TabItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Active tab index: 2"
+        ],
+        "expect_absent": [
+          "Active tab index: 0"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "tab-view",
+    "checks": [
+      {
+        "desc": "Add Tab button increases dynamic tab count: a new 'Tab 4' / 'Content of Tab 4' tab appears (count 3 -> 4)",
+        "find": {
+          "name": "Add Tab",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Tab 4",
+          "Content of Tab 4"
+        ]
+      },
+      {
+        "desc": "Remove Tab button drops the last (newest) dynamic tab: count 4 -> 3, so 'Content of Tab 4' disappears while 'Content of Tab 3' remains (mirrors rs (1..=count) semantics)",
+        "find": {
+          "name": "Remove Tab",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Content of Tab 3"
+        ],
+        "expect_absent": [
+          "Content of Tab 4"
+        ]
+      },
+      {
+        "desc": "Selecting the Document tab in Basic TabView surfaces Document content (TabItem accessible name is the content string)",
+        "find": {
+          "name": "Document content",
+          "type": "TabItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Document content"
+        ]
+      },
+      {
+        "desc": "Selecting the Settings tab in Basic TabView surfaces Settings content",
+        "find": {
+          "name": "Settings content",
+          "type": "TabItem"
+        },
+        "action": "selectitem",
+        "expect_present": [
+          "Settings content"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "title-bar",
+    "checks": [],
+    "skip_reason": "This page has exactly one sample card (\"Basic TitleBar\") whose only content is a static informational text_block. There are no event handlers (no on_click/on_changed/on_toggled/etc.) and no state-dependent text in either the rs reference or the cj port. The only interactive element rendered is the shared \"Source code\" button (common chrome to every card, not a page-specific behavior). The UIA dump (rows 157-162) confirms only static Text rows plus the Source code button. There is no UIA-driveable interaction that produces an observable text-state change, so the page is not driveable."
+  },
+  {
+    "tag": "info-badge",
+    "checks": [
+      {
+        "desc": "Click 'Add notification' increments the counter from 3 to 4, updating the unread text and numeric badge",
+        "find": {
+          "name": "Add notification",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "4 unread"
+        ],
+        "expect_absent": [
+          "3 unread"
+        ]
+      },
+      {
+        "desc": "Click 'Clear' resets the counter to 0, updating the unread text and numeric badge",
+        "find": {
+          "name": "Clear",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "0 unread"
+        ],
+        "expect_absent": [
+          "3 unread"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "info-bar",
+    "checks": [],
+    "skip_reason": "The only interactive control is the \"Show InfoBar\" ToggleSwitch (UIA row 170, a Button with TogglePattern) which drives is_open of Card 1's InfoBar. Its observable text effect cannot be reliably asserted via page-wide text substrings: Card 1's InfoBar (\"Update available\" / \"A new version is ready to install.\") is textually identical to the always-open Card 2 informational InfoBar (UIA rows 182/183). Toggling Card 1 off therefore does NOT make either substring disappear from the page (Card 2 retains them), and the initial state visible=true already shows them, so neither expect_present nor expect_absent uniquely tracks the toggle. No text uniquely keyed to Card 1's open/closed state exists, so no no-op-detecting text-flip check can be authored. The remaining cards (Informational InfoBar, Severity Variants) are static, non-interactive displays."
+  },
+  {
+    "tag": "progress-bar",
+    "checks": [
+      {
+        "desc": "Drag the Determinate ProgressBar's Slider to 80; the progress state text must update from 60% to 80%.",
+        "find": {
+          "type": "Slider",
+          "name": ""
+        },
+        "action": "setrange",
+        "param": "80",
+        "expect_present": [
+          "Progress: 80%"
+        ],
+        "expect_absent": [
+          "Progress: 60%"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "progress-ring",
+    "checks": [
+      {
+        "desc": "Drag the Determinate ProgressRing slider to 80; the percent text should update from 75% to 80%.",
+        "find": {
+          "type": "Slider"
+        },
+        "action": "setrange",
+        "param": "80",
+        "expect_present": [
+          "80%"
+        ],
+        "expect_absent": [
+          "75%"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "tool-tip",
+    "checks": [
+      {
+        "desc": "Click the 'Hover target' button; its on_click increments hover_count, so the card's 'Hover count: 0' text becomes 'Hover count: 1'.",
+        "find": {
+          "name": "Hover target",
+          "type": "Button"
+        },
+        "action": "invoke",
+        "expect_present": [
+          "Hover count: 1"
+        ],
+        "expect_absent": [
+          "Hover count: 0"
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "auto-suggest-box",
+    "checks": [
+      {
+        "desc": "Type a query into the AutoSuggestBox; the on_text_changed handler updates the state text block to echo the query",
+        "find": {
+          "name": "Search fruits...",
+          "type": "Edit"
+        },
+        "action": "setvalue",
+        "param": "Cherry",
+        "expect_present": [
+          "Query: \"Cherry\""
+        ],
+        "expect_absent": [
+          "Query: \"\""
+        ]
+      }
+    ]
+  },
+  {
+    "tag": "rich-edit-box",
+    "checks": [],
+    "skip_reason": "The WinUI RichEditBox inner edit exposes only TextPattern (rich text), not ValuePattern, so no single pattern-based harness action (setvalue/invoke/toggle/setrange/selectitem/expand/collapse) can insert text to fire on_changed; driving it would require raw keystroke injection, which is outside the harness's pattern-action model."
+  },
+  {
+    "tag": "rich-text-block",
+    "checks": [],
+    "skip_reason": "The cj port faithfully reproduces all 3 rs sample cards. \"Basic RichTextBlock\": a RichTextBlock bound to font_size state plus a Slider with .on_changed -> set_font_size.call(v); cj wires the identical .onChanged({ v => setFontSize.call(v) }). \"Structured Rich Text\" and \"Selectable Text\" are static blocks with no interaction. The only interactive control (the Font Size Slider, UIA row 179) drives RichTextBlock.font_size, which is a purely visual property: the rich-text content string is unchanged regardless of slider value, and there is no text_block whose content depends on font_size. The UIA dump confirms all cards render (row 178 basic text, row 184 structured paragraphs, row 188 selectable text) but exposes no state Text that reflects the slider value. Therefore there is no UIA-driveable interaction with an observable text effect; nothing to assert post-interaction. No parity divergences found."
+  },
+  {
+    "tag": "type-ramp",
+    "checks": [],
+    "skip_reason": "Pure typography/type-ramp page. All three rs sample cards (\"Type Ramp Factories\", \"Custom Font Size\", \"Composed Example — Article Card\") contain only static display text — no event handlers (.on_click/.on_changed/etc.), no state-dependent text_blocks, no interactive controls. The cj port reproduces every card, every named factory (typeTitle/typeSubtitle/typeBodyLarge/typeBodyStrong/typeBody/typeCaption with matching sizes+weights), the custom font-size strip (10/14/24/36px), and the article-card border verbatim. The UIA dump confirms all text renders (rows 177-200): card1 six type-ramp lines, card2 four custom-size lines, card3 five article lines, plus per-card \"Source code\" buttons. No driveable interaction produces an observable text-state change, so no functional checks are authored. No parity divergences."
+  }
+]
