@@ -16,23 +16,36 @@ func testCommonModeScansNativeSupportPackages() {
     @Expect(contains(config.supportPackageDirs, "windows_foundation"), true)
     @Expect(contains(config.supportPackageDirs, "windows_collections"), true)
     @Expect(contains(config.supportPackageDirs, "windows_future"), true)
-    @Expect(contains(config.supportPackageDirs, "windows_winui3"), true)
+    // The WinUI common namespaces are supplied from a static table rather than a
+    // scanned support package, so no WinUI runtime package is registered here.
+    @Expect(contains(config.supportPackageDirs, "windows_winui3"), false)
     @Expect(contains(config.supportPackageDirs, "windows-webview2"), false)
 }
 
 @Test
-func testCommonFeatureNamesIncludeWinui3SupportNamespaces() {
-    let dirs = ArrayList<String>()
-    dirs.add("windows_winui3")
-    let common = collectCommonFeatureNames(dirs)
+func testWinuiCommonFeatureNamesCoverHostNamespaces() {
+    let common = winuiCommonFeatureNames()
 
     @Expect(cliTestContainsString(common, "Microsoft.UI.Xaml"), false)
     @Expect(cliTestContainsString(common, "Microsoft.UI.Xaml.Application"), true)
     @Expect(cliTestContainsString(common, "Microsoft.UI.Xaml.Controls.ContentControl"), true)
     @Expect(cliTestContainsString(common, "Microsoft.UI.Xaml.Markup.IXamlReaderStatics"), true)
     @Expect(cliTestContainsString(common, "Microsoft.UI.Xaml.Markup.IXamlReaderStaticsVtbl"), false)
+    @Expect(cliTestContainsString(common, "Microsoft.UI.Windowing.AppWindow"), true)
+    @Expect(cliTestContainsString(common, "Windows.Foundation.EventRegistrationToken"), true)
     @Expect(cliTestContainsString(common, "Windows.Native"), false)
     @Expect(cliTestContainsString(common, "Windows.Native.AppRuntime"), false)
+}
+
+@Test
+func testCommonFeatureSelectionAddsWinuiNamespaces() {
+    let config = parseArgs(["--input-json", "metadata.json", "--common"])
+    ensureCommonFeatureSelection(config)
+
+    @Expect(contains(config.features, "Microsoft.UI.Xaml.Application"), true)
+    @Expect(contains(config.features, "Microsoft.UI.Xaml.Controls.ItemsControl"), true)
+    @Expect(contains(config.features, "Microsoft.UI.Xaml.Markup.XamlReader"), true)
+    @Expect(contains(config.features, "Microsoft.UI.Windowing.AppWindow"), true)
 }
 
 @Test
@@ -118,6 +131,111 @@ func testSelectSymbolsFiltersByMemberNameAndExpandsDependencies() {
     @Expect(cliTestContainsSymbol(selected, "Example.Services.ServiceApis"), true)
     @Expect(cliTestContainsSymbol(selected, "Example.Shared.FILETIME"), true)
     @Expect(cliTestContainsSymbol(selected, "Example.Other.Unrelated"), false)
+}
+
+@Test
+func testFilterRulesPruneApisMembersAndDependencies() {
+    let fields = ArrayList<FieldRecord>()
+    fields.add(FieldRecord("USED_CONSTANT", primitiveSignature("UInt32")))
+    fields.add(FieldRecord("UNUSED_CONSTANT", typeSignature("Example.Other", "UnusedFieldType")))
+    let usedParameters = ArrayList<SignatureRecord>()
+    usedParameters.add(typeSignature("Example.Shared", "FILETIME"))
+    let unusedParameters = ArrayList<SignatureRecord>()
+    unusedParameters.add(typeSignature("Example.Other", "UnusedType"))
+    let methods = ArrayList<MethodRecord>()
+    methods.add(MethodRecord("UsedApi", MethodSignatureRecord(voidSignature(), parameters: usedParameters, requiredParameterCount: 1)))
+    methods.add(MethodRecord("UnusedApi", MethodSignatureRecord(voidSignature(), parameters: unusedParameters, requiredParameterCount: 1)))
+    let apisType = TypeDefinitionRecord("Example.Services", "Apis", fields: fields, methods: methods)
+    let records = ArrayList<SymbolRecord>()
+    records.add(SymbolRecord(
+        "Example.Services.Apis",
+        "Example.Services",
+        "Apis",
+        "Example_Services_Apis",
+        typeDependencies(apisType, "Example.Services.Apis"),
+        typeDef: Some(apisType)
+    ))
+    records.add(SymbolRecord("Example.Shared.FILETIME", "Example.Shared", "FILETIME", "Example_Shared_FILETIME", []))
+    records.add(SymbolRecord("Example.Other.UnusedType", "Example.Other", "UnusedType", "Example_Other_UnusedType", []))
+    records.add(SymbolRecord("Example.Other.UnusedFieldType", "Example.Other", "UnusedFieldType", "Example_Other_UnusedFieldType", []))
+    let features = ArrayList<String>()
+    let filters = ArrayList<String>()
+    filters.add("UsedApi")
+    filters.add("USED_CONSTANT")
+
+    let selected = selectSymbolsFromFeatureAndFilterRules(features, filters, records)
+
+    @Expect(cliTestContainsSymbol(selected, "Example.Services.Apis"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Shared.FILETIME"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Other.UnusedType"), false)
+    @Expect(cliTestContainsSymbol(selected, "Example.Other.UnusedFieldType"), false)
+    var selectedApis: Option<SymbolRecord> = None
+    for (symbol in selected) {
+        if (symbol.fullName == "Example.Services.Apis") {
+            selectedApis = Some(symbol)
+        }
+    }
+    match (selectedApis) {
+        case Some(symbol) =>
+            match (symbol.typeDef) {
+                case Some(typeDef) =>
+                    @Expect(typeDef.fields.size, 1)
+                    @Expect(typeDef.fields[0].name, "USED_CONSTANT")
+                    @Expect(typeDef.methods.size, 1)
+                    @Expect(typeDef.methods[0].name, "UsedApi")
+                case None => @Expect(true, false)
+            }
+        case None => @Expect(true, false)
+    }
+}
+
+@Test
+func testFilterRulesPruneProjectedMembersAndDependencies() {
+    let usedParameters = ArrayList<SignatureRecord>()
+    usedParameters.add(typeSignature("Example.Shared", "UsedType"))
+    let unusedParameters = ArrayList<SignatureRecord>()
+    unusedParameters.add(typeSignature("Example.Other", "UnusedType"))
+    let methods = ArrayList<MethodRecord>()
+    methods.add(MethodRecord("UsedMethod", MethodSignatureRecord(voidSignature(), parameters: usedParameters, requiredParameterCount: 1)))
+    methods.add(MethodRecord("UnusedMethod", MethodSignatureRecord(voidSignature(), parameters: unusedParameters, requiredParameterCount: 1)))
+    let widgetType = TypeDefinitionRecord("Example.Services", "Widget", methods: methods)
+    let records = ArrayList<SymbolRecord>()
+    records.add(SymbolRecord(
+        "Example.Services.Widget",
+        "Example.Services",
+        "Widget",
+        "Example_Services_Widget",
+        typeDependencies(widgetType, "Example.Services.Widget"),
+        typeDef: Some(widgetType)
+    ))
+    records.add(SymbolRecord("Example.Shared.UsedType", "Example.Shared", "UsedType", "Example_Shared_UsedType", []))
+    records.add(SymbolRecord("Example.Other.UnusedType", "Example.Other", "UnusedType", "Example_Other_UnusedType", []))
+    let features = ArrayList<String>()
+    let filters = ArrayList<String>()
+    filters.add("Widget")
+    filters.add("UsedMethod")
+
+    let selected = selectSymbolsFromFeatureAndFilterRules(features, filters, records)
+
+    @Expect(cliTestContainsSymbol(selected, "Example.Services.Widget"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Shared.UsedType"), true)
+    @Expect(cliTestContainsSymbol(selected, "Example.Other.UnusedType"), false)
+    var selectedWidget: Option<SymbolRecord> = None
+    for (symbol in selected) {
+        if (symbol.fullName == "Example.Services.Widget") {
+            selectedWidget = Some(symbol)
+        }
+    }
+    match (selectedWidget) {
+        case Some(symbol) =>
+            match (symbol.typeDef) {
+                case Some(typeDef) =>
+                    @Expect(typeDef.methods.size, 1)
+                    @Expect(typeDef.methods[0].name, "UsedMethod")
+                case None => @Expect(true, false)
+            }
+        case None => @Expect(true, false)
+    }
 }
 
 @Test

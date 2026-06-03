@@ -501,7 +501,6 @@ func finalizeConfigDefaults(config: CliConfig): Unit {
         addUnique(config.supportPackageDirs, "windows_foundation")
         addUnique(config.supportPackageDirs, "windows_collections")
         addUnique(config.supportPackageDirs, "windows_future")
-        addUnique(config.supportPackageDirs, "windows_winui3")
     }
     if (config.features.isEmpty() && config.filters.isEmpty() && !config.common && !config.listFeatures && !config.help) {
         addUnique(config.features, "all")
@@ -786,10 +785,44 @@ func ensureCommonFeatureSelection(config: CliConfig): Unit {
         for (feature in collectCommonFeatureNames(config.supportPackageDirs)) {
             addUnique(config.features, feature)
         }
+        // The composed WinUI host now lives in the reactor framework rather than a
+        // dedicated runtime support package, so the WinUI common feature
+        // namespaces are supplied from a static table here instead of being
+        // scanned out of a support package's source imports.
+        for (feature in winuiCommonFeatureNames()) {
+            addUnique(config.features, feature)
+        }
         if (config.features.isEmpty()) {
             throw Exception("--common did not find support package imports; pass --feature or --support-package-dir")
         }
     }
+}
+
+// Static set of WinUI common feature namespaces contributed to `--common`
+// selection. These are the Microsoft.UI.* (plus the two cross-namespace helper
+// types) feature names the composed WinUI host depends on. Keeping them as an
+// explicit table decouples `--common` from any single support package's source
+// imports while preserving the exact selection the WinUI host requires.
+func winuiCommonFeatureNames(): Array<String> {
+    return [
+        "Microsoft.UI.Windowing.AppWindow",
+        "Microsoft.UI.Xaml.Application",
+        "Microsoft.UI.Xaml.Controls.ContentControl",
+        "Microsoft.UI.Xaml.Controls.ItemsControl",
+        "Microsoft.UI.Xaml.IApplicationFactory",
+        "Microsoft.UI.Xaml.IApplicationOverrides",
+        "Microsoft.UI.Xaml.IApplicationStatics",
+        "Microsoft.UI.Xaml.IFrameworkElement",
+        "Microsoft.UI.Xaml.IUIElement",
+        "Microsoft.UI.Xaml.IWindowFactory",
+        "Microsoft.UI.Xaml.Markup.IXamlReaderStatics",
+        "Microsoft.UI.Xaml.Markup.XamlReader",
+        "Microsoft.UI.Xaml.ResourceDictionary",
+        "Microsoft.UI.Xaml.UIElement",
+        "Microsoft.UI.Xaml.Window",
+        "Windows.Foundation.EventRegistrationToken",
+        "Windows.Win32.System.Com"
+    ]
 }
 
 func featureLinkOptions(config: CliConfig, records: ArrayList<SymbolRecord>): ArrayList<String> {
@@ -922,19 +955,25 @@ func selectSymbolsFromFeatureAndFilterRules(
     let selectedNames = ArrayList<String>()
     let selectedNameSet = HashSet<String>()
     let recordsByName = HashMap<String, SymbolRecord>()
+    let selectedRecordOverrides = HashMap<String, SymbolRecord>()
     for (record in records) {
         recordsByName.add(record.fullName, record)
     }
 
     for (record in records) {
-        let included = featureRulesIncludeRecord(features, record) || selectionRulesIncludeRecord(filters, record)
+        let includedByFeature = featureRulesIncludeRecord(features, record)
+        let includedByFilter = selectionRulesIncludeRecord(filters, record)
+        let included = includedByFeature || includedByFilter
         if (included && !selectionRulesExcludeRecord(filters, record)) {
             addSelectedSymbolName(selectedNames, selectedNameSet, record.fullName)
+            if (!includedByFeature && includedByFilter) {
+                selectedRecordOverrides.add(record.fullName, filterRecordMembers(record, filters))
+            }
         }
     }
 
-    expandSelectedSymbolDependencies(selectedNames, selectedNameSet, recordsByName, filters)
-    return selectedRecordsInOriginalOrder(records, selectedNameSet)
+    expandSelectedSymbolDependencies(selectedNames, selectedNameSet, recordsByName, filters, selectedRecordOverrides: selectedRecordOverrides)
+    return selectedRecordsInOriginalOrder(records, selectedNameSet, selectedRecordOverrides: selectedRecordOverrides)
 }
 
 func addSelectedSymbolName(
@@ -952,21 +991,23 @@ func expandSelectedSymbolDependencies(
     selectedNames: ArrayList<String>,
     selectedNameSet: HashSet<String>,
     recordsByName: HashMap<String, SymbolRecord>,
-    excludeRules: ArrayList<String>
+    excludeRules: ArrayList<String>,
+    selectedRecordOverrides!: HashMap<String, SymbolRecord> = HashMap<String, SymbolRecord>()
 ): Unit {
     var cursor: Int64 = 0
     while (cursor < Int64(selectedNames.size)) {
         let fullName = selectedNames[cursor]
-        if (recordsByName.contains(fullName)) {
-            let record = recordsByName.get(fullName).getOrThrow()
-            for (dependency in record.dependencies) {
-                if (!selectedNameSet.contains(dependency) && recordsByName.contains(dependency)) {
-                    let dependencyRecord = recordsByName.get(dependency).getOrThrow()
-                    if (!selectionRulesExcludeRecord(excludeRules, dependencyRecord)) {
-                        addSelectedSymbolName(selectedNames, selectedNameSet, dependency)
+        match (selectedRecordForName(fullName, recordsByName, selectedRecordOverrides)) {
+            case Some(record) =>
+                for (dependency in record.dependencies) {
+                    if (!selectedNameSet.contains(dependency) && recordsByName.contains(dependency)) {
+                        let dependencyRecord = recordsByName.get(dependency).getOrThrow()
+                        if (!selectionRulesExcludeRecord(excludeRules, dependencyRecord)) {
+                            addSelectedSymbolName(selectedNames, selectedNameSet, dependency)
+                        }
                     }
                 }
-            }
+            case None => ()
         }
         cursor += 1
     }
@@ -974,12 +1015,130 @@ func expandSelectedSymbolDependencies(
 
 func selectedRecordsInOriginalOrder(
     records: ArrayList<SymbolRecord>,
-    selectedNameSet: HashSet<String>
+    selectedNameSet: HashSet<String>,
+    selectedRecordOverrides!: HashMap<String, SymbolRecord> = HashMap<String, SymbolRecord>()
 ): ArrayList<SymbolRecord> {
     let selected = ArrayList<SymbolRecord>()
     for (record in records) {
         if (selectedNameSet.contains(record.fullName)) {
-            selected.add(record)
+            match (selectedRecordOverrides.get(record.fullName)) {
+                case Some(overrideRecord) => selected.add(overrideRecord)
+                case None => selected.add(record)
+            }
+        }
+    }
+    return selected
+}
+
+func selectedRecordForName(
+    fullName: String,
+    recordsByName: HashMap<String, SymbolRecord>,
+    selectedRecordOverrides: HashMap<String, SymbolRecord>
+): Option<SymbolRecord> {
+    match (selectedRecordOverrides.get(fullName)) {
+        case Some(record) => return Some(record)
+        case None => return recordsByName.get(fullName)
+    }
+}
+
+func filterRecordMembers(record: SymbolRecord, filters: ArrayList<String>): SymbolRecord {
+    match (record.typeDef) {
+        case Some(typeDef) =>
+            let fields = filterFieldsBySelectionRules(typeDef.fields, record.fullName, filters)
+            let methods = filterMethodsBySelectionRules(typeDef.methods, record.fullName, filters)
+            let properties = filterPropertiesBySelectionRules(typeDef.properties, record.fullName, filters)
+            let events = filterEventsBySelectionRules(typeDef.events, record.fullName, filters)
+            let matchedMembers = fields.size + methods.size + properties.size + events.size
+            if (matchedMembers == 0) {
+                return record
+            }
+            let prunedTypeDef = TypeDefinitionRecord(
+                typeDef.namespace,
+                typeDef.name,
+                metadataToken: typeDef.metadataToken,
+                baseType: typeDef.baseType,
+                hasBaseType: typeDef.hasBaseType,
+                isNested: typeDef.isNested,
+                attributes: typeDef.attributes,
+                customAttributes: typeDef.customAttributes,
+                fields: fields,
+                interfaceImplementations: typeDef.interfaceImplementations,
+                layout: typeDef.layout,
+                methods: methods,
+                nestedTypes: typeDef.nestedTypes,
+                genericParameters: typeDef.genericParameters,
+                events: events,
+                properties: properties,
+                supportedArchitectures: typeDef.supportedArchitectures,
+                supportedOsPlatform: typeDef.supportedOsPlatform,
+                isExperimental: typeDef.isExperimental,
+                sourceSet: typeDef.sourceSet
+            )
+            return SymbolRecord(
+                record.fullName,
+                record.namespace,
+                record.name,
+                record.implName,
+                typeDependencies(prunedTypeDef, record.fullName),
+                implSource: record.implSource,
+                metadataToken: record.metadataToken,
+                typeDef: Some(prunedTypeDef)
+            )
+        case None => return record
+    }
+}
+
+func filterFieldsBySelectionRules(
+    fields: ArrayList<FieldRecord>,
+    containerFullName: String,
+    filters: ArrayList<String>
+): ArrayList<FieldRecord> {
+    let selected = ArrayList<FieldRecord>()
+    for (field in fields) {
+        if (selectionRulesIncludeMember(filters, containerFullName, field.name)) {
+            selected.add(field)
+        }
+    }
+    return selected
+}
+
+func filterMethodsBySelectionRules(
+    methods: ArrayList<MethodRecord>,
+    containerFullName: String,
+    filters: ArrayList<String>
+): ArrayList<MethodRecord> {
+    let selected = ArrayList<MethodRecord>()
+    for (method in methods) {
+        if (selectionRulesIncludeMember(filters, containerFullName, method.name)) {
+            selected.add(method)
+        }
+    }
+    return selected
+}
+
+func filterPropertiesBySelectionRules(
+    properties: ArrayList<PropertyRecord>,
+    containerFullName: String,
+    filters: ArrayList<String>
+): ArrayList<PropertyRecord> {
+    let selected = ArrayList<PropertyRecord>()
+    for (property in properties) {
+        if (selectionRulesIncludeMember(filters, containerFullName, property.name)) {
+            selected.add(property)
+        }
+    }
+    return selected
+}
+
+func filterEventsBySelectionRules(
+    events: ArrayList<EventRecord>,
+    containerFullName: String,
+    filters: ArrayList<String>
+): ArrayList<EventRecord> {
+    let selected = ArrayList<EventRecord>()
+    for (event in events) {
+        if (selectionRulesIncludeMember(filters, containerFullName, event.name)) {
+            selected.add(event)
         }
     }
     return selected
@@ -1023,6 +1182,25 @@ func selectionRulesExcludeRecord(rules: ArrayList<String>, record: SymbolRecord)
         }
     }
     return false
+}
+
+func selectionRulesIncludeMember(rules: ArrayList<String>, containerFullName: String, memberName: String): Bool {
+    var included = false
+    var excluded = false
+    for (rule in rules) {
+        if (selectionRuleMatchesMember(rule, containerFullName, memberName)) {
+            if (selectionRuleIsExclude(rule)) {
+                excluded = true
+            } else {
+                included = true
+            }
+        }
+    }
+    return included && !excluded
+}
+
+func selectionRuleMatchesMember(rule: String, containerFullName: String, memberName: String): Bool {
+    return selectionPatternMatchesMember(selectionRulePattern(rule), containerFullName, memberName)
 }
 
 func selectionRuleIsExclude(rule: String): Bool {
