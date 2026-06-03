@@ -1,0 +1,12 @@
+[package]
+  name = "windows_sample_ocr"
+  version = "0.1.0"
+  description = "ocr sample port"
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_sample_ocr_bindings = { path = "./bindings" }
+  windows_core = { path = "../../../windows_core" }
+  windows_strings = { path = "../../../windows_strings" }
