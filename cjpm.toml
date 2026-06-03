@@ -23,8 +23,8 @@ members = [
     "windows_services",
     "windows_common",
     "windows_reactor",
-    "windows_reactor_gallery",
-    "windows_reactor_minimal",
-    "windows_reactor_apps",
+    "samples/reactor/windows_reactor_gallery",
+    "samples/reactor/windows_reactor_minimal",
+    "samples/reactor/windows_reactor_apps",
     "windows_bindgen"
 ]

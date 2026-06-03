@@ -10,4 +10,4 @@
   compile-option = "-Woff unused"
 
 [dependencies]
-  windows_reactor = { path = "../windows_reactor" }
+  windows_reactor = { path = "../../../windows_reactor" }

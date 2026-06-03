@@ -18,7 +18,7 @@ import stage_windows_app_sdk
 
 
 ROOT = Path(__file__).resolve().parents[1]
-GALLERY = ROOT / "windows_reactor_gallery"
+GALLERY = ROOT / "samples" / "reactor" / "windows_reactor_gallery"
 TARGET = GALLERY / "target"
 BUILD_BIN = TARGET / "release" / "bin"
 DEFAULT_PUBLISH = TARGET / "gallery-self-contained"
