@@ -203,7 +203,7 @@ def build_steps(args: argparse.Namespace) -> list[Step]:
             ],
         ),
         Step(
-            "windows-runtime runner self-test",
+            "split projection runner self-test",
             [
                 sys.executable,
                 script("scripts/run_windows_runtime_tests.py"),

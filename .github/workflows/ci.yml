@@ -29,7 +29,7 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 90
     env:
-      cjHeapSize: 4gb
+      cjHeapSize: 32GB
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -52,7 +52,7 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 90
     env:
-      cjHeapSize: 4gb
+      cjHeapSize: 32GB
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -64,28 +64,6 @@ jobs:
           version: 1.1.0
           components: stdx
 
-      - name: Test core packages
+      - name: Test workspace packages
         shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Continue'
-          $PSNativeCommandUseErrorActionPreference = $false
-          $members = @(
-            "windows_result", "windows_strings", "windows_core",
-            "windows_libloading", "windows_targets", "windows_version",
-            "windows_registry", "windows_interface", "windows_implement",
-            "windows_polyfill", "windows_numerics", "windows_variant",
-            "windows_propvariant", "windows_safearray", "windows_threading",
-            "windows_services"
-          )
-          $failed = @()
-          foreach ($m in $members) {
-            Write-Host "::group::cjpm test -m $m"
-            cjpm test -m $m --no-progress --no-color
-            if ($LASTEXITCODE -ne 0) { $failed += $m }
-            Write-Host "::endgroup::"
-          }
-          if ($failed.Count -gt 0) {
-            Write-Error "测试失败的包: $($failed -join ', ')"
-            exit 1
-          }
-          Write-Host "全部 $($members.Count) 个核心包测试通过"
+        run: python scripts\run_windows_workspace_tests.py --timeout-seconds 900

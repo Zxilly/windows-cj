@@ -1527,14 +1527,10 @@ class CollectionThunkGateTests(unittest.TestCase):
             "func collectionNotImplValueOut<T>(result: CPointer<T>, value: T): Int32 where T <: CType { E_NOTIMPL.value }\n"
             "func collectionNotImplIndexBoolOut(index: CPointer<UInt32>, result: CPointer<Bool>): Int32 { E_NOTIMPL.value }\n"
             "func collectionNotImplSplitOut(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Int32 { E_NOTIMPL.value }\n"
-            "func collectionGenericOutThunk<T>() {\n"
-            "    windows_core.releaseFailedComOutSlot(result)\n"
-            "    let hr = windows_core.winrtStoreGenericOut<T>(result, value)\n"
-            "    if (HRESULT(hr).failed()) {\n"
-            "        releaseCollectionGenericOutRangeNoThrow<T>(CPointer<Unit>(result), 1u32)\n"
-            "    }\n"
+            "func collectionGenericOutThunk<T>(result: CPointer<CPointer<Unit>>, action: () -> Result<T>): Int32 {\n"
+            "    windows_core.foundationGenericOutThunk<T>(result, action)\n"
             "}\n"
-            "func collectionUnitThunk(action: () -> Result<Unit>): Int32 { S_OK.value }\n"
+            "func collectionUnitThunk(action: () -> Result<Unit>): Int32 { windows_core.foundationUnitThunk(action) }\n"
             "func collectionGenericOutRangeThunk<T>(itemsSize: UInt32, items: CPointer<Unit>, result: CPointer<UInt32>): Int32 {\n"
             "    if (result.isNull()) { return E_POINTER.value }\n"
             "    clearCollectionIndexOutSlot(result)\n"
@@ -1830,9 +1826,7 @@ class CollectionThunkGateTests(unittest.TestCase):
             self.write_runtime_source(
                 workspace,
                 self.guarded_scalar_output_thunks().replace(
-                    "    if (HRESULT(hr).failed()) {\n"
-                    "        releaseCollectionGenericOutRangeNoThrow<T>(CPointer<Unit>(result), 1u32)\n"
-                    "    }\n",
+                    "    windows_core.foundationGenericOutThunk<T>(result, action)\n",
                     "",
                     1,
                 ),
@@ -2490,8 +2484,11 @@ class CollectionThunkGateTests(unittest.TestCase):
             "    catch (error: windows_core.WindowsException) { cleanupFoundationHStringOutSlot(result); error.code().value }\n"
             "    catch (_: Exception) { cleanupFoundationHStringOutSlot(result); windows_core.E_FAIL.value }\n"
             "}\n"
+            "func winrtReleaseGenericOutRangeNoThrow<T>(buffer: CPointer<Unit>, length: UInt32): Unit {\n"
+            "    windows_core.winrtReleaseGenericOutRange<T>(buffer, length)\n"
+            "}\n"
             "func cleanupFoundationGenericOutSlot<T>(result: CPointer<CPointer<Unit>>): Unit {\n"
-            "    windows_core.winrtReleaseGenericOutRange<T>(CPointer<Unit>(result), 1u32)\n"
+            "    winrtReleaseGenericOutRangeNoThrow<T>(CPointer<Unit>(result), 1u32)\n"
             "}\n"
             "func foundationGenericOutThunk<T>(result: CPointer<CPointer<Unit>>, action: () -> Result<T>): Int32 {\n"
             "    try { match (action()) { case _ => S_OK.value } }\n"
@@ -13251,7 +13248,7 @@ class FinalizerCleanupGateTests(unittest.TestCase):
                     "    var closed: Bool = false\n"
                     "    ~init() {\n"
                     "        if (!closed) {\n"
-                    "            releaseVariantStorageNoThrow(storage, false)\n"
+                    "            releaseUnknownStorageNoThrow(storage, false)\n"
                     "            closed = true\n"
                     "        }\n"
                     "    }\n"
@@ -13265,7 +13262,7 @@ class FinalizerCleanupGateTests(unittest.TestCase):
                     setup.check_finalizers_do_not_block_on_locks(workspace)
 
             self.assertEqual(raised.exception.code, 1)
-            self.assertIn("releaseVariantStorageNoThrow(", stderr.getvalue())
+            self.assertIn("releaseUnknownStorageNoThrow(", stderr.getvalue())
 
     def test_rejects_cleanup_helper_after_brace_in_string_literal_in_finalizer(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -13280,7 +13277,7 @@ class FinalizerCleanupGateTests(unittest.TestCase):
                     "    ~init() {\n"
                     "        let marker = \"}\"\n"
                     "        if (!closed) {\n"
-                    "            releaseVariantStorageNoThrow(storage, false)\n"
+                    "            releaseUnknownStorageNoThrow(storage, false)\n"
                     "            closed = true\n"
                     "        }\n"
                     "    }\n"
@@ -13294,7 +13291,7 @@ class FinalizerCleanupGateTests(unittest.TestCase):
                     setup.check_finalizers_do_not_block_on_locks(workspace)
 
             self.assertEqual(raised.exception.code, 1)
-            self.assertIn("releaseVariantStorageNoThrow(", stderr.getvalue())
+            self.assertIn("releaseUnknownStorageNoThrow(", stderr.getvalue())
 
     def test_rejects_array_proxy_clear_in_finalizer(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:

@@ -10,6 +10,8 @@ members = [
     "windows_foundation",
     "windows_collections",
     "windows_future",
+    "windows_time",
+    "windows_reference",
     "windows_threading",
     "windows_version",
     "windows_numerics",
@@ -20,6 +22,9 @@ members = [
     "windows_registry",
     "windows_services",
     "windows_common",
-    "windows_winui3",
+    "windows_reactor",
+    "windows_reactor_gallery",
+    "windows_reactor_minimal",
+    "windows_reactor_apps",
     "windows_bindgen"
 ]
