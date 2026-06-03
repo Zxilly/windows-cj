@@ -65,6 +65,18 @@ func factoryCacheTestMissingThenLoadedFailure(
     RegFreeFactoryLoad<IUnknown>.Loaded(Result<IUnknown>.Err(WinError.fromHRESULT(E_POINTER)))
 }
 
+func factoryCacheTestClassNotRegisteredThenLoadedFailure(
+    _: String,
+    _: Array<UInt8>,
+    _: InterfaceDescriptor<IUnknown>
+): RegFreeFactoryLoad<IUnknown> {
+    let previous = factoryCacheTestRegFreeCalls.fetchAdd(1)
+    if (previous == 0) {
+        return RegFreeFactoryLoad<IUnknown>.Loaded(Result<IUnknown>.Err(WinError.fromHRESULT(REGDB_E_CLASSNOTREG)))
+    }
+    RegFreeFactoryLoad<IUnknown>.Loaded(Result<IUnknown>.Err(WinError.fromHRESULT(E_FAIL)))
+}
+
 @Test
 func testLoadFactoryByNameReturnsResultForMissingClass() {
     let result = loadFactoryByName("Windows.Cangjie.MissingActivationClass", IUnknown.descriptor())
@@ -138,6 +150,25 @@ func testRegFreeActivationPreservesLoadedCandidateFailure() {
         "Windows.Cangjie.MissingActivationClass",
         IUnknown.descriptor(),
         factoryCacheTestMissingThenLoadedFailure
+    )
+
+    match (result) {
+        case Result<IUnknown>.Ok(value) =>
+            value.close()
+            throw Exception("loadRegFreeActivationFactoryWithLoader unexpectedly succeeded")
+        case Result<IUnknown>.Err(error) =>
+            @Expect(error.code(), E_FAIL)
+    }
+    @Expect(factoryCacheTestRegFreeCalls.load(), 2)
+}
+
+@Test
+func testRegFreeActivationContinuesAfterClassNotRegisteredCandidate() {
+    resetFactoryCacheTestActivationHooks()
+    let result = loadRegFreeActivationFactoryWithLoader<IUnknown>(
+        "Windows.Cangjie.MissingActivationClass",
+        IUnknown.descriptor(),
+        factoryCacheTestClassNotRegisteredThenLoadedFailure
     )
 
     match (result) {

@@ -456,6 +456,37 @@ public open class IInspectable <: InterfaceWrapperBase & ComInterface & RuntimeN
         IID_IINSPECTABLE
     }
 
+    // WinRT parameterized-type (PIID) signature for Object / IInspectable. When
+    // IInspectable is used as a generic argument (e.g. IVector<IInspectable>,
+    // IIterable<IInspectable>, IObservableVector<IInspectable>), its contribution
+    // to the parameterized interface's signature — and therefore to the v5 GUID
+    // hashed from that signature — is the fixed token "cinterface(IInspectable)".
+    //
+    // A parametrized generic such as IVector<T> obtains the element token by
+    // calling T.signature() through a *static witness*. The element constraint on
+    // those generated generics is the core type-system RuntimeType (the one in the
+    // dependent core package), reached here only indirectly: this class declares
+    // it satisfies RuntimeName, and the core RuntimeType witness for IInspectable
+    // ends up routed through RuntimeName.signature()'s default body, which is
+    // `runtimeName()`. The class-body signature() override below binds the direct
+    // RuntimeName/RuntimeType witnesses, but it does NOT propagate to that
+    // extension-supplied core witness. Therefore the runtime *name* must also carry
+    // the token so the default `signature() = runtimeName()` yields it on every
+    // witness path. Without this, the core witness returns "" (the empty
+    // runtimeName default), the element token is dropped, the parametrized
+    // signature is truncated, and the wrong v5 PIID is hashed — making
+    // QueryInterface fail (E_NOINTERFACE) against real WinRT collections whose
+    // Object-parameterized vectors answer only the canonical IID. IInspectable /
+    // Object is an abstract WinRT root that is never activated as a concrete
+    // runtime class, so it has no other meaningful runtime-class name to report.
+    public static func signature(): String {
+        "cinterface(IInspectable)"
+    }
+
+    public static func runtimeName(): String {
+        "cinterface(IInspectable)"
+    }
+
     public static func descriptor(): InterfaceDescriptor<IInspectable> {
         InterfaceDescriptor<IInspectable>(
             "IInspectable",

@@ -301,7 +301,9 @@ func loadRegFreeActivationFactoryWithLoader<I>(
                     case Result<I>.Ok(value) =>
                         return Result<I>.Ok(value)
                     case Result<I>.Err(error) =>
-                        return Result<I>.Err(error)
+                        if (error.code().value != REGDB_E_CLASSNOTREG.value) {
+                            return Result<I>.Err(error)
+                        }
                 }
             case RegFreeFactoryLoad<I>.MissingCandidate =>
                 ()

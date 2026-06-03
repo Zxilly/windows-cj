@@ -4,21 +4,32 @@ import std.collection.*
 import std.sync.AtomicInt64
 import windows_core.{
     ComInterface,
+    E_FAIL,
+    E_NOINTERFACE,
+    E_NOTIMPL,
     E_POINTER,
     HString,
     HandleWinrtType,
     HRESULT,
     Result,
     RuntimeType,
+    S_OK,
     WinrtGenericType,
     WinError,
+    asImplFromRaw,
+    buildIInspectableVtbl,
     createComObjectFromSchemas,
+    winrtProjectGenericIn,
     winrtReleaseGenericOutRange,
     winrtStoreGenericOutAt
 }
-import windows_interface.{InterfaceDescriptor, InterfaceDescriptorSchema}
+import windows_interface.{GUID, IInspectableVtbl, InterfaceDescriptor, InterfaceDescriptorSchema, InterfaceMethodSchema, InterfaceParameterBridgeKind, InterfaceParameterSchema}
 
 let STOCK_E_BOUNDS = HRESULT(-2147483637i32)
+let IID_BINDABLE_ITERABLE = GUID(0x036D2C08, 0xDF29, 0x41AF, 0x8A, 0xA2, 0xD7, 0x74, 0xBE, 0x62, 0xBA, 0x6F)
+let IID_BINDABLE_ITERATOR = GUID(0x6A1D6C07, 0x076D, 0x49F2, 0x83, 0x14, 0xF5, 0x2C, 0x9C, 0x9A, 0x83, 0x31)
+let IID_BINDABLE_VECTOR = GUID(0x393DE7DE, 0x6FD0, 0x4C0D, 0xBB, 0x71, 0x47, 0x24, 0x4A, 0x11, 0x3E, 0x93)
+let IID_BINDABLE_VECTOR_VIEW = GUID(0x346DD6E7, 0x976E, 0x4BC3, 0x81, 0x5D, 0xEC, 0xE2, 0x43, 0xBC, 0x0F, 0x33)
 
 func stockBoundsError(): WinError {
     WinError(STOCK_E_BOUNDS)
@@ -92,6 +103,520 @@ func closeStockPairList<K, V>(items: ArrayList<(K, V)>): Unit {
     for ((key, value) in items) {
         closeStockValue<K>(key)
         closeStockValue<V>(value)
+    }
+}
+
+func bindableObjectOutParameter(name: String): InterfaceParameterSchema {
+    InterfaceParameterSchema(name, "CPointer<CPointer<Unit>>", "Object", InterfaceParameterBridgeKind.OutSlot)
+}
+
+func bindableObjectInParameter(name: String): InterfaceParameterSchema {
+    InterfaceParameterSchema(name, "CPointer<Unit>", "Object", InterfaceParameterBridgeKind.Value)
+}
+
+func bindableUInt32OutParameter(name: String): InterfaceParameterSchema {
+    InterfaceParameterSchema(name, "CPointer<UInt32>", "UInt32", InterfaceParameterBridgeKind.OutSlot)
+}
+
+func bindableBoolOutParameter(name: String): InterfaceParameterSchema {
+    InterfaceParameterSchema(name, "CPointer<Bool>", "Bool", InterfaceParameterBridgeKind.OutSlot)
+}
+
+func bindableIterableDescriptorSchema(): InterfaceDescriptorSchema {
+    InterfaceDescriptorSchema(
+        "IBindableIterable",
+        IID_BINDABLE_ITERABLE,
+        windows_interface.IInspectable.descriptorSchema(),
+        Array<String>(),
+        Array<GUID>(),
+        "IBindableIterableVtbl",
+        "IBindableIterable",
+        "IBindableIterable_Impl",
+        [
+            InterfaceMethodSchema("First", 6, [bindableObjectOutParameter("result")], "Int32")
+        ]
+    )
+}
+
+func bindableIteratorDescriptorSchema(): InterfaceDescriptorSchema {
+    InterfaceDescriptorSchema(
+        "IBindableIterator",
+        IID_BINDABLE_ITERATOR,
+        windows_interface.IInspectable.descriptorSchema(),
+        Array<String>(),
+        Array<GUID>(),
+        "IBindableIteratorVtbl",
+        "IBindableIterator",
+        "IBindableIterator_Impl",
+        [
+            InterfaceMethodSchema("Current", 6, [bindableObjectOutParameter("result")], "Int32"),
+            InterfaceMethodSchema("HasCurrent", 7, [bindableBoolOutParameter("result")], "Int32"),
+            InterfaceMethodSchema("MoveNext", 8, [bindableBoolOutParameter("result")], "Int32"),
+            InterfaceMethodSchema(
+                "GetMany",
+                9,
+                [
+                    InterfaceParameterSchema("itemsSize", "Int32", "Int32", InterfaceParameterBridgeKind.Value),
+                    InterfaceParameterSchema("items", "CPointer<Unit>", "CPointer<Unit>", InterfaceParameterBridgeKind.Value),
+                    bindableUInt32OutParameter("result")
+                ],
+                "Int32"
+            )
+        ]
+    )
+}
+
+func bindableVectorDescriptorSchema(): InterfaceDescriptorSchema {
+    InterfaceDescriptorSchema(
+        "IBindableVector",
+        IID_BINDABLE_VECTOR,
+        windows_interface.IInspectable.descriptorSchema(),
+        ["IBindableIterable"],
+        [IID_BINDABLE_ITERABLE],
+        "IBindableVectorVtbl",
+        "IBindableVector",
+        "IBindableVector_Impl",
+        [
+            InterfaceMethodSchema("GetAt", 6, [InterfaceParameterSchema("index", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), bindableObjectOutParameter("result")], "Int32"),
+            InterfaceMethodSchema("Size", 7, [bindableUInt32OutParameter("result")], "Int32"),
+            InterfaceMethodSchema("GetView", 8, [bindableObjectOutParameter("result")], "Int32"),
+            InterfaceMethodSchema("IndexOf", 9, [bindableObjectInParameter("value"), bindableUInt32OutParameter("index"), bindableBoolOutParameter("result")], "Int32"),
+            InterfaceMethodSchema("SetAt", 10, [InterfaceParameterSchema("index", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), bindableObjectInParameter("value")], "Int32"),
+            InterfaceMethodSchema("InsertAt", 11, [InterfaceParameterSchema("index", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), bindableObjectInParameter("value")], "Int32"),
+            InterfaceMethodSchema("RemoveAt", 12, [InterfaceParameterSchema("index", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value)], "Int32"),
+            InterfaceMethodSchema("Append", 13, [bindableObjectInParameter("value")], "Int32"),
+            InterfaceMethodSchema("RemoveAtEnd", 14, Array<InterfaceParameterSchema>(), "Int32"),
+            InterfaceMethodSchema("Clear", 15, Array<InterfaceParameterSchema>(), "Int32")
+        ]
+    )
+}
+
+func bindableVectorViewDescriptorSchema(): InterfaceDescriptorSchema {
+    InterfaceDescriptorSchema(
+        "IBindableVectorView",
+        IID_BINDABLE_VECTOR_VIEW,
+        windows_interface.IInspectable.descriptorSchema(),
+        ["IBindableIterable"],
+        [IID_BINDABLE_ITERABLE],
+        "IBindableVectorViewVtbl",
+        "IBindableVectorView",
+        "IBindableVectorView_Impl",
+        [
+            InterfaceMethodSchema("GetAt", 6, [InterfaceParameterSchema("index", "UInt32", "UInt32", InterfaceParameterBridgeKind.Value), bindableObjectOutParameter("result")], "Int32"),
+            InterfaceMethodSchema("Size", 7, [bindableUInt32OutParameter("result")], "Int32"),
+            InterfaceMethodSchema("IndexOf", 8, [bindableObjectInParameter("value"), bindableUInt32OutParameter("index"), bindableBoolOutParameter("result")], "Int32")
+        ]
+    )
+}
+
+func clearBindableObjectOutSlot(result: CPointer<CPointer<Unit>>): Unit {
+    if (result.isNotNull()) {
+        unsafe { result.write(CPointer<Unit>()) }
+    }
+}
+
+func clearBindableBoolOutSlot(result: CPointer<Bool>): Unit {
+    if (result.isNotNull()) {
+        unsafe { result.write(false) }
+    }
+}
+
+func clearBindableUInt32OutSlot(result: CPointer<UInt32>): Unit {
+    if (result.isNotNull()) {
+        unsafe { result.write(0u32) }
+    }
+}
+
+func bindableNoInterfaceObjectOut(result: CPointer<CPointer<Unit>>): Int32 {
+    clearBindableObjectOutSlot(result)
+    E_NOINTERFACE.value
+}
+
+func bindableNoInterfaceBoolOut(result: CPointer<Bool>): Int32 {
+    clearBindableBoolOutSlot(result)
+    E_NOINTERFACE.value
+}
+
+func bindableNoInterfaceUInt32Out(result: CPointer<UInt32>): Int32 {
+    clearBindableUInt32OutSlot(result)
+    E_NOINTERFACE.value
+}
+
+func bindableNoInterfaceIndexBoolOut(index: CPointer<UInt32>, result: CPointer<Bool>): Int32 {
+    clearBindableUInt32OutSlot(index)
+    clearBindableBoolOutSlot(result)
+    E_NOINTERFACE.value
+}
+
+func writeBindableInspectableOut(
+    result: CPointer<CPointer<Unit>>,
+    valueResult: Result<windows_interface.IInspectable>
+): Int32 {
+    if (result.isNull()) {
+        return E_POINTER.value
+    }
+    clearBindableObjectOutSlot(result)
+    try {
+        match (valueResult) {
+            case Result<windows_interface.IInspectable>.Ok(value) =>
+                let raw = value.intoAbi()
+                if (raw.isNull()) {
+                    return E_POINTER.value
+                }
+                unsafe { result.write(raw) }
+                S_OK.value
+            case Result<windows_interface.IInspectable>.Err(error) =>
+                error.code().value
+        }
+    } catch (_: Exception) {
+        E_FAIL.value
+    }
+}
+
+func writeBindableRawOut(result: CPointer<CPointer<Unit>>, valueResult: Result<CPointer<Unit>>): Int32 {
+    if (result.isNull()) {
+        return E_POINTER.value
+    }
+    clearBindableObjectOutSlot(result)
+    try {
+        match (valueResult) {
+            case Result<CPointer<Unit>>.Ok(raw) =>
+                if (raw.isNull()) {
+                    return E_POINTER.value
+                }
+                unsafe { result.write(raw) }
+                S_OK.value
+            case Result<CPointer<Unit>>.Err(error) =>
+                error.code().value
+        }
+    } catch (_: Exception) {
+        E_FAIL.value
+    }
+}
+
+func writeBindableBoolOut(result: CPointer<Bool>, valueResult: Result<Bool>): Int32 {
+    if (result.isNull()) {
+        return E_POINTER.value
+    }
+    clearBindableBoolOutSlot(result)
+    try {
+        match (valueResult) {
+            case Result<Bool>.Ok(value) =>
+                unsafe { result.write(value) }
+                S_OK.value
+            case Result<Bool>.Err(error) =>
+                error.code().value
+        }
+    } catch (_: Exception) {
+        E_FAIL.value
+    }
+}
+
+func writeBindableUInt32Out(result: CPointer<UInt32>, valueResult: Result<UInt32>): Int32 {
+    if (result.isNull()) {
+        return E_POINTER.value
+    }
+    clearBindableUInt32OutSlot(result)
+    try {
+        match (valueResult) {
+            case Result<UInt32>.Ok(value) =>
+                unsafe { result.write(value) }
+                S_OK.value
+            case Result<UInt32>.Err(error) =>
+                error.code().value
+        }
+    } catch (_: Exception) {
+        E_FAIL.value
+    }
+}
+
+func writeBindableUnitResult(valueResult: Result<Unit>): Int32 {
+    try {
+        match (valueResult) {
+            case Result<Unit>.Ok(_) => S_OK.value
+            case Result<Unit>.Err(error) => error.code().value
+        }
+    } catch (_: Exception) {
+        E_FAIL.value
+    }
+}
+
+func bindableInspectableFromRaw(raw: CPointer<Unit>): Result<windows_interface.IInspectable> {
+    if (raw.isNull()) {
+        return Result<windows_interface.IInspectable>.Err(WinError(E_POINTER))
+    }
+    Result<windows_interface.IInspectable>.Ok(windows_interface.IInspectable.viewOf(raw))
+}
+
+@C
+public struct IBindableIterableVtbl {
+    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var First: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ =>
+        bindableNoInterfaceObjectOut(result__)
+    }
+    public init() {}
+
+    public static func newForVector(): IBindableIterableVtbl {
+        var vtbl = IBindableIterableVtbl()
+        vtbl.base_ = buildIInspectableVtbl()
+        vtbl.First = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<StockInspectableVectorImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableRawOut(result__, impl.BindableFirst())
+                case None => bindableNoInterfaceObjectOut(result__)
+            }
+        }
+        vtbl
+    }
+
+    public static func newForVectorView(): IBindableIterableVtbl {
+        var vtbl = IBindableIterableVtbl()
+        vtbl.base_ = buildIInspectableVtbl()
+        vtbl.First = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<StockInspectableVectorViewImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableRawOut(result__, impl.BindableFirst())
+                case None => bindableNoInterfaceObjectOut(result__)
+            }
+        }
+        vtbl
+    }
+}
+
+@C
+public struct IBindableIteratorVtbl {
+    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var Current: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ =>
+        bindableNoInterfaceObjectOut(result__)
+    }
+    public var HasCurrent: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, result__ =>
+        bindableNoInterfaceBoolOut(result__)
+    }
+    public var MoveNext: CFunc<(CPointer<Unit>, CPointer<Bool>) -> Int32> = { _, result__ =>
+        bindableNoInterfaceBoolOut(result__)
+    }
+    public var GetMany: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, _, _, result__ =>
+        bindableNoInterfaceUInt32Out(result__)
+    }
+    public init() {}
+
+    public static func new(): IBindableIteratorVtbl {
+        var vtbl = IBindableIteratorVtbl()
+        vtbl.base_ = buildIInspectableVtbl()
+        vtbl.Current = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<StockInspectableBindableIteratorImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableInspectableOut(result__, impl.Current())
+                case None => bindableNoInterfaceObjectOut(result__)
+            }
+        }
+        vtbl.HasCurrent = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<StockInspectableBindableIteratorImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableBoolOut(result__, impl.HasCurrent())
+                case None => bindableNoInterfaceBoolOut(result__)
+            }
+        }
+        vtbl.MoveNext = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<StockInspectableBindableIteratorImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableBoolOut(result__, impl.MoveNext())
+                case None => bindableNoInterfaceBoolOut(result__)
+            }
+        }
+        vtbl.GetMany = { instanceRaw, itemsSize, items, result__ =>
+            match (unsafe { asImplFromRaw<StockInspectableBindableIteratorImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableUInt32Out(result__, impl.GetMany(itemsSize, items))
+                case None => bindableNoInterfaceUInt32Out(result__)
+            }
+        }
+        vtbl
+    }
+}
+
+@C
+public struct IBindableVectorVtbl {
+    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ =>
+        bindableNoInterfaceObjectOut(result__)
+    }
+    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result__ =>
+        bindableNoInterfaceUInt32Out(result__)
+    }
+    public var GetView: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result__ =>
+        bindableNoInterfaceObjectOut(result__)
+    }
+    public var IndexOf: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32> = { _, _, index__, result__ =>
+        bindableNoInterfaceIndexBoolOut(index__, result__)
+    }
+    public var SetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var InsertAt: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = { _, _, _ => E_NOTIMPL.value }
+    public var RemoveAt: CFunc<(CPointer<Unit>, UInt32) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var Append: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _ => E_NOTIMPL.value }
+    public var RemoveAtEnd: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
+    public var Clear: CFunc<(CPointer<Unit>) -> Int32> = { _ => E_NOTIMPL.value }
+    public init() {}
+
+    public static func new(): IBindableVectorVtbl {
+        var vtbl = IBindableVectorVtbl()
+        vtbl.base_ = buildIInspectableVtbl()
+        vtbl.GetAt = { instanceRaw, index, result__ =>
+            match (unsafe { asImplFromRaw<StockInspectableVectorImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableInspectableOut(result__, impl.GetAt(index))
+                case None => bindableNoInterfaceObjectOut(result__)
+            }
+        }
+        vtbl.Size = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<StockInspectableVectorImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableUInt32Out(result__, impl.Size())
+                case None => bindableNoInterfaceUInt32Out(result__)
+            }
+        }
+        vtbl.GetView = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<StockInspectableVectorImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableRawOut(result__, impl.BindableGetView())
+                case None => bindableNoInterfaceObjectOut(result__)
+            }
+        }
+        vtbl.IndexOf = { instanceRaw, valueRaw, index__, result__ =>
+            if (index__.isNull() || result__.isNull()) {
+                clearBindableUInt32OutSlot(index__)
+                clearBindableBoolOutSlot(result__)
+                E_POINTER.value
+            } else if (valueRaw.isNull()) {
+                clearBindableUInt32OutSlot(index__)
+                clearBindableBoolOutSlot(result__)
+                S_OK.value
+            } else {
+                match (unsafe { asImplFromRaw<StockInspectableVectorImpl>(instanceRaw) }) {
+                    case Some(impl) =>
+                        match (bindableInspectableFromRaw(valueRaw)) {
+                            case Result<windows_interface.IInspectable>.Ok(value) =>
+                                writeBindableBoolOut(result__, impl.IndexOf(value, index__))
+                            case Result<windows_interface.IInspectable>.Err(error) =>
+                                error.code().value
+                        }
+                    case None => bindableNoInterfaceIndexBoolOut(index__, result__)
+                }
+            }
+        }
+        vtbl.SetAt = { instanceRaw, index, valueRaw =>
+            if (valueRaw.isNull()) {
+                E_POINTER.value
+            } else {
+                match (unsafe { asImplFromRaw<StockInspectableVectorImpl>(instanceRaw) }) {
+                    case Some(impl) =>
+                        match (bindableInspectableFromRaw(valueRaw)) {
+                            case Result<windows_interface.IInspectable>.Ok(value) =>
+                                writeBindableUnitResult(impl.SetAt(index, value))
+                            case Result<windows_interface.IInspectable>.Err(error) =>
+                                error.code().value
+                        }
+                    case None => E_NOINTERFACE.value
+                }
+            }
+        }
+        vtbl.InsertAt = { instanceRaw, index, valueRaw =>
+            if (valueRaw.isNull()) {
+                E_POINTER.value
+            } else {
+                match (unsafe { asImplFromRaw<StockInspectableVectorImpl>(instanceRaw) }) {
+                    case Some(impl) =>
+                        match (bindableInspectableFromRaw(valueRaw)) {
+                            case Result<windows_interface.IInspectable>.Ok(value) =>
+                                writeBindableUnitResult(impl.InsertAt(index, value))
+                            case Result<windows_interface.IInspectable>.Err(error) =>
+                                error.code().value
+                        }
+                    case None => E_NOINTERFACE.value
+                }
+            }
+        }
+        vtbl.RemoveAt = { instanceRaw, index =>
+            match (unsafe { asImplFromRaw<StockInspectableVectorImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableUnitResult(impl.RemoveAt(index))
+                case None => E_NOINTERFACE.value
+            }
+        }
+        vtbl.Append = { instanceRaw, valueRaw =>
+            if (valueRaw.isNull()) {
+                E_POINTER.value
+            } else {
+                match (unsafe { asImplFromRaw<StockInspectableVectorImpl>(instanceRaw) }) {
+                    case Some(impl) =>
+                        match (bindableInspectableFromRaw(valueRaw)) {
+                            case Result<windows_interface.IInspectable>.Ok(value) =>
+                                writeBindableUnitResult(impl.Append(value))
+                            case Result<windows_interface.IInspectable>.Err(error) =>
+                                error.code().value
+                        }
+                    case None => E_NOINTERFACE.value
+                }
+            }
+        }
+        vtbl.RemoveAtEnd = { instanceRaw =>
+            match (unsafe { asImplFromRaw<StockInspectableVectorImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableUnitResult(impl.RemoveAtEnd())
+                case None => E_NOINTERFACE.value
+            }
+        }
+        vtbl.Clear = { instanceRaw =>
+            match (unsafe { asImplFromRaw<StockInspectableVectorImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableUnitResult(impl.Clear())
+                case None => E_NOINTERFACE.value
+            }
+        }
+        vtbl
+    }
+}
+
+@C
+public struct IBindableVectorViewVtbl {
+    public var base_: IInspectableVtbl = IInspectableVtbl()
+    public var GetAt: CFunc<(CPointer<Unit>, UInt32, CPointer<CPointer<Unit>>) -> Int32> = { _, _, result__ =>
+        bindableNoInterfaceObjectOut(result__)
+    }
+    public var Size: CFunc<(CPointer<Unit>, CPointer<UInt32>) -> Int32> = { _, result__ =>
+        bindableNoInterfaceUInt32Out(result__)
+    }
+    public var IndexOf: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<Bool>) -> Int32> = { _, _, index__, result__ =>
+        bindableNoInterfaceIndexBoolOut(index__, result__)
+    }
+    public init() {}
+
+    public static func new(): IBindableVectorViewVtbl {
+        var vtbl = IBindableVectorViewVtbl()
+        vtbl.base_ = buildIInspectableVtbl()
+        vtbl.GetAt = { instanceRaw, index, result__ =>
+            match (unsafe { asImplFromRaw<StockInspectableVectorViewImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableInspectableOut(result__, impl.GetAt(index))
+                case None => bindableNoInterfaceObjectOut(result__)
+            }
+        }
+        vtbl.Size = { instanceRaw, result__ =>
+            match (unsafe { asImplFromRaw<StockInspectableVectorViewImpl>(instanceRaw) }) {
+                case Some(impl) => writeBindableUInt32Out(result__, impl.Size())
+                case None => bindableNoInterfaceUInt32Out(result__)
+            }
+        }
+        vtbl.IndexOf = { instanceRaw, valueRaw, index__, result__ =>
+            if (index__.isNull() || result__.isNull()) {
+                clearBindableUInt32OutSlot(index__)
+                clearBindableBoolOutSlot(result__)
+                E_POINTER.value
+            } else if (valueRaw.isNull()) {
+                clearBindableUInt32OutSlot(index__)
+                clearBindableBoolOutSlot(result__)
+                S_OK.value
+            } else {
+                match (unsafe { asImplFromRaw<StockInspectableVectorViewImpl>(instanceRaw) }) {
+                    case Some(impl) =>
+                        match (bindableInspectableFromRaw(valueRaw)) {
+                            case Result<windows_interface.IInspectable>.Ok(value) =>
+                                writeBindableBoolOut(result__, impl.IndexOf(value, index__))
+                            case Result<windows_interface.IInspectable>.Err(error) =>
+                                error.code().value
+                        }
+                    case None => bindableNoInterfaceIndexBoolOut(index__, result__)
+                }
+            }
+        }
+        vtbl
     }
 }
 
@@ -664,6 +1189,519 @@ where K <: RuntimeType & HandleWinrtType<K> & Equatable<K>, V <: RuntimeType & W
     }
 }
 
+func sameInspectableVectorElement(left: windows_interface.IInspectable, right: windows_interface.IInspectable): Bool {
+    left.asRaw().toUIntNative() == right.asRaw().toUIntNative()
+}
+
+func retainInspectableVectorElement(value: windows_interface.IInspectable): Result<windows_interface.IInspectable> {
+    let raw = value.retainRaw()
+    if (raw.isNull()) {
+        return Result<windows_interface.IInspectable>.Err(WinError(E_POINTER))
+    }
+    Result<windows_interface.IInspectable>.Ok(windows_interface.IInspectable.fromAbiTake(raw))
+}
+
+func mustRetainInspectableVectorElement(value: windows_interface.IInspectable): windows_interface.IInspectable {
+    match (retainInspectableVectorElement(value)) {
+        case Result<windows_interface.IInspectable>.Ok(retained) => retained
+        case Result<windows_interface.IInspectable>.Err(_) => throw Exception("expected live IInspectable")
+    }
+}
+
+func closeInspectableVectorElements(values: ArrayList<windows_interface.IInspectable>): Unit {
+    var offset = 0
+    while (offset < values.size) {
+        match (values.get(offset)) {
+            case Some(value) => value.close()
+            case None => ()
+        }
+        offset += 1
+    }
+    values.clear()
+}
+
+class StockInspectableBindableIteratorImpl <: Resource {
+    private let items: ArrayList<windows_interface.IInspectable>
+    private let vtblHandle: CPointer<IBindableIteratorVtbl>
+    private var closed: Bool = false
+    private let index = AtomicInt64(0)
+
+    public init(seed: ArrayList<windows_interface.IInspectable>) {
+        this.items = ArrayList<windows_interface.IInspectable>(seed.size, { offset => mustRetainInspectableVectorElement(seed[offset]) })
+        this.vtblHandle = unsafe {
+            windows_interface.allocateNativeValue<IBindableIteratorVtbl>(IBindableIteratorVtbl.new())
+        }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        closeInspectableVectorElements(items)
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (closed) {
+            return
+        }
+        closed = true
+    }
+
+    public func Current(): Result<windows_interface.IInspectable> {
+        let current = index.load()
+        if (current < 0 || current >= items.size) {
+            return Result<windows_interface.IInspectable>.Err(stockBoundsError())
+        }
+        match (items.get(current)) {
+            case Some(value) => retainInspectableVectorElement(value)
+            case None => Result<windows_interface.IInspectable>.Err(stockBoundsError())
+        }
+    }
+
+    public func HasCurrent(): Result<Bool> {
+        let current = index.load()
+        Result<Bool>.Ok(current >= 0 && current < items.size)
+    }
+
+    public func MoveNext(): Result<Bool> {
+        let current = index.load()
+        if (current < items.size) {
+            index.fetchAdd(1)
+        }
+        Result<Bool>.Ok(current + 1 < items.size)
+    }
+
+    public func GetMany(itemsSize: Int32, itemsBuffer: CPointer<Unit>): Result<UInt32> {
+        if (itemsSize <= 0) {
+            return Result<UInt32>.Ok(0u32)
+        }
+        let current = index.load()
+        match (writeGenericManyRange<windows_interface.IInspectable>(UInt32(itemsSize), itemsBuffer, items, current)) {
+            case Result<UInt32>.Ok(count) =>
+                index.fetchAdd(Int64(count))
+                Result<UInt32>.Ok(count)
+            case Result<UInt32>.Err(error) =>
+                Result<UInt32>.Err(error)
+        }
+    }
+}
+
+func createStockInspectableBindableIteratorRaw(source: Iterable<windows_interface.IInspectable>): Result<CPointer<Unit>> {
+    let items = collectArrayList<windows_interface.IInspectable>(source)
+    let impl = StockInspectableBindableIteratorImpl(items)
+    let object = createComObjectFromSchemas(impl, [bindableIteratorDescriptorSchema()], impl.vtblPtr())
+    var raw = CPointer<Unit>()
+    let hr = HRESULT(object.queryInterfaceBase(IID_BINDABLE_ITERATOR, CPointer<CPointer<Unit>>(inout raw)))
+    object.close()
+    if (hr.failed()) {
+        return Result<CPointer<Unit>>.Err(WinError(hr))
+    }
+    if (raw.isNull()) {
+        return Result<CPointer<Unit>>.Err(WinError(E_POINTER))
+    }
+    Result<CPointer<Unit>>.Ok(raw)
+}
+
+class StockInspectableVectorViewImpl <: IVectorView_Impl<windows_interface.IInspectable> & Resource {
+    private let items: ArrayList<windows_interface.IInspectable>
+    private let vtblHandle: CPointer<IVectorViewVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
+    private let bindableIterableVtblHandle: CPointer<IBindableIterableVtbl>
+    private let bindableVectorViewVtblHandle: CPointer<IBindableVectorViewVtbl>
+    private var closed: Bool = false
+
+    public init(seed: ArrayList<windows_interface.IInspectable>) {
+        this.items = ArrayList<windows_interface.IInspectable>(seed.size, { index => mustRetainInspectableVectorElement(seed[index]) })
+        this.vtblHandle = unsafe {
+            windows_interface.allocateNativeValue<IVectorViewVtbl>(IVectorViewVtbl.new<StockInspectableVectorViewImpl, windows_interface.IInspectable>())
+        }
+        this.iterableVtblHandle = unsafe {
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<StockInspectableVectorViewImpl, windows_interface.IInspectable>())
+        }
+        this.bindableIterableVtblHandle = unsafe {
+            windows_interface.allocateNativeValue<IBindableIterableVtbl>(IBindableIterableVtbl.newForVectorView())
+        }
+        this.bindableVectorViewVtblHandle = unsafe {
+            windows_interface.allocateNativeValue<IBindableVectorViewVtbl>(IBindableVectorViewVtbl.new())
+        }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func iterableVtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(iterableVtblHandle)
+    }
+
+    public func bindableIterableVtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(bindableIterableVtblHandle)
+    }
+
+    public func bindableVectorViewVtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(bindableVectorViewVtblHandle)
+    }
+
+    private func drainItems(): Unit {
+        closeInspectableVectorElements(items)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        drainItems()
+        unsafe {
+            windows_interface.freeNativeValue(bindableVectorViewVtblHandle)
+            windows_interface.freeNativeValue(bindableIterableVtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (closed) {
+            return
+        }
+        closed = true
+    }
+
+    public func First(): Result<IIterator<windows_interface.IInspectable>> {
+        Result<IIterator<windows_interface.IInspectable>>.Ok(toIterator<windows_interface.IInspectable>(items))
+    }
+
+    public func BindableFirst(): Result<CPointer<Unit>> {
+        createStockInspectableBindableIteratorRaw(items)
+    }
+
+    public func GetAt(index: UInt32): Result<windows_interface.IInspectable> {
+        let resolved = Int64(index)
+        if (resolved < 0 || resolved >= items.size) {
+            return Result<windows_interface.IInspectable>.Err(stockBoundsError())
+        }
+        match (items.get(resolved)) {
+            case Some(value) => retainInspectableVectorElement(value)
+            case None => Result<windows_interface.IInspectable>.Err(stockBoundsError())
+        }
+    }
+
+    public func Size(): Result<UInt32> {
+        Result<UInt32>.Ok(UInt32(items.size))
+    }
+
+    public func IndexOf(value: windows_interface.IInspectable, indexSlot: CPointer<UInt32>): Result<Bool> {
+        var offset = 0
+        while (offset < items.size) {
+            match (items.get(offset)) {
+                case Some(candidate) =>
+                    if (sameInspectableVectorElement(candidate, value)) {
+                        if (indexSlot.isNotNull()) {
+                            unsafe { indexSlot.write(UInt32(offset)) }
+                        }
+                        return Result<Bool>.Ok(true)
+                    }
+                case None => ()
+            }
+            offset += 1
+        }
+        if (indexSlot.isNotNull()) {
+            unsafe { indexSlot.write(0u32) }
+        }
+        Result<Bool>.Ok(false)
+    }
+
+    public func GetMany(startIndex: UInt32, itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<UInt32> {
+        writeGenericManyRange<windows_interface.IInspectable>(itemsSize, itemsBuffer, items, Int64(startIndex))
+    }
+}
+
+func createStockInspectableVectorView(source: Iterable<windows_interface.IInspectable>): IVectorView<windows_interface.IInspectable> {
+    let items = collectArrayList<windows_interface.IInspectable>(source)
+    let impl = StockInspectableVectorViewImpl(items)
+    let schemas = [
+        IIterable<windows_interface.IInspectable>.descriptorSchema(),
+        IVectorView<windows_interface.IInspectable>.descriptorSchema(),
+        bindableIterableDescriptorSchema(),
+        bindableVectorViewDescriptorSchema()
+    ]
+    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr(), impl.bindableIterableVtblPtr(), impl.bindableVectorViewVtblPtr()]
+    createStockInterfaceMulti<StockInspectableVectorViewImpl, IVectorView<windows_interface.IInspectable>>(
+        impl,
+        schemas,
+        IVectorView<windows_interface.IInspectable>.descriptor(),
+        vtbls
+    )
+}
+
+func createStockInspectableBindableVectorViewRaw(source: Iterable<windows_interface.IInspectable>): Result<CPointer<Unit>> {
+    let items = collectArrayList<windows_interface.IInspectable>(source)
+    let impl = StockInspectableVectorViewImpl(items)
+    let schemas = [
+        IIterable<windows_interface.IInspectable>.descriptorSchema(),
+        IVectorView<windows_interface.IInspectable>.descriptorSchema(),
+        bindableIterableDescriptorSchema(),
+        bindableVectorViewDescriptorSchema()
+    ]
+    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr(), impl.bindableIterableVtblPtr(), impl.bindableVectorViewVtblPtr()]
+    let object = createComObjectFromSchemas(impl, schemas, vtbls)
+    var raw = CPointer<Unit>()
+    let hr = HRESULT(object.queryInterfaceBase(IID_BINDABLE_VECTOR_VIEW, CPointer<CPointer<Unit>>(inout raw)))
+    object.close()
+    if (hr.failed()) {
+        return Result<CPointer<Unit>>.Err(WinError(hr))
+    }
+    if (raw.isNull()) {
+        return Result<CPointer<Unit>>.Err(WinError(E_POINTER))
+    }
+    Result<CPointer<Unit>>.Ok(raw)
+}
+
+public class StockInspectableVectorImpl <: IVector_Impl<windows_interface.IInspectable> & Resource {
+    private let items: ArrayList<windows_interface.IInspectable>
+    private let vtblHandle: CPointer<IVectorVtbl>
+    private let iterableVtblHandle: CPointer<IIterableVtbl>
+    private let bindableIterableVtblHandle: CPointer<IBindableIterableVtbl>
+    private let bindableVectorVtblHandle: CPointer<IBindableVectorVtbl>
+    private var closed: Bool = false
+
+    public init(seed: ArrayList<windows_interface.IInspectable>) {
+        this.items = ArrayList<windows_interface.IInspectable>(seed.size, { index => mustRetainInspectableVectorElement(seed[index]) })
+        this.vtblHandle = unsafe {
+            windows_interface.allocateNativeValue<IVectorVtbl>(IVectorVtbl.new<StockInspectableVectorImpl, windows_interface.IInspectable>())
+        }
+        this.iterableVtblHandle = unsafe {
+            windows_interface.allocateNativeValue<IIterableVtbl>(IIterableVtbl.new<StockInspectableVectorImpl, windows_interface.IInspectable>())
+        }
+        this.bindableIterableVtblHandle = unsafe {
+            windows_interface.allocateNativeValue<IBindableIterableVtbl>(IBindableIterableVtbl.newForVector())
+        }
+        this.bindableVectorVtblHandle = unsafe {
+            windows_interface.allocateNativeValue<IBindableVectorVtbl>(IBindableVectorVtbl.new())
+        }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func iterableVtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(iterableVtblHandle)
+    }
+
+    public func bindableIterableVtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(bindableIterableVtblHandle)
+    }
+
+    public func bindableVectorVtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(bindableVectorVtblHandle)
+    }
+
+    private func drainItems(): Unit {
+        closeInspectableVectorElements(items)
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        drainItems()
+        unsafe {
+            windows_interface.freeNativeValue(bindableVectorVtblHandle)
+            windows_interface.freeNativeValue(bindableIterableVtblHandle)
+            windows_interface.freeNativeValue(iterableVtblHandle)
+            windows_interface.freeNativeValue(vtblHandle)
+        }
+        closed = true
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (closed) {
+            return
+        }
+        closed = true
+    }
+
+    public func First(): Result<IIterator<windows_interface.IInspectable>> {
+        Result<IIterator<windows_interface.IInspectable>>.Ok(toIterator<windows_interface.IInspectable>(items))
+    }
+
+    public func BindableFirst(): Result<CPointer<Unit>> {
+        createStockInspectableBindableIteratorRaw(items)
+    }
+
+    public func GetAt(index: UInt32): Result<windows_interface.IInspectable> {
+        let resolved = Int64(index)
+        if (resolved < 0 || resolved >= items.size) {
+            return Result<windows_interface.IInspectable>.Err(stockBoundsError())
+        }
+        match (items.get(resolved)) {
+            case Some(value) => retainInspectableVectorElement(value)
+            case None => Result<windows_interface.IInspectable>.Err(stockBoundsError())
+        }
+    }
+
+    public func Size(): Result<UInt32> {
+        Result<UInt32>.Ok(UInt32(items.size))
+    }
+
+    public func GetView(): Result<IVectorView<windows_interface.IInspectable>> {
+        Result<IVectorView<windows_interface.IInspectable>>.Ok(createStockInspectableVectorView(items))
+    }
+
+    public func BindableGetView(): Result<CPointer<Unit>> {
+        createStockInspectableBindableVectorViewRaw(items)
+    }
+
+    public func IndexOf(value: windows_interface.IInspectable, indexSlot: CPointer<UInt32>): Result<Bool> {
+        var offset = 0
+        while (offset < items.size) {
+            match (items.get(offset)) {
+                case Some(candidate) =>
+                    if (sameInspectableVectorElement(candidate, value)) {
+                        if (indexSlot.isNotNull()) {
+                            unsafe { indexSlot.write(UInt32(offset)) }
+                        }
+                        return Result<Bool>.Ok(true)
+                    }
+                case None => ()
+            }
+            offset += 1
+        }
+        if (indexSlot.isNotNull()) {
+            unsafe { indexSlot.write(0u32) }
+        }
+        Result<Bool>.Ok(false)
+    }
+
+    public func SetAt(index: UInt32, value: windows_interface.IInspectable): Result<Unit> {
+        let resolved = Int64(index)
+        if (resolved < 0 || resolved >= items.size) {
+            return Result<Unit>.Err(stockBoundsError())
+        }
+        match (retainInspectableVectorElement(value)) {
+            case Result<windows_interface.IInspectable>.Ok(retained) =>
+                match (items.get(resolved)) {
+                    case Some(previous) => previous.close()
+                    case None => ()
+                }
+                items[resolved] = retained
+                Result<Unit>.Ok(())
+            case Result<windows_interface.IInspectable>.Err(error) =>
+                Result<Unit>.Err(error)
+        }
+    }
+
+    public func InsertAt(index: UInt32, value: windows_interface.IInspectable): Result<Unit> {
+        let resolved = Int64(index)
+        if (resolved < 0 || resolved > items.size) {
+            return Result<Unit>.Err(stockBoundsError())
+        }
+        match (retainInspectableVectorElement(value)) {
+            case Result<windows_interface.IInspectable>.Ok(retained) =>
+                items.add(retained, at: resolved)
+                Result<Unit>.Ok(())
+            case Result<windows_interface.IInspectable>.Err(error) =>
+                Result<Unit>.Err(error)
+        }
+    }
+
+    public func RemoveAt(index: UInt32): Result<Unit> {
+        let resolved = Int64(index)
+        if (resolved < 0 || resolved >= items.size) {
+            return Result<Unit>.Err(stockBoundsError())
+        }
+        match (items.get(resolved)) {
+            case Some(previous) => previous.close()
+            case None => ()
+        }
+        items.remove(at: resolved)
+        Result<Unit>.Ok(())
+    }
+
+    public func Append(value: windows_interface.IInspectable): Result<Unit> {
+        match (retainInspectableVectorElement(value)) {
+            case Result<windows_interface.IInspectable>.Ok(retained) =>
+                items.add(retained)
+                Result<Unit>.Ok(())
+            case Result<windows_interface.IInspectable>.Err(error) =>
+                Result<Unit>.Err(error)
+        }
+    }
+
+    public func RemoveAtEnd(): Result<Unit> {
+        if (items.size == 0) {
+            return Result<Unit>.Err(stockBoundsError())
+        }
+        match (items.get(items.size - 1)) {
+            case Some(previous) => previous.close()
+            case None => ()
+        }
+        items.remove(at: items.size - 1)
+        Result<Unit>.Ok(())
+    }
+
+    public func Clear(): Result<Unit> {
+        drainItems()
+        Result<Unit>.Ok(())
+    }
+
+    public func GetMany(startIndex: UInt32, itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<UInt32> {
+        writeGenericManyRange<windows_interface.IInspectable>(itemsSize, itemsBuffer, items, Int64(startIndex))
+    }
+
+    public func ReplaceAll(itemsSize: UInt32, itemsBuffer: CPointer<Unit>): Result<Unit> {
+        if (itemsSize > 0u32 && itemsBuffer.isNull()) {
+            return Result<Unit>.Err(WinError(E_POINTER))
+        }
+        let replacements = ArrayList<windows_interface.IInspectable>()
+        var completed = false
+        try {
+            let slots = CPointer<CPointer<Unit>>(itemsBuffer)
+            var index = 0
+            while (index < Int64(itemsSize)) {
+                let raw = unsafe { (slots + index).read() }
+                let borrowed = winrtProjectGenericIn<windows_interface.IInspectable>(raw)
+                match (retainInspectableVectorElement(borrowed)) {
+                    case Result<windows_interface.IInspectable>.Ok(retained) =>
+                        replacements.add(retained)
+                    case Result<windows_interface.IInspectable>.Err(error) =>
+                        return Result<Unit>.Err(error)
+                }
+                index += 1
+            }
+            completed = true
+        } finally {
+            if (!completed) {
+                closeInspectableVectorElements(replacements)
+            }
+        }
+        drainItems()
+        for (value in replacements) {
+            items.add(value)
+        }
+        Result<Unit>.Ok(())
+    }
+}
+
 public class StockInt32MapViewImpl <: IMapView_Impl<Int32, Int32> & Resource {
     private let entries: ArrayList<(Int32, Int32)>
     private let pairViews: ArrayList<IKeyValuePair<Int32, Int32>>
@@ -1061,6 +2099,24 @@ public func toVectorView(source: Iterable<Int32>): IVectorView<Int32> {
         impl,
         schemas,
         IVectorView<Int32>.descriptor(),
+        vtbls
+    )
+}
+
+public func toInspectableVector(source: Iterable<windows_interface.IInspectable>): IVector<windows_interface.IInspectable> {
+    let items = collectArrayList<windows_interface.IInspectable>(source)
+    let impl = StockInspectableVectorImpl(items)
+    let schemas = [
+        IIterable<windows_interface.IInspectable>.descriptorSchema(),
+        IVector<windows_interface.IInspectable>.descriptorSchema(),
+        bindableIterableDescriptorSchema(),
+        bindableVectorDescriptorSchema()
+    ]
+    let vtbls = [impl.iterableVtblPtr(), impl.vtblPtr(), impl.bindableIterableVtblPtr(), impl.bindableVectorVtblPtr()]
+    createStockInterfaceMulti<StockInspectableVectorImpl, IVector<windows_interface.IInspectable>>(
+        impl,
+        schemas,
+        IVector<windows_interface.IInspectable>.descriptor(),
         vtbls
     )
 }

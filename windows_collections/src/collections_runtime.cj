@@ -11,10 +11,7 @@ import windows_interface as windows_interface
 type WinrtSize = Size
 
 func checkCollectionComOutHRESULT(hr: HRESULT, result: CPointer<CPointer<Unit>>): Unit {
-    if (hr.failed()) {
-        windows_core.releaseFailedComOutSlot(result)
-    }
-    hr.check()
+    windows_core.checkFoundationComOutHRESULT(hr, result)
 }
 
 func checkCollectionSplitComOutHRESULT(
@@ -30,18 +27,11 @@ func checkCollectionSplitComOutHRESULT(
 }
 
 func checkCollectionHStringOutHRESULT(hr: HRESULT, result: CPointer<CPointer<Unit>>): Unit {
-    if (hr.failed() && result.isNotNull()) {
-        let raw = unsafe { result.read() }
-        if (raw.isNotNull()) {
-            windows_core.releaseSystemHStringHandle(raw)
-            unsafe { result.write(CPointer<Unit>()) }
-        }
-    }
-    hr.check()
+    windows_core.checkFoundationHStringOutHRESULT(hr, result)
 }
 
 func clearCollectionGenericOutSlot(result: CPointer<CPointer<Unit>>): Unit {
-    unsafe { result.write(CPointer<Unit>()) }
+    windows_core.clearFoundationComOutSlot(result)
 }
 
 func clearCollectionBoolOutSlot(result: CPointer<Bool>): Unit {
@@ -53,59 +43,35 @@ func clearCollectionIndexOutSlot(result: CPointer<UInt32>): Unit {
 }
 
 func collectionNoInterfaceGenericOut(result: CPointer<CPointer<Unit>>): Int32 {
-    if (result.isNotNull()) {
-        clearCollectionGenericOutSlot(result)
-    }
-    E_NOINTERFACE.value
+    windows_core.foundationNoInterfaceComOut(result)
 }
 
 func collectionNotImplGenericOut(result: CPointer<CPointer<Unit>>): Int32 {
-    if (result.isNotNull()) {
-        clearCollectionGenericOutSlot(result)
-    }
-    E_NOTIMPL.value
+    windows_core.foundationNotImplComOut(result)
 }
 
 func collectionNoInterfaceBoolOut(result: CPointer<Bool>): Int32 {
-    if (result.isNotNull()) {
-        clearCollectionBoolOutSlot(result)
-    }
-    E_NOINTERFACE.value
+    windows_core.foundationNoInterfaceBoolOut(result)
 }
 
 func collectionNotImplBoolOut(result: CPointer<Bool>): Int32 {
-    if (result.isNotNull()) {
-        clearCollectionBoolOutSlot(result)
-    }
-    E_NOTIMPL.value
+    windows_core.foundationNotImplValueOut<Bool>(result, false)
 }
 
 func collectionNoInterfaceUInt32Out(result: CPointer<UInt32>): Int32 {
-    if (result.isNotNull()) {
-        clearCollectionIndexOutSlot(result)
-    }
-    E_NOINTERFACE.value
+    windows_core.foundationNoInterfaceUInt32Out(result)
 }
 
 func collectionNotImplUInt32Out(result: CPointer<UInt32>): Int32 {
-    if (result.isNotNull()) {
-        clearCollectionIndexOutSlot(result)
-    }
-    E_NOTIMPL.value
+    windows_core.foundationNotImplValueOut<UInt32>(result, 0u32)
 }
 
 func collectionNoInterfaceValueOut<T>(result: CPointer<T>, value: T): Int32 where T <: CType {
-    if (result.isNotNull()) {
-        unsafe { result.write(value) }
-    }
-    E_NOINTERFACE.value
+    windows_core.foundationNoInterfaceValueOut<T>(result, value)
 }
 
 func collectionNotImplValueOut<T>(result: CPointer<T>, value: T): Int32 where T <: CType {
-    if (result.isNotNull()) {
-        unsafe { result.write(value) }
-    }
-    E_NOTIMPL.value
+    windows_core.foundationNotImplValueOut<T>(result, value)
 }
 
 func collectionNoInterfaceIndexBoolOut(index: CPointer<UInt32>, result: CPointer<Bool>): Int32 {
@@ -129,22 +95,14 @@ func collectionNotImplIndexBoolOut(index: CPointer<UInt32>, result: CPointer<Boo
 }
 
 func collectionNoInterfaceSplitOut(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Int32 {
-    if (first.isNotNull()) {
-        clearCollectionGenericOutSlot(first)
-    }
-    if (second.isNotNull()) {
-        clearCollectionGenericOutSlot(second)
-    }
+    let _ = windows_core.foundationNoInterfaceComOut(first)
+    let _ = windows_core.foundationNoInterfaceComOut(second)
     E_NOINTERFACE.value
 }
 
 func collectionNotImplSplitOut(first: CPointer<CPointer<Unit>>, second: CPointer<CPointer<Unit>>): Int32 {
-    if (first.isNotNull()) {
-        clearCollectionGenericOutSlot(first)
-    }
-    if (second.isNotNull()) {
-        clearCollectionGenericOutSlot(second)
-    }
+    let _ = windows_core.foundationNotImplComOut(first)
+    let _ = windows_core.foundationNotImplComOut(second)
     E_NOTIMPL.value
 }
 
@@ -167,54 +125,18 @@ func releaseCollectionGenericOutRangeNoThrow<T>(
     items: CPointer<Unit>,
     itemsSize: UInt32
 ): Unit where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
-    try {
-        windows_core.winrtReleaseGenericOutRange<T>(items, itemsSize)
-    } catch (_: Exception) {
-        ()
-    }
+    windows_core.winrtReleaseGenericOutRangeNoThrow<T>(items, itemsSize)
 }
 
 func collectionGenericOutThunk<T>(
     result: CPointer<CPointer<Unit>>,
     action: () -> Result<T>
 ): Int32 where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
-    if (result.isNull()) {
-        return E_POINTER.value
-    }
-    clearCollectionGenericOutSlot(result)
-    try {
-        match (action()) {
-            case Result<T>.Ok(value) =>
-                let hr = windows_core.winrtStoreGenericOut<T>(result, value)
-                if (HRESULT(hr).failed()) {
-                    releaseCollectionGenericOutRangeNoThrow<T>(CPointer<Unit>(result), 1u32)
-                }
-                hr
-            case Result<T>.Err(error) =>
-                error.code().value
-        }
-    } catch (error: windows_core.WindowsException) {
-        windows_core.releaseFailedComOutSlot(result)
-        error.code().value
-    } catch (_: Exception) {
-        windows_core.releaseFailedComOutSlot(result)
-        windows_core.E_FAIL.value
-    }
+    windows_core.foundationGenericOutThunk<T>(result, action)
 }
 
 func collectionUnitThunk(action: () -> Result<Unit>): Int32 {
-    try {
-        match (action()) {
-            case Result<Unit>.Ok(_) =>
-                S_OK.value
-            case Result<Unit>.Err(error) =>
-                error.code().value
-        }
-    } catch (error: windows_core.WindowsException) {
-        error.code().value
-    } catch (_: Exception) {
-        windows_core.E_FAIL.value
-    }
+    windows_core.foundationUnitThunk(action)
 }
 
 func collectionBoolOutResult(result: CPointer<Bool>, value: Result<Bool>): Int32 {

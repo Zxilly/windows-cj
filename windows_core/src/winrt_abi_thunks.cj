@@ -205,8 +205,15 @@ public func cleanupFoundationGenericOutSlot<T>(result: CPointer<CPointer<Unit>>)
     if (result.isNull()) {
         return
     }
+    winrtReleaseGenericOutRangeNoThrow<T>(CPointer<Unit>(result), 1u32)
+}
+
+public func winrtReleaseGenericOutRangeNoThrow<T>(
+    buffer: CPointer<Unit>,
+    length: UInt32
+): Unit where T <: WinrtGenericType<T> {
     try {
-        winrtReleaseGenericOutRange<T>(CPointer<Unit>(result), 1u32)
+        winrtReleaseGenericOutRange<T>(buffer, length)
     } catch (_: Exception) {
         ()
     }

@@ -261,6 +261,31 @@ func createInterfaceVectorAbiTest(values: ArrayList<IInspectable>): IVector<IIns
     result
 }
 
+@Test
+func testStockInspectableVectorReturnsVectorViewSnapshot() {
+    let first = createInterfaceVectorElement()
+    let second = createInterfaceVectorElement()
+    let source = ArrayList<IInspectable>([first, second])
+    let vector = toInspectableVector(source)
+    let view = unsafe { vector.GetView() }
+
+    try {
+        @Expect(unsafe { view.Size() }, 2u32)
+        expectInterfaceVectorAt(vector, 0u32, first)
+        let viewValue = unsafe { view.GetAt(1u32) }
+        try {
+            @Expect(sameInterfaceVectorElement(viewValue, second), true)
+        } finally {
+            viewValue.close()
+        }
+    } finally {
+        view.close()
+        vector.close()
+        second.close()
+        first.close()
+    }
+}
+
 func expectInterfaceVectorAt(vector: IVector<IInspectable>, index: UInt32, expected: IInspectable): Unit {
     let value = unsafe { vector.GetAt(index) }
     try {
@@ -282,6 +307,141 @@ func takeInterfaceOutputSlot(slot: CPointer<CPointer<Unit>>): IInspectable {
     let raw = unsafe { slot.read() }
     unsafe { slot.write(CPointer<Unit>()) }
     IInspectable.fromAbiTake(raw)
+}
+
+func requireRawInterface(value: Option<CPointer<Unit>>, message: String): CPointer<Unit> {
+    match (value) {
+        case Some(raw) => raw
+        case None => throw Exception(message)
+    }
+}
+
+func closeRawInterface(raw: CPointer<Unit>): Unit {
+    if (raw.isNotNull()) {
+        IInspectable.fromAbiTake(raw).close()
+    }
+}
+
+@Test
+func testStockInspectableVectorExposesBindableInterfacesForXamlItemsSource() {
+    let first = createInterfaceVectorElement()
+    let second = createInterfaceVectorElement()
+    let third = createInterfaceVectorElement()
+    let source = ArrayList<IInspectable>([first, second])
+    let vector = toInspectableVector(source)
+
+    var bindableVectorRaw = CPointer<Unit>()
+    var bindableIterableRaw = CPointer<Unit>()
+    var bindableViewRaw = CPointer<Unit>()
+    var bindableIteratorRaw = CPointer<Unit>()
+    var currentRaw = CPointer<Unit>()
+    var getAtRaw = CPointer<Unit>()
+    var appendedRaw = CPointer<Unit>()
+
+    try {
+        bindableVectorRaw = requireRawInterface(
+            unsafe { windows_interface.queryInterfaceRaw(vector.asRaw(), IID_BINDABLE_VECTOR) },
+            "expected IBindableVector"
+        )
+        bindableIterableRaw = requireRawInterface(
+            unsafe { windows_interface.queryInterfaceRaw(vector.asRaw(), IID_BINDABLE_ITERABLE) },
+            "expected IBindableIterable"
+        )
+
+        let bindableVectorVtbl = unsafe { CPointer<CPointer<IBindableVectorVtbl>>(bindableVectorRaw).read().read() }
+        var bindableSize = 0u32
+        @Expect(unsafe { bindableVectorVtbl.Size(bindableVectorRaw, CPointer<UInt32>(inout bindableSize)) }, S_OK.value)
+        @Expect(bindableSize, 2u32)
+
+        @Expect(
+            unsafe { bindableVectorVtbl.GetAt(bindableVectorRaw, 1u32, CPointer<CPointer<Unit>>(inout getAtRaw)) },
+            S_OK.value
+        )
+        let getAtValue = IInspectable.fromAbiTake(getAtRaw)
+        getAtRaw = CPointer<Unit>()
+        try {
+            @Expect(sameInterfaceVectorElement(getAtValue, second), true)
+        } finally {
+            getAtValue.close()
+        }
+
+        var foundIndex = 99u32
+        var foundValue = false
+        @Expect(
+            unsafe {
+                bindableVectorVtbl.IndexOf(
+                    bindableVectorRaw,
+                    second.asRaw(),
+                    CPointer<UInt32>(inout foundIndex),
+                    CPointer<Bool>(inout foundValue)
+                )
+            },
+            S_OK.value
+        )
+        @Expect(foundValue, true)
+        @Expect(foundIndex, 1u32)
+
+        @Expect(unsafe { bindableVectorVtbl.Append(bindableVectorRaw, third.asRaw()) }, S_OK.value)
+        var appendedSize = 0u32
+        @Expect(unsafe { bindableVectorVtbl.Size(bindableVectorRaw, CPointer<UInt32>(inout appendedSize)) }, S_OK.value)
+        @Expect(appendedSize, 3u32)
+        @Expect(
+            unsafe { bindableVectorVtbl.GetAt(bindableVectorRaw, 2u32, CPointer<CPointer<Unit>>(inout appendedRaw)) },
+            S_OK.value
+        )
+        let appendedValue = IInspectable.fromAbiTake(appendedRaw)
+        appendedRaw = CPointer<Unit>()
+        try {
+            @Expect(sameInterfaceVectorElement(appendedValue, third), true)
+        } finally {
+            appendedValue.close()
+        }
+
+        @Expect(
+            unsafe { bindableVectorVtbl.GetView(bindableVectorRaw, CPointer<CPointer<Unit>>(inout bindableViewRaw)) },
+            S_OK.value
+        )
+        let bindableViewVtbl = unsafe { CPointer<CPointer<IBindableVectorViewVtbl>>(bindableViewRaw).read().read() }
+        var viewSize = 0u32
+        @Expect(unsafe { bindableViewVtbl.Size(bindableViewRaw, CPointer<UInt32>(inout viewSize)) }, S_OK.value)
+        @Expect(viewSize, 3u32)
+
+        let bindableIterableVtbl = unsafe { CPointer<CPointer<IBindableIterableVtbl>>(bindableIterableRaw).read().read() }
+        @Expect(
+            unsafe { bindableIterableVtbl.First(bindableIterableRaw, CPointer<CPointer<Unit>>(inout bindableIteratorRaw)) },
+            S_OK.value
+        )
+        let bindableIteratorVtbl = unsafe { CPointer<CPointer<IBindableIteratorVtbl>>(bindableIteratorRaw).read().read() }
+        var hasCurrent = false
+        @Expect(unsafe { bindableIteratorVtbl.HasCurrent(bindableIteratorRaw, CPointer<Bool>(inout hasCurrent)) }, S_OK.value)
+        @Expect(hasCurrent, true)
+        @Expect(
+            unsafe { bindableIteratorVtbl.Current(bindableIteratorRaw, CPointer<CPointer<Unit>>(inout currentRaw)) },
+            S_OK.value
+        )
+        let currentValue = IInspectable.fromAbiTake(currentRaw)
+        currentRaw = CPointer<Unit>()
+        try {
+            @Expect(sameInterfaceVectorElement(currentValue, first), true)
+        } finally {
+            currentValue.close()
+        }
+        var moved = false
+        @Expect(unsafe { bindableIteratorVtbl.MoveNext(bindableIteratorRaw, CPointer<Bool>(inout moved)) }, S_OK.value)
+        @Expect(moved, true)
+    } finally {
+        closeRawInterface(currentRaw)
+        closeRawInterface(appendedRaw)
+        closeRawInterface(getAtRaw)
+        closeRawInterface(bindableIteratorRaw)
+        closeRawInterface(bindableViewRaw)
+        closeRawInterface(bindableIterableRaw)
+        closeRawInterface(bindableVectorRaw)
+        vector.close()
+        third.close()
+        second.close()
+        first.close()
+    }
 }
 
 @Test
