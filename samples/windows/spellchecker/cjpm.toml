@@ -1,0 +1,16 @@
+[package]
+  name = "windows_sample_spellchecker"
+  version = "0.1.0"
+  description = "Spell-check a misspelled string with ISpellChecker and print corrective actions"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_sample_spellchecker_bindings = { path = "./bindings" }
+  windows_strings = { path = "../../../windows_strings" }
+  windows_core = { path = "../../../windows_core" }
+  windows_interface = { path = "../../../windows_interface" }

@@ -1,0 +1,16 @@
+[package]
+  name = "windows_sample_file_dialogs"
+  version = "0.1.0"
+  description = "Show a FileSaveDialog and print the file system path the user picked"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_sample_file_dialogs_bindings = { path = "./bindings" }
+  windows_strings = { path = "../../../windows_strings" }
+  windows_core = { path = "../../../windows_core" }
+  windows_interface = { path = "../../../windows_interface" }

@@ -1,0 +1,15 @@
+[package]
+  name = "windows_sample_task_dialog"
+  version = "0.1.0"
+  description = "Show a TaskDialogIndirect dialog with a custom command-link button"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_sample_task_dialog_bindings = { path = "./bindings" }
+  windows_strings = { path = "../../../windows_strings" }
+  windows_core = { path = "../../../windows_core" }
