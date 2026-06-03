@@ -26058,6 +26058,1270 @@ public let Microsoft_UI_Input_PointerUpdateKind_XButton1Released = Microsoft_UI_
 public let Microsoft_UI_Input_PointerUpdateKind_XButton2Pressed = Microsoft_UI_Input_PointerUpdateKind(9)
 public let Microsoft_UI_Input_PointerUpdateKind_XButton2Released = Microsoft_UI_Input_PointerUpdateKind(10)
 
+// Microsoft.UI.Text.CaretType (synthetic:Microsoft_UI_Text_CaretType)
+public struct Microsoft_UI_Text_CaretType {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_CaretType_Normal = Microsoft_UI_Text_CaretType(0)
+public let Microsoft_UI_Text_CaretType_Null = Microsoft_UI_Text_CaretType(1)
+
+// Microsoft.UI.Text.FindOptions (synthetic:Microsoft_UI_Text_FindOptions)
+public struct Microsoft_UI_Text_FindOptions {
+    public let value: UInt32
+    public init() {
+        this.value = 0
+    }
+    public init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: Microsoft_UI_Text_FindOptions): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: Microsoft_UI_Text_FindOptions): Microsoft_UI_Text_FindOptions {
+        return Microsoft_UI_Text_FindOptions(value | other.value)
+    }
+    public operator func &(other: Microsoft_UI_Text_FindOptions): Microsoft_UI_Text_FindOptions {
+        return Microsoft_UI_Text_FindOptions(value & other.value)
+    }
+    public operator func ^(other: Microsoft_UI_Text_FindOptions): Microsoft_UI_Text_FindOptions {
+        return Microsoft_UI_Text_FindOptions(value ^ other.value)
+    }
+    public operator func !(): Microsoft_UI_Text_FindOptions {
+        return Microsoft_UI_Text_FindOptions(!value)
+    }
+}
+public let Microsoft_UI_Text_FindOptions_None = Microsoft_UI_Text_FindOptions(0)
+public let Microsoft_UI_Text_FindOptions_Word = Microsoft_UI_Text_FindOptions(2)
+public let Microsoft_UI_Text_FindOptions_Case = Microsoft_UI_Text_FindOptions(4)
+
+// Microsoft.UI.Text.FormatEffect (synthetic:Microsoft_UI_Text_FormatEffect)
+public struct Microsoft_UI_Text_FormatEffect {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_FormatEffect_Off = Microsoft_UI_Text_FormatEffect(0)
+public let Microsoft_UI_Text_FormatEffect_On = Microsoft_UI_Text_FormatEffect(1)
+public let Microsoft_UI_Text_FormatEffect_Toggle = Microsoft_UI_Text_FormatEffect(2)
+public let Microsoft_UI_Text_FormatEffect_Undefined = Microsoft_UI_Text_FormatEffect(3)
+
+// Microsoft.UI.Text.HorizontalCharacterAlignment (synthetic:Microsoft_UI_Text_HorizontalCharacterAlignment)
+public struct Microsoft_UI_Text_HorizontalCharacterAlignment {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_HorizontalCharacterAlignment_Left = Microsoft_UI_Text_HorizontalCharacterAlignment(0)
+public let Microsoft_UI_Text_HorizontalCharacterAlignment_Right = Microsoft_UI_Text_HorizontalCharacterAlignment(1)
+public let Microsoft_UI_Text_HorizontalCharacterAlignment_Center = Microsoft_UI_Text_HorizontalCharacterAlignment(2)
+
+// Microsoft.UI.Text.ITextCharacterFormat (synthetic:Microsoft_UI_Text_ITextCharacterFormat)
+@Interface["f5710050-98e5-5788-b1e3-32191eebf94d", "Microsoft.UI.Text.ITextCharacterFormat", "LanguageTag.value=HString;Name.value=HString;GetClone.result=Com"]
+public interface Microsoft_UI_Text_ITextCharacterFormat <: IInspectable {
+    func AllCaps(value: CPointer<Int32>): Int32
+    func SetAllCaps(value: Int32): Int32
+    func BackgroundColor(value: CPointer<Windows_UI_Color>): Int32
+    func SetBackgroundColor(value: Windows_UI_Color): Int32
+    func Bold(value: CPointer<Int32>): Int32
+    func SetBold(value: Int32): Int32
+    func FontStretch(value: CPointer<Int32>): Int32
+    func SetFontStretch(value: Int32): Int32
+    func FontStyle(value: CPointer<Int32>): Int32
+    func SetFontStyle(value: Int32): Int32
+    func ForegroundColor(value: CPointer<Windows_UI_Color>): Int32
+    func SetForegroundColor(value: Windows_UI_Color): Int32
+    func Hidden(value: CPointer<Int32>): Int32
+    func SetHidden(value: Int32): Int32
+    func Italic(value: CPointer<Int32>): Int32
+    func SetItalic(value: Int32): Int32
+    func Kerning(value: CPointer<Float32>): Int32
+    func SetKerning(value: Float32): Int32
+    func LanguageTag(value: CPointer<CPointer<Unit>>): Int32
+    func SetLanguageTag(value: CPointer<Unit>): Int32
+    func LinkType(value: CPointer<Int32>): Int32
+    func Name(value: CPointer<CPointer<Unit>>): Int32
+    func SetName(value: CPointer<Unit>): Int32
+    func Outline(value: CPointer<Int32>): Int32
+    func SetOutline(value: Int32): Int32
+    func Position(value: CPointer<Float32>): Int32
+    func SetPosition(value: Float32): Int32
+    func ProtectedText(value: CPointer<Int32>): Int32
+    func SetProtectedText(value: Int32): Int32
+    func Size(value: CPointer<Float32>): Int32
+    func SetSize(value: Float32): Int32
+    func SmallCaps(value: CPointer<Int32>): Int32
+    func SetSmallCaps(value: Int32): Int32
+    func Spacing(value: CPointer<Float32>): Int32
+    func SetSpacing(value: Float32): Int32
+    func Strikethrough(value: CPointer<Int32>): Int32
+    func SetStrikethrough(value: Int32): Int32
+    func Subscript(value: CPointer<Int32>): Int32
+    func SetSubscript(value: Int32): Int32
+    func Superscript(value: CPointer<Int32>): Int32
+    func SetSuperscript(value: Int32): Int32
+    func TextScript(value: CPointer<Int32>): Int32
+    func SetTextScript(value: Int32): Int32
+    func Underline(value: CPointer<Int32>): Int32
+    func SetUnderline(value: Int32): Int32
+    func Weight(value: CPointer<Int32>): Int32
+    func SetWeight(value: Int32): Int32
+    func SetClone(value: CPointer<Unit>): Int32
+    func GetClone(result: CPointer<CPointer<Unit>>): Int32
+    func IsEqual(format: CPointer<Unit>, result: CPointer<Bool>): Int32
+}
+
+// Microsoft.UI.Text.ITextDocument (synthetic:Microsoft_UI_Text_ITextDocument)
+@Interface["1149d57d-86a6-59dd-88d9-196f27bc5c85", "Microsoft.UI.Text.ITextDocument", "Selection.value=Com;GetDefaultCharacterFormat.result=Com;GetDefaultParagraphFormat.result=Com;GetRange.result=Com;GetRangeFromPoint.result=Com;GetText.value=HString"]
+public interface Microsoft_UI_Text_ITextDocument <: IInspectable {
+    func CaretType(value: CPointer<Int32>): Int32
+    func SetCaretType(value: Int32): Int32
+    func DefaultTabStop(value: CPointer<Float32>): Int32
+    func SetDefaultTabStop(value: Float32): Int32
+    func Selection(value: CPointer<CPointer<Unit>>): Int32
+    func UndoLimit(value: CPointer<UInt32>): Int32
+    func SetUndoLimit(value: UInt32): Int32
+    func CanCopy(result: CPointer<Bool>): Int32
+    func CanPaste(result: CPointer<Bool>): Int32
+    func CanRedo(result: CPointer<Bool>): Int32
+    func CanUndo(result: CPointer<Bool>): Int32
+    func ApplyDisplayUpdates(result: CPointer<Int32>): Int32
+    func BatchDisplayUpdates(result: CPointer<Int32>): Int32
+    func BeginUndoGroup(): Int32
+    func EndUndoGroup(): Int32
+    func GetDefaultCharacterFormat(result: CPointer<CPointer<Unit>>): Int32
+    func GetDefaultParagraphFormat(result: CPointer<CPointer<Unit>>): Int32
+    func GetRange(startPosition: Int32, endPosition: Int32, result: CPointer<CPointer<Unit>>): Int32
+    func GetRangeFromPoint(point: Windows_Foundation_Point, options: UInt32, result: CPointer<CPointer<Unit>>): Int32
+    func GetText(options: UInt32, value: CPointer<CPointer<Unit>>): Int32
+    func LoadFromStream(options: UInt32, value: CPointer<Unit>): Int32
+    func Redo(): Int32
+    func SaveToStream(options: UInt32, value: CPointer<Unit>): Int32
+    func SetDefaultCharacterFormat(value: CPointer<Unit>): Int32
+    func SetDefaultParagraphFormat(value: CPointer<Unit>): Int32
+    func SetText(options: UInt32, value: CPointer<Unit>): Int32
+    func Undo(): Int32
+    func AlignmentIncludesTrailingWhitespace(value: CPointer<Bool>): Int32
+    func SetAlignmentIncludesTrailingWhitespace(value: Bool): Int32
+    func IgnoreTrailingCharacterSpacing(value: CPointer<Bool>): Int32
+    func SetIgnoreTrailingCharacterSpacing(value: Bool): Int32
+    func ClearUndoRedoHistory(): Int32
+}
+
+// Microsoft.UI.Text.ITextDocument2 (synthetic:Microsoft_UI_Text_ITextDocument2)
+@Interface["21febcf1-2110-5879-b1da-b343097e71e1", "Microsoft.UI.Text.ITextDocument2", "GetMathML.value=HString"]
+public interface Microsoft_UI_Text_ITextDocument2 <: IInspectable {
+    func GetMathMode(result: CPointer<Int32>): Int32
+    func SetMathMode(mode: Int32): Int32
+    func GetMathML(value: CPointer<CPointer<Unit>>): Int32
+    func SetMathML(value: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Text.ITextParagraphFormat (synthetic:Microsoft_UI_Text_ITextParagraphFormat)
+@Interface["219b6cdf-0d0b-5701-b8a1-6c906b3ebbe1", "Microsoft.UI.Text.ITextParagraphFormat", "GetClone.result=Com"]
+public interface Microsoft_UI_Text_ITextParagraphFormat <: IInspectable {
+    func Alignment(value: CPointer<Int32>): Int32
+    func SetAlignment(value: Int32): Int32
+    func FirstLineIndent(value: CPointer<Float32>): Int32
+    func KeepTogether(value: CPointer<Int32>): Int32
+    func SetKeepTogether(value: Int32): Int32
+    func KeepWithNext(value: CPointer<Int32>): Int32
+    func SetKeepWithNext(value: Int32): Int32
+    func LeftIndent(value: CPointer<Float32>): Int32
+    func LineSpacing(value: CPointer<Float32>): Int32
+    func LineSpacingRule(value: CPointer<Int32>): Int32
+    func ListAlignment(value: CPointer<Int32>): Int32
+    func SetListAlignment(value: Int32): Int32
+    func ListLevelIndex(value: CPointer<Int32>): Int32
+    func SetListLevelIndex(value: Int32): Int32
+    func ListStart(value: CPointer<Int32>): Int32
+    func SetListStart(value: Int32): Int32
+    func ListStyle(value: CPointer<Int32>): Int32
+    func SetListStyle(value: Int32): Int32
+    func ListTab(value: CPointer<Float32>): Int32
+    func SetListTab(value: Float32): Int32
+    func ListType(value: CPointer<Int32>): Int32
+    func SetListType(value: Int32): Int32
+    func NoLineNumber(value: CPointer<Int32>): Int32
+    func SetNoLineNumber(value: Int32): Int32
+    func PageBreakBefore(value: CPointer<Int32>): Int32
+    func SetPageBreakBefore(value: Int32): Int32
+    func RightIndent(value: CPointer<Float32>): Int32
+    func SetRightIndent(value: Float32): Int32
+    func RightToLeft(value: CPointer<Int32>): Int32
+    func SetRightToLeft(value: Int32): Int32
+    func Style(value: CPointer<Int32>): Int32
+    func SetStyle(value: Int32): Int32
+    func SpaceAfter(value: CPointer<Float32>): Int32
+    func SetSpaceAfter(value: Float32): Int32
+    func SpaceBefore(value: CPointer<Float32>): Int32
+    func SetSpaceBefore(value: Float32): Int32
+    func WidowControl(value: CPointer<Int32>): Int32
+    func SetWidowControl(value: Int32): Int32
+    func TabCount(value: CPointer<Int32>): Int32
+    func AddTab(position: Float32, align: Int32, leader: Int32): Int32
+    func ClearAllTabs(): Int32
+    func DeleteTab(position: Float32): Int32
+    func GetClone(result: CPointer<CPointer<Unit>>): Int32
+    func GetTab(index: Int32, position: CPointer<Float32>, align: CPointer<Int32>, leader: CPointer<Int32>): Int32
+    func IsEqual(format: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func SetClone(format: CPointer<Unit>): Int32
+    func SetIndents(start: Float32, left: Float32, right: Float32): Int32
+    func SetLineSpacing(rule: Int32, spacing: Float32): Int32
+}
+
+// Microsoft.UI.Text.ITextRange (synthetic:Microsoft_UI_Text_ITextRange)
+@Interface["06d4abcf-0c06-5d12-a743-85537efd09ea", "Microsoft.UI.Text.ITextRange", "CharacterFormat.value=Com;FormattedText.value=Com;Link.value=HString;ParagraphFormat.value=Com;Text.value=HString;GetClone.result=Com;GetText.value=HString"]
+public interface Microsoft_UI_Text_ITextRange <: IInspectable {
+    func Character(value: CPointer<UInt16>): Int32
+    func SetCharacter(value: UInt16): Int32
+    func CharacterFormat(value: CPointer<CPointer<Unit>>): Int32
+    func SetCharacterFormat(value: CPointer<Unit>): Int32
+    func FormattedText(value: CPointer<CPointer<Unit>>): Int32
+    func SetFormattedText(value: CPointer<Unit>): Int32
+    func EndPosition(value: CPointer<Int32>): Int32
+    func SetEndPosition(value: Int32): Int32
+    func Gravity(value: CPointer<Int32>): Int32
+    func SetGravity(value: Int32): Int32
+    func Length(value: CPointer<Int32>): Int32
+    func Link(value: CPointer<CPointer<Unit>>): Int32
+    func SetLink(value: CPointer<Unit>): Int32
+    func ParagraphFormat(value: CPointer<CPointer<Unit>>): Int32
+    func SetParagraphFormat(value: CPointer<Unit>): Int32
+    func StartPosition(value: CPointer<Int32>): Int32
+    func SetStartPosition(value: Int32): Int32
+    func StoryLength(value: CPointer<Int32>): Int32
+    func Text(value: CPointer<CPointer<Unit>>): Int32
+    func SetText(value: CPointer<Unit>): Int32
+    func CanPaste(format: Int32, result: CPointer<Bool>): Int32
+    func ChangeCase(value: Int32): Int32
+    func Collapse(value: Bool): Int32
+    func Copy(): Int32
+    func Cut(): Int32
+    func Delete(unit: Int32, count: Int32, result: CPointer<Int32>): Int32
+    func EndOf(unit: Int32, extend_: Bool, result: CPointer<Int32>): Int32
+    func Expand(unit: Int32, result: CPointer<Int32>): Int32
+    func FindText(value: CPointer<Unit>, scanLength: Int32, options: UInt32, result: CPointer<Int32>): Int32
+    func GetCharacterUtf32(value: CPointer<UInt32>, offset: Int32): Int32
+    func GetClone(result: CPointer<CPointer<Unit>>): Int32
+    func GetIndex(unit: Int32, result: CPointer<Int32>): Int32
+    func GetPoint(horizontalAlign: Int32, verticalAlign: Int32, options: UInt32, point: CPointer<Windows_Foundation_Point>): Int32
+    func GetRect(options: UInt32, rect: CPointer<Windows_Foundation_Rect>, hit: CPointer<Int32>): Int32
+    func GetText(options: UInt32, value: CPointer<CPointer<Unit>>): Int32
+    func GetTextViaStream(options: UInt32, value: CPointer<Unit>): Int32
+    func InRange(range: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func InsertImage(width: Int32, height: Int32, ascent: Int32, verticalAlign: Int32, alternateText: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func InStory(range: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func IsEqual(range: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func Move(unit: Int32, count: Int32, result: CPointer<Int32>): Int32
+    func MoveEnd(unit: Int32, count: Int32, result: CPointer<Int32>): Int32
+    func MoveStart(unit: Int32, count: Int32, result: CPointer<Int32>): Int32
+    func Paste(format: Int32): Int32
+    func ScrollIntoView(value: UInt32): Int32
+    func MatchSelection(): Int32
+    func SetIndex(unit: Int32, index: Int32, extend_: Bool): Int32
+    func SetPoint(point: Windows_Foundation_Point, options: UInt32, extend_: Bool): Int32
+    func SetRange(startPosition: Int32, endPosition: Int32): Int32
+    func SetText_1(options: UInt32, value: CPointer<Unit>): Int32
+    func SetTextViaStream(options: UInt32, value: CPointer<Unit>): Int32
+    func StartOf(unit: Int32, extend_: Bool, result: CPointer<Int32>): Int32
+}
+
+// Microsoft.UI.Text.ITextSelection (synthetic:Microsoft_UI_Text_ITextSelection)
+@Interface["8f5e6cb1-2b04-589f-bd24-54e5cd8dd399", "Microsoft.UI.Text.ITextSelection"]
+public interface Microsoft_UI_Text_ITextSelection <: IInspectable {
+    func Options(value: CPointer<UInt32>): Int32
+    func SetOptions(value: UInt32): Int32
+    func Type(value: CPointer<Int32>): Int32
+    func EndKey(unit: Int32, extend_: Bool, result: CPointer<Int32>): Int32
+    func HomeKey(unit: Int32, extend_: Bool, result: CPointer<Int32>): Int32
+    func MoveDown(unit: Int32, count: Int32, extend_: Bool, result: CPointer<Int32>): Int32
+    func MoveLeft(unit: Int32, count: Int32, extend_: Bool, result: CPointer<Int32>): Int32
+    func MoveRight(unit: Int32, count: Int32, extend_: Bool, result: CPointer<Int32>): Int32
+    func MoveUp(unit: Int32, count: Int32, extend_: Bool, result: CPointer<Int32>): Int32
+    func TypeText(value: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Text.LetterCase (synthetic:Microsoft_UI_Text_LetterCase)
+public struct Microsoft_UI_Text_LetterCase {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_LetterCase_Lower = Microsoft_UI_Text_LetterCase(0)
+public let Microsoft_UI_Text_LetterCase_Upper = Microsoft_UI_Text_LetterCase(1)
+
+// Microsoft.UI.Text.LineSpacingRule (synthetic:Microsoft_UI_Text_LineSpacingRule)
+public struct Microsoft_UI_Text_LineSpacingRule {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_LineSpacingRule_Undefined = Microsoft_UI_Text_LineSpacingRule(0)
+public let Microsoft_UI_Text_LineSpacingRule_Single = Microsoft_UI_Text_LineSpacingRule(1)
+public let Microsoft_UI_Text_LineSpacingRule_OneAndHalf = Microsoft_UI_Text_LineSpacingRule(2)
+public let Microsoft_UI_Text_LineSpacingRule_Double = Microsoft_UI_Text_LineSpacingRule(3)
+public let Microsoft_UI_Text_LineSpacingRule_AtLeast = Microsoft_UI_Text_LineSpacingRule(4)
+public let Microsoft_UI_Text_LineSpacingRule_Exactly = Microsoft_UI_Text_LineSpacingRule(5)
+public let Microsoft_UI_Text_LineSpacingRule_Multiple = Microsoft_UI_Text_LineSpacingRule(6)
+public let Microsoft_UI_Text_LineSpacingRule_Percent = Microsoft_UI_Text_LineSpacingRule(7)
+
+// Microsoft.UI.Text.LinkType (synthetic:Microsoft_UI_Text_LinkType)
+public struct Microsoft_UI_Text_LinkType {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_LinkType_Undefined = Microsoft_UI_Text_LinkType(0)
+public let Microsoft_UI_Text_LinkType_NotALink = Microsoft_UI_Text_LinkType(1)
+public let Microsoft_UI_Text_LinkType_ClientLink = Microsoft_UI_Text_LinkType(2)
+public let Microsoft_UI_Text_LinkType_FriendlyLinkName = Microsoft_UI_Text_LinkType(3)
+public let Microsoft_UI_Text_LinkType_FriendlyLinkAddress = Microsoft_UI_Text_LinkType(4)
+public let Microsoft_UI_Text_LinkType_AutoLink = Microsoft_UI_Text_LinkType(5)
+public let Microsoft_UI_Text_LinkType_AutoLinkEmail = Microsoft_UI_Text_LinkType(6)
+public let Microsoft_UI_Text_LinkType_AutoLinkPhone = Microsoft_UI_Text_LinkType(7)
+public let Microsoft_UI_Text_LinkType_AutoLinkPath = Microsoft_UI_Text_LinkType(8)
+
+// Microsoft.UI.Text.MarkerAlignment (synthetic:Microsoft_UI_Text_MarkerAlignment)
+public struct Microsoft_UI_Text_MarkerAlignment {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_MarkerAlignment_Undefined = Microsoft_UI_Text_MarkerAlignment(0)
+public let Microsoft_UI_Text_MarkerAlignment_Left = Microsoft_UI_Text_MarkerAlignment(1)
+public let Microsoft_UI_Text_MarkerAlignment_Center = Microsoft_UI_Text_MarkerAlignment(2)
+public let Microsoft_UI_Text_MarkerAlignment_Right = Microsoft_UI_Text_MarkerAlignment(3)
+
+// Microsoft.UI.Text.MarkerStyle (synthetic:Microsoft_UI_Text_MarkerStyle)
+public struct Microsoft_UI_Text_MarkerStyle {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_MarkerStyle_Undefined = Microsoft_UI_Text_MarkerStyle(0)
+public let Microsoft_UI_Text_MarkerStyle_Parenthesis = Microsoft_UI_Text_MarkerStyle(1)
+public let Microsoft_UI_Text_MarkerStyle_Parentheses = Microsoft_UI_Text_MarkerStyle(2)
+public let Microsoft_UI_Text_MarkerStyle_Period = Microsoft_UI_Text_MarkerStyle(3)
+public let Microsoft_UI_Text_MarkerStyle_Plain = Microsoft_UI_Text_MarkerStyle(4)
+public let Microsoft_UI_Text_MarkerStyle_Minus = Microsoft_UI_Text_MarkerStyle(5)
+public let Microsoft_UI_Text_MarkerStyle_NoNumber = Microsoft_UI_Text_MarkerStyle(6)
+
+// Microsoft.UI.Text.MarkerType (synthetic:Microsoft_UI_Text_MarkerType)
+public struct Microsoft_UI_Text_MarkerType {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_MarkerType_Undefined = Microsoft_UI_Text_MarkerType(0)
+public let Microsoft_UI_Text_MarkerType_None = Microsoft_UI_Text_MarkerType(1)
+public let Microsoft_UI_Text_MarkerType_Bullet = Microsoft_UI_Text_MarkerType(2)
+public let Microsoft_UI_Text_MarkerType_Arabic = Microsoft_UI_Text_MarkerType(3)
+public let Microsoft_UI_Text_MarkerType_LowercaseEnglishLetter = Microsoft_UI_Text_MarkerType(4)
+public let Microsoft_UI_Text_MarkerType_UppercaseEnglishLetter = Microsoft_UI_Text_MarkerType(5)
+public let Microsoft_UI_Text_MarkerType_LowercaseRoman = Microsoft_UI_Text_MarkerType(6)
+public let Microsoft_UI_Text_MarkerType_UppercaseRoman = Microsoft_UI_Text_MarkerType(7)
+public let Microsoft_UI_Text_MarkerType_UnicodeSequence = Microsoft_UI_Text_MarkerType(8)
+public let Microsoft_UI_Text_MarkerType_CircledNumber = Microsoft_UI_Text_MarkerType(9)
+public let Microsoft_UI_Text_MarkerType_BlackCircleWingding = Microsoft_UI_Text_MarkerType(10)
+public let Microsoft_UI_Text_MarkerType_WhiteCircleWingding = Microsoft_UI_Text_MarkerType(11)
+public let Microsoft_UI_Text_MarkerType_ArabicWide = Microsoft_UI_Text_MarkerType(12)
+public let Microsoft_UI_Text_MarkerType_SimplifiedChinese = Microsoft_UI_Text_MarkerType(13)
+public let Microsoft_UI_Text_MarkerType_TraditionalChinese = Microsoft_UI_Text_MarkerType(14)
+public let Microsoft_UI_Text_MarkerType_JapanSimplifiedChinese = Microsoft_UI_Text_MarkerType(15)
+public let Microsoft_UI_Text_MarkerType_JapanKorea = Microsoft_UI_Text_MarkerType(16)
+public let Microsoft_UI_Text_MarkerType_ArabicDictionary = Microsoft_UI_Text_MarkerType(17)
+public let Microsoft_UI_Text_MarkerType_ArabicAbjad = Microsoft_UI_Text_MarkerType(18)
+public let Microsoft_UI_Text_MarkerType_Hebrew = Microsoft_UI_Text_MarkerType(19)
+public let Microsoft_UI_Text_MarkerType_ThaiAlphabetic = Microsoft_UI_Text_MarkerType(20)
+public let Microsoft_UI_Text_MarkerType_ThaiNumeric = Microsoft_UI_Text_MarkerType(21)
+public let Microsoft_UI_Text_MarkerType_DevanagariVowel = Microsoft_UI_Text_MarkerType(22)
+public let Microsoft_UI_Text_MarkerType_DevanagariConsonant = Microsoft_UI_Text_MarkerType(23)
+public let Microsoft_UI_Text_MarkerType_DevanagariNumeric = Microsoft_UI_Text_MarkerType(24)
+
+// Microsoft.UI.Text.ParagraphAlignment (synthetic:Microsoft_UI_Text_ParagraphAlignment)
+public struct Microsoft_UI_Text_ParagraphAlignment {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_ParagraphAlignment_Undefined = Microsoft_UI_Text_ParagraphAlignment(0)
+public let Microsoft_UI_Text_ParagraphAlignment_Left = Microsoft_UI_Text_ParagraphAlignment(1)
+public let Microsoft_UI_Text_ParagraphAlignment_Center = Microsoft_UI_Text_ParagraphAlignment(2)
+public let Microsoft_UI_Text_ParagraphAlignment_Right = Microsoft_UI_Text_ParagraphAlignment(3)
+public let Microsoft_UI_Text_ParagraphAlignment_Justify = Microsoft_UI_Text_ParagraphAlignment(4)
+
+// Microsoft.UI.Text.ParagraphStyle (synthetic:Microsoft_UI_Text_ParagraphStyle)
+public struct Microsoft_UI_Text_ParagraphStyle {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_ParagraphStyle_Undefined = Microsoft_UI_Text_ParagraphStyle(0)
+public let Microsoft_UI_Text_ParagraphStyle_None = Microsoft_UI_Text_ParagraphStyle(1)
+public let Microsoft_UI_Text_ParagraphStyle_Normal = Microsoft_UI_Text_ParagraphStyle(2)
+public let Microsoft_UI_Text_ParagraphStyle_Heading1 = Microsoft_UI_Text_ParagraphStyle(3)
+public let Microsoft_UI_Text_ParagraphStyle_Heading2 = Microsoft_UI_Text_ParagraphStyle(4)
+public let Microsoft_UI_Text_ParagraphStyle_Heading3 = Microsoft_UI_Text_ParagraphStyle(5)
+public let Microsoft_UI_Text_ParagraphStyle_Heading4 = Microsoft_UI_Text_ParagraphStyle(6)
+public let Microsoft_UI_Text_ParagraphStyle_Heading5 = Microsoft_UI_Text_ParagraphStyle(7)
+public let Microsoft_UI_Text_ParagraphStyle_Heading6 = Microsoft_UI_Text_ParagraphStyle(8)
+public let Microsoft_UI_Text_ParagraphStyle_Heading7 = Microsoft_UI_Text_ParagraphStyle(9)
+public let Microsoft_UI_Text_ParagraphStyle_Heading8 = Microsoft_UI_Text_ParagraphStyle(10)
+public let Microsoft_UI_Text_ParagraphStyle_Heading9 = Microsoft_UI_Text_ParagraphStyle(11)
+
+// Microsoft.UI.Text.PointOptions (synthetic:Microsoft_UI_Text_PointOptions)
+public struct Microsoft_UI_Text_PointOptions {
+    public let value: UInt32
+    public init() {
+        this.value = 0
+    }
+    public init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: Microsoft_UI_Text_PointOptions): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: Microsoft_UI_Text_PointOptions): Microsoft_UI_Text_PointOptions {
+        return Microsoft_UI_Text_PointOptions(value | other.value)
+    }
+    public operator func &(other: Microsoft_UI_Text_PointOptions): Microsoft_UI_Text_PointOptions {
+        return Microsoft_UI_Text_PointOptions(value & other.value)
+    }
+    public operator func ^(other: Microsoft_UI_Text_PointOptions): Microsoft_UI_Text_PointOptions {
+        return Microsoft_UI_Text_PointOptions(value ^ other.value)
+    }
+    public operator func !(): Microsoft_UI_Text_PointOptions {
+        return Microsoft_UI_Text_PointOptions(!value)
+    }
+}
+public let Microsoft_UI_Text_PointOptions_None = Microsoft_UI_Text_PointOptions(0)
+public let Microsoft_UI_Text_PointOptions_IncludeInset = Microsoft_UI_Text_PointOptions(1)
+public let Microsoft_UI_Text_PointOptions_Start = Microsoft_UI_Text_PointOptions(32)
+public let Microsoft_UI_Text_PointOptions_ClientCoordinates = Microsoft_UI_Text_PointOptions(256)
+public let Microsoft_UI_Text_PointOptions_AllowOffClient = Microsoft_UI_Text_PointOptions(512)
+public let Microsoft_UI_Text_PointOptions_Transform = Microsoft_UI_Text_PointOptions(1024)
+public let Microsoft_UI_Text_PointOptions_NoHorizontalScroll = Microsoft_UI_Text_PointOptions(65536)
+public let Microsoft_UI_Text_PointOptions_NoVerticalScroll = Microsoft_UI_Text_PointOptions(262144)
+
+// Microsoft.UI.Text.RangeGravity (synthetic:Microsoft_UI_Text_RangeGravity)
+public struct Microsoft_UI_Text_RangeGravity {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_RangeGravity_UIBehavior = Microsoft_UI_Text_RangeGravity(0)
+public let Microsoft_UI_Text_RangeGravity_Backward = Microsoft_UI_Text_RangeGravity(1)
+public let Microsoft_UI_Text_RangeGravity_Forward = Microsoft_UI_Text_RangeGravity(2)
+public let Microsoft_UI_Text_RangeGravity_Inward = Microsoft_UI_Text_RangeGravity(3)
+public let Microsoft_UI_Text_RangeGravity_Outward = Microsoft_UI_Text_RangeGravity(4)
+
+// Microsoft.UI.Text.RichEditMathMode (synthetic:Microsoft_UI_Text_RichEditMathMode)
+public struct Microsoft_UI_Text_RichEditMathMode {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_RichEditMathMode_NoMath = Microsoft_UI_Text_RichEditMathMode(0)
+public let Microsoft_UI_Text_RichEditMathMode_MathOnly = Microsoft_UI_Text_RichEditMathMode(1)
+
+// Microsoft.UI.Text.RichEditTextDocument (synthetic:Microsoft_UI_Text_RichEditTextDocument)
+public class Microsoft_UI_Text_RichEditTextDocument <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Text_RichEditTextDocument {
+        Microsoft_UI_Text_RichEditTextDocument(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Text_RichEditTextDocument {
+        Microsoft_UI_Text_RichEditTextDocument(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Text_ITextDocument.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Text_RichEditTextDocument> {
+        let ancestors = [Microsoft_UI_Text_ITextDocument.iid(), Microsoft_UI_Text_ITextDocument2.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Text_RichEditTextDocument>("RichEditTextDocument", Microsoft_UI_Text_ITextDocument.iid(), ancestors, { raw => Microsoft_UI_Text_RichEditTextDocument.fromAbiTake(raw) }, { raw => Microsoft_UI_Text_RichEditTextDocument.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Text_ITextDocument {
+        match (unsafe { query(Microsoft_UI_Text_ITextDocument.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asITextDocument(): Microsoft_UI_Text_ITextDocument {
+        defaultInterface()
+    }
+
+    public func asITextDocument2(): Microsoft_UI_Text_ITextDocument2 {
+        match (unsafe { query<Microsoft_UI_Text_ITextDocument2>(Microsoft_UI_Text_ITextDocument2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop AlignmentIncludesTrailingWhitespace: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AlignmentIncludesTrailingWhitespace(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetAlignmentIncludesTrailingWhitespace(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CaretType: Microsoft_UI_Text_CaretType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CaretType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Text_CaretType(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCaretType(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DefaultTabStop: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DefaultTabStop(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDefaultTabStop(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IgnoreTrailingCharacterSpacing: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IgnoreTrailingCharacterSpacing(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIgnoreTrailingCharacterSpacing(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop Selection: Microsoft_UI_Text_ITextSelection {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Selection(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Text_ITextSelection>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Text_ITextSelection.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop UndoLimit: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UndoLimit(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetUndoLimit(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func CanCopy(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CanCopy(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func CanPaste(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CanPaste(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func CanRedo(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CanRedo(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func CanUndo(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CanUndo(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func ApplyDisplayUpdates(): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ApplyDisplayUpdates(CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func BatchDisplayUpdates(): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.BatchDisplayUpdates(CPointer<Int32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func BeginUndoGroup(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.BeginUndoGroup() }
+        }
+        hr__.check()
+    }
+
+    public func EndUndoGroup(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.EndUndoGroup() }
+        }
+        hr__.check()
+    }
+
+    public func GetDefaultCharacterFormat(): Microsoft_UI_Text_ITextCharacterFormat {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetDefaultCharacterFormat(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Text_ITextCharacterFormat>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Text_ITextCharacterFormat.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetDefaultParagraphFormat(): Microsoft_UI_Text_ITextParagraphFormat {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetDefaultParagraphFormat(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Text_ITextParagraphFormat>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Text_ITextParagraphFormat.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetRange(startPosition: Int32, endPosition: Int32): Microsoft_UI_Text_ITextRange {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetRange(startPosition, endPosition, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Text_ITextRange>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Text_ITextRange.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetRangeFromPoint(point: Windows_Foundation_Point, options: Microsoft_UI_Text_PointOptions): Microsoft_UI_Text_ITextRange {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetRangeFromPoint(point, options.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Text_ITextRange>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Text_ITextRange.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public func GetText(options: Microsoft_UI_Text_TextGetOptions, value: windows_core.OutSlot<windows_core.HString>): Unit {
+        var hr__ = windows_core.E_POINTER
+        if (value.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        value.clear()
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.GetText(options.value, value.borrowMut<CPointer<Unit>>()) }
+        }
+        if (hr__.failed()) {
+            match (value.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_core.HString>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (value.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        value.write(windows_core.HString.fromSystemHandleTake(__arg1Value))
+    }
+
+    public func LoadFromStream(options: Microsoft_UI_Text_TextSetOptions, value: Windows_Storage_Streams_IRandomAccessStream): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams_IRandomAccessStream>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LoadFromStream(options.value, __argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func Redo(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Redo() }
+        }
+        hr__.check()
+    }
+
+    public func SaveToStream(options: Microsoft_UI_Text_TextGetOptions, value: Windows_Storage_Streams_IRandomAccessStream): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams_IRandomAccessStream>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SaveToStream(options.value, __argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func SetDefaultCharacterFormat(value: Microsoft_UI_Text_ITextCharacterFormat): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Text_ITextCharacterFormat>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDefaultCharacterFormat(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func SetDefaultParagraphFormat(value: Microsoft_UI_Text_ITextParagraphFormat): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Text_ITextParagraphFormat>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDefaultParagraphFormat(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func SetText(options: Microsoft_UI_Text_TextSetOptions, value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetText(options.value, __argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func Undo(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Undo() }
+        }
+        hr__.check()
+    }
+
+    public func ClearUndoRedoHistory(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ClearUndoRedoHistory() }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Text.RichEditTextDocument"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Text.RichEditTextDocument;{" + Microsoft_UI_Text_ITextDocument.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Text.RichEditTextDocument", Microsoft_UI_Text_RichEditTextDocument.signature(), Microsoft_UI_Text_ITextDocument.iid())
+    }
+}
+
+extend Microsoft_UI_Text_RichEditTextDocument <: windows_core.HandleWinrtType<Microsoft_UI_Text_RichEditTextDocument> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Text_RichEditTextDocument): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Text_RichEditTextDocument {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Text_RichEditTextDocument.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Text_RichEditTextDocument {
+        Microsoft_UI_Text_RichEditTextDocument.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Text.SelectionOptions (synthetic:Microsoft_UI_Text_SelectionOptions)
+public struct Microsoft_UI_Text_SelectionOptions {
+    public let value: UInt32
+    public init() {
+        this.value = 0
+    }
+    public init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: Microsoft_UI_Text_SelectionOptions): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: Microsoft_UI_Text_SelectionOptions): Microsoft_UI_Text_SelectionOptions {
+        return Microsoft_UI_Text_SelectionOptions(value | other.value)
+    }
+    public operator func &(other: Microsoft_UI_Text_SelectionOptions): Microsoft_UI_Text_SelectionOptions {
+        return Microsoft_UI_Text_SelectionOptions(value & other.value)
+    }
+    public operator func ^(other: Microsoft_UI_Text_SelectionOptions): Microsoft_UI_Text_SelectionOptions {
+        return Microsoft_UI_Text_SelectionOptions(value ^ other.value)
+    }
+    public operator func !(): Microsoft_UI_Text_SelectionOptions {
+        return Microsoft_UI_Text_SelectionOptions(!value)
+    }
+}
+public let Microsoft_UI_Text_SelectionOptions_StartActive = Microsoft_UI_Text_SelectionOptions(1)
+public let Microsoft_UI_Text_SelectionOptions_AtEndOfLine = Microsoft_UI_Text_SelectionOptions(2)
+public let Microsoft_UI_Text_SelectionOptions_Overtype = Microsoft_UI_Text_SelectionOptions(4)
+public let Microsoft_UI_Text_SelectionOptions_Active = Microsoft_UI_Text_SelectionOptions(8)
+public let Microsoft_UI_Text_SelectionOptions_Replace = Microsoft_UI_Text_SelectionOptions(16)
+
+// Microsoft.UI.Text.SelectionType (synthetic:Microsoft_UI_Text_SelectionType)
+public struct Microsoft_UI_Text_SelectionType {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_SelectionType_None = Microsoft_UI_Text_SelectionType(0)
+public let Microsoft_UI_Text_SelectionType_InsertionPoint = Microsoft_UI_Text_SelectionType(1)
+public let Microsoft_UI_Text_SelectionType_Normal = Microsoft_UI_Text_SelectionType(2)
+public let Microsoft_UI_Text_SelectionType_InlineShape = Microsoft_UI_Text_SelectionType(7)
+public let Microsoft_UI_Text_SelectionType_Shape = Microsoft_UI_Text_SelectionType(8)
+
+// Microsoft.UI.Text.TabAlignment (synthetic:Microsoft_UI_Text_TabAlignment)
+public struct Microsoft_UI_Text_TabAlignment {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_TabAlignment_Left = Microsoft_UI_Text_TabAlignment(0)
+public let Microsoft_UI_Text_TabAlignment_Center = Microsoft_UI_Text_TabAlignment(1)
+public let Microsoft_UI_Text_TabAlignment_Right = Microsoft_UI_Text_TabAlignment(2)
+public let Microsoft_UI_Text_TabAlignment_Decimal = Microsoft_UI_Text_TabAlignment(3)
+public let Microsoft_UI_Text_TabAlignment_Bar = Microsoft_UI_Text_TabAlignment(4)
+
+// Microsoft.UI.Text.TabLeader (synthetic:Microsoft_UI_Text_TabLeader)
+public struct Microsoft_UI_Text_TabLeader {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_TabLeader_Spaces = Microsoft_UI_Text_TabLeader(0)
+public let Microsoft_UI_Text_TabLeader_Dots = Microsoft_UI_Text_TabLeader(1)
+public let Microsoft_UI_Text_TabLeader_Dashes = Microsoft_UI_Text_TabLeader(2)
+public let Microsoft_UI_Text_TabLeader_Lines = Microsoft_UI_Text_TabLeader(3)
+public let Microsoft_UI_Text_TabLeader_ThickLines = Microsoft_UI_Text_TabLeader(4)
+public let Microsoft_UI_Text_TabLeader_Equals = Microsoft_UI_Text_TabLeader(5)
+
+// Microsoft.UI.Text.TextApiContract (synthetic:Microsoft_UI_Text_TextApiContract)
+@C
+public struct Microsoft_UI_Text_TextApiContract {
+    public var reserved: Int32 = 0
+}
+
+// Microsoft.UI.Text.TextGetOptions (synthetic:Microsoft_UI_Text_TextGetOptions)
+public struct Microsoft_UI_Text_TextGetOptions {
+    public let value: UInt32
+    public init() {
+        this.value = 0
+    }
+    public init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: Microsoft_UI_Text_TextGetOptions): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: Microsoft_UI_Text_TextGetOptions): Microsoft_UI_Text_TextGetOptions {
+        return Microsoft_UI_Text_TextGetOptions(value | other.value)
+    }
+    public operator func &(other: Microsoft_UI_Text_TextGetOptions): Microsoft_UI_Text_TextGetOptions {
+        return Microsoft_UI_Text_TextGetOptions(value & other.value)
+    }
+    public operator func ^(other: Microsoft_UI_Text_TextGetOptions): Microsoft_UI_Text_TextGetOptions {
+        return Microsoft_UI_Text_TextGetOptions(value ^ other.value)
+    }
+    public operator func !(): Microsoft_UI_Text_TextGetOptions {
+        return Microsoft_UI_Text_TextGetOptions(!value)
+    }
+}
+public let Microsoft_UI_Text_TextGetOptions_None = Microsoft_UI_Text_TextGetOptions(0)
+public let Microsoft_UI_Text_TextGetOptions_AdjustCrlf = Microsoft_UI_Text_TextGetOptions(1)
+public let Microsoft_UI_Text_TextGetOptions_UseCrlf = Microsoft_UI_Text_TextGetOptions(2)
+public let Microsoft_UI_Text_TextGetOptions_UseObjectText = Microsoft_UI_Text_TextGetOptions(4)
+public let Microsoft_UI_Text_TextGetOptions_AllowFinalEop = Microsoft_UI_Text_TextGetOptions(8)
+public let Microsoft_UI_Text_TextGetOptions_NoHidden = Microsoft_UI_Text_TextGetOptions(32)
+public let Microsoft_UI_Text_TextGetOptions_IncludeNumbering = Microsoft_UI_Text_TextGetOptions(64)
+public let Microsoft_UI_Text_TextGetOptions_FormatRtf = Microsoft_UI_Text_TextGetOptions(8192)
+public let Microsoft_UI_Text_TextGetOptions_UseLf = Microsoft_UI_Text_TextGetOptions(16777216)
+
+// Microsoft.UI.Text.TextRangeUnit (synthetic:Microsoft_UI_Text_TextRangeUnit)
+public struct Microsoft_UI_Text_TextRangeUnit {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_TextRangeUnit_Character = Microsoft_UI_Text_TextRangeUnit(0)
+public let Microsoft_UI_Text_TextRangeUnit_Word = Microsoft_UI_Text_TextRangeUnit(1)
+public let Microsoft_UI_Text_TextRangeUnit_Sentence = Microsoft_UI_Text_TextRangeUnit(2)
+public let Microsoft_UI_Text_TextRangeUnit_Paragraph = Microsoft_UI_Text_TextRangeUnit(3)
+public let Microsoft_UI_Text_TextRangeUnit_Line = Microsoft_UI_Text_TextRangeUnit(4)
+public let Microsoft_UI_Text_TextRangeUnit_Story = Microsoft_UI_Text_TextRangeUnit(5)
+public let Microsoft_UI_Text_TextRangeUnit_Screen = Microsoft_UI_Text_TextRangeUnit(6)
+public let Microsoft_UI_Text_TextRangeUnit_Section = Microsoft_UI_Text_TextRangeUnit(7)
+public let Microsoft_UI_Text_TextRangeUnit_Window = Microsoft_UI_Text_TextRangeUnit(8)
+public let Microsoft_UI_Text_TextRangeUnit_CharacterFormat = Microsoft_UI_Text_TextRangeUnit(9)
+public let Microsoft_UI_Text_TextRangeUnit_ParagraphFormat = Microsoft_UI_Text_TextRangeUnit(10)
+public let Microsoft_UI_Text_TextRangeUnit_Object = Microsoft_UI_Text_TextRangeUnit(11)
+public let Microsoft_UI_Text_TextRangeUnit_HardParagraph = Microsoft_UI_Text_TextRangeUnit(12)
+public let Microsoft_UI_Text_TextRangeUnit_Cluster = Microsoft_UI_Text_TextRangeUnit(13)
+public let Microsoft_UI_Text_TextRangeUnit_Bold = Microsoft_UI_Text_TextRangeUnit(14)
+public let Microsoft_UI_Text_TextRangeUnit_Italic = Microsoft_UI_Text_TextRangeUnit(15)
+public let Microsoft_UI_Text_TextRangeUnit_Underline = Microsoft_UI_Text_TextRangeUnit(16)
+public let Microsoft_UI_Text_TextRangeUnit_Strikethrough = Microsoft_UI_Text_TextRangeUnit(17)
+public let Microsoft_UI_Text_TextRangeUnit_ProtectedText = Microsoft_UI_Text_TextRangeUnit(18)
+public let Microsoft_UI_Text_TextRangeUnit_Link = Microsoft_UI_Text_TextRangeUnit(19)
+public let Microsoft_UI_Text_TextRangeUnit_SmallCaps = Microsoft_UI_Text_TextRangeUnit(20)
+public let Microsoft_UI_Text_TextRangeUnit_AllCaps = Microsoft_UI_Text_TextRangeUnit(21)
+public let Microsoft_UI_Text_TextRangeUnit_Hidden = Microsoft_UI_Text_TextRangeUnit(22)
+public let Microsoft_UI_Text_TextRangeUnit_Outline = Microsoft_UI_Text_TextRangeUnit(23)
+public let Microsoft_UI_Text_TextRangeUnit_Shadow = Microsoft_UI_Text_TextRangeUnit(24)
+public let Microsoft_UI_Text_TextRangeUnit_Imprint = Microsoft_UI_Text_TextRangeUnit(25)
+public let Microsoft_UI_Text_TextRangeUnit_Disabled = Microsoft_UI_Text_TextRangeUnit(26)
+public let Microsoft_UI_Text_TextRangeUnit_Revised = Microsoft_UI_Text_TextRangeUnit(27)
+public let Microsoft_UI_Text_TextRangeUnit_Subscript = Microsoft_UI_Text_TextRangeUnit(28)
+public let Microsoft_UI_Text_TextRangeUnit_Superscript = Microsoft_UI_Text_TextRangeUnit(29)
+public let Microsoft_UI_Text_TextRangeUnit_FontBound = Microsoft_UI_Text_TextRangeUnit(30)
+public let Microsoft_UI_Text_TextRangeUnit_LinkProtected = Microsoft_UI_Text_TextRangeUnit(31)
+public let Microsoft_UI_Text_TextRangeUnit_ContentLink = Microsoft_UI_Text_TextRangeUnit(32)
+
+// Microsoft.UI.Text.TextScript (synthetic:Microsoft_UI_Text_TextScript)
+public struct Microsoft_UI_Text_TextScript {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_TextScript_Undefined = Microsoft_UI_Text_TextScript(0)
+public let Microsoft_UI_Text_TextScript_Ansi = Microsoft_UI_Text_TextScript(1)
+public let Microsoft_UI_Text_TextScript_EastEurope = Microsoft_UI_Text_TextScript(2)
+public let Microsoft_UI_Text_TextScript_Cyrillic = Microsoft_UI_Text_TextScript(3)
+public let Microsoft_UI_Text_TextScript_Greek = Microsoft_UI_Text_TextScript(4)
+public let Microsoft_UI_Text_TextScript_Turkish = Microsoft_UI_Text_TextScript(5)
+public let Microsoft_UI_Text_TextScript_Hebrew = Microsoft_UI_Text_TextScript(6)
+public let Microsoft_UI_Text_TextScript_Arabic = Microsoft_UI_Text_TextScript(7)
+public let Microsoft_UI_Text_TextScript_Baltic = Microsoft_UI_Text_TextScript(8)
+public let Microsoft_UI_Text_TextScript_Vietnamese = Microsoft_UI_Text_TextScript(9)
+public let Microsoft_UI_Text_TextScript_Default = Microsoft_UI_Text_TextScript(10)
+public let Microsoft_UI_Text_TextScript_Symbol = Microsoft_UI_Text_TextScript(11)
+public let Microsoft_UI_Text_TextScript_Thai = Microsoft_UI_Text_TextScript(12)
+public let Microsoft_UI_Text_TextScript_ShiftJis = Microsoft_UI_Text_TextScript(13)
+public let Microsoft_UI_Text_TextScript_GB2312 = Microsoft_UI_Text_TextScript(14)
+public let Microsoft_UI_Text_TextScript_Hangul = Microsoft_UI_Text_TextScript(15)
+public let Microsoft_UI_Text_TextScript_Big5 = Microsoft_UI_Text_TextScript(16)
+public let Microsoft_UI_Text_TextScript_PC437 = Microsoft_UI_Text_TextScript(17)
+public let Microsoft_UI_Text_TextScript_Oem = Microsoft_UI_Text_TextScript(18)
+public let Microsoft_UI_Text_TextScript_Mac = Microsoft_UI_Text_TextScript(19)
+public let Microsoft_UI_Text_TextScript_Armenian = Microsoft_UI_Text_TextScript(20)
+public let Microsoft_UI_Text_TextScript_Syriac = Microsoft_UI_Text_TextScript(21)
+public let Microsoft_UI_Text_TextScript_Thaana = Microsoft_UI_Text_TextScript(22)
+public let Microsoft_UI_Text_TextScript_Devanagari = Microsoft_UI_Text_TextScript(23)
+public let Microsoft_UI_Text_TextScript_Bengali = Microsoft_UI_Text_TextScript(24)
+public let Microsoft_UI_Text_TextScript_Gurmukhi = Microsoft_UI_Text_TextScript(25)
+public let Microsoft_UI_Text_TextScript_Gujarati = Microsoft_UI_Text_TextScript(26)
+public let Microsoft_UI_Text_TextScript_Oriya = Microsoft_UI_Text_TextScript(27)
+public let Microsoft_UI_Text_TextScript_Tamil = Microsoft_UI_Text_TextScript(28)
+public let Microsoft_UI_Text_TextScript_Telugu = Microsoft_UI_Text_TextScript(29)
+public let Microsoft_UI_Text_TextScript_Kannada = Microsoft_UI_Text_TextScript(30)
+public let Microsoft_UI_Text_TextScript_Malayalam = Microsoft_UI_Text_TextScript(31)
+public let Microsoft_UI_Text_TextScript_Sinhala = Microsoft_UI_Text_TextScript(32)
+public let Microsoft_UI_Text_TextScript_Lao = Microsoft_UI_Text_TextScript(33)
+public let Microsoft_UI_Text_TextScript_Tibetan = Microsoft_UI_Text_TextScript(34)
+public let Microsoft_UI_Text_TextScript_Myanmar = Microsoft_UI_Text_TextScript(35)
+public let Microsoft_UI_Text_TextScript_Georgian = Microsoft_UI_Text_TextScript(36)
+public let Microsoft_UI_Text_TextScript_Jamo = Microsoft_UI_Text_TextScript(37)
+public let Microsoft_UI_Text_TextScript_Ethiopic = Microsoft_UI_Text_TextScript(38)
+public let Microsoft_UI_Text_TextScript_Cherokee = Microsoft_UI_Text_TextScript(39)
+public let Microsoft_UI_Text_TextScript_Aboriginal = Microsoft_UI_Text_TextScript(40)
+public let Microsoft_UI_Text_TextScript_Ogham = Microsoft_UI_Text_TextScript(41)
+public let Microsoft_UI_Text_TextScript_Runic = Microsoft_UI_Text_TextScript(42)
+public let Microsoft_UI_Text_TextScript_Khmer = Microsoft_UI_Text_TextScript(43)
+public let Microsoft_UI_Text_TextScript_Mongolian = Microsoft_UI_Text_TextScript(44)
+public let Microsoft_UI_Text_TextScript_Braille = Microsoft_UI_Text_TextScript(45)
+public let Microsoft_UI_Text_TextScript_Yi = Microsoft_UI_Text_TextScript(46)
+public let Microsoft_UI_Text_TextScript_Limbu = Microsoft_UI_Text_TextScript(47)
+public let Microsoft_UI_Text_TextScript_TaiLe = Microsoft_UI_Text_TextScript(48)
+public let Microsoft_UI_Text_TextScript_NewTaiLue = Microsoft_UI_Text_TextScript(49)
+public let Microsoft_UI_Text_TextScript_SylotiNagri = Microsoft_UI_Text_TextScript(50)
+public let Microsoft_UI_Text_TextScript_Kharoshthi = Microsoft_UI_Text_TextScript(51)
+public let Microsoft_UI_Text_TextScript_Kayahli = Microsoft_UI_Text_TextScript(52)
+public let Microsoft_UI_Text_TextScript_UnicodeSymbol = Microsoft_UI_Text_TextScript(53)
+public let Microsoft_UI_Text_TextScript_Emoji = Microsoft_UI_Text_TextScript(54)
+public let Microsoft_UI_Text_TextScript_Glagolitic = Microsoft_UI_Text_TextScript(55)
+public let Microsoft_UI_Text_TextScript_Lisu = Microsoft_UI_Text_TextScript(56)
+public let Microsoft_UI_Text_TextScript_Vai = Microsoft_UI_Text_TextScript(57)
+public let Microsoft_UI_Text_TextScript_NKo = Microsoft_UI_Text_TextScript(58)
+public let Microsoft_UI_Text_TextScript_Osmanya = Microsoft_UI_Text_TextScript(59)
+public let Microsoft_UI_Text_TextScript_PhagsPa = Microsoft_UI_Text_TextScript(60)
+public let Microsoft_UI_Text_TextScript_Gothic = Microsoft_UI_Text_TextScript(61)
+public let Microsoft_UI_Text_TextScript_Deseret = Microsoft_UI_Text_TextScript(62)
+public let Microsoft_UI_Text_TextScript_Tifinagh = Microsoft_UI_Text_TextScript(63)
+
+// Microsoft.UI.Text.TextSetOptions (synthetic:Microsoft_UI_Text_TextSetOptions)
+public struct Microsoft_UI_Text_TextSetOptions {
+    public let value: UInt32
+    public init() {
+        this.value = 0
+    }
+    public init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: Microsoft_UI_Text_TextSetOptions): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: Microsoft_UI_Text_TextSetOptions): Microsoft_UI_Text_TextSetOptions {
+        return Microsoft_UI_Text_TextSetOptions(value | other.value)
+    }
+    public operator func &(other: Microsoft_UI_Text_TextSetOptions): Microsoft_UI_Text_TextSetOptions {
+        return Microsoft_UI_Text_TextSetOptions(value & other.value)
+    }
+    public operator func ^(other: Microsoft_UI_Text_TextSetOptions): Microsoft_UI_Text_TextSetOptions {
+        return Microsoft_UI_Text_TextSetOptions(value ^ other.value)
+    }
+    public operator func !(): Microsoft_UI_Text_TextSetOptions {
+        return Microsoft_UI_Text_TextSetOptions(!value)
+    }
+}
+public let Microsoft_UI_Text_TextSetOptions_None = Microsoft_UI_Text_TextSetOptions(0)
+public let Microsoft_UI_Text_TextSetOptions_UnicodeBidi = Microsoft_UI_Text_TextSetOptions(1)
+public let Microsoft_UI_Text_TextSetOptions_Unlink = Microsoft_UI_Text_TextSetOptions(8)
+public let Microsoft_UI_Text_TextSetOptions_Unhide = Microsoft_UI_Text_TextSetOptions(16)
+public let Microsoft_UI_Text_TextSetOptions_CheckTextLimit = Microsoft_UI_Text_TextSetOptions(32)
+public let Microsoft_UI_Text_TextSetOptions_FormatRtf = Microsoft_UI_Text_TextSetOptions(8192)
+public let Microsoft_UI_Text_TextSetOptions_ApplyRtfDocumentDefaults = Microsoft_UI_Text_TextSetOptions(16384)
+
+// Microsoft.UI.Text.UnderlineType (synthetic:Microsoft_UI_Text_UnderlineType)
+public struct Microsoft_UI_Text_UnderlineType {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_UnderlineType_Undefined = Microsoft_UI_Text_UnderlineType(0)
+public let Microsoft_UI_Text_UnderlineType_None = Microsoft_UI_Text_UnderlineType(1)
+public let Microsoft_UI_Text_UnderlineType_Single = Microsoft_UI_Text_UnderlineType(2)
+public let Microsoft_UI_Text_UnderlineType_Words = Microsoft_UI_Text_UnderlineType(3)
+public let Microsoft_UI_Text_UnderlineType_Double = Microsoft_UI_Text_UnderlineType(4)
+public let Microsoft_UI_Text_UnderlineType_Dotted = Microsoft_UI_Text_UnderlineType(5)
+public let Microsoft_UI_Text_UnderlineType_Dash = Microsoft_UI_Text_UnderlineType(6)
+public let Microsoft_UI_Text_UnderlineType_DashDot = Microsoft_UI_Text_UnderlineType(7)
+public let Microsoft_UI_Text_UnderlineType_DashDotDot = Microsoft_UI_Text_UnderlineType(8)
+public let Microsoft_UI_Text_UnderlineType_Wave = Microsoft_UI_Text_UnderlineType(9)
+public let Microsoft_UI_Text_UnderlineType_Thick = Microsoft_UI_Text_UnderlineType(10)
+public let Microsoft_UI_Text_UnderlineType_Thin = Microsoft_UI_Text_UnderlineType(11)
+public let Microsoft_UI_Text_UnderlineType_DoubleWave = Microsoft_UI_Text_UnderlineType(12)
+public let Microsoft_UI_Text_UnderlineType_HeavyWave = Microsoft_UI_Text_UnderlineType(13)
+public let Microsoft_UI_Text_UnderlineType_LongDash = Microsoft_UI_Text_UnderlineType(14)
+public let Microsoft_UI_Text_UnderlineType_ThickDash = Microsoft_UI_Text_UnderlineType(15)
+public let Microsoft_UI_Text_UnderlineType_ThickDashDot = Microsoft_UI_Text_UnderlineType(16)
+public let Microsoft_UI_Text_UnderlineType_ThickDashDotDot = Microsoft_UI_Text_UnderlineType(17)
+public let Microsoft_UI_Text_UnderlineType_ThickDotted = Microsoft_UI_Text_UnderlineType(18)
+public let Microsoft_UI_Text_UnderlineType_ThickLongDash = Microsoft_UI_Text_UnderlineType(19)
+
+// Microsoft.UI.Text.VerticalCharacterAlignment (synthetic:Microsoft_UI_Text_VerticalCharacterAlignment)
+public struct Microsoft_UI_Text_VerticalCharacterAlignment {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Text_VerticalCharacterAlignment_Top = Microsoft_UI_Text_VerticalCharacterAlignment(0)
+public let Microsoft_UI_Text_VerticalCharacterAlignment_Baseline = Microsoft_UI_Text_VerticalCharacterAlignment(1)
+public let Microsoft_UI_Text_VerticalCharacterAlignment_Bottom = Microsoft_UI_Text_VerticalCharacterAlignment(2)
+
 // Microsoft.UI.WindowId (synthetic:Microsoft_UI_WindowId)
 @C
 public struct Microsoft_UI_WindowId {
@@ -28688,6 +29952,1358 @@ public let Microsoft_UI_Xaml_Automation_AnnotationType_AdvancedProofingIssue = M
 public let Microsoft_UI_Xaml_Automation_AnnotationType_DataValidationError = Microsoft_UI_Xaml_Automation_AnnotationType(60021)
 public let Microsoft_UI_Xaml_Automation_AnnotationType_CircularReferenceError = Microsoft_UI_Xaml_Automation_AnnotationType(60022)
 
+// Microsoft.UI.Xaml.Automation.AutomationAnnotation (synthetic:Microsoft_UI_Xaml_Automation_AutomationAnnotation)
+public class Microsoft_UI_Xaml_Automation_AutomationAnnotation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Automation_AutomationAnnotation {
+        Microsoft_UI_Xaml_Automation_AutomationAnnotation(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Automation_AutomationAnnotation {
+        Microsoft_UI_Xaml_Automation_AutomationAnnotation(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Automation_IAutomationAnnotation.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Automation_AutomationAnnotation> {
+        let ancestors = [Microsoft_UI_Xaml_Automation_IAutomationAnnotation.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Automation_AutomationAnnotation>("AutomationAnnotation", Microsoft_UI_Xaml_Automation_IAutomationAnnotation.iid(), ancestors, { raw => Microsoft_UI_Xaml_Automation_AutomationAnnotation.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Automation_AutomationAnnotation.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Automation_IAutomationAnnotation {
+        match (unsafe { query(Microsoft_UI_Xaml_Automation_IAutomationAnnotation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAutomationAnnotation(): Microsoft_UI_Xaml_Automation_IAutomationAnnotation {
+        defaultInterface()
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Element: Microsoft_UI_Xaml_UIElement {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Element(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_UIElement>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_UIElement.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_UIElement>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetElement(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Type: Microsoft_UI_Xaml_Automation_AnnotationType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Type(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Automation_AnnotationType(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetType(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): Microsoft_UI_Xaml_Automation_AutomationAnnotation {
+        var created__: Option<Microsoft_UI_Xaml_Automation_AutomationAnnotation> = Option<Microsoft_UI_Xaml_Automation_AutomationAnnotation>.None
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationAnnotation, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Automation_AutomationAnnotation>(Microsoft_UI_Xaml_Automation_AutomationAnnotation.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce AutomationAnnotation")
+        }
+    }
+
+    public static func TypeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationAnnotation, Microsoft_UI_Xaml_Automation_IAutomationAnnotationStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TypeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ElementProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationAnnotation, Microsoft_UI_Xaml_Automation_IAutomationAnnotationStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ElementProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstance(type_: Microsoft_UI_Xaml_Automation_AnnotationType): Microsoft_UI_Xaml_Automation_AutomationAnnotation {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationAnnotation, Microsoft_UI_Xaml_Automation_IAutomationAnnotationFactory>().unwrap()) {
+            hr__ = unsafe { factory__.CreateInstance(type_.value, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Automation_AutomationAnnotation>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_Automation_AutomationAnnotation.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateWithElementParameter(type_: Microsoft_UI_Xaml_Automation_AnnotationType, element: Microsoft_UI_Xaml_UIElement): Microsoft_UI_Xaml_Automation_AutomationAnnotation {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_UIElement>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationAnnotation, Microsoft_UI_Xaml_Automation_IAutomationAnnotationFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateWithElementParameter(type_.value, __argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Automation_AutomationAnnotation>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_Automation_AutomationAnnotation.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.AutomationAnnotation"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.AutomationAnnotation;{" + Microsoft_UI_Xaml_Automation_IAutomationAnnotation.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.AutomationAnnotation", Microsoft_UI_Xaml_Automation_AutomationAnnotation.signature(), Microsoft_UI_Xaml_Automation_IAutomationAnnotation.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Automation_AutomationAnnotation <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Automation_AutomationAnnotation> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Automation_AutomationAnnotation): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Automation_AutomationAnnotation {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Automation_AutomationAnnotation.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Automation_AutomationAnnotation {
+        Microsoft_UI_Xaml_Automation_AutomationAnnotation.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Automation.AutomationProperties (synthetic:Microsoft_UI_Xaml_Automation_AutomationProperties)
+public class Microsoft_UI_Xaml_Automation_AutomationProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Automation_AutomationProperties {
+        Microsoft_UI_Xaml_Automation_AutomationProperties(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Automation_AutomationProperties {
+        Microsoft_UI_Xaml_Automation_AutomationProperties(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Automation_IAutomationProperties.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Automation_AutomationProperties> {
+        let ancestors = [Microsoft_UI_Xaml_Automation_IAutomationProperties.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Automation_AutomationProperties>("AutomationProperties", Microsoft_UI_Xaml_Automation_IAutomationProperties.iid(), ancestors, { raw => Microsoft_UI_Xaml_Automation_AutomationProperties.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Automation_AutomationProperties.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Automation_IAutomationProperties {
+        match (unsafe { query(Microsoft_UI_Xaml_Automation_IAutomationProperties.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAutomationProperties(): Microsoft_UI_Xaml_Automation_IAutomationProperties {
+        defaultInterface()
+    }
+
+    public static func AutomationControlTypeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.AutomationControlTypeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetAutomationControlType(element: Microsoft_UI_Xaml_UIElement): Microsoft_UI_Xaml_Automation_Peers_AutomationControlType {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_UIElement>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.GetAutomationControlType(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(result__)
+    }
+
+    public static func SetAutomationControlType(element: Microsoft_UI_Xaml_UIElement, value: Microsoft_UI_Xaml_Automation_Peers_AutomationControlType): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_UIElement>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics2>().unwrap()) {
+                hr__ = unsafe { factory__.SetAutomationControlType(__argBorrow0.asRaw(), value.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func AcceleratorKeyProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AcceleratorKeyProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetAcceleratorKey(element: Microsoft_UI_Xaml_DependencyObject): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetAcceleratorKey(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SetAcceleratorKey(element: Microsoft_UI_Xaml_DependencyObject, value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetAcceleratorKey(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func AccessKeyProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AccessKeyProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetAccessKey(element: Microsoft_UI_Xaml_DependencyObject): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetAccessKey(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SetAccessKey(element: Microsoft_UI_Xaml_DependencyObject, value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetAccessKey(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func AutomationIdProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AutomationIdProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetAutomationId(element: Microsoft_UI_Xaml_DependencyObject): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetAutomationId(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SetAutomationId(element: Microsoft_UI_Xaml_DependencyObject, value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetAutomationId(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func HelpTextProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HelpTextProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetHelpText(element: Microsoft_UI_Xaml_DependencyObject): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetHelpText(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SetHelpText(element: Microsoft_UI_Xaml_DependencyObject, value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetHelpText(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func IsRequiredForFormProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsRequiredForFormProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetIsRequiredForForm(element: Microsoft_UI_Xaml_DependencyObject): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetIsRequiredForForm(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetIsRequiredForForm(element: Microsoft_UI_Xaml_DependencyObject, value: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetIsRequiredForForm(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func ItemStatusProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ItemStatusProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetItemStatus(element: Microsoft_UI_Xaml_DependencyObject): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetItemStatus(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SetItemStatus(element: Microsoft_UI_Xaml_DependencyObject, value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetItemStatus(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func ItemTypeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ItemTypeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetItemType(element: Microsoft_UI_Xaml_DependencyObject): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetItemType(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SetItemType(element: Microsoft_UI_Xaml_DependencyObject, value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetItemType(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func LabeledByProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LabeledByProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetLabeledBy(element: Microsoft_UI_Xaml_DependencyObject): Microsoft_UI_Xaml_UIElement {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetLabeledBy(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_UIElement>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_UIElement.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SetLabeledBy(element: Microsoft_UI_Xaml_DependencyObject, value: Microsoft_UI_Xaml_UIElement): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_UIElement>(value)) {
+                try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetLabeledBy(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func NameProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.NameProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetName(element: Microsoft_UI_Xaml_DependencyObject): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetName(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SetName(element: Microsoft_UI_Xaml_DependencyObject, value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetName(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func LiveSettingProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LiveSettingProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetLiveSetting(element: Microsoft_UI_Xaml_DependencyObject): Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetLiveSetting(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting(result__)
+    }
+
+    public static func SetLiveSetting(element: Microsoft_UI_Xaml_DependencyObject, value: Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetLiveSetting(__argBorrow0.asRaw(), value.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func AccessibilityViewProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AccessibilityViewProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetAccessibilityView(element: Microsoft_UI_Xaml_DependencyObject): Microsoft_UI_Xaml_Automation_Peers_AccessibilityView {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetAccessibilityView(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_Automation_Peers_AccessibilityView(result__)
+    }
+
+    public static func SetAccessibilityView(element: Microsoft_UI_Xaml_DependencyObject, value: Microsoft_UI_Xaml_Automation_Peers_AccessibilityView): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetAccessibilityView(__argBorrow0.asRaw(), value.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func ControlledPeersProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ControlledPeersProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetControlledPeers(element: Microsoft_UI_Xaml_DependencyObject): Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_UIElement> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetControlledPeers(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_UIElement>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_UIElement>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func PositionInSetProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PositionInSetProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetPositionInSet(element: Microsoft_UI_Xaml_DependencyObject): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetPositionInSet(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetPositionInSet(element: Microsoft_UI_Xaml_DependencyObject, value: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetPositionInSet(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func SizeOfSetProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SizeOfSetProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetSizeOfSet(element: Microsoft_UI_Xaml_DependencyObject): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetSizeOfSet(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetSizeOfSet(element: Microsoft_UI_Xaml_DependencyObject, value: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetSizeOfSet(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func LevelProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LevelProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetLevel(element: Microsoft_UI_Xaml_DependencyObject): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetLevel(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetLevel(element: Microsoft_UI_Xaml_DependencyObject, value: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetLevel(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func AnnotationsProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AnnotationsProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetAnnotations(element: Microsoft_UI_Xaml_DependencyObject): Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_Automation_AutomationAnnotation> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetAnnotations(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_Automation_AutomationAnnotation>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_Automation_AutomationAnnotation>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LandmarkTypeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LandmarkTypeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetLandmarkType(element: Microsoft_UI_Xaml_DependencyObject): Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetLandmarkType(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType(result__)
+    }
+
+    public static func SetLandmarkType(element: Microsoft_UI_Xaml_DependencyObject, value: Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetLandmarkType(__argBorrow0.asRaw(), value.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func LocalizedLandmarkTypeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LocalizedLandmarkTypeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetLocalizedLandmarkType(element: Microsoft_UI_Xaml_DependencyObject): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetLocalizedLandmarkType(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SetLocalizedLandmarkType(element: Microsoft_UI_Xaml_DependencyObject, value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetLocalizedLandmarkType(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func IsPeripheralProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsPeripheralProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetIsPeripheral(element: Microsoft_UI_Xaml_DependencyObject): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetIsPeripheral(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetIsPeripheral(element: Microsoft_UI_Xaml_DependencyObject, value: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetIsPeripheral(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func IsDataValidForFormProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsDataValidForFormProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetIsDataValidForForm(element: Microsoft_UI_Xaml_DependencyObject): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetIsDataValidForForm(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetIsDataValidForForm(element: Microsoft_UI_Xaml_DependencyObject, value: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetIsDataValidForForm(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func FullDescriptionProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FullDescriptionProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetFullDescription(element: Microsoft_UI_Xaml_DependencyObject): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetFullDescription(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SetFullDescription(element: Microsoft_UI_Xaml_DependencyObject, value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetFullDescription(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func LocalizedControlTypeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LocalizedControlTypeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetLocalizedControlType(element: Microsoft_UI_Xaml_DependencyObject): windows_core.HString {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetLocalizedControlType(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return windows_core.HString.fromSystemHandleTake(result__)
+    }
+
+    public static func SetLocalizedControlType(element: Microsoft_UI_Xaml_DependencyObject, value: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                    hr__ = unsafe { factory__.SetLocalizedControlType(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func DescribedByProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DescribedByProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetDescribedBy(element: Microsoft_UI_Xaml_DependencyObject): Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_DependencyObject> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetDescribedBy(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_DependencyObject>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_DependencyObject>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FlowsToProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FlowsToProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetFlowsTo(element: Microsoft_UI_Xaml_DependencyObject): Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_DependencyObject> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetFlowsTo(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_DependencyObject>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_DependencyObject>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FlowsFromProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FlowsFromProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetFlowsFrom(element: Microsoft_UI_Xaml_DependencyObject): Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_DependencyObject> {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetFlowsFrom(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_DependencyObject>>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_DependencyObject>.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CultureProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CultureProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetCulture(element: Microsoft_UI_Xaml_DependencyObject): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetCulture(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetCulture(element: Microsoft_UI_Xaml_DependencyObject, value: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetCulture(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func HeadingLevelProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HeadingLevelProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetHeadingLevel(element: Microsoft_UI_Xaml_DependencyObject): Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetHeadingLevel(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel(result__)
+    }
+
+    public static func SetHeadingLevel(element: Microsoft_UI_Xaml_DependencyObject, value: Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetHeadingLevel(__argBorrow0.asRaw(), value.value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func IsDialogProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsDialogProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetIsDialog(element: Microsoft_UI_Xaml_DependencyObject): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetIsDialog(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetIsDialog(element: Microsoft_UI_Xaml_DependencyObject, value: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Automation_AutomationProperties, Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetIsDialog(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Automation.AutomationProperties"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Automation.AutomationProperties;{" + Microsoft_UI_Xaml_Automation_IAutomationProperties.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Automation.AutomationProperties", Microsoft_UI_Xaml_Automation_AutomationProperties.signature(), Microsoft_UI_Xaml_Automation_IAutomationProperties.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Automation_AutomationProperties <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Automation_AutomationProperties> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Automation_AutomationProperties): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Automation_AutomationProperties {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Automation_AutomationProperties.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Automation_AutomationProperties {
+        Microsoft_UI_Xaml_Automation_AutomationProperties.viewOf(raw)
+    }
+}
+
 // Microsoft.UI.Xaml.Automation.AutomationProperty (synthetic:Microsoft_UI_Xaml_Automation_AutomationProperty)
 public class Microsoft_UI_Xaml_Automation_AutomationProperty <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
@@ -28779,10 +31395,144 @@ public let Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType_AutoCorrect
 public let Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType_Composition = Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType(2)
 public let Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType_CompositionFinalized = Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType(3)
 
+// Microsoft.UI.Xaml.Automation.IAutomationAnnotation (synthetic:Microsoft_UI_Xaml_Automation_IAutomationAnnotation)
+@Interface["c2cc46ad-1414-5f1b-808a-89e5d53d82fe", "Microsoft.UI.Xaml.Automation.IAutomationAnnotation", "Element.value=Com"]
+public interface Microsoft_UI_Xaml_Automation_IAutomationAnnotation <: IInspectable {
+    func Type(value: CPointer<Int32>): Int32
+    func SetType(value: Int32): Int32
+    func Element(value: CPointer<CPointer<Unit>>): Int32
+    func SetElement(value: CPointer<Unit>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IAutomationAnnotationFactory (synthetic:Microsoft_UI_Xaml_Automation_IAutomationAnnotationFactory)
+@Interface["95f82773-eac5-572e-87de-24d9514b9a89", "Microsoft.UI.Xaml.Automation.IAutomationAnnotationFactory", "CreateInstance.value=Com;CreateWithElementParameter.value=Com"]
+public interface Microsoft_UI_Xaml_Automation_IAutomationAnnotationFactory <: IInspectable {
+    func CreateInstance(type_: Int32, value: CPointer<CPointer<Unit>>): Int32
+    func CreateWithElementParameter(type_: Int32, element: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IAutomationAnnotationStatics (synthetic:Microsoft_UI_Xaml_Automation_IAutomationAnnotationStatics)
+@Interface["c5abdc1e-fc26-5444-a8b3-59b2c0a95578", "Microsoft.UI.Xaml.Automation.IAutomationAnnotationStatics", "TypeProperty.value=Com;ElementProperty.value=Com"]
+public interface Microsoft_UI_Xaml_Automation_IAutomationAnnotationStatics <: IInspectable {
+    func TypeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func ElementProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IAutomationProperties (synthetic:Microsoft_UI_Xaml_Automation_IAutomationProperties)
+@Interface["525c6a71-dd8a-52a0-977b-db1b02f8e896", "Microsoft.UI.Xaml.Automation.IAutomationProperties"]
+public interface Microsoft_UI_Xaml_Automation_IAutomationProperties <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Automation.IAutomationPropertiesStatics (synthetic:Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics)
+@Interface["b1e3e0f3-112f-5966-87dc-7862d4ad50e5", "Microsoft.UI.Xaml.Automation.IAutomationPropertiesStatics", "AcceleratorKeyProperty.value=Com;GetAcceleratorKey.result=HString;AccessKeyProperty.value=Com;GetAccessKey.result=HString;AutomationIdProperty.value=Com;GetAutomationId.result=HString;HelpTextProperty.value=Com;GetHelpText.result=HString;IsRequiredForFormProperty.value=Com;ItemStatusProperty.value=Com;GetItemStatus.result=HString;ItemTypeProperty.value=Com;GetItemType.result=HString;LabeledByProperty.value=Com;GetLabeledBy.result=Com;NameProperty.value=Com;GetName.result=HString;LiveSettingProperty.value=Com;AccessibilityViewProperty.value=Com;ControlledPeersProperty.value=Com;GetControlledPeers.result=Com;PositionInSetProperty.value=Com;SizeOfSetProperty.value=Com;LevelProperty.value=Com;AnnotationsProperty.value=Com;GetAnnotations.result=Com;LandmarkTypeProperty.value=Com;LocalizedLandmarkTypeProperty.value=Com;GetLocalizedLandmarkType.result=HString;IsPeripheralProperty.value=Com;IsDataValidForFormProperty.value=Com;FullDescriptionProperty.value=Com;GetFullDescription.result=HString;LocalizedControlTypeProperty.value=Com;GetLocalizedControlType.result=HString;DescribedByProperty.value=Com;GetDescribedBy.result=Com;FlowsToProperty.value=Com;GetFlowsTo.result=Com;FlowsFromProperty.value=Com;GetFlowsFrom.result=Com;CultureProperty.value=Com;HeadingLevelProperty.value=Com;IsDialogProperty.value=Com"]
+public interface Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics <: IInspectable {
+    func AcceleratorKeyProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetAcceleratorKey(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetAcceleratorKey(element: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func AccessKeyProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetAccessKey(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetAccessKey(element: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func AutomationIdProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetAutomationId(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetAutomationId(element: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func HelpTextProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetHelpText(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetHelpText(element: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func IsRequiredForFormProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetIsRequiredForForm(element: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func SetIsRequiredForForm(element: CPointer<Unit>, value: Bool): Int32
+    func ItemStatusProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetItemStatus(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetItemStatus(element: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func ItemTypeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetItemType(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetItemType(element: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func LabeledByProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetLabeledBy(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetLabeledBy(element: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func NameProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetName(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetName(element: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func LiveSettingProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetLiveSetting(element: CPointer<Unit>, result: CPointer<Int32>): Int32
+    func SetLiveSetting(element: CPointer<Unit>, value: Int32): Int32
+    func AccessibilityViewProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetAccessibilityView(element: CPointer<Unit>, result: CPointer<Int32>): Int32
+    func SetAccessibilityView(element: CPointer<Unit>, value: Int32): Int32
+    func ControlledPeersProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetControlledPeers(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func PositionInSetProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetPositionInSet(element: CPointer<Unit>, result: CPointer<Int32>): Int32
+    func SetPositionInSet(element: CPointer<Unit>, value: Int32): Int32
+    func SizeOfSetProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetSizeOfSet(element: CPointer<Unit>, result: CPointer<Int32>): Int32
+    func SetSizeOfSet(element: CPointer<Unit>, value: Int32): Int32
+    func LevelProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetLevel(element: CPointer<Unit>, result: CPointer<Int32>): Int32
+    func SetLevel(element: CPointer<Unit>, value: Int32): Int32
+    func AnnotationsProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetAnnotations(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func LandmarkTypeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetLandmarkType(element: CPointer<Unit>, result: CPointer<Int32>): Int32
+    func SetLandmarkType(element: CPointer<Unit>, value: Int32): Int32
+    func LocalizedLandmarkTypeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetLocalizedLandmarkType(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetLocalizedLandmarkType(element: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func IsPeripheralProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetIsPeripheral(element: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func SetIsPeripheral(element: CPointer<Unit>, value: Bool): Int32
+    func IsDataValidForFormProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetIsDataValidForForm(element: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func SetIsDataValidForForm(element: CPointer<Unit>, value: Bool): Int32
+    func FullDescriptionProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetFullDescription(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetFullDescription(element: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func LocalizedControlTypeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetLocalizedControlType(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func SetLocalizedControlType(element: CPointer<Unit>, value: CPointer<Unit>): Int32
+    func DescribedByProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetDescribedBy(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func FlowsToProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetFlowsTo(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func FlowsFromProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetFlowsFrom(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
+    func CultureProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetCulture(element: CPointer<Unit>, result: CPointer<Int32>): Int32
+    func SetCulture(element: CPointer<Unit>, value: Int32): Int32
+    func HeadingLevelProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetHeadingLevel(element: CPointer<Unit>, result: CPointer<Int32>): Int32
+    func SetHeadingLevel(element: CPointer<Unit>, value: Int32): Int32
+    func IsDialogProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetIsDialog(element: CPointer<Unit>, result: CPointer<Bool>): Int32
+    func SetIsDialog(element: CPointer<Unit>, value: Bool): Int32
+}
+
+// Microsoft.UI.Xaml.Automation.IAutomationPropertiesStatics2 (synthetic:Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics2)
+@Interface["d933a3ed-e90a-5df0-853d-cad17a0b9ec8", "Microsoft.UI.Xaml.Automation.IAutomationPropertiesStatics2", "AutomationControlTypeProperty.value=Com"]
+public interface Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics2 <: IInspectable {
+    func AutomationControlTypeProperty(value: CPointer<CPointer<Unit>>): Int32
+    func GetAutomationControlType(element: CPointer<Unit>, result: CPointer<Int32>): Int32
+    func SetAutomationControlType(element: CPointer<Unit>, value: Int32): Int32
+}
+
 // Microsoft.UI.Xaml.Automation.IAutomationProperty (synthetic:Microsoft_UI_Xaml_Automation_IAutomationProperty)
 @Interface["5ca6b2c8-ff86-5a41-aa18-6948fae592cf", "Microsoft.UI.Xaml.Automation.IAutomationProperty"]
 public interface Microsoft_UI_Xaml_Automation_IAutomationProperty <: IInspectable {
 }
+
+// Microsoft.UI.Xaml.Automation.Peers.AccessibilityView (synthetic:Microsoft_UI_Xaml_Automation_Peers_AccessibilityView)
+public struct Microsoft_UI_Xaml_Automation_Peers_AccessibilityView {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Xaml_Automation_Peers_AccessibilityView_Raw = Microsoft_UI_Xaml_Automation_Peers_AccessibilityView(0)
+public let Microsoft_UI_Xaml_Automation_Peers_AccessibilityView_Control = Microsoft_UI_Xaml_Automation_Peers_AccessibilityView(1)
+public let Microsoft_UI_Xaml_Automation_Peers_AccessibilityView_Content = Microsoft_UI_Xaml_Automation_Peers_AccessibilityView(2)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationControlType (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationControlType)
 public struct Microsoft_UI_Xaml_Automation_Peers_AutomationControlType {
@@ -31085,6 +33835,2816 @@ extend Microsoft_UI_Xaml_BrushTransition <: windows_core.HandleWinrtType<Microso
     }
 }
 
+// Microsoft.UI.Xaml.Controls.AnchorRequestedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs)
+public class Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs {
+        Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs {
+        Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_IAnchorRequestedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IAnchorRequestedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs>("AnchorRequestedEventArgs", Microsoft_UI_Xaml_Controls_IAnchorRequestedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IAnchorRequestedEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IAnchorRequestedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAnchorRequestedEventArgs(): Microsoft_UI_Xaml_Controls_IAnchorRequestedEventArgs {
+        defaultInterface()
+    }
+
+    public mut prop Anchor: Microsoft_UI_Xaml_UIElement {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Anchor(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_UIElement>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_UIElement.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_UIElement>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetAnchor(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop AnchorCandidates: Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_UIElement> {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AnchorCandidates(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_UIElement>>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Windows_Foundation_Collections_IVector_1<Microsoft_UI_Xaml_UIElement>.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.AnchorRequestedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.AnchorRequestedEventArgs;{" + Microsoft_UI_Xaml_Controls_IAnchorRequestedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AnchorRequestedEventArgs", Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs.signature(), Microsoft_UI_Xaml_Controls_IAnchorRequestedEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs {
+        Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.AppBar (synthetic:Microsoft_UI_Xaml_Controls_AppBar)
+public class Microsoft_UI_Xaml_Controls_AppBar <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBar {
+        Microsoft_UI_Xaml_Controls_AppBar(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBar {
+        Microsoft_UI_Xaml_Controls_AppBar(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_IAppBar.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AppBar> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IAppBar.iid(), Microsoft_UI_Xaml_Controls_IAppBarOverrides.iid(), Microsoft_UI_Xaml_Controls_IContentControl.iid(), Microsoft_UI_Xaml_Controls_IContentControlOverrides.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AppBar>("AppBar", Microsoft_UI_Xaml_Controls_IAppBar.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_AppBar.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_AppBar.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IAppBar {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IAppBar.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAppBar(): Microsoft_UI_Xaml_Controls_IAppBar {
+        defaultInterface()
+    }
+
+    public func asIAppBarOverrides(): Microsoft_UI_Xaml_Controls_IAppBarOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IAppBarOverrides>(Microsoft_UI_Xaml_Controls_IAppBarOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentControl(): Microsoft_UI_Xaml_Controls_IContentControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IContentControl>(Microsoft_UI_Xaml_Controls_IContentControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentControlOverrides(): Microsoft_UI_Xaml_Controls_IContentControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IContentControlOverrides>(Microsoft_UI_Xaml_Controls_IContentControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop ClosedDisplayMode: Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ClosedDisplayMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetClosedDisplayMode(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsOpen: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsOpen(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsOpen(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsSticky: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsSticky(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsSticky(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop LightDismissOverlayMode: Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LightDismissOverlayMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetLightDismissOverlayMode(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop TemplateSettings: Microsoft_UI_Xaml_Controls_Primitives_AppBarTemplateSettings {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TemplateSettings(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_Primitives_AppBarTemplateSettings>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_Primitives_AppBarTemplateSettings.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func addClosed(handler: Windows_Foundation_EventHandler_1<windows_interface.IInspectable>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_EventHandler_1<windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Closed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeClosed(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveClosed(token) }
+        }
+        hr__.check()
+    }
+
+    public func addClosing(handler: Windows_Foundation_EventHandler_1<windows_interface.IInspectable>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_EventHandler_1<windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Closing(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeClosing(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveClosing(token) }
+        }
+        hr__.check()
+    }
+
+    public func addOpened(handler: Windows_Foundation_EventHandler_1<windows_interface.IInspectable>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_EventHandler_1<windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Opened(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeOpened(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveOpened(token) }
+        }
+        hr__.check()
+    }
+
+    public func addOpening(handler: Windows_Foundation_EventHandler_1<windows_interface.IInspectable>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_EventHandler_1<windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Opening(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeOpening(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveOpening(token) }
+        }
+        hr__.check()
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_AppBar {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBar, Microsoft_UI_Xaml_Controls_IAppBarFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_AppBar>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return Microsoft_UI_Xaml_Controls_AppBar.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsOpenProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBar, Microsoft_UI_Xaml_Controls_IAppBarStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsOpenProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsStickyProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBar, Microsoft_UI_Xaml_Controls_IAppBarStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsStickyProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ClosedDisplayModeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBar, Microsoft_UI_Xaml_Controls_IAppBarStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ClosedDisplayModeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LightDismissOverlayModeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBar, Microsoft_UI_Xaml_Controls_IAppBarStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightDismissOverlayModeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.AppBar"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.AppBar;{" + Microsoft_UI_Xaml_Controls_IAppBar.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AppBar", Microsoft_UI_Xaml_Controls_AppBar.signature(), Microsoft_UI_Xaml_Controls_IAppBar.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_AppBar <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AppBar> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AppBar): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBar {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_AppBar.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBar {
+        Microsoft_UI_Xaml_Controls_AppBar.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.AppBarButton (synthetic:Microsoft_UI_Xaml_Controls_AppBarButton)
+public class Microsoft_UI_Xaml_Controls_AppBarButton <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBarButton {
+        Microsoft_UI_Xaml_Controls_AppBarButton(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBarButton {
+        Microsoft_UI_Xaml_Controls_AppBarButton(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_IAppBarButton.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AppBarButton> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IAppBarButton.iid(), Microsoft_UI_Xaml_Controls_ICommandBarElement.iid(), Microsoft_UI_Xaml_Controls_IButton.iid(), Microsoft_UI_Xaml_Controls_Primitives_IButtonBase.iid(), Microsoft_UI_Xaml_Controls_IContentControl.iid(), Microsoft_UI_Xaml_Controls_IContentControlOverrides.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AppBarButton>("AppBarButton", Microsoft_UI_Xaml_Controls_IAppBarButton.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_AppBarButton.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_AppBarButton.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IAppBarButton {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IAppBarButton.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAppBarButton(): Microsoft_UI_Xaml_Controls_IAppBarButton {
+        defaultInterface()
+    }
+
+    public func asICommandBarElement(): Microsoft_UI_Xaml_Controls_ICommandBarElement {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_ICommandBarElement>(Microsoft_UI_Xaml_Controls_ICommandBarElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButton(): Microsoft_UI_Xaml_Controls_IButton {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IButton>(Microsoft_UI_Xaml_Controls_IButton.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonBase(): Microsoft_UI_Xaml_Controls_Primitives_IButtonBase {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_Primitives_IButtonBase>(Microsoft_UI_Xaml_Controls_Primitives_IButtonBase.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentControl(): Microsoft_UI_Xaml_Controls_IContentControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IContentControl>(Microsoft_UI_Xaml_Controls_IContentControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentControlOverrides(): Microsoft_UI_Xaml_Controls_IContentControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IContentControlOverrides>(Microsoft_UI_Xaml_Controls_IContentControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Icon: Microsoft_UI_Xaml_Controls_IconElement {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Icon(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetIcon(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop KeyboardAcceleratorTextOverride: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.KeyboardAcceleratorTextOverride(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetKeyboardAcceleratorTextOverride(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Label: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Label(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetLabel(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop LabelPosition: Microsoft_UI_Xaml_Controls_CommandBarLabelPosition {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LabelPosition(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_CommandBarLabelPosition(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetLabelPosition(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop TemplateSettings: Microsoft_UI_Xaml_Controls_Primitives_AppBarButtonTemplateSettings {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TemplateSettings(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_Primitives_AppBarButtonTemplateSettings>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_Primitives_AppBarButtonTemplateSettings.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_AppBarButton {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarButton, Microsoft_UI_Xaml_Controls_IAppBarButtonFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_AppBarButton>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return Microsoft_UI_Xaml_Controls_AppBarButton.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LabelProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarButton, Microsoft_UI_Xaml_Controls_IAppBarButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LabelProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IconProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarButton, Microsoft_UI_Xaml_Controls_IAppBarButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IconProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LabelPositionProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarButton, Microsoft_UI_Xaml_Controls_IAppBarButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LabelPositionProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func KeyboardAcceleratorTextOverrideProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarButton, Microsoft_UI_Xaml_Controls_IAppBarButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.KeyboardAcceleratorTextOverrideProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsCompactProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarButton, Microsoft_UI_Xaml_Controls_IAppBarButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsCompactProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsInOverflowProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarButton, Microsoft_UI_Xaml_Controls_IAppBarButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsInOverflowProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DynamicOverflowOrderProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarButton, Microsoft_UI_Xaml_Controls_IAppBarButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DynamicOverflowOrderProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.AppBarButton"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.AppBarButton;{" + Microsoft_UI_Xaml_Controls_IAppBarButton.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AppBarButton", Microsoft_UI_Xaml_Controls_AppBarButton.signature(), Microsoft_UI_Xaml_Controls_IAppBarButton.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_AppBarButton <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AppBarButton> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AppBarButton): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBarButton {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_AppBarButton.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBarButton {
+        Microsoft_UI_Xaml_Controls_AppBarButton.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.AppBarClosedDisplayMode (synthetic:Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode)
+public struct Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode_Compact = Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode(0)
+public let Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode_Minimal = Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode(1)
+public let Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode_Hidden = Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode(2)
+
+// Microsoft.UI.Xaml.Controls.AppBarSeparator (synthetic:Microsoft_UI_Xaml_Controls_AppBarSeparator)
+public class Microsoft_UI_Xaml_Controls_AppBarSeparator <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBarSeparator {
+        Microsoft_UI_Xaml_Controls_AppBarSeparator(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBarSeparator {
+        Microsoft_UI_Xaml_Controls_AppBarSeparator(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_IAppBarSeparator.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AppBarSeparator> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IAppBarSeparator.iid(), Microsoft_UI_Xaml_Controls_ICommandBarElement.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AppBarSeparator>("AppBarSeparator", Microsoft_UI_Xaml_Controls_IAppBarSeparator.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_AppBarSeparator.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_AppBarSeparator.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IAppBarSeparator {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IAppBarSeparator.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAppBarSeparator(): Microsoft_UI_Xaml_Controls_IAppBarSeparator {
+        defaultInterface()
+    }
+
+    public func asICommandBarElement(): Microsoft_UI_Xaml_Controls_ICommandBarElement {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_ICommandBarElement>(Microsoft_UI_Xaml_Controls_ICommandBarElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func IsCompactProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarSeparator, Microsoft_UI_Xaml_Controls_IAppBarSeparatorStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsCompactProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsInOverflowProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarSeparator, Microsoft_UI_Xaml_Controls_IAppBarSeparatorStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsInOverflowProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DynamicOverflowOrderProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarSeparator, Microsoft_UI_Xaml_Controls_IAppBarSeparatorStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DynamicOverflowOrderProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_AppBarSeparator {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarSeparator, Microsoft_UI_Xaml_Controls_IAppBarSeparatorFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_AppBarSeparator>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return Microsoft_UI_Xaml_Controls_AppBarSeparator.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.AppBarSeparator"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.AppBarSeparator;{" + Microsoft_UI_Xaml_Controls_IAppBarSeparator.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AppBarSeparator", Microsoft_UI_Xaml_Controls_AppBarSeparator.signature(), Microsoft_UI_Xaml_Controls_IAppBarSeparator.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_AppBarSeparator <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AppBarSeparator> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AppBarSeparator): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBarSeparator {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_AppBarSeparator.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBarSeparator {
+        Microsoft_UI_Xaml_Controls_AppBarSeparator.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.AppBarToggleButton (synthetic:Microsoft_UI_Xaml_Controls_AppBarToggleButton)
+public class Microsoft_UI_Xaml_Controls_AppBarToggleButton <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBarToggleButton {
+        Microsoft_UI_Xaml_Controls_AppBarToggleButton(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBarToggleButton {
+        Microsoft_UI_Xaml_Controls_AppBarToggleButton(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_IAppBarToggleButton.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AppBarToggleButton> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IAppBarToggleButton.iid(), Microsoft_UI_Xaml_Controls_ICommandBarElement.iid(), Microsoft_UI_Xaml_Controls_Primitives_IToggleButton.iid(), Microsoft_UI_Xaml_Controls_Primitives_IToggleButtonOverrides.iid(), Microsoft_UI_Xaml_Controls_Primitives_IButtonBase.iid(), Microsoft_UI_Xaml_Controls_IContentControl.iid(), Microsoft_UI_Xaml_Controls_IContentControlOverrides.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AppBarToggleButton>("AppBarToggleButton", Microsoft_UI_Xaml_Controls_IAppBarToggleButton.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_AppBarToggleButton.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_AppBarToggleButton.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IAppBarToggleButton {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IAppBarToggleButton.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAppBarToggleButton(): Microsoft_UI_Xaml_Controls_IAppBarToggleButton {
+        defaultInterface()
+    }
+
+    public func asICommandBarElement(): Microsoft_UI_Xaml_Controls_ICommandBarElement {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_ICommandBarElement>(Microsoft_UI_Xaml_Controls_ICommandBarElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToggleButton(): Microsoft_UI_Xaml_Controls_Primitives_IToggleButton {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_Primitives_IToggleButton>(Microsoft_UI_Xaml_Controls_Primitives_IToggleButton.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToggleButtonOverrides(): Microsoft_UI_Xaml_Controls_Primitives_IToggleButtonOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_Primitives_IToggleButtonOverrides>(Microsoft_UI_Xaml_Controls_Primitives_IToggleButtonOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonBase(): Microsoft_UI_Xaml_Controls_Primitives_IButtonBase {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_Primitives_IButtonBase>(Microsoft_UI_Xaml_Controls_Primitives_IButtonBase.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentControl(): Microsoft_UI_Xaml_Controls_IContentControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IContentControl>(Microsoft_UI_Xaml_Controls_IContentControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentControlOverrides(): Microsoft_UI_Xaml_Controls_IContentControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IContentControlOverrides>(Microsoft_UI_Xaml_Controls_IContentControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Icon: Microsoft_UI_Xaml_Controls_IconElement {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Icon(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetIcon(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop KeyboardAcceleratorTextOverride: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.KeyboardAcceleratorTextOverride(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetKeyboardAcceleratorTextOverride(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Label: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Label(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetLabel(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop LabelPosition: Microsoft_UI_Xaml_Controls_CommandBarLabelPosition {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LabelPosition(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_CommandBarLabelPosition(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetLabelPosition(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop TemplateSettings: Microsoft_UI_Xaml_Controls_Primitives_AppBarToggleButtonTemplateSettings {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TemplateSettings(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_Primitives_AppBarToggleButtonTemplateSettings>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_Primitives_AppBarToggleButtonTemplateSettings.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_AppBarToggleButton {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarToggleButton, Microsoft_UI_Xaml_Controls_IAppBarToggleButtonFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_AppBarToggleButton>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return Microsoft_UI_Xaml_Controls_AppBarToggleButton.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LabelProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarToggleButton, Microsoft_UI_Xaml_Controls_IAppBarToggleButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LabelProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IconProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarToggleButton, Microsoft_UI_Xaml_Controls_IAppBarToggleButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IconProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LabelPositionProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarToggleButton, Microsoft_UI_Xaml_Controls_IAppBarToggleButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LabelPositionProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func KeyboardAcceleratorTextOverrideProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarToggleButton, Microsoft_UI_Xaml_Controls_IAppBarToggleButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.KeyboardAcceleratorTextOverrideProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsCompactProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarToggleButton, Microsoft_UI_Xaml_Controls_IAppBarToggleButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsCompactProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsInOverflowProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarToggleButton, Microsoft_UI_Xaml_Controls_IAppBarToggleButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsInOverflowProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DynamicOverflowOrderProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AppBarToggleButton, Microsoft_UI_Xaml_Controls_IAppBarToggleButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DynamicOverflowOrderProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.AppBarToggleButton"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.AppBarToggleButton;{" + Microsoft_UI_Xaml_Controls_IAppBarToggleButton.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AppBarToggleButton", Microsoft_UI_Xaml_Controls_AppBarToggleButton.signature(), Microsoft_UI_Xaml_Controls_IAppBarToggleButton.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_AppBarToggleButton <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AppBarToggleButton> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AppBarToggleButton): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBarToggleButton {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_AppBarToggleButton.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AppBarToggleButton {
+        Microsoft_UI_Xaml_Controls_AppBarToggleButton.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.AutoSuggestBox (synthetic:Microsoft_UI_Xaml_Controls_AutoSuggestBox)
+public class Microsoft_UI_Xaml_Controls_AutoSuggestBox <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBox {
+        Microsoft_UI_Xaml_Controls_AutoSuggestBox(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBox {
+        Microsoft_UI_Xaml_Controls_AutoSuggestBox(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_IAutoSuggestBox.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AutoSuggestBox> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IAutoSuggestBox.iid(), Microsoft_UI_Xaml_Controls_IItemsControl.iid(), Microsoft_UI_Xaml_Controls_IItemsControlOverrides.iid(), Microsoft_UI_Xaml_Controls_IItemContainerMapping.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AutoSuggestBox>("AutoSuggestBox", Microsoft_UI_Xaml_Controls_IAutoSuggestBox.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_AutoSuggestBox.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_AutoSuggestBox.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IAutoSuggestBox {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IAutoSuggestBox.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAutoSuggestBox(): Microsoft_UI_Xaml_Controls_IAutoSuggestBox {
+        defaultInterface()
+    }
+
+    public func asIItemsControl(): Microsoft_UI_Xaml_Controls_IItemsControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IItemsControl>(Microsoft_UI_Xaml_Controls_IItemsControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemsControlOverrides(): Microsoft_UI_Xaml_Controls_IItemsControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IItemsControlOverrides>(Microsoft_UI_Xaml_Controls_IItemsControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIItemContainerMapping(): Microsoft_UI_Xaml_Controls_IItemContainerMapping {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IItemContainerMapping>(Microsoft_UI_Xaml_Controls_IItemContainerMapping.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop AutoMaximizeSuggestionArea: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AutoMaximizeSuggestionArea(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetAutoMaximizeSuggestionArea(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Description: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Description(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetDescription(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Header: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Header(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetHeader(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsSuggestionListOpen: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsSuggestionListOpen(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsSuggestionListOpen(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop LightDismissOverlayMode: Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LightDismissOverlayMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetLightDismissOverlayMode(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxSuggestionListHeight: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxSuggestionListHeight(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMaxSuggestionListHeight(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop PlaceholderText: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PlaceholderText(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetPlaceholderText(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop QueryIcon: Microsoft_UI_Xaml_Controls_IconElement {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.QueryIcon(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetQueryIcon(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Text: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Text(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetText(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TextBoxStyle: Microsoft_UI_Xaml_Style {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TextBoxStyle(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Style>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Style.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Style>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTextBoxStyle(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TextMemberPath: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TextMemberPath(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTextMemberPath(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop UpdateTextOnSelect: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.UpdateTextOnSelect(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetUpdateTextOnSelect(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addQuerySubmitted(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.QuerySubmitted(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeQuerySubmitted(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveQuerySubmitted(token) }
+        }
+        hr__.check()
+    }
+
+    public func addSuggestionChosen(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SuggestionChosen(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeSuggestionChosen(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveSuggestionChosen(token) }
+        }
+        hr__.check()
+    }
+
+    public func addTextChanged(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TextChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeTextChanged(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveTextChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public static func new(): Microsoft_UI_Xaml_Controls_AutoSuggestBox {
+        var created__: Option<Microsoft_UI_Xaml_Controls_AutoSuggestBox> = Option<Microsoft_UI_Xaml_Controls_AutoSuggestBox>.None
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBox, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Controls_AutoSuggestBox>(Microsoft_UI_Xaml_Controls_AutoSuggestBox.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce AutoSuggestBox")
+        }
+    }
+
+    public static func MaxSuggestionListHeightProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MaxSuggestionListHeightProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsSuggestionListOpenProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsSuggestionListOpenProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TextMemberPathProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TextMemberPathProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TextProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TextProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func UpdateTextOnSelectProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics>().unwrap()) {
+            hr__ = unsafe { factory__.UpdateTextOnSelectProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func PlaceholderTextProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PlaceholderTextProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HeaderProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HeaderProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func AutoMaximizeSuggestionAreaProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics>().unwrap()) {
+            hr__ = unsafe { factory__.AutoMaximizeSuggestionAreaProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TextBoxStyleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TextBoxStyleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func QueryIconProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics>().unwrap()) {
+            hr__ = unsafe { factory__.QueryIconProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LightDismissOverlayModeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightDismissOverlayModeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DescriptionProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBox, Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DescriptionProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.AutoSuggestBox"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.AutoSuggestBox;{" + Microsoft_UI_Xaml_Controls_IAutoSuggestBox.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AutoSuggestBox", Microsoft_UI_Xaml_Controls_AutoSuggestBox.signature(), Microsoft_UI_Xaml_Controls_IAutoSuggestBox.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_AutoSuggestBox <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AutoSuggestBox> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AutoSuggestBox): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBox {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_AutoSuggestBox.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBox {
+        Microsoft_UI_Xaml_Controls_AutoSuggestBox.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.AutoSuggestBoxQuerySubmittedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs)
+public class Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs {
+        Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs {
+        Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_IAutoSuggestBoxQuerySubmittedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IAutoSuggestBoxQuerySubmittedEventArgs.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs>("AutoSuggestBoxQuerySubmittedEventArgs", Microsoft_UI_Xaml_Controls_IAutoSuggestBoxQuerySubmittedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IAutoSuggestBoxQuerySubmittedEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IAutoSuggestBoxQuerySubmittedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAutoSuggestBoxQuerySubmittedEventArgs(): Microsoft_UI_Xaml_Controls_IAutoSuggestBoxQuerySubmittedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop ChosenSuggestion: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ChosenSuggestion(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop QueryText: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.QueryText(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+    }
+
+    public static func new(): Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs {
+        var created__: Option<Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs> = Option<Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs>.None
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs>(Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce AutoSuggestBoxQuerySubmittedEventArgs")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.AutoSuggestBoxQuerySubmittedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.AutoSuggestBoxQuerySubmittedEventArgs;{" + Microsoft_UI_Xaml_Controls_IAutoSuggestBoxQuerySubmittedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AutoSuggestBoxQuerySubmittedEventArgs", Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs.signature(), Microsoft_UI_Xaml_Controls_IAutoSuggestBoxQuerySubmittedEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs {
+        Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.AutoSuggestBoxSuggestionChosenEventArgs (synthetic:Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs)
+public class Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs {
+        Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs {
+        Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_IAutoSuggestBoxSuggestionChosenEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IAutoSuggestBoxSuggestionChosenEventArgs.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs>("AutoSuggestBoxSuggestionChosenEventArgs", Microsoft_UI_Xaml_Controls_IAutoSuggestBoxSuggestionChosenEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IAutoSuggestBoxSuggestionChosenEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IAutoSuggestBoxSuggestionChosenEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAutoSuggestBoxSuggestionChosenEventArgs(): Microsoft_UI_Xaml_Controls_IAutoSuggestBoxSuggestionChosenEventArgs {
+        defaultInterface()
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop SelectedItem: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectedItem(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func new(): Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs {
+        var created__: Option<Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs> = Option<Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs>.None
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs>(Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce AutoSuggestBoxSuggestionChosenEventArgs")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.AutoSuggestBoxSuggestionChosenEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.AutoSuggestBoxSuggestionChosenEventArgs;{" + Microsoft_UI_Xaml_Controls_IAutoSuggestBoxSuggestionChosenEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AutoSuggestBoxSuggestionChosenEventArgs", Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs.signature(), Microsoft_UI_Xaml_Controls_IAutoSuggestBoxSuggestionChosenEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs {
+        Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.AutoSuggestBoxTextChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs)
+public class Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgs.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs>("AutoSuggestBoxTextChangedEventArgs", Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAutoSuggestBoxTextChangedEventArgs(): Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Reason: Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Reason(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetReason(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func CheckCurrent(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.CheckCurrent(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func new(): Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs {
+        var created__: Option<Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs> = Option<Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs>.None
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs>(Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce AutoSuggestBoxTextChangedEventArgs")
+        }
+    }
+
+    public static func ReasonProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs, Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgsStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ReasonProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.AutoSuggestBoxTextChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.AutoSuggestBoxTextChangedEventArgs;{" + Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.AutoSuggestBoxTextChangedEventArgs", Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs.signature(), Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.AutoSuggestionBoxTextChangeReason (synthetic:Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason)
+public struct Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason_UserInput = Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason(0)
+public let Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason_ProgrammaticChange = Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason(1)
+public let Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason_SuggestionChosen = Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason(2)
+
 // Microsoft.UI.Xaml.Controls.BackgroundSizing (synthetic:Microsoft_UI_Xaml_Controls_BackgroundSizing)
 public struct Microsoft_UI_Xaml_Controls_BackgroundSizing {
     public let value: Int32
@@ -31097,6 +36657,6495 @@ public struct Microsoft_UI_Xaml_Controls_BackgroundSizing {
 }
 public let Microsoft_UI_Xaml_Controls_BackgroundSizing_InnerBorderEdge = Microsoft_UI_Xaml_Controls_BackgroundSizing(0)
 public let Microsoft_UI_Xaml_Controls_BackgroundSizing_OuterBorderEdge = Microsoft_UI_Xaml_Controls_BackgroundSizing(1)
+
+// Microsoft.UI.Xaml.Controls.Border (synthetic:Microsoft_UI_Xaml_Controls_Border)
+public class Microsoft_UI_Xaml_Controls_Border <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Border {
+        Microsoft_UI_Xaml_Controls_Border(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Border {
+        Microsoft_UI_Xaml_Controls_Border(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_IBorder.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_Border> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IBorder.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_Border>("Border", Microsoft_UI_Xaml_Controls_IBorder.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_Border.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_Border.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IBorder {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IBorder.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBorder(): Microsoft_UI_Xaml_Controls_IBorder {
+        defaultInterface()
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Background: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Background(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetBackground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop BackgroundSizing: Microsoft_UI_Xaml_Controls_BackgroundSizing {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BackgroundSizing(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_BackgroundSizing(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetBackgroundSizing(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop BackgroundTransition: Microsoft_UI_Xaml_BrushTransition {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BackgroundTransition(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_BrushTransition>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_BrushTransition.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_BrushTransition>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetBackgroundTransition(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop BorderBrush: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BorderBrush(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetBorderBrush(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop BorderThickness: Microsoft_UI_Xaml_Thickness {
+        get() {
+            var result__ = Microsoft_UI_Xaml_Thickness()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BorderThickness(CPointer<Microsoft_UI_Xaml_Thickness>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetBorderThickness(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Child: Microsoft_UI_Xaml_UIElement {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Child(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_UIElement>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_UIElement.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_UIElement>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetChild(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ChildTransitions: Microsoft_UI_Xaml_Media_Animation_TransitionCollection {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ChildTransitions(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Animation_TransitionCollection>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Animation_TransitionCollection.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Animation_TransitionCollection>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetChildTransitions(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CornerRadius: Microsoft_UI_Xaml_CornerRadius {
+        get() {
+            var result__ = Microsoft_UI_Xaml_CornerRadius()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CornerRadius(CPointer<Microsoft_UI_Xaml_CornerRadius>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCornerRadius(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Padding: Microsoft_UI_Xaml_Thickness {
+        get() {
+            var result__ = Microsoft_UI_Xaml_Thickness()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Padding(CPointer<Microsoft_UI_Xaml_Thickness>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetPadding(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): Microsoft_UI_Xaml_Controls_Border {
+        var created__: Option<Microsoft_UI_Xaml_Controls_Border> = Option<Microsoft_UI_Xaml_Controls_Border>.None
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Border, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Controls_Border>(Microsoft_UI_Xaml_Controls_Border.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce Border")
+        }
+    }
+
+    public static func BorderBrushProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Border, Microsoft_UI_Xaml_Controls_IBorderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BorderBrushProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func BorderThicknessProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Border, Microsoft_UI_Xaml_Controls_IBorderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BorderThicknessProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func BackgroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Border, Microsoft_UI_Xaml_Controls_IBorderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BackgroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func BackgroundSizingProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Border, Microsoft_UI_Xaml_Controls_IBorderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BackgroundSizingProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CornerRadiusProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Border, Microsoft_UI_Xaml_Controls_IBorderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CornerRadiusProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func PaddingProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Border, Microsoft_UI_Xaml_Controls_IBorderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PaddingProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ChildTransitionsProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Border, Microsoft_UI_Xaml_Controls_IBorderStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ChildTransitionsProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.Border"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.Border;{" + Microsoft_UI_Xaml_Controls_IBorder.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.Border", Microsoft_UI_Xaml_Controls_Border.signature(), Microsoft_UI_Xaml_Controls_IBorder.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_Border <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_Border> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_Border): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Border {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_Border.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Border {
+        Microsoft_UI_Xaml_Controls_Border.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.BreadcrumbBar (synthetic:Microsoft_UI_Xaml_Controls_BreadcrumbBar)
+public class Microsoft_UI_Xaml_Controls_BreadcrumbBar <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_BreadcrumbBar {
+        Microsoft_UI_Xaml_Controls_BreadcrumbBar(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_BreadcrumbBar {
+        Microsoft_UI_Xaml_Controls_BreadcrumbBar(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_IBreadcrumbBar.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_BreadcrumbBar> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IBreadcrumbBar.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_BreadcrumbBar>("BreadcrumbBar", Microsoft_UI_Xaml_Controls_IBreadcrumbBar.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_BreadcrumbBar.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_BreadcrumbBar.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IBreadcrumbBar {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IBreadcrumbBar.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBreadcrumbBar(): Microsoft_UI_Xaml_Controls_IBreadcrumbBar {
+        defaultInterface()
+    }
+
+    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop ItemTemplate: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ItemTemplate(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetItemTemplate(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ItemsSource: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ItemsSource(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetItemsSource(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addItemClicked(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_BreadcrumbBar, Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_BreadcrumbBar, Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ItemClicked(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeItemClicked(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveItemClicked(token) }
+        }
+        hr__.check()
+    }
+
+    public static func ItemsSourceProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_BreadcrumbBar, Microsoft_UI_Xaml_Controls_IBreadcrumbBarStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ItemsSourceProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ItemTemplateProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_BreadcrumbBar, Microsoft_UI_Xaml_Controls_IBreadcrumbBarStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ItemTemplateProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_BreadcrumbBar {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_BreadcrumbBar, Microsoft_UI_Xaml_Controls_IBreadcrumbBarFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_BreadcrumbBar>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return Microsoft_UI_Xaml_Controls_BreadcrumbBar.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.BreadcrumbBar"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.BreadcrumbBar;{" + Microsoft_UI_Xaml_Controls_IBreadcrumbBar.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.BreadcrumbBar", Microsoft_UI_Xaml_Controls_BreadcrumbBar.signature(), Microsoft_UI_Xaml_Controls_IBreadcrumbBar.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_BreadcrumbBar <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_BreadcrumbBar> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_BreadcrumbBar): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_BreadcrumbBar {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_BreadcrumbBar.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_BreadcrumbBar {
+        Microsoft_UI_Xaml_Controls_BreadcrumbBar.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.BreadcrumbBarItemClickedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs)
+public class Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs {
+        Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs {
+        Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_IBreadcrumbBarItemClickedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IBreadcrumbBarItemClickedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs>("BreadcrumbBarItemClickedEventArgs", Microsoft_UI_Xaml_Controls_IBreadcrumbBarItemClickedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IBreadcrumbBarItemClickedEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IBreadcrumbBarItemClickedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBreadcrumbBarItemClickedEventArgs(): Microsoft_UI_Xaml_Controls_IBreadcrumbBarItemClickedEventArgs {
+        defaultInterface()
+    }
+
+    public prop Index: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Index(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Item: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Item(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.BreadcrumbBarItemClickedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.BreadcrumbBarItemClickedEventArgs;{" + Microsoft_UI_Xaml_Controls_IBreadcrumbBarItemClickedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.BreadcrumbBarItemClickedEventArgs", Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs.signature(), Microsoft_UI_Xaml_Controls_IBreadcrumbBarItemClickedEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs {
+        Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.Button (synthetic:Microsoft_UI_Xaml_Controls_Button)
+public class Microsoft_UI_Xaml_Controls_Button <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Button {
+        Microsoft_UI_Xaml_Controls_Button(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Button {
+        Microsoft_UI_Xaml_Controls_Button(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_IButton.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_Button> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IButton.iid(), Microsoft_UI_Xaml_Controls_Primitives_IButtonBase.iid(), Microsoft_UI_Xaml_Controls_IContentControl.iid(), Microsoft_UI_Xaml_Controls_IContentControlOverrides.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_Button>("Button", Microsoft_UI_Xaml_Controls_IButton.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_Button.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_Button.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IButton {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IButton.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIButton(): Microsoft_UI_Xaml_Controls_IButton {
+        defaultInterface()
+    }
+
+    public func asIButtonBase(): Microsoft_UI_Xaml_Controls_Primitives_IButtonBase {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_Primitives_IButtonBase>(Microsoft_UI_Xaml_Controls_Primitives_IButtonBase.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentControl(): Microsoft_UI_Xaml_Controls_IContentControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IContentControl>(Microsoft_UI_Xaml_Controls_IContentControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentControlOverrides(): Microsoft_UI_Xaml_Controls_IContentControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IContentControlOverrides>(Microsoft_UI_Xaml_Controls_IContentControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Flyout: Microsoft_UI_Xaml_Controls_Primitives_FlyoutBase {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Flyout(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_Primitives_FlyoutBase>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_Primitives_FlyoutBase.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Primitives_FlyoutBase>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetFlyout(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func FlyoutProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Button, Microsoft_UI_Xaml_Controls_IButtonStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FlyoutProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_Button {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Button, Microsoft_UI_Xaml_Controls_IButtonFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_Button>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return Microsoft_UI_Xaml_Controls_Button.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.Button"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.Button;{" + Microsoft_UI_Xaml_Controls_IButton.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.Button", Microsoft_UI_Xaml_Controls_Button.signature(), Microsoft_UI_Xaml_Controls_IButton.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_Button <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_Button> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_Button): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Button {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_Button.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Button {
+        Microsoft_UI_Xaml_Controls_Button.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.CalendarDatePicker (synthetic:Microsoft_UI_Xaml_Controls_CalendarDatePicker)
+public class Microsoft_UI_Xaml_Controls_CalendarDatePicker <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarDatePicker {
+        Microsoft_UI_Xaml_Controls_CalendarDatePicker(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarDatePicker {
+        Microsoft_UI_Xaml_Controls_CalendarDatePicker(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_ICalendarDatePicker.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarDatePicker> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_ICalendarDatePicker.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarDatePicker>("CalendarDatePicker", Microsoft_UI_Xaml_Controls_ICalendarDatePicker.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_CalendarDatePicker.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_CalendarDatePicker.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_ICalendarDatePicker {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_ICalendarDatePicker.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICalendarDatePicker(): Microsoft_UI_Xaml_Controls_ICalendarDatePicker {
+        defaultInterface()
+    }
+
+    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop CalendarIdentifier: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarIdentifier(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCalendarIdentifier(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CalendarViewStyle: Microsoft_UI_Xaml_Style {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarViewStyle(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Style>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Style.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Style>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCalendarViewStyle(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Date: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Date(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetDate(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DateFormat: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DateFormat(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetDateFormat(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DayOfWeekFormat: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DayOfWeekFormat(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetDayOfWeekFormat(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Description: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Description(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetDescription(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DisplayMode: Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisplayMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDisplayMode(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FirstDayOfWeek: Windows_Globalization_DayOfWeek {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstDayOfWeek(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Globalization_DayOfWeek(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFirstDayOfWeek(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Header: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Header(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetHeader(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop HeaderTemplate: Microsoft_UI_Xaml_DataTemplate {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HeaderTemplate(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DataTemplate>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_DataTemplate.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DataTemplate>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetHeaderTemplate(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsCalendarOpen: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsCalendarOpen(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsCalendarOpen(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsGroupLabelVisible: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsGroupLabelVisible(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsGroupLabelVisible(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsOutOfScopeEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsOutOfScopeEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsOutOfScopeEnabled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsTodayHighlighted: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsTodayHighlighted(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsTodayHighlighted(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop LightDismissOverlayMode: Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.LightDismissOverlayMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetLightDismissOverlayMode(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxDate: Windows_Foundation_DateTime {
+        get() {
+            var result__ = Windows_Foundation_DateTime()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxDate(CPointer<Windows_Foundation_DateTime>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMaxDate(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MinDate: Windows_Foundation_DateTime {
+        get() {
+            var result__ = Windows_Foundation_DateTime()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MinDate(CPointer<Windows_Foundation_DateTime>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMinDate(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop PlaceholderText: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PlaceholderText(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetPlaceholderText(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addCalendarViewDayItemChanging(handler: Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarViewDayItemChanging(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeCalendarViewDayItemChanging(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveCalendarViewDayItemChanging(token) }
+        }
+        hr__.check()
+    }
+
+    public func addClosed(handler: Windows_Foundation_EventHandler_1<windows_interface.IInspectable>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_EventHandler_1<windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Closed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeClosed(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveClosed(token) }
+        }
+        hr__.check()
+    }
+
+    public func addDateChanged(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DateChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeDateChanged(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveDateChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public func addOpened(handler: Windows_Foundation_EventHandler_1<windows_interface.IInspectable>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_EventHandler_1<windows_interface.IInspectable>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Opened(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeOpened(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveOpened(token) }
+        }
+        hr__.check()
+    }
+
+    public func SetDisplayDate(date: Windows_Foundation_DateTime): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetDisplayDate(date) }
+        }
+        hr__.check()
+    }
+
+    public func SetYearDecadeDisplayDimensions(columns: Int32, rows: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetYearDecadeDisplayDimensions(columns, rows) }
+        }
+        hr__.check()
+    }
+
+    public static func DateProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DateProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsCalendarOpenProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsCalendarOpenProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DateFormatProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DateFormatProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func PlaceholderTextProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PlaceholderTextProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HeaderProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HeaderProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HeaderTemplateProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HeaderTemplateProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CalendarViewStyleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CalendarViewStyleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func LightDismissOverlayModeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LightDismissOverlayModeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DescriptionProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DescriptionProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MinDateProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MinDateProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MaxDateProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MaxDateProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsTodayHighlightedProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsTodayHighlightedProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DisplayModeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DisplayModeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FirstDayOfWeekProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FirstDayOfWeekProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DayOfWeekFormatProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DayOfWeekFormatProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CalendarIdentifierProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CalendarIdentifierProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsOutOfScopeEnabledProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsOutOfScopeEnabledProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsGroupLabelVisibleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsGroupLabelVisibleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_CalendarDatePicker {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarDatePicker, Microsoft_UI_Xaml_Controls_ICalendarDatePickerFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_CalendarDatePicker>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return Microsoft_UI_Xaml_Controls_CalendarDatePicker.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.CalendarDatePicker"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.CalendarDatePicker;{" + Microsoft_UI_Xaml_Controls_ICalendarDatePicker.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.CalendarDatePicker", Microsoft_UI_Xaml_Controls_CalendarDatePicker.signature(), Microsoft_UI_Xaml_Controls_ICalendarDatePicker.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_CalendarDatePicker <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CalendarDatePicker> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CalendarDatePicker): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarDatePicker {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_CalendarDatePicker.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarDatePicker {
+        Microsoft_UI_Xaml_Controls_CalendarDatePicker.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.CalendarDatePickerDateChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs)
+public class Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_ICalendarDatePickerDateChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_ICalendarDatePickerDateChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs>("CalendarDatePickerDateChangedEventArgs", Microsoft_UI_Xaml_Controls_ICalendarDatePickerDateChangedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_ICalendarDatePickerDateChangedEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_ICalendarDatePickerDateChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICalendarDatePickerDateChangedEventArgs(): Microsoft_UI_Xaml_Controls_ICalendarDatePickerDateChangedEventArgs {
+        defaultInterface()
+    }
+
+    public prop NewDate: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NewDate(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop OldDate: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OldDate(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.CalendarDatePickerDateChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.CalendarDatePickerDateChangedEventArgs;{" + Microsoft_UI_Xaml_Controls_ICalendarDatePickerDateChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.CalendarDatePickerDateChangedEventArgs", Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs.signature(), Microsoft_UI_Xaml_Controls_ICalendarDatePickerDateChangedEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.CalendarView (synthetic:Microsoft_UI_Xaml_Controls_CalendarView)
+public class Microsoft_UI_Xaml_Controls_CalendarView <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarView {
+        Microsoft_UI_Xaml_Controls_CalendarView(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarView {
+        Microsoft_UI_Xaml_Controls_CalendarView(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_ICalendarView.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarView> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_ICalendarView.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarView>("CalendarView", Microsoft_UI_Xaml_Controls_ICalendarView.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_CalendarView.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_CalendarView.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_ICalendarView {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_ICalendarView.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICalendarView(): Microsoft_UI_Xaml_Controls_ICalendarView {
+        defaultInterface()
+    }
+
+    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop BlackoutBackground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BlackoutBackground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetBlackoutBackground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop BlackoutForeground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BlackoutForeground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetBlackoutForeground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop BlackoutStrikethroughBrush: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.BlackoutStrikethroughBrush(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetBlackoutStrikethroughBrush(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CalendarIdentifier: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarIdentifier(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCalendarIdentifier(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CalendarItemBackground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarItemBackground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCalendarItemBackground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CalendarItemBorderBrush: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarItemBorderBrush(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCalendarItemBorderBrush(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CalendarItemBorderThickness: Microsoft_UI_Xaml_Thickness {
+        get() {
+            var result__ = Microsoft_UI_Xaml_Thickness()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarItemBorderThickness(CPointer<Microsoft_UI_Xaml_Thickness>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCalendarItemBorderThickness(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CalendarItemCornerRadius: Microsoft_UI_Xaml_CornerRadius {
+        get() {
+            var result__ = Microsoft_UI_Xaml_CornerRadius()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarItemCornerRadius(CPointer<Microsoft_UI_Xaml_CornerRadius>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCalendarItemCornerRadius(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CalendarItemDisabledBackground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarItemDisabledBackground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCalendarItemDisabledBackground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CalendarItemForeground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarItemForeground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCalendarItemForeground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CalendarItemHoverBackground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarItemHoverBackground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCalendarItemHoverBackground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CalendarItemPressedBackground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarItemPressedBackground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCalendarItemPressedBackground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop CalendarViewDayItemStyle: Microsoft_UI_Xaml_Style {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarViewDayItemStyle(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Style>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Style.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Style>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetCalendarViewDayItemStyle(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DayItemFontFamily: Microsoft_UI_Xaml_Media_FontFamily {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DayItemFontFamily(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_FontFamily>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_FontFamily.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_FontFamily>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetDayItemFontFamily(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DayItemFontSize: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DayItemFontSize(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDayItemFontSize(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DayItemFontStyle: Windows_UI_Text_FontStyle {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DayItemFontStyle(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_UI_Text_FontStyle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDayItemFontStyle(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DayItemFontWeight: Windows_UI_Text_FontWeight {
+        get() {
+            var result__ = Windows_UI_Text_FontWeight()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DayItemFontWeight(CPointer<Windows_UI_Text_FontWeight>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDayItemFontWeight(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DayItemMargin: Microsoft_UI_Xaml_Thickness {
+        get() {
+            var result__ = Microsoft_UI_Xaml_Thickness()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DayItemMargin(CPointer<Microsoft_UI_Xaml_Thickness>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDayItemMargin(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DayOfWeekFormat: windows_core.HString {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DayOfWeekFormat(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_core.HString.fromSystemHandleTake(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetDayOfWeekFormat(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DisabledForeground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisabledForeground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetDisabledForeground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop DisplayMode: Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.DisplayMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDisplayMode(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FirstDayOfWeek: Windows_Globalization_DayOfWeek {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstDayOfWeek(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_Globalization_DayOfWeek(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFirstDayOfWeek(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FirstOfMonthLabelFontFamily: Microsoft_UI_Xaml_Media_FontFamily {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstOfMonthLabelFontFamily(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_FontFamily>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_FontFamily.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_FontFamily>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetFirstOfMonthLabelFontFamily(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FirstOfMonthLabelFontSize: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstOfMonthLabelFontSize(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFirstOfMonthLabelFontSize(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FirstOfMonthLabelFontStyle: Windows_UI_Text_FontStyle {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstOfMonthLabelFontStyle(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_UI_Text_FontStyle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFirstOfMonthLabelFontStyle(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FirstOfMonthLabelFontWeight: Windows_UI_Text_FontWeight {
+        get() {
+            var result__ = Windows_UI_Text_FontWeight()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstOfMonthLabelFontWeight(CPointer<Windows_UI_Text_FontWeight>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFirstOfMonthLabelFontWeight(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FirstOfMonthLabelMargin: Microsoft_UI_Xaml_Thickness {
+        get() {
+            var result__ = Microsoft_UI_Xaml_Thickness()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstOfMonthLabelMargin(CPointer<Microsoft_UI_Xaml_Thickness>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFirstOfMonthLabelMargin(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FirstOfYearDecadeLabelFontFamily: Microsoft_UI_Xaml_Media_FontFamily {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstOfYearDecadeLabelFontFamily(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_FontFamily>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_FontFamily.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_FontFamily>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetFirstOfYearDecadeLabelFontFamily(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FirstOfYearDecadeLabelFontSize: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstOfYearDecadeLabelFontSize(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFirstOfYearDecadeLabelFontSize(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FirstOfYearDecadeLabelFontStyle: Windows_UI_Text_FontStyle {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstOfYearDecadeLabelFontStyle(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_UI_Text_FontStyle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFirstOfYearDecadeLabelFontStyle(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FirstOfYearDecadeLabelFontWeight: Windows_UI_Text_FontWeight {
+        get() {
+            var result__ = Windows_UI_Text_FontWeight()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstOfYearDecadeLabelFontWeight(CPointer<Windows_UI_Text_FontWeight>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFirstOfYearDecadeLabelFontWeight(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FirstOfYearDecadeLabelMargin: Microsoft_UI_Xaml_Thickness {
+        get() {
+            var result__ = Microsoft_UI_Xaml_Thickness()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FirstOfYearDecadeLabelMargin(CPointer<Microsoft_UI_Xaml_Thickness>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetFirstOfYearDecadeLabelMargin(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop FocusBorderBrush: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FocusBorderBrush(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetFocusBorderBrush(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop HorizontalDayItemAlignment: Microsoft_UI_Xaml_HorizontalAlignment {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HorizontalDayItemAlignment(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_HorizontalAlignment(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHorizontalDayItemAlignment(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop HorizontalFirstOfMonthLabelAlignment: Microsoft_UI_Xaml_HorizontalAlignment {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HorizontalFirstOfMonthLabelAlignment(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_HorizontalAlignment(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHorizontalFirstOfMonthLabelAlignment(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop HoverBorderBrush: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.HoverBorderBrush(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetHoverBorderBrush(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsGroupLabelVisible: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsGroupLabelVisible(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsGroupLabelVisible(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsOutOfScopeEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsOutOfScopeEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsOutOfScopeEnabled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsTodayHighlighted: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsTodayHighlighted(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsTodayHighlighted(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxDate: Windows_Foundation_DateTime {
+        get() {
+            var result__ = Windows_Foundation_DateTime()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxDate(CPointer<Windows_Foundation_DateTime>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMaxDate(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MinDate: Windows_Foundation_DateTime {
+        get() {
+            var result__ = Windows_Foundation_DateTime()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MinDate(CPointer<Windows_Foundation_DateTime>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMinDate(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MonthYearItemFontFamily: Microsoft_UI_Xaml_Media_FontFamily {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MonthYearItemFontFamily(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_FontFamily>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_FontFamily.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_FontFamily>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetMonthYearItemFontFamily(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MonthYearItemFontSize: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MonthYearItemFontSize(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMonthYearItemFontSize(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MonthYearItemFontStyle: Windows_UI_Text_FontStyle {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MonthYearItemFontStyle(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_UI_Text_FontStyle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMonthYearItemFontStyle(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MonthYearItemFontWeight: Windows_UI_Text_FontWeight {
+        get() {
+            var result__ = Windows_UI_Text_FontWeight()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MonthYearItemFontWeight(CPointer<Windows_UI_Text_FontWeight>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMonthYearItemFontWeight(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MonthYearItemMargin: Microsoft_UI_Xaml_Thickness {
+        get() {
+            var result__ = Microsoft_UI_Xaml_Thickness()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MonthYearItemMargin(CPointer<Microsoft_UI_Xaml_Thickness>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMonthYearItemMargin(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop NumberOfWeeksInView: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NumberOfWeeksInView(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetNumberOfWeeksInView(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop OutOfScopeBackground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OutOfScopeBackground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetOutOfScopeBackground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop OutOfScopeForeground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OutOfScopeForeground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetOutOfScopeForeground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop OutOfScopeHoverForeground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OutOfScopeHoverForeground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetOutOfScopeHoverForeground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop OutOfScopePressedForeground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OutOfScopePressedForeground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetOutOfScopePressedForeground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop PressedBorderBrush: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PressedBorderBrush(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetPressedBorderBrush(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop PressedForeground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PressedForeground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetPressedForeground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SelectedBorderBrush: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectedBorderBrush(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetSelectedBorderBrush(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop SelectedDates: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectedDates(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop SelectedDisabledBorderBrush: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectedDisabledBorderBrush(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetSelectedDisabledBorderBrush(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SelectedDisabledForeground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectedDisabledForeground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetSelectedDisabledForeground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SelectedForeground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectedForeground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetSelectedForeground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SelectedHoverBorderBrush: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectedHoverBorderBrush(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetSelectedHoverBorderBrush(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SelectedHoverForeground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectedHoverForeground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetSelectedHoverForeground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SelectedPressedBorderBrush: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectedPressedBorderBrush(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetSelectedPressedBorderBrush(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SelectedPressedForeground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectedPressedForeground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetSelectedPressedForeground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop SelectionMode: Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectionMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetSelectionMode(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop TemplateSettings: Microsoft_UI_Xaml_Controls_Primitives_CalendarViewTemplateSettings {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TemplateSettings(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_Primitives_CalendarViewTemplateSettings>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_Primitives_CalendarViewTemplateSettings.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop TodayBackground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TodayBackground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTodayBackground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TodayBlackoutBackground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TodayBlackoutBackground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTodayBlackoutBackground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TodayBlackoutForeground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TodayBlackoutForeground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTodayBlackoutForeground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TodayDisabledBackground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TodayDisabledBackground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTodayDisabledBackground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TodayFontWeight: Windows_UI_Text_FontWeight {
+        get() {
+            var result__ = Windows_UI_Text_FontWeight()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TodayFontWeight(CPointer<Windows_UI_Text_FontWeight>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetTodayFontWeight(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TodayForeground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TodayForeground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTodayForeground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TodayHoverBackground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TodayHoverBackground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTodayHoverBackground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TodayPressedBackground: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TodayPressedBackground(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTodayPressedBackground(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TodaySelectedInnerBorderBrush: Microsoft_UI_Xaml_Media_Brush {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TodaySelectedInnerBorderBrush(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTodaySelectedInnerBorderBrush(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop VerticalDayItemAlignment: Microsoft_UI_Xaml_VerticalAlignment {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.VerticalDayItemAlignment(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_VerticalAlignment(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetVerticalDayItemAlignment(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop VerticalFirstOfMonthLabelAlignment: Microsoft_UI_Xaml_VerticalAlignment {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.VerticalFirstOfMonthLabelAlignment(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_VerticalAlignment(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetVerticalFirstOfMonthLabelAlignment(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addCalendarViewDayItemChanging(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CalendarViewDayItemChanging(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeCalendarViewDayItemChanging(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveCalendarViewDayItemChanging(token) }
+        }
+        hr__.check()
+    }
+
+    public func addSelectedDatesChanged(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SelectedDatesChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeSelectedDatesChanged(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveSelectedDatesChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public func SetDisplayDate(date: Windows_Foundation_DateTime): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetDisplayDate(date) }
+        }
+        hr__.check()
+    }
+
+    public func SetYearDecadeDisplayDimensions(columns: Int32, rows: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.SetYearDecadeDisplayDimensions(columns, rows) }
+        }
+        hr__.check()
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_CalendarView {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_CalendarView>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return Microsoft_UI_Xaml_Controls_CalendarView.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CalendarIdentifierProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CalendarIdentifierProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DayOfWeekFormatProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DayOfWeekFormatProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsGroupLabelVisibleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsGroupLabelVisibleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DisplayModeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DisplayModeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FirstDayOfWeekProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FirstDayOfWeekProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsOutOfScopeEnabledProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsOutOfScopeEnabledProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsTodayHighlightedProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsTodayHighlightedProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MaxDateProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MaxDateProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MinDateProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MinDateProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func NumberOfWeeksInViewProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.NumberOfWeeksInViewProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SelectedDatesProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SelectedDatesProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SelectionModeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SelectionModeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TemplateSettingsProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TemplateSettingsProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FocusBorderBrushProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FocusBorderBrushProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SelectedHoverBorderBrushProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SelectedHoverBorderBrushProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SelectedPressedBorderBrushProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SelectedPressedBorderBrushProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SelectedDisabledBorderBrushProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SelectedDisabledBorderBrushProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SelectedBorderBrushProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SelectedBorderBrushProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HoverBorderBrushProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HoverBorderBrushProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func PressedBorderBrushProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PressedBorderBrushProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TodaySelectedInnerBorderBrushProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TodaySelectedInnerBorderBrushProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func BlackoutStrikethroughBrushProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BlackoutStrikethroughBrushProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CalendarItemBorderBrushProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CalendarItemBorderBrushProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func BlackoutBackgroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BlackoutBackgroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OutOfScopeBackgroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.OutOfScopeBackgroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CalendarItemBackgroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CalendarItemBackgroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CalendarItemHoverBackgroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CalendarItemHoverBackgroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CalendarItemPressedBackgroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CalendarItemPressedBackgroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CalendarItemDisabledBackgroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CalendarItemDisabledBackgroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TodayBackgroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TodayBackgroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TodayBlackoutBackgroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TodayBlackoutBackgroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TodayHoverBackgroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TodayHoverBackgroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TodayPressedBackgroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TodayPressedBackgroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TodayDisabledBackgroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TodayDisabledBackgroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func PressedForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PressedForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TodayForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TodayForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func BlackoutForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.BlackoutForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TodayBlackoutForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TodayBlackoutForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SelectedForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SelectedForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SelectedHoverForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SelectedHoverForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SelectedPressedForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SelectedPressedForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func SelectedDisabledForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.SelectedDisabledForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OutOfScopeForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.OutOfScopeForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OutOfScopeHoverForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.OutOfScopeHoverForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func OutOfScopePressedForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.OutOfScopePressedForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CalendarItemForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CalendarItemForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DisabledForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DisabledForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DayItemFontFamilyProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DayItemFontFamilyProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DayItemFontSizeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DayItemFontSizeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DayItemFontStyleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DayItemFontStyleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DayItemFontWeightProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DayItemFontWeightProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func TodayFontWeightProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TodayFontWeightProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FirstOfMonthLabelFontFamilyProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FirstOfMonthLabelFontFamilyProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FirstOfMonthLabelFontSizeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FirstOfMonthLabelFontSizeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FirstOfMonthLabelFontStyleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FirstOfMonthLabelFontStyleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FirstOfMonthLabelFontWeightProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FirstOfMonthLabelFontWeightProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MonthYearItemFontFamilyProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MonthYearItemFontFamilyProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MonthYearItemFontSizeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MonthYearItemFontSizeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MonthYearItemFontStyleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MonthYearItemFontStyleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MonthYearItemFontWeightProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MonthYearItemFontWeightProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FirstOfYearDecadeLabelFontFamilyProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FirstOfYearDecadeLabelFontFamilyProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FirstOfYearDecadeLabelFontSizeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FirstOfYearDecadeLabelFontSizeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FirstOfYearDecadeLabelFontStyleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FirstOfYearDecadeLabelFontStyleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FirstOfYearDecadeLabelFontWeightProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FirstOfYearDecadeLabelFontWeightProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DayItemMarginProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DayItemMarginProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MonthYearItemMarginProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MonthYearItemMarginProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FirstOfMonthLabelMarginProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FirstOfMonthLabelMarginProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func FirstOfYearDecadeLabelMarginProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.FirstOfYearDecadeLabelMarginProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HorizontalDayItemAlignmentProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HorizontalDayItemAlignmentProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func VerticalDayItemAlignmentProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.VerticalDayItemAlignmentProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func HorizontalFirstOfMonthLabelAlignmentProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.HorizontalFirstOfMonthLabelAlignmentProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func VerticalFirstOfMonthLabelAlignmentProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.VerticalFirstOfMonthLabelAlignmentProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CalendarItemBorderThicknessProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CalendarItemBorderThicknessProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CalendarViewDayItemStyleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CalendarViewDayItemStyleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CalendarItemCornerRadiusProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_ICalendarViewStatics>().unwrap()) {
+            hr__ = unsafe { factory__.CalendarItemCornerRadiusProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.CalendarView"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.CalendarView;{" + Microsoft_UI_Xaml_Controls_ICalendarView.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.CalendarView", Microsoft_UI_Xaml_Controls_CalendarView.signature(), Microsoft_UI_Xaml_Controls_ICalendarView.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_CalendarView <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CalendarView> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CalendarView): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarView {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_CalendarView.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarView {
+        Microsoft_UI_Xaml_Controls_CalendarView.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.CalendarViewDayItem (synthetic:Microsoft_UI_Xaml_Controls_CalendarViewDayItem)
+public class Microsoft_UI_Xaml_Controls_CalendarViewDayItem <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewDayItem {
+        Microsoft_UI_Xaml_Controls_CalendarViewDayItem(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewDayItem {
+        Microsoft_UI_Xaml_Controls_CalendarViewDayItem(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_ICalendarViewDayItem.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarViewDayItem> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_ICalendarViewDayItem.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarViewDayItem>("CalendarViewDayItem", Microsoft_UI_Xaml_Controls_ICalendarViewDayItem.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_CalendarViewDayItem.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_CalendarViewDayItem.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_ICalendarViewDayItem {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_ICalendarViewDayItem.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICalendarViewDayItem(): Microsoft_UI_Xaml_Controls_ICalendarViewDayItem {
+        defaultInterface()
+    }
+
+    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Date: Windows_Foundation_DateTime {
+        get() {
+            var result__ = Windows_Foundation_DateTime()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Date(CPointer<Windows_Foundation_DateTime>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop IsBlackout: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsBlackout(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsBlackout(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func SetDensityColors(colors: windows_interface.IInspectable): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(colors)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetDensityColors(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func IsBlackoutProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarViewDayItem, Microsoft_UI_Xaml_Controls_ICalendarViewDayItemStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsBlackoutProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func DateProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarViewDayItem, Microsoft_UI_Xaml_Controls_ICalendarViewDayItemStatics>().unwrap()) {
+            hr__ = unsafe { factory__.DateProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_CalendarViewDayItem {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CalendarViewDayItem, Microsoft_UI_Xaml_Controls_ICalendarViewDayItemFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_CalendarViewDayItem>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return Microsoft_UI_Xaml_Controls_CalendarViewDayItem.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.CalendarViewDayItem"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.CalendarViewDayItem;{" + Microsoft_UI_Xaml_Controls_ICalendarViewDayItem.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.CalendarViewDayItem", Microsoft_UI_Xaml_Controls_CalendarViewDayItem.signature(), Microsoft_UI_Xaml_Controls_ICalendarViewDayItem.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_CalendarViewDayItem <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CalendarViewDayItem> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CalendarViewDayItem): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewDayItem {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_CalendarViewDayItem.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewDayItem {
+        Microsoft_UI_Xaml_Controls_CalendarViewDayItem.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.CalendarViewDayItemChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs)
+public class Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs {
+        Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs {
+        Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_ICalendarViewDayItemChangingEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_ICalendarViewDayItemChangingEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs>("CalendarViewDayItemChangingEventArgs", Microsoft_UI_Xaml_Controls_ICalendarViewDayItemChangingEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_ICalendarViewDayItemChangingEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_ICalendarViewDayItemChangingEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICalendarViewDayItemChangingEventArgs(): Microsoft_UI_Xaml_Controls_ICalendarViewDayItemChangingEventArgs {
+        defaultInterface()
+    }
+
+    public prop InRecycleQueue: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InRecycleQueue(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Item: Microsoft_UI_Xaml_Controls_CalendarViewDayItem {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Item(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_CalendarViewDayItem>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Controls_CalendarViewDayItem.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Phase: UInt32 {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Phase(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func RegisterUpdateCallback(callback: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs>): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs>>(callback)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RegisterUpdateCallback(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func RegisterUpdateCallbackWithPhase(callbackPhase: UInt32, callback: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs>): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_CalendarView, Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs>>(callback)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RegisterUpdateCallbackWithPhase(callbackPhase, __argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.CalendarViewDayItemChangingEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.CalendarViewDayItemChangingEventArgs;{" + Microsoft_UI_Xaml_Controls_ICalendarViewDayItemChangingEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.CalendarViewDayItemChangingEventArgs", Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs.signature(), Microsoft_UI_Xaml_Controls_ICalendarViewDayItemChangingEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs {
+        Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.CalendarViewDayItemChangingEventHandler (synthetic:Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler)
+@C
+public struct Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
+    public init() {}
+}
+
+public open class Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler {
+        OwnedMicrosoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler {
+        Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2877322749u32, 31307u16, 20558u16, 138u8, 99u8, 215u8, 243u8, 85u8, 112u8, 189u8, 134u8)
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler> {
+        windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler>("Microsoft.UI.Xaml.Controls.CalendarViewDayItemChangingEventHandler", Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler.iid(), [windows_interface.IUnknown.iid()], { raw => Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler.viewOf(raw) })
+    }
+
+    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
+        var schema = windows_interface.InterfaceDescriptorSchema("Microsoft.UI.Xaml.Controls.CalendarViewDayItemChangingEventHandler", Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler.iid(), windows_interface.IUnknown.descriptorSchema(), "Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerVtbl", "Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler", "Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerInvoker", [windows_interface.InterfaceMethodSchema("Invoke", 3, [windows_interface.InterfaceParameterSchema("sender", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("e", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        schema.runtimeTypeContract = Some(Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler.runtimeType())
+        return schema
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func signature(): String {
+        "Microsoft.UI.Xaml.Controls.CalendarViewDayItemChangingEventHandler"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.CalendarViewDayItemChangingEventHandler", Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler.signature(), Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler.iid())
+    }
+
+    public static func projectionKind(): String {
+        return "delegate"
+    }
+
+    public unsafe func vtbl(): Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerVtbl {
+        readVtbl<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerVtbl>(Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerVtbl())
+    }
+
+    public unsafe func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Invoke(liveRaw, sender, e)).check()
+    }
+
+    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler {
+        let box = Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerBox(invoke)
+        let object = windows_core.ComObject<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerBox>.new(box, [Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler.descriptorSchema()], box.vtblPtr())
+        return object.intoInterface(Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler.descriptor())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler> {}
+
+private class OwnedMicrosoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler <: Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler {
+    public init(raw: CPointer<Unit>) {
+        super(raw, takeOwnership: true, allowManualRelease: false)
+    }
+}
+
+public interface Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerInvokerErased {
+    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
+}
+
+public interface Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerInvoker <: Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerInvokerErased {
+    func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        ()
+    }
+
+    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32 {
+        try {
+            this.Invoke(sender, e)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
+    }
+}
+
+private class Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerBox <: Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerInvoker & Resource {
+    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
+    private let vtblHandle: CPointer<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerVtbl>
+    private var closed: Bool = false
+
+    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
+        this.invoke_ = invoke
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerVtbl>(buildMicrosoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerBoxVtbl()) }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        invoke_(sender, e)
+    }
+}
+
+func buildMicrosoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerVtbl {
+    var vtbl = Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerVtbl()
+    vtbl.base_ = windows_core.buildIUnknownVtbl()
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, sender: CPointer<Unit>, e: CPointer<Unit> =>
+        match (unsafe { windows_core.asImplFromRaw<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerInvokerErased>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.__winrtThunk_Invoke(sender, e)
+            case None =>
+                windows_core.E_NOTIMPL.value
+        }
+    }
+    return vtbl
+}
+
+
+// Microsoft.UI.Xaml.Controls.CalendarViewDisplayMode (synthetic:Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode)
+public struct Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode_Month = Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode(0)
+public let Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode_Year = Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode(1)
+public let Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode_Decade = Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode(2)
+
+// Microsoft.UI.Xaml.Controls.CalendarViewSelectedDatesChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs)
+public class Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_ICalendarViewSelectedDatesChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_ICalendarViewSelectedDatesChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs>("CalendarViewSelectedDatesChangedEventArgs", Microsoft_UI_Xaml_Controls_ICalendarViewSelectedDatesChangedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_ICalendarViewSelectedDatesChangedEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_ICalendarViewSelectedDatesChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICalendarViewSelectedDatesChangedEventArgs(): Microsoft_UI_Xaml_Controls_ICalendarViewSelectedDatesChangedEventArgs {
+        defaultInterface()
+    }
+
+    public prop AddedDates: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AddedDates(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop RemovedDates: windows_interface.IInspectable {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RemovedDates(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.CalendarViewSelectedDatesChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.CalendarViewSelectedDatesChangedEventArgs;{" + Microsoft_UI_Xaml_Controls_ICalendarViewSelectedDatesChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.CalendarViewSelectedDatesChangedEventArgs", Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs.signature(), Microsoft_UI_Xaml_Controls_ICalendarViewSelectedDatesChangedEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.CalendarViewSelectionMode (synthetic:Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode)
+public struct Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode_None = Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode(0)
+public let Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode_Single = Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode(1)
+public let Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode_Multiple = Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode(2)
+
+// Microsoft.UI.Xaml.Controls.CandidateWindowAlignment (synthetic:Microsoft_UI_Xaml_Controls_CandidateWindowAlignment)
+public struct Microsoft_UI_Xaml_Controls_CandidateWindowAlignment {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Xaml_Controls_CandidateWindowAlignment_Default = Microsoft_UI_Xaml_Controls_CandidateWindowAlignment(0)
+public let Microsoft_UI_Xaml_Controls_CandidateWindowAlignment_BottomEdge = Microsoft_UI_Xaml_Controls_CandidateWindowAlignment(1)
+
+// Microsoft.UI.Xaml.Controls.CandidateWindowBoundsChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs)
+public class Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_ICandidateWindowBoundsChangedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_ICandidateWindowBoundsChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs>("CandidateWindowBoundsChangedEventArgs", Microsoft_UI_Xaml_Controls_ICandidateWindowBoundsChangedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_ICandidateWindowBoundsChangedEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_ICandidateWindowBoundsChangedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICandidateWindowBoundsChangedEventArgs(): Microsoft_UI_Xaml_Controls_ICandidateWindowBoundsChangedEventArgs {
+        defaultInterface()
+    }
+
+    public prop Bounds: Windows_Foundation_Rect {
+        get() {
+            var result__ = Windows_Foundation_Rect()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Bounds(CPointer<Windows_Foundation_Rect>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.CandidateWindowBoundsChangedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.CandidateWindowBoundsChangedEventArgs;{" + Microsoft_UI_Xaml_Controls_ICandidateWindowBoundsChangedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.CandidateWindowBoundsChangedEventArgs", Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs.signature(), Microsoft_UI_Xaml_Controls_ICandidateWindowBoundsChangedEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.Canvas (synthetic:Microsoft_UI_Xaml_Controls_Canvas)
+public class Microsoft_UI_Xaml_Controls_Canvas <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Canvas {
+        Microsoft_UI_Xaml_Controls_Canvas(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Canvas {
+        Microsoft_UI_Xaml_Controls_Canvas(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_ICanvas.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_Canvas> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_ICanvas.iid(), Microsoft_UI_Xaml_Controls_IPanel.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_Canvas>("Canvas", Microsoft_UI_Xaml_Controls_ICanvas.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_Canvas.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_Canvas.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_ICanvas {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_ICanvas.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICanvas(): Microsoft_UI_Xaml_Controls_ICanvas {
+        defaultInterface()
+    }
+
+    public func asIPanel(): Microsoft_UI_Xaml_Controls_IPanel {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IPanel>(Microsoft_UI_Xaml_Controls_IPanel.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func LeftProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Canvas, Microsoft_UI_Xaml_Controls_ICanvasStatics>().unwrap()) {
+            hr__ = unsafe { factory__.LeftProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetLeft(element: Microsoft_UI_Xaml_UIElement): Float64 {
+        var result__ = 0.0f64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_UIElement>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Canvas, Microsoft_UI_Xaml_Controls_ICanvasStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetLeft(__argBorrow0.asRaw(), CPointer<Float64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetLeft(element: Microsoft_UI_Xaml_UIElement, length: Float64): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_UIElement>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Canvas, Microsoft_UI_Xaml_Controls_ICanvasStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetLeft(__argBorrow0.asRaw(), length) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func TopProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Canvas, Microsoft_UI_Xaml_Controls_ICanvasStatics>().unwrap()) {
+            hr__ = unsafe { factory__.TopProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetTop(element: Microsoft_UI_Xaml_UIElement): Float64 {
+        var result__ = 0.0f64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_UIElement>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Canvas, Microsoft_UI_Xaml_Controls_ICanvasStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetTop(__argBorrow0.asRaw(), CPointer<Float64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetTop(element: Microsoft_UI_Xaml_UIElement, length: Float64): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_UIElement>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Canvas, Microsoft_UI_Xaml_Controls_ICanvasStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetTop(__argBorrow0.asRaw(), length) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func ZIndexProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Canvas, Microsoft_UI_Xaml_Controls_ICanvasStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ZIndexProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func GetZIndex(element: Microsoft_UI_Xaml_UIElement): Int32 {
+        var result__ = 0i32
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_UIElement>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Canvas, Microsoft_UI_Xaml_Controls_ICanvasStatics>().unwrap()) {
+                hr__ = unsafe { factory__.GetZIndex(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func SetZIndex(element: Microsoft_UI_Xaml_UIElement, value: Int32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_UIElement>(element)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Canvas, Microsoft_UI_Xaml_Controls_ICanvasStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SetZIndex(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_Canvas {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Canvas, Microsoft_UI_Xaml_Controls_ICanvasFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_Canvas>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return Microsoft_UI_Xaml_Controls_Canvas.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.Canvas"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.Canvas;{" + Microsoft_UI_Xaml_Controls_ICanvas.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.Canvas", Microsoft_UI_Xaml_Controls_Canvas.signature(), Microsoft_UI_Xaml_Controls_ICanvas.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_Canvas <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_Canvas> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_Canvas): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Canvas {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_Canvas.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Canvas {
+        Microsoft_UI_Xaml_Controls_Canvas.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Controls.CharacterCasing (synthetic:Microsoft_UI_Xaml_Controls_CharacterCasing)
+public struct Microsoft_UI_Xaml_Controls_CharacterCasing {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Xaml_Controls_CharacterCasing_Normal = Microsoft_UI_Xaml_Controls_CharacterCasing(0)
+public let Microsoft_UI_Xaml_Controls_CharacterCasing_Lower = Microsoft_UI_Xaml_Controls_CharacterCasing(1)
+public let Microsoft_UI_Xaml_Controls_CharacterCasing_Upper = Microsoft_UI_Xaml_Controls_CharacterCasing(2)
+
+// Microsoft.UI.Xaml.Controls.CheckBox (synthetic:Microsoft_UI_Xaml_Controls_CheckBox)
+public class Microsoft_UI_Xaml_Controls_CheckBox <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CheckBox {
+        Microsoft_UI_Xaml_Controls_CheckBox(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CheckBox {
+        Microsoft_UI_Xaml_Controls_CheckBox(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Controls_ICheckBox.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CheckBox> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_ICheckBox.iid(), Microsoft_UI_Xaml_Controls_Primitives_IToggleButton.iid(), Microsoft_UI_Xaml_Controls_Primitives_IToggleButtonOverrides.iid(), Microsoft_UI_Xaml_Controls_Primitives_IButtonBase.iid(), Microsoft_UI_Xaml_Controls_IContentControl.iid(), Microsoft_UI_Xaml_Controls_IContentControlOverrides.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_CheckBox>("CheckBox", Microsoft_UI_Xaml_Controls_ICheckBox.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_CheckBox.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_CheckBox.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_ICheckBox {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_ICheckBox.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICheckBox(): Microsoft_UI_Xaml_Controls_ICheckBox {
+        defaultInterface()
+    }
+
+    public func asIToggleButton(): Microsoft_UI_Xaml_Controls_Primitives_IToggleButton {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_Primitives_IToggleButton>(Microsoft_UI_Xaml_Controls_Primitives_IToggleButton.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIToggleButtonOverrides(): Microsoft_UI_Xaml_Controls_Primitives_IToggleButtonOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_Primitives_IToggleButtonOverrides>(Microsoft_UI_Xaml_Controls_Primitives_IToggleButtonOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIButtonBase(): Microsoft_UI_Xaml_Controls_Primitives_IButtonBase {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_Primitives_IButtonBase>(Microsoft_UI_Xaml_Controls_Primitives_IButtonBase.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentControl(): Microsoft_UI_Xaml_Controls_IContentControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IContentControl>(Microsoft_UI_Xaml_Controls_IContentControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIContentControlOverrides(): Microsoft_UI_Xaml_Controls_IContentControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IContentControlOverrides>(Microsoft_UI_Xaml_Controls_IContentControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
+        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
+        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
+        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_CheckBox {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_CheckBox, Microsoft_UI_Xaml_Controls_ICheckBoxFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_CheckBox>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return Microsoft_UI_Xaml_Controls_CheckBox.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Controls.CheckBox"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Controls.CheckBox;{" + Microsoft_UI_Xaml_Controls_ICheckBox.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.CheckBox", Microsoft_UI_Xaml_Controls_CheckBox.signature(), Microsoft_UI_Xaml_Controls_ICheckBox.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Controls_CheckBox <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CheckBox> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CheckBox): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CheckBox {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Controls_CheckBox.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_CheckBox {
+        Microsoft_UI_Xaml_Controls_CheckBox.viewOf(raw)
+    }
+}
 
 // Microsoft.UI.Xaml.Controls.ChoosingGroupHeaderContainerEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ChoosingGroupHeaderContainerEventArgs)
 public class Microsoft_UI_Xaml_Controls_ChoosingGroupHeaderContainerEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
@@ -31397,3708 +43446,8 @@ extend Microsoft_UI_Xaml_Controls_ChoosingItemContainerEventArgs <: windows_core
     }
 }
 
-// Microsoft.UI.Xaml.Controls.ContainerContentChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs)
-public class Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs {
-        Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs {
-        Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IContainerContentChangingEventArgs.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IContainerContentChangingEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs>("ContainerContentChangingEventArgs", Microsoft_UI_Xaml_Controls_IContainerContentChangingEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IContainerContentChangingEventArgs {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IContainerContentChangingEventArgs.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIContainerContentChangingEventArgs(): Microsoft_UI_Xaml_Controls_IContainerContentChangingEventArgs {
-        defaultInterface()
-    }
-
-    public mut prop Handled: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Handled(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetHandled(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public prop InRecycleQueue: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.InRecycleQueue(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-    }
-
-    public prop Item: windows_interface.IInspectable {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Item(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
-        }
-    }
-
-    public prop ItemContainer: Microsoft_UI_Xaml_Controls_Primitives_SelectorItem {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemContainer(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_Primitives_SelectorItem>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Controls_Primitives_SelectorItem.fromAbiTakeWinrtHandle(result__)
-        }
-    }
-
-    public prop ItemIndex: Int32 {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemIndex(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-    }
-
-    public prop Phase: UInt32 {
-        get() {
-            var result__ = 0u32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Phase(CPointer<UInt32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-    }
-
-    public func RegisterUpdateCallback(callback: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs>): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs>>(callback)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.RegisterUpdateCallback(__argBorrow0.asRaw()) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func RegisterUpdateCallbackWithPhase(callbackPhase: UInt32, callback: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs>): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs>>(callback)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.RegisterUpdateCallbackWithPhase(callbackPhase, __argBorrow0.asRaw()) }
-            }
-        }
-        hr__.check()
-    }
-
-    public static func new(): Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs {
-        var created__: Option<Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs> = Option<Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs>.None
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs, windows_core.IGenericFactory>().unwrap()) {
-            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs>(Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs.descriptor()).unwrap() })
-        }
-        match (created__) {
-            case Some(value) => return value
-            case None => throw IllegalStateException("Activation factory did not produce ContainerContentChangingEventArgs")
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.ContainerContentChangingEventArgs"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.ContainerContentChangingEventArgs;{" + Microsoft_UI_Xaml_Controls_IContainerContentChangingEventArgs.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.ContainerContentChangingEventArgs", Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs.signature(), Microsoft_UI_Xaml_Controls_IContainerContentChangingEventArgs.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs {
-        Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.ContentControl (synthetic:Microsoft_UI_Xaml_Controls_ContentControl)
-public class Microsoft_UI_Xaml_Controls_ContentControl <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ContentControl {
-        Microsoft_UI_Xaml_Controls_ContentControl(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ContentControl {
-        Microsoft_UI_Xaml_Controls_ContentControl(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IContentControl.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ContentControl> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IContentControl.iid(), Microsoft_UI_Xaml_Controls_IContentControlOverrides.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ContentControl>("ContentControl", Microsoft_UI_Xaml_Controls_IContentControl.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_ContentControl.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_ContentControl.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IContentControl {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IContentControl.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIContentControl(): Microsoft_UI_Xaml_Controls_IContentControl {
-        defaultInterface()
-    }
-
-    public func asIContentControlOverrides(): Microsoft_UI_Xaml_Controls_IContentControlOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IContentControlOverrides>(Microsoft_UI_Xaml_Controls_IContentControlOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
-        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
-        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
-        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
-        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
-        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
-        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public mut prop Content: windows_interface.IInspectable {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Content(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetContent(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop ContentTemplate: Microsoft_UI_Xaml_DataTemplate {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ContentTemplate(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DataTemplate>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_DataTemplate.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DataTemplate>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetContentTemplate(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public prop ContentTemplateRoot: Microsoft_UI_Xaml_UIElement {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ContentTemplateRoot(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_UIElement>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_UIElement.fromAbiTakeWinrtHandle(result__)
-        }
-    }
-
-    public mut prop ContentTemplateSelector: Microsoft_UI_Xaml_Controls_DataTemplateSelector {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ContentTemplateSelector(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_DataTemplateSelector>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Controls_DataTemplateSelector.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_DataTemplateSelector>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetContentTemplateSelector(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop ContentTransitions: Microsoft_UI_Xaml_Media_Animation_TransitionCollection {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ContentTransitions(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Animation_TransitionCollection>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Media_Animation_TransitionCollection.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Animation_TransitionCollection>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetContentTransitions(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_ContentControl {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        if (innerInterface.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        innerInterface.clear()
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
-            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ContentControl, Microsoft_UI_Xaml_Controls_IContentControlFactory>().unwrap()) {
-                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ContentControl>(result__)
-            result__ = CPointer<Unit>()
-        }
-        if (hr__.failed()) {
-            match (innerInterface.takeAbi<CPointer<Unit>>()) {
-                case Some(__arg1ValuePartial) =>
-                    if (__arg1ValuePartial.isNotNull()) {
-                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
-                    }
-                case None => ()
-            }
-        }
-        hr__.check()
-        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Controls_ContentControl.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ContentProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ContentControl, Microsoft_UI_Xaml_Controls_IContentControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ContentProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ContentTemplateProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ContentControl, Microsoft_UI_Xaml_Controls_IContentControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ContentTemplateProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ContentTemplateSelectorProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ContentControl, Microsoft_UI_Xaml_Controls_IContentControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ContentTemplateSelectorProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ContentTransitionsProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ContentControl, Microsoft_UI_Xaml_Controls_IContentControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ContentTransitionsProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.ContentControl"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.ContentControl;{" + Microsoft_UI_Xaml_Controls_IContentControl.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.ContentControl", Microsoft_UI_Xaml_Controls_ContentControl.signature(), Microsoft_UI_Xaml_Controls_IContentControl.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_ContentControl <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ContentControl> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ContentControl): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ContentControl {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_ContentControl.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ContentControl {
-        Microsoft_UI_Xaml_Controls_ContentControl.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.Control (synthetic:Microsoft_UI_Xaml_Controls_Control)
-public class Microsoft_UI_Xaml_Controls_Control <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Control {
-        Microsoft_UI_Xaml_Controls_Control(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Control {
-        Microsoft_UI_Xaml_Controls_Control(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IControl.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_Control> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_Control>("Control", Microsoft_UI_Xaml_Controls_IControl.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_Control.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_Control.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IControl {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
-        defaultInterface()
-    }
-
-    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
-        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
-        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
-        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
-        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
-        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
-        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public mut prop Background: Microsoft_UI_Xaml_Media_Brush {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Background(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetBackground(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop BackgroundSizing: Microsoft_UI_Xaml_Controls_BackgroundSizing {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.BackgroundSizing(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Controls_BackgroundSizing(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetBackgroundSizing(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop BorderBrush: Microsoft_UI_Xaml_Media_Brush {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.BorderBrush(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetBorderBrush(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop BorderThickness: Microsoft_UI_Xaml_Thickness {
-        get() {
-            var result__ = Microsoft_UI_Xaml_Thickness()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.BorderThickness(CPointer<Microsoft_UI_Xaml_Thickness>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetBorderThickness(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop CharacterSpacing: Int32 {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.CharacterSpacing(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetCharacterSpacing(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop CornerRadius: Microsoft_UI_Xaml_CornerRadius {
-        get() {
-            var result__ = Microsoft_UI_Xaml_CornerRadius()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.CornerRadius(CPointer<Microsoft_UI_Xaml_CornerRadius>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetCornerRadius(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop DefaultStyleResourceUri: Windows_Foundation_Uri {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.DefaultStyleResourceUri(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Windows_Foundation_Uri>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Windows_Foundation_Uri.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Uri>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetDefaultStyleResourceUri(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop ElementSoundMode: Microsoft_UI_Xaml_ElementSoundMode {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ElementSoundMode(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_ElementSoundMode(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetElementSoundMode(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop FontFamily: Microsoft_UI_Xaml_Media_FontFamily {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.FontFamily(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_FontFamily>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Media_FontFamily.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_FontFamily>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetFontFamily(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop FontSize: Float64 {
-        get() {
-            var result__ = 0.0f64
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.FontSize(CPointer<Float64>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetFontSize(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop FontStretch: Windows_UI_Text_FontStretch {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.FontStretch(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Windows_UI_Text_FontStretch(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetFontStretch(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop FontStyle: Windows_UI_Text_FontStyle {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.FontStyle(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Windows_UI_Text_FontStyle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetFontStyle(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop FontWeight: Windows_UI_Text_FontWeight {
-        get() {
-            var result__ = Windows_UI_Text_FontWeight()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.FontWeight(CPointer<Windows_UI_Text_FontWeight>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetFontWeight(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop Foreground: Microsoft_UI_Xaml_Media_Brush {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Foreground(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Brush>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Media_Brush.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Brush>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetForeground(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop HorizontalContentAlignment: Microsoft_UI_Xaml_HorizontalAlignment {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.HorizontalContentAlignment(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_HorizontalAlignment(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetHorizontalContentAlignment(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop IsEnabled: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.IsEnabled(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetIsEnabled(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop IsFocusEngaged: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.IsFocusEngaged(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetIsFocusEngaged(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop IsFocusEngagementEnabled: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.IsFocusEngagementEnabled(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetIsFocusEngagementEnabled(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop IsTextScaleFactorEnabled: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.IsTextScaleFactorEnabled(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetIsTextScaleFactorEnabled(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop Padding: Microsoft_UI_Xaml_Thickness {
-        get() {
-            var result__ = Microsoft_UI_Xaml_Thickness()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Padding(CPointer<Microsoft_UI_Xaml_Thickness>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetPadding(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop RequiresPointer: Microsoft_UI_Xaml_Controls_RequiresPointer {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.RequiresPointer(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Controls_RequiresPointer(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetRequiresPointer(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop TabNavigation: Microsoft_UI_Xaml_Input_KeyboardNavigationMode {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.TabNavigation(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Input_KeyboardNavigationMode(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetTabNavigation(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop Template: Microsoft_UI_Xaml_Controls_ControlTemplate {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Template(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ControlTemplate>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Controls_ControlTemplate.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_ControlTemplate>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetTemplate(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop VerticalContentAlignment: Microsoft_UI_Xaml_VerticalAlignment {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.VerticalContentAlignment(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_VerticalAlignment(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetVerticalContentAlignment(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public func addFocusDisengaged(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs>): Windows_Foundation_EventRegistrationToken {
-        var result__ = 0i64
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs>>(handler)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.FocusDisengaged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func removeFocusDisengaged(token: Windows_Foundation_EventRegistrationToken): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.RemoveFocusDisengaged(token) }
-        }
-        hr__.check()
-    }
-
-    public func addFocusEngaged(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs>): Windows_Foundation_EventRegistrationToken {
-        var result__ = 0i64
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs>>(handler)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.FocusEngaged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func removeFocusEngaged(token: Windows_Foundation_EventRegistrationToken): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.RemoveFocusEngaged(token) }
-        }
-        hr__.check()
-    }
-
-    public func addIsEnabledChanged(handler: Microsoft_UI_Xaml_DependencyPropertyChangedEventHandler): Windows_Foundation_EventRegistrationToken {
-        var result__ = 0i64
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyPropertyChangedEventHandler>(handler)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.IsEnabledChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func removeIsEnabledChanged(token: Windows_Foundation_EventRegistrationToken): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.RemoveIsEnabledChanged(token) }
-        }
-        hr__.check()
-    }
-
-    public func RemoveFocusEngagement(): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.RemoveFocusEngagement() }
-        }
-        hr__.check()
-    }
-
-    public func ApplyTemplate(): Bool {
-        var result__ = false
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.ApplyTemplate(CPointer<Bool>(inout result__)) }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public static func IsFocusEngagementEnabledProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IsFocusEngagementEnabledProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func IsFocusEngagedProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IsFocusEngagedProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func RequiresPointerProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.RequiresPointerProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func FontSizeProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.FontSizeProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func FontFamilyProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.FontFamilyProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func FontWeightProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.FontWeightProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func FontStyleProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.FontStyleProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func FontStretchProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.FontStretchProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func CharacterSpacingProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.CharacterSpacingProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ForegroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ForegroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func IsTextScaleFactorEnabledProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IsTextScaleFactorEnabledProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func IsEnabledProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IsEnabledProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func TabNavigationProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.TabNavigationProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func TemplateProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.TemplateProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func PaddingProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.PaddingProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func HorizontalContentAlignmentProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.HorizontalContentAlignmentProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func VerticalContentAlignmentProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.VerticalContentAlignmentProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func BackgroundProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.BackgroundProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func BackgroundSizingProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.BackgroundSizingProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func BorderThicknessProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.BorderThicknessProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func BorderBrushProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.BorderBrushProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func DefaultStyleKeyProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.DefaultStyleKeyProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func DefaultStyleResourceUriProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.DefaultStyleResourceUriProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ElementSoundModeProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ElementSoundModeProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func CornerRadiusProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.CornerRadiusProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func IsTemplateFocusTargetProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IsTemplateFocusTargetProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func GetIsTemplateFocusTarget(element: Microsoft_UI_Xaml_FrameworkElement): Bool {
-        var result__ = false
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_FrameworkElement>(element)) {
-            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-                hr__ = unsafe { factory__.GetIsTemplateFocusTarget(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public static func SetIsTemplateFocusTarget(element: Microsoft_UI_Xaml_FrameworkElement, value: Bool): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_FrameworkElement>(element)) {
-            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-                hr__ = unsafe { factory__.SetIsTemplateFocusTarget(__argBorrow0.asRaw(), value) }
-            }
-        }
-        hr__.check()
-    }
-
-    public static func IsTemplateKeyTipTargetProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IsTemplateKeyTipTargetProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func GetIsTemplateKeyTipTarget(element: Microsoft_UI_Xaml_DependencyObject): Bool {
-        var result__ = false
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
-            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-                hr__ = unsafe { factory__.GetIsTemplateKeyTipTarget(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public static func SetIsTemplateKeyTipTarget(element: Microsoft_UI_Xaml_DependencyObject, value: Bool): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
-            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlStatics>().unwrap()) {
-                hr__ = unsafe { factory__.SetIsTemplateKeyTipTarget(__argBorrow0.asRaw(), value) }
-            }
-        }
-        hr__.check()
-    }
-
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_Control {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        if (innerInterface.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        innerInterface.clear()
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
-            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_Control, Microsoft_UI_Xaml_Controls_IControlFactory>().unwrap()) {
-                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_Control>(result__)
-            result__ = CPointer<Unit>()
-        }
-        if (hr__.failed()) {
-            match (innerInterface.takeAbi<CPointer<Unit>>()) {
-                case Some(__arg1ValuePartial) =>
-                    if (__arg1ValuePartial.isNotNull()) {
-                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
-                    }
-                case None => ()
-            }
-        }
-        hr__.check()
-        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Controls_Control.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.Control"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.Control;{" + Microsoft_UI_Xaml_Controls_IControl.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.Control", Microsoft_UI_Xaml_Controls_Control.signature(), Microsoft_UI_Xaml_Controls_IControl.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_Control <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_Control> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_Control): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Control {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_Control.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_Control {
-        Microsoft_UI_Xaml_Controls_Control.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.ControlTemplate (synthetic:Microsoft_UI_Xaml_Controls_ControlTemplate)
-public class Microsoft_UI_Xaml_Controls_ControlTemplate <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ControlTemplate {
-        Microsoft_UI_Xaml_Controls_ControlTemplate(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ControlTemplate {
-        Microsoft_UI_Xaml_Controls_ControlTemplate(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IControlTemplate.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ControlTemplate> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IControlTemplate.iid(), Microsoft_UI_Xaml_IFrameworkTemplate.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ControlTemplate>("ControlTemplate", Microsoft_UI_Xaml_Controls_IControlTemplate.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_ControlTemplate.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_ControlTemplate.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IControlTemplate {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IControlTemplate.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIControlTemplate(): Microsoft_UI_Xaml_Controls_IControlTemplate {
-        defaultInterface()
-    }
-
-    public func asIFrameworkTemplate(): Microsoft_UI_Xaml_IFrameworkTemplate {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkTemplate>(Microsoft_UI_Xaml_IFrameworkTemplate.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
-        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public mut prop TargetType: Windows_UI_Xaml_Interop_TypeName {
-        get() {
-            var result__ = Windows_UI_Xaml_Interop_TypeName()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.TargetType(CPointer<Windows_UI_Xaml_Interop_TypeName>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetTargetType(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public static func new(): Microsoft_UI_Xaml_Controls_ControlTemplate {
-        var created__: Option<Microsoft_UI_Xaml_Controls_ControlTemplate> = Option<Microsoft_UI_Xaml_Controls_ControlTemplate>.None
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ControlTemplate, windows_core.IGenericFactory>().unwrap()) {
-            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Controls_ControlTemplate>(Microsoft_UI_Xaml_Controls_ControlTemplate.descriptor()).unwrap() })
-        }
-        match (created__) {
-            case Some(value) => return value
-            case None => throw IllegalStateException("Activation factory did not produce ControlTemplate")
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.ControlTemplate"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.ControlTemplate;{" + Microsoft_UI_Xaml_Controls_IControlTemplate.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.ControlTemplate", Microsoft_UI_Xaml_Controls_ControlTemplate.signature(), Microsoft_UI_Xaml_Controls_IControlTemplate.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_ControlTemplate <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ControlTemplate> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ControlTemplate): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ControlTemplate {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_ControlTemplate.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ControlTemplate {
-        Microsoft_UI_Xaml_Controls_ControlTemplate.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.DataTemplateSelector (synthetic:Microsoft_UI_Xaml_Controls_DataTemplateSelector)
-public class Microsoft_UI_Xaml_Controls_DataTemplateSelector <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DataTemplateSelector {
-        Microsoft_UI_Xaml_Controls_DataTemplateSelector(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DataTemplateSelector {
-        Microsoft_UI_Xaml_Controls_DataTemplateSelector(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IDataTemplateSelector.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_DataTemplateSelector> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IDataTemplateSelector.iid(), Microsoft_UI_Xaml_Controls_IDataTemplateSelectorOverrides.iid(), Microsoft_UI_Xaml_IElementFactory.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_DataTemplateSelector>("DataTemplateSelector", Microsoft_UI_Xaml_Controls_IDataTemplateSelector.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_DataTemplateSelector.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_DataTemplateSelector.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IDataTemplateSelector {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IDataTemplateSelector.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIDataTemplateSelector(): Microsoft_UI_Xaml_Controls_IDataTemplateSelector {
-        defaultInterface()
-    }
-
-    public func asIDataTemplateSelectorOverrides(): Microsoft_UI_Xaml_Controls_IDataTemplateSelectorOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IDataTemplateSelectorOverrides>(Microsoft_UI_Xaml_Controls_IDataTemplateSelectorOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIElementFactory(): Microsoft_UI_Xaml_IElementFactory {
-        match (unsafe { query<Microsoft_UI_Xaml_IElementFactory>(Microsoft_UI_Xaml_IElementFactory.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func SelectTemplate(item: windows_interface.IInspectable, container: Microsoft_UI_Xaml_DependencyObject): Microsoft_UI_Xaml_DataTemplate {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
-            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(container)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SelectTemplate(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
-                }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DataTemplate>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DataTemplate.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public func SelectTemplateForItem(item: windows_interface.IInspectable): Microsoft_UI_Xaml_DataTemplate {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SelectTemplateForItem(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DataTemplate>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DataTemplate.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_DataTemplateSelector {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        if (innerInterface.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        innerInterface.clear()
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
-            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_DataTemplateSelector, Microsoft_UI_Xaml_Controls_IDataTemplateSelectorFactory>().unwrap()) {
-                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_DataTemplateSelector>(result__)
-            result__ = CPointer<Unit>()
-        }
-        if (hr__.failed()) {
-            match (innerInterface.takeAbi<CPointer<Unit>>()) {
-                case Some(__arg1ValuePartial) =>
-                    if (__arg1ValuePartial.isNotNull()) {
-                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
-                    }
-                case None => ()
-            }
-        }
-        hr__.check()
-        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Controls_DataTemplateSelector.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.DataTemplateSelector"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.DataTemplateSelector;{" + Microsoft_UI_Xaml_Controls_IDataTemplateSelector.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.DataTemplateSelector", Microsoft_UI_Xaml_Controls_DataTemplateSelector.signature(), Microsoft_UI_Xaml_Controls_IDataTemplateSelector.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_DataTemplateSelector <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_DataTemplateSelector> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_DataTemplateSelector): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DataTemplateSelector {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_DataTemplateSelector.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DataTemplateSelector {
-        Microsoft_UI_Xaml_Controls_DataTemplateSelector.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.DragItemsCompletedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs)
-public class Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs {
-        Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs {
-        Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IDragItemsCompletedEventArgs.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IDragItemsCompletedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs>("DragItemsCompletedEventArgs", Microsoft_UI_Xaml_Controls_IDragItemsCompletedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IDragItemsCompletedEventArgs {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IDragItemsCompletedEventArgs.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIDragItemsCompletedEventArgs(): Microsoft_UI_Xaml_Controls_IDragItemsCompletedEventArgs {
-        defaultInterface()
-    }
-
-    public prop DropResult: Windows_ApplicationModel_DataTransfer_DataPackageOperation {
-        get() {
-            var result__ = 0u32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.DropResult(CPointer<UInt32>(inout result__)) }
-            }
-            hr__.check()
-            return Windows_ApplicationModel_DataTransfer_DataPackageOperation(result__)
-        }
-    }
-
-    public prop Items: Windows_Foundation_Collections_IVectorView_1<windows_interface.IInspectable> {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Items(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections_IVectorView_1<windows_interface.IInspectable>>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Windows_Foundation_Collections_IVectorView_1<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.DragItemsCompletedEventArgs"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.DragItemsCompletedEventArgs;{" + Microsoft_UI_Xaml_Controls_IDragItemsCompletedEventArgs.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.DragItemsCompletedEventArgs", Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs.signature(), Microsoft_UI_Xaml_Controls_IDragItemsCompletedEventArgs.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs {
-        Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.DragItemsStartingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs)
-public class Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs {
-        Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs {
-        Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IDragItemsStartingEventArgs.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IDragItemsStartingEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs>("DragItemsStartingEventArgs", Microsoft_UI_Xaml_Controls_IDragItemsStartingEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IDragItemsStartingEventArgs {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IDragItemsStartingEventArgs.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIDragItemsStartingEventArgs(): Microsoft_UI_Xaml_Controls_IDragItemsStartingEventArgs {
-        defaultInterface()
-    }
-
-    public mut prop Cancel: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Cancel(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetCancel(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public prop Data: Windows_ApplicationModel_DataTransfer_DataPackage {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Data(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Windows_ApplicationModel_DataTransfer_DataPackage>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Windows_ApplicationModel_DataTransfer_DataPackage.fromAbiTakeWinrtHandle(result__)
-        }
-    }
-
-    public prop Items: Windows_Foundation_Collections_IVector_1<windows_interface.IInspectable> {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Items(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections_IVector_1<windows_interface.IInspectable>>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Windows_Foundation_Collections_IVector_1<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
-        }
-    }
-
-    public static func new(): Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs {
-        var created__: Option<Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs> = Option<Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs>.None
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs, windows_core.IGenericFactory>().unwrap()) {
-            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs>(Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs.descriptor()).unwrap() })
-        }
-        match (created__) {
-            case Some(value) => return value
-            case None => throw IllegalStateException("Activation factory did not produce DragItemsStartingEventArgs")
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.DragItemsStartingEventArgs"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.DragItemsStartingEventArgs;{" + Microsoft_UI_Xaml_Controls_IDragItemsStartingEventArgs.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.DragItemsStartingEventArgs", Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs.signature(), Microsoft_UI_Xaml_Controls_IDragItemsStartingEventArgs.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs {
-        Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.DragItemsStartingEventHandler (synthetic:Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler)
-@C
-public struct Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl {
-    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
-    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
-    public init() {}
-}
-
-public open class Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler {
-        OwnedMicrosoft_UI_Xaml_Controls_DragItemsStartingEventHandler(raw)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler {
-        Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        windows_interface.GUID.from_values(1431513088u32, 30231u16, 23911u16, 128u8, 191u8, 185u8, 140u8, 10u8, 65u8, 185u8, 214u8)
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler> {
-        windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler>("Microsoft.UI.Xaml.Controls.DragItemsStartingEventHandler", Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler.iid(), [windows_interface.IUnknown.iid()], { raw => Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler.viewOf(raw) })
-    }
-
-    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Microsoft.UI.Xaml.Controls.DragItemsStartingEventHandler", Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler.iid(), windows_interface.IUnknown.descriptorSchema(), "Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl", "Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler", "Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerInvoker", [windows_interface.InterfaceMethodSchema("Invoke", 3, [windows_interface.InterfaceParameterSchema("sender", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("e", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
-        schema.runtimeTypeContract = Some(Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler.runtimeType())
-        return schema
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func signature(): String {
-        "Microsoft.UI.Xaml.Controls.DragItemsStartingEventHandler"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.DragItemsStartingEventHandler", Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler.signature(), Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler.iid())
-    }
-
-    public static func projectionKind(): String {
-        return "delegate"
-    }
-
-    public unsafe func vtbl(): Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl {
-        readVtbl<Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl>(Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl())
-    }
-
-    public unsafe func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
-        let liveRaw = asRaw()
-        if (liveRaw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        let v = vtbl()
-        windows_core.HRESULT(v.Invoke(liveRaw, sender, e)).check()
-    }
-
-    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler {
-        let box = Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerBox(invoke)
-        let object = windows_core.ComObject<Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerBox>.new(box, [Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler.descriptorSchema()], box.vtblPtr())
-        return object.intoInterface(Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler.descriptor())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler> {}
-
-private class OwnedMicrosoft_UI_Xaml_Controls_DragItemsStartingEventHandler <: Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler {
-    public init(raw: CPointer<Unit>) {
-        super(raw, takeOwnership: true, allowManualRelease: false)
-    }
-}
-
-public interface Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerInvokerErased {
-    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
-}
-
-public interface Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerInvoker <: Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerInvokerErased {
-    func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
-        ()
-    }
-
-    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32 {
-        try {
-            this.Invoke(sender, e)
-            return windows_core.S_OK.value
-        } catch (error: windows_core.WindowsException) {
-            return error.code().value
-        } catch (_: Exception) {
-            return windows_core.E_FAIL.value
-        }
-    }
-}
-
-private class Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerBox <: Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerInvoker & Resource {
-    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
-    private let vtblHandle: CPointer<Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl>
-    private var closed: Bool = false
-
-    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
-        this.invoke_ = invoke
-        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl>(buildMicrosoft_UI_Xaml_Controls_DragItemsStartingEventHandlerBoxVtbl()) }
-    }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle)
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    ~init() {
-        if (!closed) {
-            closed = true
-        }
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        unsafe { windows_interface.freeNativeValue(vtblHandle) }
-        closed = true
-    }
-
-    public func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
-        invoke_(sender, e)
-    }
-}
-
-func buildMicrosoft_UI_Xaml_Controls_DragItemsStartingEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl {
-    var vtbl = Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl()
-    vtbl.base_ = windows_core.buildIUnknownVtbl()
-    vtbl.Invoke = { instanceRaw: CPointer<Unit>, sender: CPointer<Unit>, e: CPointer<Unit> =>
-        match (unsafe { windows_core.asImplFromRaw<Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerInvokerErased>(instanceRaw) }) {
-            case Some(invoker) =>
-                invoker.__winrtThunk_Invoke(sender, e)
-            case None =>
-                windows_core.E_NOTIMPL.value
-        }
-    }
-    return vtbl
-}
-
-
-// Microsoft.UI.Xaml.Controls.FocusDisengagedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs)
-public class Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs {
-        Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs {
-        Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IFocusDisengagedEventArgs.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IFocusDisengagedEventArgs.iid(), Microsoft_UI_Xaml_IRoutedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs>("FocusDisengagedEventArgs", Microsoft_UI_Xaml_Controls_IFocusDisengagedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IFocusDisengagedEventArgs {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IFocusDisengagedEventArgs.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIFocusDisengagedEventArgs(): Microsoft_UI_Xaml_Controls_IFocusDisengagedEventArgs {
-        defaultInterface()
-    }
-
-    public func asIRoutedEventArgs(): Microsoft_UI_Xaml_IRoutedEventArgs {
-        match (unsafe { query<Microsoft_UI_Xaml_IRoutedEventArgs>(Microsoft_UI_Xaml_IRoutedEventArgs.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.FocusDisengagedEventArgs"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.FocusDisengagedEventArgs;{" + Microsoft_UI_Xaml_Controls_IFocusDisengagedEventArgs.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.FocusDisengagedEventArgs", Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs.signature(), Microsoft_UI_Xaml_Controls_IFocusDisengagedEventArgs.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs {
-        Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.FocusEngagedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs)
-public class Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs {
-        Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs {
-        Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IFocusEngagedEventArgs.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IFocusEngagedEventArgs.iid(), Microsoft_UI_Xaml_IRoutedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs>("FocusEngagedEventArgs", Microsoft_UI_Xaml_Controls_IFocusEngagedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IFocusEngagedEventArgs {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IFocusEngagedEventArgs.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIFocusEngagedEventArgs(): Microsoft_UI_Xaml_Controls_IFocusEngagedEventArgs {
-        defaultInterface()
-    }
-
-    public func asIRoutedEventArgs(): Microsoft_UI_Xaml_IRoutedEventArgs {
-        match (unsafe { query<Microsoft_UI_Xaml_IRoutedEventArgs>(Microsoft_UI_Xaml_IRoutedEventArgs.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public mut prop Handled: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Handled(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetHandled(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.FocusEngagedEventArgs"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.FocusEngagedEventArgs;{" + Microsoft_UI_Xaml_Controls_IFocusEngagedEventArgs.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.FocusEngagedEventArgs", Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs.signature(), Microsoft_UI_Xaml_Controls_IFocusEngagedEventArgs.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs {
-        Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.GroupStyle (synthetic:Microsoft_UI_Xaml_Controls_GroupStyle)
-public class Microsoft_UI_Xaml_Controls_GroupStyle <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_GroupStyle {
-        Microsoft_UI_Xaml_Controls_GroupStyle(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_GroupStyle {
-        Microsoft_UI_Xaml_Controls_GroupStyle(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IGroupStyle.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_GroupStyle> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IGroupStyle.iid(), Microsoft_UI_Xaml_Data_INotifyPropertyChanged.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_GroupStyle>("GroupStyle", Microsoft_UI_Xaml_Controls_IGroupStyle.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_GroupStyle.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_GroupStyle.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IGroupStyle {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IGroupStyle.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIGroupStyle(): Microsoft_UI_Xaml_Controls_IGroupStyle {
-        defaultInterface()
-    }
-
-    public func asINotifyPropertyChanged(): Microsoft_UI_Xaml_Data_INotifyPropertyChanged {
-        match (unsafe { query<Microsoft_UI_Xaml_Data_INotifyPropertyChanged>(Microsoft_UI_Xaml_Data_INotifyPropertyChanged.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public mut prop ContainerStyle: Microsoft_UI_Xaml_Style {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ContainerStyle(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Style>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Style.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Style>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetContainerStyle(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop ContainerStyleSelector: Microsoft_UI_Xaml_Controls_StyleSelector {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ContainerStyleSelector(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_StyleSelector>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Controls_StyleSelector.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_StyleSelector>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetContainerStyleSelector(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop HeaderContainerStyle: Microsoft_UI_Xaml_Style {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.HeaderContainerStyle(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Style>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Style.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Style>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetHeaderContainerStyle(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop HeaderTemplate: Microsoft_UI_Xaml_DataTemplate {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.HeaderTemplate(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DataTemplate>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_DataTemplate.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DataTemplate>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetHeaderTemplate(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop HeaderTemplateSelector: Microsoft_UI_Xaml_Controls_DataTemplateSelector {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.HeaderTemplateSelector(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_DataTemplateSelector>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Controls_DataTemplateSelector.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_DataTemplateSelector>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetHeaderTemplateSelector(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop HidesIfEmpty: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.HidesIfEmpty(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetHidesIfEmpty(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop Panel: Microsoft_UI_Xaml_Controls_ItemsPanelTemplate {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Panel(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ItemsPanelTemplate>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Controls_ItemsPanelTemplate.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_ItemsPanelTemplate>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetPanel(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_GroupStyle {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        if (innerInterface.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        innerInterface.clear()
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
-            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_GroupStyle, Microsoft_UI_Xaml_Controls_IGroupStyleFactory>().unwrap()) {
-                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_GroupStyle>(result__)
-            result__ = CPointer<Unit>()
-        }
-        if (hr__.failed()) {
-            match (innerInterface.takeAbi<CPointer<Unit>>()) {
-                case Some(__arg1ValuePartial) =>
-                    if (__arg1ValuePartial.isNotNull()) {
-                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
-                    }
-                case None => ()
-            }
-        }
-        hr__.check()
-        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Controls_GroupStyle.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.GroupStyle"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.GroupStyle;{" + Microsoft_UI_Xaml_Controls_IGroupStyle.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.GroupStyle", Microsoft_UI_Xaml_Controls_GroupStyle.signature(), Microsoft_UI_Xaml_Controls_IGroupStyle.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_GroupStyle <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_GroupStyle> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_GroupStyle): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_GroupStyle {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_GroupStyle.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_GroupStyle {
-        Microsoft_UI_Xaml_Controls_GroupStyle.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.GroupStyleSelector (synthetic:Microsoft_UI_Xaml_Controls_GroupStyleSelector)
-public class Microsoft_UI_Xaml_Controls_GroupStyleSelector <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_GroupStyleSelector {
-        Microsoft_UI_Xaml_Controls_GroupStyleSelector(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_GroupStyleSelector {
-        Microsoft_UI_Xaml_Controls_GroupStyleSelector(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IGroupStyleSelector.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_GroupStyleSelector> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IGroupStyleSelector.iid(), Microsoft_UI_Xaml_Controls_IGroupStyleSelectorOverrides.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_GroupStyleSelector>("GroupStyleSelector", Microsoft_UI_Xaml_Controls_IGroupStyleSelector.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_GroupStyleSelector.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_GroupStyleSelector.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IGroupStyleSelector {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IGroupStyleSelector.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIGroupStyleSelector(): Microsoft_UI_Xaml_Controls_IGroupStyleSelector {
-        defaultInterface()
-    }
-
-    public func asIGroupStyleSelectorOverrides(): Microsoft_UI_Xaml_Controls_IGroupStyleSelectorOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IGroupStyleSelectorOverrides>(Microsoft_UI_Xaml_Controls_IGroupStyleSelectorOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func SelectGroupStyle(group: windows_interface.IInspectable, level: UInt32): Microsoft_UI_Xaml_Controls_GroupStyle {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(group)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SelectGroupStyle(__argBorrow0.asRaw(), level, CPointer<CPointer<Unit>>(inout result__)) }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_GroupStyle>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_Controls_GroupStyle.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_GroupStyleSelector {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        if (innerInterface.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        innerInterface.clear()
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
-            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_GroupStyleSelector, Microsoft_UI_Xaml_Controls_IGroupStyleSelectorFactory>().unwrap()) {
-                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_GroupStyleSelector>(result__)
-            result__ = CPointer<Unit>()
-        }
-        if (hr__.failed()) {
-            match (innerInterface.takeAbi<CPointer<Unit>>()) {
-                case Some(__arg1ValuePartial) =>
-                    if (__arg1ValuePartial.isNotNull()) {
-                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
-                    }
-                case None => ()
-            }
-        }
-        hr__.check()
-        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Controls_GroupStyleSelector.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.GroupStyleSelector"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.GroupStyleSelector;{" + Microsoft_UI_Xaml_Controls_IGroupStyleSelector.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.GroupStyleSelector", Microsoft_UI_Xaml_Controls_GroupStyleSelector.signature(), Microsoft_UI_Xaml_Controls_IGroupStyleSelector.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_GroupStyleSelector <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_GroupStyleSelector> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_GroupStyleSelector): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_GroupStyleSelector {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_GroupStyleSelector.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_GroupStyleSelector {
-        Microsoft_UI_Xaml_Controls_GroupStyleSelector.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.IChoosingGroupHeaderContainerEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IChoosingGroupHeaderContainerEventArgs)
-@Interface["2db1b0b0-aee9-55fa-8c30-c98f00643d00", "Microsoft.UI.Xaml.Controls.IChoosingGroupHeaderContainerEventArgs", "GroupHeaderContainer.value=Com;Group.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IChoosingGroupHeaderContainerEventArgs <: IInspectable {
-    func GroupHeaderContainer(value: CPointer<CPointer<Unit>>): Int32
-    func SetGroupHeaderContainer(value: CPointer<Unit>): Int32
-    func GroupIndex(value: CPointer<Int32>): Int32
-    func Group(value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IChoosingItemContainerEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IChoosingItemContainerEventArgs)
-@Interface["b479b9d2-a63f-5638-9486-8ccc1f40251e", "Microsoft.UI.Xaml.Controls.IChoosingItemContainerEventArgs", "Item.value=Com;ItemContainer.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IChoosingItemContainerEventArgs <: IInspectable {
-    func ItemIndex(value: CPointer<Int32>): Int32
-    func Item(value: CPointer<CPointer<Unit>>): Int32
-    func ItemContainer(value: CPointer<CPointer<Unit>>): Int32
-    func SetItemContainer(value: CPointer<Unit>): Int32
-    func IsContainerPrepared(value: CPointer<Bool>): Int32
-    func SetIsContainerPrepared(value: Bool): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IContainerContentChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IContainerContentChangingEventArgs)
-@Interface["f4c8c937-b070-53ce-a76c-074ee5750a71", "Microsoft.UI.Xaml.Controls.IContainerContentChangingEventArgs", "ItemContainer.value=Com;Item.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IContainerContentChangingEventArgs <: IInspectable {
-    func ItemContainer(value: CPointer<CPointer<Unit>>): Int32
-    func InRecycleQueue(value: CPointer<Bool>): Int32
-    func ItemIndex(value: CPointer<Int32>): Int32
-    func Item(value: CPointer<CPointer<Unit>>): Int32
-    func Phase(value: CPointer<UInt32>): Int32
-    func Handled(value: CPointer<Bool>): Int32
-    func SetHandled(value: Bool): Int32
-    func RegisterUpdateCallback(callback: CPointer<Unit>): Int32
-    func RegisterUpdateCallbackWithPhase(callbackPhase: UInt32, callback: CPointer<Unit>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IContentControl (synthetic:Microsoft_UI_Xaml_Controls_IContentControl)
-@Interface["07e81761-11b2-52ae-8f8b-4d53d2b5900a", "Microsoft.UI.Xaml.Controls.IContentControl", "Content.value=Com;ContentTemplate.value=Com;ContentTemplateSelector.value=Com;ContentTransitions.value=Com;ContentTemplateRoot.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IContentControl <: IInspectable {
-    func Content(value: CPointer<CPointer<Unit>>): Int32
-    func SetContent(value: CPointer<Unit>): Int32
-    func ContentTemplate(value: CPointer<CPointer<Unit>>): Int32
-    func SetContentTemplate(value: CPointer<Unit>): Int32
-    func ContentTemplateSelector(value: CPointer<CPointer<Unit>>): Int32
-    func SetContentTemplateSelector(value: CPointer<Unit>): Int32
-    func ContentTransitions(value: CPointer<CPointer<Unit>>): Int32
-    func SetContentTransitions(value: CPointer<Unit>): Int32
-    func ContentTemplateRoot(value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IContentControlFactory (synthetic:Microsoft_UI_Xaml_Controls_IContentControlFactory)
-@Interface["3dea958e-5acd-5f80-8938-38634f51493a", "Microsoft.UI.Xaml.Controls.IContentControlFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IContentControlFactory <: IInspectable {
-    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IContentControlOverrides (synthetic:Microsoft_UI_Xaml_Controls_IContentControlOverrides)
-@Interface["2504174a-017e-5a2d-9c28-d97c66ae9937", "Microsoft.UI.Xaml.Controls.IContentControlOverrides"]
-public interface Microsoft_UI_Xaml_Controls_IContentControlOverrides <: IInspectable {
-    func OnContentChanged(oldContent: CPointer<Unit>, newContent: CPointer<Unit>): Int32
-    func OnContentTemplateChanged(oldContentTemplate: CPointer<Unit>, newContentTemplate: CPointer<Unit>): Int32
-    func OnContentTemplateSelectorChanged(oldContentTemplateSelector: CPointer<Unit>, newContentTemplateSelector: CPointer<Unit>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IContentControlStatics (synthetic:Microsoft_UI_Xaml_Controls_IContentControlStatics)
-@Interface["f25484f4-2fed-5a0a-8864-7d6d4ac43ef8", "Microsoft.UI.Xaml.Controls.IContentControlStatics", "ContentProperty.value=Com;ContentTemplateProperty.value=Com;ContentTemplateSelectorProperty.value=Com;ContentTransitionsProperty.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IContentControlStatics <: IInspectable {
-    func ContentProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ContentTemplateProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ContentTemplateSelectorProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ContentTransitionsProperty(value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IControl (synthetic:Microsoft_UI_Xaml_Controls_IControl)
-@Interface["857d6e8a-d45a-5c69-a99c-bf6a5c54fb38", "Microsoft.UI.Xaml.Controls.IControl", "FontFamily.value=Com;Foreground.value=Com;Template.value=Com;Background.value=Com;BorderBrush.value=Com;DefaultStyleResourceUri.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IControl <: IInspectable {
-    func IsFocusEngagementEnabled(value: CPointer<Bool>): Int32
-    func SetIsFocusEngagementEnabled(value: Bool): Int32
-    func IsFocusEngaged(value: CPointer<Bool>): Int32
-    func SetIsFocusEngaged(value: Bool): Int32
-    func RequiresPointer(value: CPointer<Int32>): Int32
-    func SetRequiresPointer(value: Int32): Int32
-    func FontSize(value: CPointer<Float64>): Int32
-    func SetFontSize(value: Float64): Int32
-    func FontFamily(value: CPointer<CPointer<Unit>>): Int32
-    func SetFontFamily(value: CPointer<Unit>): Int32
-    func FontWeight(value: CPointer<Windows_UI_Text_FontWeight>): Int32
-    func SetFontWeight(value: Windows_UI_Text_FontWeight): Int32
-    func FontStyle(value: CPointer<Int32>): Int32
-    func SetFontStyle(value: Int32): Int32
-    func FontStretch(value: CPointer<Int32>): Int32
-    func SetFontStretch(value: Int32): Int32
-    func CharacterSpacing(value: CPointer<Int32>): Int32
-    func SetCharacterSpacing(value: Int32): Int32
-    func Foreground(value: CPointer<CPointer<Unit>>): Int32
-    func SetForeground(value: CPointer<Unit>): Int32
-    func IsTextScaleFactorEnabled(value: CPointer<Bool>): Int32
-    func SetIsTextScaleFactorEnabled(value: Bool): Int32
-    func IsEnabled(value: CPointer<Bool>): Int32
-    func SetIsEnabled(value: Bool): Int32
-    func TabNavigation(value: CPointer<Int32>): Int32
-    func SetTabNavigation(value: Int32): Int32
-    func Template(value: CPointer<CPointer<Unit>>): Int32
-    func SetTemplate(value: CPointer<Unit>): Int32
-    func Padding(value: CPointer<Microsoft_UI_Xaml_Thickness>): Int32
-    func SetPadding(value: Microsoft_UI_Xaml_Thickness): Int32
-    func HorizontalContentAlignment(value: CPointer<Int32>): Int32
-    func SetHorizontalContentAlignment(value: Int32): Int32
-    func VerticalContentAlignment(value: CPointer<Int32>): Int32
-    func SetVerticalContentAlignment(value: Int32): Int32
-    func Background(value: CPointer<CPointer<Unit>>): Int32
-    func SetBackground(value: CPointer<Unit>): Int32
-    func BackgroundSizing(value: CPointer<Int32>): Int32
-    func SetBackgroundSizing(value: Int32): Int32
-    func BorderThickness(value: CPointer<Microsoft_UI_Xaml_Thickness>): Int32
-    func SetBorderThickness(value: Microsoft_UI_Xaml_Thickness): Int32
-    func BorderBrush(value: CPointer<CPointer<Unit>>): Int32
-    func SetBorderBrush(value: CPointer<Unit>): Int32
-    func DefaultStyleResourceUri(value: CPointer<CPointer<Unit>>): Int32
-    func SetDefaultStyleResourceUri(value: CPointer<Unit>): Int32
-    func ElementSoundMode(value: CPointer<Int32>): Int32
-    func SetElementSoundMode(value: Int32): Int32
-    func CornerRadius(value: CPointer<Microsoft_UI_Xaml_CornerRadius>): Int32
-    func SetCornerRadius(value: Microsoft_UI_Xaml_CornerRadius): Int32
-    func FocusEngaged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
-    func RemoveFocusEngaged(token: Int64): Int32
-    func FocusDisengaged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
-    func RemoveFocusDisengaged(token: Int64): Int32
-    func IsEnabledChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
-    func RemoveIsEnabledChanged(token: Int64): Int32
-    func RemoveFocusEngagement(): Int32
-    func ApplyTemplate(result: CPointer<Bool>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IControlFactory (synthetic:Microsoft_UI_Xaml_Controls_IControlFactory)
-@Interface["25159233-9438-5534-aeb9-00eb059cf73f", "Microsoft.UI.Xaml.Controls.IControlFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IControlFactory <: IInspectable {
-    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IControlOverrides (synthetic:Microsoft_UI_Xaml_Controls_IControlOverrides)
-@Interface["5f644395-2177-5161-9f87-c6c749c73a03", "Microsoft.UI.Xaml.Controls.IControlOverrides"]
-public interface Microsoft_UI_Xaml_Controls_IControlOverrides <: IInspectable {
-    func OnPointerEntered(e: CPointer<Unit>): Int32
-    func OnPointerPressed(e: CPointer<Unit>): Int32
-    func OnPointerMoved(e: CPointer<Unit>): Int32
-    func OnPointerReleased(e: CPointer<Unit>): Int32
-    func OnPointerExited(e: CPointer<Unit>): Int32
-    func OnPointerCaptureLost(e: CPointer<Unit>): Int32
-    func OnPointerCanceled(e: CPointer<Unit>): Int32
-    func OnPointerWheelChanged(e: CPointer<Unit>): Int32
-    func OnTapped(e: CPointer<Unit>): Int32
-    func OnDoubleTapped(e: CPointer<Unit>): Int32
-    func OnHolding(e: CPointer<Unit>): Int32
-    func OnRightTapped(e: CPointer<Unit>): Int32
-    func OnManipulationStarting(e: CPointer<Unit>): Int32
-    func OnManipulationInertiaStarting(e: CPointer<Unit>): Int32
-    func OnManipulationStarted(e: CPointer<Unit>): Int32
-    func OnManipulationDelta(e: CPointer<Unit>): Int32
-    func OnManipulationCompleted(e: CPointer<Unit>): Int32
-    func OnKeyUp(e: CPointer<Unit>): Int32
-    func OnKeyDown(e: CPointer<Unit>): Int32
-    func OnPreviewKeyDown(e: CPointer<Unit>): Int32
-    func OnPreviewKeyUp(e: CPointer<Unit>): Int32
-    func OnGotFocus(e: CPointer<Unit>): Int32
-    func OnLostFocus(e: CPointer<Unit>): Int32
-    func OnCharacterReceived(e: CPointer<Unit>): Int32
-    func OnDragEnter(e: CPointer<Unit>): Int32
-    func OnDragLeave(e: CPointer<Unit>): Int32
-    func OnDragOver(e: CPointer<Unit>): Int32
-    func OnDrop(e: CPointer<Unit>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IControlProtected (synthetic:Microsoft_UI_Xaml_Controls_IControlProtected)
-@Interface["5c750339-1789-5095-a214-dd9d0564e579", "Microsoft.UI.Xaml.Controls.IControlProtected", "DefaultStyleKey.value=Com;GetTemplateChild.result=Com"]
-public interface Microsoft_UI_Xaml_Controls_IControlProtected <: IInspectable {
-    func DefaultStyleKey(value: CPointer<CPointer<Unit>>): Int32
-    func SetDefaultStyleKey(value: CPointer<Unit>): Int32
-    func GetTemplateChild(childName: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IControlStatics (synthetic:Microsoft_UI_Xaml_Controls_IControlStatics)
-@Interface["c3ae388d-aa36-5e10-acac-98415f47bcc7", "Microsoft.UI.Xaml.Controls.IControlStatics", "IsFocusEngagementEnabledProperty.value=Com;IsFocusEngagedProperty.value=Com;RequiresPointerProperty.value=Com;FontSizeProperty.value=Com;FontFamilyProperty.value=Com;FontWeightProperty.value=Com;FontStyleProperty.value=Com;FontStretchProperty.value=Com;CharacterSpacingProperty.value=Com;ForegroundProperty.value=Com;IsTextScaleFactorEnabledProperty.value=Com;IsEnabledProperty.value=Com;TabNavigationProperty.value=Com;TemplateProperty.value=Com;PaddingProperty.value=Com;HorizontalContentAlignmentProperty.value=Com;VerticalContentAlignmentProperty.value=Com;BackgroundProperty.value=Com;BackgroundSizingProperty.value=Com;BorderThicknessProperty.value=Com;BorderBrushProperty.value=Com;DefaultStyleKeyProperty.value=Com;DefaultStyleResourceUriProperty.value=Com;ElementSoundModeProperty.value=Com;CornerRadiusProperty.value=Com;IsTemplateFocusTargetProperty.value=Com;IsTemplateKeyTipTargetProperty.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IControlStatics <: IInspectable {
-    func IsFocusEngagementEnabledProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IsFocusEngagedProperty(value: CPointer<CPointer<Unit>>): Int32
-    func RequiresPointerProperty(value: CPointer<CPointer<Unit>>): Int32
-    func FontSizeProperty(value: CPointer<CPointer<Unit>>): Int32
-    func FontFamilyProperty(value: CPointer<CPointer<Unit>>): Int32
-    func FontWeightProperty(value: CPointer<CPointer<Unit>>): Int32
-    func FontStyleProperty(value: CPointer<CPointer<Unit>>): Int32
-    func FontStretchProperty(value: CPointer<CPointer<Unit>>): Int32
-    func CharacterSpacingProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ForegroundProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IsTextScaleFactorEnabledProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IsEnabledProperty(value: CPointer<CPointer<Unit>>): Int32
-    func TabNavigationProperty(value: CPointer<CPointer<Unit>>): Int32
-    func TemplateProperty(value: CPointer<CPointer<Unit>>): Int32
-    func PaddingProperty(value: CPointer<CPointer<Unit>>): Int32
-    func HorizontalContentAlignmentProperty(value: CPointer<CPointer<Unit>>): Int32
-    func VerticalContentAlignmentProperty(value: CPointer<CPointer<Unit>>): Int32
-    func BackgroundProperty(value: CPointer<CPointer<Unit>>): Int32
-    func BackgroundSizingProperty(value: CPointer<CPointer<Unit>>): Int32
-    func BorderThicknessProperty(value: CPointer<CPointer<Unit>>): Int32
-    func BorderBrushProperty(value: CPointer<CPointer<Unit>>): Int32
-    func DefaultStyleKeyProperty(value: CPointer<CPointer<Unit>>): Int32
-    func DefaultStyleResourceUriProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ElementSoundModeProperty(value: CPointer<CPointer<Unit>>): Int32
-    func CornerRadiusProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IsTemplateFocusTargetProperty(value: CPointer<CPointer<Unit>>): Int32
-    func GetIsTemplateFocusTarget(element: CPointer<Unit>, result: CPointer<Bool>): Int32
-    func SetIsTemplateFocusTarget(element: CPointer<Unit>, value: Bool): Int32
-    func IsTemplateKeyTipTargetProperty(value: CPointer<CPointer<Unit>>): Int32
-    func GetIsTemplateKeyTipTarget(element: CPointer<Unit>, result: CPointer<Bool>): Int32
-    func SetIsTemplateKeyTipTarget(element: CPointer<Unit>, value: Bool): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IControlTemplate (synthetic:Microsoft_UI_Xaml_Controls_IControlTemplate)
-@Interface["3a192751-2106-547a-aca0-f15ae8926ea0", "Microsoft.UI.Xaml.Controls.IControlTemplate"]
-public interface Microsoft_UI_Xaml_Controls_IControlTemplate <: IInspectable {
-    func TargetType(value: CPointer<Windows_UI_Xaml_Interop_TypeName>): Int32
-    func SetTargetType(value: Windows_UI_Xaml_Interop_TypeName): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IDataTemplateSelector (synthetic:Microsoft_UI_Xaml_Controls_IDataTemplateSelector)
-@Interface["86ca4fa4-7de0-5049-82f5-39ec78569028", "Microsoft.UI.Xaml.Controls.IDataTemplateSelector", "SelectTemplate.result=Com;SelectTemplateForItem.result=Com"]
-public interface Microsoft_UI_Xaml_Controls_IDataTemplateSelector <: IInspectable {
-    func SelectTemplate(item: CPointer<Unit>, container: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-    func SelectTemplateForItem(item: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IDataTemplateSelectorFactory (synthetic:Microsoft_UI_Xaml_Controls_IDataTemplateSelectorFactory)
-@Interface["43217eda-6f7f-5b80-a70b-944511b354ab", "Microsoft.UI.Xaml.Controls.IDataTemplateSelectorFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IDataTemplateSelectorFactory <: IInspectable {
-    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IDataTemplateSelectorOverrides (synthetic:Microsoft_UI_Xaml_Controls_IDataTemplateSelectorOverrides)
-@Interface["980448cc-c114-5b89-8e09-61b0f264e592", "Microsoft.UI.Xaml.Controls.IDataTemplateSelectorOverrides", "SelectTemplateCore.result=Com;SelectTemplateForItemCore.result=Com"]
-public interface Microsoft_UI_Xaml_Controls_IDataTemplateSelectorOverrides <: IInspectable {
-    func SelectTemplateCore(item: CPointer<Unit>, container: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-    func SelectTemplateForItemCore(item: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IDragItemsCompletedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IDragItemsCompletedEventArgs)
-@Interface["c0138552-f467-5c3e-8af4-593607762844", "Microsoft.UI.Xaml.Controls.IDragItemsCompletedEventArgs", "Items.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IDragItemsCompletedEventArgs <: IInspectable {
-    func Items(value: CPointer<CPointer<Unit>>): Int32
-    func DropResult(value: CPointer<UInt32>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IDragItemsStartingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IDragItemsStartingEventArgs)
-@Interface["a6938886-20df-558e-ac74-bb5b7f2f7e90", "Microsoft.UI.Xaml.Controls.IDragItemsStartingEventArgs", "Items.value=Com;Data.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IDragItemsStartingEventArgs <: IInspectable {
-    func Cancel(value: CPointer<Bool>): Int32
-    func SetCancel(value: Bool): Int32
-    func Items(value: CPointer<CPointer<Unit>>): Int32
-    func Data(value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IFocusDisengagedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IFocusDisengagedEventArgs)
-@Interface["c0b4b88c-c195-5064-84c7-33cb262cb240", "Microsoft.UI.Xaml.Controls.IFocusDisengagedEventArgs"]
-public interface Microsoft_UI_Xaml_Controls_IFocusDisengagedEventArgs <: IInspectable {
-}
-
-// Microsoft.UI.Xaml.Controls.IFocusEngagedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IFocusEngagedEventArgs)
-@Interface["1e71e8e4-74b2-50a1-8f2b-42c0118ab0ea", "Microsoft.UI.Xaml.Controls.IFocusEngagedEventArgs"]
-public interface Microsoft_UI_Xaml_Controls_IFocusEngagedEventArgs <: IInspectable {
-    func Handled(value: CPointer<Bool>): Int32
-    func SetHandled(value: Bool): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IGroupStyle (synthetic:Microsoft_UI_Xaml_Controls_IGroupStyle)
-@Interface["a77d937e-0188-584c-ab1d-9df1916edc75", "Microsoft.UI.Xaml.Controls.IGroupStyle", "Panel.value=Com;ContainerStyle.value=Com;HeaderContainerStyle.value=Com;ContainerStyleSelector.value=Com;HeaderTemplate.value=Com;HeaderTemplateSelector.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IGroupStyle <: IInspectable {
-    func Panel(value: CPointer<CPointer<Unit>>): Int32
-    func SetPanel(value: CPointer<Unit>): Int32
-    func ContainerStyle(value: CPointer<CPointer<Unit>>): Int32
-    func SetContainerStyle(value: CPointer<Unit>): Int32
-    func HeaderContainerStyle(value: CPointer<CPointer<Unit>>): Int32
-    func SetHeaderContainerStyle(value: CPointer<Unit>): Int32
-    func ContainerStyleSelector(value: CPointer<CPointer<Unit>>): Int32
-    func SetContainerStyleSelector(value: CPointer<Unit>): Int32
-    func HeaderTemplate(value: CPointer<CPointer<Unit>>): Int32
-    func SetHeaderTemplate(value: CPointer<Unit>): Int32
-    func HeaderTemplateSelector(value: CPointer<CPointer<Unit>>): Int32
-    func SetHeaderTemplateSelector(value: CPointer<Unit>): Int32
-    func HidesIfEmpty(value: CPointer<Bool>): Int32
-    func SetHidesIfEmpty(value: Bool): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IGroupStyleFactory (synthetic:Microsoft_UI_Xaml_Controls_IGroupStyleFactory)
-@Interface["dc884aa2-e2a8-57ab-8cbc-b1d8ec540b0c", "Microsoft.UI.Xaml.Controls.IGroupStyleFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IGroupStyleFactory <: IInspectable {
-    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IGroupStyleSelector (synthetic:Microsoft_UI_Xaml_Controls_IGroupStyleSelector)
-@Interface["524f5086-3e02-5b71-be7c-8a8fa0feaa2c", "Microsoft.UI.Xaml.Controls.IGroupStyleSelector", "SelectGroupStyle.result=Com"]
-public interface Microsoft_UI_Xaml_Controls_IGroupStyleSelector <: IInspectable {
-    func SelectGroupStyle(group: CPointer<Unit>, level: UInt32, result: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IGroupStyleSelectorFactory (synthetic:Microsoft_UI_Xaml_Controls_IGroupStyleSelectorFactory)
-@Interface["0e0699be-50c2-5c15-aed3-e7bd663e5fad", "Microsoft.UI.Xaml.Controls.IGroupStyleSelectorFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IGroupStyleSelectorFactory <: IInspectable {
-    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IGroupStyleSelectorOverrides (synthetic:Microsoft_UI_Xaml_Controls_IGroupStyleSelectorOverrides)
-@Interface["80594304-ebeb-5a5d-a794-acdc214cbc94", "Microsoft.UI.Xaml.Controls.IGroupStyleSelectorOverrides", "SelectGroupStyleCore.result=Com"]
-public interface Microsoft_UI_Xaml_Controls_IGroupStyleSelectorOverrides <: IInspectable {
-    func SelectGroupStyleCore(group: CPointer<Unit>, level: UInt32, result: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IItemClickEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IItemClickEventArgs)
-@Interface["1cf87a70-6348-57ec-9eac-fa0565adc60f", "Microsoft.UI.Xaml.Controls.IItemClickEventArgs", "ClickedItem.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IItemClickEventArgs <: IInspectable {
-    func ClickedItem(value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IItemContainerGenerator (synthetic:Microsoft_UI_Xaml_Controls_IItemContainerGenerator)
-@Interface["c4c5d5ae-ed98-510f-afae-8a0ac6067a3b", "Microsoft.UI.Xaml.Controls.IItemContainerGenerator", "ItemFromContainer.result=Com;ContainerFromItem.result=Com;ContainerFromIndex.result=Com;GetItemContainerGeneratorForPanel.result=Com;GenerateNext.returnValue=Com"]
-public interface Microsoft_UI_Xaml_Controls_IItemContainerGenerator <: IInspectable {
-    func ItemsChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
-    func RemoveItemsChanged(token: Int64): Int32
-    func ItemFromContainer(container: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-    func ContainerFromItem(item: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-    func IndexFromContainer(container: CPointer<Unit>, result: CPointer<Int32>): Int32
-    func ContainerFromIndex(index: Int32, result: CPointer<CPointer<Unit>>): Int32
-    func GetItemContainerGeneratorForPanel(panel: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-    func StartAt(position: Microsoft_UI_Xaml_Controls_Primitives_GeneratorPosition, direction: Int32, allowStartAtRealizedItem: Bool): Int32
-    func Stop(): Int32
-    func GenerateNext(isNewlyRealized: CPointer<Bool>, returnValue: CPointer<CPointer<Unit>>): Int32
-    func PrepareItemContainer(container: CPointer<Unit>): Int32
-    func RemoveAll(): Int32
-    func Remove(position: Microsoft_UI_Xaml_Controls_Primitives_GeneratorPosition, count: Int32): Int32
-    func GeneratorPositionFromIndex(itemIndex: Int32, result: CPointer<Microsoft_UI_Xaml_Controls_Primitives_GeneratorPosition>): Int32
-    func IndexFromGeneratorPosition(position: Microsoft_UI_Xaml_Controls_Primitives_GeneratorPosition, result: CPointer<Int32>): Int32
-    func Recycle(position: Microsoft_UI_Xaml_Controls_Primitives_GeneratorPosition, count: Int32): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IItemContainerMapping (synthetic:Microsoft_UI_Xaml_Controls_IItemContainerMapping)
-@Interface["b3e03a32-ea83-5626-bfda-d327a1c7550c", "Microsoft.UI.Xaml.Controls.IItemContainerMapping", "ItemFromContainer.result=Com;ContainerFromItem.result=Com;ContainerFromIndex.result=Com"]
-public interface Microsoft_UI_Xaml_Controls_IItemContainerMapping <: IInspectable {
-    func ItemFromContainer(container: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-    func ContainerFromItem(item: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-    func IndexFromContainer(container: CPointer<Unit>, result: CPointer<Int32>): Int32
-    func ContainerFromIndex(index: Int32, result: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IItemsControl (synthetic:Microsoft_UI_Xaml_Controls_IItemsControl)
-@Interface["bf1ccb54-83e2-5b98-acbc-736f876c3d35", "Microsoft.UI.Xaml.Controls.IItemsControl", "ItemsSource.value=Com;Items.value=Com;ItemTemplate.value=Com;ItemTemplateSelector.value=Com;ItemsPanel.value=Com;DisplayMemberPath.value=HString;ItemsPanelRoot.value=Com;ItemContainerStyle.value=Com;ItemContainerStyleSelector.value=Com;ItemContainerGenerator.value=Com;ItemContainerTransitions.value=Com;GroupStyle.value=Com;GroupStyleSelector.value=Com;GroupHeaderContainerFromItemContainer.result=Com"]
-public interface Microsoft_UI_Xaml_Controls_IItemsControl <: IInspectable {
-    func ItemsSource(value: CPointer<CPointer<Unit>>): Int32
-    func SetItemsSource(value: CPointer<Unit>): Int32
-    func Items(value: CPointer<CPointer<Unit>>): Int32
-    func ItemTemplate(value: CPointer<CPointer<Unit>>): Int32
-    func SetItemTemplate(value: CPointer<Unit>): Int32
-    func ItemTemplateSelector(value: CPointer<CPointer<Unit>>): Int32
-    func SetItemTemplateSelector(value: CPointer<Unit>): Int32
-    func ItemsPanel(value: CPointer<CPointer<Unit>>): Int32
-    func SetItemsPanel(value: CPointer<Unit>): Int32
-    func DisplayMemberPath(value: CPointer<CPointer<Unit>>): Int32
-    func SetDisplayMemberPath(value: CPointer<Unit>): Int32
-    func ItemsPanelRoot(value: CPointer<CPointer<Unit>>): Int32
-    func ItemContainerStyle(value: CPointer<CPointer<Unit>>): Int32
-    func SetItemContainerStyle(value: CPointer<Unit>): Int32
-    func ItemContainerStyleSelector(value: CPointer<CPointer<Unit>>): Int32
-    func SetItemContainerStyleSelector(value: CPointer<Unit>): Int32
-    func ItemContainerGenerator(value: CPointer<CPointer<Unit>>): Int32
-    func ItemContainerTransitions(value: CPointer<CPointer<Unit>>): Int32
-    func SetItemContainerTransitions(value: CPointer<Unit>): Int32
-    func GroupStyle(value: CPointer<CPointer<Unit>>): Int32
-    func GroupStyleSelector(value: CPointer<CPointer<Unit>>): Int32
-    func SetGroupStyleSelector(value: CPointer<Unit>): Int32
-    func IsGrouping(value: CPointer<Bool>): Int32
-    func GroupHeaderContainerFromItemContainer(itemContainer: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IItemsControlFactory (synthetic:Microsoft_UI_Xaml_Controls_IItemsControlFactory)
-@Interface["b2686273-2dd3-5454-9f25-247e66270336", "Microsoft.UI.Xaml.Controls.IItemsControlFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IItemsControlFactory <: IInspectable {
-    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IItemsControlOverrides (synthetic:Microsoft_UI_Xaml_Controls_IItemsControlOverrides)
-@Interface["285c215f-64b2-5f7d-88d2-56c6658f73ee", "Microsoft.UI.Xaml.Controls.IItemsControlOverrides", "GetContainerForItemOverride.result=Com"]
-public interface Microsoft_UI_Xaml_Controls_IItemsControlOverrides <: IInspectable {
-    func IsItemItsOwnContainerOverride(item: CPointer<Unit>, result: CPointer<Bool>): Int32
-    func GetContainerForItemOverride(result: CPointer<CPointer<Unit>>): Int32
-    func ClearContainerForItemOverride(element: CPointer<Unit>, item: CPointer<Unit>): Int32
-    func PrepareContainerForItemOverride(element: CPointer<Unit>, item: CPointer<Unit>): Int32
-    func OnItemsChanged(e: CPointer<Unit>): Int32
-    func OnItemContainerStyleChanged(oldItemContainerStyle: CPointer<Unit>, newItemContainerStyle: CPointer<Unit>): Int32
-    func OnItemContainerStyleSelectorChanged(oldItemContainerStyleSelector: CPointer<Unit>, newItemContainerStyleSelector: CPointer<Unit>): Int32
-    func OnItemTemplateChanged(oldItemTemplate: CPointer<Unit>, newItemTemplate: CPointer<Unit>): Int32
-    func OnItemTemplateSelectorChanged(oldItemTemplateSelector: CPointer<Unit>, newItemTemplateSelector: CPointer<Unit>): Int32
-    func OnGroupStyleSelectorChanged(oldGroupStyleSelector: CPointer<Unit>, newGroupStyleSelector: CPointer<Unit>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IItemsControlStatics (synthetic:Microsoft_UI_Xaml_Controls_IItemsControlStatics)
-@Interface["4fb961e1-5f91-5585-a692-6825cde3ed1e", "Microsoft.UI.Xaml.Controls.IItemsControlStatics", "ItemsSourceProperty.value=Com;ItemTemplateProperty.value=Com;ItemTemplateSelectorProperty.value=Com;ItemsPanelProperty.value=Com;DisplayMemberPathProperty.value=Com;ItemContainerStyleProperty.value=Com;ItemContainerStyleSelectorProperty.value=Com;ItemContainerTransitionsProperty.value=Com;GroupStyleSelectorProperty.value=Com;IsGroupingProperty.value=Com;GetItemsOwner.result=Com;ItemsControlFromItemContainer.result=Com"]
-public interface Microsoft_UI_Xaml_Controls_IItemsControlStatics <: IInspectable {
-    func ItemsSourceProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ItemTemplateProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ItemTemplateSelectorProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ItemsPanelProperty(value: CPointer<CPointer<Unit>>): Int32
-    func DisplayMemberPathProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ItemContainerStyleProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ItemContainerStyleSelectorProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ItemContainerTransitionsProperty(value: CPointer<CPointer<Unit>>): Int32
-    func GroupStyleSelectorProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IsGroupingProperty(value: CPointer<CPointer<Unit>>): Int32
-    func GetItemsOwner(element: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-    func ItemsControlFromItemContainer(container: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IItemsPanelTemplate (synthetic:Microsoft_UI_Xaml_Controls_IItemsPanelTemplate)
-@Interface["6153af2f-f095-5e8c-89d4-9e03203b9cc2", "Microsoft.UI.Xaml.Controls.IItemsPanelTemplate"]
-public interface Microsoft_UI_Xaml_Controls_IItemsPanelTemplate <: IInspectable {
-}
-
-// Microsoft.UI.Xaml.Controls.IListViewBase (synthetic:Microsoft_UI_Xaml_Controls_IListViewBase)
-@Interface["775c57ac-abce-5beb-8e34-3b8158aedd80", "Microsoft.UI.Xaml.Controls.IListViewBase", "SelectedItems.value=Com;SelectedRanges.value=Com;LoadMoreItemsAsync.operation=Com;TryStartConnectedAnimationAsync.operation=Com;PrepareConnectedAnimation.result=Com;Header.value=Com;HeaderTemplate.value=Com;HeaderTransitions.value=Com;Footer.value=Com;FooterTemplate.value=Com;FooterTransitions.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IListViewBase <: IInspectable {
-    func SelectedItems(value: CPointer<CPointer<Unit>>): Int32
-    func SelectionMode(value: CPointer<Int32>): Int32
-    func SetSelectionMode(value: Int32): Int32
-    func IsSwipeEnabled(value: CPointer<Bool>): Int32
-    func SetIsSwipeEnabled(value: Bool): Int32
-    func CanDragItems(value: CPointer<Bool>): Int32
-    func SetCanDragItems(value: Bool): Int32
-    func CanReorderItems(value: CPointer<Bool>): Int32
-    func SetCanReorderItems(value: Bool): Int32
-    func IsItemClickEnabled(value: CPointer<Bool>): Int32
-    func SetIsItemClickEnabled(value: Bool): Int32
-    func DataFetchSize(value: CPointer<Float64>): Int32
-    func SetDataFetchSize(value: Float64): Int32
-    func IncrementalLoadingThreshold(value: CPointer<Float64>): Int32
-    func SetIncrementalLoadingThreshold(value: Float64): Int32
-    func IncrementalLoadingTrigger(value: CPointer<Int32>): Int32
-    func SetIncrementalLoadingTrigger(value: Int32): Int32
-    func ShowsScrollingPlaceholders(value: CPointer<Bool>): Int32
-    func SetShowsScrollingPlaceholders(value: Bool): Int32
-    func ReorderMode(value: CPointer<Int32>): Int32
-    func SetReorderMode(value: Int32): Int32
-    func SelectedRanges(value: CPointer<CPointer<Unit>>): Int32
-    func IsMultiSelectCheckBoxEnabled(value: CPointer<Bool>): Int32
-    func SetIsMultiSelectCheckBoxEnabled(value: Bool): Int32
-    func SingleSelectionFollowsFocus(value: CPointer<Bool>): Int32
-    func SetSingleSelectionFollowsFocus(value: Bool): Int32
-    func ItemClick(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
-    func RemoveItemClick(token: Int64): Int32
-    func DragItemsStarting(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
-    func RemoveDragItemsStarting(token: Int64): Int32
-    func DragItemsCompleted(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
-    func RemoveDragItemsCompleted(token: Int64): Int32
-    func ContainerContentChanging(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
-    func RemoveContainerContentChanging(token: Int64): Int32
-    func ChoosingItemContainer(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
-    func RemoveChoosingItemContainer(token: Int64): Int32
-    func ChoosingGroupHeaderContainer(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
-    func RemoveChoosingGroupHeaderContainer(token: Int64): Int32
-    func ScrollIntoView(item: CPointer<Unit>): Int32
-    func SelectAll(): Int32
-    func LoadMoreItemsAsync(operation: CPointer<CPointer<Unit>>): Int32
-    func ScrollIntoViewWithAlignment(item: CPointer<Unit>, alignment: Int32): Int32
-    func SetDesiredContainerUpdateDuration(duration: Windows_Foundation_TimeSpan): Int32
-    func SelectRange(itemIndexRange: CPointer<Unit>): Int32
-    func DeselectRange(itemIndexRange: CPointer<Unit>): Int32
-    func IsDragSource(result: CPointer<Bool>): Int32
-    func TryStartConnectedAnimationAsync(animation: CPointer<Unit>, item: CPointer<Unit>, elementName: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
-    func PrepareConnectedAnimation(key: CPointer<Unit>, item: CPointer<Unit>, elementName: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-    func Header(value: CPointer<CPointer<Unit>>): Int32
-    func SetHeader(value: CPointer<Unit>): Int32
-    func HeaderTemplate(value: CPointer<CPointer<Unit>>): Int32
-    func SetHeaderTemplate(value: CPointer<Unit>): Int32
-    func HeaderTransitions(value: CPointer<CPointer<Unit>>): Int32
-    func SetHeaderTransitions(value: CPointer<Unit>): Int32
-    func Footer(value: CPointer<CPointer<Unit>>): Int32
-    func SetFooter(value: CPointer<Unit>): Int32
-    func FooterTemplate(value: CPointer<CPointer<Unit>>): Int32
-    func SetFooterTemplate(value: CPointer<Unit>): Int32
-    func FooterTransitions(value: CPointer<CPointer<Unit>>): Int32
-    func SetFooterTransitions(value: CPointer<Unit>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IListViewBaseFactory (synthetic:Microsoft_UI_Xaml_Controls_IListViewBaseFactory)
-@Interface["44092863-c09e-551e-85bf-951b552950c8", "Microsoft.UI.Xaml.Controls.IListViewBaseFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IListViewBaseFactory <: IInspectable {
-    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IListViewBaseHeaderItem (synthetic:Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItem)
-@Interface["9220c4ff-1974-53fd-ad74-c29e7b360a06", "Microsoft.UI.Xaml.Controls.IListViewBaseHeaderItem"]
-public interface Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItem <: IInspectable {
-}
-
-// Microsoft.UI.Xaml.Controls.IListViewBaseHeaderItemFactory (synthetic:Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItemFactory)
-@Interface["228fc10a-b86f-5b57-96f4-34d9f9fb8711", "Microsoft.UI.Xaml.Controls.IListViewBaseHeaderItemFactory"]
-public interface Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItemFactory <: IInspectable {
-}
-
-// Microsoft.UI.Xaml.Controls.IListViewBaseStatics (synthetic:Microsoft_UI_Xaml_Controls_IListViewBaseStatics)
-@Interface["b8487e94-010f-56d4-9f76-94bf8c462745", "Microsoft.UI.Xaml.Controls.IListViewBaseStatics", "SelectionModeProperty.value=Com;IsSwipeEnabledProperty.value=Com;CanDragItemsProperty.value=Com;CanReorderItemsProperty.value=Com;IsItemClickEnabledProperty.value=Com;DataFetchSizeProperty.value=Com;IncrementalLoadingThresholdProperty.value=Com;IncrementalLoadingTriggerProperty.value=Com;ShowsScrollingPlaceholdersProperty.value=Com;ReorderModeProperty.value=Com;IsMultiSelectCheckBoxEnabledProperty.value=Com;SingleSelectionFollowsFocusProperty.value=Com;SemanticZoomOwnerProperty.value=Com;IsActiveViewProperty.value=Com;IsZoomedInViewProperty.value=Com;HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;HeaderTransitionsProperty.value=Com;FooterProperty.value=Com;FooterTemplateProperty.value=Com;FooterTransitionsProperty.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IListViewBaseStatics <: IInspectable {
-    func SelectionModeProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IsSwipeEnabledProperty(value: CPointer<CPointer<Unit>>): Int32
-    func CanDragItemsProperty(value: CPointer<CPointer<Unit>>): Int32
-    func CanReorderItemsProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IsItemClickEnabledProperty(value: CPointer<CPointer<Unit>>): Int32
-    func DataFetchSizeProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IncrementalLoadingThresholdProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IncrementalLoadingTriggerProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ShowsScrollingPlaceholdersProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ReorderModeProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IsMultiSelectCheckBoxEnabledProperty(value: CPointer<CPointer<Unit>>): Int32
-    func SingleSelectionFollowsFocusProperty(value: CPointer<CPointer<Unit>>): Int32
-    func SemanticZoomOwnerProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IsActiveViewProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IsZoomedInViewProperty(value: CPointer<CPointer<Unit>>): Int32
-    func HeaderProperty(value: CPointer<CPointer<Unit>>): Int32
-    func HeaderTemplateProperty(value: CPointer<CPointer<Unit>>): Int32
-    func HeaderTransitionsProperty(value: CPointer<CPointer<Unit>>): Int32
-    func FooterProperty(value: CPointer<CPointer<Unit>>): Int32
-    func FooterTemplateProperty(value: CPointer<CPointer<Unit>>): Int32
-    func FooterTransitionsProperty(value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IPanel (synthetic:Microsoft_UI_Xaml_Controls_IPanel)
-@Interface["27a1b418-56f3-525e-b883-cefed905eed3", "Microsoft.UI.Xaml.Controls.IPanel", "Children.value=Com;Background.value=Com;ChildrenTransitions.value=Com;BackgroundTransition.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IPanel <: IInspectable {
-    func Children(value: CPointer<CPointer<Unit>>): Int32
-    func Background(value: CPointer<CPointer<Unit>>): Int32
-    func SetBackground(value: CPointer<Unit>): Int32
-    func IsItemsHost(value: CPointer<Bool>): Int32
-    func ChildrenTransitions(value: CPointer<CPointer<Unit>>): Int32
-    func SetChildrenTransitions(value: CPointer<Unit>): Int32
-    func BackgroundTransition(value: CPointer<CPointer<Unit>>): Int32
-    func SetBackgroundTransition(value: CPointer<Unit>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IPanelFactory (synthetic:Microsoft_UI_Xaml_Controls_IPanelFactory)
-@Interface["f5e7e21c-4c97-5d20-bee6-3e4fc6ab14e9", "Microsoft.UI.Xaml.Controls.IPanelFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IPanelFactory <: IInspectable {
-    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IPanelStatics (synthetic:Microsoft_UI_Xaml_Controls_IPanelStatics)
-@Interface["76a9caa7-a5d4-5061-a325-17c76f66de51", "Microsoft.UI.Xaml.Controls.IPanelStatics", "BackgroundProperty.value=Com;IsItemsHostProperty.value=Com;ChildrenTransitionsProperty.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IPanelStatics <: IInspectable {
-    func BackgroundProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IsItemsHostProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ChildrenTransitionsProperty(value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.ISelectionChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ISelectionChangedEventArgs)
-@Interface["b6c18076-4b76-5416-ad29-e2dc20c46246", "Microsoft.UI.Xaml.Controls.ISelectionChangedEventArgs", "AddedItems.value=Com;RemovedItems.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_ISelectionChangedEventArgs <: IInspectable {
-    func AddedItems(value: CPointer<CPointer<Unit>>): Int32
-    func RemovedItems(value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.ISelectionChangedEventArgsFactory (synthetic:Microsoft_UI_Xaml_Controls_ISelectionChangedEventArgsFactory)
-@Interface["0fcd041d-465f-5745-9882-0c8348e4135d", "Microsoft.UI.Xaml.Controls.ISelectionChangedEventArgsFactory", "CreateInstanceWithRemovedItemsAndAddedItems.innerInterface=Com;CreateInstanceWithRemovedItemsAndAddedItems.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_ISelectionChangedEventArgsFactory <: IInspectable {
-    func CreateInstanceWithRemovedItemsAndAddedItems(removedItems: CPointer<Unit>, addedItems: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.ISemanticZoom (synthetic:Microsoft_UI_Xaml_Controls_ISemanticZoom)
-@Interface["7e14616d-55ef-548c-a997-c923e302718f", "Microsoft.UI.Xaml.Controls.ISemanticZoom", "ZoomedInView.value=Com;ZoomedOutView.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_ISemanticZoom <: IInspectable {
-    func ZoomedInView(value: CPointer<CPointer<Unit>>): Int32
-    func SetZoomedInView(value: CPointer<Unit>): Int32
-    func ZoomedOutView(value: CPointer<CPointer<Unit>>): Int32
-    func SetZoomedOutView(value: CPointer<Unit>): Int32
-    func IsZoomedInViewActive(value: CPointer<Bool>): Int32
-    func SetIsZoomedInViewActive(value: Bool): Int32
-    func CanChangeViews(value: CPointer<Bool>): Int32
-    func SetCanChangeViews(value: Bool): Int32
-    func ViewChangeStarted(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
-    func RemoveViewChangeStarted(token: Int64): Int32
-    func ViewChangeCompleted(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
-    func RemoveViewChangeCompleted(token: Int64): Int32
-    func ToggleActiveView(): Int32
-    func IsZoomOutButtonEnabled(value: CPointer<Bool>): Int32
-    func SetIsZoomOutButtonEnabled(value: Bool): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.ISemanticZoomInformation (synthetic:Microsoft_UI_Xaml_Controls_ISemanticZoomInformation)
-@Interface["12d62b04-bb13-50f2-9d8b-e57c02b4bde4", "Microsoft.UI.Xaml.Controls.ISemanticZoomInformation", "SemanticZoomOwner.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_ISemanticZoomInformation <: IInspectable {
-    func SemanticZoomOwner(value: CPointer<CPointer<Unit>>): Int32
-    func SetSemanticZoomOwner(value: CPointer<Unit>): Int32
-    func IsActiveView(value: CPointer<Bool>): Int32
-    func SetIsActiveView(value: Bool): Int32
-    func IsZoomedInView(value: CPointer<Bool>): Int32
-    func SetIsZoomedInView(value: Bool): Int32
-    func InitializeViewChange(): Int32
-    func CompleteViewChange(): Int32
-    func MakeVisible(item: CPointer<Unit>): Int32
-    func StartViewChangeFrom(source: CPointer<Unit>, destination: CPointer<Unit>): Int32
-    func StartViewChangeTo(source: CPointer<Unit>, destination: CPointer<Unit>): Int32
-    func CompleteViewChangeFrom(source: CPointer<Unit>, destination: CPointer<Unit>): Int32
-    func CompleteViewChangeTo(source: CPointer<Unit>, destination: CPointer<Unit>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.ISemanticZoomLocation (synthetic:Microsoft_UI_Xaml_Controls_ISemanticZoomLocation)
-@Interface["41c1dec7-f34f-51db-9525-5c149b05a527", "Microsoft.UI.Xaml.Controls.ISemanticZoomLocation", "Item.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_ISemanticZoomLocation <: IInspectable {
-    func Item(value: CPointer<CPointer<Unit>>): Int32
-    func SetItem(value: CPointer<Unit>): Int32
-    func Bounds(value: CPointer<Windows_Foundation_Rect>): Int32
-    func SetBounds(value: Windows_Foundation_Rect): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.ISemanticZoomStatics (synthetic:Microsoft_UI_Xaml_Controls_ISemanticZoomStatics)
-@Interface["e4fbd358-9342-56d3-b5c2-bf80de6f47ed", "Microsoft.UI.Xaml.Controls.ISemanticZoomStatics", "ZoomedInViewProperty.value=Com;ZoomedOutViewProperty.value=Com;IsZoomedInViewActiveProperty.value=Com;CanChangeViewsProperty.value=Com;IsZoomOutButtonEnabledProperty.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_ISemanticZoomStatics <: IInspectable {
-    func ZoomedInViewProperty(value: CPointer<CPointer<Unit>>): Int32
-    func ZoomedOutViewProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IsZoomedInViewActiveProperty(value: CPointer<CPointer<Unit>>): Int32
-    func CanChangeViewsProperty(value: CPointer<CPointer<Unit>>): Int32
-    func IsZoomOutButtonEnabledProperty(value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.ISemanticZoomViewChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ISemanticZoomViewChangedEventArgs)
-@Interface["cf62d53d-97d3-5cef-96f3-1c413f524eca", "Microsoft.UI.Xaml.Controls.ISemanticZoomViewChangedEventArgs", "SourceItem.value=Com;DestinationItem.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_ISemanticZoomViewChangedEventArgs <: IInspectable {
-    func IsSourceZoomedInView(value: CPointer<Bool>): Int32
-    func SetIsSourceZoomedInView(value: Bool): Int32
-    func SourceItem(value: CPointer<CPointer<Unit>>): Int32
-    func SetSourceItem(value: CPointer<Unit>): Int32
-    func DestinationItem(value: CPointer<CPointer<Unit>>): Int32
-    func SetDestinationItem(value: CPointer<Unit>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IStyleSelector (synthetic:Microsoft_UI_Xaml_Controls_IStyleSelector)
-@Interface["7f9cf759-785b-5ef9-9ea7-1555673a475a", "Microsoft.UI.Xaml.Controls.IStyleSelector", "SelectStyle.result=Com"]
-public interface Microsoft_UI_Xaml_Controls_IStyleSelector <: IInspectable {
-    func SelectStyle(item: CPointer<Unit>, container: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IStyleSelectorFactory (synthetic:Microsoft_UI_Xaml_Controls_IStyleSelectorFactory)
-@Interface["2a033206-a4fb-5f11-8c2d-61e1df78fbc3", "Microsoft.UI.Xaml.Controls.IStyleSelectorFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
-public interface Microsoft_UI_Xaml_Controls_IStyleSelectorFactory <: IInspectable {
-    func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IStyleSelectorOverrides (synthetic:Microsoft_UI_Xaml_Controls_IStyleSelectorOverrides)
-@Interface["26015d75-ef00-5c78-8e58-163da10f694f", "Microsoft.UI.Xaml.Controls.IStyleSelectorOverrides", "SelectStyleCore.result=Com"]
-public interface Microsoft_UI_Xaml_Controls_IStyleSelectorOverrides <: IInspectable {
-    func SelectStyleCore(item: CPointer<Unit>, container: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IUIElementCollection (synthetic:Microsoft_UI_Xaml_Controls_IUIElementCollection)
-@Interface["23050cb1-db88-54ed-9083-5ecfb12512fd", "Microsoft.UI.Xaml.Controls.IUIElementCollection"]
-public interface Microsoft_UI_Xaml_Controls_IUIElementCollection <: IInspectable {
-    func Move(oldIndex: UInt32, newIndex: UInt32): Int32
-}
-
-// Microsoft.UI.Xaml.Controls.IncrementalLoadingTrigger (synthetic:Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger)
-public struct Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger {
+// Microsoft.UI.Xaml.Controls.ClickMode (synthetic:Microsoft_UI_Xaml_Controls_ClickMode)
+public struct Microsoft_UI_Xaml_Controls_ClickMode {
     public let value: Int32
     public init() {
         this.value = 0
@@ -35107,11 +43456,12 @@ public struct Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger {
         this.value = value
     }
 }
-public let Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger_None = Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger(0)
-public let Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger_Edge = Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger(1)
+public let Microsoft_UI_Xaml_Controls_ClickMode_Release = Microsoft_UI_Xaml_Controls_ClickMode(0)
+public let Microsoft_UI_Xaml_Controls_ClickMode_Press = Microsoft_UI_Xaml_Controls_ClickMode(1)
+public let Microsoft_UI_Xaml_Controls_ClickMode_Hover = Microsoft_UI_Xaml_Controls_ClickMode(2)
 
-// Microsoft.UI.Xaml.Controls.ItemClickEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ItemClickEventArgs)
-public class Microsoft_UI_Xaml_Controls_ItemClickEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+// Microsoft.UI.Xaml.Controls.ColorChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ColorChangedEventArgs)
+public class Microsoft_UI_Xaml_Controls_ColorChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
     }
@@ -35120,25 +43470,25 @@ public class Microsoft_UI_Xaml_Controls_ItemClickEventArgs <: windows_interface.
         super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
     }
 
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemClickEventArgs {
-        Microsoft_UI_Xaml_Controls_ItemClickEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ColorChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_ColorChangedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
     }
 
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemClickEventArgs {
-        Microsoft_UI_Xaml_Controls_ItemClickEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ColorChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_ColorChangedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
     }
 
     public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IItemClickEventArgs.iid()
+        Microsoft_UI_Xaml_Controls_IColorChangedEventArgs.iid()
     }
 
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ItemClickEventArgs> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IItemClickEventArgs.iid(), Microsoft_UI_Xaml_IRoutedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ItemClickEventArgs>("ItemClickEventArgs", Microsoft_UI_Xaml_Controls_IItemClickEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_ItemClickEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_ItemClickEventArgs.viewOf(raw) })
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ColorChangedEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IColorChangedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ColorChangedEventArgs>("ColorChangedEventArgs", Microsoft_UI_Xaml_Controls_IColorChangedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_ColorChangedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_ColorChangedEventArgs.viewOf(raw) })
     }
 
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IItemClickEventArgs {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IItemClickEventArgs.descriptor()) }) {
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IColorChangedEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IColorChangedEventArgs.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -35148,41 +43498,31 @@ public class Microsoft_UI_Xaml_Controls_ItemClickEventArgs <: windows_interface.
         windows_interface.IInspectable.viewOf(asRaw())
     }
 
-    public func asIItemClickEventArgs(): Microsoft_UI_Xaml_Controls_IItemClickEventArgs {
+    public func asIColorChangedEventArgs(): Microsoft_UI_Xaml_Controls_IColorChangedEventArgs {
         defaultInterface()
     }
 
-    public func asIRoutedEventArgs(): Microsoft_UI_Xaml_IRoutedEventArgs {
-        match (unsafe { query<Microsoft_UI_Xaml_IRoutedEventArgs>(Microsoft_UI_Xaml_IRoutedEventArgs.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public prop ClickedItem: windows_interface.IInspectable {
+    public prop NewColor: Windows_UI_Color {
         get() {
-            var result__ = CPointer<Unit>()
+            var result__ = Windows_UI_Color()
             var hr__ = windows_core.E_POINTER
             try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ClickedItem(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
-                result__ = CPointer<Unit>()
+                hr__ = unsafe { interface__.NewColor(CPointer<Windows_UI_Color>(inout result__)) }
             }
             hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
+            return result__
         }
     }
 
-    public static func new(): Microsoft_UI_Xaml_Controls_ItemClickEventArgs {
-        var created__: Option<Microsoft_UI_Xaml_Controls_ItemClickEventArgs> = Option<Microsoft_UI_Xaml_Controls_ItemClickEventArgs>.None
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemClickEventArgs, windows_core.IGenericFactory>().unwrap()) {
-            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Controls_ItemClickEventArgs>(Microsoft_UI_Xaml_Controls_ItemClickEventArgs.descriptor()).unwrap() })
-        }
-        match (created__) {
-            case Some(value) => return value
-            case None => throw IllegalStateException("Activation factory did not produce ItemClickEventArgs")
+    public prop OldColor: Windows_UI_Color {
+        get() {
+            var result__ = Windows_UI_Color()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OldColor(CPointer<Windows_UI_Color>(inout result__)) }
+            }
+            hr__.check()
+            return result__
         }
     }
 
@@ -35191,193 +43531,37 @@ public class Microsoft_UI_Xaml_Controls_ItemClickEventArgs <: windows_interface.
     }
 
     public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.ItemClickEventArgs"
+        "Microsoft.UI.Xaml.Controls.ColorChangedEventArgs"
     }
 
     public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.ItemClickEventArgs;{" + Microsoft_UI_Xaml_Controls_IItemClickEventArgs.iid().toSignatureString() + "})"
+        return "rc(Microsoft.UI.Xaml.Controls.ColorChangedEventArgs;{" + Microsoft_UI_Xaml_Controls_IColorChangedEventArgs.iid().toSignatureString() + "})"
     }
 
     public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.ItemClickEventArgs", Microsoft_UI_Xaml_Controls_ItemClickEventArgs.signature(), Microsoft_UI_Xaml_Controls_IItemClickEventArgs.iid())
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.ColorChangedEventArgs", Microsoft_UI_Xaml_Controls_ColorChangedEventArgs.signature(), Microsoft_UI_Xaml_Controls_IColorChangedEventArgs.iid())
     }
 }
 
-extend Microsoft_UI_Xaml_Controls_ItemClickEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ItemClickEventArgs> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ItemClickEventArgs): CPointer<Unit> {
+extend Microsoft_UI_Xaml_Controls_ColorChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ColorChangedEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ColorChangedEventArgs): CPointer<Unit> {
         value.asRaw()
     }
 
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemClickEventArgs {
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ColorChangedEventArgs {
         if (raw.isNull()) {
             throw windows_core.WindowsException(windows_core.E_POINTER)
         }
-        Microsoft_UI_Xaml_Controls_ItemClickEventArgs.fromAbiTake(raw)
+        Microsoft_UI_Xaml_Controls_ColorChangedEventArgs.fromAbiTake(raw)
     }
 
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemClickEventArgs {
-        Microsoft_UI_Xaml_Controls_ItemClickEventArgs.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.ItemClickEventHandler (synthetic:Microsoft_UI_Xaml_Controls_ItemClickEventHandler)
-@C
-public struct Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl {
-    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
-    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
-    public init() {}
-}
-
-public open class Microsoft_UI_Xaml_Controls_ItemClickEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemClickEventHandler {
-        OwnedMicrosoft_UI_Xaml_Controls_ItemClickEventHandler(raw)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemClickEventHandler {
-        Microsoft_UI_Xaml_Controls_ItemClickEventHandler(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        windows_interface.GUID.from_values(2744137252u32, 13203u16, 22124u16, 166u8, 185u8, 166u8, 180u8, 179u8, 227u8, 1u8, 195u8)
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ItemClickEventHandler> {
-        windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ItemClickEventHandler>("Microsoft.UI.Xaml.Controls.ItemClickEventHandler", Microsoft_UI_Xaml_Controls_ItemClickEventHandler.iid(), [windows_interface.IUnknown.iid()], { raw => Microsoft_UI_Xaml_Controls_ItemClickEventHandler.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_ItemClickEventHandler.viewOf(raw) })
-    }
-
-    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
-        var schema = windows_interface.InterfaceDescriptorSchema("Microsoft.UI.Xaml.Controls.ItemClickEventHandler", Microsoft_UI_Xaml_Controls_ItemClickEventHandler.iid(), windows_interface.IUnknown.descriptorSchema(), "Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl", "Microsoft_UI_Xaml_Controls_ItemClickEventHandler", "Microsoft_UI_Xaml_Controls_ItemClickEventHandlerInvoker", [windows_interface.InterfaceMethodSchema("Invoke", 3, [windows_interface.InterfaceParameterSchema("sender", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("e", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
-        schema.runtimeTypeContract = Some(Microsoft_UI_Xaml_Controls_ItemClickEventHandler.runtimeType())
-        return schema
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func signature(): String {
-        "Microsoft.UI.Xaml.Controls.ItemClickEventHandler"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.ItemClickEventHandler", Microsoft_UI_Xaml_Controls_ItemClickEventHandler.signature(), Microsoft_UI_Xaml_Controls_ItemClickEventHandler.iid())
-    }
-
-    public static func projectionKind(): String {
-        return "delegate"
-    }
-
-    public unsafe func vtbl(): Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl {
-        readVtbl<Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl>(Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl())
-    }
-
-    public unsafe func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
-        let liveRaw = asRaw()
-        if (liveRaw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        let v = vtbl()
-        windows_core.HRESULT(v.Invoke(liveRaw, sender, e)).check()
-    }
-
-    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): Microsoft_UI_Xaml_Controls_ItemClickEventHandler {
-        let box = Microsoft_UI_Xaml_Controls_ItemClickEventHandlerBox(invoke)
-        let object = windows_core.ComObject<Microsoft_UI_Xaml_Controls_ItemClickEventHandlerBox>.new(box, [Microsoft_UI_Xaml_Controls_ItemClickEventHandler.descriptorSchema()], box.vtblPtr())
-        return object.intoInterface(Microsoft_UI_Xaml_Controls_ItemClickEventHandler.descriptor())
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ColorChangedEventArgs {
+        Microsoft_UI_Xaml_Controls_ColorChangedEventArgs.viewOf(raw)
     }
 }
 
-extend Microsoft_UI_Xaml_Controls_ItemClickEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Controls_ItemClickEventHandler> {}
-
-private class OwnedMicrosoft_UI_Xaml_Controls_ItemClickEventHandler <: Microsoft_UI_Xaml_Controls_ItemClickEventHandler {
-    public init(raw: CPointer<Unit>) {
-        super(raw, takeOwnership: true, allowManualRelease: false)
-    }
-}
-
-public interface Microsoft_UI_Xaml_Controls_ItemClickEventHandlerInvokerErased {
-    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
-}
-
-public interface Microsoft_UI_Xaml_Controls_ItemClickEventHandlerInvoker <: Microsoft_UI_Xaml_Controls_ItemClickEventHandlerInvokerErased {
-    func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
-        ()
-    }
-
-    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32 {
-        try {
-            this.Invoke(sender, e)
-            return windows_core.S_OK.value
-        } catch (error: windows_core.WindowsException) {
-            return error.code().value
-        } catch (_: Exception) {
-            return windows_core.E_FAIL.value
-        }
-    }
-}
-
-private class Microsoft_UI_Xaml_Controls_ItemClickEventHandlerBox <: Microsoft_UI_Xaml_Controls_ItemClickEventHandlerInvoker & Resource {
-    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
-    private let vtblHandle: CPointer<Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl>
-    private var closed: Bool = false
-
-    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
-        this.invoke_ = invoke
-        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl>(buildMicrosoft_UI_Xaml_Controls_ItemClickEventHandlerBoxVtbl()) }
-    }
-
-    public func vtblPtr(): CPointer<Unit> {
-        CPointer<Unit>(vtblHandle)
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    ~init() {
-        if (!closed) {
-            closed = true
-        }
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        unsafe { windows_interface.freeNativeValue(vtblHandle) }
-        closed = true
-    }
-
-    public func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
-        invoke_(sender, e)
-    }
-}
-
-func buildMicrosoft_UI_Xaml_Controls_ItemClickEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl {
-    var vtbl = Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl()
-    vtbl.base_ = windows_core.buildIUnknownVtbl()
-    vtbl.Invoke = { instanceRaw: CPointer<Unit>, sender: CPointer<Unit>, e: CPointer<Unit> =>
-        match (unsafe { windows_core.asImplFromRaw<Microsoft_UI_Xaml_Controls_ItemClickEventHandlerInvokerErased>(instanceRaw) }) {
-            case Some(invoker) =>
-                invoker.__winrtThunk_Invoke(sender, e)
-            case None =>
-                windows_core.E_NOTIMPL.value
-        }
-    }
-    return vtbl
-}
-
-
-// Microsoft.UI.Xaml.Controls.ItemCollection (synthetic:Microsoft_UI_Xaml_Controls_ItemCollection)
-public class Microsoft_UI_Xaml_Controls_ItemCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+// Microsoft.UI.Xaml.Controls.ColorPicker (synthetic:Microsoft_UI_Xaml_Controls_ColorPicker)
+public class Microsoft_UI_Xaml_Controls_ColorPicker <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
     }
@@ -35386,25 +43570,25 @@ public class Microsoft_UI_Xaml_Controls_ItemCollection <: windows_interface.Inte
         super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
     }
 
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemCollection {
-        Microsoft_UI_Xaml_Controls_ItemCollection(raw, takeOwnership: true, allowManualRelease: false)
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ColorPicker {
+        Microsoft_UI_Xaml_Controls_ColorPicker(raw, takeOwnership: true, allowManualRelease: false)
     }
 
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemCollection {
-        Microsoft_UI_Xaml_Controls_ItemCollection(raw, takeOwnership: false, allowManualRelease: false)
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ColorPicker {
+        Microsoft_UI_Xaml_Controls_ColorPicker(raw, takeOwnership: false, allowManualRelease: false)
     }
 
     public static func iid(): windows_interface.GUID {
-        Windows_Foundation_Collections_IObservableVector_1<windows_interface.IInspectable>.iid()
+        Microsoft_UI_Xaml_Controls_IColorPicker.iid()
     }
 
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ItemCollection> {
-        let ancestors = [Windows_Foundation_Collections_IObservableVector_1<windows_interface.IInspectable>.iid(), windows_interface.IInspectable.iid(), Windows_Foundation_Collections_IVector_1<windows_interface.IInspectable>.iid(), Windows_Foundation_Collections_IIterable_1<windows_interface.IInspectable>.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ItemCollection>("ItemCollection", Windows_Foundation_Collections_IObservableVector_1<windows_interface.IInspectable>.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_ItemCollection.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_ItemCollection.viewOf(raw) })
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ColorPicker> {
+        let ancestors = [Microsoft_UI_Xaml_Controls_IColorPicker.iid(), Microsoft_UI_Xaml_Controls_IColorPicker2.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ColorPicker>("ColorPicker", Microsoft_UI_Xaml_Controls_IColorPicker.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_ColorPicker.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_ColorPicker.viewOf(raw) })
     }
 
-    public func defaultInterface(): Windows_Foundation_Collections_IObservableVector_1<windows_interface.IInspectable> {
-        match (unsafe { query(Windows_Foundation_Collections_IObservableVector_1<windows_interface.IInspectable>.descriptor()) }) {
+    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IColorPicker {
+        match (unsafe { query(Microsoft_UI_Xaml_Controls_IColorPicker.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -35414,399 +43598,12 @@ public class Microsoft_UI_Xaml_Controls_ItemCollection <: windows_interface.Inte
         windows_interface.IInspectable.viewOf(asRaw())
     }
 
-    public func asIObservableVector(): Windows_Foundation_Collections_IObservableVector_1<windows_interface.IInspectable> {
+    public func asIColorPicker(): Microsoft_UI_Xaml_Controls_IColorPicker {
         defaultInterface()
     }
 
-    public func asIVector_windows_interface_IInspectable(): windows_interface.IInspectable {
-        match (unsafe { query<windows_interface.IInspectable>(windows_interface.IInspectable.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIVector_Windows_Foundation_Collections_IVector_1_windows_interface_IInspectable_(): Windows_Foundation_Collections_IVector_1<windows_interface.IInspectable> {
-        match (unsafe { query<Windows_Foundation_Collections_IVector_1<windows_interface.IInspectable>>(Windows_Foundation_Collections_IVector_1<windows_interface.IInspectable>.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIIterable(): Windows_Foundation_Collections_IIterable_1<windows_interface.IInspectable> {
-        match (unsafe { query<Windows_Foundation_Collections_IIterable_1<windows_interface.IInspectable>>(Windows_Foundation_Collections_IIterable_1<windows_interface.IInspectable>.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func addVectorChanged(vhnd: Windows_Foundation_Collections_VectorChangedEventHandler_1<windows_interface.IInspectable>): Windows_Foundation_EventRegistrationToken {
-        var result__ = 0i64
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_Collections_VectorChangedEventHandler_1<windows_interface.IInspectable>>(vhnd)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.VectorChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func removeVectorChanged(token: Windows_Foundation_EventRegistrationToken): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.RemoveVectorChanged(token) }
-        }
-        hr__.check()
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.ItemCollection"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.ItemCollection;{" + Windows_Foundation_Collections_IObservableVector_1<windows_interface.IInspectable>.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.ItemCollection", Microsoft_UI_Xaml_Controls_ItemCollection.signature(), Windows_Foundation_Collections_IObservableVector_1<windows_interface.IInspectable>.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_ItemCollection <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ItemCollection> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ItemCollection): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemCollection {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_ItemCollection.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemCollection {
-        Microsoft_UI_Xaml_Controls_ItemCollection.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.ItemContainerGenerator (synthetic:Microsoft_UI_Xaml_Controls_ItemContainerGenerator)
-public class Microsoft_UI_Xaml_Controls_ItemContainerGenerator <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemContainerGenerator {
-        Microsoft_UI_Xaml_Controls_ItemContainerGenerator(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemContainerGenerator {
-        Microsoft_UI_Xaml_Controls_ItemContainerGenerator(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IItemContainerGenerator.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ItemContainerGenerator> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IItemContainerGenerator.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ItemContainerGenerator>("ItemContainerGenerator", Microsoft_UI_Xaml_Controls_IItemContainerGenerator.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_ItemContainerGenerator.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_ItemContainerGenerator.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IItemContainerGenerator {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IItemContainerGenerator.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIItemContainerGenerator(): Microsoft_UI_Xaml_Controls_IItemContainerGenerator {
-        defaultInterface()
-    }
-
-    public func addItemsChanged(handler: Microsoft_UI_Xaml_Controls_Primitives_ItemsChangedEventHandler): Windows_Foundation_EventRegistrationToken {
-        var result__ = 0i64
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Primitives_ItemsChangedEventHandler>(handler)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemsChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func removeItemsChanged(token: Windows_Foundation_EventRegistrationToken): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.RemoveItemsChanged(token) }
-        }
-        hr__.check()
-    }
-
-    public func ItemFromContainer(container: Microsoft_UI_Xaml_DependencyObject): windows_interface.IInspectable {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(container)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemFromContainer(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public func ContainerFromItem(item: windows_interface.IInspectable): Microsoft_UI_Xaml_DependencyObject {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ContainerFromItem(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyObject>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyObject.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public func IndexFromContainer(container: Microsoft_UI_Xaml_DependencyObject): Int32 {
-        var result__ = 0i32
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(container)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.IndexFromContainer(__argBorrow0.asRaw(), CPointer<Int32>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func ContainerFromIndex(index: Int32): Microsoft_UI_Xaml_DependencyObject {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.ContainerFromIndex(index, CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyObject>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyObject.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public func GetItemContainerGeneratorForPanel(panel: Microsoft_UI_Xaml_Controls_Panel): Microsoft_UI_Xaml_Controls_ItemContainerGenerator {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Panel>(panel)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.GetItemContainerGeneratorForPanel(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ItemContainerGenerator>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_Controls_ItemContainerGenerator.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public func StartAt(position: Microsoft_UI_Xaml_Controls_Primitives_GeneratorPosition, direction: Microsoft_UI_Xaml_Controls_Primitives_GeneratorDirection, allowStartAtRealizedItem: Bool): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.StartAt(position, direction.value, allowStartAtRealizedItem) }
-        }
-        hr__.check()
-    }
-
-    public func Stop(): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.Stop() }
-        }
-        hr__.check()
-    }
-
-    public func GenerateNext(isNewlyRealized: windows_core.OutSlot<Bool>): Microsoft_UI_Xaml_DependencyObject {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        if (isNewlyRealized.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        isNewlyRealized.clear()
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.GenerateNext(isNewlyRealized.borrowMut<Bool>(), CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyObject>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        let __arg0Value = match (isNewlyRealized.takeAbi<Bool>()) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        isNewlyRealized.write(__arg0Value)
-        return Microsoft_UI_Xaml_DependencyObject.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public func PrepareItemContainer(container: Microsoft_UI_Xaml_DependencyObject): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(container)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.PrepareItemContainer(__argBorrow0.asRaw()) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func RemoveAll(): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.RemoveAll() }
-        }
-        hr__.check()
-    }
-
-    public func Remove(position: Microsoft_UI_Xaml_Controls_Primitives_GeneratorPosition, count: Int32): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.Remove(position, count) }
-        }
-        hr__.check()
-    }
-
-    public func GeneratorPositionFromIndex(itemIndex: Int32): Microsoft_UI_Xaml_Controls_Primitives_GeneratorPosition {
-        var result__ = Microsoft_UI_Xaml_Controls_Primitives_GeneratorPosition()
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.GeneratorPositionFromIndex(itemIndex, CPointer<Microsoft_UI_Xaml_Controls_Primitives_GeneratorPosition>(inout result__)) }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func IndexFromGeneratorPosition(position: Microsoft_UI_Xaml_Controls_Primitives_GeneratorPosition): Int32 {
-        var result__ = 0i32
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.IndexFromGeneratorPosition(position, CPointer<Int32>(inout result__)) }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func Recycle(position: Microsoft_UI_Xaml_Controls_Primitives_GeneratorPosition, count: Int32): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.Recycle(position, count) }
-        }
-        hr__.check()
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.ItemContainerGenerator"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.ItemContainerGenerator;{" + Microsoft_UI_Xaml_Controls_IItemContainerGenerator.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.ItemContainerGenerator", Microsoft_UI_Xaml_Controls_ItemContainerGenerator.signature(), Microsoft_UI_Xaml_Controls_IItemContainerGenerator.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_ItemContainerGenerator <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ItemContainerGenerator> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ItemContainerGenerator): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemContainerGenerator {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_ItemContainerGenerator.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemContainerGenerator {
-        Microsoft_UI_Xaml_Controls_ItemContainerGenerator.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.ItemsControl (synthetic:Microsoft_UI_Xaml_Controls_ItemsControl)
-public class Microsoft_UI_Xaml_Controls_ItemsControl <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemsControl {
-        Microsoft_UI_Xaml_Controls_ItemsControl(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemsControl {
-        Microsoft_UI_Xaml_Controls_ItemsControl(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IItemsControl.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ItemsControl> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IItemsControl.iid(), Microsoft_UI_Xaml_Controls_IItemsControlOverrides.iid(), Microsoft_UI_Xaml_Controls_IItemContainerMapping.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ItemsControl>("ItemsControl", Microsoft_UI_Xaml_Controls_IItemsControl.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_ItemsControl.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_ItemsControl.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IItemsControl {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IItemsControl.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIItemsControl(): Microsoft_UI_Xaml_Controls_IItemsControl {
-        defaultInterface()
-    }
-
-    public func asIItemsControlOverrides(): Microsoft_UI_Xaml_Controls_IItemsControlOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IItemsControlOverrides>(Microsoft_UI_Xaml_Controls_IItemsControlOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIItemContainerMapping(): Microsoft_UI_Xaml_Controls_IItemContainerMapping {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IItemContainerMapping>(Microsoft_UI_Xaml_Controls_IItemContainerMapping.descriptor()) }) {
+    public func asIColorPicker2(): Microsoft_UI_Xaml_Controls_IColorPicker2 {
+        match (unsafe { query<Microsoft_UI_Xaml_Controls_IColorPicker2>(Microsoft_UI_Xaml_Controls_IColorPicker2.descriptor()) }) {
             case Some(value) => value
             case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
         }
@@ -35903,288 +43700,354 @@ public class Microsoft_UI_Xaml_Controls_ItemsControl <: windows_interface.Interf
         }
     }
 
-    public mut prop DisplayMemberPath: windows_core.HString {
+    public mut prop Color: Windows_UI_Color {
         get() {
-            var result__ = CPointer<Unit>()
+            var result__ = Windows_UI_Color()
             var hr__ = windows_core.E_POINTER
             try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.DisplayMemberPath(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_core.HString>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return windows_core.HString.fromSystemHandleTake(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetDisplayMemberPath(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public prop GroupStyle: Windows_Foundation_Collections_IObservableVector_1<Microsoft_UI_Xaml_Controls_GroupStyle> {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.GroupStyle(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections_IObservableVector_1<Microsoft_UI_Xaml_Controls_GroupStyle>>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Windows_Foundation_Collections_IObservableVector_1<Microsoft_UI_Xaml_Controls_GroupStyle>.fromAbiTakeWinrtHandle(result__)
-        }
-    }
-
-    public mut prop GroupStyleSelector: Microsoft_UI_Xaml_Controls_GroupStyleSelector {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.GroupStyleSelector(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_GroupStyleSelector>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Controls_GroupStyleSelector.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_GroupStyleSelector>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetGroupStyleSelector(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public prop IsGrouping: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.IsGrouping(CPointer<Bool>(inout result__)) }
+                hr__ = unsafe { interface__.Color(CPointer<Windows_UI_Color>(inout result__)) }
             }
             hr__.check()
             return result__
         }
-    }
-
-    public prop ItemContainerGenerator: Microsoft_UI_Xaml_Controls_ItemContainerGenerator {
-        get() {
-            var result__ = CPointer<Unit>()
+        set(value) {
             var hr__ = windows_core.E_POINTER
             try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemContainerGenerator(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ItemContainerGenerator>(result__)
-                result__ = CPointer<Unit>()
+                hr__ = unsafe { interface__.SetColor(value) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_ItemContainerGenerator.fromAbiTakeWinrtHandle(result__)
         }
     }
 
-    public mut prop ItemContainerStyle: Microsoft_UI_Xaml_Style {
+    public mut prop ColorSpectrumComponents: Microsoft_UI_Xaml_Controls_ColorSpectrumComponents {
         get() {
-            var result__ = CPointer<Unit>()
+            var result__ = 0i32
             var hr__ = windows_core.E_POINTER
             try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemContainerStyle(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Style>(result__)
-                result__ = CPointer<Unit>()
+                hr__ = unsafe { interface__.ColorSpectrumComponents(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Style.fromAbiTakeWinrtHandle(result__)
+            return Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Style>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetItemContainerStyle(__argBorrow0.asRaw()) }
-                }
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetColorSpectrumComponents(value.value) }
             }
             hr__.check()
         }
     }
 
-    public mut prop ItemContainerStyleSelector: Microsoft_UI_Xaml_Controls_StyleSelector {
+    public mut prop ColorSpectrumShape: Microsoft_UI_Xaml_Controls_ColorSpectrumShape {
         get() {
-            var result__ = CPointer<Unit>()
+            var result__ = 0i32
             var hr__ = windows_core.E_POINTER
             try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemContainerStyleSelector(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_StyleSelector>(result__)
-                result__ = CPointer<Unit>()
+                hr__ = unsafe { interface__.ColorSpectrumShape(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_StyleSelector.fromAbiTakeWinrtHandle(result__)
+            return Microsoft_UI_Xaml_Controls_ColorSpectrumShape(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_StyleSelector>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetItemContainerStyleSelector(__argBorrow0.asRaw()) }
-                }
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetColorSpectrumShape(value.value) }
             }
             hr__.check()
         }
     }
 
-    public mut prop ItemContainerTransitions: Microsoft_UI_Xaml_Media_Animation_TransitionCollection {
+    public mut prop IsAlphaEnabled: Bool {
         get() {
-            var result__ = CPointer<Unit>()
+            var result__ = false
             var hr__ = windows_core.E_POINTER
             try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemContainerTransitions(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Animation_TransitionCollection>(result__)
-                result__ = CPointer<Unit>()
+                hr__ = unsafe { interface__.IsAlphaEnabled(CPointer<Bool>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Media_Animation_TransitionCollection.fromAbiTakeWinrtHandle(result__)
+            return result__
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Animation_TransitionCollection>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetItemContainerTransitions(__argBorrow0.asRaw()) }
-                }
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsAlphaEnabled(value) }
             }
             hr__.check()
         }
     }
 
-    public mut prop ItemTemplate: Microsoft_UI_Xaml_DataTemplate {
+    public mut prop IsAlphaSliderVisible: Bool {
         get() {
-            var result__ = CPointer<Unit>()
+            var result__ = false
             var hr__ = windows_core.E_POINTER
             try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemTemplate(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DataTemplate>(result__)
-                result__ = CPointer<Unit>()
+                hr__ = unsafe { interface__.IsAlphaSliderVisible(CPointer<Bool>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_DataTemplate.fromAbiTakeWinrtHandle(result__)
+            return result__
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DataTemplate>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetItemTemplate(__argBorrow0.asRaw()) }
-                }
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsAlphaSliderVisible(value) }
             }
             hr__.check()
         }
     }
 
-    public mut prop ItemTemplateSelector: Microsoft_UI_Xaml_Controls_DataTemplateSelector {
+    public mut prop IsAlphaTextInputVisible: Bool {
         get() {
-            var result__ = CPointer<Unit>()
+            var result__ = false
             var hr__ = windows_core.E_POINTER
             try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemTemplateSelector(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_DataTemplateSelector>(result__)
-                result__ = CPointer<Unit>()
+                hr__ = unsafe { interface__.IsAlphaTextInputVisible(CPointer<Bool>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_DataTemplateSelector.fromAbiTakeWinrtHandle(result__)
+            return result__
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_DataTemplateSelector>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetItemTemplateSelector(__argBorrow0.asRaw()) }
-                }
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsAlphaTextInputVisible(value) }
             }
             hr__.check()
         }
     }
 
-    public prop Items: Microsoft_UI_Xaml_Controls_ItemCollection {
+    public mut prop IsColorChannelTextInputVisible: Bool {
         get() {
-            var result__ = CPointer<Unit>()
+            var result__ = false
             var hr__ = windows_core.E_POINTER
             try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Items(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ItemCollection>(result__)
-                result__ = CPointer<Unit>()
+                hr__ = unsafe { interface__.IsColorChannelTextInputVisible(CPointer<Bool>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_ItemCollection.fromAbiTakeWinrtHandle(result__)
-        }
-    }
-
-    public mut prop ItemsPanel: Microsoft_UI_Xaml_Controls_ItemsPanelTemplate {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemsPanel(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ItemsPanelTemplate>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Controls_ItemsPanelTemplate.fromAbiTakeWinrtHandle(result__)
+            return result__
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_ItemsPanelTemplate>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetItemsPanel(__argBorrow0.asRaw()) }
-                }
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsColorChannelTextInputVisible(value) }
             }
             hr__.check()
         }
     }
 
-    public prop ItemsPanelRoot: Microsoft_UI_Xaml_Controls_Panel {
+    public mut prop IsColorPreviewVisible: Bool {
         get() {
-            var result__ = CPointer<Unit>()
+            var result__ = false
             var hr__ = windows_core.E_POINTER
             try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemsPanelRoot(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_Panel>(result__)
-                result__ = CPointer<Unit>()
+                hr__ = unsafe { interface__.IsColorPreviewVisible(CPointer<Bool>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_Panel.fromAbiTakeWinrtHandle(result__)
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsColorPreviewVisible(value) }
+            }
+            hr__.check()
         }
     }
 
-    public mut prop ItemsSource: windows_interface.IInspectable {
+    public mut prop IsColorSliderVisible: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsColorSliderVisible(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsColorSliderVisible(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsColorSpectrumVisible: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsColorSpectrumVisible(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsColorSpectrumVisible(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsHexInputVisible: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsHexInputVisible(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsHexInputVisible(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop IsMoreButtonVisible: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsMoreButtonVisible(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsMoreButtonVisible(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxHue: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxHue(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMaxHue(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxSaturation: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxSaturation(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMaxSaturation(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MaxValue: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MaxValue(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMaxValue(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MinHue: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MinHue(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMinHue(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MinSaturation: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MinSaturation(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMinSaturation(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop MinValue: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.MinValue(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMinValue(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop PreviousColor: windows_interface.IInspectable {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
             try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemsSource(CPointer<CPointer<Unit>>(inout result__)) }
+                hr__ = unsafe { interface__.PreviousColor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
                 windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
@@ -36197,30 +44060,300 @@ public class Microsoft_UI_Xaml_Controls_ItemsControl <: windows_interface.Interf
             var hr__ = windows_core.E_POINTER
             try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
                 try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetItemsSource(__argBorrow0.asRaw()) }
+                    hr__ = unsafe { interface__.SetPreviousColor(__argBorrow0.asRaw()) }
                 }
             }
             hr__.check()
         }
     }
 
-    public func GroupHeaderContainerFromItemContainer(itemContainer: Microsoft_UI_Xaml_DependencyObject): Microsoft_UI_Xaml_DependencyObject {
-        var result__ = CPointer<Unit>()
+    public func addColorChanged(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_ColorChangedEventArgs>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(itemContainer)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_ColorChangedEventArgs>>(handler)) {
             try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.GroupHeaderContainerFromItemContainer(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
+                hr__ = unsafe { interface__.ColorChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
             }
         }
+        hr__.check()
+        return result__
+    }
+
+    public func removeColorChanged(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveColorChanged(token) }
+        }
+        hr__.check()
+    }
+
+    public static func ColorProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ColorProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyObject>(result__)
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
             result__ = CPointer<Unit>()
         }
         hr__.check()
-        return Microsoft_UI_Xaml_DependencyObject.fromAbiTakeWinrtHandle(result__)
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_ItemsControl {
+    public static func PreviousColorProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.PreviousColorProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsAlphaEnabledProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsAlphaEnabledProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsColorSpectrumVisibleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsColorSpectrumVisibleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsColorPreviewVisibleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsColorPreviewVisibleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsColorSliderVisibleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsColorSliderVisibleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsAlphaSliderVisibleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsAlphaSliderVisibleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsMoreButtonVisibleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsMoreButtonVisibleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsColorChannelTextInputVisibleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsColorChannelTextInputVisibleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsAlphaTextInputVisibleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsAlphaTextInputVisibleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsHexInputVisibleProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsHexInputVisibleProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MinHueProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MinHueProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MaxHueProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MaxHueProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MinSaturationProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MinSaturationProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MaxSaturationProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MaxSaturationProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MinValueProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MinValueProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func MaxValueProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MaxValueProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ColorSpectrumShapeProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ColorSpectrumShapeProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ColorSpectrumComponentsProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ColorSpectrumComponentsProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_ColorPicker {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         if (innerInterface.isNull()) {
@@ -36228,12 +44361,12 @@ public class Microsoft_UI_Xaml_Controls_ItemsControl <: windows_interface.Interf
         }
         innerInterface.clear()
         try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
-            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_IItemsControlFactory>().unwrap()) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerFactory>().unwrap()) {
                 hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
             }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ItemsControl>(result__)
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ColorPicker>(result__)
             result__ = CPointer<Unit>()
         }
         if (hr__.failed()) {
@@ -36251,14 +44384,14 @@ public class Microsoft_UI_Xaml_Controls_ItemsControl <: windows_interface.Interf
             case None => throw windows_core.WindowsException(windows_core.E_POINTER)
         }
         innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Controls_ItemsControl.fromAbiTakeWinrtHandle(result__)
+        return Microsoft_UI_Xaml_Controls_ColorPicker.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func ItemsSourceProperty(): Microsoft_UI_Xaml_DependencyProperty {
+    public static func OrientationProperty(): Microsoft_UI_Xaml_DependencyProperty {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_IItemsControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ItemsSourceProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ColorPicker, Microsoft_UI_Xaml_Controls_IColorPickerStatics2>().unwrap()) {
+            hr__ = unsafe { factory__.OrientationProperty(CPointer<CPointer<Unit>>(inout result__)) }
         }
         if (hr__.failed() && result__.isNotNull()) {
             windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
@@ -36266,164 +44399,6 @@ public class Microsoft_UI_Xaml_Controls_ItemsControl <: windows_interface.Interf
         }
         hr__.check()
         return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ItemTemplateProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_IItemsControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ItemTemplateProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ItemTemplateSelectorProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_IItemsControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ItemTemplateSelectorProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ItemsPanelProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_IItemsControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ItemsPanelProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func DisplayMemberPathProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_IItemsControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.DisplayMemberPathProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ItemContainerStyleProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_IItemsControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ItemContainerStyleProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ItemContainerStyleSelectorProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_IItemsControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ItemContainerStyleSelectorProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ItemContainerTransitionsProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_IItemsControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ItemContainerTransitionsProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func GroupStyleSelectorProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_IItemsControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.GroupStyleSelectorProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func IsGroupingProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_IItemsControlStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IsGroupingProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func GetItemsOwner(element: Microsoft_UI_Xaml_DependencyObject): Microsoft_UI_Xaml_Controls_ItemsControl {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
-            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_IItemsControlStatics>().unwrap()) {
-                hr__ = unsafe { factory__.GetItemsOwner(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ItemsControl>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_Controls_ItemsControl.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ItemsControlFromItemContainer(container: Microsoft_UI_Xaml_DependencyObject): Microsoft_UI_Xaml_Controls_ItemsControl {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(container)) {
-            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_IItemsControlStatics>().unwrap()) {
-                hr__ = unsafe { factory__.ItemsControlFromItemContainer(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ItemsControl>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_Controls_ItemsControl.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func abiType(): String {
@@ -36431,138 +44406,37 @@ public class Microsoft_UI_Xaml_Controls_ItemsControl <: windows_interface.Interf
     }
 
     public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.ItemsControl"
+        "Microsoft.UI.Xaml.Controls.ColorPicker"
     }
 
     public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.ItemsControl;{" + Microsoft_UI_Xaml_Controls_IItemsControl.iid().toSignatureString() + "})"
+        return "rc(Microsoft.UI.Xaml.Controls.ColorPicker;{" + Microsoft_UI_Xaml_Controls_IColorPicker.iid().toSignatureString() + "})"
     }
 
     public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.ItemsControl", Microsoft_UI_Xaml_Controls_ItemsControl.signature(), Microsoft_UI_Xaml_Controls_IItemsControl.iid())
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.ColorPicker", Microsoft_UI_Xaml_Controls_ColorPicker.signature(), Microsoft_UI_Xaml_Controls_IColorPicker.iid())
     }
 }
 
-extend Microsoft_UI_Xaml_Controls_ItemsControl <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ItemsControl> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ItemsControl): CPointer<Unit> {
+extend Microsoft_UI_Xaml_Controls_ColorPicker <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ColorPicker> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ColorPicker): CPointer<Unit> {
         value.asRaw()
     }
 
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemsControl {
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ColorPicker {
         if (raw.isNull()) {
             throw windows_core.WindowsException(windows_core.E_POINTER)
         }
-        Microsoft_UI_Xaml_Controls_ItemsControl.fromAbiTake(raw)
+        Microsoft_UI_Xaml_Controls_ColorPicker.fromAbiTake(raw)
     }
 
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemsControl {
-        Microsoft_UI_Xaml_Controls_ItemsControl.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.ItemsPanelTemplate (synthetic:Microsoft_UI_Xaml_Controls_ItemsPanelTemplate)
-public class Microsoft_UI_Xaml_Controls_ItemsPanelTemplate <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemsPanelTemplate {
-        Microsoft_UI_Xaml_Controls_ItemsPanelTemplate(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemsPanelTemplate {
-        Microsoft_UI_Xaml_Controls_ItemsPanelTemplate(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IItemsPanelTemplate.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ItemsPanelTemplate> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IItemsPanelTemplate.iid(), Microsoft_UI_Xaml_IFrameworkTemplate.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ItemsPanelTemplate>("ItemsPanelTemplate", Microsoft_UI_Xaml_Controls_IItemsPanelTemplate.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_ItemsPanelTemplate.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_ItemsPanelTemplate.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IItemsPanelTemplate {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IItemsPanelTemplate.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIItemsPanelTemplate(): Microsoft_UI_Xaml_Controls_IItemsPanelTemplate {
-        defaultInterface()
-    }
-
-    public func asIFrameworkTemplate(): Microsoft_UI_Xaml_IFrameworkTemplate {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkTemplate>(Microsoft_UI_Xaml_IFrameworkTemplate.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
-        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public static func new(): Microsoft_UI_Xaml_Controls_ItemsPanelTemplate {
-        var created__: Option<Microsoft_UI_Xaml_Controls_ItemsPanelTemplate> = Option<Microsoft_UI_Xaml_Controls_ItemsPanelTemplate>.None
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ItemsPanelTemplate, windows_core.IGenericFactory>().unwrap()) {
-            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Controls_ItemsPanelTemplate>(Microsoft_UI_Xaml_Controls_ItemsPanelTemplate.descriptor()).unwrap() })
-        }
-        match (created__) {
-            case Some(value) => return value
-            case None => throw IllegalStateException("Activation factory did not produce ItemsPanelTemplate")
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.ItemsPanelTemplate"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.ItemsPanelTemplate;{" + Microsoft_UI_Xaml_Controls_IItemsPanelTemplate.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.ItemsPanelTemplate", Microsoft_UI_Xaml_Controls_ItemsPanelTemplate.signature(), Microsoft_UI_Xaml_Controls_IItemsPanelTemplate.iid())
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ColorPicker {
+        Microsoft_UI_Xaml_Controls_ColorPicker.viewOf(raw)
     }
 }
 
-extend Microsoft_UI_Xaml_Controls_ItemsPanelTemplate <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ItemsPanelTemplate> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ItemsPanelTemplate): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemsPanelTemplate {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_ItemsPanelTemplate.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ItemsPanelTemplate {
-        Microsoft_UI_Xaml_Controls_ItemsPanelTemplate.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.LightDismissOverlayMode (synthetic:Microsoft_UI_Xaml_Controls_LightDismissOverlayMode)
-public struct Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
+// Microsoft.UI.Xaml.Controls.ColorSpectrumComponents (synthetic:Microsoft_UI_Xaml_Controls_ColorSpectrumComponents)
+public struct Microsoft_UI_Xaml_Controls_ColorSpectrumComponents {
     public let value: Int32
     public init() {
         this.value = 0
@@ -36571,1380 +44445,9 @@ public struct Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
         this.value = value
     }
 }
-public let Microsoft_UI_Xaml_Controls_LightDismissOverlayMode_Auto = Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(0)
-public let Microsoft_UI_Xaml_Controls_LightDismissOverlayMode_On = Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(1)
-public let Microsoft_UI_Xaml_Controls_LightDismissOverlayMode_Off = Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(2)
-
-// Microsoft.UI.Xaml.Controls.ListViewBase (synthetic:Microsoft_UI_Xaml_Controls_ListViewBase)
-public class Microsoft_UI_Xaml_Controls_ListViewBase <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ListViewBase {
-        Microsoft_UI_Xaml_Controls_ListViewBase(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ListViewBase {
-        Microsoft_UI_Xaml_Controls_ListViewBase(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IListViewBase.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ListViewBase> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IListViewBase.iid(), Microsoft_UI_Xaml_Controls_ISemanticZoomInformation.iid(), Microsoft_UI_Xaml_Controls_Primitives_ISelector.iid(), Microsoft_UI_Xaml_Controls_IItemsControl.iid(), Microsoft_UI_Xaml_Controls_IItemsControlOverrides.iid(), Microsoft_UI_Xaml_Controls_IItemContainerMapping.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ListViewBase>("ListViewBase", Microsoft_UI_Xaml_Controls_IListViewBase.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_ListViewBase.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_ListViewBase.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IListViewBase {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IListViewBase.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIListViewBase(): Microsoft_UI_Xaml_Controls_IListViewBase {
-        defaultInterface()
-    }
-
-    public func asISemanticZoomInformation(): Microsoft_UI_Xaml_Controls_ISemanticZoomInformation {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_ISemanticZoomInformation>(Microsoft_UI_Xaml_Controls_ISemanticZoomInformation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asISelector(): Microsoft_UI_Xaml_Controls_Primitives_ISelector {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_Primitives_ISelector>(Microsoft_UI_Xaml_Controls_Primitives_ISelector.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIItemsControl(): Microsoft_UI_Xaml_Controls_IItemsControl {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IItemsControl>(Microsoft_UI_Xaml_Controls_IItemsControl.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIItemsControlOverrides(): Microsoft_UI_Xaml_Controls_IItemsControlOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IItemsControlOverrides>(Microsoft_UI_Xaml_Controls_IItemsControlOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIItemContainerMapping(): Microsoft_UI_Xaml_Controls_IItemContainerMapping {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IItemContainerMapping>(Microsoft_UI_Xaml_Controls_IItemContainerMapping.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
-        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
-        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
-        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
-        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
-        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
-        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public mut prop CanDragItems: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.CanDragItems(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetCanDragItems(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop CanReorderItems: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.CanReorderItems(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetCanReorderItems(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop DataFetchSize: Float64 {
-        get() {
-            var result__ = 0.0f64
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.DataFetchSize(CPointer<Float64>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetDataFetchSize(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop Footer: windows_interface.IInspectable {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Footer(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetFooter(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop FooterTemplate: Microsoft_UI_Xaml_DataTemplate {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.FooterTemplate(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DataTemplate>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_DataTemplate.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DataTemplate>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetFooterTemplate(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop FooterTransitions: Microsoft_UI_Xaml_Media_Animation_TransitionCollection {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.FooterTransitions(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Animation_TransitionCollection>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Media_Animation_TransitionCollection.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Animation_TransitionCollection>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetFooterTransitions(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop Header: windows_interface.IInspectable {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Header(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetHeader(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop HeaderTemplate: Microsoft_UI_Xaml_DataTemplate {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.HeaderTemplate(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DataTemplate>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_DataTemplate.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DataTemplate>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetHeaderTemplate(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop HeaderTransitions: Microsoft_UI_Xaml_Media_Animation_TransitionCollection {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.HeaderTransitions(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Animation_TransitionCollection>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Media_Animation_TransitionCollection.fromAbiTakeWinrtHandle(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Animation_TransitionCollection>(value)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetHeaderTransitions(__argBorrow0.asRaw()) }
-                }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop IncrementalLoadingThreshold: Float64 {
-        get() {
-            var result__ = 0.0f64
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.IncrementalLoadingThreshold(CPointer<Float64>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetIncrementalLoadingThreshold(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop IncrementalLoadingTrigger: Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.IncrementalLoadingTrigger(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetIncrementalLoadingTrigger(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop IsItemClickEnabled: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.IsItemClickEnabled(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetIsItemClickEnabled(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop IsMultiSelectCheckBoxEnabled: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.IsMultiSelectCheckBoxEnabled(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetIsMultiSelectCheckBoxEnabled(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop IsSwipeEnabled: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.IsSwipeEnabled(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetIsSwipeEnabled(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop ReorderMode: Microsoft_UI_Xaml_Controls_ListViewReorderMode {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ReorderMode(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Controls_ListViewReorderMode(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetReorderMode(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public prop SelectedItems: Windows_Foundation_Collections_IVector_1<windows_interface.IInspectable> {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SelectedItems(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections_IVector_1<windows_interface.IInspectable>>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Windows_Foundation_Collections_IVector_1<windows_interface.IInspectable>.fromAbiTakeWinrtHandle(result__)
-        }
-    }
-
-    public prop SelectedRanges: Windows_Foundation_Collections_IVectorView_1<Microsoft_UI_Xaml_Data_ItemIndexRange> {
-        get() {
-            var result__ = CPointer<Unit>()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SelectedRanges(CPointer<CPointer<Unit>>(inout result__)) }
-            }
-            if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections_IVectorView_1<Microsoft_UI_Xaml_Data_ItemIndexRange>>(result__)
-                result__ = CPointer<Unit>()
-            }
-            hr__.check()
-            return Windows_Foundation_Collections_IVectorView_1<Microsoft_UI_Xaml_Data_ItemIndexRange>.fromAbiTakeWinrtHandle(result__)
-        }
-    }
-
-    public mut prop SelectionMode: Microsoft_UI_Xaml_Controls_ListViewSelectionMode {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SelectionMode(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Microsoft_UI_Xaml_Controls_ListViewSelectionMode(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetSelectionMode(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop ShowsScrollingPlaceholders: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ShowsScrollingPlaceholders(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetShowsScrollingPlaceholders(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop SingleSelectionFollowsFocus: Bool {
-        get() {
-            var result__ = false
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SingleSelectionFollowsFocus(CPointer<Bool>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetSingleSelectionFollowsFocus(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public func addChoosingGroupHeaderContainer(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_ChoosingGroupHeaderContainerEventArgs>): Windows_Foundation_EventRegistrationToken {
-        var result__ = 0i64
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_ChoosingGroupHeaderContainerEventArgs>>(handler)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ChoosingGroupHeaderContainer(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func removeChoosingGroupHeaderContainer(token: Windows_Foundation_EventRegistrationToken): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.RemoveChoosingGroupHeaderContainer(token) }
-        }
-        hr__.check()
-    }
-
-    public func addChoosingItemContainer(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_ChoosingItemContainerEventArgs>): Windows_Foundation_EventRegistrationToken {
-        var result__ = 0i64
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_ChoosingItemContainerEventArgs>>(handler)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ChoosingItemContainer(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func removeChoosingItemContainer(token: Windows_Foundation_EventRegistrationToken): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.RemoveChoosingItemContainer(token) }
-        }
-        hr__.check()
-    }
-
-    public func addContainerContentChanging(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs>): Windows_Foundation_EventRegistrationToken {
-        var result__ = 0i64
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs>>(handler)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ContainerContentChanging(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func removeContainerContentChanging(token: Windows_Foundation_EventRegistrationToken): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.RemoveContainerContentChanging(token) }
-        }
-        hr__.check()
-    }
-
-    public func addDragItemsCompleted(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs>): Windows_Foundation_EventRegistrationToken {
-        var result__ = 0i64
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs>>(handler)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.DragItemsCompleted(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func removeDragItemsCompleted(token: Windows_Foundation_EventRegistrationToken): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.RemoveDragItemsCompleted(token) }
-        }
-        hr__.check()
-    }
-
-    public func addDragItemsStarting(handler: Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler): Windows_Foundation_EventRegistrationToken {
-        var result__ = 0i64
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler>(handler)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.DragItemsStarting(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func removeDragItemsStarting(token: Windows_Foundation_EventRegistrationToken): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.RemoveDragItemsStarting(token) }
-        }
-        hr__.check()
-    }
-
-    public func addItemClick(handler: Microsoft_UI_Xaml_Controls_ItemClickEventHandler): Windows_Foundation_EventRegistrationToken {
-        var result__ = 0i64
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_ItemClickEventHandler>(handler)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ItemClick(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
-            }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func removeItemClick(token: Windows_Foundation_EventRegistrationToken): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.RemoveItemClick(token) }
-        }
-        hr__.check()
-    }
-
-    public func ScrollIntoView(item: windows_interface.IInspectable): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ScrollIntoView(__argBorrow0.asRaw()) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func SelectAll(): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.SelectAll() }
-        }
-        hr__.check()
-    }
-
-    public func LoadMoreItemsAsync(): windows_interface.IInspectable {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.LoadMoreItemsAsync(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return windows_interface.IInspectable.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public func ScrollIntoViewWithAlignment(item: windows_interface.IInspectable, alignment: Microsoft_UI_Xaml_Controls_ScrollIntoViewAlignment): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ScrollIntoViewWithAlignment(__argBorrow0.asRaw(), alignment.value) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func SetDesiredContainerUpdateDuration(duration: Windows_Foundation_TimeSpan): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.SetDesiredContainerUpdateDuration(duration) }
-        }
-        hr__.check()
-    }
-
-    public func SelectRange(itemIndexRange: Microsoft_UI_Xaml_Data_ItemIndexRange): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Data_ItemIndexRange>(itemIndexRange)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SelectRange(__argBorrow0.asRaw()) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func DeselectRange(itemIndexRange: Microsoft_UI_Xaml_Data_ItemIndexRange): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Data_ItemIndexRange>(itemIndexRange)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.DeselectRange(__argBorrow0.asRaw()) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func IsDragSource(): Bool {
-        var result__ = false
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.IsDragSource(CPointer<Bool>(inout result__)) }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public func TryStartConnectedAnimationAsync(animation: Microsoft_UI_Xaml_Media_Animation_ConnectedAnimation, item: windows_interface.IInspectable, elementName: windows_core.HString): Windows_Foundation_IAsyncOperation_1<Bool> {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Animation_ConnectedAnimation>(animation)) {
-            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
-                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(elementName)) {
-                    try (interface__ = defaultInterface()) {
-                        hr__ = unsafe { interface__.TryStartConnectedAnimationAsync(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
-                    }
-                }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Windows_Foundation_IAsyncOperation_1<Bool>>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Windows_Foundation_IAsyncOperation_1<Bool>.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public func PrepareConnectedAnimation(key: windows_core.HString, item: windows_interface.IInspectable, elementName: windows_core.HString): Microsoft_UI_Xaml_Media_Animation_ConnectedAnimation {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
-            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(item)) {
-                try (__argBorrow2 = windows_core.winrtBorrowGenericIn<windows_core.HString>(elementName)) {
-                    try (interface__ = defaultInterface()) {
-                        hr__ = unsafe { interface__.PrepareConnectedAnimation(__argBorrow0.asRaw(), __argBorrow1.asRaw(), __argBorrow2.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
-                    }
-                }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Animation_ConnectedAnimation>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_Media_Animation_ConnectedAnimation.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func SelectionModeProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.SelectionModeProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func IsSwipeEnabledProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IsSwipeEnabledProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func CanDragItemsProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.CanDragItemsProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func CanReorderItemsProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.CanReorderItemsProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func IsItemClickEnabledProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IsItemClickEnabledProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func DataFetchSizeProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.DataFetchSizeProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func IncrementalLoadingThresholdProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IncrementalLoadingThresholdProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func IncrementalLoadingTriggerProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IncrementalLoadingTriggerProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ShowsScrollingPlaceholdersProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ShowsScrollingPlaceholdersProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func ReorderModeProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.ReorderModeProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func IsMultiSelectCheckBoxEnabledProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IsMultiSelectCheckBoxEnabledProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func SingleSelectionFollowsFocusProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.SingleSelectionFollowsFocusProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func SemanticZoomOwnerProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.SemanticZoomOwnerProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func IsActiveViewProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IsActiveViewProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func IsZoomedInViewProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.IsZoomedInViewProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func HeaderProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.HeaderProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func HeaderTemplateProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.HeaderTemplateProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func HeaderTransitionsProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.HeaderTransitionsProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func FooterProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.FooterProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func FooterTemplateProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.FooterTemplateProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func FooterTransitionsProperty(): Microsoft_UI_Xaml_DependencyProperty {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseStatics>().unwrap()) {
-            hr__ = unsafe { factory__.FooterTransitionsProperty(CPointer<CPointer<Unit>>(inout result__)) }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
-            result__ = CPointer<Unit>()
-        }
-        hr__.check()
-        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_ListViewBase {
-        var result__ = CPointer<Unit>()
-        var hr__ = windows_core.E_POINTER
-        if (innerInterface.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        innerInterface.clear()
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
-            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_IListViewBaseFactory>().unwrap()) {
-                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
-            }
-        }
-        if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ListViewBase>(result__)
-            result__ = CPointer<Unit>()
-        }
-        if (hr__.failed()) {
-            match (innerInterface.takeAbi<CPointer<Unit>>()) {
-                case Some(__arg1ValuePartial) =>
-                    if (__arg1ValuePartial.isNotNull()) {
-                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
-                    }
-                case None => ()
-            }
-        }
-        hr__.check()
-        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Controls_ListViewBase.fromAbiTakeWinrtHandle(result__)
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.ListViewBase"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.ListViewBase;{" + Microsoft_UI_Xaml_Controls_IListViewBase.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.ListViewBase", Microsoft_UI_Xaml_Controls_ListViewBase.signature(), Microsoft_UI_Xaml_Controls_IListViewBase.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_ListViewBase <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ListViewBase> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ListViewBase): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ListViewBase {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_ListViewBase.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ListViewBase {
-        Microsoft_UI_Xaml_Controls_ListViewBase.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.ListViewBaseHeaderItem (synthetic:Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem)
-public class Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem {
-        Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem {
-        Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItem.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem> {
-        let ancestors = [Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItem.iid(), Microsoft_UI_Xaml_Controls_IContentControl.iid(), Microsoft_UI_Xaml_Controls_IContentControlOverrides.iid(), Microsoft_UI_Xaml_Controls_IControl.iid(), Microsoft_UI_Xaml_Controls_IControlProtected.iid(), Microsoft_UI_Xaml_Controls_IControlOverrides.iid(), Microsoft_UI_Xaml_IFrameworkElement.iid(), Microsoft_UI_Xaml_IFrameworkElementProtected.iid(), Microsoft_UI_Xaml_IFrameworkElementOverrides.iid(), Microsoft_UI_Xaml_IUIElement.iid(), Microsoft_UI_Xaml_IUIElementProtected.iid(), Microsoft_UI_Xaml_IUIElementOverrides.iid(), Microsoft_UI_Composition_IAnimationObject.iid(), Microsoft_UI_Composition_IVisualElement.iid(), Microsoft_UI_Composition_IVisualElement2.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem>("ListViewBaseHeaderItem", Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItem.iid(), ancestors, { raw => Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItem {
-        match (unsafe { query(Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItem.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIListViewBaseHeaderItem(): Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItem {
-        defaultInterface()
-    }
-
-    public func asIContentControl(): Microsoft_UI_Xaml_Controls_IContentControl {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IContentControl>(Microsoft_UI_Xaml_Controls_IContentControl.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIContentControlOverrides(): Microsoft_UI_Xaml_Controls_IContentControlOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IContentControlOverrides>(Microsoft_UI_Xaml_Controls_IContentControlOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIControl(): Microsoft_UI_Xaml_Controls_IControl {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControl>(Microsoft_UI_Xaml_Controls_IControl.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIControlProtected(): Microsoft_UI_Xaml_Controls_IControlProtected {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlProtected>(Microsoft_UI_Xaml_Controls_IControlProtected.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIControlOverrides(): Microsoft_UI_Xaml_Controls_IControlOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_Controls_IControlOverrides>(Microsoft_UI_Xaml_Controls_IControlOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIFrameworkElement(): Microsoft_UI_Xaml_IFrameworkElement {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElement>(Microsoft_UI_Xaml_IFrameworkElement.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIFrameworkElementProtected(): Microsoft_UI_Xaml_IFrameworkElementProtected {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementProtected>(Microsoft_UI_Xaml_IFrameworkElementProtected.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIFrameworkElementOverrides(): Microsoft_UI_Xaml_IFrameworkElementOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_IFrameworkElementOverrides>(Microsoft_UI_Xaml_IFrameworkElementOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIUIElement(): Microsoft_UI_Xaml_IUIElement {
-        match (unsafe { query<Microsoft_UI_Xaml_IUIElement>(Microsoft_UI_Xaml_IUIElement.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIUIElementProtected(): Microsoft_UI_Xaml_IUIElementProtected {
-        match (unsafe { query<Microsoft_UI_Xaml_IUIElementProtected>(Microsoft_UI_Xaml_IUIElementProtected.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIUIElementOverrides(): Microsoft_UI_Xaml_IUIElementOverrides {
-        match (unsafe { query<Microsoft_UI_Xaml_IUIElementOverrides>(Microsoft_UI_Xaml_IUIElementOverrides.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Microsoft_UI_Composition_IAnimationObject {
-        match (unsafe { query<Microsoft_UI_Composition_IAnimationObject>(Microsoft_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIVisualElement(): Microsoft_UI_Composition_IVisualElement {
-        match (unsafe { query<Microsoft_UI_Composition_IVisualElement>(Microsoft_UI_Composition_IVisualElement.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIVisualElement2(): Microsoft_UI_Composition_IVisualElement2 {
-        match (unsafe { query<Microsoft_UI_Composition_IVisualElement2>(Microsoft_UI_Composition_IVisualElement2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
-        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Microsoft.UI.Xaml.Controls.ListViewBaseHeaderItem"
-    }
-
-    public static func signature(): String {
-        return "rc(Microsoft.UI.Xaml.Controls.ListViewBaseHeaderItem;{" + Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItem.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Controls.ListViewBaseHeaderItem", Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem.signature(), Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItem.iid())
-    }
-}
-
-extend Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem> {
-    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem {
-        Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem.viewOf(raw)
-    }
-}
-
-// Microsoft.UI.Xaml.Controls.ListViewReorderMode (synthetic:Microsoft_UI_Xaml_Controls_ListViewReorderMode)
-public struct Microsoft_UI_Xaml_Controls_ListViewReorderMode {
-    public let value: Int32
-    public init() {
-        this.value = 0
-    }
-    public init(value: Int32) {
-        this.value = value
-    }
-}
-public let Microsoft_UI_Xaml_Controls_ListViewReorderMode_Disabled = Microsoft_UI_Xaml_Controls_ListViewReorderMode(0)
-public let Microsoft_UI_Xaml_Controls_ListViewReorderMode_Enabled = Microsoft_UI_Xaml_Controls_ListViewReorderMode(1)
+public let Microsoft_UI_Xaml_Controls_ColorSpectrumComponents_HueValue = Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(0)
+public let Microsoft_UI_Xaml_Controls_ColorSpectrumComponents_ValueHue = Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(1)
+public let Microsoft_UI_Xaml_Controls_ColorSpectrumComponents_HueSaturation = Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(2)
+public let Microsoft_UI_Xaml_Controls_ColorSpectrumComponents_SaturationHue = Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(3)
+public let Microsoft_UI_Xaml_Controls_ColorSpectrumComponents_SaturationValue = Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(4)
+public let Microsoft_UI_Xaml_Controls_ColorSpectrumComponents_ValueSaturation = Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(5)
