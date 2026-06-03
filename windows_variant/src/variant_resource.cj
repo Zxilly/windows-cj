@@ -1,13 +1,8 @@
 package windows_variant
 
 func releaseVariantStorageNoThrow(storage: VARIANT, closed: Bool): Unit {
-    if (closed || variantVt(storage) == VT_EMPTY) {
-        return
-    }
     try {
-        var slot = storage
-        let slotPtr = unsafe { CPointer<VARIANT>(inout slot) }
-        let _ = variantClear(slotPtr)
+        releaseVariantStorage(storage, closed)
     } catch (_: Exception) {}
 }
 
@@ -140,6 +135,7 @@ public class Variant <: Resource {
     }
 
     ~init() {
+        releaseVariantStorageNoThrow(storage, closed || closing)
         closed = true
         closing = false
         storage = VARIANT()

@@ -4,11 +4,8 @@ import windows_variant.VARIANT
 import windows_variant as variant
 
 func destroySafeArrayNoThrow(handle: CPointer<SAFEARRAY>, closed: Bool): Unit {
-    if (closed || handle.isNull()) {
-        return
-    }
     try {
-        let _ = safeArrayDestroy(handle)
+        let _ = closeSafeArrayState(handle, closed)
     } catch (_: Exception) {}
 }
 
@@ -225,6 +222,7 @@ public class SafeArray <: Resource {
     }
 
     ~init() {
+        destroySafeArrayNoThrow(handle, closed || closing)
         handle = CPointer<SAFEARRAY>()
         closed = true
         closing = false

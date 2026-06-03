@@ -1,13 +1,8 @@
 package windows_propvariant
 
 func releasePropVariantStorageNoThrow(storage: PROPVARIANT, closed: Bool): Unit {
-    if (closed || propVariantVt(storage) == VT_EMPTY) {
-        return
-    }
     try {
-        var slot = storage
-        let slotPtr = unsafe { CPointer<PROPVARIANT>(inout slot) }
-        let _ = propVariantClear(slotPtr)
+        releasePropVariantStorage(storage, closed)
     } catch (_: Exception) {}
 }
 
@@ -142,6 +137,7 @@ public class PropVariant <: Resource {
     }
 
     ~init() {
+        releasePropVariantStorageNoThrow(storage, closed || closing)
         closed = true
         closing = false
         storage = PROPVARIANT()

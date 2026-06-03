@@ -555,6 +555,7 @@ public class Transaction <: Resource {
     }
 
     ~init() {
+        closeHandleNoThrow(handle)
         closed = true
         handle = HANDLE()
     }
@@ -1015,6 +1016,9 @@ public class Key <: Resource {
     }
 
     ~init() {
+        if (ownsHandle) {
+            closeRegistryKeyNoThrow(handle)
+        }
         closed = true
         handle = HKEY()
     }
