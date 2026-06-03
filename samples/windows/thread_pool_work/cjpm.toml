@@ -1,0 +1,13 @@
+[package]
+  name = "windows_sample_thread_pool_work"
+  version = "0.1.0"
+  description = "Submit ten thread-pool work items and count their callback invocations"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_sample_thread_pool_work_bindings = { path = "./bindings" }

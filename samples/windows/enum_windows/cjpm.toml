@@ -1,0 +1,14 @@
+[package]
+  name = "windows_sample_enum_windows"
+  version = "0.1.0"
+  description = "Enumerate top-level windows via EnumWindows and print visible titles"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_sample_enum_windows_bindings = { path = "./bindings" }
+  windows_strings = { path = "../../../windows_strings" }

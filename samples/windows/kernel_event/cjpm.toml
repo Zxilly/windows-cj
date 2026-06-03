@@ -1,0 +1,13 @@
+[package]
+  name = "windows_sample_kernel_event"
+  version = "0.1.0"
+  description = "Create a manual-reset kernel event, signal it, and wait on it"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_sample_kernel_event_bindings = { path = "./bindings" }
