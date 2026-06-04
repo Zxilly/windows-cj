@@ -547,7 +547,7 @@ class Window {
     // generated value-returning CFunc miscompiles on x64: it reads the sret
     // return-buffer POINTER out of RAX instead of the value, so the size comes
     // back as garbage (here it had been masked by the saturating cast + the
-    // 200.0 floor in drawClock). See docs/cj-aggregate-return-com-abi-bug.md.
+    // 200.0 floor in drawClock). See web/book/src/aggregate-return-abi-bug.md.
     // The correct fix is a bindgen change emitting an explicit out-parameter
     // signature for aggregate returns + regen, after which this can revert to
     // target.GetSize(). Until then we use GetClientRect — a plain out-parameter

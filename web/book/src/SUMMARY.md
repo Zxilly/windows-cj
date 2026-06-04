@@ -18,3 +18,7 @@
 - [链接与 windows_targets](getting-started/targets.md)
 - [用 windows_bindgen 生成绑定](getting-started/bindgen.md)
 - [WinUI 3 实战](getting-started/winui3.md)
+
+# 已知问题
+
+- [聚合返回的 COM 方法 ABI](aggregate-return-abi-bug.md)
