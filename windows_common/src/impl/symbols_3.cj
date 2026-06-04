@@ -8,6 +8,1962 @@ import windows_interface as windows_interface
 import windows_interface.IInspectable
 import windows_interface.macros.Interface
 
+// Microsoft.UI.Xaml.Input.KeyboardAccelerator (synthetic:Microsoft_UI_Xaml_Input_KeyboardAccelerator)
+public class Microsoft_UI_Xaml_Input_KeyboardAccelerator <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_KeyboardAccelerator {
+        Microsoft_UI_Xaml_Input_KeyboardAccelerator(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_KeyboardAccelerator {
+        Microsoft_UI_Xaml_Input_KeyboardAccelerator(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Input_IKeyboardAccelerator.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_KeyboardAccelerator> {
+        let ancestors = [Microsoft_UI_Xaml_Input_IKeyboardAccelerator.iid(), Microsoft_UI_Xaml_IDependencyObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_KeyboardAccelerator>("KeyboardAccelerator", Microsoft_UI_Xaml_Input_IKeyboardAccelerator.iid(), ancestors, { raw => Microsoft_UI_Xaml_Input_KeyboardAccelerator.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Input_KeyboardAccelerator.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Input_IKeyboardAccelerator {
+        match (unsafe { query(Microsoft_UI_Xaml_Input_IKeyboardAccelerator.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIKeyboardAccelerator(): Microsoft_UI_Xaml_Input_IKeyboardAccelerator {
+        defaultInterface()
+    }
+
+    public func asIDependencyObject(): Microsoft_UI_Xaml_IDependencyObject {
+        match (unsafe { query<Microsoft_UI_Xaml_IDependencyObject>(Microsoft_UI_Xaml_IDependencyObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop IsEnabled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsEnabled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetIsEnabled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Key: Windows_System_VirtualKey {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Key(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_System_VirtualKey(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetKey(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Modifiers: Windows_System_VirtualKeyModifiers {
+        get() {
+            var result__ = 0u32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Modifiers(CPointer<UInt32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_System_VirtualKeyModifiers(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetModifiers(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ScopeOwner: Microsoft_UI_Xaml_DependencyObject {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ScopeOwner(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyObject>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_DependencyObject.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetScopeOwner(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public func addInvoked(handler: Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Input_KeyboardAccelerator, Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_TypedEventHandler_2<Microsoft_UI_Xaml_Input_KeyboardAccelerator, Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs>>(handler)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Invoked(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func removeInvoked(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.RemoveInvoked(token) }
+        }
+        hr__.check()
+    }
+
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Input_KeyboardAccelerator {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        if (innerInterface.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.clear()
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(baseInterface)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Input_KeyboardAccelerator, Microsoft_UI_Xaml_Input_IKeyboardAcceleratorFactory>().unwrap()) {
+                hr__ = unsafe { factory__.CreateInstance(__argBorrow0.asRaw(), innerInterface.borrowMut<CPointer<Unit>>(), CPointer<CPointer<Unit>>(inout result__)) }
+            }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Input_KeyboardAccelerator>(result__)
+            result__ = CPointer<Unit>()
+        }
+        if (hr__.failed()) {
+            match (innerInterface.takeAbi<CPointer<Unit>>()) {
+                case Some(__arg1ValuePartial) =>
+                    if (__arg1ValuePartial.isNotNull()) {
+                        windows_core.winrtReleaseGenericOut<windows_interface.IInspectable>(__arg1ValuePartial)
+                    }
+                case None => ()
+            }
+        }
+        hr__.check()
+        let __arg1Value = match (innerInterface.takeAbi<CPointer<Unit>>()) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
+        return Microsoft_UI_Xaml_Input_KeyboardAccelerator.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func KeyProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Input_KeyboardAccelerator, Microsoft_UI_Xaml_Input_IKeyboardAcceleratorStatics>().unwrap()) {
+            hr__ = unsafe { factory__.KeyProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ModifiersProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Input_KeyboardAccelerator, Microsoft_UI_Xaml_Input_IKeyboardAcceleratorStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ModifiersProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func IsEnabledProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Input_KeyboardAccelerator, Microsoft_UI_Xaml_Input_IKeyboardAcceleratorStatics>().unwrap()) {
+            hr__ = unsafe { factory__.IsEnabledProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func ScopeOwnerProperty(): Microsoft_UI_Xaml_DependencyProperty {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Input_KeyboardAccelerator, Microsoft_UI_Xaml_Input_IKeyboardAcceleratorStatics>().unwrap()) {
+            hr__ = unsafe { factory__.ScopeOwnerProperty(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyProperty>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_DependencyProperty.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Input.KeyboardAccelerator"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Input.KeyboardAccelerator;{" + Microsoft_UI_Xaml_Input_IKeyboardAccelerator.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Input.KeyboardAccelerator", Microsoft_UI_Xaml_Input_KeyboardAccelerator.signature(), Microsoft_UI_Xaml_Input_IKeyboardAccelerator.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Input_KeyboardAccelerator <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_KeyboardAccelerator> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_KeyboardAccelerator): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_KeyboardAccelerator {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Input_KeyboardAccelerator.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_KeyboardAccelerator {
+        Microsoft_UI_Xaml_Input_KeyboardAccelerator.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs (synthetic:Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs)
+public class Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs {
+        Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs {
+        Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Input_IKeyboardAcceleratorInvokedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Input_IKeyboardAcceleratorInvokedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs>("KeyboardAcceleratorInvokedEventArgs", Microsoft_UI_Xaml_Input_IKeyboardAcceleratorInvokedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Input_IKeyboardAcceleratorInvokedEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Input_IKeyboardAcceleratorInvokedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIKeyboardAcceleratorInvokedEventArgs(): Microsoft_UI_Xaml_Input_IKeyboardAcceleratorInvokedEventArgs {
+        defaultInterface()
+    }
+
+    public prop Element: Microsoft_UI_Xaml_DependencyObject {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Element(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyObject>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_DependencyObject.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public mut prop Handled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Handled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHandled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop KeyboardAccelerator: Microsoft_UI_Xaml_Input_KeyboardAccelerator {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.KeyboardAccelerator(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Input_KeyboardAccelerator>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Input_KeyboardAccelerator.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs;{" + Microsoft_UI_Xaml_Input_IKeyboardAcceleratorInvokedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs", Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs.signature(), Microsoft_UI_Xaml_Input_IKeyboardAcceleratorInvokedEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs {
+        Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Input.KeyboardAcceleratorPlacementMode (synthetic:Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode)
+public struct Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode_Auto = Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode(0)
+public let Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode_Hidden = Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode(1)
+
+// Microsoft.UI.Xaml.Input.KeyboardNavigationMode (synthetic:Microsoft_UI_Xaml_Input_KeyboardNavigationMode)
+public struct Microsoft_UI_Xaml_Input_KeyboardNavigationMode {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Microsoft_UI_Xaml_Input_KeyboardNavigationMode_Local = Microsoft_UI_Xaml_Input_KeyboardNavigationMode(0)
+public let Microsoft_UI_Xaml_Input_KeyboardNavigationMode_Cycle = Microsoft_UI_Xaml_Input_KeyboardNavigationMode(1)
+public let Microsoft_UI_Xaml_Input_KeyboardNavigationMode_Once = Microsoft_UI_Xaml_Input_KeyboardNavigationMode(2)
+
+// Microsoft.UI.Xaml.Input.LosingFocusEventArgs (synthetic:Microsoft_UI_Xaml_Input_LosingFocusEventArgs)
+public class Microsoft_UI_Xaml_Input_LosingFocusEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_LosingFocusEventArgs {
+        Microsoft_UI_Xaml_Input_LosingFocusEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_LosingFocusEventArgs {
+        Microsoft_UI_Xaml_Input_LosingFocusEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Input_ILosingFocusEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_LosingFocusEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Input_ILosingFocusEventArgs.iid(), Microsoft_UI_Xaml_IRoutedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_LosingFocusEventArgs>("LosingFocusEventArgs", Microsoft_UI_Xaml_Input_ILosingFocusEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Input_LosingFocusEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Input_LosingFocusEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Input_ILosingFocusEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Input_ILosingFocusEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asILosingFocusEventArgs(): Microsoft_UI_Xaml_Input_ILosingFocusEventArgs {
+        defaultInterface()
+    }
+
+    public func asIRoutedEventArgs(): Microsoft_UI_Xaml_IRoutedEventArgs {
+        match (unsafe { query<Microsoft_UI_Xaml_IRoutedEventArgs>(Microsoft_UI_Xaml_IRoutedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Cancel: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Cancel(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCancel(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop CorrelationId: windows_core.GuidValue {
+        get() {
+            var result__ = GUID()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.CorrelationId(CPointer<GUID>(inout result__)) }
+            }
+            hr__.check()
+            return windows_core.GuidValue.fromRaw(result__)
+        }
+    }
+
+    public prop Direction: Microsoft_UI_Xaml_Input_FocusNavigationDirection {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Direction(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Input_FocusNavigationDirection(result__)
+        }
+    }
+
+    public prop FocusState: Microsoft_UI_Xaml_FocusState {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FocusState(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_FocusState(result__)
+        }
+    }
+
+    public mut prop Handled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Handled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHandled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop InputDevice: Microsoft_UI_Xaml_Input_FocusInputDeviceKind {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InputDevice(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Input_FocusInputDeviceKind(result__)
+        }
+    }
+
+    public mut prop NewFocusedElement: Microsoft_UI_Xaml_DependencyObject {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.NewFocusedElement(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyObject>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_DependencyObject.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetNewFocusedElement(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop OldFocusedElement: Microsoft_UI_Xaml_DependencyObject {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.OldFocusedElement(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DependencyObject>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_DependencyObject.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public func TryCancel(): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.TryCancel(CPointer<Bool>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public func TrySetNewFocusedElement(element: Microsoft_UI_Xaml_DependencyObject): Bool {
+        var result__ = false
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_DependencyObject>(element)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TrySetNewFocusedElement(__argBorrow0.asRaw(), CPointer<Bool>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Input.LosingFocusEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Input.LosingFocusEventArgs;{" + Microsoft_UI_Xaml_Input_ILosingFocusEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Input.LosingFocusEventArgs", Microsoft_UI_Xaml_Input_LosingFocusEventArgs.signature(), Microsoft_UI_Xaml_Input_ILosingFocusEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Input_LosingFocusEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_LosingFocusEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_LosingFocusEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_LosingFocusEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Input_LosingFocusEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_LosingFocusEventArgs {
+        Microsoft_UI_Xaml_Input_LosingFocusEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Input.ManipulationCompletedEventHandler (synthetic:Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler)
+@C
+public struct Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
+    public init() {}
+}
+
+public open class Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler {
+        OwnedMicrosoft_UI_Xaml_Input_ManipulationCompletedEventHandler(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler {
+        Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3575511259u32, 29133u16, 23549u16, 132u8, 38u8, 118u8, 114u8, 24u8, 238u8, 85u8, 236u8)
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler> {
+        windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler>("Microsoft.UI.Xaml.Input.ManipulationCompletedEventHandler", Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler.iid(), [windows_interface.IUnknown.iid()], { raw => Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler.viewOf(raw) })
+    }
+
+    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
+        var schema = windows_interface.InterfaceDescriptorSchema("Microsoft.UI.Xaml.Input.ManipulationCompletedEventHandler", Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler.iid(), windows_interface.IUnknown.descriptorSchema(), "Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl", "Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler", "Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerInvoker", [windows_interface.InterfaceMethodSchema("Invoke", 3, [windows_interface.InterfaceParameterSchema("sender", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("e", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        schema.runtimeTypeContract = Some(Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler.runtimeType())
+        return schema
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func signature(): String {
+        "Microsoft.UI.Xaml.Input.ManipulationCompletedEventHandler"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Input.ManipulationCompletedEventHandler", Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler.signature(), Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler.iid())
+    }
+
+    public static func projectionKind(): String {
+        return "delegate"
+    }
+
+    public unsafe func vtbl(): Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl {
+        readVtbl<Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl>(Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl())
+    }
+
+    public unsafe func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Invoke(liveRaw, sender, e)).check()
+    }
+
+    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler {
+        let box = Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerBox(invoke)
+        let object = windows_core.ComObject<Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerBox>.new(box, [Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler.descriptorSchema()], box.vtblPtr())
+        return object.intoInterface(Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler.descriptor())
+    }
+}
+
+extend Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler> {}
+
+private class OwnedMicrosoft_UI_Xaml_Input_ManipulationCompletedEventHandler <: Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler {
+    public init(raw: CPointer<Unit>) {
+        super(raw, takeOwnership: true, allowManualRelease: false)
+    }
+}
+
+public interface Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerInvokerErased {
+    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
+}
+
+public interface Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerInvoker <: Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerInvokerErased {
+    func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        ()
+    }
+
+    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32 {
+        try {
+            this.Invoke(sender, e)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
+    }
+}
+
+private class Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerBox <: Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerInvoker & Resource {
+    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
+    private let vtblHandle: CPointer<Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl>
+    private var closed: Bool = false
+
+    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
+        this.invoke_ = invoke
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl>(buildMicrosoft_UI_Xaml_Input_ManipulationCompletedEventHandlerBoxVtbl()) }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        invoke_(sender, e)
+    }
+}
+
+func buildMicrosoft_UI_Xaml_Input_ManipulationCompletedEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl {
+    var vtbl = Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl()
+    vtbl.base_ = windows_core.buildIUnknownVtbl()
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, sender: CPointer<Unit>, e: CPointer<Unit> =>
+        match (unsafe { windows_core.asImplFromRaw<Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerInvokerErased>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.__winrtThunk_Invoke(sender, e)
+            case None =>
+                windows_core.E_NOTIMPL.value
+        }
+    }
+    return vtbl
+}
+
+
+// Microsoft.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs (synthetic:Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs)
+public class Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs {
+        Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs {
+        Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Input_IManipulationCompletedRoutedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Input_IManipulationCompletedRoutedEventArgs.iid(), Microsoft_UI_Xaml_IRoutedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs>("ManipulationCompletedRoutedEventArgs", Microsoft_UI_Xaml_Input_IManipulationCompletedRoutedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Input_IManipulationCompletedRoutedEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Input_IManipulationCompletedRoutedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIManipulationCompletedRoutedEventArgs(): Microsoft_UI_Xaml_Input_IManipulationCompletedRoutedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIRoutedEventArgs(): Microsoft_UI_Xaml_IRoutedEventArgs {
+        match (unsafe { query<Microsoft_UI_Xaml_IRoutedEventArgs>(Microsoft_UI_Xaml_IRoutedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Container: Microsoft_UI_Xaml_UIElement {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Container(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_UIElement>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_UIElement.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Cumulative: Microsoft_UI_Input_ManipulationDelta {
+        get() {
+            var result__ = Microsoft_UI_Input_ManipulationDelta()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Cumulative(CPointer<Microsoft_UI_Input_ManipulationDelta>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop Handled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Handled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHandled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop IsInertial: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsInertial(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop PointerDeviceType: Microsoft_UI_Input_PointerDeviceType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Input_PointerDeviceType(result__)
+        }
+    }
+
+    public prop Position: Windows_Foundation_Point {
+        get() {
+            var result__ = Windows_Foundation_Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<Windows_Foundation_Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Velocities: Microsoft_UI_Input_ManipulationVelocities {
+        get() {
+            var result__ = Microsoft_UI_Input_ManipulationVelocities()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Velocities(CPointer<Microsoft_UI_Input_ManipulationVelocities>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func new(): Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs {
+        var created__: Option<Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs> = Option<Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs>.None
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs>(Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ManipulationCompletedRoutedEventArgs")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs;{" + Microsoft_UI_Xaml_Input_IManipulationCompletedRoutedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs", Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs.signature(), Microsoft_UI_Xaml_Input_IManipulationCompletedRoutedEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs {
+        Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Input.ManipulationDeltaEventHandler (synthetic:Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler)
+@C
+public struct Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
+    public init() {}
+}
+
+public open class Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler {
+        OwnedMicrosoft_UI_Xaml_Input_ManipulationDeltaEventHandler(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler {
+        Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2213729486u32, 4191u16, 21394u16, 163u8, 138u8, 183u8, 70u8, 123u8, 124u8, 46u8, 165u8)
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler> {
+        windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler>("Microsoft.UI.Xaml.Input.ManipulationDeltaEventHandler", Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler.iid(), [windows_interface.IUnknown.iid()], { raw => Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler.viewOf(raw) })
+    }
+
+    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
+        var schema = windows_interface.InterfaceDescriptorSchema("Microsoft.UI.Xaml.Input.ManipulationDeltaEventHandler", Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler.iid(), windows_interface.IUnknown.descriptorSchema(), "Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl", "Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler", "Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerInvoker", [windows_interface.InterfaceMethodSchema("Invoke", 3, [windows_interface.InterfaceParameterSchema("sender", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("e", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        schema.runtimeTypeContract = Some(Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler.runtimeType())
+        return schema
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func signature(): String {
+        "Microsoft.UI.Xaml.Input.ManipulationDeltaEventHandler"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Input.ManipulationDeltaEventHandler", Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler.signature(), Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler.iid())
+    }
+
+    public static func projectionKind(): String {
+        return "delegate"
+    }
+
+    public unsafe func vtbl(): Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl {
+        readVtbl<Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl>(Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl())
+    }
+
+    public unsafe func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Invoke(liveRaw, sender, e)).check()
+    }
+
+    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler {
+        let box = Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerBox(invoke)
+        let object = windows_core.ComObject<Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerBox>.new(box, [Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler.descriptorSchema()], box.vtblPtr())
+        return object.intoInterface(Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler.descriptor())
+    }
+}
+
+extend Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler> {}
+
+private class OwnedMicrosoft_UI_Xaml_Input_ManipulationDeltaEventHandler <: Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler {
+    public init(raw: CPointer<Unit>) {
+        super(raw, takeOwnership: true, allowManualRelease: false)
+    }
+}
+
+public interface Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerInvokerErased {
+    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
+}
+
+public interface Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerInvoker <: Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerInvokerErased {
+    func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        ()
+    }
+
+    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32 {
+        try {
+            this.Invoke(sender, e)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
+    }
+}
+
+private class Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerBox <: Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerInvoker & Resource {
+    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
+    private let vtblHandle: CPointer<Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl>
+    private var closed: Bool = false
+
+    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
+        this.invoke_ = invoke
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl>(buildMicrosoft_UI_Xaml_Input_ManipulationDeltaEventHandlerBoxVtbl()) }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        invoke_(sender, e)
+    }
+}
+
+func buildMicrosoft_UI_Xaml_Input_ManipulationDeltaEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl {
+    var vtbl = Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl()
+    vtbl.base_ = windows_core.buildIUnknownVtbl()
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, sender: CPointer<Unit>, e: CPointer<Unit> =>
+        match (unsafe { windows_core.asImplFromRaw<Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerInvokerErased>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.__winrtThunk_Invoke(sender, e)
+            case None =>
+                windows_core.E_NOTIMPL.value
+        }
+    }
+    return vtbl
+}
+
+
+// Microsoft.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs (synthetic:Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs)
+public class Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs {
+        Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs {
+        Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Input_IManipulationDeltaRoutedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Input_IManipulationDeltaRoutedEventArgs.iid(), Microsoft_UI_Xaml_IRoutedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs>("ManipulationDeltaRoutedEventArgs", Microsoft_UI_Xaml_Input_IManipulationDeltaRoutedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Input_IManipulationDeltaRoutedEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Input_IManipulationDeltaRoutedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIManipulationDeltaRoutedEventArgs(): Microsoft_UI_Xaml_Input_IManipulationDeltaRoutedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIRoutedEventArgs(): Microsoft_UI_Xaml_IRoutedEventArgs {
+        match (unsafe { query<Microsoft_UI_Xaml_IRoutedEventArgs>(Microsoft_UI_Xaml_IRoutedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Container: Microsoft_UI_Xaml_UIElement {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Container(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_UIElement>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_UIElement.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Cumulative: Microsoft_UI_Input_ManipulationDelta {
+        get() {
+            var result__ = Microsoft_UI_Input_ManipulationDelta()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Cumulative(CPointer<Microsoft_UI_Input_ManipulationDelta>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Delta: Microsoft_UI_Input_ManipulationDelta {
+        get() {
+            var result__ = Microsoft_UI_Input_ManipulationDelta()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Delta(CPointer<Microsoft_UI_Input_ManipulationDelta>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop Handled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Handled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHandled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop IsInertial: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.IsInertial(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop PointerDeviceType: Microsoft_UI_Input_PointerDeviceType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Input_PointerDeviceType(result__)
+        }
+    }
+
+    public prop Position: Windows_Foundation_Point {
+        get() {
+            var result__ = Windows_Foundation_Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Position(CPointer<Windows_Foundation_Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Velocities: Microsoft_UI_Input_ManipulationVelocities {
+        get() {
+            var result__ = Microsoft_UI_Input_ManipulationVelocities()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Velocities(CPointer<Microsoft_UI_Input_ManipulationVelocities>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public func Complete(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Complete() }
+        }
+        hr__.check()
+    }
+
+    public static func new(): Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs {
+        var created__: Option<Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs> = Option<Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs>.None
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs>(Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ManipulationDeltaRoutedEventArgs")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs;{" + Microsoft_UI_Xaml_Input_IManipulationDeltaRoutedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs", Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs.signature(), Microsoft_UI_Xaml_Input_IManipulationDeltaRoutedEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs {
+        Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Input.ManipulationInertiaStartingEventHandler (synthetic:Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler)
+@C
+public struct Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = { _, _, _ => windows_core.E_NOTIMPL.value }
+    public init() {}
+}
+
+public open class Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    protected init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler {
+        OwnedMicrosoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler(raw)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler {
+        Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1575130813u32, 28444u16, 24416u16, 145u8, 128u8, 16u8, 112u8, 82u8, 130u8, 87u8, 108u8)
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler> {
+        windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler>("Microsoft.UI.Xaml.Input.ManipulationInertiaStartingEventHandler", Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler.iid(), [windows_interface.IUnknown.iid()], { raw => Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler.viewOf(raw) })
+    }
+
+    public static func descriptorSchema(): windows_interface.InterfaceDescriptorSchema {
+        var schema = windows_interface.InterfaceDescriptorSchema("Microsoft.UI.Xaml.Input.ManipulationInertiaStartingEventHandler", Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler.iid(), windows_interface.IUnknown.descriptorSchema(), "Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtbl", "Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler", "Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerInvoker", [windows_interface.InterfaceMethodSchema("Invoke", 3, [windows_interface.InterfaceParameterSchema("sender", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value), windows_interface.InterfaceParameterSchema("e", "CPointer<Unit>", "CPointer<Unit>", windows_interface.InterfaceParameterBridgeKind.Value)], "Int32")])
+        schema.runtimeTypeContract = Some(Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler.runtimeType())
+        return schema
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func signature(): String {
+        "Microsoft.UI.Xaml.Input.ManipulationInertiaStartingEventHandler"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Input.ManipulationInertiaStartingEventHandler", Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler.signature(), Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler.iid())
+    }
+
+    public static func projectionKind(): String {
+        return "delegate"
+    }
+
+    public unsafe func vtbl(): Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtbl {
+        readVtbl<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtbl>(Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtbl())
+    }
+
+    public unsafe func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        let liveRaw = asRaw()
+        if (liveRaw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        let v = vtbl()
+        windows_core.HRESULT(v.Invoke(liveRaw, sender, e)).check()
+    }
+
+    public static func new(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit): Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler {
+        let box = Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerBox(invoke)
+        let object = windows_core.ComObject<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerBox>.new(box, [Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler.descriptorSchema()], box.vtblPtr())
+        return object.intoInterface(Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler.descriptor())
+    }
+}
+
+extend Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler> {}
+
+private class OwnedMicrosoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler <: Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler {
+    public init(raw: CPointer<Unit>) {
+        super(raw, takeOwnership: true, allowManualRelease: false)
+    }
+}
+
+public interface Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerInvokerErased {
+    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
+}
+
+public interface Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerInvoker <: Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerInvokerErased {
+    func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        ()
+    }
+
+    func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32 {
+        try {
+            this.Invoke(sender, e)
+            return windows_core.S_OK.value
+        } catch (error: windows_core.WindowsException) {
+            return error.code().value
+        } catch (_: Exception) {
+            return windows_core.E_FAIL.value
+        }
+    }
+}
+
+private class Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerBox <: Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerInvoker & Resource {
+    public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
+    private let vtblHandle: CPointer<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtbl>
+    private var closed: Bool = false
+
+    public init(invoke: (CPointer<Unit>, CPointer<Unit>) -> Unit) {
+        this.invoke_ = invoke
+        this.vtblHandle = unsafe { windows_interface.allocateNativeValue<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtbl>(buildMicrosoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerBoxVtbl()) }
+    }
+
+    public func vtblPtr(): CPointer<Unit> {
+        CPointer<Unit>(vtblHandle)
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    ~init() {
+        if (!closed) {
+            closed = true
+        }
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        unsafe { windows_interface.freeNativeValue(vtblHandle) }
+        closed = true
+    }
+
+    public func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
+        invoke_(sender, e)
+    }
+}
+
+func buildMicrosoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtbl {
+    var vtbl = Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtbl()
+    vtbl.base_ = windows_core.buildIUnknownVtbl()
+    vtbl.Invoke = { instanceRaw: CPointer<Unit>, sender: CPointer<Unit>, e: CPointer<Unit> =>
+        match (unsafe { windows_core.asImplFromRaw<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerInvokerErased>(instanceRaw) }) {
+            case Some(invoker) =>
+                invoker.__winrtThunk_Invoke(sender, e)
+            case None =>
+                windows_core.E_NOTIMPL.value
+        }
+    }
+    return vtbl
+}
+
+
+// Microsoft.UI.Xaml.Input.ManipulationInertiaStartingRoutedEventArgs (synthetic:Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs)
+public class Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs {
+        Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs {
+        Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Input_IManipulationInertiaStartingRoutedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Input_IManipulationInertiaStartingRoutedEventArgs.iid(), Microsoft_UI_Xaml_IRoutedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs>("ManipulationInertiaStartingRoutedEventArgs", Microsoft_UI_Xaml_Input_IManipulationInertiaStartingRoutedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Input_IManipulationInertiaStartingRoutedEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Input_IManipulationInertiaStartingRoutedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIManipulationInertiaStartingRoutedEventArgs(): Microsoft_UI_Xaml_Input_IManipulationInertiaStartingRoutedEventArgs {
+        defaultInterface()
+    }
+
+    public func asIRoutedEventArgs(): Microsoft_UI_Xaml_IRoutedEventArgs {
+        match (unsafe { query<Microsoft_UI_Xaml_IRoutedEventArgs>(Microsoft_UI_Xaml_IRoutedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Container: Microsoft_UI_Xaml_UIElement {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Container(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_UIElement>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_UIElement.fromAbiTakeWinrtHandle(result__)
+        }
+    }
+
+    public prop Cumulative: Microsoft_UI_Input_ManipulationDelta {
+        get() {
+            var result__ = Microsoft_UI_Input_ManipulationDelta()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Cumulative(CPointer<Microsoft_UI_Input_ManipulationDelta>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Delta: Microsoft_UI_Input_ManipulationDelta {
+        get() {
+            var result__ = Microsoft_UI_Input_ManipulationDelta()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Delta(CPointer<Microsoft_UI_Input_ManipulationDelta>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public mut prop ExpansionBehavior: Microsoft_UI_Xaml_Input_InertiaExpansionBehavior {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ExpansionBehavior(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Input_InertiaExpansionBehavior>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Input_InertiaExpansionBehavior.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Input_InertiaExpansionBehavior>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetExpansionBehavior(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Handled: Bool {
+        get() {
+            var result__ = false
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Handled(CPointer<Bool>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetHandled(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop PointerDeviceType: Microsoft_UI_Input_PointerDeviceType {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Microsoft_UI_Input_PointerDeviceType(result__)
+        }
+    }
+
+    public mut prop RotationBehavior: Microsoft_UI_Xaml_Input_InertiaRotationBehavior {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.RotationBehavior(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Input_InertiaRotationBehavior>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Input_InertiaRotationBehavior.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Input_InertiaRotationBehavior>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetRotationBehavior(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop TranslationBehavior: Microsoft_UI_Xaml_Input_InertiaTranslationBehavior {
+        get() {
+            var result__ = CPointer<Unit>()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.TranslationBehavior(CPointer<CPointer<Unit>>(inout result__)) }
+            }
+            if (hr__.failed() && result__.isNotNull()) {
+                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Input_InertiaTranslationBehavior>(result__)
+                result__ = CPointer<Unit>()
+            }
+            hr__.check()
+            return Microsoft_UI_Xaml_Input_InertiaTranslationBehavior.fromAbiTakeWinrtHandle(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Input_InertiaTranslationBehavior>(value)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetTranslationBehavior(__argBorrow0.asRaw()) }
+                }
+            }
+            hr__.check()
+        }
+    }
+
+    public prop Velocities: Microsoft_UI_Input_ManipulationVelocities {
+        get() {
+            var result__ = Microsoft_UI_Input_ManipulationVelocities()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Velocities(CPointer<Microsoft_UI_Input_ManipulationVelocities>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func new(): Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs {
+        var created__: Option<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs> = Option<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs>.None
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs>(Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ManipulationInertiaStartingRoutedEventArgs")
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Input.ManipulationInertiaStartingRoutedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Input.ManipulationInertiaStartingRoutedEventArgs;{" + Microsoft_UI_Xaml_Input_IManipulationInertiaStartingRoutedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Input.ManipulationInertiaStartingRoutedEventArgs", Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs.signature(), Microsoft_UI_Xaml_Input_IManipulationInertiaStartingRoutedEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs {
+        Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Input.ManipulationModes (synthetic:Microsoft_UI_Xaml_Input_ManipulationModes)
+public struct Microsoft_UI_Xaml_Input_ManipulationModes {
+    public let value: UInt32
+    public init() {
+        this.value = 0
+    }
+    public init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: Microsoft_UI_Xaml_Input_ManipulationModes): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: Microsoft_UI_Xaml_Input_ManipulationModes): Microsoft_UI_Xaml_Input_ManipulationModes {
+        return Microsoft_UI_Xaml_Input_ManipulationModes(value | other.value)
+    }
+    public operator func &(other: Microsoft_UI_Xaml_Input_ManipulationModes): Microsoft_UI_Xaml_Input_ManipulationModes {
+        return Microsoft_UI_Xaml_Input_ManipulationModes(value & other.value)
+    }
+    public operator func ^(other: Microsoft_UI_Xaml_Input_ManipulationModes): Microsoft_UI_Xaml_Input_ManipulationModes {
+        return Microsoft_UI_Xaml_Input_ManipulationModes(value ^ other.value)
+    }
+    public operator func !(): Microsoft_UI_Xaml_Input_ManipulationModes {
+        return Microsoft_UI_Xaml_Input_ManipulationModes(!value)
+    }
+}
+public let Microsoft_UI_Xaml_Input_ManipulationModes_None = Microsoft_UI_Xaml_Input_ManipulationModes(0)
+public let Microsoft_UI_Xaml_Input_ManipulationModes_TranslateX = Microsoft_UI_Xaml_Input_ManipulationModes(1)
+public let Microsoft_UI_Xaml_Input_ManipulationModes_TranslateY = Microsoft_UI_Xaml_Input_ManipulationModes(2)
+public let Microsoft_UI_Xaml_Input_ManipulationModes_TranslateRailsX = Microsoft_UI_Xaml_Input_ManipulationModes(4)
+public let Microsoft_UI_Xaml_Input_ManipulationModes_TranslateRailsY = Microsoft_UI_Xaml_Input_ManipulationModes(8)
+public let Microsoft_UI_Xaml_Input_ManipulationModes_Rotate = Microsoft_UI_Xaml_Input_ManipulationModes(16)
+public let Microsoft_UI_Xaml_Input_ManipulationModes_Scale = Microsoft_UI_Xaml_Input_ManipulationModes(32)
+public let Microsoft_UI_Xaml_Input_ManipulationModes_TranslateInertia = Microsoft_UI_Xaml_Input_ManipulationModes(64)
+public let Microsoft_UI_Xaml_Input_ManipulationModes_RotateInertia = Microsoft_UI_Xaml_Input_ManipulationModes(128)
+public let Microsoft_UI_Xaml_Input_ManipulationModes_ScaleInertia = Microsoft_UI_Xaml_Input_ManipulationModes(256)
+public let Microsoft_UI_Xaml_Input_ManipulationModes_All = Microsoft_UI_Xaml_Input_ManipulationModes(65535)
+public let Microsoft_UI_Xaml_Input_ManipulationModes_System = Microsoft_UI_Xaml_Input_ManipulationModes(65536)
+
+// Microsoft.UI.Xaml.Input.ManipulationPivot (synthetic:Microsoft_UI_Xaml_Input_ManipulationPivot)
+public class Microsoft_UI_Xaml_Input_ManipulationPivot <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationPivot {
+        Microsoft_UI_Xaml_Input_ManipulationPivot(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationPivot {
+        Microsoft_UI_Xaml_Input_ManipulationPivot(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Input_IManipulationPivot.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationPivot> {
+        let ancestors = [Microsoft_UI_Xaml_Input_IManipulationPivot.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Input_ManipulationPivot>("ManipulationPivot", Microsoft_UI_Xaml_Input_IManipulationPivot.iid(), ancestors, { raw => Microsoft_UI_Xaml_Input_ManipulationPivot.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Input_ManipulationPivot.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Input_IManipulationPivot {
+        match (unsafe { query(Microsoft_UI_Xaml_Input_IManipulationPivot.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIManipulationPivot(): Microsoft_UI_Xaml_Input_IManipulationPivot {
+        defaultInterface()
+    }
+
+    public mut prop Center: Windows_Foundation_Point {
+        get() {
+            var result__ = Windows_Foundation_Point()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Center(CPointer<Windows_Foundation_Point>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetCenter(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Radius: Float64 {
+        get() {
+            var result__ = 0.0f64
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Radius(CPointer<Float64>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetRadius(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func new(): Microsoft_UI_Xaml_Input_ManipulationPivot {
+        var created__: Option<Microsoft_UI_Xaml_Input_ManipulationPivot> = Option<Microsoft_UI_Xaml_Input_ManipulationPivot>.None
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Input_ManipulationPivot, windows_core.IGenericFactory>().unwrap()) {
+            created__ = Some(unsafe { factory__.ActivateInstance<Microsoft_UI_Xaml_Input_ManipulationPivot>(Microsoft_UI_Xaml_Input_ManipulationPivot.descriptor()).unwrap() })
+        }
+        match (created__) {
+            case Some(value) => return value
+            case None => throw IllegalStateException("Activation factory did not produce ManipulationPivot")
+        }
+    }
+
+    public static func CreateInstanceWithCenterAndRadius(center: Windows_Foundation_Point, radius: Float64): Microsoft_UI_Xaml_Input_ManipulationPivot {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Input_ManipulationPivot, Microsoft_UI_Xaml_Input_IManipulationPivotFactory>().unwrap()) {
+            hr__ = unsafe { factory__.CreateInstanceWithCenterAndRadius(center, radius, CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Input_ManipulationPivot>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Xaml_Input_ManipulationPivot.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Input.ManipulationPivot"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Input.ManipulationPivot;{" + Microsoft_UI_Xaml_Input_IManipulationPivot.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Input.ManipulationPivot", Microsoft_UI_Xaml_Input_ManipulationPivot.signature(), Microsoft_UI_Xaml_Input_IManipulationPivot.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Input_ManipulationPivot <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_ManipulationPivot> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_ManipulationPivot): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationPivot {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Input_ManipulationPivot.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Input_ManipulationPivot {
+        Microsoft_UI_Xaml_Input_ManipulationPivot.viewOf(raw)
+    }
+}
+
 // Microsoft.UI.Xaml.Input.ManipulationStartedEventHandler (synthetic:Microsoft_UI_Xaml_Input_ManipulationStartedEventHandler)
 @C
 public struct Microsoft_UI_Xaml_Input_ManipulationStartedEventHandlerVtbl {
@@ -3460,6 +5416,156 @@ extend Microsoft_UI_Xaml_Media_CacheMode <: windows_core.HandleWinrtType<Microso
     }
 }
 
+// Microsoft.UI.Xaml.Media.CompositionTarget (synthetic:Microsoft_UI_Xaml_Media_CompositionTarget)
+public class Microsoft_UI_Xaml_Media_CompositionTarget <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Media_CompositionTarget {
+        Microsoft_UI_Xaml_Media_CompositionTarget(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Media_CompositionTarget {
+        Microsoft_UI_Xaml_Media_CompositionTarget(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Media_ICompositionTarget.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Media_CompositionTarget> {
+        let ancestors = [Microsoft_UI_Xaml_Media_ICompositionTarget.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Media_CompositionTarget>("CompositionTarget", Microsoft_UI_Xaml_Media_ICompositionTarget.iid(), ancestors, { raw => Microsoft_UI_Xaml_Media_CompositionTarget.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Media_CompositionTarget.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Media_ICompositionTarget {
+        match (unsafe { query(Microsoft_UI_Xaml_Media_ICompositionTarget.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICompositionTarget(): Microsoft_UI_Xaml_Media_ICompositionTarget {
+        defaultInterface()
+    }
+
+    public static func Rendering(handler: Windows_Foundation_EventHandler_1<windows_interface.IInspectable>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_EventHandler_1<windows_interface.IInspectable>>(handler)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Media_CompositionTarget, Microsoft_UI_Xaml_Media_ICompositionTargetStatics>().unwrap()) {
+                hr__ = unsafe { factory__.Rendering(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func RemoveRendering(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Media_CompositionTarget, Microsoft_UI_Xaml_Media_ICompositionTargetStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RemoveRendering(token) }
+        }
+        hr__.check()
+    }
+
+    public static func Rendered(handler: Windows_Foundation_EventHandler_1<Microsoft_UI_Xaml_Media_RenderedEventArgs>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_EventHandler_1<Microsoft_UI_Xaml_Media_RenderedEventArgs>>(handler)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Media_CompositionTarget, Microsoft_UI_Xaml_Media_ICompositionTargetStatics>().unwrap()) {
+                hr__ = unsafe { factory__.Rendered(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func RemoveRendered(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Media_CompositionTarget, Microsoft_UI_Xaml_Media_ICompositionTargetStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RemoveRendered(token) }
+        }
+        hr__.check()
+    }
+
+    public static func SurfaceContentsLost(handler: Windows_Foundation_EventHandler_1<windows_interface.IInspectable>): Windows_Foundation_EventRegistrationToken {
+        var result__ = 0i64
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation_EventHandler_1<windows_interface.IInspectable>>(handler)) {
+            try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Media_CompositionTarget, Microsoft_UI_Xaml_Media_ICompositionTargetStatics>().unwrap()) {
+                hr__ = unsafe { factory__.SurfaceContentsLost(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
+            }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func RemoveSurfaceContentsLost(token: Windows_Foundation_EventRegistrationToken): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Media_CompositionTarget, Microsoft_UI_Xaml_Media_ICompositionTargetStatics>().unwrap()) {
+            hr__ = unsafe { factory__.RemoveSurfaceContentsLost(token) }
+        }
+        hr__.check()
+    }
+
+    public static func GetCompositorForCurrentThread(): Microsoft_UI_Composition_Compositor {
+        var result__ = CPointer<Unit>()
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Microsoft_UI_Xaml_Media_CompositionTarget, Microsoft_UI_Xaml_Media_ICompositionTargetStatics>().unwrap()) {
+            hr__ = unsafe { factory__.GetCompositorForCurrentThread(CPointer<CPointer<Unit>>(inout result__)) }
+        }
+        if (hr__.failed() && result__.isNotNull()) {
+            windows_core.winrtReleaseGenericOut<Microsoft_UI_Composition_Compositor>(result__)
+            result__ = CPointer<Unit>()
+        }
+        hr__.check()
+        return Microsoft_UI_Composition_Compositor.fromAbiTakeWinrtHandle(result__)
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.CompositionTarget"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.CompositionTarget;{" + Microsoft_UI_Xaml_Media_ICompositionTarget.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.CompositionTarget", Microsoft_UI_Xaml_Media_CompositionTarget.signature(), Microsoft_UI_Xaml_Media_ICompositionTarget.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Media_CompositionTarget <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_CompositionTarget> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_CompositionTarget): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Media_CompositionTarget {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Media_CompositionTarget.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Media_CompositionTarget {
+        Microsoft_UI_Xaml_Media_CompositionTarget.viewOf(raw)
+    }
+}
+
 // Microsoft.UI.Xaml.Media.DoubleCollection (synthetic:Microsoft_UI_Xaml_Media_DoubleCollection)
 public class Microsoft_UI_Xaml_Media_DoubleCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
@@ -4251,6 +6357,23 @@ public interface Microsoft_UI_Xaml_Media_ICacheModeFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
+// Microsoft.UI.Xaml.Media.ICompositionTarget (synthetic:Microsoft_UI_Xaml_Media_ICompositionTarget)
+@Interface["7d938324-e3ad-597c-93f6-520725410e68", "Microsoft.UI.Xaml.Media.ICompositionTarget"]
+public interface Microsoft_UI_Xaml_Media_ICompositionTarget <: IInspectable {
+}
+
+// Microsoft.UI.Xaml.Media.ICompositionTargetStatics (synthetic:Microsoft_UI_Xaml_Media_ICompositionTargetStatics)
+@Interface["12a4be6f-6db1-5165-b622-d57ab782745b", "Microsoft.UI.Xaml.Media.ICompositionTargetStatics", "GetCompositorForCurrentThread.result=Com"]
+public interface Microsoft_UI_Xaml_Media_ICompositionTargetStatics <: IInspectable {
+    func Rendering(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveRendering(token: Int64): Int32
+    func Rendered(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveRendered(token: Int64): Int32
+    func SurfaceContentsLost(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
+    func RemoveSurfaceContentsLost(token: Int64): Int32
+    func GetCompositorForCurrentThread(result: CPointer<CPointer<Unit>>): Int32
+}
+
 // Microsoft.UI.Xaml.Media.IFontFamily (synthetic:Microsoft_UI_Xaml_Media_IFontFamily)
 @Interface["18fa5bc1-7294-527c-bb02-b213e0b3a2a3", "Microsoft.UI.Xaml.Media.IFontFamily", "Source.value=HString"]
 public interface Microsoft_UI_Xaml_Media_IFontFamily <: IInspectable {
@@ -4362,6 +6485,12 @@ public interface Microsoft_UI_Xaml_Media_IRectangleGeometry <: IInspectable {
 @Interface["1ae7ac26-8a8b-55a5-b035-586e2b642919", "Microsoft.UI.Xaml.Media.IRectangleGeometryStatics", "RectProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IRectangleGeometryStatics <: IInspectable {
     func RectProperty(value: CPointer<CPointer<Unit>>): Int32
+}
+
+// Microsoft.UI.Xaml.Media.IRenderedEventArgs (synthetic:Microsoft_UI_Xaml_Media_IRenderedEventArgs)
+@Interface["b268b885-118d-5b66-8099-3b6bb8644726", "Microsoft.UI.Xaml.Media.IRenderedEventArgs"]
+public interface Microsoft_UI_Xaml_Media_IRenderedEventArgs <: IInspectable {
+    func FrameDuration(value: CPointer<Windows_Foundation_TimeSpan>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.IShadow (synthetic:Microsoft_UI_Xaml_Media_IShadow)
@@ -6197,6 +8326,94 @@ extend Microsoft_UI_Xaml_Media_RectangleGeometry <: windows_core.HandleWinrtType
 
     public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Media_RectangleGeometry {
         Microsoft_UI_Xaml_Media_RectangleGeometry.viewOf(raw)
+    }
+}
+
+// Microsoft.UI.Xaml.Media.RenderedEventArgs (synthetic:Microsoft_UI_Xaml_Media_RenderedEventArgs)
+public class Microsoft_UI_Xaml_Media_RenderedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Microsoft_UI_Xaml_Media_RenderedEventArgs {
+        Microsoft_UI_Xaml_Media_RenderedEventArgs(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Microsoft_UI_Xaml_Media_RenderedEventArgs {
+        Microsoft_UI_Xaml_Media_RenderedEventArgs(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Microsoft_UI_Xaml_Media_IRenderedEventArgs.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Media_RenderedEventArgs> {
+        let ancestors = [Microsoft_UI_Xaml_Media_IRenderedEventArgs.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Microsoft_UI_Xaml_Media_RenderedEventArgs>("RenderedEventArgs", Microsoft_UI_Xaml_Media_IRenderedEventArgs.iid(), ancestors, { raw => Microsoft_UI_Xaml_Media_RenderedEventArgs.fromAbiTake(raw) }, { raw => Microsoft_UI_Xaml_Media_RenderedEventArgs.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Microsoft_UI_Xaml_Media_IRenderedEventArgs {
+        match (unsafe { query(Microsoft_UI_Xaml_Media_IRenderedEventArgs.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIRenderedEventArgs(): Microsoft_UI_Xaml_Media_IRenderedEventArgs {
+        defaultInterface()
+    }
+
+    public prop FrameDuration: Windows_Foundation_TimeSpan {
+        get() {
+            var result__ = Windows_Foundation_TimeSpan()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.FrameDuration(CPointer<Windows_Foundation_TimeSpan>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Microsoft.UI.Xaml.Media.RenderedEventArgs"
+    }
+
+    public static func signature(): String {
+        return "rc(Microsoft.UI.Xaml.Media.RenderedEventArgs;{" + Microsoft_UI_Xaml_Media_IRenderedEventArgs.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Microsoft.UI.Xaml.Media.RenderedEventArgs", Microsoft_UI_Xaml_Media_RenderedEventArgs.signature(), Microsoft_UI_Xaml_Media_IRenderedEventArgs.iid())
+    }
+}
+
+extend Microsoft_UI_Xaml_Media_RenderedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_RenderedEventArgs> {
+    public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_RenderedEventArgs): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Media_RenderedEventArgs {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Microsoft_UI_Xaml_Media_RenderedEventArgs.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Microsoft_UI_Xaml_Media_RenderedEventArgs {
+        Microsoft_UI_Xaml_Media_RenderedEventArgs.viewOf(raw)
     }
 }
 
@@ -36585,2402 +38802,4 @@ public struct Windows_UI_Color {
     public var R: UInt8 = 0u8
     public var G: UInt8 = 0u8
     public var B: UInt8 = 0u8
-}
-
-// Windows.UI.Composition.AmbientLight (synthetic:Windows_UI_Composition_AmbientLight)
-public class Windows_UI_Composition_AmbientLight <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_AmbientLight {
-        Windows_UI_Composition_AmbientLight(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_AmbientLight {
-        Windows_UI_Composition_AmbientLight(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Windows_UI_Composition_IAmbientLight.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_AmbientLight> {
-        let ancestors = [Windows_UI_Composition_IAmbientLight.iid(), Windows_UI_Composition_IAmbientLight2.iid(), Windows_UI_Composition_ICompositionLight.iid(), Windows_UI_Composition_ICompositionLight2.iid(), Windows_UI_Composition_ICompositionLight3.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_AmbientLight>("AmbientLight", Windows_UI_Composition_IAmbientLight.iid(), ancestors, { raw => Windows_UI_Composition_AmbientLight.fromAbiTake(raw) }, { raw => Windows_UI_Composition_AmbientLight.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Windows_UI_Composition_IAmbientLight {
-        match (unsafe { query(Windows_UI_Composition_IAmbientLight.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIAmbientLight(): Windows_UI_Composition_IAmbientLight {
-        defaultInterface()
-    }
-
-    public func asIAmbientLight2(): Windows_UI_Composition_IAmbientLight2 {
-        match (unsafe { query<Windows_UI_Composition_IAmbientLight2>(Windows_UI_Composition_IAmbientLight2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionLight(): Windows_UI_Composition_ICompositionLight {
-        match (unsafe { query<Windows_UI_Composition_ICompositionLight>(Windows_UI_Composition_ICompositionLight.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionLight2(): Windows_UI_Composition_ICompositionLight2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionLight2>(Windows_UI_Composition_ICompositionLight2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionLight3(): Windows_UI_Composition_ICompositionLight3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionLight3>(Windows_UI_Composition_ICompositionLight3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIClosable(): Windows_Foundation_IClosable {
-        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
-        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public mut prop Color: Windows_UI_Color {
-        get() {
-            var result__ = Windows_UI_Color()
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Color(CPointer<Windows_UI_Color>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetColor(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Windows.UI.Composition.AmbientLight"
-    }
-
-    public static func signature(): String {
-        return "rc(Windows.UI.Composition.AmbientLight;{" + Windows_UI_Composition_IAmbientLight.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Windows.UI.Composition.AmbientLight", Windows_UI_Composition_AmbientLight.signature(), Windows_UI_Composition_IAmbientLight.iid())
-    }
-}
-
-extend Windows_UI_Composition_AmbientLight <: windows_core.HandleWinrtType<Windows_UI_Composition_AmbientLight> {
-    public static func intoWinrtHandle(value: Windows_UI_Composition_AmbientLight): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_AmbientLight {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_UI_Composition_AmbientLight.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_AmbientLight {
-        Windows_UI_Composition_AmbientLight.viewOf(raw)
-    }
-}
-
-// Windows.UI.Composition.AnimationController (synthetic:Windows_UI_Composition_AnimationController)
-public class Windows_UI_Composition_AnimationController <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_AnimationController {
-        Windows_UI_Composition_AnimationController(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_AnimationController {
-        Windows_UI_Composition_AnimationController(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Windows_UI_Composition_IAnimationController.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_AnimationController> {
-        let ancestors = [Windows_UI_Composition_IAnimationController.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_AnimationController>("AnimationController", Windows_UI_Composition_IAnimationController.iid(), ancestors, { raw => Windows_UI_Composition_AnimationController.fromAbiTake(raw) }, { raw => Windows_UI_Composition_AnimationController.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Windows_UI_Composition_IAnimationController {
-        match (unsafe { query(Windows_UI_Composition_IAnimationController.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIAnimationController(): Windows_UI_Composition_IAnimationController {
-        defaultInterface()
-    }
-
-    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIClosable(): Windows_Foundation_IClosable {
-        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
-        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public mut prop PlaybackRate: Float32 {
-        get() {
-            var result__ = 0.0f32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.PlaybackRate(CPointer<Float32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetPlaybackRate(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop Progress: Float32 {
-        get() {
-            var result__ = 0.0f32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Progress(CPointer<Float32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetProgress(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop ProgressBehavior: Windows_UI_Composition_AnimationControllerProgressBehavior {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ProgressBehavior(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Windows_UI_Composition_AnimationControllerProgressBehavior(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetProgressBehavior(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public func Pause(): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.Pause() }
-        }
-        hr__.check()
-    }
-
-    public func Resume(): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.Resume() }
-        }
-        hr__.check()
-    }
-
-    public static func MaxPlaybackRate(): Float32 {
-        var result__ = 0.0f32
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Windows_UI_Composition_AnimationController, Windows_UI_Composition_IAnimationControllerStatics>().unwrap()) {
-            hr__ = unsafe { factory__.MaxPlaybackRate(CPointer<Float32>(inout result__)) }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public static func MinPlaybackRate(): Float32 {
-        var result__ = 0.0f32
-        var hr__ = windows_core.E_POINTER
-        try (factory__ = windows_core.factory<Windows_UI_Composition_AnimationController, Windows_UI_Composition_IAnimationControllerStatics>().unwrap()) {
-            hr__ = unsafe { factory__.MinPlaybackRate(CPointer<Float32>(inout result__)) }
-        }
-        hr__.check()
-        return result__
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Windows.UI.Composition.AnimationController"
-    }
-
-    public static func signature(): String {
-        return "rc(Windows.UI.Composition.AnimationController;{" + Windows_UI_Composition_IAnimationController.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Windows.UI.Composition.AnimationController", Windows_UI_Composition_AnimationController.signature(), Windows_UI_Composition_IAnimationController.iid())
-    }
-}
-
-extend Windows_UI_Composition_AnimationController <: windows_core.HandleWinrtType<Windows_UI_Composition_AnimationController> {
-    public static func intoWinrtHandle(value: Windows_UI_Composition_AnimationController): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_AnimationController {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_UI_Composition_AnimationController.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_AnimationController {
-        Windows_UI_Composition_AnimationController.viewOf(raw)
-    }
-}
-
-// Windows.UI.Composition.AnimationControllerProgressBehavior (synthetic:Windows_UI_Composition_AnimationControllerProgressBehavior)
-public struct Windows_UI_Composition_AnimationControllerProgressBehavior {
-    public let value: Int32
-    public init() {
-        this.value = 0
-    }
-    public init(value: Int32) {
-        this.value = value
-    }
-}
-public let Windows_UI_Composition_AnimationControllerProgressBehavior_Default = Windows_UI_Composition_AnimationControllerProgressBehavior(0)
-public let Windows_UI_Composition_AnimationControllerProgressBehavior_IncludesDelayTime = Windows_UI_Composition_AnimationControllerProgressBehavior(1)
-
-// Windows.UI.Composition.AnimationDelayBehavior (synthetic:Windows_UI_Composition_AnimationDelayBehavior)
-public struct Windows_UI_Composition_AnimationDelayBehavior {
-    public let value: Int32
-    public init() {
-        this.value = 0
-    }
-    public init(value: Int32) {
-        this.value = value
-    }
-}
-public let Windows_UI_Composition_AnimationDelayBehavior_SetInitialValueAfterDelay = Windows_UI_Composition_AnimationDelayBehavior(0)
-public let Windows_UI_Composition_AnimationDelayBehavior_SetInitialValueBeforeDelay = Windows_UI_Composition_AnimationDelayBehavior(1)
-
-// Windows.UI.Composition.AnimationDirection (synthetic:Windows_UI_Composition_AnimationDirection)
-public struct Windows_UI_Composition_AnimationDirection {
-    public let value: Int32
-    public init() {
-        this.value = 0
-    }
-    public init(value: Int32) {
-        this.value = value
-    }
-}
-public let Windows_UI_Composition_AnimationDirection_Normal = Windows_UI_Composition_AnimationDirection(0)
-public let Windows_UI_Composition_AnimationDirection_Reverse = Windows_UI_Composition_AnimationDirection(1)
-public let Windows_UI_Composition_AnimationDirection_Alternate = Windows_UI_Composition_AnimationDirection(2)
-public let Windows_UI_Composition_AnimationDirection_AlternateReverse = Windows_UI_Composition_AnimationDirection(3)
-
-// Windows.UI.Composition.AnimationIterationBehavior (synthetic:Windows_UI_Composition_AnimationIterationBehavior)
-public struct Windows_UI_Composition_AnimationIterationBehavior {
-    public let value: Int32
-    public init() {
-        this.value = 0
-    }
-    public init(value: Int32) {
-        this.value = value
-    }
-}
-public let Windows_UI_Composition_AnimationIterationBehavior_Count = Windows_UI_Composition_AnimationIterationBehavior(0)
-public let Windows_UI_Composition_AnimationIterationBehavior_Forever = Windows_UI_Composition_AnimationIterationBehavior(1)
-
-// Windows.UI.Composition.AnimationPropertyAccessMode (synthetic:Windows_UI_Composition_AnimationPropertyAccessMode)
-public struct Windows_UI_Composition_AnimationPropertyAccessMode {
-    public let value: Int32
-    public init() {
-        this.value = 0
-    }
-    public init(value: Int32) {
-        this.value = value
-    }
-}
-public let Windows_UI_Composition_AnimationPropertyAccessMode_None = Windows_UI_Composition_AnimationPropertyAccessMode(0)
-public let Windows_UI_Composition_AnimationPropertyAccessMode_ReadOnly = Windows_UI_Composition_AnimationPropertyAccessMode(1)
-public let Windows_UI_Composition_AnimationPropertyAccessMode_WriteOnly = Windows_UI_Composition_AnimationPropertyAccessMode(2)
-public let Windows_UI_Composition_AnimationPropertyAccessMode_ReadWrite = Windows_UI_Composition_AnimationPropertyAccessMode(3)
-
-// Windows.UI.Composition.AnimationPropertyInfo (synthetic:Windows_UI_Composition_AnimationPropertyInfo)
-public class Windows_UI_Composition_AnimationPropertyInfo <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_AnimationPropertyInfo {
-        Windows_UI_Composition_AnimationPropertyInfo(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_AnimationPropertyInfo {
-        Windows_UI_Composition_AnimationPropertyInfo(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Windows_UI_Composition_IAnimationPropertyInfo.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_AnimationPropertyInfo> {
-        let ancestors = [Windows_UI_Composition_IAnimationPropertyInfo.iid(), Windows_UI_Composition_IAnimationPropertyInfo2.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_AnimationPropertyInfo>("AnimationPropertyInfo", Windows_UI_Composition_IAnimationPropertyInfo.iid(), ancestors, { raw => Windows_UI_Composition_AnimationPropertyInfo.fromAbiTake(raw) }, { raw => Windows_UI_Composition_AnimationPropertyInfo.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Windows_UI_Composition_IAnimationPropertyInfo {
-        match (unsafe { query(Windows_UI_Composition_IAnimationPropertyInfo.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIAnimationPropertyInfo(): Windows_UI_Composition_IAnimationPropertyInfo {
-        defaultInterface()
-    }
-
-    public func asIAnimationPropertyInfo2(): Windows_UI_Composition_IAnimationPropertyInfo2 {
-        match (unsafe { query<Windows_UI_Composition_IAnimationPropertyInfo2>(Windows_UI_Composition_IAnimationPropertyInfo2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIClosable(): Windows_Foundation_IClosable {
-        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
-        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public mut prop AccessMode: Windows_UI_Composition_AnimationPropertyAccessMode {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.AccessMode(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Windows_UI_Composition_AnimationPropertyAccessMode(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetAccessMode(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Windows.UI.Composition.AnimationPropertyInfo"
-    }
-
-    public static func signature(): String {
-        return "rc(Windows.UI.Composition.AnimationPropertyInfo;{" + Windows_UI_Composition_IAnimationPropertyInfo.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Windows.UI.Composition.AnimationPropertyInfo", Windows_UI_Composition_AnimationPropertyInfo.signature(), Windows_UI_Composition_IAnimationPropertyInfo.iid())
-    }
-}
-
-extend Windows_UI_Composition_AnimationPropertyInfo <: windows_core.HandleWinrtType<Windows_UI_Composition_AnimationPropertyInfo> {
-    public static func intoWinrtHandle(value: Windows_UI_Composition_AnimationPropertyInfo): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_AnimationPropertyInfo {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_UI_Composition_AnimationPropertyInfo.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_AnimationPropertyInfo {
-        Windows_UI_Composition_AnimationPropertyInfo.viewOf(raw)
-    }
-}
-
-// Windows.UI.Composition.AnimationStopBehavior (synthetic:Windows_UI_Composition_AnimationStopBehavior)
-public struct Windows_UI_Composition_AnimationStopBehavior {
-    public let value: Int32
-    public init() {
-        this.value = 0
-    }
-    public init(value: Int32) {
-        this.value = value
-    }
-}
-public let Windows_UI_Composition_AnimationStopBehavior_LeaveCurrentValue = Windows_UI_Composition_AnimationStopBehavior(0)
-public let Windows_UI_Composition_AnimationStopBehavior_SetToInitialValue = Windows_UI_Composition_AnimationStopBehavior(1)
-public let Windows_UI_Composition_AnimationStopBehavior_SetToFinalValue = Windows_UI_Composition_AnimationStopBehavior(2)
-
-// Windows.UI.Composition.BackEasingFunction (synthetic:Windows_UI_Composition_BackEasingFunction)
-public class Windows_UI_Composition_BackEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_BackEasingFunction {
-        Windows_UI_Composition_BackEasingFunction(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_BackEasingFunction {
-        Windows_UI_Composition_BackEasingFunction(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Windows_UI_Composition_IBackEasingFunction.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_BackEasingFunction> {
-        let ancestors = [Windows_UI_Composition_IBackEasingFunction.iid(), Windows_UI_Composition_ICompositionEasingFunction.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_BackEasingFunction>("BackEasingFunction", Windows_UI_Composition_IBackEasingFunction.iid(), ancestors, { raw => Windows_UI_Composition_BackEasingFunction.fromAbiTake(raw) }, { raw => Windows_UI_Composition_BackEasingFunction.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Windows_UI_Composition_IBackEasingFunction {
-        match (unsafe { query(Windows_UI_Composition_IBackEasingFunction.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIBackEasingFunction(): Windows_UI_Composition_IBackEasingFunction {
-        defaultInterface()
-    }
-
-    public func asICompositionEasingFunction(): Windows_UI_Composition_ICompositionEasingFunction {
-        match (unsafe { query<Windows_UI_Composition_ICompositionEasingFunction>(Windows_UI_Composition_ICompositionEasingFunction.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIClosable(): Windows_Foundation_IClosable {
-        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
-        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public prop Amplitude: Float32 {
-        get() {
-            var result__ = 0.0f32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Amplitude(CPointer<Float32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-    }
-
-    public prop Mode: Windows_UI_Composition_CompositionEasingFunctionMode {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Mode(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Windows_UI_Composition_CompositionEasingFunctionMode(result__)
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Windows.UI.Composition.BackEasingFunction"
-    }
-
-    public static func signature(): String {
-        return "rc(Windows.UI.Composition.BackEasingFunction;{" + Windows_UI_Composition_IBackEasingFunction.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Windows.UI.Composition.BackEasingFunction", Windows_UI_Composition_BackEasingFunction.signature(), Windows_UI_Composition_IBackEasingFunction.iid())
-    }
-}
-
-extend Windows_UI_Composition_BackEasingFunction <: windows_core.HandleWinrtType<Windows_UI_Composition_BackEasingFunction> {
-    public static func intoWinrtHandle(value: Windows_UI_Composition_BackEasingFunction): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BackEasingFunction {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_UI_Composition_BackEasingFunction.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BackEasingFunction {
-        Windows_UI_Composition_BackEasingFunction.viewOf(raw)
-    }
-}
-
-// Windows.UI.Composition.BooleanKeyFrameAnimation (synthetic:Windows_UI_Composition_BooleanKeyFrameAnimation)
-public class Windows_UI_Composition_BooleanKeyFrameAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_BooleanKeyFrameAnimation {
-        Windows_UI_Composition_BooleanKeyFrameAnimation(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_BooleanKeyFrameAnimation {
-        Windows_UI_Composition_BooleanKeyFrameAnimation(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Windows_UI_Composition_IBooleanKeyFrameAnimation.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_BooleanKeyFrameAnimation> {
-        let ancestors = [Windows_UI_Composition_IBooleanKeyFrameAnimation.iid(), Windows_UI_Composition_IKeyFrameAnimation.iid(), Windows_UI_Composition_IKeyFrameAnimation2.iid(), Windows_UI_Composition_IKeyFrameAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation2.iid(), Windows_UI_Composition_ICompositionAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation4.iid(), Windows_UI_Composition_ICompositionAnimationBase.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_BooleanKeyFrameAnimation>("BooleanKeyFrameAnimation", Windows_UI_Composition_IBooleanKeyFrameAnimation.iid(), ancestors, { raw => Windows_UI_Composition_BooleanKeyFrameAnimation.fromAbiTake(raw) }, { raw => Windows_UI_Composition_BooleanKeyFrameAnimation.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Windows_UI_Composition_IBooleanKeyFrameAnimation {
-        match (unsafe { query(Windows_UI_Composition_IBooleanKeyFrameAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIBooleanKeyFrameAnimation(): Windows_UI_Composition_IBooleanKeyFrameAnimation {
-        defaultInterface()
-    }
-
-    public func asIKeyFrameAnimation(): Windows_UI_Composition_IKeyFrameAnimation {
-        match (unsafe { query<Windows_UI_Composition_IKeyFrameAnimation>(Windows_UI_Composition_IKeyFrameAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIKeyFrameAnimation2(): Windows_UI_Composition_IKeyFrameAnimation2 {
-        match (unsafe { query<Windows_UI_Composition_IKeyFrameAnimation2>(Windows_UI_Composition_IKeyFrameAnimation2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIKeyFrameAnimation3(): Windows_UI_Composition_IKeyFrameAnimation3 {
-        match (unsafe { query<Windows_UI_Composition_IKeyFrameAnimation3>(Windows_UI_Composition_IKeyFrameAnimation3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation(): Windows_UI_Composition_ICompositionAnimation {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation>(Windows_UI_Composition_ICompositionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation2(): Windows_UI_Composition_ICompositionAnimation2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation2>(Windows_UI_Composition_ICompositionAnimation2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation3(): Windows_UI_Composition_ICompositionAnimation3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation3>(Windows_UI_Composition_ICompositionAnimation3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation4(): Windows_UI_Composition_ICompositionAnimation4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation4>(Windows_UI_Composition_ICompositionAnimation4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimationBase(): Windows_UI_Composition_ICompositionAnimationBase {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimationBase>(Windows_UI_Composition_ICompositionAnimationBase.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIClosable(): Windows_Foundation_IClosable {
-        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
-        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func InsertKeyFrame(normalizedProgressKey: Float32, value: Bool): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.InsertKeyFrame(normalizedProgressKey, value) }
-        }
-        hr__.check()
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Windows.UI.Composition.BooleanKeyFrameAnimation"
-    }
-
-    public static func signature(): String {
-        return "rc(Windows.UI.Composition.BooleanKeyFrameAnimation;{" + Windows_UI_Composition_IBooleanKeyFrameAnimation.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Windows.UI.Composition.BooleanKeyFrameAnimation", Windows_UI_Composition_BooleanKeyFrameAnimation.signature(), Windows_UI_Composition_IBooleanKeyFrameAnimation.iid())
-    }
-}
-
-extend Windows_UI_Composition_BooleanKeyFrameAnimation <: windows_core.HandleWinrtType<Windows_UI_Composition_BooleanKeyFrameAnimation> {
-    public static func intoWinrtHandle(value: Windows_UI_Composition_BooleanKeyFrameAnimation): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BooleanKeyFrameAnimation {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_UI_Composition_BooleanKeyFrameAnimation.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BooleanKeyFrameAnimation {
-        Windows_UI_Composition_BooleanKeyFrameAnimation.viewOf(raw)
-    }
-}
-
-// Windows.UI.Composition.BounceEasingFunction (synthetic:Windows_UI_Composition_BounceEasingFunction)
-public class Windows_UI_Composition_BounceEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_BounceEasingFunction {
-        Windows_UI_Composition_BounceEasingFunction(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_BounceEasingFunction {
-        Windows_UI_Composition_BounceEasingFunction(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Windows_UI_Composition_IBounceEasingFunction.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceEasingFunction> {
-        let ancestors = [Windows_UI_Composition_IBounceEasingFunction.iid(), Windows_UI_Composition_ICompositionEasingFunction.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceEasingFunction>("BounceEasingFunction", Windows_UI_Composition_IBounceEasingFunction.iid(), ancestors, { raw => Windows_UI_Composition_BounceEasingFunction.fromAbiTake(raw) }, { raw => Windows_UI_Composition_BounceEasingFunction.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Windows_UI_Composition_IBounceEasingFunction {
-        match (unsafe { query(Windows_UI_Composition_IBounceEasingFunction.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIBounceEasingFunction(): Windows_UI_Composition_IBounceEasingFunction {
-        defaultInterface()
-    }
-
-    public func asICompositionEasingFunction(): Windows_UI_Composition_ICompositionEasingFunction {
-        match (unsafe { query<Windows_UI_Composition_ICompositionEasingFunction>(Windows_UI_Composition_ICompositionEasingFunction.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIClosable(): Windows_Foundation_IClosable {
-        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
-        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public prop Bounces: Int32 {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Bounces(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-    }
-
-    public prop Bounciness: Float32 {
-        get() {
-            var result__ = 0.0f32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Bounciness(CPointer<Float32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-    }
-
-    public prop Mode: Windows_UI_Composition_CompositionEasingFunctionMode {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Mode(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Windows_UI_Composition_CompositionEasingFunctionMode(result__)
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Windows.UI.Composition.BounceEasingFunction"
-    }
-
-    public static func signature(): String {
-        return "rc(Windows.UI.Composition.BounceEasingFunction;{" + Windows_UI_Composition_IBounceEasingFunction.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Windows.UI.Composition.BounceEasingFunction", Windows_UI_Composition_BounceEasingFunction.signature(), Windows_UI_Composition_IBounceEasingFunction.iid())
-    }
-}
-
-extend Windows_UI_Composition_BounceEasingFunction <: windows_core.HandleWinrtType<Windows_UI_Composition_BounceEasingFunction> {
-    public static func intoWinrtHandle(value: Windows_UI_Composition_BounceEasingFunction): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceEasingFunction {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_UI_Composition_BounceEasingFunction.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceEasingFunction {
-        Windows_UI_Composition_BounceEasingFunction.viewOf(raw)
-    }
-}
-
-// Windows.UI.Composition.BounceScalarNaturalMotionAnimation (synthetic:Windows_UI_Composition_BounceScalarNaturalMotionAnimation)
-public class Windows_UI_Composition_BounceScalarNaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_BounceScalarNaturalMotionAnimation {
-        Windows_UI_Composition_BounceScalarNaturalMotionAnimation(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_BounceScalarNaturalMotionAnimation {
-        Windows_UI_Composition_BounceScalarNaturalMotionAnimation(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Windows_UI_Composition_IBounceScalarNaturalMotionAnimation.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceScalarNaturalMotionAnimation> {
-        let ancestors = [Windows_UI_Composition_IBounceScalarNaturalMotionAnimation.iid(), Windows_UI_Composition_IScalarNaturalMotionAnimation.iid(), Windows_UI_Composition_INaturalMotionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation2.iid(), Windows_UI_Composition_ICompositionAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation4.iid(), Windows_UI_Composition_ICompositionAnimationBase.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceScalarNaturalMotionAnimation>("BounceScalarNaturalMotionAnimation", Windows_UI_Composition_IBounceScalarNaturalMotionAnimation.iid(), ancestors, { raw => Windows_UI_Composition_BounceScalarNaturalMotionAnimation.fromAbiTake(raw) }, { raw => Windows_UI_Composition_BounceScalarNaturalMotionAnimation.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Windows_UI_Composition_IBounceScalarNaturalMotionAnimation {
-        match (unsafe { query(Windows_UI_Composition_IBounceScalarNaturalMotionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIBounceScalarNaturalMotionAnimation(): Windows_UI_Composition_IBounceScalarNaturalMotionAnimation {
-        defaultInterface()
-    }
-
-    public func asIScalarNaturalMotionAnimation(): Windows_UI_Composition_IScalarNaturalMotionAnimation {
-        match (unsafe { query<Windows_UI_Composition_IScalarNaturalMotionAnimation>(Windows_UI_Composition_IScalarNaturalMotionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asINaturalMotionAnimation(): Windows_UI_Composition_INaturalMotionAnimation {
-        match (unsafe { query<Windows_UI_Composition_INaturalMotionAnimation>(Windows_UI_Composition_INaturalMotionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation(): Windows_UI_Composition_ICompositionAnimation {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation>(Windows_UI_Composition_ICompositionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation2(): Windows_UI_Composition_ICompositionAnimation2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation2>(Windows_UI_Composition_ICompositionAnimation2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation3(): Windows_UI_Composition_ICompositionAnimation3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation3>(Windows_UI_Composition_ICompositionAnimation3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation4(): Windows_UI_Composition_ICompositionAnimation4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation4>(Windows_UI_Composition_ICompositionAnimation4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimationBase(): Windows_UI_Composition_ICompositionAnimationBase {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimationBase>(Windows_UI_Composition_ICompositionAnimationBase.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIClosable(): Windows_Foundation_IClosable {
-        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
-        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public mut prop Acceleration: Float32 {
-        get() {
-            var result__ = 0.0f32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Acceleration(CPointer<Float32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetAcceleration(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop Restitution: Float32 {
-        get() {
-            var result__ = 0.0f32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Restitution(CPointer<Float32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetRestitution(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Windows.UI.Composition.BounceScalarNaturalMotionAnimation"
-    }
-
-    public static func signature(): String {
-        return "rc(Windows.UI.Composition.BounceScalarNaturalMotionAnimation;{" + Windows_UI_Composition_IBounceScalarNaturalMotionAnimation.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Windows.UI.Composition.BounceScalarNaturalMotionAnimation", Windows_UI_Composition_BounceScalarNaturalMotionAnimation.signature(), Windows_UI_Composition_IBounceScalarNaturalMotionAnimation.iid())
-    }
-}
-
-extend Windows_UI_Composition_BounceScalarNaturalMotionAnimation <: windows_core.HandleWinrtType<Windows_UI_Composition_BounceScalarNaturalMotionAnimation> {
-    public static func intoWinrtHandle(value: Windows_UI_Composition_BounceScalarNaturalMotionAnimation): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceScalarNaturalMotionAnimation {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_UI_Composition_BounceScalarNaturalMotionAnimation.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceScalarNaturalMotionAnimation {
-        Windows_UI_Composition_BounceScalarNaturalMotionAnimation.viewOf(raw)
-    }
-}
-
-// Windows.UI.Composition.BounceVector2NaturalMotionAnimation (synthetic:Windows_UI_Composition_BounceVector2NaturalMotionAnimation)
-public class Windows_UI_Composition_BounceVector2NaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector2NaturalMotionAnimation {
-        Windows_UI_Composition_BounceVector2NaturalMotionAnimation(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector2NaturalMotionAnimation {
-        Windows_UI_Composition_BounceVector2NaturalMotionAnimation(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Windows_UI_Composition_IBounceVector2NaturalMotionAnimation.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceVector2NaturalMotionAnimation> {
-        let ancestors = [Windows_UI_Composition_IBounceVector2NaturalMotionAnimation.iid(), Windows_UI_Composition_IVector2NaturalMotionAnimation.iid(), Windows_UI_Composition_INaturalMotionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation2.iid(), Windows_UI_Composition_ICompositionAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation4.iid(), Windows_UI_Composition_ICompositionAnimationBase.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceVector2NaturalMotionAnimation>("BounceVector2NaturalMotionAnimation", Windows_UI_Composition_IBounceVector2NaturalMotionAnimation.iid(), ancestors, { raw => Windows_UI_Composition_BounceVector2NaturalMotionAnimation.fromAbiTake(raw) }, { raw => Windows_UI_Composition_BounceVector2NaturalMotionAnimation.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Windows_UI_Composition_IBounceVector2NaturalMotionAnimation {
-        match (unsafe { query(Windows_UI_Composition_IBounceVector2NaturalMotionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIBounceVector2NaturalMotionAnimation(): Windows_UI_Composition_IBounceVector2NaturalMotionAnimation {
-        defaultInterface()
-    }
-
-    public func asIVector2NaturalMotionAnimation(): Windows_UI_Composition_IVector2NaturalMotionAnimation {
-        match (unsafe { query<Windows_UI_Composition_IVector2NaturalMotionAnimation>(Windows_UI_Composition_IVector2NaturalMotionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asINaturalMotionAnimation(): Windows_UI_Composition_INaturalMotionAnimation {
-        match (unsafe { query<Windows_UI_Composition_INaturalMotionAnimation>(Windows_UI_Composition_INaturalMotionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation(): Windows_UI_Composition_ICompositionAnimation {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation>(Windows_UI_Composition_ICompositionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation2(): Windows_UI_Composition_ICompositionAnimation2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation2>(Windows_UI_Composition_ICompositionAnimation2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation3(): Windows_UI_Composition_ICompositionAnimation3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation3>(Windows_UI_Composition_ICompositionAnimation3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation4(): Windows_UI_Composition_ICompositionAnimation4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation4>(Windows_UI_Composition_ICompositionAnimation4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimationBase(): Windows_UI_Composition_ICompositionAnimationBase {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimationBase>(Windows_UI_Composition_ICompositionAnimationBase.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIClosable(): Windows_Foundation_IClosable {
-        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
-        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public mut prop Acceleration: Float32 {
-        get() {
-            var result__ = 0.0f32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Acceleration(CPointer<Float32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetAcceleration(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop Restitution: Float32 {
-        get() {
-            var result__ = 0.0f32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Restitution(CPointer<Float32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetRestitution(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Windows.UI.Composition.BounceVector2NaturalMotionAnimation"
-    }
-
-    public static func signature(): String {
-        return "rc(Windows.UI.Composition.BounceVector2NaturalMotionAnimation;{" + Windows_UI_Composition_IBounceVector2NaturalMotionAnimation.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Windows.UI.Composition.BounceVector2NaturalMotionAnimation", Windows_UI_Composition_BounceVector2NaturalMotionAnimation.signature(), Windows_UI_Composition_IBounceVector2NaturalMotionAnimation.iid())
-    }
-}
-
-extend Windows_UI_Composition_BounceVector2NaturalMotionAnimation <: windows_core.HandleWinrtType<Windows_UI_Composition_BounceVector2NaturalMotionAnimation> {
-    public static func intoWinrtHandle(value: Windows_UI_Composition_BounceVector2NaturalMotionAnimation): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector2NaturalMotionAnimation {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_UI_Composition_BounceVector2NaturalMotionAnimation.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector2NaturalMotionAnimation {
-        Windows_UI_Composition_BounceVector2NaturalMotionAnimation.viewOf(raw)
-    }
-}
-
-// Windows.UI.Composition.BounceVector3NaturalMotionAnimation (synthetic:Windows_UI_Composition_BounceVector3NaturalMotionAnimation)
-public class Windows_UI_Composition_BounceVector3NaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector3NaturalMotionAnimation {
-        Windows_UI_Composition_BounceVector3NaturalMotionAnimation(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector3NaturalMotionAnimation {
-        Windows_UI_Composition_BounceVector3NaturalMotionAnimation(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Windows_UI_Composition_IBounceVector3NaturalMotionAnimation.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceVector3NaturalMotionAnimation> {
-        let ancestors = [Windows_UI_Composition_IBounceVector3NaturalMotionAnimation.iid(), Windows_UI_Composition_IVector3NaturalMotionAnimation.iid(), Windows_UI_Composition_INaturalMotionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation2.iid(), Windows_UI_Composition_ICompositionAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation4.iid(), Windows_UI_Composition_ICompositionAnimationBase.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceVector3NaturalMotionAnimation>("BounceVector3NaturalMotionAnimation", Windows_UI_Composition_IBounceVector3NaturalMotionAnimation.iid(), ancestors, { raw => Windows_UI_Composition_BounceVector3NaturalMotionAnimation.fromAbiTake(raw) }, { raw => Windows_UI_Composition_BounceVector3NaturalMotionAnimation.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Windows_UI_Composition_IBounceVector3NaturalMotionAnimation {
-        match (unsafe { query(Windows_UI_Composition_IBounceVector3NaturalMotionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIBounceVector3NaturalMotionAnimation(): Windows_UI_Composition_IBounceVector3NaturalMotionAnimation {
-        defaultInterface()
-    }
-
-    public func asIVector3NaturalMotionAnimation(): Windows_UI_Composition_IVector3NaturalMotionAnimation {
-        match (unsafe { query<Windows_UI_Composition_IVector3NaturalMotionAnimation>(Windows_UI_Composition_IVector3NaturalMotionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asINaturalMotionAnimation(): Windows_UI_Composition_INaturalMotionAnimation {
-        match (unsafe { query<Windows_UI_Composition_INaturalMotionAnimation>(Windows_UI_Composition_INaturalMotionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation(): Windows_UI_Composition_ICompositionAnimation {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation>(Windows_UI_Composition_ICompositionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation2(): Windows_UI_Composition_ICompositionAnimation2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation2>(Windows_UI_Composition_ICompositionAnimation2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation3(): Windows_UI_Composition_ICompositionAnimation3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation3>(Windows_UI_Composition_ICompositionAnimation3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation4(): Windows_UI_Composition_ICompositionAnimation4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation4>(Windows_UI_Composition_ICompositionAnimation4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimationBase(): Windows_UI_Composition_ICompositionAnimationBase {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimationBase>(Windows_UI_Composition_ICompositionAnimationBase.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIClosable(): Windows_Foundation_IClosable {
-        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
-        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public mut prop Acceleration: Float32 {
-        get() {
-            var result__ = 0.0f32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Acceleration(CPointer<Float32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetAcceleration(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public mut prop Restitution: Float32 {
-        get() {
-            var result__ = 0.0f32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Restitution(CPointer<Float32>(inout result__)) }
-            }
-            hr__.check()
-            return result__
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetRestitution(value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Windows.UI.Composition.BounceVector3NaturalMotionAnimation"
-    }
-
-    public static func signature(): String {
-        return "rc(Windows.UI.Composition.BounceVector3NaturalMotionAnimation;{" + Windows_UI_Composition_IBounceVector3NaturalMotionAnimation.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Windows.UI.Composition.BounceVector3NaturalMotionAnimation", Windows_UI_Composition_BounceVector3NaturalMotionAnimation.signature(), Windows_UI_Composition_IBounceVector3NaturalMotionAnimation.iid())
-    }
-}
-
-extend Windows_UI_Composition_BounceVector3NaturalMotionAnimation <: windows_core.HandleWinrtType<Windows_UI_Composition_BounceVector3NaturalMotionAnimation> {
-    public static func intoWinrtHandle(value: Windows_UI_Composition_BounceVector3NaturalMotionAnimation): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector3NaturalMotionAnimation {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_UI_Composition_BounceVector3NaturalMotionAnimation.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector3NaturalMotionAnimation {
-        Windows_UI_Composition_BounceVector3NaturalMotionAnimation.viewOf(raw)
-    }
-}
-
-// Windows.UI.Composition.CircleEasingFunction (synthetic:Windows_UI_Composition_CircleEasingFunction)
-public class Windows_UI_Composition_CircleEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_CircleEasingFunction {
-        Windows_UI_Composition_CircleEasingFunction(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_CircleEasingFunction {
-        Windows_UI_Composition_CircleEasingFunction(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Windows_UI_Composition_ICircleEasingFunction.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_CircleEasingFunction> {
-        let ancestors = [Windows_UI_Composition_ICircleEasingFunction.iid(), Windows_UI_Composition_ICompositionEasingFunction.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_CircleEasingFunction>("CircleEasingFunction", Windows_UI_Composition_ICircleEasingFunction.iid(), ancestors, { raw => Windows_UI_Composition_CircleEasingFunction.fromAbiTake(raw) }, { raw => Windows_UI_Composition_CircleEasingFunction.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Windows_UI_Composition_ICircleEasingFunction {
-        match (unsafe { query(Windows_UI_Composition_ICircleEasingFunction.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asICircleEasingFunction(): Windows_UI_Composition_ICircleEasingFunction {
-        defaultInterface()
-    }
-
-    public func asICompositionEasingFunction(): Windows_UI_Composition_ICompositionEasingFunction {
-        match (unsafe { query<Windows_UI_Composition_ICompositionEasingFunction>(Windows_UI_Composition_ICompositionEasingFunction.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIClosable(): Windows_Foundation_IClosable {
-        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
-        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public prop Mode: Windows_UI_Composition_CompositionEasingFunctionMode {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.Mode(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Windows_UI_Composition_CompositionEasingFunctionMode(result__)
-        }
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Windows.UI.Composition.CircleEasingFunction"
-    }
-
-    public static func signature(): String {
-        return "rc(Windows.UI.Composition.CircleEasingFunction;{" + Windows_UI_Composition_ICircleEasingFunction.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Windows.UI.Composition.CircleEasingFunction", Windows_UI_Composition_CircleEasingFunction.signature(), Windows_UI_Composition_ICircleEasingFunction.iid())
-    }
-}
-
-extend Windows_UI_Composition_CircleEasingFunction <: windows_core.HandleWinrtType<Windows_UI_Composition_CircleEasingFunction> {
-    public static func intoWinrtHandle(value: Windows_UI_Composition_CircleEasingFunction): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_CircleEasingFunction {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_UI_Composition_CircleEasingFunction.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_CircleEasingFunction {
-        Windows_UI_Composition_CircleEasingFunction.viewOf(raw)
-    }
-}
-
-// Windows.UI.Composition.ColorKeyFrameAnimation (synthetic:Windows_UI_Composition_ColorKeyFrameAnimation)
-public class Windows_UI_Composition_ColorKeyFrameAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_ColorKeyFrameAnimation {
-        Windows_UI_Composition_ColorKeyFrameAnimation(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_ColorKeyFrameAnimation {
-        Windows_UI_Composition_ColorKeyFrameAnimation(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Windows_UI_Composition_IColorKeyFrameAnimation.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_ColorKeyFrameAnimation> {
-        let ancestors = [Windows_UI_Composition_IColorKeyFrameAnimation.iid(), Windows_UI_Composition_IKeyFrameAnimation.iid(), Windows_UI_Composition_IKeyFrameAnimation2.iid(), Windows_UI_Composition_IKeyFrameAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation2.iid(), Windows_UI_Composition_ICompositionAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation4.iid(), Windows_UI_Composition_ICompositionAnimationBase.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_ColorKeyFrameAnimation>("ColorKeyFrameAnimation", Windows_UI_Composition_IColorKeyFrameAnimation.iid(), ancestors, { raw => Windows_UI_Composition_ColorKeyFrameAnimation.fromAbiTake(raw) }, { raw => Windows_UI_Composition_ColorKeyFrameAnimation.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Windows_UI_Composition_IColorKeyFrameAnimation {
-        match (unsafe { query(Windows_UI_Composition_IColorKeyFrameAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asIColorKeyFrameAnimation(): Windows_UI_Composition_IColorKeyFrameAnimation {
-        defaultInterface()
-    }
-
-    public func asIKeyFrameAnimation(): Windows_UI_Composition_IKeyFrameAnimation {
-        match (unsafe { query<Windows_UI_Composition_IKeyFrameAnimation>(Windows_UI_Composition_IKeyFrameAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIKeyFrameAnimation2(): Windows_UI_Composition_IKeyFrameAnimation2 {
-        match (unsafe { query<Windows_UI_Composition_IKeyFrameAnimation2>(Windows_UI_Composition_IKeyFrameAnimation2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIKeyFrameAnimation3(): Windows_UI_Composition_IKeyFrameAnimation3 {
-        match (unsafe { query<Windows_UI_Composition_IKeyFrameAnimation3>(Windows_UI_Composition_IKeyFrameAnimation3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation(): Windows_UI_Composition_ICompositionAnimation {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation>(Windows_UI_Composition_ICompositionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation2(): Windows_UI_Composition_ICompositionAnimation2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation2>(Windows_UI_Composition_ICompositionAnimation2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation3(): Windows_UI_Composition_ICompositionAnimation3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation3>(Windows_UI_Composition_ICompositionAnimation3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation4(): Windows_UI_Composition_ICompositionAnimation4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation4>(Windows_UI_Composition_ICompositionAnimation4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimationBase(): Windows_UI_Composition_ICompositionAnimationBase {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimationBase>(Windows_UI_Composition_ICompositionAnimationBase.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIClosable(): Windows_Foundation_IClosable {
-        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
-        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public mut prop InterpolationColorSpace: Windows_UI_Composition_CompositionColorSpace {
-        get() {
-            var result__ = 0i32
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.InterpolationColorSpace(CPointer<Int32>(inout result__)) }
-            }
-            hr__.check()
-            return Windows_UI_Composition_CompositionColorSpace(result__)
-        }
-        set(value) {
-            var hr__ = windows_core.E_POINTER
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetInterpolationColorSpace(value.value) }
-            }
-            hr__.check()
-        }
-    }
-
-    public func InsertKeyFrame(normalizedProgressKey: Float32, value: Windows_UI_Color): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.InsertKeyFrame(normalizedProgressKey, value) }
-        }
-        hr__.check()
-    }
-
-    public func InsertKeyFrameWithEasingFunction(normalizedProgressKey: Float32, value: Windows_UI_Color, easingFunction: Windows_UI_Composition_CompositionEasingFunction): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_UI_Composition_CompositionEasingFunction>(easingFunction)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.InsertKeyFrameWithEasingFunction(normalizedProgressKey, value, __argBorrow0.asRaw()) }
-            }
-        }
-        hr__.check()
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Windows.UI.Composition.ColorKeyFrameAnimation"
-    }
-
-    public static func signature(): String {
-        return "rc(Windows.UI.Composition.ColorKeyFrameAnimation;{" + Windows_UI_Composition_IColorKeyFrameAnimation.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Windows.UI.Composition.ColorKeyFrameAnimation", Windows_UI_Composition_ColorKeyFrameAnimation.signature(), Windows_UI_Composition_IColorKeyFrameAnimation.iid())
-    }
-}
-
-extend Windows_UI_Composition_ColorKeyFrameAnimation <: windows_core.HandleWinrtType<Windows_UI_Composition_ColorKeyFrameAnimation> {
-    public static func intoWinrtHandle(value: Windows_UI_Composition_ColorKeyFrameAnimation): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_ColorKeyFrameAnimation {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_UI_Composition_ColorKeyFrameAnimation.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_ColorKeyFrameAnimation {
-        Windows_UI_Composition_ColorKeyFrameAnimation.viewOf(raw)
-    }
-}
-
-// Windows.UI.Composition.CompositionAnimation (synthetic:Windows_UI_Composition_CompositionAnimation)
-public class Windows_UI_Composition_CompositionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
-    public init(raw: CPointer<Unit>) {
-        super(raw)
-    }
-
-    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
-        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
-    }
-
-    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_CompositionAnimation {
-        Windows_UI_Composition_CompositionAnimation(raw, takeOwnership: true, allowManualRelease: false)
-    }
-
-    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_CompositionAnimation {
-        Windows_UI_Composition_CompositionAnimation(raw, takeOwnership: false, allowManualRelease: false)
-    }
-
-    public static func iid(): windows_interface.GUID {
-        Windows_UI_Composition_ICompositionAnimation.iid()
-    }
-
-    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_CompositionAnimation> {
-        let ancestors = [Windows_UI_Composition_ICompositionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation2.iid(), Windows_UI_Composition_ICompositionAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation4.iid(), Windows_UI_Composition_ICompositionAnimationBase.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
-        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_CompositionAnimation>("CompositionAnimation", Windows_UI_Composition_ICompositionAnimation.iid(), ancestors, { raw => Windows_UI_Composition_CompositionAnimation.fromAbiTake(raw) }, { raw => Windows_UI_Composition_CompositionAnimation.viewOf(raw) })
-    }
-
-    public func defaultInterface(): Windows_UI_Composition_ICompositionAnimation {
-        match (unsafe { query(Windows_UI_Composition_ICompositionAnimation.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIInspectable(): windows_interface.IInspectable {
-        windows_interface.IInspectable.viewOf(asRaw())
-    }
-
-    public func asICompositionAnimation(): Windows_UI_Composition_ICompositionAnimation {
-        defaultInterface()
-    }
-
-    public func asICompositionAnimation2(): Windows_UI_Composition_ICompositionAnimation2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation2>(Windows_UI_Composition_ICompositionAnimation2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation3(): Windows_UI_Composition_ICompositionAnimation3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation3>(Windows_UI_Composition_ICompositionAnimation3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimation4(): Windows_UI_Composition_ICompositionAnimation4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation4>(Windows_UI_Composition_ICompositionAnimation4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionAnimationBase(): Windows_UI_Composition_ICompositionAnimationBase {
-        match (unsafe { query<Windows_UI_Composition_ICompositionAnimationBase>(Windows_UI_Composition_ICompositionAnimationBase.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
-        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIClosable(): Windows_Foundation_IClosable {
-        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
-        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
-            case Some(value) => value
-            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
-        }
-    }
-
-    public func ClearAllParameters(): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (interface__ = defaultInterface()) {
-            hr__ = unsafe { interface__.ClearAllParameters() }
-        }
-        hr__.check()
-    }
-
-    public func ClearParameter(key: windows_core.HString): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.ClearParameter(__argBorrow0.asRaw()) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func SetColorParameter(key: windows_core.HString, value: Windows_UI_Color): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetColorParameter(__argBorrow0.asRaw(), value) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func SetMatrix3x2Parameter(key: windows_core.HString, value: Windows_Foundation_Numerics_Matrix3x2): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetMatrix3x2Parameter(__argBorrow0.asRaw(), value) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func SetMatrix4x4Parameter(key: windows_core.HString, value: Windows_Foundation_Numerics_Matrix4x4): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetMatrix4x4Parameter(__argBorrow0.asRaw(), value) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func SetQuaternionParameter(key: windows_core.HString, value: Windows_Foundation_Numerics_Quaternion): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetQuaternionParameter(__argBorrow0.asRaw(), value) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func SetReferenceParameter(key: windows_core.HString, compositionObject: Windows_UI_Composition_CompositionObject): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
-            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_UI_Composition_CompositionObject>(compositionObject)) {
-                try (interface__ = defaultInterface()) {
-                    hr__ = unsafe { interface__.SetReferenceParameter(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
-                }
-            }
-        }
-        hr__.check()
-    }
-
-    public func SetScalarParameter(key: windows_core.HString, value: Float32): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetScalarParameter(__argBorrow0.asRaw(), value) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func SetVector2Parameter(key: windows_core.HString, value: Windows_Foundation_Numerics_Vector2): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetVector2Parameter(__argBorrow0.asRaw(), value) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func SetVector3Parameter(key: windows_core.HString, value: Windows_Foundation_Numerics_Vector3): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetVector3Parameter(__argBorrow0.asRaw(), value) }
-            }
-        }
-        hr__.check()
-    }
-
-    public func SetVector4Parameter(key: windows_core.HString, value: Windows_Foundation_Numerics_Vector4): Unit {
-        var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
-            try (interface__ = defaultInterface()) {
-                hr__ = unsafe { interface__.SetVector4Parameter(__argBorrow0.asRaw(), value) }
-            }
-        }
-        hr__.check()
-    }
-
-    public static func abiType(): String {
-        "CPointer<Unit>"
-    }
-
-    public static func runtimeName(): String {
-        "Windows.UI.Composition.CompositionAnimation"
-    }
-
-    public static func signature(): String {
-        return "rc(Windows.UI.Composition.CompositionAnimation;{" + Windows_UI_Composition_ICompositionAnimation.iid().toSignatureString() + "})"
-    }
-
-    public static func runtimeType(): windows_interface.RuntimeTypeContract {
-        windows_interface.RuntimeTypeContract("Windows.UI.Composition.CompositionAnimation", Windows_UI_Composition_CompositionAnimation.signature(), Windows_UI_Composition_ICompositionAnimation.iid())
-    }
-}
-
-extend Windows_UI_Composition_CompositionAnimation <: windows_core.HandleWinrtType<Windows_UI_Composition_CompositionAnimation> {
-    public static func intoWinrtHandle(value: Windows_UI_Composition_CompositionAnimation): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_CompositionAnimation {
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_UI_Composition_CompositionAnimation.fromAbiTake(raw)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_CompositionAnimation {
-        Windows_UI_Composition_CompositionAnimation.viewOf(raw)
-    }
 }

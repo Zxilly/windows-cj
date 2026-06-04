@@ -7,6 +7,770 @@ import windows_interface.GUID
 import windows_interface as windows_interface
 import windows_polyfill as windows_polyfill
 
+// Windows.Win32.Security.SYSTEM_ALARM_OBJECT_ACE (synthetic:Windows_Win32_Security_SYSTEM_ALARM_OBJECT_ACE)
+@C
+public struct Windows_Win32_Security_SYSTEM_ALARM_OBJECT_ACE {
+    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
+    public var Mask: UInt32 = 0u32
+    public var Flags: UInt32 = 0u32
+    public var ObjectType: GUID = GUID()
+    public var InheritedObjectType: GUID = GUID()
+    public var SidStart: UInt32 = 0u32
+}
+
+// Windows.Win32.Security.SYSTEM_AUDIT_ACE (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_ACE)
+@C
+public struct Windows_Win32_Security_SYSTEM_AUDIT_ACE {
+    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
+    public var Mask: UInt32 = 0u32
+    public var SidStart: UInt32 = 0u32
+}
+
+// Windows.Win32.Security.SYSTEM_AUDIT_CALLBACK_ACE (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_ACE)
+@C
+public struct Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_ACE {
+    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
+    public var Mask: UInt32 = 0u32
+    public var SidStart: UInt32 = 0u32
+}
+
+// Windows.Win32.Security.SYSTEM_AUDIT_CALLBACK_OBJECT_ACE (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_OBJECT_ACE)
+@C
+public struct Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_OBJECT_ACE {
+    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
+    public var Mask: UInt32 = 0u32
+    public var Flags: UInt32 = 0u32
+    public var ObjectType: GUID = GUID()
+    public var InheritedObjectType: GUID = GUID()
+    public var SidStart: UInt32 = 0u32
+}
+
+// Windows.Win32.Security.SYSTEM_AUDIT_OBJECT_ACE (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE)
+@C
+public struct Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE {
+    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
+    public var Mask: UInt32 = 0u32
+    public var Flags: UInt32 = 0u32
+    public var ObjectType: GUID = GUID()
+    public var InheritedObjectType: GUID = GUID()
+    public var SidStart: UInt32 = 0u32
+}
+
+// Windows.Win32.Security.SYSTEM_AUDIT_OBJECT_ACE_FLAGS (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS)
+public type Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS = UInt32
+public let Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS_ACE_OBJECT_TYPE_PRESENT: Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS = 1
+public let Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS_ACE_INHERITED_OBJECT_TYPE_PRESENT: Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS = 2
+
+// Windows.Win32.Security.SYSTEM_MANDATORY_LABEL_ACE (synthetic:Windows_Win32_Security_SYSTEM_MANDATORY_LABEL_ACE)
+@C
+public struct Windows_Win32_Security_SYSTEM_MANDATORY_LABEL_ACE {
+    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
+    public var Mask: UInt32 = 0u32
+    public var SidStart: UInt32 = 0u32
+}
+
+// Windows.Win32.Security.SYSTEM_PROCESS_TRUST_LABEL_ACE (synthetic:Windows_Win32_Security_SYSTEM_PROCESS_TRUST_LABEL_ACE)
+@C
+public struct Windows_Win32_Security_SYSTEM_PROCESS_TRUST_LABEL_ACE {
+    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
+    public var Mask: UInt32 = 0u32
+    public var SidStart: UInt32 = 0u32
+}
+
+// Windows.Win32.Security.SYSTEM_RESOURCE_ATTRIBUTE_ACE (synthetic:Windows_Win32_Security_SYSTEM_RESOURCE_ATTRIBUTE_ACE)
+@C
+public struct Windows_Win32_Security_SYSTEM_RESOURCE_ATTRIBUTE_ACE {
+    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
+    public var Mask: UInt32 = 0u32
+    public var SidStart: UInt32 = 0u32
+}
+
+// Windows.Win32.Security.SYSTEM_SCOPED_POLICY_ID_ACE (synthetic:Windows_Win32_Security_SYSTEM_SCOPED_POLICY_ID_ACE)
+@C
+public struct Windows_Win32_Security_SYSTEM_SCOPED_POLICY_ID_ACE {
+    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
+    public var Mask: UInt32 = 0u32
+    public var SidStart: UInt32 = 0u32
+}
+
+// Windows.Win32.Security.TOKEN_ACCESS_INFORMATION (synthetic:Windows_Win32_Security_TOKEN_ACCESS_INFORMATION)
+@C
+public struct Windows_Win32_Security_TOKEN_ACCESS_INFORMATION {
+    public var SidHash: CPointer<Unit> = CPointer<Unit>()
+    public var RestrictedSidHash: CPointer<Unit> = CPointer<Unit>()
+    public var Privileges: CPointer<Unit> = CPointer<Unit>()
+    public var AuthenticationId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
+    public var TokenType: Int32 = 0i32
+    public var ImpersonationLevel: Int32 = 0i32
+    public var MandatoryPolicy: Windows_Win32_Security_TOKEN_MANDATORY_POLICY = Windows_Win32_Security_TOKEN_MANDATORY_POLICY()
+    public var Flags: UInt32 = 0u32
+    public var AppContainerNumber: UInt32 = 0u32
+    public var PackageSid: Windows_Win32_Security_PSID = Windows_Win32_Security_PSID()
+    public var CapabilitiesHash: CPointer<Unit> = CPointer<Unit>()
+    public var TrustLevelSid: Windows_Win32_Security_PSID = Windows_Win32_Security_PSID()
+    public var SecurityAttributes: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Security.TOKEN_ACCESS_MASK (synthetic:Windows_Win32_Security_TOKEN_ACCESS_MASK)
+public type Windows_Win32_Security_TOKEN_ACCESS_MASK = UInt32
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_DELETE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 65536
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_READ_CONTROL: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131072
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_WRITE_DAC: Windows_Win32_Security_TOKEN_ACCESS_MASK = 262144
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_WRITE_OWNER: Windows_Win32_Security_TOKEN_ACCESS_MASK = 524288
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ACCESS_SYSTEM_SECURITY: Windows_Win32_Security_TOKEN_ACCESS_MASK = 16777216
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ASSIGN_PRIMARY: Windows_Win32_Security_TOKEN_ACCESS_MASK = 1
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_DUPLICATE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 2
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_IMPERSONATE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 4
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_QUERY: Windows_Win32_Security_TOKEN_ACCESS_MASK = 8
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_QUERY_SOURCE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 16
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ADJUST_PRIVILEGES: Windows_Win32_Security_TOKEN_ACCESS_MASK = 32
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ADJUST_GROUPS: Windows_Win32_Security_TOKEN_ACCESS_MASK = 64
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ADJUST_DEFAULT: Windows_Win32_Security_TOKEN_ACCESS_MASK = 128
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ADJUST_SESSIONID: Windows_Win32_Security_TOKEN_ACCESS_MASK = 256
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_READ: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131080
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_WRITE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131296
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_EXECUTE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131072
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_TRUST_CONSTRAINT_MASK: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131096
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ACCESS_PSEUDO_HANDLE_WIN8: Windows_Win32_Security_TOKEN_ACCESS_MASK = 24
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ACCESS_PSEUDO_HANDLE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 24
+public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ALL_ACCESS: Windows_Win32_Security_TOKEN_ACCESS_MASK = 983551
+
+// Windows.Win32.Security.TOKEN_APPCONTAINER_INFORMATION (synthetic:Windows_Win32_Security_TOKEN_APPCONTAINER_INFORMATION)
+@C
+public struct Windows_Win32_Security_TOKEN_APPCONTAINER_INFORMATION {
+    public var TokenAppContainer: Windows_Win32_Security_PSID = Windows_Win32_Security_PSID()
+}
+
+// Windows.Win32.Security.TOKEN_AUDIT_POLICY (synthetic:Windows_Win32_Security_TOKEN_AUDIT_POLICY)
+@C
+public struct Windows_Win32_Security_TOKEN_AUDIT_POLICY {
+    public var PerUserPolicy: VArray<UInt8, $31> = VArray<UInt8, $31>(repeat: 0u8)
+}
+
+// Windows.Win32.Security.TOKEN_CONTROL (synthetic:Windows_Win32_Security_TOKEN_CONTROL)
+@C
+public struct Windows_Win32_Security_TOKEN_CONTROL {
+    public var TokenId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
+    public var AuthenticationId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
+    public var ModifiedId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
+    public var TokenSource: Windows_Win32_Security_TOKEN_SOURCE = Windows_Win32_Security_TOKEN_SOURCE()
+}
+
+// Windows.Win32.Security.TOKEN_DEFAULT_DACL (synthetic:Windows_Win32_Security_TOKEN_DEFAULT_DACL)
+@C
+public struct Windows_Win32_Security_TOKEN_DEFAULT_DACL {
+    public var DefaultDacl: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Security.TOKEN_DEVICE_CLAIMS (synthetic:Windows_Win32_Security_TOKEN_DEVICE_CLAIMS)
+@C
+public struct Windows_Win32_Security_TOKEN_DEVICE_CLAIMS {
+    public var DeviceClaims: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Security.TOKEN_ELEVATION (synthetic:Windows_Win32_Security_TOKEN_ELEVATION)
+@C
+public struct Windows_Win32_Security_TOKEN_ELEVATION {
+    public var TokenIsElevated: UInt32 = 0u32
+}
+
+// Windows.Win32.Security.TOKEN_ELEVATION_TYPE (synthetic:Windows_Win32_Security_TOKEN_ELEVATION_TYPE)
+public type Windows_Win32_Security_TOKEN_ELEVATION_TYPE = Int32
+public let Windows_Win32_Security_TOKEN_ELEVATION_TYPE_TokenElevationTypeDefault: Windows_Win32_Security_TOKEN_ELEVATION_TYPE = 1
+public let Windows_Win32_Security_TOKEN_ELEVATION_TYPE_TokenElevationTypeFull: Windows_Win32_Security_TOKEN_ELEVATION_TYPE = 2
+public let Windows_Win32_Security_TOKEN_ELEVATION_TYPE_TokenElevationTypeLimited: Windows_Win32_Security_TOKEN_ELEVATION_TYPE = 3
+
+// Windows.Win32.Security.TOKEN_GROUPS (synthetic:Windows_Win32_Security_TOKEN_GROUPS)
+@C
+public struct Windows_Win32_Security_TOKEN_GROUPS {
+    public var GroupCount: UInt32 = 0u32
+    public var Groups: VArray<Windows_Win32_Security_SID_AND_ATTRIBUTES, $1> = VArray<Windows_Win32_Security_SID_AND_ATTRIBUTES, $1>(repeat: Windows_Win32_Security_SID_AND_ATTRIBUTES())
+}
+
+// Windows.Win32.Security.TOKEN_GROUPS_AND_PRIVILEGES (synthetic:Windows_Win32_Security_TOKEN_GROUPS_AND_PRIVILEGES)
+@C
+public struct Windows_Win32_Security_TOKEN_GROUPS_AND_PRIVILEGES {
+    public var SidCount: UInt32 = 0u32
+    public var SidLength: UInt32 = 0u32
+    public var Sids: CPointer<Unit> = CPointer<Unit>()
+    public var RestrictedSidCount: UInt32 = 0u32
+    public var RestrictedSidLength: UInt32 = 0u32
+    public var RestrictedSids: CPointer<Unit> = CPointer<Unit>()
+    public var PrivilegeCount: UInt32 = 0u32
+    public var PrivilegeLength: UInt32 = 0u32
+    public var Privileges: CPointer<Unit> = CPointer<Unit>()
+    public var AuthenticationId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
+}
+
+// Windows.Win32.Security.TOKEN_INFORMATION_CLASS (synthetic:Windows_Win32_Security_TOKEN_INFORMATION_CLASS)
+public type Windows_Win32_Security_TOKEN_INFORMATION_CLASS = Int32
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenUser: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 1
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenGroups: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 2
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenPrivileges: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 3
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenOwner: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 4
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenPrimaryGroup: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 5
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenDefaultDacl: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 6
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSource: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 7
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenType: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 8
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenImpersonationLevel: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 9
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenStatistics: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 10
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenRestrictedSids: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 11
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSessionId: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 12
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenGroupsAndPrivileges: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 13
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSessionReference: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 14
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSandBoxInert: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 15
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenAuditPolicy: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 16
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenOrigin: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 17
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenElevationType: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 18
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenLinkedToken: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 19
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenElevation: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 20
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenHasRestrictions: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 21
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenAccessInformation: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 22
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenVirtualizationAllowed: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 23
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenVirtualizationEnabled: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 24
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIntegrityLevel: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 25
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenUIAccess: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 26
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenMandatoryPolicy: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 27
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenLogonSid: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 28
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsAppContainer: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 29
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenCapabilities: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 30
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenAppContainerSid: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 31
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenAppContainerNumber: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 32
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenUserClaimAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 33
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenDeviceClaimAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 34
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenRestrictedUserClaimAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 35
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenRestrictedDeviceClaimAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 36
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenDeviceGroups: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 37
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenRestrictedDeviceGroups: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 38
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSecurityAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 39
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsRestricted: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 40
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenProcessTrustLevel: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 41
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenPrivateNameSpace: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 42
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSingletonAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 43
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenBnoIsolation: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 44
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenChildProcessFlags: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 45
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsLessPrivilegedAppContainer: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 46
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsSandboxed: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 47
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsAppSilo: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 48
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenLoggingInformation: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 49
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenLearningMode: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 50
+public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_MaxTokenInfoClass: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 51
+
+// Windows.Win32.Security.TOKEN_LINKED_TOKEN (synthetic:Windows_Win32_Security_TOKEN_LINKED_TOKEN)
+@C
+public struct Windows_Win32_Security_TOKEN_LINKED_TOKEN {
+    public var LinkedToken: Windows_Win32_Foundation_HANDLE = Windows_Win32_Foundation_HANDLE()
+}
+
+// Windows.Win32.Security.TOKEN_MANDATORY_LABEL (synthetic:Windows_Win32_Security_TOKEN_MANDATORY_LABEL)
+@C
+public struct Windows_Win32_Security_TOKEN_MANDATORY_LABEL {
+    public var Label: Windows_Win32_Security_SID_AND_ATTRIBUTES = Windows_Win32_Security_SID_AND_ATTRIBUTES()
+}
+
+// Windows.Win32.Security.TOKEN_MANDATORY_POLICY (synthetic:Windows_Win32_Security_TOKEN_MANDATORY_POLICY)
+@C
+public struct Windows_Win32_Security_TOKEN_MANDATORY_POLICY {
+    public var Policy: UInt32 = 0u32
+}
+
+// Windows.Win32.Security.TOKEN_MANDATORY_POLICY_ID (synthetic:Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID)
+public type Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = UInt32
+public let Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID_TOKEN_MANDATORY_POLICY_OFF: Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = 0
+public let Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID_TOKEN_MANDATORY_POLICY_NO_WRITE_UP: Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = 1
+public let Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID_TOKEN_MANDATORY_POLICY_NEW_PROCESS_MIN: Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = 2
+public let Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID_TOKEN_MANDATORY_POLICY_VALID_MASK: Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = 3
+
+// Windows.Win32.Security.TOKEN_ORIGIN (synthetic:Windows_Win32_Security_TOKEN_ORIGIN)
+@C
+public struct Windows_Win32_Security_TOKEN_ORIGIN {
+    public var OriginatingLogonSession: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
+}
+
+// Windows.Win32.Security.TOKEN_OWNER (synthetic:Windows_Win32_Security_TOKEN_OWNER)
+@C
+public struct Windows_Win32_Security_TOKEN_OWNER {
+    public var Owner: Windows_Win32_Security_PSID = Windows_Win32_Security_PSID()
+}
+
+// Windows.Win32.Security.TOKEN_PRIMARY_GROUP (synthetic:Windows_Win32_Security_TOKEN_PRIMARY_GROUP)
+@C
+public struct Windows_Win32_Security_TOKEN_PRIMARY_GROUP {
+    public var PrimaryGroup: Windows_Win32_Security_PSID = Windows_Win32_Security_PSID()
+}
+
+// Windows.Win32.Security.TOKEN_PRIVILEGES (synthetic:Windows_Win32_Security_TOKEN_PRIVILEGES)
+@C
+public struct Windows_Win32_Security_TOKEN_PRIVILEGES {
+    public var PrivilegeCount: UInt32 = 0u32
+    public var Privileges: VArray<Windows_Win32_Security_LUID_AND_ATTRIBUTES, $1> = VArray<Windows_Win32_Security_LUID_AND_ATTRIBUTES, $1>(repeat: Windows_Win32_Security_LUID_AND_ATTRIBUTES())
+}
+
+// Windows.Win32.Security.TOKEN_PRIVILEGES_ATTRIBUTES (synthetic:Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES)
+public type Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = UInt32
+public let Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES_SE_PRIVILEGE_ENABLED: Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = 2
+public let Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES_SE_PRIVILEGE_ENABLED_BY_DEFAULT: Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = 1
+public let Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES_SE_PRIVILEGE_REMOVED: Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = 4
+public let Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES_SE_PRIVILEGE_USED_FOR_ACCESS: Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = 2147483648
+
+// Windows.Win32.Security.TOKEN_SOURCE (synthetic:Windows_Win32_Security_TOKEN_SOURCE)
+@C
+public struct Windows_Win32_Security_TOKEN_SOURCE {
+    public var SourceName: VArray<Int8, $8> = VArray<Int8, $8>(repeat: 0i8)
+    public var SourceIdentifier: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
+}
+
+// Windows.Win32.Security.TOKEN_STATISTICS (synthetic:Windows_Win32_Security_TOKEN_STATISTICS)
+@C
+public struct Windows_Win32_Security_TOKEN_STATISTICS {
+    public var TokenId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
+    public var AuthenticationId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
+    public var ExpirationTime: Int64 = 0i64
+    public var TokenType: Int32 = 0i32
+    public var ImpersonationLevel: Int32 = 0i32
+    public var DynamicCharged: UInt32 = 0u32
+    public var DynamicAvailable: UInt32 = 0u32
+    public var GroupCount: UInt32 = 0u32
+    public var PrivilegeCount: UInt32 = 0u32
+    public var ModifiedId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
+}
+
+// Windows.Win32.Security.TOKEN_TYPE (synthetic:Windows_Win32_Security_TOKEN_TYPE)
+public type Windows_Win32_Security_TOKEN_TYPE = Int32
+public let Windows_Win32_Security_TOKEN_TYPE_TokenPrimary: Windows_Win32_Security_TOKEN_TYPE = 1
+public let Windows_Win32_Security_TOKEN_TYPE_TokenImpersonation: Windows_Win32_Security_TOKEN_TYPE = 2
+
+// Windows.Win32.Security.TOKEN_USER (synthetic:Windows_Win32_Security_TOKEN_USER)
+@C
+public struct Windows_Win32_Security_TOKEN_USER {
+    public var User: Windows_Win32_Security_SID_AND_ATTRIBUTES = Windows_Win32_Security_SID_AND_ATTRIBUTES()
+}
+
+// Windows.Win32.Security.TOKEN_USER_CLAIMS (synthetic:Windows_Win32_Security_TOKEN_USER_CLAIMS)
+@C
+public struct Windows_Win32_Security_TOKEN_USER_CLAIMS {
+    public var UserClaims: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Security.WELL_KNOWN_SID_TYPE (synthetic:Windows_Win32_Security_WELL_KNOWN_SID_TYPE)
+public type Windows_Win32_Security_WELL_KNOWN_SID_TYPE = Int32
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNullSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 0
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinWorldSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 1
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 2
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorOwnerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 3
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorGroupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 4
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorOwnerServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 5
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorGroupServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 6
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNtAuthoritySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 7
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinDialupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 8
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNetworkSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 9
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBatchSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 10
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinInteractiveSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 11
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinServiceSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 12
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAnonymousSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 13
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinProxySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 14
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinEnterpriseControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 15
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinSelfSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 16
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticatedUserSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 17
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinRestrictedCodeSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 18
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinTerminalServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 19
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinRemoteLogonIdSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 20
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLogonIdsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 21
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalSystemSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 22
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalServiceSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 23
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNetworkServiceSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 24
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinDomainSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 25
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAdministratorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 26
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 27
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinGuestsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 28
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPowerUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 29
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAccountOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 30
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinSystemOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 31
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPrintOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 32
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinBackupOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 33
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinReplicatorSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 34
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPreWindows2000CompatibleAccessSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 35
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRemoteDesktopUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 36
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinNetworkConfigurationOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 37
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountAdministratorSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 38
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountGuestSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 39
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountKrbtgtSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 40
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountDomainAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 41
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountDomainUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 42
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountDomainGuestsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 43
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountComputersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 44
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 45
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountCertAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 46
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountSchemaAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 47
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountEnterpriseAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 48
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountPolicyAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 49
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountRasAndIasServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 50
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNTLMAuthenticationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 51
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinDigestAuthenticationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 52
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinSChannelAuthenticationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 53
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinThisOrganizationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 54
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinOtherOrganizationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 55
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinIncomingForestTrustBuildersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 56
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPerfMonitoringUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 57
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPerfLoggingUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 58
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAuthorizationAccessSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 59
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinTerminalServerLicenseServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 60
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinDCOMUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 61
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinIUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 62
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinIUserSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 63
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinCryptoOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 64
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinUntrustedLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 65
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLowLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 66
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinMediumLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 67
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinHighLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 68
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinSystemLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 69
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinWriteRestrictedCodeSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 70
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorOwnerRightsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 71
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCacheablePrincipalsGroupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 72
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNonCacheablePrincipalsGroupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 73
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinEnterpriseReadonlyControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 74
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountReadonlyControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 75
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinEventLogReadersGroup: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 76
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNewEnterpriseReadonlyControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 77
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinCertSvcDComAccessGroup: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 78
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinMediumPlusLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 79
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalLogonSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 80
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinConsoleLogonSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 81
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinThisOrganizationCertificateSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 82
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinApplicationPackageAuthoritySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 83
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAnyPackageSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 84
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityInternetClientSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 85
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityInternetClientServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 86
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityPrivateNetworkClientServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 87
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityPicturesLibrarySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 88
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityVideosLibrarySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 89
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityMusicLibrarySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 90
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityDocumentsLibrarySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 91
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilitySharedUserCertificatesSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 92
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityEnterpriseAuthenticationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 93
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityRemovableStorageSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 94
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRDSRemoteAccessServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 95
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRDSEndpointServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 96
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRDSManagementServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 97
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinUserModeDriversSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 98
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinHyperVAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 99
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountCloneableControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 100
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAccessControlAssistanceOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 101
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRemoteManagementUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 102
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationAuthorityAssertedSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 103
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationServiceAssertedSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 104
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalAccountSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 105
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalAccountAndAdministratorSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 106
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountProtectedUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 107
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityAppointmentsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 108
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityContactsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 109
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountDefaultSystemManagedSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 110
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinDefaultSystemManagedGroupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 111
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinStorageReplicaAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 112
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountKeyAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 113
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountEnterpriseKeyAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 114
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationKeyTrustSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 115
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationKeyPropertyMFASid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 116
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationKeyPropertyAttestationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 117
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationFreshKeyAuthSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 118
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinDeviceOwnersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 119
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinUserModeHardwareOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 120
+public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinOpenSSHUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 121
+
+// Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS (synthetic:Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS)
+public type Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = UInt16
+public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_AUTO: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 1
+public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_STATIC: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 2
+public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_EMBEDDED: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 4
+public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_FIXEDSIZE: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 16
+public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_RECORD: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 32
+public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_HAVEIID: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 64
+public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_HAVEVARTYPE: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 128
+public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_BSTR: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 256
+public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_UNKNOWN: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 512
+public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_DISPATCH: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 1024
+public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_VARIANT: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 2048
+public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_RESERVED: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 61448
+
+// Windows.Win32.System.Com.ADVF (synthetic:Windows_Win32_System_Com_ADVF)
+public type Windows_Win32_System_Com_ADVF = Int32
+public let Windows_Win32_System_Com_ADVF_ADVF_NODATA: Windows_Win32_System_Com_ADVF = 1
+public let Windows_Win32_System_Com_ADVF_ADVF_PRIMEFIRST: Windows_Win32_System_Com_ADVF = 2
+public let Windows_Win32_System_Com_ADVF_ADVF_ONLYONCE: Windows_Win32_System_Com_ADVF = 4
+public let Windows_Win32_System_Com_ADVF_ADVF_DATAONSTOP: Windows_Win32_System_Com_ADVF = 64
+public let Windows_Win32_System_Com_ADVF_ADVFCACHE_NOHANDLER: Windows_Win32_System_Com_ADVF = 8
+public let Windows_Win32_System_Com_ADVF_ADVFCACHE_FORCEBUILTIN: Windows_Win32_System_Com_ADVF = 16
+public let Windows_Win32_System_Com_ADVF_ADVFCACHE_ONSAVE: Windows_Win32_System_Com_ADVF = 32
+
+// Windows.Win32.System.Com.APTTYPE (synthetic:Windows_Win32_System_Com_APTTYPE)
+public type Windows_Win32_System_Com_APTTYPE = Int32
+public let Windows_Win32_System_Com_APTTYPE_APTTYPE_CURRENT: Windows_Win32_System_Com_APTTYPE = -1
+public let Windows_Win32_System_Com_APTTYPE_APTTYPE_STA: Windows_Win32_System_Com_APTTYPE = 0
+public let Windows_Win32_System_Com_APTTYPE_APTTYPE_MTA: Windows_Win32_System_Com_APTTYPE = 1
+public let Windows_Win32_System_Com_APTTYPE_APTTYPE_NA: Windows_Win32_System_Com_APTTYPE = 2
+public let Windows_Win32_System_Com_APTTYPE_APTTYPE_MAINSTA: Windows_Win32_System_Com_APTTYPE = 3
+
+// Windows.Win32.System.Com.APTTYPEQUALIFIER (synthetic:Windows_Win32_System_Com_APTTYPEQUALIFIER)
+public type Windows_Win32_System_Com_APTTYPEQUALIFIER = Int32
+public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NONE: Windows_Win32_System_Com_APTTYPEQUALIFIER = 0
+public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_IMPLICIT_MTA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 1
+public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NA_ON_MTA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 2
+public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NA_ON_STA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 3
+public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NA_ON_IMPLICIT_MTA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 4
+public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NA_ON_MAINSTA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 5
+public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_APPLICATION_STA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 6
+public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_RESERVED_1: Windows_Win32_System_Com_APTTYPEQUALIFIER = 7
+
+// Windows.Win32.System.Com.AUTHENTICATEINFO (synthetic:Windows_Win32_System_Com_AUTHENTICATEINFO)
+@C
+public struct Windows_Win32_System_Com_AUTHENTICATEINFO {
+    public var dwFlags: UInt32 = 0u32
+    public var dwReserved: UInt32 = 0u32
+}
+
+// Windows.Win32.System.Com.ApplicationType (synthetic:Windows_Win32_System_Com_ApplicationType)
+public type Windows_Win32_System_Com_ApplicationType = Int32
+public let Windows_Win32_System_Com_ApplicationType_ServerApplication: Windows_Win32_System_Com_ApplicationType = 0
+public let Windows_Win32_System_Com_ApplicationType_LibraryApplication: Windows_Win32_System_Com_ApplicationType = 1
+
+// Windows.Win32.System.Com.AsyncIAdviseSink (synthetic:Windows_Win32_System_Com_AsyncIAdviseSink)
+public class Windows_Win32_System_Com_AsyncIAdviseSink <: Resource {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            Windows_Win32_System_Com_AsyncIAdviseSink.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Com.AsyncIAdviseSink"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+}
+
+extend Windows_Win32_System_Com_AsyncIAdviseSink <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIAdviseSink> {
+    public static func intoWinrtHandle(value: Windows_Win32_System_Com_AsyncIAdviseSink): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: Windows_Win32_System_Com_AsyncIAdviseSink): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        Windows_Win32_System_Com_AsyncIAdviseSink.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Com_AsyncIAdviseSink {
+        Windows_Win32_System_Com_AsyncIAdviseSink(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Com_AsyncIAdviseSink {
+        Windows_Win32_System_Com_AsyncIAdviseSink(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: Windows_Win32_System_Com_AsyncIAdviseSink): Windows_Win32_System_Com_AsyncIAdviseSink {
+        let raw = Windows_Win32_System_Com_AsyncIAdviseSink.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_Win32_System_Com_AsyncIAdviseSink(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Com.AsyncIAdviseSinkVtbl (synthetic:Windows_Win32_System_Com_AsyncIAdviseSinkVtbl)
+@C
+public struct Windows_Win32_System_Com_AsyncIAdviseSinkVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var Begin_OnDataChange: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var Finish_OnDataChange: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var Begin_OnViewChange: CFunc<(CPointer<Unit>, UInt32, Int32) -> Unit> = CFunc<(CPointer<Unit>, UInt32, Int32) -> Unit>(CPointer<Unit>())
+    public var Finish_OnViewChange: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var Begin_OnRename: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var Finish_OnRename: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var Begin_OnSave: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var Finish_OnSave: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var Begin_OnClose: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var Finish_OnClose: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.System.Com.AsyncIAdviseSink2 (synthetic:Windows_Win32_System_Com_AsyncIAdviseSink2)
+public class Windows_Win32_System_Com_AsyncIAdviseSink2 <: Resource {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            Windows_Win32_System_Com_AsyncIAdviseSink2.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.System.Com.AsyncIAdviseSink2"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+}
+
+extend Windows_Win32_System_Com_AsyncIAdviseSink2 <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIAdviseSink2> {
+    public static func intoWinrtHandle(value: Windows_Win32_System_Com_AsyncIAdviseSink2): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: Windows_Win32_System_Com_AsyncIAdviseSink2): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        Windows_Win32_System_Com_AsyncIAdviseSink2.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Com_AsyncIAdviseSink2 {
+        Windows_Win32_System_Com_AsyncIAdviseSink2(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Com_AsyncIAdviseSink2 {
+        Windows_Win32_System_Com_AsyncIAdviseSink2(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: Windows_Win32_System_Com_AsyncIAdviseSink2): Windows_Win32_System_Com_AsyncIAdviseSink2 {
+        let raw = Windows_Win32_System_Com_AsyncIAdviseSink2.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_Win32_System_Com_AsyncIAdviseSink2(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.System.Com.AsyncIAdviseSink2Vtbl (synthetic:Windows_Win32_System_Com_AsyncIAdviseSink2Vtbl)
+@C
+public struct Windows_Win32_System_Com_AsyncIAdviseSink2Vtbl {
+    public var base_: Windows_Win32_System_Com_AsyncIAdviseSinkVtbl = Windows_Win32_System_Com_AsyncIAdviseSinkVtbl()
+    public var Begin_OnLinkSrcChange: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var Finish_OnLinkSrcChange: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public init() {}
+}
+
 // Windows.Win32.System.Com.AsyncIMultiQI (synthetic:Windows_Win32_System_Com_AsyncIMultiQI)
 public class Windows_Win32_System_Com_AsyncIMultiQI <: Resource {
     private let raw: CPointer<Unit>
@@ -19903,828 +20667,3 @@ public let Windows_Win32_System_Threading_AVRT_PRIORITY_AVRT_PRIORITY_LOW: Windo
 public let Windows_Win32_System_Threading_AVRT_PRIORITY_AVRT_PRIORITY_NORMAL: Windows_Win32_System_Threading_AVRT_PRIORITY = 0
 public let Windows_Win32_System_Threading_AVRT_PRIORITY_AVRT_PRIORITY_HIGH: Windows_Win32_System_Threading_AVRT_PRIORITY = 1
 public let Windows_Win32_System_Threading_AVRT_PRIORITY_AVRT_PRIORITY_CRITICAL: Windows_Win32_System_Threading_AVRT_PRIORITY = 2
-
-// Windows.Win32.System.Threading.AVRT_TASK_HANDLE (synthetic:Windows_Win32_System_Threading_AVRT_TASK_HANDLE)
-@C
-public struct Windows_Win32_System_Threading_AVRT_TASK_HANDLE {
-    public var Value: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.System.Threading.AVRT_THREAD_ORDERING_GROUP_HANDLE (synthetic:Windows_Win32_System_Threading_AVRT_THREAD_ORDERING_GROUP_HANDLE)
-@C
-public struct Windows_Win32_System_Threading_AVRT_THREAD_ORDERING_GROUP_HANDLE {
-    public var Value: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.System.Threading.CONDITION_VARIABLE (synthetic:Windows_Win32_System_Threading_CONDITION_VARIABLE)
-@C
-public struct Windows_Win32_System_Threading_CONDITION_VARIABLE {
-    public var Ptr: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.System.Threading.CREATE_EVENT (synthetic:Windows_Win32_System_Threading_CREATE_EVENT)
-public type Windows_Win32_System_Threading_CREATE_EVENT = UInt32
-public let Windows_Win32_System_Threading_CREATE_EVENT_CREATE_EVENT_INITIAL_SET: Windows_Win32_System_Threading_CREATE_EVENT = 2
-public let Windows_Win32_System_Threading_CREATE_EVENT_CREATE_EVENT_MANUAL_RESET: Windows_Win32_System_Threading_CREATE_EVENT = 1
-
-// Windows.Win32.System.Threading.CREATE_PROCESS_LOGON_FLAGS (synthetic:Windows_Win32_System_Threading_CREATE_PROCESS_LOGON_FLAGS)
-public type Windows_Win32_System_Threading_CREATE_PROCESS_LOGON_FLAGS = UInt32
-public let Windows_Win32_System_Threading_CREATE_PROCESS_LOGON_FLAGS_LOGON_WITH_PROFILE: Windows_Win32_System_Threading_CREATE_PROCESS_LOGON_FLAGS = 1
-public let Windows_Win32_System_Threading_CREATE_PROCESS_LOGON_FLAGS_LOGON_NETCREDENTIALS_ONLY: Windows_Win32_System_Threading_CREATE_PROCESS_LOGON_FLAGS = 2
-
-// Windows.Win32.System.Threading.CRITICAL_SECTION (synthetic:Windows_Win32_System_Threading_CRITICAL_SECTION)
-@C
-public struct Windows_Win32_System_Threading_CRITICAL_SECTION {
-    public var DebugInfo: CPointer<Unit> = CPointer<Unit>()
-    public var LockCount: Int32 = 0i32
-    public var RecursionCount: Int32 = 0i32
-    public var OwningThread: Windows_Win32_Foundation_HANDLE = Windows_Win32_Foundation_HANDLE()
-    public var LockSemaphore: Windows_Win32_Foundation_HANDLE = Windows_Win32_Foundation_HANDLE()
-    public var SpinCount: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.System.Threading.CRITICAL_SECTION_DEBUG (synthetic:Windows_Win32_System_Threading_CRITICAL_SECTION_DEBUG)
-@C
-public struct Windows_Win32_System_Threading_CRITICAL_SECTION_DEBUG {
-    public var Type: UInt16 = 0u16
-    public var CreatorBackTraceIndex: UInt16 = 0u16
-    public var CriticalSection: CPointer<Unit> = CPointer<Unit>()
-    public var ProcessLocksList: Windows_Win32_System_Kernel_LIST_ENTRY = Windows_Win32_System_Kernel_LIST_ENTRY()
-    public var EntryCount: UInt32 = 0u32
-    public var ContentionCount: UInt32 = 0u32
-    public var Flags: UInt32 = 0u32
-    public var CreatorBackTraceIndexHigh: UInt16 = 0u16
-    public var Identifier: UInt16 = 0u16
-}
-
-// Windows.Win32.System.Threading.GET_GUI_RESOURCES_FLAGS (synthetic:Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS)
-public type Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS = UInt32
-public let Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS_GR_GLOBAL: Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS = 4294967294
-public let Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS_GR_GDIOBJECTS: Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS = 0
-public let Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS_GR_GDIOBJECTS_PEAK: Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS = 2
-public let Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS_GR_USEROBJECTS: Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS = 1
-public let Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS_GR_USEROBJECTS_PEAK: Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS = 4
-
-// Windows.Win32.System.Threading.INIT_ONCE (synthetic:Windows_Win32_System_Threading_INIT_ONCE)
-@C
-public struct Windows_Win32_System_Threading_INIT_ONCE {
-    public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
-
-    public mut prop Ptr: CPointer<Unit> {
-        get() {
-            unsafe {
-                var rawStorage = _raw
-                let base = CPointer<UInt8>(inout rawStorage)
-                let p = base
-                let ptr = CPointer<CPointer<Unit>>(p)
-                return ptr.read()
-            }
-        }
-        set(val) {
-            unsafe {
-                var rawStorage = _raw
-                let base = CPointer<UInt8>(inout rawStorage)
-                let p = base
-                let ptr = CPointer<CPointer<Unit>>(p)
-                ptr.write(val)
-                _raw = rawStorage
-            }
-        }
-    }
-}
-
-// Windows.Win32.System.Threading.IO_COUNTERS (synthetic:Windows_Win32_System_Threading_IO_COUNTERS)
-@C
-public struct Windows_Win32_System_Threading_IO_COUNTERS {
-    public var ReadOperationCount: UInt64 = 0u64
-    public var WriteOperationCount: UInt64 = 0u64
-    public var OtherOperationCount: UInt64 = 0u64
-    public var ReadTransferCount: UInt64 = 0u64
-    public var WriteTransferCount: UInt64 = 0u64
-    public var OtherTransferCount: UInt64 = 0u64
-}
-
-// Windows.Win32.System.Threading.IRtwqAsyncCallback (synthetic:Windows_Win32_System_Threading_IRtwqAsyncCallback)
-public class Windows_Win32_System_Threading_IRtwqAsyncCallback <: Resource {
-    private let raw: CPointer<Unit>
-    private var ownsHandle: Bool = false
-    private var closed: Bool = false
-
-    public init(raw: CPointer<Unit>) {
-        this.raw = raw
-    }
-
-    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
-        if (takeOwnership && raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        this.raw = raw
-        this.ownsHandle = takeOwnership
-    }
-
-    public func asRaw(): CPointer<Unit> {
-        if (closed) {
-            return CPointer<Unit>()
-        }
-        raw
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        let shouldRelease = ownsHandle
-        ownsHandle = false
-        closed = true
-        if (shouldRelease) {
-            Windows_Win32_System_Threading_IRtwqAsyncCallback.releaseRaw(raw)
-        }
-    }
-
-    public static func addRefRaw(raw: CPointer<Unit>): Unit {
-        if (raw.isNull()) {
-            return
-        }
-        unsafe {
-            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
-            if (vtblPtr.isNotNull()) {
-                let vtbl = vtblPtr.read()
-                let _ = vtbl.AddRef(raw)
-            }
-        }
-    }
-
-    private static func releaseRaw(raw: CPointer<Unit>): Unit {
-        if (raw.isNull()) {
-            return
-        }
-        unsafe {
-            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
-            if (vtblPtr.isNotNull()) {
-                let vtbl = vtblPtr.read()
-                let _ = vtbl.Release(raw)
-            }
-        }
-    }
-
-    public static func runtimeName(): String {
-        return "Windows.Win32.System.Threading.IRtwqAsyncCallback"
-    }
-    public static func projectionKind(): String {
-        return "interface"
-    }
-}
-
-extend Windows_Win32_System_Threading_IRtwqAsyncCallback <: windows_core.HandleWinrtType<Windows_Win32_System_Threading_IRtwqAsyncCallback> {
-    public static func intoWinrtHandle(value: Windows_Win32_System_Threading_IRtwqAsyncCallback): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func intoOwnedWinrtHandle(value: Windows_Win32_System_Threading_IRtwqAsyncCallback): CPointer<Unit> {
-        let raw = value.asRaw()
-        if (raw.isNull()) {
-            return CPointer<Unit>()
-        }
-        Windows_Win32_System_Threading_IRtwqAsyncCallback.addRefRaw(raw)
-        raw
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Threading_IRtwqAsyncCallback {
-        Windows_Win32_System_Threading_IRtwqAsyncCallback(raw, takeOwnership: true)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Threading_IRtwqAsyncCallback {
-        Windows_Win32_System_Threading_IRtwqAsyncCallback(raw, takeOwnership: false)
-    }
-
-    public static func cloneWinrtValue(value: Windows_Win32_System_Threading_IRtwqAsyncCallback): Windows_Win32_System_Threading_IRtwqAsyncCallback {
-        let raw = Windows_Win32_System_Threading_IRtwqAsyncCallback.intoOwnedWinrtHandle(value)
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_Win32_System_Threading_IRtwqAsyncCallback(raw, takeOwnership: true)
-    }
-}
-
-// Windows.Win32.System.Threading.IRtwqAsyncCallbackVtbl (synthetic:Windows_Win32_System_Threading_IRtwqAsyncCallbackVtbl)
-@C
-public struct Windows_Win32_System_Threading_IRtwqAsyncCallbackVtbl {
-    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
-    public var GetParameters: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
-    public var Invoke: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
-    public init() {}
-}
-
-// Windows.Win32.System.Threading.IRtwqAsyncResult (synthetic:Windows_Win32_System_Threading_IRtwqAsyncResult)
-public class Windows_Win32_System_Threading_IRtwqAsyncResult <: Resource {
-    private let raw: CPointer<Unit>
-    private var ownsHandle: Bool = false
-    private var closed: Bool = false
-
-    public init(raw: CPointer<Unit>) {
-        this.raw = raw
-    }
-
-    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
-        if (takeOwnership && raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        this.raw = raw
-        this.ownsHandle = takeOwnership
-    }
-
-    public func asRaw(): CPointer<Unit> {
-        if (closed) {
-            return CPointer<Unit>()
-        }
-        raw
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        let shouldRelease = ownsHandle
-        ownsHandle = false
-        closed = true
-        if (shouldRelease) {
-            Windows_Win32_System_Threading_IRtwqAsyncResult.releaseRaw(raw)
-        }
-    }
-
-    public static func addRefRaw(raw: CPointer<Unit>): Unit {
-        if (raw.isNull()) {
-            return
-        }
-        unsafe {
-            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
-            if (vtblPtr.isNotNull()) {
-                let vtbl = vtblPtr.read()
-                let _ = vtbl.AddRef(raw)
-            }
-        }
-    }
-
-    private static func releaseRaw(raw: CPointer<Unit>): Unit {
-        if (raw.isNull()) {
-            return
-        }
-        unsafe {
-            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
-            if (vtblPtr.isNotNull()) {
-                let vtbl = vtblPtr.read()
-                let _ = vtbl.Release(raw)
-            }
-        }
-    }
-
-    public static func runtimeName(): String {
-        return "Windows.Win32.System.Threading.IRtwqAsyncResult"
-    }
-    public static func projectionKind(): String {
-        return "interface"
-    }
-}
-
-extend Windows_Win32_System_Threading_IRtwqAsyncResult <: windows_core.HandleWinrtType<Windows_Win32_System_Threading_IRtwqAsyncResult> {
-    public static func intoWinrtHandle(value: Windows_Win32_System_Threading_IRtwqAsyncResult): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func intoOwnedWinrtHandle(value: Windows_Win32_System_Threading_IRtwqAsyncResult): CPointer<Unit> {
-        let raw = value.asRaw()
-        if (raw.isNull()) {
-            return CPointer<Unit>()
-        }
-        Windows_Win32_System_Threading_IRtwqAsyncResult.addRefRaw(raw)
-        raw
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Threading_IRtwqAsyncResult {
-        Windows_Win32_System_Threading_IRtwqAsyncResult(raw, takeOwnership: true)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Threading_IRtwqAsyncResult {
-        Windows_Win32_System_Threading_IRtwqAsyncResult(raw, takeOwnership: false)
-    }
-
-    public static func cloneWinrtValue(value: Windows_Win32_System_Threading_IRtwqAsyncResult): Windows_Win32_System_Threading_IRtwqAsyncResult {
-        let raw = Windows_Win32_System_Threading_IRtwqAsyncResult.intoOwnedWinrtHandle(value)
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_Win32_System_Threading_IRtwqAsyncResult(raw, takeOwnership: true)
-    }
-}
-
-// Windows.Win32.System.Threading.IRtwqAsyncResultVtbl (synthetic:Windows_Win32_System_Threading_IRtwqAsyncResultVtbl)
-@C
-public struct Windows_Win32_System_Threading_IRtwqAsyncResultVtbl {
-    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
-    public var GetState: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
-    public var GetStatus: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
-    public var SetStatus: CFunc<(CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
-    public var GetObject: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
-    public var GetStateNoAddRef: CFunc<(CPointer<Unit>) -> CPointer<Unit>> = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(CPointer<Unit>())
-    public init() {}
-}
-
-// Windows.Win32.System.Threading.IRtwqPlatformEvents (synthetic:Windows_Win32_System_Threading_IRtwqPlatformEvents)
-public class Windows_Win32_System_Threading_IRtwqPlatformEvents <: Resource {
-    private let raw: CPointer<Unit>
-    private var ownsHandle: Bool = false
-    private var closed: Bool = false
-
-    public init(raw: CPointer<Unit>) {
-        this.raw = raw
-    }
-
-    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
-        if (takeOwnership && raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        this.raw = raw
-        this.ownsHandle = takeOwnership
-    }
-
-    public func asRaw(): CPointer<Unit> {
-        if (closed) {
-            return CPointer<Unit>()
-        }
-        raw
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        let shouldRelease = ownsHandle
-        ownsHandle = false
-        closed = true
-        if (shouldRelease) {
-            Windows_Win32_System_Threading_IRtwqPlatformEvents.releaseRaw(raw)
-        }
-    }
-
-    public static func addRefRaw(raw: CPointer<Unit>): Unit {
-        if (raw.isNull()) {
-            return
-        }
-        unsafe {
-            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
-            if (vtblPtr.isNotNull()) {
-                let vtbl = vtblPtr.read()
-                let _ = vtbl.AddRef(raw)
-            }
-        }
-    }
-
-    private static func releaseRaw(raw: CPointer<Unit>): Unit {
-        if (raw.isNull()) {
-            return
-        }
-        unsafe {
-            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
-            if (vtblPtr.isNotNull()) {
-                let vtbl = vtblPtr.read()
-                let _ = vtbl.Release(raw)
-            }
-        }
-    }
-
-    public static func runtimeName(): String {
-        return "Windows.Win32.System.Threading.IRtwqPlatformEvents"
-    }
-    public static func projectionKind(): String {
-        return "interface"
-    }
-}
-
-extend Windows_Win32_System_Threading_IRtwqPlatformEvents <: windows_core.HandleWinrtType<Windows_Win32_System_Threading_IRtwqPlatformEvents> {
-    public static func intoWinrtHandle(value: Windows_Win32_System_Threading_IRtwqPlatformEvents): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func intoOwnedWinrtHandle(value: Windows_Win32_System_Threading_IRtwqPlatformEvents): CPointer<Unit> {
-        let raw = value.asRaw()
-        if (raw.isNull()) {
-            return CPointer<Unit>()
-        }
-        Windows_Win32_System_Threading_IRtwqPlatformEvents.addRefRaw(raw)
-        raw
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Threading_IRtwqPlatformEvents {
-        Windows_Win32_System_Threading_IRtwqPlatformEvents(raw, takeOwnership: true)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Threading_IRtwqPlatformEvents {
-        Windows_Win32_System_Threading_IRtwqPlatformEvents(raw, takeOwnership: false)
-    }
-
-    public static func cloneWinrtValue(value: Windows_Win32_System_Threading_IRtwqPlatformEvents): Windows_Win32_System_Threading_IRtwqPlatformEvents {
-        let raw = Windows_Win32_System_Threading_IRtwqPlatformEvents.intoOwnedWinrtHandle(value)
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_Win32_System_Threading_IRtwqPlatformEvents(raw, takeOwnership: true)
-    }
-}
-
-// Windows.Win32.System.Threading.IRtwqPlatformEventsVtbl (synthetic:Windows_Win32_System_Threading_IRtwqPlatformEventsVtbl)
-@C
-public struct Windows_Win32_System_Threading_IRtwqPlatformEventsVtbl {
-    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
-    public var InitializationComplete: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
-    public var ShutdownStart: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
-    public var ShutdownComplete: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
-    public init() {}
-}
-
-// Windows.Win32.System.Threading.LPFIBER_START_ROUTINE (synthetic:Windows_Win32_System_Threading_LPFIBER_START_ROUTINE)
-public type Windows_Win32_System_Threading_LPFIBER_START_ROUTINE = CFunc<(CPointer<Unit>) -> Unit>
-
-// Windows.Win32.System.Threading.LPPROC_THREAD_ATTRIBUTE_LIST (synthetic:Windows_Win32_System_Threading_LPPROC_THREAD_ATTRIBUTE_LIST)
-@C
-public struct Windows_Win32_System_Threading_LPPROC_THREAD_ATTRIBUTE_LIST {
-    public var Value: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.System.Threading.LPTHREAD_START_ROUTINE (synthetic:Windows_Win32_System_Threading_LPTHREAD_START_ROUTINE)
-public type Windows_Win32_System_Threading_LPTHREAD_START_ROUTINE = CFunc<(CPointer<Unit>) -> UInt32>
-
-// Windows.Win32.System.Threading.MACHINE_ATTRIBUTES (synthetic:Windows_Win32_System_Threading_MACHINE_ATTRIBUTES)
-public type Windows_Win32_System_Threading_MACHINE_ATTRIBUTES = Int32
-public let Windows_Win32_System_Threading_MACHINE_ATTRIBUTES_UserEnabled: Windows_Win32_System_Threading_MACHINE_ATTRIBUTES = 1
-public let Windows_Win32_System_Threading_MACHINE_ATTRIBUTES_KernelEnabled: Windows_Win32_System_Threading_MACHINE_ATTRIBUTES = 2
-public let Windows_Win32_System_Threading_MACHINE_ATTRIBUTES_Wow64Container: Windows_Win32_System_Threading_MACHINE_ATTRIBUTES = 4
-
-// Windows.Win32.System.Threading.MEMORY_PRIORITY (synthetic:Windows_Win32_System_Threading_MEMORY_PRIORITY)
-public type Windows_Win32_System_Threading_MEMORY_PRIORITY = UInt32
-public let Windows_Win32_System_Threading_MEMORY_PRIORITY_MEMORY_PRIORITY_VERY_LOW: Windows_Win32_System_Threading_MEMORY_PRIORITY = 1
-public let Windows_Win32_System_Threading_MEMORY_PRIORITY_MEMORY_PRIORITY_LOW: Windows_Win32_System_Threading_MEMORY_PRIORITY = 2
-public let Windows_Win32_System_Threading_MEMORY_PRIORITY_MEMORY_PRIORITY_MEDIUM: Windows_Win32_System_Threading_MEMORY_PRIORITY = 3
-public let Windows_Win32_System_Threading_MEMORY_PRIORITY_MEMORY_PRIORITY_BELOW_NORMAL: Windows_Win32_System_Threading_MEMORY_PRIORITY = 4
-public let Windows_Win32_System_Threading_MEMORY_PRIORITY_MEMORY_PRIORITY_NORMAL: Windows_Win32_System_Threading_MEMORY_PRIORITY = 5
-
-// Windows.Win32.System.Threading.MEMORY_PRIORITY_INFORMATION (synthetic:Windows_Win32_System_Threading_MEMORY_PRIORITY_INFORMATION)
-@C
-public struct Windows_Win32_System_Threading_MEMORY_PRIORITY_INFORMATION {
-    public var MemoryPriority: UInt32 = 0u32
-}
-
-// Windows.Win32.System.Threading.OVERRIDE_PREFETCH_PARAMETER (synthetic:Windows_Win32_System_Threading_OVERRIDE_PREFETCH_PARAMETER)
-public type Windows_Win32_System_Threading_OVERRIDE_PREFETCH_PARAMETER = UInt32
-
-// Windows.Win32.System.Threading.PEB (synthetic:Windows_Win32_System_Threading_PEB)
-@C
-public struct Windows_Win32_System_Threading_PEB {
-    public var Reserved1: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
-    public var BeingDebugged: UInt8 = 0u8
-    public var Reserved2: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
-    public var Reserved3: VArray<CPointer<Unit>, $2> = VArray<CPointer<Unit>, $2>(repeat: CPointer<Unit>())
-    public var Ldr: CPointer<Unit> = CPointer<Unit>()
-    public var ProcessParameters: CPointer<Unit> = CPointer<Unit>()
-    public var Reserved4: VArray<CPointer<Unit>, $3> = VArray<CPointer<Unit>, $3>(repeat: CPointer<Unit>())
-    public var AtlThunkSListPtr: CPointer<Unit> = CPointer<Unit>()
-    public var Reserved5: CPointer<Unit> = CPointer<Unit>()
-    public var Reserved6: UInt32 = 0u32
-    public var Reserved7: CPointer<Unit> = CPointer<Unit>()
-    public var Reserved8: UInt32 = 0u32
-    public var AtlThunkSListPtr32: UInt32 = 0u32
-    public var Reserved9: VArray<CPointer<Unit>, $45> = VArray<CPointer<Unit>, $45>(repeat: CPointer<Unit>())
-    public var Reserved10: VArray<UInt8, $96> = VArray<UInt8, $96>(repeat: 0u8)
-    public var PostProcessInitRoutine: CFunc<() -> Unit> = CFunc<() -> Unit>(CPointer<Unit>())
-    public var Reserved11: VArray<UInt8, $128> = VArray<UInt8, $128>(repeat: 0u8)
-    public var Reserved12: VArray<CPointer<Unit>, $1> = VArray<CPointer<Unit>, $1>(repeat: CPointer<Unit>())
-    public var SessionId: UInt32 = 0u32
-}
-
-// Windows.Win32.System.Threading.PEB_LDR_DATA (synthetic:Windows_Win32_System_Threading_PEB_LDR_DATA)
-@C
-public struct Windows_Win32_System_Threading_PEB_LDR_DATA {
-    public var Reserved1: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
-    public var Reserved2: VArray<CPointer<Unit>, $3> = VArray<CPointer<Unit>, $3>(repeat: CPointer<Unit>())
-    public var InMemoryOrderModuleList: Windows_Win32_System_Kernel_LIST_ENTRY = Windows_Win32_System_Kernel_LIST_ENTRY()
-}
-
-// Windows.Win32.System.Threading.PFLS_CALLBACK_FUNCTION (synthetic:Windows_Win32_System_Threading_PFLS_CALLBACK_FUNCTION)
-public type Windows_Win32_System_Threading_PFLS_CALLBACK_FUNCTION = CFunc<(CPointer<Unit>) -> Unit>
-
-// Windows.Win32.System.Threading.PINIT_ONCE_FN (synthetic:Windows_Win32_System_Threading_PINIT_ONCE_FN)
-public type Windows_Win32_System_Threading_PINIT_ONCE_FN = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>
-
-// Windows.Win32.System.Threading.POWER_REQUEST_CONTEXT_FLAGS (synthetic:Windows_Win32_System_Threading_POWER_REQUEST_CONTEXT_FLAGS)
-public type Windows_Win32_System_Threading_POWER_REQUEST_CONTEXT_FLAGS = UInt32
-public let Windows_Win32_System_Threading_POWER_REQUEST_CONTEXT_FLAGS_POWER_REQUEST_CONTEXT_DETAILED_STRING: Windows_Win32_System_Threading_POWER_REQUEST_CONTEXT_FLAGS = 2
-public let Windows_Win32_System_Threading_POWER_REQUEST_CONTEXT_FLAGS_POWER_REQUEST_CONTEXT_SIMPLE_STRING: Windows_Win32_System_Threading_POWER_REQUEST_CONTEXT_FLAGS = 1
-
-// Windows.Win32.System.Threading.PPS_POST_PROCESS_INIT_ROUTINE (synthetic:Windows_Win32_System_Threading_PPS_POST_PROCESS_INIT_ROUTINE)
-public type Windows_Win32_System_Threading_PPS_POST_PROCESS_INIT_ROUTINE = CFunc<() -> Unit>
-
-// Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID (synthetic:Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID)
-public type Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = UInt32
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_FLOATING_POINT_PRECISION_ERRATA: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 0
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_FLOATING_POINT_EMULATED: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 1
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_COMPARE_EXCHANGE_DOUBLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 2
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_MMX_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 3
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_PPC_MOVEMEM_64BIT_OK: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 4
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ALPHA_BYTE_INSTRUCTIONS: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 5
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_XMMI_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 6
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_3DNOW_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 7
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_RDTSC_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 8
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_PAE_ENABLED: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 9
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_XMMI64_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 10
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_SSE_DAZ_MODE_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 11
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_NX_ENABLED: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 12
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_SSE3_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 13
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_COMPARE_EXCHANGE128: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 14
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_COMPARE64_EXCHANGE128: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 15
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_CHANNELS_ENABLED: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 16
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_XSAVE_ENABLED: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 17
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_VFP_32_REGISTERS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 18
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_NEON_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 19
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_SECOND_LEVEL_ADDRESS_TRANSLATION: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 20
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_VIRT_FIRMWARE_ENABLED: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 21
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_RDWRFSGSBASE_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 22
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_FASTFAIL_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 23
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_DIVIDE_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 24
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_64BIT_LOADSTORE_ATOMIC: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 25
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_EXTERNAL_CACHE_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 26
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_FMAC_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 27
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_RDRAND_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 28
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V8_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 29
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V8_CRYPTO_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 30
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V8_CRC32_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 31
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_RDTSCP_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 32
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_RDPID_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 33
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V81_ATOMIC_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 34
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_MONITORX_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 35
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_SSSE3_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 36
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_SSE4_1_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 37
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_SSE4_2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 38
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_AVX_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 39
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_AVX2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 40
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_AVX512F_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 41
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ERMS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 42
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V82_DP_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 43
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V83_JSCVT_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 44
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V83_LRCPC_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 45
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 46
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 47
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE2_1_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 48
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_AES_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 49
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_PMULL128_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 50
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_BITPERM_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 51
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_BF16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 52
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_EBF16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 53
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_B16B16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 54
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_SHA3_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 55
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_SM4_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 56
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_I8MM_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 57
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_F32MM_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 58
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_F64MM_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 59
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_BMI2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 60
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_MOVDIR64B_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 61
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_LSE2_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 62
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_RESERVED_FEATURE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 63
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SHA3_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 64
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SHA512_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 65
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V82_I8MM_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 66
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V82_FP16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 67
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V86_BF16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 68
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V86_EBF16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 69
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 70
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 71
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME2_1_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 72
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME2_2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 73
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_AES_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 74
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_SBITPERM_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 75
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_SF8MM4_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 76
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_SF8MM8_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 77
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_SF8DP2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 78
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_SF8DP4_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 79
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_SF8FMA_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 80
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_F8F32_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 81
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_F8F16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 82
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_F16F16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 83
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_B16B16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 84
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_F64F64_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 85
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_I16I64_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 86
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_LUTv2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 87
-public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 88
-
-// Windows.Win32.System.Threading.PROCESS_ACCESS_RIGHTS (synthetic:Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS)
-public type Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = UInt32
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_TERMINATE: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 1
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_CREATE_THREAD: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 2
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_SET_SESSIONID: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 4
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_VM_OPERATION: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 8
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_VM_READ: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 16
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_VM_WRITE: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 32
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_DUP_HANDLE: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 64
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_CREATE_PROCESS: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 128
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_SET_QUOTA: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 256
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_SET_INFORMATION: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 512
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_QUERY_INFORMATION: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 1024
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_SUSPEND_RESUME: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 2048
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_QUERY_LIMITED_INFORMATION: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 4096
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_SET_LIMITED_INFORMATION: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 8192
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_ALL_ACCESS: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 2097151
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_DELETE: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 65536
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_READ_CONTROL: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 131072
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_WRITE_DAC: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 262144
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_WRITE_OWNER: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 524288
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_SYNCHRONIZE: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 1048576
-public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_STANDARD_RIGHTS_REQUIRED: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 983040
-
-// Windows.Win32.System.Threading.PROCESS_AFFINITY_AUTO_UPDATE_FLAGS (synthetic:Windows_Win32_System_Threading_PROCESS_AFFINITY_AUTO_UPDATE_FLAGS)
-public type Windows_Win32_System_Threading_PROCESS_AFFINITY_AUTO_UPDATE_FLAGS = UInt32
-public let Windows_Win32_System_Threading_PROCESS_AFFINITY_AUTO_UPDATE_FLAGS_PROCESS_AFFINITY_DISABLE_AUTO_UPDATE: Windows_Win32_System_Threading_PROCESS_AFFINITY_AUTO_UPDATE_FLAGS = 0
-public let Windows_Win32_System_Threading_PROCESS_AFFINITY_AUTO_UPDATE_FLAGS_PROCESS_AFFINITY_ENABLE_AUTO_UPDATE: Windows_Win32_System_Threading_PROCESS_AFFINITY_AUTO_UPDATE_FLAGS = 1
-
-// Windows.Win32.System.Threading.PROCESS_BASIC_INFORMATION (synthetic:Windows_Win32_System_Threading_PROCESS_BASIC_INFORMATION)
-@C
-public struct Windows_Win32_System_Threading_PROCESS_BASIC_INFORMATION {
-    public var ExitStatus: Int32 = 0i32
-    public var PebBaseAddress: CPointer<Unit> = CPointer<Unit>()
-    public var AffinityMask: CPointer<Unit> = CPointer<Unit>()
-    public var BasePriority: Int32 = 0i32
-    public var UniqueProcessId: CPointer<Unit> = CPointer<Unit>()
-    public var InheritedFromUniqueProcessId: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.System.Threading.PROCESS_CREATION_FLAGS (synthetic:Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS)
-public type Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = UInt32
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_DEBUG_PROCESS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 1
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_DEBUG_ONLY_THIS_PROCESS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 2
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_SUSPENDED: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 4
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_DETACHED_PROCESS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 8
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_NEW_CONSOLE: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 16
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_NORMAL_PRIORITY_CLASS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 32
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_IDLE_PRIORITY_CLASS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 64
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_HIGH_PRIORITY_CLASS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 128
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_REALTIME_PRIORITY_CLASS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 256
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_NEW_PROCESS_GROUP: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 512
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_UNICODE_ENVIRONMENT: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 1024
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_SEPARATE_WOW_VDM: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 2048
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_SHARED_WOW_VDM: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 4096
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_FORCEDOS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 8192
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_BELOW_NORMAL_PRIORITY_CLASS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 16384
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_ABOVE_NORMAL_PRIORITY_CLASS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 32768
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_INHERIT_PARENT_AFFINITY: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 65536
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_INHERIT_CALLER_PRIORITY: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 131072
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_PROTECTED_PROCESS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 262144
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_EXTENDED_STARTUPINFO_PRESENT: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 524288
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_PROCESS_MODE_BACKGROUND_BEGIN: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 1048576
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_PROCESS_MODE_BACKGROUND_END: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 2097152
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_SECURE_PROCESS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 4194304
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_BREAKAWAY_FROM_JOB: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 16777216
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_PRESERVE_CODE_AUTHZ_LEVEL: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 33554432
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_DEFAULT_ERROR_MODE: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 67108864
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_NO_WINDOW: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 134217728
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_PROFILE_USER: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 268435456
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_PROFILE_KERNEL: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 536870912
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_PROFILE_SERVER: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 1073741824
-public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_IGNORE_SYSTEM_DEFAULT: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 2147483648
-
-// Windows.Win32.System.Threading.PROCESS_DEP_FLAGS (synthetic:Windows_Win32_System_Threading_PROCESS_DEP_FLAGS)
-public type Windows_Win32_System_Threading_PROCESS_DEP_FLAGS = UInt32
-public let Windows_Win32_System_Threading_PROCESS_DEP_FLAGS_PROCESS_DEP_ENABLE: Windows_Win32_System_Threading_PROCESS_DEP_FLAGS = 1
-public let Windows_Win32_System_Threading_PROCESS_DEP_FLAGS_PROCESS_DEP_DISABLE_ATL_THUNK_EMULATION: Windows_Win32_System_Threading_PROCESS_DEP_FLAGS = 2
-public let Windows_Win32_System_Threading_PROCESS_DEP_FLAGS_PROCESS_DEP_NONE: Windows_Win32_System_Threading_PROCESS_DEP_FLAGS = 0
-
-// Windows.Win32.System.Threading.PROCESS_DYNAMIC_EH_CONTINUATION_TARGET (synthetic:Windows_Win32_System_Threading_PROCESS_DYNAMIC_EH_CONTINUATION_TARGET)
-@C
-public struct Windows_Win32_System_Threading_PROCESS_DYNAMIC_EH_CONTINUATION_TARGET {
-    public var TargetAddress: CPointer<Unit> = CPointer<Unit>()
-    public var Flags: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.System.Threading.PROCESS_DYNAMIC_EH_CONTINUATION_TARGETS_INFORMATION (synthetic:Windows_Win32_System_Threading_PROCESS_DYNAMIC_EH_CONTINUATION_TARGETS_INFORMATION)
-@C
-public struct Windows_Win32_System_Threading_PROCESS_DYNAMIC_EH_CONTINUATION_TARGETS_INFORMATION {
-    public var NumberOfTargets: UInt16 = 0u16
-    public var Reserved: UInt16 = 0u16
-    public var Reserved2: UInt32 = 0u32
-    public var Targets: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.System.Threading.PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE (synthetic:Windows_Win32_System_Threading_PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE)
-@C
-public struct Windows_Win32_System_Threading_PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE {
-    public var BaseAddress: CPointer<Unit> = CPointer<Unit>()
-    public var Size: CPointer<Unit> = CPointer<Unit>()
-    public var Flags: UInt32 = 0u32
-}
-
-// Windows.Win32.System.Threading.PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGES_INFORMATION (synthetic:Windows_Win32_System_Threading_PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGES_INFORMATION)
-@C
-public struct Windows_Win32_System_Threading_PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGES_INFORMATION {
-    public var NumberOfRanges: UInt16 = 0u16
-    public var Reserved: UInt16 = 0u16
-    public var Reserved2: UInt32 = 0u32
-    public var Ranges: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.System.Threading.PROCESS_INFORMATION (synthetic:Windows_Win32_System_Threading_PROCESS_INFORMATION)
-@C
-public struct Windows_Win32_System_Threading_PROCESS_INFORMATION {
-    public var hProcess: Windows_Win32_Foundation_HANDLE = Windows_Win32_Foundation_HANDLE()
-    public var hThread: Windows_Win32_Foundation_HANDLE = Windows_Win32_Foundation_HANDLE()
-    public var dwProcessId: UInt32 = 0u32
-    public var dwThreadId: UInt32 = 0u32
-}
-
-// Windows.Win32.System.Threading.PROCESS_INFORMATION_CLASS (synthetic:Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS)
-public type Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = Int32
-public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessMemoryPriority: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 0
-public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessMemoryExhaustionInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 1
-public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessAppMemoryInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 2
-public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessInPrivateInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 3
-public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessPowerThrottling: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 4
-public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessReservedValue1: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 5
-public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessTelemetryCoverageInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 6
-public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessProtectionLevelInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 7
-public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessLeapSecondInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 8
-public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessMachineTypeInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 9
-public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessOverrideSubsequentPrefetchParameter: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 10
-public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessMaxOverridePrefetchParameter: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 11
-public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessInformationClassMax: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 12
-
-// Windows.Win32.System.Threading.PROCESS_LEAP_SECOND_INFO (synthetic:Windows_Win32_System_Threading_PROCESS_LEAP_SECOND_INFO)
-@C
-public struct Windows_Win32_System_Threading_PROCESS_LEAP_SECOND_INFO {
-    public var Flags: UInt32 = 0u32
-    public var Reserved: UInt32 = 0u32
-}
-
-// Windows.Win32.System.Threading.PROCESS_MACHINE_INFORMATION (synthetic:Windows_Win32_System_Threading_PROCESS_MACHINE_INFORMATION)
-@C
-public struct Windows_Win32_System_Threading_PROCESS_MACHINE_INFORMATION {
-    public var ProcessMachine: UInt16 = 0u16
-    public var Res0: UInt16 = 0u16
-    public var MachineAttributes: Int32 = 0i32
-}
-
-// Windows.Win32.System.Threading.PROCESS_MEMORY_EXHAUSTION_INFO (synthetic:Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_INFO)
-@C
-public struct Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_INFO {
-    public var Version: UInt16 = 0u16
-    public var Reserved: UInt16 = 0u16
-    public var Type: Int32 = 0i32
-    public var Value: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.System.Threading.PROCESS_MEMORY_EXHAUSTION_TYPE (synthetic:Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_TYPE)
-public type Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_TYPE = Int32
-public let Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_TYPE_PMETypeFailFastOnCommitFailure: Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_TYPE = 0
-public let Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_TYPE_PMETypeMax: Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_TYPE = 1
-
-// Windows.Win32.System.Threading.PROCESS_MITIGATION_POLICY (synthetic:Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY)
-public type Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = Int32
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessDEPPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 0
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessASLRPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 1
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessDynamicCodePolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 2
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessStrictHandleCheckPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 3
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessSystemCallDisablePolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 4
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessMitigationOptionsMask: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 5
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessExtensionPointDisablePolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 6
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessControlFlowGuardPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 7
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessSignaturePolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 8
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessFontDisablePolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 9
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessImageLoadPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 10
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessSystemCallFilterPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 11
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessPayloadRestrictionPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 12
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessChildProcessPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 13
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessSideChannelIsolationPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 14
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessUserShadowStackPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 15
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessRedirectionTrustPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 16
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessUserPointerAuthPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 17
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessSEHOPPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 18
-public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_MaxProcessMitigationPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 19
-
-// Windows.Win32.System.Threading.PROCESS_NAME_FORMAT (synthetic:Windows_Win32_System_Threading_PROCESS_NAME_FORMAT)
-public type Windows_Win32_System_Threading_PROCESS_NAME_FORMAT = UInt32
-public let Windows_Win32_System_Threading_PROCESS_NAME_FORMAT_PROCESS_NAME_WIN32: Windows_Win32_System_Threading_PROCESS_NAME_FORMAT = 0
-public let Windows_Win32_System_Threading_PROCESS_NAME_FORMAT_PROCESS_NAME_NATIVE: Windows_Win32_System_Threading_PROCESS_NAME_FORMAT = 1
-
-// Windows.Win32.System.Threading.PROCESS_POWER_THROTTLING_STATE (synthetic:Windows_Win32_System_Threading_PROCESS_POWER_THROTTLING_STATE)
-@C
-public struct Windows_Win32_System_Threading_PROCESS_POWER_THROTTLING_STATE {
-    public var Version: UInt32 = 0u32
-    public var ControlMask: UInt32 = 0u32
-    public var StateMask: UInt32 = 0u32
-}

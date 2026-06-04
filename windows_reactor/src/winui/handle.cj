@@ -96,9 +96,9 @@ public enum Handle {
     | RichEditBoxH(RichEditBox)
     | RelativePanelH(RelativePanel)
     | ToggleButtonH(ToggleButton)
-    // SwapChainPanel is not in the curated windows_common projection, so its
-    // backing object is the local SwapChainPanelControl (see winui/swap_chain.cj),
-    // not a generated projection class.
+    // SwapChainPanel's backing object is SwapChainPanelControl (see
+    // winui/swap_chain.cj), a thin wrapper over the generated windows_common
+    // SwapChainPanel projection (it adds the canvas-specific interop surface).
     | SwapChainPanelH(SwapChainPanelControl)
 
     // Raw identity (defaultInterface) pointer for QI / vtable use. Non-owning.
@@ -546,10 +546,10 @@ public func makeHandleForKind(kind: ControlKind): Handle {
         case RelativePanel => Handle.RelativePanelH(makeComposable(RelativePanel.CreateInstance))
         case ToggleButton => Handle.ToggleButtonH(makeComposable(ToggleButton.CreateInstance))
 
-        // ── local-vtbl activation (SwapChainPanel is not in windows_common) ────
-        // Activated by runtime-class name through its composition factory; see
-        // winui/swap_chain.cj for why this is a local fallback rather than a
-        // generated projection class.
+        // ── composable (CreateInstance with null base), via SwapChainPanelControl ─
+        // SwapChainPanelControl.create() activates the generated windows_common
+        // SwapChainPanel projection through its composition factory (makeComposable);
+        // see winui/swap_chain.cj.
         case SwapChainPanel => Handle.SwapChainPanelH(SwapChainPanelControl.create())
     }
 }

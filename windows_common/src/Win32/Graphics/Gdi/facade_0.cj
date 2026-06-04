@@ -2,9 +2,10 @@
 
 package windows_common.Win32.Graphics.Gdi
 
-import windows_common.impl.{Windows_Win32_Graphics_Gdi_HBITMAP, Windows_Win32_Graphics_Gdi_HENHMETAFILE, Windows_Win32_Graphics_Gdi_LOGPALETTE, Windows_Win32_Graphics_Gdi_PALETTEENTRY}
+import windows_common.impl.{Windows_Win32_Graphics_Gdi_HBITMAP, Windows_Win32_Graphics_Gdi_HENHMETAFILE, Windows_Win32_Graphics_Gdi_HMONITOR, Windows_Win32_Graphics_Gdi_LOGPALETTE, Windows_Win32_Graphics_Gdi_PALETTEENTRY}
 
 public type HBITMAP = Windows_Win32_Graphics_Gdi_HBITMAP
 public type HENHMETAFILE = Windows_Win32_Graphics_Gdi_HENHMETAFILE
+public type HMONITOR = Windows_Win32_Graphics_Gdi_HMONITOR
 public type LOGPALETTE = Windows_Win32_Graphics_Gdi_LOGPALETTE
 public type PALETTEENTRY = Windows_Win32_Graphics_Gdi_PALETTEENTRY

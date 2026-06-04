@@ -9,6 +9,2404 @@ import windows_interface.IInspectable
 import windows_interface.macros.Interface
 import windows_polyfill as windows_polyfill
 
+// Windows.UI.Composition.AmbientLight (synthetic:Windows_UI_Composition_AmbientLight)
+public class Windows_UI_Composition_AmbientLight <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_AmbientLight {
+        Windows_UI_Composition_AmbientLight(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_AmbientLight {
+        Windows_UI_Composition_AmbientLight(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_UI_Composition_IAmbientLight.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_AmbientLight> {
+        let ancestors = [Windows_UI_Composition_IAmbientLight.iid(), Windows_UI_Composition_IAmbientLight2.iid(), Windows_UI_Composition_ICompositionLight.iid(), Windows_UI_Composition_ICompositionLight2.iid(), Windows_UI_Composition_ICompositionLight3.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_AmbientLight>("AmbientLight", Windows_UI_Composition_IAmbientLight.iid(), ancestors, { raw => Windows_UI_Composition_AmbientLight.fromAbiTake(raw) }, { raw => Windows_UI_Composition_AmbientLight.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_UI_Composition_IAmbientLight {
+        match (unsafe { query(Windows_UI_Composition_IAmbientLight.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAmbientLight(): Windows_UI_Composition_IAmbientLight {
+        defaultInterface()
+    }
+
+    public func asIAmbientLight2(): Windows_UI_Composition_IAmbientLight2 {
+        match (unsafe { query<Windows_UI_Composition_IAmbientLight2>(Windows_UI_Composition_IAmbientLight2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionLight(): Windows_UI_Composition_ICompositionLight {
+        match (unsafe { query<Windows_UI_Composition_ICompositionLight>(Windows_UI_Composition_ICompositionLight.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionLight2(): Windows_UI_Composition_ICompositionLight2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionLight2>(Windows_UI_Composition_ICompositionLight2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionLight3(): Windows_UI_Composition_ICompositionLight3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionLight3>(Windows_UI_Composition_ICompositionLight3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation_IClosable {
+        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
+        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Color: Windows_UI_Color {
+        get() {
+            var result__ = Windows_UI_Color()
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Color(CPointer<Windows_UI_Color>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetColor(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.AmbientLight"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.AmbientLight;{" + Windows_UI_Composition_IAmbientLight.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.AmbientLight", Windows_UI_Composition_AmbientLight.signature(), Windows_UI_Composition_IAmbientLight.iid())
+    }
+}
+
+extend Windows_UI_Composition_AmbientLight <: windows_core.HandleWinrtType<Windows_UI_Composition_AmbientLight> {
+    public static func intoWinrtHandle(value: Windows_UI_Composition_AmbientLight): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_AmbientLight {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_UI_Composition_AmbientLight.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_AmbientLight {
+        Windows_UI_Composition_AmbientLight.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.AnimationController (synthetic:Windows_UI_Composition_AnimationController)
+public class Windows_UI_Composition_AnimationController <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_AnimationController {
+        Windows_UI_Composition_AnimationController(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_AnimationController {
+        Windows_UI_Composition_AnimationController(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_UI_Composition_IAnimationController.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_AnimationController> {
+        let ancestors = [Windows_UI_Composition_IAnimationController.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_AnimationController>("AnimationController", Windows_UI_Composition_IAnimationController.iid(), ancestors, { raw => Windows_UI_Composition_AnimationController.fromAbiTake(raw) }, { raw => Windows_UI_Composition_AnimationController.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_UI_Composition_IAnimationController {
+        match (unsafe { query(Windows_UI_Composition_IAnimationController.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAnimationController(): Windows_UI_Composition_IAnimationController {
+        defaultInterface()
+    }
+
+    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation_IClosable {
+        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
+        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop PlaybackRate: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.PlaybackRate(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetPlaybackRate(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Progress: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Progress(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetProgress(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop ProgressBehavior: Windows_UI_Composition_AnimationControllerProgressBehavior {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ProgressBehavior(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_UI_Composition_AnimationControllerProgressBehavior(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetProgressBehavior(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func Pause(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Pause() }
+        }
+        hr__.check()
+    }
+
+    public func Resume(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.Resume() }
+        }
+        hr__.check()
+    }
+
+    public static func MaxPlaybackRate(): Float32 {
+        var result__ = 0.0f32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Windows_UI_Composition_AnimationController, Windows_UI_Composition_IAnimationControllerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MaxPlaybackRate(CPointer<Float32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func MinPlaybackRate(): Float32 {
+        var result__ = 0.0f32
+        var hr__ = windows_core.E_POINTER
+        try (factory__ = windows_core.factory<Windows_UI_Composition_AnimationController, Windows_UI_Composition_IAnimationControllerStatics>().unwrap()) {
+            hr__ = unsafe { factory__.MinPlaybackRate(CPointer<Float32>(inout result__)) }
+        }
+        hr__.check()
+        return result__
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.AnimationController"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.AnimationController;{" + Windows_UI_Composition_IAnimationController.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.AnimationController", Windows_UI_Composition_AnimationController.signature(), Windows_UI_Composition_IAnimationController.iid())
+    }
+}
+
+extend Windows_UI_Composition_AnimationController <: windows_core.HandleWinrtType<Windows_UI_Composition_AnimationController> {
+    public static func intoWinrtHandle(value: Windows_UI_Composition_AnimationController): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_AnimationController {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_UI_Composition_AnimationController.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_AnimationController {
+        Windows_UI_Composition_AnimationController.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.AnimationControllerProgressBehavior (synthetic:Windows_UI_Composition_AnimationControllerProgressBehavior)
+public struct Windows_UI_Composition_AnimationControllerProgressBehavior {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Windows_UI_Composition_AnimationControllerProgressBehavior_Default = Windows_UI_Composition_AnimationControllerProgressBehavior(0)
+public let Windows_UI_Composition_AnimationControllerProgressBehavior_IncludesDelayTime = Windows_UI_Composition_AnimationControllerProgressBehavior(1)
+
+// Windows.UI.Composition.AnimationDelayBehavior (synthetic:Windows_UI_Composition_AnimationDelayBehavior)
+public struct Windows_UI_Composition_AnimationDelayBehavior {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Windows_UI_Composition_AnimationDelayBehavior_SetInitialValueAfterDelay = Windows_UI_Composition_AnimationDelayBehavior(0)
+public let Windows_UI_Composition_AnimationDelayBehavior_SetInitialValueBeforeDelay = Windows_UI_Composition_AnimationDelayBehavior(1)
+
+// Windows.UI.Composition.AnimationDirection (synthetic:Windows_UI_Composition_AnimationDirection)
+public struct Windows_UI_Composition_AnimationDirection {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Windows_UI_Composition_AnimationDirection_Normal = Windows_UI_Composition_AnimationDirection(0)
+public let Windows_UI_Composition_AnimationDirection_Reverse = Windows_UI_Composition_AnimationDirection(1)
+public let Windows_UI_Composition_AnimationDirection_Alternate = Windows_UI_Composition_AnimationDirection(2)
+public let Windows_UI_Composition_AnimationDirection_AlternateReverse = Windows_UI_Composition_AnimationDirection(3)
+
+// Windows.UI.Composition.AnimationIterationBehavior (synthetic:Windows_UI_Composition_AnimationIterationBehavior)
+public struct Windows_UI_Composition_AnimationIterationBehavior {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Windows_UI_Composition_AnimationIterationBehavior_Count = Windows_UI_Composition_AnimationIterationBehavior(0)
+public let Windows_UI_Composition_AnimationIterationBehavior_Forever = Windows_UI_Composition_AnimationIterationBehavior(1)
+
+// Windows.UI.Composition.AnimationPropertyAccessMode (synthetic:Windows_UI_Composition_AnimationPropertyAccessMode)
+public struct Windows_UI_Composition_AnimationPropertyAccessMode {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Windows_UI_Composition_AnimationPropertyAccessMode_None = Windows_UI_Composition_AnimationPropertyAccessMode(0)
+public let Windows_UI_Composition_AnimationPropertyAccessMode_ReadOnly = Windows_UI_Composition_AnimationPropertyAccessMode(1)
+public let Windows_UI_Composition_AnimationPropertyAccessMode_WriteOnly = Windows_UI_Composition_AnimationPropertyAccessMode(2)
+public let Windows_UI_Composition_AnimationPropertyAccessMode_ReadWrite = Windows_UI_Composition_AnimationPropertyAccessMode(3)
+
+// Windows.UI.Composition.AnimationPropertyInfo (synthetic:Windows_UI_Composition_AnimationPropertyInfo)
+public class Windows_UI_Composition_AnimationPropertyInfo <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_AnimationPropertyInfo {
+        Windows_UI_Composition_AnimationPropertyInfo(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_AnimationPropertyInfo {
+        Windows_UI_Composition_AnimationPropertyInfo(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_UI_Composition_IAnimationPropertyInfo.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_AnimationPropertyInfo> {
+        let ancestors = [Windows_UI_Composition_IAnimationPropertyInfo.iid(), Windows_UI_Composition_IAnimationPropertyInfo2.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_AnimationPropertyInfo>("AnimationPropertyInfo", Windows_UI_Composition_IAnimationPropertyInfo.iid(), ancestors, { raw => Windows_UI_Composition_AnimationPropertyInfo.fromAbiTake(raw) }, { raw => Windows_UI_Composition_AnimationPropertyInfo.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_UI_Composition_IAnimationPropertyInfo {
+        match (unsafe { query(Windows_UI_Composition_IAnimationPropertyInfo.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIAnimationPropertyInfo(): Windows_UI_Composition_IAnimationPropertyInfo {
+        defaultInterface()
+    }
+
+    public func asIAnimationPropertyInfo2(): Windows_UI_Composition_IAnimationPropertyInfo2 {
+        match (unsafe { query<Windows_UI_Composition_IAnimationPropertyInfo2>(Windows_UI_Composition_IAnimationPropertyInfo2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation_IClosable {
+        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
+        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop AccessMode: Windows_UI_Composition_AnimationPropertyAccessMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.AccessMode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_UI_Composition_AnimationPropertyAccessMode(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetAccessMode(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.AnimationPropertyInfo"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.AnimationPropertyInfo;{" + Windows_UI_Composition_IAnimationPropertyInfo.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.AnimationPropertyInfo", Windows_UI_Composition_AnimationPropertyInfo.signature(), Windows_UI_Composition_IAnimationPropertyInfo.iid())
+    }
+}
+
+extend Windows_UI_Composition_AnimationPropertyInfo <: windows_core.HandleWinrtType<Windows_UI_Composition_AnimationPropertyInfo> {
+    public static func intoWinrtHandle(value: Windows_UI_Composition_AnimationPropertyInfo): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_AnimationPropertyInfo {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_UI_Composition_AnimationPropertyInfo.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_AnimationPropertyInfo {
+        Windows_UI_Composition_AnimationPropertyInfo.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.AnimationStopBehavior (synthetic:Windows_UI_Composition_AnimationStopBehavior)
+public struct Windows_UI_Composition_AnimationStopBehavior {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Windows_UI_Composition_AnimationStopBehavior_LeaveCurrentValue = Windows_UI_Composition_AnimationStopBehavior(0)
+public let Windows_UI_Composition_AnimationStopBehavior_SetToInitialValue = Windows_UI_Composition_AnimationStopBehavior(1)
+public let Windows_UI_Composition_AnimationStopBehavior_SetToFinalValue = Windows_UI_Composition_AnimationStopBehavior(2)
+
+// Windows.UI.Composition.BackEasingFunction (synthetic:Windows_UI_Composition_BackEasingFunction)
+public class Windows_UI_Composition_BackEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_BackEasingFunction {
+        Windows_UI_Composition_BackEasingFunction(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_BackEasingFunction {
+        Windows_UI_Composition_BackEasingFunction(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_UI_Composition_IBackEasingFunction.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_BackEasingFunction> {
+        let ancestors = [Windows_UI_Composition_IBackEasingFunction.iid(), Windows_UI_Composition_ICompositionEasingFunction.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_BackEasingFunction>("BackEasingFunction", Windows_UI_Composition_IBackEasingFunction.iid(), ancestors, { raw => Windows_UI_Composition_BackEasingFunction.fromAbiTake(raw) }, { raw => Windows_UI_Composition_BackEasingFunction.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_UI_Composition_IBackEasingFunction {
+        match (unsafe { query(Windows_UI_Composition_IBackEasingFunction.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBackEasingFunction(): Windows_UI_Composition_IBackEasingFunction {
+        defaultInterface()
+    }
+
+    public func asICompositionEasingFunction(): Windows_UI_Composition_ICompositionEasingFunction {
+        match (unsafe { query<Windows_UI_Composition_ICompositionEasingFunction>(Windows_UI_Composition_ICompositionEasingFunction.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation_IClosable {
+        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
+        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Amplitude: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Amplitude(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Mode: Windows_UI_Composition_CompositionEasingFunctionMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Mode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_UI_Composition_CompositionEasingFunctionMode(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.BackEasingFunction"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.BackEasingFunction;{" + Windows_UI_Composition_IBackEasingFunction.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.BackEasingFunction", Windows_UI_Composition_BackEasingFunction.signature(), Windows_UI_Composition_IBackEasingFunction.iid())
+    }
+}
+
+extend Windows_UI_Composition_BackEasingFunction <: windows_core.HandleWinrtType<Windows_UI_Composition_BackEasingFunction> {
+    public static func intoWinrtHandle(value: Windows_UI_Composition_BackEasingFunction): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BackEasingFunction {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_UI_Composition_BackEasingFunction.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BackEasingFunction {
+        Windows_UI_Composition_BackEasingFunction.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.BooleanKeyFrameAnimation (synthetic:Windows_UI_Composition_BooleanKeyFrameAnimation)
+public class Windows_UI_Composition_BooleanKeyFrameAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_BooleanKeyFrameAnimation {
+        Windows_UI_Composition_BooleanKeyFrameAnimation(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_BooleanKeyFrameAnimation {
+        Windows_UI_Composition_BooleanKeyFrameAnimation(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_UI_Composition_IBooleanKeyFrameAnimation.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_BooleanKeyFrameAnimation> {
+        let ancestors = [Windows_UI_Composition_IBooleanKeyFrameAnimation.iid(), Windows_UI_Composition_IKeyFrameAnimation.iid(), Windows_UI_Composition_IKeyFrameAnimation2.iid(), Windows_UI_Composition_IKeyFrameAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation2.iid(), Windows_UI_Composition_ICompositionAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation4.iid(), Windows_UI_Composition_ICompositionAnimationBase.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_BooleanKeyFrameAnimation>("BooleanKeyFrameAnimation", Windows_UI_Composition_IBooleanKeyFrameAnimation.iid(), ancestors, { raw => Windows_UI_Composition_BooleanKeyFrameAnimation.fromAbiTake(raw) }, { raw => Windows_UI_Composition_BooleanKeyFrameAnimation.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_UI_Composition_IBooleanKeyFrameAnimation {
+        match (unsafe { query(Windows_UI_Composition_IBooleanKeyFrameAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBooleanKeyFrameAnimation(): Windows_UI_Composition_IBooleanKeyFrameAnimation {
+        defaultInterface()
+    }
+
+    public func asIKeyFrameAnimation(): Windows_UI_Composition_IKeyFrameAnimation {
+        match (unsafe { query<Windows_UI_Composition_IKeyFrameAnimation>(Windows_UI_Composition_IKeyFrameAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIKeyFrameAnimation2(): Windows_UI_Composition_IKeyFrameAnimation2 {
+        match (unsafe { query<Windows_UI_Composition_IKeyFrameAnimation2>(Windows_UI_Composition_IKeyFrameAnimation2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIKeyFrameAnimation3(): Windows_UI_Composition_IKeyFrameAnimation3 {
+        match (unsafe { query<Windows_UI_Composition_IKeyFrameAnimation3>(Windows_UI_Composition_IKeyFrameAnimation3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation(): Windows_UI_Composition_ICompositionAnimation {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation>(Windows_UI_Composition_ICompositionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation2(): Windows_UI_Composition_ICompositionAnimation2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation2>(Windows_UI_Composition_ICompositionAnimation2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation3(): Windows_UI_Composition_ICompositionAnimation3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation3>(Windows_UI_Composition_ICompositionAnimation3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation4(): Windows_UI_Composition_ICompositionAnimation4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation4>(Windows_UI_Composition_ICompositionAnimation4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimationBase(): Windows_UI_Composition_ICompositionAnimationBase {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimationBase>(Windows_UI_Composition_ICompositionAnimationBase.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation_IClosable {
+        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
+        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func InsertKeyFrame(normalizedProgressKey: Float32, value: Bool): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.InsertKeyFrame(normalizedProgressKey, value) }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.BooleanKeyFrameAnimation"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.BooleanKeyFrameAnimation;{" + Windows_UI_Composition_IBooleanKeyFrameAnimation.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.BooleanKeyFrameAnimation", Windows_UI_Composition_BooleanKeyFrameAnimation.signature(), Windows_UI_Composition_IBooleanKeyFrameAnimation.iid())
+    }
+}
+
+extend Windows_UI_Composition_BooleanKeyFrameAnimation <: windows_core.HandleWinrtType<Windows_UI_Composition_BooleanKeyFrameAnimation> {
+    public static func intoWinrtHandle(value: Windows_UI_Composition_BooleanKeyFrameAnimation): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BooleanKeyFrameAnimation {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_UI_Composition_BooleanKeyFrameAnimation.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BooleanKeyFrameAnimation {
+        Windows_UI_Composition_BooleanKeyFrameAnimation.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.BounceEasingFunction (synthetic:Windows_UI_Composition_BounceEasingFunction)
+public class Windows_UI_Composition_BounceEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_BounceEasingFunction {
+        Windows_UI_Composition_BounceEasingFunction(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_BounceEasingFunction {
+        Windows_UI_Composition_BounceEasingFunction(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_UI_Composition_IBounceEasingFunction.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceEasingFunction> {
+        let ancestors = [Windows_UI_Composition_IBounceEasingFunction.iid(), Windows_UI_Composition_ICompositionEasingFunction.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceEasingFunction>("BounceEasingFunction", Windows_UI_Composition_IBounceEasingFunction.iid(), ancestors, { raw => Windows_UI_Composition_BounceEasingFunction.fromAbiTake(raw) }, { raw => Windows_UI_Composition_BounceEasingFunction.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_UI_Composition_IBounceEasingFunction {
+        match (unsafe { query(Windows_UI_Composition_IBounceEasingFunction.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBounceEasingFunction(): Windows_UI_Composition_IBounceEasingFunction {
+        defaultInterface()
+    }
+
+    public func asICompositionEasingFunction(): Windows_UI_Composition_ICompositionEasingFunction {
+        match (unsafe { query<Windows_UI_Composition_ICompositionEasingFunction>(Windows_UI_Composition_ICompositionEasingFunction.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation_IClosable {
+        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
+        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Bounces: Int32 {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Bounces(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Bounciness: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Bounciness(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+    }
+
+    public prop Mode: Windows_UI_Composition_CompositionEasingFunctionMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Mode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_UI_Composition_CompositionEasingFunctionMode(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.BounceEasingFunction"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.BounceEasingFunction;{" + Windows_UI_Composition_IBounceEasingFunction.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.BounceEasingFunction", Windows_UI_Composition_BounceEasingFunction.signature(), Windows_UI_Composition_IBounceEasingFunction.iid())
+    }
+}
+
+extend Windows_UI_Composition_BounceEasingFunction <: windows_core.HandleWinrtType<Windows_UI_Composition_BounceEasingFunction> {
+    public static func intoWinrtHandle(value: Windows_UI_Composition_BounceEasingFunction): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceEasingFunction {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_UI_Composition_BounceEasingFunction.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceEasingFunction {
+        Windows_UI_Composition_BounceEasingFunction.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.BounceScalarNaturalMotionAnimation (synthetic:Windows_UI_Composition_BounceScalarNaturalMotionAnimation)
+public class Windows_UI_Composition_BounceScalarNaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_BounceScalarNaturalMotionAnimation {
+        Windows_UI_Composition_BounceScalarNaturalMotionAnimation(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_BounceScalarNaturalMotionAnimation {
+        Windows_UI_Composition_BounceScalarNaturalMotionAnimation(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_UI_Composition_IBounceScalarNaturalMotionAnimation.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceScalarNaturalMotionAnimation> {
+        let ancestors = [Windows_UI_Composition_IBounceScalarNaturalMotionAnimation.iid(), Windows_UI_Composition_IScalarNaturalMotionAnimation.iid(), Windows_UI_Composition_INaturalMotionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation2.iid(), Windows_UI_Composition_ICompositionAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation4.iid(), Windows_UI_Composition_ICompositionAnimationBase.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceScalarNaturalMotionAnimation>("BounceScalarNaturalMotionAnimation", Windows_UI_Composition_IBounceScalarNaturalMotionAnimation.iid(), ancestors, { raw => Windows_UI_Composition_BounceScalarNaturalMotionAnimation.fromAbiTake(raw) }, { raw => Windows_UI_Composition_BounceScalarNaturalMotionAnimation.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_UI_Composition_IBounceScalarNaturalMotionAnimation {
+        match (unsafe { query(Windows_UI_Composition_IBounceScalarNaturalMotionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBounceScalarNaturalMotionAnimation(): Windows_UI_Composition_IBounceScalarNaturalMotionAnimation {
+        defaultInterface()
+    }
+
+    public func asIScalarNaturalMotionAnimation(): Windows_UI_Composition_IScalarNaturalMotionAnimation {
+        match (unsafe { query<Windows_UI_Composition_IScalarNaturalMotionAnimation>(Windows_UI_Composition_IScalarNaturalMotionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINaturalMotionAnimation(): Windows_UI_Composition_INaturalMotionAnimation {
+        match (unsafe { query<Windows_UI_Composition_INaturalMotionAnimation>(Windows_UI_Composition_INaturalMotionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation(): Windows_UI_Composition_ICompositionAnimation {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation>(Windows_UI_Composition_ICompositionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation2(): Windows_UI_Composition_ICompositionAnimation2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation2>(Windows_UI_Composition_ICompositionAnimation2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation3(): Windows_UI_Composition_ICompositionAnimation3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation3>(Windows_UI_Composition_ICompositionAnimation3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation4(): Windows_UI_Composition_ICompositionAnimation4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation4>(Windows_UI_Composition_ICompositionAnimation4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimationBase(): Windows_UI_Composition_ICompositionAnimationBase {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimationBase>(Windows_UI_Composition_ICompositionAnimationBase.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation_IClosable {
+        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
+        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Acceleration: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Acceleration(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetAcceleration(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Restitution: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Restitution(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetRestitution(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.BounceScalarNaturalMotionAnimation"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.BounceScalarNaturalMotionAnimation;{" + Windows_UI_Composition_IBounceScalarNaturalMotionAnimation.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.BounceScalarNaturalMotionAnimation", Windows_UI_Composition_BounceScalarNaturalMotionAnimation.signature(), Windows_UI_Composition_IBounceScalarNaturalMotionAnimation.iid())
+    }
+}
+
+extend Windows_UI_Composition_BounceScalarNaturalMotionAnimation <: windows_core.HandleWinrtType<Windows_UI_Composition_BounceScalarNaturalMotionAnimation> {
+    public static func intoWinrtHandle(value: Windows_UI_Composition_BounceScalarNaturalMotionAnimation): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceScalarNaturalMotionAnimation {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_UI_Composition_BounceScalarNaturalMotionAnimation.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceScalarNaturalMotionAnimation {
+        Windows_UI_Composition_BounceScalarNaturalMotionAnimation.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.BounceVector2NaturalMotionAnimation (synthetic:Windows_UI_Composition_BounceVector2NaturalMotionAnimation)
+public class Windows_UI_Composition_BounceVector2NaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector2NaturalMotionAnimation {
+        Windows_UI_Composition_BounceVector2NaturalMotionAnimation(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector2NaturalMotionAnimation {
+        Windows_UI_Composition_BounceVector2NaturalMotionAnimation(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_UI_Composition_IBounceVector2NaturalMotionAnimation.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceVector2NaturalMotionAnimation> {
+        let ancestors = [Windows_UI_Composition_IBounceVector2NaturalMotionAnimation.iid(), Windows_UI_Composition_IVector2NaturalMotionAnimation.iid(), Windows_UI_Composition_INaturalMotionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation2.iid(), Windows_UI_Composition_ICompositionAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation4.iid(), Windows_UI_Composition_ICompositionAnimationBase.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceVector2NaturalMotionAnimation>("BounceVector2NaturalMotionAnimation", Windows_UI_Composition_IBounceVector2NaturalMotionAnimation.iid(), ancestors, { raw => Windows_UI_Composition_BounceVector2NaturalMotionAnimation.fromAbiTake(raw) }, { raw => Windows_UI_Composition_BounceVector2NaturalMotionAnimation.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_UI_Composition_IBounceVector2NaturalMotionAnimation {
+        match (unsafe { query(Windows_UI_Composition_IBounceVector2NaturalMotionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBounceVector2NaturalMotionAnimation(): Windows_UI_Composition_IBounceVector2NaturalMotionAnimation {
+        defaultInterface()
+    }
+
+    public func asIVector2NaturalMotionAnimation(): Windows_UI_Composition_IVector2NaturalMotionAnimation {
+        match (unsafe { query<Windows_UI_Composition_IVector2NaturalMotionAnimation>(Windows_UI_Composition_IVector2NaturalMotionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINaturalMotionAnimation(): Windows_UI_Composition_INaturalMotionAnimation {
+        match (unsafe { query<Windows_UI_Composition_INaturalMotionAnimation>(Windows_UI_Composition_INaturalMotionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation(): Windows_UI_Composition_ICompositionAnimation {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation>(Windows_UI_Composition_ICompositionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation2(): Windows_UI_Composition_ICompositionAnimation2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation2>(Windows_UI_Composition_ICompositionAnimation2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation3(): Windows_UI_Composition_ICompositionAnimation3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation3>(Windows_UI_Composition_ICompositionAnimation3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation4(): Windows_UI_Composition_ICompositionAnimation4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation4>(Windows_UI_Composition_ICompositionAnimation4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimationBase(): Windows_UI_Composition_ICompositionAnimationBase {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimationBase>(Windows_UI_Composition_ICompositionAnimationBase.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation_IClosable {
+        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
+        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Acceleration: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Acceleration(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetAcceleration(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Restitution: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Restitution(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetRestitution(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.BounceVector2NaturalMotionAnimation"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.BounceVector2NaturalMotionAnimation;{" + Windows_UI_Composition_IBounceVector2NaturalMotionAnimation.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.BounceVector2NaturalMotionAnimation", Windows_UI_Composition_BounceVector2NaturalMotionAnimation.signature(), Windows_UI_Composition_IBounceVector2NaturalMotionAnimation.iid())
+    }
+}
+
+extend Windows_UI_Composition_BounceVector2NaturalMotionAnimation <: windows_core.HandleWinrtType<Windows_UI_Composition_BounceVector2NaturalMotionAnimation> {
+    public static func intoWinrtHandle(value: Windows_UI_Composition_BounceVector2NaturalMotionAnimation): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector2NaturalMotionAnimation {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_UI_Composition_BounceVector2NaturalMotionAnimation.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector2NaturalMotionAnimation {
+        Windows_UI_Composition_BounceVector2NaturalMotionAnimation.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.BounceVector3NaturalMotionAnimation (synthetic:Windows_UI_Composition_BounceVector3NaturalMotionAnimation)
+public class Windows_UI_Composition_BounceVector3NaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector3NaturalMotionAnimation {
+        Windows_UI_Composition_BounceVector3NaturalMotionAnimation(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector3NaturalMotionAnimation {
+        Windows_UI_Composition_BounceVector3NaturalMotionAnimation(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_UI_Composition_IBounceVector3NaturalMotionAnimation.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceVector3NaturalMotionAnimation> {
+        let ancestors = [Windows_UI_Composition_IBounceVector3NaturalMotionAnimation.iid(), Windows_UI_Composition_IVector3NaturalMotionAnimation.iid(), Windows_UI_Composition_INaturalMotionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation2.iid(), Windows_UI_Composition_ICompositionAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation4.iid(), Windows_UI_Composition_ICompositionAnimationBase.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_BounceVector3NaturalMotionAnimation>("BounceVector3NaturalMotionAnimation", Windows_UI_Composition_IBounceVector3NaturalMotionAnimation.iid(), ancestors, { raw => Windows_UI_Composition_BounceVector3NaturalMotionAnimation.fromAbiTake(raw) }, { raw => Windows_UI_Composition_BounceVector3NaturalMotionAnimation.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_UI_Composition_IBounceVector3NaturalMotionAnimation {
+        match (unsafe { query(Windows_UI_Composition_IBounceVector3NaturalMotionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIBounceVector3NaturalMotionAnimation(): Windows_UI_Composition_IBounceVector3NaturalMotionAnimation {
+        defaultInterface()
+    }
+
+    public func asIVector3NaturalMotionAnimation(): Windows_UI_Composition_IVector3NaturalMotionAnimation {
+        match (unsafe { query<Windows_UI_Composition_IVector3NaturalMotionAnimation>(Windows_UI_Composition_IVector3NaturalMotionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asINaturalMotionAnimation(): Windows_UI_Composition_INaturalMotionAnimation {
+        match (unsafe { query<Windows_UI_Composition_INaturalMotionAnimation>(Windows_UI_Composition_INaturalMotionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation(): Windows_UI_Composition_ICompositionAnimation {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation>(Windows_UI_Composition_ICompositionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation2(): Windows_UI_Composition_ICompositionAnimation2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation2>(Windows_UI_Composition_ICompositionAnimation2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation3(): Windows_UI_Composition_ICompositionAnimation3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation3>(Windows_UI_Composition_ICompositionAnimation3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation4(): Windows_UI_Composition_ICompositionAnimation4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation4>(Windows_UI_Composition_ICompositionAnimation4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimationBase(): Windows_UI_Composition_ICompositionAnimationBase {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimationBase>(Windows_UI_Composition_ICompositionAnimationBase.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation_IClosable {
+        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
+        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop Acceleration: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Acceleration(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetAcceleration(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public mut prop Restitution: Float32 {
+        get() {
+            var result__ = 0.0f32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Restitution(CPointer<Float32>(inout result__)) }
+            }
+            hr__.check()
+            return result__
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetRestitution(value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.BounceVector3NaturalMotionAnimation"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.BounceVector3NaturalMotionAnimation;{" + Windows_UI_Composition_IBounceVector3NaturalMotionAnimation.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.BounceVector3NaturalMotionAnimation", Windows_UI_Composition_BounceVector3NaturalMotionAnimation.signature(), Windows_UI_Composition_IBounceVector3NaturalMotionAnimation.iid())
+    }
+}
+
+extend Windows_UI_Composition_BounceVector3NaturalMotionAnimation <: windows_core.HandleWinrtType<Windows_UI_Composition_BounceVector3NaturalMotionAnimation> {
+    public static func intoWinrtHandle(value: Windows_UI_Composition_BounceVector3NaturalMotionAnimation): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector3NaturalMotionAnimation {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_UI_Composition_BounceVector3NaturalMotionAnimation.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_BounceVector3NaturalMotionAnimation {
+        Windows_UI_Composition_BounceVector3NaturalMotionAnimation.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.CircleEasingFunction (synthetic:Windows_UI_Composition_CircleEasingFunction)
+public class Windows_UI_Composition_CircleEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_CircleEasingFunction {
+        Windows_UI_Composition_CircleEasingFunction(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_CircleEasingFunction {
+        Windows_UI_Composition_CircleEasingFunction(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_UI_Composition_ICircleEasingFunction.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_CircleEasingFunction> {
+        let ancestors = [Windows_UI_Composition_ICircleEasingFunction.iid(), Windows_UI_Composition_ICompositionEasingFunction.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_CircleEasingFunction>("CircleEasingFunction", Windows_UI_Composition_ICircleEasingFunction.iid(), ancestors, { raw => Windows_UI_Composition_CircleEasingFunction.fromAbiTake(raw) }, { raw => Windows_UI_Composition_CircleEasingFunction.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_UI_Composition_ICircleEasingFunction {
+        match (unsafe { query(Windows_UI_Composition_ICircleEasingFunction.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICircleEasingFunction(): Windows_UI_Composition_ICircleEasingFunction {
+        defaultInterface()
+    }
+
+    public func asICompositionEasingFunction(): Windows_UI_Composition_ICompositionEasingFunction {
+        match (unsafe { query<Windows_UI_Composition_ICompositionEasingFunction>(Windows_UI_Composition_ICompositionEasingFunction.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation_IClosable {
+        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
+        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public prop Mode: Windows_UI_Composition_CompositionEasingFunctionMode {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.Mode(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_UI_Composition_CompositionEasingFunctionMode(result__)
+        }
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.CircleEasingFunction"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.CircleEasingFunction;{" + Windows_UI_Composition_ICircleEasingFunction.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.CircleEasingFunction", Windows_UI_Composition_CircleEasingFunction.signature(), Windows_UI_Composition_ICircleEasingFunction.iid())
+    }
+}
+
+extend Windows_UI_Composition_CircleEasingFunction <: windows_core.HandleWinrtType<Windows_UI_Composition_CircleEasingFunction> {
+    public static func intoWinrtHandle(value: Windows_UI_Composition_CircleEasingFunction): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_CircleEasingFunction {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_UI_Composition_CircleEasingFunction.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_CircleEasingFunction {
+        Windows_UI_Composition_CircleEasingFunction.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.ColorKeyFrameAnimation (synthetic:Windows_UI_Composition_ColorKeyFrameAnimation)
+public class Windows_UI_Composition_ColorKeyFrameAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_ColorKeyFrameAnimation {
+        Windows_UI_Composition_ColorKeyFrameAnimation(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_ColorKeyFrameAnimation {
+        Windows_UI_Composition_ColorKeyFrameAnimation(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_UI_Composition_IColorKeyFrameAnimation.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_ColorKeyFrameAnimation> {
+        let ancestors = [Windows_UI_Composition_IColorKeyFrameAnimation.iid(), Windows_UI_Composition_IKeyFrameAnimation.iid(), Windows_UI_Composition_IKeyFrameAnimation2.iid(), Windows_UI_Composition_IKeyFrameAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation2.iid(), Windows_UI_Composition_ICompositionAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation4.iid(), Windows_UI_Composition_ICompositionAnimationBase.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_ColorKeyFrameAnimation>("ColorKeyFrameAnimation", Windows_UI_Composition_IColorKeyFrameAnimation.iid(), ancestors, { raw => Windows_UI_Composition_ColorKeyFrameAnimation.fromAbiTake(raw) }, { raw => Windows_UI_Composition_ColorKeyFrameAnimation.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_UI_Composition_IColorKeyFrameAnimation {
+        match (unsafe { query(Windows_UI_Composition_IColorKeyFrameAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asIColorKeyFrameAnimation(): Windows_UI_Composition_IColorKeyFrameAnimation {
+        defaultInterface()
+    }
+
+    public func asIKeyFrameAnimation(): Windows_UI_Composition_IKeyFrameAnimation {
+        match (unsafe { query<Windows_UI_Composition_IKeyFrameAnimation>(Windows_UI_Composition_IKeyFrameAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIKeyFrameAnimation2(): Windows_UI_Composition_IKeyFrameAnimation2 {
+        match (unsafe { query<Windows_UI_Composition_IKeyFrameAnimation2>(Windows_UI_Composition_IKeyFrameAnimation2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIKeyFrameAnimation3(): Windows_UI_Composition_IKeyFrameAnimation3 {
+        match (unsafe { query<Windows_UI_Composition_IKeyFrameAnimation3>(Windows_UI_Composition_IKeyFrameAnimation3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation(): Windows_UI_Composition_ICompositionAnimation {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation>(Windows_UI_Composition_ICompositionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation2(): Windows_UI_Composition_ICompositionAnimation2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation2>(Windows_UI_Composition_ICompositionAnimation2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation3(): Windows_UI_Composition_ICompositionAnimation3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation3>(Windows_UI_Composition_ICompositionAnimation3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation4(): Windows_UI_Composition_ICompositionAnimation4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation4>(Windows_UI_Composition_ICompositionAnimation4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimationBase(): Windows_UI_Composition_ICompositionAnimationBase {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimationBase>(Windows_UI_Composition_ICompositionAnimationBase.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation_IClosable {
+        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
+        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public mut prop InterpolationColorSpace: Windows_UI_Composition_CompositionColorSpace {
+        get() {
+            var result__ = 0i32
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InterpolationColorSpace(CPointer<Int32>(inout result__)) }
+            }
+            hr__.check()
+            return Windows_UI_Composition_CompositionColorSpace(result__)
+        }
+        set(value) {
+            var hr__ = windows_core.E_POINTER
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetInterpolationColorSpace(value.value) }
+            }
+            hr__.check()
+        }
+    }
+
+    public func InsertKeyFrame(normalizedProgressKey: Float32, value: Windows_UI_Color): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.InsertKeyFrame(normalizedProgressKey, value) }
+        }
+        hr__.check()
+    }
+
+    public func InsertKeyFrameWithEasingFunction(normalizedProgressKey: Float32, value: Windows_UI_Color, easingFunction: Windows_UI_Composition_CompositionEasingFunction): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_UI_Composition_CompositionEasingFunction>(easingFunction)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.InsertKeyFrameWithEasingFunction(normalizedProgressKey, value, __argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.ColorKeyFrameAnimation"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.ColorKeyFrameAnimation;{" + Windows_UI_Composition_IColorKeyFrameAnimation.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.ColorKeyFrameAnimation", Windows_UI_Composition_ColorKeyFrameAnimation.signature(), Windows_UI_Composition_IColorKeyFrameAnimation.iid())
+    }
+}
+
+extend Windows_UI_Composition_ColorKeyFrameAnimation <: windows_core.HandleWinrtType<Windows_UI_Composition_ColorKeyFrameAnimation> {
+    public static func intoWinrtHandle(value: Windows_UI_Composition_ColorKeyFrameAnimation): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_ColorKeyFrameAnimation {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_UI_Composition_ColorKeyFrameAnimation.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_ColorKeyFrameAnimation {
+        Windows_UI_Composition_ColorKeyFrameAnimation.viewOf(raw)
+    }
+}
+
+// Windows.UI.Composition.CompositionAnimation (synthetic:Windows_UI_Composition_CompositionAnimation)
+public class Windows_UI_Composition_CompositionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
+    public init(raw: CPointer<Unit>) {
+        super(raw)
+    }
+
+    private init(raw: CPointer<Unit>, takeOwnership!: Bool, allowManualRelease!: Bool) {
+        super(raw, takeOwnership: takeOwnership, allowManualRelease: allowManualRelease)
+    }
+
+    public static func fromAbiTake(raw: CPointer<Unit>): Windows_UI_Composition_CompositionAnimation {
+        Windows_UI_Composition_CompositionAnimation(raw, takeOwnership: true, allowManualRelease: false)
+    }
+
+    public static func viewOf(raw: CPointer<Unit>): Windows_UI_Composition_CompositionAnimation {
+        Windows_UI_Composition_CompositionAnimation(raw, takeOwnership: false, allowManualRelease: false)
+    }
+
+    public static func iid(): windows_interface.GUID {
+        Windows_UI_Composition_ICompositionAnimation.iid()
+    }
+
+    public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_UI_Composition_CompositionAnimation> {
+        let ancestors = [Windows_UI_Composition_ICompositionAnimation.iid(), Windows_UI_Composition_ICompositionAnimation2.iid(), Windows_UI_Composition_ICompositionAnimation3.iid(), Windows_UI_Composition_ICompositionAnimation4.iid(), Windows_UI_Composition_ICompositionAnimationBase.iid(), Windows_UI_Composition_ICompositionObject.iid(), Windows_UI_Composition_ICompositionObject2.iid(), Windows_UI_Composition_ICompositionObject3.iid(), Windows_UI_Composition_ICompositionObject4.iid(), Windows_UI_Composition_ICompositionObject5.iid(), Windows_Foundation_IClosable.iid(), Windows_UI_Composition_IAnimationObject.iid(), windows_interface.IInspectable.iid(), windows_interface.IUnknown.iid()]
+        return windows_interface.InterfaceDescriptor<Windows_UI_Composition_CompositionAnimation>("CompositionAnimation", Windows_UI_Composition_ICompositionAnimation.iid(), ancestors, { raw => Windows_UI_Composition_CompositionAnimation.fromAbiTake(raw) }, { raw => Windows_UI_Composition_CompositionAnimation.viewOf(raw) })
+    }
+
+    public func defaultInterface(): Windows_UI_Composition_ICompositionAnimation {
+        match (unsafe { query(Windows_UI_Composition_ICompositionAnimation.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIInspectable(): windows_interface.IInspectable {
+        windows_interface.IInspectable.viewOf(asRaw())
+    }
+
+    public func asICompositionAnimation(): Windows_UI_Composition_ICompositionAnimation {
+        defaultInterface()
+    }
+
+    public func asICompositionAnimation2(): Windows_UI_Composition_ICompositionAnimation2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation2>(Windows_UI_Composition_ICompositionAnimation2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation3(): Windows_UI_Composition_ICompositionAnimation3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation3>(Windows_UI_Composition_ICompositionAnimation3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimation4(): Windows_UI_Composition_ICompositionAnimation4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimation4>(Windows_UI_Composition_ICompositionAnimation4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionAnimationBase(): Windows_UI_Composition_ICompositionAnimationBase {
+        match (unsafe { query<Windows_UI_Composition_ICompositionAnimationBase>(Windows_UI_Composition_ICompositionAnimationBase.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject(): Windows_UI_Composition_ICompositionObject {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject>(Windows_UI_Composition_ICompositionObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject2(): Windows_UI_Composition_ICompositionObject2 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject2>(Windows_UI_Composition_ICompositionObject2.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject3(): Windows_UI_Composition_ICompositionObject3 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject3>(Windows_UI_Composition_ICompositionObject3.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject4(): Windows_UI_Composition_ICompositionObject4 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject4>(Windows_UI_Composition_ICompositionObject4.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asICompositionObject5(): Windows_UI_Composition_ICompositionObject5 {
+        match (unsafe { query<Windows_UI_Composition_ICompositionObject5>(Windows_UI_Composition_ICompositionObject5.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIClosable(): Windows_Foundation_IClosable {
+        match (unsafe { query<Windows_Foundation_IClosable>(Windows_Foundation_IClosable.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func asIAnimationObject(): Windows_UI_Composition_IAnimationObject {
+        match (unsafe { query<Windows_UI_Composition_IAnimationObject>(Windows_UI_Composition_IAnimationObject.descriptor()) }) {
+            case Some(value) => value
+            case None => throw windows_core.WindowsException(windows_core.E_NOINTERFACE)
+        }
+    }
+
+    public func ClearAllParameters(): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (interface__ = defaultInterface()) {
+            hr__ = unsafe { interface__.ClearAllParameters() }
+        }
+        hr__.check()
+    }
+
+    public func ClearParameter(key: windows_core.HString): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.ClearParameter(__argBorrow0.asRaw()) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func SetColorParameter(key: windows_core.HString, value: Windows_UI_Color): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetColorParameter(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func SetMatrix3x2Parameter(key: windows_core.HString, value: Windows_Foundation_Numerics_Matrix3x2): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMatrix3x2Parameter(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func SetMatrix4x4Parameter(key: windows_core.HString, value: Windows_Foundation_Numerics_Matrix4x4): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetMatrix4x4Parameter(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func SetQuaternionParameter(key: windows_core.HString, value: Windows_Foundation_Numerics_Quaternion): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetQuaternionParameter(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func SetReferenceParameter(key: windows_core.HString, compositionObject: Windows_UI_Composition_CompositionObject): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (__argBorrow1 = windows_core.winrtBorrowGenericIn<Windows_UI_Composition_CompositionObject>(compositionObject)) {
+                try (interface__ = defaultInterface()) {
+                    hr__ = unsafe { interface__.SetReferenceParameter(__argBorrow0.asRaw(), __argBorrow1.asRaw()) }
+                }
+            }
+        }
+        hr__.check()
+    }
+
+    public func SetScalarParameter(key: windows_core.HString, value: Float32): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetScalarParameter(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func SetVector2Parameter(key: windows_core.HString, value: Windows_Foundation_Numerics_Vector2): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetVector2Parameter(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func SetVector3Parameter(key: windows_core.HString, value: Windows_Foundation_Numerics_Vector3): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetVector3Parameter(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public func SetVector4Parameter(key: windows_core.HString, value: Windows_Foundation_Numerics_Vector4): Unit {
+        var hr__ = windows_core.E_POINTER
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(key)) {
+            try (interface__ = defaultInterface()) {
+                hr__ = unsafe { interface__.SetVector4Parameter(__argBorrow0.asRaw(), value) }
+            }
+        }
+        hr__.check()
+    }
+
+    public static func abiType(): String {
+        "CPointer<Unit>"
+    }
+
+    public static func runtimeName(): String {
+        "Windows.UI.Composition.CompositionAnimation"
+    }
+
+    public static func signature(): String {
+        return "rc(Windows.UI.Composition.CompositionAnimation;{" + Windows_UI_Composition_ICompositionAnimation.iid().toSignatureString() + "})"
+    }
+
+    public static func runtimeType(): windows_interface.RuntimeTypeContract {
+        windows_interface.RuntimeTypeContract("Windows.UI.Composition.CompositionAnimation", Windows_UI_Composition_CompositionAnimation.signature(), Windows_UI_Composition_ICompositionAnimation.iid())
+    }
+}
+
+extend Windows_UI_Composition_CompositionAnimation <: windows_core.HandleWinrtType<Windows_UI_Composition_CompositionAnimation> {
+    public static func intoWinrtHandle(value: Windows_UI_Composition_CompositionAnimation): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_CompositionAnimation {
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_UI_Composition_CompositionAnimation.fromAbiTake(raw)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_UI_Composition_CompositionAnimation {
+        Windows_UI_Composition_CompositionAnimation.viewOf(raw)
+    }
+}
+
 // Windows.UI.Composition.CompositionAnimationGroup (synthetic:Windows_UI_Composition_CompositionAnimationGroup)
 public class Windows_UI_Composition_CompositionAnimationGroup <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
@@ -27126,6 +29524,1060 @@ public let Windows_Win32_Foundation_WIN32_ERROR_ERROR_QUERY_STORAGE_ERROR: Windo
 // Windows.Win32.Foundation.WPARAM (synthetic:Windows_Win32_Foundation_WPARAM)
 public type Windows_Win32_Foundation_WPARAM = UIntNative
 
+// Windows.Win32.Graphics.Dxgi.Common.DXGI_FORMAT (synthetic:Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT)
+public struct Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_UNKNOWN = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(0)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32G32B32A32_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(1)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32G32B32A32_FLOAT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(2)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32G32B32A32_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(3)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32G32B32A32_SINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(4)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32G32B32_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(5)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32G32B32_FLOAT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(6)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32G32B32_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(7)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32G32B32_SINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(8)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16G16B16A16_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(9)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16G16B16A16_FLOAT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(10)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16G16B16A16_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(11)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16G16B16A16_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(12)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16G16B16A16_SNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(13)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16G16B16A16_SINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(14)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32G32_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(15)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32G32_FLOAT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(16)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32G32_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(17)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32G32_SINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(18)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32G8X24_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(19)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_D32_FLOAT_S8X24_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(20)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32_FLOAT_X8X24_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(21)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_X32_TYPELESS_G8X24_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(22)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R10G10B10A2_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(23)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R10G10B10A2_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(24)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R10G10B10A2_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(25)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R11G11B10_FLOAT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(26)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8G8B8A8_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(27)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8G8B8A8_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(28)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8G8B8A8_UNORM_SRGB = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(29)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8G8B8A8_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(30)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8G8B8A8_SNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(31)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8G8B8A8_SINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(32)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16G16_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(33)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16G16_FLOAT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(34)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16G16_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(35)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16G16_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(36)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16G16_SNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(37)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16G16_SINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(38)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(39)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_D32_FLOAT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(40)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32_FLOAT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(41)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(42)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R32_SINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(43)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R24G8_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(44)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_D24_UNORM_S8_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(45)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R24_UNORM_X8_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(46)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_X24_TYPELESS_G8_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(47)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8G8_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(48)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8G8_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(49)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8G8_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(50)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8G8_SNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(51)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8G8_SINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(52)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(53)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16_FLOAT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(54)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_D16_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(55)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(56)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(57)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16_SNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(58)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R16_SINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(59)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(60)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(61)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8_UINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(62)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8_SNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(63)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8_SINT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(64)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_A8_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(65)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R1_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(66)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R9G9B9E5_SHAREDEXP = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(67)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R8G8_B8G8_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(68)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_G8R8_G8B8_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(69)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC1_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(70)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC1_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(71)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC1_UNORM_SRGB = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(72)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC2_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(73)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC2_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(74)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC2_UNORM_SRGB = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(75)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC3_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(76)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC3_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(77)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC3_UNORM_SRGB = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(78)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC4_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(79)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC4_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(80)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC4_SNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(81)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC5_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(82)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC5_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(83)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC5_SNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(84)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_B5G6R5_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(85)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_B5G5R5A1_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(86)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_B8G8R8A8_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(87)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_B8G8R8X8_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(88)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_R10G10B10_XR_BIAS_A2_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(89)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_B8G8R8A8_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(90)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_B8G8R8A8_UNORM_SRGB = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(91)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_B8G8R8X8_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(92)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_B8G8R8X8_UNORM_SRGB = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(93)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC6H_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(94)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC6H_UF16 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(95)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC6H_SF16 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(96)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC7_TYPELESS = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(97)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC7_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(98)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_BC7_UNORM_SRGB = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(99)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_AYUV = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(100)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_Y410 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(101)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_Y416 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(102)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_NV12 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(103)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_P010 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(104)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_P016 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(105)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_420_OPAQUE = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(106)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_YUY2 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(107)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_Y210 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(108)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_Y216 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(109)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_NV11 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(110)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_AI44 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(111)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_IA44 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(112)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_P8 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(113)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_A8P8 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(114)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_B4G4R4A4_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(115)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_P208 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(130)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_V208 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(131)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_V408 = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(132)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_SAMPLER_FEEDBACK_MIN_MIP_OPAQUE = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(189)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_SAMPLER_FEEDBACK_MIP_REGION_USED_OPAQUE = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(190)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT_DXGI_FORMAT_A4B4G4R4_UNORM = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT(191)
+
+// Windows.Win32.Graphics.Dxgi.Common.DXGI_GAMMA_CONTROL (synthetic:Windows_Win32_Graphics_Dxgi_Common_DXGI_GAMMA_CONTROL)
+@C
+public struct Windows_Win32_Graphics_Dxgi_Common_DXGI_GAMMA_CONTROL {
+    public var Scale: Windows_Win32_Graphics_Dxgi_Common_DXGI_RGB = Windows_Win32_Graphics_Dxgi_Common_DXGI_RGB()
+    public var Offset: Windows_Win32_Graphics_Dxgi_Common_DXGI_RGB = Windows_Win32_Graphics_Dxgi_Common_DXGI_RGB()
+    public var GammaCurve: VArray<Windows_Win32_Graphics_Dxgi_Common_DXGI_RGB, $1025> = VArray<Windows_Win32_Graphics_Dxgi_Common_DXGI_RGB, $1025>(repeat: Windows_Win32_Graphics_Dxgi_Common_DXGI_RGB())
+}
+
+// Windows.Win32.Graphics.Dxgi.Common.DXGI_GAMMA_CONTROL_CAPABILITIES (synthetic:Windows_Win32_Graphics_Dxgi_Common_DXGI_GAMMA_CONTROL_CAPABILITIES)
+@C
+public struct Windows_Win32_Graphics_Dxgi_Common_DXGI_GAMMA_CONTROL_CAPABILITIES {
+    public var ScaleAndOffsetSupported: Int32 = 0i32
+    public var MaxConvertedValue: Float32 = 0.0f32
+    public var MinConvertedValue: Float32 = 0.0f32
+    public var NumGammaControlPoints: UInt32 = 0u32
+    public var ControlPointPositions: VArray<Float32, $1025> = VArray<Float32, $1025>(repeat: 0.0f32)
+}
+
+// Windows.Win32.Graphics.Dxgi.Common.DXGI_MODE_DESC (synthetic:Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_DESC)
+@C
+public struct Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_DESC {
+    public var Width: UInt32 = 0u32
+    public var Height: UInt32 = 0u32
+    public var RefreshRate: Windows_Win32_Graphics_Dxgi_Common_DXGI_RATIONAL = Windows_Win32_Graphics_Dxgi_Common_DXGI_RATIONAL()
+    public var Format: Int32 = 0i32
+    public var ScanlineOrdering: Int32 = 0i32
+    public var Scaling: Int32 = 0i32
+}
+
+// Windows.Win32.Graphics.Dxgi.Common.DXGI_MODE_ROTATION (synthetic:Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION)
+public struct Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION_DXGI_MODE_ROTATION_UNSPECIFIED = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION(0)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION_DXGI_MODE_ROTATION_IDENTITY = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION(1)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION_DXGI_MODE_ROTATION_ROTATE90 = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION(2)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION_DXGI_MODE_ROTATION_ROTATE180 = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION(3)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION_DXGI_MODE_ROTATION_ROTATE270 = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION(4)
+
+// Windows.Win32.Graphics.Dxgi.Common.DXGI_MODE_SCALING (synthetic:Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCALING)
+public struct Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCALING {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCALING_DXGI_MODE_SCALING_UNSPECIFIED = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCALING(0)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCALING_DXGI_MODE_SCALING_CENTERED = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCALING(1)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCALING_DXGI_MODE_SCALING_STRETCHED = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCALING(2)
+
+// Windows.Win32.Graphics.Dxgi.Common.DXGI_MODE_SCANLINE_ORDER (synthetic:Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCANLINE_ORDER)
+public struct Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCANLINE_ORDER {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCANLINE_ORDER_DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCANLINE_ORDER(0)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCANLINE_ORDER_DXGI_MODE_SCANLINE_ORDER_PROGRESSIVE = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCANLINE_ORDER(1)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCANLINE_ORDER_DXGI_MODE_SCANLINE_ORDER_UPPER_FIELD_FIRST = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCANLINE_ORDER(2)
+public let Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCANLINE_ORDER_DXGI_MODE_SCANLINE_ORDER_LOWER_FIELD_FIRST = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCANLINE_ORDER(3)
+
+// Windows.Win32.Graphics.Dxgi.Common.DXGI_RATIONAL (synthetic:Windows_Win32_Graphics_Dxgi_Common_DXGI_RATIONAL)
+@C
+public struct Windows_Win32_Graphics_Dxgi_Common_DXGI_RATIONAL {
+    public var Numerator: UInt32 = 0u32
+    public var Denominator: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Dxgi.Common.DXGI_RGB (synthetic:Windows_Win32_Graphics_Dxgi_Common_DXGI_RGB)
+@C
+public struct Windows_Win32_Graphics_Dxgi_Common_DXGI_RGB {
+    public var Red: Float32 = 0.0f32
+    public var Green: Float32 = 0.0f32
+    public var Blue: Float32 = 0.0f32
+}
+
+// Windows.Win32.Graphics.Dxgi.Common.DXGI_SAMPLE_DESC (synthetic:Windows_Win32_Graphics_Dxgi_Common_DXGI_SAMPLE_DESC)
+@C
+public struct Windows_Win32_Graphics_Dxgi_Common_DXGI_SAMPLE_DESC {
+    public var Count: UInt32 = 0u32
+    public var Quality: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_ENUM_MODES (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES)
+public struct Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES {
+    public let value: UInt32
+    public init() {
+        this.value = 0
+    }
+    public init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES): Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES {
+        return Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES(value | other.value)
+    }
+    public operator func &(other: Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES): Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES {
+        return Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES(value & other.value)
+    }
+    public operator func ^(other: Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES): Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES {
+        return Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES(value ^ other.value)
+    }
+    public operator func !(): Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES {
+        return Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES(!value)
+    }
+}
+public let Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES_DXGI_ENUM_MODES_INTERLACED = Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES(1)
+public let Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES_DXGI_ENUM_MODES_SCALING = Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES(2)
+public let Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES_DXGI_ENUM_MODES_STEREO = Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES(4)
+public let Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES_DXGI_ENUM_MODES_DISABLED_STEREO = Windows_Win32_Graphics_Dxgi_DXGI_ENUM_MODES(8)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_FRAME_STATISTICS (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_FRAME_STATISTICS)
+@C
+public struct Windows_Win32_Graphics_Dxgi_DXGI_FRAME_STATISTICS {
+    public var PresentCount: UInt32 = 0u32
+    public var PresentRefreshCount: UInt32 = 0u32
+    public var SyncRefreshCount: UInt32 = 0u32
+    public var SyncQPCTime: Int64 = 0i64
+    public var SyncGPUTime: Int64 = 0i64
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_MAPPED_RECT (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_MAPPED_RECT)
+@C
+public struct Windows_Win32_Graphics_Dxgi_DXGI_MAPPED_RECT {
+    public var Pitch: Int32 = 0i32
+    public var pBits: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_MAP_FLAGS (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS)
+public struct Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS {
+    public let value: UInt32
+    public init() {
+        this.value = 0
+    }
+    public init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS): Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS {
+        return Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS(value | other.value)
+    }
+    public operator func &(other: Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS): Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS {
+        return Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS(value & other.value)
+    }
+    public operator func ^(other: Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS): Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS {
+        return Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS(value ^ other.value)
+    }
+    public operator func !(): Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS {
+        return Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS(!value)
+    }
+}
+public let Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS_DXGI_MAP_READ = Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS(1)
+public let Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS_DXGI_MAP_WRITE = Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS(2)
+public let Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS_DXGI_MAP_DISCARD = Windows_Win32_Graphics_Dxgi_DXGI_MAP_FLAGS(4)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_OUTPUT_DESC (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_OUTPUT_DESC)
+@C
+public struct Windows_Win32_Graphics_Dxgi_DXGI_OUTPUT_DESC {
+    public var DeviceName: VArray<UInt16, $32> = VArray<UInt16, $32>(repeat: 0u16)
+    public var DesktopCoordinates: Windows_Win32_Foundation_RECT = Windows_Win32_Foundation_RECT()
+    public var AttachedToDesktop: Int32 = 0i32
+    public var Rotation: Int32 = 0i32
+    public var Monitor: Windows_Win32_Graphics_Gdi_HMONITOR = Windows_Win32_Graphics_Gdi_HMONITOR()
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_PRESENT (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_PRESENT)
+public struct Windows_Win32_Graphics_Dxgi_DXGI_PRESENT {
+    public let value: UInt32
+    public init() {
+        this.value = 0
+    }
+    public init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: Windows_Win32_Graphics_Dxgi_DXGI_PRESENT): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: Windows_Win32_Graphics_Dxgi_DXGI_PRESENT): Windows_Win32_Graphics_Dxgi_DXGI_PRESENT {
+        return Windows_Win32_Graphics_Dxgi_DXGI_PRESENT(value | other.value)
+    }
+    public operator func &(other: Windows_Win32_Graphics_Dxgi_DXGI_PRESENT): Windows_Win32_Graphics_Dxgi_DXGI_PRESENT {
+        return Windows_Win32_Graphics_Dxgi_DXGI_PRESENT(value & other.value)
+    }
+    public operator func ^(other: Windows_Win32_Graphics_Dxgi_DXGI_PRESENT): Windows_Win32_Graphics_Dxgi_DXGI_PRESENT {
+        return Windows_Win32_Graphics_Dxgi_DXGI_PRESENT(value ^ other.value)
+    }
+    public operator func !(): Windows_Win32_Graphics_Dxgi_DXGI_PRESENT {
+        return Windows_Win32_Graphics_Dxgi_DXGI_PRESENT(!value)
+    }
+}
+public let Windows_Win32_Graphics_Dxgi_DXGI_PRESENT_DXGI_PRESENT_TEST = Windows_Win32_Graphics_Dxgi_DXGI_PRESENT(1)
+public let Windows_Win32_Graphics_Dxgi_DXGI_PRESENT_DXGI_PRESENT_DO_NOT_SEQUENCE = Windows_Win32_Graphics_Dxgi_DXGI_PRESENT(2)
+public let Windows_Win32_Graphics_Dxgi_DXGI_PRESENT_DXGI_PRESENT_RESTART = Windows_Win32_Graphics_Dxgi_DXGI_PRESENT(4)
+public let Windows_Win32_Graphics_Dxgi_DXGI_PRESENT_DXGI_PRESENT_DO_NOT_WAIT = Windows_Win32_Graphics_Dxgi_DXGI_PRESENT(8)
+public let Windows_Win32_Graphics_Dxgi_DXGI_PRESENT_DXGI_PRESENT_STEREO_PREFER_RIGHT = Windows_Win32_Graphics_Dxgi_DXGI_PRESENT(16)
+public let Windows_Win32_Graphics_Dxgi_DXGI_PRESENT_DXGI_PRESENT_STEREO_TEMPORARY_MONO = Windows_Win32_Graphics_Dxgi_DXGI_PRESENT(32)
+public let Windows_Win32_Graphics_Dxgi_DXGI_PRESENT_DXGI_PRESENT_RESTRICT_TO_OUTPUT = Windows_Win32_Graphics_Dxgi_DXGI_PRESENT(64)
+public let Windows_Win32_Graphics_Dxgi_DXGI_PRESENT_DXGI_PRESENT_USE_DURATION = Windows_Win32_Graphics_Dxgi_DXGI_PRESENT(256)
+public let Windows_Win32_Graphics_Dxgi_DXGI_PRESENT_DXGI_PRESENT_ALLOW_TEARING = Windows_Win32_Graphics_Dxgi_DXGI_PRESENT(512)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_SURFACE_DESC (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SURFACE_DESC)
+@C
+public struct Windows_Win32_Graphics_Dxgi_DXGI_SURFACE_DESC {
+    public var Width: UInt32 = 0u32
+    public var Height: UInt32 = 0u32
+    public var Format: Int32 = 0i32
+    public var SampleDesc: Windows_Win32_Graphics_Dxgi_Common_DXGI_SAMPLE_DESC = Windows_Win32_Graphics_Dxgi_Common_DXGI_SAMPLE_DESC()
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_DESC (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_DESC)
+@C
+public struct Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_DESC {
+    public var BufferDesc: Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_DESC = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_DESC()
+    public var SampleDesc: Windows_Win32_Graphics_Dxgi_Common_DXGI_SAMPLE_DESC = Windows_Win32_Graphics_Dxgi_Common_DXGI_SAMPLE_DESC()
+    public var BufferUsage: UInt32 = 0u32
+    public var BufferCount: UInt32 = 0u32
+    public var OutputWindow: Windows_Win32_Foundation_HWND = Windows_Win32_Foundation_HWND()
+    public var Windowed: Int32 = 0i32
+    public var SwapEffect: Int32 = 0i32
+    public var Flags: UInt32 = 0u32
+}
+
+// Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_FLAG (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG)
+public struct Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+    public func contains(other: Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG): Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG {
+        return Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(value | other.value)
+    }
+    public operator func &(other: Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG): Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG {
+        return Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(value & other.value)
+    }
+    public operator func ^(other: Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG): Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG {
+        return Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(value ^ other.value)
+    }
+    public operator func !(): Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG {
+        return Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(!value)
+    }
+}
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_NONPREROTATED = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(1)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(2)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(4)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_RESTRICTED_CONTENT = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(8)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_RESTRICT_SHARED_RESOURCE_DRIVER = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(16)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_DISPLAY_ONLY = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(32)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_FRAME_LATENCY_WAITABLE_OBJECT = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(64)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(128)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(256)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(512)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(1024)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(2048)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG_DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_CHAIN_FLAG(4096)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_SWAP_EFFECT (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_SWAP_EFFECT)
+public struct Windows_Win32_Graphics_Dxgi_DXGI_SWAP_EFFECT {
+    public let value: Int32
+    public init() {
+        this.value = 0
+    }
+    public init(value: Int32) {
+        this.value = value
+    }
+}
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_EFFECT_DXGI_SWAP_EFFECT_DISCARD = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_EFFECT(0)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_EFFECT_DXGI_SWAP_EFFECT_SEQUENTIAL = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_EFFECT(1)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_EFFECT_DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_EFFECT(3)
+public let Windows_Win32_Graphics_Dxgi_DXGI_SWAP_EFFECT_DXGI_SWAP_EFFECT_FLIP_DISCARD = Windows_Win32_Graphics_Dxgi_DXGI_SWAP_EFFECT(4)
+
+// Windows.Win32.Graphics.Dxgi.DXGI_USAGE (synthetic:Windows_Win32_Graphics_Dxgi_DXGI_USAGE)
+public struct Windows_Win32_Graphics_Dxgi_DXGI_USAGE {
+    public let value: UInt32
+    public init() {
+        this.value = 0
+    }
+    public init(value: UInt32) {
+        this.value = value
+    }
+    public func contains(other: Windows_Win32_Graphics_Dxgi_DXGI_USAGE): Bool {
+        return (value & other.value) == other.value
+    }
+    public operator func |(other: Windows_Win32_Graphics_Dxgi_DXGI_USAGE): Windows_Win32_Graphics_Dxgi_DXGI_USAGE {
+        return Windows_Win32_Graphics_Dxgi_DXGI_USAGE(value | other.value)
+    }
+    public operator func &(other: Windows_Win32_Graphics_Dxgi_DXGI_USAGE): Windows_Win32_Graphics_Dxgi_DXGI_USAGE {
+        return Windows_Win32_Graphics_Dxgi_DXGI_USAGE(value & other.value)
+    }
+    public operator func ^(other: Windows_Win32_Graphics_Dxgi_DXGI_USAGE): Windows_Win32_Graphics_Dxgi_DXGI_USAGE {
+        return Windows_Win32_Graphics_Dxgi_DXGI_USAGE(value ^ other.value)
+    }
+    public operator func !(): Windows_Win32_Graphics_Dxgi_DXGI_USAGE {
+        return Windows_Win32_Graphics_Dxgi_DXGI_USAGE(!value)
+    }
+}
+public let Windows_Win32_Graphics_Dxgi_DXGI_USAGE_DXGI_USAGE_SHADER_INPUT = Windows_Win32_Graphics_Dxgi_DXGI_USAGE(16)
+public let Windows_Win32_Graphics_Dxgi_DXGI_USAGE_DXGI_USAGE_RENDER_TARGET_OUTPUT = Windows_Win32_Graphics_Dxgi_DXGI_USAGE(32)
+public let Windows_Win32_Graphics_Dxgi_DXGI_USAGE_DXGI_USAGE_BACK_BUFFER = Windows_Win32_Graphics_Dxgi_DXGI_USAGE(64)
+public let Windows_Win32_Graphics_Dxgi_DXGI_USAGE_DXGI_USAGE_SHARED = Windows_Win32_Graphics_Dxgi_DXGI_USAGE(128)
+public let Windows_Win32_Graphics_Dxgi_DXGI_USAGE_DXGI_USAGE_READ_ONLY = Windows_Win32_Graphics_Dxgi_DXGI_USAGE(256)
+public let Windows_Win32_Graphics_Dxgi_DXGI_USAGE_DXGI_USAGE_DISCARD_ON_PRESENT = Windows_Win32_Graphics_Dxgi_DXGI_USAGE(512)
+public let Windows_Win32_Graphics_Dxgi_DXGI_USAGE_DXGI_USAGE_UNORDERED_ACCESS = Windows_Win32_Graphics_Dxgi_DXGI_USAGE(1024)
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDeviceSubObject (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject)
+public class Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject <: Resource {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIDeviceSubObject"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+}
+
+extend Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject <: windows_core.HandleWinrtType<Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject> {
+    public static func intoWinrtHandle(value: Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject {
+        Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject {
+        Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject): Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject {
+        let raw = Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIDeviceSubObjectVtbl (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObjectVtbl)
+@C
+public struct Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObjectVtbl {
+    public var base_: Windows_Win32_Graphics_Dxgi_IDXGIObjectVtbl = Windows_Win32_Graphics_Dxgi_IDXGIObjectVtbl()
+    public var GetDevice: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIObject (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIObject)
+public class Windows_Win32_Graphics_Dxgi_IDXGIObject <: Resource {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            Windows_Win32_Graphics_Dxgi_IDXGIObject.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIObject"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+}
+
+extend Windows_Win32_Graphics_Dxgi_IDXGIObject <: windows_core.HandleWinrtType<Windows_Win32_Graphics_Dxgi_IDXGIObject> {
+    public static func intoWinrtHandle(value: Windows_Win32_Graphics_Dxgi_IDXGIObject): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: Windows_Win32_Graphics_Dxgi_IDXGIObject): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        Windows_Win32_Graphics_Dxgi_IDXGIObject.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_Win32_Graphics_Dxgi_IDXGIObject {
+        Windows_Win32_Graphics_Dxgi_IDXGIObject(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_Win32_Graphics_Dxgi_IDXGIObject {
+        Windows_Win32_Graphics_Dxgi_IDXGIObject(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: Windows_Win32_Graphics_Dxgi_IDXGIObject): Windows_Win32_Graphics_Dxgi_IDXGIObject {
+        let raw = Windows_Win32_Graphics_Dxgi_IDXGIObject.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_Win32_Graphics_Dxgi_IDXGIObject(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIObjectVtbl (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIObjectVtbl)
+@C
+public struct Windows_Win32_Graphics_Dxgi_IDXGIObjectVtbl {
+    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
+    public var SetPrivateData: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetPrivateDataInterface: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetPrivateData: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetParent: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutput (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIOutput)
+public class Windows_Win32_Graphics_Dxgi_IDXGIOutput <: Resource {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            Windows_Win32_Graphics_Dxgi_IDXGIOutput.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGIOutput"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+}
+
+extend Windows_Win32_Graphics_Dxgi_IDXGIOutput <: windows_core.HandleWinrtType<Windows_Win32_Graphics_Dxgi_IDXGIOutput> {
+    public static func intoWinrtHandle(value: Windows_Win32_Graphics_Dxgi_IDXGIOutput): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: Windows_Win32_Graphics_Dxgi_IDXGIOutput): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        Windows_Win32_Graphics_Dxgi_IDXGIOutput.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_Win32_Graphics_Dxgi_IDXGIOutput {
+        Windows_Win32_Graphics_Dxgi_IDXGIOutput(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_Win32_Graphics_Dxgi_IDXGIOutput {
+        Windows_Win32_Graphics_Dxgi_IDXGIOutput(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: Windows_Win32_Graphics_Dxgi_IDXGIOutput): Windows_Win32_Graphics_Dxgi_IDXGIOutput {
+        let raw = Windows_Win32_Graphics_Dxgi_IDXGIOutput.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_Win32_Graphics_Dxgi_IDXGIOutput(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGIOutputVtbl (synthetic:Windows_Win32_Graphics_Dxgi_IDXGIOutputVtbl)
+@C
+public struct Windows_Win32_Graphics_Dxgi_IDXGIOutputVtbl {
+    public var base_: Windows_Win32_Graphics_Dxgi_IDXGIObjectVtbl = Windows_Win32_Graphics_Dxgi_IDXGIObjectVtbl()
+    public var GetDesc: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetDisplayModeList: CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var FindClosestMatchingMode: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var WaitForVBlank: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var TakeOwnership: CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32>(CPointer<Unit>())
+    public var ReleaseOwnership: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
+    public var GetGammaControlCapabilities: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetGammaControl: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetGammaControl: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetDisplaySurface: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetDisplaySurfaceData: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetFrameStatistics: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISurface (synthetic:Windows_Win32_Graphics_Dxgi_IDXGISurface)
+public class Windows_Win32_Graphics_Dxgi_IDXGISurface <: Resource {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            Windows_Win32_Graphics_Dxgi_IDXGISurface.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGISurface"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+}
+
+extend Windows_Win32_Graphics_Dxgi_IDXGISurface <: windows_core.HandleWinrtType<Windows_Win32_Graphics_Dxgi_IDXGISurface> {
+    public static func intoWinrtHandle(value: Windows_Win32_Graphics_Dxgi_IDXGISurface): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: Windows_Win32_Graphics_Dxgi_IDXGISurface): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        Windows_Win32_Graphics_Dxgi_IDXGISurface.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_Win32_Graphics_Dxgi_IDXGISurface {
+        Windows_Win32_Graphics_Dxgi_IDXGISurface(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_Win32_Graphics_Dxgi_IDXGISurface {
+        Windows_Win32_Graphics_Dxgi_IDXGISurface(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: Windows_Win32_Graphics_Dxgi_IDXGISurface): Windows_Win32_Graphics_Dxgi_IDXGISurface {
+        let raw = Windows_Win32_Graphics_Dxgi_IDXGISurface.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_Win32_Graphics_Dxgi_IDXGISurface(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISurfaceVtbl (synthetic:Windows_Win32_Graphics_Dxgi_IDXGISurfaceVtbl)
+@C
+public struct Windows_Win32_Graphics_Dxgi_IDXGISurfaceVtbl {
+    public var base_: Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObjectVtbl = Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObjectVtbl()
+    public var GetDesc: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var Map: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32) -> Int32>(CPointer<Unit>())
+    public var Unmap: CFunc<(CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISwapChain (synthetic:Windows_Win32_Graphics_Dxgi_IDXGISwapChain)
+public class Windows_Win32_Graphics_Dxgi_IDXGISwapChain <: Resource {
+    private let raw: CPointer<Unit>
+    private var ownsHandle: Bool = false
+    private var closed: Bool = false
+
+    public init(raw: CPointer<Unit>) {
+        this.raw = raw
+    }
+
+    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
+        if (takeOwnership && raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        this.raw = raw
+        this.ownsHandle = takeOwnership
+    }
+
+    public func asRaw(): CPointer<Unit> {
+        if (closed) {
+            return CPointer<Unit>()
+        }
+        raw
+    }
+
+    public func isClosed(): Bool {
+        closed
+    }
+
+    public func close(): Unit {
+        if (closed) {
+            return
+        }
+        let shouldRelease = ownsHandle
+        ownsHandle = false
+        closed = true
+        if (shouldRelease) {
+            Windows_Win32_Graphics_Dxgi_IDXGISwapChain.releaseRaw(raw)
+        }
+    }
+
+    public static func addRefRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.AddRef(raw)
+            }
+        }
+    }
+
+    private static func releaseRaw(raw: CPointer<Unit>): Unit {
+        if (raw.isNull()) {
+            return
+        }
+        unsafe {
+            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
+            if (vtblPtr.isNotNull()) {
+                let vtbl = vtblPtr.read()
+                let _ = vtbl.Release(raw)
+            }
+        }
+    }
+
+    public static func runtimeName(): String {
+        return "Windows.Win32.Graphics.Dxgi.IDXGISwapChain"
+    }
+    public static func projectionKind(): String {
+        return "interface"
+    }
+}
+
+extend Windows_Win32_Graphics_Dxgi_IDXGISwapChain <: windows_core.HandleWinrtType<Windows_Win32_Graphics_Dxgi_IDXGISwapChain> {
+    public static func intoWinrtHandle(value: Windows_Win32_Graphics_Dxgi_IDXGISwapChain): CPointer<Unit> {
+        value.asRaw()
+    }
+
+    public static func intoOwnedWinrtHandle(value: Windows_Win32_Graphics_Dxgi_IDXGISwapChain): CPointer<Unit> {
+        let raw = value.asRaw()
+        if (raw.isNull()) {
+            return CPointer<Unit>()
+        }
+        Windows_Win32_Graphics_Dxgi_IDXGISwapChain.addRefRaw(raw)
+        raw
+    }
+
+    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_Win32_Graphics_Dxgi_IDXGISwapChain {
+        Windows_Win32_Graphics_Dxgi_IDXGISwapChain(raw, takeOwnership: true)
+    }
+
+    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_Win32_Graphics_Dxgi_IDXGISwapChain {
+        Windows_Win32_Graphics_Dxgi_IDXGISwapChain(raw, takeOwnership: false)
+    }
+
+    public static func cloneWinrtValue(value: Windows_Win32_Graphics_Dxgi_IDXGISwapChain): Windows_Win32_Graphics_Dxgi_IDXGISwapChain {
+        let raw = Windows_Win32_Graphics_Dxgi_IDXGISwapChain.intoOwnedWinrtHandle(value)
+        if (raw.isNull()) {
+            throw windows_core.WindowsException(windows_core.E_POINTER)
+        }
+        Windows_Win32_Graphics_Dxgi_IDXGISwapChain(raw, takeOwnership: true)
+    }
+}
+
+// Windows.Win32.Graphics.Dxgi.IDXGISwapChainVtbl (synthetic:Windows_Win32_Graphics_Dxgi_IDXGISwapChainVtbl)
+@C
+public struct Windows_Win32_Graphics_Dxgi_IDXGISwapChainVtbl {
+    public var base_: Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObjectVtbl = Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObjectVtbl()
+    public var Present: CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Int32>(CPointer<Unit>())
+    public var GetBuffer: CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var SetFullscreenState: CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetFullscreenState: CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetDesc: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var ResizeBuffers: CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32, Int32, UInt32) -> Int32> = CFunc<(CPointer<Unit>, UInt32, UInt32, UInt32, Int32, UInt32) -> Int32>(CPointer<Unit>())
+    public var ResizeTarget: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetContainingOutput: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetFrameStatistics: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public var GetLastPresentCount: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(CPointer<Unit>())
+    public init() {}
+}
+
 // Windows.Win32.Graphics.Gdi.HBITMAP (synthetic:Windows_Win32_Graphics_Gdi_HBITMAP)
 @C
 public struct Windows_Win32_Graphics_Gdi_HBITMAP {
@@ -27135,6 +30587,12 @@ public struct Windows_Win32_Graphics_Gdi_HBITMAP {
 // Windows.Win32.Graphics.Gdi.HENHMETAFILE (synthetic:Windows_Win32_Graphics_Gdi_HENHMETAFILE)
 @C
 public struct Windows_Win32_Graphics_Gdi_HENHMETAFILE {
+    public var Value: CPointer<Unit> = CPointer<Unit>()
+}
+
+// Windows.Win32.Graphics.Gdi.HMONITOR (synthetic:Windows_Win32_Graphics_Gdi_HMONITOR)
+@C
+public struct Windows_Win32_Graphics_Gdi_HMONITOR {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
@@ -28070,768 +31528,4 @@ public struct Windows_Win32_Security_SYSTEM_ALARM_CALLBACK_OBJECT_ACE {
     public var ObjectType: GUID = GUID()
     public var InheritedObjectType: GUID = GUID()
     public var SidStart: UInt32 = 0u32
-}
-
-// Windows.Win32.Security.SYSTEM_ALARM_OBJECT_ACE (synthetic:Windows_Win32_Security_SYSTEM_ALARM_OBJECT_ACE)
-@C
-public struct Windows_Win32_Security_SYSTEM_ALARM_OBJECT_ACE {
-    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
-    public var Mask: UInt32 = 0u32
-    public var Flags: UInt32 = 0u32
-    public var ObjectType: GUID = GUID()
-    public var InheritedObjectType: GUID = GUID()
-    public var SidStart: UInt32 = 0u32
-}
-
-// Windows.Win32.Security.SYSTEM_AUDIT_ACE (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_ACE)
-@C
-public struct Windows_Win32_Security_SYSTEM_AUDIT_ACE {
-    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
-    public var Mask: UInt32 = 0u32
-    public var SidStart: UInt32 = 0u32
-}
-
-// Windows.Win32.Security.SYSTEM_AUDIT_CALLBACK_ACE (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_ACE)
-@C
-public struct Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_ACE {
-    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
-    public var Mask: UInt32 = 0u32
-    public var SidStart: UInt32 = 0u32
-}
-
-// Windows.Win32.Security.SYSTEM_AUDIT_CALLBACK_OBJECT_ACE (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_OBJECT_ACE)
-@C
-public struct Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_OBJECT_ACE {
-    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
-    public var Mask: UInt32 = 0u32
-    public var Flags: UInt32 = 0u32
-    public var ObjectType: GUID = GUID()
-    public var InheritedObjectType: GUID = GUID()
-    public var SidStart: UInt32 = 0u32
-}
-
-// Windows.Win32.Security.SYSTEM_AUDIT_OBJECT_ACE (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE)
-@C
-public struct Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE {
-    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
-    public var Mask: UInt32 = 0u32
-    public var Flags: UInt32 = 0u32
-    public var ObjectType: GUID = GUID()
-    public var InheritedObjectType: GUID = GUID()
-    public var SidStart: UInt32 = 0u32
-}
-
-// Windows.Win32.Security.SYSTEM_AUDIT_OBJECT_ACE_FLAGS (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS)
-public type Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS = UInt32
-public let Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS_ACE_OBJECT_TYPE_PRESENT: Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS = 1
-public let Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS_ACE_INHERITED_OBJECT_TYPE_PRESENT: Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS = 2
-
-// Windows.Win32.Security.SYSTEM_MANDATORY_LABEL_ACE (synthetic:Windows_Win32_Security_SYSTEM_MANDATORY_LABEL_ACE)
-@C
-public struct Windows_Win32_Security_SYSTEM_MANDATORY_LABEL_ACE {
-    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
-    public var Mask: UInt32 = 0u32
-    public var SidStart: UInt32 = 0u32
-}
-
-// Windows.Win32.Security.SYSTEM_PROCESS_TRUST_LABEL_ACE (synthetic:Windows_Win32_Security_SYSTEM_PROCESS_TRUST_LABEL_ACE)
-@C
-public struct Windows_Win32_Security_SYSTEM_PROCESS_TRUST_LABEL_ACE {
-    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
-    public var Mask: UInt32 = 0u32
-    public var SidStart: UInt32 = 0u32
-}
-
-// Windows.Win32.Security.SYSTEM_RESOURCE_ATTRIBUTE_ACE (synthetic:Windows_Win32_Security_SYSTEM_RESOURCE_ATTRIBUTE_ACE)
-@C
-public struct Windows_Win32_Security_SYSTEM_RESOURCE_ATTRIBUTE_ACE {
-    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
-    public var Mask: UInt32 = 0u32
-    public var SidStart: UInt32 = 0u32
-}
-
-// Windows.Win32.Security.SYSTEM_SCOPED_POLICY_ID_ACE (synthetic:Windows_Win32_Security_SYSTEM_SCOPED_POLICY_ID_ACE)
-@C
-public struct Windows_Win32_Security_SYSTEM_SCOPED_POLICY_ID_ACE {
-    public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
-    public var Mask: UInt32 = 0u32
-    public var SidStart: UInt32 = 0u32
-}
-
-// Windows.Win32.Security.TOKEN_ACCESS_INFORMATION (synthetic:Windows_Win32_Security_TOKEN_ACCESS_INFORMATION)
-@C
-public struct Windows_Win32_Security_TOKEN_ACCESS_INFORMATION {
-    public var SidHash: CPointer<Unit> = CPointer<Unit>()
-    public var RestrictedSidHash: CPointer<Unit> = CPointer<Unit>()
-    public var Privileges: CPointer<Unit> = CPointer<Unit>()
-    public var AuthenticationId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
-    public var TokenType: Int32 = 0i32
-    public var ImpersonationLevel: Int32 = 0i32
-    public var MandatoryPolicy: Windows_Win32_Security_TOKEN_MANDATORY_POLICY = Windows_Win32_Security_TOKEN_MANDATORY_POLICY()
-    public var Flags: UInt32 = 0u32
-    public var AppContainerNumber: UInt32 = 0u32
-    public var PackageSid: Windows_Win32_Security_PSID = Windows_Win32_Security_PSID()
-    public var CapabilitiesHash: CPointer<Unit> = CPointer<Unit>()
-    public var TrustLevelSid: Windows_Win32_Security_PSID = Windows_Win32_Security_PSID()
-    public var SecurityAttributes: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.Security.TOKEN_ACCESS_MASK (synthetic:Windows_Win32_Security_TOKEN_ACCESS_MASK)
-public type Windows_Win32_Security_TOKEN_ACCESS_MASK = UInt32
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_DELETE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 65536
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_READ_CONTROL: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131072
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_WRITE_DAC: Windows_Win32_Security_TOKEN_ACCESS_MASK = 262144
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_WRITE_OWNER: Windows_Win32_Security_TOKEN_ACCESS_MASK = 524288
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ACCESS_SYSTEM_SECURITY: Windows_Win32_Security_TOKEN_ACCESS_MASK = 16777216
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ASSIGN_PRIMARY: Windows_Win32_Security_TOKEN_ACCESS_MASK = 1
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_DUPLICATE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 2
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_IMPERSONATE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 4
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_QUERY: Windows_Win32_Security_TOKEN_ACCESS_MASK = 8
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_QUERY_SOURCE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 16
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ADJUST_PRIVILEGES: Windows_Win32_Security_TOKEN_ACCESS_MASK = 32
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ADJUST_GROUPS: Windows_Win32_Security_TOKEN_ACCESS_MASK = 64
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ADJUST_DEFAULT: Windows_Win32_Security_TOKEN_ACCESS_MASK = 128
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ADJUST_SESSIONID: Windows_Win32_Security_TOKEN_ACCESS_MASK = 256
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_READ: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131080
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_WRITE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131296
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_EXECUTE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131072
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_TRUST_CONSTRAINT_MASK: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131096
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ACCESS_PSEUDO_HANDLE_WIN8: Windows_Win32_Security_TOKEN_ACCESS_MASK = 24
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ACCESS_PSEUDO_HANDLE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 24
-public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ALL_ACCESS: Windows_Win32_Security_TOKEN_ACCESS_MASK = 983551
-
-// Windows.Win32.Security.TOKEN_APPCONTAINER_INFORMATION (synthetic:Windows_Win32_Security_TOKEN_APPCONTAINER_INFORMATION)
-@C
-public struct Windows_Win32_Security_TOKEN_APPCONTAINER_INFORMATION {
-    public var TokenAppContainer: Windows_Win32_Security_PSID = Windows_Win32_Security_PSID()
-}
-
-// Windows.Win32.Security.TOKEN_AUDIT_POLICY (synthetic:Windows_Win32_Security_TOKEN_AUDIT_POLICY)
-@C
-public struct Windows_Win32_Security_TOKEN_AUDIT_POLICY {
-    public var PerUserPolicy: VArray<UInt8, $31> = VArray<UInt8, $31>(repeat: 0u8)
-}
-
-// Windows.Win32.Security.TOKEN_CONTROL (synthetic:Windows_Win32_Security_TOKEN_CONTROL)
-@C
-public struct Windows_Win32_Security_TOKEN_CONTROL {
-    public var TokenId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
-    public var AuthenticationId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
-    public var ModifiedId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
-    public var TokenSource: Windows_Win32_Security_TOKEN_SOURCE = Windows_Win32_Security_TOKEN_SOURCE()
-}
-
-// Windows.Win32.Security.TOKEN_DEFAULT_DACL (synthetic:Windows_Win32_Security_TOKEN_DEFAULT_DACL)
-@C
-public struct Windows_Win32_Security_TOKEN_DEFAULT_DACL {
-    public var DefaultDacl: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.Security.TOKEN_DEVICE_CLAIMS (synthetic:Windows_Win32_Security_TOKEN_DEVICE_CLAIMS)
-@C
-public struct Windows_Win32_Security_TOKEN_DEVICE_CLAIMS {
-    public var DeviceClaims: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.Security.TOKEN_ELEVATION (synthetic:Windows_Win32_Security_TOKEN_ELEVATION)
-@C
-public struct Windows_Win32_Security_TOKEN_ELEVATION {
-    public var TokenIsElevated: UInt32 = 0u32
-}
-
-// Windows.Win32.Security.TOKEN_ELEVATION_TYPE (synthetic:Windows_Win32_Security_TOKEN_ELEVATION_TYPE)
-public type Windows_Win32_Security_TOKEN_ELEVATION_TYPE = Int32
-public let Windows_Win32_Security_TOKEN_ELEVATION_TYPE_TokenElevationTypeDefault: Windows_Win32_Security_TOKEN_ELEVATION_TYPE = 1
-public let Windows_Win32_Security_TOKEN_ELEVATION_TYPE_TokenElevationTypeFull: Windows_Win32_Security_TOKEN_ELEVATION_TYPE = 2
-public let Windows_Win32_Security_TOKEN_ELEVATION_TYPE_TokenElevationTypeLimited: Windows_Win32_Security_TOKEN_ELEVATION_TYPE = 3
-
-// Windows.Win32.Security.TOKEN_GROUPS (synthetic:Windows_Win32_Security_TOKEN_GROUPS)
-@C
-public struct Windows_Win32_Security_TOKEN_GROUPS {
-    public var GroupCount: UInt32 = 0u32
-    public var Groups: VArray<Windows_Win32_Security_SID_AND_ATTRIBUTES, $1> = VArray<Windows_Win32_Security_SID_AND_ATTRIBUTES, $1>(repeat: Windows_Win32_Security_SID_AND_ATTRIBUTES())
-}
-
-// Windows.Win32.Security.TOKEN_GROUPS_AND_PRIVILEGES (synthetic:Windows_Win32_Security_TOKEN_GROUPS_AND_PRIVILEGES)
-@C
-public struct Windows_Win32_Security_TOKEN_GROUPS_AND_PRIVILEGES {
-    public var SidCount: UInt32 = 0u32
-    public var SidLength: UInt32 = 0u32
-    public var Sids: CPointer<Unit> = CPointer<Unit>()
-    public var RestrictedSidCount: UInt32 = 0u32
-    public var RestrictedSidLength: UInt32 = 0u32
-    public var RestrictedSids: CPointer<Unit> = CPointer<Unit>()
-    public var PrivilegeCount: UInt32 = 0u32
-    public var PrivilegeLength: UInt32 = 0u32
-    public var Privileges: CPointer<Unit> = CPointer<Unit>()
-    public var AuthenticationId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
-}
-
-// Windows.Win32.Security.TOKEN_INFORMATION_CLASS (synthetic:Windows_Win32_Security_TOKEN_INFORMATION_CLASS)
-public type Windows_Win32_Security_TOKEN_INFORMATION_CLASS = Int32
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenUser: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 1
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenGroups: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 2
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenPrivileges: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 3
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenOwner: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 4
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenPrimaryGroup: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 5
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenDefaultDacl: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 6
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSource: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 7
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenType: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 8
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenImpersonationLevel: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 9
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenStatistics: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 10
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenRestrictedSids: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 11
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSessionId: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 12
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenGroupsAndPrivileges: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 13
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSessionReference: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 14
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSandBoxInert: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 15
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenAuditPolicy: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 16
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenOrigin: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 17
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenElevationType: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 18
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenLinkedToken: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 19
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenElevation: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 20
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenHasRestrictions: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 21
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenAccessInformation: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 22
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenVirtualizationAllowed: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 23
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenVirtualizationEnabled: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 24
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIntegrityLevel: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 25
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenUIAccess: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 26
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenMandatoryPolicy: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 27
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenLogonSid: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 28
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsAppContainer: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 29
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenCapabilities: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 30
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenAppContainerSid: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 31
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenAppContainerNumber: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 32
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenUserClaimAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 33
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenDeviceClaimAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 34
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenRestrictedUserClaimAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 35
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenRestrictedDeviceClaimAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 36
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenDeviceGroups: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 37
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenRestrictedDeviceGroups: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 38
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSecurityAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 39
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsRestricted: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 40
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenProcessTrustLevel: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 41
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenPrivateNameSpace: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 42
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSingletonAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 43
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenBnoIsolation: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 44
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenChildProcessFlags: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 45
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsLessPrivilegedAppContainer: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 46
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsSandboxed: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 47
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsAppSilo: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 48
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenLoggingInformation: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 49
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenLearningMode: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 50
-public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_MaxTokenInfoClass: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 51
-
-// Windows.Win32.Security.TOKEN_LINKED_TOKEN (synthetic:Windows_Win32_Security_TOKEN_LINKED_TOKEN)
-@C
-public struct Windows_Win32_Security_TOKEN_LINKED_TOKEN {
-    public var LinkedToken: Windows_Win32_Foundation_HANDLE = Windows_Win32_Foundation_HANDLE()
-}
-
-// Windows.Win32.Security.TOKEN_MANDATORY_LABEL (synthetic:Windows_Win32_Security_TOKEN_MANDATORY_LABEL)
-@C
-public struct Windows_Win32_Security_TOKEN_MANDATORY_LABEL {
-    public var Label: Windows_Win32_Security_SID_AND_ATTRIBUTES = Windows_Win32_Security_SID_AND_ATTRIBUTES()
-}
-
-// Windows.Win32.Security.TOKEN_MANDATORY_POLICY (synthetic:Windows_Win32_Security_TOKEN_MANDATORY_POLICY)
-@C
-public struct Windows_Win32_Security_TOKEN_MANDATORY_POLICY {
-    public var Policy: UInt32 = 0u32
-}
-
-// Windows.Win32.Security.TOKEN_MANDATORY_POLICY_ID (synthetic:Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID)
-public type Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = UInt32
-public let Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID_TOKEN_MANDATORY_POLICY_OFF: Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = 0
-public let Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID_TOKEN_MANDATORY_POLICY_NO_WRITE_UP: Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = 1
-public let Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID_TOKEN_MANDATORY_POLICY_NEW_PROCESS_MIN: Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = 2
-public let Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID_TOKEN_MANDATORY_POLICY_VALID_MASK: Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = 3
-
-// Windows.Win32.Security.TOKEN_ORIGIN (synthetic:Windows_Win32_Security_TOKEN_ORIGIN)
-@C
-public struct Windows_Win32_Security_TOKEN_ORIGIN {
-    public var OriginatingLogonSession: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
-}
-
-// Windows.Win32.Security.TOKEN_OWNER (synthetic:Windows_Win32_Security_TOKEN_OWNER)
-@C
-public struct Windows_Win32_Security_TOKEN_OWNER {
-    public var Owner: Windows_Win32_Security_PSID = Windows_Win32_Security_PSID()
-}
-
-// Windows.Win32.Security.TOKEN_PRIMARY_GROUP (synthetic:Windows_Win32_Security_TOKEN_PRIMARY_GROUP)
-@C
-public struct Windows_Win32_Security_TOKEN_PRIMARY_GROUP {
-    public var PrimaryGroup: Windows_Win32_Security_PSID = Windows_Win32_Security_PSID()
-}
-
-// Windows.Win32.Security.TOKEN_PRIVILEGES (synthetic:Windows_Win32_Security_TOKEN_PRIVILEGES)
-@C
-public struct Windows_Win32_Security_TOKEN_PRIVILEGES {
-    public var PrivilegeCount: UInt32 = 0u32
-    public var Privileges: VArray<Windows_Win32_Security_LUID_AND_ATTRIBUTES, $1> = VArray<Windows_Win32_Security_LUID_AND_ATTRIBUTES, $1>(repeat: Windows_Win32_Security_LUID_AND_ATTRIBUTES())
-}
-
-// Windows.Win32.Security.TOKEN_PRIVILEGES_ATTRIBUTES (synthetic:Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES)
-public type Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = UInt32
-public let Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES_SE_PRIVILEGE_ENABLED: Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = 2
-public let Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES_SE_PRIVILEGE_ENABLED_BY_DEFAULT: Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = 1
-public let Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES_SE_PRIVILEGE_REMOVED: Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = 4
-public let Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES_SE_PRIVILEGE_USED_FOR_ACCESS: Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = 2147483648
-
-// Windows.Win32.Security.TOKEN_SOURCE (synthetic:Windows_Win32_Security_TOKEN_SOURCE)
-@C
-public struct Windows_Win32_Security_TOKEN_SOURCE {
-    public var SourceName: VArray<Int8, $8> = VArray<Int8, $8>(repeat: 0i8)
-    public var SourceIdentifier: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
-}
-
-// Windows.Win32.Security.TOKEN_STATISTICS (synthetic:Windows_Win32_Security_TOKEN_STATISTICS)
-@C
-public struct Windows_Win32_Security_TOKEN_STATISTICS {
-    public var TokenId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
-    public var AuthenticationId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
-    public var ExpirationTime: Int64 = 0i64
-    public var TokenType: Int32 = 0i32
-    public var ImpersonationLevel: Int32 = 0i32
-    public var DynamicCharged: UInt32 = 0u32
-    public var DynamicAvailable: UInt32 = 0u32
-    public var GroupCount: UInt32 = 0u32
-    public var PrivilegeCount: UInt32 = 0u32
-    public var ModifiedId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
-}
-
-// Windows.Win32.Security.TOKEN_TYPE (synthetic:Windows_Win32_Security_TOKEN_TYPE)
-public type Windows_Win32_Security_TOKEN_TYPE = Int32
-public let Windows_Win32_Security_TOKEN_TYPE_TokenPrimary: Windows_Win32_Security_TOKEN_TYPE = 1
-public let Windows_Win32_Security_TOKEN_TYPE_TokenImpersonation: Windows_Win32_Security_TOKEN_TYPE = 2
-
-// Windows.Win32.Security.TOKEN_USER (synthetic:Windows_Win32_Security_TOKEN_USER)
-@C
-public struct Windows_Win32_Security_TOKEN_USER {
-    public var User: Windows_Win32_Security_SID_AND_ATTRIBUTES = Windows_Win32_Security_SID_AND_ATTRIBUTES()
-}
-
-// Windows.Win32.Security.TOKEN_USER_CLAIMS (synthetic:Windows_Win32_Security_TOKEN_USER_CLAIMS)
-@C
-public struct Windows_Win32_Security_TOKEN_USER_CLAIMS {
-    public var UserClaims: CPointer<Unit> = CPointer<Unit>()
-}
-
-// Windows.Win32.Security.WELL_KNOWN_SID_TYPE (synthetic:Windows_Win32_Security_WELL_KNOWN_SID_TYPE)
-public type Windows_Win32_Security_WELL_KNOWN_SID_TYPE = Int32
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNullSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 0
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinWorldSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 1
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 2
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorOwnerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 3
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorGroupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 4
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorOwnerServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 5
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorGroupServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 6
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNtAuthoritySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 7
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinDialupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 8
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNetworkSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 9
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBatchSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 10
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinInteractiveSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 11
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinServiceSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 12
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAnonymousSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 13
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinProxySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 14
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinEnterpriseControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 15
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinSelfSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 16
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticatedUserSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 17
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinRestrictedCodeSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 18
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinTerminalServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 19
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinRemoteLogonIdSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 20
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLogonIdsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 21
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalSystemSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 22
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalServiceSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 23
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNetworkServiceSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 24
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinDomainSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 25
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAdministratorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 26
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 27
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinGuestsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 28
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPowerUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 29
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAccountOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 30
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinSystemOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 31
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPrintOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 32
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinBackupOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 33
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinReplicatorSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 34
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPreWindows2000CompatibleAccessSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 35
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRemoteDesktopUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 36
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinNetworkConfigurationOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 37
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountAdministratorSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 38
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountGuestSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 39
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountKrbtgtSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 40
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountDomainAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 41
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountDomainUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 42
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountDomainGuestsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 43
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountComputersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 44
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 45
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountCertAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 46
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountSchemaAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 47
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountEnterpriseAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 48
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountPolicyAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 49
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountRasAndIasServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 50
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNTLMAuthenticationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 51
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinDigestAuthenticationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 52
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinSChannelAuthenticationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 53
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinThisOrganizationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 54
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinOtherOrganizationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 55
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinIncomingForestTrustBuildersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 56
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPerfMonitoringUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 57
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPerfLoggingUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 58
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAuthorizationAccessSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 59
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinTerminalServerLicenseServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 60
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinDCOMUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 61
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinIUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 62
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinIUserSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 63
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinCryptoOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 64
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinUntrustedLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 65
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLowLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 66
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinMediumLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 67
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinHighLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 68
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinSystemLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 69
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinWriteRestrictedCodeSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 70
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorOwnerRightsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 71
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCacheablePrincipalsGroupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 72
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNonCacheablePrincipalsGroupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 73
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinEnterpriseReadonlyControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 74
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountReadonlyControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 75
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinEventLogReadersGroup: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 76
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNewEnterpriseReadonlyControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 77
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinCertSvcDComAccessGroup: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 78
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinMediumPlusLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 79
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalLogonSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 80
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinConsoleLogonSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 81
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinThisOrganizationCertificateSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 82
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinApplicationPackageAuthoritySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 83
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAnyPackageSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 84
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityInternetClientSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 85
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityInternetClientServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 86
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityPrivateNetworkClientServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 87
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityPicturesLibrarySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 88
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityVideosLibrarySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 89
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityMusicLibrarySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 90
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityDocumentsLibrarySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 91
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilitySharedUserCertificatesSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 92
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityEnterpriseAuthenticationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 93
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityRemovableStorageSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 94
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRDSRemoteAccessServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 95
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRDSEndpointServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 96
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRDSManagementServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 97
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinUserModeDriversSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 98
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinHyperVAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 99
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountCloneableControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 100
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAccessControlAssistanceOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 101
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRemoteManagementUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 102
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationAuthorityAssertedSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 103
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationServiceAssertedSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 104
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalAccountSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 105
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalAccountAndAdministratorSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 106
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountProtectedUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 107
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityAppointmentsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 108
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityContactsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 109
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountDefaultSystemManagedSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 110
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinDefaultSystemManagedGroupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 111
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinStorageReplicaAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 112
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountKeyAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 113
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountEnterpriseKeyAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 114
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationKeyTrustSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 115
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationKeyPropertyMFASid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 116
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationKeyPropertyAttestationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 117
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationFreshKeyAuthSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 118
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinDeviceOwnersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 119
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinUserModeHardwareOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 120
-public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinOpenSSHUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 121
-
-// Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS (synthetic:Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS)
-public type Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = UInt16
-public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_AUTO: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 1
-public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_STATIC: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 2
-public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_EMBEDDED: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 4
-public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_FIXEDSIZE: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 16
-public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_RECORD: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 32
-public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_HAVEIID: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 64
-public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_HAVEVARTYPE: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 128
-public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_BSTR: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 256
-public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_UNKNOWN: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 512
-public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_DISPATCH: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 1024
-public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_VARIANT: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 2048
-public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_RESERVED: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 61448
-
-// Windows.Win32.System.Com.ADVF (synthetic:Windows_Win32_System_Com_ADVF)
-public type Windows_Win32_System_Com_ADVF = Int32
-public let Windows_Win32_System_Com_ADVF_ADVF_NODATA: Windows_Win32_System_Com_ADVF = 1
-public let Windows_Win32_System_Com_ADVF_ADVF_PRIMEFIRST: Windows_Win32_System_Com_ADVF = 2
-public let Windows_Win32_System_Com_ADVF_ADVF_ONLYONCE: Windows_Win32_System_Com_ADVF = 4
-public let Windows_Win32_System_Com_ADVF_ADVF_DATAONSTOP: Windows_Win32_System_Com_ADVF = 64
-public let Windows_Win32_System_Com_ADVF_ADVFCACHE_NOHANDLER: Windows_Win32_System_Com_ADVF = 8
-public let Windows_Win32_System_Com_ADVF_ADVFCACHE_FORCEBUILTIN: Windows_Win32_System_Com_ADVF = 16
-public let Windows_Win32_System_Com_ADVF_ADVFCACHE_ONSAVE: Windows_Win32_System_Com_ADVF = 32
-
-// Windows.Win32.System.Com.APTTYPE (synthetic:Windows_Win32_System_Com_APTTYPE)
-public type Windows_Win32_System_Com_APTTYPE = Int32
-public let Windows_Win32_System_Com_APTTYPE_APTTYPE_CURRENT: Windows_Win32_System_Com_APTTYPE = -1
-public let Windows_Win32_System_Com_APTTYPE_APTTYPE_STA: Windows_Win32_System_Com_APTTYPE = 0
-public let Windows_Win32_System_Com_APTTYPE_APTTYPE_MTA: Windows_Win32_System_Com_APTTYPE = 1
-public let Windows_Win32_System_Com_APTTYPE_APTTYPE_NA: Windows_Win32_System_Com_APTTYPE = 2
-public let Windows_Win32_System_Com_APTTYPE_APTTYPE_MAINSTA: Windows_Win32_System_Com_APTTYPE = 3
-
-// Windows.Win32.System.Com.APTTYPEQUALIFIER (synthetic:Windows_Win32_System_Com_APTTYPEQUALIFIER)
-public type Windows_Win32_System_Com_APTTYPEQUALIFIER = Int32
-public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NONE: Windows_Win32_System_Com_APTTYPEQUALIFIER = 0
-public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_IMPLICIT_MTA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 1
-public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NA_ON_MTA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 2
-public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NA_ON_STA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 3
-public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NA_ON_IMPLICIT_MTA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 4
-public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NA_ON_MAINSTA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 5
-public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_APPLICATION_STA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 6
-public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_RESERVED_1: Windows_Win32_System_Com_APTTYPEQUALIFIER = 7
-
-// Windows.Win32.System.Com.AUTHENTICATEINFO (synthetic:Windows_Win32_System_Com_AUTHENTICATEINFO)
-@C
-public struct Windows_Win32_System_Com_AUTHENTICATEINFO {
-    public var dwFlags: UInt32 = 0u32
-    public var dwReserved: UInt32 = 0u32
-}
-
-// Windows.Win32.System.Com.ApplicationType (synthetic:Windows_Win32_System_Com_ApplicationType)
-public type Windows_Win32_System_Com_ApplicationType = Int32
-public let Windows_Win32_System_Com_ApplicationType_ServerApplication: Windows_Win32_System_Com_ApplicationType = 0
-public let Windows_Win32_System_Com_ApplicationType_LibraryApplication: Windows_Win32_System_Com_ApplicationType = 1
-
-// Windows.Win32.System.Com.AsyncIAdviseSink (synthetic:Windows_Win32_System_Com_AsyncIAdviseSink)
-public class Windows_Win32_System_Com_AsyncIAdviseSink <: Resource {
-    private let raw: CPointer<Unit>
-    private var ownsHandle: Bool = false
-    private var closed: Bool = false
-
-    public init(raw: CPointer<Unit>) {
-        this.raw = raw
-    }
-
-    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
-        if (takeOwnership && raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        this.raw = raw
-        this.ownsHandle = takeOwnership
-    }
-
-    public func asRaw(): CPointer<Unit> {
-        if (closed) {
-            return CPointer<Unit>()
-        }
-        raw
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        let shouldRelease = ownsHandle
-        ownsHandle = false
-        closed = true
-        if (shouldRelease) {
-            Windows_Win32_System_Com_AsyncIAdviseSink.releaseRaw(raw)
-        }
-    }
-
-    public static func addRefRaw(raw: CPointer<Unit>): Unit {
-        if (raw.isNull()) {
-            return
-        }
-        unsafe {
-            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
-            if (vtblPtr.isNotNull()) {
-                let vtbl = vtblPtr.read()
-                let _ = vtbl.AddRef(raw)
-            }
-        }
-    }
-
-    private static func releaseRaw(raw: CPointer<Unit>): Unit {
-        if (raw.isNull()) {
-            return
-        }
-        unsafe {
-            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
-            if (vtblPtr.isNotNull()) {
-                let vtbl = vtblPtr.read()
-                let _ = vtbl.Release(raw)
-            }
-        }
-    }
-
-    public static func runtimeName(): String {
-        return "Windows.Win32.System.Com.AsyncIAdviseSink"
-    }
-    public static func projectionKind(): String {
-        return "interface"
-    }
-}
-
-extend Windows_Win32_System_Com_AsyncIAdviseSink <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIAdviseSink> {
-    public static func intoWinrtHandle(value: Windows_Win32_System_Com_AsyncIAdviseSink): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func intoOwnedWinrtHandle(value: Windows_Win32_System_Com_AsyncIAdviseSink): CPointer<Unit> {
-        let raw = value.asRaw()
-        if (raw.isNull()) {
-            return CPointer<Unit>()
-        }
-        Windows_Win32_System_Com_AsyncIAdviseSink.addRefRaw(raw)
-        raw
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Com_AsyncIAdviseSink {
-        Windows_Win32_System_Com_AsyncIAdviseSink(raw, takeOwnership: true)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Com_AsyncIAdviseSink {
-        Windows_Win32_System_Com_AsyncIAdviseSink(raw, takeOwnership: false)
-    }
-
-    public static func cloneWinrtValue(value: Windows_Win32_System_Com_AsyncIAdviseSink): Windows_Win32_System_Com_AsyncIAdviseSink {
-        let raw = Windows_Win32_System_Com_AsyncIAdviseSink.intoOwnedWinrtHandle(value)
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_Win32_System_Com_AsyncIAdviseSink(raw, takeOwnership: true)
-    }
-}
-
-// Windows.Win32.System.Com.AsyncIAdviseSinkVtbl (synthetic:Windows_Win32_System_Com_AsyncIAdviseSinkVtbl)
-@C
-public struct Windows_Win32_System_Com_AsyncIAdviseSinkVtbl {
-    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
-    public var Begin_OnDataChange: CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Unit>(CPointer<Unit>())
-    public var Finish_OnDataChange: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
-    public var Begin_OnViewChange: CFunc<(CPointer<Unit>, UInt32, Int32) -> Unit> = CFunc<(CPointer<Unit>, UInt32, Int32) -> Unit>(CPointer<Unit>())
-    public var Finish_OnViewChange: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
-    public var Begin_OnRename: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>(CPointer<Unit>())
-    public var Finish_OnRename: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
-    public var Begin_OnSave: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
-    public var Finish_OnSave: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
-    public var Begin_OnClose: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
-    public var Finish_OnClose: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
-    public init() {}
-}
-
-// Windows.Win32.System.Com.AsyncIAdviseSink2 (synthetic:Windows_Win32_System_Com_AsyncIAdviseSink2)
-public class Windows_Win32_System_Com_AsyncIAdviseSink2 <: Resource {
-    private let raw: CPointer<Unit>
-    private var ownsHandle: Bool = false
-    private var closed: Bool = false
-
-    public init(raw: CPointer<Unit>) {
-        this.raw = raw
-    }
-
-    public init(raw: CPointer<Unit>, takeOwnership!: Bool) {
-        if (takeOwnership && raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        this.raw = raw
-        this.ownsHandle = takeOwnership
-    }
-
-    public func asRaw(): CPointer<Unit> {
-        if (closed) {
-            return CPointer<Unit>()
-        }
-        raw
-    }
-
-    public func isClosed(): Bool {
-        closed
-    }
-
-    public func close(): Unit {
-        if (closed) {
-            return
-        }
-        let shouldRelease = ownsHandle
-        ownsHandle = false
-        closed = true
-        if (shouldRelease) {
-            Windows_Win32_System_Com_AsyncIAdviseSink2.releaseRaw(raw)
-        }
-    }
-
-    public static func addRefRaw(raw: CPointer<Unit>): Unit {
-        if (raw.isNull()) {
-            return
-        }
-        unsafe {
-            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
-            if (vtblPtr.isNotNull()) {
-                let vtbl = vtblPtr.read()
-                let _ = vtbl.AddRef(raw)
-            }
-        }
-    }
-
-    private static func releaseRaw(raw: CPointer<Unit>): Unit {
-        if (raw.isNull()) {
-            return
-        }
-        unsafe {
-            let vtblPtr = CPointer<CPointer<windows_interface.IUnknownVtbl>>(raw).read()
-            if (vtblPtr.isNotNull()) {
-                let vtbl = vtblPtr.read()
-                let _ = vtbl.Release(raw)
-            }
-        }
-    }
-
-    public static func runtimeName(): String {
-        return "Windows.Win32.System.Com.AsyncIAdviseSink2"
-    }
-    public static func projectionKind(): String {
-        return "interface"
-    }
-}
-
-extend Windows_Win32_System_Com_AsyncIAdviseSink2 <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIAdviseSink2> {
-    public static func intoWinrtHandle(value: Windows_Win32_System_Com_AsyncIAdviseSink2): CPointer<Unit> {
-        value.asRaw()
-    }
-
-    public static func intoOwnedWinrtHandle(value: Windows_Win32_System_Com_AsyncIAdviseSink2): CPointer<Unit> {
-        let raw = value.asRaw()
-        if (raw.isNull()) {
-            return CPointer<Unit>()
-        }
-        Windows_Win32_System_Com_AsyncIAdviseSink2.addRefRaw(raw)
-        raw
-    }
-
-    public static func fromAbiTakeWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Com_AsyncIAdviseSink2 {
-        Windows_Win32_System_Com_AsyncIAdviseSink2(raw, takeOwnership: true)
-    }
-
-    public static func viewWinrtHandle(raw: CPointer<Unit>): Windows_Win32_System_Com_AsyncIAdviseSink2 {
-        Windows_Win32_System_Com_AsyncIAdviseSink2(raw, takeOwnership: false)
-    }
-
-    public static func cloneWinrtValue(value: Windows_Win32_System_Com_AsyncIAdviseSink2): Windows_Win32_System_Com_AsyncIAdviseSink2 {
-        let raw = Windows_Win32_System_Com_AsyncIAdviseSink2.intoOwnedWinrtHandle(value)
-        if (raw.isNull()) {
-            throw windows_core.WindowsException(windows_core.E_POINTER)
-        }
-        Windows_Win32_System_Com_AsyncIAdviseSink2(raw, takeOwnership: true)
-    }
-}
-
-// Windows.Win32.System.Com.AsyncIAdviseSink2Vtbl (synthetic:Windows_Win32_System_Com_AsyncIAdviseSink2Vtbl)
-@C
-public struct Windows_Win32_System_Com_AsyncIAdviseSink2Vtbl {
-    public var base_: Windows_Win32_System_Com_AsyncIAdviseSinkVtbl = Windows_Win32_System_Com_AsyncIAdviseSinkVtbl()
-    public var Begin_OnLinkSrcChange: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>(CPointer<Unit>())
-    public var Finish_OnLinkSrcChange: CFunc<(CPointer<Unit>) -> Unit> = CFunc<(CPointer<Unit>) -> Unit>(CPointer<Unit>())
-    public init() {}
 }
