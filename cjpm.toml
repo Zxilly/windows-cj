@@ -81,5 +81,7 @@ members = [
     "samples/windows/bits",
     "samples/windows/core_app/bindings",
     "samples/windows/core_app",
+    "samples/windows/xaml_app/bindings",
+    "samples/windows/xaml_app",
     "windows_bindgen"
 ]

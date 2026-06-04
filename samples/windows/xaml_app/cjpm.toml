@@ -1,0 +1,16 @@
+[package]
+  name = "windows_sample_xaml_app"
+  version = "0.1.0"
+  description = "Host a Windows.UI.Xaml Application by aggregating a composable WinRT runtime class and implementing IApplicationOverrides"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_sample_xaml_app_bindings = { path = "./bindings" }
+  windows_core = { path = "../../../windows_core" }
+  windows_interface = { path = "../../../windows_interface" }
+  windows_strings = { path = "../../../windows_strings" }
