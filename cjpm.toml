@@ -85,5 +85,7 @@ members = [
     "samples/windows/xaml_app",
     "samples/windows/direct2d/bindings",
     "samples/windows/direct2d",
+    "samples/windows/direct3d12/bindings",
+    "samples/windows/direct3d12",
     "windows_bindgen"
 ]
