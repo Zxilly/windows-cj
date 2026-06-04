@@ -23,7 +23,8 @@ import windows_common.impl.{
 //   - Background            → TextBlock / RichTextBlock: consumed no-op (text
 //                             controls have no Background surface; matches the
 //                             reference arm that returns Ok(()) without effect).
-//   - IsTextSelectionEnabled → RichTextBlock.IsTextSelectionEnabled (Bool).
+//   - IsTextSelectionEnabled → RichTextBlock / TextBlock IsTextSelectionEnabled
+//                             (Bool; Unset clears to false).
 //   - TextWrappingWrap       → TextBlock / RichTextBlock TextWrapping mapped to
 //                             Wrap when true, NoWrap when false.
 func applyTextProps(handle: Handle, which: Prop, value: PropValue): Bool {
@@ -59,6 +60,15 @@ func applyTextProps(handle: Handle, which: Prop, value: PropValue): Bool {
         case IsTextSelectionEnabled => match ((handle, value)) {
             case (RichTextBlockH(rtb), BoolV(v)) =>
                 rtb.IsTextSelectionEnabled = v
+                true
+            case (RichTextBlockH(rtb), Unset) =>
+                rtb.IsTextSelectionEnabled = false
+                true
+            case (TextBlockH(tb), BoolV(v)) =>
+                tb.IsTextSelectionEnabled = v
+                true
+            case (TextBlockH(tb), Unset) =>
+                tb.IsTextSelectionEnabled = false
                 true
             case _ => false
         }

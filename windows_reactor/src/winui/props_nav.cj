@@ -91,6 +91,10 @@ func applyNavProps(handle: Handle, which: Prop, value: PropValue): Bool {
             case (TabViewH(tv), BoolV(v)) => tv.CanReorderTabs = v; true
             case _ => false
         }
+        case IsAddTabButtonVisible => match ((handle, value)) {
+            case (TabViewH(tv), BoolV(v)) => tv.IsAddTabButtonVisible = v; true
+            case _ => false
+        }
 
         // ── TabViewItem ─────────────────────────────────────────────────────────
         case TabHeader => match ((handle, value)) {

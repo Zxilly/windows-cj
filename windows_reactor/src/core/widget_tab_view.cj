@@ -11,8 +11,10 @@ public class TabView <: Widget {
     public var tabs: ArrayList<TabItem>
     public var selectedIndexValue: Int32 = 0
     public var canReorderTabs: Bool = false
+    public var isAddTabButtonVisible: Bool = false
     public var onSelectionChangedCb: ?Callback<Int32> = None
     public var onTabCloseRequestedCb: ?Callback<String> = None
+    public var onAddTabButtonClickCb: ?Callback<Unit> = None
 
     public init(tabs: ArrayList<TabItem>) {
         this.tabs = tabs
@@ -26,6 +28,7 @@ public class TabView <: Widget {
         let out = ArrayList<Binding>()
         out.add(Binding.PropB(Prop.SelectedIndex, PropValue.I32(selectedIndexValue)))
         out.add(Binding.PropB(Prop.CanReorderTabs, PropValue.BoolV(canReorderTabs)))
+        out.add(Binding.PropB(Prop.IsAddTabButtonVisible, PropValue.BoolV(isAddTabButtonVisible)))
         match (onSelectionChangedCb) {
             case Some(cb) => out.add(Binding.EventB(Event.TabSelectionChanged, Some(EventHandler.IndexChangedH(cb))))
             case None => out.add(Binding.EventB(Event.TabSelectionChanged, None))
@@ -33,6 +36,10 @@ public class TabView <: Widget {
         match (onTabCloseRequestedCb) {
             case Some(cb) => out.add(Binding.EventB(Event.TabCloseRequested, Some(EventHandler.TabKeyH(cb))))
             case None => out.add(Binding.EventB(Event.TabCloseRequested, None))
+        }
+        match (onAddTabButtonClickCb) {
+            case Some(cb) => out.add(Binding.EventB(Event.AddTabButtonClick, Some(EventHandler.ClickH(cb))))
+            case None => out.add(Binding.EventB(Event.AddTabButtonClick, None))
         }
         out
     }
@@ -50,8 +57,10 @@ public class TabView <: Widget {
                     tabItemArrayEquivalent(tabs, o.tabs) &&
                     selectedIndexValue == o.selectedIndexValue &&
                     canReorderTabs == o.canReorderTabs &&
+                    isAddTabButtonVisible == o.isAddTabButtonVisible &&
                     optCbI32Eq(onSelectionChangedCb, o.onSelectionChangedCb) &&
-                    optCbStrEq(onTabCloseRequestedCb, o.onTabCloseRequestedCb)
+                    optCbStrEq(onTabCloseRequestedCb, o.onTabCloseRequestedCb) &&
+                    optCbUnitEq(onAddTabButtonClickCb, o.onAddTabButtonClickCb)
                 case _ => false
             }
             case None => false
@@ -95,8 +104,10 @@ public class TabView <: Widget {
 
     public func selectedIndex(i: Int32): This { selectedIndexValue = i; this }
     public func canReorder(v: Bool): This { canReorderTabs = v; this }
+    public func isAddTabButtonVisibleOf(v: Bool): This { isAddTabButtonVisible = v; this }
     public func onSelectionChanged(handler: (Int32) -> Unit): This { onSelectionChangedCb = Some(Callback<Int32>(handler)); this }
     public func onTabCloseRequested(handler: (String) -> Unit): This { onTabCloseRequestedCb = Some(Callback<String>(handler)); this }
+    public func onAddTabButtonClick(handler: () -> Unit): This { onAddTabButtonClickCb = Some(Callback<Unit>({ _ => handler() })); this }
 }
 
 public func tab_view(tabs: ArrayList<TabItem>): TabView { TabView(tabs) }

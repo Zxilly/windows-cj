@@ -95,6 +95,8 @@ WIDGETS = [
             ("fontSizeValue", "?Float64", "None"),
             ("fontWeightValue", "?UInt16", "None"),
             ("wrapText", "Bool", "false"),
+            # Enables interactive text selection on the TextBlock.
+            ("isTextSelectionEnabled", "Bool", "false"),
         ],
         "children": None,
         "bindings": [
@@ -102,6 +104,7 @@ WIDGETS = [
             ("prop", "FontSize", "PropValue.F64(fs)", ("some", "fontSizeValue", "fs")),
             ("prop", "FontWeight", "PropValue.U16(fw)", ("some", "fontWeightValue", "fw")),
             ("prop", "TextWrappingWrap", "PropValue.BoolV(true)", ("bool", "wrapText")),
+            ("prop", "IsTextSelectionEnabled", "PropValue.BoolV(true)", ("bool", "isTextSelectionEnabled")),
         ],
         "builders": [
             ("fontSize(v: Float64)", "fontSizeValue = Some(v)"),
@@ -109,12 +112,15 @@ WIDGETS = [
             ("bold()", "fontWeightValue = Some(700)"),
             ("semibold()", "fontWeightValue = Some(600)"),
             ("wrap()", "wrapText = true"),
+            # Enable interactive text selection.
+            ("selectable()", "isTextSelectionEnabled = true"),
         ],
         "equiv": [
             ("str", "content"),
             ("optf64", "fontSizeValue"),
             ("optu16", "fontWeightValue"),
             ("bool", "wrapText"),
+            ("bool", "isTextSelectionEnabled"),
         ],
         "factory": ("text_block", [("content", "String")], "TextBlock(content)"),
     },
@@ -1769,28 +1775,40 @@ WIDGETS = [
             ("tabs", "ArrayList<TabItem>", None),
             ("selectedIndexValue", "Int32", "0"),
             ("canReorderTabs", "Bool", "false"),
+            # Controls the visibility of the built-in "+" add-tab button.
+            ("isAddTabButtonVisible", "Bool", "false"),
             ("onSelectionChangedCb", "?Callback<Int32>", "None"),
             ("onTabCloseRequestedCb", "?Callback<String>", "None"),
+            # Click handler for the built-in "+" add-tab button.
+            ("onAddTabButtonClickCb", "?Callback<Unit>", "None"),
         ],
         "children": ("tabs", "tabs"),
         "bindings": [
             ("prop", "SelectedIndex", "PropValue.I32(selectedIndexValue)", None),
             ("prop", "CanReorderTabs", "PropValue.BoolV(canReorderTabs)", None),
+            ("prop", "IsAddTabButtonVisible", "PropValue.BoolV(isAddTabButtonVisible)", None),
             ("event", "TabSelectionChanged", "IndexChangedH", "onSelectionChangedCb"),
             ("event", "TabCloseRequested", "TabKeyH", "onTabCloseRequestedCb"),
+            ("event", "AddTabButtonClick", "ClickH", "onAddTabButtonClickCb"),
         ],
         "builders": [
             ("selectedIndex(i: Int32)", "selectedIndexValue = i"),
             ("canReorder(v: Bool)", "canReorderTabs = v"),
+            # Show or hide the built-in "+" add-tab button.
+            ("isAddTabButtonVisibleOf(v: Bool)", "isAddTabButtonVisible = v"),
             ("onSelectionChanged(handler: (Int32) -> Unit)", "onSelectionChangedCb = Some(Callback<Int32>(handler))"),
             ("onTabCloseRequested(handler: (String) -> Unit)", "onTabCloseRequestedCb = Some(Callback<String>(handler))"),
+            # Handle the built-in "+" add-tab button click.
+            ("onAddTabButtonClick(handler: () -> Unit)", "onAddTabButtonClickCb = Some(Callback<Unit>({ _ => handler() }))"),
         ],
         "equiv": [
             ("tabitemarr", "tabs"),
             ("i32", "selectedIndexValue"),
             ("bool", "canReorderTabs"),
+            ("bool", "isAddTabButtonVisible"),
             ("optcbi32", "onSelectionChangedCb"),
             ("optcbstr", "onTabCloseRequestedCb"),
+            ("optcb", "onAddTabButtonClickCb"),
         ],
         "factory": ("tab_view", [("tabs", "ArrayList<TabItem>")], "TabView(tabs)"),
     },

@@ -201,6 +201,8 @@ public enum Prop <: Hashable & Equatable<Prop> {
     | RelativePanelAlignRightWithPanel | RelativePanelAlignTopWithPanel
     | RelativePanelAlignBottomWithPanel | RelativePanelAlignHCenterWithPanel
     | RelativePanelAlignVCenterWithPanel | Resources
+    // Controls the visibility of the TabView's built-in add-tab button.
+    | IsAddTabButtonVisible
 
     public func tag(): Int64 {
         match (this) {
@@ -370,6 +372,7 @@ public enum Prop <: Hashable & Equatable<Prop> {
             case RelativePanelAlignHCenterWithPanel => 163
             case RelativePanelAlignVCenterWithPanel => 164
             case Resources => 165
+            case IsAddTabButtonVisible => 166
         }
     }
 
@@ -398,6 +401,8 @@ public enum Event <: Hashable & Equatable<Event> {
     | CommandBarFlyoutClick | TeachingTipClosed | TeachingTipActionClick
     | SelectorBarSelectionChanged | RichEditBoxTextChanged | FlyoutOpened
     | FlyoutClosed
+    // TabView: the built-in "+" add-tab button was clicked.
+    | AddTabButtonClick
 
     public func tag(): Int64 {
         match (this) {
@@ -447,6 +452,7 @@ public enum Event <: Hashable & Equatable<Event> {
             case RichEditBoxTextChanged => 43
             case FlyoutOpened => 44
             case FlyoutClosed => 45
+            case AddTabButtonClick => 46
         }
     }
 

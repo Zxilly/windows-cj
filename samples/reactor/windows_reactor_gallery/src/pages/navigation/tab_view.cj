@@ -58,6 +58,11 @@ func tabViewPage(cx: RenderCx): Element {
                 vstack([
                     tab_view(dynamicTabs)
                         .selectedIndex(clampedSelected)
+                        .isAddTabButtonVisibleOf(true)
+                        .onAddTabButtonClick({ =>
+                            setTabCount.call(tabCount + 1)
+                            setSelected.call(tabCount)
+                        })
                         .onSelectionChanged({ idx: Int32 => setSelected.call(idx) })
                         .height(180.0)
                         .toElement(),

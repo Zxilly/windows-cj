@@ -961,10 +961,11 @@ public class WinUIBackend <: Backend {
             case ComboSelectionChanged | ListBoxSelectionChanged | TreeViewItemInvoked
                 | RadioButtonsSelectionChanged =>
                 wireListEvents(handle, event, handler)
-            case TabSelectionChanged | TabCloseRequested | NavSelectionChanged | NavBackRequested
-                | NavSearchQuerySubmitted | NavSearchTextChanged | NavSearchSuggestionChosen
-                | PivotSelectionChanged | BreadcrumbItemClicked | SelectorBarSelectionChanged
-                | MenuBarItemClicked | CommandBarClick | SplitViewPaneClosed =>
+            case TabSelectionChanged | TabCloseRequested | AddTabButtonClick | NavSelectionChanged
+                | NavBackRequested | NavSearchQuerySubmitted | NavSearchTextChanged
+                | NavSearchSuggestionChosen | PivotSelectionChanged | BreadcrumbItemClicked
+                | SelectorBarSelectionChanged | MenuBarItemClicked | CommandBarClick
+                | SplitViewPaneClosed =>
                 wireNavEvents(handle, event, handler)
             case ColorChanged | DateSelected | TimeSelected | CalendarDateSelected
                 | CalendarViewSelectionChanged =>

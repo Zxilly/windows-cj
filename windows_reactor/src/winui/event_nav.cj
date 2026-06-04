@@ -138,6 +138,29 @@ func wireNavEvents(handle: Handle, event: Event, handler: EventHandler): ArrayLi
                 target.close()
             }))
 
+        // ── TabView.AddTabButtonClick → built-in "+" add-tab button click ─────
+        case (AddTabButtonClick, TabViewH(_)) =>
+            let target = TabView.fromAbiTake(
+                queryRequired(handle.asRaw(), TabView.iid(), "Microsoft.UI.Xaml.Controls.ITabView")
+            )
+            let delegate = TypedEventHandler<TabView, IInspectable>.new({ _, _ =>
+                try {
+                    handler.invoke()
+                } catch (_: Exception) {
+                    ()
+                }
+            })
+            let token = target.addAddTabButtonClick(delegate)
+            revokers.add(EventRevoker({ =>
+                try {
+                    target.removeAddTabButtonClick(token)
+                } catch (_: Exception) {
+                    ()
+                }
+                delegate.close()
+                target.close()
+            }))
+
         // ── NavigationView.SelectionChanged → selected item tag ───────────────
         // Reads the tag from the EVENT ARGS' SelectedItem (args.SelectedItem -> cast
         // NavigationViewItem -> FrameworkElement.Tag -> unbox IReference<HSTRING>),

@@ -31,6 +31,11 @@ func typeRampPage(cx: RenderCx): Element {
         text_block("Huge text").fontSize(36.0).toElement()
     ]).spacing(4.0).toElement()
 
+    let selectableDemo = vstack([
+        text_block("Selectable text \u{2014} try selecting this with your mouse").selectable().toElement(),
+        text_block("Selectable + wrapped text that demonstrates both features working together on a TextBlock element").selectable().wrap().toElement()
+    ]).spacing(8.0).toElement()
+
     let articleCard = border(
         vstack([
             typeTitle("Release Notes"),
@@ -62,6 +67,12 @@ func typeRampPage(cx: RenderCx): Element {
                 "text_block(\"Normal\").fontSize(14.0)\n" +
                 "text_block(\"Large\").fontSize(24.0)\n" +
                 "text_block(\"Huge\").fontSize(36.0)"
+            ),
+            sample_card(
+                "Selectable Text",
+                selectableDemo,
+                "text_block(\"Selectable text\").selectable()\n" +
+                "text_block(\"Selectable + wrapped text\").selectable().wrap()"
             ),
             sample_card(
                 "Composed Example \u{2014} Article Card",

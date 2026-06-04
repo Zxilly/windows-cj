@@ -12,6 +12,7 @@ public class TextBlock <: Widget {
     public var fontSizeValue: ?Float64 = None
     public var fontWeightValue: ?UInt16 = None
     public var wrapText: Bool = false
+    public var isTextSelectionEnabled: Bool = false
 
     public init(content: String) {
         this.content = content
@@ -33,6 +34,7 @@ public class TextBlock <: Widget {
             case None => ()
         }
         if (wrapText) { out.add(Binding.PropB(Prop.TextWrappingWrap, PropValue.BoolV(true))) }
+        if (isTextSelectionEnabled) { out.add(Binding.PropB(Prop.IsTextSelectionEnabled, PropValue.BoolV(true))) }
         out
     }
 
@@ -45,7 +47,8 @@ public class TextBlock <: Widget {
                     content == o.content &&
                     optF64Eq(fontSizeValue, o.fontSizeValue) &&
                     optU16Eq(fontWeightValue, o.fontWeightValue) &&
-                    wrapText == o.wrapText
+                    wrapText == o.wrapText &&
+                    isTextSelectionEnabled == o.isTextSelectionEnabled
                 case _ => false
             }
             case None => false
@@ -92,6 +95,7 @@ public class TextBlock <: Widget {
     public func bold(): This { fontWeightValue = Some(700); this }
     public func semibold(): This { fontWeightValue = Some(600); this }
     public func wrap(): This { wrapText = true; this }
+    public func selectable(): This { isTextSelectionEnabled = true; this }
 }
 
 public func text_block(content: String): TextBlock { TextBlock(content) }
