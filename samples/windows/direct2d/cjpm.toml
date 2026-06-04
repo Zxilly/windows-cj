@@ -1,0 +1,17 @@
+[package]
+  name = "windows_sample_direct2d"
+  version = "0.1.0"
+  description = "A Direct2D analog clock rendered with Direct3D11/DXGI interop and Windows animation"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_sample_direct2d_bindings = { path = "./bindings" }
+  windows_core = { path = "../../../windows_core" }
+  windows_strings = { path = "../../../windows_strings" }
+  windows_numerics = { path = "../../../windows_numerics" }
+  windows_polyfill = { path = "../../../windows_polyfill" }
