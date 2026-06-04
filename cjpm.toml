@@ -74,5 +74,6 @@ members = [
     "samples/windows/ocr",
     "samples/windows/rss/bindings",
     "samples/windows/rss",
+    "samples/services/simple",
     "windows_bindgen"
 ]

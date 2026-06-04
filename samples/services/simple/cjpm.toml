@@ -1,0 +1,13 @@
+[package]
+  name = "windows_sample_simple"
+  version = "0.1.0"
+  description = "Windows service that registers with the SCM and logs each received control command to a file"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_services = { path = "../../../windows_services" }
