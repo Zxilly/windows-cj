@@ -26,7 +26,8 @@ import windows_reactor.core.{
     Tooltip,
     PointerHandlers,
     ReactorDateTime,
-    ReactorTimeSpan
+    ReactorTimeSpan,
+    NativeElement
 }
 import windows_core.{HString, OutSlot, queryInterfaceRaw}
 import windows_interface.{IInspectable}
@@ -156,6 +157,19 @@ public class WinUIBackend <: Backend {
             case Some(h) =>
                 let ui = h.asUIElement()
                 Some(ui.asRaw())
+            case None => None
+        }
+    }
+
+    // Backend interface: surface the live control's native element as an opaque
+    // NativeElement token for interop (e.g. the SwapChainPanel on-mounted callback
+    // attaching a swap chain). The token carries the control's raw IUIElement
+    // pointer as a UIntNative; the winui SwapChainPanelHandle rebuilds the WinRT
+    // interop views from it. Non-owning — the live Handle (in `controls`) owns the
+    // COM ref. Mirrors the reference WinUIBackend::get_native_element.
+    public func getNativeElement(id: ControlId): ?NativeElement {
+        match (controls.get(id.raw)) {
+            case Some(h) => Some(NativeElement(h.asUIElement().asRaw().toUIntNative()))
             case None => None
         }
     }
@@ -1637,8 +1651,13 @@ public class WinUIBackend <: Backend {
             case TextBoxH(_) | PasswordBoxH(_) | RichEditBoxH(_) =>
                 applyTextInputProps(handle, which, value)
             // layout containers
+            // SwapChainPanel is a Panel-derived FrameworkElement with no
+            // control-specific props of its own; any prop that reaches here (only
+            // generic element modifiers, since the widget emits no bindings) is
+            // handled by the shared layout/FrameworkElement path.
             case StackPanelH(_) | GridH(_) | CanvasH(_) | RelativePanelH(_)
-                | BorderH(_) | ViewboxH(_) | ScrollViewerH(_) | ScrollViewH(_) =>
+                | BorderH(_) | ViewboxH(_) | ScrollViewerH(_) | ScrollViewH(_)
+                | SwapChainPanelH(_) =>
                 applyLayoutProps(handle, which, value)
             // selection / collection
             case ListViewH(_) | GridViewH(_) | ListBoxH(_) | ComboBoxH(_)

@@ -882,6 +882,41 @@ WIDGETS = [
         "factory": ("toggle_button", [("label", "String"), ("isChecked", "Bool")],
                     "ToggleButton(label, isChecked)"),
     },
+    {
+        # SwapChainPanel hosts native Direct3D / Direct2D rendering inside the
+        # XAML tree. It has no XAML props/children/events; its sole purpose is to
+        # surface the created control's native element to user code (via the
+        # on-mounted callback) so a DXGI swap chain can be attached through the
+        # winui-layer SwapChainPanelHandle. Mirrors the reference
+        # SwapChainPanelWidget (core/widgets/swap_chain_panel.rs), whose on_ready
+        # callback receives a handle wrapping the native IInspectable.
+        "name": "SwapChainPanelWidget", "kind": "SwapChainPanel",
+        "ctor": [],
+        "fields": [
+            # ?Callback<NativeElement> handed to the reconciler as the on-mounted
+            # callback. The reconciler invokes it once with the control's opaque
+            # NativeElement token after the control is created; user code builds a
+            # winui SwapChainPanelHandle from it (swapChainPanelHandle(native)).
+            ("onReadyCb", "?Callback<NativeElement>", "None"),
+        ],
+        "children": None,
+        "bindings": [],
+        "mounted": "onReadyCb",
+        "builders": [
+            # Register the on-ready callback. Receives the opaque NativeElement of
+            # the created SwapChainPanel control (mirrors the reference on_ready,
+            # which receives a SwapChainPanelHandle; here the handle is built from
+            # the NativeElement in the winui layer via swapChainPanelHandle()).
+            ("onReady(handler: (NativeElement) -> Unit)",
+             "onReadyCb = Some(Callback<NativeElement>(handler))"),
+        ],
+        # The on-ready callback is identity-compared like every other reactor
+        # callback (re-renders with the same handler do not force a re-mount).
+        "equiv": [
+            ("optcbnative", "onReadyCb"),
+        ],
+        "factory": ("swap_chain_panel", [], "SwapChainPanelWidget()"),
+    },
 
     # ════════════════════════════════════════════════════════════════════
     # text group
@@ -2169,6 +2204,8 @@ def emit_equiv_field(spec) -> str:
         return f"optCbDateTimeOptEq({f}, o.{f})"
     if kind == "optcbcdr":
         return f"optCbCdrEq({f}, o.{f})"
+    if kind == "optcbnative":
+        return f"optCbNativeEq({f}, o.{f})"
     if kind == "colorargb":
         return f"{f} == o.{f}"
     if kind == "optbrush":
@@ -2287,6 +2324,16 @@ def gen_widget(w) -> str:
     if pe is not None:
         out.append("    public func paneElement(): ?Element {")
         out.append(f"        {pe}")
+        out.append("    }")
+        out.append("")
+    # on-mounted callback override (native-element interop). `mounted` names the
+    # ?Callback<NativeElement> field returned to the reconciler; the reconciler
+    # invokes it after the control is created (see reconciler_widget_dispatch
+    # mountWidget). Used by SwapChainPanel to expose its native element.
+    mounted_field = w.get("mounted")
+    if mounted_field is not None:
+        out.append("    public func onMountedCallback(): ?Callback<NativeElement> {")
+        out.append(f"        {mounted_field}")
         out.append("    }")
         out.append("")
     # extra class methods (e.g. NavigationView.hasSearch)
@@ -2591,6 +2638,7 @@ def gen_element() -> str:
         ("optCbTimeSpanEq", "ReactorTimeSpan"),
         ("optCbDateTimeOptEq", "?ReactorDateTime"),
         ("optCbCdrEq", "ContentDialogResult"),
+        ("optCbNativeEq", "NativeElement"),
     ]
     for (fnname, payload) in cb_helpers:
         out.append(f"func {fnname}(a: ?Callback<{payload}>, b: ?Callback<{payload}>): Bool {{")

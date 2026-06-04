@@ -78,7 +78,7 @@ public enum ControlKind <: Hashable & Equatable<ControlKind> {
     | TimePicker | CalendarDatePicker | CalendarView | ListBox | DropDownButton
     | SplitButton | AutoSuggestBox | SplitView | MenuBar | ScrollView
     | TreeView | CommandBar | TeachingTip | SelectorBar | RichEditBox
-    | RelativePanel | ToggleButton
+    | RelativePanel | ToggleButton | SwapChainPanel
 
     public func tag(): Int64 {
         match (this) {
@@ -143,6 +143,7 @@ public enum ControlKind <: Hashable & Equatable<ControlKind> {
             case RichEditBox => 58
             case RelativePanel => 59
             case ToggleButton => 60
+            case SwapChainPanel => 62
             case PivotItem => 61
         }
     }
@@ -744,4 +745,11 @@ public interface Backend {
     func setPointerHandlers(id: ControlId, handlers: ?PointerHandlers): Unit {
         let _ = id; let _ = handlers
     }
+
+    // Retrieve the underlying platform element for `id` as a backend-neutral
+    // NativeElement token (for interop, e.g. attaching a native swap chain to a
+    // SwapChainPanel). Returns None on non-WinUI backends or for an unknown id.
+    // Mirrors the reference Backend::get_native_element (which returns an
+    // IInspectable); here the token is opaque so core stays backend-agnostic.
+    func getNativeElement(id: ControlId): ?NativeElement { let _ = id; None }
 }

@@ -36,6 +36,20 @@ func mountWidget(r: Reconciler, w: Widget): ControlId {
             }
         case None => ()
     }
+    // On-mounted native-element callback (mirrors the reference mount path that
+    // invokes Widget::on_mounted_callback with the backend's native element).
+    // Fires once after the control + its subtree exist, handing the control's
+    // opaque NativeElement token to user code (used by SwapChainPanel to attach
+    // a native swap chain). Only widgets that override onMountedCallback (i.e.
+    // return Some) incur any work; for every other widget this is a no-op.
+    match (w.onMountedCallback()) {
+        case Some(cb) =>
+            match (r.backend.getNativeElement(id)) {
+                case Some(native) => cb.invoke(native)
+                case None => ()
+            }
+        case None => ()
+    }
     id
 }
 

@@ -31,6 +31,7 @@ public enum Element {
     | DropDownButtonEl(DropDownButton)
     | SplitButtonEl(SplitButton)
     | ToggleButtonEl(ToggleButton)
+    | SwapChainPanelWidgetEl(SwapChainPanelWidget)
     | AutoSuggestBoxWidgetEl(AutoSuggestBoxWidget)
     | RichEditBoxWidgetEl(RichEditBoxWidget)
     | RichTextBlockEl(RichTextBlock)
@@ -98,6 +99,7 @@ public enum Element {
             case DropDownButtonEl(v) => Some(v)
             case SplitButtonEl(v) => Some(v)
             case ToggleButtonEl(v) => Some(v)
+            case SwapChainPanelWidgetEl(v) => Some(v)
             case AutoSuggestBoxWidgetEl(v) => Some(v)
             case RichEditBoxWidgetEl(v) => Some(v)
             case RichTextBlockEl(v) => Some(v)
@@ -160,6 +162,7 @@ public enum Element {
             case DropDownButtonEl(_) => "DropDownButton"
             case SplitButtonEl(_) => "SplitButton"
             case ToggleButtonEl(_) => "ToggleButton"
+            case SwapChainPanelWidgetEl(_) => "SwapChainPanelWidget"
             case AutoSuggestBoxWidgetEl(_) => "AutoSuggestBoxWidget"
             case RichEditBoxWidgetEl(_) => "RichEditBoxWidget"
             case RichTextBlockEl(_) => "RichTextBlock"
@@ -228,48 +231,49 @@ public enum Element {
             case DropDownButtonEl(_) => 18
             case SplitButtonEl(_) => 19
             case ToggleButtonEl(_) => 20
-            case AutoSuggestBoxWidgetEl(_) => 21
-            case RichEditBoxWidgetEl(_) => 22
-            case RichTextBlockEl(_) => 23
-            case ListBoxEl(_) => 24
-            case TreeViewEl(_) => 25
-            case CalendarDatePickerEl(_) => 26
-            case CalendarViewEl(_) => 27
-            case DatePickerEl(_) => 28
-            case TimePickerEl(_) => 29
-            case BorderEl(_) => 30
-            case CanvasEl(_) => 31
-            case ExpanderEl(_) => 32
-            case RelativePanelEl(_) => 33
-            case ScrollViewEl(_) => 34
-            case SplitViewEl(_) => 35
-            case ViewboxEl(_) => 36
-            case ImageEl(_) => 37
-            case PersonPictureEl(_) => 38
-            case CommandBarWidgetEl(_) => 39
-            case MenuBarWidgetEl(_) => 40
-            case SelectorBarWidgetEl(_) => 41
-            case InfoBadgeEl(_) => 42
-            case InfoBarEl(_) => 43
-            case ProgressBarEl(_) => 44
-            case ProgressRingEl(_) => 45
-            case BreadcrumbBarEl(_) => 46
-            case NavigationViewEl(_) => 47
-            case PivotEl(_) => 48
-            case TabViewEl(_) => 49
-            case TitleBarEl(_) => 50
-            case ContentDialogEl(_) => 51
-            case TeachingTipEl(_) => 52
-            case RectangleEl(_) => 53
-            case EllipseEl(_) => 54
-            case LineEl(_) => 55
-            case TemplatedListEl(_) => 56
-            case ComponentEl(_) => 57
-            case ErrorBoundaryEl(_) => 58
-            case ProviderEl(_) => 59
-            case GroupEl(_) => 60
-            case CustomEl(_) => 61
-            case EmptyEl => 62
+            case SwapChainPanelWidgetEl(_) => 21
+            case AutoSuggestBoxWidgetEl(_) => 22
+            case RichEditBoxWidgetEl(_) => 23
+            case RichTextBlockEl(_) => 24
+            case ListBoxEl(_) => 25
+            case TreeViewEl(_) => 26
+            case CalendarDatePickerEl(_) => 27
+            case CalendarViewEl(_) => 28
+            case DatePickerEl(_) => 29
+            case TimePickerEl(_) => 30
+            case BorderEl(_) => 31
+            case CanvasEl(_) => 32
+            case ExpanderEl(_) => 33
+            case RelativePanelEl(_) => 34
+            case ScrollViewEl(_) => 35
+            case SplitViewEl(_) => 36
+            case ViewboxEl(_) => 37
+            case ImageEl(_) => 38
+            case PersonPictureEl(_) => 39
+            case CommandBarWidgetEl(_) => 40
+            case MenuBarWidgetEl(_) => 41
+            case SelectorBarWidgetEl(_) => 42
+            case InfoBadgeEl(_) => 43
+            case InfoBarEl(_) => 44
+            case ProgressBarEl(_) => 45
+            case ProgressRingEl(_) => 46
+            case BreadcrumbBarEl(_) => 47
+            case NavigationViewEl(_) => 48
+            case PivotEl(_) => 49
+            case TabViewEl(_) => 50
+            case TitleBarEl(_) => 51
+            case ContentDialogEl(_) => 52
+            case TeachingTipEl(_) => 53
+            case RectangleEl(_) => 54
+            case EllipseEl(_) => 55
+            case LineEl(_) => 56
+            case TemplatedListEl(_) => 57
+            case ComponentEl(_) => 58
+            case ErrorBoundaryEl(_) => 59
+            case ProviderEl(_) => 60
+            case GroupEl(_) => 61
+            case CustomEl(_) => 62
+            case EmptyEl => 63
         }
     }
 
@@ -296,6 +300,7 @@ public enum Element {
             case DropDownButtonEl(v) => v.keyValue
             case SplitButtonEl(v) => v.keyValue
             case ToggleButtonEl(v) => v.keyValue
+            case SwapChainPanelWidgetEl(v) => v.keyValue
             case AutoSuggestBoxWidgetEl(v) => v.keyValue
             case RichEditBoxWidgetEl(v) => v.keyValue
             case RichTextBlockEl(v) => v.keyValue
@@ -364,6 +369,7 @@ public enum Element {
             case DropDownButtonEl(v) => Some(v.mods)
             case SplitButtonEl(v) => Some(v.mods)
             case ToggleButtonEl(v) => Some(v.mods)
+            case SwapChainPanelWidgetEl(v) => Some(v.mods)
             case AutoSuggestBoxWidgetEl(v) => Some(v.mods)
             case RichEditBoxWidgetEl(v) => Some(v.mods)
             case RichTextBlockEl(v) => Some(v.mods)
@@ -452,6 +458,7 @@ public func elementEquivalent(a: Element, b: Element): Bool {
         case (DropDownButtonEl(x), DropDownButtonEl(y)) => x.equivalent(y)
         case (SplitButtonEl(x), SplitButtonEl(y)) => x.equivalent(y)
         case (ToggleButtonEl(x), ToggleButtonEl(y)) => x.equivalent(y)
+        case (SwapChainPanelWidgetEl(x), SwapChainPanelWidgetEl(y)) => x.equivalent(y)
         case (AutoSuggestBoxWidgetEl(x), AutoSuggestBoxWidgetEl(y)) => x.equivalent(y)
         case (RichEditBoxWidgetEl(x), RichEditBoxWidgetEl(y)) => x.equivalent(y)
         case (RichTextBlockEl(x), RichTextBlockEl(y)) => x.equivalent(y)
@@ -670,6 +677,14 @@ func optCbDateTimeOptEq(a: ?Callback<?ReactorDateTime>, b: ?Callback<?ReactorDat
 }
 
 func optCbCdrEq(a: ?Callback<ContentDialogResult>, b: ?Callback<ContentDialogResult>): Bool {
+    match ((a, b)) {
+        case (Some(x), Some(y)) => x.sameAs(y)
+        case (None, None) => true
+        case _ => false
+    }
+}
+
+func optCbNativeEq(a: ?Callback<NativeElement>, b: ?Callback<NativeElement>): Bool {
     match ((a, b)) {
         case (Some(x), Some(y)) => x.sameAs(y)
         case (None, None) => true
