@@ -15,3 +15,8 @@
   windows_strings = { path = "../windows_strings" }
   windows_numerics = { path = "../windows_numerics" }
   windows_polyfill = { path = "../windows_polyfill" }
+  # Phase C: GPU 2D drawing integrated into the declarative reactor UI. The
+  # dependency is one-directional (canvas -> reactor); the reactor does not
+  # depend on canvas, so there is no cycle. (No "feature" mechanism in Cangjie:
+  # the reference's optional `reactor` feature is a plain dependency here.)
+  windows_reactor = { path = "../windows_reactor" }

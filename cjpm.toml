@@ -91,5 +91,7 @@ members = [
     "samples/windows/direct3d12",
     "samples/windows/dcomp/bindings",
     "samples/windows/dcomp",
+    "samples/canvas/minimal",
+    "samples/canvas/circles",
     "windows_bindgen"
 ]

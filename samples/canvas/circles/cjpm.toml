@@ -1,0 +1,15 @@
+[package]
+  name = "windows_canvas_circles"
+  version = "0.1.0"
+  description = "Animated orbiting circles rendered with windows_canvas inside a reactor UI"
+  authors = ["Zxilly"]
+  repository = "https://github.com/Zxilly/windows-cj"
+  license = ["MIT"]
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_canvas = { path = "../../../windows_canvas" }
+  windows_reactor = { path = "../../../windows_reactor" }
+  windows_numerics = { path = "../../../windows_numerics" }
