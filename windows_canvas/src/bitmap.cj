@@ -141,6 +141,10 @@ public class Bitmap {
         // garbage (and calling it through a mismatched signature corrupts state).
         // At the default 96 DPI the WIC pixel size equals the DIP size that
         // ID2D1Bitmap::GetSize would report, so this is behaviourally equivalent.
+        // See docs/cj-aggregate-return-com-abi-bug.md for the full analysis and
+        // the expected root fix (a bindgen change emitting explicit out-param
+        // signatures for aggregate returns, after which this can revert to
+        // ID2D1Bitmap::GetSize once the bindings are regenerated).
         // GetSize lives on the IWICBitmapSource base of IWICFormatConverter.
         var pxW: UInt32 = 0
         var pxH: UInt32 = 0

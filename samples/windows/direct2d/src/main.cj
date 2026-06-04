@@ -36,7 +36,7 @@ import windows_sample_direct2d_bindings.Win32.System.Com.Apis as ComApis
 import windows_sample_direct2d_bindings.Win32.System.Performance.Apis as PerfApis
 import windows_sample_direct2d_bindings.Win32.System.SystemInformation.Apis as SysInfoApis
 import windows_sample_direct2d_bindings.Win32.System.LibraryLoader.Apis as LoaderApis
-import windows_sample_direct2d_bindings.Win32.Foundation.{HWND, HINSTANCE, HMODULE, SYSTEMTIME}
+import windows_sample_direct2d_bindings.Win32.Foundation.{HWND, HINSTANCE, HMODULE, SYSTEMTIME, RECT}
 import windows_sample_direct2d_bindings.Win32.UI.WindowsAndMessaging.{Apis as WndApis, WNDCLASSA, MSG, HMENU}
 import windows_sample_direct2d_bindings.Win32.Graphics.Gdi.{Apis as GdiApis, PAINTSTRUCT}
 import windows_sample_direct2d_bindings.Foundation.Numerics.{Vector2, Matrix3x2 as ProjectedMatrix3x2}
@@ -450,13 +450,9 @@ class Window {
     }
 
     func drawClock(): Unit {
-        // size = target.GetSize().
-        var size = D2D_SIZE_F()
-        unsafe {
-            let vtblPtr = CPointer<CPointer<ID2D1DeviceContextVtbl>>(target).read()
-            let vtbl = vtblPtr.read()
-            size = vtbl.base_.GetSize(target)
-        }
+        // size = render-target size in DIPs (see sizeDip — it avoids the
+        // aggregate-return ABI bug in ID2D1RenderTarget::GetSize).
+        let size = sizeDip()
 
         let minSide = if (size.width < size.height) { size.width } else { size.height }
         let clamped = if (minSide > 200.0f32) { minSide } else { 200.0f32 }
@@ -546,15 +542,33 @@ class Window {
         clock = newClock
     }
 
+    // Render-target size in DIPs, obtained WITHOUT ID2D1RenderTarget::GetSize.
+    // That COM getter returns a D2D_SIZE_F aggregate by value, which the
+    // generated value-returning CFunc miscompiles on x64: it reads the sret
+    // return-buffer POINTER out of RAX instead of the value, so the size comes
+    // back as garbage (here it had been masked by the saturating cast + the
+    // 200.0 floor in drawClock). See docs/cj-aggregate-return-com-abi-bug.md.
+    // The correct fix is a bindgen change emitting an explicit out-parameter
+    // signature for aggregate returns + regen, after which this can revert to
+    // target.GetSize(). Until then we use GetClientRect — a plain out-parameter
+    // call — and convert physical pixels to DIPs by the DPI scale (the target
+    // was created with SetDpi(dpi), so its DIP size == client px * 96 / dpi).
+    func sizeDip(): D2D_SIZE_F {
+        var rect = RECT()
+        unsafe {
+            WndApis.GetClientRect(handle, CPointer<Unit>(CPointer<RECT>(inout rect)))
+        }
+        let scale = dpi / 96.0f32
+        var size = D2D_SIZE_F()
+        size.width = Float32(rect.right - rect.left) / scale
+        size.height = Float32(rect.bottom - rect.top) / scale
+        return size
+    }
+
     // CreateBitmap with TARGET option, dpi-scaled pixel size — the offscreen
     // clock face. Returns an owned ID2D1Bitmap1 raw pointer.
     func createClock(): CPointer<Unit> {
-        var sizeF = D2D_SIZE_F()
-        unsafe {
-            let vtblPtr = CPointer<CPointer<ID2D1DeviceContextVtbl>>(target).read()
-            let vtbl = vtblPtr.read()
-            sizeF = vtbl.base_.GetSize(target)
-        }
+        let sizeF = sizeDip()
 
         var sizeU = D2D_SIZE_U()
         // The reference performs `(size * dpi / 96.0) as u32`, which in Rust
