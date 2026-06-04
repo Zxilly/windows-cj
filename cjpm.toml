@@ -75,5 +75,11 @@ members = [
     "samples/windows/rss/bindings",
     "samples/windows/rss",
     "samples/services/simple",
+    "samples/services/time/bindings",
+    "samples/services/time",
+    "samples/windows/bits/bindings",
+    "samples/windows/bits",
+    "samples/windows/core_app/bindings",
+    "samples/windows/core_app",
     "windows_bindgen"
 ]

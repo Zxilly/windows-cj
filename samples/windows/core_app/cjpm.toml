@@ -1,0 +1,14 @@
+[package]
+  name = "windows_sample_core_app"
+  version = "0.1.0"
+  description = "CoreApplication bootstrap implementing IFrameworkViewSource/IFrameworkView as CCWs"
+  output-type = "executable"
+  cjc-version = "1.1.0"
+  compile-option = "-Woff unused"
+
+[dependencies]
+  windows_sample_core_app_bindings = { path = "./bindings" }
+  windows_core = { path = "../../../windows_core" }
+  windows_interface = { path = "../../../windows_interface" }
+  windows_implement = { path = "../../../windows_implement" }
+  windows_strings = { path = "../../../windows_strings" }
