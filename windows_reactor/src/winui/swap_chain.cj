@@ -2,7 +2,6 @@ package windows_reactor.winui
 
 import windows_reactor.core.{NativeElement}
 import windows_core.{
-    GUID,
     HRESULT,
     WindowsException,
     queryInterfaceRaw
@@ -27,8 +26,8 @@ import windows_common.Foundation.{TypedEventHandler, EventHandler}
 //   `SwapChainPanel`, its `ISwapChainPanel` composition-scale interface and
 //   factory, `Microsoft.UI.Xaml.Media.CompositionTarget` (the static Rendering
 //   event), and the `Windows.Win32.System.WinRT.Xaml.ISwapChainPanelNative`
-//   interop interface are all part of the curated windows_common projection
-//   (their precise-type features are listed in
+//   interop vtbl are all part of the curated windows_common projection (their
+//   precise-type features are listed in
 //   windows_common/codegen-manifest.json requested_features). This file uses
 //   those generated projection types directly:
 //     - SwapChainPanel.CreateInstance — composable (CreateInstance with null
@@ -37,12 +36,14 @@ import windows_common.Foundation.{TypedEventHandler, EventHandler}
 //     - SwapChainPanel.CompositionScaleX / CompositionScaleY props (scalar
 //       getters) and addCompositionScaleChanged / removeCompositionScaleChanged.
 //     - CompositionTarget.Rendering / RemoveRendering static event accessors.
-//   The only hand-described item that remains is the IID used to QI the panel to
-//   ISwapChainPanelNative: the Win32-style interop interface is projected as a
-//   raw-COM `Resource` handle plus an `@C` vtbl struct (ISwapChainPanelNativeVtbl)
-//   without a generated `iid()` accessor or ergonomic SetSwapChain method, so the
-//   QI target IID is named here and the single `SetSwapChain` call goes through
-//   the generated vtbl struct.
+//     - ISwapChainPanelNativeVtbl.SetSwapChain, whose native COM ABI layout is
+//       shared by the Windows.UI.Xaml and Microsoft.UI.Xaml interop interfaces.
+//   The QI target IID is not taken from the generated Windows.Win32 interface:
+//   that metadata describes the Windows.UI.Xaml/UWP family
+//   (f92f19d2-3ade-45a6-a20c-f6f1ea90554b), while WinUI 3
+//   Microsoft.UI.Xaml.Controls.SwapChainPanel answers the Microsoft.UI.Xaml
+//   native IID (63aad0b8-7c24-40ff-85a8-640d944cc325). The WinUI 3 IID is
+//   maintained in extras.cj; the vtbl layout is still generated.
 //
 // ABI-BUG NOTE: none of the methods used here return an aggregate by value, so
 // the sret/RAX miscompilation in web/book/src/aggregate-return-abi-bug.md does
@@ -50,14 +51,6 @@ import windows_common.Foundation.{TypedEventHandler, EventHandler}
 // CompositionScaleX/Y props read a scalar f32 out-param; the event add/remove
 // methods return / take an Int64 token.
 // ============================================================================
-
-// QI target IID for the Win32 interop interface. The generated
-// windows_common projection emits ISwapChainPanelNative as a raw-COM Resource
-// wrapper + @C vtbl struct without an iid() accessor (Win32-style interfaces
-// have no WinRT type-witness IID), so the QI target is named here.
-//   ISwapChainPanelNative = 63aad0b8-7c24-40ff-85a8-640d944cc325
-let IID_ISWAPCHAINPANEL_NATIVE = GUID.from_values(
-    0x63aad0b8u32, 0x7c24u16, 0x40ffu16, 0x85u8, 0xa8u8, 0x64u8, 0x0du8, 0x94u8, 0x4cu8, 0xc3u8, 0x25u8)
 
 // ============================================================================
 // SwapChainPanelControl — the winui Handle's backing object for a created
@@ -141,7 +134,7 @@ public class SwapChainPanelHandle {
         if (raw.isNull()) {
             throw Exception("SwapChainPanelHandle.setSwapChain: null panel")
         }
-        let nativeRaw = queryRequired(raw, IID_ISWAPCHAINPANEL_NATIVE, "ISwapChainPanelNative")
+        let nativeRaw = queryRequired(raw, IID_WINUI3_ISWAPCHAINPANEL_NATIVE, "Microsoft.UI.Xaml.ISwapChainPanelNative")
         try {
             let table = readWinuiVtbl<ISwapChainPanelNativeVtbl>(nativeRaw)
             checkHRESULT(HRESULT(unsafe { table.SetSwapChain(nativeRaw, swapChainRaw) }),
