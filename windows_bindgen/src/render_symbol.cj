@@ -2989,7 +2989,7 @@ func renderNativeComInterfaceSymbol(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>
 ): String {
-    return renderRawHandleSymbol(symbol, "interface") + "\n\n" +
+    return renderRawHandleSymbol(symbol, "interface", iidExpr: guidAttributeInterfaceExpression(typeDef)) + "\n\n" +
         renderNativeComInterfaceVtblSymbol(symbol, typeDef, symbolsByName)
 }
 
@@ -4440,9 +4440,23 @@ func guidLiteralPart(value: Int64, index: Int64): String {
     return "${value}u8"
 }
 
-func renderRawHandleSymbol(symbol: SymbolRecord, kind: String): String {
+func renderRawHandleSymbol(symbol: SymbolRecord, kind: String, iidExpr!: Option<String> = None): String {
     if (kind == "delegate") {
         return renderRawDelegateHandleSymbol(symbol)
+    }
+    // Native COM (non-WinRT) interfaces carry their IID in metadata but, unlike
+    // WinRT interfaces, do not get the full WinRT type-witness surface
+    // (descriptor / runtimeType). We still surface the IID as a static `iid()`
+    // accessor so callers QI against the generated value instead of
+    // hand-writing a GUID constant. `iidExpr` is None for handles without a
+    // GUID (raw classes, GUID-less interfaces) and Some(...) for native COM
+    // interfaces.
+    let iidMethod = match (iidExpr) {
+        case Some(expr) =>
+            "    public static func iid(): windows_interface.GUID {\n" +
+            "        ${expr}\n" +
+            "    }\n"
+        case None => ""
     }
     return "public class ${symbol.implName} <: Resource {\n" +
         "    private let raw: CPointer<Unit>\n" +
@@ -4516,6 +4530,7 @@ func renderRawHandleSymbol(symbol: SymbolRecord, kind: String): String {
         "    public static func projectionKind(): String {\n" +
         "        return \"${kind}\"\n" +
         "    }\n" +
+        iidMethod +
         "}\n\n" +
         "extend ${symbol.implName} <: windows_core.HandleWinrtType<${symbol.implName}> {\n" +
         "    public static func intoWinrtHandle(value: ${symbol.implName}): CPointer<Unit> {\n" +

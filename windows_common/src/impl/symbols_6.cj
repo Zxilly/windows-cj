@@ -179,6 +179,9 @@ public class Windows_Win32_System_Threading_IRtwqAsyncCallback <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2725249999u32, 9044u16, 20266u16, 141u8, 106u8, 171u8, 124u8, 255u8, 21u8, 67u8, 126u8)
+    }
 }
 
 extend Windows_Win32_System_Threading_IRtwqAsyncCallback <: windows_core.HandleWinrtType<Windows_Win32_System_Threading_IRtwqAsyncCallback> {
@@ -293,6 +296,9 @@ public class Windows_Win32_System_Threading_IRtwqAsyncResult <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2892724361u32, 1856u16, 19793u16, 134u8, 25u8, 144u8, 89u8, 148u8, 165u8, 92u8, 198u8)
     }
 }
 
@@ -411,6 +417,9 @@ public class Windows_Win32_System_Threading_IRtwqPlatformEvents <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1675175258u32, 32753u16, 19297u16, 143u8, 175u8, 237u8, 100u8, 96u8, 218u8, 207u8, 43u8)
     }
 }
 
@@ -2697,6 +2706,9 @@ public class Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNative <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(4180613586u32, 15070u16, 17830u16, 162u8, 12u8, 246u8, 241u8, 234u8, 144u8, 85u8, 75u8)
     }
 }
 

@@ -606,6 +606,9 @@ public class Windows_Win32_System_Com_AsyncIAdviseSink <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(336u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_AsyncIAdviseSink <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIAdviseSink> {
@@ -729,6 +732,9 @@ public class Windows_Win32_System_Com_AsyncIAdviseSink2 <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(337u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_AsyncIAdviseSink2 <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIAdviseSink2> {
@@ -844,6 +850,9 @@ public class Windows_Win32_System_Com_AsyncIMultiQI <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(917536u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_AsyncIMultiQI <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIMultiQI> {
@@ -958,6 +967,9 @@ public class Windows_Win32_System_Com_AsyncIPipeByte <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3677305547u32, 12166u16, 4561u16, 142u8, 4u8, 0u8, 192u8, 79u8, 185u8, 152u8, 154u8)
     }
 }
 
@@ -1076,6 +1088,9 @@ public class Windows_Win32_System_Com_AsyncIPipeDouble <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3677305551u32, 12166u16, 4561u16, 142u8, 4u8, 0u8, 192u8, 79u8, 185u8, 152u8, 154u8)
+    }
 }
 
 extend Windows_Win32_System_Com_AsyncIPipeDouble <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIPipeDouble> {
@@ -1193,6 +1208,9 @@ public class Windows_Win32_System_Com_AsyncIPipeLong <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3677305549u32, 12166u16, 4561u16, 142u8, 4u8, 0u8, 192u8, 79u8, 185u8, 152u8, 154u8)
+    }
 }
 
 extend Windows_Win32_System_Com_AsyncIPipeLong <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIPipeLong> {
@@ -1309,6 +1327,9 @@ public class Windows_Win32_System_Com_AsyncIUnknown <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(917504u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -2211,6 +2232,9 @@ public class Windows_Win32_System_Com_IActivationFilter <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(23u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IActivationFilter <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IActivationFilter> {
@@ -2324,6 +2348,9 @@ public class Windows_Win32_System_Com_IAddrExclusionControl <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(328u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -2440,6 +2467,9 @@ public class Windows_Win32_System_Com_IAddrTrackingControl <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(327u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IAddrTrackingControl <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAddrTrackingControl> {
@@ -2554,6 +2584,9 @@ public class Windows_Win32_System_Com_IAdviseSink <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(271u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -2673,6 +2706,9 @@ public class Windows_Win32_System_Com_IAdviseSink2 <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(293u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IAdviseSink2 <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAdviseSink2> {
@@ -2787,6 +2823,9 @@ public class Windows_Win32_System_Com_IAgileObject <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2498374548u32, 59852u16, 18912u16, 192u8, 255u8, 238u8, 100u8, 202u8, 143u8, 91u8, 144u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IAgileObject <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAgileObject> {
@@ -2899,6 +2938,9 @@ public class Windows_Win32_System_Com_IAsyncManager <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(42u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -3016,6 +3058,9 @@ public class Windows_Win32_System_Com_IAsyncRpcChannelBuffer <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2768412598u32, 15412u16, 4561u16, 156u8, 153u8, 0u8, 192u8, 79u8, 185u8, 152u8, 170u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IAsyncRpcChannelBuffer <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAsyncRpcChannelBuffer> {
@@ -3132,6 +3177,9 @@ public class Windows_Win32_System_Com_IAuthenticate <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2045430224u32, 47865u16, 4558u16, 140u8, 130u8, 0u8, 170u8, 0u8, 75u8, 169u8, 11u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IAuthenticate <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAuthenticate> {
@@ -3246,6 +3294,9 @@ public class Windows_Win32_System_Com_IAuthenticateEx <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(718400943u32, 55357u16, 18613u16, 154u8, 223u8, 3u8, 219u8, 225u8, 159u8, 83u8, 189u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IAuthenticateEx <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAuthenticateEx> {
@@ -3359,6 +3410,9 @@ public class Windows_Win32_System_Com_IBindCtx <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(14u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -3483,6 +3537,9 @@ public class Windows_Win32_System_Com_IBindHost <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(4232577441u32, 11177u16, 4559u16, 162u8, 41u8, 0u8, 170u8, 0u8, 61u8, 115u8, 82u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IBindHost <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IBindHost> {
@@ -3598,6 +3655,9 @@ public class Windows_Win32_System_Com_IBindStatusCallback <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2045430209u32, 47865u16, 4558u16, 140u8, 130u8, 0u8, 170u8, 0u8, 75u8, 169u8, 11u8)
     }
 }
 
@@ -3720,6 +3780,9 @@ public class Windows_Win32_System_Com_IBindStatusCallbackEx <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2863091449u32, 36583u16, 18009u16, 136u8, 217u8, 248u8, 197u8, 4u8, 218u8, 115u8, 204u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IBindStatusCallbackEx <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IBindStatusCallbackEx> {
@@ -3833,6 +3896,9 @@ public class Windows_Win32_System_Com_IBinding <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2045430208u32, 47865u16, 4558u16, 140u8, 130u8, 0u8, 170u8, 0u8, 75u8, 169u8, 11u8)
     }
 }
 
@@ -3953,6 +4019,9 @@ public class Windows_Win32_System_Com_IBlockingLock <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(821286010u32, 25671u16, 4561u16, 142u8, 60u8, 0u8, 192u8, 79u8, 185u8, 56u8, 109u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IBlockingLock <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IBlockingLock> {
@@ -4068,6 +4137,9 @@ public class Windows_Win32_System_Com_ICallFactory <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(477313584u32, 10780u16, 4558u16, 173u8, 229u8, 0u8, 170u8, 0u8, 68u8, 119u8, 61u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ICallFactory <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ICallFactory> {
@@ -4181,6 +4253,9 @@ public class Windows_Win32_System_Com_ICancelMethodCalls <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(41u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -4296,6 +4371,9 @@ public class Windows_Win32_System_Com_ICatInformation <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(188435u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -4416,6 +4494,9 @@ public class Windows_Win32_System_Com_ICatRegister <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(188434u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ICatRegister <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ICatRegister> {
@@ -4534,6 +4615,9 @@ public class Windows_Win32_System_Com_IChannelHook <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(269010080u32, 30227u16, 4559u16, 154u8, 241u8, 0u8, 32u8, 175u8, 110u8, 114u8, 244u8)
     }
 }
 
@@ -4654,6 +4738,9 @@ public class Windows_Win32_System_Com_IClassActivator <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(320u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IClassActivator <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IClassActivator> {
@@ -4767,6 +4854,9 @@ public class Windows_Win32_System_Com_IClassFactory <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -4882,6 +4972,9 @@ public class Windows_Win32_System_Com_IClientSecurity <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(317u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -4999,6 +5092,9 @@ public class Windows_Win32_System_Com_IComThreadingInfo <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(462u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IComThreadingInfo <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IComThreadingInfo> {
@@ -5115,6 +5211,9 @@ public class Windows_Win32_System_Com_IConnectionPoint <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2979443334u32, 47796u16, 4122u16, 182u8, 156u8, 0u8, 170u8, 0u8, 52u8, 29u8, 7u8)
     }
 }
 
@@ -5234,6 +5333,9 @@ public class Windows_Win32_System_Com_IConnectionPointContainer <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2979443332u32, 47796u16, 4122u16, 182u8, 156u8, 0u8, 170u8, 0u8, 52u8, 29u8, 7u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IConnectionPointContainer <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IConnectionPointContainer> {
@@ -5348,6 +5450,9 @@ public class Windows_Win32_System_Com_IContext <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(448u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -5465,6 +5570,9 @@ public class Windows_Win32_System_Com_IContextCallback <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(474u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -5595,6 +5703,9 @@ public class Windows_Win32_System_Com_IDataAdviseHolder <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(272u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IDataAdviseHolder <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IDataAdviseHolder> {
@@ -5711,6 +5822,9 @@ public class Windows_Win32_System_Com_IDataObject <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(270u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -5834,6 +5948,9 @@ public class Windows_Win32_System_Com_IDispatch <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(132096u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IDispatch <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IDispatch> {
@@ -5950,6 +6067,9 @@ public class Windows_Win32_System_Com_IEnumCATEGORYINFO <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(188433u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -6068,6 +6188,9 @@ public class Windows_Win32_System_Com_IEnumConnectionPoints <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2979443333u32, 47796u16, 4122u16, 182u8, 156u8, 0u8, 170u8, 0u8, 52u8, 29u8, 7u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IEnumConnectionPoints <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumConnectionPoints> {
@@ -6185,6 +6308,9 @@ public class Windows_Win32_System_Com_IEnumConnections <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2979443335u32, 47796u16, 4122u16, 182u8, 156u8, 0u8, 170u8, 0u8, 52u8, 29u8, 7u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IEnumConnections <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumConnections> {
@@ -6301,6 +6427,9 @@ public class Windows_Win32_System_Com_IEnumContextProps <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(449u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -6420,6 +6549,9 @@ public class Windows_Win32_System_Com_IEnumFORMATETC <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(259u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IEnumFORMATETC <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumFORMATETC> {
@@ -6536,6 +6668,9 @@ public class Windows_Win32_System_Com_IEnumGUID <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(188416u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -6654,6 +6789,9 @@ public class Windows_Win32_System_Com_IEnumMoniker <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(258u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IEnumMoniker <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumMoniker> {
@@ -6770,6 +6908,9 @@ public class Windows_Win32_System_Com_IEnumSTATDATA <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(261u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -6888,6 +7029,9 @@ public class Windows_Win32_System_Com_IEnumString <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(257u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IEnumString <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumString> {
@@ -7005,6 +7149,9 @@ public class Windows_Win32_System_Com_IEnumUnknown <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(256u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IEnumUnknown <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumUnknown> {
@@ -7121,6 +7268,9 @@ public class Windows_Win32_System_Com_IErrorInfo <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(485667104u32, 21629u16, 4123u16, 142u8, 101u8, 8u8, 0u8, 43u8, 43u8, 209u8, 25u8)
     }
 }
 
@@ -7240,6 +7390,9 @@ public class Windows_Win32_System_Com_IErrorLog <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(824691264u32, 17518u16, 4558u16, 129u8, 53u8, 0u8, 170u8, 0u8, 75u8, 184u8, 81u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IErrorLog <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IErrorLog> {
@@ -7353,6 +7506,9 @@ public class Windows_Win32_System_Com_IExternalConnection <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(25u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -7469,6 +7625,9 @@ public class Windows_Win32_System_Com_IFastRundown <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(64u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IFastRundown <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IFastRundown> {
@@ -7581,6 +7740,9 @@ public class Windows_Win32_System_Com_IForegroundTransfer <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(325u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -7695,6 +7857,9 @@ public class Windows_Win32_System_Com_IGlobalInterfaceTable <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(326u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -7812,6 +7977,9 @@ public class Windows_Win32_System_Com_IGlobalOptions <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(347u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IGlobalOptions <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IGlobalOptions> {
@@ -7926,6 +8094,9 @@ public class Windows_Win32_System_Com_IInitializeSpy <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(52u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -8043,6 +8214,9 @@ public class Windows_Win32_System_Com_IInternalUnknown <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(33u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -8165,6 +8339,9 @@ public class Windows_Win32_System_Com_IMachineGlobalObjectTable <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(651626924u32, 63243u16, 17441u16, 169u8, 111u8, 210u8, 135u8, 143u8, 175u8, 176u8, 13u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IMachineGlobalObjectTable <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IMachineGlobalObjectTable> {
@@ -8280,6 +8457,9 @@ public class Windows_Win32_System_Com_IMalloc <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -8399,6 +8579,9 @@ public class Windows_Win32_System_Com_IMallocSpy <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(29u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -8524,6 +8707,9 @@ public class Windows_Win32_System_Com_IMoniker <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(15u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -8652,6 +8838,9 @@ public class Windows_Win32_System_Com_IMultiQI <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(32u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -8782,6 +8971,9 @@ public class Windows_Win32_System_Com_INoMarshal <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3972557083u32, 49627u16, 19904u16, 133u8, 94u8, 101u8, 246u8, 197u8, 81u8, 175u8, 73u8)
+    }
 }
 
 extend Windows_Win32_System_Com_INoMarshal <: windows_core.HandleWinrtType<Windows_Win32_System_Com_INoMarshal> {
@@ -8894,6 +9086,9 @@ public class Windows_Win32_System_Com_IOplockStorage <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2367277108u32, 34937u16, 4561u16, 131u8, 233u8, 0u8, 192u8, 79u8, 194u8, 198u8, 212u8)
     }
 }
 
@@ -9010,6 +9205,9 @@ public class Windows_Win32_System_Com_IPSFactoryBuffer <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3589630416u32, 22843u16, 4122u16, 181u8, 105u8, 8u8, 0u8, 43u8, 45u8, 191u8, 122u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IPSFactoryBuffer <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPSFactoryBuffer> {
@@ -9125,6 +9323,9 @@ public class Windows_Win32_System_Com_IPackagedComSyntaxSupport <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2400478324u32, 45608u16, 18683u16, 165u8, 140u8, 16u8, 94u8, 187u8, 39u8, 58u8, 188u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IPackagedComSyntaxSupport <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPackagedComSyntaxSupport> {
@@ -9239,6 +9440,9 @@ public class Windows_Win32_System_Com_IPersist <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(268u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IPersist <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPersist> {
@@ -9352,6 +9556,9 @@ public class Windows_Win32_System_Com_IPersistFile <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(267u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -9471,6 +9678,9 @@ public class Windows_Win32_System_Com_IPersistMemory <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3172656608u32, 42670u16, 4558u16, 189u8, 55u8, 80u8, 66u8, 0u8, 193u8, 0u8, 0u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IPersistMemory <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPersistMemory> {
@@ -9589,6 +9799,9 @@ public class Windows_Win32_System_Com_IPersistStream <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(265u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IPersistStream <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPersistStream> {
@@ -9705,6 +9918,9 @@ public class Windows_Win32_System_Com_IPersistStreamInit <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2144674688u32, 19975u16, 4123u16, 174u8, 45u8, 8u8, 0u8, 43u8, 46u8, 199u8, 19u8)
     }
 }
 
@@ -9824,6 +10040,9 @@ public class Windows_Win32_System_Com_IPipeByte <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3677305546u32, 12166u16, 4561u16, 142u8, 4u8, 0u8, 192u8, 79u8, 185u8, 152u8, 154u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IPipeByte <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPipeByte> {
@@ -9938,6 +10157,9 @@ public class Windows_Win32_System_Com_IPipeDouble <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3677305550u32, 12166u16, 4561u16, 142u8, 4u8, 0u8, 192u8, 79u8, 185u8, 152u8, 154u8)
     }
 }
 
@@ -10054,6 +10276,9 @@ public class Windows_Win32_System_Com_IPipeLong <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3677305548u32, 12166u16, 4561u16, 142u8, 4u8, 0u8, 192u8, 79u8, 185u8, 152u8, 154u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IPipeLong <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPipeLong> {
@@ -10169,6 +10394,9 @@ public class Windows_Win32_System_Com_IProcessInitControl <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1916276053u32, 36139u16, 17315u16, 133u8, 19u8, 43u8, 110u8, 243u8, 20u8, 52u8, 233u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IProcessInitControl <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IProcessInitControl> {
@@ -10282,6 +10510,9 @@ public class Windows_Win32_System_Com_IProcessLock <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(469u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -10398,6 +10629,9 @@ public class Windows_Win32_System_Com_IProgressNotify <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2849462432u32, 17943u16, 4559u16, 149u8, 252u8, 0u8, 170u8, 0u8, 104u8, 13u8, 180u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IProgressNotify <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IProgressNotify> {
@@ -10511,6 +10745,9 @@ public class Windows_Win32_System_Com_IROTData <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(4070534080u32, 20513u16, 4558u16, 170u8, 21u8, 0u8, 0u8, 105u8, 1u8, 41u8, 63u8)
     }
 }
 
@@ -10626,6 +10863,9 @@ public class Windows_Win32_System_Com_IReleaseMarshalBuffers <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3943479784u32, 31126u16, 4562u16, 135u8, 46u8, 0u8, 0u8, 248u8, 8u8, 8u8, 89u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IReleaseMarshalBuffers <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IReleaseMarshalBuffers> {
@@ -10739,6 +10979,9 @@ public class Windows_Win32_System_Com_IRpcChannelBuffer <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3589630816u32, 22843u16, 4122u16, 181u8, 105u8, 8u8, 0u8, 43u8, 45u8, 191u8, 122u8)
     }
 }
 
@@ -10858,6 +11101,9 @@ public class Windows_Win32_System_Com_IRpcChannelBuffer2 <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1498362320u32, 32537u16, 4560u16, 177u8, 148u8, 0u8, 160u8, 201u8, 13u8, 200u8, 191u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IRpcChannelBuffer2 <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRpcChannelBuffer2> {
@@ -10971,6 +11217,9 @@ public class Windows_Win32_System_Com_IRpcChannelBuffer3 <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(632378880u32, 277u16, 4560u16, 191u8, 13u8, 0u8, 170u8, 0u8, 184u8, 223u8, 210u8)
     }
 }
 
@@ -11092,6 +11341,9 @@ public class Windows_Win32_System_Com_IRpcHelper <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(329u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IRpcHelper <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRpcHelper> {
@@ -11206,6 +11458,9 @@ public class Windows_Win32_System_Com_IRpcOptions <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(324u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -11322,6 +11577,9 @@ public class Windows_Win32_System_Com_IRpcProxyBuffer <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3589630516u32, 22843u16, 4122u16, 181u8, 105u8, 8u8, 0u8, 43u8, 45u8, 191u8, 122u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IRpcProxyBuffer <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRpcProxyBuffer> {
@@ -11436,6 +11694,9 @@ public class Windows_Win32_System_Com_IRpcStubBuffer <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3589630716u32, 22843u16, 4122u16, 181u8, 105u8, 8u8, 0u8, 43u8, 45u8, 191u8, 122u8)
     }
 }
 
@@ -11557,6 +11818,9 @@ public class Windows_Win32_System_Com_IRpcSyntaxNegotiate <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1486914841u32, 9416u16, 18741u16, 180u8, 130u8, 63u8, 216u8, 35u8, 51u8, 58u8, 79u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IRpcSyntaxNegotiate <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRpcSyntaxNegotiate> {
@@ -11670,6 +11934,9 @@ public class Windows_Win32_System_Com_IRunnableObject <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(294u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -11788,6 +12055,9 @@ public class Windows_Win32_System_Com_IRunningObjectTable <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(16u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -11909,6 +12179,9 @@ public class Windows_Win32_System_Com_ISequentialStream <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(208878128u32, 10780u16, 4558u16, 173u8, 229u8, 0u8, 170u8, 0u8, 68u8, 119u8, 61u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ISequentialStream <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISequentialStream> {
@@ -12023,6 +12296,9 @@ public class Windows_Win32_System_Com_IServerSecurity <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(318u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -12141,6 +12417,9 @@ public class Windows_Win32_System_Com_IServiceProvider <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1834041537u32, 29750u16, 4558u16, 128u8, 52u8, 0u8, 170u8, 0u8, 96u8, 9u8, 250u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IServiceProvider <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IServiceProvider> {
@@ -12255,6 +12534,9 @@ public class Windows_Win32_System_Com_IStdMarshalInfo <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(24u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IStdMarshalInfo <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IStdMarshalInfo> {
@@ -12368,6 +12650,9 @@ public class Windows_Win32_System_Com_IStream <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(12u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -12491,6 +12776,9 @@ public class Windows_Win32_System_Com_ISupportActivateAsActivatorPackaged <: Res
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1985814002u32, 61615u16, 20216u16, 170u8, 80u8, 132u8, 120u8, 156u8, 163u8, 48u8, 237u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ISupportActivateAsActivatorPackaged <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportActivateAsActivatorPackaged> {
@@ -12603,6 +12891,9 @@ public class Windows_Win32_System_Com_ISupportActivationFromPackage <: Resource 
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(169388773u32, 23722u16, 18629u16, 169u8, 244u8, 110u8, 70u8, 220u8, 213u8, 138u8, 213u8)
     }
 }
 
@@ -12717,6 +13008,9 @@ public class Windows_Win32_System_Com_ISupportAllowLowerTrustActivation <: Resou
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3918884594u32, 14376u16, 19275u16, 143u8, 169u8, 125u8, 182u8, 29u8, 238u8, 73u8, 84u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ISupportAllowLowerTrustActivation <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportAllowLowerTrustActivation> {
@@ -12829,6 +13123,9 @@ public class Windows_Win32_System_Com_ISupportCoAddComDependencyOnPackage <: Res
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3355811580u32, 20120u16, 20432u16, 191u8, 198u8, 68u8, 25u8, 11u8, 128u8, 184u8, 35u8)
     }
 }
 
@@ -12943,6 +13240,9 @@ public class Windows_Win32_System_Com_ISupportDoNotElevateServerActivation <: Re
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1085210146u32, 16374u16, 17372u16, 129u8, 8u8, 200u8, 196u8, 2u8, 213u8, 123u8, 92u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ISupportDoNotElevateServerActivation <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportDoNotElevateServerActivation> {
@@ -13055,6 +13355,9 @@ public class Windows_Win32_System_Com_ISupportErrorInfo <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3742055776u32, 21647u16, 4123u16, 142u8, 101u8, 8u8, 0u8, 43u8, 43u8, 209u8, 25u8)
     }
 }
 
@@ -13170,6 +13473,9 @@ public class Windows_Win32_System_Com_ISupportPackagedComElevationEnabledClasses
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3022098457u32, 63250u16, 19791u16, 173u8, 231u8, 244u8, 104u8, 39u8, 106u8, 240u8, 184u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ISupportPackagedComElevationEnabledClasses <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportPackagedComElevationEnabledClasses> {
@@ -13282,6 +13588,9 @@ public class Windows_Win32_System_Com_ISupportPackagedComRegistrationVisibility 
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2378384462u32, 51182u16, 17562u16, 159u8, 184u8, 185u8, 23u8, 57u8, 136u8, 214u8, 106u8)
     }
 }
 
@@ -13396,6 +13705,9 @@ public class Windows_Win32_System_Com_ISupportServerMustBeEqualOrGreaterPrivileg
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1541095138u32, 18108u16, 17171u16, 181u8, 251u8, 128u8, 28u8, 54u8, 11u8, 165u8, 249u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ISupportServerMustBeEqualOrGreaterPrivilegeActivation <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportServerMustBeEqualOrGreaterPrivilegeActivation> {
@@ -13508,6 +13820,9 @@ public class Windows_Win32_System_Com_ISurrogate <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(34u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -13623,6 +13938,9 @@ public class Windows_Win32_System_Com_ISurrogateService <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(468u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -13742,6 +14060,9 @@ public class Windows_Win32_System_Com_ISynchronize <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(48u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ISynchronize <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISynchronize> {
@@ -13858,6 +14179,9 @@ public class Windows_Win32_System_Com_ISynchronizeContainer <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(51u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ISynchronizeContainer <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISynchronizeContainer> {
@@ -13973,6 +14297,9 @@ public class Windows_Win32_System_Com_ISynchronizeEvent <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(50u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ISynchronizeEvent <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISynchronizeEvent> {
@@ -14086,6 +14413,9 @@ public class Windows_Win32_System_Com_ISynchronizeHandle <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(49u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -14201,6 +14531,9 @@ public class Windows_Win32_System_Com_ISynchronizeMutex <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(37u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ISynchronizeMutex <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISynchronizeMutex> {
@@ -14314,6 +14647,9 @@ public class Windows_Win32_System_Com_ITimeAndNoticeControl <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3154900654u32, 34936u16, 4561u16, 131u8, 233u8, 0u8, 192u8, 79u8, 194u8, 198u8, 212u8)
     }
 }
 
@@ -14429,6 +14765,9 @@ public class Windows_Win32_System_Com_ITypeComp <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(132099u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ITypeComp <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ITypeComp> {
@@ -14543,6 +14882,9 @@ public class Windows_Win32_System_Com_ITypeInfo <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(132097u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -14676,6 +15018,9 @@ public class Windows_Win32_System_Com_ITypeInfo2 <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(132114u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ITypeInfo2 <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ITypeInfo2> {
@@ -14804,6 +15149,9 @@ public class Windows_Win32_System_Com_ITypeLib <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(132098u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ITypeLib <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ITypeLib> {
@@ -14927,6 +15275,9 @@ public class Windows_Win32_System_Com_ITypeLib2 <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(132113u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ITypeLib2 <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ITypeLib2> {
@@ -15043,6 +15394,9 @@ public class Windows_Win32_System_Com_ITypeLibRegistration <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1990453045u32, 735u16, 18962u16, 152u8, 235u8, 4u8, 58u8, 211u8, 96u8, 10u8, 243u8)
     }
 }
 
@@ -15165,6 +15519,9 @@ public class Windows_Win32_System_Com_ITypeLibRegistrationReader <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3983182378u32, 45408u16, 20087u16, 143u8, 115u8, 170u8, 116u8, 53u8, 205u8, 92u8, 39u8)
+    }
 }
 
 extend Windows_Win32_System_Com_ITypeLibRegistrationReader <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ITypeLibRegistrationReader> {
@@ -15279,6 +15636,9 @@ public class Windows_Win32_System_Com_IUnknown <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(0u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IUnknown <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IUnknown> {
@@ -15387,6 +15747,9 @@ public class Windows_Win32_System_Com_IUri <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2745100104u32, 27175u16, 18455u16, 166u8, 242u8, 19u8, 145u8, 75u8, 239u8, 88u8, 144u8)
     }
 }
 
@@ -15526,6 +15889,9 @@ public class Windows_Win32_System_Com_IUriBuilder <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1109504737u32, 35157u16, 18112u16, 189u8, 91u8, 222u8, 152u8, 151u8, 86u8, 93u8, 231u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IUriBuilder <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IUriBuilder> {
@@ -15662,6 +16028,9 @@ public class Windows_Win32_System_Com_IUrlMon <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(38u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_IUrlMon <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IUrlMon> {
@@ -15775,6 +16144,9 @@ public class Windows_Win32_System_Com_IWaitMultiple <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(43u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -16383,6 +16755,9 @@ public class Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG <: Resource
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(13u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
+    }
 }
 
 extend Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG <: windows_core.HandleWinrtType<Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG> {
@@ -16499,6 +16874,9 @@ public class Windows_Win32_System_Com_StructuredStorage_IStorage <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(11u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 
@@ -18157,6 +18535,9 @@ public class Windows_Win32_System_Ole_IRecordInfo <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(47u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)
     }
 }
 

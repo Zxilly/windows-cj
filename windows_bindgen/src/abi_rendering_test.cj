@@ -7894,6 +7894,11 @@ func testWin32GuidAttributeRendersIUnknownBasedNativeComSurface() {
     @Expect(source.contains("public static func intoOwnedWinrtHandle(value: Example_Win32_System_Com_IClassFactory): CPointer<Unit>"), true)
     @Expect(source.contains("Example_Win32_System_Com_IClassFactory(raw, takeOwnership: true)"), true)
     @Expect(source.contains("Example_Win32_System_Com_IClassFactory(raw, takeOwnership: false)"), true)
+    // Native COM (non-WinRT) interfaces surface their metadata IID via a static
+    // iid() accessor so callers QI against the generated value rather than
+    // hand-writing a GUID constant. IClassFactory IID = 00000001-0000-0000-c000-000000000046.
+    @Expect(source.contains("public static func iid(): windows_interface.GUID {"), true)
+    @Expect(source.contains("windows_interface.GUID.from_values(1u32, 0u16, 0u16, 192u8, 0u8, 0u8, 0u8, 0u8, 0u8, 0u8, 70u8)"), true)
     @Expect(source.contains("// Example.Win32.System.Com.IClassFactoryVtbl (synthetic:Example_Win32_System_Com_IClassFactoryVtbl)"), true)
     @Expect(source.contains("public struct Example_Win32_System_Com_IClassFactoryVtbl {"), true)
     @Expect(source.contains("public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()"), true)

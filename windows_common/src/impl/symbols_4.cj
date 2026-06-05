@@ -30056,6 +30056,9 @@ public class Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(1027474297u32, 63966u16, 19800u16, 187u8, 108u8, 24u8, 214u8, 41u8, 146u8, 241u8, 166u8)
+    }
 }
 
 extend Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject <: windows_core.HandleWinrtType<Windows_Win32_Graphics_Dxgi_IDXGIDeviceSubObject> {
@@ -30169,6 +30172,9 @@ public class Windows_Win32_Graphics_Dxgi_IDXGIObject <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2931961784u32, 30451u16, 17977u16, 155u8, 224u8, 40u8, 235u8, 67u8, 166u8, 122u8, 46u8)
     }
 }
 
@@ -30286,6 +30292,9 @@ public class Windows_Win32_Graphics_Dxgi_IDXGIOutput <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(2919427803u32, 50997u16, 18064u16, 141u8, 82u8, 90u8, 141u8, 194u8, 2u8, 19u8, 170u8)
     }
 }
 
@@ -30412,6 +30421,9 @@ public class Windows_Win32_Graphics_Dxgi_IDXGISurface <: Resource {
     public static func projectionKind(): String {
         return "interface"
     }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(3405559148u32, 27331u16, 18569u16, 191u8, 71u8, 158u8, 35u8, 187u8, 210u8, 96u8, 236u8)
+    }
 }
 
 extend Windows_Win32_Graphics_Dxgi_IDXGISurface <: windows_core.HandleWinrtType<Windows_Win32_Graphics_Dxgi_IDXGISurface> {
@@ -30527,6 +30539,9 @@ public class Windows_Win32_Graphics_Dxgi_IDXGISwapChain <: Resource {
     }
     public static func projectionKind(): String {
         return "interface"
+    }
+    public static func iid(): windows_interface.GUID {
+        windows_interface.GUID.from_values(822949536u32, 53991u16, 19466u16, 170u8, 4u8, 106u8, 157u8, 35u8, 184u8, 136u8, 106u8)
     }
 }
 
