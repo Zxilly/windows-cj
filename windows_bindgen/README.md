@@ -257,15 +257,6 @@ declarations, and a runtime probe where one is safe. When the evidence is
 incomplete or internally ambiguous, do not guess — leave the export on the safe
 raw default and record it as a watchlist item with the documented gap.
 
-`scripts/scan_native_return_classification.py` enumerates every P/Invoke export
-over `.generated/winmd-json`, buckets the return type, and flags high-confidence
-unclassified status candidates (integer returns from the direct-status /
-sentinel-convention DLLs that are not yet special-cased). Reviewed candidates that
-intentionally keep the raw default are recorded in
-`scripts/native_return_classification_baseline.json`, so
-`scan_native_return_classification.py --check --baseline <file>` ratchets only on
-newly introduced unclassified status exports.
-
 ### Evidence sources are different for syntax vs behavior
 
 These are separate obligations:

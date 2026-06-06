@@ -27,9 +27,8 @@ func makeBitmapDraw(): (DrawContext) -> Unit {
         }
 
         // Draw at original size in the top-left. width()/height() are cached
-        // scalar getters (set at load time from the WIC pixel size) — NOT the
-        // ID2D1Bitmap::GetSize aggregate-return COM method, which is unsafe in cj
-        // (see web/book/src/aggregate-return-abi-bug.md).
+        // scalar getters (set at load time from the WIC pixel size), not the
+        // ID2D1Bitmap::GetSize aggregate-return COM method.
         let w = bitmap.width()
         let h = bitmap.height()
         ctx.drawBitmap(bitmap, Rect(20.0, 20.0, 20.0 + w, 20.0 + h), 1.0)

@@ -45,11 +45,10 @@ import windows_common.Foundation.{TypedEventHandler, EventHandler}
 //   native IID (63aad0b8-7c24-40ff-85a8-640d944cc325). The WinUI 3 IID is
 //   maintained in extras.cj; the vtbl layout is still generated.
 //
-// ABI-BUG NOTE: none of the methods used here return an aggregate by value, so
-// the sret/RAX miscompilation in web/book/src/aggregate-return-abi-bug.md does
-// not apply. SetSwapChain takes a pointer and returns HRESULT; the
-// CompositionScaleX/Y props read a scalar f32 out-param; the event add/remove
-// methods return / take an Int64 token.
+// ABI NOTE: none of the methods used here return an aggregate by value.
+// SetSwapChain takes a pointer and returns HRESULT; the CompositionScaleX/Y
+// props read scalar f32 out-params; the event add/remove methods return / take
+// an Int64 token.
 // ============================================================================
 
 // ============================================================================

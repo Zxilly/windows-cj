@@ -36,12 +36,11 @@ import windows_numerics.{Matrix3x2, Vector2}
 // resize all run there. This matches the reference (which also drives the loop
 // from the UI-thread Rendering event — no worker thread).
 //
-// ABI-BUG NOTE: none of the COM calls reached here return an aggregate by value,
-// so the sret/RAX miscompilation in web/book/src/aggregate-return-abi-bug.md
-// does not apply. DIP sizes come from the panel's ActualWidth/ActualHeight
-// scalar getters (already handled inside SwapChainPanelHandle.onResize) and the
-// composition scale from the scalar get_CompositionScaleX/Y out-param getters;
-// bitmap pixel sizes come from the cached Bitmap.width()/height().
+// ABI NOTE: none of the COM calls reached here return an aggregate by value.
+// DIP sizes come from the panel's ActualWidth/ActualHeight scalar getters
+// (already handled inside SwapChainPanelHandle.onResize), composition scale
+// comes from scalar get_CompositionScaleX/Y out-param getters, and bitmap pixel
+// sizes come from the cached Bitmap.width()/height().
 // ============================================================================
 
 // Per-frame draw context handed to the user's draw closure.

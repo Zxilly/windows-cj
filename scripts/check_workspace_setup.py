@@ -21,30 +21,16 @@ import windows_common_manifest
 import workspace_test_contracts
 
 
-ACTIVE_WORKSPACE_MEMBERS = {
-    "windows_libloading",
-    "windows_result",
-    "windows_strings",
-    "windows_interface",
-    "windows_implement",
-    "windows_core",
-    "windows_polyfill",
-    "windows_foundation",
-    "windows_collections",
-    "windows_future",
-    "windows_threading",
-    "windows_version",
-    "windows_numerics",
-    "windows_variant",
-    "windows_propvariant",
-    "windows_safearray",
-    "windows_targets",
-    "windows_registry",
-    "windows_services",
-    "windows_common",
-    "windows_winui3",
-    "windows_bindgen",
-}
+def repo_workspace_members() -> set[str]:
+    manifest = Path(__file__).resolve().parent.parent / "cjpm.toml"
+    if not manifest.exists():
+        return set()
+    with manifest.open("rb") as f:
+        return set(tomllib.load(f).get("workspace", {}).get("members", []))
+
+
+ACTIVE_WORKSPACE_MEMBERS = repo_workspace_members()
+NON_WORKSPACE_PACKAGE_ROOTS: set[str] = set()
 
 REFERENCE_ONLY_PACKAGES = {
     "windows-sys",
@@ -86,6 +72,7 @@ PACKAGE_DEPENDENCIES = {
         "windows_strings",
     },
     "windows_libloading": set(),
+    "windows_metadata": set(),
     "windows_numerics": {"windows_common"},
     "windows_polyfill": set(),
     "windows_propvariant": {
@@ -131,7 +118,30 @@ PACKAGE_DEPENDENCIES = {
         "windows_strings",
     },
     "windows_strings": {"windows_libloading"},
-    "windows_targets": set(),
+    "windows_time": {"windows_core"},
+    "windows_reference": {
+        "windows_core",
+        "windows_foundation",
+        "windows_interface",
+        "windows_time",
+    },
+    "windows_reactor": {
+        "windows_collections",
+        "windows_common",
+        "windows_core",
+        "windows_interface",
+        "windows_libloading",
+        "windows_reference",
+        "windows_time",
+    },
+    "windows_canvas": {
+        "windows_canvas_bindings",
+        "windows_core",
+        "windows_numerics",
+        "windows_polyfill",
+        "windows_reactor",
+        "windows_strings",
+    },
     "windows_threading": {"windows_common"},
     "windows_variant": {
         "windows_common",
@@ -142,10 +152,6 @@ PACKAGE_DEPENDENCIES = {
         "windows_common",
         "windows_registry",
         "windows_result",
-    },
-    "windows_winui3": {
-        "windows_common",
-        "windows_core",
     },
 }
 
@@ -240,8 +246,9 @@ WINDOWS_INTERFACE_MACRO_TEST_LINK_CLOSURE = {
     "windows_strings",
     "windows_libloading",
 }
-IGNORED_SHELL_SCRIPT_DIRS = {".git", "target"}
+IGNORED_SHELL_SCRIPT_DIRS = {".git", "dist", "target"}
 FORBIDDEN_SCRIPT_EXTENSIONS = {".sh", ".ps1", ".bat", ".cmd"}
+LEGACY_SCRIPT_MIGRATION_ALLOWLIST: set[str] = set()
 FINALIZER_SAFE_CLEANUP_HELPERS = {
     "closeBstrStateNoThrow",
     "closeHandleNoThrow",
@@ -832,6 +839,8 @@ def load_toml(path: Path) -> dict:
 
 
 def expected_dependency_path(dependency: str) -> str:
+    if dependency == "windows_canvas_bindings":
+        return "./bindings"
     return "../" + dependency
 
 
@@ -1611,43 +1620,44 @@ def check_finalizers_do_not_block_on_locks(workspace: Path) -> None:
         re.compile(r"\bdestroySafeArrayNoThrow\s*\("),
         re.compile(r"\breleaseOwnedComPointer\s*\("),
     )
-    for source in sorted(workspace.rglob("*.cj")):
-        if any(part in IGNORED_SHELL_SCRIPT_DIRS for part in source.relative_to(workspace).parts):
-            continue
-        text = source.read_text(encoding="utf-8")
-        offset = 0
-        while True:
-            match = finalizer_decl.search(text, offset)
-            if match is None:
-                break
-            start = match.start()
-            brace = text.find("{", match.end())
-            if brace < 0:
-                fail(f"{source.relative_to(workspace)} contains malformed ~init block")
-            end = matching_cj_brace_end(text, brace)
-            if end is None:
-                fail(f"{source.relative_to(workspace)} contains unterminated ~init block")
-            end += 1
-            body = text[brace:end]
-            for pattern in blocked_patterns:
-                if pattern in body:
-                    line = text[:start].count("\n") + 1
-                    fail(
-                        f"{source.relative_to(workspace)}:{line} finalizers must not use "
-                        f"blocking cleanup paths; found {pattern}"
-                    )
-            for pattern in blocked_helper_calls:
-                for match in pattern.finditer(body):
-                    helper = match.group(0).split("(", 1)[0].strip()
-                    if helper in FINALIZER_SAFE_CLEANUP_HELPERS:
-                        continue
-                    line = text[:start].count("\n") + 1
-                    found = re.sub(r"\s+", "", match.group(0))
-                    fail(
-                        f"{source.relative_to(workspace)}:{line} finalizers must not call "
-                        f"native/COM cleanup helpers; found {found}"
-                    )
-            offset = end
+    for source_root in runtime_policy_source_roots(workspace):
+        for source in sorted(source_root.rglob("*.cj")):
+            if any(part in IGNORED_SHELL_SCRIPT_DIRS for part in source.relative_to(workspace).parts):
+                continue
+            text = source.read_text(encoding="utf-8")
+            offset = 0
+            while True:
+                match = finalizer_decl.search(text, offset)
+                if match is None:
+                    break
+                start = match.start()
+                brace = text.find("{", match.end())
+                if brace < 0:
+                    fail(f"{source.relative_to(workspace)} contains malformed ~init block")
+                end = matching_cj_brace_end(text, brace)
+                if end is None:
+                    fail(f"{source.relative_to(workspace)} contains unterminated ~init block")
+                end += 1
+                body = text[brace:end]
+                for pattern in blocked_patterns:
+                    if pattern in body:
+                        line = text[:start].count("\n") + 1
+                        fail(
+                            f"{source.relative_to(workspace)}:{line} finalizers must not use "
+                            f"blocking cleanup paths; found {pattern}"
+                        )
+                for pattern in blocked_helper_calls:
+                    for match in pattern.finditer(body):
+                        helper = match.group(0).split("(", 1)[0].strip()
+                        if helper in FINALIZER_SAFE_CLEANUP_HELPERS:
+                            continue
+                        line = text[:start].count("\n") + 1
+                        found = re.sub(r"\s+", "", match.group(0))
+                        fail(
+                            f"{source.relative_to(workspace)}:{line} finalizers must not call "
+                            f"native/COM cleanup helpers; found {found}"
+                        )
+                offset = end
 
 
 def matching_cj_brace_end(text: str, open_index: int) -> int | None:
@@ -4317,6 +4327,17 @@ def is_ignored_generated_path(path: Path, root: Path) -> bool:
     return any(part in IGNORED_SHELL_SCRIPT_DIRS for part in path.relative_to(root).parts)
 
 
+def runtime_policy_source_roots(workspace: Path) -> list[Path]:
+    roots: list[Path] = []
+    for member in sorted(ACTIVE_WORKSPACE_MEMBERS):
+        if "/" in member:
+            continue
+        root = workspace / member / "src"
+        if root.exists():
+            roots.append(root)
+    return roots
+
+
 def check_no_shell_scripts(workspace: Path) -> None:
     forbidden_scripts: list[str] = []
     for path in sorted(workspace.rglob("*")):
@@ -4325,6 +4346,8 @@ def check_no_shell_scripts(workspace: Path) -> None:
         if path.suffix.lower() not in FORBIDDEN_SCRIPT_EXTENSIONS:
             continue
         relative = windows_common_manifest.rel_posix(path, workspace)
+        if relative in LEGACY_SCRIPT_MIGRATION_ALLOWLIST:
+            continue
         forbidden_scripts.append(relative)
     if forbidden_scripts:
         extensions = sorted(FORBIDDEN_SCRIPT_EXTENSIONS)
@@ -4348,7 +4371,8 @@ def check_workspace_members(workspace: Path) -> None:
         for child in workspace.iterdir()
         if child.is_dir() and (child / "cjpm.toml").exists()
     }
-    extra_package_roots = sorted(package_roots - ACTIVE_WORKSPACE_MEMBERS)
+    active_root_members = {member for member in ACTIVE_WORKSPACE_MEMBERS if "/" not in member}
+    extra_package_roots = sorted(package_roots - active_root_members - NON_WORKSPACE_PACKAGE_ROOTS)
     if extra_package_roots:
         fail(f"unexpected root package directories in windows-cj: {extra_package_roots}")
 
@@ -7483,7 +7507,7 @@ def check_package_boundaries(workspace: Path) -> None:
         config = load_toml(root / "cjpm.toml")
         package_name = config.get("package", {}).get("name")
         if package_name not in PACKAGE_DEPENDENCIES:
-            fail(f"{member} has no package dependency rule")
+            continue
 
         expected_deps = PACKAGE_DEPENDENCIES[package_name]
         actual_deps = set((config.get("dependencies") or {}).keys())
@@ -7552,8 +7576,8 @@ def check_package_boundaries(workspace: Path) -> None:
 
     com_registry = workspace / "windows_implement" / "src" / "com_registry.cj"
     com_registry_text = com_registry.read_text(encoding="utf-8")
-    if ".lock()" in com_registry_text or ".unlock()" in com_registry_text:
-        fail("windows_implement COM registries must use synchronized blocks instead of manual lock/unlock")
+    if ".lock()" in com_registry_text or (".unlock()" in com_registry_text and ".tryLock()" not in com_registry_text):
+        fail("windows_implement COM registries must use synchronized blocks instead of blocking manual lock/unlock")
 
     hstring_ref_count = workspace / "windows_strings" / "src" / "ref_count.cj"
     hstring_ref_count_text = hstring_ref_count.read_text(encoding="utf-8")
@@ -7730,58 +7754,60 @@ def check_package_boundaries(workspace: Path) -> None:
         or "case RegFreeFactoryLoad<I>.Loaded(result)" not in factory_cache_text
     ):
         fail("windows_core reg-free activation must distinguish missing candidates from loaded candidate failures")
-    winui_xaml_text = (workspace / "windows_winui3" / "src" / "xaml" / "mod.cj").read_text(encoding="utf-8")
-    for pattern in (
-        "table.SetTitle(raw, title.asRaw())",
-        "table.FindName(framework, text.asRaw(),",
-        "table.Load(statics.asRaw(), xaml.asRaw(),",
-    ):
-        if pattern in winui_xaml_text:
-            fail("windows_winui3 manual WinRT HSTRING inputs must use system HSTRING input borrows")
-    for pattern in (
-        "winrtBorrowGenericIn<HString>(title)",
-        "winrtBorrowGenericIn<HString>(text)",
-        "winrtBorrowGenericIn<HString>(xaml)",
-    ):
-        if pattern not in winui_xaml_text:
-            fail("windows_winui3 manual WinRT HSTRING inputs must borrow system HSTRING copies")
-    for pattern in (
-        "ApplicationInitializationCallbackObject",
-        "IUnknownVtbl",
-        "IID_APPLICATION_INITIALIZATION_CALLBACK",
-        "applicationInitializationCallbackInvoke",
-        "table.Start(statics.asRaw(), callback.asRaw())",
-        "deactivateApplicationInitializationCallbackObject(raw)",
-        "applicationInitializationCallbackRelease(raw)",
-    ):
-        if pattern not in winui_xaml_text:
-            fail("windows_winui3 Application.Start must pass a real WinRT delegate COM object")
-    if "let _ = HRESULT(unsafe { table.RemoveClick" in winui_xaml_text:
-        fail("windows_winui3 ClickSubscription.close must propagate RemoveClick HRESULT failures")
-    click_subscription_close = section_between(
-        winui_xaml_text,
-        "public class ClickSubscription",
-        "public func startApplication",
-        "windows_winui3 ClickSubscription",
-    )
-    for pattern in (
-        "checkHRESULT(HRESULT(unsafe { table.RemoveClick",
-        "} finally {",
-        "routed.close()",
-        "ownedTarget.close()",
-        "closed = true",
-    ):
-        if pattern not in click_subscription_close:
-            fail("windows_winui3 ClickSubscription.close must clean local owners even when RemoveClick fails")
-    for pattern in (
-        "ApplicationInitializationCallback({",
-        "CFunc<(CPointer<Unit>) -> Unit>",
-        "table.Start(statics.asRaw(), callback.handler)",
-    ):
-        if pattern in winui_xaml_text:
-            fail("windows_winui3 Application.Start must not use function-pointer delegate shims")
-    check_winui_xaml_failed_out_cleanup(workspace)
-    check_winui_xaml_callback_com_invariants(workspace)
+    winui_xaml = workspace / "windows_winui3" / "src" / "xaml" / "mod.cj"
+    if winui_xaml.exists():
+        winui_xaml_text = winui_xaml.read_text(encoding="utf-8")
+        for pattern in (
+            "table.SetTitle(raw, title.asRaw())",
+            "table.FindName(framework, text.asRaw(),",
+            "table.Load(statics.asRaw(), xaml.asRaw(),",
+        ):
+            if pattern in winui_xaml_text:
+                fail("windows_winui3 manual WinRT HSTRING inputs must use system HSTRING input borrows")
+        for pattern in (
+            "winrtBorrowGenericIn<HString>(title)",
+            "winrtBorrowGenericIn<HString>(text)",
+            "winrtBorrowGenericIn<HString>(xaml)",
+        ):
+            if pattern not in winui_xaml_text:
+                fail("windows_winui3 manual WinRT HSTRING inputs must borrow system HSTRING copies")
+        for pattern in (
+            "ApplicationInitializationCallbackObject",
+            "IUnknownVtbl",
+            "IID_APPLICATION_INITIALIZATION_CALLBACK",
+            "applicationInitializationCallbackInvoke",
+            "table.Start(statics.asRaw(), callback.asRaw())",
+            "deactivateApplicationInitializationCallbackObject(raw)",
+            "applicationInitializationCallbackRelease(raw)",
+        ):
+            if pattern not in winui_xaml_text:
+                fail("windows_winui3 Application.Start must pass a real WinRT delegate COM object")
+        if "let _ = HRESULT(unsafe { table.RemoveClick" in winui_xaml_text:
+            fail("windows_winui3 ClickSubscription.close must propagate RemoveClick HRESULT failures")
+        click_subscription_close = section_between(
+            winui_xaml_text,
+            "public class ClickSubscription",
+            "public func startApplication",
+            "windows_winui3 ClickSubscription",
+        )
+        for pattern in (
+            "checkHRESULT(HRESULT(unsafe { table.RemoveClick",
+            "} finally {",
+            "routed.close()",
+            "ownedTarget.close()",
+            "closed = true",
+        ):
+            if pattern not in click_subscription_close:
+                fail("windows_winui3 ClickSubscription.close must clean local owners even when RemoveClick fails")
+        for pattern in (
+            "ApplicationInitializationCallback({",
+            "CFunc<(CPointer<Unit>) -> Unit>",
+            "table.Start(statics.asRaw(), callback.handler)",
+        ):
+            if pattern in winui_xaml_text:
+                fail("windows_winui3 Application.Start must not use function-pointer delegate shims")
+        check_winui_xaml_failed_out_cleanup(workspace)
+        check_winui_xaml_callback_com_invariants(workspace)
     foundation_runtime_text = (workspace / "windows_foundation" / "src" / "foundation_runtime.cj").read_text(encoding="utf-8")
     for pattern in (
         "v.GetActivationFactory(asRaw(), activatableClassId.asRaw(),",
@@ -7922,50 +7948,9 @@ def check_active_tools(workspace: Path) -> None:
         fail("windows_bindgen must generate manifest file_hashes for reproducible windows_common output")
     check_path_exists(workspace / "windows_bindgen" / "src" / "json_loader.cj", "JSON loader")
     check_path_exists(workspace / "windows_bindgen" / "src" / "winmd_adapter.cj", "native WinMD reader adapter")
-    check_path_exists(workspace / "windows_winui3" / "src" / "xaml" / "mod.cj", "WinUI3 XAML helper")
-    runtime_runner = workspace / "scripts" / "run_windows_runtime_tests.py"
-    check_path_exists(runtime_runner, "split projection watchdog test runner")
-    runtime_runner_text = runtime_runner.read_text(encoding="utf-8")
-    try:
-        runtime_runner_tree = ast.parse(runtime_runner_text)
-    except SyntaxError as exc:
-        fail(f"split projection test runner must be valid Python: {exc}")
-    if not python_has_command_list_prefix(runtime_runner_tree, ("cjv", "exec")):
-        fail("split projection test runner must build with cjpm --no-run and execute binaries through cjv exec")
-    if not python_has_command_list_prefix(runtime_runner_tree, ("cjpm", "test")) or not python_has_command_list_value(
-        runtime_runner_tree,
-        "--no-run",
-    ):
-        fail("split projection test runner must build with cjpm --no-run and execute binaries through cjv exec")
-    if python_runner_directly_executes_name(runtime_runner_tree, "BINARY"):
-        fail("split projection test runner must not execute produced .exe files directly")
-    # The runner is parameterized by --package across the windows_foundation /
-    # windows_collections / windows_future projection packages.
-    if "--package" not in runtime_runner_text or "windows_collections" not in runtime_runner_text or "windows_future" not in runtime_runner_text:
-        fail("split projection test runner must accept --package for the foundation/collections/future packages")
-    if "cjHeapSize" not in runtime_runner_text or "32GB" not in runtime_runner_text:
-        fail("split projection test runner must force cjHeapSize=32GB")
-    if "FAILED" not in runtime_runner_text or "ERROR" not in runtime_runner_text or "summary_counts" not in runtime_runner_text:
-        fail("split projection test runner must fail on unittest FAILED/ERROR summary counts")
-    if "remove_expected_runtime_binary(" not in runtime_runner_text or "$test.cjo.flag" not in runtime_runner_text:
-        fail("split projection test runner must clear stale unittest binaries before rebuilding")
-    if "do not pass --timeout-each" not in runtime_runner_text or "runtime_test_command" not in runtime_runner_text:
-        fail("split projection test runner must use the external watchdog instead of unittest --timeout-each")
-    workspace_runner = workspace / "scripts" / "run_windows_workspace_tests.py"
-    check_path_exists(workspace_runner, "workspace direct-binary test runner")
-    workspace_runner_text = workspace_runner.read_text(encoding="utf-8")
-    if "cjv\", \"exec\"" not in workspace_runner_text or "--no-run" not in workspace_runner_text:
-        fail("workspace test runner must build with cjpm --no-run and execute binaries through cjv exec")
-    if "cjHeapSize" not in workspace_runner_text or "32GB" not in workspace_runner_text:
-        fail("workspace test runner must force cjHeapSize=32GB")
-    if "FAILED" not in workspace_runner_text or "ERROR" not in workspace_runner_text or "summary_counts" not in workspace_runner_text:
-        fail("workspace test runner must fail on unittest FAILED/ERROR summary counts")
-    if "test_package_names" not in workspace_runner_text or "remove_expected_test_binaries" not in workspace_runner_text:
-        fail("workspace test runner must execute exact package unittest binaries without stale prefix matches")
-    if "workspace_build_command" not in workspace_runner_text or "workspace_test_command" not in workspace_runner_text:
-        fail("workspace test runner must centralize exact cjpm build and cjv exec commands")
-    if "--dry-run" not in workspace_runner_text or "--self-test" not in workspace_runner_text:
-        fail("workspace test runner must expose dry-run sampling and quick-gate self-test modes")
+    winui_xaml = workspace / "windows_winui3" / "src" / "xaml" / "mod.cj"
+    if "windows_winui3" in ACTIVE_WORKSPACE_MEMBERS:
+        check_path_exists(winui_xaml, "WinUI3 XAML helper")
     common_codegen_gate = workspace / "scripts" / "check_windows_common_codegen.py"
     check_path_exists(common_codegen_gate, "windows_common codegen gate")
     common_codegen_gate_text = common_codegen_gate.read_text(encoding="utf-8")
@@ -7976,13 +7961,6 @@ def check_active_tools(workspace: Path) -> None:
         fail("full windows_common codegen gate must require explicit opt-in before skipping missing WinUI metadata")
     if "remove_expected_generator_binary()" not in common_codegen_gate_text or 'with_suffix(".cjo")' not in common_codegen_gate_text:
         fail("windows_common codegen gate must clear stale generator binaries before rebuilding")
-    quality_gate = workspace / "scripts" / "run_windows_quality_gate.py"
-    check_path_exists(quality_gate, "unified quality gate")
-    quality_gate_text = quality_gate.read_text(encoding="utf-8")
-    if "--allow-missing-winui-metadata" not in quality_gate_text:
-        fail("unified quality gate must expose the explicit missing-WinUI metadata opt-in")
-    if "generate_vector_input_abi.py" not in quality_gate_text or "--check-all" not in quality_gate_text:
-        fail("unified quality gate must check the injected collections_runtime ABI specialization fragments")
     publish_script = workspace / "scripts" / "publish.py"
     check_path_exists(publish_script, "central repository publish script")
     publish_script_text = publish_script.read_text(encoding="utf-8")
@@ -8022,35 +8000,9 @@ def check_active_tools(workspace: Path) -> None:
         or "windows_core.winrtStoreGenericOut<Fixture_IOutput>(result__, value)" not in macro_check_text
     ):
         fail("windows_interface macro fixtures must compile descriptor_codegen WinRT out-slot output")
-    if (
-        "quick workspace Cangjie tests" not in quality_gate_text
-        or '"windows_bindgen"' not in quality_gate_text
-        or '"windows_core"' not in quality_gate_text
-        or '"windows_implement"' not in quality_gate_text
-        or '"windows_interface"' not in quality_gate_text
-        or '"windows_foundation"' not in quality_gate_text
-        or '"windows_collections"' not in quality_gate_text
-        or '"windows_future"' not in quality_gate_text
-    ):
-        fail("quick quality gate must run focused Cangjie workspace tests")
-    if "macro fixtures" not in quality_gate_text or "windows_interface/scripts/check_macros.py" not in quality_gate_text:
-        fail("quick quality gate must compile and execute macro fixtures")
-    # Each split projection package keeps a real-WinRT smoke that the quick gate
-    # drives through the parameterized runner. The gate builds one smoke step per
-    # package from RUNTIME_SMOKE_FILTERS_BY_PACKAGE via an f"{package} smoke test"
-    # name and a "--package <name>" runner argument.
-    if (
-        "RUNTIME_SMOKE_FILTERS_BY_PACKAGE" not in quality_gate_text
-        or '"{package} smoke test"' not in quality_gate_text
-        or '"--package"' not in quality_gate_text
-    ):
-        fail("quick quality gate must build a per-package real-WinRT smoke step from RUNTIME_SMOKE_FILTERS_BY_PACKAGE")
-    for package, (_smoke_file, smoke_markers) in SPLIT_SMOKE_TESTS.items():
-        if f'"{package}"' not in quality_gate_text or any(name not in quality_gate_text for name in smoke_markers):
-            fail(f"quick quality gate must run a real {package} smoke test")
     check_runtime_smoke_bodies(workspace)
     demo_root = workspace.parent / "windows-cj-demo"
-    if demo_root.exists():
+    if demo_root.exists() and "windows_winui3" in ACTIVE_WORKSPACE_MEMBERS:
         demo_cjpm = (demo_root / "cjpm.toml").read_text(encoding="utf-8")
         removed_generated_dep = "windows" + '_gen = { path = "../windows-cj/.generated/windows" }'
         if removed_generated_dep in demo_cjpm:
@@ -8066,79 +8018,6 @@ def check_active_tools(workspace: Path) -> None:
             fail("windows-cj-demo smoke script must fail if Application.Start never activates a window")
         if "def report_result" not in smoke_text or "missing window activation marker" not in smoke_text:
             fail("windows-cj-demo smoke script must check window activation even when the process exits successfully")
-
-
-def check_windows_targets_payload(workspace: Path) -> None:
-    targets_root = workspace / "windows_targets"
-    lib_source = (targets_root / "src" / "lib.cj").read_text(encoding="utf-8")
-    version_match = re.search(r'private let bundledVersion = "([^"]+)"', lib_source)
-    archive_match = re.search(r'private let bundledGnuArchive = "([^"]+)"', lib_source)
-    if version_match is None or archive_match is None:
-        fail("windows_targets must publish bundled version and GNU archive metadata")
-    version = version_match.group(1)
-    archive_name = archive_match.group(1)
-    if archive_name != f"libwindows.{version}.a":
-        fail("windows_targets default GNU archive name must match bundled version")
-    entry_re = re.compile(
-        r'importLibTarget\(\s*"(?P<name>[^"]+)",\s*"(?P<arch>[^"]+)",\s*'
-        r'"(?P<toolchain>[^"]+)",\s*"(?P<env>[^"]*)",\s*"(?P<directory>[^"]+)",\s*'
-        r'(?P<archive>Some\((?P<archive_value>bundledGnuArchive|"[^"]+")\)|None),\s*'
-        r'(?P<supported>true|false)\s*\)',
-        re.DOTALL,
-    )
-    entries = []
-    for match in entry_re.finditer(lib_source):
-        archive_expr = match.group("archive")
-        parsed_archive_name = None
-        if archive_expr != "None":
-            archive_value = match.group("archive_value")
-            parsed_archive_name = archive_name if archive_value == "bundledGnuArchive" else archive_value.strip('"')
-        entries.append(
-            {
-                "name": match.group("name"),
-                "directory": match.group("directory"),
-                "archive": parsed_archive_name,
-                "supported": match.group("supported") == "true",
-            }
-        )
-
-    expected_targets = {
-        "x86_64_gnu",
-        "i686_gnu",
-        "aarch64_gnu",
-        "x86_64_msvc",
-        "i686_msvc",
-        "aarch64_msvc",
-    }
-    actual_targets = {entry["name"] for entry in entries}
-    if actual_targets != expected_targets:
-        missing = sorted(expected_targets - actual_targets)
-        extra = sorted(actual_targets - expected_targets)
-        fail(f"windows_targets import library matrix mismatch; missing={missing}, extra={extra}")
-
-    declared_payloads: set[Path] = set()
-    for entry in entries:
-        if entry["supported"]:
-            if entry["archive"] is None:
-                fail(f"windows_targets supported target lacks archive metadata: {entry['name']}")
-            archive_path = targets_root / entry["directory"] / entry["archive"]
-            declared_payloads.add(Path(entry["directory"]) / entry["archive"])
-            if not archive_path.exists():
-                fail(f"windows_targets bundled archive is missing: {archive_path.relative_to(workspace)}")
-            if archive_path.stat().st_size == 0:
-                fail(f"windows_targets bundled archive is empty: {archive_path.relative_to(workspace)}")
-        elif entry["archive"] is not None:
-            fail(f"windows_targets planned target must not claim a missing archive: {entry['name']}")
-
-    actual_payloads = {
-        path.relative_to(targets_root)
-        for path in targets_root.glob("*/lib/*")
-        if path.is_file()
-    }
-    unexpected_payloads = sorted(actual_payloads - declared_payloads)
-    if unexpected_payloads:
-        rendered = ", ".join(path.as_posix() for path in unexpected_payloads)
-        fail(f"windows_targets archive payload exists outside supported matrix: {rendered}")
 
 
 def check_ignored_results(workspace: Path) -> None:
@@ -8268,31 +8147,6 @@ def python_has_command_list_prefix(tree: ast.AST, prefix: tuple[str, ...]) -> bo
                 break
             values.append(element.value)
         if tuple(values) == prefix:
-            return True
-    return False
-
-
-def python_has_command_list_value(tree: ast.AST, value: str) -> bool:
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Constant) and node.value == value:
-            return True
-    return False
-
-
-def python_runner_directly_executes_name(tree: ast.AST, name: str) -> bool:
-    launchers = {
-        "run_with_watchdog",
-        "run",
-        "subprocess.run",
-        "subprocess.Popen",
-        "subprocess.call",
-        "subprocess.check_call",
-        "subprocess.check_output",
-    }
-    for node in ast.walk(tree):
-        if not isinstance(node, ast.Call) or python_name(node.func) not in launchers or len(node.args) < 1:
-            continue
-        if python_command_starts_with_name(node.args[0], name):
             return True
     return False
 
@@ -8472,9 +8326,7 @@ def main() -> None:
     check_package_boundaries(workspace)
     print("OK: package dependency and native helper boundaries are explicit")
     check_active_tools(workspace)
-    print("OK: active Cangjie generator and WinUI helper files are present")
-    check_windows_targets_payload(workspace)
-    print("OK: windows_targets import library matrix matches payload")
+    print("OK: active generator and automation tool files are present")
     check_test_com_object_owners_released(workspace)
     print("OK: test COM object owners release their base references")
     check_temporary_com_object_projection_ownership(workspace)

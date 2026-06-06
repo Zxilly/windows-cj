@@ -546,13 +546,9 @@ class Window {
     // That COM getter returns a D2D_SIZE_F aggregate by value, which the
     // generated value-returning CFunc miscompiles on x64: it reads the sret
     // return-buffer POINTER out of RAX instead of the value, so the size comes
-    // back as garbage (here it had been masked by the saturating cast + the
-    // 200.0 floor in drawClock). See web/book/src/aggregate-return-abi-bug.md.
-    // The correct fix is a bindgen change emitting an explicit out-parameter
-    // signature for aggregate returns + regen, after which this can revert to
-    // target.GetSize(). Until then we use GetClientRect — a plain out-parameter
-    // call — and convert physical pixels to DIPs by the DPI scale (the target
-    // was created with SetDpi(dpi), so its DIP size == client px * 96 / dpi).
+    // back as garbage. Use GetClientRect — a plain out-parameter call — and
+    // convert physical pixels to DIPs by the DPI scale (the target was created
+    // with SetDpi(dpi), so its DIP size == client px * 96 / dpi).
     func sizeDip(): D2D_SIZE_F {
         var rect = RECT()
         unsafe {
