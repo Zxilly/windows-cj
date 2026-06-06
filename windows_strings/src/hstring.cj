@@ -77,6 +77,10 @@ public class HString <: Resource & Equatable<HString> & ToString & Hashable & Co
     }
 
     public static func fromAbiTake(raw: CPointer<Unit>): HString {
+        HString.fromSystemHandleTake(raw)
+    }
+
+    public static func fromLocalHeaderTake(raw: CPointer<Unit>): HString {
         HString(raw)
     }
 

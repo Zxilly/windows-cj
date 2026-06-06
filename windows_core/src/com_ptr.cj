@@ -105,14 +105,20 @@ public class InterfaceHandle<T> <: Resource {
         released
     }
 
-    public func close(): Unit {
-        if (!closed) {
-            let rawToRelease = raw
-            raw = CPointer<Unit>()
-            closed = true
-            if (rawToRelease.isNotNull()) {
-                interfaceHandleReleaseRaw(rawToRelease)
-            }
+    private func closeHandleForResourceOwner(): UInt32 {
+        if (closed) {
+            return 0u32
         }
+        let rawToRelease = raw
+        raw = CPointer<Unit>()
+        closed = true
+        if (rawToRelease.isNull()) {
+            return 0u32
+        }
+        interfaceHandleReleaseRaw(rawToRelease)
+    }
+
+    public func close(): Unit {
+        let _ = closeHandleForResourceOwner()
     }
 }

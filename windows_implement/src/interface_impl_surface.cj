@@ -225,6 +225,65 @@ public class ComObjectRuntime<T> <: ComObjectBase & IInspectableBase & Implement
         }
     }
 
+    private func closeRuntimeClassNameNoThrow(): Unit {
+        let value = runtimeClassName
+        runtimeClassName = None
+        try {
+            match (value) {
+                case Some(name) => name.close()
+                case None => ()
+            }
+        } catch (_: Exception) {}
+    }
+
+    private func runOnDestroyNoThrow(): Unit {
+        let callback = onDestroy
+        onDestroy = None
+        try {
+            match (callback) {
+                case Some(cb) => cb()
+                case None => ()
+            }
+        } catch (_: Exception) {}
+    }
+
+    private func clearFinalizerOwnedStateNoThrow(): Unit {
+        // Finalizers must not call arbitrary Resource.close or COM Release paths.
+        inner = None
+        outerObject = None
+        queryInterfaceFallback = None
+        closeRuntimeClassNameNoThrow()
+        runOnDestroyNoThrow()
+    }
+
+    func tryFinalizeOwnerDrop(): Bool {
+        if (runtimePinned || isDestroyed() || !isReferenceCountOne()) {
+            return false
+        }
+        if (!weakRefCount.canFinalizeOwnerDropWithoutBlocking()) {
+            return false
+        }
+        if (!refCount.compareAndSwap(1, 0)) {
+            return false
+        }
+        if (!weakRefCount.canFinalizeOwnerDropWithoutBlocking()) {
+            refCount.store(1)
+            return false
+        }
+        if (registered) {
+            if (!comRegistryTryRemoveRootAndSlots(identityKey, registrationKeys)) {
+                refCount.store(1)
+                return false
+            }
+            registered = false
+        }
+        let wasDestroyed = destroyed.swap(true)
+        if (!wasDestroyed) {
+            clearFinalizerOwnedStateNoThrow()
+        }
+        true
+    }
+
     public func releaseBase(_: UIntNative): UInt32 {
         if (isDestroyed()) {
             return 0u32
@@ -1025,6 +1084,11 @@ public class ComObject<T> <: Resource {
     ~init() {
         if (closed || runtime.isDestroyed()) {
             return
+        }
+        let _ = try {
+            runtime.tryFinalizeOwnerDrop()
+        } catch (_: Exception) {
+            false
         }
         closed = true
     }

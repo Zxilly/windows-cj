@@ -481,7 +481,8 @@ func wireCommandBarElementsClick(obsRaw: CPointer<Unit>, handler: EventHandler, 
                 match (unsafe { queryInterfaceRaw(slot, AppBarButton.iid()) }) {
                     case Some(btnRaw) =>
                         releaseSlotOwner(slot)
-                        wireOneAppBarButtonClick(AppBarButton.fromAbiTake(btnRaw), handler, revokers)
+                        let btn = AppBarButton.fromAbiTake(btnRaw)
+                        wireOneAppBarButtonClick(btn, handler, revokers)
                     case None =>
                         // AppBarToggleButton / AppBarSeparator carry no plain Click.
                         releaseSlotOwner(slot)

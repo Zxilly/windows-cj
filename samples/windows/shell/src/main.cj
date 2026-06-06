@@ -10,7 +10,7 @@ import windows_sample_shell_bindings.Win32.UI.Shell.{
     IShellDispatch2Vtbl
 }
 import windows_sample_shell_bindings.Win32.System.Variant.VARIANT as BindingsVariant
-import windows_core.HRESULT
+import windows_core.{E_NOINTERFACE, HRESULT, queryInterfaceRaw}
 import windows_strings.BSTR
 import windows_variant.{VARIANT, Variant, variantFromI4, variantFromString, emptyVariant}
 import windows_interface.{GUID, IUnknownVtbl}
@@ -118,24 +118,16 @@ func toBindingsVariant(value: VARIANT): BindingsVariant {
     }
 }
 
-// QueryInterface ("cast") on any live COM pointer. The IUnknown vtbl sits at
-// the head of every COM vtbl, so we reinterpret the object's vtbl as
-// IUnknownVtbl and invoke QueryInterface(iid, &out). Returns a fresh,
-// AddRef'd raw pointer (caller owns it).
+// QueryInterface ("cast") on any live COM pointer. Returns a fresh AddRef'd raw
+// pointer (caller owns it).
 func queryInterface(raw: CPointer<Unit>, iid: GUID): CPointer<Unit> {
-    var iidVar = iid
-    var out = CPointer<Unit>()
-    unsafe {
-        let vtblPtr = CPointer<CPointer<IUnknownVtbl>>(raw).read()
-        let vtbl = vtblPtr.read()
-        let hr = vtbl.QueryInterface(
-            raw,
-            CPointer<GUID>(inout iidVar),
-            CPointer<CPointer<Unit>>(inout out)
-        )
-        HRESULT(hr).check()
+    match (unsafe { queryInterfaceRaw(raw, iid) }) {
+        case Some(out) =>
+            out
+        case None =>
+            E_NOINTERFACE.check()
+            CPointer<Unit>()
     }
-    out
 }
 
 // Release a COM pointer via its IUnknown vtbl (no-op on null).
@@ -357,7 +349,7 @@ main(): Int64 {
     ComApis.CoInitializeChecked(CPointer<Unit>())
 
     shellExecuteFromExplorer(
-        "https://github.com/microsoft/windows-rs",
+        "https://github.com/Zxilly/windows-cj",
         "",
         "",
         "",

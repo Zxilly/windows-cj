@@ -1,6 +1,6 @@
 package windows_implement
 
-import std.collection.HashMap
+import std.collection.{ArrayList, HashMap}
 import std.sync.Mutex
 
 var comRegistryMutex = Mutex()
@@ -46,5 +46,20 @@ public func comSlotRegistryContains(slotKey: UIntNative): Bool {
 public func comSlotRegistryRemove(slotKey: UIntNative): Unit {
     synchronized(comRegistryMutex) {
         comSlotRegistry.remove(slotKey)
+    }
+}
+
+func comRegistryTryRemoveRootAndSlots(rootKey: UIntNative, slotKeys: ArrayList<UIntNative>): Bool {
+    if (!comRegistryMutex.tryLock()) {
+        return false
+    }
+    try {
+        for (slotKey in slotKeys) {
+            comSlotRegistry.remove(slotKey)
+        }
+        comRegistry.remove(rootKey)
+        true
+    } finally {
+        comRegistryMutex.unlock()
     }
 }

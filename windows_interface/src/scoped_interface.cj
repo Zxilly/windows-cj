@@ -146,6 +146,24 @@ class InterfaceResourceState<T> {
             }
         }
     }
+
+    public func closeForResourceOwner(): Unit {
+        if (closed) {
+            return
+        }
+        let rawToRelease = raw
+        let shouldRelease = releaseOnClose && !rawToRelease.isNull()
+        raw = CPointer<Unit>()
+        slotInfo = InterfaceSlotInfo()
+        closed = true
+        if (shouldRelease) {
+            descriptor.releasePointer(rawToRelease)
+        }
+        match (onClose) {
+            case Some(callback) => callback()
+            case None => ()
+        }
+    }
 }
 
 public struct InterfaceResource<T> <: Resource {
@@ -200,21 +218,7 @@ public struct InterfaceResource<T> <: Resource {
     }
 
     public func close(): Unit {
-        if (state.closed) {
-            return
-        }
-        let rawToRelease = state.raw
-        let shouldRelease = state.releaseOnClose && !rawToRelease.isNull()
-        state.raw = CPointer<Unit>()
-        state.slotInfo = InterfaceSlotInfo()
-        state.closed = true
-        if (shouldRelease) {
-            state.descriptor.releasePointer(rawToRelease)
-        }
-        match (state.onClose) {
-            case Some(callback) => callback()
-            case None => ()
-        }
+        state.closeForResourceOwner()
     }
 }
 

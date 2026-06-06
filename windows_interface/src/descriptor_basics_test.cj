@@ -22,6 +22,8 @@ let reentrantManualAddRefCount = AtomicInt64(0)
 var reentrantInterfaceResourceValue: Option<InterfaceResource<IUnknown>> = None
 var reentrantManualReleaseValue: Option<IUnknown> = None
 
+class InterfaceResourceTargetProbe {}
+
 class TypedActivationTestInterface <: InterfaceWrapperBase & ComInterface {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -415,6 +417,27 @@ func testInterfaceResourceCloseIsReleaseReentrantSafe() {
 }
 
 @Test
+func testOwnedInterfaceWrapperCloseIsReleaseReentrantSafe() {
+    resetReentrantInterfaceResourceState()
+    let vtblHandle = unsafe { allocateNativeValue<IUnknownVtbl>(reentrantInterfaceResourceVtbl()) }
+    let objectHandle = unsafe { allocateNativeValue<CPointer<IUnknownVtbl>>(vtblHandle) }
+    let wrapper = IUnknown.fromAbiTake(CPointer<Unit>(objectHandle))
+    reentrantManualReleaseValue = Some(wrapper)
+    try {
+        wrapper.close()
+        @Expect(wrapper.isClosed(), true)
+        @Expect(wrapper.asRaw().isNull(), true)
+        @Expect(reentrantInterfaceResourceReleaseCount.load(), 1)
+    } finally {
+        reentrantManualReleaseValue = None
+        unsafe {
+            freeNativeValue<CPointer<IUnknownVtbl>>(objectHandle)
+            freeNativeValue<IUnknownVtbl>(vtblHandle)
+        }
+    }
+}
+
+@Test
 func testManualInterfaceWrapperReleaseIsReleaseReentrantSafe() {
     resetReentrantInterfaceResourceState()
     let vtblHandle = unsafe { allocateNativeValue<IUnknownVtbl>(reentrantInterfaceResourceVtbl()) }
@@ -463,6 +486,32 @@ func testManualInterfaceWrapperIntoAbiIsAddRefReentrantSafe() {
             freeNativeValue<CPointer<IUnknownVtbl>>(objectHandle)
             freeNativeValue<IUnknownVtbl>(vtblHandle)
         }
+    }
+}
+
+@Test
+func testTargetBackedInterfaceResourceCloseClearsRegistryAndIsIdempotent() {
+    let vtblHandle = unsafe { allocateNativeValue<IUnknownVtbl>(IUnknownVtbl()) }
+    let target = InterfaceResourceTargetProbe()
+    let resource = unsafe {
+        createInterfaceResourceFromTarget(IUnknown.descriptor(), target, CPointer<Unit>(vtblHandle))
+    }
+    let raw = resource.asRaw()
+    match (lookupInterfaceTarget<InterfaceResourceTargetProbe>(raw)) {
+        case Some(value) => @Expect(refEq(value, target), true)
+        case None => @Expect(true, false)
+    }
+
+    try {
+        resource.close()
+        @Expect(resource.isClosed(), true)
+        @Expect(resource.asRaw().isNull(), true)
+        @Expect(lookupInterfaceTarget<InterfaceResourceTargetProbe>(raw).isNone(), true)
+
+        resource.close()
+        @Expect(lookupInterfaceTarget<InterfaceResourceTargetProbe>(raw).isNone(), true)
+    } finally {
+        unsafe { freeNativeValue<IUnknownVtbl>(vtblHandle) }
     }
 }
 

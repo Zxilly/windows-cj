@@ -1,4 +1,4 @@
-package windows_sample_simple
+package windows_service_sample_simple
 
 import std.fs.{File, removeIfExists}
 import std.process.Process

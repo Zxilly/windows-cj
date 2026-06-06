@@ -99,16 +99,6 @@ private class StockReference<T> <: IReference_Impl<T> & Resource where T <: wind
 
     ~init() {
         if (!closed) {
-            try {
-                unsafe { windows_interface.freeNativeValue(referenceVtblHandle) }
-            } catch (_: Exception) {}
-            try {
-                unsafe { windows_interface.freeNativeValue(propertyVtblHandle) }
-            } catch (_: Exception) {}
-            match (value) {
-                case text: HString => text.close()
-                case _ => ()
-            }
             closed = true
         }
     }

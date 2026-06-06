@@ -191,9 +191,9 @@ struct ErrorInfo {
         }
         match (ptr) {
             case Some(info) =>
-                // Detach the raw pointer before calling SetErrorInfo so the ComHandle
-                // finalizer never releases it. SetErrorInfo takes ownership on success;
-                // on failure we must Release the detached raw to avoid a leak.
+                // Detach the raw pointer before calling SetErrorInfo so this handle
+                // no longer owns it. SetErrorInfo takes ownership on success; on failure
+                // we must Release the detached raw to avoid a leak.
                 let raw = info.intoAbi()
                 if (raw.isNull()) {
                     return

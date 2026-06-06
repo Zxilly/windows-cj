@@ -1,6 +1,6 @@
 package windows_implement
 
-import std.sync.AtomicInt64
+import std.sync.{AtomicBool, AtomicInt64}
 import std.unittest.*
 import std.unittest.testmacro.*
 import windows_interface.*
@@ -329,6 +329,51 @@ func testComObjectCloseRemovesRegistryAndIsIdempotent() {
 
     owner.close()
     @Expect(owner.asRaw().isNull(), true)
+}
+
+@Test
+func testComObjectFinalizerDropCleanupRemovesUnescapedOwnerRegistry() {
+    let owner = createComObject(ComObjectLifetimeDummy(), [IID_IUNKNOWN])
+    let raw = owner.asRaw()
+    let key = unsafe { rootRegistryKeyFromRaw(raw) }
+    @Expect(owner.runtime.isReferenceCountOne(), true)
+    @Expect(comRegistryLookup(key).isSome(), true)
+
+    @Expect(owner.runtime.tryFinalizeOwnerDrop(), true)
+    @Expect(owner.runtime.isDestroyed(), true)
+    @Expect(owner.asRaw().isNull(), true)
+    @Expect(comRegistryLookup(key).isNone(), true)
+    @Expect(implementActionThrows({ => owner.close() }), false)
+}
+
+@Test
+func testComObjectFinalizerDropCleanupSkipsWhenRegistryLockIsBusy() {
+    let owner = createComObject(ComObjectLifetimeDummy(), [IID_IUNKNOWN])
+    let raw = owner.asRaw()
+    let key = unsafe { rootRegistryKeyFromRaw(raw) }
+    let locked = AtomicBool(false)
+    let releaseLock = AtomicBool(false)
+    let lockHolder = spawn {
+        comRegistryMutex.lock()
+        locked.store(true)
+        while (!releaseLock.load()) {}
+        comRegistryMutex.unlock()
+    }
+
+    while (!locked.load()) {}
+    try {
+        @Expect(owner.runtime.tryFinalizeOwnerDrop(), false)
+        @Expect(owner.runtime.isReferenceCountOne(), true)
+        @Expect(owner.runtime.isDestroyed(), false)
+    } finally {
+        releaseLock.store(true)
+        lockHolder.get()
+    }
+
+    @Expect(comRegistryLookup(key).isSome(), true)
+    owner.close()
+    @Expect(owner.runtime.isDestroyed(), true)
+    @Expect(comRegistryLookup(key).isNone(), true)
 }
 
 @Test

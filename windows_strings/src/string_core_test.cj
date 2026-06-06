@@ -76,6 +76,18 @@ func testHStringBuilderCloseReleasesOwnedStorageOnce() {
     @Expect(builder.length(), 0)
 }
 
+@Test
+func testHStringLocalHeaderTakeConsumesLocalHeader() {
+    let source = HString("local")
+    let raw = source.intoRaw()
+    let projected = HString.fromLocalHeaderTake(raw)
+
+    @Expect(source.isClosed(), true)
+    @Expect(projected.get(), "local")
+
+    projected.close()
+}
+
 @When[os == "Windows"]
 @Test
 func testHStringSystemHandleCopyRoundTripsThroughSystemOwnership() {
@@ -85,6 +97,20 @@ func testHStringSystemHandleCopyRoundTripsThroughSystemOwnership() {
 
     @Expect(projected.get(), "system")
     @Expect(source.get(), "system")
+
+    projected.close()
+    source.close()
+}
+
+@When[os == "Windows"]
+@Test
+func testHStringAbiTakeConsumesSystemHandle() {
+    let source = HString("abi")
+    let raw = source.toSystemHandleCopy()
+    let projected = HString.fromAbiTake(raw)
+
+    @Expect(projected.get(), "abi")
+    @Expect(source.get(), "abi")
 
     projected.close()
     source.close()

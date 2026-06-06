@@ -136,20 +136,14 @@ class WindowsResultInternalTests {
     }
 
     @TestCase
-    public func comHandleFinalizerBodyDoesNotReleaseCom(): Unit {
+    public func comHandleFinalizerBodyReleasesOwnedComReference(): Unit {
         let source = readComSourceForTesting()
-        let expectedLfBody = "~init() {\n        raw = CPointer<T>()\n        closed = true\n    }"
-        let expectedCrLfBody = "~init() {\r\n        raw = CPointer<T>()\r\n        closed = true\r\n    }"
-        let oldLfReleaseBody = "~init() {\n        if (!closed) {\n            comReleaseRaw(raw)"
-        let oldCrLfReleaseBody = "~init() {\r\n        if (!closed) {\r\n            comReleaseRaw(raw)"
+        let expectedLfBody = "~init() {\n        if (!closed) {\n            let released = raw\n            raw = CPointer<T>()\n            closed = true\n            let _ = comReleaseRaw(released)\n        }\n    }"
+        let expectedCrLfBody = "~init() {\r\n        if (!closed) {\r\n            let released = raw\r\n            raw = CPointer<T>()\r\n            closed = true\r\n            let _ = comReleaseRaw(released)\r\n        }\r\n    }"
 
         require(
             source.contains(expectedLfBody) || source.contains(expectedCrLfBody),
-            "ComHandle finalizer should only clear the raw slot and mark closed"
-        )
-        require(
-            !source.contains(oldLfReleaseBody) && !source.contains(oldCrLfReleaseBody),
-            "ComHandle finalizer body should not call the COM Release helper"
+            "ComHandle finalizer should release an owned COM reference exactly once"
         )
     }
 

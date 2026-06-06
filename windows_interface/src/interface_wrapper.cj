@@ -338,8 +338,8 @@ public open class InterfaceWrapperBase <: Resource {
             return 0u32
         }
         if (ownsHandle_) {
-            let remaining = releaseOwnedHandle()
             closed_ = true
+            let remaining = releaseOwnedHandle()
             return remaining
         }
         if (allowManualRelease_) {
@@ -368,7 +368,9 @@ public open class InterfaceWrapperBase <: Resource {
             return
         }
         if (ownsHandle_) {
+            closed_ = true
             let _ = releaseOwnedHandle()
+            return
         }
         closed_ = true
     }

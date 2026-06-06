@@ -36,6 +36,7 @@ QUERY_REQUIRED_CALL_RE = re.compile(r"\bqueryRequired\s*\(")
 SOME_CASE_RE = re.compile(r"^(\s*)case\s+Some\(([A-Za-z_][A-Za-z0-9_]*)\)\s*=>", re.MULTILINE)
 CASE_RE = re.compile(r"^(\s*)case\b.*=>", re.MULTILINE)
 DIRECT_QUERY_INTERFACE_RE = re.compile(r"\.QueryInterface\s*\(")
+FUNC_NAME_RE = re.compile(r"\bfunc\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(")
 DISCARDED_OWNED_WRAPPER_RE = re.compile(
     r"\b(?:let|var)\s+_\s*(?::[^=\n]+)?=\s*[^\n;]*"
     r"(?:fromAbiTake|fromAbiTakeWinrtHandle|takeFromAbi)\s*\(",
@@ -61,6 +62,9 @@ DIRECT_QUERY_INTERFACE_ALLOWED_FILES = {
     "windows_core/src/com_interface.cj",
     "windows_core/src/marshaler.cj",
     "windows_core/src/weak_ref_count.cj",
+}
+DIRECT_QUERY_INTERFACE_ALLOWED_FUNCTIONS = {
+    ("windows_reactor/src/winui/host.cj", "queryApplicationInner"),
 }
 
 
@@ -239,6 +243,15 @@ def query_result_consumed(body: str, name: str) -> bool:
         qualified_prefix
         + rf"(?:takeFromAbi|fromAbiTake|fromAbiTakeWinrtHandle)\s*\(\s*{raw_name}\b[^\n;]*\)"
     )
+    local_owned_wrapper = (
+        rf"\b(?:let|var)\s+(?!_)\w+(?:\s*:[^=\n]+)?\s*=\s*{known_take_call}"
+    )
+    local_take_ownership_constructor = (
+        rf"\b(?:let|var)\s+(?!_)\w+(?:\s*:[^=\n]+)?\s*=\s*"
+        rf"{qualified_prefix}[A-Za-z_][A-Za-z0-9_]*(?:\s*<[^{{}}\n]+>)?"
+        rf"\s*\(\s*{raw_name}\s*,\s*takeOwnership:\s*true\b[^\n;]*\)"
+    )
+    forwarded_out_pointer = rf"\b[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\.write\s*\(\s*{raw_name}\s*\)"
     direct_tail_owned_wrapper = (
         tail_expression is not None
         and (
@@ -254,6 +267,9 @@ def query_result_consumed(body: str, name: str) -> bool:
         rf"\b{raw_name}\s*\.\s*(?:close|intoAbi|release)\s*\(",
         rf"\b(?:interfaceHandleReleaseRaw|comReleaseRaw|releaseRaw)\s*\(\s*{raw_name}\s*\)",
         rf"\breleasePointer\s*\(\s*{raw_name}\s*\)",
+        local_owned_wrapper,
+        local_take_ownership_constructor,
+        forwarded_out_pointer,
     )
     return (
         direct_tail_raw
@@ -357,6 +373,13 @@ def mask_cj_strings_and_comments(text: str) -> str:
             continue
         index += 1
     return "".join(chars)
+
+
+def enclosing_function_name(text: str, offset: int) -> str | None:
+    name: str | None = None
+    for match in FUNC_NAME_RE.finditer(text, 0, offset):
+        name = match.group(1)
+    return name
 
 
 def mask_conditional_blocks(text: str) -> str:
@@ -540,17 +563,21 @@ def check_direct_query_interface_call_sites(workspace: Path) -> None:
     findings: list[str] = []
     for source in cj_sources(workspace, production_only=True):
         text = source.read_text(encoding="utf-8")
-        if not DIRECT_QUERY_INTERFACE_RE.search(text):
+        masked = mask_cj_strings_and_comments(text)
+        if not DIRECT_QUERY_INTERFACE_RE.search(masked):
             continue
         relative = rel(source, workspace)
         if relative in DIRECT_QUERY_INTERFACE_ALLOWED_FILES:
             continue
-        for line_number, line in enumerate(text.splitlines(), start=1):
-            if DIRECT_QUERY_INTERFACE_RE.search(line):
-                findings.append(
-                    f"{relative}:{line_number}: direct QueryInterface calls must use "
-                    "queryInterfaceRaw/queryInterfaceAs or be added as a narrow helper exception"
-                )
+        for match in DIRECT_QUERY_INTERFACE_RE.finditer(masked):
+            line_number = text[: match.start()].count("\n") + 1
+            function_name = enclosing_function_name(masked, match.start())
+            if (relative, function_name) in DIRECT_QUERY_INTERFACE_ALLOWED_FUNCTIONS:
+                continue
+            findings.append(
+                f"{relative}:{line_number}: direct QueryInterface calls must use "
+                "queryInterfaceRaw/queryInterfaceAs or be added as a narrow helper exception"
+            )
     if findings:
         print("FAIL: direct QueryInterface call site audit failed:", file=sys.stderr)
         for finding in findings:

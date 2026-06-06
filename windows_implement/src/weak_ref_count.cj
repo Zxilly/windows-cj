@@ -468,6 +468,17 @@ public class WeakRefCount {
         }
     }
 
+    public func canFinalizeOwnerDropWithoutBlocking(): Bool {
+        if (!stateMutex.tryLock()) {
+            return false
+        }
+        try {
+            tearOff.isNone() && objectMarshaler.isNone()
+        } finally {
+            stateMutex.unlock()
+        }
+    }
+
     public func writeWeakReferenceSource(resultSlot: CPointer<CPointer<Unit>>): Int32 {
         let value = ensureTearOff()
         value.writeStrongReference(resultSlot)

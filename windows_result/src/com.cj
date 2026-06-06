@@ -126,8 +126,12 @@ class ComHandle<T> <: Resource where T <: CType {
     }
 
     ~init() {
-        raw = CPointer<T>()
-        closed = true
+        if (!closed) {
+            let released = raw
+            raw = CPointer<T>()
+            closed = true
+            let _ = comReleaseRaw(released)
+        }
     }
 
     public operator func ==(other: ComHandle<T>): Bool {
