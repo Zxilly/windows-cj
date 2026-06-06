@@ -179,4 +179,3 @@ func loadLibraryWithFlags(moduleNameBytes: Array<UInt8>, flags: UInt32): CPointe
 - [处理字符串](strings.md) —— Win32 的 `W` 函数要求 UTF-16 宽字符串，这一节讲 `HString` / `PCWSTR` / `PWSTR` / `CWideString` 怎么用。
 - [错误处理与 HRESULT](error-handling.md) —— `BOOL` / `HRESULT` / `Error` / `Win32Exception` 的完整体系。
 - [调用 COM API 与查询接口](com-api.md) —— 从 C 风格函数进阶到 vtable 调用与 `QueryInterface`。
-- [链接与 windows_targets](targets.md) —— 这些导出符号在链接期是怎么被解析的。

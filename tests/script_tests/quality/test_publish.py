@@ -68,26 +68,26 @@ class PublishScriptTests(unittest.TestCase):
     def test_bundle_includes_assets_and_excludes_build_outputs(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
-            write_file(root, "cjpm.toml", '[workspace]\nmembers = ["windows_targets"]\n')
+            write_file(root, "cjpm.toml", '[workspace]\nmembers = ["asset_pkg"]\n')
             package_toml = (
-                '[package]\nname = "windows_targets"\nversion = "0.1.0"\n'
-                'description = "targets"\noutput-type = "static"\ncjc-version = "1.1.0"\n'
+                '[package]\nname = "asset_pkg"\nversion = "0.1.0"\n'
+                'description = "asset package"\noutput-type = "static"\ncjc-version = "1.1.0"\n'
             )
-            write_package(root, "windows_targets", package_toml)
-            write_file(root, "windows_targets/README.md", "# targets\n")
-            write_file(root, "windows_targets/cjpm.lock", "version = 0\n")
-            write_file(root, "windows_targets/target/junk.txt", "junk\n")
-            write_file(root, "windows_targets/x86_64_gnu/lib/libwindows.a", "archive\n")
-            info = publish.package_infos(root)["windows_targets"]
+            write_package(root, "asset_pkg", package_toml)
+            write_file(root, "asset_pkg/README.md", "# assets\n")
+            write_file(root, "asset_pkg/cjpm.lock", "version = 0\n")
+            write_file(root, "asset_pkg/target/junk.txt", "junk\n")
+            write_file(root, "asset_pkg/assets/data.bin", "asset\n")
+            info = publish.package_infos(root)["asset_pkg"]
 
             cjp = publish.make_bundle(root, info, package_toml)
 
             with tarfile.open(cjp, mode="r:gz") as tar:
                 names = set(tar.getnames())
-            self.assertIn("windows_targets-0.1.0/x86_64_gnu/lib/libwindows.a", names)
-            self.assertIn("windows_targets-0.1.0/README.md", names)
-            self.assertNotIn("windows_targets-0.1.0/cjpm.lock", names)
-            self.assertNotIn("windows_targets-0.1.0/target/junk.txt", names)
+            self.assertIn("asset_pkg-0.1.0/assets/data.bin", names)
+            self.assertIn("asset_pkg-0.1.0/README.md", names)
+            self.assertNotIn("asset_pkg-0.1.0/cjpm.lock", names)
+            self.assertNotIn("asset_pkg-0.1.0/target/junk.txt", names)
 
     def test_publish_restores_toml_and_forces_heap_size(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:

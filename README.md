@@ -2,7 +2,7 @@
 
 windows-cj 是一组面向仓颉的 Windows API 绑定、投影与工具包。项目目标是在仓颉中直接调用 Win32、COM、WinRT 和 WinUI 3 相关 API，同时尽量保持仓颉自身的类型系统、GC 与资源管理习惯。
 
-仓库根目录是一个 `cjpm` workspace，稳定支持包、运行时投影包、链接资产包和绑定生成器都作为独立成员维护。你可以只依赖某几个小包，也可以组合它们构建完整的 Windows 桌面应用。
+仓库根目录是一个 `cjpm` workspace，稳定支持包、运行时投影包和绑定生成器都作为独立成员维护。你可以只依赖某几个小包，也可以组合它们构建完整的 Windows 桌面应用。
 
 ## 当前状态
 
@@ -25,9 +25,9 @@ windows-cj 是一组面向仓颉的 Windows API 绑定、投影与工具包。�
 | `windows_future` | WinRT async 投影、完成回调与等待 helper |
 | `windows_registry` / `windows_services` / `windows_threading` | 常用 Win32 子系统 helper |
 | `windows_variant` / `windows_propvariant` / `windows_safearray` | COM 自动化相关类型 |
-| `windows_targets` | GNU 链接器所需的 Windows import archive 资产 |
 | `windows_common` | 已签入的 generated 支持符号与 native ABI helper |
 | `windows_winui3` | WinUI 3 / Windows App SDK 运行时支持 |
+| `windows_metadata` | 独立 `.winmd` metadata reader API |
 | `windows_bindgen` | 读取 `.winmd` 并生成仓颉绑定源码的 CLI |
 | `winmd` | 项目自带的 Windows metadata 输入 |
 | `web/book` | mdBook 文档源码 |
@@ -95,7 +95,7 @@ cjpm test -m windows_core --no-progress --no-color
 $env:cjHeapSize = '32GB'
 $members = @(
   'windows_result', 'windows_strings', 'windows_core',
-  'windows_libloading', 'windows_targets', 'windows_version',
+  'windows_libloading', 'windows_version',
   'windows_registry', 'windows_interface', 'windows_implement',
   'windows_polyfill', 'windows_numerics', 'windows_variant',
   'windows_propvariant', 'windows_safearray', 'windows_threading',

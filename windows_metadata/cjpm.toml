@@ -1,10 +1,12 @@
 [package]
-  name = "windows_targets"
+  name = "windows_metadata"
   version = "0.1.0"
-  description = "Windows import archive carrier for Cangjie"
+  description = "Windows metadata reader for Cangjie"
   authors = ["Zxilly"]
   repository = "https://github.com/Zxilly/windows-cj"
   license = ["MIT"]
   output-type = "static"
   cjc-version = "1.1.0"
-  compile-option = "-Woff unused"
+  compile-option = "--experimental --incremental-compile -Woff unused"
+
+[dependencies]

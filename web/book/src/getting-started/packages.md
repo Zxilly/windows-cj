@@ -46,9 +46,9 @@ windows-cj 的工作区由一组职责单一的包组成。你几乎不会一次
 
 | 包名（目录） | 仓颉包名 | 职责 |
 | --- | --- | --- |
-| `windows_targets` | `windows_targets` | GNU 链接器所需的 Windows 导入库资源（链接期资产，非源码依赖） |
 | `windows_common` | `windows_common` | 中心仓维护的 generated 支持 / 投影子集，以及可复用的底层 native ABI helper 入口（注意：它是支持符号包，**不是运行时**） |
 | `windows_winui3` | `windows_winui3` | WinUI 3 / Windows App SDK 支持包 |
+| `windows_metadata` | `windows_metadata` | 独立 `.winmd` metadata reader：PE metadata、表、签名、类型索引、custom attribute 解码 |
 | `windows_bindgen` | `windows_bindgen` | 命令行绑定生成器，按需把元数据生成成仓颉源码包 |
 
 ## 怎么选
