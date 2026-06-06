@@ -7,7 +7,7 @@
   license = ["MIT"]
   output-type = "static"
   cjc-version = "1.1.0"
-  compile-option = "-Woff unused"
+  compile-option = "--experimental --incremental-compile -Woff unused"
 
 [dependencies]
   windows_time = { path = "../windows_time" }

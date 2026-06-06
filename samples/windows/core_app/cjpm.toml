@@ -4,7 +4,7 @@
   description = "CoreApplication bootstrap implementing IFrameworkViewSource/IFrameworkView as CCWs"
   output-type = "executable"
   cjc-version = "1.1.0"
-  compile-option = "-Woff unused"
+  compile-option = "--experimental --incremental-compile -Woff unused"
 
 [dependencies]
   windows_sample_core_app_bindings = { path = "./bindings" }

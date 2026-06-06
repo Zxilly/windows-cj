@@ -8,6 +8,7 @@
   output-type = "static"
   cjc-version = "1.1.0"
 
+  compile-option = "--experimental --incremental-compile"
 [dependencies]
   windows_interface = { path = "../windows_interface" }
   windows_libloading = { path = "../windows_libloading" }

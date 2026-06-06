@@ -1,5 +1,5 @@
 [package]
-  name = "windows_sample_simple"
+  name = "windows_service_sample_simple"
   version = "0.1.0"
   description = "Windows service that registers with the SCM and logs each received control command to a file"
   authors = ["Zxilly"]
@@ -7,7 +7,7 @@
   license = ["MIT"]
   output-type = "executable"
   cjc-version = "1.1.0"
-  compile-option = "-Woff unused"
+  compile-option = "--experimental --incremental-compile -Woff unused"
 
 [dependencies]
   windows_services = { path = "../../../windows_services" }
