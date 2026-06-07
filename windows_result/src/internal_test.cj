@@ -435,6 +435,10 @@ class WindowsResultInternalTests {
             fakeErrorInfoAddRefCalls == 2u32,
             "Error.intoThread should not add an extra COM reference before calling SetErrorInfo"
         )
+        require(
+            fakeErrorInfoReleaseCalls == 2u32,
+            "Error.intoThread should release the caller reference after SetErrorInfo"
+        )
     }
 
     @TestCase

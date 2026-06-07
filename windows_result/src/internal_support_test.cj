@@ -325,4 +325,5 @@ func publishAndClearThreadError(infoPtr: CPointer<IErrorInfo>): Unit {
     require(fakeErrorInfoRefCount == 1u32, "test setup should start with exactly one retained COM reference")
     error.intoThread()
     let _ = setErrorInfoAbi(0u32, CPointer<Unit>())
+    require(fakeErrorInfoRefCount == 0u32, "clearing thread error should release all retained COM references")
 }

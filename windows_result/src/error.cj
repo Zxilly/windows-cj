@@ -191,16 +191,14 @@ struct ErrorInfo {
         }
         match (ptr) {
             case Some(info) =>
-                // Detach the raw pointer before calling SetErrorInfo so this handle
-                // no longer owns it. SetErrorInfo takes ownership on success; on failure
-                // we must Release the detached raw to avoid a leak.
-                let raw = info.intoAbi()
+                // SetErrorInfo stores the thread error object, but the caller still
+                // owns this reference and must release it after the call.
+                let raw = info.asRaw()
                 if (raw.isNull()) {
                     return
                 }
-                if (HRESULT(setErrorInfoAbi(0u32, CPointer<Unit>(raw))).failed()) {
-                    comReleaseRaw(raw)
-                }
+                let _ = setErrorInfoAbi(0u32, CPointer<Unit>(raw))
+                info.close()
             case None =>
                 ()
         }
