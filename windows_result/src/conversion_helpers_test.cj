@@ -50,3 +50,16 @@ func testHResultAndWin32RoundTripHelpers() {
 
     @Expect(WIN32_ERROR.from(errorFromHRESULT(E_FAIL)).isNone(), true)
 }
+
+@When[os == "Windows" && arch != "x86_64"]
+@Test
+func testDynamicWin32CFuncAbiRejectsWindowsNonX64() {
+    var rejected = false
+    try {
+        ensureDynamicWin32CFuncAbiSupported()
+    } catch (err: Exception) {
+        rejected = "${err}".contains("dynamic Win32 CFunc ABI is only supported on Windows x86_64")
+    }
+
+    @Expect(rejected, true)
+}

@@ -20,6 +20,19 @@ func testUtf16AndUtf8Helpers() {
     @Expect(decodeUtf8Lossy([0x41u8, 0xE2u8]), "A${Rune(0xFFFDu32)}")
 }
 
+@When[os == "Windows" && arch != "x86_64"]
+@Test
+func testDynamicWin32CFuncAbiRejectsWindowsNonX64() {
+    var rejected = false
+    try {
+        ensureDynamicWin32CFuncAbiSupported()
+    } catch (err: Exception) {
+        rejected = "${err}".contains("dynamic Win32 CFunc ABI is only supported on Windows x86_64")
+    }
+
+    @Expect(rejected, true)
+}
+
 @Test
 func testHStringCloneAndBuilderRoundTrip() {
     let source = HString("Cangjie")

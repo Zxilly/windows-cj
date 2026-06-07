@@ -25,7 +25,8 @@ func ensureDynamicWin32CFuncAbiSupported(): Unit {
 }
 
 func resolveDynamicWin32Proc(moduleName: String, procName: String): CPointer<Unit> {
-    // @CallingConv cannot be applied to local CFunc casts, so keep this dynamic path target-limited.
+    // @CallingConv cannot be applied to local CFunc casts, so this dynamic path is only
+    // valid where Win32 uses the platform C calling convention.
     ensureDynamicWin32CFuncAbiSupported()
     windows_libloading.resolveProc(moduleName, procName)
 }

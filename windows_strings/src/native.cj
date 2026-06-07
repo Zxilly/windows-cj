@@ -22,6 +22,7 @@ func ensureDynamicWin32CFuncAbiSupported(): Unit {}
 
 @When[os == "Windows" && arch != "x86_64"]
 func ensureDynamicWin32CFuncAbiSupported(): Unit {
+    // Local CFunc(resolveProc(...)) casts cannot carry STDCALL; Win32 non-x64 APIs require it.
     throw HStringAbiException("dynamic Win32 CFunc ABI is only supported on Windows x86_64")
 }
 
