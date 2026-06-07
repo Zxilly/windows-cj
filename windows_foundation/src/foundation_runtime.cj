@@ -419,7 +419,7 @@ public class IClosable <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     public static func descriptor(): InterfaceDescriptor<IClosable> {
-        var descriptor = InterfaceDescriptor<IClosable>("IClosable", IClosable.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IClosable.fromAbiTake(raw) }, { raw => IClosable.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IClosable>("IClosable", IClosable.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IClosable.fromAbiTake(raw) }, { raw => IClosable.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IClosable.runtimeType())
         return descriptor
     }
@@ -504,7 +504,7 @@ public class IDeferral <: InterfaceWrapperBase & ComInterface & RuntimeName & wi
     }
 
     public static func descriptor(): InterfaceDescriptor<IDeferral> {
-        var descriptor = InterfaceDescriptor<IDeferral>("IDeferral", IDeferral.iid(), IInspectable.descriptor(), [IClosable.iid()], { raw => IDeferral.fromAbiTake(raw) }, { raw => IDeferral.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IDeferral>("IDeferral", IDeferral.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IClosable.iid()], { raw => IDeferral.fromAbiTake(raw) }, { raw => IDeferral.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IDeferral.runtimeType())
         return descriptor
     }
@@ -643,7 +643,7 @@ public class IGetActivationFactory <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptor(): InterfaceDescriptor<IGetActivationFactory> {
-        var descriptor = InterfaceDescriptor<IGetActivationFactory>("IGetActivationFactory", IGetActivationFactory.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IGetActivationFactory.fromAbiTake(raw) }, { raw => IGetActivationFactory.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IGetActivationFactory>("IGetActivationFactory", IGetActivationFactory.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IGetActivationFactory.fromAbiTake(raw) }, { raw => IGetActivationFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IGetActivationFactory.runtimeType())
         return descriptor
     }
@@ -730,7 +730,7 @@ public class IGuidHelperStatics <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptor(): InterfaceDescriptor<IGuidHelperStatics> {
-        var descriptor = InterfaceDescriptor<IGuidHelperStatics>("IGuidHelperStatics", IGuidHelperStatics.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IGuidHelperStatics.fromAbiTake(raw) }, { raw => IGuidHelperStatics.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IGuidHelperStatics>("IGuidHelperStatics", IGuidHelperStatics.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IGuidHelperStatics.fromAbiTake(raw) }, { raw => IGuidHelperStatics.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IGuidHelperStatics.runtimeType())
         return descriptor
     }
@@ -864,7 +864,7 @@ public class IStringable <: InterfaceWrapperBase & ComInterface & RuntimeName & 
     }
 
     public static func descriptor(): InterfaceDescriptor<IStringable> {
-        var descriptor = InterfaceDescriptor<IStringable>("IStringable", IStringable.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IStringable.fromAbiTake(raw) }, { raw => IStringable.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IStringable>("IStringable", IStringable.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IStringable.fromAbiTake(raw) }, { raw => IStringable.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IStringable.runtimeType())
         return descriptor
     }
@@ -947,7 +947,7 @@ public class IUriEscapeStatics <: InterfaceWrapperBase & ComInterface & RuntimeN
     }
 
     public static func descriptor(): InterfaceDescriptor<IUriEscapeStatics> {
-        var descriptor = InterfaceDescriptor<IUriEscapeStatics>("IUriEscapeStatics", IUriEscapeStatics.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IUriEscapeStatics.fromAbiTake(raw) }, { raw => IUriEscapeStatics.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IUriEscapeStatics>("IUriEscapeStatics", IUriEscapeStatics.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IUriEscapeStatics.fromAbiTake(raw) }, { raw => IUriEscapeStatics.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IUriEscapeStatics.runtimeType())
         return descriptor
     }
@@ -1044,7 +1044,7 @@ public class IUriRuntimeClassWithAbsoluteCanonicalUri <: InterfaceWrapperBase & 
     }
 
     public static func descriptor(): InterfaceDescriptor<IUriRuntimeClassWithAbsoluteCanonicalUri> {
-        var descriptor = InterfaceDescriptor<IUriRuntimeClassWithAbsoluteCanonicalUri>("IUriRuntimeClassWithAbsoluteCanonicalUri", IUriRuntimeClassWithAbsoluteCanonicalUri.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IUriRuntimeClassWithAbsoluteCanonicalUri.fromAbiTake(raw) }, { raw => IUriRuntimeClassWithAbsoluteCanonicalUri.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IUriRuntimeClassWithAbsoluteCanonicalUri>("IUriRuntimeClassWithAbsoluteCanonicalUri", IUriRuntimeClassWithAbsoluteCanonicalUri.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IUriRuntimeClassWithAbsoluteCanonicalUri.fromAbiTake(raw) }, { raw => IUriRuntimeClassWithAbsoluteCanonicalUri.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IUriRuntimeClassWithAbsoluteCanonicalUri.runtimeType())
         return descriptor
     }
@@ -1185,7 +1185,7 @@ public class IWwwFormUrlDecoderEntry <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptor(): InterfaceDescriptor<IWwwFormUrlDecoderEntry> {
-        var descriptor = InterfaceDescriptor<IWwwFormUrlDecoderEntry>("IWwwFormUrlDecoderEntry", IWwwFormUrlDecoderEntry.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IWwwFormUrlDecoderEntry.fromAbiTake(raw) }, { raw => IWwwFormUrlDecoderEntry.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IWwwFormUrlDecoderEntry>("IWwwFormUrlDecoderEntry", IWwwFormUrlDecoderEntry.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IWwwFormUrlDecoderEntry.fromAbiTake(raw) }, { raw => IWwwFormUrlDecoderEntry.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IWwwFormUrlDecoderEntry.runtimeType())
         return descriptor
     }
@@ -1280,7 +1280,7 @@ public class IWwwFormUrlDecoderRuntimeClass <: InterfaceWrapperBase & ComInterfa
     }
 
     public static func descriptor(): InterfaceDescriptor<IWwwFormUrlDecoderRuntimeClass> {
-        var descriptor = InterfaceDescriptor<IWwwFormUrlDecoderRuntimeClass>("IWwwFormUrlDecoderRuntimeClass", IWwwFormUrlDecoderRuntimeClass.iid(), IInspectable.descriptor(), [IIterable<IWwwFormUrlDecoderEntry>.iid(), IVectorView<IWwwFormUrlDecoderEntry>.iid()], { raw => IWwwFormUrlDecoderRuntimeClass.fromAbiTake(raw) }, { raw => IWwwFormUrlDecoderRuntimeClass.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IWwwFormUrlDecoderRuntimeClass>("IWwwFormUrlDecoderRuntimeClass", IWwwFormUrlDecoderRuntimeClass.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IIterable<IWwwFormUrlDecoderEntry>.iid(), IVectorView<IWwwFormUrlDecoderEntry>.iid()], { raw => IWwwFormUrlDecoderRuntimeClass.fromAbiTake(raw) }, { raw => IWwwFormUrlDecoderRuntimeClass.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IWwwFormUrlDecoderRuntimeClass.runtimeType())
         return descriptor
     }
@@ -1976,7 +1976,7 @@ public class IMemoryBufferReference <: InterfaceWrapperBase & ComInterface & Run
     }
 
     public static func descriptor(): InterfaceDescriptor<IMemoryBufferReference> {
-        var descriptor = InterfaceDescriptor<IMemoryBufferReference>("IMemoryBufferReference", IMemoryBufferReference.iid(), IInspectable.descriptor(), [IClosable.iid()], { raw => IMemoryBufferReference.fromAbiTake(raw) }, { raw => IMemoryBufferReference.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IMemoryBufferReference>("IMemoryBufferReference", IMemoryBufferReference.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IClosable.iid()], { raw => IMemoryBufferReference.fromAbiTake(raw) }, { raw => IMemoryBufferReference.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IMemoryBufferReference.runtimeType())
         return descriptor
     }
@@ -3261,7 +3261,7 @@ public class IPropertyValue <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptor(): InterfaceDescriptor<IPropertyValue> {
-        var descriptor = InterfaceDescriptor<IPropertyValue>("IPropertyValue", IPropertyValue.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IPropertyValue.fromAbiTake(raw) }, { raw => IPropertyValue.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPropertyValue>("IPropertyValue", IPropertyValue.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IPropertyValue.fromAbiTake(raw) }, { raw => IPropertyValue.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPropertyValue.runtimeType())
         return descriptor
     }
@@ -3875,7 +3875,7 @@ public class IPropertyValueStatics <: InterfaceWrapperBase & ComInterface & Runt
     }
 
     public static func descriptor(): InterfaceDescriptor<IPropertyValueStatics> {
-        var descriptor = InterfaceDescriptor<IPropertyValueStatics>("IPropertyValueStatics", IPropertyValueStatics.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IPropertyValueStatics.fromAbiTake(raw) }, { raw => IPropertyValueStatics.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPropertyValueStatics>("IPropertyValueStatics", IPropertyValueStatics.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IPropertyValueStatics.fromAbiTake(raw) }, { raw => IPropertyValueStatics.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPropertyValueStatics.runtimeType())
         return descriptor
     }
@@ -4917,7 +4917,7 @@ public class IReference<T> <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptor(): InterfaceDescriptor<IReference<T>> {
-        var descriptor = InterfaceDescriptor<IReference<T>>("IReference", IReference<T>.iid(), IInspectable.descriptor(), [IPropertyValue.iid()], { raw => IReference<T>.fromAbiTake(raw) }, { raw => IReference<T>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IReference<T>>("IReference", IReference<T>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IPropertyValue.iid()], { raw => IReference<T>.fromAbiTake(raw) }, { raw => IReference<T>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IReference<T>.runtimeType())
         return descriptor
     }
@@ -5728,7 +5728,7 @@ public class IReferenceArray<T> <: InterfaceWrapperBase & ComInterface & Runtime
     }
 
     public static func descriptor(): InterfaceDescriptor<IReferenceArray<T>> {
-        var descriptor = InterfaceDescriptor<IReferenceArray<T>>("IReferenceArray", IReferenceArray<T>.iid(), IInspectable.descriptor(), [IPropertyValue.iid()], { raw => IReferenceArray<T>.fromAbiTake(raw) }, { raw => IReferenceArray<T>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IReferenceArray<T>>("IReferenceArray", IReferenceArray<T>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IPropertyValue.iid()], { raw => IReferenceArray<T>.fromAbiTake(raw) }, { raw => IReferenceArray<T>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IReferenceArray<T>.runtimeType())
         return descriptor
     }
@@ -6977,7 +6977,7 @@ public class IMemoryBuffer <: InterfaceWrapperBase & ComInterface & RuntimeName 
     }
 
     public static func descriptor(): InterfaceDescriptor<IMemoryBuffer> {
-        var descriptor = InterfaceDescriptor<IMemoryBuffer>("IMemoryBuffer", IMemoryBuffer.iid(), IInspectable.descriptor(), [IClosable.iid()], { raw => IMemoryBuffer.fromAbiTake(raw) }, { raw => IMemoryBuffer.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IMemoryBuffer>("IMemoryBuffer", IMemoryBuffer.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IClosable.iid()], { raw => IMemoryBuffer.fromAbiTake(raw) }, { raw => IMemoryBuffer.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IMemoryBuffer.runtimeType())
         return descriptor
     }
@@ -7194,7 +7194,7 @@ public class IDeferralFactory <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptor(): InterfaceDescriptor<IDeferralFactory> {
-        var descriptor = InterfaceDescriptor<IDeferralFactory>("IDeferralFactory", IDeferralFactory.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IDeferralFactory.fromAbiTake(raw) }, { raw => IDeferralFactory.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IDeferralFactory>("IDeferralFactory", IDeferralFactory.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IDeferralFactory.fromAbiTake(raw) }, { raw => IDeferralFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IDeferralFactory.runtimeType())
         return descriptor
     }
@@ -7276,7 +7276,7 @@ public class IMemoryBufferFactory <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptor(): InterfaceDescriptor<IMemoryBufferFactory> {
-        var descriptor = InterfaceDescriptor<IMemoryBufferFactory>("IMemoryBufferFactory", IMemoryBufferFactory.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IMemoryBufferFactory.fromAbiTake(raw) }, { raw => IMemoryBufferFactory.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IMemoryBufferFactory>("IMemoryBufferFactory", IMemoryBufferFactory.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IMemoryBufferFactory.fromAbiTake(raw) }, { raw => IMemoryBufferFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IMemoryBufferFactory.runtimeType())
         return descriptor
     }
@@ -7374,7 +7374,7 @@ public class IUriRuntimeClass <: InterfaceWrapperBase & ComInterface & RuntimeNa
     }
 
     public static func descriptor(): InterfaceDescriptor<IUriRuntimeClass> {
-        var descriptor = InterfaceDescriptor<IUriRuntimeClass>("IUriRuntimeClass", IUriRuntimeClass.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IUriRuntimeClass.fromAbiTake(raw) }, { raw => IUriRuntimeClass.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IUriRuntimeClass>("IUriRuntimeClass", IUriRuntimeClass.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IUriRuntimeClass.fromAbiTake(raw) }, { raw => IUriRuntimeClass.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IUriRuntimeClass.runtimeType())
         return descriptor
     }
@@ -7588,7 +7588,7 @@ public class IUriRuntimeClassFactory <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptor(): InterfaceDescriptor<IUriRuntimeClassFactory> {
-        var descriptor = InterfaceDescriptor<IUriRuntimeClassFactory>("IUriRuntimeClassFactory", IUriRuntimeClassFactory.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IUriRuntimeClassFactory.fromAbiTake(raw) }, { raw => IUriRuntimeClassFactory.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IUriRuntimeClassFactory>("IUriRuntimeClassFactory", IUriRuntimeClassFactory.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IUriRuntimeClassFactory.fromAbiTake(raw) }, { raw => IUriRuntimeClassFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IUriRuntimeClassFactory.runtimeType())
         return descriptor
     }
@@ -7686,7 +7686,7 @@ public class IWwwFormUrlDecoderRuntimeClassFactory <: InterfaceWrapperBase & Com
     }
 
     public static func descriptor(): InterfaceDescriptor<IWwwFormUrlDecoderRuntimeClassFactory> {
-        var descriptor = InterfaceDescriptor<IWwwFormUrlDecoderRuntimeClassFactory>("IWwwFormUrlDecoderRuntimeClassFactory", IWwwFormUrlDecoderRuntimeClassFactory.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IWwwFormUrlDecoderRuntimeClassFactory.fromAbiTake(raw) }, { raw => IWwwFormUrlDecoderRuntimeClassFactory.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IWwwFormUrlDecoderRuntimeClassFactory>("IWwwFormUrlDecoderRuntimeClassFactory", IWwwFormUrlDecoderRuntimeClassFactory.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IWwwFormUrlDecoderRuntimeClassFactory.fromAbiTake(raw) }, { raw => IWwwFormUrlDecoderRuntimeClassFactory.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IWwwFormUrlDecoderRuntimeClassFactory.runtimeType())
         return descriptor
     }

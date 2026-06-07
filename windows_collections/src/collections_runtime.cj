@@ -457,7 +457,7 @@ public class IIterator<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptor(): InterfaceDescriptor<IIterator<T>> {
-        var descriptor = InterfaceDescriptor<IIterator<T>>("IIterator", IIterator<T>.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IIterator<T>.fromAbiTake(raw) }, { raw => IIterator<T>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IIterator<T>>("IIterator", IIterator<T>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IIterator<T>.fromAbiTake(raw) }, { raw => IIterator<T>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IIterator<T>.runtimeType())
         return descriptor
     }
@@ -650,7 +650,7 @@ public class IKeyValuePair<K, V> <: InterfaceWrapperBase & ComInterface & Runtim
     }
 
     public static func descriptor(): InterfaceDescriptor<IKeyValuePair<K, V>> {
-        var descriptor = InterfaceDescriptor<IKeyValuePair<K, V>>("IKeyValuePair", IKeyValuePair<K, V>.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IKeyValuePair<K, V>.fromAbiTake(raw) }, { raw => IKeyValuePair<K, V>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IKeyValuePair<K, V>>("IKeyValuePair", IKeyValuePair<K, V>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IKeyValuePair<K, V>.fromAbiTake(raw) }, { raw => IKeyValuePair<K, V>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IKeyValuePair<K, V>.runtimeType())
         return descriptor
     }
@@ -811,7 +811,7 @@ public class IMapChangedEventArgs<K> <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptor(): InterfaceDescriptor<IMapChangedEventArgs<K>> {
-        var descriptor = InterfaceDescriptor<IMapChangedEventArgs<K>>("IMapChangedEventArgs", IMapChangedEventArgs<K>.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IMapChangedEventArgs<K>.fromAbiTake(raw) }, { raw => IMapChangedEventArgs<K>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IMapChangedEventArgs<K>>("IMapChangedEventArgs", IMapChangedEventArgs<K>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IMapChangedEventArgs<K>.fromAbiTake(raw) }, { raw => IMapChangedEventArgs<K>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IMapChangedEventArgs<K>.runtimeType())
         return descriptor
     }
@@ -989,7 +989,7 @@ public class IVectorChangedEventArgs <: InterfaceWrapperBase & ComInterface & Ru
     }
 
     public static func descriptor(): InterfaceDescriptor<IVectorChangedEventArgs> {
-        var descriptor = InterfaceDescriptor<IVectorChangedEventArgs>("IVectorChangedEventArgs", IVectorChangedEventArgs.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IVectorChangedEventArgs.fromAbiTake(raw) }, { raw => IVectorChangedEventArgs.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IVectorChangedEventArgs>("IVectorChangedEventArgs", IVectorChangedEventArgs.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IVectorChangedEventArgs.fromAbiTake(raw) }, { raw => IVectorChangedEventArgs.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IVectorChangedEventArgs.runtimeType())
         return descriptor
     }
@@ -1113,7 +1113,7 @@ public class IIterable<T> <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptor(): InterfaceDescriptor<IIterable<T>> {
-        var descriptor = InterfaceDescriptor<IIterable<T>>("IIterable", IIterable<T>.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IIterable<T>.fromAbiTake(raw) }, { raw => IIterable<T>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IIterable<T>>("IIterable", IIterable<T>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IIterable<T>.fromAbiTake(raw) }, { raw => IIterable<T>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IIterable<T>.runtimeType())
         return descriptor
     }
@@ -2055,7 +2055,7 @@ public class IMapView<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptor(): InterfaceDescriptor<IMapView<K, V>> {
-        var descriptor = InterfaceDescriptor<IMapView<K, V>>("IMapView", IMapView<K, V>.iid(), IInspectable.descriptor(), [IIterable<IKeyValuePair<K, V>>.iid()], { raw => IMapView<K, V>.fromAbiTake(raw) }, { raw => IMapView<K, V>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IMapView<K, V>>("IMapView", IMapView<K, V>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IIterable<IKeyValuePair<K, V>>.iid()], { raw => IMapView<K, V>.fromAbiTake(raw) }, { raw => IMapView<K, V>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IMapView<K, V>.runtimeType())
         return descriptor
     }
@@ -3405,7 +3405,7 @@ public class IVectorView<T> <: InterfaceWrapperBase & ComInterface & RuntimeName
     }
 
     public static func descriptor(): InterfaceDescriptor<IVectorView<T>> {
-        var descriptor = InterfaceDescriptor<IVectorView<T>>("IVectorView", IVectorView<T>.iid(), IInspectable.descriptor(), [IIterable<T>.iid()], { raw => IVectorView<T>.fromAbiTake(raw) }, { raw => IVectorView<T>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IVectorView<T>>("IVectorView", IVectorView<T>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IIterable<T>.iid()], { raw => IVectorView<T>.fromAbiTake(raw) }, { raw => IVectorView<T>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IVectorView<T>.runtimeType())
         return descriptor
     }
@@ -4844,7 +4844,7 @@ public class IMap<K, V> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     public static func descriptor(): InterfaceDescriptor<IMap<K, V>> {
-        var descriptor = InterfaceDescriptor<IMap<K, V>>("IMap", IMap<K, V>.iid(), IInspectable.descriptor(), [IIterable<IKeyValuePair<K, V>>.iid()], { raw => IMap<K, V>.fromAbiTake(raw) }, { raw => IMap<K, V>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IMap<K, V>>("IMap", IMap<K, V>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IIterable<IKeyValuePair<K, V>>.iid()], { raw => IMap<K, V>.fromAbiTake(raw) }, { raw => IMap<K, V>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IMap<K, V>.runtimeType())
         return descriptor
     }
@@ -7776,7 +7776,7 @@ public class IVector<T> <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     public static func descriptor(): InterfaceDescriptor<IVector<T>> {
-        var descriptor = InterfaceDescriptor<IVector<T>>("IVector", IVector<T>.iid(), IInspectable.descriptor(), [IIterable<T>.iid()], { raw => IVector<T>.fromAbiTake(raw) }, { raw => IVector<T>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IVector<T>>("IVector", IVector<T>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IIterable<T>.iid()], { raw => IVector<T>.fromAbiTake(raw) }, { raw => IVector<T>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IVector<T>.runtimeType())
         return descriptor
     }
@@ -8355,7 +8355,7 @@ public class IObservableMap<K, V> <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptor(): InterfaceDescriptor<IObservableMap<K, V>> {
-        var descriptor = InterfaceDescriptor<IObservableMap<K, V>>("IObservableMap", IObservableMap<K, V>.iid(), IInspectable.descriptor(), [IMap<K, V>.iid(), IIterable<IKeyValuePair<K, V>>.iid()], { raw => IObservableMap<K, V>.fromAbiTake(raw) }, { raw => IObservableMap<K, V>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IObservableMap<K, V>>("IObservableMap", IObservableMap<K, V>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IMap<K, V>.iid(), IIterable<IKeyValuePair<K, V>>.iid()], { raw => IObservableMap<K, V>.fromAbiTake(raw) }, { raw => IObservableMap<K, V>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IObservableMap<K, V>.runtimeType())
         return descriptor
     }
@@ -8751,7 +8751,7 @@ public class IObservableVector<T> <: InterfaceWrapperBase & ComInterface & Runti
     }
 
     public static func descriptor(): InterfaceDescriptor<IObservableVector<T>> {
-        var descriptor = InterfaceDescriptor<IObservableVector<T>>("IObservableVector", IObservableVector<T>.iid(), IInspectable.descriptor(), [IVector<T>.iid(), IIterable<T>.iid()], { raw => IObservableVector<T>.fromAbiTake(raw) }, { raw => IObservableVector<T>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IObservableVector<T>>("IObservableVector", IObservableVector<T>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IVector<T>.iid(), IIterable<T>.iid()], { raw => IObservableVector<T>.fromAbiTake(raw) }, { raw => IObservableVector<T>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IObservableVector<T>.runtimeType())
         return descriptor
     }
@@ -9134,7 +9134,7 @@ public class IPropertySet <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptor(): InterfaceDescriptor<IPropertySet> {
-        var descriptor = InterfaceDescriptor<IPropertySet>("IPropertySet", IPropertySet.iid(), IInspectable.descriptor(), [IObservableMap<windows_core.HString, IInspectable>.iid(), IMap<windows_core.HString, IInspectable>.iid(), IIterable<IKeyValuePair<windows_core.HString, IInspectable>>.iid()], { raw => IPropertySet.fromAbiTake(raw) }, { raw => IPropertySet.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IPropertySet>("IPropertySet", IPropertySet.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IObservableMap<windows_core.HString, IInspectable>.iid(), IMap<windows_core.HString, IInspectable>.iid(), IIterable<IKeyValuePair<windows_core.HString, IInspectable>>.iid()], { raw => IPropertySet.fromAbiTake(raw) }, { raw => IPropertySet.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IPropertySet.runtimeType())
         return descriptor
     }

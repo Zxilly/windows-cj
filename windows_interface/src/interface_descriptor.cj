@@ -74,6 +74,10 @@ public interface AbiReferenceDescriptorBase<T> {
     func releasePointer(raw: CPointer<Unit>): UInt32
 }
 
+public func eraseInterfaceDescriptor<T>(descriptor: InterfaceDescriptor<T>): InterfaceDescriptorBase {
+    descriptor
+}
+
 public class AbiReferenceDescriptor<T> <: AbiReferenceDescriptorBase<T> {
     public let name: String
     private let takeFromAbi_: (CPointer<Unit>) -> T

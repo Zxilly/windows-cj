@@ -300,7 +300,7 @@ public open class Windows_Foundation_IAsyncOperation_1<TResult> <: windows_inter
     }
 
     public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_Foundation_IAsyncOperation_1<TResult>> {
-        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_IAsyncOperation_1<TResult>>("Windows.Foundation.IAsyncOperation", Windows_Foundation_IAsyncOperation_1<TResult>.iid(), windows_interface.IInspectable.descriptor(), { raw => Windows_Foundation_IAsyncOperation_1<TResult>.fromAbiTake(raw) }, { raw => Windows_Foundation_IAsyncOperation_1<TResult>.viewOf(raw) }, ownMethodCount: 1)
+        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_IAsyncOperation_1<TResult>>("Windows.Foundation.IAsyncOperation", Windows_Foundation_IAsyncOperation_1<TResult>.iid(), windows_interface.eraseInterfaceDescriptor(windows_interface.IInspectable.descriptor()), { raw => Windows_Foundation_IAsyncOperation_1<TResult>.fromAbiTake(raw) }, { raw => Windows_Foundation_IAsyncOperation_1<TResult>.viewOf(raw) }, ownMethodCount: 1)
         descriptor.runtimeTypeContract = Some(Windows_Foundation_IAsyncOperation_1<TResult>.runtimeType())
         return descriptor
     }

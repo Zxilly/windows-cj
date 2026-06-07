@@ -48,7 +48,7 @@ public class IGenericFactory <: InterfaceWrapperBase & ComInterface {
         InterfaceDescriptor<IGenericFactory>(
             "IGenericFactory",
             IID_IGENERICFACTORY,
-            IInspectable.descriptor(),
+            eraseInterfaceDescriptor(IInspectable.descriptor()),
             takeIGenericFactoryFromAbi,
             viewIGenericFactory
         )

@@ -7,6 +7,7 @@ import windows_interface as windows_interface
 public import windows_interface.{
     ComInterface,
     InterfaceDescriptor,
+    InterfaceDescriptorBase,
     InterfaceWrapperBase,
     IUnknownVtbl,
     IInspectableVtbl,
@@ -29,7 +30,8 @@ public import windows_interface.{
     IID_IWEAKREFERENCE,
     IID_IWEAKREFERENCESOURCE,
     queryInterfaceRaw,
-    queryInterfaceAs
+    queryInterfaceAs,
+    eraseInterfaceDescriptor
 }
 
 public enum QueryResult<T> {

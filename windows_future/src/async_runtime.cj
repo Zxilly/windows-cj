@@ -208,7 +208,7 @@ public class IAsyncInfo <: InterfaceWrapperBase & ComInterface & RuntimeName & w
     }
 
     public static func descriptor(): InterfaceDescriptor<IAsyncInfo> {
-        var descriptor = InterfaceDescriptor<IAsyncInfo>("IAsyncInfo", IAsyncInfo.iid(), IInspectable.descriptor(), Array<GUID>(), { raw => IAsyncInfo.fromAbiTake(raw) }, { raw => IAsyncInfo.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IAsyncInfo>("IAsyncInfo", IAsyncInfo.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), Array<GUID>(), { raw => IAsyncInfo.fromAbiTake(raw) }, { raw => IAsyncInfo.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IAsyncInfo.runtimeType())
         return descriptor
     }
@@ -1388,7 +1388,7 @@ public class IAsyncAction <: InterfaceWrapperBase & ComInterface & RuntimeName &
     }
 
     public static func descriptor(): InterfaceDescriptor<IAsyncAction> {
-        var descriptor = InterfaceDescriptor<IAsyncAction>("IAsyncAction", IAsyncAction.iid(), IInspectable.descriptor(), [IAsyncInfo.iid()], { raw => IAsyncAction.fromAbiTake(raw) }, { raw => IAsyncAction.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IAsyncAction>("IAsyncAction", IAsyncAction.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IAsyncInfo.iid()], { raw => IAsyncAction.fromAbiTake(raw) }, { raw => IAsyncAction.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IAsyncAction.runtimeType())
         return descriptor
     }
@@ -1631,7 +1631,7 @@ public class IAsyncActionWithProgress<TProgress> <: InterfaceWrapperBase & ComIn
     }
 
     public static func descriptor(): InterfaceDescriptor<IAsyncActionWithProgress<TProgress>> {
-        var descriptor = InterfaceDescriptor<IAsyncActionWithProgress<TProgress>>("IAsyncActionWithProgress", IAsyncActionWithProgress<TProgress>.iid(), IInspectable.descriptor(), [IAsyncInfo.iid()], { raw => IAsyncActionWithProgress<TProgress>.fromAbiTake(raw) }, { raw => IAsyncActionWithProgress<TProgress>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IAsyncActionWithProgress<TProgress>>("IAsyncActionWithProgress", IAsyncActionWithProgress<TProgress>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IAsyncInfo.iid()], { raw => IAsyncActionWithProgress<TProgress>.fromAbiTake(raw) }, { raw => IAsyncActionWithProgress<TProgress>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IAsyncActionWithProgress<TProgress>.runtimeType())
         return descriptor
     }
@@ -1854,7 +1854,7 @@ public class IAsyncOperation<TResult> <: InterfaceWrapperBase & ComInterface & R
     }
 
     public static func descriptor(): InterfaceDescriptor<IAsyncOperation<TResult>> {
-        var descriptor = InterfaceDescriptor<IAsyncOperation<TResult>>("IAsyncOperation", IAsyncOperation<TResult>.iid(), IInspectable.descriptor(), [IAsyncInfo.iid()], { raw => IAsyncOperation<TResult>.fromAbiTake(raw) }, { raw => IAsyncOperation<TResult>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IAsyncOperation<TResult>>("IAsyncOperation", IAsyncOperation<TResult>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IAsyncInfo.iid()], { raw => IAsyncOperation<TResult>.fromAbiTake(raw) }, { raw => IAsyncOperation<TResult>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IAsyncOperation<TResult>.runtimeType())
         return descriptor
     }
@@ -2101,7 +2101,7 @@ public class IAsyncOperationWithProgress<TResult, TProgress> <: InterfaceWrapper
     }
 
     public static func descriptor(): InterfaceDescriptor<IAsyncOperationWithProgress<TResult, TProgress>> {
-        var descriptor = InterfaceDescriptor<IAsyncOperationWithProgress<TResult, TProgress>>("IAsyncOperationWithProgress", IAsyncOperationWithProgress<TResult, TProgress>.iid(), IInspectable.descriptor(), [IAsyncInfo.iid()], { raw => IAsyncOperationWithProgress<TResult, TProgress>.fromAbiTake(raw) }, { raw => IAsyncOperationWithProgress<TResult, TProgress>.viewOf(raw) })
+        var descriptor = InterfaceDescriptor<IAsyncOperationWithProgress<TResult, TProgress>>("IAsyncOperationWithProgress", IAsyncOperationWithProgress<TResult, TProgress>.iid(), windows_interface.eraseInterfaceDescriptor(IInspectable.descriptor()), [IAsyncInfo.iid()], { raw => IAsyncOperationWithProgress<TResult, TProgress>.fromAbiTake(raw) }, { raw => IAsyncOperationWithProgress<TResult, TProgress>.viewOf(raw) })
         descriptor.runtimeTypeContract = Some(IAsyncOperationWithProgress<TResult, TProgress>.runtimeType())
         return descriptor
     }

@@ -272,7 +272,7 @@ public open class Windows_Foundation_Collections_IVectorView_1<T> <: windows_int
     }
 
     public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_Foundation_Collections_IVectorView_1<T>> {
-        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_Collections_IVectorView_1<T>>("Windows.Foundation.Collections.IVectorView", Windows_Foundation_Collections_IVectorView_1<T>.iid(), windows_interface.IInspectable.descriptor(), { raw => Windows_Foundation_Collections_IVectorView_1<T>.fromAbiTake(raw) }, { raw => Windows_Foundation_Collections_IVectorView_1<T>.viewOf(raw) }, ownMethodCount: 4)
+        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_Collections_IVectorView_1<T>>("Windows.Foundation.Collections.IVectorView", Windows_Foundation_Collections_IVectorView_1<T>.iid(), windows_interface.eraseInterfaceDescriptor(windows_interface.IInspectable.descriptor()), { raw => Windows_Foundation_Collections_IVectorView_1<T>.fromAbiTake(raw) }, { raw => Windows_Foundation_Collections_IVectorView_1<T>.viewOf(raw) }, ownMethodCount: 4)
         descriptor.runtimeTypeContract = Some(Windows_Foundation_Collections_IVectorView_1<T>.runtimeType())
         return descriptor
     }
@@ -795,7 +795,7 @@ public open class Windows_Foundation_Collections_IVector_1<T> <: windows_interfa
     }
 
     public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_Foundation_Collections_IVector_1<T>> {
-        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_Collections_IVector_1<T>>("Windows.Foundation.Collections.IVector", Windows_Foundation_Collections_IVector_1<T>.iid(), windows_interface.IInspectable.descriptor(), { raw => Windows_Foundation_Collections_IVector_1<T>.fromAbiTake(raw) }, { raw => Windows_Foundation_Collections_IVector_1<T>.viewOf(raw) }, ownMethodCount: 12)
+        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_Collections_IVector_1<T>>("Windows.Foundation.Collections.IVector", Windows_Foundation_Collections_IVector_1<T>.iid(), windows_interface.eraseInterfaceDescriptor(windows_interface.IInspectable.descriptor()), { raw => Windows_Foundation_Collections_IVector_1<T>.fromAbiTake(raw) }, { raw => Windows_Foundation_Collections_IVector_1<T>.viewOf(raw) }, ownMethodCount: 12)
         descriptor.runtimeTypeContract = Some(Windows_Foundation_Collections_IVector_1<T>.runtimeType())
         return descriptor
     }
@@ -2059,7 +2059,7 @@ public open class Windows_Foundation_IAsyncActionWithProgress_1<TProgress> <: wi
     }
 
     public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_Foundation_IAsyncActionWithProgress_1<TProgress>> {
-        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_IAsyncActionWithProgress_1<TProgress>>("Windows.Foundation.IAsyncActionWithProgress", Windows_Foundation_IAsyncActionWithProgress_1<TProgress>.iid(), windows_interface.IInspectable.descriptor(), { raw => Windows_Foundation_IAsyncActionWithProgress_1<TProgress>.fromAbiTake(raw) }, { raw => Windows_Foundation_IAsyncActionWithProgress_1<TProgress>.viewOf(raw) }, ownMethodCount: 5)
+        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_IAsyncActionWithProgress_1<TProgress>>("Windows.Foundation.IAsyncActionWithProgress", Windows_Foundation_IAsyncActionWithProgress_1<TProgress>.iid(), windows_interface.eraseInterfaceDescriptor(windows_interface.IInspectable.descriptor()), { raw => Windows_Foundation_IAsyncActionWithProgress_1<TProgress>.fromAbiTake(raw) }, { raw => Windows_Foundation_IAsyncActionWithProgress_1<TProgress>.viewOf(raw) }, ownMethodCount: 5)
         descriptor.runtimeTypeContract = Some(Windows_Foundation_IAsyncActionWithProgress_1<TProgress>.runtimeType())
         return descriptor
     }
@@ -2410,7 +2410,7 @@ public open class Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TPro
     }
 
     public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>> {
-        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>>("Windows.Foundation.IAsyncOperationWithProgress", Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>.iid(), windows_interface.IInspectable.descriptor(), { raw => Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>.fromAbiTake(raw) }, { raw => Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>.viewOf(raw) }, ownMethodCount: 5)
+        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>>("Windows.Foundation.IAsyncOperationWithProgress", Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>.iid(), windows_interface.eraseInterfaceDescriptor(windows_interface.IInspectable.descriptor()), { raw => Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>.fromAbiTake(raw) }, { raw => Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>.viewOf(raw) }, ownMethodCount: 5)
         descriptor.runtimeTypeContract = Some(Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>.runtimeType())
         return descriptor
     }
@@ -2683,7 +2683,7 @@ public open class Windows_Foundation_IAsyncOperation_1<TResult> <: windows_inter
     }
 
     public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_Foundation_IAsyncOperation_1<TResult>> {
-        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_IAsyncOperation_1<TResult>>("Windows.Foundation.IAsyncOperation", Windows_Foundation_IAsyncOperation_1<TResult>.iid(), windows_interface.IInspectable.descriptor(), { raw => Windows_Foundation_IAsyncOperation_1<TResult>.fromAbiTake(raw) }, { raw => Windows_Foundation_IAsyncOperation_1<TResult>.viewOf(raw) }, ownMethodCount: 3)
+        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_IAsyncOperation_1<TResult>>("Windows.Foundation.IAsyncOperation", Windows_Foundation_IAsyncOperation_1<TResult>.iid(), windows_interface.eraseInterfaceDescriptor(windows_interface.IInspectable.descriptor()), { raw => Windows_Foundation_IAsyncOperation_1<TResult>.fromAbiTake(raw) }, { raw => Windows_Foundation_IAsyncOperation_1<TResult>.viewOf(raw) }, ownMethodCount: 3)
         descriptor.runtimeTypeContract = Some(Windows_Foundation_IAsyncOperation_1<TResult>.runtimeType())
         return descriptor
     }
@@ -2958,7 +2958,7 @@ public open class Windows_Foundation_IReference_1<T> <: windows_interface.Interf
     }
 
     public static func descriptor(): windows_interface.InterfaceDescriptor<Windows_Foundation_IReference_1<T>> {
-        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_IReference_1<T>>("Windows.Foundation.IReference", Windows_Foundation_IReference_1<T>.iid(), windows_interface.IInspectable.descriptor(), { raw => Windows_Foundation_IReference_1<T>.fromAbiTake(raw) }, { raw => Windows_Foundation_IReference_1<T>.viewOf(raw) }, ownMethodCount: 1)
+        var descriptor = windows_interface.InterfaceDescriptor<Windows_Foundation_IReference_1<T>>("Windows.Foundation.IReference", Windows_Foundation_IReference_1<T>.iid(), windows_interface.eraseInterfaceDescriptor(windows_interface.IInspectable.descriptor()), { raw => Windows_Foundation_IReference_1<T>.fromAbiTake(raw) }, { raw => Windows_Foundation_IReference_1<T>.viewOf(raw) }, ownMethodCount: 1)
         descriptor.runtimeTypeContract = Some(Windows_Foundation_IReference_1<T>.runtimeType())
         return descriptor
     }
