@@ -36,6 +36,7 @@ public class SignatureRecord {
     public var lowerBounds: Option<ArrayList<Int64>> = None
     public var rank: Option<Int64> = None
     public var sizes: Option<ArrayList<Int64>> = None
+    public var functionPointerSignature: Option<MethodSignatureRecord> = None
     public var comment: Option<String> = None
 
     public init(
@@ -54,6 +55,7 @@ public class SignatureRecord {
         lowerBounds!: Option<ArrayList<Int64>> = None,
         rank!: Option<Int64> = None,
         sizes!: Option<ArrayList<Int64>> = None,
+        functionPointerSignature!: Option<MethodSignatureRecord> = None,
         comment!: Option<String> = None
     ) {
         this.kind = kind
@@ -71,6 +73,7 @@ public class SignatureRecord {
         this.lowerBounds = lowerBounds
         this.rank = rank
         this.sizes = sizes
+        this.functionPointerSignature = functionPointerSignature
         this.comment = comment
     }
 }

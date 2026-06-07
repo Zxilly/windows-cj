@@ -128,6 +128,58 @@ func testPInvokeWrappersUseLibloadingDependencyWithoutForeignFunc() {
 }
 
 @Test
+func testPInvokeRendererSkipsForceInlineAndOrdinalImports() {
+    let methods = ArrayList<MethodRecord>()
+    let returnType = SignatureRecord("Primitive", name: "UInt32")
+    let signature = MethodSignatureRecord(returnType)
+    methods.add(MethodRecord(
+        "InlineOnly",
+        signature,
+        methodImport: Some(MethodImportRecord("InlineOnly", "FORCEINLINE", callingConvention: "CDecl"))
+    ))
+    methods.add(MethodRecord(
+        "OrdinalOnly",
+        signature,
+        methodImport: Some(MethodImportRecord("#12", "native.dll", callingConvention: "CDecl"))
+    ))
+    methods.add(MethodRecord(
+        "GetTickCount",
+        signature,
+        methodImport: Some(MethodImportRecord("GetTickCount", "KERNEL32.dll", callingConvention: "CDecl"))
+    ))
+    let typeAttributes = ArrayList<String>()
+    typeAttributes.add("Public")
+    typeAttributes.add("Class")
+    let typeDef = TypeDefinitionRecord(
+        "Example.Native",
+        "Apis",
+        baseType: "System.Object",
+        hasBaseType: true,
+        attributes: typeAttributes,
+        methods: methods
+    )
+    let symbol = SymbolRecord(
+        "Example.Native.Apis",
+        "Example.Native",
+        "Apis",
+        "Example_Native_Apis",
+        [],
+        typeDef: Some(typeDef)
+    )
+    let records = ArrayList<SymbolRecord>()
+    records.add(symbol)
+    let symbolsByName = cliTestRecordsByName(records)
+    let source = renderSymbolImpl(symbol, symbolsByName)
+
+    @Expect(source.contains("public static func GetTickCount(): UInt32"), true)
+    @Expect(source.contains("windows_libloading.resolveProc(\"KERNEL32.dll\", \"GetTickCount\")"), true)
+    @Expect(source.contains("InlineOnly"), false)
+    @Expect(source.contains("FORCEINLINE"), false)
+    @Expect(source.contains("OrdinalOnly"), false)
+    @Expect(source.contains("\"#12\""), false)
+}
+
+@Test
 func testPInvokeCDeclCallingConventionUsesDefaultCFunc() {
     let symbol = cliTestPInvokeApiSymbol("CallingConventionCDecl")
     let records = ArrayList<SymbolRecord>()
@@ -184,6 +236,60 @@ func testPInvokeResolvedProcLocalAvoidsParameterNameCollision() {
     @Expect(source.contains("let proc__ = CFunc<(UInt32) -> Int32>(windows_libloading.resolveProc(\"native.dll\", \"CallNative\"))"), true)
     @Expect(source.contains("return unsafe { proc__(proc) }"), true)
     @Expect(source.contains("let proc = CFunc<(UInt32) -> Int32>"), false)
+}
+
+@Test
+func testPInvokeFunctionPointerParameterUsesCFuncSignature() {
+    let callbackSignature = MethodSignatureRecord(
+        SignatureRecord("Primitive", name: "Int32"),
+        parameters: ArrayList<SignatureRecord>([
+            SignatureRecord("Primitive", name: "Int32"),
+            SignatureRecord("Pointer")
+        ]),
+        requiredParameterCount: 2
+    )
+    let parameters = ArrayList<SignatureRecord>()
+    parameters.add(SignatureRecord("FunctionPointer", functionPointerSignature: Some(callbackSignature)))
+    let metadataParameters = ArrayList<ParameterRecord>()
+    metadataParameters.add(ParameterRecord("callback", sequenceNumber: 1))
+    let methods = ArrayList<MethodRecord>()
+    methods.add(MethodRecord(
+        "CallWithCallback",
+        MethodSignatureRecord(
+            SignatureRecord("Primitive", name: "Int32"),
+            parameters: parameters,
+            requiredParameterCount: 1
+        ),
+        parameters: metadataParameters,
+        methodImport: Some(MethodImportRecord("CallWithCallback", "native.dll", callingConvention: "CDecl"))
+    ))
+    let typeAttributes = ArrayList<String>()
+    typeAttributes.add("Public")
+    typeAttributes.add("Class")
+    let typeDef = TypeDefinitionRecord(
+        "Example.Native",
+        "Apis",
+        baseType: "System.Object",
+        hasBaseType: true,
+        attributes: typeAttributes,
+        methods: methods
+    )
+    let symbol = SymbolRecord(
+        "Example.Native.Apis",
+        "Example.Native",
+        "Apis",
+        "Example_Native_Apis",
+        [],
+        typeDef: Some(typeDef)
+    )
+    let records = ArrayList<SymbolRecord>()
+    records.add(symbol)
+    let symbolsByName = cliTestRecordsByName(records)
+    let source = renderSymbolImpl(symbol, symbolsByName)
+
+    @Expect(source.contains("callback: CFunc<(Int32, CPointer<Unit>) -> Int32>"), true)
+    @Expect(source.contains("let proc = CFunc<(CFunc<(Int32, CPointer<Unit>) -> Int32>) -> Int32>"), true)
+    @Expect(source.contains("return unsafe { proc(callback) }"), true)
 }
 
 @Test

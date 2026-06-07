@@ -4148,6 +4148,22 @@ func nativeRawType(
     return nativeNonPointerRawType(signature, symbolsByName, ownerFullName)
 }
 
+func nativeFunctionPointerCFuncType(
+    signature: MethodSignatureRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): String {
+    let params = ArrayList<String>()
+    for (parameter in signature.parameters) {
+        params.add(nativeRawType(parameter, symbolsByName, ownerFullName))
+    }
+    let returnType = nativeRawType(signature.returnType, symbolsByName, ownerFullName)
+    if (params.isEmpty()) {
+        return "CFunc<() -> ${returnType}>"
+    }
+    return "CFunc<(${joinStrings(params, ", ")}) -> ${returnType}>"
+}
+
 func nativePublicPointerElementType(
     signature: SignatureRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
@@ -4214,6 +4230,12 @@ func nativeNonPointerPublicType(
     if (signature.kind == "Array" || signature.kind == "SZArray") {
         return "CPointer<Unit>"
     }
+    if (signature.kind == "FunctionPointer") {
+        match (signature.functionPointerSignature) {
+            case Some(methodSignature) => return nativeFunctionPointerCFuncType(methodSignature, symbolsByName, ownerFullName)
+            case None => return "CPointer<Unit>"
+        }
+    }
     if (signature.kind == "Type" || signature.kind == "TypeReference" || signature.kind == "TypeDefinition") {
         match (signatureFullNameInContext(signature, symbolsByName, ownerFullName)) {
             case Some(fullName) => return nativeNamedPublicType(fullName, symbolsByName)
@@ -4244,6 +4266,12 @@ func nativeNonPointerRawType(
     }
     if (signature.kind == "Array" || signature.kind == "SZArray") {
         return "CPointer<Unit>"
+    }
+    if (signature.kind == "FunctionPointer") {
+        match (signature.functionPointerSignature) {
+            case Some(methodSignature) => return nativeFunctionPointerCFuncType(methodSignature, symbolsByName, ownerFullName)
+            case None => return "CPointer<Unit>"
+        }
     }
     if (signature.kind == "Type" || signature.kind == "TypeReference" || signature.kind == "TypeDefinition") {
         match (signatureFullNameInContext(signature, symbolsByName, ownerFullName)) {

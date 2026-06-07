@@ -73,6 +73,9 @@ public class BindgenConfig {
     public let filters: Array<String>
     public let inputJsonPaths: Array<String>
     public let inputJsonDirs: Array<String>
+    public let inputWinmdPaths: Array<String>
+    public let inputWinmdDirs: Array<String>
+    public let defaultWinmdInput: Bool
     public let supportPackageDirs: Array<String>
     public let outputDir: String
     public let packageName: String
@@ -91,6 +94,9 @@ public class BindgenConfig {
         this.filters = copyStrings(config.filters)
         this.inputJsonPaths = copyStrings(config.inputJsonPaths)
         this.inputJsonDirs = copyStrings(config.inputJsonDirs)
+        this.inputWinmdPaths = copyStrings(config.inputWinmdPaths)
+        this.inputWinmdDirs = copyStrings(config.inputWinmdDirs)
+        this.defaultWinmdInput = config.defaultWinmdInput
         this.supportPackageDirs = copyStrings(config.supportPackageDirs)
         this.outputDir = config.outputDir
         this.packageName = config.packageName
@@ -123,6 +129,30 @@ public class BindgenBuilder {
 
     public func inputJson(path: String): BindgenBuilder {
         addUnique(config.inputJsonPaths, path)
+        return this
+    }
+
+    public func input(value: String): BindgenBuilder {
+        parseInputArgument(config, value)
+        return this
+    }
+
+    public func inputs(values: Array<String>): BindgenBuilder {
+        for (value in values) {
+            parseInputArgument(config, value)
+        }
+        return this
+    }
+
+    public func inputs(values: ArrayList<String>): BindgenBuilder {
+        for (value in values) {
+            parseInputArgument(config, value)
+        }
+        return this
+    }
+
+    public func defaultInput(): BindgenBuilder {
+        config.defaultWinmdInput = true
         return this
     }
 
@@ -201,29 +231,29 @@ public class BindgenBuilder {
     }
 
     public func configSnapshot(): BindgenConfig {
-        finalizeConfigDefaults(config)
+        finalizeBuilderConfigDefaults(config)
         return BindgenConfig(config)
     }
 
     public func selectedSymbols(records: ArrayList<SymbolRecord>): ArrayList<SymbolRecord> {
-        finalizeConfigDefaults(config)
+        finalizeBuilderConfigDefaults(config)
         validateRequestedFeatures(config.features, records)
         validateRequestedFilters(config.filters, records)
         return selectedSymbolsForConfig(config, records)
     }
 
     public func linkOptions(records: ArrayList<SymbolRecord>): ArrayList<String> {
-        finalizeConfigDefaults(config)
+        finalizeBuilderConfigDefaults(config)
         return featureLinkOptions(config, records)
     }
 
     public func write(records: ArrayList<SymbolRecord>): Unit {
-        finalizeConfigDefaults(config)
+        finalizeBuilderConfigDefaults(config)
         generate(config, records)
     }
 
     public func loadAndWrite(): Unit {
-        finalizeConfigDefaults(config)
+        finalizeBuilderConfigDefaults(config)
         generate(config, loadSymbolRecords(config))
     }
 }
@@ -505,6 +535,21 @@ func finalizeConfigDefaults(config: CliConfig): Unit {
     if (config.features.isEmpty() && config.filters.isEmpty() && !config.common && !config.listFeatures && !config.help) {
         addUnique(config.features, "all")
     }
+}
+
+func finalizeBuilderConfigDefaults(config: CliConfig): Unit {
+    if (!hasMetadataInput(config)) {
+        config.defaultWinmdInput = true
+    }
+    finalizeConfigDefaults(config)
+}
+
+func hasMetadataInput(config: CliConfig): Bool {
+    return config.defaultWinmdInput ||
+        !config.inputJsonPaths.isEmpty() ||
+        !config.inputJsonDirs.isEmpty() ||
+        !config.inputWinmdPaths.isEmpty() ||
+        !config.inputWinmdDirs.isEmpty()
 }
 
 func loadSymbolRecords(config: CliConfig): ArrayList<SymbolRecord> {

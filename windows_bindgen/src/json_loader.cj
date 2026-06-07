@@ -524,6 +524,7 @@ func parseSignature(obj: JsonObject, path: String): SignatureRecord {
         "LowerBounds",
         "Rank",
         "Sizes",
+        "Signature",
         "Comment"
     ])
     var typeSig: Option<SignatureRecord> = None
@@ -532,6 +533,7 @@ func parseSignature(obj: JsonObject, path: String): SignatureRecord {
     var typeReference: Option<MetadataTypeRecord> = None
     var typeDefinition: Option<MetadataTypeRecord> = None
     var typeSpecification: Option<TypeSpecificationRecord> = None
+    var functionPointerSignature: Option<MethodSignatureRecord> = None
     var name = ""
     var namespace = ""
     var hasNamespace = false
@@ -569,6 +571,10 @@ func parseSignature(obj: JsonObject, path: String): SignatureRecord {
         case Some(value) => typeSpecification = Some(parseTypeSpecification(value, "${path}.TypeSpecification"))
         case None => ()
     }
+    match (optionalObject(obj, "Signature", path)) {
+        case Some(value) => functionPointerSignature = Some(parseMethodSignature(value, "${path}.Signature"))
+        case None => ()
+    }
     return SignatureRecord(
         requiredString(obj, "Kind", path),
         name: name,
@@ -585,6 +591,7 @@ func parseSignature(obj: JsonObject, path: String): SignatureRecord {
         lowerBounds: optionalIntList(obj, "LowerBounds", path),
         rank: optionalInt(obj, "Rank", path),
         sizes: optionalIntList(obj, "Sizes", path),
+        functionPointerSignature: functionPointerSignature,
         comment: optionalString(obj, "Comment", path)
     )
 }

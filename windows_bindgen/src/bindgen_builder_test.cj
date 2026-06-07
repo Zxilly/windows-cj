@@ -35,6 +35,33 @@ func testBindgenBuilderBuildsConfigSnapshot() {
 }
 
 @Test
+func testBindgenBuilderAcceptsRefStyleWinmdAndDefaultInputs() {
+    let config = BindgenBuilder()
+        .input("default")
+        .input("metadata/Windows.Foundation.winmd")
+        .configSnapshot()
+
+    @Expect(config.defaultWinmdInput, true)
+    @Expect(config.inputWinmdPaths.size, 1)
+    @Expect(config.inputWinmdPaths[0], "metadata/Windows.Foundation.winmd")
+    @Expect(config.inputJsonPaths.isEmpty(), true)
+    @Expect(config.inputJsonDirs.isEmpty(), true)
+    @Expect(config.features.size, 1)
+    @Expect(config.features[0], "all")
+}
+
+@Test
+func testBindgenBuilderDefaultsToBundledWinmdInputWhenNoInputConfigured() {
+    let config = BindgenBuilder().configSnapshot()
+
+    @Expect(config.defaultWinmdInput, true)
+    @Expect(config.inputWinmdPaths.isEmpty(), true)
+    @Expect(config.inputJsonPaths.isEmpty(), true)
+    @Expect(config.features.size, 1)
+    @Expect(config.features[0], "all")
+}
+
+@Test
 func testBindgenBuilderDefaultsToAllWithoutExplicitSelection() {
     let config = BindgenBuilder().inputJson("metadata.json").configSnapshot()
 

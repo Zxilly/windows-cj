@@ -63,9 +63,11 @@ public class BlobReader {
     }
 
     public func readI8(): Int8 {
-        let v = Int8(bytes[offset])
-        advance(1)
-        return v
+        let value = readU8()
+        if (value >= 0x80u8) {
+            return Int8(Int64(value) - 0x100)
+        }
+        return Int8(value)
     }
 
     public func readU16(): UInt16 {
@@ -77,8 +79,11 @@ public class BlobReader {
     }
 
     public func readI16(): Int16 {
-        let v = Int16(readU16())
-        return v
+        let value = readU16()
+        if (value >= 0x8000u16) {
+            return Int16(Int64(value) - 0x1_0000)
+        }
+        return Int16(value)
     }
 
     public func readU32(): UInt32 {
@@ -92,7 +97,11 @@ public class BlobReader {
     }
 
     public func readI32(): Int32 {
-        return Int32(readU32())
+        let value = readU32()
+        if (value >= 0x8000_0000u32) {
+            return Int32(Int64(value) - 0x1_0000_0000)
+        }
+        return Int32(value)
     }
 
     public func readU64(): UInt64 {
@@ -102,7 +111,11 @@ public class BlobReader {
     }
 
     public func readI64(): Int64 {
-        return Int64(readU64())
+        let value = readU64()
+        if (value > UInt64(Int64.Max)) {
+            return Int64(value - 0x8000_0000_0000_0000u64) + Int64.Min
+        }
+        return Int64(value)
     }
 
     public func readF32(): Float32 {

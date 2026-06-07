@@ -415,7 +415,10 @@ func isWinrtDelegateType(typeDef: TypeDefinitionRecord): Bool {
 func hasPInvokeMethods(typeDef: TypeDefinitionRecord): Bool {
     for (method in typeDef.methods) {
         match (method.methodImport) {
-            case Some(_) => return true
+            case Some(methodImport) =>
+                if (!shouldSkipPInvokeImport(methodImport.moduleName, methodImport.name)) {
+                    return true
+                }
             case None => ()
         }
     }
@@ -2162,6 +2165,9 @@ func renderPInvokeSymbol(
     for (method in typeDef.methods) {
         match (method.methodImport) {
             case Some(methodImport) =>
+                if (shouldSkipPInvokeImport(methodImport.moduleName, methodImport.name)) {
+                    continue
+                }
                 validatePInvokeCallingConvention(method, methodImport, targetAbi)
                 let params = methodParameterText(method, true, symbolsByName)
                 let args = methodArgumentText(method, true, symbolsByName)
@@ -3641,7 +3647,7 @@ func renderGenericWinrtInterfaceWrapper(
     content += "    }\n\n"
     content += "    public static func descriptor(): windows_interface.InterfaceDescriptor<${genericTypeName}> {\n"
     content += "        var descriptor = windows_interface.InterfaceDescriptor<${genericTypeName}>(\"${cjStringContent(runtimeName)}\", " +
-        "${genericTypeName}.iid(), windows_interface.IInspectable.descriptor(), " +
+        "${genericTypeName}.iid(), windows_interface.eraseInterfaceDescriptor(windows_interface.IInspectable.descriptor()), " +
         "{ raw => ${genericTypeName}.fromAbiTake(raw) }, { raw => ${genericTypeName}.viewOf(raw) }, " +
         "ownMethodCount: ${typeDef.methods.size})\n"
     content += "        descriptor.runtimeTypeContract = Some(${genericTypeName}.runtimeType())\n"
@@ -7456,6 +7462,12 @@ func cjAbiTypeInContext(
             case None => return "CPointer<Unit>"
         }
     }
+    if (signature.kind == "FunctionPointer") {
+        match (signature.functionPointerSignature) {
+            case Some(methodSignature) => return functionPointerCFuncType(methodSignature, symbolsByName, ownerFullName)
+            case None => return "CPointer<Unit>"
+        }
+    }
     if (signature.kind == "Pointer" || isByReferenceSignature(signature) ||
         signature.kind == "SZArray") {
         match (rawPointerAbiType(signature, symbolsByName, ownerFullName)) {
@@ -7533,6 +7545,22 @@ func delegateCFuncType(
         }
     }
     return None
+}
+
+func functionPointerCFuncType(
+    signature: MethodSignatureRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    ownerFullName: String
+): String {
+    let params = ArrayList<String>()
+    for (parameter in signature.parameters) {
+        params.add(cjAbiTypeInContext(parameter, symbolsByName, ownerFullName))
+    }
+    let returnType = cjAbiTypeInContext(signature.returnType, symbolsByName, ownerFullName)
+    if (params.isEmpty()) {
+        return "CFunc<() -> ${returnType}>"
+    }
+    return "CFunc<(${joinStrings(params, ", ")}) -> ${returnType}>"
 }
 
 func fixedArrayCjType(

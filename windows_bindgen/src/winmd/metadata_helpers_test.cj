@@ -40,3 +40,11 @@ func testBlobReaderCompressedAndUtf16EdgeCases() {
     @Expect(four.readCompressed(), 0x4000)
     @Expect(utf16.readUtf16(), "A${Rune(0x1F600u32)}")
 }
+
+@Test
+func testSignedIntegerReadersPreserveTwosComplement() {
+    @Expect(BlobReader([0xFFu8], 0, 1).readI8(), -1i8)
+    @Expect(BlobReader([0xFFu8, 0xFFu8], 0, 2).readI16(), -1i16)
+    @Expect(BlobReader([0xFFu8, 0xFFu8, 0xFFu8, 0xFFu8], 0, 4).readI32(), -1i32)
+    @Expect(BlobReader([0xFFu8, 0xFFu8, 0xFFu8, 0xFFu8, 0xFFu8, 0xFFu8, 0xFFu8, 0xFFu8], 0, 8).readI64(), -1i64)
+}

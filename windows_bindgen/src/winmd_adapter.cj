@@ -423,6 +423,14 @@ func adaptMethods(index: TypeIndex, fileIdx: Int64, row: Int64, generics: Array<
     let (mStart, mEnd) = index.typeDefMethods(fileIdx, row)
     var mi = mStart
     while (mi < mEnd) {
+        match (index.methodDefImplMap(fileIdx, mi)) {
+            case Some((_, importName, moduleName)) =>
+                if (shouldSkipPInvokeImport(moduleName, importName)) {
+                    mi += 1
+                    continue
+                }
+            case None => ()
+        }
         result.add(adaptMethod(index, fileIdx, mi, generics))
         mi += 1
     }
@@ -569,9 +577,16 @@ func adaptParameter(index: TypeIndex, fileIdx: Int64, paramRow: Int64): Paramete
 
 // --- Method import (P/Invoke) ---
 
+func shouldSkipPInvokeImport(moduleName: String, importName: String): Bool {
+    moduleName == "FORCEINLINE" || importName.startsWith("#")
+}
+
 func adaptMethodImport(index: TypeIndex, fileIdx: Int64, methodRow: Int64): Option<MethodImportRecord> {
     match (index.methodDefImplMap(fileIdx, methodRow)) {
         case Some((flags, importName, moduleName)) =>
+            if (shouldSkipPInvokeImport(moduleName, importName)) {
+                return None
+            }
             let attributes = pinvokeAttributesToStrings(UInt32(flags.value))
             let moduleRef = ModuleReferenceRecord(moduleName)
             return Some(MethodImportRecord(
@@ -599,6 +614,7 @@ func adaptMethodGenericParameters(index: TypeIndex, fileIdx: Int64, methodRow: I
 func adaptGenericParameterRange(index: TypeIndex, fileIdx: Int64, start: Int64, end: Int64): ArrayList<GenericParameterRecord> {
     let result = ArrayList<GenericParameterRecord>()
     let file = index.getFile(fileIdx)
+    let generics = genericParameterSubstitutes(index, fileIdx, start, end)
     var gi = start
     while (gi < end) {
         let name = index.genericParamName(fileIdx, gi)
@@ -606,7 +622,7 @@ func adaptGenericParameterRange(index: TypeIndex, fileIdx: Int64, start: Int64, 
         let attrValue = UInt32(UInt16(file.getUInt(gi, TABLE_GENERIC_PARAM, 1)))
         let attributes = genericParameterAttributesToStrings(attrValue)
         let customAttributes = adaptCustomAttributes(index, fileIdx, TABLE_GENERIC_PARAM, gi)
-        let constraints = adaptGenericParameterConstraints(index, fileIdx, gi)
+        let constraints = adaptGenericParameterConstraints(index, fileIdx, gi, generics)
         result.add(GenericParameterRecord(
             name,
             sequenceNumber: sequence,
@@ -620,14 +636,49 @@ func adaptGenericParameterRange(index: TypeIndex, fileIdx: Int64, start: Int64, 
     return result
 }
 
+func genericParameterSubstitutes(index: TypeIndex, fileIdx: Int64, start: Int64, end: Int64): Array<MetadataType> {
+    let count = end - start
+    if (count <= 0) {
+        return Array<MetadataType>()
+    }
+    let names = ArrayList<String>()
+    let sequences = ArrayList<Int64>()
+    var gi = start
+    while (gi < end) {
+        names.add(index.genericParamName(fileIdx, gi))
+        sequences.add(Int64(index.genericParamSequence(fileIdx, gi)))
+        gi += 1
+    }
+    var maxSeq: Int64 = -1
+    for (s in sequences) {
+        if (s > maxSeq) {
+            maxSeq = s
+        }
+    }
+    let result = Array<MetadataType>(maxSeq + 1, {i => MetadataType.Generic("T${i}", UInt16(i))})
+    var k: Int64 = 0
+    while (k < Int64(sequences.size)) {
+        let seq = sequences[k]
+        if (seq >= 0 && seq <= maxSeq) {
+            result[seq] = MetadataType.Generic(names[k], UInt16(seq))
+        }
+        k += 1
+    }
+    return result
+}
+
 // Generic-parameter constraints. The C# output renders each constraint as a
 // JsEntityHandle (Kind + TypeReference/TypeDefinition/TypeSpecification). We
 // reproduce that entity-handle shape as a JsonValue object.
-func adaptGenericParameterConstraints(index: TypeIndex, fileIdx: Int64, genericParamRow: Int64): ArrayList<JsonValue> {
+func adaptGenericParameterConstraints(
+    index: TypeIndex,
+    fileIdx: Int64,
+    genericParamRow: Int64,
+    generics: Array<MetadataType>
+): ArrayList<JsonValue> {
     let result = ArrayList<JsonValue>()
-    let file = index.getFile(fileIdx)
     for ((table, row) in index.genericParamConstraints(fileIdx, genericParamRow)) {
-        result.add(entityHandleJson(file, table, row))
+        result.add(entityHandleJson(index, fileIdx, table, row, generics))
     }
     return result
 }
@@ -669,17 +720,15 @@ func entityHandleSignature(index: TypeIndex, file: WinmdFile, fileIdx: Int64, ta
         return SignatureRecord("TypeDefinition", typeDefinition: Some(MetadataTypeRecord(nm, ns)))
     }
     if (table == TABLE_TYPE_SPEC) {
-        var specBlob = file.getBlob(row, TABLE_TYPE_SPEC, 0)
-        let specType = specBlob.readTypeCode(file, generics)
-        let specSig = adaptType(index, fileIdx, specType)
-        let specRecord = TypeSpecificationRecord(specSig)
+        let specRecord = typeSpecificationRecord(index, fileIdx, row, generics)
         return SignatureRecord("TypeSpecification", typeSpecification: Some(specRecord))
     }
     return SignatureRecord("TypeReference")
 }
 
 // JsonValue form of an entity handle (used for generic-parameter constraints).
-func entityHandleJson(file: WinmdFile, table: Int64, row: Int64): JsonValue {
+func entityHandleJson(index: TypeIndex, fileIdx: Int64, table: Int64, row: Int64, generics: Array<MetadataType>): JsonValue {
+    let file = index.getFile(fileIdx)
     let obj = JsonObject()
     if (table == TABLE_TYPE_REF) {
         obj.put("Kind", JsonString("TypeReference"))
@@ -701,7 +750,175 @@ func entityHandleJson(file: WinmdFile, table: Int64, row: Int64): JsonValue {
         obj.put("Kind", JsonString("TypeSpecification"))
         obj.put("TypeReference", JsonNull())
         obj.put("TypeDefinition", JsonNull())
-        obj.put("TypeSpecification", JsonNull())
+        obj.put("TypeSpecification", typeSpecificationJson(typeSpecificationRecord(index, fileIdx, row, generics)))
+    }
+    return obj
+}
+
+func typeSpecificationRecord(
+    index: TypeIndex,
+    fileIdx: Int64,
+    row: Int64,
+    generics: Array<MetadataType>
+): TypeSpecificationRecord {
+    let file = index.getFile(fileIdx)
+    var specBlob = file.getBlob(row, TABLE_TYPE_SPEC, 0)
+    let specType = specBlob.readTypeCode(file, generics)
+    let specSig = adaptType(index, fileIdx, specType)
+    let customAttributes = adaptCustomAttributes(index, fileIdx, TABLE_TYPE_SPEC, row)
+    return TypeSpecificationRecord(specSig, customAttributes: customAttributes)
+}
+
+func typeSpecificationJson(value: TypeSpecificationRecord): JsonValue {
+    let obj = JsonObject()
+    obj.put("Signature", signatureRecordJson(value.signature))
+    obj.put("CustomAttributes", customAttributesJson(value.customAttributes))
+    return obj
+}
+
+func signatureRecordJson(sig: SignatureRecord): JsonValue {
+    let obj = JsonObject()
+    obj.put("Kind", JsonString(sig.kind))
+    match (sig.typeSig) {
+        case Some(inner) => obj.put("Type", signatureRecordJson(inner))
+        case None => ()
+    }
+    if (sig.hasNamespace) {
+        obj.put("Namespace", JsonString(sig.namespace))
+    }
+    if (signatureRecordNamePresent(sig)) {
+        obj.put("Name", JsonString(sig.name))
+    }
+    match (sig.lowerBounds) {
+        case Some(values) => obj.put("LowerBounds", intListJson(values))
+        case None => ()
+    }
+    match (sig.rank) {
+        case Some(value) => obj.put("Rank", JsonInt(value))
+        case None => ()
+    }
+    match (sig.sizes) {
+        case Some(values) => obj.put("Sizes", intListJson(values))
+        case None => ()
+    }
+    if (!sig.typeArguments.isEmpty()) {
+        let args = ArrayList<JsonValue>()
+        for (arg in sig.typeArguments) {
+            args.add(signatureRecordJson(arg))
+        }
+        obj.put("TypeArguments", JsonArray(args))
+    }
+    match (sig.modifierType) {
+        case Some(inner) => obj.put("ModifierType", signatureRecordJson(inner))
+        case None => ()
+    }
+    match (sig.unmodifiedType) {
+        case Some(inner) => obj.put("UnmodifiedType", signatureRecordJson(inner))
+        case None => ()
+    }
+    match (sig.isRequired) {
+        case Some(value) => obj.put("IsRequired", JsonBool(value))
+        case None => ()
+    }
+    match (sig.functionPointerSignature) {
+        case Some(value) => obj.put("Signature", methodSignatureRecordJson(value))
+        case None => ()
+    }
+    match (sig.comment) {
+        case Some(value) => obj.put("Comment", JsonString(value))
+        case None => ()
+    }
+    return obj
+}
+
+func signatureRecordNamePresent(sig: SignatureRecord): Bool {
+    if (sig.name.isEmpty()) {
+        return false
+    }
+    match (sig.kind) {
+        case "Primitive" => return true
+        case "Type" => return true
+        case "GenericParameter" => return true
+        case "SerializedName" => return true
+        case _ => return !sig.name.isEmpty()
+    }
+}
+
+func intListJson(values: ArrayList<Int64>): JsonValue {
+    let result = ArrayList<JsonValue>()
+    for (value in values) {
+        result.add(JsonInt(value))
+    }
+    return JsonArray(result)
+}
+
+func methodSignatureRecordJson(sig: MethodSignatureRecord): JsonValue {
+    let obj = JsonObject()
+    obj.put("GenericParameterCount", JsonInt(sig.genericParameterCount))
+    obj.put("Header", signatureHeaderJson(sig.header))
+    let parameters = ArrayList<JsonValue>()
+    for (param in sig.parameters) {
+        parameters.add(signatureRecordJson(param))
+    }
+    obj.put("ParameterTypes", JsonArray(parameters))
+    obj.put("RequiredParameterCount", JsonInt(sig.requiredParameterCount))
+    obj.put("ReturnType", signatureRecordJson(sig.returnType))
+    return obj
+}
+
+func signatureHeaderJson(header: HashMap<String, JsonValue>): JsonValue {
+    let obj = JsonObject()
+    for (key in ["Attributes", "CallingConvention", "HasExplicitThis", "IsGeneric", "IsInstance", "Kind"]) {
+        match (header.get(key)) {
+            case Some(value) => obj.put(key, value)
+            case None => ()
+        }
+    }
+    return obj
+}
+
+func customAttributesJson(attributes: ArrayList<CustomAttributeRecord>): JsonValue {
+    let values = ArrayList<JsonValue>()
+    for (attribute in attributes) {
+        values.add(customAttributeJson(attribute))
+    }
+    return JsonArray(values)
+}
+
+func customAttributeJson(attribute: CustomAttributeRecord): JsonValue {
+    let obj = JsonObject()
+    obj.put("Type", JsonString(attribute.typeName))
+    let fixedArgs = ArrayList<JsonValue>()
+    for (arg in attribute.fixedArguments) {
+        fixedArgs.add(fixedArgumentJson(arg))
+    }
+    obj.put("FixedArguments", JsonArray(fixedArgs))
+    let namedArgs = ArrayList<JsonValue>()
+    for (arg in attribute.namedArguments) {
+        namedArgs.add(namedArgumentJson(arg))
+    }
+    obj.put("NamedArguments", JsonArray(namedArgs))
+    return obj
+}
+
+func fixedArgumentJson(arg: CustomAttributeFixedArgumentRecord): JsonValue {
+    let obj = JsonObject()
+    obj.put("Type", signatureRecordJson(arg.typeSig))
+    match (arg.value) {
+        case Some(value) => obj.put("Value", value)
+        case None => obj.put("Value", JsonNull())
+    }
+    return obj
+}
+
+func namedArgumentJson(arg: CustomAttributeNamedArgumentRecord): JsonValue {
+    let obj = JsonObject()
+    obj.put("Kind", JsonString(arg.kind))
+    obj.put("Name", JsonString(arg.name))
+    obj.put("Type", signatureRecordJson(arg.typeSig))
+    match (arg.value) {
+        case Some(value) => obj.put("Value", value)
+        case None => obj.put("Value", JsonNull())
     }
     return obj
 }
@@ -1121,14 +1338,10 @@ func adaptType(index: TypeIndex, fileIdx: Int64, ty: MetadataType): SignatureRec
         case MetadataType.Pinned(inner) =>
             return SignatureRecord("Pinned", typeSig: Some(adaptType(index, fileIdx, inner)))
         case MetadataType.FnPtr(sig) =>
-            // FunctionPointer carries a method signature in the C# output.
-            // The signature is exposed via the model's typeSpecification slot is
-            // not appropriate; instead nest the method signature inside a Type
-            // child is not how C# does it. C# emits Kind="FunctionPointer" with a
-            // Signature sub-object. The model has no Signature slot on
-            // SignatureRecord, so we approximate with the bare kind. (See report.)
-            let _ = sig
-            return SignatureRecord("FunctionPointer")
+            return SignatureRecord(
+                "FunctionPointer",
+                functionPointerSignature: Some(adaptMethodSignature(index, fileIdx, sig))
+            )
     }
 }
 
@@ -1276,7 +1489,7 @@ func decodeConstant(blob: BlobReader, typeCode: Int64): (String, JsonValue) {
         return ("UInt32", JsonInt(Int64(blob.readU32())))
     }
     if (typeCode == ET_I8) {
-        return ("Int64", JsonInt(Int64(blob.readU64())))
+        return ("Int64", JsonInt(reinterpretI64(blob.readU64())))
     }
     if (typeCode == ET_U8) {
         let v = blob.readU64()

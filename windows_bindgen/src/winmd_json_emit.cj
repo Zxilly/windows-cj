@@ -634,9 +634,9 @@ func renderSignature(sig: SignatureRecord, indent: String): String {
         case None => fields.add(JField("IsRequired", skip: true))
     }
     // Signature (FunctionPointer kind).
-    match (sig.typeSpecification) {
-        case Some(_) => ()
-        case None => ()
+    match (sig.functionPointerSignature) {
+        case Some(value) => fields.add(JField("Signature", renderMethodSignature(value, "${indent}  ")))
+        case None => fields.add(JField("Signature", skip: true))
     }
     // Comment (TypeDefinition / TypeReference source marker).
     match (sig.comment) {
