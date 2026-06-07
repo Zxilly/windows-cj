@@ -139,6 +139,10 @@ class TrackingInt32AbiArrayStorage <: AbiArrayStorage<Int32> {
         clearCount += 1
         values = Array<Int32>()
     }
+
+    public func finalizeNoThrow(): Unit {
+        clear()
+    }
 }
 
 @Test
@@ -168,6 +172,33 @@ func testProjectedAbiArrayReplaceWithClosesPreviousHStringClones() {
     array.close()
     second.close()
     @Expect(debugObservedHStringFreeCount() - freeBefore, 2)
+}
+
+@Test
+func testProjectedAbiArrayStorageFinalizeNoThrowClosesHStringClones() {
+    let source = HString("finalize-projected")
+    let storage = ProjectedAbiArrayStorage<HString>([source])
+    let freeBefore = debugObservedHStringFreeCount()
+
+    storage.finalizeNoThrow()
+    source.close()
+
+    @Expect(debugObservedHStringFreeCount() - freeBefore, 1)
+}
+
+@When[os == "Windows"]
+@Test
+func testNativeAbiArrayStorageFinalizeNoThrowClosesState() {
+    let raw = unsafe { CoTaskMemAlloc(sizeOf<Int32>()) }
+    if (raw.isNull()) {
+        throw Exception("CoTaskMemAlloc returned null")
+    }
+    let storage = NativeAbiArrayStorage<Int32>(CPointer<Int32>(raw), 1u32)
+
+    storage.finalizeNoThrow()
+
+    @Expect(storage.isClosed(), true)
+    @Expect(storage.rawOrNull().isNull(), true)
 }
 
 @Test

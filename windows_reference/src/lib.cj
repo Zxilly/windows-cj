@@ -57,6 +57,36 @@ func stockPropertyType<T>(): PropertyType where T <: windows_core.RuntimeType & 
     PropertyType_OtherType
 }
 
+func freeStockReferenceStoredValueNoThrow<T>(value: T): Unit {
+    try {
+        match (value) {
+            case text: HString => text.close()
+            case _ => ()
+        }
+    } catch (_: Exception) {}
+}
+
+func freeStockReferenceVtablesNoThrow(
+    referenceVtblHandle: CPointer<IReferenceVtbl>,
+    propertyVtblHandle: CPointer<IPropertyValueVtbl>
+): Unit {
+    try {
+        unsafe { windows_interface.freeNativeValue(referenceVtblHandle) }
+    } catch (_: Exception) {}
+    try {
+        unsafe { windows_interface.freeNativeValue(propertyVtblHandle) }
+    } catch (_: Exception) {}
+}
+
+func freeStockReferenceResourcesNoThrow<T>(
+    value: T,
+    referenceVtblHandle: CPointer<IReferenceVtbl>,
+    propertyVtblHandle: CPointer<IPropertyValueVtbl>
+): Unit {
+    freeStockReferenceVtablesNoThrow(referenceVtblHandle, propertyVtblHandle)
+    freeStockReferenceStoredValueNoThrow<T>(value)
+}
+
 private class StockReference<T> <: IReference_Impl<T> & Resource where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     private let value: T
     private let referenceVtblHandle: CPointer<IReferenceVtbl>
@@ -77,20 +107,8 @@ private class StockReference<T> <: IReference_Impl<T> & Resource where T <: wind
         CPointer<Unit>(propertyVtblHandle)
     }
 
-    private func closeStoredValue(): Unit {
-        match (value) {
-            case text: HString => text.close()
-            case _ => ()
-        }
-    }
-
-    private func freeVtablesNoThrow(): Unit {
-        try {
-            unsafe { windows_interface.freeNativeValue(referenceVtblHandle) }
-        } catch (_: Exception) {}
-        try {
-            unsafe { windows_interface.freeNativeValue(propertyVtblHandle) }
-        } catch (_: Exception) {}
+    private func freeOwnedResourcesNoThrow(): Unit {
+        freeStockReferenceResourcesNoThrow<T>(value, referenceVtblHandle, propertyVtblHandle)
     }
 
     public func isClosed(): Bool {
@@ -99,6 +117,7 @@ private class StockReference<T> <: IReference_Impl<T> & Resource where T <: wind
 
     ~init() {
         if (!closed) {
+            freeStockReferenceResourcesNoThrow<T>(value, referenceVtblHandle, propertyVtblHandle)
             closed = true
         }
     }
@@ -107,8 +126,7 @@ private class StockReference<T> <: IReference_Impl<T> & Resource where T <: wind
         if (closed) {
             return
         }
-        freeVtablesNoThrow()
-        closeStoredValue()
+        freeOwnedResourcesNoThrow()
         closed = true
     }
 

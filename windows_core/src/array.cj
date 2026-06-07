@@ -2,13 +2,46 @@ package windows_core
 
 import std.collection.HashMap
 import std.sync.Mutex
+import windows_libloading as windows_libloading
 
 var coTaskMemAllocationSizeMutex = Mutex()
 var coTaskMemAllocationSizes = HashMap<UIntNative, UIntNative>()
+let coTaskMemFreeFinalizerProc = windows_libloading.FinalizerSafeProc("ole32.dll", "CoTaskMemFree")
+
+func prepareCoTaskMemFreeForFinalizer(): Unit {
+    try {
+        let _ = coTaskMemFreeFinalizerProc.ensureResolved()
+    } catch (_: Exception) {}
+}
+
+func freeCoTaskMemForFinalizerNoThrow(pv: CPointer<Unit>): Unit {
+    if (pv.isNull()) {
+        return
+    }
+    try {
+        let proc = coTaskMemFreeFinalizerProc.rawIfResolvedForFinalizer()
+        if (proc.isNull()) {
+            return
+        }
+        let freeFn = CFunc<(CPointer<Unit>) -> Unit>(proc)
+        unsafe { freeFn(pv) }
+    } catch (_: Exception) {}
+}
+
+func finalizeNativeAbiArrayStorageNoThrow<T>(
+    data: CPointer<T>,
+    closed: Bool
+): (CPointer<T>, UInt32, Bool) where T <: CType {
+    if (!closed) {
+        freeCoTaskMemForFinalizerNoThrow(CPointer<Unit>(data))
+    }
+    (CPointer<T>(), 0u32, true)
+}
 
 public func coTaskMemAlloc(cb: UIntNative): CPointer<Unit> {
     let raw = unsafe { CoTaskMemAlloc(cb) }
     if (raw.isNotNull()) {
+        prepareCoTaskMemFreeForFinalizer()
         synchronized(coTaskMemAllocationSizeMutex) {
             coTaskMemAllocationSizes.add(raw.toUIntNative(), cb)
         }
@@ -18,6 +51,9 @@ public func coTaskMemAlloc(cb: UIntNative): CPointer<Unit> {
 
 public func coTaskMemRealloc(pv: CPointer<Unit>, cb: UIntNative): CPointer<Unit> {
     let resized = unsafe { CoTaskMemRealloc(pv, cb) }
+    if (resized.isNotNull()) {
+        prepareCoTaskMemFreeForFinalizer()
+    }
     if (cb == UIntNative(0)) {
         synchronized(coTaskMemAllocationSizeMutex) {
             if (pv.isNotNull()) {
@@ -63,6 +99,7 @@ abstract class AbiArrayStorage<T> {
     public func toArray(): Array<T>
     public func replaceWith(values: Array<T>): Unit
     public func clear(): Unit
+    public func finalizeNoThrow(): Unit
 }
 
 class ProjectedAbiArrayStorage<T> <: AbiArrayStorage<T> {
@@ -104,6 +141,14 @@ class ProjectedAbiArrayStorage<T> <: AbiArrayStorage<T> {
         closeProjectedElements(values)
         values = Array<T>()
     }
+
+    public func finalizeNoThrow(): Unit {
+        try {
+            clear()
+        } catch (_: Exception) {
+            values = Array<T>()
+        }
+    }
 }
 
 class NativeAbiArrayStorage<T> <: AbiArrayStorage<T> & Resource where T <: CType {
@@ -117,6 +162,9 @@ class NativeAbiArrayStorage<T> <: AbiArrayStorage<T> & Resource where T <: CType
         this.data = data
         this.length = length
         this.closed = data.isNull()
+        if (data.isNotNull()) {
+            prepareCoTaskMemFreeForFinalizer()
+        }
     }
 
     public static func withLen(length: Int64): NativeAbiArrayStorage<T> {
@@ -207,6 +255,13 @@ class NativeAbiArrayStorage<T> <: AbiArrayStorage<T> & Resource where T <: CType
         length = 0u32
     }
 
+    public func finalizeNoThrow(): Unit {
+        let (nextData, nextLength, nextClosed) = finalizeNativeAbiArrayStorageNoThrow<T>(data, closed)
+        data = nextData
+        length = nextLength
+        closed = nextClosed
+    }
+
     public func close(): Unit {
         if (closed) {
             return
@@ -216,9 +271,10 @@ class NativeAbiArrayStorage<T> <: AbiArrayStorage<T> & Resource where T <: CType
     }
 
     ~init() {
-        data = CPointer<T>()
-        length = 0u32
-        closed = true
+        let (nextData, nextLength, nextClosed) = finalizeNativeAbiArrayStorageNoThrow<T>(data, closed)
+        data = nextData
+        length = nextLength
+        closed = nextClosed
     }
 
     public func rawOrNull(): CPointer<T> {
@@ -267,6 +323,12 @@ func cloneProjectedArray<T>(values: Array<T>): Array<T> {
     }
     let cloned = Array<T>(values.size, { index => cloneProjectedValue(values[index]) })
     cloned
+}
+
+func freeAbiArrayStorageNoThrow<T>(storage: AbiArrayStorage<T>): Unit {
+    try {
+        storage.finalizeNoThrow()
+    } catch (_: Exception) {}
 }
 
 func ensureProjectedIndex(index: Int64, length: UInt32): Unit {
@@ -350,6 +412,7 @@ public class AbiArray<T> <: Resource {
 
     ~init() {
         if (!closed) {
+            freeAbiArrayStorageNoThrow<T>(storage)
             closed = true
         }
     }
