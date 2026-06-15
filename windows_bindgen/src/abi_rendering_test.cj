@@ -19,8 +19,8 @@ func testFacadeFilesImportOnlyReferencedImplSymbols() {
     let content = String.fromUtf8(File.readFrom("${outDir}/src/Example/Foundation/facade_0.cj"))
     removeIfExists(outDir, recursive: true)
 
-    @Expect(content.contains("import windows.impl.{Example_Foundation_Widget, Example_Foundation_Gadget}"), true)
-    @Expect(content.contains("import windows.impl.*"), false)
+    @Expect(content.contains("import windows.impl.Example_Foundation.*"), true)
+    @Expect(content.contains("import windows.impl.Example_Other"), false)
     @Expect(content.contains("Example_Other_Hidden"), false)
 }
 
@@ -530,7 +530,7 @@ func testWin32TextPointerLiteralConstantsUseStringFactories() {
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
     writeImplFiles(writer, records, "windows", symbolsByName)
-    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/symbols_0.cj"))
+    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/Tiny_Foundation/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
 
     @Expect(textNamesSource.contains("public static let WideName: windows_strings.WideStringFactory = windows_strings.wideStringFactory(\"Wide.Name\")"), true)
@@ -7094,7 +7094,7 @@ func testFacadeExportsInterfaceVtblAlias() {
     let content = String.fromUtf8(File.readFrom("${outDir}/src/Tiny/Foundation/facade_0.cj"))
     removeIfExists(outDir, recursive: true)
 
-    @Expect(content.contains("import windows.impl.{Tiny_Foundation_IWidget, Tiny_Foundation_IWidgetVtbl}"), true)
+    @Expect(content.contains("import windows.impl.Tiny_Foundation.*"), true)
     @Expect(content.contains("public type IWidget = Tiny_Foundation_IWidget"), true)
     @Expect(content.contains("public type IWidgetVtbl = Tiny_Foundation_IWidgetVtbl"), true)
 }
@@ -7389,7 +7389,7 @@ func testImplFilesImportPolyfillWhenRenderedSourceUsesLayoutHelper() {
     let symbolsByName = cliTestRecordsByName(records)
 
     writeImplFiles(writer, records, "windows", symbolsByName)
-    let content = String.fromUtf8(File.readFrom("${outDir}/src/impl/symbols_0.cj"))
+    let content = String.fromUtf8(File.readFrom("${outDir}/src/impl/Example_Foundation/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
 
     @Expect(content.contains("import windows_polyfill as windows_polyfill"), true)

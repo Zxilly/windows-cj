@@ -4,7 +4,8 @@ import std.collection.*
 
 let RT_RCDATA_RESOURCE_ID: Int64 = 10
 
-@CallingConv[STDCALL]
+// Win32 imports. x86_64 has a single calling convention, so no @CallingConv is
+// needed (STDCALL is a no-op on x64; default CDECL maps to the Microsoft x64 ABI).
 foreign {
     func GetModuleHandleW(lpModuleName: CPointer<UInt16>): CPointer<Unit>
     func FindResourceW(hModule: CPointer<Unit>, lpName: CPointer<UInt16>, lpType: CPointer<UInt16>): CPointer<Unit>

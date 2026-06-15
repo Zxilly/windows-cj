@@ -54,6 +54,13 @@ WINDOWS_BINDGEN = ROOT / "windows_bindgen"
 # generator binary is bin/main.exe (named after the package's main.cj entry).
 GENERATOR_BINARY = WINDOWS_BINDGEN / "target" / "release" / "bin" / "main.exe"
 WINDOWS_COMMON_LOCK_CONTENT = "version = 0\n\n[requires]\n"
+# The cfg-gated windows_common compilation must use dev_perf_ci: nightly has a
+# slow cfg-evaluation bug that dev_perf has fixed. The generator itself is a
+# small dependency-light executable, but its source uses stdx.encoding.json; the
+# dev_perf_ci toolchain ships no stdx component, so an ABI-compatible stdx path
+# is injected for the generator build only (the produced binary is dependency
+# free, and the actual gated windows_common build is pure dev_perf_ci).
+TOOLCHAIN = "dev_perf_ci"
 
 
 def fail(message: str) -> None:
@@ -61,9 +68,32 @@ def fail(message: str) -> None:
     raise SystemExit(1)
 
 
+def stdx_static_path() -> str | None:
+    """Resolve an ABI-compatible static stdx path for the generator build.
+
+    dev_perf_ci has no stdx component, so reuse another installed toolchain's
+    static stdx (preferring the active toolchain's). Honour an explicit
+    CANGJIE_STDX_PATH_STATIC if the caller already set one.
+    """
+    existing = os.environ.get("CANGJIE_STDX_PATH_STATIC")
+    if existing and (Path(existing) / "stdx").exists():
+        return existing
+    stdx_root = Path.home() / ".cjv" / "stdx"
+    if not stdx_root.exists():
+        return None
+    candidates = [stdx_root / "tmp_build" / "static", *sorted(stdx_root.glob("*/static"))]
+    for candidate in candidates:
+        if (candidate / "stdx").exists():
+            return str(candidate)
+    return None
+
+
 def command_env() -> dict[str, str]:
     env = os.environ.copy()
     env["cjHeapSize"] = "32GB"
+    stdx = stdx_static_path()
+    if stdx is not None:
+        env["CANGJIE_STDX_PATH_STATIC"] = stdx
     return env
 
 
@@ -96,7 +126,7 @@ def requested_features() -> list[str]:
 def build_generator(timeout_seconds: int) -> None:
     # Build in place (cwd=windows_bindgen) to bypass the workspace-level nested
     # member validation; see the GENERATOR_BINARY note above.
-    run(["cjv", "exec", "cjpm", "build"], timeout_seconds=timeout_seconds, cwd=WINDOWS_BINDGEN)
+    run(["cjv", "run", TOOLCHAIN, "cjpm", "build"], timeout_seconds=timeout_seconds, cwd=WINDOWS_BINDGEN)
     if not GENERATOR_BINARY.exists():
         fail(f"generator binary was not produced: {GENERATOR_BINARY}")
 
@@ -104,7 +134,7 @@ def build_generator(timeout_seconds: int) -> None:
 def regenerate(timeout_seconds: int) -> None:
     features = requested_features()
     winmd_inputs = bundled_winmd_files()
-    command = ["cjv", "exec", str(GENERATOR_BINARY), "--common", "--clean", "--out", str(WINDOWS_COMMON)]
+    command = ["cjv", "run", TOOLCHAIN, str(GENERATOR_BINARY), "--common", "--clean", "--out", str(WINDOWS_COMMON)]
     command += [str(path) for path in winmd_inputs]
     for feature in features:
         command += ["--feature", feature]

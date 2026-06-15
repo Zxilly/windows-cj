@@ -830,7 +830,7 @@ func testWriteImplFilesAddsReferenceImportWhenSymbolIsRemapped() {
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
     writeImplFiles(writer, records, "windows_local", symbolsByName, options)
-    let content = String.fromUtf8(File.readFrom("${outDir}/src/impl/symbols_0.cj"))
+    let content = String.fromUtf8(File.readFrom("${outDir}/src/impl/Example_LocalNs/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
 
     @Expect(content.contains("import windows_refpkg as windows_refpkg"), true)

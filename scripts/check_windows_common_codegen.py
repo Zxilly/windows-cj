@@ -55,7 +55,10 @@ IGNORED_GENERATED_FILES = windows_common_manifest.IGNORED_GENERATED_FILES
 WINUI_FEATURE_PREFIXES = ("Microsoft.UI.", "Microsoft.Windows.")
 WINUI_WINMD_ROOTS_ENV = "WINDOWS_CJ_WINUI_WINMD_ROOTS"
 CONTRACT_VERSION_ATTRIBUTE = "Windows.Foundation.Metadata.ContractVersionAttribute"
-IMPL_SYMBOLS_FILE_RE = re.compile(r"src/impl/symbols_\d+\.cj$")
+# The impl is emitted as one subpackage per namespace
+# (src/impl/<ns_var>/symbols_<i>.cj); the optional middle segment also matches the
+# legacy monolithic src/impl/symbols_<i>.cj layout.
+IMPL_SYMBOLS_FILE_RE = re.compile(r"src/impl/(?:[^/]+/)?symbols_\d+\.cj$")
 SYMBOL_SECTION_RE = re.compile(r"^// (.+?) \((?:0x|synthetic:)")
 FACADE_FILE_RE = re.compile(r"(^|/)facade_\d+\.cj$")
 JSON_HEADER_RE = {

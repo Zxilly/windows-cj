@@ -136,6 +136,23 @@ public func commonNativeHelperFiles(
     return files
 }
 
+// Namespaces used by the common native helper files. These include the synthetic
+// app-runtime namespace and any namespace carrying P/Invoke wrappers; their cfg
+// variables must be defined in every package cfg.toml since native helpers are
+// `@When`-gated by namespace.
+public func commonNativeHelperNamespaces(nativeSymbols: ArrayList<SymbolRecord>): ArrayList<String> {
+    let namespaces = ArrayList<String>()
+    addUnique(namespaces, "Native.AppRuntime")
+    for (spec in syntheticCommonNativeFunctionSpecs()) {
+        addUnique(namespaces, spec.namespace)
+    }
+    for (spec in nativeFunctionSpecsFromSymbols(nativeSymbols)) {
+        addUnique(namespaces, spec.namespace)
+    }
+    sortStrings(namespaces)
+    return namespaces
+}
+
 func addNativeFunctionSpec(
     namespaces: ArrayList<String>,
     specsByNamespace: HashMap<String, ArrayList<NativeFunctionSpec>>,
@@ -334,18 +351,87 @@ func renderNativeHelperNamespaceSource(
     specs: ArrayList<NativeFunctionSpec>,
     symbolsByName: HashMap<String, SymbolRecord>
 ): String {
+    // All native helper functions in this file belong to `namespace`, and the
+    // impl types they reference (plus any cross-namespace imports) are part of
+    // that namespace's dependency closure. The whole file is therefore gated by
+    // the one namespace cfg variable: when it is off, the functions and their
+    // impl imports are removed together (no dangling import of a gated-off type).
+    let gate = cfgGateAnnotation(namespace)
     var content = "package ${namespaceToPackage(namespace, packageName)}\n\n"
-    content += "import windows_libloading as windows_libloading\n"
+    content += "${gate}\nimport windows_libloading as windows_libloading\n"
     let imports = nativeHelperImports(packageName, namespace, specs, symbolsByName)
+    // Native helper functions import specific symbols from sibling facade packages
+    // (e.g. Windows.Win32.Foundation.HANDLE), but those imports are `@When`-gated
+    // and so are soft edges for cjpm's build scheduler. Emit an unconditional
+    // package-alias edge to each distinct sibling facade package so cjpm always
+    // builds it first; otherwise the package scheduler can compile this helper
+    // package before the sibling facade has produced its `.cjo`.
+    content += renderNativeHelperPackageEdges(packageName, namespace, imports)
     for (importPath in imports) {
-        content += "import ${importPath}\n"
+        content += "${gate}\nimport ${importPath}\n"
     }
     content += "\n"
     for (spec in specs) {
-        content += renderNativeFunction(spec, symbolsByName)
-        content += "\n"
+        content += renderNativeFunction(spec, symbolsByName, gate) + "\n"
     }
     return content
+}
+
+// Emit unconditional package-alias edges for the distinct sibling facade packages
+// a native helper file imports specific symbols from. Support packages
+// (windows_core, windows_strings, ...) are real cjpm.toml dependencies and always
+// built, so they need no extra edge; only generated `${packageName}.*` facade
+// packages do. The helper's own package is excluded.
+func renderNativeHelperPackageEdges(
+    packageName: String,
+    namespace: String,
+    imports: ArrayList<String>
+): String {
+    let selfPackage = namespaceToPackage(namespace, packageName)
+    let edgePackages = ArrayList<String>()
+    for (importPath in imports) {
+        match (nativeHelperImportPackage(importPath, packageName)) {
+            case Some(pkg) =>
+                if (pkg != selfPackage) {
+                    addUnique(edgePackages, pkg)
+                }
+            case None => ()
+        }
+    }
+    sortStrings(edgePackages)
+    var content = ""
+    var index: Int64 = 0
+    for (pkg in edgePackages) {
+        content += "import ${pkg} as native_helper_edge_${index}\n"
+        index += 1
+    }
+    return content
+}
+
+// Extract the generated facade package from a native helper import entry, or None
+// for support-package aliases. Entries are either `pkg.Symbol` (a specific facade
+// symbol import) or `support as support` (a package alias). Only the former,
+// rooted at `${packageName}.`, yields a facade package (its symbol component is
+// dropped).
+func nativeHelperImportPackage(importPath: String, packageName: String): Option<String> {
+    if (importPath.contains(" as ")) {
+        return None
+    }
+    let prefix = "${packageName}."
+    if (!startsWithString(importPath, prefix)) {
+        return None
+    }
+    let parts = splitString(importPath, b'.')
+    if (Int64(parts.size) < 2) {
+        return None
+    }
+    let pkgParts = ArrayList<String>()
+    var i: Int64 = 0
+    while (i < Int64(parts.size) - 1) {
+        pkgParts.add(parts[i])
+        i += 1
+    }
+    return Some(joinStrings(pkgParts, "."))
 }
 
 func nativeHelperImports(
@@ -569,7 +655,13 @@ func nativeNamedTypeUsesFacadeAlias(symbol: SymbolRecord, symbolsByName: HashMap
     }
 }
 
-func renderNativeFunction(spec: NativeFunctionSpec, symbolsByName: HashMap<String, SymbolRecord>): String {
+// Render a native helper function (and any error-checking wrapper variants),
+// structurally prefixing each top-level `public func` with `gate` — the
+// `@When[<ns> == "on"]` annotation (without trailing newline, matching the
+// convention used elsewhere in this file). The main function and every wrapper
+// are independent top-level declarations, so each receives its own gate.
+func renderNativeFunction(spec: NativeFunctionSpec, symbolsByName: HashMap<String, SymbolRecord>, gate: String): String {
+    let gatePrefix = if (gate.isEmpty()) { "" } else { "${gate}\n" }
     let method = spec.method
     let publicParams = nativeFunctionParameterText(spec, symbolsByName)
     let rawReturnType = nativeRawType(method.signature.returnType, symbolsByName, spec.ownerFullName)
@@ -580,7 +672,7 @@ func renderNativeFunction(spec: NativeFunctionSpec, symbolsByName: HashMap<Strin
         defaultReturnType
     }
     let procType = nativeCFuncType(spec, rawReturnType, symbolsByName)
-    var content = "public func ${cjIdentifier(method.name)}(${publicParams}): ${returnType} {\n"
+    var content = "${gatePrefix}public func ${cjIdentifier(method.name)}(${publicParams}): ${returnType} {\n"
     content += "    let proc = ${procType}(${nativeResolveExpression(spec)})\n"
     let args = nativeFunctionArgumentText(spec, symbolsByName)
     let arrayInfos = nativeArrayParameterInfos(spec, symbolsByName)
@@ -607,139 +699,139 @@ func renderNativeFunction(spec: NativeFunctionSpec, symbolsByName: HashMap<Strin
     }
     content += "}\n"
     if (nativeMethodNeedsWinSockBoolCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeWinSockBoolCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorBoolStatusCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorBoolStatusCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorBoolFalseSuccessCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorBoolFalseSuccessCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsWinSockNullHandleCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeWinSockNullCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsWinSockInvalidEventCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeWinSockNullCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorHandleCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorHandleCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorInvalidHandleCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorInvalidHandleCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorNullSuccessHandleCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorNullSuccessHandleCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorWaitEventCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorWaitEventCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsWinSockWaitEventCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeWinSockWaitEventCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsWinSockNullPointerCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeWinSockNullCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorPointerCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorPointerCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorTlsValueCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorTlsValueCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorUInt32MinusOneCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorUInt32MinusOneCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorUInt32ZeroLastErrorCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorUInt32ZeroLastErrorCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorUInt32ZeroCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorUInt32ZeroCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorUIntNativeZeroCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorUIntNativeZeroCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorIntNativeZeroLastErrorCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorIntNativeZeroLastErrorCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorInt32MaxCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorInt32MaxCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsSetLastErrorInt32MinusOneCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeSetLastErrorInt32MinusOneCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsWinSockInvalidSocketCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeWinSockInvalidSocketCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsMswsockGetLastErrorSocketErrorInt32CheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeMswsockGetLastErrorSocketErrorInt32CheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsWinSockSocketErrorInt32CheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeWinSockSocketErrorInt32CheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsWinSockDirectErrorInt32CheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeWinSockDirectErrorInt32CheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsWinSockPendingStatusInt32CheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeWinSockPendingStatusInt32CheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsWinSockLpErrnoInt32CheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeWinSockLpErrnoInt32CheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsWaitFailedUInt32CheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeWaitFailedUInt32CheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsDirectWin32ErrorCodeInt32StatusCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeDirectWin32ErrorCodeInt32StatusCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsDirectWin32ErrorCodeInt32CheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeDirectWin32ErrorCodeInt32CheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsDirectWin32ErrorCodeUInt32StatusCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeDirectWin32ErrorCodeUInt32StatusCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsDirectWin32ErrorCodeUInt32CheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeDirectWin32ErrorCodeUInt32CheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsUInt32LessThanOrEqualCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeUInt32LessThanOrEqualCheckedWrapper(spec, symbolsByName)
     }
     if (nativeMethodNeedsHResultCheckedWrapper(method, symbolsByName, spec.ownerFullName)) {
-        content += "\n"
+        content += "\n${gatePrefix}"
         content += renderNativeHResultCheckedWrapper(spec, symbolsByName)
     }
     return content

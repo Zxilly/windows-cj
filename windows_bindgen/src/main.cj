@@ -764,13 +764,112 @@ func generate(config: CliConfig, records: ArrayList<SymbolRecord>): Unit {
     if (config.common) {
         writeCommonNativeHelperFiles(writer, commonHelperFiles)
     }
+    // Namespace -> namespace dependency map (base types, fields, projected method
+    // types, attribute types). The feature-selection tool reads this to compute
+    // the transitive closure of cfg variables a consumer must enable. Mirrors the
+    // reference projection's per-namespace feature dependency graph. Computed over
+    // the full native symbol set (not just the impl subset) so the P/Invoke native
+    // helper functions' cross-namespace type references are included in the graph;
+    // otherwise enabling a namespace whose native helpers reference another would
+    // miss that edge in the closure and fail to compile.
+    //
+    // The graph is computed BEFORE the impl files are written because the impl
+    // monolith is now split into per-namespace subpackages: a symbol in
+    // `impl.<ns_var(N)>` that references a symbol in namespace M must import M's
+    // impl subpackage, and these cross-impl import edges are derived from exactly
+    // this dependency graph (see renderCrossImplImports / writeImplFiles).
+    let namespaceDeps = computeNamespaceDependencies(nativeSelected, nativeSelectedByName)
+    // Augment the metadata-derived graph by scanning the actually-emitted source
+    // (impl declarations + native helper functions) for references to other
+    // namespaces' types, so the closure the selection tool computes is complete.
+    let implNameToNamespace = buildImplNameToNamespace(nativeSelected)
+    for (symbol in selected) {
+        augmentNamespaceDependenciesFromSource(
+            namespaceDeps,
+            symbol.namespace,
+            renderImplSource(symbol, selectedByName, renderOptions),
+            implNameToNamespace
+        )
+    }
+    for (helperNamespace in commonNativeHelperNamespaces(nativeSelected)) {
+        let helperPath = "${namespaceToDirectory(helperNamespace)}/native_helpers.cj"
+        for (file in commonHelperFiles) {
+            if (file.relativePath == helperPath) {
+                augmentNamespaceDependenciesFromSource(
+                    namespaceDeps,
+                    helperNamespace,
+                    file.content,
+                    implNameToNamespace
+                )
+            }
+        }
+    }
+    sortNamespaceDependencyBuckets(namespaceDeps)
+
     writer.writeFile("src/impl/mod.cj", "package ${config.packageName}.impl\n")
-    writeImplFiles(writer, selected, config.packageName, selectedByName, renderOptions)
+    writeImplFiles(writer, selected, config.packageName, selectedByName, namespaceDeps, renderOptions)
     let namespaces = selectedNamespaces(selected)
     writeIntermediateNamespaceModules(writer, namespaces, config.packageName)
     for (namespace in namespaces) {
         writer.writeFile(namespaceToRelativePath(namespace), "package ${namespaceToPackage(namespace, config.packageName)}\n")
         writeFacadeFiles(writer, namespace, selected, config.packageName)
+    }
+
+    writer.writeFile("namespace-deps.json", renderNamespaceDepsJson(namespaceDeps))
+
+    // Subpackage -> cfg-variable map (the build tool reads this to skip parsing
+    // gated-off subpackages). Covers every per-namespace impl subpackage and every
+    // facade subpackage; the root package itself carries no gated declarations and
+    // is excluded.
+    let subpackageToCfgVar = HashMap<String, String>()
+    for (namespace in namespaces) {
+        subpackageToCfgVar.add(implSubpackageName(config.packageName, namespace), namespaceToCfgVar(namespace))
+        let facadePackage = namespaceToPackage(namespace, config.packageName)
+        if (facadePackage != config.packageName) {
+            subpackageToCfgVar.add(facadePackage, namespaceToCfgVar(namespace))
+        }
+    }
+    writer.writeFile("subpackage-namespaces.json", renderSubpackageNamespacesJson(config.packageName, subpackageToCfgVar))
+
+    // Emit a cfg.toml into every package directory that carries gated source. The
+    // complete cfg-variable set (every namespace plus the synthetic native-helper
+    // namespaces) is written uniformly so any `@When` referencing a variable
+    // resolves, and the feature-selection tool can rewrite all files in lockstep.
+    // All default to "off" for the opt-in baseline.
+    let allCfgVars = collectAllCfgVars(nativeSelected, commonNativeHelperNamespaces(nativeSelected))
+    let cfgTomlBody = renderCfgToml(allCfgVars)
+    // Map each facade directory to the impl subpackage carrying that namespace's
+    // declarations, so the build-order edge file points at the concrete subpackage
+    // (the monolith no longer exists). Only namespaces with impl symbols have a
+    // subpackage; native-helper-only directories without one rely on the sibling
+    // facade edges (renderNativeHelperPackageEdges) for build order.
+    let directoryToImplSubpackage = HashMap<String, String>()
+    for (namespace in namespaces) {
+        directoryToImplSubpackage.add(namespaceToDirectory(namespace), implSubpackageName(config.packageName, namespace))
+    }
+    for (directory in gatedSourceDirectories(writer.files())) {
+        let cfgPath = if (directory.isEmpty()) {
+            "cfg.toml"
+        } else {
+            "${directory}/cfg.toml"
+        }
+        writer.writeFile(cfgPath, cfgTomlBody)
+        // Every facade package gets an unconditional package edge to its impl
+        // subpackage so cjpm always builds that subpackage first; without it the
+        // `@When`-gated impl imports are soft edges and the package scheduler races
+        // (see renderImplDependencyEdgeFile). The impl subpackages themselves
+        // (`src/impl/...`) are excluded — they are the impl. A directory whose
+        // namespace has no impl subpackage (native-helper-only) is also skipped.
+        if (!startsWithString(directory, "src/impl")) {
+            match (directoryToImplSubpackage.get(directory)) {
+                case Some(implSubpackage) =>
+                    writer.writeFile(
+                        "${directory}/impl_edge.cj",
+                        renderImplDependencyEdgeFile(directory, config.packageName, implSubpackage)
+                    )
+                case None => ()
+            }
+        }
     }
 
     let manifest = renderManifest(selectionRules, selected, writer.files(), writer.fileHashes(), config.packageName)
@@ -1462,7 +1561,106 @@ func writeImplFiles(
     symbolsByName: HashMap<String, SymbolRecord>,
     options: RenderOptions
 ): Unit {
+    // Derive a self-contained dependency graph from the symbol set so the
+    // (test/standalone) callers that omit one still get correct cross-impl
+    // imports between the per-namespace subpackages.
+    let deps = computeNamespaceDependencies(symbols, symbolsByName)
+    let implNameToNamespace = buildImplNameToNamespace(symbols)
+    for (symbol in symbols) {
+        augmentNamespaceDependenciesFromSource(
+            deps,
+            symbol.namespace,
+            renderImplSource(symbol, symbolsByName, options),
+            implNameToNamespace
+        )
+    }
+    sortNamespaceDependencyBuckets(deps)
+    writeImplFiles(writer, symbols, packageName, symbolsByName, deps, options)
+}
+
+// Write the impl package as one subpackage per namespace.
+//
+// The impl monolith is split so a consumer enabling only a few namespaces
+// compiles (and, once the build tool skips disabled subpackages, parses) only the
+// impl subpackages it needs. Symbols are grouped by namespace (order within a
+// group preserved; namespaces emitted in sorted order for stable output) and each
+// group is chunked at 512 symbols into `src/impl/<ns_var>/symbols_<i>.cj` with
+// package `<packageName>.impl.<ns_var>`. The helper-import flags are detected per
+// subpackage (scoped to that namespace's body). Because the split puts a
+// referencing symbol and its referent in different packages, each subpackage also
+// emits gated wildcard imports of every impl subpackage it depends on
+// (`namespaceDeps`); these are cyclic across siblings and rely on circular
+// subpackage compilation support.
+func writeImplFiles(
+    writer: GeneratedPackageWriter,
+    symbols: ArrayList<SymbolRecord>,
+    packageName: String,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    namespaceDeps: HashMap<String, ArrayList<String>>,
+    options: RenderOptions
+): Unit {
     setActiveReferences(options.references)
+    let extraImports = ArrayList<String>()
+    for (stage in options.references) {
+        if (stage.name != packageName) {
+            addUnique(extraImports, stage.name)
+        }
+    }
+
+    // Group symbols by namespace, preserving first-seen symbol order within each
+    // group. The namespace key order is tracked separately because HashMap does
+    // not preserve insertion order; the group list is sorted before emission so
+    // file output is deterministic.
+    let groups = HashMap<String, ArrayList<SymbolRecord>>()
+    let orderedNamespaces = ArrayList<String>()
+    for (symbol in symbols) {
+        let bucket = match (groups.get(symbol.namespace)) {
+            case Some(existing) => existing
+            case None =>
+                let fresh = ArrayList<SymbolRecord>()
+                groups.add(symbol.namespace, fresh)
+                orderedNamespaces.add(symbol.namespace)
+                fresh
+        }
+        bucket.add(symbol)
+    }
+    sortStrings(orderedNamespaces)
+
+    for (namespace in orderedNamespaces) {
+        let groupSymbols = match (groups.get(namespace)) {
+            case Some(found) => found
+            case None => ArrayList<SymbolRecord>()
+        }
+        let nv = namespaceToCfgVar(namespace)
+        let implSubpackage = implSubpackageName(packageName, namespace)
+        let directory = implSubpackageDirectory(namespace)
+        let crossImplImports = renderCrossImplImports(
+            packageName,
+            namespace,
+            match (namespaceDeps.get(namespace)) {
+                case Some(found) => found
+                case None => ArrayList<String>()
+            }
+        )
+        writeImplSubpackage(writer, groupSymbols, packageName, implSubpackage, directory, crossImplImports, extraImports, symbolsByName, options)
+    }
+    clearActiveReferences()
+}
+
+// Emit one namespace's impl subpackage: chunk its symbols at 512 into
+// `<directory>/symbols_<i>.cj`, each file declaring `package <implSubpackage>` and
+// the helper/cross-impl imports its body needs.
+func writeImplSubpackage(
+    writer: GeneratedPackageWriter,
+    symbols: ArrayList<SymbolRecord>,
+    packageName: String,
+    implSubpackage: String,
+    directory: String,
+    crossImplImports: String,
+    extraImports: ArrayList<String>,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    options: RenderOptions
+): Unit {
     var chunkIndex: Int64 = 0
     var count: Int64 = 0
     var body = ""
@@ -1473,14 +1671,8 @@ func writeImplFiles(
     var importsInterfaceGuid = false
     var importsInterfaceMacros = false
     var importsStrings = false
-    let extraImports = ArrayList<String>()
-    for (stage in options.references) {
-        if (stage.name != packageName) {
-            addUnique(extraImports, stage.name)
-        }
-    }
     for (symbol in symbols) {
-        let rendered = renderImplSource(symbol, symbolsByName, options)
+        let rendered = renderGatedImplSource(symbol, symbolsByName, options)
         if (rendered.contains("windows_polyfill.")) {
             importsPolyfill = true
         }
@@ -1506,7 +1698,7 @@ func writeImplFiles(
         body += "\n\n"
         count += 1
         if (count >= 512) {
-            writer.writeFile("src/impl/symbols_${chunkIndex}.cj", renderImplChunk(packageName, body, importsPolyfill, importsCore, importsLibloading, importsInterfacePackage, importsInterfaceGuid, importsInterfaceMacros, importsStrings, extraImports))
+            writer.writeFile("${directory}/symbols_${chunkIndex}.cj", renderImplChunk(implSubpackage, body, crossImplImports, importsPolyfill, importsCore, importsLibloading, importsInterfacePackage, importsInterfaceGuid, importsInterfaceMacros, importsStrings, extraImports))
             chunkIndex += 1
             count = 0
             body = ""
@@ -1520,9 +1712,8 @@ func writeImplFiles(
         }
     }
     if (count > 0) {
-        writer.writeFile("src/impl/symbols_${chunkIndex}.cj", renderImplChunk(packageName, body, importsPolyfill, importsCore, importsLibloading, importsInterfacePackage, importsInterfaceGuid, importsInterfaceMacros, importsStrings, extraImports))
+        writer.writeFile("${directory}/symbols_${chunkIndex}.cj", renderImplChunk(implSubpackage, body, crossImplImports, importsPolyfill, importsCore, importsLibloading, importsInterfacePackage, importsInterfaceGuid, importsInterfaceMacros, importsStrings, extraImports))
     }
-    clearActiveReferences()
 }
 
 func implChunkNeedsGuidImport(rendered: String): Bool {
@@ -1533,9 +1724,15 @@ func implChunkNeedsGuidImport(rendered: String): Bool {
     rendered.contains("VArray<GUID")
 }
 
+// Render one impl subpackage source file. `implSubpackage` is the full package
+// name (`<packageName>.impl.<ns_var>`). `crossImplImports` is the pre-rendered,
+// gated wildcard-import block bringing sibling impl subpackages this namespace
+// depends on into scope; it is emitted after the helper imports and before the
+// body so cross-namespace references resolve.
 func renderImplChunk(
-    packageName: String,
+    implSubpackage: String,
     body: String,
+    crossImplImports: String,
     importsPolyfill: Bool,
     importsCore: Bool,
     importsLibloading: Bool,
@@ -1545,7 +1742,7 @@ func renderImplChunk(
     importsStrings: Bool,
     extraImports: ArrayList<String>
 ): String {
-    var content = "package ${packageName}.impl\n\n"
+    var content = "package ${implSubpackage}\n\n"
     if (importsCore || importsInterfaceMacros) {
         content += "import windows_core as windows_core\n"
     }
@@ -1579,6 +1776,10 @@ func renderImplChunk(
         importsInterfaceGuid || importsInterfaceMacros || importsStrings || addedExtra) {
         content += "\n"
     }
+    content += crossImplImports
+    if (!crossImplImports.isEmpty()) {
+        content += "\n"
+    }
     content += body
     return content
 }
@@ -1595,6 +1796,26 @@ func renderImplSource(
     return renderSymbolImpl(symbol, symbolsByName, options)
 }
 
+// Render a symbol's impl source with the per-namespace `@When` gate structurally
+// prefixed before every top-level declaration. The gate is computed once from the
+// symbol's namespace (the same derivation used by the facade re-exports and the
+// per-package cfg.toml, keeping them consistent) and threaded into the renderers,
+// which emit it at each declaration boundary. This is the gated counterpart of
+// renderImplSource used when writing the impl package files.
+func renderGatedImplSource(
+    symbol: SymbolRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    options: RenderOptions
+): String {
+    return renderSymbolImplWithGate(
+        symbol,
+        symbolsByName,
+        options,
+        TargetAbiOptions.defaults(),
+        gatePrefix(symbol.namespace)
+    )
+}
+
 func writeFacadeFiles(
     writer: GeneratedPackageWriter,
     namespace: String,
@@ -1606,17 +1827,22 @@ func writeFacadeFiles(
     var count: Int64 = 0
     var importNames = ArrayList<String>()
     var aliases = ""
+    // Every symbol in a facade chunk shares the facade's namespace, so the whole
+    // chunk (imports + aliases) is gated by that one namespace cfg variable. When
+    // it is "off", the re-exports and their impl imports are both removed, so no
+    // dangling import of a gated-off impl declaration remains.
+    let gate = cfgGateAnnotation(namespace)
     for (symbol in symbols) {
         if (symbol.namespace == namespace) {
             addUnique(importNames, symbol.implName)
-            aliases += renderFacadeAlias(symbol)
+            aliases += renderFacadeAlias(symbol, gate)
             match (symbol.typeDef) {
                 case Some(typeDef) =>
                     if (isInterfaceType(typeDef)) {
                         match (guidAttributeLiteral(typeDef)) {
                             case Some(_) =>
                                 addUnique(importNames, "${symbol.implName}Vtbl")
-                                aliases += "public type ${symbol.name}Vtbl = ${symbol.implName}Vtbl\n"
+                                aliases += "${gate}\npublic type ${symbol.name}Vtbl = ${symbol.implName}Vtbl\n"
                             case None => ()
                         }
                     }
@@ -1626,7 +1852,7 @@ func writeFacadeFiles(
             if (count >= 512) {
                 writer.writeFile(
                     "${namespaceDir}/facade_${chunkIndex}.cj",
-                    renderFacadeContent(namespace, packageName, importNames, aliases)
+                    renderFacadeContent(namespace, packageName, importNames, aliases, gate)
                 )
                 chunkIndex += 1
                 count = 0
@@ -1638,49 +1864,54 @@ func writeFacadeFiles(
     if (count > 0) {
         writer.writeFile(
             "${namespaceDir}/facade_${chunkIndex}.cj",
-            renderFacadeContent(namespace, packageName, importNames, aliases)
+            renderFacadeContent(namespace, packageName, importNames, aliases, gate)
         )
     }
 }
 
-func renderFacadeAlias(symbol: SymbolRecord): String {
+func renderFacadeAlias(symbol: SymbolRecord, gate: String): String {
     match (symbol.typeDef) {
         case Some(typeDef) =>
             let genericNames = genericParameterNames(typeDef)
             if (!genericNames.isEmpty()) {
                 let genericParams = genericParameterList(genericNames)
-                return "public type ${symbol.name}${genericParams} = ${symbol.implName}${genericParams}\n"
+                return "${gate}\npublic type ${symbol.name}${genericParams} = ${symbol.implName}${genericParams}\n"
             }
         case None => ()
     }
-    return "public type ${symbol.name} = ${symbol.implName}\n"
+    return "${gate}\npublic type ${symbol.name} = ${symbol.implName}\n"
 }
 
 func renderFacadeContent(
     namespace: String,
     packageName: String,
     importNames: ArrayList<String>,
-    aliases: String
+    aliases: String,
+    gate: String
 ): String {
     var content = "package ${namespaceToPackage(namespace, packageName)}\n\n"
-    content += renderFacadeImplImports(packageName, importNames)
+    // Every symbol re-exported by this facade belongs to `namespace`, so it lives
+    // in that namespace's impl subpackage (`<packageName>.impl.<ns_var>`); import
+    // the type aliases from there rather than the (now-split) monolithic impl.
+    content += renderFacadeImplImports(implSubpackageName(packageName, namespace), importNames, gate)
     content += "\n"
     content += aliases
     return content
 }
 
-func renderFacadeImplImports(packageName: String, importNames: ArrayList<String>): String {
+func renderFacadeImplImports(implSubpackage: String, importNames: ArrayList<String>, gate: String): String {
+    // Import the whole impl subpackage with a single gated wildcard. The explicit
+    // `import subpkg.{Sym1, Sym2, ...}` form concatenates the (now namespace-
+    // qualified, hence long) impl subpackage name with each mangled symbol name,
+    // and cjc's import parser computes a combined-length bound that the longest
+    // Win32 anonymous-aggregate mangled names overflow. A wildcard avoids the
+    // concatenation entirely; the facade's `public type` aliases resolve the
+    // mangled names brought into scope, and impl names are globally unique so the
+    // wildcard introduces no clashes. The gate keeps the import removed when the
+    // namespace is off (no dangling import of gated-off declarations).
     var content = ""
-    var i: Int64 = 0
-    while (i < Int64(importNames.size)) {
-        let group = ArrayList<String>()
-        var count: Int64 = 0
-        while (count < 64 && i < Int64(importNames.size)) {
-            group.add(importNames[i])
-            i += 1
-            count += 1
-        }
-        content += "import ${packageName}.impl.{${joinStrings(group, ", ")}}\n"
+    if (!importNames.isEmpty()) {
+        content += "${gate}\nimport ${implSubpackage}.*\n"
     }
     return content
 }

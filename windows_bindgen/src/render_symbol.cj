@@ -318,6 +318,28 @@ public func renderSymbolImpl(
     options: RenderOptions,
     targetAbi: TargetAbiOptions
 ): String {
+    // The public entry points render ungated source (empty gate). The gated impl
+    // path (writeImplFiles) calls renderSymbolImplWithGate, which computes the
+    // per-symbol gate once and threads it into every top-level-declaration
+    // renderer.
+    return renderSymbolImplWithGate(symbol, symbolsByName, options, targetAbi, "")
+}
+
+// Render a symbol's impl source, structurally prefixing `gate` before every
+// top-level declaration it emits. `gate` is the `@When[<ns> == "on"]\n` prefix
+// for the symbol's namespace (or "" to render ungated). The gate is computed once
+// here and passed down to each renderer, which prepends it at the exact point a
+// top-level declaration begins — replacing the former rendered-source line
+// scanner. Each renderer is responsible for gating every column-0 declaration it
+// produces (a single renderer may emit several: e.g. a class, its `extend`, and a
+// private owned subclass).
+func renderSymbolImplWithGate(
+    symbol: SymbolRecord,
+    symbolsByName: HashMap<String, SymbolRecord>,
+    options: RenderOptions,
+    targetAbi: TargetAbiOptions,
+    gate: String
+): String {
     if (!symbol.implSource.isEmpty()) {
         return symbol.implSource
     }
@@ -325,61 +347,61 @@ public func renderSymbolImpl(
         case Some(typeDef) =>
             let header = "// ${symbol.fullName} (${symbol.metadataToken})"
             match (win32TextPointerRawAbiTypeByFullName(symbol.fullName)) {
-                case Some(typeName) => return "${header}\npublic type ${symbol.implName} = ${typeName}"
+                case Some(typeName) => return "${header}\n${gate}public type ${symbol.implName} = ${typeName}"
                 case None => ()
             }
             match (eventRegistrationTokenRawAbiTypeByFullName(symbol.fullName)) {
-                case Some(typeName) => return "${header}\npublic type ${symbol.implName} = ${typeName}"
+                case Some(typeName) => return "${header}\n${gate}public type ${symbol.implName} = ${typeName}"
                 case None => ()
             }
             match (hresultRawAbiTypeByFullName(symbol.fullName)) {
-                case Some(typeName) => return "${header}\npublic type ${symbol.implName} = ${typeName}"
+                case Some(typeName) => return "${header}\n${gate}public type ${symbol.implName} = ${typeName}"
                 case None => ()
             }
             match (win32ScalarRawAbiTypeByFullName(symbol.fullName)) {
-                case Some(typeName) => return "${header}\n${renderRawAliasSymbol(symbol, typeDef, typeName)}"
+                case Some(typeName) => return "${header}\n${renderRawAliasSymbol(symbol, typeDef, typeName, gate)}"
                 case None => ()
             }
             match (stringHandleRawAbiTypeByFullName(symbol.fullName)) {
-                case Some(typeName) => return "${header}\npublic type ${symbol.implName} = ${typeName}"
+                case Some(typeName) => return "${header}\n${gate}public type ${symbol.implName} = ${typeName}"
                 case None => ()
             }
             if (isEnumType(typeDef)) {
-                return "${header}\n${renderEnumSymbol(symbol, typeDef, symbolsByName, options)}"
+                return "${header}\n${renderEnumSymbol(symbol, typeDef, symbolsByName, options, gate)}"
             }
             if (isDelegateType(typeDef)) {
-                return "${header}\n${renderDelegateSymbol(symbol, typeDef, symbolsByName)}"
+                return "${header}\n${renderDelegateSymbol(symbol, typeDef, symbolsByName, gate)}"
             }
             if (isValueType(typeDef)) {
-                return "${header}\n${renderValueStructSymbol(symbol, typeDef, symbolsByName, options, targetAbi)}"
+                return "${header}\n${renderValueStructSymbol(symbol, typeDef, symbolsByName, options, targetAbi, gate)}"
             }
             if (hasPInvokeMethods(typeDef)) {
-                return "${header}\n${renderPInvokeSymbol(symbol, typeDef, symbolsByName, options, targetAbi)}"
+                return "${header}\n${renderPInvokeSymbol(symbol, typeDef, symbolsByName, options, targetAbi, gate)}"
             }
             if (isApisLikeClass(typeDef)) {
-                return "${header}\n${renderPInvokeSymbol(symbol, typeDef, symbolsByName, options, targetAbi)}"
+                return "${header}\n${renderPInvokeSymbol(symbol, typeDef, symbolsByName, options, targetAbi, gate)}"
             }
             if (isInterfaceType(typeDef)) {
                 match (guidAttributeString(typeDef)) {
                     case Some(guidValue) =>
                         if (!contains(typeDef.attributes, "WindowsRuntime")) {
-                            return "${header}\n${renderNativeComInterfaceSymbol(symbol, typeDef, symbolsByName)}"
+                            return "${header}\n${renderNativeComInterfaceSymbol(symbol, typeDef, symbolsByName, gate)}"
                         }
-                        return "${header}\n${renderInterfaceSymbol(symbol, typeDef, symbolsByName, guidValue, options)}"
+                        return "${header}\n${renderInterfaceSymbol(symbol, typeDef, symbolsByName, guidValue, options, gate)}"
                     case None => ()
                 }
-                return "${header}\n${renderRawHandleSymbol(symbol, "interface")}"
+                return "${header}\n${renderRawHandleSymbol(symbol, "interface", gate)}"
             }
             if (isWinrtClassType(typeDef)) {
-                match (renderWinrtRuntimeClassSymbol(symbol, typeDef, symbolsByName)) {
+                match (renderWinrtRuntimeClassSymbol(symbol, typeDef, symbolsByName, gate)) {
                     case Some(source) => return "${header}\n${source}"
                     case None => ()
                 }
             }
-            return "${header}\n${renderRawHandleSymbol(symbol, "class")}"
+            return "${header}\n${renderRawHandleSymbol(symbol, "class", gate)}"
         case None =>
             return "// ${symbol.fullName}\n" +
-                "public struct ${symbol.implName} {\n" +
+                "${gate}public struct ${symbol.implName} {\n" +
                 "    public init() {}\n" +
                 "}"
     }
@@ -441,24 +463,25 @@ func isApisLikeClass(typeDef: TypeDefinitionRecord): Bool {
 func renderDelegateSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
-    symbolsByName: HashMap<String, SymbolRecord>
+    symbolsByName: HashMap<String, SymbolRecord>,
+    gate: String
 ): String {
     if (isWinrtDelegateType(typeDef)) {
         match (guidAttributeString(typeDef)) {
             case Some(guidValue) =>
                 match (delegateInvokeMethod(typeDef)) {
                     case Some(invokeMethod) =>
-                        return renderWinrtDelegateSymbol(symbol, typeDef, symbolsByName, guidValue, invokeMethod)
+                        return renderWinrtDelegateSymbol(symbol, typeDef, symbolsByName, guidValue, invokeMethod, gate)
                     case None =>
-                        return renderUnsupportedWinrtDelegateSymbol(symbol, "missing Invoke method")
+                        return renderUnsupportedWinrtDelegateSymbol(symbol, "missing Invoke method", gate)
                 }
             case None =>
-                return renderUnsupportedWinrtDelegateSymbol(symbol, "missing GuidAttribute")
+                return renderUnsupportedWinrtDelegateSymbol(symbol, "missing GuidAttribute", gate)
         }
     }
     match (delegateCFuncType(typeDef, symbolsByName)) {
-        case Some(typeName) => return "public type ${symbol.implName} = ${typeName}"
-        case None => return renderRawHandleSymbol(symbol, "delegate")
+        case Some(typeName) => return "${gate}public type ${symbol.implName} = ${typeName}"
+        case None => return renderRawHandleSymbol(symbol, "delegate", gate)
     }
 }
 
@@ -471,10 +494,10 @@ func delegateInvokeMethod(typeDef: TypeDefinitionRecord): Option<MethodRecord> {
     return None
 }
 
-func renderUnsupportedWinrtDelegateSymbol(symbol: SymbolRecord, reason: String): String {
-    return renderRawDelegateHandleSymbol(symbol) + "\n\n" +
+func renderUnsupportedWinrtDelegateSymbol(symbol: SymbolRecord, reason: String, gate: String): String {
+    return renderRawDelegateHandleSymbol(symbol, gate) + "\n\n" +
         "// WinRT delegate authoring is unavailable for this metadata shape: ${cjStringContent(reason)}.\n" +
-        "extend ${symbol.implName} {\n" +
+        "${gate}extend ${symbol.implName} {\n" +
         "    public static func unsupportedDelegateAuthoringReason(): String {\n" +
         "        return \"${cjStringContent(reason)}\"\n" +
         "    }\n\n" +
@@ -489,22 +512,24 @@ func renderWinrtDelegateSymbol(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
     guidValue: String,
-    invokeMethod: MethodRecord
+    invokeMethod: MethodRecord,
+    gate: String
 ): String {
     let genericNames = genericParameterNames(typeDef)
-    var content = renderWinrtDelegateVtbl(symbol, invokeMethod, symbolsByName)
-    content += renderWinrtDelegateWrapper(symbol, typeDef, symbolsByName, guidValue, invokeMethod, genericNames)
-    content += renderWinrtDelegateInvoker(symbol, invokeMethod, symbolsByName, genericNames)
+    var content = renderWinrtDelegateVtbl(symbol, invokeMethod, symbolsByName, gate)
+    content += renderWinrtDelegateWrapper(symbol, typeDef, symbolsByName, guidValue, invokeMethod, genericNames, gate)
+    content += renderWinrtDelegateInvoker(symbol, invokeMethod, symbolsByName, genericNames, gate)
     return content
 }
 
 func renderWinrtDelegateVtbl(
     symbol: SymbolRecord,
     invokeMethod: MethodRecord,
-    symbolsByName: HashMap<String, SymbolRecord>
+    symbolsByName: HashMap<String, SymbolRecord>,
+    gate: String
 ): String {
     let pairs = winrtDelegateAbiParameterPairs(invokeMethod, symbolsByName, symbol.fullName)
-    var content = "@C\npublic struct ${symbol.implName}Vtbl {\n"
+    var content = "${gate}@C\npublic struct ${symbol.implName}Vtbl {\n"
     content += "    public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()\n"
     content += "    public var Invoke: CFunc<(${interfaceCFuncParameterTypes(pairs)}) -> Int32> = " +
         "{ ${interfaceClosurePlaceholders(Int64(pairs.size) + 1)} => windows_core.E_NOTIMPL.value }\n"
@@ -519,7 +544,8 @@ func renderWinrtDelegateWrapper(
     symbolsByName: HashMap<String, SymbolRecord>,
     guidValue: String,
     invokeMethod: MethodRecord,
-    genericNames: ArrayList<String>
+    genericNames: ArrayList<String>,
+    gate: String
 ): String {
     let genericParams = genericParameterList(genericNames)
     let genericWhere = genericRuntimeWhereClause(genericNames)
@@ -532,7 +558,7 @@ func renderWinrtDelegateWrapper(
     } else {
         abiPairs
     }
-    var content = "public open class ${genericTypeName} <: windows_interface.InterfaceWrapperBase & " +
+    var content = "${gate}public open class ${genericTypeName} <: windows_interface.InterfaceWrapperBase & " +
         "windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & " +
         "windows_interface.DescriptorSchemaProvider${genericWhere} {\n"
     content += "    public init(raw: CPointer<Unit>) {\n"
@@ -618,8 +644,8 @@ func renderWinrtDelegateWrapper(
     content += "        return object.intoInterface(${genericTypeName}.descriptor())\n"
     content += "    }\n"
     content += "}\n\n"
-    content += "extend${genericParams} ${genericTypeName} <: windows_core.Interface<${genericTypeName}>${genericWhere} {}\n\n"
-    content += "private class Owned${symbol.implName}${genericParams} <: ${genericTypeName}${genericWhere} {\n"
+    content += "${gate}extend${genericParams} ${genericTypeName} <: windows_core.Interface<${genericTypeName}>${genericWhere} {}\n\n"
+    content += "${gate}private class Owned${symbol.implName}${genericParams} <: ${genericTypeName}${genericWhere} {\n"
     content += "    public init(raw: CPointer<Unit>) {\n"
     content += "        super(raw, takeOwnership: true, allowManualRelease: false)\n"
     content += "    }\n"
@@ -631,7 +657,8 @@ func renderWinrtDelegateInvoker(
     symbol: SymbolRecord,
     invokeMethod: MethodRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
-    genericNames: ArrayList<String>
+    genericNames: ArrayList<String>,
+    gate: String
 ): String {
     let genericParams = genericParameterList(genericNames)
     let genericWhere = genericRuntimeWhereClause(genericNames)
@@ -642,10 +669,10 @@ func renderWinrtDelegateInvoker(
     } else {
         abiPairs
     }
-    var content = "\npublic interface ${symbol.implName}InvokerErased {\n"
+    var content = "\n${gate}public interface ${symbol.implName}InvokerErased {\n"
     content += "    func __winrtThunk_Invoke(${parameterPairListText(abiPairs)}): Int32\n"
     content += "}\n\n"
-    content += "public interface ${symbol.implName}Invoker${genericParams} <: " +
+    content += "${gate}public interface ${symbol.implName}Invoker${genericParams} <: " +
         "${symbol.implName}InvokerErased${genericWhere} {\n"
     content += "    func Invoke(${parameterPairListText(projectedPairs)}): Unit {\n"
     content += "        ()\n"
@@ -665,7 +692,7 @@ func renderWinrtDelegateInvoker(
     content += "        }\n"
     content += "    }\n"
     content += "}\n\n"
-    content += "private class ${symbol.implName}Box${genericParams} <: ${symbol.implName}Invoker${genericParams} & Resource${genericWhere} {\n"
+    content += "${gate}private class ${symbol.implName}Box${genericParams} <: ${symbol.implName}Invoker${genericParams} & Resource${genericWhere} {\n"
     content += "    public let invoke_: ${delegateClosureType(projectedPairs)}\n"
     content += "    private let vtblHandle: CPointer<${symbol.implName}Vtbl>\n"
     content += "    private var closed: Bool = false\n\n"
@@ -696,7 +723,7 @@ func renderWinrtDelegateInvoker(
     content += "        invoke_(${argumentPairListText(projectedPairs)})\n"
     content += "    }\n"
     content += "}\n\n"
-    content += "func build${symbol.implName}BoxVtbl${genericParams}(): ${symbol.implName}Vtbl${genericWhere} {\n"
+    content += "${gate}func build${symbol.implName}BoxVtbl${genericParams}(): ${symbol.implName}Vtbl${genericWhere} {\n"
     content += "    var vtbl = ${symbol.implName}Vtbl()\n"
     content += "    vtbl.base_ = windows_core.buildIUnknownVtbl()\n"
     content += "    vtbl.Invoke = { instanceRaw: CPointer<Unit>${delegateClosureTypedParameters(abiPairs)} =>\n"
@@ -911,15 +938,16 @@ func renderValueStructSymbol(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
     options: RenderOptions,
-    targetAbi: TargetAbiOptions
+    targetAbi: TargetAbiOptions,
+    gate: String
 ): String {
     if (!hasPublicInstanceFields(typeDef) && hasLiteralFields(typeDef)) {
-        return renderStaticLiteralStructSymbol(symbol, typeDef, symbolsByName)
+        return renderStaticLiteralStructSymbol(symbol, typeDef, symbolsByName, gate)
     }
     if (contains(typeDef.attributes, "ExplicitLayout")) {
-        return renderExplicitLayoutStructSymbol(symbol, typeDef, symbolsByName, options, targetAbi)
+        return renderExplicitLayoutStructSymbol(symbol, typeDef, symbolsByName, options, targetAbi, gate)
     }
-    var content = "@C\npublic struct ${symbol.implName} {\n"
+    var content = "${gate}@C\npublic struct ${symbol.implName} {\n"
     var count: Int64 = 0
     for (field in typeDef.fields) {
         if (isPublicInstanceField(field) && field.name != "value__") {
@@ -961,9 +989,10 @@ func renderGuidAccessHelper(typeDef: TypeDefinitionRecord): String {
 func renderStaticLiteralStructSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
-    symbolsByName: HashMap<String, SymbolRecord>
+    symbolsByName: HashMap<String, SymbolRecord>,
+    gate: String
 ): String {
-    var content = "public struct ${symbol.implName} {\n"
+    var content = "${gate}public struct ${symbol.implName} {\n"
     content += renderLiteralFieldConstants(typeDef, symbolsByName, false)
     content += "}"
     return content
@@ -1048,10 +1077,11 @@ func renderExplicitLayoutStructSymbol(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
     options: RenderOptions,
-    targetAbi: TargetAbiOptions
+    targetAbi: TargetAbiOptions,
+    gate: String
 ): String {
     let storage = rawStorageSpec(symbol.fullName, typeDef, symbolsByName, targetAbi)
-    var content = "@C\npublic struct ${symbol.implName} {\n"
+    var content = "${gate}@C\npublic struct ${symbol.implName} {\n"
     content += "    public var _raw: VArray<${storage.typeName}, \$${storage.count}> = " +
         "VArray<${storage.typeName}, \$${storage.count}>(repeat: ${storage.repeatValue})\n"
     var count: Int64 = 0
@@ -2059,10 +2089,11 @@ func renderEnumSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
-    options: RenderOptions
+    options: RenderOptions,
+    gate: String
 ): String {
     let underlying = enumUnderlyingType(typeDef, symbolsByName)
-    var content = "public struct ${symbol.implName} {\n" +
+    var content = "${gate}public struct ${symbol.implName} {\n" +
         "    public let value: ${underlying}\n" +
         "    public init() {\n" +
         "        this.value = ${cjLiteralInt("0", underlying)}\n" +
@@ -2082,7 +2113,7 @@ func renderEnumSymbol(
         if (isEnumLiteral(field)) {
             match (literalValue(field.defaultValue)) {
                 case Some(value) =>
-                    content += "\npublic let ${symbol.implName}_${cjIdentifier(field.name)} = " +
+                    content += "\n${gate}public let ${symbol.implName}_${cjIdentifier(field.name)} = " +
                         "${symbol.implName}(${cjLiteral(value, underlying)})"
                 case None => ()
             }
@@ -2110,13 +2141,13 @@ func renderFlagsEnumExtendedHelpers(typeName: String): String {
     return content
 }
 
-func renderRawAliasSymbol(symbol: SymbolRecord, typeDef: TypeDefinitionRecord, rawType: String): String {
-    var content = "public type ${symbol.implName} = ${rawType}"
+func renderRawAliasSymbol(symbol: SymbolRecord, typeDef: TypeDefinitionRecord, rawType: String, gate: String): String {
+    var content = "${gate}public type ${symbol.implName} = ${rawType}"
     for (field in typeDef.fields) {
         if (isEnumLiteral(field)) {
             match (literalValue(field.defaultValue)) {
                 case Some(value) =>
-                    content += "\npublic let ${symbol.implName}_${cjIdentifier(field.name)}: ${symbol.implName} = " +
+                    content += "\n${gate}public let ${symbol.implName}_${cjIdentifier(field.name)}: ${symbol.implName} = " +
                         cjLiteral(value, rawType)
                 case None => ()
             }
@@ -2158,9 +2189,10 @@ func renderPInvokeSymbol(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
     options: RenderOptions,
-    targetAbi: TargetAbiOptions
+    targetAbi: TargetAbiOptions,
+    gate: String
 ): String {
-    var content = "public struct ${symbol.implName} {\n"
+    var content = "${gate}public struct ${symbol.implName} {\n"
     content += "    public init() {}\n"
     for (method in typeDef.methods) {
         match (method.methodImport) {
@@ -2993,26 +3025,29 @@ func pointerElementType(typeName: String): String {
 func renderNativeComInterfaceSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
-    symbolsByName: HashMap<String, SymbolRecord>
+    symbolsByName: HashMap<String, SymbolRecord>,
+    gate: String
 ): String {
-    return renderRawHandleSymbol(symbol, "interface", iidExpr: guidAttributeInterfaceExpression(typeDef)) + "\n\n" +
-        renderNativeComInterfaceVtblSymbol(symbol, typeDef, symbolsByName)
+    return renderRawHandleSymbol(symbol, "interface", gate, iidExpr: guidAttributeInterfaceExpression(typeDef)) + "\n\n" +
+        renderNativeComInterfaceVtblSymbol(symbol, typeDef, symbolsByName, gate)
 }
 
 func renderNativeComInterfaceVtblSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
-    symbolsByName: HashMap<String, SymbolRecord>
+    symbolsByName: HashMap<String, SymbolRecord>,
+    gate: String
 ): String {
     let vtblFullName = "${symbol.fullName}Vtbl"
     let vtblImplName = "${symbol.implName}Vtbl"
     var content = "// ${vtblFullName} (synthetic:${vtblImplName})\n"
     if (symbol.fullName == "Windows.Win32.System.Com.IUnknown") {
-        content += "public type ${vtblImplName} = windows_interface.IUnknownVtbl"
+        content += "${gate}public type ${vtblImplName} = windows_interface.IUnknownVtbl"
         return content
     }
 
     let baseVtbl = nativeComInterfaceBaseVtblName(typeDef, symbolsByName, symbol.fullName)
+    content += gate
     content += "@C\n"
     content += "public struct ${vtblImplName} {\n"
     content += "    public var base_: ${baseVtbl} = ${baseVtbl}()\n"
@@ -3108,17 +3143,18 @@ func renderInterfaceSymbol(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
     guidValue: String,
-    options: RenderOptions
+    options: RenderOptions,
+    gate: String
 ): String {
     if (isGenericWinrtType(typeDef)) {
-        return renderGenericWinrtInterfaceSymbol(symbol, typeDef, symbolsByName, guidValue, options)
+        return renderGenericWinrtInterfaceSymbol(symbol, typeDef, symbolsByName, guidValue, options, gate)
     }
     let cleanupSpecs = interfaceMacroCleanupSpecs(symbol, typeDef, symbolsByName)
     var interfaceAttr = "@Interface[\"${guidValue}\", \"${cjStringContent(symbol.fullName)}\""
     if (!cleanupSpecs.isEmpty()) {
         interfaceAttr += ", \"${cjStringContent(cleanupSpecs)}\""
     }
-    var content = "${interfaceAttr}]\n"
+    var content = "${gate}${interfaceAttr}]\n"
     content += "public interface ${symbol.implName} <: IInspectable {\n"
     let slotNames = ArrayList<String>()
     for (method in typeDef.methods) {
@@ -3129,7 +3165,7 @@ func renderInterfaceSymbol(
     content += "}"
     if (options.implement) {
         content += "\n\n"
-        content += renderInterfaceImplTrait(symbol, typeDef, symbolsByName)
+        content += renderInterfaceImplTrait(symbol, typeDef, symbolsByName, gate)
     }
     return content
 }
@@ -3156,9 +3192,10 @@ func interfaceMacroCleanupSpecs(
 func renderInterfaceImplTrait(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
-    symbolsByName: HashMap<String, SymbolRecord>
+    symbolsByName: HashMap<String, SymbolRecord>,
+    gate: String
 ): String {
-    var content = "public interface ${symbol.implName}_Impl {\n"
+    var content = "${gate}public interface ${symbol.implName}_Impl {\n"
     let slotNames = ArrayList<String>()
     for (method in typeDef.methods) {
         let slotName = uniqueInterfaceSlotName(method, slotNames)
@@ -3179,23 +3216,25 @@ func renderGenericWinrtInterfaceSymbol(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
     guidValue: String,
-    options: RenderOptions
+    options: RenderOptions,
+    gate: String
 ): String {
     let _ = options
     let genericNames = genericParameterNames(typeDef)
-    var content = renderGenericWinrtInterfaceVtbl(symbol, typeDef, symbolsByName)
-    content += renderGenericWinrtInterfaceImplSurfaces(symbol, typeDef, symbolsByName, genericNames)
-    content += renderGenericWinrtInterfaceWrapper(symbol, typeDef, symbolsByName, guidValue, genericNames)
+    var content = renderGenericWinrtInterfaceVtbl(symbol, typeDef, symbolsByName, gate)
+    content += renderGenericWinrtInterfaceImplSurfaces(symbol, typeDef, symbolsByName, genericNames, gate)
+    content += renderGenericWinrtInterfaceWrapper(symbol, typeDef, symbolsByName, guidValue, genericNames, gate)
     return content
 }
 
 func renderGenericWinrtInterfaceVtbl(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
-    symbolsByName: HashMap<String, SymbolRecord>
+    symbolsByName: HashMap<String, SymbolRecord>,
+    gate: String
 ): String {
     let exceptionAlias = "${symbol.implName}ExceptionBase"
-    var content = "type ${exceptionAlias} = Exception\n\n@C\npublic struct ${symbol.implName}Vtbl {\n"
+    var content = "${gate}type ${exceptionAlias} = Exception\n\n${gate}@C\npublic struct ${symbol.implName}Vtbl {\n"
     content += "    public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()\n"
     let slotNames = ArrayList<String>()
     for (method in typeDef.methods) {
@@ -3590,9 +3629,10 @@ func renderGenericWinrtInterfaceImplSurfaces(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
-    genericNames: ArrayList<String>
+    genericNames: ArrayList<String>,
+    gate: String
 ): String {
-    var content = "public interface ${symbol.implName}_ImplErased {\n"
+    var content = "${gate}public interface ${symbol.implName}_ImplErased {\n"
     let slotNames = ArrayList<String>()
     for (method in typeDef.methods) {
         let slotName = uniqueInterfaceSlotName(method, slotNames)
@@ -3604,7 +3644,7 @@ func renderGenericWinrtInterfaceImplSurfaces(
         content += "    func ${genericArrayOutReleaseMethodName(genericName)}(data: CPointer<Unit>, length: UInt32): Unit\n"
     }
     content += "}\n\n"
-    content += "public interface ${symbol.implName}_Impl${genericParameterList(genericNames)} <: " +
+    content += "${gate}public interface ${symbol.implName}_Impl${genericParameterList(genericNames)} <: " +
         "${symbol.implName}_ImplErased${genericRuntimeWhereClause(genericNames)} {\n"
     for (genericName in genericNames) {
         let safeGenericName = cjIdentifier(genericName)
@@ -3621,13 +3661,14 @@ func renderGenericWinrtInterfaceWrapper(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,
     guidValue: String,
-    genericNames: ArrayList<String>
+    genericNames: ArrayList<String>,
+    gate: String
 ): String {
     let genericParams = genericParameterList(genericNames)
     let genericWhere = genericRuntimeWhereClause(genericNames)
     let genericTypeName = "${symbol.implName}${genericParams}"
     let runtimeName = stripGenericArity(symbol.fullName)
-    var content = "public open class ${genericTypeName} <: windows_interface.InterfaceWrapperBase & " +
+    var content = "${gate}public open class ${genericTypeName} <: windows_interface.InterfaceWrapperBase & " +
         "windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & " +
         "windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider${genericWhere} {\n"
     content += "    public init(raw: CPointer<Unit>) {\n"
@@ -3689,8 +3730,8 @@ func renderGenericWinrtInterfaceWrapper(
     content += "        windows_interface.IInspectable.viewOf(asRaw())\n"
     content += "    }\n"
     content += "}\n\n"
-    content += "extend${genericParams} ${genericTypeName} <: windows_core.Interface<${genericTypeName}>${genericWhere} {}\n\n"
-    content += "private class Owned${symbol.implName}${genericParams} <: ${genericTypeName}${genericWhere} {\n"
+    content += "${gate}extend${genericParams} ${genericTypeName} <: windows_core.Interface<${genericTypeName}>${genericWhere} {}\n\n"
+    content += "${gate}private class Owned${symbol.implName}${genericParams} <: ${genericTypeName}${genericWhere} {\n"
     content += "    public init(raw: CPointer<Unit>) {\n"
     content += "        super(raw, takeOwnership: true, allowManualRelease: false)\n"
     content += "    }\n"
@@ -4446,9 +4487,9 @@ func guidLiteralPart(value: Int64, index: Int64): String {
     return "${value}u8"
 }
 
-func renderRawHandleSymbol(symbol: SymbolRecord, kind: String, iidExpr!: Option<String> = None): String {
+func renderRawHandleSymbol(symbol: SymbolRecord, kind: String, gate: String, iidExpr!: Option<String> = None): String {
     if (kind == "delegate") {
-        return renderRawDelegateHandleSymbol(symbol)
+        return renderRawDelegateHandleSymbol(symbol, gate)
     }
     // Native COM (non-WinRT) interfaces carry their IID in metadata but, unlike
     // WinRT interfaces, do not get the full WinRT type-witness surface
@@ -4464,7 +4505,7 @@ func renderRawHandleSymbol(symbol: SymbolRecord, kind: String, iidExpr!: Option<
             "    }\n"
         case None => ""
     }
-    return "public class ${symbol.implName} <: Resource {\n" +
+    return "${gate}public class ${symbol.implName} <: Resource {\n" +
         "    private let raw: CPointer<Unit>\n" +
         "    private var ownsHandle: Bool = false\n" +
         "    private var closed: Bool = false\n" +
@@ -4538,7 +4579,7 @@ func renderRawHandleSymbol(symbol: SymbolRecord, kind: String, iidExpr!: Option<
         "    }\n" +
         iidMethod +
         "}\n\n" +
-        "extend ${symbol.implName} <: windows_core.HandleWinrtType<${symbol.implName}> {\n" +
+        "${gate}extend ${symbol.implName} <: windows_core.HandleWinrtType<${symbol.implName}> {\n" +
         "    public static func intoWinrtHandle(value: ${symbol.implName}): CPointer<Unit> {\n" +
         "        value.asRaw()\n" +
         "    }\n\n" +
@@ -4566,8 +4607,8 @@ func renderRawHandleSymbol(symbol: SymbolRecord, kind: String, iidExpr!: Option<
         "}"
 }
 
-func renderRawDelegateHandleSymbol(symbol: SymbolRecord): String {
-    return "public class ${symbol.implName} <: Resource {\n" +
+func renderRawDelegateHandleSymbol(symbol: SymbolRecord, gate: String): String {
+    return "${gate}public class ${symbol.implName} <: Resource {\n" +
         "    private let raw: CPointer<Unit>\n" +
         "    private var ownsHandle: Bool = false\n" +
         "    private var closed: Bool = false\n" +
@@ -4641,7 +4682,7 @@ func renderRawDelegateHandleSymbol(symbol: SymbolRecord): String {
         "        return \"delegate\"\n" +
         "    }\n" +
         "}\n\n" +
-        "extend ${symbol.implName} <: windows_core.HandleWinrtType<${symbol.implName}> {\n" +
+        "${gate}extend ${symbol.implName} <: windows_core.HandleWinrtType<${symbol.implName}> {\n" +
         "    public static func intoWinrtHandle(value: ${symbol.implName}): CPointer<Unit> {\n" +
         "        value.asRaw()\n" +
         "    }\n\n" +
@@ -4672,13 +4713,14 @@ func renderRawDelegateHandleSymbol(symbol: SymbolRecord): String {
 func renderWinrtRuntimeClassSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
-    symbolsByName: HashMap<String, SymbolRecord>
+    symbolsByName: HashMap<String, SymbolRecord>,
+    gate: String
 ): Option<String> {
     match (defaultWinrtClassInterfaceSpec(typeDef, symbolsByName, symbol.fullName)) {
         case Some(defaultInterface) =>
             let defaultInterfaceName = defaultInterface.typeName
             let interfaceSpecs = winrtClassInterfaceSpecs(typeDef, symbolsByName, symbol.fullName, defaultInterface)
-            var content = "public class ${symbol.implName} <: windows_interface.InterfaceWrapperBase & " +
+            var content = "${gate}public class ${symbol.implName} <: windows_interface.InterfaceWrapperBase & " +
                 "windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & " +
                 "windows_core.RuntimeName & windows_core.RuntimeType {\n"
             content += "    public init(raw: CPointer<Unit>) {\n"
@@ -4742,7 +4784,7 @@ func renderWinrtRuntimeClassSymbol(
                 "${symbol.implName}.signature(), ${defaultInterfaceName}.iid())\n"
             content += "    }\n"
             content += "}\n\n"
-            content += "extend ${symbol.implName} <: windows_core.HandleWinrtType<${symbol.implName}> {\n"
+            content += "${gate}extend ${symbol.implName} <: windows_core.HandleWinrtType<${symbol.implName}> {\n"
             content += "    public static func intoWinrtHandle(value: ${symbol.implName}): CPointer<Unit> {\n"
             content += "        value.asRaw()\n"
             content += "    }\n\n"
@@ -4757,20 +4799,21 @@ func renderWinrtRuntimeClassSymbol(
             content += "    }\n"
             content += "}"
             return Some(content)
-        case None => return renderStaticOnlyWinrtRuntimeClassSymbol(symbol, typeDef, symbolsByName)
+        case None => return renderStaticOnlyWinrtRuntimeClassSymbol(symbol, typeDef, symbolsByName, gate)
     }
 }
 
 func renderStaticOnlyWinrtRuntimeClassSymbol(
     symbol: SymbolRecord,
     typeDef: TypeDefinitionRecord,
-    symbolsByName: HashMap<String, SymbolRecord>
+    symbolsByName: HashMap<String, SymbolRecord>,
+    gate: String
 ): Option<String> {
     let factoryMethods = renderRuntimeClassFactoryMethods(symbol, typeDef, symbolsByName)
     if (factoryMethods.isEmpty()) {
         return None
     }
-    var content = "public struct ${symbol.implName} <: windows_interface.RuntimeName & windows_interface.RuntimeType & " +
+    var content = "${gate}public struct ${symbol.implName} <: windows_interface.RuntimeName & windows_interface.RuntimeType & " +
         "windows_core.RuntimeName & windows_core.RuntimeType {\n"
     content += "    public init() {}\n\n"
     content += factoryMethods

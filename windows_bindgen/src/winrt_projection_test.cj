@@ -220,7 +220,7 @@ func testGenericWinrtVtblNoneBranchClearsOutSlots() {
         [],
         typeDef: Some(typeDef)
     )
-    let source = renderGenericWinrtInterfaceVtbl(symbol, typeDef, symbolsByName)
+    let source = renderGenericWinrtInterfaceVtbl(symbol, typeDef, symbolsByName, "")
 
     @Expect(source.contains("type Tiny_Foundation_IClearingSource_1ExceptionBase = Exception"), true)
     @Expect(source.contains("public var Name: CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32> = { _, result =>\n        if (result.isNotNull()) {\n            unsafe { result.write(CPointer<Unit>()) }\n        }\n        windows_core.E_NOTIMPL.value\n    }"), true)
@@ -453,7 +453,7 @@ func testWinrtInterfaceRendersInterfaceMacroAndSupportDependencies() {
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
     writeImplFiles(writer, records, "windows", symbolsByName)
-    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/symbols_0.cj"))
+    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/Example_Foundation/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
     @Expect(implChunk.contains("import windows_core.*"), false)
     @Expect(implChunk.contains("import windows_interface.*"), false)
@@ -1562,7 +1562,7 @@ func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
     writeImplFiles(writer, records, "windows", symbolsByName)
-    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/symbols_0.cj"))
+    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/Example_Foundation/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
     @Expect(implChunk.contains("import windows_core as windows_core"), true)
     @Expect(implChunk.contains("import windows_interface as windows_interface"), true)
@@ -3238,7 +3238,7 @@ func testWinrtInterfaceArrayParametersRenderSizePointerPairs() {
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
     writeImplFiles(writer, records, "windows", symbolsByName)
-    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/symbols_0.cj"))
+    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/Example_Foundation/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
     @Expect(implChunk.contains("import windows_interface.GUID"), true)
 }
