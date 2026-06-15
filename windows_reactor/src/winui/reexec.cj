@@ -37,9 +37,27 @@ import windows_libloading as windows_libloading
 
 let UI_STACK_SENTINEL = "REACTOR_UI_STACK_BOOTSTRAPPED"
 
-public func reexecWithUiStackIfNeeded(stackSpec!: String = "32mb"): ?Int64 {
-    // Already configured (wrapper set cjStackSize, or we are the re-launched child).
-    if (environmentVariableExists("cjStackSize") || environmentVariableExists(UI_STACK_SENTINEL)) {
+// `processorSpec` optionally pins the Cangjie scheduler's carrier count via the
+// `cjProcessorNum` environment variable (same pre-main re-exec mechanism as the
+// stack size). WinUI / CoreMessaging state is OS-thread-affine, but cjthreads
+// migrate between carrier threads under load; with more than one carrier a
+// sustained input burst can resume UI work on a different OS thread and trip a
+// fail-fast assertion inside CoreMessagingXP (Win32EventLoopBridge,
+// exception code 0xe0464645). Passing "1" serialises all cjthreads onto a
+// single carrier, which removes the migration hazard at the cost of in-process
+// parallelism. Leave it None for apps that need parallel cjthreads and do not
+// drive the UI at machine-gun rates.
+public func reexecWithUiStackIfNeeded(stackSpec!: String = "32mb", processorSpec!: ?String = None): ?Int64 {
+    // Already re-launched (or a wrapper bootstrapped us) — never re-exec twice.
+    if (environmentVariableExists(UI_STACK_SENTINEL)) {
+        return None
+    }
+    let needStack = !environmentVariableExists("cjStackSize")
+    let needProcessor = match (processorSpec) {
+        case Some(_) => !environmentVariableExists("cjProcessorNum")
+        case None => false
+    }
+    if (!needStack && !needProcessor) {
         return None
     }
 
@@ -54,8 +72,15 @@ public func reexecWithUiStackIfNeeded(stackSpec!: String = "32mb"): ?Int64 {
     if (!setEnvironmentVariableValue(UI_STACK_SENTINEL, "1")) {
         return None
     }
-    if (!setEnvironmentVariableValue("cjStackSize", stackSpec)) {
+    if (needStack && !setEnvironmentVariableValue("cjStackSize", stackSpec)) {
         return None
+    }
+    match (processorSpec) {
+        case Some(spec) =>
+            if (needProcessor && !setEnvironmentVariableValue("cjProcessorNum", spec)) {
+                return None
+            }
+        case None => ()
     }
 
     try {

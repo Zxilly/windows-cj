@@ -35,7 +35,24 @@ public class WinUIDispatcher <: Dispatcher & SendDispatcher {
         // we drop OUR wrapper ref the queue is the sole owner, and the CCW is freed when
         // the queue invokes+releases it. Without this close() every render loop leaks a
         // CCW (native vtable + a permanent registry root) — a steady per-navigation leak.
-        let handler = DispatcherQueueHandler.new(work)
+        //
+        // The closure MUST NOT let anything escape into the CCW thunk: the
+        // generated __winrtThunk_Invoke converts an Exception into a FAILING
+        // HRESULT returned to the DispatcherQueue (lifted CoreMessaging
+        // fail-fasts on a failed dispatch callback — CFlat::Abandonment inside
+        // CoreMessagingXP, exception code 0xe0464645), and a Cangjie Error is
+        // not caught at all and unwinds straight through the native frames.
+        let handler = DispatcherQueueHandler.new({ =>
+            try {
+                work()
+            } catch (e: Exception) {
+                println("WinUIDispatcher: dispatched work threw: ${e}")
+                e.printStackTrace()
+            } catch (e: Error) {
+                println("WinUIDispatcher: dispatched work raised error: ${e}")
+                e.printStackTrace()
+            }
+        })
         try {
             return queue.TryEnqueue(handler)
         } catch (_: Exception) {

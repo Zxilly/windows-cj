@@ -174,9 +174,15 @@ func a11ySetKeyboardAccelerators(handle: Handle, accelerators: Array<ReactorKeyb
                             ia.Handled = true
                         }
                         cb.invoke(())
-                    } catch (_: Exception) {
-                        // Never let a handler exception cross the Invoke FFI boundary.
-                        ()
+                    } catch (e: Exception) {
+                        // Never let a handler exception cross the Invoke FFI
+                        // boundary (the CCW thunk would return a failing
+                        // HRESULT to the input dispatch path).
+                        println("KeyboardAccelerator handler threw: ${e}")
+                    } catch (e: Error) {
+                        // Errors are NOT caught by the generated CCW thunk and
+                        // would unwind through CoreMessaging (0xe0464645).
+                        println("KeyboardAccelerator handler raised error: ${e}")
                     }
                 })
                 ka.addInvoked(delegate)

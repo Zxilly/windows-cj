@@ -672,7 +672,33 @@ public class Reconciler {
 
         // Canvas placement attached props.
         if (!optEq<CanvasPosition>(old.canvasPosition, neu.canvasPosition)) {
-            applyCanvasPositionFull(id, canvasOrDefault(neu.canvasPosition))
+            let oldCanvas = canvasOrDefault(old.canvasPosition)
+            let newCanvas = canvasOrDefault(neu.canvasPosition)
+            applyCanvasPositionFull(id, newCanvas)
+            let dx = oldCanvas.left - newCanvas.left
+            let dy = oldCanvas.top - newCanvas.top
+            if (dx != 0.0 || dy != 0.0) {
+                match (optAnimLayout(neu.animations)) {
+                    case Some(la) =>
+                        if (la.animateOffset) {
+                            backend.runLayoutTranslationAnimation(id, dx, dy, la)
+                        }
+                    case None => ()
+                }
+            }
+        } else {
+            // Position unchanged this pass: if this is a layout-animated element, its
+            // slide has settled, so clear any residual Translation offset. A slide
+            // interrupted/superseded under rapid input can otherwise leave a stale
+            // per-tile offset that persists (the element renders at canvasLeft/Top +
+            // stale Translation). No-op for elements that never animated.
+            match (optAnimLayout(neu.animations)) {
+                case Some(la) =>
+                    if (la.animateOffset) {
+                        backend.snapLayoutTranslationAtRest(id)
+                    }
+                case None => ()
+            }
         }
 
         // RelativePanel alignment attached props.

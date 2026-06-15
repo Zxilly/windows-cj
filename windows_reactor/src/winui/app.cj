@@ -3,6 +3,13 @@ package windows_reactor.winui
 import std.collection.ArrayList
 import windows_reactor.core.{RenderHost, ComponentObject, ControlId, RenderCx, Element, rootComponent}
 
+// Carrier-thread pinning, exported by the cjnative runtime (libcangjie-runtime).
+// CJ_BindOSThread marries the current cjthread to its carrier OS thread 1:1 so it
+// never migrates carriers; the WinUI UI thread must stay OS-thread-stable because
+// WinUI/CoreMessaging state is thread-affine. (C symbol CJBindOSThread; Windows
+// exports it under the CJ_ prefix.)
+foreign func CJ_BindOSThread(): Int32
+
 // ============================================================================
 // App — process entry builder that wires the WinUI host to a reactor RenderHost
 // and pumps the first render.
@@ -67,6 +74,15 @@ public class App {
 
     // Run the application to completion (blocks on the WinUI message loop).
     public func run(): Unit {
+        // Pin the UI cjthread to its carrier OS thread before establishing any
+        // thread-affine state (STA apartment, DispatcherQueue, message loop). This
+        // keeps GetCurrentThreadId stable for the app lifetime so WinUI/CoreMessaging
+        // never see the UI work resume on a different OS thread (which fail-fasts
+        // CoreMessagingXP, 0xe0464645). Background cjthreads still span other carriers.
+        if (unsafe { CJ_BindOSThread() } != 0) {
+            println("windows_reactor: CJ_BindOSThread failed; UI thread not pinned")
+        }
+
         let title = titleValue
         let root = match (rootValue) {
             case Some(r) => r

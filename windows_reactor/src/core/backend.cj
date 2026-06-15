@@ -729,6 +729,15 @@ public interface Backend {
     func setLayoutAnimation(id: ControlId, config: ?LayoutAnimationConfig): Unit {
         let _ = id; let _ = config
     }
+    func runLayoutTranslationAnimation(id: ControlId, dx: Float64, dy: Float64,
+                                       config: LayoutAnimationConfig): Unit {
+        let _ = id; let _ = dx; let _ = dy; let _ = config
+    }
+    // Clear a residual layout-translation offset for a control now at rest (slide
+    // settled). Default no-op; backends that drive layout slides override it.
+    func snapLayoutTranslationAtRest(id: ControlId): Unit {
+        let _ = id
+    }
     func runPropertyAnimation(id: ControlId, config: ?AnimationConfig): Unit {
         let _ = id; let _ = config
     }

@@ -32,6 +32,7 @@ public enum Op {
     | OnThemeChangedOp
     | SetImplicitTransitionsOp(ControlId, ?ImplicitTransitions)
     | SetLayoutAnimationOp(ControlId, ?LayoutAnimationConfig)
+    | RunLayoutTranslationAnimationOp(ControlId, Float64, Float64, LayoutAnimationConfig)
     | RunPropertyAnimationOp(ControlId, ?AnimationConfig)
     | SetRichTextParagraphsOp(ControlId, Array<RichTextParagraph>)
     | SetAccessibilityOp(ControlId, AccessibilityModifiers)
@@ -66,6 +67,7 @@ public enum Op {
             case OnThemeChangedOp => "OnThemeChanged"
             case SetImplicitTransitionsOp(_, _) => "SetImplicitTransitions"
             case SetLayoutAnimationOp(_, _) => "SetLayoutAnimation"
+            case RunLayoutTranslationAnimationOp(_, _, _, _) => "RunLayoutTranslationAnimation"
             case RunPropertyAnimationOp(_, _) => "RunPropertyAnimation"
             case SetRichTextParagraphsOp(_, _) => "SetRichTextParagraphs"
             case SetAccessibilityOp(_, _) => "SetAccessibility"
@@ -330,6 +332,11 @@ public class RecordingBackend <: Backend {
 
     public func setLayoutAnimation(id: ControlId, config: ?LayoutAnimationConfig): Unit {
         ops.add(Op.SetLayoutAnimationOp(id, config))
+    }
+
+    public func runLayoutTranslationAnimation(id: ControlId, dx: Float64, dy: Float64,
+                                              config: LayoutAnimationConfig): Unit {
+        ops.add(Op.RunLayoutTranslationAnimationOp(id, dx, dy, config))
     }
 
     public func runPropertyAnimation(id: ControlId, config: ?AnimationConfig): Unit {

@@ -165,12 +165,70 @@ func animSetImplicitTransitions(handle: Handle, transitions: ?ImplicitTransition
     }
 }
 
-// Configure the layout (reposition / resize) animation. The reference leaves
-// this unimplemented (requires SetIsTranslationEnabled + the Translation
-// channel), so this is intentionally a no-op — matching set_layout_animation.
+// Configure the layout animation flag. The actual offset animation is triggered
+// by the reconciler when Canvas.Left / Canvas.Top changes.
 func animSetLayout(handle: Handle, config: ?LayoutAnimationConfig): Unit {
     let _ = handle
     let _ = config
+}
+
+// Best-effort cleanup for layout translation animations before a control is
+// destroyed or reused for another move.
+func animStopLayoutTranslation(handle: Handle): Unit {
+    let visual = elementVisual(handle)
+    try {
+        let compObj = compositionObjectOf(visual)
+        try {
+            stopAnimation(compObj, "Translation")
+        } finally {
+            compObj.close()
+        }
+    } finally {
+        visual.close()
+    }
+}
+
+// Animate a layout jump by placing the element at its final Canvas.Left/Top and
+// running a compositor Translation animation from the old visual offset back to
+// zero. This keeps layout correct immediately while movement is GPU-composited.
+func animRunLayoutTranslation(handle: Handle, dx: Float64, dy: Float64,
+                              config: LayoutAnimationConfig): Unit {
+    if (!config.animateOffset) {
+        return
+    }
+    if (dx == 0.0 && dy == 0.0) {
+        return
+    }
+
+    let ui = handleUIElementOwned(handle)
+    try {
+        // Only the legacy ElementCompositionPreview protocol may drive the
+        // hand-off visual's "Translation" channel here. Also writing the
+        // UIElement facade property (ui.Translation) makes XAML's facade
+        // engine and this manual StartAnimation double-drive the same
+        // property, which fail-fasts inside CoreMessagingXP under churn.
+        ElementCompositionPreview.SetIsTranslationEnabled(ui, true)
+
+        let visual = ElementCompositionPreview.GetElementVisual(ui)
+        try {
+            let compObj = compositionObjectOf(visual)
+            try {
+                stopAnimation(compObj, "Translation")
+                let compositor = compObj.Compositor
+                try {
+                    runLayoutTranslationAnimation(compObj, compositor, dx, dy, config)
+                } finally {
+                    compositor.close()
+                }
+            } finally {
+                compObj.close()
+            }
+        } finally {
+            visual.close()
+        }
+    } finally {
+        ui.close()
+    }
 }
 
 // Run a one-shot property animation (opacity / scale key-frames) on the
@@ -378,6 +436,63 @@ func runScaleAnimation(handle: Handle, visual: Visual, compObj: CompositionObjec
     }
 }
 
+// Force a hand-off visual's Translation back to (0,0,0) — used to clear a residual
+// offset left by a slide that was interrupted/superseded under rapid input. Driven
+// through the same ElementCompositionPreview + StartAnimation path as the slide (a
+// 1 ms key-frame to zero); the UIElement Translation FACADE is deliberately NOT
+// written (that double-drives the property and fail-fasts CoreMessagingXP).
+func animSnapLayoutTranslation(handle: Handle): Unit {
+    let ui = handleUIElementOwned(handle)
+    try {
+        ElementCompositionPreview.SetIsTranslationEnabled(ui, true)
+        let visual = ElementCompositionPreview.GetElementVisual(ui)
+        try {
+            let compObj = compositionObjectOf(visual)
+            try {
+                stopAnimation(compObj, "Translation")
+                let compositor = compObj.Compositor
+                try {
+                    let anim = compositor.CreateVector3KeyFrameAnimation()
+                    try {
+                        setAnimationDuration(anim.asRaw(), 1.0)
+                        anim.InsertKeyFrame(1.0f32, vec3(0.0f32, 0.0f32, 0.0f32))
+                        startAnimation(compObj, "Translation", anim.asRaw())
+                    } finally {
+                        anim.close()
+                    }
+                } finally {
+                    compositor.close()
+                }
+            } finally {
+                compObj.close()
+            }
+        } finally {
+            visual.close()
+        }
+    } finally {
+        ui.close()
+    }
+}
+
+func runLayoutTranslationAnimation(compObj: CompositionObject, compositor: Compositor,
+                                   dx: Float64, dy: Float64,
+                                   cfg: LayoutAnimationConfig): Unit {
+    let anim = compositor.CreateVector3KeyFrameAnimation()
+    try {
+        setAnimationDuration(anim.asRaw(), cfg.durationMs)
+        let easing = easingFor(compositor, Easing.EaseOut)
+        try {
+            anim.InsertKeyFrame(0.0f32, vec3(Float32(dx), Float32(dy), 0.0f32))
+            anim.InsertKeyFrameWithEasingFunction(1.0f32, vec3(0.0f32, 0.0f32, 0.0f32), easing)
+        } finally {
+            easing.close()
+        }
+        startAnimation(compObj, "Translation", anim.asRaw())
+    } finally {
+        anim.close()
+    }
+}
+
 // Read the laid-out (ActualWidth, ActualHeight) of the control, or None if the
 // FrameworkElement QI fails. Mirrors the reference's
 // `ui.cast::<IFrameworkElement>()...get_ActualWidth/Height`.
@@ -403,6 +518,15 @@ func startAnimation(compObj: CompositionObject, propertyName: String, animRaw: C
     let propHs = HString(propertyName)
     try {
         compObj.StartAnimation(propHs, anim)
+    } finally {
+        propHs.close()
+    }
+}
+
+func stopAnimation(compObj: CompositionObject, propertyName: String): Unit {
+    let propHs = HString(propertyName)
+    try {
+        compObj.StopAnimation(propHs)
     } finally {
         propHs.close()
     }

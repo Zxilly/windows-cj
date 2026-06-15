@@ -1,6 +1,6 @@
 package windows_reactor.winui
 
-import std.collection.{HashMap, ArrayList}
+import std.collection.{HashMap, ArrayList, HashSet}
 import windows_reactor.core.{
     Backend,
     ControlId,
@@ -133,6 +133,11 @@ public class WinUIBackend <: Backend {
     // commandBarFlyoutHandlers covers CommandBarFlyoutClick (Button flyout).
     private let menuClickHandlers = HashMap<UInt32, EventHandler>()
     private let commandBarFlyoutHandlers = HashMap<UInt32, EventHandler>()
+    // Controls that have had a layout Translation animation started. Only these
+    // need (and may safely receive) a StopAnimation at destroy time — calling
+    // GetElementVisual on every doomed control would force-create a hand-off
+    // visual + CoreMessaging channel traffic per destroyed element.
+    private let translationAnimated = HashSet<UInt32>()
     private var nextId: UInt32 = 1
 
     public init() {}
@@ -312,12 +317,9 @@ public class WinUIBackend <: Backend {
         // phantom flag and the visual index from the CURRENT mirror BEFORE the
         // logical-mirror write, gate ONLY that write on the (possibly
         // already-shrunk) mirror bounds, then perform the visual op
-        // unconditionally. The reconciler runs `unmount(old)` BEFORE this call and
-        // destroy scrubs the child from this mirror, so `index >= mirror.size` is
-        // expected here — but the control is still parented in the live visual tree
-        // (destroy never touches the visual Children), so the RemoveAt must still
-        // run or the old control stays visible. Gating the whole method on the
-        // mirror bound (as a naive port would) is the navigation-staleness bug.
+        // unconditionally. The reconciler runs `unmount(old)` BEFORE this call,
+        // but destroy does not touch the parent's visual Children; RemoveAt still
+        // has to run or the old control stays visible.
         let mirror = childMirror(parent)
         // Phantom check: the ContentDialog at `index` is not in the visual tree,
         // so skip the visual RemoveAt for it (the mirror write still applies).
@@ -347,12 +349,11 @@ public class WinUIBackend <: Backend {
             return
         }
         // See removeChild: the reconciler unmounts the old child before calling
-        // this, and destroy scrubs it from the logical mirror — so the slot may no
-        // longer be present in `mirror` even though the old control is still live in
-        // the visual tree. Gate only the mirror write on the bounds; always perform
-        // the visual op (matching the reference replace_child backend/mod.rs:
-        // 2566-2589, which computes the phantom flags + visual index up front and
-        // unconditionally touches the visual tree).
+        // this, but destroy does not touch the parent's visual Children. Gate only
+        // the mirror write on the bounds; always perform the visual op (matching
+        // the reference replace_child backend/mod.rs: 2566-2589, which computes
+        // the phantom flags + visual index up front and unconditionally touches
+        // the visual tree).
         let mirror = childMirror(parent)
         var oldPhantom = false
         if (index < mirror.size) {
@@ -489,21 +490,22 @@ public class WinUIBackend <: Backend {
         // Drop the stored menu / command-bar click handlers this control owns.
         menuClickHandlers.remove(id.raw)
         commandBarFlyoutHandlers.remove(id.raw)
+        // Drop only this control's own logical child list. Parent mirrors are
+        // updated by removeChild/replaceChild/moveChild using the reconciler's
+        // explicit logical index. Scrubbing this id from every parent here makes
+        // those later indexed operations remove or replace the next sibling.
         parentChildren.remove(id.raw)
-        // Remove from any parent's mirror (mirrors the reference destroy, which
-        // does `for list in kids.values_mut() { list.retain(|c| *c != id) }`).
-        for ((_, mirror) in parentChildren) {
-            var i = mirror.size - 1
-            while (i >= 0) {
-                if (mirror[i] == id.raw) {
-                    mirror.remove(at: i)
-                }
-                i = i - 1
-            }
-        }
         match (controls.get(id.raw)) {
             case Some(h) =>
                 controls.remove(id.raw)
+                if (translationAnimated.contains(id.raw)) {
+                    translationAnimated.remove(id.raw)
+                    try {
+                        animStopLayoutTranslation(h)
+                    } catch (_: Exception) {
+                        ()
+                    }
+                }
                 match (h) {
                     case NavigationViewH(_) => releaseNavMenuItemsSource(h.asRaw())
                     case _ => ()
@@ -863,6 +865,40 @@ public class WinUIBackend <: Backend {
                     println("WinUIBackend.setLayoutAnimation(#${id.raw}) failed: ${e}")
                 }
             case None => ()
+        }
+    }
+
+    public func runLayoutTranslationAnimation(id: ControlId, dx: Float64, dy: Float64,
+                                              config: LayoutAnimationConfig): Unit {
+        match (controls.get(id.raw)) {
+            case Some(h) =>
+                try {
+                    animRunLayoutTranslation(h, dx, dy, config)
+                    translationAnimated.add(id.raw)
+                } catch (e: Exception) {
+                    println("WinUIBackend.runLayoutTranslationAnimation(#${id.raw}) failed: ${e}")
+                }
+            case None => ()
+        }
+    }
+
+    // Clear a residual layout-translation offset for a control that is now at rest
+    // (its slide has settled / was superseded). No-op unless the control actually
+    // ran a translation animation, and it is dropped from the tracking set so this
+    // stays one reset per completed slide rather than per render.
+    public func snapLayoutTranslationAtRest(id: ControlId): Unit {
+        if (!translationAnimated.contains(id.raw)) {
+            return
+        }
+        match (controls.get(id.raw)) {
+            case Some(h) =>
+                try {
+                    animSnapLayoutTranslation(h)
+                    translationAnimated.remove(id.raw)
+                } catch (e: Exception) {
+                    println("WinUIBackend.snapLayoutTranslationAtRest(#${id.raw}) failed: ${e}")
+                }
+            case None => translationAnimated.remove(id.raw)
         }
     }
 
