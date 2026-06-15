@@ -33,7 +33,9 @@ public class FinalizerSafeProc {
     }
 }
 
-@CallingConv[STDCALL]
+// Win32 imports. On x86_64 there is a single calling convention, so no
+// @CallingConv is needed (STDCALL is meaningless on x64; the default CDECL maps to
+// the Microsoft x64 ABI). The newer compiler rejects @CallingConv[STDCALL] here.
 foreign {
     func GetProcAddress(hModule: CPointer<Unit>, lpProcName: CPointer<UInt8>): CPointer<Unit>
     func FreeLibrary(hLibModule: CPointer<Unit>): Int32

@@ -40,7 +40,8 @@ func resolveWinrtStringProc(name: String): CPointer<Unit> {
     windows_libloading.resolveProc("combase.dll", name)
 }
 
-@CallingConv[STDCALL]
+// Win32 imports. x86_64 has a single calling convention, so no @CallingConv is
+// needed (STDCALL is a no-op on x64; default CDECL maps to the Microsoft x64 ABI).
 foreign {
     func GetProcessHeap(): CPointer<Unit>
     func HeapAlloc(hHeap: CPointer<Unit>, dwFlags: UInt32, dwBytes: UIntNative): CPointer<Unit>

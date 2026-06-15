@@ -82,10 +82,9 @@ struct SYSTEMTIME {
     public init() {}
 }
 
-// GetLocalTime is a Win32 (STDCALL) call that writes the local wall-clock time
-// into the supplied SYSTEMTIME. Behaviour-equivalent to the reference's
-// `unsafe extern "system" fn GetLocalTime`.
-@CallingConv[STDCALL]
+// GetLocalTime writes the local wall-clock time into the supplied SYSTEMTIME.
+// On x86_64 there is a single calling convention, so no @CallingConv is needed
+// (STDCALL is a no-op on x64; default CDECL maps to the Microsoft x64 ABI).
 foreign func GetLocalTime(lpSystemTime: CPointer<SYSTEMTIME>): Unit
 
 // Holds the stroke style created once on the first frame (the reference caches
