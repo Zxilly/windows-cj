@@ -2,11 +2,18 @@
 
 package windows_common.Win32.System.Ole
 
+@When[Windows_Win32_System_Ole == "on"]
 import windows_common.impl.{Windows_Win32_System_Ole_ARRAYDESC, Windows_Win32_System_Ole_IRecordInfo, Windows_Win32_System_Ole_IRecordInfoVtbl, Windows_Win32_System_Ole_PARAMDESC, Windows_Win32_System_Ole_PARAMDESCEX, Windows_Win32_System_Ole_PARAMFLAGS}
 
+@When[Windows_Win32_System_Ole == "on"]
 public type ARRAYDESC = Windows_Win32_System_Ole_ARRAYDESC
+@When[Windows_Win32_System_Ole == "on"]
 public type IRecordInfo = Windows_Win32_System_Ole_IRecordInfo
+@When[Windows_Win32_System_Ole == "on"]
 public type IRecordInfoVtbl = Windows_Win32_System_Ole_IRecordInfoVtbl
+@When[Windows_Win32_System_Ole == "on"]
 public type PARAMDESC = Windows_Win32_System_Ole_PARAMDESC
+@When[Windows_Win32_System_Ole == "on"]
 public type PARAMDESCEX = Windows_Win32_System_Ole_PARAMDESCEX
+@When[Windows_Win32_System_Ole == "on"]
 public type PARAMFLAGS = Windows_Win32_System_Ole_PARAMFLAGS

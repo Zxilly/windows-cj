@@ -8,6 +8,7 @@ import windows_interface.IInspectable
 import windows_interface.macros.Interface
 
 // Microsoft.UI.Xaml.Controls.Canvas (synthetic:Microsoft_UI_Xaml_Controls_Canvas)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_Canvas <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -285,6 +286,7 @@ public class Microsoft_UI_Xaml_Controls_Canvas <: windows_interface.InterfaceWra
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_Canvas <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_Canvas> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_Canvas): CPointer<Unit> {
         value.asRaw()
@@ -303,6 +305,7 @@ extend Microsoft_UI_Xaml_Controls_Canvas <: windows_core.HandleWinrtType<Microso
 }
 
 // Microsoft.UI.Xaml.Controls.CharacterCasing (synthetic:Microsoft_UI_Xaml_Controls_CharacterCasing)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_CharacterCasing {
     public let value: Int32
     public init() {
@@ -312,11 +315,15 @@ public struct Microsoft_UI_Xaml_Controls_CharacterCasing {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CharacterCasing_Normal = Microsoft_UI_Xaml_Controls_CharacterCasing(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CharacterCasing_Lower = Microsoft_UI_Xaml_Controls_CharacterCasing(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CharacterCasing_Upper = Microsoft_UI_Xaml_Controls_CharacterCasing(2)
 
 // Microsoft.UI.Xaml.Controls.CheckBox (synthetic:Microsoft_UI_Xaml_Controls_CheckBox)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_CheckBox <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -535,6 +542,7 @@ public class Microsoft_UI_Xaml_Controls_CheckBox <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_CheckBox <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CheckBox> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CheckBox): CPointer<Unit> {
         value.asRaw()
@@ -553,6 +561,7 @@ extend Microsoft_UI_Xaml_Controls_CheckBox <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Xaml.Controls.ChoosingGroupHeaderContainerEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ChoosingGroupHeaderContainerEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ChoosingGroupHeaderContainerEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -675,6 +684,7 @@ public class Microsoft_UI_Xaml_Controls_ChoosingGroupHeaderContainerEventArgs <:
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ChoosingGroupHeaderContainerEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ChoosingGroupHeaderContainerEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ChoosingGroupHeaderContainerEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -693,6 +703,7 @@ extend Microsoft_UI_Xaml_Controls_ChoosingGroupHeaderContainerEventArgs <: windo
 }
 
 // Microsoft.UI.Xaml.Controls.ChoosingItemContainerEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ChoosingItemContainerEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ChoosingItemContainerEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -834,6 +845,7 @@ public class Microsoft_UI_Xaml_Controls_ChoosingItemContainerEventArgs <: window
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ChoosingItemContainerEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ChoosingItemContainerEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ChoosingItemContainerEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -852,6 +864,7 @@ extend Microsoft_UI_Xaml_Controls_ChoosingItemContainerEventArgs <: windows_core
 }
 
 // Microsoft.UI.Xaml.Controls.ClickMode (synthetic:Microsoft_UI_Xaml_Controls_ClickMode)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_ClickMode {
     public let value: Int32
     public init() {
@@ -861,11 +874,15 @@ public struct Microsoft_UI_Xaml_Controls_ClickMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ClickMode_Release = Microsoft_UI_Xaml_Controls_ClickMode(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ClickMode_Press = Microsoft_UI_Xaml_Controls_ClickMode(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ClickMode_Hover = Microsoft_UI_Xaml_Controls_ClickMode(2)
 
 // Microsoft.UI.Xaml.Controls.ColorChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ColorChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ColorChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -948,6 +965,7 @@ public class Microsoft_UI_Xaml_Controls_ColorChangedEventArgs <: windows_interfa
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ColorChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ColorChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ColorChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -966,6 +984,7 @@ extend Microsoft_UI_Xaml_Controls_ColorChangedEventArgs <: windows_core.HandleWi
 }
 
 // Microsoft.UI.Xaml.Controls.ColorPicker (synthetic:Microsoft_UI_Xaml_Controls_ColorPicker)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ColorPicker <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1823,6 +1842,7 @@ public class Microsoft_UI_Xaml_Controls_ColorPicker <: windows_interface.Interfa
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ColorPicker <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ColorPicker> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ColorPicker): CPointer<Unit> {
         value.asRaw()
@@ -1841,6 +1861,7 @@ extend Microsoft_UI_Xaml_Controls_ColorPicker <: windows_core.HandleWinrtType<Mi
 }
 
 // Microsoft.UI.Xaml.Controls.ColorSpectrumComponents (synthetic:Microsoft_UI_Xaml_Controls_ColorSpectrumComponents)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_ColorSpectrumComponents {
     public let value: Int32
     public init() {
@@ -1850,14 +1871,21 @@ public struct Microsoft_UI_Xaml_Controls_ColorSpectrumComponents {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ColorSpectrumComponents_HueValue = Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ColorSpectrumComponents_ValueHue = Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ColorSpectrumComponents_HueSaturation = Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ColorSpectrumComponents_SaturationHue = Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(3)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ColorSpectrumComponents_SaturationValue = Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(4)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ColorSpectrumComponents_ValueSaturation = Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(5)
 
 // Microsoft.UI.Xaml.Controls.ColorSpectrumShape (synthetic:Microsoft_UI_Xaml_Controls_ColorSpectrumShape)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_ColorSpectrumShape {
     public let value: Int32
     public init() {
@@ -1867,10 +1895,13 @@ public struct Microsoft_UI_Xaml_Controls_ColorSpectrumShape {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ColorSpectrumShape_Box = Microsoft_UI_Xaml_Controls_ColorSpectrumShape(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ColorSpectrumShape_Ring = Microsoft_UI_Xaml_Controls_ColorSpectrumShape(1)
 
 // Microsoft.UI.Xaml.Controls.ColumnDefinition (synthetic:Microsoft_UI_Xaml_Controls_ColumnDefinition)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ColumnDefinition <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2058,6 +2089,7 @@ public class Microsoft_UI_Xaml_Controls_ColumnDefinition <: windows_interface.In
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ColumnDefinition <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ColumnDefinition> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ColumnDefinition): CPointer<Unit> {
         value.asRaw()
@@ -2076,6 +2108,7 @@ extend Microsoft_UI_Xaml_Controls_ColumnDefinition <: windows_core.HandleWinrtTy
 }
 
 // Microsoft.UI.Xaml.Controls.ColumnDefinitionCollection (synthetic:Microsoft_UI_Xaml_Controls_ColumnDefinitionCollection)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ColumnDefinitionCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2303,6 +2336,7 @@ public class Microsoft_UI_Xaml_Controls_ColumnDefinitionCollection <: windows_in
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ColumnDefinitionCollection <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ColumnDefinitionCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ColumnDefinitionCollection): CPointer<Unit> {
         value.asRaw()
@@ -2321,6 +2355,7 @@ extend Microsoft_UI_Xaml_Controls_ColumnDefinitionCollection <: windows_core.Han
 }
 
 // Microsoft.UI.Xaml.Controls.ComboBox (synthetic:Microsoft_UI_Xaml_Controls_ComboBox)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ComboBox <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3130,6 +3165,7 @@ public class Microsoft_UI_Xaml_Controls_ComboBox <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ComboBox <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ComboBox> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ComboBox): CPointer<Unit> {
         value.asRaw()
@@ -3148,6 +3184,7 @@ extend Microsoft_UI_Xaml_Controls_ComboBox <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Xaml.Controls.ComboBoxSelectionChangedTrigger (synthetic:Microsoft_UI_Xaml_Controls_ComboBoxSelectionChangedTrigger)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_ComboBoxSelectionChangedTrigger {
     public let value: Int32
     public init() {
@@ -3157,10 +3194,13 @@ public struct Microsoft_UI_Xaml_Controls_ComboBoxSelectionChangedTrigger {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ComboBoxSelectionChangedTrigger_Committed = Microsoft_UI_Xaml_Controls_ComboBoxSelectionChangedTrigger(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ComboBoxSelectionChangedTrigger_Always = Microsoft_UI_Xaml_Controls_ComboBoxSelectionChangedTrigger(1)
 
 // Microsoft.UI.Xaml.Controls.ComboBoxTextSubmittedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ComboBoxTextSubmittedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ComboBoxTextSubmittedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3254,6 +3294,7 @@ public class Microsoft_UI_Xaml_Controls_ComboBoxTextSubmittedEventArgs <: window
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ComboBoxTextSubmittedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ComboBoxTextSubmittedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ComboBoxTextSubmittedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -3272,6 +3313,7 @@ extend Microsoft_UI_Xaml_Controls_ComboBoxTextSubmittedEventArgs <: windows_core
 }
 
 // Microsoft.UI.Xaml.Controls.CommandBar (synthetic:Microsoft_UI_Xaml_Controls_CommandBar)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_CommandBar <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3717,6 +3759,7 @@ public class Microsoft_UI_Xaml_Controls_CommandBar <: windows_interface.Interfac
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_CommandBar <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CommandBar> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CommandBar): CPointer<Unit> {
         value.asRaw()
@@ -3735,6 +3778,7 @@ extend Microsoft_UI_Xaml_Controls_CommandBar <: windows_core.HandleWinrtType<Mic
 }
 
 // Microsoft.UI.Xaml.Controls.CommandBarDefaultLabelPosition (synthetic:Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition {
     public let value: Int32
     public init() {
@@ -3744,11 +3788,15 @@ public struct Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition_Bottom = Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition_Right = Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition_Collapsed = Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition(2)
 
 // Microsoft.UI.Xaml.Controls.CommandBarDynamicOverflowAction (synthetic:Microsoft_UI_Xaml_Controls_CommandBarDynamicOverflowAction)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_CommandBarDynamicOverflowAction {
     public let value: Int32
     public init() {
@@ -3758,10 +3806,13 @@ public struct Microsoft_UI_Xaml_Controls_CommandBarDynamicOverflowAction {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CommandBarDynamicOverflowAction_AddingToOverflow = Microsoft_UI_Xaml_Controls_CommandBarDynamicOverflowAction(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CommandBarDynamicOverflowAction_RemovingFromOverflow = Microsoft_UI_Xaml_Controls_CommandBarDynamicOverflowAction(1)
 
 // Microsoft.UI.Xaml.Controls.CommandBarFlyout (synthetic:Microsoft_UI_Xaml_Controls_CommandBarFlyout)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_CommandBarFlyout <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3921,6 +3972,7 @@ public class Microsoft_UI_Xaml_Controls_CommandBarFlyout <: windows_interface.In
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_CommandBarFlyout <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CommandBarFlyout> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CommandBarFlyout): CPointer<Unit> {
         value.asRaw()
@@ -3939,6 +3991,7 @@ extend Microsoft_UI_Xaml_Controls_CommandBarFlyout <: windows_core.HandleWinrtTy
 }
 
 // Microsoft.UI.Xaml.Controls.CommandBarLabelPosition (synthetic:Microsoft_UI_Xaml_Controls_CommandBarLabelPosition)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_CommandBarLabelPosition {
     public let value: Int32
     public init() {
@@ -3948,10 +4001,13 @@ public struct Microsoft_UI_Xaml_Controls_CommandBarLabelPosition {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CommandBarLabelPosition_Default = Microsoft_UI_Xaml_Controls_CommandBarLabelPosition(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CommandBarLabelPosition_Collapsed = Microsoft_UI_Xaml_Controls_CommandBarLabelPosition(1)
 
 // Microsoft.UI.Xaml.Controls.CommandBarOverflowButtonVisibility (synthetic:Microsoft_UI_Xaml_Controls_CommandBarOverflowButtonVisibility)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_CommandBarOverflowButtonVisibility {
     public let value: Int32
     public init() {
@@ -3961,11 +4017,15 @@ public struct Microsoft_UI_Xaml_Controls_CommandBarOverflowButtonVisibility {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CommandBarOverflowButtonVisibility_Auto = Microsoft_UI_Xaml_Controls_CommandBarOverflowButtonVisibility(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CommandBarOverflowButtonVisibility_Visible = Microsoft_UI_Xaml_Controls_CommandBarOverflowButtonVisibility(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CommandBarOverflowButtonVisibility_Collapsed = Microsoft_UI_Xaml_Controls_CommandBarOverflowButtonVisibility(2)
 
 // Microsoft.UI.Xaml.Controls.ContainerContentChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4142,6 +4202,7 @@ public class Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs <: win
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -4160,6 +4221,7 @@ extend Microsoft_UI_Xaml_Controls_ContainerContentChangingEventArgs <: windows_c
 }
 
 // Microsoft.UI.Xaml.Controls.ContentControl (synthetic:Microsoft_UI_Xaml_Controls_ContentControl)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ContentControl <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4522,6 +4584,7 @@ public class Microsoft_UI_Xaml_Controls_ContentControl <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ContentControl <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ContentControl> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ContentControl): CPointer<Unit> {
         value.asRaw()
@@ -4540,6 +4603,7 @@ extend Microsoft_UI_Xaml_Controls_ContentControl <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Xaml.Controls.ContentDialog (synthetic:Microsoft_UI_Xaml_Controls_ContentDialog)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ContentDialog <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5571,6 +5635,7 @@ public class Microsoft_UI_Xaml_Controls_ContentDialog <: windows_interface.Inter
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ContentDialog <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ContentDialog> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ContentDialog): CPointer<Unit> {
         value.asRaw()
@@ -5589,6 +5654,7 @@ extend Microsoft_UI_Xaml_Controls_ContentDialog <: windows_core.HandleWinrtType<
 }
 
 // Microsoft.UI.Xaml.Controls.ContentDialogButton (synthetic:Microsoft_UI_Xaml_Controls_ContentDialogButton)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_ContentDialogButton {
     public let value: Int32
     public init() {
@@ -5598,12 +5664,17 @@ public struct Microsoft_UI_Xaml_Controls_ContentDialogButton {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ContentDialogButton_None = Microsoft_UI_Xaml_Controls_ContentDialogButton(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ContentDialogButton_Primary = Microsoft_UI_Xaml_Controls_ContentDialogButton(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ContentDialogButton_Secondary = Microsoft_UI_Xaml_Controls_ContentDialogButton(2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ContentDialogButton_Close = Microsoft_UI_Xaml_Controls_ContentDialogButton(3)
 
 // Microsoft.UI.Xaml.Controls.ContentDialogButtonClickDeferral (synthetic:Microsoft_UI_Xaml_Controls_ContentDialogButtonClickDeferral)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ContentDialogButtonClickDeferral <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5670,6 +5741,7 @@ public class Microsoft_UI_Xaml_Controls_ContentDialogButtonClickDeferral <: wind
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ContentDialogButtonClickDeferral <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ContentDialogButtonClickDeferral> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ContentDialogButtonClickDeferral): CPointer<Unit> {
         value.asRaw()
@@ -5688,6 +5760,7 @@ extend Microsoft_UI_Xaml_Controls_ContentDialogButtonClickDeferral <: windows_co
 }
 
 // Microsoft.UI.Xaml.Controls.ContentDialogButtonClickEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ContentDialogButtonClickEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ContentDialogButtonClickEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5779,6 +5852,7 @@ public class Microsoft_UI_Xaml_Controls_ContentDialogButtonClickEventArgs <: win
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ContentDialogButtonClickEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ContentDialogButtonClickEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ContentDialogButtonClickEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -5797,6 +5871,7 @@ extend Microsoft_UI_Xaml_Controls_ContentDialogButtonClickEventArgs <: windows_c
 }
 
 // Microsoft.UI.Xaml.Controls.ContentDialogClosedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ContentDialogClosedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ContentDialogClosedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5867,6 +5942,7 @@ public class Microsoft_UI_Xaml_Controls_ContentDialogClosedEventArgs <: windows_
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ContentDialogClosedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ContentDialogClosedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ContentDialogClosedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -5885,6 +5961,7 @@ extend Microsoft_UI_Xaml_Controls_ContentDialogClosedEventArgs <: windows_core.H
 }
 
 // Microsoft.UI.Xaml.Controls.ContentDialogClosingDeferral (synthetic:Microsoft_UI_Xaml_Controls_ContentDialogClosingDeferral)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ContentDialogClosingDeferral <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5951,6 +6028,7 @@ public class Microsoft_UI_Xaml_Controls_ContentDialogClosingDeferral <: windows_
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ContentDialogClosingDeferral <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ContentDialogClosingDeferral> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ContentDialogClosingDeferral): CPointer<Unit> {
         value.asRaw()
@@ -5969,6 +6047,7 @@ extend Microsoft_UI_Xaml_Controls_ContentDialogClosingDeferral <: windows_core.H
 }
 
 // Microsoft.UI.Xaml.Controls.ContentDialogClosingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ContentDialogClosingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ContentDialogClosingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6072,6 +6151,7 @@ public class Microsoft_UI_Xaml_Controls_ContentDialogClosingEventArgs <: windows
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ContentDialogClosingEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ContentDialogClosingEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ContentDialogClosingEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -6090,6 +6170,7 @@ extend Microsoft_UI_Xaml_Controls_ContentDialogClosingEventArgs <: windows_core.
 }
 
 // Microsoft.UI.Xaml.Controls.ContentDialogOpenedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ContentDialogOpenedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ContentDialogOpenedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6148,6 +6229,7 @@ public class Microsoft_UI_Xaml_Controls_ContentDialogOpenedEventArgs <: windows_
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ContentDialogOpenedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ContentDialogOpenedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ContentDialogOpenedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -6166,6 +6248,7 @@ extend Microsoft_UI_Xaml_Controls_ContentDialogOpenedEventArgs <: windows_core.H
 }
 
 // Microsoft.UI.Xaml.Controls.ContentDialogPlacement (synthetic:Microsoft_UI_Xaml_Controls_ContentDialogPlacement)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_ContentDialogPlacement {
     public let value: Int32
     public init() {
@@ -6175,10 +6258,13 @@ public struct Microsoft_UI_Xaml_Controls_ContentDialogPlacement {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ContentDialogPlacement_Popup = Microsoft_UI_Xaml_Controls_ContentDialogPlacement(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ContentDialogPlacement_InPlace = Microsoft_UI_Xaml_Controls_ContentDialogPlacement(1)
 
 // Microsoft.UI.Xaml.Controls.ContentDialogResult (synthetic:Microsoft_UI_Xaml_Controls_ContentDialogResult)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_ContentDialogResult {
     public let value: Int32
     public init() {
@@ -6188,11 +6274,15 @@ public struct Microsoft_UI_Xaml_Controls_ContentDialogResult {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ContentDialogResult_None = Microsoft_UI_Xaml_Controls_ContentDialogResult(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ContentDialogResult_Primary = Microsoft_UI_Xaml_Controls_ContentDialogResult(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ContentDialogResult_Secondary = Microsoft_UI_Xaml_Controls_ContentDialogResult(2)
 
 // Microsoft.UI.Xaml.Controls.ContextMenuEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ContextMenuEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ContextMenuEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6301,6 +6391,7 @@ public class Microsoft_UI_Xaml_Controls_ContextMenuEventArgs <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ContextMenuEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ContextMenuEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ContextMenuEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -6319,6 +6410,7 @@ extend Microsoft_UI_Xaml_Controls_ContextMenuEventArgs <: windows_core.HandleWin
 }
 
 // Microsoft.UI.Xaml.Controls.ContextMenuOpeningEventHandler (synthetic:Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandler)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @C
 public struct Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -6326,6 +6418,7 @@ public struct Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public open class Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6393,18 +6486,22 @@ public open class Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandler <: w
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandler> {}
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 private class OwnedMicrosoft_UI_Xaml_Controls_ContextMenuOpeningEventHandler <: Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public interface Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public interface Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerInvoker <: Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -6422,6 +6519,7 @@ public interface Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerInvoke
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 private class Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerBox <: Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerVtbl>
@@ -6459,6 +6557,7 @@ private class Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerBox <: Mi
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 func buildMicrosoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -6475,6 +6574,7 @@ func buildMicrosoft_UI_Xaml_Controls_ContextMenuOpeningEventHandlerBoxVtbl(): Mi
 
 
 // Microsoft.UI.Xaml.Controls.Control (synthetic:Microsoft_UI_Xaml_Controls_Control)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_Control <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7643,6 +7743,7 @@ public class Microsoft_UI_Xaml_Controls_Control <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_Control <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_Control> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_Control): CPointer<Unit> {
         value.asRaw()
@@ -7661,6 +7762,7 @@ extend Microsoft_UI_Xaml_Controls_Control <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Xaml.Controls.ControlTemplate (synthetic:Microsoft_UI_Xaml_Controls_ControlTemplate)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ControlTemplate <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7763,6 +7865,7 @@ public class Microsoft_UI_Xaml_Controls_ControlTemplate <: windows_interface.Int
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ControlTemplate <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ControlTemplate> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ControlTemplate): CPointer<Unit> {
         value.asRaw()
@@ -7781,6 +7884,7 @@ extend Microsoft_UI_Xaml_Controls_ControlTemplate <: windows_core.HandleWinrtTyp
 }
 
 // Microsoft.UI.Xaml.Controls.DataTemplateSelector (synthetic:Microsoft_UI_Xaml_Controls_DataTemplateSelector)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_DataTemplateSelector <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7921,6 +8025,7 @@ public class Microsoft_UI_Xaml_Controls_DataTemplateSelector <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_DataTemplateSelector <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_DataTemplateSelector> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_DataTemplateSelector): CPointer<Unit> {
         value.asRaw()
@@ -7939,6 +8044,7 @@ extend Microsoft_UI_Xaml_Controls_DataTemplateSelector <: windows_core.HandleWin
 }
 
 // Microsoft.UI.Xaml.Controls.DatePicker (synthetic:Microsoft_UI_Xaml_Controls_DatePicker)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_DatePicker <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8699,6 +8805,7 @@ public class Microsoft_UI_Xaml_Controls_DatePicker <: windows_interface.Interfac
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_DatePicker <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_DatePicker> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_DatePicker): CPointer<Unit> {
         value.asRaw()
@@ -8717,6 +8824,7 @@ extend Microsoft_UI_Xaml_Controls_DatePicker <: windows_core.HandleWinrtType<Mic
 }
 
 // Microsoft.UI.Xaml.Controls.DatePickerSelectedValueChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_DatePickerSelectedValueChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_DatePickerSelectedValueChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8807,6 +8915,7 @@ public class Microsoft_UI_Xaml_Controls_DatePickerSelectedValueChangedEventArgs 
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_DatePickerSelectedValueChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_DatePickerSelectedValueChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_DatePickerSelectedValueChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -8825,6 +8934,7 @@ extend Microsoft_UI_Xaml_Controls_DatePickerSelectedValueChangedEventArgs <: win
 }
 
 // Microsoft.UI.Xaml.Controls.DatePickerValueChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_DatePickerValueChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_DatePickerValueChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8907,6 +9017,7 @@ public class Microsoft_UI_Xaml_Controls_DatePickerValueChangedEventArgs <: windo
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_DatePickerValueChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_DatePickerValueChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_DatePickerValueChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -8925,6 +9036,7 @@ extend Microsoft_UI_Xaml_Controls_DatePickerValueChangedEventArgs <: windows_cor
 }
 
 // Microsoft.UI.Xaml.Controls.DisabledFormattingAccelerators (synthetic:Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators {
     public let value: UInt32
     public init() {
@@ -8949,13 +9061,19 @@ public struct Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators {
         return Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators(!value)
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators_None = Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators_Bold = Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators_Italic = Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators(2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators_Underline = Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators(4)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators_All = Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators(4294967295)
 
 // Microsoft.UI.Xaml.Controls.DragItemsCompletedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9042,6 +9160,7 @@ public class Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs <: windows_i
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -9060,6 +9179,7 @@ extend Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs <: windows_core.Ha
 }
 
 // Microsoft.UI.Xaml.Controls.DragItemsStartingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9180,6 +9300,7 @@ public class Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs <: windows_in
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -9198,6 +9319,7 @@ extend Microsoft_UI_Xaml_Controls_DragItemsStartingEventArgs <: windows_core.Han
 }
 
 // Microsoft.UI.Xaml.Controls.DragItemsStartingEventHandler (synthetic:Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @C
 public struct Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -9205,6 +9327,7 @@ public struct Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public open class Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9272,18 +9395,22 @@ public open class Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler <: wi
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler> {}
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 private class OwnedMicrosoft_UI_Xaml_Controls_DragItemsStartingEventHandler <: Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public interface Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public interface Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerInvoker <: Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -9301,6 +9428,7 @@ public interface Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerInvoker
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 private class Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerBox <: Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl>
@@ -9338,6 +9466,7 @@ private class Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerBox <: Mic
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 func buildMicrosoft_UI_Xaml_Controls_DragItemsStartingEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_Controls_DragItemsStartingEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -9354,6 +9483,7 @@ func buildMicrosoft_UI_Xaml_Controls_DragItemsStartingEventHandlerBoxVtbl(): Mic
 
 
 // Microsoft.UI.Xaml.Controls.DropDownButton (synthetic:Microsoft_UI_Xaml_Controls_DropDownButton)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_DropDownButton <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9565,6 +9695,7 @@ public class Microsoft_UI_Xaml_Controls_DropDownButton <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_DropDownButton <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_DropDownButton> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_DropDownButton): CPointer<Unit> {
         value.asRaw()
@@ -9583,6 +9714,7 @@ extend Microsoft_UI_Xaml_Controls_DropDownButton <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Xaml.Controls.DynamicOverflowItemsChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_DynamicOverflowItemsChangingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_DynamicOverflowItemsChangingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9664,6 +9796,7 @@ public class Microsoft_UI_Xaml_Controls_DynamicOverflowItemsChangingEventArgs <:
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_DynamicOverflowItemsChangingEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_DynamicOverflowItemsChangingEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_DynamicOverflowItemsChangingEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -9682,6 +9815,7 @@ extend Microsoft_UI_Xaml_Controls_DynamicOverflowItemsChangingEventArgs <: windo
 }
 
 // Microsoft.UI.Xaml.Controls.ExpandDirection (synthetic:Microsoft_UI_Xaml_Controls_ExpandDirection)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_ExpandDirection {
     public let value: Int32
     public init() {
@@ -9691,10 +9825,13 @@ public struct Microsoft_UI_Xaml_Controls_ExpandDirection {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ExpandDirection_Down = Microsoft_UI_Xaml_Controls_ExpandDirection(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_ExpandDirection_Up = Microsoft_UI_Xaml_Controls_ExpandDirection(1)
 
 // Microsoft.UI.Xaml.Controls.Expander (synthetic:Microsoft_UI_Xaml_Controls_Expander)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_Expander <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10131,6 +10268,7 @@ public class Microsoft_UI_Xaml_Controls_Expander <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_Expander <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_Expander> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_Expander): CPointer<Unit> {
         value.asRaw()
@@ -10149,6 +10287,7 @@ extend Microsoft_UI_Xaml_Controls_Expander <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Xaml.Controls.ExpanderCollapsedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ExpanderCollapsedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ExpanderCollapsedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10207,6 +10346,7 @@ public class Microsoft_UI_Xaml_Controls_ExpanderCollapsedEventArgs <: windows_in
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ExpanderCollapsedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ExpanderCollapsedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ExpanderCollapsedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -10225,6 +10365,7 @@ extend Microsoft_UI_Xaml_Controls_ExpanderCollapsedEventArgs <: windows_core.Han
 }
 
 // Microsoft.UI.Xaml.Controls.ExpanderExpandingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ExpanderExpandingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ExpanderExpandingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10283,6 +10424,7 @@ public class Microsoft_UI_Xaml_Controls_ExpanderExpandingEventArgs <: windows_in
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ExpanderExpandingEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ExpanderExpandingEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ExpanderExpandingEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -10301,6 +10443,7 @@ extend Microsoft_UI_Xaml_Controls_ExpanderExpandingEventArgs <: windows_core.Han
 }
 
 // Microsoft.UI.Xaml.Controls.ExpanderTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_ExpanderTemplateSettings)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ExpanderTemplateSettings <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10390,6 +10533,7 @@ public class Microsoft_UI_Xaml_Controls_ExpanderTemplateSettings <: windows_inte
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ExpanderTemplateSettings <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ExpanderTemplateSettings> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ExpanderTemplateSettings): CPointer<Unit> {
         value.asRaw()
@@ -10408,6 +10552,7 @@ extend Microsoft_UI_Xaml_Controls_ExpanderTemplateSettings <: windows_core.Handl
 }
 
 // Microsoft.UI.Xaml.Controls.FlipView (synthetic:Microsoft_UI_Xaml_Controls_FlipView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_FlipView <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10652,6 +10797,7 @@ public class Microsoft_UI_Xaml_Controls_FlipView <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_FlipView <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_FlipView> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_FlipView): CPointer<Unit> {
         value.asRaw()
@@ -10670,6 +10816,7 @@ extend Microsoft_UI_Xaml_Controls_FlipView <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Xaml.Controls.Flyout (synthetic:Microsoft_UI_Xaml_Controls_Flyout)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_Flyout <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10868,6 +11015,7 @@ public class Microsoft_UI_Xaml_Controls_Flyout <: windows_interface.InterfaceWra
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_Flyout <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_Flyout> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_Flyout): CPointer<Unit> {
         value.asRaw()
@@ -10886,6 +11034,7 @@ extend Microsoft_UI_Xaml_Controls_Flyout <: windows_core.HandleWinrtType<Microso
 }
 
 // Microsoft.UI.Xaml.Controls.FocusDisengagedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10951,6 +11100,7 @@ public class Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs <: windows_inte
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -10969,6 +11119,7 @@ extend Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs <: windows_core.Handl
 }
 
 // Microsoft.UI.Xaml.Controls.FocusEngagedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -11053,6 +11204,7 @@ public class Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs <: windows_interfa
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -11071,6 +11223,7 @@ extend Microsoft_UI_Xaml_Controls_FocusEngagedEventArgs <: windows_core.HandleWi
 }
 
 // Microsoft.UI.Xaml.Controls.Grid (synthetic:Microsoft_UI_Xaml_Controls_Grid)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_Grid <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -11653,6 +11806,7 @@ public class Microsoft_UI_Xaml_Controls_Grid <: windows_interface.InterfaceWrapp
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_Grid <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_Grid> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_Grid): CPointer<Unit> {
         value.asRaw()
@@ -11671,6 +11825,7 @@ extend Microsoft_UI_Xaml_Controls_Grid <: windows_core.HandleWinrtType<Microsoft
 }
 
 // Microsoft.UI.Xaml.Controls.GridView (synthetic:Microsoft_UI_Xaml_Controls_GridView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_GridView <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -11896,6 +12051,7 @@ public class Microsoft_UI_Xaml_Controls_GridView <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_GridView <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_GridView> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_GridView): CPointer<Unit> {
         value.asRaw()
@@ -11914,6 +12070,7 @@ extend Microsoft_UI_Xaml_Controls_GridView <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Xaml.Controls.GroupStyle (synthetic:Microsoft_UI_Xaml_Controls_GroupStyle)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_GroupStyle <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12182,6 +12339,7 @@ public class Microsoft_UI_Xaml_Controls_GroupStyle <: windows_interface.Interfac
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_GroupStyle <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_GroupStyle> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_GroupStyle): CPointer<Unit> {
         value.asRaw()
@@ -12200,6 +12358,7 @@ extend Microsoft_UI_Xaml_Controls_GroupStyle <: windows_core.HandleWinrtType<Mic
 }
 
 // Microsoft.UI.Xaml.Controls.GroupStyleSelector (synthetic:Microsoft_UI_Xaml_Controls_GroupStyleSelector)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_GroupStyleSelector <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12315,6 +12474,7 @@ public class Microsoft_UI_Xaml_Controls_GroupStyleSelector <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_GroupStyleSelector <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_GroupStyleSelector> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_GroupStyleSelector): CPointer<Unit> {
         value.asRaw()
@@ -12333,6 +12493,7 @@ extend Microsoft_UI_Xaml_Controls_GroupStyleSelector <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Xaml.Controls.HyperlinkButton (synthetic:Microsoft_UI_Xaml_Controls_HyperlinkButton)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_HyperlinkButton <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12576,6 +12737,7 @@ public class Microsoft_UI_Xaml_Controls_HyperlinkButton <: windows_interface.Int
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_HyperlinkButton <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_HyperlinkButton> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_HyperlinkButton): CPointer<Unit> {
         value.asRaw()
@@ -12594,6 +12756,7 @@ extend Microsoft_UI_Xaml_Controls_HyperlinkButton <: windows_core.HandleWinrtTyp
 }
 
 // Microsoft.UI.Xaml.Controls.IAnchorRequestedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IAnchorRequestedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d5645e80-d4d3-5df8-a3ac-1f9beeb2bcef", "Microsoft.UI.Xaml.Controls.IAnchorRequestedEventArgs", "Anchor.value=Com;AnchorCandidates.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAnchorRequestedEventArgs <: IInspectable {
     func Anchor(value: CPointer<CPointer<Unit>>): Int32
@@ -12602,6 +12765,7 @@ public interface Microsoft_UI_Xaml_Controls_IAnchorRequestedEventArgs <: IInspec
 }
 
 // Microsoft.UI.Xaml.Controls.IAppBar (synthetic:Microsoft_UI_Xaml_Controls_IAppBar)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["3d8c2927-5ac5-51bb-8bec-13ff4c1bd6c8", "Microsoft.UI.Xaml.Controls.IAppBar", "TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAppBar <: IInspectable {
     func IsOpen(value: CPointer<Bool>): Int32
@@ -12624,6 +12788,7 @@ public interface Microsoft_UI_Xaml_Controls_IAppBar <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IAppBarButton (synthetic:Microsoft_UI_Xaml_Controls_IAppBarButton)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["8ab0e278-b6ae-569e-8dcd-d293552fe4d5", "Microsoft.UI.Xaml.Controls.IAppBarButton", "Label.value=HString;Icon.value=Com;KeyboardAcceleratorTextOverride.value=HString;TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAppBarButton <: IInspectable {
     func Label(value: CPointer<CPointer<Unit>>): Int32
@@ -12638,12 +12803,14 @@ public interface Microsoft_UI_Xaml_Controls_IAppBarButton <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IAppBarButtonFactory (synthetic:Microsoft_UI_Xaml_Controls_IAppBarButtonFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["4168a40a-d11f-5aeb-974e-bb43a6e7f9b2", "Microsoft.UI.Xaml.Controls.IAppBarButtonFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAppBarButtonFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IAppBarButtonStatics (synthetic:Microsoft_UI_Xaml_Controls_IAppBarButtonStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["74327a2a-18fa-59c3-8268-ec3732a4d272", "Microsoft.UI.Xaml.Controls.IAppBarButtonStatics", "LabelProperty.value=Com;IconProperty.value=Com;LabelPositionProperty.value=Com;KeyboardAcceleratorTextOverrideProperty.value=Com;IsCompactProperty.value=Com;IsInOverflowProperty.value=Com;DynamicOverflowOrderProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAppBarButtonStatics <: IInspectable {
     func LabelProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -12656,12 +12823,14 @@ public interface Microsoft_UI_Xaml_Controls_IAppBarButtonStatics <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.IAppBarFactory (synthetic:Microsoft_UI_Xaml_Controls_IAppBarFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["66b96b53-755b-5472-b2c4-8624e977d65b", "Microsoft.UI.Xaml.Controls.IAppBarFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAppBarFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IAppBarOverrides (synthetic:Microsoft_UI_Xaml_Controls_IAppBarOverrides)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["67f17798-e281-5e53-8edf-42c29c354d63", "Microsoft.UI.Xaml.Controls.IAppBarOverrides"]
 public interface Microsoft_UI_Xaml_Controls_IAppBarOverrides <: IInspectable {
     func OnClosed(e: CPointer<Unit>): Int32
@@ -12671,17 +12840,20 @@ public interface Microsoft_UI_Xaml_Controls_IAppBarOverrides <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IAppBarSeparator (synthetic:Microsoft_UI_Xaml_Controls_IAppBarSeparator)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["57bb94a3-1e56-5ebe-8a57-3a243c491d67", "Microsoft.UI.Xaml.Controls.IAppBarSeparator"]
 public interface Microsoft_UI_Xaml_Controls_IAppBarSeparator <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IAppBarSeparatorFactory (synthetic:Microsoft_UI_Xaml_Controls_IAppBarSeparatorFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6497d326-fb55-5cf5-8cc4-c556b1a958fb", "Microsoft.UI.Xaml.Controls.IAppBarSeparatorFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAppBarSeparatorFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IAppBarSeparatorStatics (synthetic:Microsoft_UI_Xaml_Controls_IAppBarSeparatorStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["dda9a3d2-d3b9-5be1-abf7-dba1eaafe0f7", "Microsoft.UI.Xaml.Controls.IAppBarSeparatorStatics", "IsCompactProperty.value=Com;IsInOverflowProperty.value=Com;DynamicOverflowOrderProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAppBarSeparatorStatics <: IInspectable {
     func IsCompactProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -12690,6 +12862,7 @@ public interface Microsoft_UI_Xaml_Controls_IAppBarSeparatorStatics <: IInspecta
 }
 
 // Microsoft.UI.Xaml.Controls.IAppBarStatics (synthetic:Microsoft_UI_Xaml_Controls_IAppBarStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["0dc7172c-a03d-5ae4-9538-ffd804823bce", "Microsoft.UI.Xaml.Controls.IAppBarStatics", "IsOpenProperty.value=Com;IsStickyProperty.value=Com;ClosedDisplayModeProperty.value=Com;LightDismissOverlayModeProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAppBarStatics <: IInspectable {
     func IsOpenProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -12699,6 +12872,7 @@ public interface Microsoft_UI_Xaml_Controls_IAppBarStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IAppBarToggleButton (synthetic:Microsoft_UI_Xaml_Controls_IAppBarToggleButton)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9687c0b1-c390-59be-acdc-4fc48f552823", "Microsoft.UI.Xaml.Controls.IAppBarToggleButton", "Label.value=HString;Icon.value=Com;KeyboardAcceleratorTextOverride.value=HString;TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAppBarToggleButton <: IInspectable {
     func Label(value: CPointer<CPointer<Unit>>): Int32
@@ -12713,12 +12887,14 @@ public interface Microsoft_UI_Xaml_Controls_IAppBarToggleButton <: IInspectable 
 }
 
 // Microsoft.UI.Xaml.Controls.IAppBarToggleButtonFactory (synthetic:Microsoft_UI_Xaml_Controls_IAppBarToggleButtonFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["07bfb2d6-23b9-57a2-9122-006294bfa92f", "Microsoft.UI.Xaml.Controls.IAppBarToggleButtonFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAppBarToggleButtonFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IAppBarToggleButtonStatics (synthetic:Microsoft_UI_Xaml_Controls_IAppBarToggleButtonStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["70021504-3fe8-53bc-abd6-d69762f4bc87", "Microsoft.UI.Xaml.Controls.IAppBarToggleButtonStatics", "LabelProperty.value=Com;IconProperty.value=Com;LabelPositionProperty.value=Com;KeyboardAcceleratorTextOverrideProperty.value=Com;IsCompactProperty.value=Com;IsInOverflowProperty.value=Com;DynamicOverflowOrderProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAppBarToggleButtonStatics <: IInspectable {
     func LabelProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -12731,6 +12907,7 @@ public interface Microsoft_UI_Xaml_Controls_IAppBarToggleButtonStatics <: IInspe
 }
 
 // Microsoft.UI.Xaml.Controls.IAutoSuggestBox (synthetic:Microsoft_UI_Xaml_Controls_IAutoSuggestBox)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["3eea809e-b2db-521d-97db-e0648fb5d798", "Microsoft.UI.Xaml.Controls.IAutoSuggestBox", "TextMemberPath.value=HString;Text.value=HString;PlaceholderText.value=HString;Header.value=Com;TextBoxStyle.value=Com;QueryIcon.value=Com;Description.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAutoSuggestBox <: IInspectable {
     func MaxSuggestionListHeight(value: CPointer<Float64>): Int32
@@ -12766,6 +12943,7 @@ public interface Microsoft_UI_Xaml_Controls_IAutoSuggestBox <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IAutoSuggestBoxQuerySubmittedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IAutoSuggestBoxQuerySubmittedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["26da5de4-57a6-57bf-acc9-aac599c0b22b", "Microsoft.UI.Xaml.Controls.IAutoSuggestBoxQuerySubmittedEventArgs", "QueryText.value=HString;ChosenSuggestion.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAutoSuggestBoxQuerySubmittedEventArgs <: IInspectable {
     func QueryText(value: CPointer<CPointer<Unit>>): Int32
@@ -12773,6 +12951,7 @@ public interface Microsoft_UI_Xaml_Controls_IAutoSuggestBoxQuerySubmittedEventAr
 }
 
 // Microsoft.UI.Xaml.Controls.IAutoSuggestBoxStatics (synthetic:Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9dfa2ff9-1094-54a8-beee-b345fa3ee089", "Microsoft.UI.Xaml.Controls.IAutoSuggestBoxStatics", "MaxSuggestionListHeightProperty.value=Com;IsSuggestionListOpenProperty.value=Com;TextMemberPathProperty.value=Com;TextProperty.value=Com;UpdateTextOnSelectProperty.value=Com;PlaceholderTextProperty.value=Com;HeaderProperty.value=Com;AutoMaximizeSuggestionAreaProperty.value=Com;TextBoxStyleProperty.value=Com;QueryIconProperty.value=Com;LightDismissOverlayModeProperty.value=Com;DescriptionProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics <: IInspectable {
     func MaxSuggestionListHeightProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -12790,12 +12969,14 @@ public interface Microsoft_UI_Xaml_Controls_IAutoSuggestBoxStatics <: IInspectab
 }
 
 // Microsoft.UI.Xaml.Controls.IAutoSuggestBoxSuggestionChosenEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IAutoSuggestBoxSuggestionChosenEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7547c7e9-7429-5045-ad98-338a96b270b1", "Microsoft.UI.Xaml.Controls.IAutoSuggestBoxSuggestionChosenEventArgs", "SelectedItem.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAutoSuggestBoxSuggestionChosenEventArgs <: IInspectable {
     func SelectedItem(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IAutoSuggestBoxTextChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d7191d84-e886-547f-a3e2-12f0e05b20fa", "Microsoft.UI.Xaml.Controls.IAutoSuggestBoxTextChangedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgs <: IInspectable {
     func Reason(value: CPointer<Int32>): Int32
@@ -12804,12 +12985,14 @@ public interface Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgs 
 }
 
 // Microsoft.UI.Xaml.Controls.IAutoSuggestBoxTextChangedEventArgsStatics (synthetic:Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgsStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["40155fb9-253b-5624-a17a-294be7a07f87", "Microsoft.UI.Xaml.Controls.IAutoSuggestBoxTextChangedEventArgsStatics", "ReasonProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IAutoSuggestBoxTextChangedEventArgsStatics <: IInspectable {
     func ReasonProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IBorder (synthetic:Microsoft_UI_Xaml_Controls_IBorder)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1ca13b47-ff5c-5abc-a411-a177df9482a9", "Microsoft.UI.Xaml.Controls.IBorder", "BorderBrush.value=Com;Background.value=Com;Child.value=Com;ChildTransitions.value=Com;BackgroundTransition.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IBorder <: IInspectable {
     func BorderBrush(value: CPointer<CPointer<Unit>>): Int32
@@ -12833,6 +13016,7 @@ public interface Microsoft_UI_Xaml_Controls_IBorder <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IBorderStatics (synthetic:Microsoft_UI_Xaml_Controls_IBorderStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9385cd66-c178-5176-b4a5-160e00e93935", "Microsoft.UI.Xaml.Controls.IBorderStatics", "BorderBrushProperty.value=Com;BorderThicknessProperty.value=Com;BackgroundProperty.value=Com;BackgroundSizingProperty.value=Com;CornerRadiusProperty.value=Com;PaddingProperty.value=Com;ChildTransitionsProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IBorderStatics <: IInspectable {
     func BorderBrushProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -12845,6 +13029,7 @@ public interface Microsoft_UI_Xaml_Controls_IBorderStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IBreadcrumbBar (synthetic:Microsoft_UI_Xaml_Controls_IBreadcrumbBar)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["2e47b7d6-5fbd-54c7-b0b1-ceff4a19c744", "Microsoft.UI.Xaml.Controls.IBreadcrumbBar", "ItemsSource.value=Com;ItemTemplate.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IBreadcrumbBar <: IInspectable {
     func ItemsSource(value: CPointer<CPointer<Unit>>): Int32
@@ -12856,12 +13041,14 @@ public interface Microsoft_UI_Xaml_Controls_IBreadcrumbBar <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IBreadcrumbBarFactory (synthetic:Microsoft_UI_Xaml_Controls_IBreadcrumbBarFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d5b6a6d9-3148-5cbc-a6ae-0f44cde41952", "Microsoft.UI.Xaml.Controls.IBreadcrumbBarFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IBreadcrumbBarFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IBreadcrumbBarItemClickedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IBreadcrumbBarItemClickedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1ceea503-365e-580d-bcd4-e9ad0248f6b5", "Microsoft.UI.Xaml.Controls.IBreadcrumbBarItemClickedEventArgs", "Item.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IBreadcrumbBarItemClickedEventArgs <: IInspectable {
     func Index(value: CPointer<Int32>): Int32
@@ -12869,6 +13056,7 @@ public interface Microsoft_UI_Xaml_Controls_IBreadcrumbBarItemClickedEventArgs <
 }
 
 // Microsoft.UI.Xaml.Controls.IBreadcrumbBarStatics (synthetic:Microsoft_UI_Xaml_Controls_IBreadcrumbBarStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["4abf3fb5-6f69-54e2-a68f-e5f904f79f38", "Microsoft.UI.Xaml.Controls.IBreadcrumbBarStatics", "ItemsSourceProperty.value=Com;ItemTemplateProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IBreadcrumbBarStatics <: IInspectable {
     func ItemsSourceProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -12876,6 +13064,7 @@ public interface Microsoft_UI_Xaml_Controls_IBreadcrumbBarStatics <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.IButton (synthetic:Microsoft_UI_Xaml_Controls_IButton)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["216c183d-d07a-5aa5-b8a4-0300a2683e87", "Microsoft.UI.Xaml.Controls.IButton", "Flyout.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IButton <: IInspectable {
     func Flyout(value: CPointer<CPointer<Unit>>): Int32
@@ -12883,18 +13072,21 @@ public interface Microsoft_UI_Xaml_Controls_IButton <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IButtonFactory (synthetic:Microsoft_UI_Xaml_Controls_IButtonFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["fe393422-d91c-57b1-9a9c-2c7e3f41f77c", "Microsoft.UI.Xaml.Controls.IButtonFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IButtonFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IButtonStatics (synthetic:Microsoft_UI_Xaml_Controls_IButtonStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["57823d25-b26a-5e0f-94f6-bbae70683dc5", "Microsoft.UI.Xaml.Controls.IButtonStatics", "FlyoutProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IButtonStatics <: IInspectable {
     func FlyoutProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ICalendarDatePicker (synthetic:Microsoft_UI_Xaml_Controls_ICalendarDatePicker)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e3d9faa1-0fd0-5932-a6db-ff00c003ac21", "Microsoft.UI.Xaml.Controls.ICalendarDatePicker", "Date.value=Com;DateFormat.value=HString;PlaceholderText.value=HString;Header.value=Com;HeaderTemplate.value=Com;CalendarViewStyle.value=Com;Description.value=Com;DayOfWeekFormat.value=HString;CalendarIdentifier.value=HString"]
 public interface Microsoft_UI_Xaml_Controls_ICalendarDatePicker <: IInspectable {
     func Date(value: CPointer<CPointer<Unit>>): Int32
@@ -12946,6 +13138,7 @@ public interface Microsoft_UI_Xaml_Controls_ICalendarDatePicker <: IInspectable 
 }
 
 // Microsoft.UI.Xaml.Controls.ICalendarDatePickerDateChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ICalendarDatePickerDateChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["57c212d7-c2f2-54a0-9d41-f263b1e5106e", "Microsoft.UI.Xaml.Controls.ICalendarDatePickerDateChangedEventArgs", "NewDate.value=Com;OldDate.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICalendarDatePickerDateChangedEventArgs <: IInspectable {
     func NewDate(value: CPointer<CPointer<Unit>>): Int32
@@ -12953,12 +13146,14 @@ public interface Microsoft_UI_Xaml_Controls_ICalendarDatePickerDateChangedEventA
 }
 
 // Microsoft.UI.Xaml.Controls.ICalendarDatePickerFactory (synthetic:Microsoft_UI_Xaml_Controls_ICalendarDatePickerFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b00c7818-955a-5524-b451-93868230892f", "Microsoft.UI.Xaml.Controls.ICalendarDatePickerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICalendarDatePickerFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ICalendarDatePickerStatics (synthetic:Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e74eb740-1aeb-591f-b84a-ef881c3b527e", "Microsoft.UI.Xaml.Controls.ICalendarDatePickerStatics", "DateProperty.value=Com;IsCalendarOpenProperty.value=Com;DateFormatProperty.value=Com;PlaceholderTextProperty.value=Com;HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;CalendarViewStyleProperty.value=Com;LightDismissOverlayModeProperty.value=Com;DescriptionProperty.value=Com;MinDateProperty.value=Com;MaxDateProperty.value=Com;IsTodayHighlightedProperty.value=Com;DisplayModeProperty.value=Com;FirstDayOfWeekProperty.value=Com;DayOfWeekFormatProperty.value=Com;CalendarIdentifierProperty.value=Com;IsOutOfScopeEnabledProperty.value=Com;IsGroupLabelVisibleProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics <: IInspectable {
     func DateProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -12982,6 +13177,7 @@ public interface Microsoft_UI_Xaml_Controls_ICalendarDatePickerStatics <: IInspe
 }
 
 // Microsoft.UI.Xaml.Controls.ICalendarView (synthetic:Microsoft_UI_Xaml_Controls_ICalendarView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e786081e-b680-56ab-bfbb-52d5b17c365e", "Microsoft.UI.Xaml.Controls.ICalendarView", "CalendarIdentifier.value=HString;DayOfWeekFormat.value=HString;SelectedDates.value=Com;TemplateSettings.value=Com;FocusBorderBrush.value=Com;SelectedHoverBorderBrush.value=Com;SelectedPressedBorderBrush.value=Com;SelectedDisabledBorderBrush.value=Com;SelectedBorderBrush.value=Com;HoverBorderBrush.value=Com;PressedBorderBrush.value=Com;TodaySelectedInnerBorderBrush.value=Com;BlackoutStrikethroughBrush.value=Com;CalendarItemBorderBrush.value=Com;BlackoutBackground.value=Com;OutOfScopeBackground.value=Com;CalendarItemBackground.value=Com;CalendarItemHoverBackground.value=Com;CalendarItemPressedBackground.value=Com;CalendarItemDisabledBackground.value=Com;TodayBackground.value=Com;TodayBlackoutBackground.value=Com;TodayHoverBackground.value=Com;TodayPressedBackground.value=Com;TodayDisabledBackground.value=Com;PressedForeground.value=Com;TodayForeground.value=Com;BlackoutForeground.value=Com;TodayBlackoutForeground.value=Com;SelectedForeground.value=Com;SelectedHoverForeground.value=Com;SelectedPressedForeground.value=Com;SelectedDisabledForeground.value=Com;OutOfScopeForeground.value=Com;OutOfScopeHoverForeground.value=Com;OutOfScopePressedForeground.value=Com;CalendarItemForeground.value=Com;DisabledForeground.value=Com;DayItemFontFamily.value=Com;FirstOfMonthLabelFontFamily.value=Com;MonthYearItemFontFamily.value=Com;FirstOfYearDecadeLabelFontFamily.value=Com;CalendarViewDayItemStyle.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICalendarView <: IInspectable {
     func CalendarIdentifier(value: CPointer<CPointer<Unit>>): Int32
@@ -13141,6 +13337,7 @@ public interface Microsoft_UI_Xaml_Controls_ICalendarView <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ICalendarViewDayItem (synthetic:Microsoft_UI_Xaml_Controls_ICalendarViewDayItem)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["947d3a07-6fa4-553c-9b12-57ca1bf72e9e", "Microsoft.UI.Xaml.Controls.ICalendarViewDayItem"]
 public interface Microsoft_UI_Xaml_Controls_ICalendarViewDayItem <: IInspectable {
     func IsBlackout(value: CPointer<Bool>): Int32
@@ -13150,6 +13347,7 @@ public interface Microsoft_UI_Xaml_Controls_ICalendarViewDayItem <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.ICalendarViewDayItemChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ICalendarViewDayItemChangingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e894fe7f-12f6-5b1a-88a2-a96764c1273f", "Microsoft.UI.Xaml.Controls.ICalendarViewDayItemChangingEventArgs", "Item.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICalendarViewDayItemChangingEventArgs <: IInspectable {
     func InRecycleQueue(value: CPointer<Bool>): Int32
@@ -13160,12 +13358,14 @@ public interface Microsoft_UI_Xaml_Controls_ICalendarViewDayItemChangingEventArg
 }
 
 // Microsoft.UI.Xaml.Controls.ICalendarViewDayItemFactory (synthetic:Microsoft_UI_Xaml_Controls_ICalendarViewDayItemFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e6159e51-1c48-5a77-a3a1-aef59d6a8c4e", "Microsoft.UI.Xaml.Controls.ICalendarViewDayItemFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICalendarViewDayItemFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ICalendarViewDayItemStatics (synthetic:Microsoft_UI_Xaml_Controls_ICalendarViewDayItemStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["2b2c4006-57fa-5f0f-b8ed-26e21f910e3a", "Microsoft.UI.Xaml.Controls.ICalendarViewDayItemStatics", "IsBlackoutProperty.value=Com;DateProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICalendarViewDayItemStatics <: IInspectable {
     func IsBlackoutProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -13173,12 +13373,14 @@ public interface Microsoft_UI_Xaml_Controls_ICalendarViewDayItemStatics <: IInsp
 }
 
 // Microsoft.UI.Xaml.Controls.ICalendarViewFactory (synthetic:Microsoft_UI_Xaml_Controls_ICalendarViewFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["2f31d1eb-8229-517c-b3a6-5a5f28724e8f", "Microsoft.UI.Xaml.Controls.ICalendarViewFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICalendarViewFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ICalendarViewSelectedDatesChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ICalendarViewSelectedDatesChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["675f688f-bc30-59f6-83c4-140bd053a09a", "Microsoft.UI.Xaml.Controls.ICalendarViewSelectedDatesChangedEventArgs", "AddedDates.value=Com;RemovedDates.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICalendarViewSelectedDatesChangedEventArgs <: IInspectable {
     func AddedDates(value: CPointer<CPointer<Unit>>): Int32
@@ -13186,6 +13388,7 @@ public interface Microsoft_UI_Xaml_Controls_ICalendarViewSelectedDatesChangedEve
 }
 
 // Microsoft.UI.Xaml.Controls.ICalendarViewStatics (synthetic:Microsoft_UI_Xaml_Controls_ICalendarViewStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9553e6fc-e4da-57d4-9472-7f8ed5ff7219", "Microsoft.UI.Xaml.Controls.ICalendarViewStatics", "CalendarIdentifierProperty.value=Com;DayOfWeekFormatProperty.value=Com;IsGroupLabelVisibleProperty.value=Com;DisplayModeProperty.value=Com;FirstDayOfWeekProperty.value=Com;IsOutOfScopeEnabledProperty.value=Com;IsTodayHighlightedProperty.value=Com;MaxDateProperty.value=Com;MinDateProperty.value=Com;NumberOfWeeksInViewProperty.value=Com;SelectedDatesProperty.value=Com;SelectionModeProperty.value=Com;TemplateSettingsProperty.value=Com;FocusBorderBrushProperty.value=Com;SelectedHoverBorderBrushProperty.value=Com;SelectedPressedBorderBrushProperty.value=Com;SelectedDisabledBorderBrushProperty.value=Com;SelectedBorderBrushProperty.value=Com;HoverBorderBrushProperty.value=Com;PressedBorderBrushProperty.value=Com;TodaySelectedInnerBorderBrushProperty.value=Com;BlackoutStrikethroughBrushProperty.value=Com;CalendarItemBorderBrushProperty.value=Com;BlackoutBackgroundProperty.value=Com;OutOfScopeBackgroundProperty.value=Com;CalendarItemBackgroundProperty.value=Com;CalendarItemHoverBackgroundProperty.value=Com;CalendarItemPressedBackgroundProperty.value=Com;CalendarItemDisabledBackgroundProperty.value=Com;TodayBackgroundProperty.value=Com;TodayBlackoutBackgroundProperty.value=Com;TodayHoverBackgroundProperty.value=Com;TodayPressedBackgroundProperty.value=Com;TodayDisabledBackgroundProperty.value=Com;PressedForegroundProperty.value=Com;TodayForegroundProperty.value=Com;BlackoutForegroundProperty.value=Com;TodayBlackoutForegroundProperty.value=Com;SelectedForegroundProperty.value=Com;SelectedHoverForegroundProperty.value=Com;SelectedPressedForegroundProperty.value=Com;SelectedDisabledForegroundProperty.value=Com;OutOfScopeForegroundProperty.value=Com;OutOfScopeHoverForegroundProperty.value=Com;OutOfScopePressedForegroundProperty.value=Com;CalendarItemForegroundProperty.value=Com;DisabledForegroundProperty.value=Com;DayItemFontFamilyProperty.value=Com;DayItemFontSizeProperty.value=Com;DayItemFontStyleProperty.value=Com;DayItemFontWeightProperty.value=Com;TodayFontWeightProperty.value=Com;FirstOfMonthLabelFontFamilyProperty.value=Com;FirstOfMonthLabelFontSizeProperty.value=Com;FirstOfMonthLabelFontStyleProperty.value=Com;FirstOfMonthLabelFontWeightProperty.value=Com;MonthYearItemFontFamilyProperty.value=Com;MonthYearItemFontSizeProperty.value=Com;MonthYearItemFontStyleProperty.value=Com;MonthYearItemFontWeightProperty.value=Com;FirstOfYearDecadeLabelFontFamilyProperty.value=Com;FirstOfYearDecadeLabelFontSizeProperty.value=Com;FirstOfYearDecadeLabelFontStyleProperty.value=Com;FirstOfYearDecadeLabelFontWeightProperty.value=Com;DayItemMarginProperty.value=Com;MonthYearItemMarginProperty.value=Com;FirstOfMonthLabelMarginProperty.value=Com;FirstOfYearDecadeLabelMarginProperty.value=Com;HorizontalDayItemAlignmentProperty.value=Com;VerticalDayItemAlignmentProperty.value=Com;HorizontalFirstOfMonthLabelAlignmentProperty.value=Com;VerticalFirstOfMonthLabelAlignmentProperty.value=Com;CalendarItemBorderThicknessProperty.value=Com;CalendarViewDayItemStyleProperty.value=Com;CalendarItemCornerRadiusProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICalendarViewStatics <: IInspectable {
     func CalendarIdentifierProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -13266,23 +13469,27 @@ public interface Microsoft_UI_Xaml_Controls_ICalendarViewStatics <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.ICandidateWindowBoundsChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ICandidateWindowBoundsChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b76faf94-3172-5c50-9507-26cd873815a1", "Microsoft.UI.Xaml.Controls.ICandidateWindowBoundsChangedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ICandidateWindowBoundsChangedEventArgs <: IInspectable {
     func Bounds(value: CPointer<Windows_Foundation_Rect>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ICanvas (synthetic:Microsoft_UI_Xaml_Controls_ICanvas)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["457ba139-1146-51d2-807e-d9d65c927060", "Microsoft.UI.Xaml.Controls.ICanvas"]
 public interface Microsoft_UI_Xaml_Controls_ICanvas <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ICanvasFactory (synthetic:Microsoft_UI_Xaml_Controls_ICanvasFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["374c5050-3481-5557-9948-804c0b8eea89", "Microsoft.UI.Xaml.Controls.ICanvasFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICanvasFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ICanvasStatics (synthetic:Microsoft_UI_Xaml_Controls_ICanvasStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c00d5e0f-77e3-5c59-8fcd-86761f0c6607", "Microsoft.UI.Xaml.Controls.ICanvasStatics", "LeftProperty.value=Com;TopProperty.value=Com;ZIndexProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICanvasStatics <: IInspectable {
     func LeftProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -13297,17 +13504,20 @@ public interface Microsoft_UI_Xaml_Controls_ICanvasStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ICheckBox (synthetic:Microsoft_UI_Xaml_Controls_ICheckBox)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c5830000-4c9d-5fdd-9346-674c71cd80c5", "Microsoft.UI.Xaml.Controls.ICheckBox"]
 public interface Microsoft_UI_Xaml_Controls_ICheckBox <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ICheckBoxFactory (synthetic:Microsoft_UI_Xaml_Controls_ICheckBoxFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f43ff58d-31d5-5835-af7b-375bc6a9bcf3", "Microsoft.UI.Xaml.Controls.ICheckBoxFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICheckBoxFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IChoosingGroupHeaderContainerEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IChoosingGroupHeaderContainerEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["2db1b0b0-aee9-55fa-8c30-c98f00643d00", "Microsoft.UI.Xaml.Controls.IChoosingGroupHeaderContainerEventArgs", "GroupHeaderContainer.value=Com;Group.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IChoosingGroupHeaderContainerEventArgs <: IInspectable {
     func GroupHeaderContainer(value: CPointer<CPointer<Unit>>): Int32
@@ -13317,6 +13527,7 @@ public interface Microsoft_UI_Xaml_Controls_IChoosingGroupHeaderContainerEventAr
 }
 
 // Microsoft.UI.Xaml.Controls.IChoosingItemContainerEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IChoosingItemContainerEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b479b9d2-a63f-5638-9486-8ccc1f40251e", "Microsoft.UI.Xaml.Controls.IChoosingItemContainerEventArgs", "Item.value=Com;ItemContainer.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IChoosingItemContainerEventArgs <: IInspectable {
     func ItemIndex(value: CPointer<Int32>): Int32
@@ -13328,6 +13539,7 @@ public interface Microsoft_UI_Xaml_Controls_IChoosingItemContainerEventArgs <: I
 }
 
 // Microsoft.UI.Xaml.Controls.IColorChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IColorChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["148d57a2-b1cb-5f5d-b6b5-512805d71761", "Microsoft.UI.Xaml.Controls.IColorChangedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IColorChangedEventArgs <: IInspectable {
     func OldColor(value: CPointer<Windows_UI_Color>): Int32
@@ -13335,6 +13547,7 @@ public interface Microsoft_UI_Xaml_Controls_IColorChangedEventArgs <: IInspectab
 }
 
 // Microsoft.UI.Xaml.Controls.IColorPicker (synthetic:Microsoft_UI_Xaml_Controls_IColorPicker)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ae72b24b-f93f-5a19-8ce4-a18b73c3356d", "Microsoft.UI.Xaml.Controls.IColorPicker", "PreviousColor.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IColorPicker <: IInspectable {
     func Color(value: CPointer<Windows_UI_Color>): Int32
@@ -13380,6 +13593,7 @@ public interface Microsoft_UI_Xaml_Controls_IColorPicker <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IColorPicker2 (synthetic:Microsoft_UI_Xaml_Controls_IColorPicker2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["802e64c9-4608-5c4c-93cf-6c462e3c1068", "Microsoft.UI.Xaml.Controls.IColorPicker2"]
 public interface Microsoft_UI_Xaml_Controls_IColorPicker2 <: IInspectable {
     func Orientation(value: CPointer<Int32>): Int32
@@ -13387,12 +13601,14 @@ public interface Microsoft_UI_Xaml_Controls_IColorPicker2 <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IColorPickerFactory (synthetic:Microsoft_UI_Xaml_Controls_IColorPickerFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["72c350e2-0a20-5b9b-ac54-633b97d7ffde", "Microsoft.UI.Xaml.Controls.IColorPickerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IColorPickerFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IColorPickerStatics (synthetic:Microsoft_UI_Xaml_Controls_IColorPickerStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["920d2d62-172e-5771-b677-4069b5134574", "Microsoft.UI.Xaml.Controls.IColorPickerStatics", "ColorProperty.value=Com;PreviousColorProperty.value=Com;IsAlphaEnabledProperty.value=Com;IsColorSpectrumVisibleProperty.value=Com;IsColorPreviewVisibleProperty.value=Com;IsColorSliderVisibleProperty.value=Com;IsAlphaSliderVisibleProperty.value=Com;IsMoreButtonVisibleProperty.value=Com;IsColorChannelTextInputVisibleProperty.value=Com;IsAlphaTextInputVisibleProperty.value=Com;IsHexInputVisibleProperty.value=Com;MinHueProperty.value=Com;MaxHueProperty.value=Com;MinSaturationProperty.value=Com;MaxSaturationProperty.value=Com;MinValueProperty.value=Com;MaxValueProperty.value=Com;ColorSpectrumShapeProperty.value=Com;ColorSpectrumComponentsProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IColorPickerStatics <: IInspectable {
     func ColorProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -13417,12 +13633,14 @@ public interface Microsoft_UI_Xaml_Controls_IColorPickerStatics <: IInspectable 
 }
 
 // Microsoft.UI.Xaml.Controls.IColorPickerStatics2 (synthetic:Microsoft_UI_Xaml_Controls_IColorPickerStatics2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["2f4af95b-81cf-5304-9950-49ec934c1b35", "Microsoft.UI.Xaml.Controls.IColorPickerStatics2", "OrientationProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IColorPickerStatics2 <: IInspectable {
     func OrientationProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IColumnDefinition (synthetic:Microsoft_UI_Xaml_Controls_IColumnDefinition)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["454cea14-87ec-5890-bb62-f1d82a94758e", "Microsoft.UI.Xaml.Controls.IColumnDefinition"]
 public interface Microsoft_UI_Xaml_Controls_IColumnDefinition <: IInspectable {
     func Width(value: CPointer<Microsoft_UI_Xaml_GridLength>): Int32
@@ -13435,6 +13653,7 @@ public interface Microsoft_UI_Xaml_Controls_IColumnDefinition <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IColumnDefinitionStatics (synthetic:Microsoft_UI_Xaml_Controls_IColumnDefinitionStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["aba4b755-ca63-5ed7-ae31-45f9f91920b0", "Microsoft.UI.Xaml.Controls.IColumnDefinitionStatics", "WidthProperty.value=Com;MaxWidthProperty.value=Com;MinWidthProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IColumnDefinitionStatics <: IInspectable {
     func WidthProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -13443,6 +13662,7 @@ public interface Microsoft_UI_Xaml_Controls_IColumnDefinitionStatics <: IInspect
 }
 
 // Microsoft.UI.Xaml.Controls.IComboBox (synthetic:Microsoft_UI_Xaml_Controls_IComboBox)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c77da58b-4fd7-51e0-a431-f84658a83e9e", "Microsoft.UI.Xaml.Controls.IComboBox", "SelectionBoxItem.value=Com;SelectionBoxItemTemplate.value=Com;TemplateSettings.value=Com;Header.value=Com;HeaderTemplate.value=Com;PlaceholderText.value=HString;PlaceholderForeground.value=Com;Text.value=HString;TextBoxStyle.value=Com;Description.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IComboBox <: IInspectable {
     func IsDropDownOpen(value: CPointer<Bool>): Int32
@@ -13484,12 +13704,14 @@ public interface Microsoft_UI_Xaml_Controls_IComboBox <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IComboBoxFactory (synthetic:Microsoft_UI_Xaml_Controls_IComboBoxFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["71c1014b-acdf-5c03-b5ed-02871caaeb6b", "Microsoft.UI.Xaml.Controls.IComboBoxFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IComboBoxFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IComboBoxOverrides (synthetic:Microsoft_UI_Xaml_Controls_IComboBoxOverrides)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a6afbc7a-284f-5b9a-89fe-a334b613f895", "Microsoft.UI.Xaml.Controls.IComboBoxOverrides"]
 public interface Microsoft_UI_Xaml_Controls_IComboBoxOverrides <: IInspectable {
     func OnDropDownClosed(e: CPointer<Unit>): Int32
@@ -13497,6 +13719,7 @@ public interface Microsoft_UI_Xaml_Controls_IComboBoxOverrides <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IComboBoxStatics (synthetic:Microsoft_UI_Xaml_Controls_IComboBoxStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7da7cd09-e256-5238-9fed-02b2f3afba25", "Microsoft.UI.Xaml.Controls.IComboBoxStatics", "IsEditableProperty.value=Com;IsDropDownOpenProperty.value=Com;MaxDropDownHeightProperty.value=Com;HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;PlaceholderTextProperty.value=Com;LightDismissOverlayModeProperty.value=Com;IsTextSearchEnabledProperty.value=Com;SelectionChangedTriggerProperty.value=Com;PlaceholderForegroundProperty.value=Com;TextProperty.value=Com;TextBoxStyleProperty.value=Com;DescriptionProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IComboBoxStatics <: IInspectable {
     func IsEditableProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -13515,6 +13738,7 @@ public interface Microsoft_UI_Xaml_Controls_IComboBoxStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IComboBoxTextSubmittedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IComboBoxTextSubmittedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["0d7a9794-73b5-585e-bfbb-de6df7eb9fcf", "Microsoft.UI.Xaml.Controls.IComboBoxTextSubmittedEventArgs", "Text.value=HString"]
 public interface Microsoft_UI_Xaml_Controls_IComboBoxTextSubmittedEventArgs <: IInspectable {
     func Text(value: CPointer<CPointer<Unit>>): Int32
@@ -13523,6 +13747,7 @@ public interface Microsoft_UI_Xaml_Controls_IComboBoxTextSubmittedEventArgs <: I
 }
 
 // Microsoft.UI.Xaml.Controls.ICommandBar (synthetic:Microsoft_UI_Xaml_Controls_ICommandBar)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b7ca8ee3-a07a-5f69-8ab8-be4e3e4cf0c8", "Microsoft.UI.Xaml.Controls.ICommandBar", "PrimaryCommands.value=Com;SecondaryCommands.value=Com;CommandBarOverflowPresenterStyle.value=Com;CommandBarTemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICommandBar <: IInspectable {
     func PrimaryCommands(value: CPointer<CPointer<Unit>>): Int32
@@ -13541,6 +13766,7 @@ public interface Microsoft_UI_Xaml_Controls_ICommandBar <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ICommandBarElement (synthetic:Microsoft_UI_Xaml_Controls_ICommandBarElement)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f8eb20b4-373e-5327-9942-66a1ea21f5f9", "Microsoft.UI.Xaml.Controls.ICommandBarElement"]
 public interface Microsoft_UI_Xaml_Controls_ICommandBarElement <: IInspectable {
     func IsCompact(value: CPointer<Bool>): Int32
@@ -13551,12 +13777,14 @@ public interface Microsoft_UI_Xaml_Controls_ICommandBarElement <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ICommandBarFactory (synthetic:Microsoft_UI_Xaml_Controls_ICommandBarFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["8d4079c3-fa0a-5bb1-b45d-499c378761b4", "Microsoft.UI.Xaml.Controls.ICommandBarFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICommandBarFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ICommandBarFlyout (synthetic:Microsoft_UI_Xaml_Controls_ICommandBarFlyout)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["18e2cc40-09cb-5f20-a715-f0b2039c5e18", "Microsoft.UI.Xaml.Controls.ICommandBarFlyout", "PrimaryCommands.value=Com;SecondaryCommands.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICommandBarFlyout <: IInspectable {
     func PrimaryCommands(value: CPointer<CPointer<Unit>>): Int32
@@ -13564,6 +13792,7 @@ public interface Microsoft_UI_Xaml_Controls_ICommandBarFlyout <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ICommandBarFlyout2 (synthetic:Microsoft_UI_Xaml_Controls_ICommandBarFlyout2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["5f81ec9e-a9d2-5f04-b5b1-013daef026dd", "Microsoft.UI.Xaml.Controls.ICommandBarFlyout2"]
 public interface Microsoft_UI_Xaml_Controls_ICommandBarFlyout2 <: IInspectable {
     func AlwaysExpanded(value: CPointer<Bool>): Int32
@@ -13571,12 +13800,14 @@ public interface Microsoft_UI_Xaml_Controls_ICommandBarFlyout2 <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ICommandBarFlyoutFactory (synthetic:Microsoft_UI_Xaml_Controls_ICommandBarFlyoutFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a194dbe6-4311-5bd2-a8eb-b49c4733a33c", "Microsoft.UI.Xaml.Controls.ICommandBarFlyoutFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICommandBarFlyoutFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ICommandBarStatics (synthetic:Microsoft_UI_Xaml_Controls_ICommandBarStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["4ed65848-4c67-588f-9666-11ff56d76f02", "Microsoft.UI.Xaml.Controls.ICommandBarStatics", "PrimaryCommandsProperty.value=Com;SecondaryCommandsProperty.value=Com;CommandBarOverflowPresenterStyleProperty.value=Com;DefaultLabelPositionProperty.value=Com;OverflowButtonVisibilityProperty.value=Com;IsDynamicOverflowEnabledProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ICommandBarStatics <: IInspectable {
     func PrimaryCommandsProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -13588,6 +13819,7 @@ public interface Microsoft_UI_Xaml_Controls_ICommandBarStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IContainerContentChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IContainerContentChangingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f4c8c937-b070-53ce-a76c-074ee5750a71", "Microsoft.UI.Xaml.Controls.IContainerContentChangingEventArgs", "ItemContainer.value=Com;Item.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IContainerContentChangingEventArgs <: IInspectable {
     func ItemContainer(value: CPointer<CPointer<Unit>>): Int32
@@ -13602,6 +13834,7 @@ public interface Microsoft_UI_Xaml_Controls_IContainerContentChangingEventArgs <
 }
 
 // Microsoft.UI.Xaml.Controls.IContentControl (synthetic:Microsoft_UI_Xaml_Controls_IContentControl)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["07e81761-11b2-52ae-8f8b-4d53d2b5900a", "Microsoft.UI.Xaml.Controls.IContentControl", "Content.value=Com;ContentTemplate.value=Com;ContentTemplateSelector.value=Com;ContentTransitions.value=Com;ContentTemplateRoot.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IContentControl <: IInspectable {
     func Content(value: CPointer<CPointer<Unit>>): Int32
@@ -13616,12 +13849,14 @@ public interface Microsoft_UI_Xaml_Controls_IContentControl <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IContentControlFactory (synthetic:Microsoft_UI_Xaml_Controls_IContentControlFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["3dea958e-5acd-5f80-8938-38634f51493a", "Microsoft.UI.Xaml.Controls.IContentControlFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IContentControlFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IContentControlOverrides (synthetic:Microsoft_UI_Xaml_Controls_IContentControlOverrides)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["2504174a-017e-5a2d-9c28-d97c66ae9937", "Microsoft.UI.Xaml.Controls.IContentControlOverrides"]
 public interface Microsoft_UI_Xaml_Controls_IContentControlOverrides <: IInspectable {
     func OnContentChanged(oldContent: CPointer<Unit>, newContent: CPointer<Unit>): Int32
@@ -13630,6 +13865,7 @@ public interface Microsoft_UI_Xaml_Controls_IContentControlOverrides <: IInspect
 }
 
 // Microsoft.UI.Xaml.Controls.IContentControlStatics (synthetic:Microsoft_UI_Xaml_Controls_IContentControlStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f25484f4-2fed-5a0a-8864-7d6d4ac43ef8", "Microsoft.UI.Xaml.Controls.IContentControlStatics", "ContentProperty.value=Com;ContentTemplateProperty.value=Com;ContentTemplateSelectorProperty.value=Com;ContentTransitionsProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IContentControlStatics <: IInspectable {
     func ContentProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -13639,6 +13875,7 @@ public interface Microsoft_UI_Xaml_Controls_IContentControlStatics <: IInspectab
 }
 
 // Microsoft.UI.Xaml.Controls.IContentDialog (synthetic:Microsoft_UI_Xaml_Controls_IContentDialog)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ac2145a3-4a32-5305-a81d-47509515bfce", "Microsoft.UI.Xaml.Controls.IContentDialog", "Title.value=Com;TitleTemplate.value=Com;PrimaryButtonText.value=HString;SecondaryButtonText.value=HString;CloseButtonText.value=HString;PrimaryButtonCommand.value=Com;SecondaryButtonCommand.value=Com;CloseButtonCommand.value=Com;PrimaryButtonCommandParameter.value=Com;SecondaryButtonCommandParameter.value=Com;CloseButtonCommandParameter.value=Com;PrimaryButtonStyle.value=Com;SecondaryButtonStyle.value=Com;CloseButtonStyle.value=Com;ShowAsync.operation=Com;ShowAsyncWithPlacement.operation=Com"]
 public interface Microsoft_UI_Xaml_Controls_IContentDialog <: IInspectable {
     func Title(value: CPointer<CPointer<Unit>>): Int32
@@ -13695,12 +13932,14 @@ public interface Microsoft_UI_Xaml_Controls_IContentDialog <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IContentDialogButtonClickDeferral (synthetic:Microsoft_UI_Xaml_Controls_IContentDialogButtonClickDeferral)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ddca6d2e-a81a-5f61-8b87-e4b6ec5fa398", "Microsoft.UI.Xaml.Controls.IContentDialogButtonClickDeferral"]
 public interface Microsoft_UI_Xaml_Controls_IContentDialogButtonClickDeferral <: IInspectable {
     func Complete(): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IContentDialogButtonClickEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IContentDialogButtonClickEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["bae6261c-362f-5342-ba26-5f6990ef726c", "Microsoft.UI.Xaml.Controls.IContentDialogButtonClickEventArgs", "GetDeferral.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IContentDialogButtonClickEventArgs <: IInspectable {
     func Cancel(value: CPointer<Bool>): Int32
@@ -13709,18 +13948,21 @@ public interface Microsoft_UI_Xaml_Controls_IContentDialogButtonClickEventArgs <
 }
 
 // Microsoft.UI.Xaml.Controls.IContentDialogClosedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IContentDialogClosedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9b84e681-1ab6-5485-88b2-d0d3c05b29f3", "Microsoft.UI.Xaml.Controls.IContentDialogClosedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IContentDialogClosedEventArgs <: IInspectable {
     func Result(value: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IContentDialogClosingDeferral (synthetic:Microsoft_UI_Xaml_Controls_IContentDialogClosingDeferral)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9d74ecc1-67d3-5f02-9b30-56f3b2e8b0a6", "Microsoft.UI.Xaml.Controls.IContentDialogClosingDeferral"]
 public interface Microsoft_UI_Xaml_Controls_IContentDialogClosingDeferral <: IInspectable {
     func Complete(): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IContentDialogClosingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IContentDialogClosingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["12782103-3b80-511c-9128-12cb8cdac444", "Microsoft.UI.Xaml.Controls.IContentDialogClosingEventArgs", "GetDeferral.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IContentDialogClosingEventArgs <: IInspectable {
     func Result(value: CPointer<Int32>): Int32
@@ -13730,17 +13972,20 @@ public interface Microsoft_UI_Xaml_Controls_IContentDialogClosingEventArgs <: II
 }
 
 // Microsoft.UI.Xaml.Controls.IContentDialogFactory (synthetic:Microsoft_UI_Xaml_Controls_IContentDialogFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a05b3ad7-c60e-545a-9ee4-f098220ed816", "Microsoft.UI.Xaml.Controls.IContentDialogFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IContentDialogFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IContentDialogOpenedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IContentDialogOpenedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d1355ed8-64ed-5bbc-9411-5f4dbca7d93f", "Microsoft.UI.Xaml.Controls.IContentDialogOpenedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IContentDialogOpenedEventArgs <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IContentDialogStatics (synthetic:Microsoft_UI_Xaml_Controls_IContentDialogStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["397b18dd-6964-5056-97c3-d69cd7716a4b", "Microsoft.UI.Xaml.Controls.IContentDialogStatics", "TitleProperty.value=Com;TitleTemplateProperty.value=Com;FullSizeDesiredProperty.value=Com;PrimaryButtonTextProperty.value=Com;SecondaryButtonTextProperty.value=Com;CloseButtonTextProperty.value=Com;PrimaryButtonCommandProperty.value=Com;SecondaryButtonCommandProperty.value=Com;CloseButtonCommandProperty.value=Com;PrimaryButtonCommandParameterProperty.value=Com;SecondaryButtonCommandParameterProperty.value=Com;CloseButtonCommandParameterProperty.value=Com;IsPrimaryButtonEnabledProperty.value=Com;IsSecondaryButtonEnabledProperty.value=Com;PrimaryButtonStyleProperty.value=Com;SecondaryButtonStyleProperty.value=Com;CloseButtonStyleProperty.value=Com;DefaultButtonProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IContentDialogStatics <: IInspectable {
     func TitleProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -13764,6 +14009,7 @@ public interface Microsoft_UI_Xaml_Controls_IContentDialogStatics <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.IContextMenuEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IContextMenuEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["65637bb3-e279-5507-bd16-6f7ba6705f31", "Microsoft.UI.Xaml.Controls.IContextMenuEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IContextMenuEventArgs <: IInspectable {
     func Handled(value: CPointer<Bool>): Int32
@@ -13773,6 +14019,7 @@ public interface Microsoft_UI_Xaml_Controls_IContextMenuEventArgs <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.IControl (synthetic:Microsoft_UI_Xaml_Controls_IControl)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["857d6e8a-d45a-5c69-a99c-bf6a5c54fb38", "Microsoft.UI.Xaml.Controls.IControl", "FontFamily.value=Com;Foreground.value=Com;Template.value=Com;Background.value=Com;BorderBrush.value=Com;DefaultStyleResourceUri.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IControl <: IInspectable {
     func IsFocusEngagementEnabled(value: CPointer<Bool>): Int32
@@ -13834,12 +14081,14 @@ public interface Microsoft_UI_Xaml_Controls_IControl <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IControlFactory (synthetic:Microsoft_UI_Xaml_Controls_IControlFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["25159233-9438-5534-aeb9-00eb059cf73f", "Microsoft.UI.Xaml.Controls.IControlFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IControlFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IControlOverrides (synthetic:Microsoft_UI_Xaml_Controls_IControlOverrides)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["5f644395-2177-5161-9f87-c6c749c73a03", "Microsoft.UI.Xaml.Controls.IControlOverrides"]
 public interface Microsoft_UI_Xaml_Controls_IControlOverrides <: IInspectable {
     func OnPointerEntered(e: CPointer<Unit>): Int32
@@ -13873,6 +14122,7 @@ public interface Microsoft_UI_Xaml_Controls_IControlOverrides <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IControlProtected (synthetic:Microsoft_UI_Xaml_Controls_IControlProtected)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["5c750339-1789-5095-a214-dd9d0564e579", "Microsoft.UI.Xaml.Controls.IControlProtected", "DefaultStyleKey.value=Com;GetTemplateChild.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IControlProtected <: IInspectable {
     func DefaultStyleKey(value: CPointer<CPointer<Unit>>): Int32
@@ -13881,6 +14131,7 @@ public interface Microsoft_UI_Xaml_Controls_IControlProtected <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IControlStatics (synthetic:Microsoft_UI_Xaml_Controls_IControlStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c3ae388d-aa36-5e10-acac-98415f47bcc7", "Microsoft.UI.Xaml.Controls.IControlStatics", "IsFocusEngagementEnabledProperty.value=Com;IsFocusEngagedProperty.value=Com;RequiresPointerProperty.value=Com;FontSizeProperty.value=Com;FontFamilyProperty.value=Com;FontWeightProperty.value=Com;FontStyleProperty.value=Com;FontStretchProperty.value=Com;CharacterSpacingProperty.value=Com;ForegroundProperty.value=Com;IsTextScaleFactorEnabledProperty.value=Com;IsEnabledProperty.value=Com;TabNavigationProperty.value=Com;TemplateProperty.value=Com;PaddingProperty.value=Com;HorizontalContentAlignmentProperty.value=Com;VerticalContentAlignmentProperty.value=Com;BackgroundProperty.value=Com;BackgroundSizingProperty.value=Com;BorderThicknessProperty.value=Com;BorderBrushProperty.value=Com;DefaultStyleKeyProperty.value=Com;DefaultStyleResourceUriProperty.value=Com;ElementSoundModeProperty.value=Com;CornerRadiusProperty.value=Com;IsTemplateFocusTargetProperty.value=Com;IsTemplateKeyTipTargetProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IControlStatics <: IInspectable {
     func IsFocusEngagementEnabledProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -13917,6 +14168,7 @@ public interface Microsoft_UI_Xaml_Controls_IControlStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IControlTemplate (synthetic:Microsoft_UI_Xaml_Controls_IControlTemplate)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["3a192751-2106-547a-aca0-f15ae8926ea0", "Microsoft.UI.Xaml.Controls.IControlTemplate"]
 public interface Microsoft_UI_Xaml_Controls_IControlTemplate <: IInspectable {
     func TargetType(value: CPointer<Windows_UI_Xaml_Interop_TypeName>): Int32
@@ -13924,6 +14176,7 @@ public interface Microsoft_UI_Xaml_Controls_IControlTemplate <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IDataTemplateSelector (synthetic:Microsoft_UI_Xaml_Controls_IDataTemplateSelector)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["86ca4fa4-7de0-5049-82f5-39ec78569028", "Microsoft.UI.Xaml.Controls.IDataTemplateSelector", "SelectTemplate.result=Com;SelectTemplateForItem.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IDataTemplateSelector <: IInspectable {
     func SelectTemplate(item: CPointer<Unit>, container: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
@@ -13931,12 +14184,14 @@ public interface Microsoft_UI_Xaml_Controls_IDataTemplateSelector <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.IDataTemplateSelectorFactory (synthetic:Microsoft_UI_Xaml_Controls_IDataTemplateSelectorFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["43217eda-6f7f-5b80-a70b-944511b354ab", "Microsoft.UI.Xaml.Controls.IDataTemplateSelectorFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IDataTemplateSelectorFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IDataTemplateSelectorOverrides (synthetic:Microsoft_UI_Xaml_Controls_IDataTemplateSelectorOverrides)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["980448cc-c114-5b89-8e09-61b0f264e592", "Microsoft.UI.Xaml.Controls.IDataTemplateSelectorOverrides", "SelectTemplateCore.result=Com;SelectTemplateForItemCore.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IDataTemplateSelectorOverrides <: IInspectable {
     func SelectTemplateCore(item: CPointer<Unit>, container: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
@@ -13944,6 +14199,7 @@ public interface Microsoft_UI_Xaml_Controls_IDataTemplateSelectorOverrides <: II
 }
 
 // Microsoft.UI.Xaml.Controls.IDatePicker (synthetic:Microsoft_UI_Xaml_Controls_IDatePicker)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ca1dc351-3ae3-5247-8263-16bd516c6e72", "Microsoft.UI.Xaml.Controls.IDatePicker", "Header.value=Com;HeaderTemplate.value=Com;CalendarIdentifier.value=HString;DayFormat.value=HString;MonthFormat.value=HString;YearFormat.value=HString;SelectedDate.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IDatePicker <: IInspectable {
     func Header(value: CPointer<CPointer<Unit>>): Int32
@@ -13983,12 +14239,14 @@ public interface Microsoft_UI_Xaml_Controls_IDatePicker <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IDatePickerFactory (synthetic:Microsoft_UI_Xaml_Controls_IDatePickerFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a16bea02-b3e0-5fdc-b5bb-25f794dc483b", "Microsoft.UI.Xaml.Controls.IDatePickerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IDatePickerFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IDatePickerSelectedValueChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IDatePickerSelectedValueChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["305ed436-370f-5e82-acf2-f1413e8f9ec4", "Microsoft.UI.Xaml.Controls.IDatePickerSelectedValueChangedEventArgs", "OldDate.value=Com;NewDate.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IDatePickerSelectedValueChangedEventArgs <: IInspectable {
     func OldDate(value: CPointer<CPointer<Unit>>): Int32
@@ -13996,6 +14254,7 @@ public interface Microsoft_UI_Xaml_Controls_IDatePickerSelectedValueChangedEvent
 }
 
 // Microsoft.UI.Xaml.Controls.IDatePickerStatics (synthetic:Microsoft_UI_Xaml_Controls_IDatePickerStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["4d810253-aae7-5be1-b7a8-af451ca433e1", "Microsoft.UI.Xaml.Controls.IDatePickerStatics", "HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;CalendarIdentifierProperty.value=Com;DateProperty.value=Com;DayVisibleProperty.value=Com;MonthVisibleProperty.value=Com;YearVisibleProperty.value=Com;DayFormatProperty.value=Com;MonthFormatProperty.value=Com;YearFormatProperty.value=Com;MinYearProperty.value=Com;MaxYearProperty.value=Com;OrientationProperty.value=Com;LightDismissOverlayModeProperty.value=Com;SelectedDateProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IDatePickerStatics <: IInspectable {
     func HeaderProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14016,6 +14275,7 @@ public interface Microsoft_UI_Xaml_Controls_IDatePickerStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IDatePickerValueChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IDatePickerValueChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["bd4e36ca-f6ab-57cf-84f0-75d024084f20", "Microsoft.UI.Xaml.Controls.IDatePickerValueChangedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IDatePickerValueChangedEventArgs <: IInspectable {
     func OldDate(value: CPointer<Windows_Foundation_DateTime>): Int32
@@ -14023,6 +14283,7 @@ public interface Microsoft_UI_Xaml_Controls_IDatePickerValueChangedEventArgs <: 
 }
 
 // Microsoft.UI.Xaml.Controls.IDragItemsCompletedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IDragItemsCompletedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c0138552-f467-5c3e-8af4-593607762844", "Microsoft.UI.Xaml.Controls.IDragItemsCompletedEventArgs", "Items.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IDragItemsCompletedEventArgs <: IInspectable {
     func Items(value: CPointer<CPointer<Unit>>): Int32
@@ -14030,6 +14291,7 @@ public interface Microsoft_UI_Xaml_Controls_IDragItemsCompletedEventArgs <: IIns
 }
 
 // Microsoft.UI.Xaml.Controls.IDragItemsStartingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IDragItemsStartingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a6938886-20df-558e-ac74-bb5b7f2f7e90", "Microsoft.UI.Xaml.Controls.IDragItemsStartingEventArgs", "Items.value=Com;Data.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IDragItemsStartingEventArgs <: IInspectable {
     func Cancel(value: CPointer<Bool>): Int32
@@ -14039,23 +14301,27 @@ public interface Microsoft_UI_Xaml_Controls_IDragItemsStartingEventArgs <: IInsp
 }
 
 // Microsoft.UI.Xaml.Controls.IDropDownButton (synthetic:Microsoft_UI_Xaml_Controls_IDropDownButton)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c1e9fa91-4f95-5796-8a7b-3b7594a12c69", "Microsoft.UI.Xaml.Controls.IDropDownButton"]
 public interface Microsoft_UI_Xaml_Controls_IDropDownButton <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IDropDownButtonFactory (synthetic:Microsoft_UI_Xaml_Controls_IDropDownButtonFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7cf3e13b-668d-57e7-b5d6-f5ca3dbc80bd", "Microsoft.UI.Xaml.Controls.IDropDownButtonFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IDropDownButtonFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IDynamicOverflowItemsChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IDynamicOverflowItemsChangingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["bf64c37f-6332-541d-80f1-876c5bb9b196", "Microsoft.UI.Xaml.Controls.IDynamicOverflowItemsChangingEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IDynamicOverflowItemsChangingEventArgs <: IInspectable {
     func Action(value: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IExpander (synthetic:Microsoft_UI_Xaml_Controls_IExpander)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ca633942-e584-55c2-b7ee-cffc73c8127a", "Microsoft.UI.Xaml.Controls.IExpander", "Header.value=Com;HeaderTemplate.value=Com;HeaderTemplateSelector.value=Com;TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IExpander <: IInspectable {
     func Header(value: CPointer<CPointer<Unit>>): Int32
@@ -14076,22 +14342,26 @@ public interface Microsoft_UI_Xaml_Controls_IExpander <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IExpanderCollapsedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IExpanderCollapsedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["968a6870-7426-535e-a526-279e6eedecd0", "Microsoft.UI.Xaml.Controls.IExpanderCollapsedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IExpanderCollapsedEventArgs <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IExpanderExpandingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IExpanderExpandingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["433f2e36-19e7-579c-b4ce-9ce5d510d001", "Microsoft.UI.Xaml.Controls.IExpanderExpandingEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IExpanderExpandingEventArgs <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IExpanderFactory (synthetic:Microsoft_UI_Xaml_Controls_IExpanderFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["51a5afc2-b16d-516e-83ae-5a10476b13af", "Microsoft.UI.Xaml.Controls.IExpanderFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IExpanderFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IExpanderStatics (synthetic:Microsoft_UI_Xaml_Controls_IExpanderStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b742c27b-c023-5096-8c2a-717d324afb7e", "Microsoft.UI.Xaml.Controls.IExpanderStatics", "HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;HeaderTemplateSelectorProperty.value=Com;IsExpandedProperty.value=Com;ExpandDirectionProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IExpanderStatics <: IInspectable {
     func HeaderProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14102,6 +14372,7 @@ public interface Microsoft_UI_Xaml_Controls_IExpanderStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IExpanderTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_IExpanderTemplateSettings)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["8f959018-f6b8-5c02-be08-cd196c9fcd2d", "Microsoft.UI.Xaml.Controls.IExpanderTemplateSettings"]
 public interface Microsoft_UI_Xaml_Controls_IExpanderTemplateSettings <: IInspectable {
     func ContentHeight(value: CPointer<Float64>): Int32
@@ -14109,6 +14380,7 @@ public interface Microsoft_UI_Xaml_Controls_IExpanderTemplateSettings <: IInspec
 }
 
 // Microsoft.UI.Xaml.Controls.IFlipView (synthetic:Microsoft_UI_Xaml_Controls_IFlipView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["96c35e7f-cc48-5acc-b3b4-8ab4bdf1fe17", "Microsoft.UI.Xaml.Controls.IFlipView"]
 public interface Microsoft_UI_Xaml_Controls_IFlipView <: IInspectable {
     func UseTouchAnimationsForAllNavigation(value: CPointer<Bool>): Int32
@@ -14116,18 +14388,21 @@ public interface Microsoft_UI_Xaml_Controls_IFlipView <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IFlipViewFactory (synthetic:Microsoft_UI_Xaml_Controls_IFlipViewFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f3a89be6-81e3-53c4-9dc9-98a5a4e79b13", "Microsoft.UI.Xaml.Controls.IFlipViewFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IFlipViewFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IFlipViewStatics (synthetic:Microsoft_UI_Xaml_Controls_IFlipViewStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1e98fc86-2bc1-5c89-8305-251ad56a9cdb", "Microsoft.UI.Xaml.Controls.IFlipViewStatics", "UseTouchAnimationsForAllNavigationProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IFlipViewStatics <: IInspectable {
     func UseTouchAnimationsForAllNavigationProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IFlyout (synthetic:Microsoft_UI_Xaml_Controls_IFlyout)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d4a1eb7d-59b8-5df9-87c3-bd5e3856923f", "Microsoft.UI.Xaml.Controls.IFlyout", "Content.value=Com;FlyoutPresenterStyle.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IFlyout <: IInspectable {
     func Content(value: CPointer<CPointer<Unit>>): Int32
@@ -14137,12 +14412,14 @@ public interface Microsoft_UI_Xaml_Controls_IFlyout <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IFlyoutFactory (synthetic:Microsoft_UI_Xaml_Controls_IFlyoutFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["fd19002e-66b3-5656-b49c-b2aca11e9602", "Microsoft.UI.Xaml.Controls.IFlyoutFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IFlyoutFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IFlyoutStatics (synthetic:Microsoft_UI_Xaml_Controls_IFlyoutStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["23ae001a-aaa6-5d19-9947-917ecbd883ca", "Microsoft.UI.Xaml.Controls.IFlyoutStatics", "ContentProperty.value=Com;FlyoutPresenterStyleProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IFlyoutStatics <: IInspectable {
     func ContentProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14150,11 +14427,13 @@ public interface Microsoft_UI_Xaml_Controls_IFlyoutStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IFocusDisengagedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IFocusDisengagedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c0b4b88c-c195-5064-84c7-33cb262cb240", "Microsoft.UI.Xaml.Controls.IFocusDisengagedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IFocusDisengagedEventArgs <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IFocusEngagedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IFocusEngagedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1e71e8e4-74b2-50a1-8f2b-42c0118ab0ea", "Microsoft.UI.Xaml.Controls.IFocusEngagedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IFocusEngagedEventArgs <: IInspectable {
     func Handled(value: CPointer<Bool>): Int32
@@ -14162,6 +14441,7 @@ public interface Microsoft_UI_Xaml_Controls_IFocusEngagedEventArgs <: IInspectab
 }
 
 // Microsoft.UI.Xaml.Controls.IGrid (synthetic:Microsoft_UI_Xaml_Controls_IGrid)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c4496219-9014-58a1-b4ad-c5044913a5bb", "Microsoft.UI.Xaml.Controls.IGrid", "RowDefinitions.value=Com;ColumnDefinitions.value=Com;BorderBrush.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IGrid <: IInspectable {
     func RowDefinitions(value: CPointer<CPointer<Unit>>): Int32
@@ -14183,12 +14463,14 @@ public interface Microsoft_UI_Xaml_Controls_IGrid <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IGridFactory (synthetic:Microsoft_UI_Xaml_Controls_IGridFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b16bf561-fc6c-57c6-8ebc-0b06ce4513aa", "Microsoft.UI.Xaml.Controls.IGridFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IGridFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IGridStatics (synthetic:Microsoft_UI_Xaml_Controls_IGridStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ef9cf81d-a431-50f4-abf5-3023fe447704", "Microsoft.UI.Xaml.Controls.IGridStatics", "BackgroundSizingProperty.value=Com;BorderBrushProperty.value=Com;BorderThicknessProperty.value=Com;CornerRadiusProperty.value=Com;PaddingProperty.value=Com;RowSpacingProperty.value=Com;ColumnSpacingProperty.value=Com;RowProperty.value=Com;ColumnProperty.value=Com;RowSpanProperty.value=Com;ColumnSpanProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IGridStatics <: IInspectable {
     func BackgroundSizingProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14213,17 +14495,20 @@ public interface Microsoft_UI_Xaml_Controls_IGridStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IGridView (synthetic:Microsoft_UI_Xaml_Controls_IGridView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d495f2fa-594d-5170-b1e8-8629a179f9fb", "Microsoft.UI.Xaml.Controls.IGridView"]
 public interface Microsoft_UI_Xaml_Controls_IGridView <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IGridViewFactory (synthetic:Microsoft_UI_Xaml_Controls_IGridViewFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["892947ea-6b86-5f17-a9b8-2121b2251271", "Microsoft.UI.Xaml.Controls.IGridViewFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IGridViewFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IGroupStyle (synthetic:Microsoft_UI_Xaml_Controls_IGroupStyle)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a77d937e-0188-584c-ab1d-9df1916edc75", "Microsoft.UI.Xaml.Controls.IGroupStyle", "Panel.value=Com;ContainerStyle.value=Com;HeaderContainerStyle.value=Com;ContainerStyleSelector.value=Com;HeaderTemplate.value=Com;HeaderTemplateSelector.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IGroupStyle <: IInspectable {
     func Panel(value: CPointer<CPointer<Unit>>): Int32
@@ -14243,30 +14528,35 @@ public interface Microsoft_UI_Xaml_Controls_IGroupStyle <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IGroupStyleFactory (synthetic:Microsoft_UI_Xaml_Controls_IGroupStyleFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["dc884aa2-e2a8-57ab-8cbc-b1d8ec540b0c", "Microsoft.UI.Xaml.Controls.IGroupStyleFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IGroupStyleFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IGroupStyleSelector (synthetic:Microsoft_UI_Xaml_Controls_IGroupStyleSelector)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["524f5086-3e02-5b71-be7c-8a8fa0feaa2c", "Microsoft.UI.Xaml.Controls.IGroupStyleSelector", "SelectGroupStyle.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IGroupStyleSelector <: IInspectable {
     func SelectGroupStyle(group: CPointer<Unit>, level: UInt32, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IGroupStyleSelectorFactory (synthetic:Microsoft_UI_Xaml_Controls_IGroupStyleSelectorFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["0e0699be-50c2-5c15-aed3-e7bd663e5fad", "Microsoft.UI.Xaml.Controls.IGroupStyleSelectorFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IGroupStyleSelectorFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IGroupStyleSelectorOverrides (synthetic:Microsoft_UI_Xaml_Controls_IGroupStyleSelectorOverrides)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["80594304-ebeb-5a5d-a794-acdc214cbc94", "Microsoft.UI.Xaml.Controls.IGroupStyleSelectorOverrides", "SelectGroupStyleCore.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IGroupStyleSelectorOverrides <: IInspectable {
     func SelectGroupStyleCore(group: CPointer<Unit>, level: UInt32, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IHyperlinkButton (synthetic:Microsoft_UI_Xaml_Controls_IHyperlinkButton)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6dbee605-8df0-50cc-9a42-250eb138f0c6", "Microsoft.UI.Xaml.Controls.IHyperlinkButton", "NavigateUri.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IHyperlinkButton <: IInspectable {
     func NavigateUri(value: CPointer<CPointer<Unit>>): Int32
@@ -14274,18 +14564,21 @@ public interface Microsoft_UI_Xaml_Controls_IHyperlinkButton <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IHyperlinkButtonFactory (synthetic:Microsoft_UI_Xaml_Controls_IHyperlinkButtonFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["01f775ea-c5ed-514a-a23d-89c494a8f09d", "Microsoft.UI.Xaml.Controls.IHyperlinkButtonFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IHyperlinkButtonFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IHyperlinkButtonStatics (synthetic:Microsoft_UI_Xaml_Controls_IHyperlinkButtonStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ab5c7b77-7c4c-5b26-9c7c-763f8d95258e", "Microsoft.UI.Xaml.Controls.IHyperlinkButtonStatics", "NavigateUriProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IHyperlinkButtonStatics <: IInspectable {
     func NavigateUriProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IIconElement (synthetic:Microsoft_UI_Xaml_Controls_IIconElement)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["18f69350-279e-50ea-8d23-138e717ed939", "Microsoft.UI.Xaml.Controls.IIconElement", "Foreground.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IIconElement <: IInspectable {
     func Foreground(value: CPointer<CPointer<Unit>>): Int32
@@ -14293,17 +14586,20 @@ public interface Microsoft_UI_Xaml_Controls_IIconElement <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IIconElementFactory (synthetic:Microsoft_UI_Xaml_Controls_IIconElementFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7161eeff-2cc3-59c9-b355-f752ef2030fb", "Microsoft.UI.Xaml.Controls.IIconElementFactory"]
 public interface Microsoft_UI_Xaml_Controls_IIconElementFactory <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IIconElementStatics (synthetic:Microsoft_UI_Xaml_Controls_IIconElementStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["4ccfdc81-9d9d-5a02-b95b-ad1add921750", "Microsoft.UI.Xaml.Controls.IIconElementStatics", "ForegroundProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IIconElementStatics <: IInspectable {
     func ForegroundProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IIconSource (synthetic:Microsoft_UI_Xaml_Controls_IIconSource)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["39e6b320-a2af-5ee3-b7e9-4ba4aa80541a", "Microsoft.UI.Xaml.Controls.IIconSource", "Foreground.value=Com;CreateIconElement.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IIconSource <: IInspectable {
     func Foreground(value: CPointer<CPointer<Unit>>): Int32
@@ -14312,11 +14608,13 @@ public interface Microsoft_UI_Xaml_Controls_IIconSource <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IIconSourceFactory (synthetic:Microsoft_UI_Xaml_Controls_IIconSourceFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e8bc19c6-9a64-5c54-9338-e18e076875bf", "Microsoft.UI.Xaml.Controls.IIconSourceFactory"]
 public interface Microsoft_UI_Xaml_Controls_IIconSourceFactory <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IIconSourceOverrides (synthetic:Microsoft_UI_Xaml_Controls_IIconSourceOverrides)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9a02d369-1c79-5a81-871b-0b90946ba7f0", "Microsoft.UI.Xaml.Controls.IIconSourceOverrides", "CreateIconElementCore.result=Com;GetIconElementPropertyCore.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IIconSourceOverrides <: IInspectable {
     func CreateIconElementCore(result: CPointer<CPointer<Unit>>): Int32
@@ -14324,12 +14622,14 @@ public interface Microsoft_UI_Xaml_Controls_IIconSourceOverrides <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.IIconSourceStatics (synthetic:Microsoft_UI_Xaml_Controls_IIconSourceStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["eed55973-7e15-575f-af8e-ae2b9b975dd7", "Microsoft.UI.Xaml.Controls.IIconSourceStatics", "ForegroundProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IIconSourceStatics <: IInspectable {
     func ForegroundProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IImage (synthetic:Microsoft_UI_Xaml_Controls_IImage)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["220d3d8d-66de-53a1-a215-ba9c165565ab", "Microsoft.UI.Xaml.Controls.IImage", "Source.value=Com;GetAsCastingSource.result=Com;GetAlphaMask.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IImage <: IInspectable {
     func Source(value: CPointer<CPointer<Unit>>): Int32
@@ -14347,6 +14647,7 @@ public interface Microsoft_UI_Xaml_Controls_IImage <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IImageStatics (synthetic:Microsoft_UI_Xaml_Controls_IImageStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["cb5378a8-996b-547e-9c4c-7bbfd9dbe7dc", "Microsoft.UI.Xaml.Controls.IImageStatics", "SourceProperty.value=Com;StretchProperty.value=Com;NineGridProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IImageStatics <: IInspectable {
     func SourceProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14355,6 +14656,7 @@ public interface Microsoft_UI_Xaml_Controls_IImageStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBadge (synthetic:Microsoft_UI_Xaml_Controls_IInfoBadge)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["82104d7f-03d4-5ea4-872e-f9ecab758601", "Microsoft.UI.Xaml.Controls.IInfoBadge", "IconSource.value=Com;TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBadge <: IInspectable {
     func Value(value: CPointer<Int32>): Int32
@@ -14365,12 +14667,14 @@ public interface Microsoft_UI_Xaml_Controls_IInfoBadge <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBadgeFactory (synthetic:Microsoft_UI_Xaml_Controls_IInfoBadgeFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["fb498205-2de0-5986-8aec-2c46ac235087", "Microsoft.UI.Xaml.Controls.IInfoBadgeFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBadgeFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBadgeStatics (synthetic:Microsoft_UI_Xaml_Controls_IInfoBadgeStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b0160061-b463-54de-81ac-64f390d4f25d", "Microsoft.UI.Xaml.Controls.IInfoBadgeStatics", "ValueProperty.value=Com;IconSourceProperty.value=Com;TemplateSettingsProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBadgeStatics <: IInspectable {
     func ValueProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14379,6 +14683,7 @@ public interface Microsoft_UI_Xaml_Controls_IInfoBadgeStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBadgeTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_IInfoBadgeTemplateSettings)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ce810f86-d4bb-51bd-bf7d-dfd1e6c85f4a", "Microsoft.UI.Xaml.Controls.IInfoBadgeTemplateSettings", "IconElement.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBadgeTemplateSettings <: IInspectable {
     func InfoBadgeCornerRadius(value: CPointer<Microsoft_UI_Xaml_CornerRadius>): Int32
@@ -14388,12 +14693,14 @@ public interface Microsoft_UI_Xaml_Controls_IInfoBadgeTemplateSettings <: IInspe
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBadgeTemplateSettingsFactory (synthetic:Microsoft_UI_Xaml_Controls_IInfoBadgeTemplateSettingsFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["5d366775-1f6e-558c-aab4-667704b3070c", "Microsoft.UI.Xaml.Controls.IInfoBadgeTemplateSettingsFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBadgeTemplateSettingsFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBadgeTemplateSettingsStatics (synthetic:Microsoft_UI_Xaml_Controls_IInfoBadgeTemplateSettingsStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["10959133-64ce-586f-a252-9e26fc1ad9ba", "Microsoft.UI.Xaml.Controls.IInfoBadgeTemplateSettingsStatics", "InfoBadgeCornerRadiusProperty.value=Com;IconElementProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBadgeTemplateSettingsStatics <: IInspectable {
     func InfoBadgeCornerRadiusProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14401,6 +14708,7 @@ public interface Microsoft_UI_Xaml_Controls_IInfoBadgeTemplateSettingsStatics <:
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBar (synthetic:Microsoft_UI_Xaml_Controls_IInfoBar)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c1c3a438-dd79-5d22-9e42-5a3cdf8113a9", "Microsoft.UI.Xaml.Controls.IInfoBar", "Title.value=HString;Message.value=HString;IconSource.value=Com;CloseButtonStyle.value=Com;CloseButtonCommand.value=Com;CloseButtonCommandParameter.value=Com;ActionButton.value=Com;Content.value=Com;ContentTemplate.value=Com;TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBar <: IInspectable {
     func IsOpen(value: CPointer<Bool>): Int32
@@ -14439,17 +14747,20 @@ public interface Microsoft_UI_Xaml_Controls_IInfoBar <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBarClosedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IInfoBarClosedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["593af0b3-bded-53da-8f56-80ed3c64322c", "Microsoft.UI.Xaml.Controls.IInfoBarClosedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBarClosedEventArgs <: IInspectable {
     func Reason(value: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBarClosedEventArgsFactory (synthetic:Microsoft_UI_Xaml_Controls_IInfoBarClosedEventArgsFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["42fe1f7e-6d68-5a85-8a5c-abb7effcdf26", "Microsoft.UI.Xaml.Controls.IInfoBarClosedEventArgsFactory"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBarClosedEventArgsFactory <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBarClosingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IInfoBarClosingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["062d01d6-61af-5435-8c4b-c51106583b5b", "Microsoft.UI.Xaml.Controls.IInfoBarClosingEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBarClosingEventArgs <: IInspectable {
     func Reason(value: CPointer<Int32>): Int32
@@ -14458,17 +14769,20 @@ public interface Microsoft_UI_Xaml_Controls_IInfoBarClosingEventArgs <: IInspect
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBarClosingEventArgsFactory (synthetic:Microsoft_UI_Xaml_Controls_IInfoBarClosingEventArgsFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d6cfcc14-5206-5c9d-801c-3a90b4e2ebe4", "Microsoft.UI.Xaml.Controls.IInfoBarClosingEventArgsFactory"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBarClosingEventArgsFactory <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBarFactory (synthetic:Microsoft_UI_Xaml_Controls_IInfoBarFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["60618a60-9be7-5df5-be0d-933d34ddb44c", "Microsoft.UI.Xaml.Controls.IInfoBarFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBarFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBarStatics (synthetic:Microsoft_UI_Xaml_Controls_IInfoBarStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["5fb1e80d-ea5d-57ba-9915-b6782b982aca", "Microsoft.UI.Xaml.Controls.IInfoBarStatics", "IsOpenProperty.value=Com;TitleProperty.value=Com;MessageProperty.value=Com;SeverityProperty.value=Com;IconSourceProperty.value=Com;IsIconVisibleProperty.value=Com;IsClosableProperty.value=Com;CloseButtonStyleProperty.value=Com;CloseButtonCommandProperty.value=Com;CloseButtonCommandParameterProperty.value=Com;ActionButtonProperty.value=Com;ContentProperty.value=Com;ContentTemplateProperty.value=Com;TemplateSettingsProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBarStatics <: IInspectable {
     func IsOpenProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14488,6 +14802,7 @@ public interface Microsoft_UI_Xaml_Controls_IInfoBarStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_IInfoBarTemplateSettings)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["926f7292-9882-5056-8097-6da2a7ea27cd", "Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettings", "IconElement.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBarTemplateSettings <: IInspectable {
     func IconElement(value: CPointer<CPointer<Unit>>): Int32
@@ -14495,35 +14810,41 @@ public interface Microsoft_UI_Xaml_Controls_IInfoBarTemplateSettings <: IInspect
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettingsFactory (synthetic:Microsoft_UI_Xaml_Controls_IInfoBarTemplateSettingsFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["29517daf-c763-56ce-8d54-eefcaf7f2e01", "Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettingsFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBarTemplateSettingsFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettingsStatics (synthetic:Microsoft_UI_Xaml_Controls_IInfoBarTemplateSettingsStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["57671639-43e8-506d-b9a7-539a605a1c67", "Microsoft.UI.Xaml.Controls.IInfoBarTemplateSettingsStatics", "IconElementProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IInfoBarTemplateSettingsStatics <: IInspectable {
     func IconElementProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IInsertionPanel (synthetic:Microsoft_UI_Xaml_Controls_IInsertionPanel)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["84e13e27-2d24-59c4-a00e-16c7255901e2", "Microsoft.UI.Xaml.Controls.IInsertionPanel"]
 public interface Microsoft_UI_Xaml_Controls_IInsertionPanel <: IInspectable {
     func GetInsertionIndexes(position: Windows_Foundation_Point, first: CPointer<Int32>, second: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IIsTextTrimmedChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IIsTextTrimmedChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["3c709b2f-16ba-55d2-b6f6-dfc54a1ed021", "Microsoft.UI.Xaml.Controls.IIsTextTrimmedChangedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IIsTextTrimmedChangedEventArgs <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IItemClickEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IItemClickEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1cf87a70-6348-57ec-9eac-fa0565adc60f", "Microsoft.UI.Xaml.Controls.IItemClickEventArgs", "ClickedItem.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IItemClickEventArgs <: IInspectable {
     func ClickedItem(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IItemContainer (synthetic:Microsoft_UI_Xaml_Controls_IItemContainer)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6332a67f-7fd9-53c7-afd8-cfa1237cf6d1", "Microsoft.UI.Xaml.Controls.IItemContainer", "Child.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IItemContainer <: IInspectable {
     func Child(value: CPointer<CPointer<Unit>>): Int32
@@ -14533,12 +14854,14 @@ public interface Microsoft_UI_Xaml_Controls_IItemContainer <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IItemContainerFactory (synthetic:Microsoft_UI_Xaml_Controls_IItemContainerFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ee1cc57c-6bf2-5ee9-a943-c95ca775edb4", "Microsoft.UI.Xaml.Controls.IItemContainerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IItemContainerFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IItemContainerGenerator (synthetic:Microsoft_UI_Xaml_Controls_IItemContainerGenerator)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c4c5d5ae-ed98-510f-afae-8a0ac6067a3b", "Microsoft.UI.Xaml.Controls.IItemContainerGenerator", "ItemFromContainer.result=Com;ContainerFromItem.result=Com;ContainerFromIndex.result=Com;GetItemContainerGeneratorForPanel.result=Com;GenerateNext.returnValue=Com"]
 public interface Microsoft_UI_Xaml_Controls_IItemContainerGenerator <: IInspectable {
     func ItemsChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
@@ -14560,6 +14883,7 @@ public interface Microsoft_UI_Xaml_Controls_IItemContainerGenerator <: IInspecta
 }
 
 // Microsoft.UI.Xaml.Controls.IItemContainerMapping (synthetic:Microsoft_UI_Xaml_Controls_IItemContainerMapping)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b3e03a32-ea83-5626-bfda-d327a1c7550c", "Microsoft.UI.Xaml.Controls.IItemContainerMapping", "ItemFromContainer.result=Com;ContainerFromItem.result=Com;ContainerFromIndex.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IItemContainerMapping <: IInspectable {
     func ItemFromContainer(container: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
@@ -14569,6 +14893,7 @@ public interface Microsoft_UI_Xaml_Controls_IItemContainerMapping <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.IItemContainerStatics (synthetic:Microsoft_UI_Xaml_Controls_IItemContainerStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e26e121d-b7bf-5632-85a2-f36040e649f8", "Microsoft.UI.Xaml.Controls.IItemContainerStatics", "ChildProperty.value=Com;IsSelectedProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IItemContainerStatics <: IInspectable {
     func ChildProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14576,6 +14901,7 @@ public interface Microsoft_UI_Xaml_Controls_IItemContainerStatics <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.IItemsControl (synthetic:Microsoft_UI_Xaml_Controls_IItemsControl)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["bf1ccb54-83e2-5b98-acbc-736f876c3d35", "Microsoft.UI.Xaml.Controls.IItemsControl", "ItemsSource.value=Com;Items.value=Com;ItemTemplate.value=Com;ItemTemplateSelector.value=Com;ItemsPanel.value=Com;DisplayMemberPath.value=HString;ItemsPanelRoot.value=Com;ItemContainerStyle.value=Com;ItemContainerStyleSelector.value=Com;ItemContainerGenerator.value=Com;ItemContainerTransitions.value=Com;GroupStyle.value=Com;GroupStyleSelector.value=Com;GroupHeaderContainerFromItemContainer.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IItemsControl <: IInspectable {
     func ItemsSource(value: CPointer<CPointer<Unit>>): Int32
@@ -14605,12 +14931,14 @@ public interface Microsoft_UI_Xaml_Controls_IItemsControl <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IItemsControlFactory (synthetic:Microsoft_UI_Xaml_Controls_IItemsControlFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b2686273-2dd3-5454-9f25-247e66270336", "Microsoft.UI.Xaml.Controls.IItemsControlFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IItemsControlFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IItemsControlOverrides (synthetic:Microsoft_UI_Xaml_Controls_IItemsControlOverrides)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["285c215f-64b2-5f7d-88d2-56c6658f73ee", "Microsoft.UI.Xaml.Controls.IItemsControlOverrides", "GetContainerForItemOverride.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IItemsControlOverrides <: IInspectable {
     func IsItemItsOwnContainerOverride(item: CPointer<Unit>, result: CPointer<Bool>): Int32
@@ -14626,6 +14954,7 @@ public interface Microsoft_UI_Xaml_Controls_IItemsControlOverrides <: IInspectab
 }
 
 // Microsoft.UI.Xaml.Controls.IItemsControlStatics (synthetic:Microsoft_UI_Xaml_Controls_IItemsControlStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["4fb961e1-5f91-5585-a692-6825cde3ed1e", "Microsoft.UI.Xaml.Controls.IItemsControlStatics", "ItemsSourceProperty.value=Com;ItemTemplateProperty.value=Com;ItemTemplateSelectorProperty.value=Com;ItemsPanelProperty.value=Com;DisplayMemberPathProperty.value=Com;ItemContainerStyleProperty.value=Com;ItemContainerStyleSelectorProperty.value=Com;ItemContainerTransitionsProperty.value=Com;GroupStyleSelectorProperty.value=Com;IsGroupingProperty.value=Com;GetItemsOwner.result=Com;ItemsControlFromItemContainer.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IItemsControlStatics <: IInspectable {
     func ItemsSourceProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14643,11 +14972,13 @@ public interface Microsoft_UI_Xaml_Controls_IItemsControlStatics <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.IItemsPanelTemplate (synthetic:Microsoft_UI_Xaml_Controls_IItemsPanelTemplate)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6153af2f-f095-5e8c-89d4-9e03203b9cc2", "Microsoft.UI.Xaml.Controls.IItemsPanelTemplate"]
 public interface Microsoft_UI_Xaml_Controls_IItemsPanelTemplate <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IListBox (synthetic:Microsoft_UI_Xaml_Controls_IListBox)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f3e7dedf-7a3c-59f1-9e05-ae5026b54293", "Microsoft.UI.Xaml.Controls.IListBox", "SelectedItems.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IListBox <: IInspectable {
     func SelectedItems(value: CPointer<CPointer<Unit>>): Int32
@@ -14660,12 +14991,14 @@ public interface Microsoft_UI_Xaml_Controls_IListBox <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IListBoxFactory (synthetic:Microsoft_UI_Xaml_Controls_IListBoxFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d048e0bc-4692-5c60-b2e9-07c4433ce050", "Microsoft.UI.Xaml.Controls.IListBoxFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IListBoxFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IListBoxStatics (synthetic:Microsoft_UI_Xaml_Controls_IListBoxStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["763a4986-db3a-5a94-8505-aee2f229af85", "Microsoft.UI.Xaml.Controls.IListBoxStatics", "SelectionModeProperty.value=Com;SingleSelectionFollowsFocusProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IListBoxStatics <: IInspectable {
     func SelectionModeProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14673,11 +15006,13 @@ public interface Microsoft_UI_Xaml_Controls_IListBoxStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IListView (synthetic:Microsoft_UI_Xaml_Controls_IListView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f6015db1-df63-52fd-a164-0df44715ee0a", "Microsoft.UI.Xaml.Controls.IListView"]
 public interface Microsoft_UI_Xaml_Controls_IListView <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IListViewBase (synthetic:Microsoft_UI_Xaml_Controls_IListViewBase)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["775c57ac-abce-5beb-8e34-3b8158aedd80", "Microsoft.UI.Xaml.Controls.IListViewBase", "SelectedItems.value=Com;SelectedRanges.value=Com;LoadMoreItemsAsync.operation=Com;TryStartConnectedAnimationAsync.operation=Com;PrepareConnectedAnimation.result=Com;Header.value=Com;HeaderTemplate.value=Com;HeaderTransitions.value=Com;Footer.value=Com;FooterTemplate.value=Com;FooterTransitions.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IListViewBase <: IInspectable {
     func SelectedItems(value: CPointer<CPointer<Unit>>): Int32
@@ -14743,22 +15078,26 @@ public interface Microsoft_UI_Xaml_Controls_IListViewBase <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IListViewBaseFactory (synthetic:Microsoft_UI_Xaml_Controls_IListViewBaseFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["44092863-c09e-551e-85bf-951b552950c8", "Microsoft.UI.Xaml.Controls.IListViewBaseFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IListViewBaseFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IListViewBaseHeaderItem (synthetic:Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItem)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9220c4ff-1974-53fd-ad74-c29e7b360a06", "Microsoft.UI.Xaml.Controls.IListViewBaseHeaderItem"]
 public interface Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItem <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IListViewBaseHeaderItemFactory (synthetic:Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItemFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["228fc10a-b86f-5b57-96f4-34d9f9fb8711", "Microsoft.UI.Xaml.Controls.IListViewBaseHeaderItemFactory"]
 public interface Microsoft_UI_Xaml_Controls_IListViewBaseHeaderItemFactory <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IListViewBaseStatics (synthetic:Microsoft_UI_Xaml_Controls_IListViewBaseStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b8487e94-010f-56d4-9f76-94bf8c462745", "Microsoft.UI.Xaml.Controls.IListViewBaseStatics", "SelectionModeProperty.value=Com;IsSwipeEnabledProperty.value=Com;CanDragItemsProperty.value=Com;CanReorderItemsProperty.value=Com;IsItemClickEnabledProperty.value=Com;DataFetchSizeProperty.value=Com;IncrementalLoadingThresholdProperty.value=Com;IncrementalLoadingTriggerProperty.value=Com;ShowsScrollingPlaceholdersProperty.value=Com;ReorderModeProperty.value=Com;IsMultiSelectCheckBoxEnabledProperty.value=Com;SingleSelectionFollowsFocusProperty.value=Com;SemanticZoomOwnerProperty.value=Com;IsActiveViewProperty.value=Com;IsZoomedInViewProperty.value=Com;HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;HeaderTransitionsProperty.value=Com;FooterProperty.value=Com;FooterTemplateProperty.value=Com;FooterTransitionsProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IListViewBaseStatics <: IInspectable {
     func SelectionModeProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14785,36 +15124,42 @@ public interface Microsoft_UI_Xaml_Controls_IListViewBaseStatics <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.IListViewFactory (synthetic:Microsoft_UI_Xaml_Controls_IListViewFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["03ebefb8-f64a-5bf9-9570-cb09eeea2335", "Microsoft.UI.Xaml.Controls.IListViewFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IListViewFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IListViewItem (synthetic:Microsoft_UI_Xaml_Controls_IListViewItem)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["05fe41c2-0451-5d38-9c55-5d10cfd08889", "Microsoft.UI.Xaml.Controls.IListViewItem", "TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IListViewItem <: IInspectable {
     func TemplateSettings(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IListViewItemFactory (synthetic:Microsoft_UI_Xaml_Controls_IListViewItemFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d9f4d0b8-ee59-5036-bd7a-7c89cf0bc2ac", "Microsoft.UI.Xaml.Controls.IListViewItemFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IListViewItemFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuBar (synthetic:Microsoft_UI_Xaml_Controls_IMenuBar)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ba97f337-8f1e-5141-b53f-e77a8ba3ebbd", "Microsoft.UI.Xaml.Controls.IMenuBar", "Items.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuBar <: IInspectable {
     func Items(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuBarFactory (synthetic:Microsoft_UI_Xaml_Controls_IMenuBarFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["76aa8759-04ee-5a4c-b98c-d03742d47cdb", "Microsoft.UI.Xaml.Controls.IMenuBarFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuBarFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuBarItem (synthetic:Microsoft_UI_Xaml_Controls_IMenuBarItem)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a7900980-51cc-531d-97c5-356b13573398", "Microsoft.UI.Xaml.Controls.IMenuBarItem", "Title.value=HString;Items.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuBarItem <: IInspectable {
     func Title(value: CPointer<CPointer<Unit>>): Int32
@@ -14823,12 +15168,14 @@ public interface Microsoft_UI_Xaml_Controls_IMenuBarItem <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuBarItemFactory (synthetic:Microsoft_UI_Xaml_Controls_IMenuBarItemFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["87d02172-83cb-5459-940f-173f7501b300", "Microsoft.UI.Xaml.Controls.IMenuBarItemFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuBarItemFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuBarItemStatics (synthetic:Microsoft_UI_Xaml_Controls_IMenuBarItemStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c8a33f46-2e1c-5ce0-bc09-4524e68941c8", "Microsoft.UI.Xaml.Controls.IMenuBarItemStatics", "TitleProperty.value=Com;ItemsProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuBarItemStatics <: IInspectable {
     func TitleProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14836,12 +15183,14 @@ public interface Microsoft_UI_Xaml_Controls_IMenuBarItemStatics <: IInspectable 
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuBarStatics (synthetic:Microsoft_UI_Xaml_Controls_IMenuBarStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["79aa0b84-5554-5f7c-80d9-7970aa030125", "Microsoft.UI.Xaml.Controls.IMenuBarStatics", "ItemsProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuBarStatics <: IInspectable {
     func ItemsProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuFlyout (synthetic:Microsoft_UI_Xaml_Controls_IMenuFlyout)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f4c77c6c-1fa5-5d85-8559-5d02b7d4e5e7", "Microsoft.UI.Xaml.Controls.IMenuFlyout", "Items.value=Com;MenuFlyoutPresenterStyle.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuFlyout <: IInspectable {
     func Items(value: CPointer<CPointer<Unit>>): Int32
@@ -14851,12 +15200,14 @@ public interface Microsoft_UI_Xaml_Controls_IMenuFlyout <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuFlyoutFactory (synthetic:Microsoft_UI_Xaml_Controls_IMenuFlyoutFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a3d225de-6b35-5442-b6c9-06fd24139a63", "Microsoft.UI.Xaml.Controls.IMenuFlyoutFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuFlyoutItem (synthetic:Microsoft_UI_Xaml_Controls_IMenuFlyoutItem)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["4252df5a-44f9-5ee8-b1cc-53de9aaa4095", "Microsoft.UI.Xaml.Controls.IMenuFlyoutItem", "Text.value=HString;Command.value=Com;CommandParameter.value=Com;Icon.value=Com;KeyboardAcceleratorTextOverride.value=HString;TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutItem <: IInspectable {
     func Text(value: CPointer<CPointer<Unit>>): Int32
@@ -14875,22 +15226,26 @@ public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutItem <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuFlyoutItemBase (synthetic:Microsoft_UI_Xaml_Controls_IMenuFlyoutItemBase)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["4bee2715-44a1-5f94-86e8-02ddbe3dc6b9", "Microsoft.UI.Xaml.Controls.IMenuFlyoutItemBase"]
 public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutItemBase <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuFlyoutItemBaseFactory (synthetic:Microsoft_UI_Xaml_Controls_IMenuFlyoutItemBaseFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["33f4ead3-ab54-505d-bc5f-45e7c35f20f8", "Microsoft.UI.Xaml.Controls.IMenuFlyoutItemBaseFactory"]
 public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutItemBaseFactory <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuFlyoutItemFactory (synthetic:Microsoft_UI_Xaml_Controls_IMenuFlyoutItemFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9c3c9a1f-89af-521a-81a5-8a01db7a79af", "Microsoft.UI.Xaml.Controls.IMenuFlyoutItemFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutItemFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuFlyoutItemStatics (synthetic:Microsoft_UI_Xaml_Controls_IMenuFlyoutItemStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9d7953d6-e6a6-5154-91f4-67f4d6042a4f", "Microsoft.UI.Xaml.Controls.IMenuFlyoutItemStatics", "TextProperty.value=Com;CommandProperty.value=Com;CommandParameterProperty.value=Com;IconProperty.value=Com;KeyboardAcceleratorTextOverrideProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutItemStatics <: IInspectable {
     func TextProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14901,23 +15256,27 @@ public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutItemStatics <: IInspectab
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuFlyoutSeparator (synthetic:Microsoft_UI_Xaml_Controls_IMenuFlyoutSeparator)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["3eaf5fd5-935e-5ed7-8d05-f6bafa936d25", "Microsoft.UI.Xaml.Controls.IMenuFlyoutSeparator"]
 public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutSeparator <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuFlyoutSeparatorFactory (synthetic:Microsoft_UI_Xaml_Controls_IMenuFlyoutSeparatorFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["26156c9c-95ef-5e55-8342-773fc43baac3", "Microsoft.UI.Xaml.Controls.IMenuFlyoutSeparatorFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutSeparatorFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuFlyoutStatics (synthetic:Microsoft_UI_Xaml_Controls_IMenuFlyoutStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6959e683-16f6-5208-84e0-b0be92d9f6dd", "Microsoft.UI.Xaml.Controls.IMenuFlyoutStatics", "MenuFlyoutPresenterStyleProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutStatics <: IInspectable {
     func MenuFlyoutPresenterStyleProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuFlyoutSubItem (synthetic:Microsoft_UI_Xaml_Controls_IMenuFlyoutSubItem)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6b0688c1-47b0-53b5-b6f9-5ec5d6623b84", "Microsoft.UI.Xaml.Controls.IMenuFlyoutSubItem", "Items.value=Com;Text.value=HString;Icon.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutSubItem <: IInspectable {
     func Items(value: CPointer<CPointer<Unit>>): Int32
@@ -14928,6 +15287,7 @@ public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutSubItem <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IMenuFlyoutSubItemStatics (synthetic:Microsoft_UI_Xaml_Controls_IMenuFlyoutSubItemStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f59a8ddf-804b-5f56-bc42-f27f987db291", "Microsoft.UI.Xaml.Controls.IMenuFlyoutSubItemStatics", "TextProperty.value=Com;IconProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutSubItemStatics <: IInspectable {
     func TextProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -14935,6 +15295,7 @@ public interface Microsoft_UI_Xaml_Controls_IMenuFlyoutSubItemStatics <: IInspec
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationView (synthetic:Microsoft_UI_Xaml_Controls_INavigationView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e77a4b36-3dd1-53d9-9f97-65dccaa74a5c", "Microsoft.UI.Xaml.Controls.INavigationView", "FooterMenuItems.value=Com;FooterMenuItemsSource.value=Com;PaneFooter.value=Com;Header.value=Com;HeaderTemplate.value=Com;PaneToggleButtonStyle.value=Com;SelectedItem.value=Com;MenuItems.value=Com;MenuItemsSource.value=Com;SettingsItem.value=Com;AutoSuggestBox.value=Com;MenuItemTemplate.value=Com;MenuItemTemplateSelector.value=Com;MenuItemContainerStyle.value=Com;MenuItemContainerStyleSelector.value=Com;MenuItemFromContainer.result=Com;ContainerFromMenuItem.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationView <: IInspectable {
     func IsPaneOpen(value: CPointer<Bool>): Int32
@@ -14994,6 +15355,7 @@ public interface Microsoft_UI_Xaml_Controls_INavigationView <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationView2 (synthetic:Microsoft_UI_Xaml_Controls_INavigationView2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["05b428cf-014c-56dd-896a-a3e7089d73b5", "Microsoft.UI.Xaml.Controls.INavigationView2", "PaneTitle.value=HString;PaneHeader.value=Com;PaneCustomContent.value=Com;ContentOverlay.value=Com;TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationView2 <: IInspectable {
     func IsBackButtonVisible(value: CPointer<Int32>): Int32
@@ -15038,23 +15400,27 @@ public interface Microsoft_UI_Xaml_Controls_INavigationView2 <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewBackRequestedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewBackRequestedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ae752207-bd1b-5afa-a872-e9bbaeea0ede", "Microsoft.UI.Xaml.Controls.INavigationViewBackRequestedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewBackRequestedEventArgs <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewDisplayModeChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewDisplayModeChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["58dcf1ea-9e56-522c-b3f8-34bd55ecaca4", "Microsoft.UI.Xaml.Controls.INavigationViewDisplayModeChangedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewDisplayModeChangedEventArgs <: IInspectable {
     func DisplayMode(value: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewFactory (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ffea1ada-9232-5507-a320-ed2fadbe6127", "Microsoft.UI.Xaml.Controls.INavigationViewFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItem (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItem)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["3ab3d503-a37c-5836-8adb-2882062e73a1", "Microsoft.UI.Xaml.Controls.INavigationViewItem", "Icon.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItem <: IInspectable {
     func Icon(value: CPointer<CPointer<Unit>>): Int32
@@ -15063,6 +15429,7 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewItem <: IInspectable 
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItem2 (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItem2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["2d5bd889-9dac-5675-b254-68226f077a61", "Microsoft.UI.Xaml.Controls.INavigationViewItem2", "MenuItems.value=Com;MenuItemsSource.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItem2 <: IInspectable {
     func SelectsOnInvoked(value: CPointer<Bool>): Int32
@@ -15079,6 +15446,7 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewItem2 <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItem3 (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItem3)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c6aa3120-d888-5c32-8bb7-490ec91b1aec", "Microsoft.UI.Xaml.Controls.INavigationViewItem3", "InfoBadge.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItem3 <: IInspectable {
     func InfoBadge(value: CPointer<CPointer<Unit>>): Int32
@@ -15086,11 +15454,13 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewItem3 <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemBase (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemBase)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["33586494-af48-513f-be4d-f645e8c89005", "Microsoft.UI.Xaml.Controls.INavigationViewItemBase"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemBase <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemBase2 (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemBase2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d94ee683-d437-5523-9c5c-11d4804e471e", "Microsoft.UI.Xaml.Controls.INavigationViewItemBase2"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemBase2 <: IInspectable {
     func IsSelected(value: CPointer<Bool>): Int32
@@ -15098,17 +15468,20 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewItemBase2 <: IInspect
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemBaseFactory (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemBaseFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["31b9d7b1-7c38-5916-99c6-c71f6b012b1b", "Microsoft.UI.Xaml.Controls.INavigationViewItemBaseFactory"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemBaseFactory <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemBaseStatics (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemBaseStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["71a0c438-f0c2-5093-8906-c1c3c02de791", "Microsoft.UI.Xaml.Controls.INavigationViewItemBaseStatics", "IsSelectedProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemBaseStatics <: IInspectable {
     func IsSelectedProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemCollapsedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemCollapsedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b546f6a1-c66f-5ded-b5d7-bed0a26197e3", "Microsoft.UI.Xaml.Controls.INavigationViewItemCollapsedEventArgs", "CollapsedItemContainer.value=Com;CollapsedItem.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemCollapsedEventArgs <: IInspectable {
     func CollapsedItemContainer(value: CPointer<CPointer<Unit>>): Int32
@@ -15116,6 +15489,7 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewItemCollapsedEventArg
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemExpandingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemExpandingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6f0941be-e991-52f8-8315-f08389497976", "Microsoft.UI.Xaml.Controls.INavigationViewItemExpandingEventArgs", "ExpandingItemContainer.value=Com;ExpandingItem.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemExpandingEventArgs <: IInspectable {
     func ExpandingItemContainer(value: CPointer<CPointer<Unit>>): Int32
@@ -15123,23 +15497,27 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewItemExpandingEventArg
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemFactory (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["de60a001-9385-5535-80e1-2b68f4bfde26", "Microsoft.UI.Xaml.Controls.INavigationViewItemFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemHeader (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemHeader)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["432bc062-45bc-57ef-a2d3-11851a56a882", "Microsoft.UI.Xaml.Controls.INavigationViewItemHeader"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemHeader <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemHeaderFactory (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemHeaderFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6a5447cd-2918-5fe3-899b-93d6961285e6", "Microsoft.UI.Xaml.Controls.INavigationViewItemHeaderFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemHeaderFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemInvokedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemInvokedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["074cebaa-5d05-547b-8cd6-d19ac2d9bb3b", "Microsoft.UI.Xaml.Controls.INavigationViewItemInvokedEventArgs", "InvokedItem.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemInvokedEventArgs <: IInspectable {
     func InvokedItem(value: CPointer<CPointer<Unit>>): Int32
@@ -15147,6 +15525,7 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewItemInvokedEventArgs 
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemInvokedEventArgs2 (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemInvokedEventArgs2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e1cbb99f-19eb-5c7b-b982-854bb08d5eb7", "Microsoft.UI.Xaml.Controls.INavigationViewItemInvokedEventArgs2", "InvokedItemContainer.value=Com;RecommendedNavigationTransitionInfo.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemInvokedEventArgs2 <: IInspectable {
     func InvokedItemContainer(value: CPointer<CPointer<Unit>>): Int32
@@ -15154,6 +15533,7 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewItemInvokedEventArgs2
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemStatics (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7b6198e5-0714-531c-a056-21b3ca40ec1a", "Microsoft.UI.Xaml.Controls.INavigationViewItemStatics", "IconProperty.value=Com;CompactPaneLengthProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemStatics <: IInspectable {
     func IconProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15161,6 +15541,7 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewItemStatics <: IInspe
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemStatics2 (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemStatics2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d49d016f-abd0-51f3-acf0-118ecceea760", "Microsoft.UI.Xaml.Controls.INavigationViewItemStatics2", "SelectsOnInvokedProperty.value=Com;IsExpandedProperty.value=Com;HasUnrealizedChildrenProperty.value=Com;IsChildSelectedProperty.value=Com;MenuItemsProperty.value=Com;MenuItemsSourceProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemStatics2 <: IInspectable {
     func SelectsOnInvokedProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15172,12 +15553,14 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewItemStatics2 <: IInsp
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewItemStatics3 (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewItemStatics3)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["957beb66-d33a-53aa-a518-7d426bb9b177", "Microsoft.UI.Xaml.Controls.INavigationViewItemStatics3", "InfoBadgeProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewItemStatics3 <: IInspectable {
     func InfoBadgeProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewPaneClosingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewPaneClosingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e8643304-6db4-5af5-bac2-62733ca037da", "Microsoft.UI.Xaml.Controls.INavigationViewPaneClosingEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewPaneClosingEventArgs <: IInspectable {
     func Cancel(value: CPointer<Bool>): Int32
@@ -15185,6 +15568,7 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewPaneClosingEventArgs 
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewSelectionChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewSelectionChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["14a064a5-c79d-5f63-ac6e-1c313fe63566", "Microsoft.UI.Xaml.Controls.INavigationViewSelectionChangedEventArgs", "SelectedItem.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewSelectionChangedEventArgs <: IInspectable {
     func SelectedItem(value: CPointer<CPointer<Unit>>): Int32
@@ -15192,6 +15576,7 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewSelectionChangedEvent
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewSelectionChangedEventArgs2 (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewSelectionChangedEventArgs2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e9b5191f-1ad1-5366-bc1a-90b96076d49e", "Microsoft.UI.Xaml.Controls.INavigationViewSelectionChangedEventArgs2", "SelectedItemContainer.value=Com;RecommendedNavigationTransitionInfo.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewSelectionChangedEventArgs2 <: IInspectable {
     func SelectedItemContainer(value: CPointer<CPointer<Unit>>): Int32
@@ -15199,6 +15584,7 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewSelectionChangedEvent
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewStatics (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["dcd04caf-1904-564b-b0de-babaff9962f5", "Microsoft.UI.Xaml.Controls.INavigationViewStatics", "IsPaneOpenProperty.value=Com;CompactModeThresholdWidthProperty.value=Com;ExpandedModeThresholdWidthProperty.value=Com;FooterMenuItemsProperty.value=Com;FooterMenuItemsSourceProperty.value=Com;PaneFooterProperty.value=Com;HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;DisplayModeProperty.value=Com;IsSettingsVisibleProperty.value=Com;IsPaneToggleButtonVisibleProperty.value=Com;AlwaysShowHeaderProperty.value=Com;CompactPaneLengthProperty.value=Com;OpenPaneLengthProperty.value=Com;PaneToggleButtonStyleProperty.value=Com;MenuItemsProperty.value=Com;MenuItemsSourceProperty.value=Com;SelectedItemProperty.value=Com;SettingsItemProperty.value=Com;AutoSuggestBoxProperty.value=Com;MenuItemTemplateProperty.value=Com;MenuItemTemplateSelectorProperty.value=Com;MenuItemContainerStyleProperty.value=Com;MenuItemContainerStyleSelectorProperty.value=Com;IsTitleBarAutoPaddingEnabledProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewStatics <: IInspectable {
     func IsPaneOpenProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15229,6 +15615,7 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewStatics <: IInspectab
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewStatics2 (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewStatics2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["79588150-4a1b-5e7c-9f8a-ebc814ce773d", "Microsoft.UI.Xaml.Controls.INavigationViewStatics2", "IsBackButtonVisibleProperty.value=Com;IsBackEnabledProperty.value=Com;PaneTitleProperty.value=Com;PaneDisplayModeProperty.value=Com;PaneHeaderProperty.value=Com;PaneCustomContentProperty.value=Com;ContentOverlayProperty.value=Com;IsPaneVisibleProperty.value=Com;SelectionFollowsFocusProperty.value=Com;TemplateSettingsProperty.value=Com;ShoulderNavigationEnabledProperty.value=Com;OverflowLabelModeProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewStatics2 <: IInspectable {
     func IsBackButtonVisibleProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15246,6 +15633,7 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewStatics2 <: IInspecta
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewTemplateSettings)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["bbd25fa5-9c08-5f10-be20-cb4c1899bd9d", "Microsoft.UI.Xaml.Controls.INavigationViewTemplateSettings"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewTemplateSettings <: IInspectable {
     func TopPadding(value: CPointer<Float64>): Int32
@@ -15260,18 +15648,21 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewTemplateSettings <: I
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewTemplateSettings2 (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewTemplateSettings2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["56bec72f-1de1-5060-a44c-187885df2973", "Microsoft.UI.Xaml.Controls.INavigationViewTemplateSettings2"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewTemplateSettings2 <: IInspectable {
     func OpenPaneLength(value: CPointer<Float64>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewTemplateSettingsFactory (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewTemplateSettingsFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["34ff6c94-6465-5f3e-b0a5-4f1eea48e743", "Microsoft.UI.Xaml.Controls.INavigationViewTemplateSettingsFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewTemplateSettingsFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewTemplateSettingsStatics (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewTemplateSettingsStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["be3a88d6-d19b-5543-8b72-d42b459e72ed", "Microsoft.UI.Xaml.Controls.INavigationViewTemplateSettingsStatics", "TopPaddingProperty.value=Com;OverflowButtonVisibilityProperty.value=Com;PaneToggleButtonVisibilityProperty.value=Com;BackButtonVisibilityProperty.value=Com;TopPaneVisibilityProperty.value=Com;LeftPaneVisibilityProperty.value=Com;SingleSelectionFollowsFocusProperty.value=Com;PaneToggleButtonWidthProperty.value=Com;SmallerPaneToggleButtonWidthProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewTemplateSettingsStatics <: IInspectable {
     func TopPaddingProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15286,12 +15677,14 @@ public interface Microsoft_UI_Xaml_Controls_INavigationViewTemplateSettingsStati
 }
 
 // Microsoft.UI.Xaml.Controls.INavigationViewTemplateSettingsStatics2 (synthetic:Microsoft_UI_Xaml_Controls_INavigationViewTemplateSettingsStatics2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c0c06be3-9203-5eea-91dc-5d812a9702a6", "Microsoft.UI.Xaml.Controls.INavigationViewTemplateSettingsStatics2", "OpenPaneLengthProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INavigationViewTemplateSettingsStatics2 <: IInspectable {
     func OpenPaneLengthProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.INumberBox (synthetic:Microsoft_UI_Xaml_Controls_INumberBox)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c18eb0e9-29fb-525d-abbc-d6b2110f542e", "Microsoft.UI.Xaml.Controls.INumberBox", "Text.value=HString;Header.value=Com;HeaderTemplate.value=Com;PlaceholderText.value=HString;SelectionFlyout.value=Com;SelectionHighlightColor.value=Com;Description.value=Com;NumberFormatter.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INumberBox <: IInspectable {
     func Minimum(value: CPointer<Float64>): Int32
@@ -15337,12 +15730,14 @@ public interface Microsoft_UI_Xaml_Controls_INumberBox <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.INumberBoxFactory (synthetic:Microsoft_UI_Xaml_Controls_INumberBoxFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6b81f3cb-45a4-5d19-9bbb-a9fe4656ac4d", "Microsoft.UI.Xaml.Controls.INumberBoxFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INumberBoxFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.INumberBoxStatics (synthetic:Microsoft_UI_Xaml_Controls_INumberBoxStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["251ec05c-a77c-5540-be39-6053f797cde7", "Microsoft.UI.Xaml.Controls.INumberBoxStatics", "MinimumProperty.value=Com;MaximumProperty.value=Com;ValueProperty.value=Com;SmallChangeProperty.value=Com;LargeChangeProperty.value=Com;TextProperty.value=Com;HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;PlaceholderTextProperty.value=Com;SelectionFlyoutProperty.value=Com;SelectionHighlightColorProperty.value=Com;TextReadingOrderProperty.value=Com;PreventKeyboardDisplayOnProgrammaticFocusProperty.value=Com;DescriptionProperty.value=Com;ValidationModeProperty.value=Com;SpinButtonPlacementModeProperty.value=Com;IsWrapEnabledProperty.value=Com;AcceptsExpressionProperty.value=Com;NumberFormatterProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_INumberBoxStatics <: IInspectable {
     func MinimumProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15367,6 +15762,7 @@ public interface Microsoft_UI_Xaml_Controls_INumberBoxStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.INumberBoxValueChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_INumberBoxValueChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c66cf16e-7c8a-532e-9d23-058c1c98dd50", "Microsoft.UI.Xaml.Controls.INumberBoxValueChangedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_INumberBoxValueChangedEventArgs <: IInspectable {
     func OldValue(value: CPointer<Float64>): Int32
@@ -15374,6 +15770,7 @@ public interface Microsoft_UI_Xaml_Controls_INumberBoxValueChangedEventArgs <: I
 }
 
 // Microsoft.UI.Xaml.Controls.IPanel (synthetic:Microsoft_UI_Xaml_Controls_IPanel)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["27a1b418-56f3-525e-b883-cefed905eed3", "Microsoft.UI.Xaml.Controls.IPanel", "Children.value=Com;Background.value=Com;ChildrenTransitions.value=Com;BackgroundTransition.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPanel <: IInspectable {
     func Children(value: CPointer<CPointer<Unit>>): Int32
@@ -15387,12 +15784,14 @@ public interface Microsoft_UI_Xaml_Controls_IPanel <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IPanelFactory (synthetic:Microsoft_UI_Xaml_Controls_IPanelFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f5e7e21c-4c97-5d20-bee6-3e4fc6ab14e9", "Microsoft.UI.Xaml.Controls.IPanelFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPanelFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IPanelStatics (synthetic:Microsoft_UI_Xaml_Controls_IPanelStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["76a9caa7-a5d4-5061-a325-17c76f66de51", "Microsoft.UI.Xaml.Controls.IPanelStatics", "BackgroundProperty.value=Com;IsItemsHostProperty.value=Com;ChildrenTransitionsProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPanelStatics <: IInspectable {
     func BackgroundProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15401,6 +15800,7 @@ public interface Microsoft_UI_Xaml_Controls_IPanelStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IPasswordBox (synthetic:Microsoft_UI_Xaml_Controls_IPasswordBox)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6d3ccff7-aaee-5adc-8298-33300fa119da", "Microsoft.UI.Xaml.Controls.IPasswordBox", "Password.value=HString;PasswordChar.value=HString;Header.value=Com;HeaderTemplate.value=Com;PlaceholderText.value=HString;SelectionHighlightColor.value=Com;InputScope.value=Com;SelectionFlyout.value=Com;Description.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPasswordBox <: IInspectable {
     func Password(value: CPointer<CPointer<Unit>>): Int32
@@ -15445,12 +15845,14 @@ public interface Microsoft_UI_Xaml_Controls_IPasswordBox <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IPasswordBoxPasswordChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IPasswordBoxPasswordChangingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9a2f3b79-c00c-5d27-bb67-92cab3db0477", "Microsoft.UI.Xaml.Controls.IPasswordBoxPasswordChangingEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IPasswordBoxPasswordChangingEventArgs <: IInspectable {
     func IsContentChanging(value: CPointer<Bool>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IPasswordBoxStatics (synthetic:Microsoft_UI_Xaml_Controls_IPasswordBoxStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["90e6559c-5f74-5cd1-87b6-c0514085ab42", "Microsoft.UI.Xaml.Controls.IPasswordBoxStatics", "PasswordProperty.value=Com;PasswordCharProperty.value=Com;IsPasswordRevealButtonEnabledProperty.value=Com;MaxLengthProperty.value=Com;HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;PlaceholderTextProperty.value=Com;SelectionHighlightColorProperty.value=Com;PreventKeyboardDisplayOnProgrammaticFocusProperty.value=Com;PasswordRevealModeProperty.value=Com;TextReadingOrderProperty.value=Com;InputScopeProperty.value=Com;CanPasteClipboardContentProperty.value=Com;SelectionFlyoutProperty.value=Com;DescriptionProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPasswordBoxStatics <: IInspectable {
     func PasswordProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15471,6 +15873,7 @@ public interface Microsoft_UI_Xaml_Controls_IPasswordBoxStatics <: IInspectable 
 }
 
 // Microsoft.UI.Xaml.Controls.IPersonPicture (synthetic:Microsoft_UI_Xaml_Controls_IPersonPicture)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["30ec982c-0efa-5538-a356-e9ebd5aa363c", "Microsoft.UI.Xaml.Controls.IPersonPicture", "BadgeGlyph.value=HString;BadgeImageSource.value=Com;BadgeText.value=HString;Contact.value=Com;DisplayName.value=HString;Initials.value=HString;ProfilePicture.value=Com;TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPersonPicture <: IInspectable {
     func BadgeNumber(value: CPointer<Int32>): Int32
@@ -15497,12 +15900,14 @@ public interface Microsoft_UI_Xaml_Controls_IPersonPicture <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IPersonPictureFactory (synthetic:Microsoft_UI_Xaml_Controls_IPersonPictureFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7ec0794c-f2cc-5282-a89d-cd3bb765b71a", "Microsoft.UI.Xaml.Controls.IPersonPictureFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPersonPictureFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IPersonPictureStatics (synthetic:Microsoft_UI_Xaml_Controls_IPersonPictureStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["3c769423-9b05-56c1-a169-098493c21f91", "Microsoft.UI.Xaml.Controls.IPersonPictureStatics", "BadgeNumberProperty.value=Com;BadgeGlyphProperty.value=Com;BadgeImageSourceProperty.value=Com;BadgeTextProperty.value=Com;IsGroupProperty.value=Com;ContactProperty.value=Com;DisplayNameProperty.value=Com;InitialsProperty.value=Com;PreferSmallImageProperty.value=Com;ProfilePictureProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPersonPictureStatics <: IInspectable {
     func BadgeNumberProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15518,6 +15923,7 @@ public interface Microsoft_UI_Xaml_Controls_IPersonPictureStatics <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.IPersonPictureTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_IPersonPictureTemplateSettings)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e16df12f-c3c0-5f26-a381-08f2df052f29", "Microsoft.UI.Xaml.Controls.IPersonPictureTemplateSettings", "ActualInitials.value=HString;ActualImageBrush.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPersonPictureTemplateSettings <: IInspectable {
     func ActualInitials(value: CPointer<CPointer<Unit>>): Int32
@@ -15525,6 +15931,7 @@ public interface Microsoft_UI_Xaml_Controls_IPersonPictureTemplateSettings <: II
 }
 
 // Microsoft.UI.Xaml.Controls.IPivot (synthetic:Microsoft_UI_Xaml_Controls_IPivot)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1c6438e5-ecac-5fb6-8e8e-00de7e922303", "Microsoft.UI.Xaml.Controls.IPivot", "Title.value=Com;TitleTemplate.value=Com;LeftHeader.value=Com;LeftHeaderTemplate.value=Com;RightHeader.value=Com;RightHeaderTemplate.value=Com;HeaderTemplate.value=Com;SelectedItem.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPivot <: IInspectable {
     func Title(value: CPointer<CPointer<Unit>>): Int32
@@ -15564,12 +15971,14 @@ public interface Microsoft_UI_Xaml_Controls_IPivot <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IPivotFactory (synthetic:Microsoft_UI_Xaml_Controls_IPivotFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["da9d033c-4782-5a69-90af-076ccdf071ae", "Microsoft.UI.Xaml.Controls.IPivotFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPivotFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IPivotItem (synthetic:Microsoft_UI_Xaml_Controls_IPivotItem)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["8108c195-63f5-5df9-abcf-418fa2dbfbec", "Microsoft.UI.Xaml.Controls.IPivotItem", "Header.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPivotItem <: IInspectable {
     func Header(value: CPointer<CPointer<Unit>>): Int32
@@ -15577,6 +15986,7 @@ public interface Microsoft_UI_Xaml_Controls_IPivotItem <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IPivotItemEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IPivotItemEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e42c62c2-0cb9-5e5b-8148-8d80a3838de9", "Microsoft.UI.Xaml.Controls.IPivotItemEventArgs", "Item.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPivotItemEventArgs <: IInspectable {
     func Item(value: CPointer<CPointer<Unit>>): Int32
@@ -15584,18 +15994,21 @@ public interface Microsoft_UI_Xaml_Controls_IPivotItemEventArgs <: IInspectable 
 }
 
 // Microsoft.UI.Xaml.Controls.IPivotItemFactory (synthetic:Microsoft_UI_Xaml_Controls_IPivotItemFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9149a2ab-606c-55a9-8786-801d55ca8ed6", "Microsoft.UI.Xaml.Controls.IPivotItemFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPivotItemFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IPivotItemStatics (synthetic:Microsoft_UI_Xaml_Controls_IPivotItemStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e2ebe630-6629-5b7b-8666-fdeb9b98db2c", "Microsoft.UI.Xaml.Controls.IPivotItemStatics", "HeaderProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPivotItemStatics <: IInspectable {
     func HeaderProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IPivotStatics (synthetic:Microsoft_UI_Xaml_Controls_IPivotStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["619cc35f-b97b-5e32-885e-70949ed97eeb", "Microsoft.UI.Xaml.Controls.IPivotStatics", "TitleProperty.value=Com;TitleTemplateProperty.value=Com;LeftHeaderProperty.value=Com;LeftHeaderTemplateProperty.value=Com;RightHeaderProperty.value=Com;RightHeaderTemplateProperty.value=Com;HeaderTemplateProperty.value=Com;SelectedIndexProperty.value=Com;SelectedItemProperty.value=Com;IsLockedProperty.value=Com;HeaderFocusVisualPlacementProperty.value=Com;IsHeaderItemsCarouselEnabledProperty.value=Com;SlideInAnimationGroupProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IPivotStatics <: IInspectable {
     func TitleProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15616,6 +16029,7 @@ public interface Microsoft_UI_Xaml_Controls_IPivotStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IProgressBar (synthetic:Microsoft_UI_Xaml_Controls_IProgressBar)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["87555c8c-0aaf-52c1-8390-0db17f40438e", "Microsoft.UI.Xaml.Controls.IProgressBar", "TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IProgressBar <: IInspectable {
     func IsIndeterminate(value: CPointer<Bool>): Int32
@@ -15628,12 +16042,14 @@ public interface Microsoft_UI_Xaml_Controls_IProgressBar <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IProgressBarFactory (synthetic:Microsoft_UI_Xaml_Controls_IProgressBarFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["189826ad-f6f2-533e-9ddb-b6600e88675b", "Microsoft.UI.Xaml.Controls.IProgressBarFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IProgressBarFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IProgressBarStatics (synthetic:Microsoft_UI_Xaml_Controls_IProgressBarStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["61bbb127-e4c4-5e22-a8dc-cfcf957236d0", "Microsoft.UI.Xaml.Controls.IProgressBarStatics", "IsIndeterminateProperty.value=Com;ShowErrorProperty.value=Com;ShowPausedProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IProgressBarStatics <: IInspectable {
     func IsIndeterminateProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15642,6 +16058,7 @@ public interface Microsoft_UI_Xaml_Controls_IProgressBarStatics <: IInspectable 
 }
 
 // Microsoft.UI.Xaml.Controls.IProgressBarTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_IProgressBarTemplateSettings)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["fbea95c9-9ef9-5e79-af54-44ded28035d5", "Microsoft.UI.Xaml.Controls.IProgressBarTemplateSettings", "ClipRect.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IProgressBarTemplateSettings <: IInspectable {
     func ContainerAnimationStartPosition(value: CPointer<Float64>): Int32
@@ -15658,6 +16075,7 @@ public interface Microsoft_UI_Xaml_Controls_IProgressBarTemplateSettings <: IIns
 }
 
 // Microsoft.UI.Xaml.Controls.IProgressRing (synthetic:Microsoft_UI_Xaml_Controls_IProgressRing)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["2670d03f-e28c-5652-bee2-b5212ebdf7ff", "Microsoft.UI.Xaml.Controls.IProgressRing", "TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IProgressRing <: IInspectable {
     func IsActive(value: CPointer<Bool>): Int32
@@ -15674,12 +16092,14 @@ public interface Microsoft_UI_Xaml_Controls_IProgressRing <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IProgressRingFactory (synthetic:Microsoft_UI_Xaml_Controls_IProgressRingFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["092fa98c-62a7-5dbc-9a85-3e556ba81f79", "Microsoft.UI.Xaml.Controls.IProgressRingFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IProgressRingFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IProgressRingStatics (synthetic:Microsoft_UI_Xaml_Controls_IProgressRingStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["4ba1166a-cec2-50e2-b26b-66b69dc2e371", "Microsoft.UI.Xaml.Controls.IProgressRingStatics", "IsActiveProperty.value=Com;IsIndeterminateProperty.value=Com;ValueProperty.value=Com;MinimumProperty.value=Com;MaximumProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IProgressRingStatics <: IInspectable {
     func IsActiveProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15690,6 +16110,7 @@ public interface Microsoft_UI_Xaml_Controls_IProgressRingStatics <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.IProgressRingTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_IProgressRingTemplateSettings)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["34020d86-e1c1-5d7c-b223-acd7f862ffd5", "Microsoft.UI.Xaml.Controls.IProgressRingTemplateSettings"]
 public interface Microsoft_UI_Xaml_Controls_IProgressRingTemplateSettings <: IInspectable {
     func EllipseDiameter(value: CPointer<Float64>): Int32
@@ -15698,6 +16119,7 @@ public interface Microsoft_UI_Xaml_Controls_IProgressRingTemplateSettings <: IIn
 }
 
 // Microsoft.UI.Xaml.Controls.IRadioButton (synthetic:Microsoft_UI_Xaml_Controls_IRadioButton)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["38f30cee-e75a-5ba1-ae64-4474a3abeac7", "Microsoft.UI.Xaml.Controls.IRadioButton", "GroupName.value=HString"]
 public interface Microsoft_UI_Xaml_Controls_IRadioButton <: IInspectable {
     func GroupName(value: CPointer<CPointer<Unit>>): Int32
@@ -15705,18 +16127,21 @@ public interface Microsoft_UI_Xaml_Controls_IRadioButton <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IRadioButtonFactory (synthetic:Microsoft_UI_Xaml_Controls_IRadioButtonFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["5772c79a-b3eb-5719-8005-2a513429495a", "Microsoft.UI.Xaml.Controls.IRadioButtonFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRadioButtonFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IRadioButtonStatics (synthetic:Microsoft_UI_Xaml_Controls_IRadioButtonStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a8bce4d4-68fe-53d9-a317-74ab409cd4ee", "Microsoft.UI.Xaml.Controls.IRadioButtonStatics", "GroupNameProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRadioButtonStatics <: IInspectable {
     func GroupNameProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IRadioButtons (synthetic:Microsoft_UI_Xaml_Controls_IRadioButtons)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["966daf80-ee85-5d90-b6b3-80bec9134673", "Microsoft.UI.Xaml.Controls.IRadioButtons", "ItemsSource.value=Com;Items.value=Com;ItemTemplate.value=Com;ContainerFromIndex.result=Com;SelectedItem.value=Com;Header.value=Com;HeaderTemplate.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRadioButtons <: IInspectable {
     func ItemsSource(value: CPointer<CPointer<Unit>>): Int32
@@ -15740,12 +16165,14 @@ public interface Microsoft_UI_Xaml_Controls_IRadioButtons <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IRadioButtonsFactory (synthetic:Microsoft_UI_Xaml_Controls_IRadioButtonsFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["2cf95efb-a7a2-5d85-8ead-ea222baa3c55", "Microsoft.UI.Xaml.Controls.IRadioButtonsFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRadioButtonsFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IRadioButtonsStatics (synthetic:Microsoft_UI_Xaml_Controls_IRadioButtonsStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["de0bf0ca-9ae8-5b8a-9738-7d98b344c039", "Microsoft.UI.Xaml.Controls.IRadioButtonsStatics", "ItemsSourceProperty.value=Com;ItemsProperty.value=Com;ItemTemplateProperty.value=Com;SelectedIndexProperty.value=Com;SelectedItemProperty.value=Com;MaxColumnsProperty.value=Com;HeaderProperty.value=Com;HeaderTemplateProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRadioButtonsStatics <: IInspectable {
     func ItemsSourceProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15759,6 +16186,7 @@ public interface Microsoft_UI_Xaml_Controls_IRadioButtonsStatics <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.IRatingControl (synthetic:Microsoft_UI_Xaml_Controls_IRatingControl)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["5488193b-ea4b-52c6-8544-c063219bcd90", "Microsoft.UI.Xaml.Controls.IRatingControl", "Caption.value=HString;ItemInfo.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRatingControl <: IInspectable {
     func Caption(value: CPointer<CPointer<Unit>>): Int32
@@ -15782,12 +16210,14 @@ public interface Microsoft_UI_Xaml_Controls_IRatingControl <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IRatingControlFactory (synthetic:Microsoft_UI_Xaml_Controls_IRatingControlFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a53b9b73-bff9-548d-a294-ac63d819f78a", "Microsoft.UI.Xaml.Controls.IRatingControlFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRatingControlFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IRatingControlStatics (synthetic:Microsoft_UI_Xaml_Controls_IRatingControlStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["dac61d65-e8f9-5e4d-813d-05c980b2f118", "Microsoft.UI.Xaml.Controls.IRatingControlStatics", "CaptionProperty.value=Com;InitialSetValueProperty.value=Com;IsClearEnabledProperty.value=Com;IsReadOnlyProperty.value=Com;MaxRatingProperty.value=Com;PlaceholderValueProperty.value=Com;ItemInfoProperty.value=Com;ValueProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRatingControlStatics <: IInspectable {
     func CaptionProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15801,17 +16231,20 @@ public interface Microsoft_UI_Xaml_Controls_IRatingControlStatics <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.IRatingItemInfo (synthetic:Microsoft_UI_Xaml_Controls_IRatingItemInfo)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["801e924e-3613-55dd-8321-9ebabbed0b8a", "Microsoft.UI.Xaml.Controls.IRatingItemInfo"]
 public interface Microsoft_UI_Xaml_Controls_IRatingItemInfo <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IRatingItemInfoFactory (synthetic:Microsoft_UI_Xaml_Controls_IRatingItemInfoFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["61f13480-cd0c-556a-b532-a0cf53e3cda0", "Microsoft.UI.Xaml.Controls.IRatingItemInfoFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRatingItemInfoFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IRelativePanel (synthetic:Microsoft_UI_Xaml_Controls_IRelativePanel)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c432fcc4-88f2-59d8-9d0e-a237beaeb07f", "Microsoft.UI.Xaml.Controls.IRelativePanel", "BorderBrush.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRelativePanel <: IInspectable {
     func BackgroundSizing(value: CPointer<Int32>): Int32
@@ -15827,12 +16260,14 @@ public interface Microsoft_UI_Xaml_Controls_IRelativePanel <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IRelativePanelFactory (synthetic:Microsoft_UI_Xaml_Controls_IRelativePanelFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c85f1443-d973-50fd-9497-b867f492468f", "Microsoft.UI.Xaml.Controls.IRelativePanelFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRelativePanelFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IRelativePanelStatics (synthetic:Microsoft_UI_Xaml_Controls_IRelativePanelStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["bdd929a2-76cc-59c4-82c1-f14b5da4221a", "Microsoft.UI.Xaml.Controls.IRelativePanelStatics", "BackgroundSizingProperty.value=Com;LeftOfProperty.value=Com;GetLeftOf.result=Com;AboveProperty.value=Com;GetAbove.result=Com;RightOfProperty.value=Com;GetRightOf.result=Com;BelowProperty.value=Com;GetBelow.result=Com;AlignHorizontalCenterWithProperty.value=Com;GetAlignHorizontalCenterWith.result=Com;AlignVerticalCenterWithProperty.value=Com;GetAlignVerticalCenterWith.result=Com;AlignLeftWithProperty.value=Com;GetAlignLeftWith.result=Com;AlignTopWithProperty.value=Com;GetAlignTopWith.result=Com;AlignRightWithProperty.value=Com;GetAlignRightWith.result=Com;AlignBottomWithProperty.value=Com;GetAlignBottomWith.result=Com;AlignLeftWithPanelProperty.value=Com;AlignTopWithPanelProperty.value=Com;AlignRightWithPanelProperty.value=Com;AlignBottomWithPanelProperty.value=Com;AlignHorizontalCenterWithPanelProperty.value=Com;AlignVerticalCenterWithPanelProperty.value=Com;BorderBrushProperty.value=Com;BorderThicknessProperty.value=Com;CornerRadiusProperty.value=Com;PaddingProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRelativePanelStatics <: IInspectable {
     func BackgroundSizingProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -15891,6 +16326,7 @@ public interface Microsoft_UI_Xaml_Controls_IRelativePanelStatics <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.IRichEditBox (synthetic:Microsoft_UI_Xaml_Controls_IRichEditBox)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["699163db-723d-5514-a8c9-2c64d99e1ea6", "Microsoft.UI.Xaml.Controls.IRichEditBox", "Document.value=Com;InputScope.value=Com;Header.value=Com;HeaderTemplate.value=Com;PlaceholderText.value=HString;SelectionHighlightColor.value=Com;SelectionHighlightColorWhenNotFocused.value=Com;TextDocument.value=Com;SelectionFlyout.value=Com;ProofingMenuFlyout.value=Com;Description.value=Com;GetLinguisticAlternativesAsync.operation=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRichEditBox <: IInspectable {
     func IsReadOnly(value: CPointer<Bool>): Int32
@@ -15970,12 +16406,14 @@ public interface Microsoft_UI_Xaml_Controls_IRichEditBox <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IRichEditBoxFactory (synthetic:Microsoft_UI_Xaml_Controls_IRichEditBoxFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7c993c60-f5b6-589f-bba8-b68b9713e4ae", "Microsoft.UI.Xaml.Controls.IRichEditBoxFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRichEditBoxFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IRichEditBoxSelectionChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IRichEditBoxSelectionChangingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["5dbadbe1-0515-5045-9a6f-6859237301ac", "Microsoft.UI.Xaml.Controls.IRichEditBoxSelectionChangingEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IRichEditBoxSelectionChangingEventArgs <: IInspectable {
     func SelectionStart(value: CPointer<Int32>): Int32
@@ -15985,6 +16423,7 @@ public interface Microsoft_UI_Xaml_Controls_IRichEditBoxSelectionChangingEventAr
 }
 
 // Microsoft.UI.Xaml.Controls.IRichEditBoxStatics (synthetic:Microsoft_UI_Xaml_Controls_IRichEditBoxStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b3f59239-efd1-5129-bf80-2841a331b24a", "Microsoft.UI.Xaml.Controls.IRichEditBoxStatics", "IsReadOnlyProperty.value=Com;AcceptsReturnProperty.value=Com;TextAlignmentProperty.value=Com;TextWrappingProperty.value=Com;IsSpellCheckEnabledProperty.value=Com;IsTextPredictionEnabledProperty.value=Com;InputScopeProperty.value=Com;HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;PlaceholderTextProperty.value=Com;SelectionHighlightColorProperty.value=Com;PreventKeyboardDisplayOnProgrammaticFocusProperty.value=Com;IsColorFontEnabledProperty.value=Com;SelectionHighlightColorWhenNotFocusedProperty.value=Com;MaxLengthProperty.value=Com;HorizontalTextAlignmentProperty.value=Com;CharacterCasingProperty.value=Com;DisabledFormattingAcceleratorsProperty.value=Com;SelectionFlyoutProperty.value=Com;ProofingMenuFlyoutProperty.value=Com;DescriptionProperty.value=Com;DesiredCandidateWindowAlignmentProperty.value=Com;TextReadingOrderProperty.value=Com;ClipboardCopyFormatProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRichEditBoxStatics <: IInspectable {
     func IsReadOnlyProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16014,12 +16453,14 @@ public interface Microsoft_UI_Xaml_Controls_IRichEditBoxStatics <: IInspectable 
 }
 
 // Microsoft.UI.Xaml.Controls.IRichEditBoxTextChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IRichEditBoxTextChangingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e887b29a-1551-5868-a5dc-3fcfe7452e6b", "Microsoft.UI.Xaml.Controls.IRichEditBoxTextChangingEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IRichEditBoxTextChangingEventArgs <: IInspectable {
     func IsContentChanging(value: CPointer<Bool>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IRichTextBlock (synthetic:Microsoft_UI_Xaml_Controls_IRichTextBlock)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d766e4db-a684-50b7-a202-c8e91fa26ff3", "Microsoft.UI.Xaml.Controls.IRichTextBlock", "FontFamily.value=Com;Foreground.value=Com;Blocks.value=Com;OverflowContentTarget.value=Com;SelectedText.value=HString;ContentStart.value=Com;ContentEnd.value=Com;SelectionStart.value=Com;SelectionEnd.value=Com;SelectionHighlightColor.value=Com;TextHighlighters.value=Com;SelectionFlyout.value=Com;GetPositionFromPoint.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRichTextBlock <: IInspectable {
     func FontSize(value: CPointer<Float64>): Int32
@@ -16097,6 +16538,7 @@ public interface Microsoft_UI_Xaml_Controls_IRichTextBlock <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IRichTextBlockOverflow (synthetic:Microsoft_UI_Xaml_Controls_IRichTextBlockOverflow)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["015c2522-0646-5c71-9f54-3c38c7235a62", "Microsoft.UI.Xaml.Controls.IRichTextBlockOverflow", "OverflowContentTarget.value=Com;ContentSource.value=Com;ContentStart.value=Com;ContentEnd.value=Com;GetPositionFromPoint.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRichTextBlockOverflow <: IInspectable {
     func OverflowContentTarget(value: CPointer<CPointer<Unit>>): Int32
@@ -16117,6 +16559,7 @@ public interface Microsoft_UI_Xaml_Controls_IRichTextBlockOverflow <: IInspectab
 }
 
 // Microsoft.UI.Xaml.Controls.IRichTextBlockOverflowStatics (synthetic:Microsoft_UI_Xaml_Controls_IRichTextBlockOverflowStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6db6ee42-a333-5e5b-9ce8-f5e2f46f4d66", "Microsoft.UI.Xaml.Controls.IRichTextBlockOverflowStatics", "OverflowContentTargetProperty.value=Com;PaddingProperty.value=Com;HasOverflowContentProperty.value=Com;MaxLinesProperty.value=Com;IsTextTrimmedProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRichTextBlockOverflowStatics <: IInspectable {
     func OverflowContentTargetProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16127,6 +16570,7 @@ public interface Microsoft_UI_Xaml_Controls_IRichTextBlockOverflowStatics <: IIn
 }
 
 // Microsoft.UI.Xaml.Controls.IRichTextBlockStatics (synthetic:Microsoft_UI_Xaml_Controls_IRichTextBlockStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["65dca245-b4fc-5718-b628-a4953f61d6a3", "Microsoft.UI.Xaml.Controls.IRichTextBlockStatics", "FontSizeProperty.value=Com;FontFamilyProperty.value=Com;FontWeightProperty.value=Com;FontStyleProperty.value=Com;FontStretchProperty.value=Com;ForegroundProperty.value=Com;TextWrappingProperty.value=Com;TextTrimmingProperty.value=Com;TextAlignmentProperty.value=Com;PaddingProperty.value=Com;LineHeightProperty.value=Com;LineStackingStrategyProperty.value=Com;CharacterSpacingProperty.value=Com;OverflowContentTargetProperty.value=Com;IsTextSelectionEnabledProperty.value=Com;HasOverflowContentProperty.value=Com;SelectedTextProperty.value=Com;MaxLinesProperty.value=Com;TextLineBoundsProperty.value=Com;SelectionHighlightColorProperty.value=Com;OpticalMarginAlignmentProperty.value=Com;IsColorFontEnabledProperty.value=Com;TextReadingOrderProperty.value=Com;IsTextScaleFactorEnabledProperty.value=Com;TextDecorationsProperty.value=Com;IsTextTrimmedProperty.value=Com;HorizontalTextAlignmentProperty.value=Com;SelectionFlyoutProperty.value=Com;TextIndentProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRichTextBlockStatics <: IInspectable {
     func FontSizeProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16161,6 +16605,7 @@ public interface Microsoft_UI_Xaml_Controls_IRichTextBlockStatics <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.IRowDefinition (synthetic:Microsoft_UI_Xaml_Controls_IRowDefinition)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["fe870f2f-89ef-5dac-9f33-968d0dc577c3", "Microsoft.UI.Xaml.Controls.IRowDefinition"]
 public interface Microsoft_UI_Xaml_Controls_IRowDefinition <: IInspectable {
     func Height(value: CPointer<Microsoft_UI_Xaml_GridLength>): Int32
@@ -16173,6 +16618,7 @@ public interface Microsoft_UI_Xaml_Controls_IRowDefinition <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IRowDefinitionStatics (synthetic:Microsoft_UI_Xaml_Controls_IRowDefinitionStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7317c7c5-fd6f-58d9-9b53-4978dbacde23", "Microsoft.UI.Xaml.Controls.IRowDefinitionStatics", "HeightProperty.value=Com;MaxHeightProperty.value=Com;MinHeightProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IRowDefinitionStatics <: IInspectable {
     func HeightProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16181,6 +16627,7 @@ public interface Microsoft_UI_Xaml_Controls_IRowDefinitionStatics <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollAnchorProvider (synthetic:Microsoft_UI_Xaml_Controls_IScrollAnchorProvider)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["885df41f-f240-5b7b-a703-bfaf39c6a2cd", "Microsoft.UI.Xaml.Controls.IScrollAnchorProvider", "CurrentAnchor.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IScrollAnchorProvider <: IInspectable {
     func CurrentAnchor(value: CPointer<CPointer<Unit>>): Int32
@@ -16189,6 +16636,7 @@ public interface Microsoft_UI_Xaml_Controls_IScrollAnchorProvider <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollView (synthetic:Microsoft_UI_Xaml_Controls_IScrollView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["8c98c86d-378a-5102-a1e3-3352280fa010", "Microsoft.UI.Xaml.Controls.IScrollView", "Content.value=Com;CurrentAnchor.value=Com;ScrollPresenter.value=Com;ExpressionAnimationSources.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IScrollView <: IInspectable {
     func Content(value: CPointer<CPointer<Unit>>): Int32
@@ -16275,12 +16723,14 @@ public interface Microsoft_UI_Xaml_Controls_IScrollView <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollViewFactory (synthetic:Microsoft_UI_Xaml_Controls_IScrollViewFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f3547344-22e4-5e6c-9ece-66504ef733ed", "Microsoft.UI.Xaml.Controls.IScrollViewFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IScrollViewFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollViewStatics (synthetic:Microsoft_UI_Xaml_Controls_IScrollViewStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ac966c50-31f1-5485-8e08-ee7a7e9a6fd0", "Microsoft.UI.Xaml.Controls.IScrollViewStatics", "ContentProperty.value=Com;ScrollPresenterProperty.value=Com;HorizontalScrollBarVisibilityProperty.value=Com;VerticalScrollBarVisibilityProperty.value=Com;ContentOrientationProperty.value=Com;HorizontalScrollChainModeProperty.value=Com;VerticalScrollChainModeProperty.value=Com;HorizontalScrollRailModeProperty.value=Com;VerticalScrollRailModeProperty.value=Com;HorizontalScrollModeProperty.value=Com;VerticalScrollModeProperty.value=Com;ComputedHorizontalScrollBarVisibilityProperty.value=Com;ComputedVerticalScrollBarVisibilityProperty.value=Com;ComputedHorizontalScrollModeProperty.value=Com;ComputedVerticalScrollModeProperty.value=Com;ZoomChainModeProperty.value=Com;ZoomModeProperty.value=Com;IgnoredInputKindsProperty.value=Com;MinZoomFactorProperty.value=Com;MaxZoomFactorProperty.value=Com;HorizontalAnchorRatioProperty.value=Com;VerticalAnchorRatioProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IScrollViewStatics <: IInspectable {
     func ContentProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16308,6 +16758,7 @@ public interface Microsoft_UI_Xaml_Controls_IScrollViewStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollViewer (synthetic:Microsoft_UI_Xaml_Controls_IScrollViewer)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1dc28c2e-996c-5394-89c3-4dc656b4ad46", "Microsoft.UI.Xaml.Controls.IScrollViewer", "ZoomSnapPoints.value=Com;TopLeftHeader.value=Com;LeftHeader.value=Com;TopHeader.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IScrollViewer <: IInspectable {
     func HorizontalScrollBarVisibility(value: CPointer<Int32>): Int32
@@ -16397,6 +16848,7 @@ public interface Microsoft_UI_Xaml_Controls_IScrollViewer <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollViewerStatics (synthetic:Microsoft_UI_Xaml_Controls_IScrollViewerStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d971fd86-0a96-50c4-a6e1-9975faa2a142", "Microsoft.UI.Xaml.Controls.IScrollViewerStatics", "HorizontalSnapPointsAlignmentProperty.value=Com;VerticalSnapPointsAlignmentProperty.value=Com;HorizontalSnapPointsTypeProperty.value=Com;VerticalSnapPointsTypeProperty.value=Com;ZoomSnapPointsTypeProperty.value=Com;HorizontalOffsetProperty.value=Com;ViewportWidthProperty.value=Com;ScrollableWidthProperty.value=Com;ComputedHorizontalScrollBarVisibilityProperty.value=Com;ExtentWidthProperty.value=Com;VerticalOffsetProperty.value=Com;ViewportHeightProperty.value=Com;ScrollableHeightProperty.value=Com;ComputedVerticalScrollBarVisibilityProperty.value=Com;ExtentHeightProperty.value=Com;MinZoomFactorProperty.value=Com;MaxZoomFactorProperty.value=Com;ZoomFactorProperty.value=Com;ZoomSnapPointsProperty.value=Com;TopLeftHeaderProperty.value=Com;LeftHeaderProperty.value=Com;TopHeaderProperty.value=Com;ReduceViewportForCoreInputViewOcclusionsProperty.value=Com;HorizontalAnchorRatioProperty.value=Com;VerticalAnchorRatioProperty.value=Com;HorizontalScrollBarVisibilityProperty.value=Com;VerticalScrollBarVisibilityProperty.value=Com;IsHorizontalRailEnabledProperty.value=Com;IsVerticalRailEnabledProperty.value=Com;IsHorizontalScrollChainingEnabledProperty.value=Com;IsVerticalScrollChainingEnabledProperty.value=Com;IsZoomChainingEnabledProperty.value=Com;IsScrollInertiaEnabledProperty.value=Com;IsZoomInertiaEnabledProperty.value=Com;HorizontalScrollModeProperty.value=Com;VerticalScrollModeProperty.value=Com;ZoomModeProperty.value=Com;CanContentRenderOutsideBoundsProperty.value=Com;IsDeferredScrollingEnabledProperty.value=Com;BringIntoViewOnFocusChangeProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IScrollViewerStatics <: IInspectable {
     func HorizontalSnapPointsAlignmentProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16472,6 +16924,7 @@ public interface Microsoft_UI_Xaml_Controls_IScrollViewerStatics <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollViewerView (synthetic:Microsoft_UI_Xaml_Controls_IScrollViewerView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1e9f68ee-6ce5-5cbf-bbfe-b8cd284b9c23", "Microsoft.UI.Xaml.Controls.IScrollViewerView"]
 public interface Microsoft_UI_Xaml_Controls_IScrollViewerView <: IInspectable {
     func HorizontalOffset(value: CPointer<Float64>): Int32
@@ -16480,12 +16933,14 @@ public interface Microsoft_UI_Xaml_Controls_IScrollViewerView <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollViewerViewChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IScrollViewerViewChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["bf7bb85b-1d46-5004-a370-ecb626630588", "Microsoft.UI.Xaml.Controls.IScrollViewerViewChangedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IScrollViewerViewChangedEventArgs <: IInspectable {
     func IsIntermediate(value: CPointer<Bool>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollViewerViewChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IScrollViewerViewChangingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["aee37d7c-4696-55f1-96ca-656832fc0fd2", "Microsoft.UI.Xaml.Controls.IScrollViewerViewChangingEventArgs", "NextView.value=Com;FinalView.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IScrollViewerViewChangingEventArgs <: IInspectable {
     func NextView(value: CPointer<CPointer<Unit>>): Int32
@@ -16494,6 +16949,7 @@ public interface Microsoft_UI_Xaml_Controls_IScrollViewerViewChangingEventArgs <
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollingAnchorRequestedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IScrollingAnchorRequestedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6a46cb4b-ab26-55b2-aa76-9b337a4f8e8e", "Microsoft.UI.Xaml.Controls.IScrollingAnchorRequestedEventArgs", "AnchorCandidates.value=Com;AnchorElement.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IScrollingAnchorRequestedEventArgs <: IInspectable {
     func AnchorCandidates(value: CPointer<CPointer<Unit>>): Int32
@@ -16502,6 +16958,7 @@ public interface Microsoft_UI_Xaml_Controls_IScrollingAnchorRequestedEventArgs <
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollingBringingIntoViewEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IScrollingBringingIntoViewEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["09760d99-d60c-5c76-8033-127b2085358c", "Microsoft.UI.Xaml.Controls.IScrollingBringingIntoViewEventArgs", "RequestEventArgs.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IScrollingBringingIntoViewEventArgs <: IInspectable {
     func SnapPointsMode(value: CPointer<Int32>): Int32
@@ -16515,6 +16972,7 @@ public interface Microsoft_UI_Xaml_Controls_IScrollingBringingIntoViewEventArgs 
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollingScrollAnimationStartingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IScrollingScrollAnimationStartingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7acb0423-6fc7-516b-ab67-03a4a4285a90", "Microsoft.UI.Xaml.Controls.IScrollingScrollAnimationStartingEventArgs", "Animation.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IScrollingScrollAnimationStartingEventArgs <: IInspectable {
     func Animation(value: CPointer<CPointer<Unit>>): Int32
@@ -16525,12 +16983,14 @@ public interface Microsoft_UI_Xaml_Controls_IScrollingScrollAnimationStartingEve
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollingScrollCompletedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IScrollingScrollCompletedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9bdeae9c-972c-54ae-9c62-fc1a03ff3fa8", "Microsoft.UI.Xaml.Controls.IScrollingScrollCompletedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IScrollingScrollCompletedEventArgs <: IInspectable {
     func CorrelationId(value: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollingScrollOptions (synthetic:Microsoft_UI_Xaml_Controls_IScrollingScrollOptions)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["30b2e77b-2553-5b09-b308-b4b06fc8f9af", "Microsoft.UI.Xaml.Controls.IScrollingScrollOptions"]
 public interface Microsoft_UI_Xaml_Controls_IScrollingScrollOptions <: IInspectable {
     func AnimationMode(value: CPointer<Int32>): Int32
@@ -16540,6 +17000,7 @@ public interface Microsoft_UI_Xaml_Controls_IScrollingScrollOptions <: IInspecta
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollingScrollOptionsFactory (synthetic:Microsoft_UI_Xaml_Controls_IScrollingScrollOptionsFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["31eb58fe-0f6a-51ec-90db-5ccaa0a288a6", "Microsoft.UI.Xaml.Controls.IScrollingScrollOptionsFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com;CreateInstance2.innerInterface=Com;CreateInstance2.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IScrollingScrollOptionsFactory <: IInspectable {
     func CreateInstance(animationMode: Int32, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
@@ -16547,6 +17008,7 @@ public interface Microsoft_UI_Xaml_Controls_IScrollingScrollOptionsFactory <: II
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollingZoomAnimationStartingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IScrollingZoomAnimationStartingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["59bfb77b-47c9-5691-bdcd-536fbe8eb8c1", "Microsoft.UI.Xaml.Controls.IScrollingZoomAnimationStartingEventArgs", "Animation.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IScrollingZoomAnimationStartingEventArgs <: IInspectable {
     func CenterPoint(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -16558,12 +17020,14 @@ public interface Microsoft_UI_Xaml_Controls_IScrollingZoomAnimationStartingEvent
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollingZoomCompletedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IScrollingZoomCompletedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c821207e-ab2a-5f6c-9074-411840a68d55", "Microsoft.UI.Xaml.Controls.IScrollingZoomCompletedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_IScrollingZoomCompletedEventArgs <: IInspectable {
     func CorrelationId(value: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollingZoomOptions (synthetic:Microsoft_UI_Xaml_Controls_IScrollingZoomOptions)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e4ace0b2-9b0c-5eda-88a2-c31b1b84f829", "Microsoft.UI.Xaml.Controls.IScrollingZoomOptions"]
 public interface Microsoft_UI_Xaml_Controls_IScrollingZoomOptions <: IInspectable {
     func AnimationMode(value: CPointer<Int32>): Int32
@@ -16573,6 +17037,7 @@ public interface Microsoft_UI_Xaml_Controls_IScrollingZoomOptions <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.IScrollingZoomOptionsFactory (synthetic:Microsoft_UI_Xaml_Controls_IScrollingZoomOptionsFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d1c82e57-d5e8-58f5-a2c0-ee70c64143be", "Microsoft.UI.Xaml.Controls.IScrollingZoomOptionsFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com;CreateInstance2.innerInterface=Com;CreateInstance2.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IScrollingZoomOptionsFactory <: IInspectable {
     func CreateInstance(animationMode: Int32, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
@@ -16580,6 +17045,7 @@ public interface Microsoft_UI_Xaml_Controls_IScrollingZoomOptionsFactory <: IIns
 }
 
 // Microsoft.UI.Xaml.Controls.ISelectionChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ISelectionChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b6c18076-4b76-5416-ad29-e2dc20c46246", "Microsoft.UI.Xaml.Controls.ISelectionChangedEventArgs", "AddedItems.value=Com;RemovedItems.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISelectionChangedEventArgs <: IInspectable {
     func AddedItems(value: CPointer<CPointer<Unit>>): Int32
@@ -16587,12 +17053,14 @@ public interface Microsoft_UI_Xaml_Controls_ISelectionChangedEventArgs <: IInspe
 }
 
 // Microsoft.UI.Xaml.Controls.ISelectionChangedEventArgsFactory (synthetic:Microsoft_UI_Xaml_Controls_ISelectionChangedEventArgsFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["0fcd041d-465f-5745-9882-0c8348e4135d", "Microsoft.UI.Xaml.Controls.ISelectionChangedEventArgsFactory", "CreateInstanceWithRemovedItemsAndAddedItems.innerInterface=Com;CreateInstanceWithRemovedItemsAndAddedItems.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISelectionChangedEventArgsFactory <: IInspectable {
     func CreateInstanceWithRemovedItemsAndAddedItems(removedItems: CPointer<Unit>, addedItems: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ISelectorBar (synthetic:Microsoft_UI_Xaml_Controls_ISelectorBar)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7f4ad191-55ea-508e-bf47-7047d8677370", "Microsoft.UI.Xaml.Controls.ISelectorBar", "Items.value=Com;SelectedItem.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISelectorBar <: IInspectable {
     func Items(value: CPointer<CPointer<Unit>>): Int32
@@ -16603,12 +17071,14 @@ public interface Microsoft_UI_Xaml_Controls_ISelectorBar <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ISelectorBarFactory (synthetic:Microsoft_UI_Xaml_Controls_ISelectorBarFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["71243dc7-b46c-5a04-9894-e420e462703f", "Microsoft.UI.Xaml.Controls.ISelectorBarFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISelectorBarFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ISelectorBarItem (synthetic:Microsoft_UI_Xaml_Controls_ISelectorBarItem)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["3cdba1f9-a13a-56a2-b9a9-f954998d3658", "Microsoft.UI.Xaml.Controls.ISelectorBarItem", "Text.value=HString;Icon.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISelectorBarItem <: IInspectable {
     func Text(value: CPointer<CPointer<Unit>>): Int32
@@ -16618,12 +17088,14 @@ public interface Microsoft_UI_Xaml_Controls_ISelectorBarItem <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ISelectorBarItemFactory (synthetic:Microsoft_UI_Xaml_Controls_ISelectorBarItemFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e46b62ea-e60d-5989-bea7-5470da326816", "Microsoft.UI.Xaml.Controls.ISelectorBarItemFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISelectorBarItemFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ISelectorBarItemStatics (synthetic:Microsoft_UI_Xaml_Controls_ISelectorBarItemStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["08b5bdfc-54de-5d4c-aae3-3763a6b4e75b", "Microsoft.UI.Xaml.Controls.ISelectorBarItemStatics", "TextProperty.value=Com;IconProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISelectorBarItemStatics <: IInspectable {
     func TextProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16631,11 +17103,13 @@ public interface Microsoft_UI_Xaml_Controls_ISelectorBarItemStatics <: IInspecta
 }
 
 // Microsoft.UI.Xaml.Controls.ISelectorBarSelectionChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ISelectorBarSelectionChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["73b3f6c5-5050-5c5a-899c-4e6e0474cb63", "Microsoft.UI.Xaml.Controls.ISelectorBarSelectionChangedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ISelectorBarSelectionChangedEventArgs <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ISelectorBarStatics (synthetic:Microsoft_UI_Xaml_Controls_ISelectorBarStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["672b4e72-728a-53ea-b66a-968bc802dc24", "Microsoft.UI.Xaml.Controls.ISelectorBarStatics", "ItemsProperty.value=Com;SelectedItemProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISelectorBarStatics <: IInspectable {
     func ItemsProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16643,6 +17117,7 @@ public interface Microsoft_UI_Xaml_Controls_ISelectorBarStatics <: IInspectable 
 }
 
 // Microsoft.UI.Xaml.Controls.ISemanticZoom (synthetic:Microsoft_UI_Xaml_Controls_ISemanticZoom)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7e14616d-55ef-548c-a997-c923e302718f", "Microsoft.UI.Xaml.Controls.ISemanticZoom", "ZoomedInView.value=Com;ZoomedOutView.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISemanticZoom <: IInspectable {
     func ZoomedInView(value: CPointer<CPointer<Unit>>): Int32
@@ -16663,6 +17138,7 @@ public interface Microsoft_UI_Xaml_Controls_ISemanticZoom <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ISemanticZoomInformation (synthetic:Microsoft_UI_Xaml_Controls_ISemanticZoomInformation)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["12d62b04-bb13-50f2-9d8b-e57c02b4bde4", "Microsoft.UI.Xaml.Controls.ISemanticZoomInformation", "SemanticZoomOwner.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISemanticZoomInformation <: IInspectable {
     func SemanticZoomOwner(value: CPointer<CPointer<Unit>>): Int32
@@ -16681,6 +17157,7 @@ public interface Microsoft_UI_Xaml_Controls_ISemanticZoomInformation <: IInspect
 }
 
 // Microsoft.UI.Xaml.Controls.ISemanticZoomLocation (synthetic:Microsoft_UI_Xaml_Controls_ISemanticZoomLocation)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["41c1dec7-f34f-51db-9525-5c149b05a527", "Microsoft.UI.Xaml.Controls.ISemanticZoomLocation", "Item.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISemanticZoomLocation <: IInspectable {
     func Item(value: CPointer<CPointer<Unit>>): Int32
@@ -16690,6 +17167,7 @@ public interface Microsoft_UI_Xaml_Controls_ISemanticZoomLocation <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Controls.ISemanticZoomStatics (synthetic:Microsoft_UI_Xaml_Controls_ISemanticZoomStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e4fbd358-9342-56d3-b5c2-bf80de6f47ed", "Microsoft.UI.Xaml.Controls.ISemanticZoomStatics", "ZoomedInViewProperty.value=Com;ZoomedOutViewProperty.value=Com;IsZoomedInViewActiveProperty.value=Com;CanChangeViewsProperty.value=Com;IsZoomOutButtonEnabledProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISemanticZoomStatics <: IInspectable {
     func ZoomedInViewProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16700,6 +17178,7 @@ public interface Microsoft_UI_Xaml_Controls_ISemanticZoomStatics <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.ISemanticZoomViewChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ISemanticZoomViewChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["cf62d53d-97d3-5cef-96f3-1c413f524eca", "Microsoft.UI.Xaml.Controls.ISemanticZoomViewChangedEventArgs", "SourceItem.value=Com;DestinationItem.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISemanticZoomViewChangedEventArgs <: IInspectable {
     func IsSourceZoomedInView(value: CPointer<Bool>): Int32
@@ -16711,6 +17190,7 @@ public interface Microsoft_UI_Xaml_Controls_ISemanticZoomViewChangedEventArgs <:
 }
 
 // Microsoft.UI.Xaml.Controls.ISlider (synthetic:Microsoft_UI_Xaml_Controls_ISlider)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f7418ecf-7c35-5216-8bf1-d82d47cce5df", "Microsoft.UI.Xaml.Controls.ISlider", "ThumbToolTipValueConverter.value=Com;Header.value=Com;HeaderTemplate.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISlider <: IInspectable {
     func IntermediateValue(value: CPointer<Float64>): Int32
@@ -16738,12 +17218,14 @@ public interface Microsoft_UI_Xaml_Controls_ISlider <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ISliderFactory (synthetic:Microsoft_UI_Xaml_Controls_ISliderFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["06604d71-34ca-5f39-9656-29d81d3c110c", "Microsoft.UI.Xaml.Controls.ISliderFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISliderFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ISliderStatics (synthetic:Microsoft_UI_Xaml_Controls_ISliderStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f0541f7b-6d81-59e2-997a-2e65fbcccd21", "Microsoft.UI.Xaml.Controls.ISliderStatics", "IntermediateValueProperty.value=Com;StepFrequencyProperty.value=Com;SnapsToProperty.value=Com;TickFrequencyProperty.value=Com;TickPlacementProperty.value=Com;OrientationProperty.value=Com;IsDirectionReversedProperty.value=Com;IsThumbToolTipEnabledProperty.value=Com;ThumbToolTipValueConverterProperty.value=Com;HeaderProperty.value=Com;HeaderTemplateProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISliderStatics <: IInspectable {
     func IntermediateValueProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16760,6 +17242,7 @@ public interface Microsoft_UI_Xaml_Controls_ISliderStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ISplitButton (synthetic:Microsoft_UI_Xaml_Controls_ISplitButton)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f627202d-d2d7-5ff6-bb05-8c48eb6b1fc6", "Microsoft.UI.Xaml.Controls.ISplitButton", "Flyout.value=Com;Command.value=Com;CommandParameter.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISplitButton <: IInspectable {
     func Flyout(value: CPointer<CPointer<Unit>>): Int32
@@ -16773,17 +17256,20 @@ public interface Microsoft_UI_Xaml_Controls_ISplitButton <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ISplitButtonClickEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ISplitButtonClickEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6af896c2-e65a-5998-9c82-2af8f3e0741f", "Microsoft.UI.Xaml.Controls.ISplitButtonClickEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ISplitButtonClickEventArgs <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ISplitButtonFactory (synthetic:Microsoft_UI_Xaml_Controls_ISplitButtonFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["07510092-2612-55e7-981c-a536ddd4570e", "Microsoft.UI.Xaml.Controls.ISplitButtonFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISplitButtonFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ISplitButtonStatics (synthetic:Microsoft_UI_Xaml_Controls_ISplitButtonStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d54ddd05-73e7-55a1-a119-aa342e5f9feb", "Microsoft.UI.Xaml.Controls.ISplitButtonStatics", "FlyoutProperty.value=Com;CommandProperty.value=Com;CommandParameterProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISplitButtonStatics <: IInspectable {
     func FlyoutProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16792,6 +17278,7 @@ public interface Microsoft_UI_Xaml_Controls_ISplitButtonStatics <: IInspectable 
 }
 
 // Microsoft.UI.Xaml.Controls.ISplitView (synthetic:Microsoft_UI_Xaml_Controls_ISplitView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["10ae18f7-1666-5897-bbce-1e687e7784a8", "Microsoft.UI.Xaml.Controls.ISplitView", "Content.value=Com;Pane.value=Com;TemplateSettings.value=Com;PaneBackground.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISplitView <: IInspectable {
     func Content(value: CPointer<CPointer<Unit>>): Int32
@@ -16824,12 +17311,14 @@ public interface Microsoft_UI_Xaml_Controls_ISplitView <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ISplitViewFactory (synthetic:Microsoft_UI_Xaml_Controls_ISplitViewFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["389ece72-75ce-561b-aad3-c52125ca6a50", "Microsoft.UI.Xaml.Controls.ISplitViewFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISplitViewFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ISplitViewPaneClosingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ISplitViewPaneClosingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9138965b-8499-5f9c-93e0-34beda441e6d", "Microsoft.UI.Xaml.Controls.ISplitViewPaneClosingEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ISplitViewPaneClosingEventArgs <: IInspectable {
     func Cancel(value: CPointer<Bool>): Int32
@@ -16837,6 +17326,7 @@ public interface Microsoft_UI_Xaml_Controls_ISplitViewPaneClosingEventArgs <: II
 }
 
 // Microsoft.UI.Xaml.Controls.ISplitViewStatics (synthetic:Microsoft_UI_Xaml_Controls_ISplitViewStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1c69a263-552c-5505-ac81-49e247fee9db", "Microsoft.UI.Xaml.Controls.ISplitViewStatics", "ContentProperty.value=Com;PaneProperty.value=Com;IsPaneOpenProperty.value=Com;OpenPaneLengthProperty.value=Com;CompactPaneLengthProperty.value=Com;PanePlacementProperty.value=Com;DisplayModeProperty.value=Com;TemplateSettingsProperty.value=Com;PaneBackgroundProperty.value=Com;LightDismissOverlayModeProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISplitViewStatics <: IInspectable {
     func ContentProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16852,6 +17342,7 @@ public interface Microsoft_UI_Xaml_Controls_ISplitViewStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IStackPanel (synthetic:Microsoft_UI_Xaml_Controls_IStackPanel)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["493ab00b-3a6a-5e4a-9452-407cd5197406", "Microsoft.UI.Xaml.Controls.IStackPanel", "BorderBrush.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IStackPanel <: IInspectable {
     func AreScrollSnapPointsRegular(value: CPointer<Bool>): Int32
@@ -16873,12 +17364,14 @@ public interface Microsoft_UI_Xaml_Controls_IStackPanel <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IStackPanelFactory (synthetic:Microsoft_UI_Xaml_Controls_IStackPanelFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["64c1d388-47a2-5a74-a75b-559d151ee5ac", "Microsoft.UI.Xaml.Controls.IStackPanelFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IStackPanelFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IStackPanelStatics (synthetic:Microsoft_UI_Xaml_Controls_IStackPanelStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["10bb04e3-eb01-5ea8-9f96-69508479def9", "Microsoft.UI.Xaml.Controls.IStackPanelStatics", "AreScrollSnapPointsRegularProperty.value=Com;OrientationProperty.value=Com;BackgroundSizingProperty.value=Com;BorderBrushProperty.value=Com;BorderThicknessProperty.value=Com;CornerRadiusProperty.value=Com;PaddingProperty.value=Com;SpacingProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IStackPanelStatics <: IInspectable {
     func AreScrollSnapPointsRegularProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16892,24 +17385,28 @@ public interface Microsoft_UI_Xaml_Controls_IStackPanelStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IStyleSelector (synthetic:Microsoft_UI_Xaml_Controls_IStyleSelector)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7f9cf759-785b-5ef9-9ea7-1555673a475a", "Microsoft.UI.Xaml.Controls.IStyleSelector", "SelectStyle.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IStyleSelector <: IInspectable {
     func SelectStyle(item: CPointer<Unit>, container: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IStyleSelectorFactory (synthetic:Microsoft_UI_Xaml_Controls_IStyleSelectorFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["2a033206-a4fb-5f11-8c2d-61e1df78fbc3", "Microsoft.UI.Xaml.Controls.IStyleSelectorFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IStyleSelectorFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IStyleSelectorOverrides (synthetic:Microsoft_UI_Xaml_Controls_IStyleSelectorOverrides)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["26015d75-ef00-5c78-8e58-163da10f694f", "Microsoft.UI.Xaml.Controls.IStyleSelectorOverrides", "SelectStyleCore.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IStyleSelectorOverrides <: IInspectable {
     func SelectStyleCore(item: CPointer<Unit>, container: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ISwapChainPanel (synthetic:Microsoft_UI_Xaml_Controls_ISwapChainPanel)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["08844f85-aa1b-540d-bef2-b2bb7b257f8c", "Microsoft.UI.Xaml.Controls.ISwapChainPanel", "CreateCoreIndependentInputSource.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISwapChainPanel <: IInspectable {
     func CompositionScaleX(value: CPointer<Float32>): Int32
@@ -16920,12 +17417,14 @@ public interface Microsoft_UI_Xaml_Controls_ISwapChainPanel <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ISwapChainPanelFactory (synthetic:Microsoft_UI_Xaml_Controls_ISwapChainPanelFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["38d00b69-5759-5f37-9e1c-3ae0d4288b26", "Microsoft.UI.Xaml.Controls.ISwapChainPanelFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISwapChainPanelFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ISwapChainPanelStatics (synthetic:Microsoft_UI_Xaml_Controls_ISwapChainPanelStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d83b0621-aaca-534b-afde-5370167176b5", "Microsoft.UI.Xaml.Controls.ISwapChainPanelStatics", "CompositionScaleXProperty.value=Com;CompositionScaleYProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISwapChainPanelStatics <: IInspectable {
     func CompositionScaleXProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -16933,6 +17432,7 @@ public interface Microsoft_UI_Xaml_Controls_ISwapChainPanelStatics <: IInspectab
 }
 
 // Microsoft.UI.Xaml.Controls.ISymbolIcon (synthetic:Microsoft_UI_Xaml_Controls_ISymbolIcon)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a4322906-0dbe-5eb7-8b64-3e832246eb7f", "Microsoft.UI.Xaml.Controls.ISymbolIcon"]
 public interface Microsoft_UI_Xaml_Controls_ISymbolIcon <: IInspectable {
     func Symbol(value: CPointer<Int32>): Int32
@@ -16940,18 +17440,21 @@ public interface Microsoft_UI_Xaml_Controls_ISymbolIcon <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ISymbolIconFactory (synthetic:Microsoft_UI_Xaml_Controls_ISymbolIconFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d4430447-567c-5aad-996a-a547774e2c3c", "Microsoft.UI.Xaml.Controls.ISymbolIconFactory", "CreateInstanceWithSymbol.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISymbolIconFactory <: IInspectable {
     func CreateInstanceWithSymbol(symbol: Int32, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ISymbolIconStatics (synthetic:Microsoft_UI_Xaml_Controls_ISymbolIconStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ccaa0c34-31f2-50f1-b328-be6edc291aaa", "Microsoft.UI.Xaml.Controls.ISymbolIconStatics", "SymbolProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ISymbolIconStatics <: IInspectable {
     func SymbolProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITabView (synthetic:Microsoft_UI_Xaml_Controls_ITabView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["07b509e1-1d38-551b-95f4-4732b049f6a6", "Microsoft.UI.Xaml.Controls.ITabView", "TabStripHeader.value=Com;TabStripHeaderTemplate.value=Com;TabStripFooter.value=Com;TabStripFooterTemplate.value=Com;AddTabButtonCommand.value=Com;AddTabButtonCommandParameter.value=Com;TabItemsSource.value=Com;TabItems.value=Com;TabItemTemplate.value=Com;TabItemTemplateSelector.value=Com;SelectedItem.value=Com;ContainerFromItem.result=Com;ContainerFromIndex.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabView <: IInspectable {
     func TabWidthMode(value: CPointer<Int32>): Int32
@@ -17012,6 +17515,7 @@ public interface Microsoft_UI_Xaml_Controls_ITabView <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITabView2 (synthetic:Microsoft_UI_Xaml_Controls_ITabView2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["deaa552e-4e6c-5239-ac75-d9419a2309da", "Microsoft.UI.Xaml.Controls.ITabView2"]
 public interface Microsoft_UI_Xaml_Controls_ITabView2 <: IInspectable {
     func CanTearOutTabs(value: CPointer<Bool>): Int32
@@ -17027,6 +17531,7 @@ public interface Microsoft_UI_Xaml_Controls_ITabView2 <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewExternalTornOutTabsDroppedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITabViewExternalTornOutTabsDroppedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["69912428-34d9-5aac-85b7-a91d71c133aa", "Microsoft.UI.Xaml.Controls.ITabViewExternalTornOutTabsDroppedEventArgs", "Items.value=Array<windows_interface.IInspectable>;Tabs.value=Array<Microsoft_UI_Xaml_UIElement>"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewExternalTornOutTabsDroppedEventArgs <: IInspectable {
     func Items(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): Int32
@@ -17035,6 +17540,7 @@ public interface Microsoft_UI_Xaml_Controls_ITabViewExternalTornOutTabsDroppedEv
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewExternalTornOutTabsDroppingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITabViewExternalTornOutTabsDroppingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b2378908-c5d7-560e-a2e2-46403e13e5ad", "Microsoft.UI.Xaml.Controls.ITabViewExternalTornOutTabsDroppingEventArgs", "Items.value=Array<windows_interface.IInspectable>;Tabs.value=Array<Microsoft_UI_Xaml_UIElement>"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewExternalTornOutTabsDroppingEventArgs <: IInspectable {
     func Items(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): Int32
@@ -17045,12 +17551,14 @@ public interface Microsoft_UI_Xaml_Controls_ITabViewExternalTornOutTabsDroppingE
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewFactory (synthetic:Microsoft_UI_Xaml_Controls_ITabViewFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e7e83685-eedf-5106-9429-884435ab166b", "Microsoft.UI.Xaml.Controls.ITabViewFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewItem (synthetic:Microsoft_UI_Xaml_Controls_ITabViewItem)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["64980afa-97af-5190-90b3-4ba277b1113d", "Microsoft.UI.Xaml.Controls.ITabViewItem", "Header.value=Com;HeaderTemplate.value=Com;IconSource.value=Com;TabViewTemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewItem <: IInspectable {
     func Header(value: CPointer<CPointer<Unit>>): Int32
@@ -17067,12 +17575,14 @@ public interface Microsoft_UI_Xaml_Controls_ITabViewItem <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewItemFactory (synthetic:Microsoft_UI_Xaml_Controls_ITabViewItemFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b64c2423-7e56-5d41-8a84-1ee28f9826a4", "Microsoft.UI.Xaml.Controls.ITabViewItemFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewItemFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewItemStatics (synthetic:Microsoft_UI_Xaml_Controls_ITabViewItemStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["4cfc7eab-2eff-5457-8251-c19d374ab34d", "Microsoft.UI.Xaml.Controls.ITabViewItemStatics", "HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;IconSourceProperty.value=Com;IsClosableProperty.value=Com;TabViewTemplateSettingsProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewItemStatics <: IInspectable {
     func HeaderProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -17083,6 +17593,7 @@ public interface Microsoft_UI_Xaml_Controls_ITabViewItemStatics <: IInspectable 
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewItemTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_ITabViewItemTemplateSettings)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["cc5c99ec-c9d1-55f5-bc81-7612ff4e2b77", "Microsoft.UI.Xaml.Controls.ITabViewItemTemplateSettings", "IconElement.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewItemTemplateSettings <: IInspectable {
     func IconElement(value: CPointer<CPointer<Unit>>): Int32
@@ -17090,6 +17601,7 @@ public interface Microsoft_UI_Xaml_Controls_ITabViewItemTemplateSettings <: IIns
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewItemTemplateSettings2 (synthetic:Microsoft_UI_Xaml_Controls_ITabViewItemTemplateSettings2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9e2780d3-7056-5aaf-9a7a-404a2c094ced", "Microsoft.UI.Xaml.Controls.ITabViewItemTemplateSettings2", "TabGeometry.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewItemTemplateSettings2 <: IInspectable {
     func TabGeometry(value: CPointer<CPointer<Unit>>): Int32
@@ -17097,24 +17609,28 @@ public interface Microsoft_UI_Xaml_Controls_ITabViewItemTemplateSettings2 <: IIn
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewItemTemplateSettingsFactory (synthetic:Microsoft_UI_Xaml_Controls_ITabViewItemTemplateSettingsFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["cba3e467-4c98-5885-ba24-6fa699cc8edd", "Microsoft.UI.Xaml.Controls.ITabViewItemTemplateSettingsFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewItemTemplateSettingsFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewItemTemplateSettingsStatics (synthetic:Microsoft_UI_Xaml_Controls_ITabViewItemTemplateSettingsStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["eb62dd88-fc12-5338-8e88-788be72d07d6", "Microsoft.UI.Xaml.Controls.ITabViewItemTemplateSettingsStatics", "IconElementProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewItemTemplateSettingsStatics <: IInspectable {
     func IconElementProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewItemTemplateSettingsStatics2 (synthetic:Microsoft_UI_Xaml_Controls_ITabViewItemTemplateSettingsStatics2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d31ab42b-3842-5e4d-8845-6232eea8ee1d", "Microsoft.UI.Xaml.Controls.ITabViewItemTemplateSettingsStatics2", "TabGeometryProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewItemTemplateSettingsStatics2 <: IInspectable {
     func TabGeometryProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewStatics (synthetic:Microsoft_UI_Xaml_Controls_ITabViewStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f4326c08-1b94-53d7-934f-e6ae0d3d18ab", "Microsoft.UI.Xaml.Controls.ITabViewStatics", "TabWidthModeProperty.value=Com;TabStripHeaderProperty.value=Com;TabStripHeaderTemplateProperty.value=Com;TabStripFooterProperty.value=Com;TabStripFooterTemplateProperty.value=Com;IsAddTabButtonVisibleProperty.value=Com;AddTabButtonCommandProperty.value=Com;AddTabButtonCommandParameterProperty.value=Com;TabItemsSourceProperty.value=Com;TabItemsProperty.value=Com;TabItemTemplateProperty.value=Com;TabItemTemplateSelectorProperty.value=Com;CloseButtonOverlayModeProperty.value=Com;CanDragTabsProperty.value=Com;CanReorderTabsProperty.value=Com;AllowDropTabsProperty.value=Com;SelectedIndexProperty.value=Com;SelectedItemProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewStatics <: IInspectable {
     func TabWidthModeProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -17138,12 +17654,14 @@ public interface Microsoft_UI_Xaml_Controls_ITabViewStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewStatics2 (synthetic:Microsoft_UI_Xaml_Controls_ITabViewStatics2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b589da39-25f2-517c-82d1-c51d8085550e", "Microsoft.UI.Xaml.Controls.ITabViewStatics2", "CanTearOutTabsProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewStatics2 <: IInspectable {
     func CanTearOutTabsProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewTabCloseRequestedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITabViewTabCloseRequestedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["d56ab9b2-e264-5c7e-a1cb-e41a16a6c6c6", "Microsoft.UI.Xaml.Controls.ITabViewTabCloseRequestedEventArgs", "Item.value=Com;Tab.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewTabCloseRequestedEventArgs <: IInspectable {
     func Item(value: CPointer<CPointer<Unit>>): Int32
@@ -17151,6 +17669,7 @@ public interface Microsoft_UI_Xaml_Controls_ITabViewTabCloseRequestedEventArgs <
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewTabDragCompletedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITabViewTabDragCompletedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["791fc623-c8f6-5102-81bd-1869cde82284", "Microsoft.UI.Xaml.Controls.ITabViewTabDragCompletedEventArgs", "Item.value=Com;Tab.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewTabDragCompletedEventArgs <: IInspectable {
     func DropResult(value: CPointer<UInt32>): Int32
@@ -17159,6 +17678,7 @@ public interface Microsoft_UI_Xaml_Controls_ITabViewTabDragCompletedEventArgs <:
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewTabDragStartingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITabViewTabDragStartingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["97682812-1a7b-53fd-8b4e-c2f70d2ad250", "Microsoft.UI.Xaml.Controls.ITabViewTabDragStartingEventArgs", "Data.value=Com;Item.value=Com;Tab.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewTabDragStartingEventArgs <: IInspectable {
     func Cancel(value: CPointer<Bool>): Int32
@@ -17169,6 +17689,7 @@ public interface Microsoft_UI_Xaml_Controls_ITabViewTabDragStartingEventArgs <: 
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewTabDroppedOutsideEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITabViewTabDroppedOutsideEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1f1f4d5d-0fb1-51ab-b66f-f7a322bf2d13", "Microsoft.UI.Xaml.Controls.ITabViewTabDroppedOutsideEventArgs", "Item.value=Com;Tab.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewTabDroppedOutsideEventArgs <: IInspectable {
     func Item(value: CPointer<CPointer<Unit>>): Int32
@@ -17176,6 +17697,7 @@ public interface Microsoft_UI_Xaml_Controls_ITabViewTabDroppedOutsideEventArgs <
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewTabTearOutRequestedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITabViewTabTearOutRequestedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e8a0c441-66c5-578a-8177-47dfffb97b83", "Microsoft.UI.Xaml.Controls.ITabViewTabTearOutRequestedEventArgs", "Items.value=Array<windows_interface.IInspectable>;Tabs.value=Array<Microsoft_UI_Xaml_UIElement>"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewTabTearOutRequestedEventArgs <: IInspectable {
     func Items(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): Int32
@@ -17184,6 +17706,7 @@ public interface Microsoft_UI_Xaml_Controls_ITabViewTabTearOutRequestedEventArgs
 }
 
 // Microsoft.UI.Xaml.Controls.ITabViewTabTearOutWindowRequestedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITabViewTabTearOutWindowRequestedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["0c13afa7-f291-5bac-a6e8-cc67a69b04c9", "Microsoft.UI.Xaml.Controls.ITabViewTabTearOutWindowRequestedEventArgs", "Items.value=Array<windows_interface.IInspectable>;Tabs.value=Array<Microsoft_UI_Xaml_UIElement>"]
 public interface Microsoft_UI_Xaml_Controls_ITabViewTabTearOutWindowRequestedEventArgs <: IInspectable {
     func Items(valueSize: CPointer<UInt32>, value: CPointer<CPointer<CPointer<Unit>>>): Int32
@@ -17193,6 +17716,7 @@ public interface Microsoft_UI_Xaml_Controls_ITabViewTabTearOutWindowRequestedEve
 }
 
 // Microsoft.UI.Xaml.Controls.ITeachingTip (synthetic:Microsoft_UI_Xaml_Controls_ITeachingTip)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["daebd5f7-3b47-5b12-b804-f4e1442b2113", "Microsoft.UI.Xaml.Controls.ITeachingTip", "Title.value=HString;Subtitle.value=HString;Target.value=Com;ActionButtonContent.value=Com;ActionButtonStyle.value=Com;ActionButtonCommand.value=Com;ActionButtonCommandParameter.value=Com;CloseButtonContent.value=Com;CloseButtonStyle.value=Com;CloseButtonCommand.value=Com;CloseButtonCommandParameter.value=Com;HeroContent.value=Com;IconSource.value=Com;TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITeachingTip <: IInspectable {
     func Title(value: CPointer<CPointer<Unit>>): Int32
@@ -17247,12 +17771,14 @@ public interface Microsoft_UI_Xaml_Controls_ITeachingTip <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITeachingTipClosedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITeachingTipClosedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["2536f506-4038-59db-9e35-a9252fb5adb2", "Microsoft.UI.Xaml.Controls.ITeachingTipClosedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ITeachingTipClosedEventArgs <: IInspectable {
     func Reason(value: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITeachingTipClosingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITeachingTipClosingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["16f53512-3c55-5636-a856-229d9768d64e", "Microsoft.UI.Xaml.Controls.ITeachingTipClosingEventArgs", "GetDeferral.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITeachingTipClosingEventArgs <: IInspectable {
     func Reason(value: CPointer<Int32>): Int32
@@ -17262,12 +17788,14 @@ public interface Microsoft_UI_Xaml_Controls_ITeachingTipClosingEventArgs <: IIns
 }
 
 // Microsoft.UI.Xaml.Controls.ITeachingTipFactory (synthetic:Microsoft_UI_Xaml_Controls_ITeachingTipFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a3ecd47d-2972-5d19-a62e-ddfbc5e1ad57", "Microsoft.UI.Xaml.Controls.ITeachingTipFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITeachingTipFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITeachingTipStatics (synthetic:Microsoft_UI_Xaml_Controls_ITeachingTipStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7c3ecddb-0b4d-51c2-a27f-89180afd45a8", "Microsoft.UI.Xaml.Controls.ITeachingTipStatics", "IsOpenProperty.value=Com;TargetProperty.value=Com;TailVisibilityProperty.value=Com;TitleProperty.value=Com;SubtitleProperty.value=Com;ActionButtonContentProperty.value=Com;ActionButtonStyleProperty.value=Com;ActionButtonCommandProperty.value=Com;ActionButtonCommandParameterProperty.value=Com;CloseButtonContentProperty.value=Com;CloseButtonStyleProperty.value=Com;CloseButtonCommandProperty.value=Com;CloseButtonCommandParameterProperty.value=Com;PlacementMarginProperty.value=Com;ShouldConstrainToRootBoundsProperty.value=Com;IsLightDismissEnabledProperty.value=Com;PreferredPlacementProperty.value=Com;HeroContentPlacementProperty.value=Com;HeroContentProperty.value=Com;IconSourceProperty.value=Com;TemplateSettingsProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITeachingTipStatics <: IInspectable {
     func IsOpenProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -17294,6 +17822,7 @@ public interface Microsoft_UI_Xaml_Controls_ITeachingTipStatics <: IInspectable 
 }
 
 // Microsoft.UI.Xaml.Controls.ITeachingTipTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_ITeachingTipTemplateSettings)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b081e1e9-c1a5-590a-8049-69ea003b6cf7", "Microsoft.UI.Xaml.Controls.ITeachingTipTemplateSettings", "IconElement.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITeachingTipTemplateSettings <: IInspectable {
     func TopRightHighlightMargin(value: CPointer<Microsoft_UI_Xaml_Thickness>): Int32
@@ -17305,12 +17834,14 @@ public interface Microsoft_UI_Xaml_Controls_ITeachingTipTemplateSettings <: IIns
 }
 
 // Microsoft.UI.Xaml.Controls.ITeachingTipTemplateSettingsFactory (synthetic:Microsoft_UI_Xaml_Controls_ITeachingTipTemplateSettingsFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["63210545-e195-56cd-bccd-169255e134e3", "Microsoft.UI.Xaml.Controls.ITeachingTipTemplateSettingsFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITeachingTipTemplateSettingsFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITeachingTipTemplateSettingsStatics (synthetic:Microsoft_UI_Xaml_Controls_ITeachingTipTemplateSettingsStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["fa9acf9a-9743-51ee-8db9-8abd063edfea", "Microsoft.UI.Xaml.Controls.ITeachingTipTemplateSettingsStatics", "TopRightHighlightMarginProperty.value=Com;TopLeftHighlightMarginProperty.value=Com;IconElementProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITeachingTipTemplateSettingsStatics <: IInspectable {
     func TopRightHighlightMarginProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -17319,6 +17850,7 @@ public interface Microsoft_UI_Xaml_Controls_ITeachingTipTemplateSettingsStatics 
 }
 
 // Microsoft.UI.Xaml.Controls.ITextBlock (synthetic:Microsoft_UI_Xaml_Controls_ITextBlock)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1ac8d84f-392c-5c7e-83f5-a53e3bf0abb0", "Microsoft.UI.Xaml.Controls.ITextBlock", "FontFamily.value=Com;Foreground.value=Com;Text.value=HString;Inlines.value=Com;SelectedText.value=HString;ContentStart.value=Com;ContentEnd.value=Com;SelectionStart.value=Com;SelectionEnd.value=Com;SelectionHighlightColor.value=Com;TextHighlighters.value=Com;SelectionFlyout.value=Com;GetAlphaMask.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITextBlock <: IInspectable {
     func FontSize(value: CPointer<Float64>): Int32
@@ -17393,6 +17925,7 @@ public interface Microsoft_UI_Xaml_Controls_ITextBlock <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITextBlockStatics (synthetic:Microsoft_UI_Xaml_Controls_ITextBlockStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["3187104b-65c2-5e53-b889-c8272b1314cd", "Microsoft.UI.Xaml.Controls.ITextBlockStatics", "FontSizeProperty.value=Com;FontFamilyProperty.value=Com;FontWeightProperty.value=Com;FontStyleProperty.value=Com;FontStretchProperty.value=Com;CharacterSpacingProperty.value=Com;ForegroundProperty.value=Com;TextWrappingProperty.value=Com;TextTrimmingProperty.value=Com;TextAlignmentProperty.value=Com;TextProperty.value=Com;PaddingProperty.value=Com;LineHeightProperty.value=Com;LineStackingStrategyProperty.value=Com;IsTextSelectionEnabledProperty.value=Com;SelectedTextProperty.value=Com;SelectionHighlightColorProperty.value=Com;MaxLinesProperty.value=Com;TextLineBoundsProperty.value=Com;OpticalMarginAlignmentProperty.value=Com;IsColorFontEnabledProperty.value=Com;TextReadingOrderProperty.value=Com;IsTextScaleFactorEnabledProperty.value=Com;TextDecorationsProperty.value=Com;IsTextTrimmedProperty.value=Com;HorizontalTextAlignmentProperty.value=Com;SelectionFlyoutProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITextBlockStatics <: IInspectable {
     func FontSizeProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -17425,6 +17958,7 @@ public interface Microsoft_UI_Xaml_Controls_ITextBlockStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITextBox (synthetic:Microsoft_UI_Xaml_Controls_ITextBox)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["873af7c2-ab89-5d76-8dbe-3d6325669df5", "Microsoft.UI.Xaml.Controls.ITextBox", "Text.value=HString;SelectedText.value=HString;InputScope.value=Com;Header.value=Com;HeaderTemplate.value=Com;PlaceholderText.value=HString;SelectionHighlightColor.value=Com;SelectionHighlightColorWhenNotFocused.value=Com;PlaceholderForeground.value=Com;SelectionFlyout.value=Com;ProofingMenuFlyout.value=Com;Description.value=Com;GetLinguisticAlternativesAsync.operation=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITextBox <: IInspectable {
     func Text(value: CPointer<CPointer<Unit>>): Int32
@@ -17522,6 +18056,7 @@ public interface Microsoft_UI_Xaml_Controls_ITextBox <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITextBoxBeforeTextChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITextBoxBeforeTextChangingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ba46105b-9a16-5237-a20f-5df750992a05", "Microsoft.UI.Xaml.Controls.ITextBoxBeforeTextChangingEventArgs", "NewText.value=HString"]
 public interface Microsoft_UI_Xaml_Controls_ITextBoxBeforeTextChangingEventArgs <: IInspectable {
     func NewText(value: CPointer<CPointer<Unit>>): Int32
@@ -17530,12 +18065,14 @@ public interface Microsoft_UI_Xaml_Controls_ITextBoxBeforeTextChangingEventArgs 
 }
 
 // Microsoft.UI.Xaml.Controls.ITextBoxFactory (synthetic:Microsoft_UI_Xaml_Controls_ITextBoxFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e1d8b82e-bc60-5d27-b646-5ca4c4a69432", "Microsoft.UI.Xaml.Controls.ITextBoxFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITextBoxFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITextBoxSelectionChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITextBoxSelectionChangingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6dce20db-894e-5ff6-825b-f9891af79516", "Microsoft.UI.Xaml.Controls.ITextBoxSelectionChangingEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ITextBoxSelectionChangingEventArgs <: IInspectable {
     func SelectionStart(value: CPointer<Int32>): Int32
@@ -17545,6 +18082,7 @@ public interface Microsoft_UI_Xaml_Controls_ITextBoxSelectionChangingEventArgs <
 }
 
 // Microsoft.UI.Xaml.Controls.ITextBoxStatics (synthetic:Microsoft_UI_Xaml_Controls_ITextBoxStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a41cf38f-712a-5599-bbed-5a3d9b6bd46e", "Microsoft.UI.Xaml.Controls.ITextBoxStatics", "TextProperty.value=Com;MaxLengthProperty.value=Com;IsReadOnlyProperty.value=Com;AcceptsReturnProperty.value=Com;TextAlignmentProperty.value=Com;TextWrappingProperty.value=Com;IsSpellCheckEnabledProperty.value=Com;IsTextPredictionEnabledProperty.value=Com;InputScopeProperty.value=Com;HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;PlaceholderTextProperty.value=Com;SelectionHighlightColorProperty.value=Com;PreventKeyboardDisplayOnProgrammaticFocusProperty.value=Com;IsColorFontEnabledProperty.value=Com;SelectionHighlightColorWhenNotFocusedProperty.value=Com;HorizontalTextAlignmentProperty.value=Com;CharacterCasingProperty.value=Com;PlaceholderForegroundProperty.value=Com;CanPasteClipboardContentProperty.value=Com;CanUndoProperty.value=Com;CanRedoProperty.value=Com;SelectionFlyoutProperty.value=Com;ProofingMenuFlyoutProperty.value=Com;DescriptionProperty.value=Com;DesiredCandidateWindowAlignmentProperty.value=Com;TextReadingOrderProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITextBoxStatics <: IInspectable {
     func TextProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -17577,17 +18115,20 @@ public interface Microsoft_UI_Xaml_Controls_ITextBoxStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITextBoxTextChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITextBoxTextChangingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a1a08d48-e8c0-5379-b138-7eb3f8d5f5e6", "Microsoft.UI.Xaml.Controls.ITextBoxTextChangingEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ITextBoxTextChangingEventArgs <: IInspectable {
     func IsContentChanging(value: CPointer<Bool>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITextChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITextChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["71c37e43-7be7-52fc-bf8c-9867f44be5f4", "Microsoft.UI.Xaml.Controls.ITextChangedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ITextChangedEventArgs <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITextCompositionChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITextCompositionChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["04f420d2-ba9c-5f59-b8ac-0d8aa50a9240", "Microsoft.UI.Xaml.Controls.ITextCompositionChangedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ITextCompositionChangedEventArgs <: IInspectable {
     func StartIndex(value: CPointer<Int32>): Int32
@@ -17595,6 +18136,7 @@ public interface Microsoft_UI_Xaml_Controls_ITextCompositionChangedEventArgs <: 
 }
 
 // Microsoft.UI.Xaml.Controls.ITextCompositionEndedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITextCompositionEndedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["19d0a5c5-8d0f-5118-8c30-e709326f1283", "Microsoft.UI.Xaml.Controls.ITextCompositionEndedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ITextCompositionEndedEventArgs <: IInspectable {
     func StartIndex(value: CPointer<Int32>): Int32
@@ -17602,6 +18144,7 @@ public interface Microsoft_UI_Xaml_Controls_ITextCompositionEndedEventArgs <: II
 }
 
 // Microsoft.UI.Xaml.Controls.ITextCompositionStartedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITextCompositionStartedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a604ff71-5d44-5859-8d71-72030ed78bc8", "Microsoft.UI.Xaml.Controls.ITextCompositionStartedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ITextCompositionStartedEventArgs <: IInspectable {
     func StartIndex(value: CPointer<Int32>): Int32
@@ -17609,6 +18152,7 @@ public interface Microsoft_UI_Xaml_Controls_ITextCompositionStartedEventArgs <: 
 }
 
 // Microsoft.UI.Xaml.Controls.ITextControlCopyingToClipboardEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITextControlCopyingToClipboardEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1daac6d5-8db5-5d9f-9382-1e644f9aa437", "Microsoft.UI.Xaml.Controls.ITextControlCopyingToClipboardEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ITextControlCopyingToClipboardEventArgs <: IInspectable {
     func Handled(value: CPointer<Bool>): Int32
@@ -17616,6 +18160,7 @@ public interface Microsoft_UI_Xaml_Controls_ITextControlCopyingToClipboardEventA
 }
 
 // Microsoft.UI.Xaml.Controls.ITextControlCuttingToClipboardEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITextControlCuttingToClipboardEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9d73671f-ea30-555d-8129-5a96aec73a14", "Microsoft.UI.Xaml.Controls.ITextControlCuttingToClipboardEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ITextControlCuttingToClipboardEventArgs <: IInspectable {
     func Handled(value: CPointer<Bool>): Int32
@@ -17623,6 +18168,7 @@ public interface Microsoft_UI_Xaml_Controls_ITextControlCuttingToClipboardEventA
 }
 
 // Microsoft.UI.Xaml.Controls.ITextControlPasteEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITextControlPasteEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["fc5e567e-3aa9-5c57-88d4-834ad3b62e9e", "Microsoft.UI.Xaml.Controls.ITextControlPasteEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ITextControlPasteEventArgs <: IInspectable {
     func Handled(value: CPointer<Bool>): Int32
@@ -17630,6 +18176,7 @@ public interface Microsoft_UI_Xaml_Controls_ITextControlPasteEventArgs <: IInspe
 }
 
 // Microsoft.UI.Xaml.Controls.ITimePicker (synthetic:Microsoft_UI_Xaml_Controls_ITimePicker)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ed4baa33-c240-5934-9229-82d37b26f846", "Microsoft.UI.Xaml.Controls.ITimePicker", "Header.value=Com;HeaderTemplate.value=Com;ClockIdentifier.value=HString;SelectedTime.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITimePicker <: IInspectable {
     func Header(value: CPointer<CPointer<Unit>>): Int32
@@ -17653,12 +18200,14 @@ public interface Microsoft_UI_Xaml_Controls_ITimePicker <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITimePickerFactory (synthetic:Microsoft_UI_Xaml_Controls_ITimePickerFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1584429e-aafe-5c65-89e9-8c066e5690e7", "Microsoft.UI.Xaml.Controls.ITimePickerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITimePickerFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITimePickerSelectedValueChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITimePickerSelectedValueChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["6ed7edf1-9b0b-5e7b-9e10-f35660a29fd2", "Microsoft.UI.Xaml.Controls.ITimePickerSelectedValueChangedEventArgs", "OldTime.value=Com;NewTime.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITimePickerSelectedValueChangedEventArgs <: IInspectable {
     func OldTime(value: CPointer<CPointer<Unit>>): Int32
@@ -17666,6 +18215,7 @@ public interface Microsoft_UI_Xaml_Controls_ITimePickerSelectedValueChangedEvent
 }
 
 // Microsoft.UI.Xaml.Controls.ITimePickerStatics (synthetic:Microsoft_UI_Xaml_Controls_ITimePickerStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["12bef59e-4222-507b-901e-effd04620c4f", "Microsoft.UI.Xaml.Controls.ITimePickerStatics", "HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;ClockIdentifierProperty.value=Com;MinuteIncrementProperty.value=Com;TimeProperty.value=Com;LightDismissOverlayModeProperty.value=Com;SelectedTimeProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITimePickerStatics <: IInspectable {
     func HeaderProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -17678,6 +18228,7 @@ public interface Microsoft_UI_Xaml_Controls_ITimePickerStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITimePickerValueChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITimePickerValueChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["7b98953f-c24a-53c6-8a3a-520558508b08", "Microsoft.UI.Xaml.Controls.ITimePickerValueChangedEventArgs"]
 public interface Microsoft_UI_Xaml_Controls_ITimePickerValueChangedEventArgs <: IInspectable {
     func OldTime(value: CPointer<Windows_Foundation_TimeSpan>): Int32
@@ -17685,6 +18236,7 @@ public interface Microsoft_UI_Xaml_Controls_ITimePickerValueChangedEventArgs <: 
 }
 
 // Microsoft.UI.Xaml.Controls.ITitleBar (synthetic:Microsoft_UI_Xaml_Controls_ITitleBar)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c552714d-5d30-5a2b-9c7a-d68bea3dde8d", "Microsoft.UI.Xaml.Controls.ITitleBar", "Title.value=HString;Subtitle.value=HString;IconSource.value=Com;LeftHeader.value=Com;Content.value=Com;RightHeader.value=Com;TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITitleBar <: IInspectable {
     func Title(value: CPointer<CPointer<Unit>>): Int32
@@ -17713,6 +18265,7 @@ public interface Microsoft_UI_Xaml_Controls_ITitleBar <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITitleBar2 (synthetic:Microsoft_UI_Xaml_Controls_ITitleBar2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["55533ac5-80bf-5b29-8be9-4fadb734db0a", "Microsoft.UI.Xaml.Controls.ITitleBar2"]
 public interface Microsoft_UI_Xaml_Controls_ITitleBar2 <: IInspectable {
     func AutoRefreshDragRegions(value: CPointer<Bool>): Int32
@@ -17721,12 +18274,14 @@ public interface Microsoft_UI_Xaml_Controls_ITitleBar2 <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITitleBarFactory (synthetic:Microsoft_UI_Xaml_Controls_ITitleBarFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c4452799-4606-59ef-9392-a0548d48b82e", "Microsoft.UI.Xaml.Controls.ITitleBarFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITitleBarFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITitleBarStatics (synthetic:Microsoft_UI_Xaml_Controls_ITitleBarStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f9ada39b-1f24-5955-9b5c-cacbfe9a41cf", "Microsoft.UI.Xaml.Controls.ITitleBarStatics", "TitleProperty.value=Com;SubtitleProperty.value=Com;IconSourceProperty.value=Com;LeftHeaderProperty.value=Com;ContentProperty.value=Com;RightHeaderProperty.value=Com;IsBackButtonVisibleProperty.value=Com;IsBackButtonEnabledProperty.value=Com;IsPaneToggleButtonVisibleProperty.value=Com;TemplateSettingsProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITitleBarStatics <: IInspectable {
     func TitleProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -17742,6 +18297,7 @@ public interface Microsoft_UI_Xaml_Controls_ITitleBarStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITitleBarStatics2 (synthetic:Microsoft_UI_Xaml_Controls_ITitleBarStatics2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["cd36d484-36f5-510c-9ecd-7e289c97f263", "Microsoft.UI.Xaml.Controls.ITitleBarStatics2", "AutoRefreshDragRegionsProperty.value=Com;IsDragRegionProperty.value=Com;GetIsDragRegion.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITitleBarStatics2 <: IInspectable {
     func AutoRefreshDragRegionsProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -17751,6 +18307,7 @@ public interface Microsoft_UI_Xaml_Controls_ITitleBarStatics2 <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITitleBarTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_ITitleBarTemplateSettings)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["be19011a-4957-5332-98b8-1704401b6a0e", "Microsoft.UI.Xaml.Controls.ITitleBarTemplateSettings", "IconElement.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITitleBarTemplateSettings <: IInspectable {
     func IconElement(value: CPointer<CPointer<Unit>>): Int32
@@ -17758,18 +18315,21 @@ public interface Microsoft_UI_Xaml_Controls_ITitleBarTemplateSettings <: IInspec
 }
 
 // Microsoft.UI.Xaml.Controls.ITitleBarTemplateSettingsFactory (synthetic:Microsoft_UI_Xaml_Controls_ITitleBarTemplateSettingsFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["fcf9e48c-dfe4-55f3-b179-b900a7ae9c25", "Microsoft.UI.Xaml.Controls.ITitleBarTemplateSettingsFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITitleBarTemplateSettingsFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITitleBarTemplateSettingsStatics (synthetic:Microsoft_UI_Xaml_Controls_ITitleBarTemplateSettingsStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f568e19b-b9af-5f1f-a752-482f12887434", "Microsoft.UI.Xaml.Controls.ITitleBarTemplateSettingsStatics", "IconElementProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITitleBarTemplateSettingsStatics <: IInspectable {
     func IconElementProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IToggleSwitch (synthetic:Microsoft_UI_Xaml_Controls_IToggleSwitch)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1b17eeb1-74bf-5a83-8161-a86f0fdcdf24", "Microsoft.UI.Xaml.Controls.IToggleSwitch", "Header.value=Com;HeaderTemplate.value=Com;OnContent.value=Com;OnContentTemplate.value=Com;OffContent.value=Com;OffContentTemplate.value=Com;TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IToggleSwitch <: IInspectable {
     func IsOn(value: CPointer<Bool>): Int32
@@ -17792,6 +18352,7 @@ public interface Microsoft_UI_Xaml_Controls_IToggleSwitch <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IToggleSwitchOverrides (synthetic:Microsoft_UI_Xaml_Controls_IToggleSwitchOverrides)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["772682db-e3d4-5242-b6de-36705725eeb8", "Microsoft.UI.Xaml.Controls.IToggleSwitchOverrides"]
 public interface Microsoft_UI_Xaml_Controls_IToggleSwitchOverrides <: IInspectable {
     func OnToggled(): Int32
@@ -17801,6 +18362,7 @@ public interface Microsoft_UI_Xaml_Controls_IToggleSwitchOverrides <: IInspectab
 }
 
 // Microsoft.UI.Xaml.Controls.IToggleSwitchStatics (synthetic:Microsoft_UI_Xaml_Controls_IToggleSwitchStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c9c203d6-0619-504d-9ed8-5054fe3ca51e", "Microsoft.UI.Xaml.Controls.IToggleSwitchStatics", "IsOnProperty.value=Com;HeaderProperty.value=Com;HeaderTemplateProperty.value=Com;OnContentProperty.value=Com;OnContentTemplateProperty.value=Com;OffContentProperty.value=Com;OffContentTemplateProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IToggleSwitchStatics <: IInspectable {
     func IsOnProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -17813,6 +18375,7 @@ public interface Microsoft_UI_Xaml_Controls_IToggleSwitchStatics <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.IToolTip (synthetic:Microsoft_UI_Xaml_Controls_IToolTip)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["67e93d74-5e93-59a1-91bf-413efbeb904c", "Microsoft.UI.Xaml.Controls.IToolTip", "PlacementTarget.value=Com;PlacementRect.value=Com;TemplateSettings.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IToolTip <: IInspectable {
     func HorizontalOffset(value: CPointer<Float64>): Int32
@@ -17835,17 +18398,20 @@ public interface Microsoft_UI_Xaml_Controls_IToolTip <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IToolTipFactory (synthetic:Microsoft_UI_Xaml_Controls_IToolTipFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["bcbb3720-2db8-54e1-8806-fcbed38949a9", "Microsoft.UI.Xaml.Controls.IToolTipFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IToolTipFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IToolTipService (synthetic:Microsoft_UI_Xaml_Controls_IToolTipService)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["01140768-2727-5f89-80e0-5210326a3431", "Microsoft.UI.Xaml.Controls.IToolTipService"]
 public interface Microsoft_UI_Xaml_Controls_IToolTipService <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IToolTipServiceStatics (synthetic:Microsoft_UI_Xaml_Controls_IToolTipServiceStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["5aa38adc-9874-5e0a-8d8e-1574efc0b88f", "Microsoft.UI.Xaml.Controls.IToolTipServiceStatics", "PlacementProperty.value=Com;PlacementTargetProperty.value=Com;GetPlacementTarget.result=Com;ToolTipProperty.value=Com;GetToolTip.result=Com"]
 public interface Microsoft_UI_Xaml_Controls_IToolTipServiceStatics <: IInspectable {
     func PlacementProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -17860,6 +18426,7 @@ public interface Microsoft_UI_Xaml_Controls_IToolTipServiceStatics <: IInspectab
 }
 
 // Microsoft.UI.Xaml.Controls.IToolTipStatics (synthetic:Microsoft_UI_Xaml_Controls_IToolTipStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["88eb60d4-cd54-5e23-bd1a-223702442ba4", "Microsoft.UI.Xaml.Controls.IToolTipStatics", "HorizontalOffsetProperty.value=Com;IsOpenProperty.value=Com;PlacementProperty.value=Com;PlacementTargetProperty.value=Com;PlacementRectProperty.value=Com;VerticalOffsetProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IToolTipStatics <: IInspectable {
     func HorizontalOffsetProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -17871,6 +18438,7 @@ public interface Microsoft_UI_Xaml_Controls_IToolTipStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeView (synthetic:Microsoft_UI_Xaml_Controls_ITreeView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1bef9af4-712c-50ef-9bb4-881b975232ab", "Microsoft.UI.Xaml.Controls.ITreeView", "RootNodes.value=Com;SelectedNodes.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeView <: IInspectable {
     func RootNodes(value: CPointer<CPointer<Unit>>): Int32
@@ -17889,6 +18457,7 @@ public interface Microsoft_UI_Xaml_Controls_ITreeView <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeView2 (synthetic:Microsoft_UI_Xaml_Controls_ITreeView2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["b947ca7d-0f6f-594c-83ec-14153d343225", "Microsoft.UI.Xaml.Controls.ITreeView2", "NodeFromContainer.result=Com;ContainerFromNode.result=Com;ItemFromContainer.result=Com;ContainerFromItem.result=Com;ItemTemplate.value=Com;ItemTemplateSelector.value=Com;ItemContainerStyle.value=Com;ItemContainerStyleSelector.value=Com;ItemContainerTransitions.value=Com;ItemsSource.value=Com;SelectedNode.value=Com;SelectedItem.value=Com;SelectedItems.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeView2 <: IInspectable {
     func NodeFromContainer(container: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
@@ -17923,6 +18492,7 @@ public interface Microsoft_UI_Xaml_Controls_ITreeView2 <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeView3 (synthetic:Microsoft_UI_Xaml_Controls_ITreeView3)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["a1b5538e-7956-5671-afd0-4c0f38122b70", "Microsoft.UI.Xaml.Controls.ITreeView3"]
 public interface Microsoft_UI_Xaml_Controls_ITreeView3 <: IInspectable {
     func SelectionChanged(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
@@ -17930,18 +18500,21 @@ public interface Microsoft_UI_Xaml_Controls_ITreeView3 <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewCollapsedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewCollapsedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["8ee00b59-42c6-5d73-809f-68710088e5a5", "Microsoft.UI.Xaml.Controls.ITreeViewCollapsedEventArgs", "Node.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewCollapsedEventArgs <: IInspectable {
     func Node(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewCollapsedEventArgs2 (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewCollapsedEventArgs2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["77804a23-9feb-5c57-9c95-4dd984267217", "Microsoft.UI.Xaml.Controls.ITreeViewCollapsedEventArgs2", "Item.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewCollapsedEventArgs2 <: IInspectable {
     func Item(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewDragItemsCompletedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewDragItemsCompletedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["e5b8547e-f839-55db-9c26-2a95f57a60dc", "Microsoft.UI.Xaml.Controls.ITreeViewDragItemsCompletedEventArgs", "Items.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewDragItemsCompletedEventArgs <: IInspectable {
     func DropResult(value: CPointer<UInt32>): Int32
@@ -17949,12 +18522,14 @@ public interface Microsoft_UI_Xaml_Controls_ITreeViewDragItemsCompletedEventArgs
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewDragItemsCompletedEventArgs2 (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewDragItemsCompletedEventArgs2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["060d3921-57a0-5bc5-be26-320bd9c1a6e8", "Microsoft.UI.Xaml.Controls.ITreeViewDragItemsCompletedEventArgs2", "NewParentItem.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewDragItemsCompletedEventArgs2 <: IInspectable {
     func NewParentItem(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewDragItemsStartingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewDragItemsStartingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1b6c4ffc-cd32-5e06-b782-df9f077546c7", "Microsoft.UI.Xaml.Controls.ITreeViewDragItemsStartingEventArgs", "Data.value=Com;Items.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewDragItemsStartingEventArgs <: IInspectable {
     func Cancel(value: CPointer<Bool>): Int32
@@ -17964,24 +18539,28 @@ public interface Microsoft_UI_Xaml_Controls_ITreeViewDragItemsStartingEventArgs 
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewExpandingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewExpandingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["bd769ef7-cadc-5334-93ad-c9bbe820643d", "Microsoft.UI.Xaml.Controls.ITreeViewExpandingEventArgs", "Node.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewExpandingEventArgs <: IInspectable {
     func Node(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewExpandingEventArgs2 (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewExpandingEventArgs2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ed7840e5-dbf5-5937-89dd-997a6fde0d5c", "Microsoft.UI.Xaml.Controls.ITreeViewExpandingEventArgs2", "Item.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewExpandingEventArgs2 <: IInspectable {
     func Item(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewFactory (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["9c6220be-f9eb-518a-b30e-7e41de5efda9", "Microsoft.UI.Xaml.Controls.ITreeViewFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewItemInvokedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewItemInvokedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["1a05853c-b101-542c-9a1e-775a044c4652", "Microsoft.UI.Xaml.Controls.ITreeViewItemInvokedEventArgs", "InvokedItem.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewItemInvokedEventArgs <: IInspectable {
     func InvokedItem(value: CPointer<CPointer<Unit>>): Int32
@@ -17990,6 +18569,7 @@ public interface Microsoft_UI_Xaml_Controls_ITreeViewItemInvokedEventArgs <: IIn
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewNode (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewNode)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["00378a74-790b-5328-8afa-7d65e22da426", "Microsoft.UI.Xaml.Controls.ITreeViewNode", "Content.value=Com;Parent.value=Com;Children.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewNode <: IInspectable {
     func Content(value: CPointer<CPointer<Unit>>): Int32
@@ -18005,12 +18585,14 @@ public interface Microsoft_UI_Xaml_Controls_ITreeViewNode <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewNodeFactory (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewNodeFactory)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["c105a5e5-cea8-5efd-8be8-3d89b54cbd5f", "Microsoft.UI.Xaml.Controls.ITreeViewNodeFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewNodeFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewNodeStatics (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewNodeStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["f5bb217c-66b9-5b62-b2d6-fb47843c8f6f", "Microsoft.UI.Xaml.Controls.ITreeViewNodeStatics", "ContentProperty.value=Com;DepthProperty.value=Com;IsExpandedProperty.value=Com;HasChildrenProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewNodeStatics <: IInspectable {
     func ContentProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -18020,6 +18602,7 @@ public interface Microsoft_UI_Xaml_Controls_ITreeViewNodeStatics <: IInspectable
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewSelectionChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewSelectionChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["664190f3-7133-5599-b41c-1d54cd2cb930", "Microsoft.UI.Xaml.Controls.ITreeViewSelectionChangedEventArgs", "AddedItems.value=Com;RemovedItems.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewSelectionChangedEventArgs <: IInspectable {
     func AddedItems(value: CPointer<CPointer<Unit>>): Int32
@@ -18027,6 +18610,7 @@ public interface Microsoft_UI_Xaml_Controls_ITreeViewSelectionChangedEventArgs <
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewStatics (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["71efaf86-4d73-5f5f-8ea6-a42dfe044917", "Microsoft.UI.Xaml.Controls.ITreeViewStatics", "SelectedItemProperty.value=Com;SelectionModeProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewStatics <: IInspectable {
     func SelectedItemProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -18034,6 +18618,7 @@ public interface Microsoft_UI_Xaml_Controls_ITreeViewStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.ITreeViewStatics2 (synthetic:Microsoft_UI_Xaml_Controls_ITreeViewStatics2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["ddd01c44-a883-583b-9181-dca583da0ad9", "Microsoft.UI.Xaml.Controls.ITreeViewStatics2", "CanDragItemsProperty.value=Com;CanReorderItemsProperty.value=Com;ItemTemplateProperty.value=Com;ItemTemplateSelectorProperty.value=Com;ItemContainerStyleProperty.value=Com;ItemContainerStyleSelectorProperty.value=Com;ItemContainerTransitionsProperty.value=Com;ItemsSourceProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_ITreeViewStatics2 <: IInspectable {
     func CanDragItemsProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -18047,12 +18632,14 @@ public interface Microsoft_UI_Xaml_Controls_ITreeViewStatics2 <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IUIElementCollection (synthetic:Microsoft_UI_Xaml_Controls_IUIElementCollection)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["23050cb1-db88-54ed-9083-5ecfb12512fd", "Microsoft.UI.Xaml.Controls.IUIElementCollection"]
 public interface Microsoft_UI_Xaml_Controls_IUIElementCollection <: IInspectable {
     func Move(oldIndex: UInt32, newIndex: UInt32): Int32
 }
 
 // Microsoft.UI.Xaml.Controls.IViewbox (synthetic:Microsoft_UI_Xaml_Controls_IViewbox)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["510683e8-d0fe-5ef4-85bd-e1131076ac22", "Microsoft.UI.Xaml.Controls.IViewbox", "Child.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IViewbox <: IInspectable {
     func Child(value: CPointer<CPointer<Unit>>): Int32
@@ -18064,6 +18651,7 @@ public interface Microsoft_UI_Xaml_Controls_IViewbox <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IViewboxStatics (synthetic:Microsoft_UI_Xaml_Controls_IViewboxStatics)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @Interface["0466c103-1e17-5e83-a262-8855f216b59f", "Microsoft.UI.Xaml.Controls.IViewboxStatics", "StretchProperty.value=Com;StretchDirectionProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Controls_IViewboxStatics <: IInspectable {
     func StretchProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -18071,6 +18659,7 @@ public interface Microsoft_UI_Xaml_Controls_IViewboxStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Controls.IconElement (synthetic:Microsoft_UI_Xaml_Controls_IconElement)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_IconElement <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18238,6 +18827,7 @@ public class Microsoft_UI_Xaml_Controls_IconElement <: windows_interface.Interfa
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_IconElement <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_IconElement> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_IconElement): CPointer<Unit> {
         value.asRaw()
@@ -18256,6 +18846,7 @@ extend Microsoft_UI_Xaml_Controls_IconElement <: windows_core.HandleWinrtType<Mi
 }
 
 // Microsoft.UI.Xaml.Controls.IconSource (synthetic:Microsoft_UI_Xaml_Controls_IconSource)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_IconSource <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18381,6 +18972,7 @@ public class Microsoft_UI_Xaml_Controls_IconSource <: windows_interface.Interfac
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_IconSource <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_IconSource> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_IconSource): CPointer<Unit> {
         value.asRaw()
@@ -18399,6 +18991,7 @@ extend Microsoft_UI_Xaml_Controls_IconSource <: windows_core.HandleWinrtType<Mic
 }
 
 // Microsoft.UI.Xaml.Controls.Image (synthetic:Microsoft_UI_Xaml_Controls_Image)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_Image <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18711,6 +19304,7 @@ public class Microsoft_UI_Xaml_Controls_Image <: windows_interface.InterfaceWrap
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_Image <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_Image> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_Image): CPointer<Unit> {
         value.asRaw()
@@ -18729,6 +19323,7 @@ extend Microsoft_UI_Xaml_Controls_Image <: windows_core.HandleWinrtType<Microsof
 }
 
 // Microsoft.UI.Xaml.Controls.IncrementalLoadingTrigger (synthetic:Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger {
     public let value: Int32
     public init() {
@@ -18738,10 +19333,13 @@ public struct Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger_None = Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger_Edge = Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger(1)
 
 // Microsoft.UI.Xaml.Controls.InfoBadge (synthetic:Microsoft_UI_Xaml_Controls_InfoBadge)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_InfoBadge <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19027,6 +19625,7 @@ public class Microsoft_UI_Xaml_Controls_InfoBadge <: windows_interface.Interface
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_InfoBadge <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_InfoBadge> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_InfoBadge): CPointer<Unit> {
         value.asRaw()
@@ -19045,6 +19644,7 @@ extend Microsoft_UI_Xaml_Controls_InfoBadge <: windows_core.HandleWinrtType<Micr
 }
 
 // Microsoft.UI.Xaml.Controls.InfoBadgeTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_InfoBadgeTemplateSettings)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_InfoBadgeTemplateSettings <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19216,6 +19816,7 @@ public class Microsoft_UI_Xaml_Controls_InfoBadgeTemplateSettings <: windows_int
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_InfoBadgeTemplateSettings <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_InfoBadgeTemplateSettings> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_InfoBadgeTemplateSettings): CPointer<Unit> {
         value.asRaw()
@@ -19234,6 +19835,7 @@ extend Microsoft_UI_Xaml_Controls_InfoBadgeTemplateSettings <: windows_core.Hand
 }
 
 // Microsoft.UI.Xaml.Controls.InfoBar (synthetic:Microsoft_UI_Xaml_Controls_InfoBar)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_InfoBar <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19990,6 +20592,7 @@ public class Microsoft_UI_Xaml_Controls_InfoBar <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_InfoBar <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_InfoBar> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_InfoBar): CPointer<Unit> {
         value.asRaw()
@@ -20008,6 +20611,7 @@ extend Microsoft_UI_Xaml_Controls_InfoBar <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Xaml.Controls.InfoBarCloseReason (synthetic:Microsoft_UI_Xaml_Controls_InfoBarCloseReason)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_InfoBarCloseReason {
     public let value: Int32
     public init() {
@@ -20017,10 +20621,13 @@ public struct Microsoft_UI_Xaml_Controls_InfoBarCloseReason {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_InfoBarCloseReason_CloseButton = Microsoft_UI_Xaml_Controls_InfoBarCloseReason(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_InfoBarCloseReason_Programmatic = Microsoft_UI_Xaml_Controls_InfoBarCloseReason(1)
 
 // Microsoft.UI.Xaml.Controls.InfoBarClosedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_InfoBarClosedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_InfoBarClosedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20091,6 +20698,7 @@ public class Microsoft_UI_Xaml_Controls_InfoBarClosedEventArgs <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_InfoBarClosedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_InfoBarClosedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_InfoBarClosedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -20109,6 +20717,7 @@ extend Microsoft_UI_Xaml_Controls_InfoBarClosedEventArgs <: windows_core.HandleW
 }
 
 // Microsoft.UI.Xaml.Controls.InfoBarClosingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_InfoBarClosingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_InfoBarClosingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20198,6 +20807,7 @@ public class Microsoft_UI_Xaml_Controls_InfoBarClosingEventArgs <: windows_inter
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_InfoBarClosingEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_InfoBarClosingEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_InfoBarClosingEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -20216,6 +20826,7 @@ extend Microsoft_UI_Xaml_Controls_InfoBarClosingEventArgs <: windows_core.Handle
 }
 
 // Microsoft.UI.Xaml.Controls.InfoBarSeverity (synthetic:Microsoft_UI_Xaml_Controls_InfoBarSeverity)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_InfoBarSeverity {
     public let value: Int32
     public init() {
@@ -20225,12 +20836,17 @@ public struct Microsoft_UI_Xaml_Controls_InfoBarSeverity {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_InfoBarSeverity_Informational = Microsoft_UI_Xaml_Controls_InfoBarSeverity(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_InfoBarSeverity_Success = Microsoft_UI_Xaml_Controls_InfoBarSeverity(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_InfoBarSeverity_Warning = Microsoft_UI_Xaml_Controls_InfoBarSeverity(2)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_InfoBarSeverity_Error = Microsoft_UI_Xaml_Controls_InfoBarSeverity(3)
 
 // Microsoft.UI.Xaml.Controls.InfoBarTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_InfoBarTemplateSettings)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_InfoBarTemplateSettings <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20369,6 +20985,7 @@ public class Microsoft_UI_Xaml_Controls_InfoBarTemplateSettings <: windows_inter
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_InfoBarTemplateSettings <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_InfoBarTemplateSettings> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_InfoBarTemplateSettings): CPointer<Unit> {
         value.asRaw()
@@ -20387,6 +21004,7 @@ extend Microsoft_UI_Xaml_Controls_InfoBarTemplateSettings <: windows_core.Handle
 }
 
 // Microsoft.UI.Xaml.Controls.IsTextTrimmedChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_IsTextTrimmedChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_IsTextTrimmedChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20445,6 +21063,7 @@ public class Microsoft_UI_Xaml_Controls_IsTextTrimmedChangedEventArgs <: windows
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_IsTextTrimmedChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_IsTextTrimmedChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_IsTextTrimmedChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -20463,6 +21082,7 @@ extend Microsoft_UI_Xaml_Controls_IsTextTrimmedChangedEventArgs <: windows_core.
 }
 
 // Microsoft.UI.Xaml.Controls.ItemClickEventArgs (synthetic:Microsoft_UI_Xaml_Controls_ItemClickEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ItemClickEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20555,6 +21175,7 @@ public class Microsoft_UI_Xaml_Controls_ItemClickEventArgs <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ItemClickEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ItemClickEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ItemClickEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -20573,6 +21194,7 @@ extend Microsoft_UI_Xaml_Controls_ItemClickEventArgs <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Xaml.Controls.ItemClickEventHandler (synthetic:Microsoft_UI_Xaml_Controls_ItemClickEventHandler)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @C
 public struct Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -20580,6 +21202,7 @@ public struct Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public open class Microsoft_UI_Xaml_Controls_ItemClickEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20647,18 +21270,22 @@ public open class Microsoft_UI_Xaml_Controls_ItemClickEventHandler <: windows_in
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ItemClickEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Controls_ItemClickEventHandler> {}
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 private class OwnedMicrosoft_UI_Xaml_Controls_ItemClickEventHandler <: Microsoft_UI_Xaml_Controls_ItemClickEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public interface Microsoft_UI_Xaml_Controls_ItemClickEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public interface Microsoft_UI_Xaml_Controls_ItemClickEventHandlerInvoker <: Microsoft_UI_Xaml_Controls_ItemClickEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -20676,6 +21303,7 @@ public interface Microsoft_UI_Xaml_Controls_ItemClickEventHandlerInvoker <: Micr
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 private class Microsoft_UI_Xaml_Controls_ItemClickEventHandlerBox <: Microsoft_UI_Xaml_Controls_ItemClickEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl>
@@ -20713,6 +21341,7 @@ private class Microsoft_UI_Xaml_Controls_ItemClickEventHandlerBox <: Microsoft_U
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 func buildMicrosoft_UI_Xaml_Controls_ItemClickEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_Controls_ItemClickEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -20729,6 +21358,7 @@ func buildMicrosoft_UI_Xaml_Controls_ItemClickEventHandlerBoxVtbl(): Microsoft_U
 
 
 // Microsoft.UI.Xaml.Controls.ItemCollection (synthetic:Microsoft_UI_Xaml_Controls_ItemCollection)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ItemCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20828,6 +21458,7 @@ public class Microsoft_UI_Xaml_Controls_ItemCollection <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ItemCollection <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ItemCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ItemCollection): CPointer<Unit> {
         value.asRaw()
@@ -20846,6 +21477,7 @@ extend Microsoft_UI_Xaml_Controls_ItemCollection <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Xaml.Controls.ItemContainer (synthetic:Microsoft_UI_Xaml_Controls_ItemContainer)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ItemContainer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -21101,6 +21733,7 @@ public class Microsoft_UI_Xaml_Controls_ItemContainer <: windows_interface.Inter
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ItemContainer <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ItemContainer> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ItemContainer): CPointer<Unit> {
         value.asRaw()
@@ -21119,6 +21752,7 @@ extend Microsoft_UI_Xaml_Controls_ItemContainer <: windows_core.HandleWinrtType<
 }
 
 // Microsoft.UI.Xaml.Controls.ItemContainerGenerator (synthetic:Microsoft_UI_Xaml_Controls_ItemContainerGenerator)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ItemContainerGenerator <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -21364,6 +21998,7 @@ public class Microsoft_UI_Xaml_Controls_ItemContainerGenerator <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ItemContainerGenerator <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ItemContainerGenerator> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ItemContainerGenerator): CPointer<Unit> {
         value.asRaw()
@@ -21382,6 +22017,7 @@ extend Microsoft_UI_Xaml_Controls_ItemContainerGenerator <: windows_core.HandleW
 }
 
 // Microsoft.UI.Xaml.Controls.ItemsControl (synthetic:Microsoft_UI_Xaml_Controls_ItemsControl)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ItemsControl <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -22068,6 +22704,7 @@ public class Microsoft_UI_Xaml_Controls_ItemsControl <: windows_interface.Interf
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ItemsControl <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ItemsControl> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ItemsControl): CPointer<Unit> {
         value.asRaw()
@@ -22086,6 +22723,7 @@ extend Microsoft_UI_Xaml_Controls_ItemsControl <: windows_core.HandleWinrtType<M
 }
 
 // Microsoft.UI.Xaml.Controls.ItemsPanelTemplate (synthetic:Microsoft_UI_Xaml_Controls_ItemsPanelTemplate)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ItemsPanelTemplate <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -22169,6 +22807,7 @@ public class Microsoft_UI_Xaml_Controls_ItemsPanelTemplate <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ItemsPanelTemplate <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ItemsPanelTemplate> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ItemsPanelTemplate): CPointer<Unit> {
         value.asRaw()
@@ -22187,6 +22826,7 @@ extend Microsoft_UI_Xaml_Controls_ItemsPanelTemplate <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Xaml.Controls.LightDismissOverlayMode (synthetic:Microsoft_UI_Xaml_Controls_LightDismissOverlayMode)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
     public let value: Int32
     public init() {
@@ -22196,11 +22836,15 @@ public struct Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_LightDismissOverlayMode_Auto = Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_LightDismissOverlayMode_On = Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_LightDismissOverlayMode_Off = Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(2)
 
 // Microsoft.UI.Xaml.Controls.ListBox (synthetic:Microsoft_UI_Xaml_Controls_ListBox)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ListBox <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -22512,6 +23156,7 @@ public class Microsoft_UI_Xaml_Controls_ListBox <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ListBox <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ListBox> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ListBox): CPointer<Unit> {
         value.asRaw()
@@ -22530,6 +23175,7 @@ extend Microsoft_UI_Xaml_Controls_ListBox <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Xaml.Controls.ListView (synthetic:Microsoft_UI_Xaml_Controls_ListView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ListView <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -22755,6 +23401,7 @@ public class Microsoft_UI_Xaml_Controls_ListView <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ListView <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ListView> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ListView): CPointer<Unit> {
         value.asRaw()
@@ -22773,6 +23420,7 @@ extend Microsoft_UI_Xaml_Controls_ListView <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Xaml.Controls.ListViewBase (synthetic:Microsoft_UI_Xaml_Controls_ListViewBase)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ListViewBase <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -23935,6 +24583,7 @@ public class Microsoft_UI_Xaml_Controls_ListViewBase <: windows_interface.Interf
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ListViewBase <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ListViewBase> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ListViewBase): CPointer<Unit> {
         value.asRaw()
@@ -23953,6 +24602,7 @@ extend Microsoft_UI_Xaml_Controls_ListViewBase <: windows_core.HandleWinrtType<M
 }
 
 // Microsoft.UI.Xaml.Controls.ListViewBaseHeaderItem (synthetic:Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24116,6 +24766,7 @@ public class Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem): CPointer<Unit> {
         value.asRaw()

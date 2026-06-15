@@ -9,6 +9,7 @@ import windows_interface.IInspectable
 import windows_interface.macros.Interface
 
 // Microsoft.UI.Xaml.Input.KeyboardAccelerator (synthetic:Microsoft_UI_Xaml_Input_KeyboardAccelerator)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_KeyboardAccelerator <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -266,6 +267,7 @@ public class Microsoft_UI_Xaml_Input_KeyboardAccelerator <: windows_interface.In
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_KeyboardAccelerator <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_KeyboardAccelerator> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_KeyboardAccelerator): CPointer<Unit> {
         value.asRaw()
@@ -284,6 +286,7 @@ extend Microsoft_UI_Xaml_Input_KeyboardAccelerator <: windows_core.HandleWinrtTy
 }
 
 // Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs (synthetic:Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -393,6 +396,7 @@ public class Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs <: wind
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -411,6 +415,7 @@ extend Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs <: windows_co
 }
 
 // Microsoft.UI.Xaml.Input.KeyboardAcceleratorPlacementMode (synthetic:Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public struct Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode {
     public let value: Int32
     public init() {
@@ -420,10 +425,13 @@ public struct Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode_Auto = Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode(0)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode_Hidden = Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode(1)
 
 // Microsoft.UI.Xaml.Input.KeyboardNavigationMode (synthetic:Microsoft_UI_Xaml_Input_KeyboardNavigationMode)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public struct Microsoft_UI_Xaml_Input_KeyboardNavigationMode {
     public let value: Int32
     public init() {
@@ -433,11 +441,15 @@ public struct Microsoft_UI_Xaml_Input_KeyboardNavigationMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_KeyboardNavigationMode_Local = Microsoft_UI_Xaml_Input_KeyboardNavigationMode(0)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_KeyboardNavigationMode_Cycle = Microsoft_UI_Xaml_Input_KeyboardNavigationMode(1)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_KeyboardNavigationMode_Once = Microsoft_UI_Xaml_Input_KeyboardNavigationMode(2)
 
 // Microsoft.UI.Xaml.Input.LosingFocusEventArgs (synthetic:Microsoft_UI_Xaml_Input_LosingFocusEventArgs)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_LosingFocusEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -652,6 +664,7 @@ public class Microsoft_UI_Xaml_Input_LosingFocusEventArgs <: windows_interface.I
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_LosingFocusEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_LosingFocusEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_LosingFocusEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -670,6 +683,7 @@ extend Microsoft_UI_Xaml_Input_LosingFocusEventArgs <: windows_core.HandleWinrtT
 }
 
 // Microsoft.UI.Xaml.Input.ManipulationCompletedEventHandler (synthetic:Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler)
+@When[Microsoft_UI_Xaml_Input == "on"]
 @C
 public struct Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -677,6 +691,7 @@ public struct Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public open class Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -744,18 +759,22 @@ public open class Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler <: w
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler> {}
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class OwnedMicrosoft_UI_Xaml_Input_ManipulationCompletedEventHandler <: Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerInvoker <: Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -773,6 +792,7 @@ public interface Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerInvoke
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerBox <: Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl>
@@ -810,6 +830,7 @@ private class Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerBox <: Mi
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 func buildMicrosoft_UI_Xaml_Input_ManipulationCompletedEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -826,6 +847,7 @@ func buildMicrosoft_UI_Xaml_Input_ManipulationCompletedEventHandlerBoxVtbl(): Mi
 
 
 // Microsoft.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs (synthetic:Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -997,6 +1019,7 @@ public class Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs <: win
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -1015,6 +1038,7 @@ extend Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs <: windows_c
 }
 
 // Microsoft.UI.Xaml.Input.ManipulationDeltaEventHandler (synthetic:Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler)
+@When[Microsoft_UI_Xaml_Input == "on"]
 @C
 public struct Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -1022,6 +1046,7 @@ public struct Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public open class Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1089,18 +1114,22 @@ public open class Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler <: windo
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler> {}
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class OwnedMicrosoft_UI_Xaml_Input_ManipulationDeltaEventHandler <: Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerInvoker <: Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -1118,6 +1147,7 @@ public interface Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerInvoker <:
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerBox <: Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl>
@@ -1155,6 +1185,7 @@ private class Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerBox <: Micros
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 func buildMicrosoft_UI_Xaml_Input_ManipulationDeltaEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -1171,6 +1202,7 @@ func buildMicrosoft_UI_Xaml_Input_ManipulationDeltaEventHandlerBoxVtbl(): Micros
 
 
 // Microsoft.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs (synthetic:Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1362,6 +1394,7 @@ public class Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs <: windows
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -1380,6 +1413,7 @@ extend Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs <: windows_core.
 }
 
 // Microsoft.UI.Xaml.Input.ManipulationInertiaStartingEventHandler (synthetic:Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler)
+@When[Microsoft_UI_Xaml_Input == "on"]
 @C
 public struct Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -1387,6 +1421,7 @@ public struct Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtb
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public open class Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1454,18 +1489,22 @@ public open class Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandle
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler> {}
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class OwnedMicrosoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler <: Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerInvoker <: Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -1483,6 +1522,7 @@ public interface Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerBox <: Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtbl>
@@ -1520,6 +1560,7 @@ private class Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerBox
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 func buildMicrosoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -1536,6 +1577,7 @@ func buildMicrosoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandlerBoxVtbl
 
 
 // Microsoft.UI.Xaml.Input.ManipulationInertiaStartingRoutedEventArgs (synthetic:Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1770,6 +1812,7 @@ public class Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs 
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -1788,6 +1831,7 @@ extend Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs <: win
 }
 
 // Microsoft.UI.Xaml.Input.ManipulationModes (synthetic:Microsoft_UI_Xaml_Input_ManipulationModes)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public struct Microsoft_UI_Xaml_Input_ManipulationModes {
     public let value: UInt32
     public init() {
@@ -1812,20 +1856,33 @@ public struct Microsoft_UI_Xaml_Input_ManipulationModes {
         return Microsoft_UI_Xaml_Input_ManipulationModes(!value)
     }
 }
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_ManipulationModes_None = Microsoft_UI_Xaml_Input_ManipulationModes(0)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_ManipulationModes_TranslateX = Microsoft_UI_Xaml_Input_ManipulationModes(1)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_ManipulationModes_TranslateY = Microsoft_UI_Xaml_Input_ManipulationModes(2)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_ManipulationModes_TranslateRailsX = Microsoft_UI_Xaml_Input_ManipulationModes(4)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_ManipulationModes_TranslateRailsY = Microsoft_UI_Xaml_Input_ManipulationModes(8)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_ManipulationModes_Rotate = Microsoft_UI_Xaml_Input_ManipulationModes(16)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_ManipulationModes_Scale = Microsoft_UI_Xaml_Input_ManipulationModes(32)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_ManipulationModes_TranslateInertia = Microsoft_UI_Xaml_Input_ManipulationModes(64)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_ManipulationModes_RotateInertia = Microsoft_UI_Xaml_Input_ManipulationModes(128)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_ManipulationModes_ScaleInertia = Microsoft_UI_Xaml_Input_ManipulationModes(256)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_ManipulationModes_All = Microsoft_UI_Xaml_Input_ManipulationModes(65535)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_ManipulationModes_System = Microsoft_UI_Xaml_Input_ManipulationModes(65536)
 
 // Microsoft.UI.Xaml.Input.ManipulationPivot (synthetic:Microsoft_UI_Xaml_Input_ManipulationPivot)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_ManipulationPivot <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1947,6 +2004,7 @@ public class Microsoft_UI_Xaml_Input_ManipulationPivot <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_ManipulationPivot <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_ManipulationPivot> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_ManipulationPivot): CPointer<Unit> {
         value.asRaw()
@@ -1965,6 +2023,7 @@ extend Microsoft_UI_Xaml_Input_ManipulationPivot <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Xaml.Input.ManipulationStartedEventHandler (synthetic:Microsoft_UI_Xaml_Input_ManipulationStartedEventHandler)
+@When[Microsoft_UI_Xaml_Input == "on"]
 @C
 public struct Microsoft_UI_Xaml_Input_ManipulationStartedEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -1972,6 +2031,7 @@ public struct Microsoft_UI_Xaml_Input_ManipulationStartedEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public open class Microsoft_UI_Xaml_Input_ManipulationStartedEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2039,18 +2099,22 @@ public open class Microsoft_UI_Xaml_Input_ManipulationStartedEventHandler <: win
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_ManipulationStartedEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Input_ManipulationStartedEventHandler> {}
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class OwnedMicrosoft_UI_Xaml_Input_ManipulationStartedEventHandler <: Microsoft_UI_Xaml_Input_ManipulationStartedEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_ManipulationStartedEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_ManipulationStartedEventHandlerInvoker <: Microsoft_UI_Xaml_Input_ManipulationStartedEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -2068,6 +2132,7 @@ public interface Microsoft_UI_Xaml_Input_ManipulationStartedEventHandlerInvoker 
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class Microsoft_UI_Xaml_Input_ManipulationStartedEventHandlerBox <: Microsoft_UI_Xaml_Input_ManipulationStartedEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_Input_ManipulationStartedEventHandlerVtbl>
@@ -2105,6 +2170,7 @@ private class Microsoft_UI_Xaml_Input_ManipulationStartedEventHandlerBox <: Micr
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 func buildMicrosoft_UI_Xaml_Input_ManipulationStartedEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Input_ManipulationStartedEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_Input_ManipulationStartedEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -2121,6 +2187,7 @@ func buildMicrosoft_UI_Xaml_Input_ManipulationStartedEventHandlerBoxVtbl(): Micr
 
 
 // Microsoft.UI.Xaml.Input.ManipulationStartedRoutedEventArgs (synthetic:Microsoft_UI_Xaml_Input_ManipulationStartedRoutedEventArgs)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_ManipulationStartedRoutedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2299,6 +2366,7 @@ public class Microsoft_UI_Xaml_Input_ManipulationStartedRoutedEventArgs <: windo
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_ManipulationStartedRoutedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_ManipulationStartedRoutedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_ManipulationStartedRoutedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -2317,6 +2385,7 @@ extend Microsoft_UI_Xaml_Input_ManipulationStartedRoutedEventArgs <: windows_cor
 }
 
 // Microsoft.UI.Xaml.Input.ManipulationStartingEventHandler (synthetic:Microsoft_UI_Xaml_Input_ManipulationStartingEventHandler)
+@When[Microsoft_UI_Xaml_Input == "on"]
 @C
 public struct Microsoft_UI_Xaml_Input_ManipulationStartingEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -2324,6 +2393,7 @@ public struct Microsoft_UI_Xaml_Input_ManipulationStartingEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public open class Microsoft_UI_Xaml_Input_ManipulationStartingEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2391,18 +2461,22 @@ public open class Microsoft_UI_Xaml_Input_ManipulationStartingEventHandler <: wi
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_ManipulationStartingEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Input_ManipulationStartingEventHandler> {}
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class OwnedMicrosoft_UI_Xaml_Input_ManipulationStartingEventHandler <: Microsoft_UI_Xaml_Input_ManipulationStartingEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_ManipulationStartingEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_ManipulationStartingEventHandlerInvoker <: Microsoft_UI_Xaml_Input_ManipulationStartingEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -2420,6 +2494,7 @@ public interface Microsoft_UI_Xaml_Input_ManipulationStartingEventHandlerInvoker
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class Microsoft_UI_Xaml_Input_ManipulationStartingEventHandlerBox <: Microsoft_UI_Xaml_Input_ManipulationStartingEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_Input_ManipulationStartingEventHandlerVtbl>
@@ -2457,6 +2532,7 @@ private class Microsoft_UI_Xaml_Input_ManipulationStartingEventHandlerBox <: Mic
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 func buildMicrosoft_UI_Xaml_Input_ManipulationStartingEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Input_ManipulationStartingEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_Input_ManipulationStartingEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -2473,6 +2549,7 @@ func buildMicrosoft_UI_Xaml_Input_ManipulationStartingEventHandlerBoxVtbl(): Mic
 
 
 // Microsoft.UI.Xaml.Input.ManipulationStartingRoutedEventArgs (synthetic:Microsoft_UI_Xaml_Input_ManipulationStartingRoutedEventArgs)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_ManipulationStartingRoutedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2637,6 +2714,7 @@ public class Microsoft_UI_Xaml_Input_ManipulationStartingRoutedEventArgs <: wind
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_ManipulationStartingRoutedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_ManipulationStartingRoutedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_ManipulationStartingRoutedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -2655,6 +2733,7 @@ extend Microsoft_UI_Xaml_Input_ManipulationStartingRoutedEventArgs <: windows_co
 }
 
 // Microsoft.UI.Xaml.Input.NoFocusCandidateFoundEventArgs (synthetic:Microsoft_UI_Xaml_Input_NoFocusCandidateFoundEventArgs)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_NoFocusCandidateFoundEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2763,6 +2842,7 @@ public class Microsoft_UI_Xaml_Input_NoFocusCandidateFoundEventArgs <: windows_i
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_NoFocusCandidateFoundEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_NoFocusCandidateFoundEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_NoFocusCandidateFoundEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -2781,6 +2861,7 @@ extend Microsoft_UI_Xaml_Input_NoFocusCandidateFoundEventArgs <: windows_core.Ha
 }
 
 // Microsoft.UI.Xaml.Input.Pointer (synthetic:Microsoft_UI_Xaml_Input_Pointer)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_Pointer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2887,6 +2968,7 @@ public class Microsoft_UI_Xaml_Input_Pointer <: windows_interface.InterfaceWrapp
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_Pointer <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_Pointer> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_Pointer): CPointer<Unit> {
         value.asRaw()
@@ -2905,6 +2987,7 @@ extend Microsoft_UI_Xaml_Input_Pointer <: windows_core.HandleWinrtType<Microsoft
 }
 
 // Microsoft.UI.Xaml.Input.PointerEventHandler (synthetic:Microsoft_UI_Xaml_Input_PointerEventHandler)
+@When[Microsoft_UI_Xaml_Input == "on"]
 @C
 public struct Microsoft_UI_Xaml_Input_PointerEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -2912,6 +2995,7 @@ public struct Microsoft_UI_Xaml_Input_PointerEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public open class Microsoft_UI_Xaml_Input_PointerEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2979,18 +3063,22 @@ public open class Microsoft_UI_Xaml_Input_PointerEventHandler <: windows_interfa
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_PointerEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Input_PointerEventHandler> {}
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class OwnedMicrosoft_UI_Xaml_Input_PointerEventHandler <: Microsoft_UI_Xaml_Input_PointerEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_PointerEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_PointerEventHandlerInvoker <: Microsoft_UI_Xaml_Input_PointerEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -3008,6 +3096,7 @@ public interface Microsoft_UI_Xaml_Input_PointerEventHandlerInvoker <: Microsoft
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class Microsoft_UI_Xaml_Input_PointerEventHandlerBox <: Microsoft_UI_Xaml_Input_PointerEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_Input_PointerEventHandlerVtbl>
@@ -3045,6 +3134,7 @@ private class Microsoft_UI_Xaml_Input_PointerEventHandlerBox <: Microsoft_UI_Xam
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 func buildMicrosoft_UI_Xaml_Input_PointerEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Input_PointerEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_Input_PointerEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -3061,6 +3151,7 @@ func buildMicrosoft_UI_Xaml_Input_PointerEventHandlerBoxVtbl(): Microsoft_UI_Xam
 
 
 // Microsoft.UI.Xaml.Input.PointerRoutedEventArgs (synthetic:Microsoft_UI_Xaml_Input_PointerRoutedEventArgs)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_PointerRoutedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3217,6 +3308,7 @@ public class Microsoft_UI_Xaml_Input_PointerRoutedEventArgs <: windows_interface
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_PointerRoutedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_PointerRoutedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_PointerRoutedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -3235,6 +3327,7 @@ extend Microsoft_UI_Xaml_Input_PointerRoutedEventArgs <: windows_core.HandleWinr
 }
 
 // Microsoft.UI.Xaml.Input.ProcessKeyboardAcceleratorEventArgs (synthetic:Microsoft_UI_Xaml_Input_ProcessKeyboardAcceleratorEventArgs)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_ProcessKeyboardAcceleratorEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3336,6 +3429,7 @@ public class Microsoft_UI_Xaml_Input_ProcessKeyboardAcceleratorEventArgs <: wind
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_ProcessKeyboardAcceleratorEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_ProcessKeyboardAcceleratorEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_ProcessKeyboardAcceleratorEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -3354,6 +3448,7 @@ extend Microsoft_UI_Xaml_Input_ProcessKeyboardAcceleratorEventArgs <: windows_co
 }
 
 // Microsoft.UI.Xaml.Input.RightTappedEventHandler (synthetic:Microsoft_UI_Xaml_Input_RightTappedEventHandler)
+@When[Microsoft_UI_Xaml_Input == "on"]
 @C
 public struct Microsoft_UI_Xaml_Input_RightTappedEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -3361,6 +3456,7 @@ public struct Microsoft_UI_Xaml_Input_RightTappedEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public open class Microsoft_UI_Xaml_Input_RightTappedEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3428,18 +3524,22 @@ public open class Microsoft_UI_Xaml_Input_RightTappedEventHandler <: windows_int
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_RightTappedEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Input_RightTappedEventHandler> {}
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class OwnedMicrosoft_UI_Xaml_Input_RightTappedEventHandler <: Microsoft_UI_Xaml_Input_RightTappedEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_RightTappedEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_RightTappedEventHandlerInvoker <: Microsoft_UI_Xaml_Input_RightTappedEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -3457,6 +3557,7 @@ public interface Microsoft_UI_Xaml_Input_RightTappedEventHandlerInvoker <: Micro
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class Microsoft_UI_Xaml_Input_RightTappedEventHandlerBox <: Microsoft_UI_Xaml_Input_RightTappedEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_Input_RightTappedEventHandlerVtbl>
@@ -3494,6 +3595,7 @@ private class Microsoft_UI_Xaml_Input_RightTappedEventHandlerBox <: Microsoft_UI
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 func buildMicrosoft_UI_Xaml_Input_RightTappedEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Input_RightTappedEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_Input_RightTappedEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -3510,6 +3612,7 @@ func buildMicrosoft_UI_Xaml_Input_RightTappedEventHandlerBoxVtbl(): Microsoft_UI
 
 
 // Microsoft.UI.Xaml.Input.RightTappedRoutedEventArgs (synthetic:Microsoft_UI_Xaml_Input_RightTappedRoutedEventArgs)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_RightTappedRoutedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3629,6 +3732,7 @@ public class Microsoft_UI_Xaml_Input_RightTappedRoutedEventArgs <: windows_inter
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_RightTappedRoutedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_RightTappedRoutedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_RightTappedRoutedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -3647,6 +3751,7 @@ extend Microsoft_UI_Xaml_Input_RightTappedRoutedEventArgs <: windows_core.Handle
 }
 
 // Microsoft.UI.Xaml.Input.TappedEventHandler (synthetic:Microsoft_UI_Xaml_Input_TappedEventHandler)
+@When[Microsoft_UI_Xaml_Input == "on"]
 @C
 public struct Microsoft_UI_Xaml_Input_TappedEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -3654,6 +3759,7 @@ public struct Microsoft_UI_Xaml_Input_TappedEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public open class Microsoft_UI_Xaml_Input_TappedEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3721,18 +3827,22 @@ public open class Microsoft_UI_Xaml_Input_TappedEventHandler <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_TappedEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Input_TappedEventHandler> {}
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class OwnedMicrosoft_UI_Xaml_Input_TappedEventHandler <: Microsoft_UI_Xaml_Input_TappedEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_TappedEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public interface Microsoft_UI_Xaml_Input_TappedEventHandlerInvoker <: Microsoft_UI_Xaml_Input_TappedEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -3750,6 +3860,7 @@ public interface Microsoft_UI_Xaml_Input_TappedEventHandlerInvoker <: Microsoft_
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 private class Microsoft_UI_Xaml_Input_TappedEventHandlerBox <: Microsoft_UI_Xaml_Input_TappedEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_Input_TappedEventHandlerVtbl>
@@ -3787,6 +3898,7 @@ private class Microsoft_UI_Xaml_Input_TappedEventHandlerBox <: Microsoft_UI_Xaml
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 func buildMicrosoft_UI_Xaml_Input_TappedEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Input_TappedEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_Input_TappedEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -3803,6 +3915,7 @@ func buildMicrosoft_UI_Xaml_Input_TappedEventHandlerBoxVtbl(): Microsoft_UI_Xaml
 
 
 // Microsoft.UI.Xaml.Input.TappedRoutedEventArgs (synthetic:Microsoft_UI_Xaml_Input_TappedRoutedEventArgs)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public class Microsoft_UI_Xaml_Input_TappedRoutedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3922,6 +4035,7 @@ public class Microsoft_UI_Xaml_Input_TappedRoutedEventArgs <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 extend Microsoft_UI_Xaml_Input_TappedRoutedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Input_TappedRoutedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Input_TappedRoutedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -3940,6 +4054,7 @@ extend Microsoft_UI_Xaml_Input_TappedRoutedEventArgs <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Xaml.Input.XYFocusKeyboardNavigationMode (synthetic:Microsoft_UI_Xaml_Input_XYFocusKeyboardNavigationMode)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public struct Microsoft_UI_Xaml_Input_XYFocusKeyboardNavigationMode {
     public let value: Int32
     public init() {
@@ -3949,11 +4064,15 @@ public struct Microsoft_UI_Xaml_Input_XYFocusKeyboardNavigationMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_XYFocusKeyboardNavigationMode_Auto = Microsoft_UI_Xaml_Input_XYFocusKeyboardNavigationMode(0)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_XYFocusKeyboardNavigationMode_Enabled = Microsoft_UI_Xaml_Input_XYFocusKeyboardNavigationMode(1)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_XYFocusKeyboardNavigationMode_Disabled = Microsoft_UI_Xaml_Input_XYFocusKeyboardNavigationMode(2)
 
 // Microsoft.UI.Xaml.Input.XYFocusNavigationStrategy (synthetic:Microsoft_UI_Xaml_Input_XYFocusNavigationStrategy)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public struct Microsoft_UI_Xaml_Input_XYFocusNavigationStrategy {
     public let value: Int32
     public init() {
@@ -3963,12 +4082,17 @@ public struct Microsoft_UI_Xaml_Input_XYFocusNavigationStrategy {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_XYFocusNavigationStrategy_Auto = Microsoft_UI_Xaml_Input_XYFocusNavigationStrategy(0)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_XYFocusNavigationStrategy_Projection = Microsoft_UI_Xaml_Input_XYFocusNavigationStrategy(1)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_XYFocusNavigationStrategy_NavigationDirectionDistance = Microsoft_UI_Xaml_Input_XYFocusNavigationStrategy(2)
+@When[Microsoft_UI_Xaml_Input == "on"]
 public let Microsoft_UI_Xaml_Input_XYFocusNavigationStrategy_RectilinearDistance = Microsoft_UI_Xaml_Input_XYFocusNavigationStrategy(3)
 
 // Microsoft.UI.Xaml.LaunchActivatedEventArgs (synthetic:Microsoft_UI_Xaml_LaunchActivatedEventArgs)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_LaunchActivatedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4059,6 +4183,7 @@ public class Microsoft_UI_Xaml_LaunchActivatedEventArgs <: windows_interface.Int
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_LaunchActivatedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_LaunchActivatedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_LaunchActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -4077,6 +4202,7 @@ extend Microsoft_UI_Xaml_LaunchActivatedEventArgs <: windows_core.HandleWinrtTyp
 }
 
 // Microsoft.UI.Xaml.LayoutCycleDebugBreakLevel (synthetic:Microsoft_UI_Xaml_LayoutCycleDebugBreakLevel)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_LayoutCycleDebugBreakLevel {
     public let value: Int32
     public init() {
@@ -4086,11 +4212,15 @@ public struct Microsoft_UI_Xaml_LayoutCycleDebugBreakLevel {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_LayoutCycleDebugBreakLevel_None = Microsoft_UI_Xaml_LayoutCycleDebugBreakLevel(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_LayoutCycleDebugBreakLevel_Low = Microsoft_UI_Xaml_LayoutCycleDebugBreakLevel(1)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_LayoutCycleDebugBreakLevel_High = Microsoft_UI_Xaml_LayoutCycleDebugBreakLevel(2)
 
 // Microsoft.UI.Xaml.LayoutCycleTracingLevel (synthetic:Microsoft_UI_Xaml_LayoutCycleTracingLevel)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_LayoutCycleTracingLevel {
     public let value: Int32
     public init() {
@@ -4100,11 +4230,15 @@ public struct Microsoft_UI_Xaml_LayoutCycleTracingLevel {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_LayoutCycleTracingLevel_None = Microsoft_UI_Xaml_LayoutCycleTracingLevel(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_LayoutCycleTracingLevel_Low = Microsoft_UI_Xaml_LayoutCycleTracingLevel(1)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_LayoutCycleTracingLevel_High = Microsoft_UI_Xaml_LayoutCycleTracingLevel(2)
 
 // Microsoft.UI.Xaml.LineStackingStrategy (synthetic:Microsoft_UI_Xaml_LineStackingStrategy)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_LineStackingStrategy {
     public let value: Int32
     public init() {
@@ -4114,16 +4248,21 @@ public struct Microsoft_UI_Xaml_LineStackingStrategy {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_LineStackingStrategy_MaxHeight = Microsoft_UI_Xaml_LineStackingStrategy(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_LineStackingStrategy_BlockLineHeight = Microsoft_UI_Xaml_LineStackingStrategy(1)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_LineStackingStrategy_BaselineToBaseline = Microsoft_UI_Xaml_LineStackingStrategy(2)
 
 // Microsoft.UI.Xaml.Markup.IXamlReader (synthetic:Microsoft_UI_Xaml_Markup_IXamlReader)
+@When[Microsoft_UI_Xaml_Markup == "on"]
 @Interface["54ce54c8-38c6-50d9-ac98-4b03eddbde9f", "Microsoft.UI.Xaml.Markup.IXamlReader"]
 public interface Microsoft_UI_Xaml_Markup_IXamlReader <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Markup.IXamlReaderStatics (synthetic:Microsoft_UI_Xaml_Markup_IXamlReaderStatics)
+@When[Microsoft_UI_Xaml_Markup == "on"]
 @Interface["82a4cd9e-435e-5aeb-8c4f-300cece45cae", "Microsoft.UI.Xaml.Markup.IXamlReaderStatics", "Load.result=Com;LoadWithInitialTemplateValidation.result=Com"]
 public interface Microsoft_UI_Xaml_Markup_IXamlReaderStatics <: IInspectable {
     func Load(xaml: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
@@ -4131,6 +4270,7 @@ public interface Microsoft_UI_Xaml_Markup_IXamlReaderStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Markup.XamlReader (synthetic:Microsoft_UI_Xaml_Markup_XamlReader)
+@When[Microsoft_UI_Xaml_Markup == "on"]
 public class Microsoft_UI_Xaml_Markup_XamlReader <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4221,6 +4361,7 @@ public class Microsoft_UI_Xaml_Markup_XamlReader <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Xaml_Markup == "on"]
 extend Microsoft_UI_Xaml_Markup_XamlReader <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Markup_XamlReader> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Markup_XamlReader): CPointer<Unit> {
         value.asRaw()
@@ -4239,6 +4380,7 @@ extend Microsoft_UI_Xaml_Markup_XamlReader <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Xaml.Media.AlignmentX (synthetic:Microsoft_UI_Xaml_Media_AlignmentX)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public struct Microsoft_UI_Xaml_Media_AlignmentX {
     public let value: Int32
     public init() {
@@ -4248,11 +4390,15 @@ public struct Microsoft_UI_Xaml_Media_AlignmentX {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_AlignmentX_Left = Microsoft_UI_Xaml_Media_AlignmentX(0)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_AlignmentX_Center = Microsoft_UI_Xaml_Media_AlignmentX(1)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_AlignmentX_Right = Microsoft_UI_Xaml_Media_AlignmentX(2)
 
 // Microsoft.UI.Xaml.Media.AlignmentY (synthetic:Microsoft_UI_Xaml_Media_AlignmentY)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public struct Microsoft_UI_Xaml_Media_AlignmentY {
     public let value: Int32
     public init() {
@@ -4262,11 +4408,15 @@ public struct Microsoft_UI_Xaml_Media_AlignmentY {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_AlignmentY_Top = Microsoft_UI_Xaml_Media_AlignmentY(0)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_AlignmentY_Center = Microsoft_UI_Xaml_Media_AlignmentY(1)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_AlignmentY_Bottom = Microsoft_UI_Xaml_Media_AlignmentY(2)
 
 // Microsoft.UI.Xaml.Media.Animation.ConnectedAnimation (synthetic:Microsoft_UI_Xaml_Media_Animation_ConnectedAnimation)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 public class Microsoft_UI_Xaml_Media_Animation_ConnectedAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4433,6 +4583,7 @@ public class Microsoft_UI_Xaml_Media_Animation_ConnectedAnimation <: windows_int
     }
 }
 
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 extend Microsoft_UI_Xaml_Media_Animation_ConnectedAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Animation_ConnectedAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Animation_ConnectedAnimation): CPointer<Unit> {
         value.asRaw()
@@ -4451,6 +4602,7 @@ extend Microsoft_UI_Xaml_Media_Animation_ConnectedAnimation <: windows_core.Hand
 }
 
 // Microsoft.UI.Xaml.Media.Animation.ConnectedAnimationComponent (synthetic:Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationComponent)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 public struct Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationComponent {
     public let value: Int32
     public init() {
@@ -4460,12 +4612,17 @@ public struct Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationComponent {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 public let Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationComponent_OffsetX = Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationComponent(0)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 public let Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationComponent_OffsetY = Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationComponent(1)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 public let Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationComponent_CrossFade = Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationComponent(2)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 public let Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationComponent_Scale = Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationComponent(3)
 
 // Microsoft.UI.Xaml.Media.Animation.ConnectedAnimationConfiguration (synthetic:Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationConfiguration)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 public class Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationConfiguration <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4524,6 +4681,7 @@ public class Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationConfiguration <
     }
 }
 
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 extend Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationConfiguration <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationConfiguration> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationConfiguration): CPointer<Unit> {
         value.asRaw()
@@ -4542,6 +4700,7 @@ extend Microsoft_UI_Xaml_Media_Animation_ConnectedAnimationConfiguration <: wind
 }
 
 // Microsoft.UI.Xaml.Media.Animation.IConnectedAnimation (synthetic:Microsoft_UI_Xaml_Media_Animation_IConnectedAnimation)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 @Interface["a9c1c6ad-7670-589c-a608-9b5c01cec71f", "Microsoft.UI.Xaml.Media.Animation.IConnectedAnimation", "Configuration.value=Com"]
 public interface Microsoft_UI_Xaml_Media_Animation_IConnectedAnimation <: IInspectable {
     func IsScaleAnimationEnabled(value: CPointer<Bool>): Int32
@@ -4557,27 +4716,32 @@ public interface Microsoft_UI_Xaml_Media_Animation_IConnectedAnimation <: IInspe
 }
 
 // Microsoft.UI.Xaml.Media.Animation.IConnectedAnimationConfiguration (synthetic:Microsoft_UI_Xaml_Media_Animation_IConnectedAnimationConfiguration)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 @Interface["e848379d-7e25-5976-bfb3-086bac4e8849", "Microsoft.UI.Xaml.Media.Animation.IConnectedAnimationConfiguration"]
 public interface Microsoft_UI_Xaml_Media_Animation_IConnectedAnimationConfiguration <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.Animation.IConnectedAnimationConfigurationFactory (synthetic:Microsoft_UI_Xaml_Media_Animation_IConnectedAnimationConfigurationFactory)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 @Interface["71008845-4a12-5a1a-969c-4152b5174922", "Microsoft.UI.Xaml.Media.Animation.IConnectedAnimationConfigurationFactory"]
 public interface Microsoft_UI_Xaml_Media_Animation_IConnectedAnimationConfigurationFactory <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.Animation.INavigationTransitionInfo (synthetic:Microsoft_UI_Xaml_Media_Animation_INavigationTransitionInfo)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 @Interface["25bb17fb-6e15-514e-b278-197537a4d990", "Microsoft.UI.Xaml.Media.Animation.INavigationTransitionInfo"]
 public interface Microsoft_UI_Xaml_Media_Animation_INavigationTransitionInfo <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.Animation.INavigationTransitionInfoFactory (synthetic:Microsoft_UI_Xaml_Media_Animation_INavigationTransitionInfoFactory)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 @Interface["c514b6ff-f6ed-572e-8392-3ea17bc7d4c4", "Microsoft.UI.Xaml.Media.Animation.INavigationTransitionInfoFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Media_Animation_INavigationTransitionInfoFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.Animation.INavigationTransitionInfoOverrides (synthetic:Microsoft_UI_Xaml_Media_Animation_INavigationTransitionInfoOverrides)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 @Interface["3d6af190-5a56-513d-aff9-631925d0fa43", "Microsoft.UI.Xaml.Media.Animation.INavigationTransitionInfoOverrides", "GetNavigationStateCore.result=HString"]
 public interface Microsoft_UI_Xaml_Media_Animation_INavigationTransitionInfoOverrides <: IInspectable {
     func GetNavigationStateCore(result: CPointer<CPointer<Unit>>): Int32
@@ -4585,16 +4749,19 @@ public interface Microsoft_UI_Xaml_Media_Animation_INavigationTransitionInfoOver
 }
 
 // Microsoft.UI.Xaml.Media.Animation.ITransition (synthetic:Microsoft_UI_Xaml_Media_Animation_ITransition)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 @Interface["e5b71956-8e44-5a38-b41e-274d706102bf", "Microsoft.UI.Xaml.Media.Animation.ITransition"]
 public interface Microsoft_UI_Xaml_Media_Animation_ITransition <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.Animation.ITransitionFactory (synthetic:Microsoft_UI_Xaml_Media_Animation_ITransitionFactory)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 @Interface["b7023e3b-bcd3-50ec-aacf-8cfcece25f17", "Microsoft.UI.Xaml.Media.Animation.ITransitionFactory"]
 public interface Microsoft_UI_Xaml_Media_Animation_ITransitionFactory <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.Animation.NavigationTransitionInfo (synthetic:Microsoft_UI_Xaml_Media_Animation_NavigationTransitionInfo)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 public class Microsoft_UI_Xaml_Media_Animation_NavigationTransitionInfo <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4701,6 +4868,7 @@ public class Microsoft_UI_Xaml_Media_Animation_NavigationTransitionInfo <: windo
     }
 }
 
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 extend Microsoft_UI_Xaml_Media_Animation_NavigationTransitionInfo <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Animation_NavigationTransitionInfo> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Animation_NavigationTransitionInfo): CPointer<Unit> {
         value.asRaw()
@@ -4719,6 +4887,7 @@ extend Microsoft_UI_Xaml_Media_Animation_NavigationTransitionInfo <: windows_cor
 }
 
 // Microsoft.UI.Xaml.Media.Animation.Transition (synthetic:Microsoft_UI_Xaml_Media_Animation_Transition)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 public class Microsoft_UI_Xaml_Media_Animation_Transition <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4784,6 +4953,7 @@ public class Microsoft_UI_Xaml_Media_Animation_Transition <: windows_interface.I
     }
 }
 
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 extend Microsoft_UI_Xaml_Media_Animation_Transition <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Animation_Transition> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Animation_Transition): CPointer<Unit> {
         value.asRaw()
@@ -4802,6 +4972,7 @@ extend Microsoft_UI_Xaml_Media_Animation_Transition <: windows_core.HandleWinrtT
 }
 
 // Microsoft.UI.Xaml.Media.Animation.TransitionCollection (synthetic:Microsoft_UI_Xaml_Media_Animation_TransitionCollection)
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 public class Microsoft_UI_Xaml_Media_Animation_TransitionCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5040,6 +5211,7 @@ public class Microsoft_UI_Xaml_Media_Animation_TransitionCollection <: windows_i
     }
 }
 
+@When[Microsoft_UI_Xaml_Media_Animation == "on"]
 extend Microsoft_UI_Xaml_Media_Animation_TransitionCollection <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Animation_TransitionCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Animation_TransitionCollection): CPointer<Unit> {
         value.asRaw()
@@ -5058,6 +5230,7 @@ extend Microsoft_UI_Xaml_Media_Animation_TransitionCollection <: windows_core.Ha
 }
 
 // Microsoft.UI.Xaml.Media.Brush (synthetic:Microsoft_UI_Xaml_Media_Brush)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_Brush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5282,6 +5455,7 @@ public class Microsoft_UI_Xaml_Media_Brush <: windows_interface.InterfaceWrapper
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_Brush <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Brush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Brush): CPointer<Unit> {
         value.asRaw()
@@ -5300,6 +5474,7 @@ extend Microsoft_UI_Xaml_Media_Brush <: windows_core.HandleWinrtType<Microsoft_U
 }
 
 // Microsoft.UI.Xaml.Media.CacheMode (synthetic:Microsoft_UI_Xaml_Media_CacheMode)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_CacheMode <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5399,6 +5574,7 @@ public class Microsoft_UI_Xaml_Media_CacheMode <: windows_interface.InterfaceWra
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_CacheMode <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_CacheMode> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_CacheMode): CPointer<Unit> {
         value.asRaw()
@@ -5417,6 +5593,7 @@ extend Microsoft_UI_Xaml_Media_CacheMode <: windows_core.HandleWinrtType<Microso
 }
 
 // Microsoft.UI.Xaml.Media.CompositionTarget (synthetic:Microsoft_UI_Xaml_Media_CompositionTarget)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_CompositionTarget <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5549,6 +5726,7 @@ public class Microsoft_UI_Xaml_Media_CompositionTarget <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_CompositionTarget <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_CompositionTarget> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_CompositionTarget): CPointer<Unit> {
         value.asRaw()
@@ -5567,6 +5745,7 @@ extend Microsoft_UI_Xaml_Media_CompositionTarget <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Xaml.Media.DoubleCollection (synthetic:Microsoft_UI_Xaml_Media_DoubleCollection)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_DoubleCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5805,6 +5984,7 @@ public class Microsoft_UI_Xaml_Media_DoubleCollection <: windows_interface.Inter
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_DoubleCollection <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_DoubleCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_DoubleCollection): CPointer<Unit> {
         value.asRaw()
@@ -5823,6 +6003,7 @@ extend Microsoft_UI_Xaml_Media_DoubleCollection <: windows_core.HandleWinrtType<
 }
 
 // Microsoft.UI.Xaml.Media.ElementCompositeMode (synthetic:Microsoft_UI_Xaml_Media_ElementCompositeMode)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public struct Microsoft_UI_Xaml_Media_ElementCompositeMode {
     public let value: Int32
     public init() {
@@ -5832,11 +6013,15 @@ public struct Microsoft_UI_Xaml_Media_ElementCompositeMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_ElementCompositeMode_Inherit = Microsoft_UI_Xaml_Media_ElementCompositeMode(0)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_ElementCompositeMode_SourceOver = Microsoft_UI_Xaml_Media_ElementCompositeMode(1)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_ElementCompositeMode_MinBlend = Microsoft_UI_Xaml_Media_ElementCompositeMode(2)
 
 // Microsoft.UI.Xaml.Media.FontFamily (synthetic:Microsoft_UI_Xaml_Media_FontFamily)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_FontFamily <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5961,6 +6146,7 @@ public class Microsoft_UI_Xaml_Media_FontFamily <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_FontFamily <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_FontFamily> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_FontFamily): CPointer<Unit> {
         value.asRaw()
@@ -5979,6 +6165,7 @@ extend Microsoft_UI_Xaml_Media_FontFamily <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Xaml.Media.GeneralTransform (synthetic:Microsoft_UI_Xaml_Media_GeneralTransform)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_GeneralTransform <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6140,6 +6327,7 @@ public class Microsoft_UI_Xaml_Media_GeneralTransform <: windows_interface.Inter
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_GeneralTransform <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_GeneralTransform> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_GeneralTransform): CPointer<Unit> {
         value.asRaw()
@@ -6158,6 +6346,7 @@ extend Microsoft_UI_Xaml_Media_GeneralTransform <: windows_core.HandleWinrtType<
 }
 
 // Microsoft.UI.Xaml.Media.Geometry (synthetic:Microsoft_UI_Xaml_Media_Geometry)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_Geometry <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6298,6 +6487,7 @@ public class Microsoft_UI_Xaml_Media_Geometry <: windows_interface.InterfaceWrap
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_Geometry <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Geometry> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Geometry): CPointer<Unit> {
         value.asRaw()
@@ -6316,6 +6506,7 @@ extend Microsoft_UI_Xaml_Media_Geometry <: windows_core.HandleWinrtType<Microsof
 }
 
 // Microsoft.UI.Xaml.Media.IBrush (synthetic:Microsoft_UI_Xaml_Media_IBrush)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["2de3cb83-1329-5679-88f8-c822bc5442cb", "Microsoft.UI.Xaml.Media.IBrush", "Transform.value=Com;RelativeTransform.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IBrush <: IInspectable {
     func Opacity(value: CPointer<Float64>): Int32
@@ -6327,18 +6518,21 @@ public interface Microsoft_UI_Xaml_Media_IBrush <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IBrushFactory (synthetic:Microsoft_UI_Xaml_Media_IBrushFactory)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["b5258717-6c49-5ba5-87fd-35df382647a5", "Microsoft.UI.Xaml.Media.IBrushFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IBrushFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.IBrushOverrides (synthetic:Microsoft_UI_Xaml_Media_IBrushOverrides)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["b6b08394-bacf-53db-9ac7-be1c693e3513", "Microsoft.UI.Xaml.Media.IBrushOverrides"]
 public interface Microsoft_UI_Xaml_Media_IBrushOverrides <: IInspectable {
     func PopulatePropertyInfoOverride(propertyName: CPointer<Unit>, animationPropertyInfo: CPointer<Unit>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.IBrushStatics (synthetic:Microsoft_UI_Xaml_Media_IBrushStatics)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["5b854f50-f818-5f01-91b0-28132d3f5957", "Microsoft.UI.Xaml.Media.IBrushStatics", "OpacityProperty.value=Com;TransformProperty.value=Com;RelativeTransformProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IBrushStatics <: IInspectable {
     func OpacityProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -6347,22 +6541,26 @@ public interface Microsoft_UI_Xaml_Media_IBrushStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.ICacheMode (synthetic:Microsoft_UI_Xaml_Media_ICacheMode)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["2ff1a1cb-0f48-53fd-b1de-e2223dfb2ff6", "Microsoft.UI.Xaml.Media.ICacheMode"]
 public interface Microsoft_UI_Xaml_Media_ICacheMode <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.ICacheModeFactory (synthetic:Microsoft_UI_Xaml_Media_ICacheModeFactory)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["e257811e-dcc5-51d8-829a-3e9400198a41", "Microsoft.UI.Xaml.Media.ICacheModeFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Media_ICacheModeFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.ICompositionTarget (synthetic:Microsoft_UI_Xaml_Media_ICompositionTarget)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["7d938324-e3ad-597c-93f6-520725410e68", "Microsoft.UI.Xaml.Media.ICompositionTarget"]
 public interface Microsoft_UI_Xaml_Media_ICompositionTarget <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.ICompositionTargetStatics (synthetic:Microsoft_UI_Xaml_Media_ICompositionTargetStatics)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["12a4be6f-6db1-5165-b622-d57ab782745b", "Microsoft.UI.Xaml.Media.ICompositionTargetStatics", "GetCompositorForCurrentThread.result=Com"]
 public interface Microsoft_UI_Xaml_Media_ICompositionTargetStatics <: IInspectable {
     func Rendering(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
@@ -6375,24 +6573,28 @@ public interface Microsoft_UI_Xaml_Media_ICompositionTargetStatics <: IInspectab
 }
 
 // Microsoft.UI.Xaml.Media.IFontFamily (synthetic:Microsoft_UI_Xaml_Media_IFontFamily)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["18fa5bc1-7294-527c-bb02-b213e0b3a2a3", "Microsoft.UI.Xaml.Media.IFontFamily", "Source.value=HString"]
 public interface Microsoft_UI_Xaml_Media_IFontFamily <: IInspectable {
     func Source(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.IFontFamilyFactory (synthetic:Microsoft_UI_Xaml_Media_IFontFamilyFactory)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["61b88a77-d0f9-5e9e-8c28-eda01fede22e", "Microsoft.UI.Xaml.Media.IFontFamilyFactory", "CreateInstanceWithName.innerInterface=Com;CreateInstanceWithName.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IFontFamilyFactory <: IInspectable {
     func CreateInstanceWithName(familyName: CPointer<Unit>, baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.IFontFamilyStatics (synthetic:Microsoft_UI_Xaml_Media_IFontFamilyStatics)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["b3eadceb-c471-58fe-93d0-d71b04a7fd54", "Microsoft.UI.Xaml.Media.IFontFamilyStatics", "XamlAutoFontFamily.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IFontFamilyStatics <: IInspectable {
     func XamlAutoFontFamily(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.IGeneralTransform (synthetic:Microsoft_UI_Xaml_Media_IGeneralTransform)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["04eedeeb-31e5-54c0-ae3f-8bd06645d339", "Microsoft.UI.Xaml.Media.IGeneralTransform", "Inverse.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IGeneralTransform <: IInspectable {
     func Inverse(value: CPointer<CPointer<Unit>>): Int32
@@ -6402,12 +6604,14 @@ public interface Microsoft_UI_Xaml_Media_IGeneralTransform <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IGeneralTransformFactory (synthetic:Microsoft_UI_Xaml_Media_IGeneralTransformFactory)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["2f1025a3-5391-5d1b-8382-3caaa1d26a96", "Microsoft.UI.Xaml.Media.IGeneralTransformFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IGeneralTransformFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.IGeneralTransformOverrides (synthetic:Microsoft_UI_Xaml_Media_IGeneralTransformOverrides)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["ce8970f1-83f8-543f-9cf5-439c461601f1", "Microsoft.UI.Xaml.Media.IGeneralTransformOverrides", "InverseCore.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IGeneralTransformOverrides <: IInspectable {
     func InverseCore(value: CPointer<CPointer<Unit>>): Int32
@@ -6416,6 +6620,7 @@ public interface Microsoft_UI_Xaml_Media_IGeneralTransformOverrides <: IInspecta
 }
 
 // Microsoft.UI.Xaml.Media.IGeometry (synthetic:Microsoft_UI_Xaml_Media_IGeometry)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["dc102dcc-3be2-5414-8599-94b6e76ef39b", "Microsoft.UI.Xaml.Media.IGeometry", "Transform.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IGeometry <: IInspectable {
     func Transform(value: CPointer<CPointer<Unit>>): Int32
@@ -6424,11 +6629,13 @@ public interface Microsoft_UI_Xaml_Media_IGeometry <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IGeometryFactory (synthetic:Microsoft_UI_Xaml_Media_IGeometryFactory)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["4edcd536-7949-548a-a9b1-6ff03b951cf3", "Microsoft.UI.Xaml.Media.IGeometryFactory"]
 public interface Microsoft_UI_Xaml_Media_IGeometryFactory <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IGeometryStatics (synthetic:Microsoft_UI_Xaml_Media_IGeometryStatics)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["349f78d0-4978-5742-b7d2-b34ea2c95600", "Microsoft.UI.Xaml.Media.IGeometryStatics", "Empty.value=Com;TransformProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IGeometryStatics <: IInspectable {
     func Empty(value: CPointer<CPointer<Unit>>): Int32
@@ -6437,6 +6644,7 @@ public interface Microsoft_UI_Xaml_Media_IGeometryStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IImageBrush (synthetic:Microsoft_UI_Xaml_Media_IImageBrush)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["edcd91a3-a868-5ba6-9489-5b12b4c29d85", "Microsoft.UI.Xaml.Media.IImageBrush", "ImageSource.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IImageBrush <: IInspectable {
     func ImageSource(value: CPointer<CPointer<Unit>>): Int32
@@ -6448,33 +6656,39 @@ public interface Microsoft_UI_Xaml_Media_IImageBrush <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IImageBrushStatics (synthetic:Microsoft_UI_Xaml_Media_IImageBrushStatics)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["ce8082dc-a505-5b4f-8861-79630f52c189", "Microsoft.UI.Xaml.Media.IImageBrushStatics", "ImageSourceProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IImageBrushStatics <: IInspectable {
     func ImageSourceProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.IImageSource (synthetic:Microsoft_UI_Xaml_Media_IImageSource)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["6c2038f6-d6d5-55e9-9b9e-082f12dbff60", "Microsoft.UI.Xaml.Media.IImageSource"]
 public interface Microsoft_UI_Xaml_Media_IImageSource <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IImageSourceFactory (synthetic:Microsoft_UI_Xaml_Media_IImageSourceFactory)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["0b1e64a3-e353-5901-b84b-ae9842aea5cd", "Microsoft.UI.Xaml.Media.IImageSourceFactory"]
 public interface Microsoft_UI_Xaml_Media_IImageSourceFactory <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IProjection (synthetic:Microsoft_UI_Xaml_Media_IProjection)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["c95364b3-6058-5ee5-9e28-d38b7679fcd4", "Microsoft.UI.Xaml.Media.IProjection"]
 public interface Microsoft_UI_Xaml_Media_IProjection <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IProjectionFactory (synthetic:Microsoft_UI_Xaml_Media_IProjectionFactory)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["870ea34f-db61-5b75-89ad-e0480c802937", "Microsoft.UI.Xaml.Media.IProjectionFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IProjectionFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.IRectangleGeometry (synthetic:Microsoft_UI_Xaml_Media_IRectangleGeometry)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["b6143890-a5f5-54e0-ab42-d88bab451f04", "Microsoft.UI.Xaml.Media.IRectangleGeometry"]
 public interface Microsoft_UI_Xaml_Media_IRectangleGeometry <: IInspectable {
     func Rect(value: CPointer<Windows_Foundation_Rect>): Int32
@@ -6482,28 +6696,33 @@ public interface Microsoft_UI_Xaml_Media_IRectangleGeometry <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IRectangleGeometryStatics (synthetic:Microsoft_UI_Xaml_Media_IRectangleGeometryStatics)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["1ae7ac26-8a8b-55a5-b035-586e2b642919", "Microsoft.UI.Xaml.Media.IRectangleGeometryStatics", "RectProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IRectangleGeometryStatics <: IInspectable {
     func RectProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.IRenderedEventArgs (synthetic:Microsoft_UI_Xaml_Media_IRenderedEventArgs)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["b268b885-118d-5b66-8099-3b6bb8644726", "Microsoft.UI.Xaml.Media.IRenderedEventArgs"]
 public interface Microsoft_UI_Xaml_Media_IRenderedEventArgs <: IInspectable {
     func FrameDuration(value: CPointer<Windows_Foundation_TimeSpan>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.IShadow (synthetic:Microsoft_UI_Xaml_Media_IShadow)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["cc12fd6a-50aa-5eb3-9a0e-b938b454c439", "Microsoft.UI.Xaml.Media.IShadow"]
 public interface Microsoft_UI_Xaml_Media_IShadow <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IShadowFactory (synthetic:Microsoft_UI_Xaml_Media_IShadowFactory)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["c9115fbb-fcc3-52bf-b8ee-c348102a46e0", "Microsoft.UI.Xaml.Media.IShadowFactory"]
 public interface Microsoft_UI_Xaml_Media_IShadowFactory <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.ISolidColorBrush (synthetic:Microsoft_UI_Xaml_Media_ISolidColorBrush)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["b3865c31-37c8-55c1-8a72-d41c67642e2a", "Microsoft.UI.Xaml.Media.ISolidColorBrush"]
 public interface Microsoft_UI_Xaml_Media_ISolidColorBrush <: IInspectable {
     func Color(value: CPointer<Windows_UI_Color>): Int32
@@ -6511,30 +6730,35 @@ public interface Microsoft_UI_Xaml_Media_ISolidColorBrush <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.ISolidColorBrushFactory (synthetic:Microsoft_UI_Xaml_Media_ISolidColorBrushFactory)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["7b559384-4daa-54f4-91ef-33a23fd816ca", "Microsoft.UI.Xaml.Media.ISolidColorBrushFactory", "CreateInstanceWithColor.value=Com"]
 public interface Microsoft_UI_Xaml_Media_ISolidColorBrushFactory <: IInspectable {
     func CreateInstanceWithColor(color: Windows_UI_Color, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.ISolidColorBrushStatics (synthetic:Microsoft_UI_Xaml_Media_ISolidColorBrushStatics)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["6bc16da0-c4e6-59b8-995b-b31e48424c07", "Microsoft.UI.Xaml.Media.ISolidColorBrushStatics", "ColorProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Media_ISolidColorBrushStatics <: IInspectable {
     func ColorProperty(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.ISystemBackdrop (synthetic:Microsoft_UI_Xaml_Media_ISystemBackdrop)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["5aeed5c4-37ac-5852-b73f-1b76ebc3205f", "Microsoft.UI.Xaml.Media.ISystemBackdrop", "GetDefaultSystemBackdropConfiguration.result=Com"]
 public interface Microsoft_UI_Xaml_Media_ISystemBackdrop <: IInspectable {
     func GetDefaultSystemBackdropConfiguration(target: CPointer<Unit>, xamlRoot: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.ISystemBackdropFactory (synthetic:Microsoft_UI_Xaml_Media_ISystemBackdropFactory)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["1e07656b-fad2-5b29-913f-b6748bc45942", "Microsoft.UI.Xaml.Media.ISystemBackdropFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Media_ISystemBackdropFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.ISystemBackdropOverrides (synthetic:Microsoft_UI_Xaml_Media_ISystemBackdropOverrides)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["eb1f5399-cad7-5611-b637-09d76a07e708", "Microsoft.UI.Xaml.Media.ISystemBackdropOverrides"]
 public interface Microsoft_UI_Xaml_Media_ISystemBackdropOverrides <: IInspectable {
     func OnTargetConnected(connectedTarget: CPointer<Unit>, xamlRoot: CPointer<Unit>): Int32
@@ -6543,6 +6767,7 @@ public interface Microsoft_UI_Xaml_Media_ISystemBackdropOverrides <: IInspectabl
 }
 
 // Microsoft.UI.Xaml.Media.ITileBrush (synthetic:Microsoft_UI_Xaml_Media_ITileBrush)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["ee46060d-cabc-505d-883c-75d2e0e45875", "Microsoft.UI.Xaml.Media.ITileBrush"]
 public interface Microsoft_UI_Xaml_Media_ITileBrush <: IInspectable {
     func AlignmentX(value: CPointer<Int32>): Int32
@@ -6554,12 +6779,14 @@ public interface Microsoft_UI_Xaml_Media_ITileBrush <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.ITileBrushFactory (synthetic:Microsoft_UI_Xaml_Media_ITileBrushFactory)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["8542e5e6-5177-506f-8a3b-aa7da651f099", "Microsoft.UI.Xaml.Media.ITileBrushFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Media_ITileBrushFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.ITileBrushStatics (synthetic:Microsoft_UI_Xaml_Media_ITileBrushStatics)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["f402197b-9047-5f8a-90bc-6f5d8c748a5f", "Microsoft.UI.Xaml.Media.ITileBrushStatics", "AlignmentXProperty.value=Com;AlignmentYProperty.value=Com;StretchProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Media_ITileBrushStatics <: IInspectable {
     func AlignmentXProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -6568,27 +6795,32 @@ public interface Microsoft_UI_Xaml_Media_ITileBrushStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.ITransform (synthetic:Microsoft_UI_Xaml_Media_ITransform)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["92a8dee5-1413-56b9-8cca-3c46918fde1b", "Microsoft.UI.Xaml.Media.ITransform"]
 public interface Microsoft_UI_Xaml_Media_ITransform <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.ITransformFactory (synthetic:Microsoft_UI_Xaml_Media_ITransformFactory)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["7da293f9-b82e-5d15-b623-c08210cbb640", "Microsoft.UI.Xaml.Media.ITransformFactory"]
 public interface Microsoft_UI_Xaml_Media_ITransformFactory <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IXamlLight (synthetic:Microsoft_UI_Xaml_Media_IXamlLight)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["dcd20139-8cd5-5da5-a25c-2b7b813d8d58", "Microsoft.UI.Xaml.Media.IXamlLight"]
 public interface Microsoft_UI_Xaml_Media_IXamlLight <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IXamlLightFactory (synthetic:Microsoft_UI_Xaml_Media_IXamlLightFactory)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["76da6306-96fc-553e-bb39-9a4801d06f48", "Microsoft.UI.Xaml.Media.IXamlLightFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IXamlLightFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.IXamlLightOverrides (synthetic:Microsoft_UI_Xaml_Media_IXamlLightOverrides)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["696d4f30-92ee-540d-ad70-33d4489514d0", "Microsoft.UI.Xaml.Media.IXamlLightOverrides", "GetId.result=HString"]
 public interface Microsoft_UI_Xaml_Media_IXamlLightOverrides <: IInspectable {
     func GetId(result: CPointer<CPointer<Unit>>): Int32
@@ -6597,6 +6829,7 @@ public interface Microsoft_UI_Xaml_Media_IXamlLightOverrides <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IXamlLightProtected (synthetic:Microsoft_UI_Xaml_Media_IXamlLightProtected)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["c307bf12-fdaf-54ca-a631-ad0e86263c6e", "Microsoft.UI.Xaml.Media.IXamlLightProtected", "CompositionLight.value=Com"]
 public interface Microsoft_UI_Xaml_Media_IXamlLightProtected <: IInspectable {
     func CompositionLight(value: CPointer<CPointer<Unit>>): Int32
@@ -6604,6 +6837,7 @@ public interface Microsoft_UI_Xaml_Media_IXamlLightProtected <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.IXamlLightStatics (synthetic:Microsoft_UI_Xaml_Media_IXamlLightStatics)
+@When[Microsoft_UI_Xaml_Media == "on"]
 @Interface["a2d8ea26-26ff-5374-b1dd-f232d5604f6a", "Microsoft.UI.Xaml.Media.IXamlLightStatics"]
 public interface Microsoft_UI_Xaml_Media_IXamlLightStatics <: IInspectable {
     func AddTargetElement(lightId: CPointer<Unit>, element: CPointer<Unit>): Int32
@@ -6613,6 +6847,7 @@ public interface Microsoft_UI_Xaml_Media_IXamlLightStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.ImageBrush (synthetic:Microsoft_UI_Xaml_Media_ImageBrush)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_ImageBrush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6796,6 +7031,7 @@ public class Microsoft_UI_Xaml_Media_ImageBrush <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_ImageBrush <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_ImageBrush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_ImageBrush): CPointer<Unit> {
         value.asRaw()
@@ -6814,6 +7050,7 @@ extend Microsoft_UI_Xaml_Media_ImageBrush <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Xaml.Media.ImageSource (synthetic:Microsoft_UI_Xaml_Media_ImageSource)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_ImageSource <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6879,6 +7116,7 @@ public class Microsoft_UI_Xaml_Media_ImageSource <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_ImageSource <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_ImageSource> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_ImageSource): CPointer<Unit> {
         value.asRaw()
@@ -6897,6 +7135,7 @@ extend Microsoft_UI_Xaml_Media_ImageSource <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Xaml.Media.Imaging.BitmapCreateOptions (synthetic:Microsoft_UI_Xaml_Media_Imaging_BitmapCreateOptions)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public struct Microsoft_UI_Xaml_Media_Imaging_BitmapCreateOptions {
     public let value: UInt32
     public init() {
@@ -6921,10 +7160,13 @@ public struct Microsoft_UI_Xaml_Media_Imaging_BitmapCreateOptions {
         return Microsoft_UI_Xaml_Media_Imaging_BitmapCreateOptions(!value)
     }
 }
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public let Microsoft_UI_Xaml_Media_Imaging_BitmapCreateOptions_None = Microsoft_UI_Xaml_Media_Imaging_BitmapCreateOptions(0)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public let Microsoft_UI_Xaml_Media_Imaging_BitmapCreateOptions_IgnoreImageCache = Microsoft_UI_Xaml_Media_Imaging_BitmapCreateOptions(8)
 
 // Microsoft.UI.Xaml.Media.Imaging.BitmapImage (synthetic:Microsoft_UI_Xaml_Media_Imaging_BitmapImage)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public class Microsoft_UI_Xaml_Media_Imaging_BitmapImage <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7363,6 +7605,7 @@ public class Microsoft_UI_Xaml_Media_Imaging_BitmapImage <: windows_interface.In
     }
 }
 
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 extend Microsoft_UI_Xaml_Media_Imaging_BitmapImage <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Imaging_BitmapImage> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Imaging_BitmapImage): CPointer<Unit> {
         value.asRaw()
@@ -7381,6 +7624,7 @@ extend Microsoft_UI_Xaml_Media_Imaging_BitmapImage <: windows_core.HandleWinrtTy
 }
 
 // Microsoft.UI.Xaml.Media.Imaging.BitmapSource (synthetic:Microsoft_UI_Xaml_Media_Imaging_BitmapSource)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public class Microsoft_UI_Xaml_Media_Imaging_BitmapSource <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7565,6 +7809,7 @@ public class Microsoft_UI_Xaml_Media_Imaging_BitmapSource <: windows_interface.I
     }
 }
 
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 extend Microsoft_UI_Xaml_Media_Imaging_BitmapSource <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Imaging_BitmapSource> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Imaging_BitmapSource): CPointer<Unit> {
         value.asRaw()
@@ -7583,6 +7828,7 @@ extend Microsoft_UI_Xaml_Media_Imaging_BitmapSource <: windows_core.HandleWinrtT
 }
 
 // Microsoft.UI.Xaml.Media.Imaging.DecodePixelType (synthetic:Microsoft_UI_Xaml_Media_Imaging_DecodePixelType)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public struct Microsoft_UI_Xaml_Media_Imaging_DecodePixelType {
     public let value: Int32
     public init() {
@@ -7592,10 +7838,13 @@ public struct Microsoft_UI_Xaml_Media_Imaging_DecodePixelType {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public let Microsoft_UI_Xaml_Media_Imaging_DecodePixelType_Physical = Microsoft_UI_Xaml_Media_Imaging_DecodePixelType(0)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public let Microsoft_UI_Xaml_Media_Imaging_DecodePixelType_Logical = Microsoft_UI_Xaml_Media_Imaging_DecodePixelType(1)
 
 // Microsoft.UI.Xaml.Media.Imaging.DownloadProgressEventArgs (synthetic:Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventArgs)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public class Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7673,6 +7922,7 @@ public class Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventArgs <: window
     }
 }
 
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 extend Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -7691,6 +7941,7 @@ extend Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventArgs <: windows_core
 }
 
 // Microsoft.UI.Xaml.Media.Imaging.DownloadProgressEventHandler (synthetic:Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandler)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 @C
 public struct Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -7698,6 +7949,7 @@ public struct Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public open class Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7765,18 +8017,22 @@ public open class Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandler <
     }
 }
 
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 extend Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandler> {}
 
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 private class OwnedMicrosoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandler <: Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public interface Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public interface Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerInvoker <: Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -7794,6 +8050,7 @@ public interface Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerInv
     }
 }
 
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 private class Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerBox <: Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerVtbl>
@@ -7831,6 +8088,7 @@ private class Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerBox <:
     }
 }
 
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 func buildMicrosoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -7847,6 +8105,7 @@ func buildMicrosoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandlerBoxVtbl():
 
 
 // Microsoft.UI.Xaml.Media.Imaging.IBitmapImage (synthetic:Microsoft_UI_Xaml_Media_Imaging_IBitmapImage)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 @Interface["5cc29916-a411-5bc2-a3c5-a00d99a59da8", "Microsoft.UI.Xaml.Media.Imaging.IBitmapImage", "UriSource.value=Com"]
 public interface Microsoft_UI_Xaml_Media_Imaging_IBitmapImage <: IInspectable {
     func CreateOptions(value: CPointer<UInt32>): Int32
@@ -7874,12 +8133,14 @@ public interface Microsoft_UI_Xaml_Media_Imaging_IBitmapImage <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.Imaging.IBitmapImageFactory (synthetic:Microsoft_UI_Xaml_Media_Imaging_IBitmapImageFactory)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 @Interface["f037e0e9-f229-522e-95c9-da2211a14b05", "Microsoft.UI.Xaml.Media.Imaging.IBitmapImageFactory", "CreateInstanceWithUriSource.value=Com"]
 public interface Microsoft_UI_Xaml_Media_Imaging_IBitmapImageFactory <: IInspectable {
     func CreateInstanceWithUriSource(uriSource: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.Imaging.IBitmapImageStatics (synthetic:Microsoft_UI_Xaml_Media_Imaging_IBitmapImageStatics)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 @Interface["4bcf71a9-1897-51dc-8e3f-2c5c796d1cd9", "Microsoft.UI.Xaml.Media.Imaging.IBitmapImageStatics", "CreateOptionsProperty.value=Com;UriSourceProperty.value=Com;DecodePixelWidthProperty.value=Com;DecodePixelHeightProperty.value=Com;DecodePixelTypeProperty.value=Com;IsAnimatedBitmapProperty.value=Com;IsPlayingProperty.value=Com;AutoPlayProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Media_Imaging_IBitmapImageStatics <: IInspectable {
     func CreateOptionsProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -7893,6 +8154,7 @@ public interface Microsoft_UI_Xaml_Media_Imaging_IBitmapImageStatics <: IInspect
 }
 
 // Microsoft.UI.Xaml.Media.Imaging.IBitmapSource (synthetic:Microsoft_UI_Xaml_Media_Imaging_IBitmapSource)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 @Interface["8424269d-9b82-534f-8fea-af5b5ef96bf2", "Microsoft.UI.Xaml.Media.Imaging.IBitmapSource", "SetSourceAsync.operation=Com"]
 public interface Microsoft_UI_Xaml_Media_Imaging_IBitmapSource <: IInspectable {
     func PixelWidth(value: CPointer<Int32>): Int32
@@ -7902,12 +8164,14 @@ public interface Microsoft_UI_Xaml_Media_Imaging_IBitmapSource <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.Imaging.IBitmapSourceFactory (synthetic:Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceFactory)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 @Interface["0392f025-1868-5876-ad67-12e94a8da5bf", "Microsoft.UI.Xaml.Media.Imaging.IBitmapSourceFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.Imaging.IBitmapSourceStatics (synthetic:Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceStatics)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 @Interface["efa3745e-4400-5f0b-bdc7-3f2911a3d719", "Microsoft.UI.Xaml.Media.Imaging.IBitmapSourceStatics", "PixelWidthProperty.value=Com;PixelHeightProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceStatics <: IInspectable {
     func PixelWidthProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -7915,6 +8179,7 @@ public interface Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceStatics <: IInspec
 }
 
 // Microsoft.UI.Xaml.Media.Imaging.IDownloadProgressEventArgs (synthetic:Microsoft_UI_Xaml_Media_Imaging_IDownloadProgressEventArgs)
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 @Interface["9a0ea80b-1a17-50d5-83f3-377738212619", "Microsoft.UI.Xaml.Media.Imaging.IDownloadProgressEventArgs"]
 public interface Microsoft_UI_Xaml_Media_Imaging_IDownloadProgressEventArgs <: IInspectable {
     func Progress(value: CPointer<Int32>): Int32
@@ -7922,17 +8187,20 @@ public interface Microsoft_UI_Xaml_Media_Imaging_IDownloadProgressEventArgs <: I
 }
 
 // Microsoft.UI.Xaml.Media.Media3D.ITransform3D (synthetic:Microsoft_UI_Xaml_Media_Media3D_ITransform3D)
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
 @Interface["afea4941-2e49-533c-9f8f-2c126ef9893a", "Microsoft.UI.Xaml.Media.Media3D.ITransform3D"]
 public interface Microsoft_UI_Xaml_Media_Media3D_ITransform3D <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Media.Media3D.ITransform3DFactory (synthetic:Microsoft_UI_Xaml_Media_Media3D_ITransform3DFactory)
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
 @Interface["9bcce0a1-10ac-5319-bdf1-548d2e5ae504", "Microsoft.UI.Xaml.Media.Media3D.ITransform3DFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Media_Media3D_ITransform3DFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Media.Media3D.Transform3D (synthetic:Microsoft_UI_Xaml_Media_Media3D_Transform3D)
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
 public class Microsoft_UI_Xaml_Media_Media3D_Transform3D <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8032,6 +8300,7 @@ public class Microsoft_UI_Xaml_Media_Media3D_Transform3D <: windows_interface.In
     }
 }
 
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
 extend Microsoft_UI_Xaml_Media_Media3D_Transform3D <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Media3D_Transform3D> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Media3D_Transform3D): CPointer<Unit> {
         value.asRaw()
@@ -8050,6 +8319,7 @@ extend Microsoft_UI_Xaml_Media_Media3D_Transform3D <: windows_core.HandleWinrtTy
 }
 
 // Microsoft.UI.Xaml.Media.PenLineCap (synthetic:Microsoft_UI_Xaml_Media_PenLineCap)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public struct Microsoft_UI_Xaml_Media_PenLineCap {
     public let value: Int32
     public init() {
@@ -8059,12 +8329,17 @@ public struct Microsoft_UI_Xaml_Media_PenLineCap {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_PenLineCap_Flat = Microsoft_UI_Xaml_Media_PenLineCap(0)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_PenLineCap_Square = Microsoft_UI_Xaml_Media_PenLineCap(1)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_PenLineCap_Round = Microsoft_UI_Xaml_Media_PenLineCap(2)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_PenLineCap_Triangle = Microsoft_UI_Xaml_Media_PenLineCap(3)
 
 // Microsoft.UI.Xaml.Media.PenLineJoin (synthetic:Microsoft_UI_Xaml_Media_PenLineJoin)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public struct Microsoft_UI_Xaml_Media_PenLineJoin {
     public let value: Int32
     public init() {
@@ -8074,11 +8349,15 @@ public struct Microsoft_UI_Xaml_Media_PenLineJoin {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_PenLineJoin_Miter = Microsoft_UI_Xaml_Media_PenLineJoin(0)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_PenLineJoin_Bevel = Microsoft_UI_Xaml_Media_PenLineJoin(1)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_PenLineJoin_Round = Microsoft_UI_Xaml_Media_PenLineJoin(2)
 
 // Microsoft.UI.Xaml.Media.Projection (synthetic:Microsoft_UI_Xaml_Media_Projection)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_Projection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8178,6 +8457,7 @@ public class Microsoft_UI_Xaml_Media_Projection <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_Projection <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Projection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Projection): CPointer<Unit> {
         value.asRaw()
@@ -8196,6 +8476,7 @@ extend Microsoft_UI_Xaml_Media_Projection <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Xaml.Media.RectangleGeometry (synthetic:Microsoft_UI_Xaml_Media_RectangleGeometry)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_RectangleGeometry <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8312,6 +8593,7 @@ public class Microsoft_UI_Xaml_Media_RectangleGeometry <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_RectangleGeometry <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_RectangleGeometry> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_RectangleGeometry): CPointer<Unit> {
         value.asRaw()
@@ -8330,6 +8612,7 @@ extend Microsoft_UI_Xaml_Media_RectangleGeometry <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Xaml.Media.RenderedEventArgs (synthetic:Microsoft_UI_Xaml_Media_RenderedEventArgs)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_RenderedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8400,6 +8683,7 @@ public class Microsoft_UI_Xaml_Media_RenderedEventArgs <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_RenderedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_RenderedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_RenderedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -8418,6 +8702,7 @@ extend Microsoft_UI_Xaml_Media_RenderedEventArgs <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Xaml.Media.Shadow (synthetic:Microsoft_UI_Xaml_Media_Shadow)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_Shadow <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8483,6 +8768,7 @@ public class Microsoft_UI_Xaml_Media_Shadow <: windows_interface.InterfaceWrappe
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_Shadow <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Shadow> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Shadow): CPointer<Unit> {
         value.asRaw()
@@ -8501,6 +8787,7 @@ extend Microsoft_UI_Xaml_Media_Shadow <: windows_core.HandleWinrtType<Microsoft_
 }
 
 // Microsoft.UI.Xaml.Media.SolidColorBrush (synthetic:Microsoft_UI_Xaml_Media_SolidColorBrush)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_SolidColorBrush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8645,6 +8932,7 @@ public class Microsoft_UI_Xaml_Media_SolidColorBrush <: windows_interface.Interf
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_SolidColorBrush <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_SolidColorBrush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_SolidColorBrush): CPointer<Unit> {
         value.asRaw()
@@ -8663,6 +8951,7 @@ extend Microsoft_UI_Xaml_Media_SolidColorBrush <: windows_core.HandleWinrtType<M
 }
 
 // Microsoft.UI.Xaml.Media.Stretch (synthetic:Microsoft_UI_Xaml_Media_Stretch)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public struct Microsoft_UI_Xaml_Media_Stretch {
     public let value: Int32
     public init() {
@@ -8672,12 +8961,17 @@ public struct Microsoft_UI_Xaml_Media_Stretch {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_Stretch_None = Microsoft_UI_Xaml_Media_Stretch(0)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_Stretch_Fill = Microsoft_UI_Xaml_Media_Stretch(1)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_Stretch_Uniform = Microsoft_UI_Xaml_Media_Stretch(2)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public let Microsoft_UI_Xaml_Media_Stretch_UniformToFill = Microsoft_UI_Xaml_Media_Stretch(3)
 
 // Microsoft.UI.Xaml.Media.SystemBackdrop (synthetic:Microsoft_UI_Xaml_Media_SystemBackdrop)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_SystemBackdrop <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8802,6 +9096,7 @@ public class Microsoft_UI_Xaml_Media_SystemBackdrop <: windows_interface.Interfa
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_SystemBackdrop <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_SystemBackdrop> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_SystemBackdrop): CPointer<Unit> {
         value.asRaw()
@@ -8820,6 +9115,7 @@ extend Microsoft_UI_Xaml_Media_SystemBackdrop <: windows_core.HandleWinrtType<Mi
 }
 
 // Microsoft.UI.Xaml.Media.TileBrush (synthetic:Microsoft_UI_Xaml_Media_TileBrush)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_TileBrush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9039,6 +9335,7 @@ public class Microsoft_UI_Xaml_Media_TileBrush <: windows_interface.InterfaceWra
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_TileBrush <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_TileBrush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_TileBrush): CPointer<Unit> {
         value.asRaw()
@@ -9057,6 +9354,7 @@ extend Microsoft_UI_Xaml_Media_TileBrush <: windows_core.HandleWinrtType<Microso
 }
 
 // Microsoft.UI.Xaml.Media.Transform (synthetic:Microsoft_UI_Xaml_Media_Transform)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_Transform <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9136,6 +9434,7 @@ public class Microsoft_UI_Xaml_Media_Transform <: windows_interface.InterfaceWra
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_Transform <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_Transform> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_Transform): CPointer<Unit> {
         value.asRaw()
@@ -9154,6 +9453,7 @@ extend Microsoft_UI_Xaml_Media_Transform <: windows_core.HandleWinrtType<Microso
 }
 
 // Microsoft.UI.Xaml.Media.XamlLight (synthetic:Microsoft_UI_Xaml_Media_XamlLight)
+@When[Microsoft_UI_Xaml_Media == "on"]
 public class Microsoft_UI_Xaml_Media_XamlLight <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9315,6 +9615,7 @@ public class Microsoft_UI_Xaml_Media_XamlLight <: windows_interface.InterfaceWra
     }
 }
 
+@When[Microsoft_UI_Xaml_Media == "on"]
 extend Microsoft_UI_Xaml_Media_XamlLight <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Media_XamlLight> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Media_XamlLight): CPointer<Unit> {
         value.asRaw()
@@ -9333,6 +9634,7 @@ extend Microsoft_UI_Xaml_Media_XamlLight <: windows_core.HandleWinrtType<Microso
 }
 
 // Microsoft.UI.Xaml.OpticalMarginAlignment (synthetic:Microsoft_UI_Xaml_OpticalMarginAlignment)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_OpticalMarginAlignment {
     public let value: Int32
     public init() {
@@ -9342,10 +9644,13 @@ public struct Microsoft_UI_Xaml_OpticalMarginAlignment {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_OpticalMarginAlignment_None = Microsoft_UI_Xaml_OpticalMarginAlignment(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_OpticalMarginAlignment_TrimSideBearings = Microsoft_UI_Xaml_OpticalMarginAlignment(1)
 
 // Microsoft.UI.Xaml.PropertyChangedCallback (synthetic:Microsoft_UI_Xaml_PropertyChangedCallback)
+@When[Microsoft_UI_Xaml == "on"]
 @C
 public struct Microsoft_UI_Xaml_PropertyChangedCallbackVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -9353,6 +9658,7 @@ public struct Microsoft_UI_Xaml_PropertyChangedCallbackVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public open class Microsoft_UI_Xaml_PropertyChangedCallback <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9420,18 +9726,22 @@ public open class Microsoft_UI_Xaml_PropertyChangedCallback <: windows_interface
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_PropertyChangedCallback <: windows_core.Interface<Microsoft_UI_Xaml_PropertyChangedCallback> {}
 
+@When[Microsoft_UI_Xaml == "on"]
 private class OwnedMicrosoft_UI_Xaml_PropertyChangedCallback <: Microsoft_UI_Xaml_PropertyChangedCallback {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public interface Microsoft_UI_Xaml_PropertyChangedCallbackInvokerErased {
     func __winrtThunk_Invoke(d: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public interface Microsoft_UI_Xaml_PropertyChangedCallbackInvoker <: Microsoft_UI_Xaml_PropertyChangedCallbackInvokerErased {
     func Invoke(d: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -9449,6 +9759,7 @@ public interface Microsoft_UI_Xaml_PropertyChangedCallbackInvoker <: Microsoft_U
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 private class Microsoft_UI_Xaml_PropertyChangedCallbackBox <: Microsoft_UI_Xaml_PropertyChangedCallbackInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_PropertyChangedCallbackVtbl>
@@ -9486,6 +9797,7 @@ private class Microsoft_UI_Xaml_PropertyChangedCallbackBox <: Microsoft_UI_Xaml_
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 func buildMicrosoft_UI_Xaml_PropertyChangedCallbackBoxVtbl(): Microsoft_UI_Xaml_PropertyChangedCallbackVtbl {
     var vtbl = Microsoft_UI_Xaml_PropertyChangedCallbackVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -9502,6 +9814,7 @@ func buildMicrosoft_UI_Xaml_PropertyChangedCallbackBoxVtbl(): Microsoft_UI_Xaml_
 
 
 // Microsoft.UI.Xaml.PropertyMetadata (synthetic:Microsoft_UI_Xaml_PropertyMetadata)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_PropertyMetadata <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9734,6 +10047,7 @@ public class Microsoft_UI_Xaml_PropertyMetadata <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_PropertyMetadata <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_PropertyMetadata> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_PropertyMetadata): CPointer<Unit> {
         value.asRaw()
@@ -9752,6 +10066,7 @@ extend Microsoft_UI_Xaml_PropertyMetadata <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Xaml.PropertyPath (synthetic:Microsoft_UI_Xaml_PropertyPath)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_PropertyPath <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9849,6 +10164,7 @@ public class Microsoft_UI_Xaml_PropertyPath <: windows_interface.InterfaceWrappe
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_PropertyPath <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_PropertyPath> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_PropertyPath): CPointer<Unit> {
         value.asRaw()
@@ -9867,6 +10183,7 @@ extend Microsoft_UI_Xaml_PropertyPath <: windows_core.HandleWinrtType<Microsoft_
 }
 
 // Microsoft.UI.Xaml.ResourceDictionary (synthetic:Microsoft_UI_Xaml_ResourceDictionary)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_ResourceDictionary <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10044,6 +10361,7 @@ public class Microsoft_UI_Xaml_ResourceDictionary <: windows_interface.Interface
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_ResourceDictionary <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_ResourceDictionary> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_ResourceDictionary): CPointer<Unit> {
         value.asRaw()
@@ -10062,6 +10380,7 @@ extend Microsoft_UI_Xaml_ResourceDictionary <: windows_core.HandleWinrtType<Micr
 }
 
 // Microsoft.UI.Xaml.ResourceManagerRequestedEventArgs (synthetic:Microsoft_UI_Xaml_ResourceManagerRequestedEventArgs)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_ResourceManagerRequestedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10145,6 +10464,7 @@ public class Microsoft_UI_Xaml_ResourceManagerRequestedEventArgs <: windows_inte
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_ResourceManagerRequestedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_ResourceManagerRequestedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_ResourceManagerRequestedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -10163,6 +10483,7 @@ extend Microsoft_UI_Xaml_ResourceManagerRequestedEventArgs <: windows_core.Handl
 }
 
 // Microsoft.UI.Xaml.RoutedEvent (synthetic:Microsoft_UI_Xaml_RoutedEvent)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_RoutedEvent <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10221,6 +10542,7 @@ public class Microsoft_UI_Xaml_RoutedEvent <: windows_interface.InterfaceWrapper
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_RoutedEvent <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_RoutedEvent> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_RoutedEvent): CPointer<Unit> {
         value.asRaw()
@@ -10239,6 +10561,7 @@ extend Microsoft_UI_Xaml_RoutedEvent <: windows_core.HandleWinrtType<Microsoft_U
 }
 
 // Microsoft.UI.Xaml.RoutedEventArgs (synthetic:Microsoft_UI_Xaml_RoutedEventArgs)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_RoutedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10347,6 +10670,7 @@ public class Microsoft_UI_Xaml_RoutedEventArgs <: windows_interface.InterfaceWra
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_RoutedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_RoutedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_RoutedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -10365,6 +10689,7 @@ extend Microsoft_UI_Xaml_RoutedEventArgs <: windows_core.HandleWinrtType<Microso
 }
 
 // Microsoft.UI.Xaml.RoutedEventHandler (synthetic:Microsoft_UI_Xaml_RoutedEventHandler)
+@When[Microsoft_UI_Xaml == "on"]
 @C
 public struct Microsoft_UI_Xaml_RoutedEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -10372,6 +10697,7 @@ public struct Microsoft_UI_Xaml_RoutedEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public open class Microsoft_UI_Xaml_RoutedEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10439,18 +10765,22 @@ public open class Microsoft_UI_Xaml_RoutedEventHandler <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_RoutedEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_RoutedEventHandler> {}
 
+@When[Microsoft_UI_Xaml == "on"]
 private class OwnedMicrosoft_UI_Xaml_RoutedEventHandler <: Microsoft_UI_Xaml_RoutedEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public interface Microsoft_UI_Xaml_RoutedEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public interface Microsoft_UI_Xaml_RoutedEventHandlerInvoker <: Microsoft_UI_Xaml_RoutedEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -10468,6 +10798,7 @@ public interface Microsoft_UI_Xaml_RoutedEventHandlerInvoker <: Microsoft_UI_Xam
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 private class Microsoft_UI_Xaml_RoutedEventHandlerBox <: Microsoft_UI_Xaml_RoutedEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_RoutedEventHandlerVtbl>
@@ -10505,6 +10836,7 @@ private class Microsoft_UI_Xaml_RoutedEventHandlerBox <: Microsoft_UI_Xaml_Route
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 func buildMicrosoft_UI_Xaml_RoutedEventHandlerBoxVtbl(): Microsoft_UI_Xaml_RoutedEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_RoutedEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -10521,6 +10853,7 @@ func buildMicrosoft_UI_Xaml_RoutedEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Route
 
 
 // Microsoft.UI.Xaml.ScalarTransition (synthetic:Microsoft_UI_Xaml_ScalarTransition)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_ScalarTransition <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10632,6 +10965,7 @@ public class Microsoft_UI_Xaml_ScalarTransition <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_ScalarTransition <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_ScalarTransition> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_ScalarTransition): CPointer<Unit> {
         value.asRaw()
@@ -10650,6 +10984,7 @@ extend Microsoft_UI_Xaml_ScalarTransition <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Xaml.SetterBase (synthetic:Microsoft_UI_Xaml_SetterBase)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_SetterBase <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10727,6 +11062,7 @@ public class Microsoft_UI_Xaml_SetterBase <: windows_interface.InterfaceWrapperB
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_SetterBase <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_SetterBase> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_SetterBase): CPointer<Unit> {
         value.asRaw()
@@ -10745,6 +11081,7 @@ extend Microsoft_UI_Xaml_SetterBase <: windows_core.HandleWinrtType<Microsoft_UI
 }
 
 // Microsoft.UI.Xaml.SetterBaseCollection (synthetic:Microsoft_UI_Xaml_SetterBaseCollection)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_SetterBaseCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10840,6 +11177,7 @@ public class Microsoft_UI_Xaml_SetterBaseCollection <: windows_interface.Interfa
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_SetterBaseCollection <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_SetterBaseCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_SetterBaseCollection): CPointer<Unit> {
         value.asRaw()
@@ -10858,6 +11196,7 @@ extend Microsoft_UI_Xaml_SetterBaseCollection <: windows_core.HandleWinrtType<Mi
 }
 
 // Microsoft.UI.Xaml.Shapes.Ellipse (synthetic:Microsoft_UI_Xaml_Shapes_Ellipse)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 public class Microsoft_UI_Xaml_Shapes_Ellipse <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -11004,6 +11343,7 @@ public class Microsoft_UI_Xaml_Shapes_Ellipse <: windows_interface.InterfaceWrap
     }
 }
 
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 extend Microsoft_UI_Xaml_Shapes_Ellipse <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Shapes_Ellipse> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Shapes_Ellipse): CPointer<Unit> {
         value.asRaw()
@@ -11022,11 +11362,13 @@ extend Microsoft_UI_Xaml_Shapes_Ellipse <: windows_core.HandleWinrtType<Microsof
 }
 
 // Microsoft.UI.Xaml.Shapes.IEllipse (synthetic:Microsoft_UI_Xaml_Shapes_IEllipse)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 @Interface["805c39aa-fa8a-5e0b-9847-4ab81b42a3df", "Microsoft.UI.Xaml.Shapes.IEllipse"]
 public interface Microsoft_UI_Xaml_Shapes_IEllipse <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Shapes.ILine (synthetic:Microsoft_UI_Xaml_Shapes_ILine)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 @Interface["507b3858-af7e-559b-a87e-4cc6a5d8ba96", "Microsoft.UI.Xaml.Shapes.ILine"]
 public interface Microsoft_UI_Xaml_Shapes_ILine <: IInspectable {
     func X1(value: CPointer<Float64>): Int32
@@ -11040,6 +11382,7 @@ public interface Microsoft_UI_Xaml_Shapes_ILine <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Shapes.ILineStatics (synthetic:Microsoft_UI_Xaml_Shapes_ILineStatics)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 @Interface["a425bf93-f1f3-5dcb-997e-b6a26f7ae8c0", "Microsoft.UI.Xaml.Shapes.ILineStatics", "X1Property.value=Com;Y1Property.value=Com;X2Property.value=Com;Y2Property.value=Com"]
 public interface Microsoft_UI_Xaml_Shapes_ILineStatics <: IInspectable {
     func X1Property(value: CPointer<CPointer<Unit>>): Int32
@@ -11049,6 +11392,7 @@ public interface Microsoft_UI_Xaml_Shapes_ILineStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Shapes.IRectangle (synthetic:Microsoft_UI_Xaml_Shapes_IRectangle)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 @Interface["bf7d30b9-152c-556e-9f10-d0b7eba4e52f", "Microsoft.UI.Xaml.Shapes.IRectangle"]
 public interface Microsoft_UI_Xaml_Shapes_IRectangle <: IInspectable {
     func RadiusX(value: CPointer<Float64>): Int32
@@ -11058,6 +11402,7 @@ public interface Microsoft_UI_Xaml_Shapes_IRectangle <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Shapes.IRectangleStatics (synthetic:Microsoft_UI_Xaml_Shapes_IRectangleStatics)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 @Interface["3cc3cc79-c332-5ad0-8743-1f1b1e670a86", "Microsoft.UI.Xaml.Shapes.IRectangleStatics", "RadiusXProperty.value=Com;RadiusYProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Shapes_IRectangleStatics <: IInspectable {
     func RadiusXProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -11065,6 +11410,7 @@ public interface Microsoft_UI_Xaml_Shapes_IRectangleStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Shapes.IShape (synthetic:Microsoft_UI_Xaml_Shapes_IShape)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 @Interface["9941aad3-6af2-5ba2-9085-8506d5f2485e", "Microsoft.UI.Xaml.Shapes.IShape", "Fill.value=Com;Stroke.value=Com;StrokeDashArray.value=Com;GeometryTransform.value=Com;GetAlphaMask.result=Com"]
 public interface Microsoft_UI_Xaml_Shapes_IShape <: IInspectable {
     func Fill(value: CPointer<CPointer<Unit>>): Int32
@@ -11094,12 +11440,14 @@ public interface Microsoft_UI_Xaml_Shapes_IShape <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Shapes.IShapeFactory (synthetic:Microsoft_UI_Xaml_Shapes_IShapeFactory)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 @Interface["4fecafaf-8265-5252-ba5c-f43639f974a5", "Microsoft.UI.Xaml.Shapes.IShapeFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Shapes_IShapeFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Shapes.IShapeStatics (synthetic:Microsoft_UI_Xaml_Shapes_IShapeStatics)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 @Interface["ea407c43-8a09-587a-958a-4dd17d217ce1", "Microsoft.UI.Xaml.Shapes.IShapeStatics", "FillProperty.value=Com;StrokeProperty.value=Com;StrokeMiterLimitProperty.value=Com;StrokeThicknessProperty.value=Com;StrokeStartLineCapProperty.value=Com;StrokeEndLineCapProperty.value=Com;StrokeLineJoinProperty.value=Com;StrokeDashOffsetProperty.value=Com;StrokeDashCapProperty.value=Com;StrokeDashArrayProperty.value=Com;StretchProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Shapes_IShapeStatics <: IInspectable {
     func FillProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -11116,6 +11464,7 @@ public interface Microsoft_UI_Xaml_Shapes_IShapeStatics <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Shapes.Line (synthetic:Microsoft_UI_Xaml_Shapes_Line)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 public class Microsoft_UI_Xaml_Shapes_Line <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -11394,6 +11743,7 @@ public class Microsoft_UI_Xaml_Shapes_Line <: windows_interface.InterfaceWrapper
     }
 }
 
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 extend Microsoft_UI_Xaml_Shapes_Line <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Shapes_Line> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Shapes_Line): CPointer<Unit> {
         value.asRaw()
@@ -11412,6 +11762,7 @@ extend Microsoft_UI_Xaml_Shapes_Line <: windows_core.HandleWinrtType<Microsoft_U
 }
 
 // Microsoft.UI.Xaml.Shapes.Rectangle (synthetic:Microsoft_UI_Xaml_Shapes_Rectangle)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 public class Microsoft_UI_Xaml_Shapes_Rectangle <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -11624,6 +11975,7 @@ public class Microsoft_UI_Xaml_Shapes_Rectangle <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 extend Microsoft_UI_Xaml_Shapes_Rectangle <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Shapes_Rectangle> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Shapes_Rectangle): CPointer<Unit> {
         value.asRaw()
@@ -11642,6 +11994,7 @@ extend Microsoft_UI_Xaml_Shapes_Rectangle <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Xaml.Shapes.Shape (synthetic:Microsoft_UI_Xaml_Shapes_Shape)
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 public class Microsoft_UI_Xaml_Shapes_Shape <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12215,6 +12568,7 @@ public class Microsoft_UI_Xaml_Shapes_Shape <: windows_interface.InterfaceWrappe
     }
 }
 
+@When[Microsoft_UI_Xaml_Shapes == "on"]
 extend Microsoft_UI_Xaml_Shapes_Shape <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Shapes_Shape> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Shapes_Shape): CPointer<Unit> {
         value.asRaw()
@@ -12233,6 +12587,7 @@ extend Microsoft_UI_Xaml_Shapes_Shape <: windows_core.HandleWinrtType<Microsoft_
 }
 
 // Microsoft.UI.Xaml.SizeChangedEventArgs (synthetic:Microsoft_UI_Xaml_SizeChangedEventArgs)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_SizeChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12322,6 +12677,7 @@ public class Microsoft_UI_Xaml_SizeChangedEventArgs <: windows_interface.Interfa
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_SizeChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_SizeChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_SizeChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -12340,6 +12696,7 @@ extend Microsoft_UI_Xaml_SizeChangedEventArgs <: windows_core.HandleWinrtType<Mi
 }
 
 // Microsoft.UI.Xaml.SizeChangedEventHandler (synthetic:Microsoft_UI_Xaml_SizeChangedEventHandler)
+@When[Microsoft_UI_Xaml == "on"]
 @C
 public struct Microsoft_UI_Xaml_SizeChangedEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -12347,6 +12704,7 @@ public struct Microsoft_UI_Xaml_SizeChangedEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public open class Microsoft_UI_Xaml_SizeChangedEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12414,18 +12772,22 @@ public open class Microsoft_UI_Xaml_SizeChangedEventHandler <: windows_interface
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_SizeChangedEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_SizeChangedEventHandler> {}
 
+@When[Microsoft_UI_Xaml == "on"]
 private class OwnedMicrosoft_UI_Xaml_SizeChangedEventHandler <: Microsoft_UI_Xaml_SizeChangedEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public interface Microsoft_UI_Xaml_SizeChangedEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public interface Microsoft_UI_Xaml_SizeChangedEventHandlerInvoker <: Microsoft_UI_Xaml_SizeChangedEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -12443,6 +12805,7 @@ public interface Microsoft_UI_Xaml_SizeChangedEventHandlerInvoker <: Microsoft_U
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 private class Microsoft_UI_Xaml_SizeChangedEventHandlerBox <: Microsoft_UI_Xaml_SizeChangedEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_SizeChangedEventHandlerVtbl>
@@ -12480,6 +12843,7 @@ private class Microsoft_UI_Xaml_SizeChangedEventHandlerBox <: Microsoft_UI_Xaml_
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 func buildMicrosoft_UI_Xaml_SizeChangedEventHandlerBoxVtbl(): Microsoft_UI_Xaml_SizeChangedEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_SizeChangedEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -12496,6 +12860,7 @@ func buildMicrosoft_UI_Xaml_SizeChangedEventHandlerBoxVtbl(): Microsoft_UI_Xaml_
 
 
 // Microsoft.UI.Xaml.Style (synthetic:Microsoft_UI_Xaml_Style)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_Style <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12666,6 +13031,7 @@ public class Microsoft_UI_Xaml_Style <: windows_interface.InterfaceWrapperBase &
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_Style <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Style> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Style): CPointer<Unit> {
         value.asRaw()
@@ -12684,6 +13050,7 @@ extend Microsoft_UI_Xaml_Style <: windows_core.HandleWinrtType<Microsoft_UI_Xaml
 }
 
 // Microsoft.UI.Xaml.TargetPropertyPath (synthetic:Microsoft_UI_Xaml_TargetPropertyPath)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_TargetPropertyPath <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12819,6 +13186,7 @@ public class Microsoft_UI_Xaml_TargetPropertyPath <: windows_interface.Interface
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_TargetPropertyPath <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_TargetPropertyPath> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_TargetPropertyPath): CPointer<Unit> {
         value.asRaw()
@@ -12837,6 +13205,7 @@ extend Microsoft_UI_Xaml_TargetPropertyPath <: windows_core.HandleWinrtType<Micr
 }
 
 // Microsoft.UI.Xaml.TextAlignment (synthetic:Microsoft_UI_Xaml_TextAlignment)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_TextAlignment {
     public let value: Int32
     public init() {
@@ -12846,15 +13215,23 @@ public struct Microsoft_UI_Xaml_TextAlignment {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextAlignment_Center = Microsoft_UI_Xaml_TextAlignment(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextAlignment_Left = Microsoft_UI_Xaml_TextAlignment(1)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextAlignment_Start = Microsoft_UI_Xaml_TextAlignment(1)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextAlignment_Right = Microsoft_UI_Xaml_TextAlignment(2)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextAlignment_End = Microsoft_UI_Xaml_TextAlignment(2)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextAlignment_Justify = Microsoft_UI_Xaml_TextAlignment(3)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextAlignment_DetectFromContent = Microsoft_UI_Xaml_TextAlignment(4)
 
 // Microsoft.UI.Xaml.TextLineBounds (synthetic:Microsoft_UI_Xaml_TextLineBounds)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_TextLineBounds {
     public let value: Int32
     public init() {
@@ -12864,12 +13241,17 @@ public struct Microsoft_UI_Xaml_TextLineBounds {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextLineBounds_Full = Microsoft_UI_Xaml_TextLineBounds(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextLineBounds_TrimToCapHeight = Microsoft_UI_Xaml_TextLineBounds(1)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextLineBounds_TrimToBaseline = Microsoft_UI_Xaml_TextLineBounds(2)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextLineBounds_Tight = Microsoft_UI_Xaml_TextLineBounds(3)
 
 // Microsoft.UI.Xaml.TextReadingOrder (synthetic:Microsoft_UI_Xaml_TextReadingOrder)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_TextReadingOrder {
     public let value: Int32
     public init() {
@@ -12879,11 +13261,15 @@ public struct Microsoft_UI_Xaml_TextReadingOrder {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextReadingOrder_Default = Microsoft_UI_Xaml_TextReadingOrder(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextReadingOrder_UseFlowDirection = Microsoft_UI_Xaml_TextReadingOrder(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextReadingOrder_DetectFromContent = Microsoft_UI_Xaml_TextReadingOrder(1)
 
 // Microsoft.UI.Xaml.TextTrimming (synthetic:Microsoft_UI_Xaml_TextTrimming)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_TextTrimming {
     public let value: Int32
     public init() {
@@ -12893,12 +13279,17 @@ public struct Microsoft_UI_Xaml_TextTrimming {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextTrimming_None = Microsoft_UI_Xaml_TextTrimming(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextTrimming_CharacterEllipsis = Microsoft_UI_Xaml_TextTrimming(1)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextTrimming_WordEllipsis = Microsoft_UI_Xaml_TextTrimming(2)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextTrimming_Clip = Microsoft_UI_Xaml_TextTrimming(3)
 
 // Microsoft.UI.Xaml.TextWrapping (synthetic:Microsoft_UI_Xaml_TextWrapping)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_TextWrapping {
     public let value: Int32
     public init() {
@@ -12908,11 +13299,15 @@ public struct Microsoft_UI_Xaml_TextWrapping {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextWrapping_NoWrap = Microsoft_UI_Xaml_TextWrapping(1)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextWrapping_Wrap = Microsoft_UI_Xaml_TextWrapping(2)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_TextWrapping_WrapWholeWords = Microsoft_UI_Xaml_TextWrapping(3)
 
 // Microsoft.UI.Xaml.Thickness (synthetic:Microsoft_UI_Xaml_Thickness)
+@When[Microsoft_UI_Xaml == "on"]
 @C
 public struct Microsoft_UI_Xaml_Thickness {
     public var Left: Float64 = 0.0f64
@@ -12922,6 +13317,7 @@ public struct Microsoft_UI_Xaml_Thickness {
 }
 
 // Microsoft.UI.Xaml.TriggerBase (synthetic:Microsoft_UI_Xaml_TriggerBase)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_TriggerBase <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12987,6 +13383,7 @@ public class Microsoft_UI_Xaml_TriggerBase <: windows_interface.InterfaceWrapper
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_TriggerBase <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_TriggerBase> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_TriggerBase): CPointer<Unit> {
         value.asRaw()
@@ -13005,6 +13402,7 @@ extend Microsoft_UI_Xaml_TriggerBase <: windows_core.HandleWinrtType<Microsoft_U
 }
 
 // Microsoft.UI.Xaml.TriggerCollection (synthetic:Microsoft_UI_Xaml_TriggerCollection)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_TriggerCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -13232,6 +13630,7 @@ public class Microsoft_UI_Xaml_TriggerCollection <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_TriggerCollection <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_TriggerCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_TriggerCollection): CPointer<Unit> {
         value.asRaw()
@@ -13250,6 +13649,7 @@ extend Microsoft_UI_Xaml_TriggerCollection <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Xaml.UIElement (synthetic:Microsoft_UI_Xaml_UIElement)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_UIElement <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -16822,6 +17222,7 @@ public class Microsoft_UI_Xaml_UIElement <: windows_interface.InterfaceWrapperBa
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_UIElement <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_UIElement> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_UIElement): CPointer<Unit> {
         value.asRaw()
@@ -16840,6 +17241,7 @@ extend Microsoft_UI_Xaml_UIElement <: windows_core.HandleWinrtType<Microsoft_UI_
 }
 
 // Microsoft.UI.Xaml.UnhandledExceptionEventArgs (synthetic:Microsoft_UI_Xaml_UnhandledExceptionEventArgs)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_UnhandledExceptionEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -16945,6 +17347,7 @@ public class Microsoft_UI_Xaml_UnhandledExceptionEventArgs <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_UnhandledExceptionEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_UnhandledExceptionEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_UnhandledExceptionEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -16963,6 +17366,7 @@ extend Microsoft_UI_Xaml_UnhandledExceptionEventArgs <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Xaml.UnhandledExceptionEventHandler (synthetic:Microsoft_UI_Xaml_UnhandledExceptionEventHandler)
+@When[Microsoft_UI_Xaml == "on"]
 @C
 public struct Microsoft_UI_Xaml_UnhandledExceptionEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -16970,6 +17374,7 @@ public struct Microsoft_UI_Xaml_UnhandledExceptionEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public open class Microsoft_UI_Xaml_UnhandledExceptionEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -17037,18 +17442,22 @@ public open class Microsoft_UI_Xaml_UnhandledExceptionEventHandler <: windows_in
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_UnhandledExceptionEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_UnhandledExceptionEventHandler> {}
 
+@When[Microsoft_UI_Xaml == "on"]
 private class OwnedMicrosoft_UI_Xaml_UnhandledExceptionEventHandler <: Microsoft_UI_Xaml_UnhandledExceptionEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public interface Microsoft_UI_Xaml_UnhandledExceptionEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public interface Microsoft_UI_Xaml_UnhandledExceptionEventHandlerInvoker <: Microsoft_UI_Xaml_UnhandledExceptionEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -17066,6 +17475,7 @@ public interface Microsoft_UI_Xaml_UnhandledExceptionEventHandlerInvoker <: Micr
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 private class Microsoft_UI_Xaml_UnhandledExceptionEventHandlerBox <: Microsoft_UI_Xaml_UnhandledExceptionEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_UnhandledExceptionEventHandlerVtbl>
@@ -17103,6 +17513,7 @@ private class Microsoft_UI_Xaml_UnhandledExceptionEventHandlerBox <: Microsoft_U
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 func buildMicrosoft_UI_Xaml_UnhandledExceptionEventHandlerBoxVtbl(): Microsoft_UI_Xaml_UnhandledExceptionEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_UnhandledExceptionEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -17119,6 +17530,7 @@ func buildMicrosoft_UI_Xaml_UnhandledExceptionEventHandlerBoxVtbl(): Microsoft_U
 
 
 // Microsoft.UI.Xaml.Vector3Transition (synthetic:Microsoft_UI_Xaml_Vector3Transition)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_Vector3Transition <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -17249,6 +17661,7 @@ public class Microsoft_UI_Xaml_Vector3Transition <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_Vector3Transition <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Vector3Transition> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Vector3Transition): CPointer<Unit> {
         value.asRaw()
@@ -17267,6 +17680,7 @@ extend Microsoft_UI_Xaml_Vector3Transition <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Xaml.Vector3TransitionComponents (synthetic:Microsoft_UI_Xaml_Vector3TransitionComponents)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_Vector3TransitionComponents {
     public let value: UInt32
     public init() {
@@ -17291,11 +17705,15 @@ public struct Microsoft_UI_Xaml_Vector3TransitionComponents {
         return Microsoft_UI_Xaml_Vector3TransitionComponents(!value)
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_Vector3TransitionComponents_X = Microsoft_UI_Xaml_Vector3TransitionComponents(1)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_Vector3TransitionComponents_Y = Microsoft_UI_Xaml_Vector3TransitionComponents(2)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_Vector3TransitionComponents_Z = Microsoft_UI_Xaml_Vector3TransitionComponents(4)
 
 // Microsoft.UI.Xaml.VerticalAlignment (synthetic:Microsoft_UI_Xaml_VerticalAlignment)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_VerticalAlignment {
     public let value: Int32
     public init() {
@@ -17305,12 +17723,17 @@ public struct Microsoft_UI_Xaml_VerticalAlignment {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_VerticalAlignment_Top = Microsoft_UI_Xaml_VerticalAlignment(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_VerticalAlignment_Center = Microsoft_UI_Xaml_VerticalAlignment(1)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_VerticalAlignment_Bottom = Microsoft_UI_Xaml_VerticalAlignment(2)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_VerticalAlignment_Stretch = Microsoft_UI_Xaml_VerticalAlignment(3)
 
 // Microsoft.UI.Xaml.Visibility (synthetic:Microsoft_UI_Xaml_Visibility)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_Visibility {
     public let value: Int32
     public init() {
@@ -17320,16 +17743,20 @@ public struct Microsoft_UI_Xaml_Visibility {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_Visibility_Visible = Microsoft_UI_Xaml_Visibility(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_Visibility_Collapsed = Microsoft_UI_Xaml_Visibility(1)
 
 // Microsoft.UI.Xaml.WinUIContract (synthetic:Microsoft_UI_Xaml_WinUIContract)
+@When[Microsoft_UI_Xaml == "on"]
 @C
 public struct Microsoft_UI_Xaml_WinUIContract {
     public var reserved: Int32 = 0
 }
 
 // Microsoft.UI.Xaml.Window (synthetic:Microsoft_UI_Xaml_Window)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_Window <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -17706,6 +18133,7 @@ public class Microsoft_UI_Xaml_Window <: windows_interface.InterfaceWrapperBase 
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_Window <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Window> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Window): CPointer<Unit> {
         value.asRaw()
@@ -17724,6 +18152,7 @@ extend Microsoft_UI_Xaml_Window <: windows_core.HandleWinrtType<Microsoft_UI_Xam
 }
 
 // Microsoft.UI.Xaml.WindowActivatedEventArgs (synthetic:Microsoft_UI_Xaml_WindowActivatedEventArgs)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_WindowActivatedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -17813,6 +18242,7 @@ public class Microsoft_UI_Xaml_WindowActivatedEventArgs <: windows_interface.Int
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_WindowActivatedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_WindowActivatedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_WindowActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -17831,6 +18261,7 @@ extend Microsoft_UI_Xaml_WindowActivatedEventArgs <: windows_core.HandleWinrtTyp
 }
 
 // Microsoft.UI.Xaml.WindowActivationState (synthetic:Microsoft_UI_Xaml_WindowActivationState)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_WindowActivationState {
     public let value: Int32
     public init() {
@@ -17840,11 +18271,15 @@ public struct Microsoft_UI_Xaml_WindowActivationState {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_WindowActivationState_CodeActivated = Microsoft_UI_Xaml_WindowActivationState(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_WindowActivationState_Deactivated = Microsoft_UI_Xaml_WindowActivationState(1)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_WindowActivationState_PointerActivated = Microsoft_UI_Xaml_WindowActivationState(2)
 
 // Microsoft.UI.Xaml.WindowEventArgs (synthetic:Microsoft_UI_Xaml_WindowEventArgs)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_WindowEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -17922,6 +18357,7 @@ public class Microsoft_UI_Xaml_WindowEventArgs <: windows_interface.InterfaceWra
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_WindowEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_WindowEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_WindowEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -17940,6 +18376,7 @@ extend Microsoft_UI_Xaml_WindowEventArgs <: windows_core.HandleWinrtType<Microso
 }
 
 // Microsoft.UI.Xaml.WindowSizeChangedEventArgs (synthetic:Microsoft_UI_Xaml_WindowSizeChangedEventArgs)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_WindowSizeChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18029,6 +18466,7 @@ public class Microsoft_UI_Xaml_WindowSizeChangedEventArgs <: windows_interface.I
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_WindowSizeChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_WindowSizeChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_WindowSizeChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -18047,6 +18485,7 @@ extend Microsoft_UI_Xaml_WindowSizeChangedEventArgs <: windows_core.HandleWinrtT
 }
 
 // Microsoft.UI.Xaml.WindowVisibilityChangedEventArgs (synthetic:Microsoft_UI_Xaml_WindowVisibilityChangedEventArgs)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_WindowVisibilityChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18136,6 +18575,7 @@ public class Microsoft_UI_Xaml_WindowVisibilityChangedEventArgs <: windows_inter
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_WindowVisibilityChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_WindowVisibilityChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_WindowVisibilityChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -18154,12 +18594,14 @@ extend Microsoft_UI_Xaml_WindowVisibilityChangedEventArgs <: windows_core.Handle
 }
 
 // Microsoft.UI.Xaml.XamlContract (synthetic:Microsoft_UI_Xaml_XamlContract)
+@When[Microsoft_UI_Xaml == "on"]
 @C
 public struct Microsoft_UI_Xaml_XamlContract {
     public var reserved: Int32 = 0
 }
 
 // Microsoft.UI.Xaml.XamlResourceReferenceFailedEventArgs (synthetic:Microsoft_UI_Xaml_XamlResourceReferenceFailedEventArgs)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_XamlResourceReferenceFailedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18234,6 +18676,7 @@ public class Microsoft_UI_Xaml_XamlResourceReferenceFailedEventArgs <: windows_i
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_XamlResourceReferenceFailedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_XamlResourceReferenceFailedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_XamlResourceReferenceFailedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -18252,6 +18695,7 @@ extend Microsoft_UI_Xaml_XamlResourceReferenceFailedEventArgs <: windows_core.Ha
 }
 
 // Microsoft.UI.Xaml.XamlRoot (synthetic:Microsoft_UI_Xaml_XamlRoot)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_XamlRoot <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18403,6 +18847,7 @@ public class Microsoft_UI_Xaml_XamlRoot <: windows_interface.InterfaceWrapperBas
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_XamlRoot <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_XamlRoot> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_XamlRoot): CPointer<Unit> {
         value.asRaw()
@@ -18421,6 +18866,7 @@ extend Microsoft_UI_Xaml_XamlRoot <: windows_core.HandleWinrtType<Microsoft_UI_X
 }
 
 // Microsoft.UI.Xaml.XamlRootChangedEventArgs (synthetic:Microsoft_UI_Xaml_XamlRootChangedEventArgs)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_XamlRootChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18479,6 +18925,7 @@ public class Microsoft_UI_Xaml_XamlRootChangedEventArgs <: windows_interface.Int
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_XamlRootChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_XamlRootChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_XamlRootChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -18497,6 +18944,7 @@ extend Microsoft_UI_Xaml_XamlRootChangedEventArgs <: windows_core.HandleWinrtTyp
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.IResourceCandidate (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceCandidate)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 @Interface["6c54bc0c-ef1e-57b8-b478-34fece737356", "Microsoft.Windows.ApplicationModel.Resources.IResourceCandidate", "ValueAsString.value=HString;ValueAsBytes.value=Array<UInt8>;QualifierValues.value=Com"]
 public interface Microsoft_Windows_ApplicationModel_Resources_IResourceCandidate <: IInspectable {
     func ValueAsString(value: CPointer<CPointer<Unit>>): Int32
@@ -18506,6 +18954,7 @@ public interface Microsoft_Windows_ApplicationModel_Resources_IResourceCandidate
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.IResourceCandidateFactory (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceCandidateFactory)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 @Interface["bb2b30f8-c19b-5f43-88d9-69ad728a32f4", "Microsoft.Windows.ApplicationModel.Resources.IResourceCandidateFactory", "CreateInstance.value=Com;CreateInstance2.value=Com"]
 public interface Microsoft_Windows_ApplicationModel_Resources_IResourceCandidateFactory <: IInspectable {
     func CreateInstance(kind: Int32, data: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
@@ -18513,17 +18962,20 @@ public interface Microsoft_Windows_ApplicationModel_Resources_IResourceCandidate
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.IResourceContext (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceContext)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 @Interface["96fb48dc-f77d-55ff-af12-34861e3d4939", "Microsoft.Windows.ApplicationModel.Resources.IResourceContext", "QualifierValues.value=Com"]
 public interface Microsoft_Windows_ApplicationModel_Resources_IResourceContext <: IInspectable {
     func QualifierValues(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.IResourceContext2 (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceContext2)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 @Interface["7a3b1158-798c-5949-969d-03510b9ce6ca", "Microsoft.Windows.ApplicationModel.Resources.IResourceContext2"]
 public interface Microsoft_Windows_ApplicationModel_Resources_IResourceContext2 <: IInspectable {
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.IResourceManager (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceManager)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 @Interface["ac2291ef-81be-5c99-a0ae-bcee0180b8a8", "Microsoft.Windows.ApplicationModel.Resources.IResourceManager", "MainResourceMap.value=Com;CreateResourceContext.result=Com"]
 public interface Microsoft_Windows_ApplicationModel_Resources_IResourceManager <: IInspectable {
     func MainResourceMap(value: CPointer<CPointer<Unit>>): Int32
@@ -18533,17 +18985,20 @@ public interface Microsoft_Windows_ApplicationModel_Resources_IResourceManager <
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.IResourceManager2 (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceManager2)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 @Interface["7ec10160-a154-5c42-8268-30e306b1f585", "Microsoft.Windows.ApplicationModel.Resources.IResourceManager2"]
 public interface Microsoft_Windows_ApplicationModel_Resources_IResourceManager2 <: IInspectable {
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.IResourceManagerFactory (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceManagerFactory)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 @Interface["d6acf18f-458a-535b-a5c4-ac2dc4e49099", "Microsoft.Windows.ApplicationModel.Resources.IResourceManagerFactory", "CreateInstance.value=Com"]
 public interface Microsoft_Windows_ApplicationModel_Resources_IResourceManagerFactory <: IInspectable {
     func CreateInstance(fileName: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.IResourceMap (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceMap)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 @Interface["4abbd9bc-df4e-5c7b-812c-7e7bb0c22377", "Microsoft.Windows.ApplicationModel.Resources.IResourceMap", "GetSubtree.result=Com;TryGetSubtree.result=Com;GetValue.result=Com;GetValueWithContext.result=Com;GetValueByIndex.result=Com;GetValueByIndexWithContext.result=Com;TryGetValue.result=Com;TryGetValueWithContext.result=Com"]
 public interface Microsoft_Windows_ApplicationModel_Resources_IResourceMap <: IInspectable {
     func ResourceCount(value: CPointer<UInt32>): Int32
@@ -18558,6 +19013,7 @@ public interface Microsoft_Windows_ApplicationModel_Resources_IResourceMap <: II
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.IResourceNotFoundEventArgs (synthetic:Microsoft_Windows_ApplicationModel_Resources_IResourceNotFoundEventArgs)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 @Interface["64abb08b-e77d-5b26-830f-15941e0e8200", "Microsoft.Windows.ApplicationModel.Resources.IResourceNotFoundEventArgs", "Context.value=Com;Name.value=HString"]
 public interface Microsoft_Windows_ApplicationModel_Resources_IResourceNotFoundEventArgs <: IInspectable {
     func Context(value: CPointer<CPointer<Unit>>): Int32
@@ -18566,12 +19022,14 @@ public interface Microsoft_Windows_ApplicationModel_Resources_IResourceNotFoundE
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.MrtCoreContract (synthetic:Microsoft_Windows_ApplicationModel_Resources_MrtCoreContract)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 @C
 public struct Microsoft_Windows_ApplicationModel_Resources_MrtCoreContract {
     public var reserved: Int32 = 0
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.ResourceCandidate (synthetic:Microsoft_Windows_ApplicationModel_Resources_ResourceCandidate)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 public class Microsoft_Windows_ApplicationModel_Resources_ResourceCandidate <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18745,6 +19203,7 @@ public class Microsoft_Windows_ApplicationModel_Resources_ResourceCandidate <: w
     }
 }
 
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 extend Microsoft_Windows_ApplicationModel_Resources_ResourceCandidate <: windows_core.HandleWinrtType<Microsoft_Windows_ApplicationModel_Resources_ResourceCandidate> {
     public static func intoWinrtHandle(value: Microsoft_Windows_ApplicationModel_Resources_ResourceCandidate): CPointer<Unit> {
         value.asRaw()
@@ -18763,6 +19222,7 @@ extend Microsoft_Windows_ApplicationModel_Resources_ResourceCandidate <: windows
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.ResourceCandidateKind (synthetic:Microsoft_Windows_ApplicationModel_Resources_ResourceCandidateKind)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 public struct Microsoft_Windows_ApplicationModel_Resources_ResourceCandidateKind {
     public let value: Int32
     public init() {
@@ -18772,12 +19232,17 @@ public struct Microsoft_Windows_ApplicationModel_Resources_ResourceCandidateKind
         this.value = value
     }
 }
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 public let Microsoft_Windows_ApplicationModel_Resources_ResourceCandidateKind_Unknown = Microsoft_Windows_ApplicationModel_Resources_ResourceCandidateKind(0)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 public let Microsoft_Windows_ApplicationModel_Resources_ResourceCandidateKind_String_ = Microsoft_Windows_ApplicationModel_Resources_ResourceCandidateKind(1)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 public let Microsoft_Windows_ApplicationModel_Resources_ResourceCandidateKind_FilePath = Microsoft_Windows_ApplicationModel_Resources_ResourceCandidateKind(2)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 public let Microsoft_Windows_ApplicationModel_Resources_ResourceCandidateKind_EmbeddedData = Microsoft_Windows_ApplicationModel_Resources_ResourceCandidateKind(3)
 
 // Microsoft.Windows.ApplicationModel.Resources.ResourceContext (synthetic:Microsoft_Windows_ApplicationModel_Resources_ResourceContext)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 public class Microsoft_Windows_ApplicationModel_Resources_ResourceContext <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18859,6 +19324,7 @@ public class Microsoft_Windows_ApplicationModel_Resources_ResourceContext <: win
     }
 }
 
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 extend Microsoft_Windows_ApplicationModel_Resources_ResourceContext <: windows_core.HandleWinrtType<Microsoft_Windows_ApplicationModel_Resources_ResourceContext> {
     public static func intoWinrtHandle(value: Microsoft_Windows_ApplicationModel_Resources_ResourceContext): CPointer<Unit> {
         value.asRaw()
@@ -18877,6 +19343,7 @@ extend Microsoft_Windows_ApplicationModel_Resources_ResourceContext <: windows_c
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.ResourceManager (synthetic:Microsoft_Windows_ApplicationModel_Resources_ResourceManager)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 public class Microsoft_Windows_ApplicationModel_Resources_ResourceManager <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19019,6 +19486,7 @@ public class Microsoft_Windows_ApplicationModel_Resources_ResourceManager <: win
     }
 }
 
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 extend Microsoft_Windows_ApplicationModel_Resources_ResourceManager <: windows_core.HandleWinrtType<Microsoft_Windows_ApplicationModel_Resources_ResourceManager> {
     public static func intoWinrtHandle(value: Microsoft_Windows_ApplicationModel_Resources_ResourceManager): CPointer<Unit> {
         value.asRaw()
@@ -19037,6 +19505,7 @@ extend Microsoft_Windows_ApplicationModel_Resources_ResourceManager <: windows_c
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.ResourceMap (synthetic:Microsoft_Windows_ApplicationModel_Resources_ResourceMap)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 public class Microsoft_Windows_ApplicationModel_Resources_ResourceMap <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19237,6 +19706,7 @@ public class Microsoft_Windows_ApplicationModel_Resources_ResourceMap <: windows
     }
 }
 
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 extend Microsoft_Windows_ApplicationModel_Resources_ResourceMap <: windows_core.HandleWinrtType<Microsoft_Windows_ApplicationModel_Resources_ResourceMap> {
     public static func intoWinrtHandle(value: Microsoft_Windows_ApplicationModel_Resources_ResourceMap): CPointer<Unit> {
         value.asRaw()
@@ -19255,6 +19725,7 @@ extend Microsoft_Windows_ApplicationModel_Resources_ResourceMap <: windows_core.
 }
 
 // Microsoft.Windows.ApplicationModel.Resources.ResourceNotFoundEventArgs (synthetic:Microsoft_Windows_ApplicationModel_Resources_ResourceNotFoundEventArgs)
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 public class Microsoft_Windows_ApplicationModel_Resources_ResourceNotFoundEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19355,6 +19826,7 @@ public class Microsoft_Windows_ApplicationModel_Resources_ResourceNotFoundEventA
     }
 }
 
+@When[Microsoft_Windows_ApplicationModel_Resources == "on"]
 extend Microsoft_Windows_ApplicationModel_Resources_ResourceNotFoundEventArgs <: windows_core.HandleWinrtType<Microsoft_Windows_ApplicationModel_Resources_ResourceNotFoundEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_Windows_ApplicationModel_Resources_ResourceNotFoundEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -19373,6 +19845,7 @@ extend Microsoft_Windows_ApplicationModel_Resources_ResourceNotFoundEventArgs <:
 }
 
 // Windows.ApplicationModel.Activation.ActivationKind (synthetic:Windows_ApplicationModel_Activation_ActivationKind)
+@When[Windows_ApplicationModel_Activation == "on"]
 public struct Windows_ApplicationModel_Activation_ActivationKind {
     public let value: Int32
     public init() {
@@ -19382,53 +19855,99 @@ public struct Windows_ApplicationModel_Activation_ActivationKind {
         this.value = value
     }
 }
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_Launch = Windows_ApplicationModel_Activation_ActivationKind(0)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_Search = Windows_ApplicationModel_Activation_ActivationKind(1)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_ShareTarget = Windows_ApplicationModel_Activation_ActivationKind(2)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_File = Windows_ApplicationModel_Activation_ActivationKind(3)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_Protocol = Windows_ApplicationModel_Activation_ActivationKind(4)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_FileOpenPicker = Windows_ApplicationModel_Activation_ActivationKind(5)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_FileSavePicker = Windows_ApplicationModel_Activation_ActivationKind(6)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_CachedFileUpdater = Windows_ApplicationModel_Activation_ActivationKind(7)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_ContactPicker = Windows_ApplicationModel_Activation_ActivationKind(8)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_Device = Windows_ApplicationModel_Activation_ActivationKind(9)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_PrintTaskSettings = Windows_ApplicationModel_Activation_ActivationKind(10)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_CameraSettings = Windows_ApplicationModel_Activation_ActivationKind(11)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_RestrictedLaunch = Windows_ApplicationModel_Activation_ActivationKind(12)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_AppointmentsProvider = Windows_ApplicationModel_Activation_ActivationKind(13)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_Contact = Windows_ApplicationModel_Activation_ActivationKind(14)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_LockScreenCall = Windows_ApplicationModel_Activation_ActivationKind(15)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_VoiceCommand = Windows_ApplicationModel_Activation_ActivationKind(16)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_LockScreen = Windows_ApplicationModel_Activation_ActivationKind(17)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_PickerReturned = Windows_ApplicationModel_Activation_ActivationKind(1000)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_WalletAction = Windows_ApplicationModel_Activation_ActivationKind(1001)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_PickFileContinuation = Windows_ApplicationModel_Activation_ActivationKind(1002)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_PickSaveFileContinuation = Windows_ApplicationModel_Activation_ActivationKind(1003)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_PickFolderContinuation = Windows_ApplicationModel_Activation_ActivationKind(1004)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_WebAuthenticationBrokerContinuation = Windows_ApplicationModel_Activation_ActivationKind(1005)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_WebAccountProvider = Windows_ApplicationModel_Activation_ActivationKind(1006)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_ComponentUI = Windows_ApplicationModel_Activation_ActivationKind(1007)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_ProtocolForResults = Windows_ApplicationModel_Activation_ActivationKind(1009)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_ToastNotification = Windows_ApplicationModel_Activation_ActivationKind(1010)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_Print3DWorkflow = Windows_ApplicationModel_Activation_ActivationKind(1011)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_DialReceiver = Windows_ApplicationModel_Activation_ActivationKind(1012)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_DevicePairing = Windows_ApplicationModel_Activation_ActivationKind(1013)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_UserDataAccountsProvider = Windows_ApplicationModel_Activation_ActivationKind(1014)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_FilePickerExperience = Windows_ApplicationModel_Activation_ActivationKind(1015)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_LockScreenComponent = Windows_ApplicationModel_Activation_ActivationKind(1016)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_ContactPanel = Windows_ApplicationModel_Activation_ActivationKind(1017)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_PrintWorkflowForegroundTask = Windows_ApplicationModel_Activation_ActivationKind(1018)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_GameUIProvider = Windows_ApplicationModel_Activation_ActivationKind(1019)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_StartupTask = Windows_ApplicationModel_Activation_ActivationKind(1020)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_CommandLineLaunch = Windows_ApplicationModel_Activation_ActivationKind(1021)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_BarcodeScannerProvider = Windows_ApplicationModel_Activation_ActivationKind(1022)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_PrintSupportJobUI = Windows_ApplicationModel_Activation_ActivationKind(1023)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_PrintSupportSettingsUI = Windows_ApplicationModel_Activation_ActivationKind(1024)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_PhoneCallActivation = Windows_ApplicationModel_Activation_ActivationKind(1025)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_VpnForeground = Windows_ApplicationModel_Activation_ActivationKind(1026)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ActivationKind_PrintSupportEnterpriseManagementUI = Windows_ApplicationModel_Activation_ActivationKind(1027)
 
 // Windows.ApplicationModel.Activation.ApplicationExecutionState (synthetic:Windows_ApplicationModel_Activation_ApplicationExecutionState)
+@When[Windows_ApplicationModel_Activation == "on"]
 public struct Windows_ApplicationModel_Activation_ApplicationExecutionState {
     public let value: Int32
     public init() {
@@ -19438,13 +19957,19 @@ public struct Windows_ApplicationModel_Activation_ApplicationExecutionState {
         this.value = value
     }
 }
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ApplicationExecutionState_NotRunning = Windows_ApplicationModel_Activation_ApplicationExecutionState(0)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ApplicationExecutionState_Running = Windows_ApplicationModel_Activation_ApplicationExecutionState(1)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ApplicationExecutionState_Suspended = Windows_ApplicationModel_Activation_ApplicationExecutionState(2)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ApplicationExecutionState_Terminated = Windows_ApplicationModel_Activation_ApplicationExecutionState(3)
+@When[Windows_ApplicationModel_Activation == "on"]
 public let Windows_ApplicationModel_Activation_ApplicationExecutionState_ClosedByUser = Windows_ApplicationModel_Activation_ApplicationExecutionState(4)
 
 // Windows.ApplicationModel.Activation.IActivatedEventArgs (synthetic:Windows_ApplicationModel_Activation_IActivatedEventArgs)
+@When[Windows_ApplicationModel_Activation == "on"]
 @Interface["cf651713-cd08-4fd8-b697-a281b6544e2e", "Windows.ApplicationModel.Activation.IActivatedEventArgs", "SplashScreen.value=Com"]
 public interface Windows_ApplicationModel_Activation_IActivatedEventArgs <: IInspectable {
     func Kind(value: CPointer<Int32>): Int32
@@ -19453,18 +19978,21 @@ public interface Windows_ApplicationModel_Activation_IActivatedEventArgs <: IIns
 }
 
 // Windows.ApplicationModel.Activation.IActivatedEventArgsWithUser (synthetic:Windows_ApplicationModel_Activation_IActivatedEventArgsWithUser)
+@When[Windows_ApplicationModel_Activation == "on"]
 @Interface["1cf09b9e-9962-4936-80ff-afc8e8ae5c8c", "Windows.ApplicationModel.Activation.IActivatedEventArgsWithUser", "User.value=Com"]
 public interface Windows_ApplicationModel_Activation_IActivatedEventArgsWithUser <: IInspectable {
     func User(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.Activation.IApplicationViewActivatedEventArgs (synthetic:Windows_ApplicationModel_Activation_IApplicationViewActivatedEventArgs)
+@When[Windows_ApplicationModel_Activation == "on"]
 @Interface["930cef4b-b829-40fc-88f4-8513e8a64738", "Windows.ApplicationModel.Activation.IApplicationViewActivatedEventArgs"]
 public interface Windows_ApplicationModel_Activation_IApplicationViewActivatedEventArgs <: IInspectable {
     func CurrentlyShownApplicationViewId(value: CPointer<Int32>): Int32
 }
 
 // Windows.ApplicationModel.Activation.ILaunchActivatedEventArgs (synthetic:Windows_ApplicationModel_Activation_ILaunchActivatedEventArgs)
+@When[Windows_ApplicationModel_Activation == "on"]
 @Interface["fbc93e26-a14a-4b4f-82b0-33bed920af52", "Windows.ApplicationModel.Activation.ILaunchActivatedEventArgs", "Arguments.value=HString;TileId.value=HString"]
 public interface Windows_ApplicationModel_Activation_ILaunchActivatedEventArgs <: IInspectable {
     func Arguments(value: CPointer<CPointer<Unit>>): Int32
@@ -19472,18 +20000,21 @@ public interface Windows_ApplicationModel_Activation_ILaunchActivatedEventArgs <
 }
 
 // Windows.ApplicationModel.Activation.ILaunchActivatedEventArgs2 (synthetic:Windows_ApplicationModel_Activation_ILaunchActivatedEventArgs2)
+@When[Windows_ApplicationModel_Activation == "on"]
 @Interface["0fd37ebc-9dc9-46b5-9ace-bd95d4565345", "Windows.ApplicationModel.Activation.ILaunchActivatedEventArgs2", "TileActivatedInfo.value=Com"]
 public interface Windows_ApplicationModel_Activation_ILaunchActivatedEventArgs2 <: IInspectable {
     func TileActivatedInfo(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.Activation.IPrelaunchActivatedEventArgs (synthetic:Windows_ApplicationModel_Activation_IPrelaunchActivatedEventArgs)
+@When[Windows_ApplicationModel_Activation == "on"]
 @Interface["0c44717b-19f7-48d6-b046-cf22826eaa74", "Windows.ApplicationModel.Activation.IPrelaunchActivatedEventArgs"]
 public interface Windows_ApplicationModel_Activation_IPrelaunchActivatedEventArgs <: IInspectable {
     func PrelaunchActivated(value: CPointer<Bool>): Int32
 }
 
 // Windows.ApplicationModel.Activation.ISplashScreen (synthetic:Windows_ApplicationModel_Activation_ISplashScreen)
+@When[Windows_ApplicationModel_Activation == "on"]
 @Interface["ca4d975c-d4d6-43f0-97c0-0833c6391c24", "Windows.ApplicationModel.Activation.ISplashScreen"]
 public interface Windows_ApplicationModel_Activation_ISplashScreen <: IInspectable {
     func ImageLocation(value: CPointer<Windows_Foundation_Rect>): Int32
@@ -19492,18 +20023,21 @@ public interface Windows_ApplicationModel_Activation_ISplashScreen <: IInspectab
 }
 
 // Windows.ApplicationModel.Activation.ITileActivatedInfo (synthetic:Windows_ApplicationModel_Activation_ITileActivatedInfo)
+@When[Windows_ApplicationModel_Activation == "on"]
 @Interface["80e4a3b1-3980-4f17-b738-89194e0b8f65", "Windows.ApplicationModel.Activation.ITileActivatedInfo", "RecentlyShownNotifications.value=Com"]
 public interface Windows_ApplicationModel_Activation_ITileActivatedInfo <: IInspectable {
     func RecentlyShownNotifications(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.Activation.IViewSwitcherProvider (synthetic:Windows_ApplicationModel_Activation_IViewSwitcherProvider)
+@When[Windows_ApplicationModel_Activation == "on"]
 @Interface["33f288a6-5c2c-4d27-bac7-7536088f1219", "Windows.ApplicationModel.Activation.IViewSwitcherProvider", "ViewSwitcher.value=Com"]
 public interface Windows_ApplicationModel_Activation_IViewSwitcherProvider <: IInspectable {
     func ViewSwitcher(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.Activation.LaunchActivatedEventArgs (synthetic:Windows_ApplicationModel_Activation_LaunchActivatedEventArgs)
+@When[Windows_ApplicationModel_Activation == "on"]
 public class Windows_ApplicationModel_Activation_LaunchActivatedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19636,6 +20170,7 @@ public class Windows_ApplicationModel_Activation_LaunchActivatedEventArgs <: win
     }
 }
 
+@When[Windows_ApplicationModel_Activation == "on"]
 extend Windows_ApplicationModel_Activation_LaunchActivatedEventArgs <: windows_core.HandleWinrtType<Windows_ApplicationModel_Activation_LaunchActivatedEventArgs> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_Activation_LaunchActivatedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -19654,6 +20189,7 @@ extend Windows_ApplicationModel_Activation_LaunchActivatedEventArgs <: windows_c
 }
 
 // Windows.ApplicationModel.Activation.SplashScreen (synthetic:Windows_ApplicationModel_Activation_SplashScreen)
+@When[Windows_ApplicationModel_Activation == "on"]
 public class Windows_ApplicationModel_Activation_SplashScreen <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19744,6 +20280,7 @@ public class Windows_ApplicationModel_Activation_SplashScreen <: windows_interfa
     }
 }
 
+@When[Windows_ApplicationModel_Activation == "on"]
 extend Windows_ApplicationModel_Activation_SplashScreen <: windows_core.HandleWinrtType<Windows_ApplicationModel_Activation_SplashScreen> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_Activation_SplashScreen): CPointer<Unit> {
         value.asRaw()
@@ -19762,6 +20299,7 @@ extend Windows_ApplicationModel_Activation_SplashScreen <: windows_core.HandleWi
 }
 
 // Windows.ApplicationModel.Activation.TileActivatedInfo (synthetic:Windows_ApplicationModel_Activation_TileActivatedInfo)
+@When[Windows_ApplicationModel_Activation == "on"]
 public class Windows_ApplicationModel_Activation_TileActivatedInfo <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19836,6 +20374,7 @@ public class Windows_ApplicationModel_Activation_TileActivatedInfo <: windows_in
     }
 }
 
+@When[Windows_ApplicationModel_Activation == "on"]
 extend Windows_ApplicationModel_Activation_TileActivatedInfo <: windows_core.HandleWinrtType<Windows_ApplicationModel_Activation_TileActivatedInfo> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_Activation_TileActivatedInfo): CPointer<Unit> {
         value.asRaw()
@@ -19854,6 +20393,7 @@ extend Windows_ApplicationModel_Activation_TileActivatedInfo <: windows_core.Han
 }
 
 // Windows.ApplicationModel.Contacts.Contact (synthetic:Windows_ApplicationModel_Contacts_Contact)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public class Windows_ApplicationModel_Contacts_Contact <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20010,6 +20550,7 @@ public class Windows_ApplicationModel_Contacts_Contact <: windows_interface.Inte
     }
 }
 
+@When[Windows_ApplicationModel_Contacts == "on"]
 extend Windows_ApplicationModel_Contacts_Contact <: windows_core.HandleWinrtType<Windows_ApplicationModel_Contacts_Contact> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_Contacts_Contact): CPointer<Unit> {
         value.asRaw()
@@ -20028,6 +20569,7 @@ extend Windows_ApplicationModel_Contacts_Contact <: windows_core.HandleWinrtType
 }
 
 // Windows.ApplicationModel.Contacts.ContactAddress (synthetic:Windows_ApplicationModel_Contacts_ContactAddress)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public class Windows_ApplicationModel_Contacts_ContactAddress <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20266,6 +20808,7 @@ public class Windows_ApplicationModel_Contacts_ContactAddress <: windows_interfa
     }
 }
 
+@When[Windows_ApplicationModel_Contacts == "on"]
 extend Windows_ApplicationModel_Contacts_ContactAddress <: windows_core.HandleWinrtType<Windows_ApplicationModel_Contacts_ContactAddress> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_Contacts_ContactAddress): CPointer<Unit> {
         value.asRaw()
@@ -20284,6 +20827,7 @@ extend Windows_ApplicationModel_Contacts_ContactAddress <: windows_core.HandleWi
 }
 
 // Windows.ApplicationModel.Contacts.ContactAddressKind (synthetic:Windows_ApplicationModel_Contacts_ContactAddressKind)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public struct Windows_ApplicationModel_Contacts_ContactAddressKind {
     public let value: Int32
     public init() {
@@ -20293,11 +20837,15 @@ public struct Windows_ApplicationModel_Contacts_ContactAddressKind {
         this.value = value
     }
 }
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactAddressKind_Home = Windows_ApplicationModel_Contacts_ContactAddressKind(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactAddressKind_Work = Windows_ApplicationModel_Contacts_ContactAddressKind(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactAddressKind_Other = Windows_ApplicationModel_Contacts_ContactAddressKind(2)
 
 // Windows.ApplicationModel.Contacts.ContactConnectedServiceAccount (synthetic:Windows_ApplicationModel_Contacts_ContactConnectedServiceAccount)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public class Windows_ApplicationModel_Contacts_ContactConnectedServiceAccount <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20417,6 +20965,7 @@ public class Windows_ApplicationModel_Contacts_ContactConnectedServiceAccount <:
     }
 }
 
+@When[Windows_ApplicationModel_Contacts == "on"]
 extend Windows_ApplicationModel_Contacts_ContactConnectedServiceAccount <: windows_core.HandleWinrtType<Windows_ApplicationModel_Contacts_ContactConnectedServiceAccount> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_Contacts_ContactConnectedServiceAccount): CPointer<Unit> {
         value.asRaw()
@@ -20435,6 +20984,7 @@ extend Windows_ApplicationModel_Contacts_ContactConnectedServiceAccount <: windo
 }
 
 // Windows.ApplicationModel.Contacts.ContactDate (synthetic:Windows_ApplicationModel_Contacts_ContactDate)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public class Windows_ApplicationModel_Contacts_ContactDate <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20623,6 +21173,7 @@ public class Windows_ApplicationModel_Contacts_ContactDate <: windows_interface.
     }
 }
 
+@When[Windows_ApplicationModel_Contacts == "on"]
 extend Windows_ApplicationModel_Contacts_ContactDate <: windows_core.HandleWinrtType<Windows_ApplicationModel_Contacts_ContactDate> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_Contacts_ContactDate): CPointer<Unit> {
         value.asRaw()
@@ -20641,6 +21192,7 @@ extend Windows_ApplicationModel_Contacts_ContactDate <: windows_core.HandleWinrt
 }
 
 // Windows.ApplicationModel.Contacts.ContactDateKind (synthetic:Windows_ApplicationModel_Contacts_ContactDateKind)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public struct Windows_ApplicationModel_Contacts_ContactDateKind {
     public let value: Int32
     public init() {
@@ -20650,11 +21202,15 @@ public struct Windows_ApplicationModel_Contacts_ContactDateKind {
         this.value = value
     }
 }
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactDateKind_Birthday = Windows_ApplicationModel_Contacts_ContactDateKind(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactDateKind_Anniversary = Windows_ApplicationModel_Contacts_ContactDateKind(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactDateKind_Other = Windows_ApplicationModel_Contacts_ContactDateKind(2)
 
 // Windows.ApplicationModel.Contacts.ContactEmail (synthetic:Windows_ApplicationModel_Contacts_ContactEmail)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public class Windows_ApplicationModel_Contacts_ContactEmail <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20793,6 +21349,7 @@ public class Windows_ApplicationModel_Contacts_ContactEmail <: windows_interface
     }
 }
 
+@When[Windows_ApplicationModel_Contacts == "on"]
 extend Windows_ApplicationModel_Contacts_ContactEmail <: windows_core.HandleWinrtType<Windows_ApplicationModel_Contacts_ContactEmail> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_Contacts_ContactEmail): CPointer<Unit> {
         value.asRaw()
@@ -20811,6 +21368,7 @@ extend Windows_ApplicationModel_Contacts_ContactEmail <: windows_core.HandleWinr
 }
 
 // Windows.ApplicationModel.Contacts.ContactEmailKind (synthetic:Windows_ApplicationModel_Contacts_ContactEmailKind)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public struct Windows_ApplicationModel_Contacts_ContactEmailKind {
     public let value: Int32
     public init() {
@@ -20820,11 +21378,15 @@ public struct Windows_ApplicationModel_Contacts_ContactEmailKind {
         this.value = value
     }
 }
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactEmailKind_Personal = Windows_ApplicationModel_Contacts_ContactEmailKind(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactEmailKind_Work = Windows_ApplicationModel_Contacts_ContactEmailKind(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactEmailKind_Other = Windows_ApplicationModel_Contacts_ContactEmailKind(2)
 
 // Windows.ApplicationModel.Contacts.ContactFieldCategory (synthetic:Windows_ApplicationModel_Contacts_ContactFieldCategory)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public struct Windows_ApplicationModel_Contacts_ContactFieldCategory {
     public let value: Int32
     public init() {
@@ -20834,13 +21396,19 @@ public struct Windows_ApplicationModel_Contacts_ContactFieldCategory {
         this.value = value
     }
 }
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldCategory_None = Windows_ApplicationModel_Contacts_ContactFieldCategory(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldCategory_Home = Windows_ApplicationModel_Contacts_ContactFieldCategory(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldCategory_Work = Windows_ApplicationModel_Contacts_ContactFieldCategory(2)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldCategory_Mobile = Windows_ApplicationModel_Contacts_ContactFieldCategory(3)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldCategory_Other = Windows_ApplicationModel_Contacts_ContactFieldCategory(4)
 
 // Windows.ApplicationModel.Contacts.ContactFieldType (synthetic:Windows_ApplicationModel_Contacts_ContactFieldType)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public struct Windows_ApplicationModel_Contacts_ContactFieldType {
     public let value: Int32
     public init() {
@@ -20850,20 +21418,33 @@ public struct Windows_ApplicationModel_Contacts_ContactFieldType {
         this.value = value
     }
 }
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldType_Email = Windows_ApplicationModel_Contacts_ContactFieldType(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldType_PhoneNumber = Windows_ApplicationModel_Contacts_ContactFieldType(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldType_Location = Windows_ApplicationModel_Contacts_ContactFieldType(2)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldType_InstantMessage = Windows_ApplicationModel_Contacts_ContactFieldType(3)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldType_Custom = Windows_ApplicationModel_Contacts_ContactFieldType(4)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldType_ConnectedServiceAccount = Windows_ApplicationModel_Contacts_ContactFieldType(5)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldType_ImportantDate = Windows_ApplicationModel_Contacts_ContactFieldType(6)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldType_Address = Windows_ApplicationModel_Contacts_ContactFieldType(7)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldType_SignificantOther = Windows_ApplicationModel_Contacts_ContactFieldType(8)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldType_Notes = Windows_ApplicationModel_Contacts_ContactFieldType(9)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldType_Website = Windows_ApplicationModel_Contacts_ContactFieldType(10)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactFieldType_JobInfo = Windows_ApplicationModel_Contacts_ContactFieldType(11)
 
 // Windows.ApplicationModel.Contacts.ContactJobInfo (synthetic:Windows_ApplicationModel_Contacts_ContactJobInfo)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public class Windows_ApplicationModel_Contacts_ContactJobInfo <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -21133,6 +21714,7 @@ public class Windows_ApplicationModel_Contacts_ContactJobInfo <: windows_interfa
     }
 }
 
+@When[Windows_ApplicationModel_Contacts == "on"]
 extend Windows_ApplicationModel_Contacts_ContactJobInfo <: windows_core.HandleWinrtType<Windows_ApplicationModel_Contacts_ContactJobInfo> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_Contacts_ContactJobInfo): CPointer<Unit> {
         value.asRaw()
@@ -21151,6 +21733,7 @@ extend Windows_ApplicationModel_Contacts_ContactJobInfo <: windows_core.HandleWi
 }
 
 // Windows.ApplicationModel.Contacts.ContactPhone (synthetic:Windows_ApplicationModel_Contacts_ContactPhone)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public class Windows_ApplicationModel_Contacts_ContactPhone <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -21289,6 +21872,7 @@ public class Windows_ApplicationModel_Contacts_ContactPhone <: windows_interface
     }
 }
 
+@When[Windows_ApplicationModel_Contacts == "on"]
 extend Windows_ApplicationModel_Contacts_ContactPhone <: windows_core.HandleWinrtType<Windows_ApplicationModel_Contacts_ContactPhone> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_Contacts_ContactPhone): CPointer<Unit> {
         value.asRaw()
@@ -21307,6 +21891,7 @@ extend Windows_ApplicationModel_Contacts_ContactPhone <: windows_core.HandleWinr
 }
 
 // Windows.ApplicationModel.Contacts.ContactPhoneKind (synthetic:Windows_ApplicationModel_Contacts_ContactPhoneKind)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public struct Windows_ApplicationModel_Contacts_ContactPhoneKind {
     public let value: Int32
     public init() {
@@ -21316,18 +21901,29 @@ public struct Windows_ApplicationModel_Contacts_ContactPhoneKind {
         this.value = value
     }
 }
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactPhoneKind_Home = Windows_ApplicationModel_Contacts_ContactPhoneKind(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactPhoneKind_Mobile = Windows_ApplicationModel_Contacts_ContactPhoneKind(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactPhoneKind_Work = Windows_ApplicationModel_Contacts_ContactPhoneKind(2)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactPhoneKind_Other = Windows_ApplicationModel_Contacts_ContactPhoneKind(3)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactPhoneKind_Pager = Windows_ApplicationModel_Contacts_ContactPhoneKind(4)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactPhoneKind_BusinessFax = Windows_ApplicationModel_Contacts_ContactPhoneKind(5)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactPhoneKind_HomeFax = Windows_ApplicationModel_Contacts_ContactPhoneKind(6)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactPhoneKind_Company = Windows_ApplicationModel_Contacts_ContactPhoneKind(7)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactPhoneKind_Assistant = Windows_ApplicationModel_Contacts_ContactPhoneKind(8)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactPhoneKind_Radio = Windows_ApplicationModel_Contacts_ContactPhoneKind(9)
 
 // Windows.ApplicationModel.Contacts.ContactRelationship (synthetic:Windows_ApplicationModel_Contacts_ContactRelationship)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public struct Windows_ApplicationModel_Contacts_ContactRelationship {
     public let value: Int32
     public init() {
@@ -21337,14 +21933,21 @@ public struct Windows_ApplicationModel_Contacts_ContactRelationship {
         this.value = value
     }
 }
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactRelationship_Other = Windows_ApplicationModel_Contacts_ContactRelationship(0)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactRelationship_Spouse = Windows_ApplicationModel_Contacts_ContactRelationship(1)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactRelationship_Partner = Windows_ApplicationModel_Contacts_ContactRelationship(2)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactRelationship_Sibling = Windows_ApplicationModel_Contacts_ContactRelationship(3)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactRelationship_Parent = Windows_ApplicationModel_Contacts_ContactRelationship(4)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public let Windows_ApplicationModel_Contacts_ContactRelationship_Child = Windows_ApplicationModel_Contacts_ContactRelationship(5)
 
 // Windows.ApplicationModel.Contacts.ContactSignificantOther (synthetic:Windows_ApplicationModel_Contacts_ContactSignificantOther)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public class Windows_ApplicationModel_Contacts_ContactSignificantOther <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -21471,6 +22074,7 @@ public class Windows_ApplicationModel_Contacts_ContactSignificantOther <: window
     }
 }
 
+@When[Windows_ApplicationModel_Contacts == "on"]
 extend Windows_ApplicationModel_Contacts_ContactSignificantOther <: windows_core.HandleWinrtType<Windows_ApplicationModel_Contacts_ContactSignificantOther> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_Contacts_ContactSignificantOther): CPointer<Unit> {
         value.asRaw()
@@ -21489,6 +22093,7 @@ extend Windows_ApplicationModel_Contacts_ContactSignificantOther <: windows_core
 }
 
 // Windows.ApplicationModel.Contacts.ContactWebsite (synthetic:Windows_ApplicationModel_Contacts_ContactWebsite)
+@When[Windows_ApplicationModel_Contacts == "on"]
 public class Windows_ApplicationModel_Contacts_ContactWebsite <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -21615,6 +22220,7 @@ public class Windows_ApplicationModel_Contacts_ContactWebsite <: windows_interfa
     }
 }
 
+@When[Windows_ApplicationModel_Contacts == "on"]
 extend Windows_ApplicationModel_Contacts_ContactWebsite <: windows_core.HandleWinrtType<Windows_ApplicationModel_Contacts_ContactWebsite> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_Contacts_ContactWebsite): CPointer<Unit> {
         value.asRaw()
@@ -21633,6 +22239,7 @@ extend Windows_ApplicationModel_Contacts_ContactWebsite <: windows_core.HandleWi
 }
 
 // Windows.ApplicationModel.Contacts.IContact (synthetic:Windows_ApplicationModel_Contacts_IContact)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["ec0072f3-2118-4049-9ebc-17f0ab692b64", "Windows.ApplicationModel.Contacts.IContact", "Name.value=HString;Thumbnail.value=Com;Fields.value=Com"]
 public interface Windows_ApplicationModel_Contacts_IContact <: IInspectable {
     func Name(value: CPointer<CPointer<Unit>>): Int32
@@ -21643,6 +22250,7 @@ public interface Windows_ApplicationModel_Contacts_IContact <: IInspectable {
 }
 
 // Windows.ApplicationModel.Contacts.IContact2 (synthetic:Windows_ApplicationModel_Contacts_IContact2)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["f312f365-bb77-4c94-802d-8328cee40c08", "Windows.ApplicationModel.Contacts.IContact2", "Id.value=HString;Notes.value=HString;Phones.value=Com;Emails.value=Com;Addresses.value=Com;ConnectedServiceAccounts.value=Com;ImportantDates.value=Com;DataSuppliers.value=Com;JobInfo.value=Com;SignificantOthers.value=Com;Websites.value=Com;ProviderProperties.value=Com"]
 public interface Windows_ApplicationModel_Contacts_IContact2 <: IInspectable {
     func Id(value: CPointer<CPointer<Unit>>): Int32
@@ -21662,6 +22270,7 @@ public interface Windows_ApplicationModel_Contacts_IContact2 <: IInspectable {
 }
 
 // Windows.ApplicationModel.Contacts.IContact3 (synthetic:Windows_ApplicationModel_Contacts_IContact3)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["48201e67-e08e-42a4-b561-41d08ca9575d", "Windows.ApplicationModel.Contacts.IContact3", "ContactListId.value=HString;AggregateId.value=HString;RemoteId.value=HString;RingToneToken.value=HString;LargeDisplayPicture.value=Com;SmallDisplayPicture.value=Com;SourceDisplayPicture.value=Com;TextToneToken.value=HString;FullName.value=HString;DisplayNameOverride.value=HString;Nickname.value=HString;SortName.value=HString"]
 public interface Windows_ApplicationModel_Contacts_IContact3 <: IInspectable {
     func ContactListId(value: CPointer<CPointer<Unit>>): Int32
@@ -21690,6 +22299,7 @@ public interface Windows_ApplicationModel_Contacts_IContact3 <: IInspectable {
 }
 
 // Windows.ApplicationModel.Contacts.IContactAddress (synthetic:Windows_ApplicationModel_Contacts_IContactAddress)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["9739d39a-42ce-4872-8d70-3063aa584b70", "Windows.ApplicationModel.Contacts.IContactAddress", "StreetAddress.value=HString;Locality.value=HString;Region.value=HString;Country.value=HString;PostalCode.value=HString;Description.value=HString"]
 public interface Windows_ApplicationModel_Contacts_IContactAddress <: IInspectable {
     func StreetAddress(value: CPointer<CPointer<Unit>>): Int32
@@ -21709,6 +22319,7 @@ public interface Windows_ApplicationModel_Contacts_IContactAddress <: IInspectab
 }
 
 // Windows.ApplicationModel.Contacts.IContactConnectedServiceAccount (synthetic:Windows_ApplicationModel_Contacts_IContactConnectedServiceAccount)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["f6f83553-aa27-4731-8e4a-3dec5ce9eec9", "Windows.ApplicationModel.Contacts.IContactConnectedServiceAccount", "Id.value=HString;ServiceName.value=HString"]
 public interface Windows_ApplicationModel_Contacts_IContactConnectedServiceAccount <: IInspectable {
     func Id(value: CPointer<CPointer<Unit>>): Int32
@@ -21718,6 +22329,7 @@ public interface Windows_ApplicationModel_Contacts_IContactConnectedServiceAccou
 }
 
 // Windows.ApplicationModel.Contacts.IContactDate (synthetic:Windows_ApplicationModel_Contacts_IContactDate)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["fe98ae66-b205-4934-9174-0ff2b0565707", "Windows.ApplicationModel.Contacts.IContactDate", "Day.value=Com;Month.value=Com;Year.value=Com;Description.value=HString"]
 public interface Windows_ApplicationModel_Contacts_IContactDate <: IInspectable {
     func Day(value: CPointer<CPointer<Unit>>): Int32
@@ -21733,6 +22345,7 @@ public interface Windows_ApplicationModel_Contacts_IContactDate <: IInspectable 
 }
 
 // Windows.ApplicationModel.Contacts.IContactEmail (synthetic:Windows_ApplicationModel_Contacts_IContactEmail)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["90a219a9-e3d3-4d63-993b-05b9a5393abf", "Windows.ApplicationModel.Contacts.IContactEmail", "Address.value=HString;Description.value=HString"]
 public interface Windows_ApplicationModel_Contacts_IContactEmail <: IInspectable {
     func Address(value: CPointer<CPointer<Unit>>): Int32
@@ -21744,6 +22357,7 @@ public interface Windows_ApplicationModel_Contacts_IContactEmail <: IInspectable
 }
 
 // Windows.ApplicationModel.Contacts.IContactField (synthetic:Windows_ApplicationModel_Contacts_IContactField)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["b176486a-d293-492c-a058-db575b3e3c0f", "Windows.ApplicationModel.Contacts.IContactField", "Name.value=HString;Value.value=HString"]
 public interface Windows_ApplicationModel_Contacts_IContactField <: IInspectable {
     func Type(value: CPointer<Int32>): Int32
@@ -21753,6 +22367,7 @@ public interface Windows_ApplicationModel_Contacts_IContactField <: IInspectable
 }
 
 // Windows.ApplicationModel.Contacts.IContactJobInfo (synthetic:Windows_ApplicationModel_Contacts_IContactJobInfo)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["6d117b4c-ce50-4b43-9e69-b18258ea5315", "Windows.ApplicationModel.Contacts.IContactJobInfo", "CompanyName.value=HString;CompanyYomiName.value=HString;Department.value=HString;Title.value=HString;Manager.value=HString;Office.value=HString;CompanyAddress.value=HString;Description.value=HString"]
 public interface Windows_ApplicationModel_Contacts_IContactJobInfo <: IInspectable {
     func CompanyName(value: CPointer<CPointer<Unit>>): Int32
@@ -21774,6 +22389,7 @@ public interface Windows_ApplicationModel_Contacts_IContactJobInfo <: IInspectab
 }
 
 // Windows.ApplicationModel.Contacts.IContactName (synthetic:Windows_ApplicationModel_Contacts_IContactName)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["f404e97b-9034-453c-8ebf-140a38c86f1d", "Windows.ApplicationModel.Contacts.IContactName", "FirstName.value=HString;LastName.value=HString;MiddleName.value=HString;YomiGivenName.value=HString;YomiFamilyName.value=HString;HonorificNameSuffix.value=HString;HonorificNamePrefix.value=HString;DisplayName.value=HString;YomiDisplayName.value=HString"]
 public interface Windows_ApplicationModel_Contacts_IContactName <: IInspectable {
     func FirstName(value: CPointer<CPointer<Unit>>): Int32
@@ -21795,6 +22411,7 @@ public interface Windows_ApplicationModel_Contacts_IContactName <: IInspectable 
 }
 
 // Windows.ApplicationModel.Contacts.IContactPhone (synthetic:Windows_ApplicationModel_Contacts_IContactPhone)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["467dab65-2712-4f52-b783-9ea8111c63cd", "Windows.ApplicationModel.Contacts.IContactPhone", "Number.value=HString;Description.value=HString"]
 public interface Windows_ApplicationModel_Contacts_IContactPhone <: IInspectable {
     func Number(value: CPointer<CPointer<Unit>>): Int32
@@ -21806,6 +22423,7 @@ public interface Windows_ApplicationModel_Contacts_IContactPhone <: IInspectable
 }
 
 // Windows.ApplicationModel.Contacts.IContactSignificantOther (synthetic:Windows_ApplicationModel_Contacts_IContactSignificantOther)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["8873b5ab-c5fb-46d8-93fe-da3ff1934054", "Windows.ApplicationModel.Contacts.IContactSignificantOther", "Name.value=HString;Description.value=HString"]
 public interface Windows_ApplicationModel_Contacts_IContactSignificantOther <: IInspectable {
     func Name(value: CPointer<CPointer<Unit>>): Int32
@@ -21815,6 +22433,7 @@ public interface Windows_ApplicationModel_Contacts_IContactSignificantOther <: I
 }
 
 // Windows.ApplicationModel.Contacts.IContactSignificantOther2 (synthetic:Windows_ApplicationModel_Contacts_IContactSignificantOther2)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["8d7bd474-3f03-45f8-ba0f-c4ed37d64219", "Windows.ApplicationModel.Contacts.IContactSignificantOther2"]
 public interface Windows_ApplicationModel_Contacts_IContactSignificantOther2 <: IInspectable {
     func Relationship(value: CPointer<Int32>): Int32
@@ -21822,6 +22441,7 @@ public interface Windows_ApplicationModel_Contacts_IContactSignificantOther2 <: 
 }
 
 // Windows.ApplicationModel.Contacts.IContactWebsite (synthetic:Windows_ApplicationModel_Contacts_IContactWebsite)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["9f130176-dc1b-4055-ad66-652f39d990e8", "Windows.ApplicationModel.Contacts.IContactWebsite", "Uri.value=Com;Description.value=HString"]
 public interface Windows_ApplicationModel_Contacts_IContactWebsite <: IInspectable {
     func Uri(value: CPointer<CPointer<Unit>>): Int32
@@ -21831,6 +22451,7 @@ public interface Windows_ApplicationModel_Contacts_IContactWebsite <: IInspectab
 }
 
 // Windows.ApplicationModel.Contacts.IContactWebsite2 (synthetic:Windows_ApplicationModel_Contacts_IContactWebsite2)
+@When[Windows_ApplicationModel_Contacts == "on"]
 @Interface["f87ee91e-5647-4068-bb5e-4b6f437ce308", "Windows.ApplicationModel.Contacts.IContactWebsite2", "RawValue.value=HString"]
 public interface Windows_ApplicationModel_Contacts_IContactWebsite2 <: IInspectable {
     func RawValue(value: CPointer<CPointer<Unit>>): Int32
@@ -21838,6 +22459,7 @@ public interface Windows_ApplicationModel_Contacts_IContactWebsite2 <: IInspecta
 }
 
 // Windows.ApplicationModel.DataTransfer.DataPackage (synthetic:Windows_ApplicationModel_DataTransfer_DataPackage)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public class Windows_ApplicationModel_DataTransfer_DataPackage <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -22127,6 +22749,7 @@ public class Windows_ApplicationModel_DataTransfer_DataPackage <: windows_interf
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 extend Windows_ApplicationModel_DataTransfer_DataPackage <: windows_core.HandleWinrtType<Windows_ApplicationModel_DataTransfer_DataPackage> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_DataTransfer_DataPackage): CPointer<Unit> {
         value.asRaw()
@@ -22145,6 +22768,7 @@ extend Windows_ApplicationModel_DataTransfer_DataPackage <: windows_core.HandleW
 }
 
 // Windows.ApplicationModel.DataTransfer.DataPackageOperation (synthetic:Windows_ApplicationModel_DataTransfer_DataPackageOperation)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public struct Windows_ApplicationModel_DataTransfer_DataPackageOperation {
     public let value: UInt32
     public init() {
@@ -22169,12 +22793,17 @@ public struct Windows_ApplicationModel_DataTransfer_DataPackageOperation {
         return Windows_ApplicationModel_DataTransfer_DataPackageOperation(!value)
     }
 }
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public let Windows_ApplicationModel_DataTransfer_DataPackageOperation_None = Windows_ApplicationModel_DataTransfer_DataPackageOperation(0)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public let Windows_ApplicationModel_DataTransfer_DataPackageOperation_Copy = Windows_ApplicationModel_DataTransfer_DataPackageOperation(1)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public let Windows_ApplicationModel_DataTransfer_DataPackageOperation_Move = Windows_ApplicationModel_DataTransfer_DataPackageOperation(2)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public let Windows_ApplicationModel_DataTransfer_DataPackageOperation_Link = Windows_ApplicationModel_DataTransfer_DataPackageOperation(4)
 
 // Windows.ApplicationModel.DataTransfer.DataPackagePropertySet (synthetic:Windows_ApplicationModel_DataTransfer_DataPackagePropertySet)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public class Windows_ApplicationModel_DataTransfer_DataPackagePropertySet <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -22416,6 +23045,7 @@ public class Windows_ApplicationModel_DataTransfer_DataPackagePropertySet <: win
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 extend Windows_ApplicationModel_DataTransfer_DataPackagePropertySet <: windows_core.HandleWinrtType<Windows_ApplicationModel_DataTransfer_DataPackagePropertySet> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_DataTransfer_DataPackagePropertySet): CPointer<Unit> {
         value.asRaw()
@@ -22434,6 +23064,7 @@ extend Windows_ApplicationModel_DataTransfer_DataPackagePropertySet <: windows_c
 }
 
 // Windows.ApplicationModel.DataTransfer.DataPackagePropertySetView (synthetic:Windows_ApplicationModel_DataTransfer_DataPackagePropertySetView)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public class Windows_ApplicationModel_DataTransfer_DataPackagePropertySetView <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -22637,6 +23268,7 @@ public class Windows_ApplicationModel_DataTransfer_DataPackagePropertySetView <:
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 extend Windows_ApplicationModel_DataTransfer_DataPackagePropertySetView <: windows_core.HandleWinrtType<Windows_ApplicationModel_DataTransfer_DataPackagePropertySetView> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_DataTransfer_DataPackagePropertySetView): CPointer<Unit> {
         value.asRaw()
@@ -22655,6 +23287,7 @@ extend Windows_ApplicationModel_DataTransfer_DataPackagePropertySetView <: windo
 }
 
 // Windows.ApplicationModel.DataTransfer.DataPackageView (synthetic:Windows_ApplicationModel_DataTransfer_DataPackageView)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public class Windows_ApplicationModel_DataTransfer_DataPackageView <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -22928,6 +23561,7 @@ public class Windows_ApplicationModel_DataTransfer_DataPackageView <: windows_in
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 extend Windows_ApplicationModel_DataTransfer_DataPackageView <: windows_core.HandleWinrtType<Windows_ApplicationModel_DataTransfer_DataPackageView> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_DataTransfer_DataPackageView): CPointer<Unit> {
         value.asRaw()
@@ -22946,6 +23580,7 @@ extend Windows_ApplicationModel_DataTransfer_DataPackageView <: windows_core.Han
 }
 
 // Windows.ApplicationModel.DataTransfer.DataProviderDeferral (synthetic:Windows_ApplicationModel_DataTransfer_DataProviderDeferral)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public class Windows_ApplicationModel_DataTransfer_DataProviderDeferral <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -23012,6 +23647,7 @@ public class Windows_ApplicationModel_DataTransfer_DataProviderDeferral <: windo
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 extend Windows_ApplicationModel_DataTransfer_DataProviderDeferral <: windows_core.HandleWinrtType<Windows_ApplicationModel_DataTransfer_DataProviderDeferral> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_DataTransfer_DataProviderDeferral): CPointer<Unit> {
         value.asRaw()
@@ -23030,6 +23666,7 @@ extend Windows_ApplicationModel_DataTransfer_DataProviderDeferral <: windows_cor
 }
 
 // Windows.ApplicationModel.DataTransfer.DataProviderHandler (synthetic:Windows_ApplicationModel_DataTransfer_DataProviderHandler)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @C
 public struct Windows_ApplicationModel_DataTransfer_DataProviderHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -23037,6 +23674,7 @@ public struct Windows_ApplicationModel_DataTransfer_DataProviderHandlerVtbl {
     public init() {}
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public open class Windows_ApplicationModel_DataTransfer_DataProviderHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -23104,18 +23742,22 @@ public open class Windows_ApplicationModel_DataTransfer_DataProviderHandler <: w
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 extend Windows_ApplicationModel_DataTransfer_DataProviderHandler <: windows_core.Interface<Windows_ApplicationModel_DataTransfer_DataProviderHandler> {}
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 private class OwnedWindows_ApplicationModel_DataTransfer_DataProviderHandler <: Windows_ApplicationModel_DataTransfer_DataProviderHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public interface Windows_ApplicationModel_DataTransfer_DataProviderHandlerInvokerErased {
     func __winrtThunk_Invoke(request: CPointer<Unit>): Int32
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public interface Windows_ApplicationModel_DataTransfer_DataProviderHandlerInvoker <: Windows_ApplicationModel_DataTransfer_DataProviderHandlerInvokerErased {
     func Invoke(request: CPointer<Unit>): Unit {
         ()
@@ -23133,6 +23775,7 @@ public interface Windows_ApplicationModel_DataTransfer_DataProviderHandlerInvoke
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 private class Windows_ApplicationModel_DataTransfer_DataProviderHandlerBox <: Windows_ApplicationModel_DataTransfer_DataProviderHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Windows_ApplicationModel_DataTransfer_DataProviderHandlerVtbl>
@@ -23170,6 +23813,7 @@ private class Windows_ApplicationModel_DataTransfer_DataProviderHandlerBox <: Wi
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 func buildWindows_ApplicationModel_DataTransfer_DataProviderHandlerBoxVtbl(): Windows_ApplicationModel_DataTransfer_DataProviderHandlerVtbl {
     var vtbl = Windows_ApplicationModel_DataTransfer_DataProviderHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -23186,6 +23830,7 @@ func buildWindows_ApplicationModel_DataTransfer_DataProviderHandlerBoxVtbl(): Wi
 
 
 // Windows.ApplicationModel.DataTransfer.DataProviderRequest (synthetic:Windows_ApplicationModel_DataTransfer_DataProviderRequest)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public class Windows_ApplicationModel_DataTransfer_DataProviderRequest <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -23296,6 +23941,7 @@ public class Windows_ApplicationModel_DataTransfer_DataProviderRequest <: window
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 extend Windows_ApplicationModel_DataTransfer_DataProviderRequest <: windows_core.HandleWinrtType<Windows_ApplicationModel_DataTransfer_DataProviderRequest> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_DataTransfer_DataProviderRequest): CPointer<Unit> {
         value.asRaw()
@@ -23314,6 +23960,7 @@ extend Windows_ApplicationModel_DataTransfer_DataProviderRequest <: windows_core
 }
 
 // Windows.ApplicationModel.DataTransfer.DragDrop.DragDropModifiers (synthetic:Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers)
+@When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 public struct Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers {
     public let value: UInt32
     public init() {
@@ -23338,15 +23985,23 @@ public struct Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers {
         return Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers(!value)
     }
 }
+@When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 public let Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers_None = Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers(0)
+@When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 public let Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers_Shift = Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers(1)
+@When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 public let Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers_Control = Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers(2)
+@When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 public let Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers_Alt = Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers(4)
+@When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 public let Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers_LeftButton = Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers(8)
+@When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 public let Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers_MiddleButton = Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers(16)
+@When[Windows_ApplicationModel_DataTransfer_DragDrop == "on"]
 public let Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers_RightButton = Windows_ApplicationModel_DataTransfer_DragDrop_DragDropModifiers(32)
 
 // Windows.ApplicationModel.DataTransfer.IDataPackage (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackage)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["61ebf5c7-efea-4346-9554-981d7e198ffe", "Windows.ApplicationModel.DataTransfer.IDataPackage", "GetView.result=Com;Properties.value=Com;ResourceMap.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackage <: IInspectable {
     func GetView(result: CPointer<CPointer<Unit>>): Int32
@@ -23370,6 +24025,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackage <: IInspecta
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackage2 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackage2)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["041c1fe9-2409-45e1-a538-4c53eeee04a7", "Windows.ApplicationModel.DataTransfer.IDataPackage2"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackage2 <: IInspectable {
     func SetApplicationLink(value: CPointer<Unit>): Int32
@@ -23377,6 +24033,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackage2 <: IInspect
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackage3 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackage3)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["88f31f5d-787b-4d32-965a-a9838105a056", "Windows.ApplicationModel.DataTransfer.IDataPackage3"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackage3 <: IInspectable {
     func ShareCompleted(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
@@ -23384,6 +24041,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackage3 <: IInspect
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackage4 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackage4)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["13a24ec8-9382-536f-852a-3045e1b29a3b", "Windows.ApplicationModel.DataTransfer.IDataPackage4"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackage4 <: IInspectable {
     func ShareCanceled(handler: CPointer<Unit>, token: CPointer<Int64>): Int32
@@ -23391,6 +24049,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackage4 <: IInspect
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["cd1c93eb-4c4c-443a-a8d3-f5c241e91689", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet", "Title.value=HString;Description.value=HString;Thumbnail.value=Com;FileTypes.value=Com;ApplicationName.value=HString;ApplicationListingUri.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet <: IInspectable {
     func Title(value: CPointer<CPointer<Unit>>): Int32
@@ -23407,6 +24066,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet <
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet2 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["eb505d4a-9800-46aa-b181-7b6f0f2b919a", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet2", "ContentSourceWebLink.value=Com;ContentSourceApplicationLink.value=Com;PackageFamilyName.value=HString;Square30x30Logo.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2 <: IInspectable {
     func ContentSourceWebLink(value: CPointer<CPointer<Unit>>): Int32
@@ -23422,6 +24082,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet2 
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet3 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet3)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["9e87fd9b-5205-401b-874a-455653bd39e8", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet3", "EnterpriseId.value=HString"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet3 <: IInspectable {
     func EnterpriseId(value: CPointer<CPointer<Unit>>): Int32
@@ -23429,6 +24090,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet3 
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet4 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet4)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["6390ebf5-1739-4c74-b22f-865fab5e8545", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySet4", "ContentSourceUserActivityJson.value=HString"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet4 <: IInspectable {
     func ContentSourceUserActivityJson(value: CPointer<CPointer<Unit>>): Int32
@@ -23436,6 +24098,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySet4 
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["b94cec01-0c1a-4c57-be55-75d01289735d", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView", "Title.value=HString;Description.value=HString;Thumbnail.value=Com;FileTypes.value=Com;ApplicationName.value=HString;ApplicationListingUri.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView <: IInspectable {
     func Title(value: CPointer<CPointer<Unit>>): Int32
@@ -23447,6 +24110,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetVi
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView2 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView2)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["6054509b-8ebe-4feb-9c1e-75e69de54b84", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView2", "PackageFamilyName.value=HString;ContentSourceWebLink.value=Com;ContentSourceApplicationLink.value=Com;Square30x30Logo.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView2 <: IInspectable {
     func PackageFamilyName(value: CPointer<CPointer<Unit>>): Int32
@@ -23457,24 +24121,28 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetVi
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView3 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView3)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["db764ce5-d174-495c-84fc-1a51f6ab45d7", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView3", "EnterpriseId.value=HString"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView3 <: IInspectable {
     func EnterpriseId(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView4 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView4)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["4474c80d-d16f-40ae-9580-6f8562b94235", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView4", "ContentSourceUserActivityJson.value=HString"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView4 <: IInspectable {
     func ContentSourceUserActivityJson(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView5 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView5)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["6f0a9445-3760-50bb-8523-c4202ded7d78", "Windows.ApplicationModel.DataTransfer.IDataPackagePropertySetView5"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackagePropertySetView5 <: IInspectable {
     func IsFromRoamingClipboard(value: CPointer<Bool>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackageView (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackageView)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["7b840471-5900-4d85-a90b-10cb85fe3552", "Windows.ApplicationModel.DataTransfer.IDataPackageView", "Properties.value=Com;AvailableFormats.formatIds=Com;GetDataAsync.operation=Com;GetTextAsync.operation=Com;GetCustomTextAsync.operation=Com;GetUriAsync.operation=Com;GetHtmlFormatAsync.operation=Com;GetResourceMapAsync.operation=Com;GetRtfAsync.operation=Com;GetBitmapAsync.operation=Com;GetStorageItemsAsync.operation=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackageView <: IInspectable {
     func Properties(value: CPointer<CPointer<Unit>>): Int32
@@ -23494,6 +24162,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackageView <: IInsp
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackageView2 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackageView2)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["40ecba95-2450-4c1d-b6b4-ed45463dee9c", "Windows.ApplicationModel.DataTransfer.IDataPackageView2", "GetApplicationLinkAsync.operation=Com;GetWebLinkAsync.operation=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackageView2 <: IInspectable {
     func GetApplicationLinkAsync(operation: CPointer<CPointer<Unit>>): Int32
@@ -23501,6 +24170,7 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackageView2 <: IIns
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackageView3 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackageView3)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["d37771a8-ddad-4288-8428-d1cae394128b", "Windows.ApplicationModel.DataTransfer.IDataPackageView3", "RequestAccessAsync.operation=Com;RequestAccessWithEnterpriseIdAsync.operation=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackageView3 <: IInspectable {
     func RequestAccessAsync(operation: CPointer<CPointer<Unit>>): Int32
@@ -23509,18 +24179,21 @@ public interface Windows_ApplicationModel_DataTransfer_IDataPackageView3 <: IIns
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataPackageView4 (synthetic:Windows_ApplicationModel_DataTransfer_IDataPackageView4)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["dfe96f1f-e042-4433-a09f-26d6ffda8b85", "Windows.ApplicationModel.DataTransfer.IDataPackageView4"]
 public interface Windows_ApplicationModel_DataTransfer_IDataPackageView4 <: IInspectable {
     func SetAcceptedFormatId(formatId: CPointer<Unit>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataProviderDeferral (synthetic:Windows_ApplicationModel_DataTransfer_IDataProviderDeferral)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["c2cf2373-2d26-43d9-b69d-dcb86d03f6da", "Windows.ApplicationModel.DataTransfer.IDataProviderDeferral"]
 public interface Windows_ApplicationModel_DataTransfer_IDataProviderDeferral <: IInspectable {
     func Complete(): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IDataProviderRequest (synthetic:Windows_ApplicationModel_DataTransfer_IDataProviderRequest)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["ebbc7157-d3c8-47da-acde-f82388d5f716", "Windows.ApplicationModel.DataTransfer.IDataProviderRequest", "FormatId.value=HString;GetDeferral.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IDataProviderRequest <: IInspectable {
     func FormatId(value: CPointer<CPointer<Unit>>): Int32
@@ -23530,24 +24203,28 @@ public interface Windows_ApplicationModel_DataTransfer_IDataProviderRequest <: I
 }
 
 // Windows.ApplicationModel.DataTransfer.IOperationCompletedEventArgs (synthetic:Windows_ApplicationModel_DataTransfer_IOperationCompletedEventArgs)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["e7af329d-051d-4fab-b1a9-47fd77f70a41", "Windows.ApplicationModel.DataTransfer.IOperationCompletedEventArgs"]
 public interface Windows_ApplicationModel_DataTransfer_IOperationCompletedEventArgs <: IInspectable {
     func Operation(value: CPointer<UInt32>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IOperationCompletedEventArgs2 (synthetic:Windows_ApplicationModel_DataTransfer_IOperationCompletedEventArgs2)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["858fa073-1e19-4105-b2f7-c8478808d562", "Windows.ApplicationModel.DataTransfer.IOperationCompletedEventArgs2", "AcceptedFormatId.value=HString"]
 public interface Windows_ApplicationModel_DataTransfer_IOperationCompletedEventArgs2 <: IInspectable {
     func AcceptedFormatId(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IShareCompletedEventArgs (synthetic:Windows_ApplicationModel_DataTransfer_IShareCompletedEventArgs)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["4574c442-f913-4f60-9df7-cc4060ab1916", "Windows.ApplicationModel.DataTransfer.IShareCompletedEventArgs", "ShareTarget.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IShareCompletedEventArgs <: IInspectable {
     func ShareTarget(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IShareProvider (synthetic:Windows_ApplicationModel_DataTransfer_IShareProvider)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["2fabe026-443e-4cda-af25-8d81070efd80", "Windows.ApplicationModel.DataTransfer.IShareProvider", "Title.value=HString;DisplayIcon.value=Com;Tag.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IShareProvider <: IInspectable {
     func Title(value: CPointer<CPointer<Unit>>): Int32
@@ -23558,12 +24235,14 @@ public interface Windows_ApplicationModel_DataTransfer_IShareProvider <: IInspec
 }
 
 // Windows.ApplicationModel.DataTransfer.IShareProviderFactory (synthetic:Windows_ApplicationModel_DataTransfer_IShareProviderFactory)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["172a174c-e79e-4f6d-b07d-128f469e0296", "Windows.ApplicationModel.DataTransfer.IShareProviderFactory", "Create.result=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IShareProviderFactory <: IInspectable {
     func Create(title: CPointer<Unit>, displayIcon: CPointer<Unit>, backgroundColor: Windows_UI_Color, handler: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.ApplicationModel.DataTransfer.IShareProviderOperation (synthetic:Windows_ApplicationModel_DataTransfer_IShareProviderOperation)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["19cef937-d435-4179-b6af-14e0492b69f6", "Windows.ApplicationModel.DataTransfer.IShareProviderOperation", "Data.value=Com;Provider.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IShareProviderOperation <: IInspectable {
     func Data(value: CPointer<CPointer<Unit>>): Int32
@@ -23572,6 +24251,7 @@ public interface Windows_ApplicationModel_DataTransfer_IShareProviderOperation <
 }
 
 // Windows.ApplicationModel.DataTransfer.IShareTargetInfo (synthetic:Windows_ApplicationModel_DataTransfer_IShareTargetInfo)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @Interface["385be607-c6e8-4114-b294-28f3bb6f9904", "Windows.ApplicationModel.DataTransfer.IShareTargetInfo", "AppUserModelId.value=HString;ShareProvider.value=Com"]
 public interface Windows_ApplicationModel_DataTransfer_IShareTargetInfo <: IInspectable {
     func AppUserModelId(value: CPointer<CPointer<Unit>>): Int32
@@ -23579,6 +24259,7 @@ public interface Windows_ApplicationModel_DataTransfer_IShareTargetInfo <: IInsp
 }
 
 // Windows.ApplicationModel.DataTransfer.OperationCompletedEventArgs (synthetic:Windows_ApplicationModel_DataTransfer_OperationCompletedEventArgs)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public class Windows_ApplicationModel_DataTransfer_OperationCompletedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -23656,6 +24337,7 @@ public class Windows_ApplicationModel_DataTransfer_OperationCompletedEventArgs <
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 extend Windows_ApplicationModel_DataTransfer_OperationCompletedEventArgs <: windows_core.HandleWinrtType<Windows_ApplicationModel_DataTransfer_OperationCompletedEventArgs> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_DataTransfer_OperationCompletedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -23674,6 +24356,7 @@ extend Windows_ApplicationModel_DataTransfer_OperationCompletedEventArgs <: wind
 }
 
 // Windows.ApplicationModel.DataTransfer.ShareCompletedEventArgs (synthetic:Windows_ApplicationModel_DataTransfer_ShareCompletedEventArgs)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public class Windows_ApplicationModel_DataTransfer_ShareCompletedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -23748,6 +24431,7 @@ public class Windows_ApplicationModel_DataTransfer_ShareCompletedEventArgs <: wi
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 extend Windows_ApplicationModel_DataTransfer_ShareCompletedEventArgs <: windows_core.HandleWinrtType<Windows_ApplicationModel_DataTransfer_ShareCompletedEventArgs> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_DataTransfer_ShareCompletedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -23766,6 +24450,7 @@ extend Windows_ApplicationModel_DataTransfer_ShareCompletedEventArgs <: windows_
 }
 
 // Windows.ApplicationModel.DataTransfer.ShareProvider (synthetic:Windows_ApplicationModel_DataTransfer_ShareProvider)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public class Windows_ApplicationModel_DataTransfer_ShareProvider <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -23913,6 +24598,7 @@ public class Windows_ApplicationModel_DataTransfer_ShareProvider <: windows_inte
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 extend Windows_ApplicationModel_DataTransfer_ShareProvider <: windows_core.HandleWinrtType<Windows_ApplicationModel_DataTransfer_ShareProvider> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_DataTransfer_ShareProvider): CPointer<Unit> {
         value.asRaw()
@@ -23931,6 +24617,7 @@ extend Windows_ApplicationModel_DataTransfer_ShareProvider <: windows_core.Handl
 }
 
 // Windows.ApplicationModel.DataTransfer.ShareProviderHandler (synthetic:Windows_ApplicationModel_DataTransfer_ShareProviderHandler)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 @C
 public struct Windows_ApplicationModel_DataTransfer_ShareProviderHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -23938,6 +24625,7 @@ public struct Windows_ApplicationModel_DataTransfer_ShareProviderHandlerVtbl {
     public init() {}
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public open class Windows_ApplicationModel_DataTransfer_ShareProviderHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24005,18 +24693,22 @@ public open class Windows_ApplicationModel_DataTransfer_ShareProviderHandler <: 
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 extend Windows_ApplicationModel_DataTransfer_ShareProviderHandler <: windows_core.Interface<Windows_ApplicationModel_DataTransfer_ShareProviderHandler> {}
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 private class OwnedWindows_ApplicationModel_DataTransfer_ShareProviderHandler <: Windows_ApplicationModel_DataTransfer_ShareProviderHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public interface Windows_ApplicationModel_DataTransfer_ShareProviderHandlerInvokerErased {
     func __winrtThunk_Invoke(operation: CPointer<Unit>): Int32
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public interface Windows_ApplicationModel_DataTransfer_ShareProviderHandlerInvoker <: Windows_ApplicationModel_DataTransfer_ShareProviderHandlerInvokerErased {
     func Invoke(operation: CPointer<Unit>): Unit {
         ()
@@ -24034,6 +24726,7 @@ public interface Windows_ApplicationModel_DataTransfer_ShareProviderHandlerInvok
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 private class Windows_ApplicationModel_DataTransfer_ShareProviderHandlerBox <: Windows_ApplicationModel_DataTransfer_ShareProviderHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Windows_ApplicationModel_DataTransfer_ShareProviderHandlerVtbl>
@@ -24071,6 +24764,7 @@ private class Windows_ApplicationModel_DataTransfer_ShareProviderHandlerBox <: W
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 func buildWindows_ApplicationModel_DataTransfer_ShareProviderHandlerBoxVtbl(): Windows_ApplicationModel_DataTransfer_ShareProviderHandlerVtbl {
     var vtbl = Windows_ApplicationModel_DataTransfer_ShareProviderHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -24087,6 +24781,7 @@ func buildWindows_ApplicationModel_DataTransfer_ShareProviderHandlerBoxVtbl(): W
 
 
 // Windows.ApplicationModel.DataTransfer.ShareProviderOperation (synthetic:Windows_ApplicationModel_DataTransfer_ShareProviderOperation)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public class Windows_ApplicationModel_DataTransfer_ShareProviderOperation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24185,6 +24880,7 @@ public class Windows_ApplicationModel_DataTransfer_ShareProviderOperation <: win
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 extend Windows_ApplicationModel_DataTransfer_ShareProviderOperation <: windows_core.HandleWinrtType<Windows_ApplicationModel_DataTransfer_ShareProviderOperation> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_DataTransfer_ShareProviderOperation): CPointer<Unit> {
         value.asRaw()
@@ -24203,6 +24899,7 @@ extend Windows_ApplicationModel_DataTransfer_ShareProviderOperation <: windows_c
 }
 
 // Windows.ApplicationModel.DataTransfer.ShareTargetInfo (synthetic:Windows_ApplicationModel_DataTransfer_ShareTargetInfo)
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 public class Windows_ApplicationModel_DataTransfer_ShareTargetInfo <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24293,6 +24990,7 @@ public class Windows_ApplicationModel_DataTransfer_ShareTargetInfo <: windows_in
     }
 }
 
+@When[Windows_ApplicationModel_DataTransfer == "on"]
 extend Windows_ApplicationModel_DataTransfer_ShareTargetInfo <: windows_core.HandleWinrtType<Windows_ApplicationModel_DataTransfer_ShareTargetInfo> {
     public static func intoWinrtHandle(value: Windows_ApplicationModel_DataTransfer_ShareTargetInfo): CPointer<Unit> {
         value.asRaw()
@@ -24311,6 +25009,7 @@ extend Windows_ApplicationModel_DataTransfer_ShareTargetInfo <: windows_core.Han
 }
 
 // Windows.Data.Text.TextSegment (synthetic:Windows_Data_Text_TextSegment)
+@When[Windows_Data_Text == "on"]
 @C
 public struct Windows_Data_Text_TextSegment {
     public var StartPosition: UInt32 = 0u32
@@ -24318,6 +25017,7 @@ public struct Windows_Data_Text_TextSegment {
 }
 
 // Windows.Devices.Input.IPointerDevice (synthetic:Windows_Devices_Input_IPointerDevice)
+@When[Windows_Devices_Input == "on"]
 @Interface["93c9bafc-ebcb-467e-82c6-276feae36b5a", "Windows.Devices.Input.IPointerDevice", "SupportedUsages.value=Com"]
 public interface Windows_Devices_Input_IPointerDevice <: IInspectable {
     func PointerDeviceType(value: CPointer<Int32>): Int32
@@ -24329,12 +25029,14 @@ public interface Windows_Devices_Input_IPointerDevice <: IInspectable {
 }
 
 // Windows.Devices.Input.IPointerDevice2 (synthetic:Windows_Devices_Input_IPointerDevice2)
+@When[Windows_Devices_Input == "on"]
 @Interface["f8a6d2a0-c484-489f-ae3e-30d2ee1ffd3e", "Windows.Devices.Input.IPointerDevice2"]
 public interface Windows_Devices_Input_IPointerDevice2 <: IInspectable {
     func MaxPointersWithZDistance(value: CPointer<UInt32>): Int32
 }
 
 // Windows.Devices.Input.IPointerDeviceStatics (synthetic:Windows_Devices_Input_IPointerDeviceStatics)
+@When[Windows_Devices_Input == "on"]
 @Interface["d8b89aa1-d1c6-416e-bd8d-5790914dc563", "Windows.Devices.Input.IPointerDeviceStatics", "GetPointerDevice.pointerDevice=Com;GetPointerDevices.pointerDevices=Com"]
 public interface Windows_Devices_Input_IPointerDeviceStatics <: IInspectable {
     func GetPointerDevice(pointerId: UInt32, pointerDevice: CPointer<CPointer<Unit>>): Int32
@@ -24342,6 +25044,7 @@ public interface Windows_Devices_Input_IPointerDeviceStatics <: IInspectable {
 }
 
 // Windows.Devices.Input.PointerDevice (synthetic:Windows_Devices_Input_PointerDevice)
+@When[Windows_Devices_Input == "on"]
 public class Windows_Devices_Input_PointerDevice <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24511,6 +25214,7 @@ public class Windows_Devices_Input_PointerDevice <: windows_interface.InterfaceW
     }
 }
 
+@When[Windows_Devices_Input == "on"]
 extend Windows_Devices_Input_PointerDevice <: windows_core.HandleWinrtType<Windows_Devices_Input_PointerDevice> {
     public static func intoWinrtHandle(value: Windows_Devices_Input_PointerDevice): CPointer<Unit> {
         value.asRaw()
@@ -24529,6 +25233,7 @@ extend Windows_Devices_Input_PointerDevice <: windows_core.HandleWinrtType<Windo
 }
 
 // Windows.Devices.Input.PointerDeviceType (synthetic:Windows_Devices_Input_PointerDeviceType)
+@When[Windows_Devices_Input == "on"]
 public struct Windows_Devices_Input_PointerDeviceType {
     public let value: Int32
     public init() {
@@ -24538,12 +25243,17 @@ public struct Windows_Devices_Input_PointerDeviceType {
         this.value = value
     }
 }
+@When[Windows_Devices_Input == "on"]
 public let Windows_Devices_Input_PointerDeviceType_Touch = Windows_Devices_Input_PointerDeviceType(0)
+@When[Windows_Devices_Input == "on"]
 public let Windows_Devices_Input_PointerDeviceType_Pen = Windows_Devices_Input_PointerDeviceType(1)
+@When[Windows_Devices_Input == "on"]
 public let Windows_Devices_Input_PointerDeviceType_Mouse = Windows_Devices_Input_PointerDeviceType(2)
+@When[Windows_Devices_Input == "on"]
 public let Windows_Devices_Input_PointerDeviceType_Touchpad = Windows_Devices_Input_PointerDeviceType(3)
 
 // Windows.Devices.Input.PointerDeviceUsage (synthetic:Windows_Devices_Input_PointerDeviceUsage)
+@When[Windows_Devices_Input == "on"]
 @C
 public struct Windows_Devices_Input_PointerDeviceUsage {
     public var UsagePage: UInt32 = 0u32
@@ -24557,6 +25267,7 @@ public struct Windows_Devices_Input_PointerDeviceUsage {
 }
 
 // Windows.Foundation.AsyncActionCompletedHandler (synthetic:Windows_Foundation_AsyncActionCompletedHandler)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_AsyncActionCompletedHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -24564,6 +25275,7 @@ public struct Windows_Foundation_AsyncActionCompletedHandlerVtbl {
     public init() {}
 }
 
+@When[Windows_Foundation == "on"]
 public open class Windows_Foundation_AsyncActionCompletedHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24631,18 +25343,22 @@ public open class Windows_Foundation_AsyncActionCompletedHandler <: windows_inte
     }
 }
 
+@When[Windows_Foundation == "on"]
 extend Windows_Foundation_AsyncActionCompletedHandler <: windows_core.Interface<Windows_Foundation_AsyncActionCompletedHandler> {}
 
+@When[Windows_Foundation == "on"]
 private class OwnedWindows_Foundation_AsyncActionCompletedHandler <: Windows_Foundation_AsyncActionCompletedHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_AsyncActionCompletedHandlerInvokerErased {
     func __winrtThunk_Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Int32
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_AsyncActionCompletedHandlerInvoker <: Windows_Foundation_AsyncActionCompletedHandlerInvokerErased {
     func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Unit {
         ()
@@ -24660,6 +25376,7 @@ public interface Windows_Foundation_AsyncActionCompletedHandlerInvoker <: Window
     }
 }
 
+@When[Windows_Foundation == "on"]
 private class Windows_Foundation_AsyncActionCompletedHandlerBox <: Windows_Foundation_AsyncActionCompletedHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, Int32) -> Unit
     private let vtblHandle: CPointer<Windows_Foundation_AsyncActionCompletedHandlerVtbl>
@@ -24697,6 +25414,7 @@ private class Windows_Foundation_AsyncActionCompletedHandlerBox <: Windows_Found
     }
 }
 
+@When[Windows_Foundation == "on"]
 func buildWindows_Foundation_AsyncActionCompletedHandlerBoxVtbl(): Windows_Foundation_AsyncActionCompletedHandlerVtbl {
     var vtbl = Windows_Foundation_AsyncActionCompletedHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -24713,6 +25431,7 @@ func buildWindows_Foundation_AsyncActionCompletedHandlerBoxVtbl(): Windows_Found
 
 
 // Windows.Foundation.AsyncOperationCompletedHandler`1 (synthetic:Windows_Foundation_AsyncOperationCompletedHandler_1)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_AsyncOperationCompletedHandler_1Vtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -24720,6 +25439,7 @@ public struct Windows_Foundation_AsyncOperationCompletedHandler_1Vtbl {
     public init() {}
 }
 
+@When[Windows_Foundation == "on"]
 public open class Windows_Foundation_AsyncOperationCompletedHandler_1<TResult> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24792,18 +25512,22 @@ public open class Windows_Foundation_AsyncOperationCompletedHandler_1<TResult> <
     }
 }
 
+@When[Windows_Foundation == "on"]
 extend<TResult> Windows_Foundation_AsyncOperationCompletedHandler_1<TResult> <: windows_core.Interface<Windows_Foundation_AsyncOperationCompletedHandler_1<TResult>> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {}
 
+@When[Windows_Foundation == "on"]
 private class OwnedWindows_Foundation_AsyncOperationCompletedHandler_1<TResult> <: Windows_Foundation_AsyncOperationCompletedHandler_1<TResult> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_AsyncOperationCompletedHandler_1InvokerErased {
     func __winrtThunk_Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Int32
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_AsyncOperationCompletedHandler_1Invoker<TResult> <: Windows_Foundation_AsyncOperationCompletedHandler_1InvokerErased where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Unit {
         ()
@@ -24821,6 +25545,7 @@ public interface Windows_Foundation_AsyncOperationCompletedHandler_1Invoker<TRes
     }
 }
 
+@When[Windows_Foundation == "on"]
 private class Windows_Foundation_AsyncOperationCompletedHandler_1Box<TResult> <: Windows_Foundation_AsyncOperationCompletedHandler_1Invoker<TResult> & Resource where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public let invoke_: (CPointer<Unit>, Int32) -> Unit
     private let vtblHandle: CPointer<Windows_Foundation_AsyncOperationCompletedHandler_1Vtbl>
@@ -24858,6 +25583,7 @@ private class Windows_Foundation_AsyncOperationCompletedHandler_1Box<TResult> <:
     }
 }
 
+@When[Windows_Foundation == "on"]
 func buildWindows_Foundation_AsyncOperationCompletedHandler_1BoxVtbl<TResult>(): Windows_Foundation_AsyncOperationCompletedHandler_1Vtbl where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     var vtbl = Windows_Foundation_AsyncOperationCompletedHandler_1Vtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -24874,6 +25600,7 @@ func buildWindows_Foundation_AsyncOperationCompletedHandler_1BoxVtbl<TResult>():
 
 
 // Windows.Foundation.AsyncOperationProgressHandler`2 (synthetic:Windows_Foundation_AsyncOperationProgressHandler_2)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_AsyncOperationProgressHandler_2Vtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -24881,6 +25608,7 @@ public struct Windows_Foundation_AsyncOperationProgressHandler_2Vtbl {
     public init() {}
 }
 
+@When[Windows_Foundation == "on"]
 public open class Windows_Foundation_AsyncOperationProgressHandler_2<TResult, TProgress> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24955,18 +25683,22 @@ public open class Windows_Foundation_AsyncOperationProgressHandler_2<TResult, TP
     }
 }
 
+@When[Windows_Foundation == "on"]
 extend<TResult, TProgress> Windows_Foundation_AsyncOperationProgressHandler_2<TResult, TProgress> <: windows_core.Interface<Windows_Foundation_AsyncOperationProgressHandler_2<TResult, TProgress>> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {}
 
+@When[Windows_Foundation == "on"]
 private class OwnedWindows_Foundation_AsyncOperationProgressHandler_2<TResult, TProgress> <: Windows_Foundation_AsyncOperationProgressHandler_2<TResult, TProgress> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_AsyncOperationProgressHandler_2InvokerErased {
     func __winrtThunk_Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Int32
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_AsyncOperationProgressHandler_2Invoker<TResult, TProgress> <: Windows_Foundation_AsyncOperationProgressHandler_2InvokerErased where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     func Invoke(asyncInfo: CPointer<Unit>, progressInfo: CPointer<Unit>): Unit {
         ()
@@ -24984,6 +25716,7 @@ public interface Windows_Foundation_AsyncOperationProgressHandler_2Invoker<TResu
     }
 }
 
+@When[Windows_Foundation == "on"]
 private class Windows_Foundation_AsyncOperationProgressHandler_2Box<TResult, TProgress> <: Windows_Foundation_AsyncOperationProgressHandler_2Invoker<TResult, TProgress> & Resource where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Windows_Foundation_AsyncOperationProgressHandler_2Vtbl>
@@ -25021,6 +25754,7 @@ private class Windows_Foundation_AsyncOperationProgressHandler_2Box<TResult, TPr
     }
 }
 
+@When[Windows_Foundation == "on"]
 func buildWindows_Foundation_AsyncOperationProgressHandler_2BoxVtbl<TResult, TProgress>(): Windows_Foundation_AsyncOperationProgressHandler_2Vtbl where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     var vtbl = Windows_Foundation_AsyncOperationProgressHandler_2Vtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -25037,6 +25771,7 @@ func buildWindows_Foundation_AsyncOperationProgressHandler_2BoxVtbl<TResult, TPr
 
 
 // Windows.Foundation.AsyncOperationWithProgressCompletedHandler`2 (synthetic:Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2Vtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -25044,6 +25779,7 @@ public struct Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2Vtb
     public init() {}
 }
 
+@When[Windows_Foundation == "on"]
 public open class Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2<TResult, TProgress> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -25118,18 +25854,22 @@ public open class Windows_Foundation_AsyncOperationWithProgressCompletedHandler_
     }
 }
 
+@When[Windows_Foundation == "on"]
 extend<TResult, TProgress> Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2<TResult, TProgress> <: windows_core.Interface<Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2<TResult, TProgress>> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {}
 
+@When[Windows_Foundation == "on"]
 private class OwnedWindows_Foundation_AsyncOperationWithProgressCompletedHandler_2<TResult, TProgress> <: Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2<TResult, TProgress> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2InvokerErased {
     func __winrtThunk_Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Int32
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2Invoker<TResult, TProgress> <: Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2InvokerErased where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     func Invoke(asyncInfo: CPointer<Unit>, asyncStatus: Int32): Unit {
         ()
@@ -25147,6 +25887,7 @@ public interface Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2
     }
 }
 
+@When[Windows_Foundation == "on"]
 private class Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2Box<TResult, TProgress> <: Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2Invoker<TResult, TProgress> & Resource where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public let invoke_: (CPointer<Unit>, Int32) -> Unit
     private let vtblHandle: CPointer<Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2Vtbl>
@@ -25184,6 +25925,7 @@ private class Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2Box
     }
 }
 
+@When[Windows_Foundation == "on"]
 func buildWindows_Foundation_AsyncOperationWithProgressCompletedHandler_2BoxVtbl<TResult, TProgress>(): Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2Vtbl where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     var vtbl = Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2Vtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -25200,6 +25942,7 @@ func buildWindows_Foundation_AsyncOperationWithProgressCompletedHandler_2BoxVtbl
 
 
 // Windows.Foundation.AsyncStatus (synthetic:Windows_Foundation_AsyncStatus)
+@When[Windows_Foundation == "on"]
 public struct Windows_Foundation_AsyncStatus {
     public let value: Int32
     public init() {
@@ -25209,12 +25952,17 @@ public struct Windows_Foundation_AsyncStatus {
         this.value = value
     }
 }
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_AsyncStatus_Canceled = Windows_Foundation_AsyncStatus(2)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_AsyncStatus_Completed = Windows_Foundation_AsyncStatus(1)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_AsyncStatus_Error = Windows_Foundation_AsyncStatus(3)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_AsyncStatus_Started = Windows_Foundation_AsyncStatus(0)
 
 // Windows.Foundation.Collections.CollectionChange (synthetic:Windows_Foundation_Collections_CollectionChange)
+@When[Windows_Foundation_Collections == "on"]
 public struct Windows_Foundation_Collections_CollectionChange {
     public let value: Int32
     public init() {
@@ -25224,14 +25972,20 @@ public struct Windows_Foundation_Collections_CollectionChange {
         this.value = value
     }
 }
+@When[Windows_Foundation_Collections == "on"]
 public let Windows_Foundation_Collections_CollectionChange_Reset = Windows_Foundation_Collections_CollectionChange(0)
+@When[Windows_Foundation_Collections == "on"]
 public let Windows_Foundation_Collections_CollectionChange_ItemInserted = Windows_Foundation_Collections_CollectionChange(1)
+@When[Windows_Foundation_Collections == "on"]
 public let Windows_Foundation_Collections_CollectionChange_ItemRemoved = Windows_Foundation_Collections_CollectionChange(2)
+@When[Windows_Foundation_Collections == "on"]
 public let Windows_Foundation_Collections_CollectionChange_ItemChanged = Windows_Foundation_Collections_CollectionChange(3)
 
 // Windows.Foundation.Collections.IIterable`1 (synthetic:Windows_Foundation_Collections_IIterable_1)
+@When[Windows_Foundation_Collections == "on"]
 type Windows_Foundation_Collections_IIterable_1ExceptionBase = Exception
 
+@When[Windows_Foundation_Collections == "on"]
 @C
 public struct Windows_Foundation_Collections_IIterable_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
@@ -25294,17 +26048,20 @@ public struct Windows_Foundation_Collections_IIterable_1Vtbl {
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IIterable_1_ImplErased {
     func First(result: CPointer<CPointer<Unit>>): Int32
     func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IIterable_1_Impl<T> <: Windows_Foundation_Collections_IIterable_1_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
         windows_core.winrtReleaseGenericArrayOut<T>(data, length)
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public open class Windows_Foundation_Collections_IIterable_1<T> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -25389,8 +26146,10 @@ public open class Windows_Foundation_Collections_IIterable_1<T> <: windows_inter
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 extend<T> Windows_Foundation_Collections_IIterable_1<T> <: windows_core.Interface<Windows_Foundation_Collections_IIterable_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
+@When[Windows_Foundation_Collections == "on"]
 private class OwnedWindows_Foundation_Collections_IIterable_1<T> <: Windows_Foundation_Collections_IIterable_1<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
@@ -25399,8 +26158,10 @@ private class OwnedWindows_Foundation_Collections_IIterable_1<T> <: Windows_Foun
 
 
 // Windows.Foundation.Collections.IIterator`1 (synthetic:Windows_Foundation_Collections_IIterator_1)
+@When[Windows_Foundation_Collections == "on"]
 type Windows_Foundation_Collections_IIterator_1ExceptionBase = Exception
 
+@When[Windows_Foundation_Collections == "on"]
 @C
 public struct Windows_Foundation_Collections_IIterator_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
@@ -25598,6 +26359,7 @@ public struct Windows_Foundation_Collections_IIterator_1Vtbl {
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IIterator_1_ImplErased {
     func Current(result: CPointer<CPointer<Unit>>): Int32
     func HasCurrent(result: CPointer<Bool>): Int32
@@ -25606,12 +26368,14 @@ public interface Windows_Foundation_Collections_IIterator_1_ImplErased {
     func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IIterator_1_Impl<T> <: Windows_Foundation_Collections_IIterator_1_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
         windows_core.winrtReleaseGenericArrayOut<T>(data, length)
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public open class Windows_Foundation_Collections_IIterator_1<T> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -25723,8 +26487,10 @@ public open class Windows_Foundation_Collections_IIterator_1<T> <: windows_inter
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 extend<T> Windows_Foundation_Collections_IIterator_1<T> <: windows_core.Interface<Windows_Foundation_Collections_IIterator_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
+@When[Windows_Foundation_Collections == "on"]
 private class OwnedWindows_Foundation_Collections_IIterator_1<T> <: Windows_Foundation_Collections_IIterator_1<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
@@ -25733,8 +26499,10 @@ private class OwnedWindows_Foundation_Collections_IIterator_1<T> <: Windows_Foun
 
 
 // Windows.Foundation.Collections.IKeyValuePair`2 (synthetic:Windows_Foundation_Collections_IKeyValuePair_2)
+@When[Windows_Foundation_Collections == "on"]
 type Windows_Foundation_Collections_IKeyValuePair_2ExceptionBase = Exception
 
+@When[Windows_Foundation_Collections == "on"]
 @C
 public struct Windows_Foundation_Collections_IKeyValuePair_2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
@@ -25845,6 +26613,7 @@ public struct Windows_Foundation_Collections_IKeyValuePair_2Vtbl {
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IKeyValuePair_2_ImplErased {
     func Key(result: CPointer<CPointer<Unit>>): Int32
     func Value(result: CPointer<CPointer<Unit>>): Int32
@@ -25852,6 +26621,7 @@ public interface Windows_Foundation_Collections_IKeyValuePair_2_ImplErased {
     func releaseVArrayOut(data: CPointer<Unit>, length: UInt32): Unit
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IKeyValuePair_2_Impl<K, V> <: Windows_Foundation_Collections_IKeyValuePair_2_ImplErased where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     func releaseKArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
         windows_core.winrtReleaseGenericArrayOut<K>(data, length)
@@ -25861,6 +26631,7 @@ public interface Windows_Foundation_Collections_IKeyValuePair_2_Impl<K, V> <: Wi
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public open class Windows_Foundation_Collections_IKeyValuePair_2<K, V> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -25956,8 +26727,10 @@ public open class Windows_Foundation_Collections_IKeyValuePair_2<K, V> <: window
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 extend<K, V> Windows_Foundation_Collections_IKeyValuePair_2<K, V> <: windows_core.Interface<Windows_Foundation_Collections_IKeyValuePair_2<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {}
 
+@When[Windows_Foundation_Collections == "on"]
 private class OwnedWindows_Foundation_Collections_IKeyValuePair_2<K, V> <: Windows_Foundation_Collections_IKeyValuePair_2<K, V> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
@@ -25966,8 +26739,10 @@ private class OwnedWindows_Foundation_Collections_IKeyValuePair_2<K, V> <: Windo
 
 
 // Windows.Foundation.Collections.IMapChangedEventArgs`1 (synthetic:Windows_Foundation_Collections_IMapChangedEventArgs_1)
+@When[Windows_Foundation_Collections == "on"]
 type Windows_Foundation_Collections_IMapChangedEventArgs_1ExceptionBase = Exception
 
+@When[Windows_Foundation_Collections == "on"]
 @C
 public struct Windows_Foundation_Collections_IMapChangedEventArgs_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
@@ -26075,18 +26850,21 @@ public struct Windows_Foundation_Collections_IMapChangedEventArgs_1Vtbl {
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IMapChangedEventArgs_1_ImplErased {
     func CollectionChange(result: CPointer<Int32>): Int32
     func Key(result: CPointer<CPointer<Unit>>): Int32
     func releaseKArrayOut(data: CPointer<Unit>, length: UInt32): Unit
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IMapChangedEventArgs_1_Impl<K> <: Windows_Foundation_Collections_IMapChangedEventArgs_1_ImplErased where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K> {
     func releaseKArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
         windows_core.winrtReleaseGenericArrayOut<K>(data, length)
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public open class Windows_Foundation_Collections_IMapChangedEventArgs_1<K> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -26180,8 +26958,10 @@ public open class Windows_Foundation_Collections_IMapChangedEventArgs_1<K> <: wi
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 extend<K> Windows_Foundation_Collections_IMapChangedEventArgs_1<K> <: windows_core.Interface<Windows_Foundation_Collections_IMapChangedEventArgs_1<K>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K> {}
 
+@When[Windows_Foundation_Collections == "on"]
 private class OwnedWindows_Foundation_Collections_IMapChangedEventArgs_1<K> <: Windows_Foundation_Collections_IMapChangedEventArgs_1<K> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
@@ -26190,8 +26970,10 @@ private class OwnedWindows_Foundation_Collections_IMapChangedEventArgs_1<K> <: W
 
 
 // Windows.Foundation.Collections.IMapView`2 (synthetic:Windows_Foundation_Collections_IMapView_2)
+@When[Windows_Foundation_Collections == "on"]
 type Windows_Foundation_Collections_IMapView_2ExceptionBase = Exception
 
+@When[Windows_Foundation_Collections == "on"]
 @C
 public struct Windows_Foundation_Collections_IMapView_2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
@@ -26416,6 +27198,7 @@ public struct Windows_Foundation_Collections_IMapView_2Vtbl {
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IMapView_2_ImplErased {
     func Lookup(key: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
     func Size(result: CPointer<UInt32>): Int32
@@ -26425,6 +27208,7 @@ public interface Windows_Foundation_Collections_IMapView_2_ImplErased {
     func releaseVArrayOut(data: CPointer<Unit>, length: UInt32): Unit
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IMapView_2_Impl<K, V> <: Windows_Foundation_Collections_IMapView_2_ImplErased where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     func releaseKArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
         windows_core.winrtReleaseGenericArrayOut<K>(data, length)
@@ -26434,6 +27218,7 @@ public interface Windows_Foundation_Collections_IMapView_2_Impl<K, V> <: Windows
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public open class Windows_Foundation_Collections_IMapView_2<K, V> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -26547,8 +27332,10 @@ public open class Windows_Foundation_Collections_IMapView_2<K, V> <: windows_int
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 extend<K, V> Windows_Foundation_Collections_IMapView_2<K, V> <: windows_core.Interface<Windows_Foundation_Collections_IMapView_2<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {}
 
+@When[Windows_Foundation_Collections == "on"]
 private class OwnedWindows_Foundation_Collections_IMapView_2<K, V> <: Windows_Foundation_Collections_IMapView_2<K, V> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
@@ -26557,8 +27344,10 @@ private class OwnedWindows_Foundation_Collections_IMapView_2<K, V> <: Windows_Fo
 
 
 // Windows.Foundation.Collections.IMap`2 (synthetic:Windows_Foundation_Collections_IMap_2)
+@When[Windows_Foundation_Collections == "on"]
 type Windows_Foundation_Collections_IMap_2ExceptionBase = Exception
 
+@When[Windows_Foundation_Collections == "on"]
 @C
 public struct Windows_Foundation_Collections_IMap_2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
@@ -26836,6 +27625,7 @@ public struct Windows_Foundation_Collections_IMap_2Vtbl {
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IMap_2_ImplErased {
     func Lookup(key: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
     func Size(result: CPointer<UInt32>): Int32
@@ -26848,6 +27638,7 @@ public interface Windows_Foundation_Collections_IMap_2_ImplErased {
     func releaseVArrayOut(data: CPointer<Unit>, length: UInt32): Unit
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IMap_2_Impl<K, V> <: Windows_Foundation_Collections_IMap_2_ImplErased where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     func releaseKArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
         windows_core.winrtReleaseGenericArrayOut<K>(data, length)
@@ -26857,6 +27648,7 @@ public interface Windows_Foundation_Collections_IMap_2_Impl<K, V> <: Windows_Fou
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public open class Windows_Foundation_Collections_IMap_2<K, V> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -26997,8 +27789,10 @@ public open class Windows_Foundation_Collections_IMap_2<K, V> <: windows_interfa
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 extend<K, V> Windows_Foundation_Collections_IMap_2<K, V> <: windows_core.Interface<Windows_Foundation_Collections_IMap_2<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {}
 
+@When[Windows_Foundation_Collections == "on"]
 private class OwnedWindows_Foundation_Collections_IMap_2<K, V> <: Windows_Foundation_Collections_IMap_2<K, V> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
@@ -27007,8 +27801,10 @@ private class OwnedWindows_Foundation_Collections_IMap_2<K, V> <: Windows_Founda
 
 
 // Windows.Foundation.Collections.IObservableMap`2 (synthetic:Windows_Foundation_Collections_IObservableMap_2)
+@When[Windows_Foundation_Collections == "on"]
 type Windows_Foundation_Collections_IObservableMap_2ExceptionBase = Exception
 
+@When[Windows_Foundation_Collections == "on"]
 @C
 public struct Windows_Foundation_Collections_IObservableMap_2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
@@ -27084,6 +27880,7 @@ public struct Windows_Foundation_Collections_IObservableMap_2Vtbl {
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IObservableMap_2_ImplErased {
     func MapChanged(vhnd: CPointer<Unit>, result: CPointer<Int64>): Int32
     func RemoveMapChanged(token: Int64): Int32
@@ -27091,6 +27888,7 @@ public interface Windows_Foundation_Collections_IObservableMap_2_ImplErased {
     func releaseVArrayOut(data: CPointer<Unit>, length: UInt32): Unit
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IObservableMap_2_Impl<K, V> <: Windows_Foundation_Collections_IObservableMap_2_ImplErased where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     func releaseKArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
         windows_core.winrtReleaseGenericArrayOut<K>(data, length)
@@ -27100,6 +27898,7 @@ public interface Windows_Foundation_Collections_IObservableMap_2_Impl<K, V> <: W
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public open class Windows_Foundation_Collections_IObservableMap_2<K, V> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -27198,8 +27997,10 @@ public open class Windows_Foundation_Collections_IObservableMap_2<K, V> <: windo
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 extend<K, V> Windows_Foundation_Collections_IObservableMap_2<K, V> <: windows_core.Interface<Windows_Foundation_Collections_IObservableMap_2<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {}
 
+@When[Windows_Foundation_Collections == "on"]
 private class OwnedWindows_Foundation_Collections_IObservableMap_2<K, V> <: Windows_Foundation_Collections_IObservableMap_2<K, V> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
@@ -27208,8 +28009,10 @@ private class OwnedWindows_Foundation_Collections_IObservableMap_2<K, V> <: Wind
 
 
 // Windows.Foundation.Collections.IObservableVector`1 (synthetic:Windows_Foundation_Collections_IObservableVector_1)
+@When[Windows_Foundation_Collections == "on"]
 type Windows_Foundation_Collections_IObservableVector_1ExceptionBase = Exception
 
+@When[Windows_Foundation_Collections == "on"]
 @C
 public struct Windows_Foundation_Collections_IObservableVector_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
@@ -27285,18 +28088,21 @@ public struct Windows_Foundation_Collections_IObservableVector_1Vtbl {
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IObservableVector_1_ImplErased {
     func VectorChanged(vhnd: CPointer<Unit>, result: CPointer<Int64>): Int32
     func RemoveVectorChanged(token: Int64): Int32
     func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IObservableVector_1_Impl<T> <: Windows_Foundation_Collections_IObservableVector_1_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
         windows_core.winrtReleaseGenericArrayOut<T>(data, length)
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public open class Windows_Foundation_Collections_IObservableVector_1<T> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -27393,8 +28199,10 @@ public open class Windows_Foundation_Collections_IObservableVector_1<T> <: windo
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 extend<T> Windows_Foundation_Collections_IObservableVector_1<T> <: windows_core.Interface<Windows_Foundation_Collections_IObservableVector_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
+@When[Windows_Foundation_Collections == "on"]
 private class OwnedWindows_Foundation_Collections_IObservableVector_1<T> <: Windows_Foundation_Collections_IObservableVector_1<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
@@ -27403,11 +28211,13 @@ private class OwnedWindows_Foundation_Collections_IObservableVector_1<T> <: Wind
 
 
 // Windows.Foundation.Collections.IPropertySet (synthetic:Windows_Foundation_Collections_IPropertySet)
+@When[Windows_Foundation_Collections == "on"]
 @Interface["8a43ed9f-f4e6-4421-acf9-1dab2986820c", "Windows.Foundation.Collections.IPropertySet"]
 public interface Windows_Foundation_Collections_IPropertySet <: IInspectable {
 }
 
 // Windows.Foundation.Collections.IVectorChangedEventArgs (synthetic:Windows_Foundation_Collections_IVectorChangedEventArgs)
+@When[Windows_Foundation_Collections == "on"]
 @Interface["575933df-34fe-4480-af15-07691f3d5d9b", "Windows.Foundation.Collections.IVectorChangedEventArgs"]
 public interface Windows_Foundation_Collections_IVectorChangedEventArgs <: IInspectable {
     func CollectionChange(value: CPointer<Int32>): Int32
@@ -27415,8 +28225,10 @@ public interface Windows_Foundation_Collections_IVectorChangedEventArgs <: IInsp
 }
 
 // Windows.Foundation.Collections.IVectorView`1 (synthetic:Windows_Foundation_Collections_IVectorView_1)
+@When[Windows_Foundation_Collections == "on"]
 type Windows_Foundation_Collections_IVectorView_1ExceptionBase = Exception
 
+@When[Windows_Foundation_Collections == "on"]
 @C
 public struct Windows_Foundation_Collections_IVectorView_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
@@ -27635,6 +28447,7 @@ public struct Windows_Foundation_Collections_IVectorView_1Vtbl {
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IVectorView_1_ImplErased {
     func GetAt(index: UInt32, result: CPointer<CPointer<Unit>>): Int32
     func Size(result: CPointer<UInt32>): Int32
@@ -27643,12 +28456,14 @@ public interface Windows_Foundation_Collections_IVectorView_1_ImplErased {
     func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IVectorView_1_Impl<T> <: Windows_Foundation_Collections_IVectorView_1_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
         windows_core.winrtReleaseGenericArrayOut<T>(data, length)
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public open class Windows_Foundation_Collections_IVectorView_1<T> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -27760,8 +28575,10 @@ public open class Windows_Foundation_Collections_IVectorView_1<T> <: windows_int
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 extend<T> Windows_Foundation_Collections_IVectorView_1<T> <: windows_core.Interface<Windows_Foundation_Collections_IVectorView_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
+@When[Windows_Foundation_Collections == "on"]
 private class OwnedWindows_Foundation_Collections_IVectorView_1<T> <: Windows_Foundation_Collections_IVectorView_1<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
@@ -27770,8 +28587,10 @@ private class OwnedWindows_Foundation_Collections_IVectorView_1<T> <: Windows_Fo
 
 
 // Windows.Foundation.Collections.IVector`1 (synthetic:Windows_Foundation_Collections_IVector_1)
+@When[Windows_Foundation_Collections == "on"]
 type Windows_Foundation_Collections_IVector_1ExceptionBase = Exception
 
+@When[Windows_Foundation_Collections == "on"]
 @C
 public struct Windows_Foundation_Collections_IVector_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
@@ -28150,6 +28969,7 @@ public struct Windows_Foundation_Collections_IVector_1Vtbl {
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IVector_1_ImplErased {
     func GetAt(index: UInt32, result: CPointer<CPointer<Unit>>): Int32
     func Size(result: CPointer<UInt32>): Int32
@@ -28166,12 +28986,14 @@ public interface Windows_Foundation_Collections_IVector_1_ImplErased {
     func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_IVector_1_Impl<T> <: Windows_Foundation_Collections_IVector_1_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
         windows_core.winrtReleaseGenericArrayOut<T>(data, length)
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public open class Windows_Foundation_Collections_IVector_1<T> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -28355,8 +29177,10 @@ public open class Windows_Foundation_Collections_IVector_1<T> <: windows_interfa
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 extend<T> Windows_Foundation_Collections_IVector_1<T> <: windows_core.Interface<Windows_Foundation_Collections_IVector_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
+@When[Windows_Foundation_Collections == "on"]
 private class OwnedWindows_Foundation_Collections_IVector_1<T> <: Windows_Foundation_Collections_IVector_1<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
@@ -28365,6 +29189,7 @@ private class OwnedWindows_Foundation_Collections_IVector_1<T> <: Windows_Founda
 
 
 // Windows.Foundation.Collections.MapChangedEventHandler`2 (synthetic:Windows_Foundation_Collections_MapChangedEventHandler_2)
+@When[Windows_Foundation_Collections == "on"]
 @C
 public struct Windows_Foundation_Collections_MapChangedEventHandler_2Vtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -28372,6 +29197,7 @@ public struct Windows_Foundation_Collections_MapChangedEventHandler_2Vtbl {
     public init() {}
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public open class Windows_Foundation_Collections_MapChangedEventHandler_2<K, V> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -28446,18 +29272,22 @@ public open class Windows_Foundation_Collections_MapChangedEventHandler_2<K, V> 
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 extend<K, V> Windows_Foundation_Collections_MapChangedEventHandler_2<K, V> <: windows_core.Interface<Windows_Foundation_Collections_MapChangedEventHandler_2<K, V>> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {}
 
+@When[Windows_Foundation_Collections == "on"]
 private class OwnedWindows_Foundation_Collections_MapChangedEventHandler_2<K, V> <: Windows_Foundation_Collections_MapChangedEventHandler_2<K, V> where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_MapChangedEventHandler_2InvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, event: CPointer<Unit>): Int32
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_MapChangedEventHandler_2Invoker<K, V> <: Windows_Foundation_Collections_MapChangedEventHandler_2InvokerErased where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     func Invoke(sender: CPointer<Unit>, event: CPointer<Unit>): Unit {
         ()
@@ -28475,6 +29305,7 @@ public interface Windows_Foundation_Collections_MapChangedEventHandler_2Invoker<
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 private class Windows_Foundation_Collections_MapChangedEventHandler_2Box<K, V> <: Windows_Foundation_Collections_MapChangedEventHandler_2Invoker<K, V> & Resource where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Windows_Foundation_Collections_MapChangedEventHandler_2Vtbl>
@@ -28512,6 +29343,7 @@ private class Windows_Foundation_Collections_MapChangedEventHandler_2Box<K, V> <
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 func buildWindows_Foundation_Collections_MapChangedEventHandler_2BoxVtbl<K, V>(): Windows_Foundation_Collections_MapChangedEventHandler_2Vtbl where K <: windows_core.RuntimeType & windows_core.WinrtGenericType<K>, V <: windows_core.RuntimeType & windows_core.WinrtGenericType<V> {
     var vtbl = Windows_Foundation_Collections_MapChangedEventHandler_2Vtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -28528,6 +29360,7 @@ func buildWindows_Foundation_Collections_MapChangedEventHandler_2BoxVtbl<K, V>()
 
 
 // Windows.Foundation.Collections.VectorChangedEventHandler`1 (synthetic:Windows_Foundation_Collections_VectorChangedEventHandler_1)
+@When[Windows_Foundation_Collections == "on"]
 @C
 public struct Windows_Foundation_Collections_VectorChangedEventHandler_1Vtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -28535,6 +29368,7 @@ public struct Windows_Foundation_Collections_VectorChangedEventHandler_1Vtbl {
     public init() {}
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public open class Windows_Foundation_Collections_VectorChangedEventHandler_1<T> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -28607,18 +29441,22 @@ public open class Windows_Foundation_Collections_VectorChangedEventHandler_1<T> 
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 extend<T> Windows_Foundation_Collections_VectorChangedEventHandler_1<T> <: windows_core.Interface<Windows_Foundation_Collections_VectorChangedEventHandler_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
+@When[Windows_Foundation_Collections == "on"]
 private class OwnedWindows_Foundation_Collections_VectorChangedEventHandler_1<T> <: Windows_Foundation_Collections_VectorChangedEventHandler_1<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_VectorChangedEventHandler_1InvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, event: CPointer<Unit>): Int32
 }
 
+@When[Windows_Foundation_Collections == "on"]
 public interface Windows_Foundation_Collections_VectorChangedEventHandler_1Invoker<T> <: Windows_Foundation_Collections_VectorChangedEventHandler_1InvokerErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     func Invoke(sender: CPointer<Unit>, event: CPointer<Unit>): Unit {
         ()
@@ -28636,6 +29474,7 @@ public interface Windows_Foundation_Collections_VectorChangedEventHandler_1Invok
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 private class Windows_Foundation_Collections_VectorChangedEventHandler_1Box<T> <: Windows_Foundation_Collections_VectorChangedEventHandler_1Invoker<T> & Resource where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Windows_Foundation_Collections_VectorChangedEventHandler_1Vtbl>
@@ -28673,6 +29512,7 @@ private class Windows_Foundation_Collections_VectorChangedEventHandler_1Box<T> <
     }
 }
 
+@When[Windows_Foundation_Collections == "on"]
 func buildWindows_Foundation_Collections_VectorChangedEventHandler_1BoxVtbl<T>(): Windows_Foundation_Collections_VectorChangedEventHandler_1Vtbl where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     var vtbl = Windows_Foundation_Collections_VectorChangedEventHandler_1Vtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -28689,12 +29529,14 @@ func buildWindows_Foundation_Collections_VectorChangedEventHandler_1BoxVtbl<T>()
 
 
 // Windows.Foundation.DateTime (synthetic:Windows_Foundation_DateTime)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_DateTime {
     public var UniversalTime: Int64 = 0i64
 }
 
 // Windows.Foundation.Deferral (synthetic:Windows_Foundation_Deferral)
+@When[Windows_Foundation == "on"]
 public class Windows_Foundation_Deferral <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -28784,6 +29626,7 @@ public class Windows_Foundation_Deferral <: windows_interface.InterfaceWrapperBa
     }
 }
 
+@When[Windows_Foundation == "on"]
 extend Windows_Foundation_Deferral <: windows_core.HandleWinrtType<Windows_Foundation_Deferral> {
     public static func intoWinrtHandle(value: Windows_Foundation_Deferral): CPointer<Unit> {
         value.asRaw()
@@ -28802,6 +29645,7 @@ extend Windows_Foundation_Deferral <: windows_core.HandleWinrtType<Windows_Found
 }
 
 // Windows.Foundation.DeferralCompletedHandler (synthetic:Windows_Foundation_DeferralCompletedHandler)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_DeferralCompletedHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -28809,6 +29653,7 @@ public struct Windows_Foundation_DeferralCompletedHandlerVtbl {
     public init() {}
 }
 
+@When[Windows_Foundation == "on"]
 public open class Windows_Foundation_DeferralCompletedHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -28876,18 +29721,22 @@ public open class Windows_Foundation_DeferralCompletedHandler <: windows_interfa
     }
 }
 
+@When[Windows_Foundation == "on"]
 extend Windows_Foundation_DeferralCompletedHandler <: windows_core.Interface<Windows_Foundation_DeferralCompletedHandler> {}
 
+@When[Windows_Foundation == "on"]
 private class OwnedWindows_Foundation_DeferralCompletedHandler <: Windows_Foundation_DeferralCompletedHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_DeferralCompletedHandlerInvokerErased {
     func __winrtThunk_Invoke(): Int32
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_DeferralCompletedHandlerInvoker <: Windows_Foundation_DeferralCompletedHandlerInvokerErased {
     func Invoke(): Unit {
         ()
@@ -28905,6 +29754,7 @@ public interface Windows_Foundation_DeferralCompletedHandlerInvoker <: Windows_F
     }
 }
 
+@When[Windows_Foundation == "on"]
 private class Windows_Foundation_DeferralCompletedHandlerBox <: Windows_Foundation_DeferralCompletedHandlerInvoker & Resource {
     public let invoke_: () -> Unit
     private let vtblHandle: CPointer<Windows_Foundation_DeferralCompletedHandlerVtbl>
@@ -28942,6 +29792,7 @@ private class Windows_Foundation_DeferralCompletedHandlerBox <: Windows_Foundati
     }
 }
 
+@When[Windows_Foundation == "on"]
 func buildWindows_Foundation_DeferralCompletedHandlerBoxVtbl(): Windows_Foundation_DeferralCompletedHandlerVtbl {
     var vtbl = Windows_Foundation_DeferralCompletedHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -28958,6 +29809,7 @@ func buildWindows_Foundation_DeferralCompletedHandlerBoxVtbl(): Windows_Foundati
 
 
 // Windows.Foundation.EventHandler`1 (synthetic:Windows_Foundation_EventHandler_1)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_EventHandler_1Vtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -28965,6 +29817,7 @@ public struct Windows_Foundation_EventHandler_1Vtbl {
     public init() {}
 }
 
+@When[Windows_Foundation == "on"]
 public open class Windows_Foundation_EventHandler_1<T> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -29037,18 +29890,22 @@ public open class Windows_Foundation_EventHandler_1<T> <: windows_interface.Inte
     }
 }
 
+@When[Windows_Foundation == "on"]
 extend<T> Windows_Foundation_EventHandler_1<T> <: windows_core.Interface<Windows_Foundation_EventHandler_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
+@When[Windows_Foundation == "on"]
 private class OwnedWindows_Foundation_EventHandler_1<T> <: Windows_Foundation_EventHandler_1<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_EventHandler_1InvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, args: CPointer<Unit>): Int32
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_EventHandler_1Invoker<T> <: Windows_Foundation_EventHandler_1InvokerErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     func Invoke(sender: CPointer<Unit>, args: CPointer<Unit>): Unit {
         ()
@@ -29066,6 +29923,7 @@ public interface Windows_Foundation_EventHandler_1Invoker<T> <: Windows_Foundati
     }
 }
 
+@When[Windows_Foundation == "on"]
 private class Windows_Foundation_EventHandler_1Box<T> <: Windows_Foundation_EventHandler_1Invoker<T> & Resource where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Windows_Foundation_EventHandler_1Vtbl>
@@ -29103,6 +29961,7 @@ private class Windows_Foundation_EventHandler_1Box<T> <: Windows_Foundation_Even
     }
 }
 
+@When[Windows_Foundation == "on"]
 func buildWindows_Foundation_EventHandler_1BoxVtbl<T>(): Windows_Foundation_EventHandler_1Vtbl where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     var vtbl = Windows_Foundation_EventHandler_1Vtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -29119,18 +29978,22 @@ func buildWindows_Foundation_EventHandler_1BoxVtbl<T>(): Windows_Foundation_Even
 
 
 // Windows.Foundation.EventRegistrationToken (synthetic:Windows_Foundation_EventRegistrationToken)
+@When[Windows_Foundation == "on"]
 public type Windows_Foundation_EventRegistrationToken = Int64
 
 // Windows.Foundation.FoundationContract (synthetic:Windows_Foundation_FoundationContract)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_FoundationContract {
     public var reserved: Int32 = 0
 }
 
 // Windows.Foundation.HResult (synthetic:Windows_Foundation_HResult)
+@When[Windows_Foundation == "on"]
 public type Windows_Foundation_HResult = Int32
 
 // Windows.Foundation.IAsyncAction (synthetic:Windows_Foundation_IAsyncAction)
+@When[Windows_Foundation == "on"]
 @Interface["5a648006-843a-4da9-865b-9d26e5dfad7b", "Windows.Foundation.IAsyncAction", "Completed.handler=Com"]
 public interface Windows_Foundation_IAsyncAction <: IInspectable {
     func SetCompleted(handler: CPointer<Unit>): Int32
@@ -29139,6 +30002,7 @@ public interface Windows_Foundation_IAsyncAction <: IInspectable {
 }
 
 // Windows.Foundation.IAsyncInfo (synthetic:Windows_Foundation_IAsyncInfo)
+@When[Windows_Foundation == "on"]
 @Interface["00000036-0000-0000-c000-000000000046", "Windows.Foundation.IAsyncInfo"]
 public interface Windows_Foundation_IAsyncInfo <: IInspectable {
     func Id(result: CPointer<UInt32>): Int32
@@ -29149,8 +30013,10 @@ public interface Windows_Foundation_IAsyncInfo <: IInspectable {
 }
 
 // Windows.Foundation.IAsyncOperationWithProgress`2 (synthetic:Windows_Foundation_IAsyncOperationWithProgress_2)
+@When[Windows_Foundation == "on"]
 type Windows_Foundation_IAsyncOperationWithProgress_2ExceptionBase = Exception
 
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_IAsyncOperationWithProgress_2Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
@@ -29341,6 +30207,7 @@ public struct Windows_Foundation_IAsyncOperationWithProgress_2Vtbl {
     }
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_IAsyncOperationWithProgress_2_ImplErased {
     func SetProgress(handler: CPointer<Unit>): Int32
     func Progress(result: CPointer<CPointer<Unit>>): Int32
@@ -29351,6 +30218,7 @@ public interface Windows_Foundation_IAsyncOperationWithProgress_2_ImplErased {
     func releaseTProgressArrayOut(data: CPointer<Unit>, length: UInt32): Unit
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_IAsyncOperationWithProgress_2_Impl<TResult, TProgress> <: Windows_Foundation_IAsyncOperationWithProgress_2_ImplErased where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     func releaseTResultArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
         windows_core.winrtReleaseGenericArrayOut<TResult>(data, length)
@@ -29360,6 +30228,7 @@ public interface Windows_Foundation_IAsyncOperationWithProgress_2_Impl<TResult, 
     }
 }
 
+@When[Windows_Foundation == "on"]
 public open class Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -29482,8 +30351,10 @@ public open class Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TPro
     }
 }
 
+@When[Windows_Foundation == "on"]
 extend<TResult, TProgress> Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress> <: windows_core.Interface<Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {}
 
+@When[Windows_Foundation == "on"]
 private class OwnedWindows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress> <: Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult>, TProgress <: windows_core.RuntimeType & windows_core.WinrtGenericType<TProgress> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
@@ -29492,8 +30363,10 @@ private class OwnedWindows_Foundation_IAsyncOperationWithProgress_2<TResult, TPr
 
 
 // Windows.Foundation.IAsyncOperation`1 (synthetic:Windows_Foundation_IAsyncOperation_1)
+@When[Windows_Foundation == "on"]
 type Windows_Foundation_IAsyncOperation_1ExceptionBase = Exception
 
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_IAsyncOperation_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
@@ -29620,6 +30493,7 @@ public struct Windows_Foundation_IAsyncOperation_1Vtbl {
     }
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_IAsyncOperation_1_ImplErased {
     func SetCompleted(handler: CPointer<Unit>): Int32
     func Completed(result: CPointer<CPointer<Unit>>): Int32
@@ -29627,12 +30501,14 @@ public interface Windows_Foundation_IAsyncOperation_1_ImplErased {
     func releaseTResultArrayOut(data: CPointer<Unit>, length: UInt32): Unit
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_IAsyncOperation_1_Impl<TResult> <: Windows_Foundation_IAsyncOperation_1_ImplErased where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     func releaseTResultArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
         windows_core.winrtReleaseGenericArrayOut<TResult>(data, length)
     }
 }
 
+@When[Windows_Foundation == "on"]
 public open class Windows_Foundation_IAsyncOperation_1<TResult> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -29735,8 +30611,10 @@ public open class Windows_Foundation_IAsyncOperation_1<TResult> <: windows_inter
     }
 }
 
+@When[Windows_Foundation == "on"]
 extend<TResult> Windows_Foundation_IAsyncOperation_1<TResult> <: windows_core.Interface<Windows_Foundation_IAsyncOperation_1<TResult>> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {}
 
+@When[Windows_Foundation == "on"]
 private class OwnedWindows_Foundation_IAsyncOperation_1<TResult> <: Windows_Foundation_IAsyncOperation_1<TResult> where TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
@@ -29745,30 +30623,35 @@ private class OwnedWindows_Foundation_IAsyncOperation_1<TResult> <: Windows_Foun
 
 
 // Windows.Foundation.IClosable (synthetic:Windows_Foundation_IClosable)
+@When[Windows_Foundation == "on"]
 @Interface["30d5a829-7fa4-4026-83bb-d75bae4ea99e", "Windows.Foundation.IClosable"]
 public interface Windows_Foundation_IClosable <: IInspectable {
     func Close(): Int32
 }
 
 // Windows.Foundation.IDeferral (synthetic:Windows_Foundation_IDeferral)
+@When[Windows_Foundation == "on"]
 @Interface["d6269732-3b7f-46a7-b40b-4fdca2a2c693", "Windows.Foundation.IDeferral"]
 public interface Windows_Foundation_IDeferral <: IInspectable {
     func Complete(): Int32
 }
 
 // Windows.Foundation.IDeferralFactory (synthetic:Windows_Foundation_IDeferralFactory)
+@When[Windows_Foundation == "on"]
 @Interface["65a1ecc5-3fb5-4832-8ca9-f061b281d13a", "Windows.Foundation.IDeferralFactory", "Create.result=Com"]
 public interface Windows_Foundation_IDeferralFactory <: IInspectable {
     func Create(handler: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Foundation.IMemoryBuffer (synthetic:Windows_Foundation_IMemoryBuffer)
+@When[Windows_Foundation == "on"]
 @Interface["fbc4dd2a-245b-11e4-af98-689423260cf8", "Windows.Foundation.IMemoryBuffer", "CreateReference.reference=Com"]
 public interface Windows_Foundation_IMemoryBuffer <: IInspectable {
     func CreateReference(reference: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Foundation.IMemoryBufferReference (synthetic:Windows_Foundation_IMemoryBufferReference)
+@When[Windows_Foundation == "on"]
 @Interface["fbc4dd29-245b-11e4-af98-689423260cf8", "Windows.Foundation.IMemoryBufferReference"]
 public interface Windows_Foundation_IMemoryBufferReference <: IInspectable {
     func Capacity(value: CPointer<UInt32>): Int32
@@ -29777,6 +30660,7 @@ public interface Windows_Foundation_IMemoryBufferReference <: IInspectable {
 }
 
 // Windows.Foundation.IPropertyValue (synthetic:Windows_Foundation_IPropertyValue)
+@When[Windows_Foundation == "on"]
 @Interface["4bd682dd-7554-40e9-9a9b-82654ede7e62", "Windows.Foundation.IPropertyValue", "GetString.value=HString;GetUInt8Array.value=Array<UInt8>;GetInt16Array.value=Array<Int16>;GetUInt16Array.value=Array<UInt16>;GetInt32Array.value=Array<Int32>;GetUInt32Array.value=Array<UInt32>;GetInt64Array.value=Array<Int64>;GetUInt64Array.value=Array<UInt64>;GetSingleArray.value=Array<Float32>;GetDoubleArray.value=Array<Float64>;GetChar16Array.value=Array<UInt16>;GetBooleanArray.value=Array<Bool>;GetStringArray.value=Array<windows_core.HString>;GetInspectableArray.value=Array<windows_interface.IInspectable>;GetGuidArray.value=Array<windows_core.GuidValue>;GetDateTimeArray.value=Array<Windows_Foundation_DateTime>;GetTimeSpanArray.value=Array<Windows_Foundation_TimeSpan>;GetPointArray.value=Array<Windows_Foundation_Point>;GetSizeArray.value=Array<Windows_Foundation_Size>;GetRectArray.value=Array<Windows_Foundation_Rect>"]
 public interface Windows_Foundation_IPropertyValue <: IInspectable {
     func Type(value: CPointer<Int32>): Int32
@@ -29821,8 +30705,10 @@ public interface Windows_Foundation_IPropertyValue <: IInspectable {
 }
 
 // Windows.Foundation.IReference`1 (synthetic:Windows_Foundation_IReference_1)
+@When[Windows_Foundation == "on"]
 type Windows_Foundation_IReference_1ExceptionBase = Exception
 
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_IReference_1Vtbl {
     public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()
@@ -29885,17 +30771,20 @@ public struct Windows_Foundation_IReference_1Vtbl {
     }
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_IReference_1_ImplErased {
     func Value(result: CPointer<CPointer<Unit>>): Int32
     func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_IReference_1_Impl<T> <: Windows_Foundation_IReference_1_ImplErased where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     func releaseTArrayOut(data: CPointer<Unit>, length: UInt32): Unit {
         windows_core.winrtReleaseGenericArrayOut<T>(data, length)
     }
 }
 
+@When[Windows_Foundation == "on"]
 public open class Windows_Foundation_IReference_1<T> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -29980,8 +30869,10 @@ public open class Windows_Foundation_IReference_1<T> <: windows_interface.Interf
     }
 }
 
+@When[Windows_Foundation == "on"]
 extend<T> Windows_Foundation_IReference_1<T> <: windows_core.Interface<Windows_Foundation_IReference_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}
 
+@When[Windows_Foundation == "on"]
 private class OwnedWindows_Foundation_IReference_1<T> <: Windows_Foundation_IReference_1<T> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
@@ -29990,12 +30881,14 @@ private class OwnedWindows_Foundation_IReference_1<T> <: Windows_Foundation_IRef
 
 
 // Windows.Foundation.IStringable (synthetic:Windows_Foundation_IStringable)
+@When[Windows_Foundation == "on"]
 @Interface["96369f54-8eb6-48f0-abce-c1b211e627c3", "Windows.Foundation.IStringable", "ToString.value=HString"]
 public interface Windows_Foundation_IStringable <: IInspectable {
     func ToString(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Foundation.IUriEscapeStatics (synthetic:Windows_Foundation_IUriEscapeStatics)
+@When[Windows_Foundation == "on"]
 @Interface["c1d432ba-c824-4452-a7fd-512bc3bbe9a1", "Windows.Foundation.IUriEscapeStatics", "UnescapeComponent.value=HString;EscapeComponent.value=HString"]
 public interface Windows_Foundation_IUriEscapeStatics <: IInspectable {
     func UnescapeComponent(toUnescape: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
@@ -30003,6 +30896,7 @@ public interface Windows_Foundation_IUriEscapeStatics <: IInspectable {
 }
 
 // Windows.Foundation.IUriRuntimeClass (synthetic:Windows_Foundation_IUriRuntimeClass)
+@When[Windows_Foundation == "on"]
 @Interface["9e365e57-48b2-4160-956f-c7385120bbfc", "Windows.Foundation.IUriRuntimeClass", "AbsoluteUri.value=HString;DisplayUri.value=HString;Domain.value=HString;Extension.value=HString;Fragment.value=HString;Host.value=HString;Password.value=HString;Path.value=HString;Query.value=HString;QueryParsed.ppWwwFormUrlDecoder=Com;RawUri.value=HString;SchemeName.value=HString;UserName.value=HString;CombineUri.instance=Com"]
 public interface Windows_Foundation_IUriRuntimeClass <: IInspectable {
     func AbsoluteUri(value: CPointer<CPointer<Unit>>): Int32
@@ -30025,6 +30919,7 @@ public interface Windows_Foundation_IUriRuntimeClass <: IInspectable {
 }
 
 // Windows.Foundation.IUriRuntimeClassFactory (synthetic:Windows_Foundation_IUriRuntimeClassFactory)
+@When[Windows_Foundation == "on"]
 @Interface["44a9796f-723e-4fdf-a218-033e75b0c084", "Windows.Foundation.IUriRuntimeClassFactory", "CreateUri.instance=Com;CreateWithRelativeUri.instance=Com"]
 public interface Windows_Foundation_IUriRuntimeClassFactory <: IInspectable {
     func CreateUri(uri: CPointer<Unit>, instance: CPointer<CPointer<Unit>>): Int32
@@ -30032,6 +30927,7 @@ public interface Windows_Foundation_IUriRuntimeClassFactory <: IInspectable {
 }
 
 // Windows.Foundation.IUriRuntimeClassWithAbsoluteCanonicalUri (synthetic:Windows_Foundation_IUriRuntimeClassWithAbsoluteCanonicalUri)
+@When[Windows_Foundation == "on"]
 @Interface["758d9661-221c-480f-a339-50656673f46f", "Windows.Foundation.IUriRuntimeClassWithAbsoluteCanonicalUri", "AbsoluteCanonicalUri.value=HString;DisplayIri.value=HString"]
 public interface Windows_Foundation_IUriRuntimeClassWithAbsoluteCanonicalUri <: IInspectable {
     func AbsoluteCanonicalUri(value: CPointer<CPointer<Unit>>): Int32
@@ -30039,6 +30935,7 @@ public interface Windows_Foundation_IUriRuntimeClassWithAbsoluteCanonicalUri <: 
 }
 
 // Windows.Foundation.IWwwFormUrlDecoderEntry (synthetic:Windows_Foundation_IWwwFormUrlDecoderEntry)
+@When[Windows_Foundation == "on"]
 @Interface["125e7431-f678-4e8e-b670-20a9b06c512d", "Windows.Foundation.IWwwFormUrlDecoderEntry", "Name.value=HString;Value.value=HString"]
 public interface Windows_Foundation_IWwwFormUrlDecoderEntry <: IInspectable {
     func Name(value: CPointer<CPointer<Unit>>): Int32
@@ -30046,18 +30943,21 @@ public interface Windows_Foundation_IWwwFormUrlDecoderEntry <: IInspectable {
 }
 
 // Windows.Foundation.IWwwFormUrlDecoderRuntimeClass (synthetic:Windows_Foundation_IWwwFormUrlDecoderRuntimeClass)
+@When[Windows_Foundation == "on"]
 @Interface["d45a0451-f225-4542-9296-0e1df5d254df", "Windows.Foundation.IWwwFormUrlDecoderRuntimeClass", "GetFirstValueByName.phstrValue=HString"]
 public interface Windows_Foundation_IWwwFormUrlDecoderRuntimeClass <: IInspectable {
     func GetFirstValueByName(name: CPointer<Unit>, phstrValue: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Foundation.IWwwFormUrlDecoderRuntimeClassFactory (synthetic:Windows_Foundation_IWwwFormUrlDecoderRuntimeClassFactory)
+@When[Windows_Foundation == "on"]
 @Interface["5b8c6b3d-24ae-41b5-a1bf-f0c3d544845b", "Windows.Foundation.IWwwFormUrlDecoderRuntimeClassFactory", "CreateWwwFormUrlDecoder.instance=Com"]
 public interface Windows_Foundation_IWwwFormUrlDecoderRuntimeClassFactory <: IInspectable {
     func CreateWwwFormUrlDecoder(query: CPointer<Unit>, instance: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Foundation.Numerics.Matrix3x2 (synthetic:Windows_Foundation_Numerics_Matrix3x2)
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Windows_Foundation_Numerics_Matrix3x2 {
     public var M11: Float32 = 0.0f32
@@ -30069,6 +30969,7 @@ public struct Windows_Foundation_Numerics_Matrix3x2 {
 }
 
 // Windows.Foundation.Numerics.Matrix4x4 (synthetic:Windows_Foundation_Numerics_Matrix4x4)
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Windows_Foundation_Numerics_Matrix4x4 {
     public var M11: Float32 = 0.0f32
@@ -30090,6 +30991,7 @@ public struct Windows_Foundation_Numerics_Matrix4x4 {
 }
 
 // Windows.Foundation.Numerics.Quaternion (synthetic:Windows_Foundation_Numerics_Quaternion)
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Windows_Foundation_Numerics_Quaternion {
     public var X: Float32 = 0.0f32
@@ -30099,6 +31001,7 @@ public struct Windows_Foundation_Numerics_Quaternion {
 }
 
 // Windows.Foundation.Numerics.Vector2 (synthetic:Windows_Foundation_Numerics_Vector2)
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Windows_Foundation_Numerics_Vector2 {
     public var X: Float32 = 0.0f32
@@ -30106,6 +31009,7 @@ public struct Windows_Foundation_Numerics_Vector2 {
 }
 
 // Windows.Foundation.Numerics.Vector3 (synthetic:Windows_Foundation_Numerics_Vector3)
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Windows_Foundation_Numerics_Vector3 {
     public var X: Float32 = 0.0f32
@@ -30114,6 +31018,7 @@ public struct Windows_Foundation_Numerics_Vector3 {
 }
 
 // Windows.Foundation.Numerics.Vector4 (synthetic:Windows_Foundation_Numerics_Vector4)
+@When[Windows_Foundation_Numerics == "on"]
 @C
 public struct Windows_Foundation_Numerics_Vector4 {
     public var X: Float32 = 0.0f32
@@ -30123,6 +31028,7 @@ public struct Windows_Foundation_Numerics_Vector4 {
 }
 
 // Windows.Foundation.Point (synthetic:Windows_Foundation_Point)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_Point {
     public var X: Float32 = 0.0f32
@@ -30130,6 +31036,7 @@ public struct Windows_Foundation_Point {
 }
 
 // Windows.Foundation.PropertyType (synthetic:Windows_Foundation_PropertyType)
+@When[Windows_Foundation == "on"]
 public struct Windows_Foundation_PropertyType {
     public let value: Int32
     public init() {
@@ -30139,49 +31046,91 @@ public struct Windows_Foundation_PropertyType {
         this.value = value
     }
 }
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Empty = Windows_Foundation_PropertyType(0)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_UInt8_ = Windows_Foundation_PropertyType(1)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Int16_ = Windows_Foundation_PropertyType(2)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_UInt16_ = Windows_Foundation_PropertyType(3)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Int32_ = Windows_Foundation_PropertyType(4)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_UInt32_ = Windows_Foundation_PropertyType(5)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Int64_ = Windows_Foundation_PropertyType(6)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_UInt64_ = Windows_Foundation_PropertyType(7)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Single = Windows_Foundation_PropertyType(8)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Double = Windows_Foundation_PropertyType(9)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Char16 = Windows_Foundation_PropertyType(10)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Boolean = Windows_Foundation_PropertyType(11)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_String_ = Windows_Foundation_PropertyType(12)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Inspectable = Windows_Foundation_PropertyType(13)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_DateTime = Windows_Foundation_PropertyType(14)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_TimeSpan = Windows_Foundation_PropertyType(15)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Guid = Windows_Foundation_PropertyType(16)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Point = Windows_Foundation_PropertyType(17)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Size = Windows_Foundation_PropertyType(18)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Rect = Windows_Foundation_PropertyType(19)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_OtherType = Windows_Foundation_PropertyType(20)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_UInt8Array = Windows_Foundation_PropertyType(1025)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Int16Array = Windows_Foundation_PropertyType(1026)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_UInt16Array = Windows_Foundation_PropertyType(1027)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Int32Array = Windows_Foundation_PropertyType(1028)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_UInt32Array = Windows_Foundation_PropertyType(1029)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Int64Array = Windows_Foundation_PropertyType(1030)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_UInt64Array = Windows_Foundation_PropertyType(1031)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_SingleArray = Windows_Foundation_PropertyType(1032)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_DoubleArray = Windows_Foundation_PropertyType(1033)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_Char16Array = Windows_Foundation_PropertyType(1034)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_BooleanArray = Windows_Foundation_PropertyType(1035)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_StringArray = Windows_Foundation_PropertyType(1036)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_InspectableArray = Windows_Foundation_PropertyType(1037)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_DateTimeArray = Windows_Foundation_PropertyType(1038)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_TimeSpanArray = Windows_Foundation_PropertyType(1039)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_GuidArray = Windows_Foundation_PropertyType(1040)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_PointArray = Windows_Foundation_PropertyType(1041)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_SizeArray = Windows_Foundation_PropertyType(1042)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_RectArray = Windows_Foundation_PropertyType(1043)
+@When[Windows_Foundation == "on"]
 public let Windows_Foundation_PropertyType_OtherTypeArray = Windows_Foundation_PropertyType(1044)
 
 // Windows.Foundation.Rect (synthetic:Windows_Foundation_Rect)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_Rect {
     public var X: Float32 = 0.0f32
@@ -30191,6 +31140,7 @@ public struct Windows_Foundation_Rect {
 }
 
 // Windows.Foundation.Size (synthetic:Windows_Foundation_Size)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_Size {
     public var Width: Float32 = 0.0f32
@@ -30198,12 +31148,14 @@ public struct Windows_Foundation_Size {
 }
 
 // Windows.Foundation.TimeSpan (synthetic:Windows_Foundation_TimeSpan)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_TimeSpan {
     public var Duration: Int64 = 0i64
 }
 
 // Windows.Foundation.TypedEventHandler`2 (synthetic:Windows_Foundation_TypedEventHandler_2)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_TypedEventHandler_2Vtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -30211,6 +31163,7 @@ public struct Windows_Foundation_TypedEventHandler_2Vtbl {
     public init() {}
 }
 
+@When[Windows_Foundation == "on"]
 public open class Windows_Foundation_TypedEventHandler_2<TSender, TResult> <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -30285,18 +31238,22 @@ public open class Windows_Foundation_TypedEventHandler_2<TSender, TResult> <: wi
     }
 }
 
+@When[Windows_Foundation == "on"]
 extend<TSender, TResult> Windows_Foundation_TypedEventHandler_2<TSender, TResult> <: windows_core.Interface<Windows_Foundation_TypedEventHandler_2<TSender, TResult>> where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {}
 
+@When[Windows_Foundation == "on"]
 private class OwnedWindows_Foundation_TypedEventHandler_2<TSender, TResult> <: Windows_Foundation_TypedEventHandler_2<TSender, TResult> where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_TypedEventHandler_2InvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, args: CPointer<Unit>): Int32
 }
 
+@When[Windows_Foundation == "on"]
 public interface Windows_Foundation_TypedEventHandler_2Invoker<TSender, TResult> <: Windows_Foundation_TypedEventHandler_2InvokerErased where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     func Invoke(sender: CPointer<Unit>, args: CPointer<Unit>): Unit {
         ()
@@ -30314,6 +31271,7 @@ public interface Windows_Foundation_TypedEventHandler_2Invoker<TSender, TResult>
     }
 }
 
+@When[Windows_Foundation == "on"]
 private class Windows_Foundation_TypedEventHandler_2Box<TSender, TResult> <: Windows_Foundation_TypedEventHandler_2Invoker<TSender, TResult> & Resource where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Windows_Foundation_TypedEventHandler_2Vtbl>
@@ -30351,6 +31309,7 @@ private class Windows_Foundation_TypedEventHandler_2Box<TSender, TResult> <: Win
     }
 }
 
+@When[Windows_Foundation == "on"]
 func buildWindows_Foundation_TypedEventHandler_2BoxVtbl<TSender, TResult>(): Windows_Foundation_TypedEventHandler_2Vtbl where TSender <: windows_core.RuntimeType & windows_core.WinrtGenericType<TSender>, TResult <: windows_core.RuntimeType & windows_core.WinrtGenericType<TResult> {
     var vtbl = Windows_Foundation_TypedEventHandler_2Vtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -30367,12 +31326,14 @@ func buildWindows_Foundation_TypedEventHandler_2BoxVtbl<TSender, TResult>(): Win
 
 
 // Windows.Foundation.UniversalApiContract (synthetic:Windows_Foundation_UniversalApiContract)
+@When[Windows_Foundation == "on"]
 @C
 public struct Windows_Foundation_UniversalApiContract {
     public var reserved: Int32 = 0
 }
 
 // Windows.Foundation.Uri (synthetic:Windows_Foundation_Uri)
+@When[Windows_Foundation == "on"]
 public class Windows_Foundation_Uri <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -30771,6 +31732,7 @@ public class Windows_Foundation_Uri <: windows_interface.InterfaceWrapperBase & 
     }
 }
 
+@When[Windows_Foundation == "on"]
 extend Windows_Foundation_Uri <: windows_core.HandleWinrtType<Windows_Foundation_Uri> {
     public static func intoWinrtHandle(value: Windows_Foundation_Uri): CPointer<Unit> {
         value.asRaw()
@@ -30789,6 +31751,7 @@ extend Windows_Foundation_Uri <: windows_core.HandleWinrtType<Windows_Foundation
 }
 
 // Windows.Foundation.WwwFormUrlDecoder (synthetic:Windows_Foundation_WwwFormUrlDecoder)
+@When[Windows_Foundation == "on"]
 public class Windows_Foundation_WwwFormUrlDecoder <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -30893,6 +31856,7 @@ public class Windows_Foundation_WwwFormUrlDecoder <: windows_interface.Interface
     }
 }
 
+@When[Windows_Foundation == "on"]
 extend Windows_Foundation_WwwFormUrlDecoder <: windows_core.HandleWinrtType<Windows_Foundation_WwwFormUrlDecoder> {
     public static func intoWinrtHandle(value: Windows_Foundation_WwwFormUrlDecoder): CPointer<Unit> {
         value.asRaw()
@@ -30911,6 +31875,7 @@ extend Windows_Foundation_WwwFormUrlDecoder <: windows_core.HandleWinrtType<Wind
 }
 
 // Windows.Globalization.DayOfWeek (synthetic:Windows_Globalization_DayOfWeek)
+@When[Windows_Globalization == "on"]
 public struct Windows_Globalization_DayOfWeek {
     public let value: Int32
     public init() {
@@ -30920,15 +31885,23 @@ public struct Windows_Globalization_DayOfWeek {
         this.value = value
     }
 }
+@When[Windows_Globalization == "on"]
 public let Windows_Globalization_DayOfWeek_Sunday = Windows_Globalization_DayOfWeek(0)
+@When[Windows_Globalization == "on"]
 public let Windows_Globalization_DayOfWeek_Monday = Windows_Globalization_DayOfWeek(1)
+@When[Windows_Globalization == "on"]
 public let Windows_Globalization_DayOfWeek_Tuesday = Windows_Globalization_DayOfWeek(2)
+@When[Windows_Globalization == "on"]
 public let Windows_Globalization_DayOfWeek_Wednesday = Windows_Globalization_DayOfWeek(3)
+@When[Windows_Globalization == "on"]
 public let Windows_Globalization_DayOfWeek_Thursday = Windows_Globalization_DayOfWeek(4)
+@When[Windows_Globalization == "on"]
 public let Windows_Globalization_DayOfWeek_Friday = Windows_Globalization_DayOfWeek(5)
+@When[Windows_Globalization == "on"]
 public let Windows_Globalization_DayOfWeek_Saturday = Windows_Globalization_DayOfWeek(6)
 
 // Windows.Globalization.NumberFormatting.INumberFormatter2 (synthetic:Windows_Globalization_NumberFormatting_INumberFormatter2)
+@When[Windows_Globalization_NumberFormatting == "on"]
 @Interface["d4a8c1f0-80d0-4b0d-a89e-882c1e8f8310", "Windows.Globalization.NumberFormatting.INumberFormatter2", "FormatInt.result=HString;FormatUInt.result=HString;FormatDouble.result=HString"]
 public interface Windows_Globalization_NumberFormatting_INumberFormatter2 <: IInspectable {
     func FormatInt(value: Int64, result: CPointer<CPointer<Unit>>): Int32
@@ -30937,6 +31910,7 @@ public interface Windows_Globalization_NumberFormatting_INumberFormatter2 <: IIn
 }
 
 // Windows.Graphics.DirectX.Direct3D11.Direct3DMultisampleDescription (synthetic:Windows_Graphics_DirectX_Direct3D11_Direct3DMultisampleDescription)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 @C
 public struct Windows_Graphics_DirectX_Direct3D11_Direct3DMultisampleDescription {
     public var Count: Int32 = 0i32
@@ -30944,6 +31918,7 @@ public struct Windows_Graphics_DirectX_Direct3D11_Direct3DMultisampleDescription
 }
 
 // Windows.Graphics.DirectX.Direct3D11.Direct3DSurfaceDescription (synthetic:Windows_Graphics_DirectX_Direct3D11_Direct3DSurfaceDescription)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 @C
 public struct Windows_Graphics_DirectX_Direct3D11_Direct3DSurfaceDescription {
     public var Width: Int32 = 0i32
@@ -30953,12 +31928,14 @@ public struct Windows_Graphics_DirectX_Direct3D11_Direct3DSurfaceDescription {
 }
 
 // Windows.Graphics.DirectX.Direct3D11.IDirect3DSurface (synthetic:Windows_Graphics_DirectX_Direct3D11_IDirect3DSurface)
+@When[Windows_Graphics_DirectX_Direct3D11 == "on"]
 @Interface["0bf4a146-13c1-4694-bee3-7abf15eaf586", "Windows.Graphics.DirectX.Direct3D11.IDirect3DSurface"]
 public interface Windows_Graphics_DirectX_Direct3D11_IDirect3DSurface <: IInspectable {
     func Description(value: CPointer<Windows_Graphics_DirectX_Direct3D11_Direct3DSurfaceDescription>): Int32
 }
 
 // Windows.Graphics.DirectX.DirectXPixelFormat (synthetic:Windows_Graphics_DirectX_DirectXPixelFormat)
+@When[Windows_Graphics_DirectX == "on"]
 public struct Windows_Graphics_DirectX_DirectXPixelFormat {
     public let value: Int32
     public init() {
@@ -30968,130 +31945,253 @@ public struct Windows_Graphics_DirectX_DirectXPixelFormat {
         this.value = value
     }
 }
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_Unknown = Windows_Graphics_DirectX_DirectXPixelFormat(0)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32G32B32A32Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(1)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32G32B32A32Float = Windows_Graphics_DirectX_DirectXPixelFormat(2)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32G32B32A32UInt = Windows_Graphics_DirectX_DirectXPixelFormat(3)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32G32B32A32Int = Windows_Graphics_DirectX_DirectXPixelFormat(4)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32G32B32Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(5)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32G32B32Float = Windows_Graphics_DirectX_DirectXPixelFormat(6)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32G32B32UInt = Windows_Graphics_DirectX_DirectXPixelFormat(7)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32G32B32Int = Windows_Graphics_DirectX_DirectXPixelFormat(8)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16G16B16A16Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(9)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16G16B16A16Float = Windows_Graphics_DirectX_DirectXPixelFormat(10)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16G16B16A16UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(11)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16G16B16A16UInt = Windows_Graphics_DirectX_DirectXPixelFormat(12)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16G16B16A16IntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(13)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16G16B16A16Int = Windows_Graphics_DirectX_DirectXPixelFormat(14)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32G32Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(15)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32G32Float = Windows_Graphics_DirectX_DirectXPixelFormat(16)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32G32UInt = Windows_Graphics_DirectX_DirectXPixelFormat(17)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32G32Int = Windows_Graphics_DirectX_DirectXPixelFormat(18)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32G8X24Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(19)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_D32FloatS8X24UInt = Windows_Graphics_DirectX_DirectXPixelFormat(20)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32FloatX8X24Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(21)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_X32TypelessG8X24UInt = Windows_Graphics_DirectX_DirectXPixelFormat(22)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R10G10B10A2Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(23)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R10G10B10A2UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(24)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R10G10B10A2UInt = Windows_Graphics_DirectX_DirectXPixelFormat(25)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R11G11B10Float = Windows_Graphics_DirectX_DirectXPixelFormat(26)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8G8B8A8Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(27)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8G8B8A8UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(28)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8G8B8A8UIntNormalizedSrgb = Windows_Graphics_DirectX_DirectXPixelFormat(29)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8G8B8A8UInt = Windows_Graphics_DirectX_DirectXPixelFormat(30)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8G8B8A8IntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(31)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8G8B8A8Int = Windows_Graphics_DirectX_DirectXPixelFormat(32)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16G16Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(33)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16G16Float = Windows_Graphics_DirectX_DirectXPixelFormat(34)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16G16UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(35)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16G16UInt = Windows_Graphics_DirectX_DirectXPixelFormat(36)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16G16IntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(37)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16G16Int = Windows_Graphics_DirectX_DirectXPixelFormat(38)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(39)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_D32Float = Windows_Graphics_DirectX_DirectXPixelFormat(40)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32Float = Windows_Graphics_DirectX_DirectXPixelFormat(41)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32UInt = Windows_Graphics_DirectX_DirectXPixelFormat(42)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R32Int = Windows_Graphics_DirectX_DirectXPixelFormat(43)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R24G8Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(44)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_D24UIntNormalizedS8UInt = Windows_Graphics_DirectX_DirectXPixelFormat(45)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R24UIntNormalizedX8Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(46)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_X24TypelessG8UInt = Windows_Graphics_DirectX_DirectXPixelFormat(47)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8G8Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(48)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8G8UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(49)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8G8UInt = Windows_Graphics_DirectX_DirectXPixelFormat(50)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8G8IntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(51)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8G8Int = Windows_Graphics_DirectX_DirectXPixelFormat(52)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(53)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16Float = Windows_Graphics_DirectX_DirectXPixelFormat(54)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_D16UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(55)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(56)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16UInt = Windows_Graphics_DirectX_DirectXPixelFormat(57)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16IntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(58)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R16Int = Windows_Graphics_DirectX_DirectXPixelFormat(59)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(60)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(61)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8UInt = Windows_Graphics_DirectX_DirectXPixelFormat(62)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8IntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(63)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8Int = Windows_Graphics_DirectX_DirectXPixelFormat(64)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_A8UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(65)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R1UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(66)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R9G9B9E5SharedExponent = Windows_Graphics_DirectX_DirectXPixelFormat(67)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R8G8B8G8UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(68)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_G8R8G8B8UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(69)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC1Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(70)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC1UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(71)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC1UIntNormalizedSrgb = Windows_Graphics_DirectX_DirectXPixelFormat(72)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC2Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(73)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC2UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(74)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC2UIntNormalizedSrgb = Windows_Graphics_DirectX_DirectXPixelFormat(75)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC3Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(76)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC3UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(77)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC3UIntNormalizedSrgb = Windows_Graphics_DirectX_DirectXPixelFormat(78)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC4Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(79)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC4UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(80)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC4IntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(81)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC5Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(82)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC5UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(83)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC5IntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(84)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_B5G6R5UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(85)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_B5G5R5A1UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(86)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_B8G8R8A8UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(87)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_B8G8R8X8UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(88)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_R10G10B10XRBiasA2UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(89)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_B8G8R8A8Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(90)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_B8G8R8A8UIntNormalizedSrgb = Windows_Graphics_DirectX_DirectXPixelFormat(91)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_B8G8R8X8Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(92)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_B8G8R8X8UIntNormalizedSrgb = Windows_Graphics_DirectX_DirectXPixelFormat(93)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC6HTypeless = Windows_Graphics_DirectX_DirectXPixelFormat(94)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC6H16UnsignedFloat = Windows_Graphics_DirectX_DirectXPixelFormat(95)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC6H16Float = Windows_Graphics_DirectX_DirectXPixelFormat(96)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC7Typeless = Windows_Graphics_DirectX_DirectXPixelFormat(97)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC7UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(98)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_BC7UIntNormalizedSrgb = Windows_Graphics_DirectX_DirectXPixelFormat(99)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_Ayuv = Windows_Graphics_DirectX_DirectXPixelFormat(100)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_Y410 = Windows_Graphics_DirectX_DirectXPixelFormat(101)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_Y416 = Windows_Graphics_DirectX_DirectXPixelFormat(102)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_NV12 = Windows_Graphics_DirectX_DirectXPixelFormat(103)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_P010 = Windows_Graphics_DirectX_DirectXPixelFormat(104)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_P016 = Windows_Graphics_DirectX_DirectXPixelFormat(105)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_Opaque420 = Windows_Graphics_DirectX_DirectXPixelFormat(106)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_Yuy2 = Windows_Graphics_DirectX_DirectXPixelFormat(107)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_Y210 = Windows_Graphics_DirectX_DirectXPixelFormat(108)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_Y216 = Windows_Graphics_DirectX_DirectXPixelFormat(109)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_NV11 = Windows_Graphics_DirectX_DirectXPixelFormat(110)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_AI44 = Windows_Graphics_DirectX_DirectXPixelFormat(111)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_IA44 = Windows_Graphics_DirectX_DirectXPixelFormat(112)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_P8 = Windows_Graphics_DirectX_DirectXPixelFormat(113)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_A8P8 = Windows_Graphics_DirectX_DirectXPixelFormat(114)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_B4G4R4A4UIntNormalized = Windows_Graphics_DirectX_DirectXPixelFormat(115)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_P208 = Windows_Graphics_DirectX_DirectXPixelFormat(130)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_V208 = Windows_Graphics_DirectX_DirectXPixelFormat(131)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_V408 = Windows_Graphics_DirectX_DirectXPixelFormat(132)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_SamplerFeedbackMinMipOpaque = Windows_Graphics_DirectX_DirectXPixelFormat(189)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_SamplerFeedbackMipRegionUsedOpaque = Windows_Graphics_DirectX_DirectXPixelFormat(190)
+@When[Windows_Graphics_DirectX == "on"]
 public let Windows_Graphics_DirectX_DirectXPixelFormat_A4B4G4R4 = Windows_Graphics_DirectX_DirectXPixelFormat(191)
 
 // Windows.Graphics.Effects.IGraphicsEffect (synthetic:Windows_Graphics_Effects_IGraphicsEffect)
+@When[Windows_Graphics_Effects == "on"]
 @Interface["cb51c0ce-8fe6-4636-b202-861faa07d8f3", "Windows.Graphics.Effects.IGraphicsEffect", "Name.name=HString"]
 public interface Windows_Graphics_Effects_IGraphicsEffect <: IInspectable {
     func Name(name: CPointer<CPointer<Unit>>): Int32
@@ -31099,16 +32199,19 @@ public interface Windows_Graphics_Effects_IGraphicsEffect <: IInspectable {
 }
 
 // Windows.Graphics.Effects.IGraphicsEffectSource (synthetic:Windows_Graphics_Effects_IGraphicsEffectSource)
+@When[Windows_Graphics_Effects == "on"]
 @Interface["2d8f9ddc-4339-4eb9-9216-f9deb75658a2", "Windows.Graphics.Effects.IGraphicsEffectSource"]
 public interface Windows_Graphics_Effects_IGraphicsEffectSource <: IInspectable {
 }
 
 // Windows.Graphics.IGeometrySource2D (synthetic:Windows_Graphics_IGeometrySource2D)
+@When[Windows_Graphics == "on"]
 @Interface["caff7902-670c-4181-a624-da977203b845", "Windows.Graphics.IGeometrySource2D"]
 public interface Windows_Graphics_IGeometrySource2D <: IInspectable {
 }
 
 // Windows.Graphics.Imaging.BitmapAlphaMode (synthetic:Windows_Graphics_Imaging_BitmapAlphaMode)
+@When[Windows_Graphics_Imaging == "on"]
 public struct Windows_Graphics_Imaging_BitmapAlphaMode {
     public let value: Int32
     public init() {
@@ -31118,11 +32221,15 @@ public struct Windows_Graphics_Imaging_BitmapAlphaMode {
         this.value = value
     }
 }
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapAlphaMode_Premultiplied = Windows_Graphics_Imaging_BitmapAlphaMode(0)
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapAlphaMode_Straight = Windows_Graphics_Imaging_BitmapAlphaMode(1)
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapAlphaMode_Ignore = Windows_Graphics_Imaging_BitmapAlphaMode(2)
 
 // Windows.Graphics.Imaging.BitmapBuffer (synthetic:Windows_Graphics_Imaging_BitmapBuffer)
+@When[Windows_Graphics_Imaging == "on"]
 public class Windows_Graphics_Imaging_BitmapBuffer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -31215,6 +32322,7 @@ public class Windows_Graphics_Imaging_BitmapBuffer <: windows_interface.Interfac
     }
 }
 
+@When[Windows_Graphics_Imaging == "on"]
 extend Windows_Graphics_Imaging_BitmapBuffer <: windows_core.HandleWinrtType<Windows_Graphics_Imaging_BitmapBuffer> {
     public static func intoWinrtHandle(value: Windows_Graphics_Imaging_BitmapBuffer): CPointer<Unit> {
         value.asRaw()
@@ -31233,6 +32341,7 @@ extend Windows_Graphics_Imaging_BitmapBuffer <: windows_core.HandleWinrtType<Win
 }
 
 // Windows.Graphics.Imaging.BitmapBufferAccessMode (synthetic:Windows_Graphics_Imaging_BitmapBufferAccessMode)
+@When[Windows_Graphics_Imaging == "on"]
 public struct Windows_Graphics_Imaging_BitmapBufferAccessMode {
     public let value: Int32
     public init() {
@@ -31242,11 +32351,15 @@ public struct Windows_Graphics_Imaging_BitmapBufferAccessMode {
         this.value = value
     }
 }
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapBufferAccessMode_Read = Windows_Graphics_Imaging_BitmapBufferAccessMode(0)
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapBufferAccessMode_ReadWrite = Windows_Graphics_Imaging_BitmapBufferAccessMode(1)
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapBufferAccessMode_Write = Windows_Graphics_Imaging_BitmapBufferAccessMode(2)
 
 // Windows.Graphics.Imaging.BitmapPixelFormat (synthetic:Windows_Graphics_Imaging_BitmapPixelFormat)
+@When[Windows_Graphics_Imaging == "on"]
 public struct Windows_Graphics_Imaging_BitmapPixelFormat {
     public let value: Int32
     public init() {
@@ -31256,17 +32369,27 @@ public struct Windows_Graphics_Imaging_BitmapPixelFormat {
         this.value = value
     }
 }
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapPixelFormat_Unknown = Windows_Graphics_Imaging_BitmapPixelFormat(0)
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapPixelFormat_Rgba16 = Windows_Graphics_Imaging_BitmapPixelFormat(12)
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapPixelFormat_Rgba8 = Windows_Graphics_Imaging_BitmapPixelFormat(30)
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapPixelFormat_Gray16 = Windows_Graphics_Imaging_BitmapPixelFormat(57)
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapPixelFormat_Gray8 = Windows_Graphics_Imaging_BitmapPixelFormat(62)
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapPixelFormat_Bgra8 = Windows_Graphics_Imaging_BitmapPixelFormat(87)
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapPixelFormat_Nv12 = Windows_Graphics_Imaging_BitmapPixelFormat(103)
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapPixelFormat_P010 = Windows_Graphics_Imaging_BitmapPixelFormat(104)
+@When[Windows_Graphics_Imaging == "on"]
 public let Windows_Graphics_Imaging_BitmapPixelFormat_Yuy2 = Windows_Graphics_Imaging_BitmapPixelFormat(107)
 
 // Windows.Graphics.Imaging.BitmapPlaneDescription (synthetic:Windows_Graphics_Imaging_BitmapPlaneDescription)
+@When[Windows_Graphics_Imaging == "on"]
 @C
 public struct Windows_Graphics_Imaging_BitmapPlaneDescription {
     public var StartIndex: Int32 = 0i32
@@ -31276,6 +32399,7 @@ public struct Windows_Graphics_Imaging_BitmapPlaneDescription {
 }
 
 // Windows.Graphics.Imaging.IBitmapBuffer (synthetic:Windows_Graphics_Imaging_IBitmapBuffer)
+@When[Windows_Graphics_Imaging == "on"]
 @Interface["a53e04c4-399c-438c-b28f-a63a6b83d1a1", "Windows.Graphics.Imaging.IBitmapBuffer"]
 public interface Windows_Graphics_Imaging_IBitmapBuffer <: IInspectable {
     func GetPlaneCount(value: CPointer<Int32>): Int32
@@ -31283,6 +32407,7 @@ public interface Windows_Graphics_Imaging_IBitmapBuffer <: IInspectable {
 }
 
 // Windows.Graphics.Imaging.ISoftwareBitmap (synthetic:Windows_Graphics_Imaging_ISoftwareBitmap)
+@When[Windows_Graphics_Imaging == "on"]
 @Interface["689e0708-7eef-483f-963f-da938818e073", "Windows.Graphics.Imaging.ISoftwareBitmap", "LockBuffer.value=Com;GetReadOnlyView.value=Com"]
 public interface Windows_Graphics_Imaging_ISoftwareBitmap <: IInspectable {
     func BitmapPixelFormat(value: CPointer<Int32>): Int32
@@ -31302,6 +32427,7 @@ public interface Windows_Graphics_Imaging_ISoftwareBitmap <: IInspectable {
 }
 
 // Windows.Graphics.Imaging.ISoftwareBitmapFactory (synthetic:Windows_Graphics_Imaging_ISoftwareBitmapFactory)
+@When[Windows_Graphics_Imaging == "on"]
 @Interface["c99feb69-2d62-4d47-a6b3-4fdb6a07fdf8", "Windows.Graphics.Imaging.ISoftwareBitmapFactory", "Create.value=Com;CreateWithAlpha.value=Com"]
 public interface Windows_Graphics_Imaging_ISoftwareBitmapFactory <: IInspectable {
     func Create(format: Int32, width: Int32, height: Int32, value: CPointer<CPointer<Unit>>): Int32
@@ -31309,6 +32435,7 @@ public interface Windows_Graphics_Imaging_ISoftwareBitmapFactory <: IInspectable
 }
 
 // Windows.Graphics.Imaging.ISoftwareBitmapStatics (synthetic:Windows_Graphics_Imaging_ISoftwareBitmapStatics)
+@When[Windows_Graphics_Imaging == "on"]
 @Interface["df0385db-672f-4a9d-806e-c2442f343e86", "Windows.Graphics.Imaging.ISoftwareBitmapStatics", "Copy.value=Com;Convert.value=Com;ConvertWithAlpha.value=Com;CreateCopyFromBuffer.value=Com;CreateCopyWithAlphaFromBuffer.value=Com;CreateCopyFromSurfaceAsync.value=Com;CreateCopyWithAlphaFromSurfaceAsync.value=Com"]
 public interface Windows_Graphics_Imaging_ISoftwareBitmapStatics <: IInspectable {
     func Copy(source: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
@@ -31321,6 +32448,7 @@ public interface Windows_Graphics_Imaging_ISoftwareBitmapStatics <: IInspectable
 }
 
 // Windows.Graphics.Imaging.SoftwareBitmap (synthetic:Windows_Graphics_Imaging_SoftwareBitmap)
+@When[Windows_Graphics_Imaging == "on"]
 public class Windows_Graphics_Imaging_SoftwareBitmap <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -31682,6 +32810,7 @@ public class Windows_Graphics_Imaging_SoftwareBitmap <: windows_interface.Interf
     }
 }
 
+@When[Windows_Graphics_Imaging == "on"]
 extend Windows_Graphics_Imaging_SoftwareBitmap <: windows_core.HandleWinrtType<Windows_Graphics_Imaging_SoftwareBitmap> {
     public static func intoWinrtHandle(value: Windows_Graphics_Imaging_SoftwareBitmap): CPointer<Unit> {
         value.asRaw()
@@ -31700,6 +32829,7 @@ extend Windows_Graphics_Imaging_SoftwareBitmap <: windows_core.HandleWinrtType<W
 }
 
 // Windows.Graphics.PointInt32 (synthetic:Windows_Graphics_PointInt32)
+@When[Windows_Graphics == "on"]
 @C
 public struct Windows_Graphics_PointInt32 {
     public var X: Int32 = 0i32
@@ -31707,6 +32837,7 @@ public struct Windows_Graphics_PointInt32 {
 }
 
 // Windows.Graphics.RectInt32 (synthetic:Windows_Graphics_RectInt32)
+@When[Windows_Graphics == "on"]
 @C
 public struct Windows_Graphics_RectInt32 {
     public var X: Int32 = 0i32
@@ -31716,6 +32847,7 @@ public struct Windows_Graphics_RectInt32 {
 }
 
 // Windows.Graphics.SizeInt32 (synthetic:Windows_Graphics_SizeInt32)
+@When[Windows_Graphics == "on"]
 @C
 public struct Windows_Graphics_SizeInt32 {
     public var Width: Int32 = 0i32
@@ -31723,6 +32855,7 @@ public struct Windows_Graphics_SizeInt32 {
 }
 
 // Windows.Media.Casting.CastingSource (synthetic:Windows_Media_Casting_CastingSource)
+@When[Windows_Media_Casting == "on"]
 public class Windows_Media_Casting_CastingSource <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -31806,6 +32939,7 @@ public class Windows_Media_Casting_CastingSource <: windows_interface.InterfaceW
     }
 }
 
+@When[Windows_Media_Casting == "on"]
 extend Windows_Media_Casting_CastingSource <: windows_core.HandleWinrtType<Windows_Media_Casting_CastingSource> {
     public static func intoWinrtHandle(value: Windows_Media_Casting_CastingSource): CPointer<Unit> {
         value.asRaw()
@@ -31824,6 +32958,7 @@ extend Windows_Media_Casting_CastingSource <: windows_core.HandleWinrtType<Windo
 }
 
 // Windows.Media.Casting.ICastingSource (synthetic:Windows_Media_Casting_ICastingSource)
+@When[Windows_Media_Casting == "on"]
 @Interface["f429ea72-3467-47e6-a027-522923e9d727", "Windows.Media.Casting.ICastingSource", "PreferredSourceUri.value=Com"]
 public interface Windows_Media_Casting_ICastingSource <: IInspectable {
     func PreferredSourceUri(value: CPointer<CPointer<Unit>>): Int32
@@ -31831,6 +32966,7 @@ public interface Windows_Media_Casting_ICastingSource <: IInspectable {
 }
 
 // Windows.Security.EnterpriseData.ProtectionPolicyEvaluationResult (synthetic:Windows_Security_EnterpriseData_ProtectionPolicyEvaluationResult)
+@When[Windows_Security_EnterpriseData == "on"]
 public struct Windows_Security_EnterpriseData_ProtectionPolicyEvaluationResult {
     public let value: Int32
     public init() {
@@ -31840,11 +32976,15 @@ public struct Windows_Security_EnterpriseData_ProtectionPolicyEvaluationResult {
         this.value = value
     }
 }
+@When[Windows_Security_EnterpriseData == "on"]
 public let Windows_Security_EnterpriseData_ProtectionPolicyEvaluationResult_Allowed = Windows_Security_EnterpriseData_ProtectionPolicyEvaluationResult(0)
+@When[Windows_Security_EnterpriseData == "on"]
 public let Windows_Security_EnterpriseData_ProtectionPolicyEvaluationResult_Blocked = Windows_Security_EnterpriseData_ProtectionPolicyEvaluationResult(1)
+@When[Windows_Security_EnterpriseData == "on"]
 public let Windows_Security_EnterpriseData_ProtectionPolicyEvaluationResult_ConsentRequired = Windows_Security_EnterpriseData_ProtectionPolicyEvaluationResult(2)
 
 // Windows.Storage.CreationCollisionOption (synthetic:Windows_Storage_CreationCollisionOption)
+@When[Windows_Storage == "on"]
 public struct Windows_Storage_CreationCollisionOption {
     public let value: Int32
     public init() {
@@ -31854,12 +32994,17 @@ public struct Windows_Storage_CreationCollisionOption {
         this.value = value
     }
 }
+@When[Windows_Storage == "on"]
 public let Windows_Storage_CreationCollisionOption_GenerateUniqueName = Windows_Storage_CreationCollisionOption(0)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_CreationCollisionOption_ReplaceExisting = Windows_Storage_CreationCollisionOption(1)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_CreationCollisionOption_FailIfExists = Windows_Storage_CreationCollisionOption(2)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_CreationCollisionOption_OpenIfExists = Windows_Storage_CreationCollisionOption(3)
 
 // Windows.Storage.FileAccessMode (synthetic:Windows_Storage_FileAccessMode)
+@When[Windows_Storage == "on"]
 public struct Windows_Storage_FileAccessMode {
     public let value: Int32
     public init() {
@@ -31869,10 +33014,13 @@ public struct Windows_Storage_FileAccessMode {
         this.value = value
     }
 }
+@When[Windows_Storage == "on"]
 public let Windows_Storage_FileAccessMode_Read = Windows_Storage_FileAccessMode(0)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_FileAccessMode_ReadWrite = Windows_Storage_FileAccessMode(1)
 
 // Windows.Storage.FileAttributes (synthetic:Windows_Storage_FileAttributes)
+@When[Windows_Storage == "on"]
 public struct Windows_Storage_FileAttributes {
     public let value: UInt32
     public init() {
@@ -31897,14 +33045,21 @@ public struct Windows_Storage_FileAttributes {
         return Windows_Storage_FileAttributes(!value)
     }
 }
+@When[Windows_Storage == "on"]
 public let Windows_Storage_FileAttributes_Normal = Windows_Storage_FileAttributes(0)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_FileAttributes_ReadOnly = Windows_Storage_FileAttributes(1)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_FileAttributes_Directory = Windows_Storage_FileAttributes(16)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_FileAttributes_Archive = Windows_Storage_FileAttributes(32)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_FileAttributes_Temporary = Windows_Storage_FileAttributes(256)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_FileAttributes_LocallyIncomplete = Windows_Storage_FileAttributes(512)
 
 // Windows.Storage.FileProperties.BasicProperties (synthetic:Windows_Storage_FileProperties_BasicProperties)
+@When[Windows_Storage_FileProperties == "on"]
 public class Windows_Storage_FileProperties_BasicProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -32006,6 +33161,7 @@ public class Windows_Storage_FileProperties_BasicProperties <: windows_interface
     }
 }
 
+@When[Windows_Storage_FileProperties == "on"]
 extend Windows_Storage_FileProperties_BasicProperties <: windows_core.HandleWinrtType<Windows_Storage_FileProperties_BasicProperties> {
     public static func intoWinrtHandle(value: Windows_Storage_FileProperties_BasicProperties): CPointer<Unit> {
         value.asRaw()
@@ -32024,6 +33180,7 @@ extend Windows_Storage_FileProperties_BasicProperties <: windows_core.HandleWinr
 }
 
 // Windows.Storage.FileProperties.DocumentProperties (synthetic:Windows_Storage_FileProperties_DocumentProperties)
+@When[Windows_Storage_FileProperties == "on"]
 public class Windows_Storage_FileProperties_DocumentProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -32171,6 +33328,7 @@ public class Windows_Storage_FileProperties_DocumentProperties <: windows_interf
     }
 }
 
+@When[Windows_Storage_FileProperties == "on"]
 extend Windows_Storage_FileProperties_DocumentProperties <: windows_core.HandleWinrtType<Windows_Storage_FileProperties_DocumentProperties> {
     public static func intoWinrtHandle(value: Windows_Storage_FileProperties_DocumentProperties): CPointer<Unit> {
         value.asRaw()
@@ -32189,6 +33347,7 @@ extend Windows_Storage_FileProperties_DocumentProperties <: windows_core.HandleW
 }
 
 // Windows.Storage.FileProperties.IBasicProperties (synthetic:Windows_Storage_FileProperties_IBasicProperties)
+@When[Windows_Storage_FileProperties == "on"]
 @Interface["d05d55db-785e-4a66-be02-9beec58aea81", "Windows.Storage.FileProperties.IBasicProperties"]
 public interface Windows_Storage_FileProperties_IBasicProperties <: IInspectable {
     func Size(value: CPointer<UInt64>): Int32
@@ -32197,6 +33356,7 @@ public interface Windows_Storage_FileProperties_IBasicProperties <: IInspectable
 }
 
 // Windows.Storage.FileProperties.IDocumentProperties (synthetic:Windows_Storage_FileProperties_IDocumentProperties)
+@When[Windows_Storage_FileProperties == "on"]
 @Interface["7eab19bc-1821-4923-b4a9-0aea404d0070", "Windows.Storage.FileProperties.IDocumentProperties", "Author.value=Com;Title.value=HString;Keywords.value=Com;Comment.value=HString"]
 public interface Windows_Storage_FileProperties_IDocumentProperties <: IInspectable {
     func Author(value: CPointer<CPointer<Unit>>): Int32
@@ -32208,6 +33368,7 @@ public interface Windows_Storage_FileProperties_IDocumentProperties <: IInspecta
 }
 
 // Windows.Storage.FileProperties.IImageProperties (synthetic:Windows_Storage_FileProperties_IImageProperties)
+@When[Windows_Storage_FileProperties == "on"]
 @Interface["523c9424-fcff-4275-afee-ecdb9ab47973", "Windows.Storage.FileProperties.IImageProperties", "Keywords.value=Com;Title.value=HString;Latitude.value=Com;Longitude.value=Com;CameraManufacturer.value=HString;CameraModel.value=HString;PeopleNames.value=Com"]
 public interface Windows_Storage_FileProperties_IImageProperties <: IInspectable {
     func Rating(value: CPointer<UInt32>): Int32
@@ -32230,6 +33391,7 @@ public interface Windows_Storage_FileProperties_IImageProperties <: IInspectable
 }
 
 // Windows.Storage.FileProperties.IMusicProperties (synthetic:Windows_Storage_FileProperties_IMusicProperties)
+@When[Windows_Storage_FileProperties == "on"]
 @Interface["bc8aab62-66ec-419a-bc5d-ca65a4cb46da", "Windows.Storage.FileProperties.IMusicProperties", "Album.value=HString;Artist.value=HString;Genre.value=Com;Title.value=HString;AlbumArtist.value=HString;Composers.value=Com;Conductors.value=Com;Subtitle.value=HString;Producers.value=Com;Publisher.value=HString;Writers.value=Com"]
 public interface Windows_Storage_FileProperties_IMusicProperties <: IInspectable {
     func Album(value: CPointer<CPointer<Unit>>): Int32
@@ -32260,6 +33422,7 @@ public interface Windows_Storage_FileProperties_IMusicProperties <: IInspectable
 }
 
 // Windows.Storage.FileProperties.IStorageItemContentProperties (synthetic:Windows_Storage_FileProperties_IStorageItemContentProperties)
+@When[Windows_Storage_FileProperties == "on"]
 @Interface["05294bad-bc38-48bf-85d7-770e0e2ae0ba", "Windows.Storage.FileProperties.IStorageItemContentProperties", "GetMusicPropertiesAsync.operation=Com;GetVideoPropertiesAsync.operation=Com;GetImagePropertiesAsync.operation=Com;GetDocumentPropertiesAsync.operation=Com"]
 public interface Windows_Storage_FileProperties_IStorageItemContentProperties <: IInspectable {
     func GetMusicPropertiesAsync(operation: CPointer<CPointer<Unit>>): Int32
@@ -32269,6 +33432,7 @@ public interface Windows_Storage_FileProperties_IStorageItemContentProperties <:
 }
 
 // Windows.Storage.FileProperties.IStorageItemExtraProperties (synthetic:Windows_Storage_FileProperties_IStorageItemExtraProperties)
+@When[Windows_Storage_FileProperties == "on"]
 @Interface["c54361b2-54cd-432b-bdbc-4b19c4b470d7", "Windows.Storage.FileProperties.IStorageItemExtraProperties", "RetrievePropertiesAsync.operation=Com;SavePropertiesAsync.operation=Com;SavePropertiesAsyncOverloadDefault.operation=Com"]
 public interface Windows_Storage_FileProperties_IStorageItemExtraProperties <: IInspectable {
     func RetrievePropertiesAsync(propertiesToRetrieve: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
@@ -32277,6 +33441,7 @@ public interface Windows_Storage_FileProperties_IStorageItemExtraProperties <: I
 }
 
 // Windows.Storage.FileProperties.IThumbnailProperties (synthetic:Windows_Storage_FileProperties_IThumbnailProperties)
+@When[Windows_Storage_FileProperties == "on"]
 @Interface["693dd42f-dbe7-49b5-b3b3-2893ac5d3423", "Windows.Storage.FileProperties.IThumbnailProperties"]
 public interface Windows_Storage_FileProperties_IThumbnailProperties <: IInspectable {
     func OriginalWidth(value: CPointer<UInt32>): Int32
@@ -32286,6 +33451,7 @@ public interface Windows_Storage_FileProperties_IThumbnailProperties <: IInspect
 }
 
 // Windows.Storage.FileProperties.IVideoProperties (synthetic:Windows_Storage_FileProperties_IVideoProperties)
+@When[Windows_Storage_FileProperties == "on"]
 @Interface["719ae507-68de-4db8-97de-49998c059f2f", "Windows.Storage.FileProperties.IVideoProperties", "Keywords.value=Com;Latitude.value=Com;Longitude.value=Com;Title.value=HString;Subtitle.value=HString;Producers.value=Com;Publisher.value=HString;Writers.value=Com;Directors.value=Com"]
 public interface Windows_Storage_FileProperties_IVideoProperties <: IInspectable {
     func Rating(value: CPointer<UInt32>): Int32
@@ -32312,6 +33478,7 @@ public interface Windows_Storage_FileProperties_IVideoProperties <: IInspectable
 }
 
 // Windows.Storage.FileProperties.ImageProperties (synthetic:Windows_Storage_FileProperties_ImageProperties)
+@When[Windows_Storage_FileProperties == "on"]
 public class Windows_Storage_FileProperties_ImageProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -32590,6 +33757,7 @@ public class Windows_Storage_FileProperties_ImageProperties <: windows_interface
     }
 }
 
+@When[Windows_Storage_FileProperties == "on"]
 extend Windows_Storage_FileProperties_ImageProperties <: windows_core.HandleWinrtType<Windows_Storage_FileProperties_ImageProperties> {
     public static func intoWinrtHandle(value: Windows_Storage_FileProperties_ImageProperties): CPointer<Unit> {
         value.asRaw()
@@ -32608,6 +33776,7 @@ extend Windows_Storage_FileProperties_ImageProperties <: windows_core.HandleWinr
 }
 
 // Windows.Storage.FileProperties.MusicProperties (synthetic:Windows_Storage_FileProperties_MusicProperties)
+@When[Windows_Storage_FileProperties == "on"]
 public class Windows_Storage_FileProperties_MusicProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -32984,6 +34153,7 @@ public class Windows_Storage_FileProperties_MusicProperties <: windows_interface
     }
 }
 
+@When[Windows_Storage_FileProperties == "on"]
 extend Windows_Storage_FileProperties_MusicProperties <: windows_core.HandleWinrtType<Windows_Storage_FileProperties_MusicProperties> {
     public static func intoWinrtHandle(value: Windows_Storage_FileProperties_MusicProperties): CPointer<Unit> {
         value.asRaw()
@@ -33002,6 +34172,7 @@ extend Windows_Storage_FileProperties_MusicProperties <: windows_core.HandleWinr
 }
 
 // Windows.Storage.FileProperties.PhotoOrientation (synthetic:Windows_Storage_FileProperties_PhotoOrientation)
+@When[Windows_Storage_FileProperties == "on"]
 public struct Windows_Storage_FileProperties_PhotoOrientation {
     public let value: Int32
     public init() {
@@ -33011,17 +34182,27 @@ public struct Windows_Storage_FileProperties_PhotoOrientation {
         this.value = value
     }
 }
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PhotoOrientation_Unspecified = Windows_Storage_FileProperties_PhotoOrientation(0)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PhotoOrientation_Normal = Windows_Storage_FileProperties_PhotoOrientation(1)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PhotoOrientation_FlipHorizontal = Windows_Storage_FileProperties_PhotoOrientation(2)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PhotoOrientation_Rotate180 = Windows_Storage_FileProperties_PhotoOrientation(3)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PhotoOrientation_FlipVertical = Windows_Storage_FileProperties_PhotoOrientation(4)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PhotoOrientation_Transpose = Windows_Storage_FileProperties_PhotoOrientation(5)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PhotoOrientation_Rotate270 = Windows_Storage_FileProperties_PhotoOrientation(6)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PhotoOrientation_Transverse = Windows_Storage_FileProperties_PhotoOrientation(7)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PhotoOrientation_Rotate90 = Windows_Storage_FileProperties_PhotoOrientation(8)
 
 // Windows.Storage.FileProperties.PropertyPrefetchOptions (synthetic:Windows_Storage_FileProperties_PropertyPrefetchOptions)
+@When[Windows_Storage_FileProperties == "on"]
 public struct Windows_Storage_FileProperties_PropertyPrefetchOptions {
     public let value: UInt32
     public init() {
@@ -33046,14 +34227,21 @@ public struct Windows_Storage_FileProperties_PropertyPrefetchOptions {
         return Windows_Storage_FileProperties_PropertyPrefetchOptions(!value)
     }
 }
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PropertyPrefetchOptions_None = Windows_Storage_FileProperties_PropertyPrefetchOptions(0)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PropertyPrefetchOptions_MusicProperties = Windows_Storage_FileProperties_PropertyPrefetchOptions(1)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PropertyPrefetchOptions_VideoProperties = Windows_Storage_FileProperties_PropertyPrefetchOptions(2)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PropertyPrefetchOptions_ImageProperties = Windows_Storage_FileProperties_PropertyPrefetchOptions(4)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PropertyPrefetchOptions_DocumentProperties = Windows_Storage_FileProperties_PropertyPrefetchOptions(8)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_PropertyPrefetchOptions_BasicProperties = Windows_Storage_FileProperties_PropertyPrefetchOptions(16)
 
 // Windows.Storage.FileProperties.StorageItemContentProperties (synthetic:Windows_Storage_FileProperties_StorageItemContentProperties)
+@When[Windows_Storage_FileProperties == "on"]
 public class Windows_Storage_FileProperties_StorageItemContentProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -33175,6 +34363,7 @@ public class Windows_Storage_FileProperties_StorageItemContentProperties <: wind
     }
 }
 
+@When[Windows_Storage_FileProperties == "on"]
 extend Windows_Storage_FileProperties_StorageItemContentProperties <: windows_core.HandleWinrtType<Windows_Storage_FileProperties_StorageItemContentProperties> {
     public static func intoWinrtHandle(value: Windows_Storage_FileProperties_StorageItemContentProperties): CPointer<Unit> {
         value.asRaw()
@@ -33193,6 +34382,7 @@ extend Windows_Storage_FileProperties_StorageItemContentProperties <: windows_co
 }
 
 // Windows.Storage.FileProperties.StorageItemThumbnail (synthetic:Windows_Storage_FileProperties_StorageItemThumbnail)
+@When[Windows_Storage_FileProperties == "on"]
 public class Windows_Storage_FileProperties_StorageItemThumbnail <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -33293,6 +34483,7 @@ public class Windows_Storage_FileProperties_StorageItemThumbnail <: windows_inte
     }
 }
 
+@When[Windows_Storage_FileProperties == "on"]
 extend Windows_Storage_FileProperties_StorageItemThumbnail <: windows_core.HandleWinrtType<Windows_Storage_FileProperties_StorageItemThumbnail> {
     public static func intoWinrtHandle(value: Windows_Storage_FileProperties_StorageItemThumbnail): CPointer<Unit> {
         value.asRaw()
@@ -33311,6 +34502,7 @@ extend Windows_Storage_FileProperties_StorageItemThumbnail <: windows_core.Handl
 }
 
 // Windows.Storage.FileProperties.ThumbnailMode (synthetic:Windows_Storage_FileProperties_ThumbnailMode)
+@When[Windows_Storage_FileProperties == "on"]
 public struct Windows_Storage_FileProperties_ThumbnailMode {
     public let value: Int32
     public init() {
@@ -33320,14 +34512,21 @@ public struct Windows_Storage_FileProperties_ThumbnailMode {
         this.value = value
     }
 }
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_ThumbnailMode_PicturesView = Windows_Storage_FileProperties_ThumbnailMode(0)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_ThumbnailMode_VideosView = Windows_Storage_FileProperties_ThumbnailMode(1)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_ThumbnailMode_MusicView = Windows_Storage_FileProperties_ThumbnailMode(2)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_ThumbnailMode_DocumentsView = Windows_Storage_FileProperties_ThumbnailMode(3)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_ThumbnailMode_ListView = Windows_Storage_FileProperties_ThumbnailMode(4)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_ThumbnailMode_SingleItem = Windows_Storage_FileProperties_ThumbnailMode(5)
 
 // Windows.Storage.FileProperties.ThumbnailOptions (synthetic:Windows_Storage_FileProperties_ThumbnailOptions)
+@When[Windows_Storage_FileProperties == "on"]
 public struct Windows_Storage_FileProperties_ThumbnailOptions {
     public let value: UInt32
     public init() {
@@ -33352,12 +34551,17 @@ public struct Windows_Storage_FileProperties_ThumbnailOptions {
         return Windows_Storage_FileProperties_ThumbnailOptions(!value)
     }
 }
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_ThumbnailOptions_None = Windows_Storage_FileProperties_ThumbnailOptions(0)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_ThumbnailOptions_ReturnOnlyIfCached = Windows_Storage_FileProperties_ThumbnailOptions(1)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_ThumbnailOptions_ResizeThumbnail = Windows_Storage_FileProperties_ThumbnailOptions(2)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_ThumbnailOptions_UseCurrentScale = Windows_Storage_FileProperties_ThumbnailOptions(4)
 
 // Windows.Storage.FileProperties.ThumbnailType (synthetic:Windows_Storage_FileProperties_ThumbnailType)
+@When[Windows_Storage_FileProperties == "on"]
 public struct Windows_Storage_FileProperties_ThumbnailType {
     public let value: Int32
     public init() {
@@ -33367,10 +34571,13 @@ public struct Windows_Storage_FileProperties_ThumbnailType {
         this.value = value
     }
 }
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_ThumbnailType_Image = Windows_Storage_FileProperties_ThumbnailType(0)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_ThumbnailType_Icon = Windows_Storage_FileProperties_ThumbnailType(1)
 
 // Windows.Storage.FileProperties.VideoOrientation (synthetic:Windows_Storage_FileProperties_VideoOrientation)
+@When[Windows_Storage_FileProperties == "on"]
 public struct Windows_Storage_FileProperties_VideoOrientation {
     public let value: Int32
     public init() {
@@ -33380,12 +34587,17 @@ public struct Windows_Storage_FileProperties_VideoOrientation {
         this.value = value
     }
 }
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_VideoOrientation_Normal = Windows_Storage_FileProperties_VideoOrientation(0)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_VideoOrientation_Rotate90 = Windows_Storage_FileProperties_VideoOrientation(90)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_VideoOrientation_Rotate180 = Windows_Storage_FileProperties_VideoOrientation(180)
+@When[Windows_Storage_FileProperties == "on"]
 public let Windows_Storage_FileProperties_VideoOrientation_Rotate270 = Windows_Storage_FileProperties_VideoOrientation(270)
 
 // Windows.Storage.FileProperties.VideoProperties (synthetic:Windows_Storage_FileProperties_VideoProperties)
+@When[Windows_Storage_FileProperties == "on"]
 public class Windows_Storage_FileProperties_VideoProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -33720,6 +34932,7 @@ public class Windows_Storage_FileProperties_VideoProperties <: windows_interface
     }
 }
 
+@When[Windows_Storage_FileProperties == "on"]
 extend Windows_Storage_FileProperties_VideoProperties <: windows_core.HandleWinrtType<Windows_Storage_FileProperties_VideoProperties> {
     public static func intoWinrtHandle(value: Windows_Storage_FileProperties_VideoProperties): CPointer<Unit> {
         value.asRaw()
@@ -33738,6 +34951,7 @@ extend Windows_Storage_FileProperties_VideoProperties <: windows_core.HandleWinr
 }
 
 // Windows.Storage.IStorageFile (synthetic:Windows_Storage_IStorageFile)
+@When[Windows_Storage == "on"]
 @Interface["fa3f6186-4214-428c-a64c-14c9ac7315ea", "Windows.Storage.IStorageFile", "FileType.value=HString;ContentType.value=HString;OpenAsync.operation=Com;OpenTransactedWriteAsync.operation=Com;CopyOverloadDefaultNameAndOptions.operation=Com;CopyOverloadDefaultOptions.operation=Com;CopyOverload.operation=Com;CopyAndReplaceAsync.operation=Com;MoveOverloadDefaultNameAndOptions.operation=Com;MoveOverloadDefaultOptions.operation=Com;MoveOverload.operation=Com;MoveAndReplaceAsync.operation=Com"]
 public interface Windows_Storage_IStorageFile <: IInspectable {
     func FileType(value: CPointer<CPointer<Unit>>): Int32
@@ -33755,6 +34969,7 @@ public interface Windows_Storage_IStorageFile <: IInspectable {
 }
 
 // Windows.Storage.IStorageFile2 (synthetic:Windows_Storage_IStorageFile2)
+@When[Windows_Storage == "on"]
 @Interface["954e4bcf-0a77-42fb-b777-c2ed58a52e44", "Windows.Storage.IStorageFile2", "OpenWithOptionsAsync.operation=Com;OpenTransactedWriteWithOptionsAsync.operation=Com"]
 public interface Windows_Storage_IStorageFile2 <: IInspectable {
     func OpenWithOptionsAsync(accessMode: Int32, options: UInt32, operation: CPointer<CPointer<Unit>>): Int32
@@ -33762,12 +34977,14 @@ public interface Windows_Storage_IStorageFile2 <: IInspectable {
 }
 
 // Windows.Storage.IStorageFilePropertiesWithAvailability (synthetic:Windows_Storage_IStorageFilePropertiesWithAvailability)
+@When[Windows_Storage == "on"]
 @Interface["afcbbe9b-582b-4133-9648-e44ca46ee491", "Windows.Storage.IStorageFilePropertiesWithAvailability"]
 public interface Windows_Storage_IStorageFilePropertiesWithAvailability <: IInspectable {
     func IsAvailable(value: CPointer<Bool>): Int32
 }
 
 // Windows.Storage.IStorageFileStatics (synthetic:Windows_Storage_IStorageFileStatics)
+@When[Windows_Storage == "on"]
 @Interface["5984c710-daf2-43c8-8bb4-a4d3eacfd03f", "Windows.Storage.IStorageFileStatics", "GetFileFromPathAsync.operation=Com;GetFileFromApplicationUriAsync.operation=Com;CreateStreamedFileAsync.operation=Com;ReplaceWithStreamedFileAsync.operation=Com;CreateStreamedFileFromUriAsync.operation=Com;ReplaceWithStreamedFileFromUriAsync.operation=Com"]
 public interface Windows_Storage_IStorageFileStatics <: IInspectable {
     func GetFileFromPathAsync(path: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
@@ -33779,12 +34996,14 @@ public interface Windows_Storage_IStorageFileStatics <: IInspectable {
 }
 
 // Windows.Storage.IStorageFileStatics2 (synthetic:Windows_Storage_IStorageFileStatics2)
+@When[Windows_Storage == "on"]
 @Interface["5c76a781-212e-4af9-8f04-740cae108974", "Windows.Storage.IStorageFileStatics2", "GetFileFromPathForUserAsync.operation=Com"]
 public interface Windows_Storage_IStorageFileStatics2 <: IInspectable {
     func GetFileFromPathForUserAsync(user: CPointer<Unit>, path: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageFolder (synthetic:Windows_Storage_IStorageFolder)
+@When[Windows_Storage == "on"]
 @Interface["72d1cb78-b3ef-4f75-a80b-6fd9dae2944b", "Windows.Storage.IStorageFolder", "CreateFileAsyncOverloadDefaultOptions.operation=Com;CreateFileAsync.operation=Com;CreateFolderAsyncOverloadDefaultOptions.operation=Com;CreateFolderAsync.operation=Com;GetFileAsync.operation=Com;GetFolderAsync.operation=Com;GetItemAsync.operation=Com;GetFilesAsyncOverloadDefaultOptionsStartAndCount.operation=Com;GetFoldersAsyncOverloadDefaultOptionsStartAndCount.operation=Com;GetItemsAsyncOverloadDefaultStartAndCount.operation=Com"]
 public interface Windows_Storage_IStorageFolder <: IInspectable {
     func CreateFileAsyncOverloadDefaultOptions(desiredName: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
@@ -33800,30 +35019,35 @@ public interface Windows_Storage_IStorageFolder <: IInspectable {
 }
 
 // Windows.Storage.IStorageFolder2 (synthetic:Windows_Storage_IStorageFolder2)
+@When[Windows_Storage == "on"]
 @Interface["e827e8b9-08d9-4a8e-a0ac-fe5ed3cbbbd3", "Windows.Storage.IStorageFolder2", "TryGetItemAsync.operation=Com"]
 public interface Windows_Storage_IStorageFolder2 <: IInspectable {
     func TryGetItemAsync(name: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageFolder3 (synthetic:Windows_Storage_IStorageFolder3)
+@When[Windows_Storage == "on"]
 @Interface["9f617899-bde1-4124-aeb3-b06ad96f98d4", "Windows.Storage.IStorageFolder3", "TryGetChangeTracker.result=Com"]
 public interface Windows_Storage_IStorageFolder3 <: IInspectable {
     func TryGetChangeTracker(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageFolderStatics (synthetic:Windows_Storage_IStorageFolderStatics)
+@When[Windows_Storage == "on"]
 @Interface["08f327ff-85d5-48b9-aee9-28511e339f9f", "Windows.Storage.IStorageFolderStatics", "GetFolderFromPathAsync.operation=Com"]
 public interface Windows_Storage_IStorageFolderStatics <: IInspectable {
     func GetFolderFromPathAsync(path: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageFolderStatics2 (synthetic:Windows_Storage_IStorageFolderStatics2)
+@When[Windows_Storage == "on"]
 @Interface["b4656dc3-71d2-467d-8b29-371f0f62bf6f", "Windows.Storage.IStorageFolderStatics2", "GetFolderFromPathForUserAsync.operation=Com"]
 public interface Windows_Storage_IStorageFolderStatics2 <: IInspectable {
     func GetFolderFromPathForUserAsync(user: CPointer<Unit>, path: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageItem (synthetic:Windows_Storage_IStorageItem)
+@When[Windows_Storage == "on"]
 @Interface["4207a996-ca2f-42f7-bde8-8b10457a7f30", "Windows.Storage.IStorageItem", "RenameAsyncOverloadDefaultOptions.operation=Com;RenameAsync.operation=Com;DeleteAsyncOverloadDefaultOptions.operation=Com;DeleteAsync.operation=Com;GetBasicPropertiesAsync.operation=Com;Name.value=HString;Path.value=HString"]
 public interface Windows_Storage_IStorageItem <: IInspectable {
     func RenameAsyncOverloadDefaultOptions(desiredName: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
@@ -33839,6 +35063,7 @@ public interface Windows_Storage_IStorageItem <: IInspectable {
 }
 
 // Windows.Storage.IStorageItem2 (synthetic:Windows_Storage_IStorageItem2)
+@When[Windows_Storage == "on"]
 @Interface["53f926d2-083c-4283-b45b-81c007237e44", "Windows.Storage.IStorageItem2", "GetParentAsync.operation=Com"]
 public interface Windows_Storage_IStorageItem2 <: IInspectable {
     func GetParentAsync(operation: CPointer<CPointer<Unit>>): Int32
@@ -33846,6 +35071,7 @@ public interface Windows_Storage_IStorageItem2 <: IInspectable {
 }
 
 // Windows.Storage.IStorageItemProperties (synthetic:Windows_Storage_IStorageItemProperties)
+@When[Windows_Storage == "on"]
 @Interface["86664478-8029-46fe-a789-1c2f3e2ffb5c", "Windows.Storage.IStorageItemProperties", "GetThumbnailAsyncOverloadDefaultSizeDefaultOptions.operation=Com;GetThumbnailAsyncOverloadDefaultOptions.operation=Com;GetThumbnailAsync.operation=Com;DisplayName.value=HString;DisplayType.value=HString;FolderRelativeId.value=HString;Properties.value=Com"]
 public interface Windows_Storage_IStorageItemProperties <: IInspectable {
     func GetThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: Int32, operation: CPointer<CPointer<Unit>>): Int32
@@ -33858,6 +35084,7 @@ public interface Windows_Storage_IStorageItemProperties <: IInspectable {
 }
 
 // Windows.Storage.IStorageItemProperties2 (synthetic:Windows_Storage_IStorageItemProperties2)
+@When[Windows_Storage == "on"]
 @Interface["8e86a951-04b9-4bd2-929d-fef3f71621d0", "Windows.Storage.IStorageItemProperties2", "GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions.operation=Com;GetScaledImageAsThumbnailAsyncOverloadDefaultOptions.operation=Com;GetScaledImageAsThumbnailAsync.operation=Com"]
 public interface Windows_Storage_IStorageItemProperties2 <: IInspectable {
     func GetScaledImageAsThumbnailAsyncOverloadDefaultSizeDefaultOptions(mode: Int32, operation: CPointer<CPointer<Unit>>): Int32
@@ -33866,12 +35093,14 @@ public interface Windows_Storage_IStorageItemProperties2 <: IInspectable {
 }
 
 // Windows.Storage.IStorageItemPropertiesWithProvider (synthetic:Windows_Storage_IStorageItemPropertiesWithProvider)
+@When[Windows_Storage == "on"]
 @Interface["861bf39b-6368-4dee-b40e-74684a5ce714", "Windows.Storage.IStorageItemPropertiesWithProvider", "Provider.value=Com"]
 public interface Windows_Storage_IStorageItemPropertiesWithProvider <: IInspectable {
     func Provider(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageLibraryChange (synthetic:Windows_Storage_IStorageLibraryChange)
+@When[Windows_Storage == "on"]
 @Interface["00980b23-2be2-4909-aa48-159f5203a51e", "Windows.Storage.IStorageLibraryChange", "Path.value=HString;PreviousPath.value=HString;GetStorageItemAsync.operation=Com"]
 public interface Windows_Storage_IStorageLibraryChange <: IInspectable {
     func ChangeType(value: CPointer<Int32>): Int32
@@ -33882,6 +35111,7 @@ public interface Windows_Storage_IStorageLibraryChange <: IInspectable {
 }
 
 // Windows.Storage.IStorageLibraryChangeReader (synthetic:Windows_Storage_IStorageLibraryChangeReader)
+@When[Windows_Storage == "on"]
 @Interface["f205bc83-fca2-41f9-8954-ee2e991eb96f", "Windows.Storage.IStorageLibraryChangeReader", "ReadBatchAsync.operation=Com;AcceptChangesAsync.operation=Com"]
 public interface Windows_Storage_IStorageLibraryChangeReader <: IInspectable {
     func ReadBatchAsync(operation: CPointer<CPointer<Unit>>): Int32
@@ -33889,12 +35119,14 @@ public interface Windows_Storage_IStorageLibraryChangeReader <: IInspectable {
 }
 
 // Windows.Storage.IStorageLibraryChangeReader2 (synthetic:Windows_Storage_IStorageLibraryChangeReader2)
+@When[Windows_Storage == "on"]
 @Interface["abf4868b-fbcc-4a4f-999e-e7ab7c646dbe", "Windows.Storage.IStorageLibraryChangeReader2"]
 public interface Windows_Storage_IStorageLibraryChangeReader2 <: IInspectable {
     func GetLastChangeId(result: CPointer<UInt64>): Int32
 }
 
 // Windows.Storage.IStorageLibraryChangeTracker (synthetic:Windows_Storage_IStorageLibraryChangeTracker)
+@When[Windows_Storage == "on"]
 @Interface["9e157316-6073-44f6-9681-7492d1286c90", "Windows.Storage.IStorageLibraryChangeTracker", "GetChangeReader.value=Com"]
 public interface Windows_Storage_IStorageLibraryChangeTracker <: IInspectable {
     func GetChangeReader(value: CPointer<CPointer<Unit>>): Int32
@@ -33903,6 +35135,7 @@ public interface Windows_Storage_IStorageLibraryChangeTracker <: IInspectable {
 }
 
 // Windows.Storage.IStorageLibraryChangeTracker2 (synthetic:Windows_Storage_IStorageLibraryChangeTracker2)
+@When[Windows_Storage == "on"]
 @Interface["cd051c3b-0f9f-42f9-8fb3-158d82e13821", "Windows.Storage.IStorageLibraryChangeTracker2"]
 public interface Windows_Storage_IStorageLibraryChangeTracker2 <: IInspectable {
     func EnableWithOptions(options: CPointer<Unit>): Int32
@@ -33910,6 +35143,7 @@ public interface Windows_Storage_IStorageLibraryChangeTracker2 <: IInspectable {
 }
 
 // Windows.Storage.IStorageLibraryChangeTrackerOptions (synthetic:Windows_Storage_IStorageLibraryChangeTrackerOptions)
+@When[Windows_Storage == "on"]
 @Interface["bb52bcd4-1a6d-59c0-ad2a-823a20532483", "Windows.Storage.IStorageLibraryChangeTrackerOptions"]
 public interface Windows_Storage_IStorageLibraryChangeTrackerOptions <: IInspectable {
     func TrackChangeDetails(value: CPointer<Bool>): Int32
@@ -33917,6 +35151,7 @@ public interface Windows_Storage_IStorageLibraryChangeTrackerOptions <: IInspect
 }
 
 // Windows.Storage.IStorageProvider (synthetic:Windows_Storage_IStorageProvider)
+@When[Windows_Storage == "on"]
 @Interface["e705eed4-d478-47d6-ba46-1a8ebe114a20", "Windows.Storage.IStorageProvider", "Id.value=HString;DisplayName.value=HString"]
 public interface Windows_Storage_IStorageProvider <: IInspectable {
     func Id(value: CPointer<CPointer<Unit>>): Int32
@@ -33924,12 +35159,14 @@ public interface Windows_Storage_IStorageProvider <: IInspectable {
 }
 
 // Windows.Storage.IStorageProvider2 (synthetic:Windows_Storage_IStorageProvider2)
+@When[Windows_Storage == "on"]
 @Interface["010d1917-3404-414b-9fd7-cd44472eaa39", "Windows.Storage.IStorageProvider2", "IsPropertySupportedForPartialFileAsync.operation=Com"]
 public interface Windows_Storage_IStorageProvider2 <: IInspectable {
     func IsPropertySupportedForPartialFileAsync(propertyCanonicalName: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.IStorageStreamTransaction (synthetic:Windows_Storage_IStorageStreamTransaction)
+@When[Windows_Storage == "on"]
 @Interface["f67cf363-a53d-4d94-ae2c-67232d93acdd", "Windows.Storage.IStorageStreamTransaction", "Stream.value=Com;CommitAsync.operation=Com"]
 public interface Windows_Storage_IStorageStreamTransaction <: IInspectable {
     func Stream(value: CPointer<CPointer<Unit>>): Int32
@@ -33937,12 +35174,14 @@ public interface Windows_Storage_IStorageStreamTransaction <: IInspectable {
 }
 
 // Windows.Storage.IStreamedFileDataRequest (synthetic:Windows_Storage_IStreamedFileDataRequest)
+@When[Windows_Storage == "on"]
 @Interface["1673fcce-dabd-4d50-beee-180b8a8191b6", "Windows.Storage.IStreamedFileDataRequest"]
 public interface Windows_Storage_IStreamedFileDataRequest <: IInspectable {
     func FailAndClose(failureMode: Int32): Int32
 }
 
 // Windows.Storage.NameCollisionOption (synthetic:Windows_Storage_NameCollisionOption)
+@When[Windows_Storage == "on"]
 public struct Windows_Storage_NameCollisionOption {
     public let value: Int32
     public init() {
@@ -33952,11 +35191,15 @@ public struct Windows_Storage_NameCollisionOption {
         this.value = value
     }
 }
+@When[Windows_Storage == "on"]
 public let Windows_Storage_NameCollisionOption_GenerateUniqueName = Windows_Storage_NameCollisionOption(0)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_NameCollisionOption_ReplaceExisting = Windows_Storage_NameCollisionOption(1)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_NameCollisionOption_FailIfExists = Windows_Storage_NameCollisionOption(2)
 
 // Windows.Storage.Search.CommonFileQuery (synthetic:Windows_Storage_Search_CommonFileQuery)
+@When[Windows_Storage_Search == "on"]
 public struct Windows_Storage_Search_CommonFileQuery {
     public let value: Int32
     public init() {
@@ -33966,14 +35209,21 @@ public struct Windows_Storage_Search_CommonFileQuery {
         this.value = value
     }
 }
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFileQuery_DefaultQuery = Windows_Storage_Search_CommonFileQuery(0)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFileQuery_OrderByName = Windows_Storage_Search_CommonFileQuery(1)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFileQuery_OrderByTitle = Windows_Storage_Search_CommonFileQuery(2)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFileQuery_OrderByMusicProperties = Windows_Storage_Search_CommonFileQuery(3)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFileQuery_OrderBySearchRank = Windows_Storage_Search_CommonFileQuery(4)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFileQuery_OrderByDate = Windows_Storage_Search_CommonFileQuery(5)
 
 // Windows.Storage.Search.CommonFolderQuery (synthetic:Windows_Storage_Search_CommonFolderQuery)
+@When[Windows_Storage_Search == "on"]
 public struct Windows_Storage_Search_CommonFolderQuery {
     public let value: Int32
     public init() {
@@ -33983,21 +35233,35 @@ public struct Windows_Storage_Search_CommonFolderQuery {
         this.value = value
     }
 }
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFolderQuery_DefaultQuery = Windows_Storage_Search_CommonFolderQuery(0)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFolderQuery_GroupByYear = Windows_Storage_Search_CommonFolderQuery(100)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFolderQuery_GroupByMonth = Windows_Storage_Search_CommonFolderQuery(101)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFolderQuery_GroupByArtist = Windows_Storage_Search_CommonFolderQuery(102)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFolderQuery_GroupByAlbum = Windows_Storage_Search_CommonFolderQuery(103)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFolderQuery_GroupByAlbumArtist = Windows_Storage_Search_CommonFolderQuery(104)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFolderQuery_GroupByComposer = Windows_Storage_Search_CommonFolderQuery(105)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFolderQuery_GroupByGenre = Windows_Storage_Search_CommonFolderQuery(106)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFolderQuery_GroupByPublishedYear = Windows_Storage_Search_CommonFolderQuery(107)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFolderQuery_GroupByRating = Windows_Storage_Search_CommonFolderQuery(108)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFolderQuery_GroupByTag = Windows_Storage_Search_CommonFolderQuery(109)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFolderQuery_GroupByAuthor = Windows_Storage_Search_CommonFolderQuery(110)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_CommonFolderQuery_GroupByType = Windows_Storage_Search_CommonFolderQuery(111)
 
 // Windows.Storage.Search.DateStackOption (synthetic:Windows_Storage_Search_DateStackOption)
+@When[Windows_Storage_Search == "on"]
 public struct Windows_Storage_Search_DateStackOption {
     public let value: Int32
     public init() {
@@ -34007,11 +35271,15 @@ public struct Windows_Storage_Search_DateStackOption {
         this.value = value
     }
 }
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_DateStackOption_None = Windows_Storage_Search_DateStackOption(0)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_DateStackOption_Year = Windows_Storage_Search_DateStackOption(1)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_DateStackOption_Month = Windows_Storage_Search_DateStackOption(2)
 
 // Windows.Storage.Search.FolderDepth (synthetic:Windows_Storage_Search_FolderDepth)
+@When[Windows_Storage_Search == "on"]
 public struct Windows_Storage_Search_FolderDepth {
     public let value: Int32
     public init() {
@@ -34021,10 +35289,13 @@ public struct Windows_Storage_Search_FolderDepth {
         this.value = value
     }
 }
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_FolderDepth_Shallow = Windows_Storage_Search_FolderDepth(0)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_FolderDepth_Deep = Windows_Storage_Search_FolderDepth(1)
 
 // Windows.Storage.Search.IQueryOptions (synthetic:Windows_Storage_Search_IQueryOptions)
+@When[Windows_Storage_Search == "on"]
 @Interface["1e5e46ee-0f45-4838-a8e9-d0479d446c30", "Windows.Storage.Search.IQueryOptions", "FileTypeFilter.value=Com;ApplicationSearchFilter.value=HString;UserSearchFilter.value=HString;Language.value=HString;SortOrder.value=Com;GroupPropertyName.value=HString;SaveToString.value=HString"]
 public interface Windows_Storage_Search_IQueryOptions <: IInspectable {
     func FileTypeFilter(value: CPointer<CPointer<Unit>>): Int32
@@ -34048,6 +35319,7 @@ public interface Windows_Storage_Search_IQueryOptions <: IInspectable {
 }
 
 // Windows.Storage.Search.IQueryOptionsFactory (synthetic:Windows_Storage_Search_IQueryOptionsFactory)
+@When[Windows_Storage_Search == "on"]
 @Interface["032e1f8c-a9c1-4e71-8011-0dee9d4811a3", "Windows.Storage.Search.IQueryOptionsFactory", "CreateCommonFileQuery.queryOptions=Com;CreateCommonFolderQuery.queryOptions=Com"]
 public interface Windows_Storage_Search_IQueryOptionsFactory <: IInspectable {
     func CreateCommonFileQuery(query: Int32, fileTypeFilter: CPointer<Unit>, queryOptions: CPointer<CPointer<Unit>>): Int32
@@ -34055,12 +35327,14 @@ public interface Windows_Storage_Search_IQueryOptionsFactory <: IInspectable {
 }
 
 // Windows.Storage.Search.IQueryOptionsWithProviderFilter (synthetic:Windows_Storage_Search_IQueryOptionsWithProviderFilter)
+@When[Windows_Storage_Search == "on"]
 @Interface["5b9d1026-15c4-44dd-b89a-47a59b7d7c4f", "Windows.Storage.Search.IQueryOptionsWithProviderFilter", "StorageProviderIdFilter.value=Com"]
 public interface Windows_Storage_Search_IQueryOptionsWithProviderFilter <: IInspectable {
     func StorageProviderIdFilter(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Search.IStorageFileQueryResult (synthetic:Windows_Storage_Search_IStorageFileQueryResult)
+@When[Windows_Storage_Search == "on"]
 @Interface["52fda447-2baa-412c-b29f-d4b1778efa1e", "Windows.Storage.Search.IStorageFileQueryResult", "GetFilesAsync.operation=Com;GetFilesAsyncDefaultStartAndCount.operation=Com"]
 public interface Windows_Storage_Search_IStorageFileQueryResult <: IInspectable {
     func GetFilesAsync(startIndex: UInt32, maxNumberOfItems: UInt32, operation: CPointer<CPointer<Unit>>): Int32
@@ -34068,12 +35342,14 @@ public interface Windows_Storage_Search_IStorageFileQueryResult <: IInspectable 
 }
 
 // Windows.Storage.Search.IStorageFileQueryResult2 (synthetic:Windows_Storage_Search_IStorageFileQueryResult2)
+@When[Windows_Storage_Search == "on"]
 @Interface["4e5db9dd-7141-46c4-8be3-e9dc9e27275c", "Windows.Storage.Search.IStorageFileQueryResult2", "GetMatchingPropertiesWithRanges.result=Com"]
 public interface Windows_Storage_Search_IStorageFileQueryResult2 <: IInspectable {
     func GetMatchingPropertiesWithRanges(file: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Search.IStorageFolderQueryOperations (synthetic:Windows_Storage_Search_IStorageFolderQueryOperations)
+@When[Windows_Storage_Search == "on"]
 @Interface["cb43ccc9-446b-4a4f-be97-757771be5203", "Windows.Storage.Search.IStorageFolderQueryOperations", "GetIndexedStateAsync.operation=Com;CreateFileQueryOverloadDefault.value=Com;CreateFileQuery.value=Com;CreateFileQueryWithOptions.value=Com;CreateFolderQueryOverloadDefault.value=Com;CreateFolderQuery.value=Com;CreateFolderQueryWithOptions.value=Com;CreateItemQuery.value=Com;CreateItemQueryWithOptions.value=Com;GetFilesAsync.operation=Com;GetFilesAsyncOverloadDefaultStartAndCount.operation=Com;GetFoldersAsync.operation=Com;GetFoldersAsyncOverloadDefaultStartAndCount.operation=Com;GetItemsAsync.operation=Com"]
 public interface Windows_Storage_Search_IStorageFolderQueryOperations <: IInspectable {
     func GetIndexedStateAsync(operation: CPointer<CPointer<Unit>>): Int32
@@ -34096,6 +35372,7 @@ public interface Windows_Storage_Search_IStorageFolderQueryOperations <: IInspec
 }
 
 // Windows.Storage.Search.IStorageFolderQueryResult (synthetic:Windows_Storage_Search_IStorageFolderQueryResult)
+@When[Windows_Storage_Search == "on"]
 @Interface["6654c911-7d66-46fa-aecf-e4a4baa93ab8", "Windows.Storage.Search.IStorageFolderQueryResult", "GetFoldersAsync.operation=Com;GetFoldersAsyncDefaultStartAndCount.operation=Com"]
 public interface Windows_Storage_Search_IStorageFolderQueryResult <: IInspectable {
     func GetFoldersAsync(startIndex: UInt32, maxNumberOfItems: UInt32, operation: CPointer<CPointer<Unit>>): Int32
@@ -34103,6 +35380,7 @@ public interface Windows_Storage_Search_IStorageFolderQueryResult <: IInspectabl
 }
 
 // Windows.Storage.Search.IStorageItemQueryResult (synthetic:Windows_Storage_Search_IStorageItemQueryResult)
+@When[Windows_Storage_Search == "on"]
 @Interface["e8948079-9d58-47b8-b2b2-41b07f4795f9", "Windows.Storage.Search.IStorageItemQueryResult", "GetItemsAsync.operation=Com;GetItemsAsyncDefaultStartAndCount.operation=Com"]
 public interface Windows_Storage_Search_IStorageItemQueryResult <: IInspectable {
     func GetItemsAsync(startIndex: UInt32, maxNumberOfItems: UInt32, operation: CPointer<CPointer<Unit>>): Int32
@@ -34110,6 +35388,7 @@ public interface Windows_Storage_Search_IStorageItemQueryResult <: IInspectable 
 }
 
 // Windows.Storage.Search.IStorageQueryResultBase (synthetic:Windows_Storage_Search_IStorageQueryResultBase)
+@When[Windows_Storage_Search == "on"]
 @Interface["c297d70d-7353-47ab-ba58-8c61425dc54b", "Windows.Storage.Search.IStorageQueryResultBase", "GetItemCountAsync.operation=Com;Folder.container=Com;FindStartIndexAsync.operation=Com;GetCurrentQueryOptions.value=Com"]
 public interface Windows_Storage_Search_IStorageQueryResultBase <: IInspectable {
     func GetItemCountAsync(operation: CPointer<CPointer<Unit>>): Int32
@@ -34124,6 +35403,7 @@ public interface Windows_Storage_Search_IStorageQueryResultBase <: IInspectable 
 }
 
 // Windows.Storage.Search.IndexedState (synthetic:Windows_Storage_Search_IndexedState)
+@When[Windows_Storage_Search == "on"]
 public struct Windows_Storage_Search_IndexedState {
     public let value: Int32
     public init() {
@@ -34133,12 +35413,17 @@ public struct Windows_Storage_Search_IndexedState {
         this.value = value
     }
 }
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_IndexedState_Unknown = Windows_Storage_Search_IndexedState(0)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_IndexedState_NotIndexed = Windows_Storage_Search_IndexedState(1)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_IndexedState_PartiallyIndexed = Windows_Storage_Search_IndexedState(2)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_IndexedState_FullyIndexed = Windows_Storage_Search_IndexedState(3)
 
 // Windows.Storage.Search.IndexerOption (synthetic:Windows_Storage_Search_IndexerOption)
+@When[Windows_Storage_Search == "on"]
 public struct Windows_Storage_Search_IndexerOption {
     public let value: Int32
     public init() {
@@ -34148,12 +35433,17 @@ public struct Windows_Storage_Search_IndexerOption {
         this.value = value
     }
 }
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_IndexerOption_UseIndexerWhenAvailable = Windows_Storage_Search_IndexerOption(0)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_IndexerOption_OnlyUseIndexer = Windows_Storage_Search_IndexerOption(1)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_IndexerOption_DoNotUseIndexer = Windows_Storage_Search_IndexerOption(2)
+@When[Windows_Storage_Search == "on"]
 public let Windows_Storage_Search_IndexerOption_OnlyUseIndexerAndOptimizeForIndexedProperties = Windows_Storage_Search_IndexerOption(3)
 
 // Windows.Storage.Search.QueryOptions (synthetic:Windows_Storage_Search_QueryOptions)
+@When[Windows_Storage_Search == "on"]
 public class Windows_Storage_Search_QueryOptions <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -34475,6 +35765,7 @@ public class Windows_Storage_Search_QueryOptions <: windows_interface.InterfaceW
     }
 }
 
+@When[Windows_Storage_Search == "on"]
 extend Windows_Storage_Search_QueryOptions <: windows_core.HandleWinrtType<Windows_Storage_Search_QueryOptions> {
     public static func intoWinrtHandle(value: Windows_Storage_Search_QueryOptions): CPointer<Unit> {
         value.asRaw()
@@ -34493,6 +35784,7 @@ extend Windows_Storage_Search_QueryOptions <: windows_core.HandleWinrtType<Windo
 }
 
 // Windows.Storage.Search.SortEntry (synthetic:Windows_Storage_Search_SortEntry)
+@When[Windows_Storage_Search == "on"]
 @C
 public struct Windows_Storage_Search_SortEntry {
     public var PropertyName: CPointer<Unit> = CPointer<Unit>()
@@ -34500,6 +35792,7 @@ public struct Windows_Storage_Search_SortEntry {
 }
 
 // Windows.Storage.Search.StorageFileQueryResult (synthetic:Windows_Storage_Search_StorageFileQueryResult)
+@When[Windows_Storage_Search == "on"]
 public class Windows_Storage_Search_StorageFileQueryResult <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -34600,6 +35893,7 @@ public class Windows_Storage_Search_StorageFileQueryResult <: windows_interface.
     }
 }
 
+@When[Windows_Storage_Search == "on"]
 extend Windows_Storage_Search_StorageFileQueryResult <: windows_core.HandleWinrtType<Windows_Storage_Search_StorageFileQueryResult> {
     public static func intoWinrtHandle(value: Windows_Storage_Search_StorageFileQueryResult): CPointer<Unit> {
         value.asRaw()
@@ -34618,6 +35912,7 @@ extend Windows_Storage_Search_StorageFileQueryResult <: windows_core.HandleWinrt
 }
 
 // Windows.Storage.Search.StorageFolderQueryResult (synthetic:Windows_Storage_Search_StorageFolderQueryResult)
+@When[Windows_Storage_Search == "on"]
 public class Windows_Storage_Search_StorageFolderQueryResult <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -34711,6 +36006,7 @@ public class Windows_Storage_Search_StorageFolderQueryResult <: windows_interfac
     }
 }
 
+@When[Windows_Storage_Search == "on"]
 extend Windows_Storage_Search_StorageFolderQueryResult <: windows_core.HandleWinrtType<Windows_Storage_Search_StorageFolderQueryResult> {
     public static func intoWinrtHandle(value: Windows_Storage_Search_StorageFolderQueryResult): CPointer<Unit> {
         value.asRaw()
@@ -34729,6 +36025,7 @@ extend Windows_Storage_Search_StorageFolderQueryResult <: windows_core.HandleWin
 }
 
 // Windows.Storage.Search.StorageItemQueryResult (synthetic:Windows_Storage_Search_StorageItemQueryResult)
+@When[Windows_Storage_Search == "on"]
 public class Windows_Storage_Search_StorageItemQueryResult <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -34822,6 +36119,7 @@ public class Windows_Storage_Search_StorageItemQueryResult <: windows_interface.
     }
 }
 
+@When[Windows_Storage_Search == "on"]
 extend Windows_Storage_Search_StorageItemQueryResult <: windows_core.HandleWinrtType<Windows_Storage_Search_StorageItemQueryResult> {
     public static func intoWinrtHandle(value: Windows_Storage_Search_StorageItemQueryResult): CPointer<Unit> {
         value.asRaw()
@@ -34840,6 +36138,7 @@ extend Windows_Storage_Search_StorageItemQueryResult <: windows_core.HandleWinrt
 }
 
 // Windows.Storage.StorageDeleteOption (synthetic:Windows_Storage_StorageDeleteOption)
+@When[Windows_Storage == "on"]
 public struct Windows_Storage_StorageDeleteOption {
     public let value: Int32
     public init() {
@@ -34849,10 +36148,13 @@ public struct Windows_Storage_StorageDeleteOption {
         this.value = value
     }
 }
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageDeleteOption_Default = Windows_Storage_StorageDeleteOption(0)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageDeleteOption_PermanentDelete = Windows_Storage_StorageDeleteOption(1)
 
 // Windows.Storage.StorageFile (synthetic:Windows_Storage_StorageFile)
+@When[Windows_Storage == "on"]
 public class Windows_Storage_StorageFile <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -35300,6 +36602,7 @@ public class Windows_Storage_StorageFile <: windows_interface.InterfaceWrapperBa
     }
 }
 
+@When[Windows_Storage == "on"]
 extend Windows_Storage_StorageFile <: windows_core.HandleWinrtType<Windows_Storage_StorageFile> {
     public static func intoWinrtHandle(value: Windows_Storage_StorageFile): CPointer<Unit> {
         value.asRaw()
@@ -35318,6 +36621,7 @@ extend Windows_Storage_StorageFile <: windows_core.HandleWinrtType<Windows_Stora
 }
 
 // Windows.Storage.StorageFolder (synthetic:Windows_Storage_StorageFolder)
+@When[Windows_Storage == "on"]
 public class Windows_Storage_StorageFolder <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -35620,6 +36924,7 @@ public class Windows_Storage_StorageFolder <: windows_interface.InterfaceWrapper
     }
 }
 
+@When[Windows_Storage == "on"]
 extend Windows_Storage_StorageFolder <: windows_core.HandleWinrtType<Windows_Storage_StorageFolder> {
     public static func intoWinrtHandle(value: Windows_Storage_StorageFolder): CPointer<Unit> {
         value.asRaw()
@@ -35638,6 +36943,7 @@ extend Windows_Storage_StorageFolder <: windows_core.HandleWinrtType<Windows_Sto
 }
 
 // Windows.Storage.StorageItemTypes (synthetic:Windows_Storage_StorageItemTypes)
+@When[Windows_Storage == "on"]
 public struct Windows_Storage_StorageItemTypes {
     public let value: UInt32
     public init() {
@@ -35662,11 +36968,15 @@ public struct Windows_Storage_StorageItemTypes {
         return Windows_Storage_StorageItemTypes(!value)
     }
 }
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageItemTypes_None = Windows_Storage_StorageItemTypes(0)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageItemTypes_File = Windows_Storage_StorageItemTypes(1)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageItemTypes_Folder = Windows_Storage_StorageItemTypes(2)
 
 // Windows.Storage.StorageLibraryChange (synthetic:Windows_Storage_StorageLibraryChange)
+@When[Windows_Storage == "on"]
 public class Windows_Storage_StorageLibraryChange <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -35793,6 +37103,7 @@ public class Windows_Storage_StorageLibraryChange <: windows_interface.Interface
     }
 }
 
+@When[Windows_Storage == "on"]
 extend Windows_Storage_StorageLibraryChange <: windows_core.HandleWinrtType<Windows_Storage_StorageLibraryChange> {
     public static func intoWinrtHandle(value: Windows_Storage_StorageLibraryChange): CPointer<Unit> {
         value.asRaw()
@@ -35811,6 +37122,7 @@ extend Windows_Storage_StorageLibraryChange <: windows_core.HandleWinrtType<Wind
 }
 
 // Windows.Storage.StorageLibraryChangeReader (synthetic:Windows_Storage_StorageLibraryChangeReader)
+@When[Windows_Storage == "on"]
 public class Windows_Storage_StorageLibraryChangeReader <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -35904,6 +37216,7 @@ public class Windows_Storage_StorageLibraryChangeReader <: windows_interface.Int
     }
 }
 
+@When[Windows_Storage == "on"]
 extend Windows_Storage_StorageLibraryChangeReader <: windows_core.HandleWinrtType<Windows_Storage_StorageLibraryChangeReader> {
     public static func intoWinrtHandle(value: Windows_Storage_StorageLibraryChangeReader): CPointer<Unit> {
         value.asRaw()
@@ -35922,6 +37235,7 @@ extend Windows_Storage_StorageLibraryChangeReader <: windows_core.HandleWinrtTyp
 }
 
 // Windows.Storage.StorageLibraryChangeTracker (synthetic:Windows_Storage_StorageLibraryChangeTracker)
+@When[Windows_Storage == "on"]
 public class Windows_Storage_StorageLibraryChangeTracker <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -36017,6 +37331,7 @@ public class Windows_Storage_StorageLibraryChangeTracker <: windows_interface.In
     }
 }
 
+@When[Windows_Storage == "on"]
 extend Windows_Storage_StorageLibraryChangeTracker <: windows_core.HandleWinrtType<Windows_Storage_StorageLibraryChangeTracker> {
     public static func intoWinrtHandle(value: Windows_Storage_StorageLibraryChangeTracker): CPointer<Unit> {
         value.asRaw()
@@ -36035,6 +37350,7 @@ extend Windows_Storage_StorageLibraryChangeTracker <: windows_core.HandleWinrtTy
 }
 
 // Windows.Storage.StorageLibraryChangeTrackerOptions (synthetic:Windows_Storage_StorageLibraryChangeTrackerOptions)
+@When[Windows_Storage == "on"]
 public class Windows_Storage_StorageLibraryChangeTrackerOptions <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -36123,6 +37439,7 @@ public class Windows_Storage_StorageLibraryChangeTrackerOptions <: windows_inter
     }
 }
 
+@When[Windows_Storage == "on"]
 extend Windows_Storage_StorageLibraryChangeTrackerOptions <: windows_core.HandleWinrtType<Windows_Storage_StorageLibraryChangeTrackerOptions> {
     public static func intoWinrtHandle(value: Windows_Storage_StorageLibraryChangeTrackerOptions): CPointer<Unit> {
         value.asRaw()
@@ -36141,6 +37458,7 @@ extend Windows_Storage_StorageLibraryChangeTrackerOptions <: windows_core.Handle
 }
 
 // Windows.Storage.StorageLibraryChangeType (synthetic:Windows_Storage_StorageLibraryChangeType)
+@When[Windows_Storage == "on"]
 public struct Windows_Storage_StorageLibraryChangeType {
     public let value: Int32
     public init() {
@@ -36150,18 +37468,29 @@ public struct Windows_Storage_StorageLibraryChangeType {
         this.value = value
     }
 }
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageLibraryChangeType_Created = Windows_Storage_StorageLibraryChangeType(0)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageLibraryChangeType_Deleted = Windows_Storage_StorageLibraryChangeType(1)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageLibraryChangeType_MovedOrRenamed = Windows_Storage_StorageLibraryChangeType(2)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageLibraryChangeType_ContentsChanged = Windows_Storage_StorageLibraryChangeType(3)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageLibraryChangeType_MovedOutOfLibrary = Windows_Storage_StorageLibraryChangeType(4)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageLibraryChangeType_MovedIntoLibrary = Windows_Storage_StorageLibraryChangeType(5)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageLibraryChangeType_ContentsReplaced = Windows_Storage_StorageLibraryChangeType(6)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageLibraryChangeType_IndexingStatusChanged = Windows_Storage_StorageLibraryChangeType(7)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageLibraryChangeType_EncryptionChanged = Windows_Storage_StorageLibraryChangeType(8)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageLibraryChangeType_ChangeTrackingLost = Windows_Storage_StorageLibraryChangeType(9)
 
 // Windows.Storage.StorageOpenOptions (synthetic:Windows_Storage_StorageOpenOptions)
+@When[Windows_Storage == "on"]
 public struct Windows_Storage_StorageOpenOptions {
     public let value: UInt32
     public init() {
@@ -36186,11 +37515,15 @@ public struct Windows_Storage_StorageOpenOptions {
         return Windows_Storage_StorageOpenOptions(!value)
     }
 }
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageOpenOptions_None = Windows_Storage_StorageOpenOptions(0)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageOpenOptions_AllowOnlyReaders = Windows_Storage_StorageOpenOptions(1)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StorageOpenOptions_AllowReadersAndWriters = Windows_Storage_StorageOpenOptions(2)
 
 // Windows.Storage.StorageProvider (synthetic:Windows_Storage_StorageProvider)
+@When[Windows_Storage == "on"]
 public class Windows_Storage_StorageProvider <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -36288,6 +37621,7 @@ public class Windows_Storage_StorageProvider <: windows_interface.InterfaceWrapp
     }
 }
 
+@When[Windows_Storage == "on"]
 extend Windows_Storage_StorageProvider <: windows_core.HandleWinrtType<Windows_Storage_StorageProvider> {
     public static func intoWinrtHandle(value: Windows_Storage_StorageProvider): CPointer<Unit> {
         value.asRaw()
@@ -36306,6 +37640,7 @@ extend Windows_Storage_StorageProvider <: windows_core.HandleWinrtType<Windows_S
 }
 
 // Windows.Storage.StorageStreamTransaction (synthetic:Windows_Storage_StorageStreamTransaction)
+@When[Windows_Storage == "on"]
 public class Windows_Storage_StorageStreamTransaction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -36401,6 +37736,7 @@ public class Windows_Storage_StorageStreamTransaction <: windows_interface.Inter
     }
 }
 
+@When[Windows_Storage == "on"]
 extend Windows_Storage_StorageStreamTransaction <: windows_core.HandleWinrtType<Windows_Storage_StorageStreamTransaction> {
     public static func intoWinrtHandle(value: Windows_Storage_StorageStreamTransaction): CPointer<Unit> {
         value.asRaw()
@@ -36419,6 +37755,7 @@ extend Windows_Storage_StorageStreamTransaction <: windows_core.HandleWinrtType<
 }
 
 // Windows.Storage.StreamedFileDataRequest (synthetic:Windows_Storage_StreamedFileDataRequest)
+@When[Windows_Storage == "on"]
 public class Windows_Storage_StreamedFileDataRequest <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -36521,6 +37858,7 @@ public class Windows_Storage_StreamedFileDataRequest <: windows_interface.Interf
     }
 }
 
+@When[Windows_Storage == "on"]
 extend Windows_Storage_StreamedFileDataRequest <: windows_core.HandleWinrtType<Windows_Storage_StreamedFileDataRequest> {
     public static func intoWinrtHandle(value: Windows_Storage_StreamedFileDataRequest): CPointer<Unit> {
         value.asRaw()
@@ -36539,6 +37877,7 @@ extend Windows_Storage_StreamedFileDataRequest <: windows_core.HandleWinrtType<W
 }
 
 // Windows.Storage.StreamedFileDataRequestedHandler (synthetic:Windows_Storage_StreamedFileDataRequestedHandler)
+@When[Windows_Storage == "on"]
 @C
 public struct Windows_Storage_StreamedFileDataRequestedHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -36546,6 +37885,7 @@ public struct Windows_Storage_StreamedFileDataRequestedHandlerVtbl {
     public init() {}
 }
 
+@When[Windows_Storage == "on"]
 public open class Windows_Storage_StreamedFileDataRequestedHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -36613,18 +37953,22 @@ public open class Windows_Storage_StreamedFileDataRequestedHandler <: windows_in
     }
 }
 
+@When[Windows_Storage == "on"]
 extend Windows_Storage_StreamedFileDataRequestedHandler <: windows_core.Interface<Windows_Storage_StreamedFileDataRequestedHandler> {}
 
+@When[Windows_Storage == "on"]
 private class OwnedWindows_Storage_StreamedFileDataRequestedHandler <: Windows_Storage_StreamedFileDataRequestedHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Windows_Storage == "on"]
 public interface Windows_Storage_StreamedFileDataRequestedHandlerInvokerErased {
     func __winrtThunk_Invoke(stream: CPointer<Unit>): Int32
 }
 
+@When[Windows_Storage == "on"]
 public interface Windows_Storage_StreamedFileDataRequestedHandlerInvoker <: Windows_Storage_StreamedFileDataRequestedHandlerInvokerErased {
     func Invoke(stream: CPointer<Unit>): Unit {
         ()
@@ -36642,6 +37986,7 @@ public interface Windows_Storage_StreamedFileDataRequestedHandlerInvoker <: Wind
     }
 }
 
+@When[Windows_Storage == "on"]
 private class Windows_Storage_StreamedFileDataRequestedHandlerBox <: Windows_Storage_StreamedFileDataRequestedHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Windows_Storage_StreamedFileDataRequestedHandlerVtbl>
@@ -36679,6 +38024,7 @@ private class Windows_Storage_StreamedFileDataRequestedHandlerBox <: Windows_Sto
     }
 }
 
+@When[Windows_Storage == "on"]
 func buildWindows_Storage_StreamedFileDataRequestedHandlerBoxVtbl(): Windows_Storage_StreamedFileDataRequestedHandlerVtbl {
     var vtbl = Windows_Storage_StreamedFileDataRequestedHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -36695,6 +38041,7 @@ func buildWindows_Storage_StreamedFileDataRequestedHandlerBoxVtbl(): Windows_Sto
 
 
 // Windows.Storage.StreamedFileFailureMode (synthetic:Windows_Storage_StreamedFileFailureMode)
+@When[Windows_Storage == "on"]
 public struct Windows_Storage_StreamedFileFailureMode {
     public let value: Int32
     public init() {
@@ -36704,11 +38051,15 @@ public struct Windows_Storage_StreamedFileFailureMode {
         this.value = value
     }
 }
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StreamedFileFailureMode_Failed = Windows_Storage_StreamedFileFailureMode(0)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StreamedFileFailureMode_CurrentlyUnavailable = Windows_Storage_StreamedFileFailureMode(1)
+@When[Windows_Storage == "on"]
 public let Windows_Storage_StreamedFileFailureMode_Incomplete = Windows_Storage_StreamedFileFailureMode(2)
 
 // Windows.Storage.Streams.IBuffer (synthetic:Windows_Storage_Streams_IBuffer)
+@When[Windows_Storage_Streams == "on"]
 @Interface["905a0fe0-bc53-11df-8c49-001e4fc686da", "Windows.Storage.Streams.IBuffer"]
 public interface Windows_Storage_Streams_IBuffer <: IInspectable {
     func Capacity(value: CPointer<UInt32>): Int32
@@ -36717,24 +38068,28 @@ public interface Windows_Storage_Streams_IBuffer <: IInspectable {
 }
 
 // Windows.Storage.Streams.IContentTypeProvider (synthetic:Windows_Storage_Streams_IContentTypeProvider)
+@When[Windows_Storage_Streams == "on"]
 @Interface["97d098a5-3b99-4de9-88a5-e11d2f50c795", "Windows.Storage.Streams.IContentTypeProvider", "ContentType.value=HString"]
 public interface Windows_Storage_Streams_IContentTypeProvider <: IInspectable {
     func ContentType(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Streams.IInputStream (synthetic:Windows_Storage_Streams_IInputStream)
+@When[Windows_Storage_Streams == "on"]
 @Interface["905a0fe2-bc53-11df-8c49-001e4fc686da", "Windows.Storage.Streams.IInputStream", "ReadAsync.operation=Com"]
 public interface Windows_Storage_Streams_IInputStream <: IInspectable {
     func ReadAsync(buffer: CPointer<Unit>, count: UInt32, options: UInt32, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Streams.IInputStreamReference (synthetic:Windows_Storage_Streams_IInputStreamReference)
+@When[Windows_Storage_Streams == "on"]
 @Interface["43929d18-5ec9-4b5a-919c-4205b0c804b6", "Windows.Storage.Streams.IInputStreamReference", "OpenSequentialReadAsync.operation=Com"]
 public interface Windows_Storage_Streams_IInputStreamReference <: IInspectable {
     func OpenSequentialReadAsync(operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Streams.IOutputStream (synthetic:Windows_Storage_Streams_IOutputStream)
+@When[Windows_Storage_Streams == "on"]
 @Interface["905a0fe6-bc53-11df-8c49-001e4fc686da", "Windows.Storage.Streams.IOutputStream", "WriteAsync.operation=Com;FlushAsync.operation=Com"]
 public interface Windows_Storage_Streams_IOutputStream <: IInspectable {
     func WriteAsync(buffer: CPointer<Unit>, operation: CPointer<CPointer<Unit>>): Int32
@@ -36742,6 +38097,7 @@ public interface Windows_Storage_Streams_IOutputStream <: IInspectable {
 }
 
 // Windows.Storage.Streams.IRandomAccessStream (synthetic:Windows_Storage_Streams_IRandomAccessStream)
+@When[Windows_Storage_Streams == "on"]
 @Interface["905a0fe1-bc53-11df-8c49-001e4fc686da", "Windows.Storage.Streams.IRandomAccessStream", "GetInputStreamAt.stream=Com;GetOutputStreamAt.stream=Com;CloneStream.stream=Com"]
 public interface Windows_Storage_Streams_IRandomAccessStream <: IInspectable {
     func Size(value: CPointer<UInt64>): Int32
@@ -36756,12 +38112,14 @@ public interface Windows_Storage_Streams_IRandomAccessStream <: IInspectable {
 }
 
 // Windows.Storage.Streams.IRandomAccessStreamReference (synthetic:Windows_Storage_Streams_IRandomAccessStreamReference)
+@When[Windows_Storage_Streams == "on"]
 @Interface["33ee3134-1dd6-4e3a-8067-d1c162e8642b", "Windows.Storage.Streams.IRandomAccessStreamReference", "OpenReadAsync.operation=Com"]
 public interface Windows_Storage_Streams_IRandomAccessStreamReference <: IInspectable {
     func OpenReadAsync(operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.Storage.Streams.IRandomAccessStreamReferenceStatics (synthetic:Windows_Storage_Streams_IRandomAccessStreamReferenceStatics)
+@When[Windows_Storage_Streams == "on"]
 @Interface["857309dc-3fbf-4e7d-986f-ef3b1a07a964", "Windows.Storage.Streams.IRandomAccessStreamReferenceStatics", "CreateFromFile.streamReference=Com;CreateFromUri.streamReference=Com;CreateFromStream.streamReference=Com"]
 public interface Windows_Storage_Streams_IRandomAccessStreamReferenceStatics <: IInspectable {
     func CreateFromFile(file: CPointer<Unit>, streamReference: CPointer<CPointer<Unit>>): Int32
@@ -36770,11 +38128,13 @@ public interface Windows_Storage_Streams_IRandomAccessStreamReferenceStatics <: 
 }
 
 // Windows.Storage.Streams.IRandomAccessStreamWithContentType (synthetic:Windows_Storage_Streams_IRandomAccessStreamWithContentType)
+@When[Windows_Storage_Streams == "on"]
 @Interface["cc254827-4b3d-438f-9232-10c76bc7e038", "Windows.Storage.Streams.IRandomAccessStreamWithContentType"]
 public interface Windows_Storage_Streams_IRandomAccessStreamWithContentType <: IInspectable {
 }
 
 // Windows.Storage.Streams.InputStreamOptions (synthetic:Windows_Storage_Streams_InputStreamOptions)
+@When[Windows_Storage_Streams == "on"]
 public struct Windows_Storage_Streams_InputStreamOptions {
     public let value: UInt32
     public init() {
@@ -36799,11 +38159,15 @@ public struct Windows_Storage_Streams_InputStreamOptions {
         return Windows_Storage_Streams_InputStreamOptions(!value)
     }
 }
+@When[Windows_Storage_Streams == "on"]
 public let Windows_Storage_Streams_InputStreamOptions_None = Windows_Storage_Streams_InputStreamOptions(0)
+@When[Windows_Storage_Streams == "on"]
 public let Windows_Storage_Streams_InputStreamOptions_Partial = Windows_Storage_Streams_InputStreamOptions(1)
+@When[Windows_Storage_Streams == "on"]
 public let Windows_Storage_Streams_InputStreamOptions_ReadAhead = Windows_Storage_Streams_InputStreamOptions(2)
 
 // Windows.Storage.Streams.RandomAccessStreamReference (synthetic:Windows_Storage_Streams_RandomAccessStreamReference)
+@When[Windows_Storage_Streams == "on"]
 public class Windows_Storage_Streams_RandomAccessStreamReference <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -36924,6 +38288,7 @@ public class Windows_Storage_Streams_RandomAccessStreamReference <: windows_inte
     }
 }
 
+@When[Windows_Storage_Streams == "on"]
 extend Windows_Storage_Streams_RandomAccessStreamReference <: windows_core.HandleWinrtType<Windows_Storage_Streams_RandomAccessStreamReference> {
     public static func intoWinrtHandle(value: Windows_Storage_Streams_RandomAccessStreamReference): CPointer<Unit> {
         value.asRaw()
@@ -36942,6 +38307,7 @@ extend Windows_Storage_Streams_RandomAccessStreamReference <: windows_core.Handl
 }
 
 // Windows.System.DispatcherQueue (synthetic:Windows_System_DispatcherQueue)
+@When[Windows_System == "on"]
 public class Windows_System_DispatcherQueue <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -37099,6 +38465,7 @@ public class Windows_System_DispatcherQueue <: windows_interface.InterfaceWrappe
     }
 }
 
+@When[Windows_System == "on"]
 extend Windows_System_DispatcherQueue <: windows_core.HandleWinrtType<Windows_System_DispatcherQueue> {
     public static func intoWinrtHandle(value: Windows_System_DispatcherQueue): CPointer<Unit> {
         value.asRaw()
@@ -37117,6 +38484,7 @@ extend Windows_System_DispatcherQueue <: windows_core.HandleWinrtType<Windows_Sy
 }
 
 // Windows.System.DispatcherQueueHandler (synthetic:Windows_System_DispatcherQueueHandler)
+@When[Windows_System == "on"]
 @C
 public struct Windows_System_DispatcherQueueHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -37124,6 +38492,7 @@ public struct Windows_System_DispatcherQueueHandlerVtbl {
     public init() {}
 }
 
+@When[Windows_System == "on"]
 public open class Windows_System_DispatcherQueueHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -37191,18 +38560,22 @@ public open class Windows_System_DispatcherQueueHandler <: windows_interface.Int
     }
 }
 
+@When[Windows_System == "on"]
 extend Windows_System_DispatcherQueueHandler <: windows_core.Interface<Windows_System_DispatcherQueueHandler> {}
 
+@When[Windows_System == "on"]
 private class OwnedWindows_System_DispatcherQueueHandler <: Windows_System_DispatcherQueueHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Windows_System == "on"]
 public interface Windows_System_DispatcherQueueHandlerInvokerErased {
     func __winrtThunk_Invoke(): Int32
 }
 
+@When[Windows_System == "on"]
 public interface Windows_System_DispatcherQueueHandlerInvoker <: Windows_System_DispatcherQueueHandlerInvokerErased {
     func Invoke(): Unit {
         ()
@@ -37220,6 +38593,7 @@ public interface Windows_System_DispatcherQueueHandlerInvoker <: Windows_System_
     }
 }
 
+@When[Windows_System == "on"]
 private class Windows_System_DispatcherQueueHandlerBox <: Windows_System_DispatcherQueueHandlerInvoker & Resource {
     public let invoke_: () -> Unit
     private let vtblHandle: CPointer<Windows_System_DispatcherQueueHandlerVtbl>
@@ -37257,6 +38631,7 @@ private class Windows_System_DispatcherQueueHandlerBox <: Windows_System_Dispatc
     }
 }
 
+@When[Windows_System == "on"]
 func buildWindows_System_DispatcherQueueHandlerBoxVtbl(): Windows_System_DispatcherQueueHandlerVtbl {
     var vtbl = Windows_System_DispatcherQueueHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -37273,6 +38648,7 @@ func buildWindows_System_DispatcherQueueHandlerBoxVtbl(): Windows_System_Dispatc
 
 
 // Windows.System.DispatcherQueuePriority (synthetic:Windows_System_DispatcherQueuePriority)
+@When[Windows_System == "on"]
 public struct Windows_System_DispatcherQueuePriority {
     public let value: Int32
     public init() {
@@ -37282,11 +38658,15 @@ public struct Windows_System_DispatcherQueuePriority {
         this.value = value
     }
 }
+@When[Windows_System == "on"]
 public let Windows_System_DispatcherQueuePriority_Low = Windows_System_DispatcherQueuePriority(-10)
+@When[Windows_System == "on"]
 public let Windows_System_DispatcherQueuePriority_Normal = Windows_System_DispatcherQueuePriority(0)
+@When[Windows_System == "on"]
 public let Windows_System_DispatcherQueuePriority_High = Windows_System_DispatcherQueuePriority(10)
 
 // Windows.System.DispatcherQueueShutdownStartingEventArgs (synthetic:Windows_System_DispatcherQueueShutdownStartingEventArgs)
+@When[Windows_System == "on"]
 public class Windows_System_DispatcherQueueShutdownStartingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -37359,6 +38739,7 @@ public class Windows_System_DispatcherQueueShutdownStartingEventArgs <: windows_
     }
 }
 
+@When[Windows_System == "on"]
 extend Windows_System_DispatcherQueueShutdownStartingEventArgs <: windows_core.HandleWinrtType<Windows_System_DispatcherQueueShutdownStartingEventArgs> {
     public static func intoWinrtHandle(value: Windows_System_DispatcherQueueShutdownStartingEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -37377,6 +38758,7 @@ extend Windows_System_DispatcherQueueShutdownStartingEventArgs <: windows_core.H
 }
 
 // Windows.System.DispatcherQueueTimer (synthetic:Windows_System_DispatcherQueueTimer)
+@When[Windows_System == "on"]
 public class Windows_System_DispatcherQueueTimer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -37521,6 +38903,7 @@ public class Windows_System_DispatcherQueueTimer <: windows_interface.InterfaceW
     }
 }
 
+@When[Windows_System == "on"]
 extend Windows_System_DispatcherQueueTimer <: windows_core.HandleWinrtType<Windows_System_DispatcherQueueTimer> {
     public static func intoWinrtHandle(value: Windows_System_DispatcherQueueTimer): CPointer<Unit> {
         value.asRaw()
@@ -37539,6 +38922,7 @@ extend Windows_System_DispatcherQueueTimer <: windows_core.HandleWinrtType<Windo
 }
 
 // Windows.System.IDispatcherQueue (synthetic:Windows_System_IDispatcherQueue)
+@When[Windows_System == "on"]
 @Interface["603e88e4-a338-4ffe-a457-a5cfb9ceb899", "Windows.System.IDispatcherQueue", "CreateTimer.result=Com"]
 public interface Windows_System_IDispatcherQueue <: IInspectable {
     func CreateTimer(result: CPointer<CPointer<Unit>>): Int32
@@ -37551,24 +38935,28 @@ public interface Windows_System_IDispatcherQueue <: IInspectable {
 }
 
 // Windows.System.IDispatcherQueue2 (synthetic:Windows_System_IDispatcherQueue2)
+@When[Windows_System == "on"]
 @Interface["c822c647-30ef-506e-bd1e-a647ae6675ff", "Windows.System.IDispatcherQueue2"]
 public interface Windows_System_IDispatcherQueue2 <: IInspectable {
     func HasThreadAccess(value: CPointer<Bool>): Int32
 }
 
 // Windows.System.IDispatcherQueueShutdownStartingEventArgs (synthetic:Windows_System_IDispatcherQueueShutdownStartingEventArgs)
+@When[Windows_System == "on"]
 @Interface["c4724c4c-ff97-40c0-a226-cc0aaa545e89", "Windows.System.IDispatcherQueueShutdownStartingEventArgs", "GetDeferral.result=Com"]
 public interface Windows_System_IDispatcherQueueShutdownStartingEventArgs <: IInspectable {
     func GetDeferral(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.System.IDispatcherQueueStatics (synthetic:Windows_System_IDispatcherQueueStatics)
+@When[Windows_System == "on"]
 @Interface["a96d83d7-9371-4517-9245-d0824ac12c74", "Windows.System.IDispatcherQueueStatics", "GetForCurrentThread.result=Com"]
 public interface Windows_System_IDispatcherQueueStatics <: IInspectable {
     func GetForCurrentThread(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.System.IDispatcherQueueTimer (synthetic:Windows_System_IDispatcherQueueTimer)
+@When[Windows_System == "on"]
 @Interface["5feabb1d-a31c-4727-b1ac-37454649d56a", "Windows.System.IDispatcherQueueTimer"]
 public interface Windows_System_IDispatcherQueueTimer <: IInspectable {
     func Interval(value: CPointer<Windows_Foundation_TimeSpan>): Int32
@@ -37583,6 +38971,7 @@ public interface Windows_System_IDispatcherQueueTimer <: IInspectable {
 }
 
 // Windows.System.IUser (synthetic:Windows_System_IUser)
+@When[Windows_System == "on"]
 @Interface["df9a26c6-e746-4bcd-b5d4-120103c4209b", "Windows.System.IUser", "NonRoamableId.value=HString;GetPropertyAsync.operation=Com;GetPropertiesAsync.operation=Com;GetPictureAsync.operation=Com"]
 public interface Windows_System_IUser <: IInspectable {
     func NonRoamableId(value: CPointer<CPointer<Unit>>): Int32
@@ -37594,18 +38983,21 @@ public interface Windows_System_IUser <: IInspectable {
 }
 
 // Windows.System.IUser2 (synthetic:Windows_System_IUser2)
+@When[Windows_System == "on"]
 @Interface["98ba5628-a6e3-518e-89d9-d3b2b1991a10", "Windows.System.IUser2", "CheckUserAgeConsentGroupAsync.operation=Com"]
 public interface Windows_System_IUser2 <: IInspectable {
     func CheckUserAgeConsentGroupAsync(consentGroup: Int32, operation: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.System.IUserAuthenticationStatusChangeDeferral (synthetic:Windows_System_IUserAuthenticationStatusChangeDeferral)
+@When[Windows_System == "on"]
 @Interface["88b59568-bb30-42fb-a270-e9902e40efa7", "Windows.System.IUserAuthenticationStatusChangeDeferral"]
 public interface Windows_System_IUserAuthenticationStatusChangeDeferral <: IInspectable {
     func Complete(): Int32
 }
 
 // Windows.System.IUserAuthenticationStatusChangingEventArgs (synthetic:Windows_System_IUserAuthenticationStatusChangingEventArgs)
+@When[Windows_System == "on"]
 @Interface["8c030f28-a711-4c1e-ab48-04179c15938f", "Windows.System.IUserAuthenticationStatusChangingEventArgs", "GetDeferral.result=Com;User.value=Com"]
 public interface Windows_System_IUserAuthenticationStatusChangingEventArgs <: IInspectable {
     func GetDeferral(result: CPointer<CPointer<Unit>>): Int32
@@ -37615,18 +39007,21 @@ public interface Windows_System_IUserAuthenticationStatusChangingEventArgs <: II
 }
 
 // Windows.System.IUserChangedEventArgs (synthetic:Windows_System_IUserChangedEventArgs)
+@When[Windows_System == "on"]
 @Interface["086459dc-18c6-48db-bc99-724fb9203ccc", "Windows.System.IUserChangedEventArgs", "User.value=Com"]
 public interface Windows_System_IUserChangedEventArgs <: IInspectable {
     func User(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.System.IUserChangedEventArgs2 (synthetic:Windows_System_IUserChangedEventArgs2)
+@When[Windows_System == "on"]
 @Interface["6b2ccb44-6f01-560c-97ad-fc7f32ec581f", "Windows.System.IUserChangedEventArgs2", "ChangedPropertyKinds.value=Com"]
 public interface Windows_System_IUserChangedEventArgs2 <: IInspectable {
     func ChangedPropertyKinds(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.System.IUserStatics (synthetic:Windows_System_IUserStatics)
+@When[Windows_System == "on"]
 @Interface["155eb23b-242a-45e0-a2e9-3171fc6a7fdd", "Windows.System.IUserStatics", "CreateWatcher.result=Com;FindAllAsync.operation=Com;FindAllAsyncByType.operation=Com;FindAllAsyncByTypeAndStatus.operation=Com;GetFromId.result=Com"]
 public interface Windows_System_IUserStatics <: IInspectable {
     func CreateWatcher(result: CPointer<CPointer<Unit>>): Int32
@@ -37637,12 +39032,14 @@ public interface Windows_System_IUserStatics <: IInspectable {
 }
 
 // Windows.System.IUserStatics2 (synthetic:Windows_System_IUserStatics2)
+@When[Windows_System == "on"]
 @Interface["74a37e11-2eb5-4487-b0d5-2c6790e013e9", "Windows.System.IUserStatics2", "GetDefault.result=Com"]
 public interface Windows_System_IUserStatics2 <: IInspectable {
     func GetDefault(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Windows.System.IUserWatcher (synthetic:Windows_System_IUserWatcher)
+@When[Windows_System == "on"]
 @Interface["155eb23b-242a-45e0-a2e9-3171fc6a7fbb", "Windows.System.IUserWatcher"]
 public interface Windows_System_IUserWatcher <: IInspectable {
     func Status(value: CPointer<Int32>): Int32
@@ -37665,6 +39062,7 @@ public interface Windows_System_IUserWatcher <: IInspectable {
 }
 
 // Windows.System.User (synthetic:Windows_System_User)
+@When[Windows_System == "on"]
 public class Windows_System_User <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -37902,6 +39300,7 @@ public class Windows_System_User <: windows_interface.InterfaceWrapperBase & win
     }
 }
 
+@When[Windows_System == "on"]
 extend Windows_System_User <: windows_core.HandleWinrtType<Windows_System_User> {
     public static func intoWinrtHandle(value: Windows_System_User): CPointer<Unit> {
         value.asRaw()
@@ -37920,6 +39319,7 @@ extend Windows_System_User <: windows_core.HandleWinrtType<Windows_System_User> 
 }
 
 // Windows.System.UserAgeConsentGroup (synthetic:Windows_System_UserAgeConsentGroup)
+@When[Windows_System == "on"]
 public struct Windows_System_UserAgeConsentGroup {
     public let value: Int32
     public init() {
@@ -37929,11 +39329,15 @@ public struct Windows_System_UserAgeConsentGroup {
         this.value = value
     }
 }
+@When[Windows_System == "on"]
 public let Windows_System_UserAgeConsentGroup_Child = Windows_System_UserAgeConsentGroup(0)
+@When[Windows_System == "on"]
 public let Windows_System_UserAgeConsentGroup_Minor = Windows_System_UserAgeConsentGroup(1)
+@When[Windows_System == "on"]
 public let Windows_System_UserAgeConsentGroup_Adult = Windows_System_UserAgeConsentGroup(2)
 
 // Windows.System.UserAgeConsentResult (synthetic:Windows_System_UserAgeConsentResult)
+@When[Windows_System == "on"]
 public struct Windows_System_UserAgeConsentResult {
     public let value: Int32
     public init() {
@@ -37943,13 +39347,19 @@ public struct Windows_System_UserAgeConsentResult {
         this.value = value
     }
 }
+@When[Windows_System == "on"]
 public let Windows_System_UserAgeConsentResult_NotEnforced = Windows_System_UserAgeConsentResult(0)
+@When[Windows_System == "on"]
 public let Windows_System_UserAgeConsentResult_Included = Windows_System_UserAgeConsentResult(1)
+@When[Windows_System == "on"]
 public let Windows_System_UserAgeConsentResult_NotIncluded = Windows_System_UserAgeConsentResult(2)
+@When[Windows_System == "on"]
 public let Windows_System_UserAgeConsentResult_Unknown = Windows_System_UserAgeConsentResult(3)
+@When[Windows_System == "on"]
 public let Windows_System_UserAgeConsentResult_Ambiguous = Windows_System_UserAgeConsentResult(4)
 
 // Windows.System.UserAuthenticationStatus (synthetic:Windows_System_UserAuthenticationStatus)
+@When[Windows_System == "on"]
 public struct Windows_System_UserAuthenticationStatus {
     public let value: Int32
     public init() {
@@ -37959,11 +39369,15 @@ public struct Windows_System_UserAuthenticationStatus {
         this.value = value
     }
 }
+@When[Windows_System == "on"]
 public let Windows_System_UserAuthenticationStatus_Unauthenticated = Windows_System_UserAuthenticationStatus(0)
+@When[Windows_System == "on"]
 public let Windows_System_UserAuthenticationStatus_LocallyAuthenticated = Windows_System_UserAuthenticationStatus(1)
+@When[Windows_System == "on"]
 public let Windows_System_UserAuthenticationStatus_RemotelyAuthenticated = Windows_System_UserAuthenticationStatus(2)
 
 // Windows.System.UserAuthenticationStatusChangeDeferral (synthetic:Windows_System_UserAuthenticationStatusChangeDeferral)
+@When[Windows_System == "on"]
 public class Windows_System_UserAuthenticationStatusChangeDeferral <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -38030,6 +39444,7 @@ public class Windows_System_UserAuthenticationStatusChangeDeferral <: windows_in
     }
 }
 
+@When[Windows_System == "on"]
 extend Windows_System_UserAuthenticationStatusChangeDeferral <: windows_core.HandleWinrtType<Windows_System_UserAuthenticationStatusChangeDeferral> {
     public static func intoWinrtHandle(value: Windows_System_UserAuthenticationStatusChangeDeferral): CPointer<Unit> {
         value.asRaw()
@@ -38048,6 +39463,7 @@ extend Windows_System_UserAuthenticationStatusChangeDeferral <: windows_core.Han
 }
 
 // Windows.System.UserAuthenticationStatusChangingEventArgs (synthetic:Windows_System_UserAuthenticationStatusChangingEventArgs)
+@When[Windows_System == "on"]
 public class Windows_System_UserAuthenticationStatusChangingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -38160,6 +39576,7 @@ public class Windows_System_UserAuthenticationStatusChangingEventArgs <: windows
     }
 }
 
+@When[Windows_System == "on"]
 extend Windows_System_UserAuthenticationStatusChangingEventArgs <: windows_core.HandleWinrtType<Windows_System_UserAuthenticationStatusChangingEventArgs> {
     public static func intoWinrtHandle(value: Windows_System_UserAuthenticationStatusChangingEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -38178,6 +39595,7 @@ extend Windows_System_UserAuthenticationStatusChangingEventArgs <: windows_core.
 }
 
 // Windows.System.UserChangedEventArgs (synthetic:Windows_System_UserChangedEventArgs)
+@When[Windows_System == "on"]
 public class Windows_System_UserChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -38259,6 +39677,7 @@ public class Windows_System_UserChangedEventArgs <: windows_interface.InterfaceW
     }
 }
 
+@When[Windows_System == "on"]
 extend Windows_System_UserChangedEventArgs <: windows_core.HandleWinrtType<Windows_System_UserChangedEventArgs> {
     public static func intoWinrtHandle(value: Windows_System_UserChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -38277,6 +39696,7 @@ extend Windows_System_UserChangedEventArgs <: windows_core.HandleWinrtType<Windo
 }
 
 // Windows.System.UserPictureSize (synthetic:Windows_System_UserPictureSize)
+@When[Windows_System == "on"]
 public struct Windows_System_UserPictureSize {
     public let value: Int32
     public init() {
@@ -38286,12 +39706,17 @@ public struct Windows_System_UserPictureSize {
         this.value = value
     }
 }
+@When[Windows_System == "on"]
 public let Windows_System_UserPictureSize_Size64x64 = Windows_System_UserPictureSize(0)
+@When[Windows_System == "on"]
 public let Windows_System_UserPictureSize_Size208x208 = Windows_System_UserPictureSize(1)
+@When[Windows_System == "on"]
 public let Windows_System_UserPictureSize_Size424x424 = Windows_System_UserPictureSize(2)
+@When[Windows_System == "on"]
 public let Windows_System_UserPictureSize_Size1080x1080 = Windows_System_UserPictureSize(3)
 
 // Windows.System.UserType (synthetic:Windows_System_UserType)
+@When[Windows_System == "on"]
 public struct Windows_System_UserType {
     public let value: Int32
     public init() {
@@ -38301,13 +39726,19 @@ public struct Windows_System_UserType {
         this.value = value
     }
 }
+@When[Windows_System == "on"]
 public let Windows_System_UserType_LocalUser = Windows_System_UserType(0)
+@When[Windows_System == "on"]
 public let Windows_System_UserType_RemoteUser = Windows_System_UserType(1)
+@When[Windows_System == "on"]
 public let Windows_System_UserType_LocalGuest = Windows_System_UserType(2)
+@When[Windows_System == "on"]
 public let Windows_System_UserType_RemoteGuest = Windows_System_UserType(3)
+@When[Windows_System == "on"]
 public let Windows_System_UserType_SystemManaged = Windows_System_UserType(4)
 
 // Windows.System.UserWatcher (synthetic:Windows_System_UserWatcher)
+@When[Windows_System == "on"]
 public class Windows_System_UserWatcher <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -38534,6 +39965,7 @@ public class Windows_System_UserWatcher <: windows_interface.InterfaceWrapperBas
     }
 }
 
+@When[Windows_System == "on"]
 extend Windows_System_UserWatcher <: windows_core.HandleWinrtType<Windows_System_UserWatcher> {
     public static func intoWinrtHandle(value: Windows_System_UserWatcher): CPointer<Unit> {
         value.asRaw()
@@ -38552,6 +39984,7 @@ extend Windows_System_UserWatcher <: windows_core.HandleWinrtType<Windows_System
 }
 
 // Windows.System.UserWatcherStatus (synthetic:Windows_System_UserWatcherStatus)
+@When[Windows_System == "on"]
 public struct Windows_System_UserWatcherStatus {
     public let value: Int32
     public init() {
@@ -38561,14 +39994,21 @@ public struct Windows_System_UserWatcherStatus {
         this.value = value
     }
 }
+@When[Windows_System == "on"]
 public let Windows_System_UserWatcherStatus_Created = Windows_System_UserWatcherStatus(0)
+@When[Windows_System == "on"]
 public let Windows_System_UserWatcherStatus_Started = Windows_System_UserWatcherStatus(1)
+@When[Windows_System == "on"]
 public let Windows_System_UserWatcherStatus_EnumerationCompleted = Windows_System_UserWatcherStatus(2)
+@When[Windows_System == "on"]
 public let Windows_System_UserWatcherStatus_Stopping = Windows_System_UserWatcherStatus(3)
+@When[Windows_System == "on"]
 public let Windows_System_UserWatcherStatus_Stopped = Windows_System_UserWatcherStatus(4)
+@When[Windows_System == "on"]
 public let Windows_System_UserWatcherStatus_Aborted = Windows_System_UserWatcherStatus(5)
 
 // Windows.System.UserWatcherUpdateKind (synthetic:Windows_System_UserWatcherUpdateKind)
+@When[Windows_System == "on"]
 public struct Windows_System_UserWatcherUpdateKind {
     public let value: Int32
     public init() {
@@ -38578,10 +40018,13 @@ public struct Windows_System_UserWatcherUpdateKind {
         this.value = value
     }
 }
+@When[Windows_System == "on"]
 public let Windows_System_UserWatcherUpdateKind_Properties = Windows_System_UserWatcherUpdateKind(0)
+@When[Windows_System == "on"]
 public let Windows_System_UserWatcherUpdateKind_Picture = Windows_System_UserWatcherUpdateKind(1)
 
 // Windows.System.VirtualKey (synthetic:Windows_System_VirtualKey)
+@When[Windows_System == "on"]
 public struct Windows_System_VirtualKey {
     public let value: Int32
     public init() {
@@ -38591,180 +40034,353 @@ public struct Windows_System_VirtualKey {
         this.value = value
     }
 }
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_None = Windows_System_VirtualKey(0)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_LeftButton = Windows_System_VirtualKey(1)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_RightButton = Windows_System_VirtualKey(2)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Cancel = Windows_System_VirtualKey(3)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_MiddleButton = Windows_System_VirtualKey(4)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_XButton1 = Windows_System_VirtualKey(5)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_XButton2 = Windows_System_VirtualKey(6)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Back = Windows_System_VirtualKey(8)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Tab = Windows_System_VirtualKey(9)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Clear = Windows_System_VirtualKey(12)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Enter = Windows_System_VirtualKey(13)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Shift = Windows_System_VirtualKey(16)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Control = Windows_System_VirtualKey(17)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Menu = Windows_System_VirtualKey(18)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Pause = Windows_System_VirtualKey(19)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_CapitalLock = Windows_System_VirtualKey(20)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Kana = Windows_System_VirtualKey(21)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Hangul = Windows_System_VirtualKey(21)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_ImeOn = Windows_System_VirtualKey(22)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Junja = Windows_System_VirtualKey(23)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Final = Windows_System_VirtualKey(24)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Hanja = Windows_System_VirtualKey(25)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Kanji = Windows_System_VirtualKey(25)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_ImeOff = Windows_System_VirtualKey(26)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Escape = Windows_System_VirtualKey(27)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Convert = Windows_System_VirtualKey(28)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NonConvert = Windows_System_VirtualKey(29)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Accept = Windows_System_VirtualKey(30)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_ModeChange = Windows_System_VirtualKey(31)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Space = Windows_System_VirtualKey(32)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_PageUp = Windows_System_VirtualKey(33)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_PageDown = Windows_System_VirtualKey(34)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_End = Windows_System_VirtualKey(35)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Home = Windows_System_VirtualKey(36)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Left = Windows_System_VirtualKey(37)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Up = Windows_System_VirtualKey(38)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Right = Windows_System_VirtualKey(39)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Down = Windows_System_VirtualKey(40)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Select = Windows_System_VirtualKey(41)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Print = Windows_System_VirtualKey(42)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Execute = Windows_System_VirtualKey(43)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Snapshot = Windows_System_VirtualKey(44)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Insert = Windows_System_VirtualKey(45)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Delete = Windows_System_VirtualKey(46)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Help = Windows_System_VirtualKey(47)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Number0 = Windows_System_VirtualKey(48)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Number1 = Windows_System_VirtualKey(49)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Number2 = Windows_System_VirtualKey(50)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Number3 = Windows_System_VirtualKey(51)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Number4 = Windows_System_VirtualKey(52)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Number5 = Windows_System_VirtualKey(53)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Number6 = Windows_System_VirtualKey(54)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Number7 = Windows_System_VirtualKey(55)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Number8 = Windows_System_VirtualKey(56)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Number9 = Windows_System_VirtualKey(57)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_A = Windows_System_VirtualKey(65)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_B = Windows_System_VirtualKey(66)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_C = Windows_System_VirtualKey(67)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_D = Windows_System_VirtualKey(68)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_E = Windows_System_VirtualKey(69)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F = Windows_System_VirtualKey(70)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_G = Windows_System_VirtualKey(71)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_H = Windows_System_VirtualKey(72)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_I = Windows_System_VirtualKey(73)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_J = Windows_System_VirtualKey(74)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_K = Windows_System_VirtualKey(75)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_L = Windows_System_VirtualKey(76)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_M = Windows_System_VirtualKey(77)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_N = Windows_System_VirtualKey(78)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_O = Windows_System_VirtualKey(79)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_P = Windows_System_VirtualKey(80)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Q = Windows_System_VirtualKey(81)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_R = Windows_System_VirtualKey(82)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_S = Windows_System_VirtualKey(83)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_T = Windows_System_VirtualKey(84)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_U = Windows_System_VirtualKey(85)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_V = Windows_System_VirtualKey(86)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_W = Windows_System_VirtualKey(87)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_X = Windows_System_VirtualKey(88)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Y = Windows_System_VirtualKey(89)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Z = Windows_System_VirtualKey(90)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_LeftWindows = Windows_System_VirtualKey(91)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_RightWindows = Windows_System_VirtualKey(92)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Application = Windows_System_VirtualKey(93)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Sleep = Windows_System_VirtualKey(95)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NumberPad0 = Windows_System_VirtualKey(96)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NumberPad1 = Windows_System_VirtualKey(97)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NumberPad2 = Windows_System_VirtualKey(98)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NumberPad3 = Windows_System_VirtualKey(99)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NumberPad4 = Windows_System_VirtualKey(100)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NumberPad5 = Windows_System_VirtualKey(101)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NumberPad6 = Windows_System_VirtualKey(102)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NumberPad7 = Windows_System_VirtualKey(103)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NumberPad8 = Windows_System_VirtualKey(104)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NumberPad9 = Windows_System_VirtualKey(105)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Multiply = Windows_System_VirtualKey(106)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Add = Windows_System_VirtualKey(107)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Separator = Windows_System_VirtualKey(108)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Subtract = Windows_System_VirtualKey(109)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Decimal = Windows_System_VirtualKey(110)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Divide = Windows_System_VirtualKey(111)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F1 = Windows_System_VirtualKey(112)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F2 = Windows_System_VirtualKey(113)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F3 = Windows_System_VirtualKey(114)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F4 = Windows_System_VirtualKey(115)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F5 = Windows_System_VirtualKey(116)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F6 = Windows_System_VirtualKey(117)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F7 = Windows_System_VirtualKey(118)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F8 = Windows_System_VirtualKey(119)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F9 = Windows_System_VirtualKey(120)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F10 = Windows_System_VirtualKey(121)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F11 = Windows_System_VirtualKey(122)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F12 = Windows_System_VirtualKey(123)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F13 = Windows_System_VirtualKey(124)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F14 = Windows_System_VirtualKey(125)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F15 = Windows_System_VirtualKey(126)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F16 = Windows_System_VirtualKey(127)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F17 = Windows_System_VirtualKey(128)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F18 = Windows_System_VirtualKey(129)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F19 = Windows_System_VirtualKey(130)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F20 = Windows_System_VirtualKey(131)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F21 = Windows_System_VirtualKey(132)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F22 = Windows_System_VirtualKey(133)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F23 = Windows_System_VirtualKey(134)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_F24 = Windows_System_VirtualKey(135)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NavigationView = Windows_System_VirtualKey(136)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NavigationMenu = Windows_System_VirtualKey(137)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NavigationUp = Windows_System_VirtualKey(138)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NavigationDown = Windows_System_VirtualKey(139)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NavigationLeft = Windows_System_VirtualKey(140)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NavigationRight = Windows_System_VirtualKey(141)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NavigationAccept = Windows_System_VirtualKey(142)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NavigationCancel = Windows_System_VirtualKey(143)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_NumberKeyLock = Windows_System_VirtualKey(144)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Scroll = Windows_System_VirtualKey(145)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_LeftShift = Windows_System_VirtualKey(160)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_RightShift = Windows_System_VirtualKey(161)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_LeftControl = Windows_System_VirtualKey(162)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_RightControl = Windows_System_VirtualKey(163)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_LeftMenu = Windows_System_VirtualKey(164)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_RightMenu = Windows_System_VirtualKey(165)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GoBack = Windows_System_VirtualKey(166)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GoForward = Windows_System_VirtualKey(167)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Refresh = Windows_System_VirtualKey(168)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Stop = Windows_System_VirtualKey(169)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Search = Windows_System_VirtualKey(170)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_Favorites = Windows_System_VirtualKey(171)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GoHome = Windows_System_VirtualKey(172)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadA = Windows_System_VirtualKey(195)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadB = Windows_System_VirtualKey(196)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadX = Windows_System_VirtualKey(197)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadY = Windows_System_VirtualKey(198)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadRightShoulder = Windows_System_VirtualKey(199)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadLeftShoulder = Windows_System_VirtualKey(200)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadLeftTrigger = Windows_System_VirtualKey(201)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadRightTrigger = Windows_System_VirtualKey(202)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadDPadUp = Windows_System_VirtualKey(203)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadDPadDown = Windows_System_VirtualKey(204)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadDPadLeft = Windows_System_VirtualKey(205)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadDPadRight = Windows_System_VirtualKey(206)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadMenu = Windows_System_VirtualKey(207)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadView = Windows_System_VirtualKey(208)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadLeftThumbstickButton = Windows_System_VirtualKey(209)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadRightThumbstickButton = Windows_System_VirtualKey(210)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadLeftThumbstickUp = Windows_System_VirtualKey(211)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadLeftThumbstickDown = Windows_System_VirtualKey(212)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadLeftThumbstickRight = Windows_System_VirtualKey(213)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadLeftThumbstickLeft = Windows_System_VirtualKey(214)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadRightThumbstickUp = Windows_System_VirtualKey(215)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadRightThumbstickDown = Windows_System_VirtualKey(216)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadRightThumbstickRight = Windows_System_VirtualKey(217)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKey_GamepadRightThumbstickLeft = Windows_System_VirtualKey(218)
 
 // Windows.System.VirtualKeyModifiers (synthetic:Windows_System_VirtualKeyModifiers)
+@When[Windows_System == "on"]
 public struct Windows_System_VirtualKeyModifiers {
     public let value: UInt32
     public init() {
@@ -38789,13 +40405,19 @@ public struct Windows_System_VirtualKeyModifiers {
         return Windows_System_VirtualKeyModifiers(!value)
     }
 }
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKeyModifiers_None = Windows_System_VirtualKeyModifiers(0)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKeyModifiers_Control = Windows_System_VirtualKeyModifiers(1)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKeyModifiers_Menu = Windows_System_VirtualKeyModifiers(2)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKeyModifiers_Shift = Windows_System_VirtualKeyModifiers(4)
+@When[Windows_System == "on"]
 public let Windows_System_VirtualKeyModifiers_Windows = Windows_System_VirtualKeyModifiers(8)
 
 // Windows.UI.Color (synthetic:Windows_UI_Color)
+@When[Windows_UI == "on"]
 @C
 public struct Windows_UI_Color {
     public var A: UInt8 = 0u8

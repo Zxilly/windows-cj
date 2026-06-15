@@ -2,9 +2,14 @@
 
 package windows_common.UI
 
+@When[Windows_UI == "on"]
 import windows_common.impl.{Windows_UI_Color, Windows_UI_IUIContext, Windows_UI_IUIContextVtbl, Windows_UI_UIContext}
 
+@When[Windows_UI == "on"]
 public type Color = Windows_UI_Color
+@When[Windows_UI == "on"]
 public type IUIContext = Windows_UI_IUIContext
+@When[Windows_UI == "on"]
 public type IUIContextVtbl = Windows_UI_IUIContextVtbl
+@When[Windows_UI == "on"]
 public type UIContext = Windows_UI_UIContext

@@ -2,10 +2,16 @@
 
 package windows_common.Microsoft.UI.Xaml.Media.Media3D
 
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
 import windows_common.impl.{Microsoft_UI_Xaml_Media_Media3D_ITransform3D, Microsoft_UI_Xaml_Media_Media3D_ITransform3DVtbl, Microsoft_UI_Xaml_Media_Media3D_ITransform3DFactory, Microsoft_UI_Xaml_Media_Media3D_ITransform3DFactoryVtbl, Microsoft_UI_Xaml_Media_Media3D_Transform3D}
 
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
 public type ITransform3D = Microsoft_UI_Xaml_Media_Media3D_ITransform3D
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
 public type ITransform3DVtbl = Microsoft_UI_Xaml_Media_Media3D_ITransform3DVtbl
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
 public type ITransform3DFactory = Microsoft_UI_Xaml_Media_Media3D_ITransform3DFactory
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
 public type ITransform3DFactoryVtbl = Microsoft_UI_Xaml_Media_Media3D_ITransform3DFactoryVtbl
+@When[Microsoft_UI_Xaml_Media_Media3D == "on"]
 public type Transform3D = Microsoft_UI_Xaml_Media_Media3D_Transform3D

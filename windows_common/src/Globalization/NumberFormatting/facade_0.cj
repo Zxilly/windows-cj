@@ -2,7 +2,10 @@
 
 package windows_common.Globalization.NumberFormatting
 
+@When[Windows_Globalization_NumberFormatting == "on"]
 import windows_common.impl.{Windows_Globalization_NumberFormatting_INumberFormatter2, Windows_Globalization_NumberFormatting_INumberFormatter2Vtbl}
 
+@When[Windows_Globalization_NumberFormatting == "on"]
 public type INumberFormatter2 = Windows_Globalization_NumberFormatting_INumberFormatter2
+@When[Windows_Globalization_NumberFormatting == "on"]
 public type INumberFormatter2Vtbl = Windows_Globalization_NumberFormatting_INumberFormatter2Vtbl

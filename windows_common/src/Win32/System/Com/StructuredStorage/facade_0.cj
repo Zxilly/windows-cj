@@ -2,10 +2,16 @@
 
 package windows_common.Win32.System.Com.StructuredStorage
 
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 import windows_common.impl.{Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG, Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTGVtbl, Windows_Win32_System_Com_StructuredStorage_IStorage, Windows_Win32_System_Com_StructuredStorage_IStorageVtbl, Windows_Win32_System_Com_StructuredStorage_STGMOVE}
 
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 public type IEnumSTATSTG = Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 public type IEnumSTATSTGVtbl = Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTGVtbl
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 public type IStorage = Windows_Win32_System_Com_StructuredStorage_IStorage
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 public type IStorageVtbl = Windows_Win32_System_Com_StructuredStorage_IStorageVtbl
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 public type STGMOVE = Windows_Win32_System_Com_StructuredStorage_STGMOVE

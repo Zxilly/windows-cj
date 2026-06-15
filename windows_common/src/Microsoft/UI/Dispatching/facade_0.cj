@@ -2,26 +2,48 @@
 
 package windows_common.Microsoft.UI.Dispatching
 
+@When[Microsoft_UI_Dispatching == "on"]
 import windows_common.impl.{Microsoft_UI_Dispatching_DispatcherExitDeferral, Microsoft_UI_Dispatching_DispatcherQueue, Microsoft_UI_Dispatching_DispatcherQueueHandler, Microsoft_UI_Dispatching_DispatcherQueuePriority, Microsoft_UI_Dispatching_DispatcherQueueShutdownStartingEventArgs, Microsoft_UI_Dispatching_DispatcherQueueTimer, Microsoft_UI_Dispatching_DispatcherRunOptions, Microsoft_UI_Dispatching_IDispatcherExitDeferral, Microsoft_UI_Dispatching_IDispatcherExitDeferralVtbl, Microsoft_UI_Dispatching_IDispatcherQueue, Microsoft_UI_Dispatching_IDispatcherQueueVtbl, Microsoft_UI_Dispatching_IDispatcherQueue2, Microsoft_UI_Dispatching_IDispatcherQueue2Vtbl, Microsoft_UI_Dispatching_IDispatcherQueue3, Microsoft_UI_Dispatching_IDispatcherQueue3Vtbl, Microsoft_UI_Dispatching_IDispatcherQueueShutdownStartingEventArgs, Microsoft_UI_Dispatching_IDispatcherQueueShutdownStartingEventArgsVtbl, Microsoft_UI_Dispatching_IDispatcherQueueStatics, Microsoft_UI_Dispatching_IDispatcherQueueStaticsVtbl, Microsoft_UI_Dispatching_IDispatcherQueueTimer, Microsoft_UI_Dispatching_IDispatcherQueueTimerVtbl}
 
+@When[Microsoft_UI_Dispatching == "on"]
 public type DispatcherExitDeferral = Microsoft_UI_Dispatching_DispatcherExitDeferral
+@When[Microsoft_UI_Dispatching == "on"]
 public type DispatcherQueue = Microsoft_UI_Dispatching_DispatcherQueue
+@When[Microsoft_UI_Dispatching == "on"]
 public type DispatcherQueueHandler = Microsoft_UI_Dispatching_DispatcherQueueHandler
+@When[Microsoft_UI_Dispatching == "on"]
 public type DispatcherQueuePriority = Microsoft_UI_Dispatching_DispatcherQueuePriority
+@When[Microsoft_UI_Dispatching == "on"]
 public type DispatcherQueueShutdownStartingEventArgs = Microsoft_UI_Dispatching_DispatcherQueueShutdownStartingEventArgs
+@When[Microsoft_UI_Dispatching == "on"]
 public type DispatcherQueueTimer = Microsoft_UI_Dispatching_DispatcherQueueTimer
+@When[Microsoft_UI_Dispatching == "on"]
 public type DispatcherRunOptions = Microsoft_UI_Dispatching_DispatcherRunOptions
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherExitDeferral = Microsoft_UI_Dispatching_IDispatcherExitDeferral
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherExitDeferralVtbl = Microsoft_UI_Dispatching_IDispatcherExitDeferralVtbl
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherQueue = Microsoft_UI_Dispatching_IDispatcherQueue
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherQueueVtbl = Microsoft_UI_Dispatching_IDispatcherQueueVtbl
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherQueue2 = Microsoft_UI_Dispatching_IDispatcherQueue2
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherQueue2Vtbl = Microsoft_UI_Dispatching_IDispatcherQueue2Vtbl
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherQueue3 = Microsoft_UI_Dispatching_IDispatcherQueue3
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherQueue3Vtbl = Microsoft_UI_Dispatching_IDispatcherQueue3Vtbl
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherQueueShutdownStartingEventArgs = Microsoft_UI_Dispatching_IDispatcherQueueShutdownStartingEventArgs
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherQueueShutdownStartingEventArgsVtbl = Microsoft_UI_Dispatching_IDispatcherQueueShutdownStartingEventArgsVtbl
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherQueueStatics = Microsoft_UI_Dispatching_IDispatcherQueueStatics
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherQueueStaticsVtbl = Microsoft_UI_Dispatching_IDispatcherQueueStaticsVtbl
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherQueueTimer = Microsoft_UI_Dispatching_IDispatcherQueueTimer
+@When[Microsoft_UI_Dispatching == "on"]
 public type IDispatcherQueueTimerVtbl = Microsoft_UI_Dispatching_IDispatcherQueueTimerVtbl

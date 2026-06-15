@@ -2,15 +2,26 @@
 
 package windows_common.Win32.Graphics.Dxgi.Common
 
+@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 import windows_common.impl.{Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT, Windows_Win32_Graphics_Dxgi_Common_DXGI_GAMMA_CONTROL, Windows_Win32_Graphics_Dxgi_Common_DXGI_GAMMA_CONTROL_CAPABILITIES, Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_DESC, Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION, Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCALING, Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCANLINE_ORDER, Windows_Win32_Graphics_Dxgi_Common_DXGI_RATIONAL, Windows_Win32_Graphics_Dxgi_Common_DXGI_RGB, Windows_Win32_Graphics_Dxgi_Common_DXGI_SAMPLE_DESC}
 
+@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 public type DXGI_FORMAT = Windows_Win32_Graphics_Dxgi_Common_DXGI_FORMAT
+@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 public type DXGI_GAMMA_CONTROL = Windows_Win32_Graphics_Dxgi_Common_DXGI_GAMMA_CONTROL
+@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 public type DXGI_GAMMA_CONTROL_CAPABILITIES = Windows_Win32_Graphics_Dxgi_Common_DXGI_GAMMA_CONTROL_CAPABILITIES
+@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 public type DXGI_MODE_DESC = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_DESC
+@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 public type DXGI_MODE_ROTATION = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_ROTATION
+@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 public type DXGI_MODE_SCALING = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCALING
+@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 public type DXGI_MODE_SCANLINE_ORDER = Windows_Win32_Graphics_Dxgi_Common_DXGI_MODE_SCANLINE_ORDER
+@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 public type DXGI_RATIONAL = Windows_Win32_Graphics_Dxgi_Common_DXGI_RATIONAL
+@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 public type DXGI_RGB = Windows_Win32_Graphics_Dxgi_Common_DXGI_RGB
+@When[Windows_Win32_Graphics_Dxgi_Common == "on"]
 public type DXGI_SAMPLE_DESC = Windows_Win32_Graphics_Dxgi_Common_DXGI_SAMPLE_DESC

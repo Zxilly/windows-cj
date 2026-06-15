@@ -2,20 +2,36 @@
 
 package windows_common.Win32.System.SystemServices
 
+@When[Windows_Win32_System_SystemServices == "on"]
 import windows_common.impl.{Windows_Win32_System_SystemServices_RTL_UMS_SCHEDULER_REASON, Windows_Win32_System_SystemServices_remoteMETAFILEPICT, Windows_Win32_System_SystemServices_userBITMAP, Windows_Win32_System_SystemServices_userHBITMAP, Windows_Win32_System_SystemServices_userHBITMAP__u_e__Struct, Windows_Win32_System_SystemServices_userHENHMETAFILE, Windows_Win32_System_SystemServices_userHENHMETAFILE__u_e__Struct, Windows_Win32_System_SystemServices_userHGLOBAL, Windows_Win32_System_SystemServices_userHGLOBAL__u_e__Struct, Windows_Win32_System_SystemServices_userHMETAFILE, Windows_Win32_System_SystemServices_userHMETAFILE__u_e__Struct, Windows_Win32_System_SystemServices_userHMETAFILEPICT, Windows_Win32_System_SystemServices_userHMETAFILEPICT__u_e__Struct, Windows_Win32_System_SystemServices_userHPALETTE, Windows_Win32_System_SystemServices_userHPALETTE__u_e__Struct}
 
+@When[Windows_Win32_System_SystemServices == "on"]
 public type RTL_UMS_SCHEDULER_REASON = Windows_Win32_System_SystemServices_RTL_UMS_SCHEDULER_REASON
+@When[Windows_Win32_System_SystemServices == "on"]
 public type remoteMETAFILEPICT = Windows_Win32_System_SystemServices_remoteMETAFILEPICT
+@When[Windows_Win32_System_SystemServices == "on"]
 public type userBITMAP = Windows_Win32_System_SystemServices_userBITMAP
+@When[Windows_Win32_System_SystemServices == "on"]
 public type userHBITMAP = Windows_Win32_System_SystemServices_userHBITMAP
+@When[Windows_Win32_System_SystemServices == "on"]
 public type userHBITMAP__u_e__Struct = Windows_Win32_System_SystemServices_userHBITMAP__u_e__Struct
+@When[Windows_Win32_System_SystemServices == "on"]
 public type userHENHMETAFILE = Windows_Win32_System_SystemServices_userHENHMETAFILE
+@When[Windows_Win32_System_SystemServices == "on"]
 public type userHENHMETAFILE__u_e__Struct = Windows_Win32_System_SystemServices_userHENHMETAFILE__u_e__Struct
+@When[Windows_Win32_System_SystemServices == "on"]
 public type userHGLOBAL = Windows_Win32_System_SystemServices_userHGLOBAL
+@When[Windows_Win32_System_SystemServices == "on"]
 public type userHGLOBAL__u_e__Struct = Windows_Win32_System_SystemServices_userHGLOBAL__u_e__Struct
+@When[Windows_Win32_System_SystemServices == "on"]
 public type userHMETAFILE = Windows_Win32_System_SystemServices_userHMETAFILE
+@When[Windows_Win32_System_SystemServices == "on"]
 public type userHMETAFILE__u_e__Struct = Windows_Win32_System_SystemServices_userHMETAFILE__u_e__Struct
+@When[Windows_Win32_System_SystemServices == "on"]
 public type userHMETAFILEPICT = Windows_Win32_System_SystemServices_userHMETAFILEPICT
+@When[Windows_Win32_System_SystemServices == "on"]
 public type userHMETAFILEPICT__u_e__Struct = Windows_Win32_System_SystemServices_userHMETAFILEPICT__u_e__Struct
+@When[Windows_Win32_System_SystemServices == "on"]
 public type userHPALETTE = Windows_Win32_System_SystemServices_userHPALETTE
+@When[Windows_Win32_System_SystemServices == "on"]
 public type userHPALETTE__u_e__Struct = Windows_Win32_System_SystemServices_userHPALETTE__u_e__Struct

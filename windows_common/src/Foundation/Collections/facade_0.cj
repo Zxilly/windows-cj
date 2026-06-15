@@ -2,32 +2,60 @@
 
 package windows_common.Foundation.Collections
 
+@When[Windows_Foundation_Collections == "on"]
 import windows_common.impl.{Windows_Foundation_Collections_CollectionChange, Windows_Foundation_Collections_IIterable_1, Windows_Foundation_Collections_IIterable_1Vtbl, Windows_Foundation_Collections_IIterator_1, Windows_Foundation_Collections_IIterator_1Vtbl, Windows_Foundation_Collections_IKeyValuePair_2, Windows_Foundation_Collections_IKeyValuePair_2Vtbl, Windows_Foundation_Collections_IMapChangedEventArgs_1, Windows_Foundation_Collections_IMapChangedEventArgs_1Vtbl, Windows_Foundation_Collections_IMapView_2, Windows_Foundation_Collections_IMapView_2Vtbl, Windows_Foundation_Collections_IMap_2, Windows_Foundation_Collections_IMap_2Vtbl, Windows_Foundation_Collections_IObservableMap_2, Windows_Foundation_Collections_IObservableMap_2Vtbl, Windows_Foundation_Collections_IObservableVector_1, Windows_Foundation_Collections_IObservableVector_1Vtbl, Windows_Foundation_Collections_IPropertySet, Windows_Foundation_Collections_IPropertySetVtbl, Windows_Foundation_Collections_IVectorChangedEventArgs, Windows_Foundation_Collections_IVectorChangedEventArgsVtbl, Windows_Foundation_Collections_IVectorView_1, Windows_Foundation_Collections_IVectorView_1Vtbl, Windows_Foundation_Collections_IVector_1, Windows_Foundation_Collections_IVector_1Vtbl, Windows_Foundation_Collections_MapChangedEventHandler_2, Windows_Foundation_Collections_VectorChangedEventHandler_1}
 
+@When[Windows_Foundation_Collections == "on"]
 public type CollectionChange = Windows_Foundation_Collections_CollectionChange
+@When[Windows_Foundation_Collections == "on"]
 public type IIterable<T> = Windows_Foundation_Collections_IIterable_1<T>
+@When[Windows_Foundation_Collections == "on"]
 public type IIterableVtbl = Windows_Foundation_Collections_IIterable_1Vtbl
+@When[Windows_Foundation_Collections == "on"]
 public type IIterator<T> = Windows_Foundation_Collections_IIterator_1<T>
+@When[Windows_Foundation_Collections == "on"]
 public type IIteratorVtbl = Windows_Foundation_Collections_IIterator_1Vtbl
+@When[Windows_Foundation_Collections == "on"]
 public type IKeyValuePair<K, V> = Windows_Foundation_Collections_IKeyValuePair_2<K, V>
+@When[Windows_Foundation_Collections == "on"]
 public type IKeyValuePairVtbl = Windows_Foundation_Collections_IKeyValuePair_2Vtbl
+@When[Windows_Foundation_Collections == "on"]
 public type IMapChangedEventArgs<K> = Windows_Foundation_Collections_IMapChangedEventArgs_1<K>
+@When[Windows_Foundation_Collections == "on"]
 public type IMapChangedEventArgsVtbl = Windows_Foundation_Collections_IMapChangedEventArgs_1Vtbl
+@When[Windows_Foundation_Collections == "on"]
 public type IMapView<K, V> = Windows_Foundation_Collections_IMapView_2<K, V>
+@When[Windows_Foundation_Collections == "on"]
 public type IMapViewVtbl = Windows_Foundation_Collections_IMapView_2Vtbl
+@When[Windows_Foundation_Collections == "on"]
 public type IMap<K, V> = Windows_Foundation_Collections_IMap_2<K, V>
+@When[Windows_Foundation_Collections == "on"]
 public type IMapVtbl = Windows_Foundation_Collections_IMap_2Vtbl
+@When[Windows_Foundation_Collections == "on"]
 public type IObservableMap<K, V> = Windows_Foundation_Collections_IObservableMap_2<K, V>
+@When[Windows_Foundation_Collections == "on"]
 public type IObservableMapVtbl = Windows_Foundation_Collections_IObservableMap_2Vtbl
+@When[Windows_Foundation_Collections == "on"]
 public type IObservableVector<T> = Windows_Foundation_Collections_IObservableVector_1<T>
+@When[Windows_Foundation_Collections == "on"]
 public type IObservableVectorVtbl = Windows_Foundation_Collections_IObservableVector_1Vtbl
+@When[Windows_Foundation_Collections == "on"]
 public type IPropertySet = Windows_Foundation_Collections_IPropertySet
+@When[Windows_Foundation_Collections == "on"]
 public type IPropertySetVtbl = Windows_Foundation_Collections_IPropertySetVtbl
+@When[Windows_Foundation_Collections == "on"]
 public type IVectorChangedEventArgs = Windows_Foundation_Collections_IVectorChangedEventArgs
+@When[Windows_Foundation_Collections == "on"]
 public type IVectorChangedEventArgsVtbl = Windows_Foundation_Collections_IVectorChangedEventArgsVtbl
+@When[Windows_Foundation_Collections == "on"]
 public type IVectorView<T> = Windows_Foundation_Collections_IVectorView_1<T>
+@When[Windows_Foundation_Collections == "on"]
 public type IVectorViewVtbl = Windows_Foundation_Collections_IVectorView_1Vtbl
+@When[Windows_Foundation_Collections == "on"]
 public type IVector<T> = Windows_Foundation_Collections_IVector_1<T>
+@When[Windows_Foundation_Collections == "on"]
 public type IVectorVtbl = Windows_Foundation_Collections_IVector_1Vtbl
+@When[Windows_Foundation_Collections == "on"]
 public type MapChangedEventHandler<K, V> = Windows_Foundation_Collections_MapChangedEventHandler_2<K, V>
+@When[Windows_Foundation_Collections == "on"]
 public type VectorChangedEventHandler<T> = Windows_Foundation_Collections_VectorChangedEventHandler_1<T>

@@ -2,9 +2,14 @@
 
 package windows_common.Graphics.Effects
 
+@When[Windows_Graphics_Effects == "on"]
 import windows_common.impl.{Windows_Graphics_Effects_IGraphicsEffect, Windows_Graphics_Effects_IGraphicsEffectVtbl, Windows_Graphics_Effects_IGraphicsEffectSource, Windows_Graphics_Effects_IGraphicsEffectSourceVtbl}
 
+@When[Windows_Graphics_Effects == "on"]
 public type IGraphicsEffect = Windows_Graphics_Effects_IGraphicsEffect
+@When[Windows_Graphics_Effects == "on"]
 public type IGraphicsEffectVtbl = Windows_Graphics_Effects_IGraphicsEffectVtbl
+@When[Windows_Graphics_Effects == "on"]
 public type IGraphicsEffectSource = Windows_Graphics_Effects_IGraphicsEffectSource
+@When[Windows_Graphics_Effects == "on"]
 public type IGraphicsEffectSourceVtbl = Windows_Graphics_Effects_IGraphicsEffectSourceVtbl

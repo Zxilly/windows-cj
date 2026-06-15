@@ -2,25 +2,46 @@
 
 package windows_common.Microsoft.UI.Xaml.Media.Imaging
 
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 import windows_common.impl.{Microsoft_UI_Xaml_Media_Imaging_BitmapCreateOptions, Microsoft_UI_Xaml_Media_Imaging_BitmapImage, Microsoft_UI_Xaml_Media_Imaging_BitmapSource, Microsoft_UI_Xaml_Media_Imaging_DecodePixelType, Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventArgs, Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandler, Microsoft_UI_Xaml_Media_Imaging_IBitmapImage, Microsoft_UI_Xaml_Media_Imaging_IBitmapImageVtbl, Microsoft_UI_Xaml_Media_Imaging_IBitmapImageFactory, Microsoft_UI_Xaml_Media_Imaging_IBitmapImageFactoryVtbl, Microsoft_UI_Xaml_Media_Imaging_IBitmapImageStatics, Microsoft_UI_Xaml_Media_Imaging_IBitmapImageStaticsVtbl, Microsoft_UI_Xaml_Media_Imaging_IBitmapSource, Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceVtbl, Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceFactory, Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceFactoryVtbl, Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceStatics, Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceStaticsVtbl, Microsoft_UI_Xaml_Media_Imaging_IDownloadProgressEventArgs, Microsoft_UI_Xaml_Media_Imaging_IDownloadProgressEventArgsVtbl}
 
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type BitmapCreateOptions = Microsoft_UI_Xaml_Media_Imaging_BitmapCreateOptions
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type BitmapImage = Microsoft_UI_Xaml_Media_Imaging_BitmapImage
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type BitmapSource = Microsoft_UI_Xaml_Media_Imaging_BitmapSource
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type DecodePixelType = Microsoft_UI_Xaml_Media_Imaging_DecodePixelType
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type DownloadProgressEventArgs = Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventArgs
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type DownloadProgressEventHandler = Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventHandler
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IBitmapImage = Microsoft_UI_Xaml_Media_Imaging_IBitmapImage
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IBitmapImageVtbl = Microsoft_UI_Xaml_Media_Imaging_IBitmapImageVtbl
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IBitmapImageFactory = Microsoft_UI_Xaml_Media_Imaging_IBitmapImageFactory
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IBitmapImageFactoryVtbl = Microsoft_UI_Xaml_Media_Imaging_IBitmapImageFactoryVtbl
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IBitmapImageStatics = Microsoft_UI_Xaml_Media_Imaging_IBitmapImageStatics
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IBitmapImageStaticsVtbl = Microsoft_UI_Xaml_Media_Imaging_IBitmapImageStaticsVtbl
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IBitmapSource = Microsoft_UI_Xaml_Media_Imaging_IBitmapSource
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IBitmapSourceVtbl = Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceVtbl
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IBitmapSourceFactory = Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceFactory
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IBitmapSourceFactoryVtbl = Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceFactoryVtbl
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IBitmapSourceStatics = Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceStatics
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IBitmapSourceStaticsVtbl = Microsoft_UI_Xaml_Media_Imaging_IBitmapSourceStaticsVtbl
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IDownloadProgressEventArgs = Microsoft_UI_Xaml_Media_Imaging_IDownloadProgressEventArgs
+@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public type IDownloadProgressEventArgsVtbl = Microsoft_UI_Xaml_Media_Imaging_IDownloadProgressEventArgsVtbl

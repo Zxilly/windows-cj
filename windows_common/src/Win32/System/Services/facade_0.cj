@@ -2,77 +2,150 @@
 
 package windows_common.Win32.System.Services
 
+@When[Windows_Win32_System_Services == "on"]
 import windows_common.impl.{Windows_Win32_System_Services_ENUM_SERVICE_STATE, Windows_Win32_System_Services_ENUM_SERVICE_STATUSA, Windows_Win32_System_Services_ENUM_SERVICE_STATUSW, Windows_Win32_System_Services_ENUM_SERVICE_STATUS_PROCESSA, Windows_Win32_System_Services_ENUM_SERVICE_STATUS_PROCESSW, Windows_Win32_System_Services_ENUM_SERVICE_TYPE, Windows_Win32_System_Services_HANDLER_FUNCTION, Windows_Win32_System_Services_HANDLER_FUNCTION_EX, Windows_Win32_System_Services_LPHANDLER_FUNCTION, Windows_Win32_System_Services_LPHANDLER_FUNCTION_EX, Windows_Win32_System_Services_LPSERVICE_MAIN_FUNCTIONA, Windows_Win32_System_Services_LPSERVICE_MAIN_FUNCTIONW, Windows_Win32_System_Services_PFN_SC_NOTIFY_CALLBACK, Windows_Win32_System_Services_PSC_NOTIFICATION_CALLBACK, Windows_Win32_System_Services_PSC_NOTIFICATION_REGISTRATION, Windows_Win32_System_Services_QUERY_SERVICE_CONFIGA, Windows_Win32_System_Services_QUERY_SERVICE_CONFIGW, Windows_Win32_System_Services_QUERY_SERVICE_LOCK_STATUSA, Windows_Win32_System_Services_QUERY_SERVICE_LOCK_STATUSW, Windows_Win32_System_Services_SC_ACTION, Windows_Win32_System_Services_SC_ACTION_TYPE, Windows_Win32_System_Services_SC_ENUM_TYPE, Windows_Win32_System_Services_SC_EVENT_TYPE, Windows_Win32_System_Services_SC_HANDLE, Windows_Win32_System_Services_SC_STATUS_TYPE, Windows_Win32_System_Services_SERVICE_CONFIG, Windows_Win32_System_Services_SERVICE_CONTROL_STATUS_REASON_PARAMSA, Windows_Win32_System_Services_SERVICE_CONTROL_STATUS_REASON_PARAMSW, Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM, Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union, Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct, Windows_Win32_System_Services_SERVICE_DELAYED_AUTO_START_INFO, Windows_Win32_System_Services_SERVICE_DESCRIPTIONA, Windows_Win32_System_Services_SERVICE_DESCRIPTIONW, Windows_Win32_System_Services_SERVICE_DIRECTORY_TYPE, Windows_Win32_System_Services_SERVICE_ERROR, Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONSA, Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONSW, Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONS_FLAG, Windows_Win32_System_Services_SERVICE_LAUNCH_PROTECTED_INFO, Windows_Win32_System_Services_SERVICE_MAIN_FUNCTIONA, Windows_Win32_System_Services_SERVICE_MAIN_FUNCTIONW, Windows_Win32_System_Services_SERVICE_NOTIFY, Windows_Win32_System_Services_SERVICE_NOTIFY_1, Windows_Win32_System_Services_SERVICE_NOTIFY_2A, Windows_Win32_System_Services_SERVICE_NOTIFY_2W, Windows_Win32_System_Services_SERVICE_PREFERRED_NODE_INFO, Windows_Win32_System_Services_SERVICE_PRESHUTDOWN_INFO, Windows_Win32_System_Services_SERVICE_REGISTRY_STATE_TYPE, Windows_Win32_System_Services_SERVICE_REQUIRED_PRIVILEGES_INFOA, Windows_Win32_System_Services_SERVICE_REQUIRED_PRIVILEGES_INFOW, Windows_Win32_System_Services_SERVICE_RUNS_IN_PROCESS, Windows_Win32_System_Services_SERVICE_SHARED_DIRECTORY_TYPE, Windows_Win32_System_Services_SERVICE_SHARED_REGISTRY_STATE_TYPE, Windows_Win32_System_Services_SERVICE_SID_INFO, Windows_Win32_System_Services_SERVICE_START_REASON, Windows_Win32_System_Services_SERVICE_START_TYPE, Windows_Win32_System_Services_SERVICE_STATUS, Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE, Windows_Win32_System_Services_SERVICE_STATUS_HANDLE, Windows_Win32_System_Services_SERVICE_STATUS_PROCESS, Windows_Win32_System_Services_SERVICE_TABLE_ENTRYA, Windows_Win32_System_Services_SERVICE_TABLE_ENTRYW, Windows_Win32_System_Services_SERVICE_TIMECHANGE_INFO}
+@When[Windows_Win32_System_Services == "on"]
 import windows_common.impl.{Windows_Win32_System_Services_SERVICE_TRIGGER, Windows_Win32_System_Services_SERVICE_TRIGGER_ACTION, Windows_Win32_System_Services_SERVICE_TRIGGER_CUSTOM_STATE_ID, Windows_Win32_System_Services_SERVICE_TRIGGER_INFO, Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM, Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE, Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE}
 
+@When[Windows_Win32_System_Services == "on"]
 public type ENUM_SERVICE_STATE = Windows_Win32_System_Services_ENUM_SERVICE_STATE
+@When[Windows_Win32_System_Services == "on"]
 public type ENUM_SERVICE_STATUSA = Windows_Win32_System_Services_ENUM_SERVICE_STATUSA
+@When[Windows_Win32_System_Services == "on"]
 public type ENUM_SERVICE_STATUSW = Windows_Win32_System_Services_ENUM_SERVICE_STATUSW
+@When[Windows_Win32_System_Services == "on"]
 public type ENUM_SERVICE_STATUS_PROCESSA = Windows_Win32_System_Services_ENUM_SERVICE_STATUS_PROCESSA
+@When[Windows_Win32_System_Services == "on"]
 public type ENUM_SERVICE_STATUS_PROCESSW = Windows_Win32_System_Services_ENUM_SERVICE_STATUS_PROCESSW
+@When[Windows_Win32_System_Services == "on"]
 public type ENUM_SERVICE_TYPE = Windows_Win32_System_Services_ENUM_SERVICE_TYPE
+@When[Windows_Win32_System_Services == "on"]
 public type HANDLER_FUNCTION = Windows_Win32_System_Services_HANDLER_FUNCTION
+@When[Windows_Win32_System_Services == "on"]
 public type HANDLER_FUNCTION_EX = Windows_Win32_System_Services_HANDLER_FUNCTION_EX
+@When[Windows_Win32_System_Services == "on"]
 public type LPHANDLER_FUNCTION = Windows_Win32_System_Services_LPHANDLER_FUNCTION
+@When[Windows_Win32_System_Services == "on"]
 public type LPHANDLER_FUNCTION_EX = Windows_Win32_System_Services_LPHANDLER_FUNCTION_EX
+@When[Windows_Win32_System_Services == "on"]
 public type LPSERVICE_MAIN_FUNCTIONA = Windows_Win32_System_Services_LPSERVICE_MAIN_FUNCTIONA
+@When[Windows_Win32_System_Services == "on"]
 public type LPSERVICE_MAIN_FUNCTIONW = Windows_Win32_System_Services_LPSERVICE_MAIN_FUNCTIONW
+@When[Windows_Win32_System_Services == "on"]
 public type PFN_SC_NOTIFY_CALLBACK = Windows_Win32_System_Services_PFN_SC_NOTIFY_CALLBACK
+@When[Windows_Win32_System_Services == "on"]
 public type PSC_NOTIFICATION_CALLBACK = Windows_Win32_System_Services_PSC_NOTIFICATION_CALLBACK
+@When[Windows_Win32_System_Services == "on"]
 public type PSC_NOTIFICATION_REGISTRATION = Windows_Win32_System_Services_PSC_NOTIFICATION_REGISTRATION
+@When[Windows_Win32_System_Services == "on"]
 public type QUERY_SERVICE_CONFIGA = Windows_Win32_System_Services_QUERY_SERVICE_CONFIGA
+@When[Windows_Win32_System_Services == "on"]
 public type QUERY_SERVICE_CONFIGW = Windows_Win32_System_Services_QUERY_SERVICE_CONFIGW
+@When[Windows_Win32_System_Services == "on"]
 public type QUERY_SERVICE_LOCK_STATUSA = Windows_Win32_System_Services_QUERY_SERVICE_LOCK_STATUSA
+@When[Windows_Win32_System_Services == "on"]
 public type QUERY_SERVICE_LOCK_STATUSW = Windows_Win32_System_Services_QUERY_SERVICE_LOCK_STATUSW
+@When[Windows_Win32_System_Services == "on"]
 public type SC_ACTION = Windows_Win32_System_Services_SC_ACTION
+@When[Windows_Win32_System_Services == "on"]
 public type SC_ACTION_TYPE = Windows_Win32_System_Services_SC_ACTION_TYPE
+@When[Windows_Win32_System_Services == "on"]
 public type SC_ENUM_TYPE = Windows_Win32_System_Services_SC_ENUM_TYPE
+@When[Windows_Win32_System_Services == "on"]
 public type SC_EVENT_TYPE = Windows_Win32_System_Services_SC_EVENT_TYPE
+@When[Windows_Win32_System_Services == "on"]
 public type SC_HANDLE = Windows_Win32_System_Services_SC_HANDLE
+@When[Windows_Win32_System_Services == "on"]
 public type SC_STATUS_TYPE = Windows_Win32_System_Services_SC_STATUS_TYPE
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_CONFIG = Windows_Win32_System_Services_SERVICE_CONFIG
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_CONTROL_STATUS_REASON_PARAMSA = Windows_Win32_System_Services_SERVICE_CONTROL_STATUS_REASON_PARAMSA
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_CONTROL_STATUS_REASON_PARAMSW = Windows_Win32_System_Services_SERVICE_CONTROL_STATUS_REASON_PARAMSW
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM = Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union = Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct = Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_DELAYED_AUTO_START_INFO = Windows_Win32_System_Services_SERVICE_DELAYED_AUTO_START_INFO
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_DESCRIPTIONA = Windows_Win32_System_Services_SERVICE_DESCRIPTIONA
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_DESCRIPTIONW = Windows_Win32_System_Services_SERVICE_DESCRIPTIONW
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_DIRECTORY_TYPE = Windows_Win32_System_Services_SERVICE_DIRECTORY_TYPE
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_ERROR = Windows_Win32_System_Services_SERVICE_ERROR
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_FAILURE_ACTIONSA = Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONSA
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_FAILURE_ACTIONSW = Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONSW
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_FAILURE_ACTIONS_FLAG = Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONS_FLAG
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_LAUNCH_PROTECTED_INFO = Windows_Win32_System_Services_SERVICE_LAUNCH_PROTECTED_INFO
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_MAIN_FUNCTIONA = Windows_Win32_System_Services_SERVICE_MAIN_FUNCTIONA
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_MAIN_FUNCTIONW = Windows_Win32_System_Services_SERVICE_MAIN_FUNCTIONW
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_NOTIFY = Windows_Win32_System_Services_SERVICE_NOTIFY
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_NOTIFY_1 = Windows_Win32_System_Services_SERVICE_NOTIFY_1
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_NOTIFY_2A = Windows_Win32_System_Services_SERVICE_NOTIFY_2A
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_NOTIFY_2W = Windows_Win32_System_Services_SERVICE_NOTIFY_2W
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_PREFERRED_NODE_INFO = Windows_Win32_System_Services_SERVICE_PREFERRED_NODE_INFO
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_PRESHUTDOWN_INFO = Windows_Win32_System_Services_SERVICE_PRESHUTDOWN_INFO
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_REGISTRY_STATE_TYPE = Windows_Win32_System_Services_SERVICE_REGISTRY_STATE_TYPE
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_REQUIRED_PRIVILEGES_INFOA = Windows_Win32_System_Services_SERVICE_REQUIRED_PRIVILEGES_INFOA
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_REQUIRED_PRIVILEGES_INFOW = Windows_Win32_System_Services_SERVICE_REQUIRED_PRIVILEGES_INFOW
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_RUNS_IN_PROCESS = Windows_Win32_System_Services_SERVICE_RUNS_IN_PROCESS
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_SHARED_DIRECTORY_TYPE = Windows_Win32_System_Services_SERVICE_SHARED_DIRECTORY_TYPE
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_SHARED_REGISTRY_STATE_TYPE = Windows_Win32_System_Services_SERVICE_SHARED_REGISTRY_STATE_TYPE
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_SID_INFO = Windows_Win32_System_Services_SERVICE_SID_INFO
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_START_REASON = Windows_Win32_System_Services_SERVICE_START_REASON
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_START_TYPE = Windows_Win32_System_Services_SERVICE_START_TYPE
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_STATUS = Windows_Win32_System_Services_SERVICE_STATUS
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_STATUS_CURRENT_STATE = Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_STATUS_HANDLE = Windows_Win32_System_Services_SERVICE_STATUS_HANDLE
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_STATUS_PROCESS = Windows_Win32_System_Services_SERVICE_STATUS_PROCESS
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_TABLE_ENTRYA = Windows_Win32_System_Services_SERVICE_TABLE_ENTRYA
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_TABLE_ENTRYW = Windows_Win32_System_Services_SERVICE_TABLE_ENTRYW
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_TIMECHANGE_INFO = Windows_Win32_System_Services_SERVICE_TIMECHANGE_INFO
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_TRIGGER = Windows_Win32_System_Services_SERVICE_TRIGGER
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_TRIGGER_ACTION = Windows_Win32_System_Services_SERVICE_TRIGGER_ACTION
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_TRIGGER_CUSTOM_STATE_ID = Windows_Win32_System_Services_SERVICE_TRIGGER_CUSTOM_STATE_ID
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_TRIGGER_INFO = Windows_Win32_System_Services_SERVICE_TRIGGER_INFO
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_TRIGGER_SPECIFIC_DATA_ITEM = Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE = Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE
+@When[Windows_Win32_System_Services == "on"]
 public type SERVICE_TRIGGER_TYPE = Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE

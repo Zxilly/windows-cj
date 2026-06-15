@@ -7,34 +7,44 @@ import windows_interface as windows_interface
 import windows_polyfill as windows_polyfill
 
 // Windows.Win32.System.Threading.AVRT_TASK_HANDLE (synthetic:Windows_Win32_System_Threading_AVRT_TASK_HANDLE)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_AVRT_TASK_HANDLE {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Threading.AVRT_THREAD_ORDERING_GROUP_HANDLE (synthetic:Windows_Win32_System_Threading_AVRT_THREAD_ORDERING_GROUP_HANDLE)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_AVRT_THREAD_ORDERING_GROUP_HANDLE {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Threading.CONDITION_VARIABLE (synthetic:Windows_Win32_System_Threading_CONDITION_VARIABLE)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_CONDITION_VARIABLE {
     public var Ptr: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Threading.CREATE_EVENT (synthetic:Windows_Win32_System_Threading_CREATE_EVENT)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_CREATE_EVENT = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_CREATE_EVENT_CREATE_EVENT_INITIAL_SET: Windows_Win32_System_Threading_CREATE_EVENT = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_CREATE_EVENT_CREATE_EVENT_MANUAL_RESET: Windows_Win32_System_Threading_CREATE_EVENT = 1
 
 // Windows.Win32.System.Threading.CREATE_PROCESS_LOGON_FLAGS (synthetic:Windows_Win32_System_Threading_CREATE_PROCESS_LOGON_FLAGS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_CREATE_PROCESS_LOGON_FLAGS = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_CREATE_PROCESS_LOGON_FLAGS_LOGON_WITH_PROFILE: Windows_Win32_System_Threading_CREATE_PROCESS_LOGON_FLAGS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_CREATE_PROCESS_LOGON_FLAGS_LOGON_NETCREDENTIALS_ONLY: Windows_Win32_System_Threading_CREATE_PROCESS_LOGON_FLAGS = 2
 
 // Windows.Win32.System.Threading.CRITICAL_SECTION (synthetic:Windows_Win32_System_Threading_CRITICAL_SECTION)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_CRITICAL_SECTION {
     public var DebugInfo: CPointer<Unit> = CPointer<Unit>()
@@ -46,6 +56,7 @@ public struct Windows_Win32_System_Threading_CRITICAL_SECTION {
 }
 
 // Windows.Win32.System.Threading.CRITICAL_SECTION_DEBUG (synthetic:Windows_Win32_System_Threading_CRITICAL_SECTION_DEBUG)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_CRITICAL_SECTION_DEBUG {
     public var Type: UInt16 = 0u16
@@ -60,14 +71,21 @@ public struct Windows_Win32_System_Threading_CRITICAL_SECTION_DEBUG {
 }
 
 // Windows.Win32.System.Threading.GET_GUI_RESOURCES_FLAGS (synthetic:Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS_GR_GLOBAL: Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS = 4294967294
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS_GR_GDIOBJECTS: Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS_GR_GDIOBJECTS_PEAK: Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS_GR_USEROBJECTS: Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS_GR_USEROBJECTS_PEAK: Windows_Win32_System_Threading_GET_GUI_RESOURCES_FLAGS = 4
 
 // Windows.Win32.System.Threading.INIT_ONCE (synthetic:Windows_Win32_System_Threading_INIT_ONCE)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_INIT_ONCE {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -96,6 +114,7 @@ public struct Windows_Win32_System_Threading_INIT_ONCE {
 }
 
 // Windows.Win32.System.Threading.IO_COUNTERS (synthetic:Windows_Win32_System_Threading_IO_COUNTERS)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_IO_COUNTERS {
     public var ReadOperationCount: UInt64 = 0u64
@@ -107,6 +126,7 @@ public struct Windows_Win32_System_Threading_IO_COUNTERS {
 }
 
 // Windows.Win32.System.Threading.IRtwqAsyncCallback (synthetic:Windows_Win32_System_Threading_IRtwqAsyncCallback)
+@When[Windows_Win32_System_Threading == "on"]
 public class Windows_Win32_System_Threading_IRtwqAsyncCallback <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -184,6 +204,7 @@ public class Windows_Win32_System_Threading_IRtwqAsyncCallback <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Threading == "on"]
 extend Windows_Win32_System_Threading_IRtwqAsyncCallback <: windows_core.HandleWinrtType<Windows_Win32_System_Threading_IRtwqAsyncCallback> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Threading_IRtwqAsyncCallback): CPointer<Unit> {
         value.asRaw()
@@ -216,6 +237,7 @@ extend Windows_Win32_System_Threading_IRtwqAsyncCallback <: windows_core.HandleW
 }
 
 // Windows.Win32.System.Threading.IRtwqAsyncCallbackVtbl (synthetic:Windows_Win32_System_Threading_IRtwqAsyncCallbackVtbl)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_IRtwqAsyncCallbackVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -225,6 +247,7 @@ public struct Windows_Win32_System_Threading_IRtwqAsyncCallbackVtbl {
 }
 
 // Windows.Win32.System.Threading.IRtwqAsyncResult (synthetic:Windows_Win32_System_Threading_IRtwqAsyncResult)
+@When[Windows_Win32_System_Threading == "on"]
 public class Windows_Win32_System_Threading_IRtwqAsyncResult <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -302,6 +325,7 @@ public class Windows_Win32_System_Threading_IRtwqAsyncResult <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Threading == "on"]
 extend Windows_Win32_System_Threading_IRtwqAsyncResult <: windows_core.HandleWinrtType<Windows_Win32_System_Threading_IRtwqAsyncResult> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Threading_IRtwqAsyncResult): CPointer<Unit> {
         value.asRaw()
@@ -334,6 +358,7 @@ extend Windows_Win32_System_Threading_IRtwqAsyncResult <: windows_core.HandleWin
 }
 
 // Windows.Win32.System.Threading.IRtwqAsyncResultVtbl (synthetic:Windows_Win32_System_Threading_IRtwqAsyncResultVtbl)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_IRtwqAsyncResultVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -346,6 +371,7 @@ public struct Windows_Win32_System_Threading_IRtwqAsyncResultVtbl {
 }
 
 // Windows.Win32.System.Threading.IRtwqPlatformEvents (synthetic:Windows_Win32_System_Threading_IRtwqPlatformEvents)
+@When[Windows_Win32_System_Threading == "on"]
 public class Windows_Win32_System_Threading_IRtwqPlatformEvents <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -423,6 +449,7 @@ public class Windows_Win32_System_Threading_IRtwqPlatformEvents <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Threading == "on"]
 extend Windows_Win32_System_Threading_IRtwqPlatformEvents <: windows_core.HandleWinrtType<Windows_Win32_System_Threading_IRtwqPlatformEvents> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Threading_IRtwqPlatformEvents): CPointer<Unit> {
         value.asRaw()
@@ -455,6 +482,7 @@ extend Windows_Win32_System_Threading_IRtwqPlatformEvents <: windows_core.Handle
 }
 
 // Windows.Win32.System.Threading.IRtwqPlatformEventsVtbl (synthetic:Windows_Win32_System_Threading_IRtwqPlatformEventsVtbl)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_IRtwqPlatformEventsVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -465,41 +493,57 @@ public struct Windows_Win32_System_Threading_IRtwqPlatformEventsVtbl {
 }
 
 // Windows.Win32.System.Threading.LPFIBER_START_ROUTINE (synthetic:Windows_Win32_System_Threading_LPFIBER_START_ROUTINE)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_LPFIBER_START_ROUTINE = CFunc<(CPointer<Unit>) -> Unit>
 
 // Windows.Win32.System.Threading.LPPROC_THREAD_ATTRIBUTE_LIST (synthetic:Windows_Win32_System_Threading_LPPROC_THREAD_ATTRIBUTE_LIST)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_LPPROC_THREAD_ATTRIBUTE_LIST {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Threading.LPTHREAD_START_ROUTINE (synthetic:Windows_Win32_System_Threading_LPTHREAD_START_ROUTINE)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_LPTHREAD_START_ROUTINE = CFunc<(CPointer<Unit>) -> UInt32>
 
 // Windows.Win32.System.Threading.MACHINE_ATTRIBUTES (synthetic:Windows_Win32_System_Threading_MACHINE_ATTRIBUTES)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_MACHINE_ATTRIBUTES = Int32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_MACHINE_ATTRIBUTES_UserEnabled: Windows_Win32_System_Threading_MACHINE_ATTRIBUTES = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_MACHINE_ATTRIBUTES_KernelEnabled: Windows_Win32_System_Threading_MACHINE_ATTRIBUTES = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_MACHINE_ATTRIBUTES_Wow64Container: Windows_Win32_System_Threading_MACHINE_ATTRIBUTES = 4
 
 // Windows.Win32.System.Threading.MEMORY_PRIORITY (synthetic:Windows_Win32_System_Threading_MEMORY_PRIORITY)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_MEMORY_PRIORITY = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_MEMORY_PRIORITY_MEMORY_PRIORITY_VERY_LOW: Windows_Win32_System_Threading_MEMORY_PRIORITY = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_MEMORY_PRIORITY_MEMORY_PRIORITY_LOW: Windows_Win32_System_Threading_MEMORY_PRIORITY = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_MEMORY_PRIORITY_MEMORY_PRIORITY_MEDIUM: Windows_Win32_System_Threading_MEMORY_PRIORITY = 3
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_MEMORY_PRIORITY_MEMORY_PRIORITY_BELOW_NORMAL: Windows_Win32_System_Threading_MEMORY_PRIORITY = 4
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_MEMORY_PRIORITY_MEMORY_PRIORITY_NORMAL: Windows_Win32_System_Threading_MEMORY_PRIORITY = 5
 
 // Windows.Win32.System.Threading.MEMORY_PRIORITY_INFORMATION (synthetic:Windows_Win32_System_Threading_MEMORY_PRIORITY_INFORMATION)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_MEMORY_PRIORITY_INFORMATION {
     public var MemoryPriority: UInt32 = 0u32
 }
 
 // Windows.Win32.System.Threading.OVERRIDE_PREFETCH_PARAMETER (synthetic:Windows_Win32_System_Threading_OVERRIDE_PREFETCH_PARAMETER)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_OVERRIDE_PREFETCH_PARAMETER = UInt32
 
 // Windows.Win32.System.Threading.PEB (synthetic:Windows_Win32_System_Threading_PEB)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PEB {
     public var Reserved1: VArray<UInt8, $2> = VArray<UInt8, $2>(repeat: 0u8)
@@ -524,6 +568,7 @@ public struct Windows_Win32_System_Threading_PEB {
 }
 
 // Windows.Win32.System.Threading.PEB_LDR_DATA (synthetic:Windows_Win32_System_Threading_PEB_LDR_DATA)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PEB_LDR_DATA {
     public var Reserved1: VArray<UInt8, $8> = VArray<UInt8, $8>(repeat: 0u8)
@@ -532,141 +577,263 @@ public struct Windows_Win32_System_Threading_PEB_LDR_DATA {
 }
 
 // Windows.Win32.System.Threading.PFLS_CALLBACK_FUNCTION (synthetic:Windows_Win32_System_Threading_PFLS_CALLBACK_FUNCTION)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PFLS_CALLBACK_FUNCTION = CFunc<(CPointer<Unit>) -> Unit>
 
 // Windows.Win32.System.Threading.PINIT_ONCE_FN (synthetic:Windows_Win32_System_Threading_PINIT_ONCE_FN)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PINIT_ONCE_FN = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>
 
 // Windows.Win32.System.Threading.POWER_REQUEST_CONTEXT_FLAGS (synthetic:Windows_Win32_System_Threading_POWER_REQUEST_CONTEXT_FLAGS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_POWER_REQUEST_CONTEXT_FLAGS = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_POWER_REQUEST_CONTEXT_FLAGS_POWER_REQUEST_CONTEXT_DETAILED_STRING: Windows_Win32_System_Threading_POWER_REQUEST_CONTEXT_FLAGS = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_POWER_REQUEST_CONTEXT_FLAGS_POWER_REQUEST_CONTEXT_SIMPLE_STRING: Windows_Win32_System_Threading_POWER_REQUEST_CONTEXT_FLAGS = 1
 
 // Windows.Win32.System.Threading.PPS_POST_PROCESS_INIT_ROUTINE (synthetic:Windows_Win32_System_Threading_PPS_POST_PROCESS_INIT_ROUTINE)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PPS_POST_PROCESS_INIT_ROUTINE = CFunc<() -> Unit>
 
 // Windows.Win32.System.Threading.PROCESSOR_FEATURE_ID (synthetic:Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_FLOATING_POINT_PRECISION_ERRATA: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_FLOATING_POINT_EMULATED: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_COMPARE_EXCHANGE_DOUBLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_MMX_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 3
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_PPC_MOVEMEM_64BIT_OK: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 4
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ALPHA_BYTE_INSTRUCTIONS: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 5
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_XMMI_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 6
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_3DNOW_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 7
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_RDTSC_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 8
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_PAE_ENABLED: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 9
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_XMMI64_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 10
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_SSE_DAZ_MODE_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 11
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_NX_ENABLED: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 12
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_SSE3_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 13
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_COMPARE_EXCHANGE128: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 14
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_COMPARE64_EXCHANGE128: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 15
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_CHANNELS_ENABLED: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 16
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_XSAVE_ENABLED: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 17
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_VFP_32_REGISTERS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 18
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_NEON_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 19
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_SECOND_LEVEL_ADDRESS_TRANSLATION: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 20
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_VIRT_FIRMWARE_ENABLED: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 21
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_RDWRFSGSBASE_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 22
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_FASTFAIL_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 23
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_DIVIDE_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 24
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_64BIT_LOADSTORE_ATOMIC: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 25
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_EXTERNAL_CACHE_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 26
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_FMAC_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 27
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_RDRAND_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 28
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V8_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 29
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V8_CRYPTO_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 30
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V8_CRC32_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 31
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_RDTSCP_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_RDPID_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 33
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V81_ATOMIC_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 34
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_MONITORX_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 35
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_SSSE3_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 36
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_SSE4_1_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 37
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_SSE4_2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 38
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_AVX_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 39
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_AVX2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 40
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_AVX512F_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 41
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ERMS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 42
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V82_DP_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 43
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V83_JSCVT_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 44
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V83_LRCPC_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 45
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 46
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 47
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE2_1_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 48
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_AES_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 49
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_PMULL128_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 50
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_BITPERM_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 51
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_BF16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 52
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_EBF16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 53
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_B16B16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 54
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_SHA3_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 55
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_SM4_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 56
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_I8MM_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 57
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_F32MM_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 58
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SVE_F64MM_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 59
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_BMI2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 60
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_MOVDIR64B_INSTRUCTION_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 61
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_LSE2_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 62
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_RESERVED_FEATURE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 63
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SHA3_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 64
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SHA512_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 65
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V82_I8MM_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 66
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V82_FP16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 67
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V86_BF16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 68
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_V86_EBF16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 69
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 70
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 71
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME2_1_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 72
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME2_2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 73
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_AES_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 74
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_SBITPERM_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 75
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_SF8MM4_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 76
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_SF8MM8_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 77
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_SF8DP2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 78
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_SF8DP4_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 79
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_SF8FMA_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 80
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_F8F32_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 81
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_F8F16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 82
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_F16F16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 83
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_B16B16_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 84
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_F64F64_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 85
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_I16I64_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 86
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_LUTv2_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 87
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID_PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE: Windows_Win32_System_Threading_PROCESSOR_FEATURE_ID = 88
 
 // Windows.Win32.System.Threading.PROCESS_ACCESS_RIGHTS (synthetic:Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_TERMINATE: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_CREATE_THREAD: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_SET_SESSIONID: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 4
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_VM_OPERATION: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 8
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_VM_READ: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 16
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_VM_WRITE: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_DUP_HANDLE: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 64
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_CREATE_PROCESS: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 128
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_SET_QUOTA: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 256
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_SET_INFORMATION: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 512
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_QUERY_INFORMATION: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 1024
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_SUSPEND_RESUME: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 2048
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_QUERY_LIMITED_INFORMATION: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 4096
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_SET_LIMITED_INFORMATION: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 8192
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_ALL_ACCESS: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 2097151
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_DELETE: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 65536
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_READ_CONTROL: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 131072
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_WRITE_DAC: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 262144
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_WRITE_OWNER: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 524288
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_SYNCHRONIZE: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 1048576
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS_PROCESS_STANDARD_RIGHTS_REQUIRED: Windows_Win32_System_Threading_PROCESS_ACCESS_RIGHTS = 983040
 
 // Windows.Win32.System.Threading.PROCESS_AFFINITY_AUTO_UPDATE_FLAGS (synthetic:Windows_Win32_System_Threading_PROCESS_AFFINITY_AUTO_UPDATE_FLAGS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PROCESS_AFFINITY_AUTO_UPDATE_FLAGS = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_AFFINITY_AUTO_UPDATE_FLAGS_PROCESS_AFFINITY_DISABLE_AUTO_UPDATE: Windows_Win32_System_Threading_PROCESS_AFFINITY_AUTO_UPDATE_FLAGS = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_AFFINITY_AUTO_UPDATE_FLAGS_PROCESS_AFFINITY_ENABLE_AUTO_UPDATE: Windows_Win32_System_Threading_PROCESS_AFFINITY_AUTO_UPDATE_FLAGS = 1
 
 // Windows.Win32.System.Threading.PROCESS_BASIC_INFORMATION (synthetic:Windows_Win32_System_Threading_PROCESS_BASIC_INFORMATION)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PROCESS_BASIC_INFORMATION {
     public var ExitStatus: Int32 = 0i32
@@ -678,46 +845,83 @@ public struct Windows_Win32_System_Threading_PROCESS_BASIC_INFORMATION {
 }
 
 // Windows.Win32.System.Threading.PROCESS_CREATION_FLAGS (synthetic:Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_DEBUG_PROCESS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_DEBUG_ONLY_THIS_PROCESS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_SUSPENDED: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 4
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_DETACHED_PROCESS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 8
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_NEW_CONSOLE: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 16
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_NORMAL_PRIORITY_CLASS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_IDLE_PRIORITY_CLASS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 64
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_HIGH_PRIORITY_CLASS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 128
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_REALTIME_PRIORITY_CLASS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 256
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_NEW_PROCESS_GROUP: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 512
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_UNICODE_ENVIRONMENT: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 1024
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_SEPARATE_WOW_VDM: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 2048
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_SHARED_WOW_VDM: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 4096
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_FORCEDOS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 8192
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_BELOW_NORMAL_PRIORITY_CLASS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 16384
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_ABOVE_NORMAL_PRIORITY_CLASS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 32768
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_INHERIT_PARENT_AFFINITY: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 65536
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_INHERIT_CALLER_PRIORITY: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 131072
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_PROTECTED_PROCESS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 262144
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_EXTENDED_STARTUPINFO_PRESENT: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 524288
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_PROCESS_MODE_BACKGROUND_BEGIN: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 1048576
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_PROCESS_MODE_BACKGROUND_END: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 2097152
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_SECURE_PROCESS: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 4194304
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_BREAKAWAY_FROM_JOB: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 16777216
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_PRESERVE_CODE_AUTHZ_LEVEL: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 33554432
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_DEFAULT_ERROR_MODE: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 67108864
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_NO_WINDOW: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 134217728
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_PROFILE_USER: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 268435456
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_PROFILE_KERNEL: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 536870912
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_PROFILE_SERVER: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 1073741824
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS_CREATE_IGNORE_SYSTEM_DEFAULT: Windows_Win32_System_Threading_PROCESS_CREATION_FLAGS = 2147483648
 
 // Windows.Win32.System.Threading.PROCESS_DEP_FLAGS (synthetic:Windows_Win32_System_Threading_PROCESS_DEP_FLAGS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PROCESS_DEP_FLAGS = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_DEP_FLAGS_PROCESS_DEP_ENABLE: Windows_Win32_System_Threading_PROCESS_DEP_FLAGS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_DEP_FLAGS_PROCESS_DEP_DISABLE_ATL_THUNK_EMULATION: Windows_Win32_System_Threading_PROCESS_DEP_FLAGS = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_DEP_FLAGS_PROCESS_DEP_NONE: Windows_Win32_System_Threading_PROCESS_DEP_FLAGS = 0
 
 // Windows.Win32.System.Threading.PROCESS_DYNAMIC_EH_CONTINUATION_TARGET (synthetic:Windows_Win32_System_Threading_PROCESS_DYNAMIC_EH_CONTINUATION_TARGET)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PROCESS_DYNAMIC_EH_CONTINUATION_TARGET {
     public var TargetAddress: CPointer<Unit> = CPointer<Unit>()
@@ -725,6 +929,7 @@ public struct Windows_Win32_System_Threading_PROCESS_DYNAMIC_EH_CONTINUATION_TAR
 }
 
 // Windows.Win32.System.Threading.PROCESS_DYNAMIC_EH_CONTINUATION_TARGETS_INFORMATION (synthetic:Windows_Win32_System_Threading_PROCESS_DYNAMIC_EH_CONTINUATION_TARGETS_INFORMATION)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PROCESS_DYNAMIC_EH_CONTINUATION_TARGETS_INFORMATION {
     public var NumberOfTargets: UInt16 = 0u16
@@ -734,6 +939,7 @@ public struct Windows_Win32_System_Threading_PROCESS_DYNAMIC_EH_CONTINUATION_TAR
 }
 
 // Windows.Win32.System.Threading.PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE (synthetic:Windows_Win32_System_Threading_PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE {
     public var BaseAddress: CPointer<Unit> = CPointer<Unit>()
@@ -742,6 +948,7 @@ public struct Windows_Win32_System_Threading_PROCESS_DYNAMIC_ENFORCED_ADDRESS_RA
 }
 
 // Windows.Win32.System.Threading.PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGES_INFORMATION (synthetic:Windows_Win32_System_Threading_PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGES_INFORMATION)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGES_INFORMATION {
     public var NumberOfRanges: UInt16 = 0u16
@@ -751,6 +958,7 @@ public struct Windows_Win32_System_Threading_PROCESS_DYNAMIC_ENFORCED_ADDRESS_RA
 }
 
 // Windows.Win32.System.Threading.PROCESS_INFORMATION (synthetic:Windows_Win32_System_Threading_PROCESS_INFORMATION)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PROCESS_INFORMATION {
     public var hProcess: Windows_Win32_Foundation_HANDLE = Windows_Win32_Foundation_HANDLE()
@@ -760,22 +968,37 @@ public struct Windows_Win32_System_Threading_PROCESS_INFORMATION {
 }
 
 // Windows.Win32.System.Threading.PROCESS_INFORMATION_CLASS (synthetic:Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = Int32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessMemoryPriority: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessMemoryExhaustionInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessAppMemoryInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessInPrivateInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 3
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessPowerThrottling: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 4
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessReservedValue1: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 5
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessTelemetryCoverageInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 6
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessProtectionLevelInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 7
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessLeapSecondInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 8
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessMachineTypeInfo: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 9
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessOverrideSubsequentPrefetchParameter: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 10
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessMaxOverridePrefetchParameter: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 11
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS_ProcessInformationClassMax: Windows_Win32_System_Threading_PROCESS_INFORMATION_CLASS = 12
 
 // Windows.Win32.System.Threading.PROCESS_LEAP_SECOND_INFO (synthetic:Windows_Win32_System_Threading_PROCESS_LEAP_SECOND_INFO)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PROCESS_LEAP_SECOND_INFO {
     public var Flags: UInt32 = 0u32
@@ -783,6 +1006,7 @@ public struct Windows_Win32_System_Threading_PROCESS_LEAP_SECOND_INFO {
 }
 
 // Windows.Win32.System.Threading.PROCESS_MACHINE_INFORMATION (synthetic:Windows_Win32_System_Threading_PROCESS_MACHINE_INFORMATION)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PROCESS_MACHINE_INFORMATION {
     public var ProcessMachine: UInt16 = 0u16
@@ -791,6 +1015,7 @@ public struct Windows_Win32_System_Threading_PROCESS_MACHINE_INFORMATION {
 }
 
 // Windows.Win32.System.Threading.PROCESS_MEMORY_EXHAUSTION_INFO (synthetic:Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_INFO)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_INFO {
     public var Version: UInt16 = 0u16
@@ -800,39 +1025,67 @@ public struct Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_INFO {
 }
 
 // Windows.Win32.System.Threading.PROCESS_MEMORY_EXHAUSTION_TYPE (synthetic:Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_TYPE)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_TYPE = Int32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_TYPE_PMETypeFailFastOnCommitFailure: Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_TYPE = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_TYPE_PMETypeMax: Windows_Win32_System_Threading_PROCESS_MEMORY_EXHAUSTION_TYPE = 1
 
 // Windows.Win32.System.Threading.PROCESS_MITIGATION_POLICY (synthetic:Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = Int32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessDEPPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessASLRPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessDynamicCodePolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessStrictHandleCheckPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 3
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessSystemCallDisablePolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 4
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessMitigationOptionsMask: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 5
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessExtensionPointDisablePolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 6
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessControlFlowGuardPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 7
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessSignaturePolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 8
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessFontDisablePolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 9
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessImageLoadPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 10
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessSystemCallFilterPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 11
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessPayloadRestrictionPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 12
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessChildProcessPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 13
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessSideChannelIsolationPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 14
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessUserShadowStackPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 15
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessRedirectionTrustPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 16
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessUserPointerAuthPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 17
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_ProcessSEHOPPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 18
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY_MaxProcessMitigationPolicy: Windows_Win32_System_Threading_PROCESS_MITIGATION_POLICY = 19
 
 // Windows.Win32.System.Threading.PROCESS_NAME_FORMAT (synthetic:Windows_Win32_System_Threading_PROCESS_NAME_FORMAT)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PROCESS_NAME_FORMAT = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_NAME_FORMAT_PROCESS_NAME_WIN32: Windows_Win32_System_Threading_PROCESS_NAME_FORMAT = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_NAME_FORMAT_PROCESS_NAME_NATIVE: Windows_Win32_System_Threading_PROCESS_NAME_FORMAT = 1
 
 // Windows.Win32.System.Threading.PROCESS_POWER_THROTTLING_STATE (synthetic:Windows_Win32_System_Threading_PROCESS_POWER_THROTTLING_STATE)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PROCESS_POWER_THROTTLING_STATE {
     public var Version: UInt32 = 0u32
@@ -841,122 +1094,177 @@ public struct Windows_Win32_System_Threading_PROCESS_POWER_THROTTLING_STATE {
 }
 
 // Windows.Win32.System.Threading.PROCESS_PROTECTION_LEVEL (synthetic:Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL_PROTECTION_LEVEL_WINTCB_LIGHT: Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL_PROTECTION_LEVEL_WINDOWS: Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL_PROTECTION_LEVEL_WINDOWS_LIGHT: Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL_PROTECTION_LEVEL_ANTIMALWARE_LIGHT: Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL = 3
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL_PROTECTION_LEVEL_LSA_LIGHT: Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL = 4
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL_PROTECTION_LEVEL_WINTCB: Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL = 5
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL_PROTECTION_LEVEL_CODEGEN_LIGHT: Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL = 6
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL_PROTECTION_LEVEL_AUTHENTICODE: Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL = 7
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL_PROTECTION_LEVEL_PPL_APP: Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL = 8
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL_PROTECTION_LEVEL_NONE: Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL = 4294967294
 
 // Windows.Win32.System.Threading.PROCESS_PROTECTION_LEVEL_INFORMATION (synthetic:Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL_INFORMATION)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PROCESS_PROTECTION_LEVEL_INFORMATION {
     public var ProtectionLevel: UInt32 = 0u32
 }
 
 // Windows.Win32.System.Threading.PROC_THREAD_ATTRIBUTE_NUM (synthetic:Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeParentProcess: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeHandleList: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeGroupAffinity: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 3
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributePreferredNode: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 4
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeIdealProcessor: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 5
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeUmsThread: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 6
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeMitigationPolicy: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 7
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeSecurityCapabilities: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 9
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeProtectionLevel: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 11
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeJobList: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 13
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeChildProcessPolicy: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 14
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeAllApplicationPackagesPolicy: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 15
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeWin32kFilter: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 16
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeSafeOpenPromptOriginClaim: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 17
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeDesktopAppPolicy: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 18
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributePseudoConsole: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 22
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeMitigationAuditPolicy: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 24
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeMachineType: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 25
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeComponentFilter: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 26
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeEnableOptionalXStateFeatures: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 27
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeTrustedApp: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 29
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM_ProcThreadAttributeSveVectorLength: Windows_Win32_System_Threading_PROC_THREAD_ATTRIBUTE_NUM = 30
 
 // Windows.Win32.System.Threading.PRTL_UMS_SCHEDULER_ENTRY_POINT (synthetic:Windows_Win32_System_Threading_PRTL_UMS_SCHEDULER_ENTRY_POINT)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PRTL_UMS_SCHEDULER_ENTRY_POINT = CFunc<(Int32, CPointer<Unit>, CPointer<Unit>) -> Unit>
 
 // Windows.Win32.System.Threading.PTIMERAPCROUTINE (synthetic:Windows_Win32_System_Threading_PTIMERAPCROUTINE)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PTIMERAPCROUTINE = CFunc<(CPointer<Unit>, UInt32, UInt32) -> Unit>
 
 // Windows.Win32.System.Threading.PTP_CALLBACK_INSTANCE (synthetic:Windows_Win32_System_Threading_PTP_CALLBACK_INSTANCE)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PTP_CALLBACK_INSTANCE {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Threading.PTP_CLEANUP_GROUP (synthetic:Windows_Win32_System_Threading_PTP_CLEANUP_GROUP)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PTP_CLEANUP_GROUP {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Threading.PTP_CLEANUP_GROUP_CANCEL_CALLBACK (synthetic:Windows_Win32_System_Threading_PTP_CLEANUP_GROUP_CANCEL_CALLBACK)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PTP_CLEANUP_GROUP_CANCEL_CALLBACK = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>
 
 // Windows.Win32.System.Threading.PTP_IO (synthetic:Windows_Win32_System_Threading_PTP_IO)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PTP_IO {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Threading.PTP_POOL (synthetic:Windows_Win32_System_Threading_PTP_POOL)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PTP_POOL {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Threading.PTP_SIMPLE_CALLBACK (synthetic:Windows_Win32_System_Threading_PTP_SIMPLE_CALLBACK)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PTP_SIMPLE_CALLBACK = CFunc<(Windows_Win32_System_Threading_PTP_CALLBACK_INSTANCE, CPointer<Unit>) -> Unit>
 
 // Windows.Win32.System.Threading.PTP_TIMER (synthetic:Windows_Win32_System_Threading_PTP_TIMER)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PTP_TIMER {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Threading.PTP_TIMER_CALLBACK (synthetic:Windows_Win32_System_Threading_PTP_TIMER_CALLBACK)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PTP_TIMER_CALLBACK = CFunc<(Windows_Win32_System_Threading_PTP_CALLBACK_INSTANCE, CPointer<Unit>, Windows_Win32_System_Threading_PTP_TIMER) -> Unit>
 
 // Windows.Win32.System.Threading.PTP_WAIT (synthetic:Windows_Win32_System_Threading_PTP_WAIT)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PTP_WAIT {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Threading.PTP_WAIT_CALLBACK (synthetic:Windows_Win32_System_Threading_PTP_WAIT_CALLBACK)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PTP_WAIT_CALLBACK = CFunc<(Windows_Win32_System_Threading_PTP_CALLBACK_INSTANCE, CPointer<Unit>, Windows_Win32_System_Threading_PTP_WAIT, UInt32) -> Unit>
 
 // Windows.Win32.System.Threading.PTP_WIN32_IO_CALLBACK (synthetic:Windows_Win32_System_Threading_PTP_WIN32_IO_CALLBACK)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PTP_WIN32_IO_CALLBACK = CFunc<(Windows_Win32_System_Threading_PTP_CALLBACK_INSTANCE, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, Windows_Win32_System_Threading_PTP_IO) -> Unit>
 
 // Windows.Win32.System.Threading.PTP_WORK (synthetic:Windows_Win32_System_Threading_PTP_WORK)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_PTP_WORK {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Threading.PTP_WORK_CALLBACK (synthetic:Windows_Win32_System_Threading_PTP_WORK_CALLBACK)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_PTP_WORK_CALLBACK = CFunc<(Windows_Win32_System_Threading_PTP_CALLBACK_INSTANCE, CPointer<Unit>, Windows_Win32_System_Threading_PTP_WORK) -> Unit>
 
 // Windows.Win32.System.Threading.QUEUE_USER_APC_FLAGS (synthetic:Windows_Win32_System_Threading_QUEUE_USER_APC_FLAGS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_QUEUE_USER_APC_FLAGS = Int32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_QUEUE_USER_APC_FLAGS_QUEUE_USER_APC_FLAGS_NONE: Windows_Win32_System_Threading_QUEUE_USER_APC_FLAGS = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_QUEUE_USER_APC_FLAGS_QUEUE_USER_APC_FLAGS_SPECIAL_USER_APC: Windows_Win32_System_Threading_QUEUE_USER_APC_FLAGS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_QUEUE_USER_APC_FLAGS_QUEUE_USER_APC_CALLBACK_DATA_CONTEXT: Windows_Win32_System_Threading_QUEUE_USER_APC_FLAGS = 65536
 
 // Windows.Win32.System.Threading.REASON_CONTEXT (synthetic:Windows_Win32_System_Threading_REASON_CONTEXT)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_REASON_CONTEXT {
     public var Version: UInt32 = 0u32
@@ -965,6 +1273,7 @@ public struct Windows_Win32_System_Threading_REASON_CONTEXT {
 }
 
 // Windows.Win32.System.Threading.REASON_CONTEXT._Reason_e__Union (synthetic:Windows_Win32_System_Threading_REASON_CONTEXT__Reason_e__Union)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_REASON_CONTEXT__Reason_e__Union {
     public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0u64)
@@ -1015,6 +1324,7 @@ public struct Windows_Win32_System_Threading_REASON_CONTEXT__Reason_e__Union {
 }
 
 // Windows.Win32.System.Threading.REASON_CONTEXT._Reason_e__Union._Detailed_e__Struct (synthetic:Windows_Win32_System_Threading_REASON_CONTEXT__Reason_e__Union__Detailed_e__Struct)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_REASON_CONTEXT__Reason_e__Union__Detailed_e__Struct {
     public var LocalizedReasonModule: Windows_Win32_Foundation_HMODULE = Windows_Win32_Foundation_HMODULE()
@@ -1024,6 +1334,7 @@ public struct Windows_Win32_System_Threading_REASON_CONTEXT__Reason_e__Union__De
 }
 
 // Windows.Win32.System.Threading.RTL_USER_PROCESS_PARAMETERS (synthetic:Windows_Win32_System_Threading_RTL_USER_PROCESS_PARAMETERS)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_RTL_USER_PROCESS_PARAMETERS {
     public var Reserved1: VArray<UInt8, $16> = VArray<UInt8, $16>(repeat: 0u8)
@@ -1033,6 +1344,7 @@ public struct Windows_Win32_System_Threading_RTL_USER_PROCESS_PARAMETERS {
 }
 
 // Windows.Win32.System.Threading.RTWQASYNCRESULT (synthetic:Windows_Win32_System_Threading_RTWQASYNCRESULT)
+@When[Windows_Win32_System_Threading == "on"]
 public class Windows_Win32_System_Threading_RTWQASYNCRESULT <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -1107,6 +1419,7 @@ public class Windows_Win32_System_Threading_RTWQASYNCRESULT <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Threading == "on"]
 extend Windows_Win32_System_Threading_RTWQASYNCRESULT <: windows_core.HandleWinrtType<Windows_Win32_System_Threading_RTWQASYNCRESULT> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Threading_RTWQASYNCRESULT): CPointer<Unit> {
         value.asRaw()
@@ -1139,21 +1452,28 @@ extend Windows_Win32_System_Threading_RTWQASYNCRESULT <: windows_core.HandleWinr
 }
 
 // Windows.Win32.System.Threading.RTWQPERIODICCALLBACK (synthetic:Windows_Win32_System_Threading_RTWQPERIODICCALLBACK)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_RTWQPERIODICCALLBACK = CFunc<(CPointer<Unit>) -> Unit>
 
 // Windows.Win32.System.Threading.RTWQ_WORKQUEUE_TYPE (synthetic:Windows_Win32_System_Threading_RTWQ_WORKQUEUE_TYPE)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_RTWQ_WORKQUEUE_TYPE = Int32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_RTWQ_WORKQUEUE_TYPE_RTWQ_STANDARD_WORKQUEUE: Windows_Win32_System_Threading_RTWQ_WORKQUEUE_TYPE = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_RTWQ_WORKQUEUE_TYPE_RTWQ_WINDOW_WORKQUEUE: Windows_Win32_System_Threading_RTWQ_WORKQUEUE_TYPE = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_RTWQ_WORKQUEUE_TYPE_RTWQ_MULTITHREADED_WORKQUEUE: Windows_Win32_System_Threading_RTWQ_WORKQUEUE_TYPE = 2
 
 // Windows.Win32.System.Threading.SRWLOCK (synthetic:Windows_Win32_System_Threading_SRWLOCK)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_SRWLOCK {
     public var Ptr: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Threading.STARTUPINFOA (synthetic:Windows_Win32_System_Threading_STARTUPINFOA)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_STARTUPINFOA {
     public var cb: UInt32 = 0u32
@@ -1177,6 +1497,7 @@ public struct Windows_Win32_System_Threading_STARTUPINFOA {
 }
 
 // Windows.Win32.System.Threading.STARTUPINFOEXA (synthetic:Windows_Win32_System_Threading_STARTUPINFOEXA)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_STARTUPINFOEXA {
     public var StartupInfo: Windows_Win32_System_Threading_STARTUPINFOA = Windows_Win32_System_Threading_STARTUPINFOA()
@@ -1184,6 +1505,7 @@ public struct Windows_Win32_System_Threading_STARTUPINFOEXA {
 }
 
 // Windows.Win32.System.Threading.STARTUPINFOEXW (synthetic:Windows_Win32_System_Threading_STARTUPINFOEXW)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_STARTUPINFOEXW {
     public var StartupInfo: Windows_Win32_System_Threading_STARTUPINFOW = Windows_Win32_System_Threading_STARTUPINFOW()
@@ -1191,6 +1513,7 @@ public struct Windows_Win32_System_Threading_STARTUPINFOEXW {
 }
 
 // Windows.Win32.System.Threading.STARTUPINFOW (synthetic:Windows_Win32_System_Threading_STARTUPINFOW)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_STARTUPINFOW {
     public var cb: UInt32 = 0u32
@@ -1214,40 +1537,71 @@ public struct Windows_Win32_System_Threading_STARTUPINFOW {
 }
 
 // Windows.Win32.System.Threading.STARTUPINFOW_FLAGS (synthetic:Windows_Win32_System_Threading_STARTUPINFOW_FLAGS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_FORCEONFEEDBACK: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 64
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_FORCEOFFFEEDBACK: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 128
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_PREVENTPINNING: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 8192
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_RUNFULLSCREEN: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_TITLEISAPPID: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 4096
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_TITLEISLINKNAME: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 2048
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_UNTRUSTEDSOURCE: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 32768
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_USECOUNTCHARS: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 8
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_USEFILLATTRIBUTE: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 16
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_USEHOTKEY: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 512
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_USEPOSITION: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 4
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_USESHOWWINDOW: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_USESIZE: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_STARTUPINFOW_FLAGS_STARTF_USESTDHANDLES: Windows_Win32_System_Threading_STARTUPINFOW_FLAGS = 256
 
 // Windows.Win32.System.Threading.SYNCHRONIZATION_ACCESS_RIGHTS (synthetic:Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_EVENT_ALL_ACCESS: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 2031619
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_EVENT_MODIFY_STATE: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_MUTEX_ALL_ACCESS: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 2031617
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_MUTEX_MODIFY_STATE: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_SEMAPHORE_ALL_ACCESS: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 2031619
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_SEMAPHORE_MODIFY_STATE: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_TIMER_ALL_ACCESS: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 2031619
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_TIMER_MODIFY_STATE: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_TIMER_QUERY_STATE: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_SYNCHRONIZATION_DELETE: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 65536
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_SYNCHRONIZATION_READ_CONTROL: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 131072
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_SYNCHRONIZATION_WRITE_DAC: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 262144
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_SYNCHRONIZATION_WRITE_OWNER: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 524288
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS_SYNCHRONIZATION_SYNCHRONIZE: Windows_Win32_System_Threading_SYNCHRONIZATION_ACCESS_RIGHTS = 1048576
 
 // Windows.Win32.System.Threading.SYNCHRONIZATION_BARRIER (synthetic:Windows_Win32_System_Threading_SYNCHRONIZATION_BARRIER)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_SYNCHRONIZATION_BARRIER {
     public var Reserved1: UInt32 = 0u32
@@ -1258,6 +1612,7 @@ public struct Windows_Win32_System_Threading_SYNCHRONIZATION_BARRIER {
 }
 
 // Windows.Win32.System.Threading.TEB (synthetic:Windows_Win32_System_Threading_TEB)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_TEB {
     public var Reserved1: VArray<CPointer<Unit>, $12> = VArray<CPointer<Unit>, $12>(repeat: CPointer<Unit>())
@@ -1273,42 +1628,73 @@ public struct Windows_Win32_System_Threading_TEB {
 }
 
 // Windows.Win32.System.Threading.THREAD_ACCESS_RIGHTS (synthetic:Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_TERMINATE: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_SUSPEND_RESUME: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_GET_CONTEXT: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 8
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_SET_CONTEXT: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 16
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_SET_INFORMATION: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_QUERY_INFORMATION: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 64
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_SET_THREAD_TOKEN: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 128
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_IMPERSONATE: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 256
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_DIRECT_IMPERSONATION: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 512
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_SET_LIMITED_INFORMATION: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 1024
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_QUERY_LIMITED_INFORMATION: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 2048
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_RESUME: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 4096
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_ALL_ACCESS: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 2097151
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_DELETE: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 65536
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_READ_CONTROL: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 131072
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_WRITE_DAC: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 262144
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_WRITE_OWNER: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 524288
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_SYNCHRONIZE: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 1048576
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS_THREAD_STANDARD_RIGHTS_REQUIRED: Windows_Win32_System_Threading_THREAD_ACCESS_RIGHTS = 983040
 
 // Windows.Win32.System.Threading.THREAD_CREATION_FLAGS (synthetic:Windows_Win32_System_Threading_THREAD_CREATION_FLAGS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_THREAD_CREATION_FLAGS = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_CREATION_FLAGS_THREAD_CREATE_RUN_IMMEDIATELY: Windows_Win32_System_Threading_THREAD_CREATION_FLAGS = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_CREATION_FLAGS_THREAD_CREATE_SUSPENDED: Windows_Win32_System_Threading_THREAD_CREATION_FLAGS = 4
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_CREATION_FLAGS_STACK_SIZE_PARAM_IS_A_RESERVATION: Windows_Win32_System_Threading_THREAD_CREATION_FLAGS = 65536
 
 // Windows.Win32.System.Threading.THREAD_INFORMATION_CLASS (synthetic:Windows_Win32_System_Threading_THREAD_INFORMATION_CLASS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_THREAD_INFORMATION_CLASS = Int32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_INFORMATION_CLASS_ThreadMemoryPriority: Windows_Win32_System_Threading_THREAD_INFORMATION_CLASS = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_INFORMATION_CLASS_ThreadAbsoluteCpuPriority: Windows_Win32_System_Threading_THREAD_INFORMATION_CLASS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_INFORMATION_CLASS_ThreadDynamicCodePolicy: Windows_Win32_System_Threading_THREAD_INFORMATION_CLASS = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_INFORMATION_CLASS_ThreadPowerThrottling: Windows_Win32_System_Threading_THREAD_INFORMATION_CLASS = 3
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_INFORMATION_CLASS_ThreadInformationClassMax: Windows_Win32_System_Threading_THREAD_INFORMATION_CLASS = 4
 
 // Windows.Win32.System.Threading.THREAD_POWER_THROTTLING_STATE (synthetic:Windows_Win32_System_Threading_THREAD_POWER_THROTTLING_STATE)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_THREAD_POWER_THROTTLING_STATE {
     public var Version: UInt32 = 0u32
@@ -1317,19 +1703,31 @@ public struct Windows_Win32_System_Threading_THREAD_POWER_THROTTLING_STATE {
 }
 
 // Windows.Win32.System.Threading.THREAD_PRIORITY (synthetic:Windows_Win32_System_Threading_THREAD_PRIORITY)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_THREAD_PRIORITY = Int32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_PRIORITY_THREAD_MODE_BACKGROUND_BEGIN: Windows_Win32_System_Threading_THREAD_PRIORITY = 65536
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_PRIORITY_THREAD_MODE_BACKGROUND_END: Windows_Win32_System_Threading_THREAD_PRIORITY = 131072
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_PRIORITY_THREAD_PRIORITY_ABOVE_NORMAL: Windows_Win32_System_Threading_THREAD_PRIORITY = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_PRIORITY_THREAD_PRIORITY_BELOW_NORMAL: Windows_Win32_System_Threading_THREAD_PRIORITY = -1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_PRIORITY_THREAD_PRIORITY_HIGHEST: Windows_Win32_System_Threading_THREAD_PRIORITY = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_PRIORITY_THREAD_PRIORITY_IDLE: Windows_Win32_System_Threading_THREAD_PRIORITY = -15
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_PRIORITY_THREAD_PRIORITY_MIN: Windows_Win32_System_Threading_THREAD_PRIORITY = -2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_PRIORITY_THREAD_PRIORITY_LOWEST: Windows_Win32_System_Threading_THREAD_PRIORITY = -2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_PRIORITY_THREAD_PRIORITY_NORMAL: Windows_Win32_System_Threading_THREAD_PRIORITY = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_THREAD_PRIORITY_THREAD_PRIORITY_TIME_CRITICAL: Windows_Win32_System_Threading_THREAD_PRIORITY = 15
 
 // Windows.Win32.System.Threading.TP_CALLBACK_ENVIRON_V3 (synthetic:Windows_Win32_System_Threading_TP_CALLBACK_ENVIRON_V3)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_TP_CALLBACK_ENVIRON_V3 {
     public var Version: UInt32 = 0u32
@@ -1345,6 +1743,7 @@ public struct Windows_Win32_System_Threading_TP_CALLBACK_ENVIRON_V3 {
 }
 
 // Windows.Win32.System.Threading.TP_CALLBACK_ENVIRON_V3._u_e__Union (synthetic:Windows_Win32_System_Threading_TP_CALLBACK_ENVIRON_V3__u_e__Union)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_TP_CALLBACK_ENVIRON_V3__u_e__Union {
     public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
@@ -1391,6 +1790,7 @@ public struct Windows_Win32_System_Threading_TP_CALLBACK_ENVIRON_V3__u_e__Union 
 }
 
 // Windows.Win32.System.Threading.TP_CALLBACK_ENVIRON_V3._u_e__Union._s_e__Struct (synthetic:Windows_Win32_System_Threading_TP_CALLBACK_ENVIRON_V3__u_e__Union__s_e__Struct)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_TP_CALLBACK_ENVIRON_V3__u_e__Union__s_e__Struct {
     public var _bitfield: UInt32 = 0u32
@@ -1424,14 +1824,21 @@ public struct Windows_Win32_System_Threading_TP_CALLBACK_ENVIRON_V3__u_e__Union_
 }
 
 // Windows.Win32.System.Threading.TP_CALLBACK_PRIORITY (synthetic:Windows_Win32_System_Threading_TP_CALLBACK_PRIORITY)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_TP_CALLBACK_PRIORITY = Int32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_TP_CALLBACK_PRIORITY_TP_CALLBACK_PRIORITY_HIGH: Windows_Win32_System_Threading_TP_CALLBACK_PRIORITY = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_TP_CALLBACK_PRIORITY_TP_CALLBACK_PRIORITY_NORMAL: Windows_Win32_System_Threading_TP_CALLBACK_PRIORITY = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_TP_CALLBACK_PRIORITY_TP_CALLBACK_PRIORITY_LOW: Windows_Win32_System_Threading_TP_CALLBACK_PRIORITY = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_TP_CALLBACK_PRIORITY_TP_CALLBACK_PRIORITY_INVALID: Windows_Win32_System_Threading_TP_CALLBACK_PRIORITY = 3
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_TP_CALLBACK_PRIORITY_TP_CALLBACK_PRIORITY_COUNT: Windows_Win32_System_Threading_TP_CALLBACK_PRIORITY = 3
 
 // Windows.Win32.System.Threading.TP_POOL_STACK_INFORMATION (synthetic:Windows_Win32_System_Threading_TP_POOL_STACK_INFORMATION)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_TP_POOL_STACK_INFORMATION {
     public var StackReserve: CPointer<Unit> = CPointer<Unit>()
@@ -1439,6 +1846,7 @@ public struct Windows_Win32_System_Threading_TP_POOL_STACK_INFORMATION {
 }
 
 // Windows.Win32.System.Threading.UMS_SCHEDULER_STARTUP_INFO (synthetic:Windows_Win32_System_Threading_UMS_SCHEDULER_STARTUP_INFO)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_UMS_SCHEDULER_STARTUP_INFO {
     public var UmsVersion: UInt32 = 0u32
@@ -1448,6 +1856,7 @@ public struct Windows_Win32_System_Threading_UMS_SCHEDULER_STARTUP_INFO {
 }
 
 // Windows.Win32.System.Threading.UMS_SYSTEM_THREAD_INFORMATION (synthetic:Windows_Win32_System_Threading_UMS_SYSTEM_THREAD_INFORMATION)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_UMS_SYSTEM_THREAD_INFORMATION {
     public var UmsVersion: UInt32 = 0u32
@@ -1455,6 +1864,7 @@ public struct Windows_Win32_System_Threading_UMS_SYSTEM_THREAD_INFORMATION {
 }
 
 // Windows.Win32.System.Threading.UMS_SYSTEM_THREAD_INFORMATION._Anonymous_e__Union (synthetic:Windows_Win32_System_Threading_UMS_SYSTEM_THREAD_INFORMATION__Anonymous_e__Union)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_UMS_SYSTEM_THREAD_INFORMATION__Anonymous_e__Union {
     public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
@@ -1501,6 +1911,7 @@ public struct Windows_Win32_System_Threading_UMS_SYSTEM_THREAD_INFORMATION__Anon
 }
 
 // Windows.Win32.System.Threading.UMS_SYSTEM_THREAD_INFORMATION._Anonymous_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_Threading_UMS_SYSTEM_THREAD_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_UMS_SYSTEM_THREAD_INFORMATION__Anonymous_e__Union__Anonymous_e__Struct {
     public var _bitfield: UInt32 = 0u32
@@ -1525,95 +1936,170 @@ public struct Windows_Win32_System_Threading_UMS_SYSTEM_THREAD_INFORMATION__Anon
 }
 
 // Windows.Win32.System.Threading.UMS_THREAD_INFO_CLASS (synthetic:Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS = Int32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS_UmsThreadInvalidInfoClass: Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS_UmsThreadUserContext: Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS_UmsThreadPriority: Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS = 2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS_UmsThreadAffinity: Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS = 3
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS_UmsThreadTeb: Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS = 4
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS_UmsThreadIsSuspended: Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS = 5
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS_UmsThreadIsTerminated: Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS = 6
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS_UmsThreadMaxInfoClass: Windows_Win32_System_Threading_UMS_THREAD_INFO_CLASS = 7
 
 // Windows.Win32.System.Threading.WAITORTIMERCALLBACK (synthetic:Windows_Win32_System_Threading_WAITORTIMERCALLBACK)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_WAITORTIMERCALLBACK = CFunc<(CPointer<Unit>, UInt8) -> Unit>
 
 // Windows.Win32.System.Threading.WORKERCALLBACKFUNC (synthetic:Windows_Win32_System_Threading_WORKERCALLBACKFUNC)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_WORKERCALLBACKFUNC = CFunc<(CPointer<Unit>) -> Unit>
 
 // Windows.Win32.System.Threading.WORKER_THREAD_FLAGS (synthetic:Windows_Win32_System_Threading_WORKER_THREAD_FLAGS)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_WORKER_THREAD_FLAGS = UInt32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_WORKER_THREAD_FLAGS_WT_EXECUTEDEFAULT: Windows_Win32_System_Threading_WORKER_THREAD_FLAGS = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_WORKER_THREAD_FLAGS_WT_EXECUTEINIOTHREAD: Windows_Win32_System_Threading_WORKER_THREAD_FLAGS = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_WORKER_THREAD_FLAGS_WT_EXECUTEINPERSISTENTTHREAD: Windows_Win32_System_Threading_WORKER_THREAD_FLAGS = 128
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_WORKER_THREAD_FLAGS_WT_EXECUTEINWAITTHREAD: Windows_Win32_System_Threading_WORKER_THREAD_FLAGS = 4
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_WORKER_THREAD_FLAGS_WT_EXECUTELONGFUNCTION: Windows_Win32_System_Threading_WORKER_THREAD_FLAGS = 16
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_WORKER_THREAD_FLAGS_WT_EXECUTEONLYONCE: Windows_Win32_System_Threading_WORKER_THREAD_FLAGS = 8
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_WORKER_THREAD_FLAGS_WT_TRANSFER_IMPERSONATION: Windows_Win32_System_Threading_WORKER_THREAD_FLAGS = 256
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_WORKER_THREAD_FLAGS_WT_EXECUTEINTIMERTHREAD: Windows_Win32_System_Threading_WORKER_THREAD_FLAGS = 32
 
 // Windows.Win32.System.Variant.VARENUM (synthetic:Windows_Win32_System_Variant_VARENUM)
+@When[Windows_Win32_System_Variant == "on"]
 public type Windows_Win32_System_Variant_VARENUM = UInt16
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_EMPTY: Windows_Win32_System_Variant_VARENUM = 0
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_NULL: Windows_Win32_System_Variant_VARENUM = 1
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_I2: Windows_Win32_System_Variant_VARENUM = 2
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_I4: Windows_Win32_System_Variant_VARENUM = 3
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_R4: Windows_Win32_System_Variant_VARENUM = 4
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_R8: Windows_Win32_System_Variant_VARENUM = 5
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_CY: Windows_Win32_System_Variant_VARENUM = 6
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_DATE: Windows_Win32_System_Variant_VARENUM = 7
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_BSTR: Windows_Win32_System_Variant_VARENUM = 8
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_DISPATCH: Windows_Win32_System_Variant_VARENUM = 9
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_ERROR: Windows_Win32_System_Variant_VARENUM = 10
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_BOOL: Windows_Win32_System_Variant_VARENUM = 11
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_VARIANT: Windows_Win32_System_Variant_VARENUM = 12
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_UNKNOWN: Windows_Win32_System_Variant_VARENUM = 13
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_DECIMAL: Windows_Win32_System_Variant_VARENUM = 14
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_I1: Windows_Win32_System_Variant_VARENUM = 16
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_UI1: Windows_Win32_System_Variant_VARENUM = 17
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_UI2: Windows_Win32_System_Variant_VARENUM = 18
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_UI4: Windows_Win32_System_Variant_VARENUM = 19
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_I8: Windows_Win32_System_Variant_VARENUM = 20
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_UI8: Windows_Win32_System_Variant_VARENUM = 21
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_INT: Windows_Win32_System_Variant_VARENUM = 22
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_UINT: Windows_Win32_System_Variant_VARENUM = 23
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_VOID: Windows_Win32_System_Variant_VARENUM = 24
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_HRESULT: Windows_Win32_System_Variant_VARENUM = 25
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_PTR: Windows_Win32_System_Variant_VARENUM = 26
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_SAFEARRAY: Windows_Win32_System_Variant_VARENUM = 27
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_CARRAY: Windows_Win32_System_Variant_VARENUM = 28
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_USERDEFINED: Windows_Win32_System_Variant_VARENUM = 29
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_LPSTR: Windows_Win32_System_Variant_VARENUM = 30
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_LPWSTR: Windows_Win32_System_Variant_VARENUM = 31
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_RECORD: Windows_Win32_System_Variant_VARENUM = 36
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_INT_PTR: Windows_Win32_System_Variant_VARENUM = 37
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_UINT_PTR: Windows_Win32_System_Variant_VARENUM = 38
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_FILETIME: Windows_Win32_System_Variant_VARENUM = 64
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_BLOB: Windows_Win32_System_Variant_VARENUM = 65
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_STREAM: Windows_Win32_System_Variant_VARENUM = 66
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_STORAGE: Windows_Win32_System_Variant_VARENUM = 67
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_STREAMED_OBJECT: Windows_Win32_System_Variant_VARENUM = 68
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_STORED_OBJECT: Windows_Win32_System_Variant_VARENUM = 69
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_BLOB_OBJECT: Windows_Win32_System_Variant_VARENUM = 70
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_CF: Windows_Win32_System_Variant_VARENUM = 71
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_CLSID: Windows_Win32_System_Variant_VARENUM = 72
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_VERSIONED_STREAM: Windows_Win32_System_Variant_VARENUM = 73
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_BSTR_BLOB: Windows_Win32_System_Variant_VARENUM = 4095
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_VECTOR: Windows_Win32_System_Variant_VARENUM = 4096
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_ARRAY: Windows_Win32_System_Variant_VARENUM = 8192
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_BYREF: Windows_Win32_System_Variant_VARENUM = 16384
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_RESERVED: Windows_Win32_System_Variant_VARENUM = 32768
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_ILLEGAL: Windows_Win32_System_Variant_VARENUM = 65535
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_ILLEGALMASKED: Windows_Win32_System_Variant_VARENUM = 4095
+@When[Windows_Win32_System_Variant == "on"]
 public let Windows_Win32_System_Variant_VARENUM_VT_TYPEMASK: Windows_Win32_System_Variant_VARENUM = 4095
 
 // Windows.Win32.System.Variant.VARIANT (synthetic:Windows_Win32_System_Variant_VARIANT)
+@When[Windows_Win32_System_Variant == "on"]
 @C
 public struct Windows_Win32_System_Variant_VARIANT {
     public var Anonymous: Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union = Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union()
 }
 
 // Windows.Win32.System.Variant.VARIANT._Anonymous_e__Union (synthetic:Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union)
+@When[Windows_Win32_System_Variant == "on"]
 @C
 public struct Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0u64)
@@ -1664,6 +2150,7 @@ public struct Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union {
 }
 
 // Windows.Win32.System.Variant.VARIANT._Anonymous_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_Variant == "on"]
 @C
 public struct Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union__Anonymous_e__Struct {
     public var vt: UInt16 = 0u16
@@ -1674,6 +2161,7 @@ public struct Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union__Anonymou
 }
 
 // Windows.Win32.System.Variant.VARIANT._Anonymous_e__Union._Anonymous_e__Struct._Anonymous_e__Union (synthetic:Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union__Anonymous_e__Struct__Anonymous_e__Union)
+@When[Windows_Win32_System_Variant == "on"]
 @C
 public struct Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union__Anonymous_e__Struct__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
@@ -2628,6 +3116,7 @@ public struct Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union__Anonymou
 }
 
 // Windows.Win32.System.Variant.VARIANT._Anonymous_e__Union._Anonymous_e__Struct._Anonymous_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_Variant == "on"]
 @C
 public struct Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union__Anonymous_e__Struct__Anonymous_e__Union__Anonymous_e__Struct {
     public var pvRecord: CPointer<Unit> = CPointer<Unit>()
@@ -2635,6 +3124,7 @@ public struct Windows_Win32_System_Variant_VARIANT__Anonymous_e__Union__Anonymou
 }
 
 // Windows.Win32.System.WinRT.Xaml.ISwapChainPanelNative (synthetic:Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNative)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
 public class Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNative <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -2712,6 +3202,7 @@ public class Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNative <: Resource {
     }
 }
 
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
 extend Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNative <: windows_core.HandleWinrtType<Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNative> {
     public static func intoWinrtHandle(value: Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNative): CPointer<Unit> {
         value.asRaw()
@@ -2744,6 +3235,7 @@ extend Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNative <: windows_core.Han
 }
 
 // Windows.Win32.System.WinRT.Xaml.ISwapChainPanelNativeVtbl (synthetic:Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNativeVtbl)
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
 @C
 public struct Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNativeVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()

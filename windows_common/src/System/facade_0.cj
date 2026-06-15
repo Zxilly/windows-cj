@@ -2,52 +2,100 @@
 
 package windows_common.System
 
+@When[Windows_System == "on"]
 import windows_common.impl.{Windows_System_DispatcherQueue, Windows_System_DispatcherQueueHandler, Windows_System_DispatcherQueuePriority, Windows_System_DispatcherQueueShutdownStartingEventArgs, Windows_System_DispatcherQueueTimer, Windows_System_IDispatcherQueue, Windows_System_IDispatcherQueueVtbl, Windows_System_IDispatcherQueue2, Windows_System_IDispatcherQueue2Vtbl, Windows_System_IDispatcherQueueShutdownStartingEventArgs, Windows_System_IDispatcherQueueShutdownStartingEventArgsVtbl, Windows_System_IDispatcherQueueStatics, Windows_System_IDispatcherQueueStaticsVtbl, Windows_System_IDispatcherQueueTimer, Windows_System_IDispatcherQueueTimerVtbl, Windows_System_IUser, Windows_System_IUserVtbl, Windows_System_IUser2, Windows_System_IUser2Vtbl, Windows_System_IUserAuthenticationStatusChangeDeferral, Windows_System_IUserAuthenticationStatusChangeDeferralVtbl, Windows_System_IUserAuthenticationStatusChangingEventArgs, Windows_System_IUserAuthenticationStatusChangingEventArgsVtbl, Windows_System_IUserChangedEventArgs, Windows_System_IUserChangedEventArgsVtbl, Windows_System_IUserChangedEventArgs2, Windows_System_IUserChangedEventArgs2Vtbl, Windows_System_IUserStatics, Windows_System_IUserStaticsVtbl, Windows_System_IUserStatics2, Windows_System_IUserStatics2Vtbl, Windows_System_IUserWatcher, Windows_System_IUserWatcherVtbl, Windows_System_User, Windows_System_UserAgeConsentGroup, Windows_System_UserAgeConsentResult, Windows_System_UserAuthenticationStatus, Windows_System_UserAuthenticationStatusChangeDeferral, Windows_System_UserAuthenticationStatusChangingEventArgs, Windows_System_UserChangedEventArgs, Windows_System_UserPictureSize, Windows_System_UserType, Windows_System_UserWatcher, Windows_System_UserWatcherStatus, Windows_System_UserWatcherUpdateKind, Windows_System_VirtualKey, Windows_System_VirtualKeyModifiers}
 
+@When[Windows_System == "on"]
 public type DispatcherQueue = Windows_System_DispatcherQueue
+@When[Windows_System == "on"]
 public type DispatcherQueueHandler = Windows_System_DispatcherQueueHandler
+@When[Windows_System == "on"]
 public type DispatcherQueuePriority = Windows_System_DispatcherQueuePriority
+@When[Windows_System == "on"]
 public type DispatcherQueueShutdownStartingEventArgs = Windows_System_DispatcherQueueShutdownStartingEventArgs
+@When[Windows_System == "on"]
 public type DispatcherQueueTimer = Windows_System_DispatcherQueueTimer
+@When[Windows_System == "on"]
 public type IDispatcherQueue = Windows_System_IDispatcherQueue
+@When[Windows_System == "on"]
 public type IDispatcherQueueVtbl = Windows_System_IDispatcherQueueVtbl
+@When[Windows_System == "on"]
 public type IDispatcherQueue2 = Windows_System_IDispatcherQueue2
+@When[Windows_System == "on"]
 public type IDispatcherQueue2Vtbl = Windows_System_IDispatcherQueue2Vtbl
+@When[Windows_System == "on"]
 public type IDispatcherQueueShutdownStartingEventArgs = Windows_System_IDispatcherQueueShutdownStartingEventArgs
+@When[Windows_System == "on"]
 public type IDispatcherQueueShutdownStartingEventArgsVtbl = Windows_System_IDispatcherQueueShutdownStartingEventArgsVtbl
+@When[Windows_System == "on"]
 public type IDispatcherQueueStatics = Windows_System_IDispatcherQueueStatics
+@When[Windows_System == "on"]
 public type IDispatcherQueueStaticsVtbl = Windows_System_IDispatcherQueueStaticsVtbl
+@When[Windows_System == "on"]
 public type IDispatcherQueueTimer = Windows_System_IDispatcherQueueTimer
+@When[Windows_System == "on"]
 public type IDispatcherQueueTimerVtbl = Windows_System_IDispatcherQueueTimerVtbl
+@When[Windows_System == "on"]
 public type IUser = Windows_System_IUser
+@When[Windows_System == "on"]
 public type IUserVtbl = Windows_System_IUserVtbl
+@When[Windows_System == "on"]
 public type IUser2 = Windows_System_IUser2
+@When[Windows_System == "on"]
 public type IUser2Vtbl = Windows_System_IUser2Vtbl
+@When[Windows_System == "on"]
 public type IUserAuthenticationStatusChangeDeferral = Windows_System_IUserAuthenticationStatusChangeDeferral
+@When[Windows_System == "on"]
 public type IUserAuthenticationStatusChangeDeferralVtbl = Windows_System_IUserAuthenticationStatusChangeDeferralVtbl
+@When[Windows_System == "on"]
 public type IUserAuthenticationStatusChangingEventArgs = Windows_System_IUserAuthenticationStatusChangingEventArgs
+@When[Windows_System == "on"]
 public type IUserAuthenticationStatusChangingEventArgsVtbl = Windows_System_IUserAuthenticationStatusChangingEventArgsVtbl
+@When[Windows_System == "on"]
 public type IUserChangedEventArgs = Windows_System_IUserChangedEventArgs
+@When[Windows_System == "on"]
 public type IUserChangedEventArgsVtbl = Windows_System_IUserChangedEventArgsVtbl
+@When[Windows_System == "on"]
 public type IUserChangedEventArgs2 = Windows_System_IUserChangedEventArgs2
+@When[Windows_System == "on"]
 public type IUserChangedEventArgs2Vtbl = Windows_System_IUserChangedEventArgs2Vtbl
+@When[Windows_System == "on"]
 public type IUserStatics = Windows_System_IUserStatics
+@When[Windows_System == "on"]
 public type IUserStaticsVtbl = Windows_System_IUserStaticsVtbl
+@When[Windows_System == "on"]
 public type IUserStatics2 = Windows_System_IUserStatics2
+@When[Windows_System == "on"]
 public type IUserStatics2Vtbl = Windows_System_IUserStatics2Vtbl
+@When[Windows_System == "on"]
 public type IUserWatcher = Windows_System_IUserWatcher
+@When[Windows_System == "on"]
 public type IUserWatcherVtbl = Windows_System_IUserWatcherVtbl
+@When[Windows_System == "on"]
 public type User = Windows_System_User
+@When[Windows_System == "on"]
 public type UserAgeConsentGroup = Windows_System_UserAgeConsentGroup
+@When[Windows_System == "on"]
 public type UserAgeConsentResult = Windows_System_UserAgeConsentResult
+@When[Windows_System == "on"]
 public type UserAuthenticationStatus = Windows_System_UserAuthenticationStatus
+@When[Windows_System == "on"]
 public type UserAuthenticationStatusChangeDeferral = Windows_System_UserAuthenticationStatusChangeDeferral
+@When[Windows_System == "on"]
 public type UserAuthenticationStatusChangingEventArgs = Windows_System_UserAuthenticationStatusChangingEventArgs
+@When[Windows_System == "on"]
 public type UserChangedEventArgs = Windows_System_UserChangedEventArgs
+@When[Windows_System == "on"]
 public type UserPictureSize = Windows_System_UserPictureSize
+@When[Windows_System == "on"]
 public type UserType = Windows_System_UserType
+@When[Windows_System == "on"]
 public type UserWatcher = Windows_System_UserWatcher
+@When[Windows_System == "on"]
 public type UserWatcherStatus = Windows_System_UserWatcherStatus
+@When[Windows_System == "on"]
 public type UserWatcherUpdateKind = Windows_System_UserWatcherUpdateKind
+@When[Windows_System == "on"]
 public type VirtualKey = Windows_System_VirtualKey
+@When[Windows_System == "on"]
 public type VirtualKeyModifiers = Windows_System_VirtualKeyModifiers

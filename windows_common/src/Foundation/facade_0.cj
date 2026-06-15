@@ -2,64 +2,124 @@
 
 package windows_common.Foundation
 
+@When[Windows_Foundation == "on"]
 import windows_common.impl.{Windows_Foundation_AsyncActionCompletedHandler, Windows_Foundation_AsyncOperationCompletedHandler_1, Windows_Foundation_AsyncOperationProgressHandler_2, Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2, Windows_Foundation_AsyncStatus, Windows_Foundation_DateTime, Windows_Foundation_Deferral, Windows_Foundation_DeferralCompletedHandler, Windows_Foundation_EventHandler_1, Windows_Foundation_EventRegistrationToken, Windows_Foundation_FoundationContract, Windows_Foundation_HResult, Windows_Foundation_IAsyncAction, Windows_Foundation_IAsyncActionVtbl, Windows_Foundation_IAsyncInfo, Windows_Foundation_IAsyncInfoVtbl, Windows_Foundation_IAsyncOperationWithProgress_2, Windows_Foundation_IAsyncOperationWithProgress_2Vtbl, Windows_Foundation_IAsyncOperation_1, Windows_Foundation_IAsyncOperation_1Vtbl, Windows_Foundation_IClosable, Windows_Foundation_IClosableVtbl, Windows_Foundation_IDeferral, Windows_Foundation_IDeferralVtbl, Windows_Foundation_IDeferralFactory, Windows_Foundation_IDeferralFactoryVtbl, Windows_Foundation_IMemoryBuffer, Windows_Foundation_IMemoryBufferVtbl, Windows_Foundation_IMemoryBufferReference, Windows_Foundation_IMemoryBufferReferenceVtbl, Windows_Foundation_IPropertyValue, Windows_Foundation_IPropertyValueVtbl, Windows_Foundation_IReference_1, Windows_Foundation_IReference_1Vtbl, Windows_Foundation_IStringable, Windows_Foundation_IStringableVtbl, Windows_Foundation_IUriEscapeStatics, Windows_Foundation_IUriEscapeStaticsVtbl, Windows_Foundation_IUriRuntimeClass, Windows_Foundation_IUriRuntimeClassVtbl, Windows_Foundation_IUriRuntimeClassFactory, Windows_Foundation_IUriRuntimeClassFactoryVtbl, Windows_Foundation_IUriRuntimeClassWithAbsoluteCanonicalUri, Windows_Foundation_IUriRuntimeClassWithAbsoluteCanonicalUriVtbl, Windows_Foundation_IWwwFormUrlDecoderEntry, Windows_Foundation_IWwwFormUrlDecoderEntryVtbl, Windows_Foundation_IWwwFormUrlDecoderRuntimeClass, Windows_Foundation_IWwwFormUrlDecoderRuntimeClassVtbl, Windows_Foundation_IWwwFormUrlDecoderRuntimeClassFactory, Windows_Foundation_IWwwFormUrlDecoderRuntimeClassFactoryVtbl, Windows_Foundation_Point, Windows_Foundation_PropertyType, Windows_Foundation_Rect, Windows_Foundation_Size, Windows_Foundation_TimeSpan, Windows_Foundation_TypedEventHandler_2, Windows_Foundation_UniversalApiContract, Windows_Foundation_Uri, Windows_Foundation_WwwFormUrlDecoder}
 
+@When[Windows_Foundation == "on"]
 public type AsyncActionCompletedHandler = Windows_Foundation_AsyncActionCompletedHandler
+@When[Windows_Foundation == "on"]
 public type AsyncOperationCompletedHandler<TResult> = Windows_Foundation_AsyncOperationCompletedHandler_1<TResult>
+@When[Windows_Foundation == "on"]
 public type AsyncOperationProgressHandler<TResult, TProgress> = Windows_Foundation_AsyncOperationProgressHandler_2<TResult, TProgress>
+@When[Windows_Foundation == "on"]
 public type AsyncOperationWithProgressCompletedHandler<TResult, TProgress> = Windows_Foundation_AsyncOperationWithProgressCompletedHandler_2<TResult, TProgress>
+@When[Windows_Foundation == "on"]
 public type AsyncStatus = Windows_Foundation_AsyncStatus
+@When[Windows_Foundation == "on"]
 public type DateTime = Windows_Foundation_DateTime
+@When[Windows_Foundation == "on"]
 public type Deferral = Windows_Foundation_Deferral
+@When[Windows_Foundation == "on"]
 public type DeferralCompletedHandler = Windows_Foundation_DeferralCompletedHandler
+@When[Windows_Foundation == "on"]
 public type EventHandler<T> = Windows_Foundation_EventHandler_1<T>
+@When[Windows_Foundation == "on"]
 public type EventRegistrationToken = Windows_Foundation_EventRegistrationToken
+@When[Windows_Foundation == "on"]
 public type FoundationContract = Windows_Foundation_FoundationContract
+@When[Windows_Foundation == "on"]
 public type HResult = Windows_Foundation_HResult
+@When[Windows_Foundation == "on"]
 public type IAsyncAction = Windows_Foundation_IAsyncAction
+@When[Windows_Foundation == "on"]
 public type IAsyncActionVtbl = Windows_Foundation_IAsyncActionVtbl
+@When[Windows_Foundation == "on"]
 public type IAsyncInfo = Windows_Foundation_IAsyncInfo
+@When[Windows_Foundation == "on"]
 public type IAsyncInfoVtbl = Windows_Foundation_IAsyncInfoVtbl
+@When[Windows_Foundation == "on"]
 public type IAsyncOperationWithProgress<TResult, TProgress> = Windows_Foundation_IAsyncOperationWithProgress_2<TResult, TProgress>
+@When[Windows_Foundation == "on"]
 public type IAsyncOperationWithProgressVtbl = Windows_Foundation_IAsyncOperationWithProgress_2Vtbl
+@When[Windows_Foundation == "on"]
 public type IAsyncOperation<TResult> = Windows_Foundation_IAsyncOperation_1<TResult>
+@When[Windows_Foundation == "on"]
 public type IAsyncOperationVtbl = Windows_Foundation_IAsyncOperation_1Vtbl
+@When[Windows_Foundation == "on"]
 public type IClosable = Windows_Foundation_IClosable
+@When[Windows_Foundation == "on"]
 public type IClosableVtbl = Windows_Foundation_IClosableVtbl
+@When[Windows_Foundation == "on"]
 public type IDeferral = Windows_Foundation_IDeferral
+@When[Windows_Foundation == "on"]
 public type IDeferralVtbl = Windows_Foundation_IDeferralVtbl
+@When[Windows_Foundation == "on"]
 public type IDeferralFactory = Windows_Foundation_IDeferralFactory
+@When[Windows_Foundation == "on"]
 public type IDeferralFactoryVtbl = Windows_Foundation_IDeferralFactoryVtbl
+@When[Windows_Foundation == "on"]
 public type IMemoryBuffer = Windows_Foundation_IMemoryBuffer
+@When[Windows_Foundation == "on"]
 public type IMemoryBufferVtbl = Windows_Foundation_IMemoryBufferVtbl
+@When[Windows_Foundation == "on"]
 public type IMemoryBufferReference = Windows_Foundation_IMemoryBufferReference
+@When[Windows_Foundation == "on"]
 public type IMemoryBufferReferenceVtbl = Windows_Foundation_IMemoryBufferReferenceVtbl
+@When[Windows_Foundation == "on"]
 public type IPropertyValue = Windows_Foundation_IPropertyValue
+@When[Windows_Foundation == "on"]
 public type IPropertyValueVtbl = Windows_Foundation_IPropertyValueVtbl
+@When[Windows_Foundation == "on"]
 public type IReference<T> = Windows_Foundation_IReference_1<T>
+@When[Windows_Foundation == "on"]
 public type IReferenceVtbl = Windows_Foundation_IReference_1Vtbl
+@When[Windows_Foundation == "on"]
 public type IStringable = Windows_Foundation_IStringable
+@When[Windows_Foundation == "on"]
 public type IStringableVtbl = Windows_Foundation_IStringableVtbl
+@When[Windows_Foundation == "on"]
 public type IUriEscapeStatics = Windows_Foundation_IUriEscapeStatics
+@When[Windows_Foundation == "on"]
 public type IUriEscapeStaticsVtbl = Windows_Foundation_IUriEscapeStaticsVtbl
+@When[Windows_Foundation == "on"]
 public type IUriRuntimeClass = Windows_Foundation_IUriRuntimeClass
+@When[Windows_Foundation == "on"]
 public type IUriRuntimeClassVtbl = Windows_Foundation_IUriRuntimeClassVtbl
+@When[Windows_Foundation == "on"]
 public type IUriRuntimeClassFactory = Windows_Foundation_IUriRuntimeClassFactory
+@When[Windows_Foundation == "on"]
 public type IUriRuntimeClassFactoryVtbl = Windows_Foundation_IUriRuntimeClassFactoryVtbl
+@When[Windows_Foundation == "on"]
 public type IUriRuntimeClassWithAbsoluteCanonicalUri = Windows_Foundation_IUriRuntimeClassWithAbsoluteCanonicalUri
+@When[Windows_Foundation == "on"]
 public type IUriRuntimeClassWithAbsoluteCanonicalUriVtbl = Windows_Foundation_IUriRuntimeClassWithAbsoluteCanonicalUriVtbl
+@When[Windows_Foundation == "on"]
 public type IWwwFormUrlDecoderEntry = Windows_Foundation_IWwwFormUrlDecoderEntry
+@When[Windows_Foundation == "on"]
 public type IWwwFormUrlDecoderEntryVtbl = Windows_Foundation_IWwwFormUrlDecoderEntryVtbl
+@When[Windows_Foundation == "on"]
 public type IWwwFormUrlDecoderRuntimeClass = Windows_Foundation_IWwwFormUrlDecoderRuntimeClass
+@When[Windows_Foundation == "on"]
 public type IWwwFormUrlDecoderRuntimeClassVtbl = Windows_Foundation_IWwwFormUrlDecoderRuntimeClassVtbl
+@When[Windows_Foundation == "on"]
 public type IWwwFormUrlDecoderRuntimeClassFactory = Windows_Foundation_IWwwFormUrlDecoderRuntimeClassFactory
+@When[Windows_Foundation == "on"]
 public type IWwwFormUrlDecoderRuntimeClassFactoryVtbl = Windows_Foundation_IWwwFormUrlDecoderRuntimeClassFactoryVtbl
+@When[Windows_Foundation == "on"]
 public type Point = Windows_Foundation_Point
+@When[Windows_Foundation == "on"]
 public type PropertyType = Windows_Foundation_PropertyType
+@When[Windows_Foundation == "on"]
 public type Rect = Windows_Foundation_Rect
+@When[Windows_Foundation == "on"]
 public type Size = Windows_Foundation_Size
+@When[Windows_Foundation == "on"]
 public type TimeSpan = Windows_Foundation_TimeSpan
+@When[Windows_Foundation == "on"]
 public type TypedEventHandler<TSender, TResult> = Windows_Foundation_TypedEventHandler_2<TSender, TResult>
+@When[Windows_Foundation == "on"]
 public type UniversalApiContract = Windows_Foundation_UniversalApiContract
+@When[Windows_Foundation == "on"]
 public type Uri = Windows_Foundation_Uri
+@When[Windows_Foundation == "on"]
 public type WwwFormUrlDecoder = Windows_Foundation_WwwFormUrlDecoder

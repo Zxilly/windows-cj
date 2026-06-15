@@ -2,25 +2,46 @@
 
 package windows_common.Storage.Streams
 
+@When[Windows_Storage_Streams == "on"]
 import windows_common.impl.{Windows_Storage_Streams_IBuffer, Windows_Storage_Streams_IBufferVtbl, Windows_Storage_Streams_IContentTypeProvider, Windows_Storage_Streams_IContentTypeProviderVtbl, Windows_Storage_Streams_IInputStream, Windows_Storage_Streams_IInputStreamVtbl, Windows_Storage_Streams_IInputStreamReference, Windows_Storage_Streams_IInputStreamReferenceVtbl, Windows_Storage_Streams_IOutputStream, Windows_Storage_Streams_IOutputStreamVtbl, Windows_Storage_Streams_IRandomAccessStream, Windows_Storage_Streams_IRandomAccessStreamVtbl, Windows_Storage_Streams_IRandomAccessStreamReference, Windows_Storage_Streams_IRandomAccessStreamReferenceVtbl, Windows_Storage_Streams_IRandomAccessStreamReferenceStatics, Windows_Storage_Streams_IRandomAccessStreamReferenceStaticsVtbl, Windows_Storage_Streams_IRandomAccessStreamWithContentType, Windows_Storage_Streams_IRandomAccessStreamWithContentTypeVtbl, Windows_Storage_Streams_InputStreamOptions, Windows_Storage_Streams_RandomAccessStreamReference}
 
+@When[Windows_Storage_Streams == "on"]
 public type IBuffer = Windows_Storage_Streams_IBuffer
+@When[Windows_Storage_Streams == "on"]
 public type IBufferVtbl = Windows_Storage_Streams_IBufferVtbl
+@When[Windows_Storage_Streams == "on"]
 public type IContentTypeProvider = Windows_Storage_Streams_IContentTypeProvider
+@When[Windows_Storage_Streams == "on"]
 public type IContentTypeProviderVtbl = Windows_Storage_Streams_IContentTypeProviderVtbl
+@When[Windows_Storage_Streams == "on"]
 public type IInputStream = Windows_Storage_Streams_IInputStream
+@When[Windows_Storage_Streams == "on"]
 public type IInputStreamVtbl = Windows_Storage_Streams_IInputStreamVtbl
+@When[Windows_Storage_Streams == "on"]
 public type IInputStreamReference = Windows_Storage_Streams_IInputStreamReference
+@When[Windows_Storage_Streams == "on"]
 public type IInputStreamReferenceVtbl = Windows_Storage_Streams_IInputStreamReferenceVtbl
+@When[Windows_Storage_Streams == "on"]
 public type IOutputStream = Windows_Storage_Streams_IOutputStream
+@When[Windows_Storage_Streams == "on"]
 public type IOutputStreamVtbl = Windows_Storage_Streams_IOutputStreamVtbl
+@When[Windows_Storage_Streams == "on"]
 public type IRandomAccessStream = Windows_Storage_Streams_IRandomAccessStream
+@When[Windows_Storage_Streams == "on"]
 public type IRandomAccessStreamVtbl = Windows_Storage_Streams_IRandomAccessStreamVtbl
+@When[Windows_Storage_Streams == "on"]
 public type IRandomAccessStreamReference = Windows_Storage_Streams_IRandomAccessStreamReference
+@When[Windows_Storage_Streams == "on"]
 public type IRandomAccessStreamReferenceVtbl = Windows_Storage_Streams_IRandomAccessStreamReferenceVtbl
+@When[Windows_Storage_Streams == "on"]
 public type IRandomAccessStreamReferenceStatics = Windows_Storage_Streams_IRandomAccessStreamReferenceStatics
+@When[Windows_Storage_Streams == "on"]
 public type IRandomAccessStreamReferenceStaticsVtbl = Windows_Storage_Streams_IRandomAccessStreamReferenceStaticsVtbl
+@When[Windows_Storage_Streams == "on"]
 public type IRandomAccessStreamWithContentType = Windows_Storage_Streams_IRandomAccessStreamWithContentType
+@When[Windows_Storage_Streams == "on"]
 public type IRandomAccessStreamWithContentTypeVtbl = Windows_Storage_Streams_IRandomAccessStreamWithContentTypeVtbl
+@When[Windows_Storage_Streams == "on"]
 public type InputStreamOptions = Windows_Storage_Streams_InputStreamOptions
+@When[Windows_Storage_Streams == "on"]
 public type RandomAccessStreamReference = Windows_Storage_Streams_RandomAccessStreamReference

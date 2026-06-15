@@ -2,19 +2,34 @@
 
 package windows_common.Graphics.Imaging
 
+@When[Windows_Graphics_Imaging == "on"]
 import windows_common.impl.{Windows_Graphics_Imaging_BitmapAlphaMode, Windows_Graphics_Imaging_BitmapBuffer, Windows_Graphics_Imaging_BitmapBufferAccessMode, Windows_Graphics_Imaging_BitmapPixelFormat, Windows_Graphics_Imaging_BitmapPlaneDescription, Windows_Graphics_Imaging_IBitmapBuffer, Windows_Graphics_Imaging_IBitmapBufferVtbl, Windows_Graphics_Imaging_ISoftwareBitmap, Windows_Graphics_Imaging_ISoftwareBitmapVtbl, Windows_Graphics_Imaging_ISoftwareBitmapFactory, Windows_Graphics_Imaging_ISoftwareBitmapFactoryVtbl, Windows_Graphics_Imaging_ISoftwareBitmapStatics, Windows_Graphics_Imaging_ISoftwareBitmapStaticsVtbl, Windows_Graphics_Imaging_SoftwareBitmap}
 
+@When[Windows_Graphics_Imaging == "on"]
 public type BitmapAlphaMode = Windows_Graphics_Imaging_BitmapAlphaMode
+@When[Windows_Graphics_Imaging == "on"]
 public type BitmapBuffer = Windows_Graphics_Imaging_BitmapBuffer
+@When[Windows_Graphics_Imaging == "on"]
 public type BitmapBufferAccessMode = Windows_Graphics_Imaging_BitmapBufferAccessMode
+@When[Windows_Graphics_Imaging == "on"]
 public type BitmapPixelFormat = Windows_Graphics_Imaging_BitmapPixelFormat
+@When[Windows_Graphics_Imaging == "on"]
 public type BitmapPlaneDescription = Windows_Graphics_Imaging_BitmapPlaneDescription
+@When[Windows_Graphics_Imaging == "on"]
 public type IBitmapBuffer = Windows_Graphics_Imaging_IBitmapBuffer
+@When[Windows_Graphics_Imaging == "on"]
 public type IBitmapBufferVtbl = Windows_Graphics_Imaging_IBitmapBufferVtbl
+@When[Windows_Graphics_Imaging == "on"]
 public type ISoftwareBitmap = Windows_Graphics_Imaging_ISoftwareBitmap
+@When[Windows_Graphics_Imaging == "on"]
 public type ISoftwareBitmapVtbl = Windows_Graphics_Imaging_ISoftwareBitmapVtbl
+@When[Windows_Graphics_Imaging == "on"]
 public type ISoftwareBitmapFactory = Windows_Graphics_Imaging_ISoftwareBitmapFactory
+@When[Windows_Graphics_Imaging == "on"]
 public type ISoftwareBitmapFactoryVtbl = Windows_Graphics_Imaging_ISoftwareBitmapFactoryVtbl
+@When[Windows_Graphics_Imaging == "on"]
 public type ISoftwareBitmapStatics = Windows_Graphics_Imaging_ISoftwareBitmapStatics
+@When[Windows_Graphics_Imaging == "on"]
 public type ISoftwareBitmapStaticsVtbl = Windows_Graphics_Imaging_ISoftwareBitmapStaticsVtbl
+@When[Windows_Graphics_Imaging == "on"]
 public type SoftwareBitmap = Windows_Graphics_Imaging_SoftwareBitmap

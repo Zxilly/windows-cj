@@ -2,11 +2,18 @@
 
 package windows_common.Microsoft.UI
 
+@When[Microsoft_UI == "on"]
 import windows_common.impl.{Microsoft_UI_ClosableNotifierHandler, Microsoft_UI_DisplayId, Microsoft_UI_IClosableNotifier, Microsoft_UI_IClosableNotifierVtbl, Microsoft_UI_IconId, Microsoft_UI_WindowId}
 
+@When[Microsoft_UI == "on"]
 public type ClosableNotifierHandler = Microsoft_UI_ClosableNotifierHandler
+@When[Microsoft_UI == "on"]
 public type DisplayId = Microsoft_UI_DisplayId
+@When[Microsoft_UI == "on"]
 public type IClosableNotifier = Microsoft_UI_IClosableNotifier
+@When[Microsoft_UI == "on"]
 public type IClosableNotifierVtbl = Microsoft_UI_IClosableNotifierVtbl
+@When[Microsoft_UI == "on"]
 public type IconId = Microsoft_UI_IconId
+@When[Microsoft_UI == "on"]
 public type WindowId = Microsoft_UI_WindowId

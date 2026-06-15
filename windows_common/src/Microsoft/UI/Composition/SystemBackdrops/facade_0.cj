@@ -2,9 +2,14 @@
 
 package windows_common.Microsoft.UI.Composition.SystemBackdrops
 
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
 import windows_common.impl.{Microsoft_UI_Composition_SystemBackdrops_ISystemBackdropConfiguration, Microsoft_UI_Composition_SystemBackdrops_ISystemBackdropConfigurationVtbl, Microsoft_UI_Composition_SystemBackdrops_SystemBackdropConfiguration, Microsoft_UI_Composition_SystemBackdrops_SystemBackdropTheme}
 
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
 public type ISystemBackdropConfiguration = Microsoft_UI_Composition_SystemBackdrops_ISystemBackdropConfiguration
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
 public type ISystemBackdropConfigurationVtbl = Microsoft_UI_Composition_SystemBackdrops_ISystemBackdropConfigurationVtbl
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
 public type SystemBackdropConfiguration = Microsoft_UI_Composition_SystemBackdrops_SystemBackdropConfiguration
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
 public type SystemBackdropTheme = Microsoft_UI_Composition_SystemBackdrops_SystemBackdropTheme

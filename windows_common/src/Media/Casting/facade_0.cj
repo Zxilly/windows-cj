@@ -2,8 +2,12 @@
 
 package windows_common.Media.Casting
 
+@When[Windows_Media_Casting == "on"]
 import windows_common.impl.{Windows_Media_Casting_CastingSource, Windows_Media_Casting_ICastingSource, Windows_Media_Casting_ICastingSourceVtbl}
 
+@When[Windows_Media_Casting == "on"]
 public type CastingSource = Windows_Media_Casting_CastingSource
+@When[Windows_Media_Casting == "on"]
 public type ICastingSource = Windows_Media_Casting_ICastingSource
+@When[Windows_Media_Casting == "on"]
 public type ICastingSourceVtbl = Windows_Media_Casting_ICastingSourceVtbl

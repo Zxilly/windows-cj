@@ -2,40 +2,76 @@
 
 package windows_common.Win32.System.Kernel
 
+@When[Windows_Win32_System_Kernel == "on"]
 import windows_common.impl.{Windows_Win32_System_Kernel_COMPARTMENT_ID, Windows_Win32_System_Kernel_CSTRING, Windows_Win32_System_Kernel_EVENT_TYPE, Windows_Win32_System_Kernel_EXCEPTION_DISPOSITION, Windows_Win32_System_Kernel_EXCEPTION_REGISTRATION_RECORD, Windows_Win32_System_Kernel_EXCEPTION_ROUTINE, Windows_Win32_System_Kernel_FLOATING_SAVE_AREA, Windows_Win32_System_Kernel_LIST_ENTRY, Windows_Win32_System_Kernel_LIST_ENTRY32, Windows_Win32_System_Kernel_LIST_ENTRY64, Windows_Win32_System_Kernel_NT_PRODUCT_TYPE, Windows_Win32_System_Kernel_NT_TIB, Windows_Win32_System_Kernel_NT_TIB__Anonymous_e__Union, Windows_Win32_System_Kernel_OBJECTID, Windows_Win32_System_Kernel_PROCESSOR_NUMBER, Windows_Win32_System_Kernel_QUAD, Windows_Win32_System_Kernel_QUAD__Anonymous_e__Union, Windows_Win32_System_Kernel_RTL_BALANCED_NODE, Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous1_e__Union, Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous1_e__Union__Anonymous_e__Struct, Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous2_e__Union, Windows_Win32_System_Kernel_SINGLE_LIST_ENTRY, Windows_Win32_System_Kernel_SINGLE_LIST_ENTRY32, Windows_Win32_System_Kernel_SLIST_ENTRY, Windows_Win32_System_Kernel_SLIST_HEADER, Windows_Win32_System_Kernel_SLIST_HEADER__Anonymous_e__Struct, Windows_Win32_System_Kernel_SLIST_HEADER__HeaderArm64_e__Struct, Windows_Win32_System_Kernel_SLIST_HEADER__HeaderX64_e__Struct, Windows_Win32_System_Kernel_STRING, Windows_Win32_System_Kernel_STRING32, Windows_Win32_System_Kernel_STRING64, Windows_Win32_System_Kernel_SUITE_TYPE, Windows_Win32_System_Kernel_TIMER_TYPE, Windows_Win32_System_Kernel_WAIT_TYPE, Windows_Win32_System_Kernel_WNF_STATE_NAME}
 
+@When[Windows_Win32_System_Kernel == "on"]
 public type COMPARTMENT_ID = Windows_Win32_System_Kernel_COMPARTMENT_ID
+@When[Windows_Win32_System_Kernel == "on"]
 public type CSTRING = Windows_Win32_System_Kernel_CSTRING
+@When[Windows_Win32_System_Kernel == "on"]
 public type EVENT_TYPE = Windows_Win32_System_Kernel_EVENT_TYPE
+@When[Windows_Win32_System_Kernel == "on"]
 public type EXCEPTION_DISPOSITION = Windows_Win32_System_Kernel_EXCEPTION_DISPOSITION
+@When[Windows_Win32_System_Kernel == "on"]
 public type EXCEPTION_REGISTRATION_RECORD = Windows_Win32_System_Kernel_EXCEPTION_REGISTRATION_RECORD
+@When[Windows_Win32_System_Kernel == "on"]
 public type EXCEPTION_ROUTINE = Windows_Win32_System_Kernel_EXCEPTION_ROUTINE
+@When[Windows_Win32_System_Kernel == "on"]
 public type FLOATING_SAVE_AREA = Windows_Win32_System_Kernel_FLOATING_SAVE_AREA
+@When[Windows_Win32_System_Kernel == "on"]
 public type LIST_ENTRY = Windows_Win32_System_Kernel_LIST_ENTRY
+@When[Windows_Win32_System_Kernel == "on"]
 public type LIST_ENTRY32 = Windows_Win32_System_Kernel_LIST_ENTRY32
+@When[Windows_Win32_System_Kernel == "on"]
 public type LIST_ENTRY64 = Windows_Win32_System_Kernel_LIST_ENTRY64
+@When[Windows_Win32_System_Kernel == "on"]
 public type NT_PRODUCT_TYPE = Windows_Win32_System_Kernel_NT_PRODUCT_TYPE
+@When[Windows_Win32_System_Kernel == "on"]
 public type NT_TIB = Windows_Win32_System_Kernel_NT_TIB
+@When[Windows_Win32_System_Kernel == "on"]
 public type NT_TIB__Anonymous_e__Union = Windows_Win32_System_Kernel_NT_TIB__Anonymous_e__Union
+@When[Windows_Win32_System_Kernel == "on"]
 public type OBJECTID = Windows_Win32_System_Kernel_OBJECTID
+@When[Windows_Win32_System_Kernel == "on"]
 public type PROCESSOR_NUMBER = Windows_Win32_System_Kernel_PROCESSOR_NUMBER
+@When[Windows_Win32_System_Kernel == "on"]
 public type QUAD = Windows_Win32_System_Kernel_QUAD
+@When[Windows_Win32_System_Kernel == "on"]
 public type QUAD__Anonymous_e__Union = Windows_Win32_System_Kernel_QUAD__Anonymous_e__Union
+@When[Windows_Win32_System_Kernel == "on"]
 public type RTL_BALANCED_NODE = Windows_Win32_System_Kernel_RTL_BALANCED_NODE
+@When[Windows_Win32_System_Kernel == "on"]
 public type RTL_BALANCED_NODE__Anonymous1_e__Union = Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous1_e__Union
+@When[Windows_Win32_System_Kernel == "on"]
 public type RTL_BALANCED_NODE__Anonymous1_e__Union__Anonymous_e__Struct = Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous1_e__Union__Anonymous_e__Struct
+@When[Windows_Win32_System_Kernel == "on"]
 public type RTL_BALANCED_NODE__Anonymous2_e__Union = Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous2_e__Union
+@When[Windows_Win32_System_Kernel == "on"]
 public type SINGLE_LIST_ENTRY = Windows_Win32_System_Kernel_SINGLE_LIST_ENTRY
+@When[Windows_Win32_System_Kernel == "on"]
 public type SINGLE_LIST_ENTRY32 = Windows_Win32_System_Kernel_SINGLE_LIST_ENTRY32
+@When[Windows_Win32_System_Kernel == "on"]
 public type SLIST_ENTRY = Windows_Win32_System_Kernel_SLIST_ENTRY
+@When[Windows_Win32_System_Kernel == "on"]
 public type SLIST_HEADER = Windows_Win32_System_Kernel_SLIST_HEADER
+@When[Windows_Win32_System_Kernel == "on"]
 public type SLIST_HEADER__Anonymous_e__Struct = Windows_Win32_System_Kernel_SLIST_HEADER__Anonymous_e__Struct
+@When[Windows_Win32_System_Kernel == "on"]
 public type SLIST_HEADER__HeaderArm64_e__Struct = Windows_Win32_System_Kernel_SLIST_HEADER__HeaderArm64_e__Struct
+@When[Windows_Win32_System_Kernel == "on"]
 public type SLIST_HEADER__HeaderX64_e__Struct = Windows_Win32_System_Kernel_SLIST_HEADER__HeaderX64_e__Struct
+@When[Windows_Win32_System_Kernel == "on"]
 public type STRING = Windows_Win32_System_Kernel_STRING
+@When[Windows_Win32_System_Kernel == "on"]
 public type STRING32 = Windows_Win32_System_Kernel_STRING32
+@When[Windows_Win32_System_Kernel == "on"]
 public type STRING64 = Windows_Win32_System_Kernel_STRING64
+@When[Windows_Win32_System_Kernel == "on"]
 public type SUITE_TYPE = Windows_Win32_System_Kernel_SUITE_TYPE
+@When[Windows_Win32_System_Kernel == "on"]
 public type TIMER_TYPE = Windows_Win32_System_Kernel_TIMER_TYPE
+@When[Windows_Win32_System_Kernel == "on"]
 public type WAIT_TYPE = Windows_Win32_System_Kernel_WAIT_TYPE
+@When[Windows_Win32_System_Kernel == "on"]
 public type WNF_STATE_NAME = Windows_Win32_System_Kernel_WNF_STATE_NAME

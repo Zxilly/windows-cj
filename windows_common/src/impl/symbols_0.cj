@@ -8,12 +8,14 @@ import windows_interface.IInspectable
 import windows_interface.macros.Interface
 
 // Microsoft.Foundation.WindowsAppSDKContract (synthetic:Microsoft_Foundation_WindowsAppSDKContract)
+@When[Microsoft_Foundation == "on"]
 @C
 public struct Microsoft_Foundation_WindowsAppSDKContract {
     public var reserved: Int32 = 0
 }
 
 // Microsoft.UI.ClosableNotifierHandler (synthetic:Microsoft_UI_ClosableNotifierHandler)
+@When[Microsoft_UI == "on"]
 @C
 public struct Microsoft_UI_ClosableNotifierHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -21,6 +23,7 @@ public struct Microsoft_UI_ClosableNotifierHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI == "on"]
 public open class Microsoft_UI_ClosableNotifierHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -88,18 +91,22 @@ public open class Microsoft_UI_ClosableNotifierHandler <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI == "on"]
 extend Microsoft_UI_ClosableNotifierHandler <: windows_core.Interface<Microsoft_UI_ClosableNotifierHandler> {}
 
+@When[Microsoft_UI == "on"]
 private class OwnedMicrosoft_UI_ClosableNotifierHandler <: Microsoft_UI_ClosableNotifierHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI == "on"]
 public interface Microsoft_UI_ClosableNotifierHandlerInvokerErased {
     func __winrtThunk_Invoke(): Int32
 }
 
+@When[Microsoft_UI == "on"]
 public interface Microsoft_UI_ClosableNotifierHandlerInvoker <: Microsoft_UI_ClosableNotifierHandlerInvokerErased {
     func Invoke(): Unit {
         ()
@@ -117,6 +124,7 @@ public interface Microsoft_UI_ClosableNotifierHandlerInvoker <: Microsoft_UI_Clo
     }
 }
 
+@When[Microsoft_UI == "on"]
 private class Microsoft_UI_ClosableNotifierHandlerBox <: Microsoft_UI_ClosableNotifierHandlerInvoker & Resource {
     public let invoke_: () -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_ClosableNotifierHandlerVtbl>
@@ -154,6 +162,7 @@ private class Microsoft_UI_ClosableNotifierHandlerBox <: Microsoft_UI_ClosableNo
     }
 }
 
+@When[Microsoft_UI == "on"]
 func buildMicrosoft_UI_ClosableNotifierHandlerBoxVtbl(): Microsoft_UI_ClosableNotifierHandlerVtbl {
     var vtbl = Microsoft_UI_ClosableNotifierHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -170,6 +179,7 @@ func buildMicrosoft_UI_ClosableNotifierHandlerBoxVtbl(): Microsoft_UI_ClosableNo
 
 
 // Microsoft.UI.Composition.AmbientLight (synthetic:Microsoft_UI_Composition_AmbientLight)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_AmbientLight <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -324,6 +334,7 @@ public class Microsoft_UI_Composition_AmbientLight <: windows_interface.Interfac
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_AmbientLight <: windows_core.HandleWinrtType<Microsoft_UI_Composition_AmbientLight> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_AmbientLight): CPointer<Unit> {
         value.asRaw()
@@ -342,6 +353,7 @@ extend Microsoft_UI_Composition_AmbientLight <: windows_core.HandleWinrtType<Mic
 }
 
 // Microsoft.UI.Composition.AnimationController (synthetic:Microsoft_UI_Composition_AnimationController)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_AnimationController <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -542,6 +554,7 @@ public class Microsoft_UI_Composition_AnimationController <: windows_interface.I
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_AnimationController <: windows_core.HandleWinrtType<Microsoft_UI_Composition_AnimationController> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_AnimationController): CPointer<Unit> {
         value.asRaw()
@@ -560,6 +573,7 @@ extend Microsoft_UI_Composition_AnimationController <: windows_core.HandleWinrtT
 }
 
 // Microsoft.UI.Composition.AnimationControllerProgressBehavior (synthetic:Microsoft_UI_Composition_AnimationControllerProgressBehavior)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_AnimationControllerProgressBehavior {
     public let value: Int32
     public init() {
@@ -569,10 +583,13 @@ public struct Microsoft_UI_Composition_AnimationControllerProgressBehavior {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationControllerProgressBehavior_Default = Microsoft_UI_Composition_AnimationControllerProgressBehavior(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationControllerProgressBehavior_IncludesDelayTime = Microsoft_UI_Composition_AnimationControllerProgressBehavior(1)
 
 // Microsoft.UI.Composition.AnimationDelayBehavior (synthetic:Microsoft_UI_Composition_AnimationDelayBehavior)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_AnimationDelayBehavior {
     public let value: Int32
     public init() {
@@ -582,10 +599,13 @@ public struct Microsoft_UI_Composition_AnimationDelayBehavior {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationDelayBehavior_SetInitialValueAfterDelay = Microsoft_UI_Composition_AnimationDelayBehavior(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationDelayBehavior_SetInitialValueBeforeDelay = Microsoft_UI_Composition_AnimationDelayBehavior(1)
 
 // Microsoft.UI.Composition.AnimationDirection (synthetic:Microsoft_UI_Composition_AnimationDirection)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_AnimationDirection {
     public let value: Int32
     public init() {
@@ -595,12 +615,17 @@ public struct Microsoft_UI_Composition_AnimationDirection {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationDirection_Normal = Microsoft_UI_Composition_AnimationDirection(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationDirection_Reverse = Microsoft_UI_Composition_AnimationDirection(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationDirection_Alternate = Microsoft_UI_Composition_AnimationDirection(2)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationDirection_AlternateReverse = Microsoft_UI_Composition_AnimationDirection(3)
 
 // Microsoft.UI.Composition.AnimationIterationBehavior (synthetic:Microsoft_UI_Composition_AnimationIterationBehavior)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_AnimationIterationBehavior {
     public let value: Int32
     public init() {
@@ -610,10 +635,13 @@ public struct Microsoft_UI_Composition_AnimationIterationBehavior {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationIterationBehavior_Count = Microsoft_UI_Composition_AnimationIterationBehavior(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationIterationBehavior_Forever = Microsoft_UI_Composition_AnimationIterationBehavior(1)
 
 // Microsoft.UI.Composition.AnimationPropertyAccessMode (synthetic:Microsoft_UI_Composition_AnimationPropertyAccessMode)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_AnimationPropertyAccessMode {
     public let value: Int32
     public init() {
@@ -623,12 +651,17 @@ public struct Microsoft_UI_Composition_AnimationPropertyAccessMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationPropertyAccessMode_None = Microsoft_UI_Composition_AnimationPropertyAccessMode(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationPropertyAccessMode_ReadOnly = Microsoft_UI_Composition_AnimationPropertyAccessMode(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationPropertyAccessMode_WriteOnly = Microsoft_UI_Composition_AnimationPropertyAccessMode(2)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationPropertyAccessMode_ReadWrite = Microsoft_UI_Composition_AnimationPropertyAccessMode(3)
 
 // Microsoft.UI.Composition.AnimationPropertyInfo (synthetic:Microsoft_UI_Composition_AnimationPropertyInfo)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_AnimationPropertyInfo <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -762,6 +795,7 @@ public class Microsoft_UI_Composition_AnimationPropertyInfo <: windows_interface
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_AnimationPropertyInfo <: windows_core.HandleWinrtType<Microsoft_UI_Composition_AnimationPropertyInfo> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_AnimationPropertyInfo): CPointer<Unit> {
         value.asRaw()
@@ -780,6 +814,7 @@ extend Microsoft_UI_Composition_AnimationPropertyInfo <: windows_core.HandleWinr
 }
 
 // Microsoft.UI.Composition.AnimationStopBehavior (synthetic:Microsoft_UI_Composition_AnimationStopBehavior)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_AnimationStopBehavior {
     public let value: Int32
     public init() {
@@ -789,11 +824,15 @@ public struct Microsoft_UI_Composition_AnimationStopBehavior {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationStopBehavior_LeaveCurrentValue = Microsoft_UI_Composition_AnimationStopBehavior(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationStopBehavior_SetToInitialValue = Microsoft_UI_Composition_AnimationStopBehavior(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_AnimationStopBehavior_SetToFinalValue = Microsoft_UI_Composition_AnimationStopBehavior(2)
 
 // Microsoft.UI.Composition.BackEasingFunction (synthetic:Microsoft_UI_Composition_BackEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_BackEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -932,6 +971,7 @@ public class Microsoft_UI_Composition_BackEasingFunction <: windows_interface.In
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_BackEasingFunction <: windows_core.HandleWinrtType<Microsoft_UI_Composition_BackEasingFunction> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_BackEasingFunction): CPointer<Unit> {
         value.asRaw()
@@ -950,6 +990,7 @@ extend Microsoft_UI_Composition_BackEasingFunction <: windows_core.HandleWinrtTy
 }
 
 // Microsoft.UI.Composition.BooleanKeyFrameAnimation (synthetic:Microsoft_UI_Composition_BooleanKeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_BooleanKeyFrameAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1121,6 +1162,7 @@ public class Microsoft_UI_Composition_BooleanKeyFrameAnimation <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_BooleanKeyFrameAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_BooleanKeyFrameAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_BooleanKeyFrameAnimation): CPointer<Unit> {
         value.asRaw()
@@ -1139,6 +1181,7 @@ extend Microsoft_UI_Composition_BooleanKeyFrameAnimation <: windows_core.HandleW
 }
 
 // Microsoft.UI.Composition.BounceEasingFunction (synthetic:Microsoft_UI_Composition_BounceEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_BounceEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1289,6 +1332,7 @@ public class Microsoft_UI_Composition_BounceEasingFunction <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_BounceEasingFunction <: windows_core.HandleWinrtType<Microsoft_UI_Composition_BounceEasingFunction> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_BounceEasingFunction): CPointer<Unit> {
         value.asRaw()
@@ -1307,6 +1351,7 @@ extend Microsoft_UI_Composition_BounceEasingFunction <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Composition.BounceScalarNaturalMotionAnimation (synthetic:Microsoft_UI_Composition_BounceScalarNaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_BounceScalarNaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1501,6 +1546,7 @@ public class Microsoft_UI_Composition_BounceScalarNaturalMotionAnimation <: wind
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_BounceScalarNaturalMotionAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_BounceScalarNaturalMotionAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_BounceScalarNaturalMotionAnimation): CPointer<Unit> {
         value.asRaw()
@@ -1519,6 +1565,7 @@ extend Microsoft_UI_Composition_BounceScalarNaturalMotionAnimation <: windows_co
 }
 
 // Microsoft.UI.Composition.BounceVector2NaturalMotionAnimation (synthetic:Microsoft_UI_Composition_BounceVector2NaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_BounceVector2NaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1713,6 +1760,7 @@ public class Microsoft_UI_Composition_BounceVector2NaturalMotionAnimation <: win
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_BounceVector2NaturalMotionAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_BounceVector2NaturalMotionAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_BounceVector2NaturalMotionAnimation): CPointer<Unit> {
         value.asRaw()
@@ -1731,6 +1779,7 @@ extend Microsoft_UI_Composition_BounceVector2NaturalMotionAnimation <: windows_c
 }
 
 // Microsoft.UI.Composition.BounceVector3NaturalMotionAnimation (synthetic:Microsoft_UI_Composition_BounceVector3NaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_BounceVector3NaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -1925,6 +1974,7 @@ public class Microsoft_UI_Composition_BounceVector3NaturalMotionAnimation <: win
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_BounceVector3NaturalMotionAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_BounceVector3NaturalMotionAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_BounceVector3NaturalMotionAnimation): CPointer<Unit> {
         value.asRaw()
@@ -1943,6 +1993,7 @@ extend Microsoft_UI_Composition_BounceVector3NaturalMotionAnimation <: windows_c
 }
 
 // Microsoft.UI.Composition.CircleEasingFunction (synthetic:Microsoft_UI_Composition_CircleEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CircleEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2069,6 +2120,7 @@ public class Microsoft_UI_Composition_CircleEasingFunction <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CircleEasingFunction <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CircleEasingFunction> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CircleEasingFunction): CPointer<Unit> {
         value.asRaw()
@@ -2087,6 +2139,7 @@ extend Microsoft_UI_Composition_CircleEasingFunction <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Composition.ColorKeyFrameAnimation (synthetic:Microsoft_UI_Composition_ColorKeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_ColorKeyFrameAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2287,6 +2340,7 @@ public class Microsoft_UI_Composition_ColorKeyFrameAnimation <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_ColorKeyFrameAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_ColorKeyFrameAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_ColorKeyFrameAnimation): CPointer<Unit> {
         value.asRaw()
@@ -2305,6 +2359,7 @@ extend Microsoft_UI_Composition_ColorKeyFrameAnimation <: windows_core.HandleWin
 }
 
 // Microsoft.UI.Composition.CompositionAnimation (synthetic:Microsoft_UI_Composition_CompositionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2550,6 +2605,7 @@ public class Microsoft_UI_Composition_CompositionAnimation <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionAnimation): CPointer<Unit> {
         value.asRaw()
@@ -2568,6 +2624,7 @@ extend Microsoft_UI_Composition_CompositionAnimation <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Composition.CompositionAnimationGroup (synthetic:Microsoft_UI_Composition_CompositionAnimationGroup)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionAnimationGroup <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2729,6 +2786,7 @@ public class Microsoft_UI_Composition_CompositionAnimationGroup <: windows_inter
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionAnimationGroup <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionAnimationGroup> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionAnimationGroup): CPointer<Unit> {
         value.asRaw()
@@ -2747,6 +2805,7 @@ extend Microsoft_UI_Composition_CompositionAnimationGroup <: windows_core.Handle
 }
 
 // Microsoft.UI.Composition.CompositionBackdropBrush (synthetic:Microsoft_UI_Composition_CompositionBackdropBrush)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionBackdropBrush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -2861,6 +2920,7 @@ public class Microsoft_UI_Composition_CompositionBackdropBrush <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionBackdropBrush <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionBackdropBrush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionBackdropBrush): CPointer<Unit> {
         value.asRaw()
@@ -2879,6 +2939,7 @@ extend Microsoft_UI_Composition_CompositionBackdropBrush <: windows_core.HandleW
 }
 
 // Microsoft.UI.Composition.CompositionBackfaceVisibility (synthetic:Microsoft_UI_Composition_CompositionBackfaceVisibility)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionBackfaceVisibility {
     public let value: Int32
     public init() {
@@ -2888,11 +2949,15 @@ public struct Microsoft_UI_Composition_CompositionBackfaceVisibility {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBackfaceVisibility_Inherit = Microsoft_UI_Composition_CompositionBackfaceVisibility(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBackfaceVisibility_Visible = Microsoft_UI_Composition_CompositionBackfaceVisibility(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBackfaceVisibility_Hidden = Microsoft_UI_Composition_CompositionBackfaceVisibility(2)
 
 // Microsoft.UI.Composition.CompositionBatchCompletedEventArgs (synthetic:Microsoft_UI_Composition_CompositionBatchCompletedEventArgs)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionBatchCompletedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3000,6 +3065,7 @@ public class Microsoft_UI_Composition_CompositionBatchCompletedEventArgs <: wind
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionBatchCompletedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionBatchCompletedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionBatchCompletedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -3018,6 +3084,7 @@ extend Microsoft_UI_Composition_CompositionBatchCompletedEventArgs <: windows_co
 }
 
 // Microsoft.UI.Composition.CompositionBatchTypes (synthetic:Microsoft_UI_Composition_CompositionBatchTypes)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionBatchTypes {
     public let value: UInt32
     public init() {
@@ -3042,13 +3109,19 @@ public struct Microsoft_UI_Composition_CompositionBatchTypes {
         return Microsoft_UI_Composition_CompositionBatchTypes(!value)
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBatchTypes_None = Microsoft_UI_Composition_CompositionBatchTypes(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBatchTypes_Animation = Microsoft_UI_Composition_CompositionBatchTypes(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBatchTypes_Effect = Microsoft_UI_Composition_CompositionBatchTypes(2)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBatchTypes_InfiniteAnimation = Microsoft_UI_Composition_CompositionBatchTypes(4)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBatchTypes_AllAnimations = Microsoft_UI_Composition_CompositionBatchTypes(5)
 
 // Microsoft.UI.Composition.CompositionBitmapInterpolationMode (synthetic:Microsoft_UI_Composition_CompositionBitmapInterpolationMode)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionBitmapInterpolationMode {
     public let value: Int32
     public init() {
@@ -3058,18 +3131,29 @@ public struct Microsoft_UI_Composition_CompositionBitmapInterpolationMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBitmapInterpolationMode_NearestNeighbor = Microsoft_UI_Composition_CompositionBitmapInterpolationMode(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBitmapInterpolationMode_Linear = Microsoft_UI_Composition_CompositionBitmapInterpolationMode(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBitmapInterpolationMode_MagLinearMinLinearMipLinear = Microsoft_UI_Composition_CompositionBitmapInterpolationMode(2)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBitmapInterpolationMode_MagLinearMinLinearMipNearest = Microsoft_UI_Composition_CompositionBitmapInterpolationMode(3)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBitmapInterpolationMode_MagLinearMinNearestMipLinear = Microsoft_UI_Composition_CompositionBitmapInterpolationMode(4)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBitmapInterpolationMode_MagLinearMinNearestMipNearest = Microsoft_UI_Composition_CompositionBitmapInterpolationMode(5)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBitmapInterpolationMode_MagNearestMinLinearMipLinear = Microsoft_UI_Composition_CompositionBitmapInterpolationMode(6)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBitmapInterpolationMode_MagNearestMinLinearMipNearest = Microsoft_UI_Composition_CompositionBitmapInterpolationMode(7)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBitmapInterpolationMode_MagNearestMinNearestMipLinear = Microsoft_UI_Composition_CompositionBitmapInterpolationMode(8)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBitmapInterpolationMode_MagNearestMinNearestMipNearest = Microsoft_UI_Composition_CompositionBitmapInterpolationMode(9)
 
 // Microsoft.UI.Composition.CompositionBorderMode (synthetic:Microsoft_UI_Composition_CompositionBorderMode)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionBorderMode {
     public let value: Int32
     public init() {
@@ -3079,11 +3163,15 @@ public struct Microsoft_UI_Composition_CompositionBorderMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBorderMode_Inherit = Microsoft_UI_Composition_CompositionBorderMode(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBorderMode_Soft = Microsoft_UI_Composition_CompositionBorderMode(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionBorderMode_Hard = Microsoft_UI_Composition_CompositionBorderMode(2)
 
 // Microsoft.UI.Composition.CompositionBrush (synthetic:Microsoft_UI_Composition_CompositionBrush)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionBrush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3191,6 +3279,7 @@ public class Microsoft_UI_Composition_CompositionBrush <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionBrush <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionBrush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionBrush): CPointer<Unit> {
         value.asRaw()
@@ -3209,6 +3298,7 @@ extend Microsoft_UI_Composition_CompositionBrush <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Composition.CompositionClip (synthetic:Microsoft_UI_Composition_CompositionClip)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionClip <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3323,6 +3413,7 @@ public class Microsoft_UI_Composition_CompositionClip <: windows_interface.Inter
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionClip <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionClip> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionClip): CPointer<Unit> {
         value.asRaw()
@@ -3341,6 +3432,7 @@ extend Microsoft_UI_Composition_CompositionClip <: windows_core.HandleWinrtType<
 }
 
 // Microsoft.UI.Composition.CompositionColorBrush (synthetic:Microsoft_UI_Composition_CompositionColorBrush)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionColorBrush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3474,6 +3566,7 @@ public class Microsoft_UI_Composition_CompositionColorBrush <: windows_interface
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionColorBrush <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionColorBrush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionColorBrush): CPointer<Unit> {
         value.asRaw()
@@ -3492,6 +3585,7 @@ extend Microsoft_UI_Composition_CompositionColorBrush <: windows_core.HandleWinr
 }
 
 // Microsoft.UI.Composition.CompositionColorGradientStop (synthetic:Microsoft_UI_Composition_CompositionColorGradientStop)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionColorGradientStop <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3637,6 +3731,7 @@ public class Microsoft_UI_Composition_CompositionColorGradientStop <: windows_in
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionColorGradientStop <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionColorGradientStop> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionColorGradientStop): CPointer<Unit> {
         value.asRaw()
@@ -3655,6 +3750,7 @@ extend Microsoft_UI_Composition_CompositionColorGradientStop <: windows_core.Han
 }
 
 // Microsoft.UI.Composition.CompositionColorGradientStopCollection (synthetic:Microsoft_UI_Composition_CompositionColorGradientStopCollection)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionColorGradientStopCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3727,6 +3823,7 @@ public class Microsoft_UI_Composition_CompositionColorGradientStopCollection <: 
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionColorGradientStopCollection <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionColorGradientStopCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionColorGradientStopCollection): CPointer<Unit> {
         value.asRaw()
@@ -3745,6 +3842,7 @@ extend Microsoft_UI_Composition_CompositionColorGradientStopCollection <: window
 }
 
 // Microsoft.UI.Composition.CompositionColorSpace (synthetic:Microsoft_UI_Composition_CompositionColorSpace)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionColorSpace {
     public let value: Int32
     public init() {
@@ -3754,13 +3852,19 @@ public struct Microsoft_UI_Composition_CompositionColorSpace {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionColorSpace_Auto = Microsoft_UI_Composition_CompositionColorSpace(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionColorSpace_Hsl = Microsoft_UI_Composition_CompositionColorSpace(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionColorSpace_Rgb = Microsoft_UI_Composition_CompositionColorSpace(2)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionColorSpace_HslLinear = Microsoft_UI_Composition_CompositionColorSpace(3)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionColorSpace_RgbLinear = Microsoft_UI_Composition_CompositionColorSpace(4)
 
 // Microsoft.UI.Composition.CompositionCommitBatch (synthetic:Microsoft_UI_Composition_CompositionCommitBatch)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionCommitBatch <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -3912,6 +4016,7 @@ public class Microsoft_UI_Composition_CompositionCommitBatch <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionCommitBatch <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionCommitBatch> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionCommitBatch): CPointer<Unit> {
         value.asRaw()
@@ -3930,6 +4035,7 @@ extend Microsoft_UI_Composition_CompositionCommitBatch <: windows_core.HandleWin
 }
 
 // Microsoft.UI.Composition.CompositionCompositeMode (synthetic:Microsoft_UI_Composition_CompositionCompositeMode)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionCompositeMode {
     public let value: Int32
     public init() {
@@ -3939,12 +4045,17 @@ public struct Microsoft_UI_Composition_CompositionCompositeMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionCompositeMode_Inherit = Microsoft_UI_Composition_CompositionCompositeMode(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionCompositeMode_SourceOver = Microsoft_UI_Composition_CompositionCompositeMode(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionCompositeMode_DestinationInvert = Microsoft_UI_Composition_CompositionCompositeMode(2)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionCompositeMode_MinBlend = Microsoft_UI_Composition_CompositionCompositeMode(3)
 
 // Microsoft.UI.Composition.CompositionContainerShape (synthetic:Microsoft_UI_Composition_CompositionContainerShape)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionContainerShape <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4075,6 +4186,7 @@ public class Microsoft_UI_Composition_CompositionContainerShape <: windows_inter
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionContainerShape <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionContainerShape> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionContainerShape): CPointer<Unit> {
         value.asRaw()
@@ -4093,6 +4205,7 @@ extend Microsoft_UI_Composition_CompositionContainerShape <: windows_core.Handle
 }
 
 // Microsoft.UI.Composition.CompositionDropShadowSourcePolicy (synthetic:Microsoft_UI_Composition_CompositionDropShadowSourcePolicy)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionDropShadowSourcePolicy {
     public let value: Int32
     public init() {
@@ -4102,10 +4215,13 @@ public struct Microsoft_UI_Composition_CompositionDropShadowSourcePolicy {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionDropShadowSourcePolicy_Default = Microsoft_UI_Composition_CompositionDropShadowSourcePolicy(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionDropShadowSourcePolicy_InheritFromVisualContent = Microsoft_UI_Composition_CompositionDropShadowSourcePolicy(1)
 
 // Microsoft.UI.Composition.CompositionEasingFunction (synthetic:Microsoft_UI_Composition_CompositionEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4389,6 +4505,7 @@ public class Microsoft_UI_Composition_CompositionEasingFunction <: windows_inter
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionEasingFunction <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionEasingFunction> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionEasingFunction): CPointer<Unit> {
         value.asRaw()
@@ -4407,6 +4524,7 @@ extend Microsoft_UI_Composition_CompositionEasingFunction <: windows_core.Handle
 }
 
 // Microsoft.UI.Composition.CompositionEasingFunctionMode (synthetic:Microsoft_UI_Composition_CompositionEasingFunctionMode)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionEasingFunctionMode {
     public let value: Int32
     public init() {
@@ -4416,11 +4534,15 @@ public struct Microsoft_UI_Composition_CompositionEasingFunctionMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionEasingFunctionMode_In = Microsoft_UI_Composition_CompositionEasingFunctionMode(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionEasingFunctionMode_Out = Microsoft_UI_Composition_CompositionEasingFunctionMode(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionEasingFunctionMode_InOut = Microsoft_UI_Composition_CompositionEasingFunctionMode(2)
 
 // Microsoft.UI.Composition.CompositionEffectBrush (synthetic:Microsoft_UI_Composition_CompositionEffectBrush)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionEffectBrush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4563,6 +4685,7 @@ public class Microsoft_UI_Composition_CompositionEffectBrush <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionEffectBrush <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionEffectBrush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionEffectBrush): CPointer<Unit> {
         value.asRaw()
@@ -4581,6 +4704,7 @@ extend Microsoft_UI_Composition_CompositionEffectBrush <: windows_core.HandleWin
 }
 
 // Microsoft.UI.Composition.CompositionEffectFactory (synthetic:Microsoft_UI_Composition_CompositionEffectFactory)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionEffectFactory <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4726,6 +4850,7 @@ public class Microsoft_UI_Composition_CompositionEffectFactory <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionEffectFactory <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionEffectFactory> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionEffectFactory): CPointer<Unit> {
         value.asRaw()
@@ -4744,6 +4869,7 @@ extend Microsoft_UI_Composition_CompositionEffectFactory <: windows_core.HandleW
 }
 
 // Microsoft.UI.Composition.CompositionEffectFactoryLoadStatus (synthetic:Microsoft_UI_Composition_CompositionEffectFactoryLoadStatus)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionEffectFactoryLoadStatus {
     public let value: Int32
     public init() {
@@ -4753,12 +4879,17 @@ public struct Microsoft_UI_Composition_CompositionEffectFactoryLoadStatus {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionEffectFactoryLoadStatus_Success = Microsoft_UI_Composition_CompositionEffectFactoryLoadStatus(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionEffectFactoryLoadStatus_EffectTooComplex = Microsoft_UI_Composition_CompositionEffectFactoryLoadStatus(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionEffectFactoryLoadStatus_Pending = Microsoft_UI_Composition_CompositionEffectFactoryLoadStatus(2)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionEffectFactoryLoadStatus_Other = Microsoft_UI_Composition_CompositionEffectFactoryLoadStatus(-1)
 
 // Microsoft.UI.Composition.CompositionEllipseGeometry (synthetic:Microsoft_UI_Composition_CompositionEllipseGeometry)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionEllipseGeometry <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -4911,6 +5042,7 @@ public class Microsoft_UI_Composition_CompositionEllipseGeometry <: windows_inte
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionEllipseGeometry <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionEllipseGeometry> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionEllipseGeometry): CPointer<Unit> {
         value.asRaw()
@@ -4929,6 +5061,7 @@ extend Microsoft_UI_Composition_CompositionEllipseGeometry <: windows_core.Handl
 }
 
 // Microsoft.UI.Composition.CompositionGeometricClip (synthetic:Microsoft_UI_Composition_CompositionGeometricClip)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionGeometricClip <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5100,6 +5233,7 @@ public class Microsoft_UI_Composition_CompositionGeometricClip <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionGeometricClip <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionGeometricClip> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionGeometricClip): CPointer<Unit> {
         value.asRaw()
@@ -5118,6 +5252,7 @@ extend Microsoft_UI_Composition_CompositionGeometricClip <: windows_core.HandleW
 }
 
 // Microsoft.UI.Composition.CompositionGeometry (synthetic:Microsoft_UI_Composition_CompositionGeometry)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionGeometry <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5282,6 +5417,7 @@ public class Microsoft_UI_Composition_CompositionGeometry <: windows_interface.I
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionGeometry <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionGeometry> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionGeometry): CPointer<Unit> {
         value.asRaw()
@@ -5300,6 +5436,7 @@ extend Microsoft_UI_Composition_CompositionGeometry <: windows_core.HandleWinrtT
 }
 
 // Microsoft.UI.Composition.CompositionGetValueStatus (synthetic:Microsoft_UI_Composition_CompositionGetValueStatus)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionGetValueStatus {
     public let value: Int32
     public init() {
@@ -5309,11 +5446,15 @@ public struct Microsoft_UI_Composition_CompositionGetValueStatus {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionGetValueStatus_Succeeded = Microsoft_UI_Composition_CompositionGetValueStatus(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionGetValueStatus_TypeMismatch = Microsoft_UI_Composition_CompositionGetValueStatus(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionGetValueStatus_NotFound = Microsoft_UI_Composition_CompositionGetValueStatus(2)
 
 // Microsoft.UI.Composition.CompositionGradientBrush (synthetic:Microsoft_UI_Composition_CompositionGradientBrush)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionGradientBrush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5622,6 +5763,7 @@ public class Microsoft_UI_Composition_CompositionGradientBrush <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionGradientBrush <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionGradientBrush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionGradientBrush): CPointer<Unit> {
         value.asRaw()
@@ -5640,6 +5782,7 @@ extend Microsoft_UI_Composition_CompositionGradientBrush <: windows_core.HandleW
 }
 
 // Microsoft.UI.Composition.CompositionGradientExtendMode (synthetic:Microsoft_UI_Composition_CompositionGradientExtendMode)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionGradientExtendMode {
     public let value: Int32
     public init() {
@@ -5649,11 +5792,15 @@ public struct Microsoft_UI_Composition_CompositionGradientExtendMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionGradientExtendMode_Clamp = Microsoft_UI_Composition_CompositionGradientExtendMode(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionGradientExtendMode_Wrap = Microsoft_UI_Composition_CompositionGradientExtendMode(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionGradientExtendMode_Mirror = Microsoft_UI_Composition_CompositionGradientExtendMode(2)
 
 // Microsoft.UI.Composition.CompositionLight (synthetic:Microsoft_UI_Composition_CompositionLight)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionLight <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5791,6 +5938,7 @@ public class Microsoft_UI_Composition_CompositionLight <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionLight <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionLight> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionLight): CPointer<Unit> {
         value.asRaw()
@@ -5809,6 +5957,7 @@ extend Microsoft_UI_Composition_CompositionLight <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Composition.CompositionLineGeometry (synthetic:Microsoft_UI_Composition_CompositionLineGeometry)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionLineGeometry <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -5961,6 +6110,7 @@ public class Microsoft_UI_Composition_CompositionLineGeometry <: windows_interfa
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionLineGeometry <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionLineGeometry> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionLineGeometry): CPointer<Unit> {
         value.asRaw()
@@ -5979,6 +6129,7 @@ extend Microsoft_UI_Composition_CompositionLineGeometry <: windows_core.HandleWi
 }
 
 // Microsoft.UI.Composition.CompositionLinearGradientBrush (synthetic:Microsoft_UI_Composition_CompositionLinearGradientBrush)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionLinearGradientBrush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6145,6 +6296,7 @@ public class Microsoft_UI_Composition_CompositionLinearGradientBrush <: windows_
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionLinearGradientBrush <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionLinearGradientBrush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionLinearGradientBrush): CPointer<Unit> {
         value.asRaw()
@@ -6163,6 +6315,7 @@ extend Microsoft_UI_Composition_CompositionLinearGradientBrush <: windows_core.H
 }
 
 // Microsoft.UI.Composition.CompositionMappingMode (synthetic:Microsoft_UI_Composition_CompositionMappingMode)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionMappingMode {
     public let value: Int32
     public init() {
@@ -6172,10 +6325,13 @@ public struct Microsoft_UI_Composition_CompositionMappingMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionMappingMode_Absolute = Microsoft_UI_Composition_CompositionMappingMode(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionMappingMode_Relative = Microsoft_UI_Composition_CompositionMappingMode(1)
 
 // Microsoft.UI.Composition.CompositionMaskBrush (synthetic:Microsoft_UI_Composition_CompositionMaskBrush)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionMaskBrush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6340,6 +6496,7 @@ public class Microsoft_UI_Composition_CompositionMaskBrush <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionMaskBrush <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionMaskBrush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionMaskBrush): CPointer<Unit> {
         value.asRaw()
@@ -6358,6 +6515,7 @@ extend Microsoft_UI_Composition_CompositionMaskBrush <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Composition.CompositionNineGridBrush (synthetic:Microsoft_UI_Composition_CompositionNineGridBrush)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionNineGridBrush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6700,6 +6858,7 @@ public class Microsoft_UI_Composition_CompositionNineGridBrush <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionNineGridBrush <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionNineGridBrush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionNineGridBrush): CPointer<Unit> {
         value.asRaw()
@@ -6718,6 +6877,7 @@ extend Microsoft_UI_Composition_CompositionNineGridBrush <: windows_core.HandleW
 }
 
 // Microsoft.UI.Composition.CompositionObject (synthetic:Microsoft_UI_Composition_CompositionObject)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionObject <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6898,6 +7058,7 @@ public class Microsoft_UI_Composition_CompositionObject <: windows_interface.Int
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionObject <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionObject> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionObject): CPointer<Unit> {
         value.asRaw()
@@ -6916,6 +7077,7 @@ extend Microsoft_UI_Composition_CompositionObject <: windows_core.HandleWinrtTyp
 }
 
 // Microsoft.UI.Composition.CompositionPath (synthetic:Microsoft_UI_Composition_CompositionPath)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionPath <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -6997,6 +7159,7 @@ public class Microsoft_UI_Composition_CompositionPath <: windows_interface.Inter
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionPath <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionPath> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionPath): CPointer<Unit> {
         value.asRaw()
@@ -7015,6 +7178,7 @@ extend Microsoft_UI_Composition_CompositionPath <: windows_core.HandleWinrtType<
 }
 
 // Microsoft.UI.Composition.CompositionPathGeometry (synthetic:Microsoft_UI_Composition_CompositionPathGeometry)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionPathGeometry <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7154,6 +7318,7 @@ public class Microsoft_UI_Composition_CompositionPathGeometry <: windows_interfa
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionPathGeometry <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionPathGeometry> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionPathGeometry): CPointer<Unit> {
         value.asRaw()
@@ -7172,6 +7337,7 @@ extend Microsoft_UI_Composition_CompositionPathGeometry <: windows_core.HandleWi
 }
 
 // Microsoft.UI.Composition.CompositionProjectedShadow (synthetic:Microsoft_UI_Composition_CompositionProjectedShadow)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionProjectedShadow <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7393,6 +7559,7 @@ public class Microsoft_UI_Composition_CompositionProjectedShadow <: windows_inte
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionProjectedShadow <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionProjectedShadow> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionProjectedShadow): CPointer<Unit> {
         value.asRaw()
@@ -7411,6 +7578,7 @@ extend Microsoft_UI_Composition_CompositionProjectedShadow <: windows_core.Handl
 }
 
 // Microsoft.UI.Composition.CompositionProjectedShadowCaster (synthetic:Microsoft_UI_Composition_CompositionProjectedShadowCaster)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionProjectedShadowCaster <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7568,6 +7736,7 @@ public class Microsoft_UI_Composition_CompositionProjectedShadowCaster <: window
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionProjectedShadowCaster <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionProjectedShadowCaster> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionProjectedShadowCaster): CPointer<Unit> {
         value.asRaw()
@@ -7586,6 +7755,7 @@ extend Microsoft_UI_Composition_CompositionProjectedShadowCaster <: windows_core
 }
 
 // Microsoft.UI.Composition.CompositionProjectedShadowCasterCollection (synthetic:Microsoft_UI_Composition_CompositionProjectedShadowCasterCollection)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionProjectedShadowCasterCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7784,6 +7954,7 @@ public class Microsoft_UI_Composition_CompositionProjectedShadowCasterCollection
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionProjectedShadowCasterCollection <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionProjectedShadowCasterCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionProjectedShadowCasterCollection): CPointer<Unit> {
         value.asRaw()
@@ -7802,6 +7973,7 @@ extend Microsoft_UI_Composition_CompositionProjectedShadowCasterCollection <: wi
 }
 
 // Microsoft.UI.Composition.CompositionProjectedShadowReceiver (synthetic:Microsoft_UI_Composition_CompositionProjectedShadowReceiver)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionProjectedShadowReceiver <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -7934,6 +8106,7 @@ public class Microsoft_UI_Composition_CompositionProjectedShadowReceiver <: wind
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionProjectedShadowReceiver <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionProjectedShadowReceiver> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionProjectedShadowReceiver): CPointer<Unit> {
         value.asRaw()
@@ -7952,6 +8125,7 @@ extend Microsoft_UI_Composition_CompositionProjectedShadowReceiver <: windows_co
 }
 
 // Microsoft.UI.Composition.CompositionProjectedShadowReceiverUnorderedCollection (synthetic:Microsoft_UI_Composition_CompositionProjectedShadowReceiverUnorderedCollection)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionProjectedShadowReceiverUnorderedCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8106,6 +8280,7 @@ public class Microsoft_UI_Composition_CompositionProjectedShadowReceiverUnordere
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionProjectedShadowReceiverUnorderedCollection <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionProjectedShadowReceiverUnorderedCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionProjectedShadowReceiverUnorderedCollection): CPointer<Unit> {
         value.asRaw()
@@ -8124,6 +8299,7 @@ extend Microsoft_UI_Composition_CompositionProjectedShadowReceiverUnorderedColle
 }
 
 // Microsoft.UI.Composition.CompositionPropertySet (synthetic:Microsoft_UI_Composition_CompositionPropertySet)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionPropertySet <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8486,6 +8662,7 @@ public class Microsoft_UI_Composition_CompositionPropertySet <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionPropertySet <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionPropertySet> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionPropertySet): CPointer<Unit> {
         value.asRaw()
@@ -8504,6 +8681,7 @@ extend Microsoft_UI_Composition_CompositionPropertySet <: windows_core.HandleWin
 }
 
 // Microsoft.UI.Composition.CompositionRadialGradientBrush (synthetic:Microsoft_UI_Composition_CompositionRadialGradientBrush)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionRadialGradientBrush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8689,6 +8867,7 @@ public class Microsoft_UI_Composition_CompositionRadialGradientBrush <: windows_
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionRadialGradientBrush <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionRadialGradientBrush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionRadialGradientBrush): CPointer<Unit> {
         value.asRaw()
@@ -8707,6 +8886,7 @@ extend Microsoft_UI_Composition_CompositionRadialGradientBrush <: windows_core.H
 }
 
 // Microsoft.UI.Composition.CompositionRectangleGeometry (synthetic:Microsoft_UI_Composition_CompositionRectangleGeometry)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionRectangleGeometry <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -8859,6 +9039,7 @@ public class Microsoft_UI_Composition_CompositionRectangleGeometry <: windows_in
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionRectangleGeometry <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionRectangleGeometry> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionRectangleGeometry): CPointer<Unit> {
         value.asRaw()
@@ -8877,6 +9058,7 @@ extend Microsoft_UI_Composition_CompositionRectangleGeometry <: windows_core.Han
 }
 
 // Microsoft.UI.Composition.CompositionRoundedRectangleGeometry (synthetic:Microsoft_UI_Composition_CompositionRoundedRectangleGeometry)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionRoundedRectangleGeometry <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9048,6 +9230,7 @@ public class Microsoft_UI_Composition_CompositionRoundedRectangleGeometry <: win
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionRoundedRectangleGeometry <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionRoundedRectangleGeometry> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionRoundedRectangleGeometry): CPointer<Unit> {
         value.asRaw()
@@ -9066,6 +9249,7 @@ extend Microsoft_UI_Composition_CompositionRoundedRectangleGeometry <: windows_c
 }
 
 // Microsoft.UI.Composition.CompositionScopedBatch (synthetic:Microsoft_UI_Composition_CompositionScopedBatch)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionScopedBatch <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9241,6 +9425,7 @@ public class Microsoft_UI_Composition_CompositionScopedBatch <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionScopedBatch <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionScopedBatch> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionScopedBatch): CPointer<Unit> {
         value.asRaw()
@@ -9259,6 +9444,7 @@ extend Microsoft_UI_Composition_CompositionScopedBatch <: windows_core.HandleWin
 }
 
 // Microsoft.UI.Composition.CompositionShadow (synthetic:Microsoft_UI_Composition_CompositionShadow)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionShadow <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9366,6 +9552,7 @@ public class Microsoft_UI_Composition_CompositionShadow <: windows_interface.Int
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionShadow <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionShadow> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionShadow): CPointer<Unit> {
         value.asRaw()
@@ -9384,6 +9571,7 @@ extend Microsoft_UI_Composition_CompositionShadow <: windows_core.HandleWinrtTyp
 }
 
 // Microsoft.UI.Composition.CompositionShape (synthetic:Microsoft_UI_Composition_CompositionShape)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionShape <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9605,6 +9793,7 @@ public class Microsoft_UI_Composition_CompositionShape <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionShape <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionShape> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionShape): CPointer<Unit> {
         value.asRaw()
@@ -9623,6 +9812,7 @@ extend Microsoft_UI_Composition_CompositionShape <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Composition.CompositionShapeCollection (synthetic:Microsoft_UI_Composition_CompositionShapeCollection)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionShapeCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -9899,6 +10089,7 @@ public class Microsoft_UI_Composition_CompositionShapeCollection <: windows_inte
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionShapeCollection <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionShapeCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionShapeCollection): CPointer<Unit> {
         value.asRaw()
@@ -9917,6 +10108,7 @@ extend Microsoft_UI_Composition_CompositionShapeCollection <: windows_core.Handl
 }
 
 // Microsoft.UI.Composition.CompositionSpriteShape (synthetic:Microsoft_UI_Composition_CompositionSpriteShape)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionSpriteShape <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10274,6 +10466,7 @@ public class Microsoft_UI_Composition_CompositionSpriteShape <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionSpriteShape <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionSpriteShape> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionSpriteShape): CPointer<Unit> {
         value.asRaw()
@@ -10292,6 +10485,7 @@ extend Microsoft_UI_Composition_CompositionSpriteShape <: windows_core.HandleWin
 }
 
 // Microsoft.UI.Composition.CompositionStretch (synthetic:Microsoft_UI_Composition_CompositionStretch)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionStretch {
     public let value: Int32
     public init() {
@@ -10301,12 +10495,17 @@ public struct Microsoft_UI_Composition_CompositionStretch {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionStretch_None = Microsoft_UI_Composition_CompositionStretch(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionStretch_Fill = Microsoft_UI_Composition_CompositionStretch(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionStretch_Uniform = Microsoft_UI_Composition_CompositionStretch(2)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionStretch_UniformToFill = Microsoft_UI_Composition_CompositionStretch(3)
 
 // Microsoft.UI.Composition.CompositionStrokeCap (synthetic:Microsoft_UI_Composition_CompositionStrokeCap)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionStrokeCap {
     public let value: Int32
     public init() {
@@ -10316,12 +10515,17 @@ public struct Microsoft_UI_Composition_CompositionStrokeCap {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionStrokeCap_Flat = Microsoft_UI_Composition_CompositionStrokeCap(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionStrokeCap_Square = Microsoft_UI_Composition_CompositionStrokeCap(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionStrokeCap_Round = Microsoft_UI_Composition_CompositionStrokeCap(2)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionStrokeCap_Triangle = Microsoft_UI_Composition_CompositionStrokeCap(3)
 
 // Microsoft.UI.Composition.CompositionStrokeDashArray (synthetic:Microsoft_UI_Composition_CompositionStrokeDashArray)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionStrokeDashArray <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10598,6 +10802,7 @@ public class Microsoft_UI_Composition_CompositionStrokeDashArray <: windows_inte
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionStrokeDashArray <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionStrokeDashArray> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionStrokeDashArray): CPointer<Unit> {
         value.asRaw()
@@ -10616,6 +10821,7 @@ extend Microsoft_UI_Composition_CompositionStrokeDashArray <: windows_core.Handl
 }
 
 // Microsoft.UI.Composition.CompositionStrokeLineJoin (synthetic:Microsoft_UI_Composition_CompositionStrokeLineJoin)
+@When[Microsoft_UI_Composition == "on"]
 public struct Microsoft_UI_Composition_CompositionStrokeLineJoin {
     public let value: Int32
     public init() {
@@ -10625,12 +10831,17 @@ public struct Microsoft_UI_Composition_CompositionStrokeLineJoin {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionStrokeLineJoin_Miter = Microsoft_UI_Composition_CompositionStrokeLineJoin(0)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionStrokeLineJoin_Bevel = Microsoft_UI_Composition_CompositionStrokeLineJoin(1)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionStrokeLineJoin_Round = Microsoft_UI_Composition_CompositionStrokeLineJoin(2)
+@When[Microsoft_UI_Composition == "on"]
 public let Microsoft_UI_Composition_CompositionStrokeLineJoin_MiterOrBevel = Microsoft_UI_Composition_CompositionStrokeLineJoin(3)
 
 // Microsoft.UI.Composition.CompositionSurfaceBrush (synthetic:Microsoft_UI_Composition_CompositionSurfaceBrush)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionSurfaceBrush <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -10860,6 +11071,7 @@ public class Microsoft_UI_Composition_CompositionSurfaceBrush <: windows_interfa
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionSurfaceBrush <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionSurfaceBrush> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionSurfaceBrush): CPointer<Unit> {
         value.asRaw()
@@ -10878,6 +11090,7 @@ extend Microsoft_UI_Composition_CompositionSurfaceBrush <: windows_core.HandleWi
 }
 
 // Microsoft.UI.Composition.CompositionViewBox (synthetic:Microsoft_UI_Composition_CompositionViewBox)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionViewBox <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -11080,6 +11293,7 @@ public class Microsoft_UI_Composition_CompositionViewBox <: windows_interface.In
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionViewBox <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionViewBox> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionViewBox): CPointer<Unit> {
         value.asRaw()
@@ -11098,6 +11312,7 @@ extend Microsoft_UI_Composition_CompositionViewBox <: windows_core.HandleWinrtTy
 }
 
 // Microsoft.UI.Composition.CompositionVisualSurface (synthetic:Microsoft_UI_Composition_CompositionVisualSurface)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CompositionVisualSurface <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -11275,6 +11490,7 @@ public class Microsoft_UI_Composition_CompositionVisualSurface <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CompositionVisualSurface <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CompositionVisualSurface> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CompositionVisualSurface): CPointer<Unit> {
         value.asRaw()
@@ -11293,6 +11509,7 @@ extend Microsoft_UI_Composition_CompositionVisualSurface <: windows_core.HandleW
 }
 
 // Microsoft.UI.Composition.Compositor (synthetic:Microsoft_UI_Composition_Compositor)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_Compositor <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -11784,6 +12001,7 @@ public class Microsoft_UI_Composition_Compositor <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_Compositor <: windows_core.HandleWinrtType<Microsoft_UI_Composition_Compositor> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_Compositor): CPointer<Unit> {
         value.asRaw()
@@ -11802,6 +12020,7 @@ extend Microsoft_UI_Composition_Compositor <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Composition.ContainerVisual (synthetic:Microsoft_UI_Composition_ContainerVisual)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_ContainerVisual <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -11953,6 +12172,7 @@ public class Microsoft_UI_Composition_ContainerVisual <: windows_interface.Inter
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_ContainerVisual <: windows_core.HandleWinrtType<Microsoft_UI_Composition_ContainerVisual> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_ContainerVisual): CPointer<Unit> {
         value.asRaw()
@@ -11971,6 +12191,7 @@ extend Microsoft_UI_Composition_ContainerVisual <: windows_core.HandleWinrtType<
 }
 
 // Microsoft.UI.Composition.CubicBezierEasingFunction (synthetic:Microsoft_UI_Composition_CubicBezierEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_CubicBezierEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12109,6 +12330,7 @@ public class Microsoft_UI_Composition_CubicBezierEasingFunction <: windows_inter
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_CubicBezierEasingFunction <: windows_core.HandleWinrtType<Microsoft_UI_Composition_CubicBezierEasingFunction> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_CubicBezierEasingFunction): CPointer<Unit> {
         value.asRaw()
@@ -12127,6 +12349,7 @@ extend Microsoft_UI_Composition_CubicBezierEasingFunction <: windows_core.Handle
 }
 
 // Microsoft.UI.Composition.DistantLight (synthetic:Microsoft_UI_Composition_DistantLight)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_DistantLight <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12325,6 +12548,7 @@ public class Microsoft_UI_Composition_DistantLight <: windows_interface.Interfac
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_DistantLight <: windows_core.HandleWinrtType<Microsoft_UI_Composition_DistantLight> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_DistantLight): CPointer<Unit> {
         value.asRaw()
@@ -12343,6 +12567,7 @@ extend Microsoft_UI_Composition_DistantLight <: windows_core.HandleWinrtType<Mic
 }
 
 // Microsoft.UI.Composition.DropShadow (synthetic:Microsoft_UI_Composition_DropShadow)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_DropShadow <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12565,6 +12790,7 @@ public class Microsoft_UI_Composition_DropShadow <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_DropShadow <: windows_core.HandleWinrtType<Microsoft_UI_Composition_DropShadow> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_DropShadow): CPointer<Unit> {
         value.asRaw()
@@ -12583,6 +12809,7 @@ extend Microsoft_UI_Composition_DropShadow <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Composition.ElasticEasingFunction (synthetic:Microsoft_UI_Composition_ElasticEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_ElasticEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12733,6 +12960,7 @@ public class Microsoft_UI_Composition_ElasticEasingFunction <: windows_interface
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_ElasticEasingFunction <: windows_core.HandleWinrtType<Microsoft_UI_Composition_ElasticEasingFunction> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_ElasticEasingFunction): CPointer<Unit> {
         value.asRaw()
@@ -12751,6 +12979,7 @@ extend Microsoft_UI_Composition_ElasticEasingFunction <: windows_core.HandleWinr
 }
 
 // Microsoft.UI.Composition.ExponentialEasingFunction (synthetic:Microsoft_UI_Composition_ExponentialEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_ExponentialEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -12889,6 +13118,7 @@ public class Microsoft_UI_Composition_ExponentialEasingFunction <: windows_inter
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_ExponentialEasingFunction <: windows_core.HandleWinrtType<Microsoft_UI_Composition_ExponentialEasingFunction> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_ExponentialEasingFunction): CPointer<Unit> {
         value.asRaw()
@@ -12907,6 +13137,7 @@ extend Microsoft_UI_Composition_ExponentialEasingFunction <: windows_core.Handle
 }
 
 // Microsoft.UI.Composition.ExpressionAnimation (synthetic:Microsoft_UI_Composition_ExpressionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_ExpressionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -13074,6 +13305,7 @@ public class Microsoft_UI_Composition_ExpressionAnimation <: windows_interface.I
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_ExpressionAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_ExpressionAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_ExpressionAnimation): CPointer<Unit> {
         value.asRaw()
@@ -13092,6 +13324,7 @@ extend Microsoft_UI_Composition_ExpressionAnimation <: windows_core.HandleWinrtT
 }
 
 // Microsoft.UI.Composition.IAmbientLight (synthetic:Microsoft_UI_Composition_IAmbientLight)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["4540525e-b70d-5a14-bbfa-63bef42313c7", "Microsoft.UI.Composition.IAmbientLight"]
 public interface Microsoft_UI_Composition_IAmbientLight <: IInspectable {
     func Color(value: CPointer<Windows_UI_Color>): Int32
@@ -13099,6 +13332,7 @@ public interface Microsoft_UI_Composition_IAmbientLight <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IAmbientLight2 (synthetic:Microsoft_UI_Composition_IAmbientLight2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["3356f963-040c-54d4-9dfc-b61c51aaadd1", "Microsoft.UI.Composition.IAmbientLight2"]
 public interface Microsoft_UI_Composition_IAmbientLight2 <: IInspectable {
     func Intensity(value: CPointer<Float32>): Int32
@@ -13106,6 +13340,7 @@ public interface Microsoft_UI_Composition_IAmbientLight2 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IAnimationController (synthetic:Microsoft_UI_Composition_IAnimationController)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["bd0f88a8-a415-5322-8c3d-1a6d9192754f", "Microsoft.UI.Composition.IAnimationController"]
 public interface Microsoft_UI_Composition_IAnimationController <: IInspectable {
     func PlaybackRate(value: CPointer<Float32>): Int32
@@ -13119,6 +13354,7 @@ public interface Microsoft_UI_Composition_IAnimationController <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IAnimationControllerStatics (synthetic:Microsoft_UI_Composition_IAnimationControllerStatics)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["b63b0fb6-286b-57af-b096-16066d43dc00", "Microsoft.UI.Composition.IAnimationControllerStatics"]
 public interface Microsoft_UI_Composition_IAnimationControllerStatics <: IInspectable {
     func MaxPlaybackRate(value: CPointer<Float32>): Int32
@@ -13126,12 +13362,14 @@ public interface Microsoft_UI_Composition_IAnimationControllerStatics <: IInspec
 }
 
 // Microsoft.UI.Composition.IAnimationObject (synthetic:Microsoft_UI_Composition_IAnimationObject)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["8f56119d-b96d-58d0-9916-d1c5e390f890", "Microsoft.UI.Composition.IAnimationObject"]
 public interface Microsoft_UI_Composition_IAnimationObject <: IInspectable {
     func PopulatePropertyInfo(propertyName: CPointer<Unit>, propertyInfo: CPointer<Unit>): Int32
 }
 
 // Microsoft.UI.Composition.IAnimationPropertyInfo (synthetic:Microsoft_UI_Composition_IAnimationPropertyInfo)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["3d721a2b-9ccd-57bd-b6c2-ce9e04ae3606", "Microsoft.UI.Composition.IAnimationPropertyInfo"]
 public interface Microsoft_UI_Composition_IAnimationPropertyInfo <: IInspectable {
     func AccessMode(value: CPointer<Int32>): Int32
@@ -13139,6 +13377,7 @@ public interface Microsoft_UI_Composition_IAnimationPropertyInfo <: IInspectable
 }
 
 // Microsoft.UI.Composition.IAnimationPropertyInfo2 (synthetic:Microsoft_UI_Composition_IAnimationPropertyInfo2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["ed14fb09-de28-540d-9311-80cfdcc97338", "Microsoft.UI.Composition.IAnimationPropertyInfo2", "GetResolvedCompositionObject.result=Com;GetResolvedCompositionObjectProperty.result=HString"]
 public interface Microsoft_UI_Composition_IAnimationPropertyInfo2 <: IInspectable {
     func GetResolvedCompositionObject(result: CPointer<CPointer<Unit>>): Int32
@@ -13146,6 +13385,7 @@ public interface Microsoft_UI_Composition_IAnimationPropertyInfo2 <: IInspectabl
 }
 
 // Microsoft.UI.Composition.IBackEasingFunction (synthetic:Microsoft_UI_Composition_IBackEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["27c75bab-317a-5362-bf25-fffbb98a51b9", "Microsoft.UI.Composition.IBackEasingFunction"]
 public interface Microsoft_UI_Composition_IBackEasingFunction <: IInspectable {
     func Mode(value: CPointer<Int32>): Int32
@@ -13153,12 +13393,14 @@ public interface Microsoft_UI_Composition_IBackEasingFunction <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IBooleanKeyFrameAnimation (synthetic:Microsoft_UI_Composition_IBooleanKeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["7fe485e9-e874-5ff3-8ddc-826c3818bfc3", "Microsoft.UI.Composition.IBooleanKeyFrameAnimation"]
 public interface Microsoft_UI_Composition_IBooleanKeyFrameAnimation <: IInspectable {
     func InsertKeyFrame(normalizedProgressKey: Float32, value: Bool): Int32
 }
 
 // Microsoft.UI.Composition.IBounceEasingFunction (synthetic:Microsoft_UI_Composition_IBounceEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["fa11f3c0-697b-562f-af46-c6af666b6ec4", "Microsoft.UI.Composition.IBounceEasingFunction"]
 public interface Microsoft_UI_Composition_IBounceEasingFunction <: IInspectable {
     func Mode(value: CPointer<Int32>): Int32
@@ -13167,6 +13409,7 @@ public interface Microsoft_UI_Composition_IBounceEasingFunction <: IInspectable 
 }
 
 // Microsoft.UI.Composition.IBounceScalarNaturalMotionAnimation (synthetic:Microsoft_UI_Composition_IBounceScalarNaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["1c0c4b76-c4d6-5dd9-8dd6-dbe35c7b7e55", "Microsoft.UI.Composition.IBounceScalarNaturalMotionAnimation"]
 public interface Microsoft_UI_Composition_IBounceScalarNaturalMotionAnimation <: IInspectable {
     func Acceleration(value: CPointer<Float32>): Int32
@@ -13176,6 +13419,7 @@ public interface Microsoft_UI_Composition_IBounceScalarNaturalMotionAnimation <:
 }
 
 // Microsoft.UI.Composition.IBounceVector2NaturalMotionAnimation (synthetic:Microsoft_UI_Composition_IBounceVector2NaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["ec528d1f-22e2-573e-ab87-757071e50012", "Microsoft.UI.Composition.IBounceVector2NaturalMotionAnimation"]
 public interface Microsoft_UI_Composition_IBounceVector2NaturalMotionAnimation <: IInspectable {
     func Acceleration(value: CPointer<Float32>): Int32
@@ -13185,6 +13429,7 @@ public interface Microsoft_UI_Composition_IBounceVector2NaturalMotionAnimation <
 }
 
 // Microsoft.UI.Composition.IBounceVector3NaturalMotionAnimation (synthetic:Microsoft_UI_Composition_IBounceVector3NaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["e3e2ee98-1211-586d-8a6d-fea5efc3957f", "Microsoft.UI.Composition.IBounceVector3NaturalMotionAnimation"]
 public interface Microsoft_UI_Composition_IBounceVector3NaturalMotionAnimation <: IInspectable {
     func Acceleration(value: CPointer<Float32>): Int32
@@ -13194,12 +13439,14 @@ public interface Microsoft_UI_Composition_IBounceVector3NaturalMotionAnimation <
 }
 
 // Microsoft.UI.Composition.ICircleEasingFunction (synthetic:Microsoft_UI_Composition_ICircleEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["414b172c-bf27-5ead-93e0-35915322db2c", "Microsoft.UI.Composition.ICircleEasingFunction"]
 public interface Microsoft_UI_Composition_ICircleEasingFunction <: IInspectable {
     func Mode(value: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Composition.IColorKeyFrameAnimation (synthetic:Microsoft_UI_Composition_IColorKeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["f0237928-353c-5867-be93-71547e989f44", "Microsoft.UI.Composition.IColorKeyFrameAnimation"]
 public interface Microsoft_UI_Composition_IColorKeyFrameAnimation <: IInspectable {
     func InterpolationColorSpace(value: CPointer<Int32>): Int32
@@ -13209,6 +13456,7 @@ public interface Microsoft_UI_Composition_IColorKeyFrameAnimation <: IInspectabl
 }
 
 // Microsoft.UI.Composition.ICompositionAnimation (synthetic:Microsoft_UI_Composition_ICompositionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["a829ccc8-6fde-5b90-ad37-efd307e1b631", "Microsoft.UI.Composition.ICompositionAnimation"]
 public interface Microsoft_UI_Composition_ICompositionAnimation <: IInspectable {
     func ClearAllParameters(): Int32
@@ -13225,6 +13473,7 @@ public interface Microsoft_UI_Composition_ICompositionAnimation <: IInspectable 
 }
 
 // Microsoft.UI.Composition.ICompositionAnimation2 (synthetic:Microsoft_UI_Composition_ICompositionAnimation2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["0926eb58-8965-5c74-bdac-852ebb5e8542", "Microsoft.UI.Composition.ICompositionAnimation2", "Target.value=HString"]
 public interface Microsoft_UI_Composition_ICompositionAnimation2 <: IInspectable {
     func SetBooleanParameter(key: CPointer<Unit>, value: Bool): Int32
@@ -13233,28 +13482,33 @@ public interface Microsoft_UI_Composition_ICompositionAnimation2 <: IInspectable
 }
 
 // Microsoft.UI.Composition.ICompositionAnimation3 (synthetic:Microsoft_UI_Composition_ICompositionAnimation3)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["60063f53-4167-5914-a2f1-9efcc2f86c76", "Microsoft.UI.Composition.ICompositionAnimation3", "InitialValueExpressions.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionAnimation3 <: IInspectable {
     func InitialValueExpressions(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Composition.ICompositionAnimation4 (synthetic:Microsoft_UI_Composition_ICompositionAnimation4)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["c4101447-dfe4-597f-b5bc-96443f5d18a1", "Microsoft.UI.Composition.ICompositionAnimation4"]
 public interface Microsoft_UI_Composition_ICompositionAnimation4 <: IInspectable {
     func SetExpressionReferenceParameter(parameterName: CPointer<Unit>, source: CPointer<Unit>): Int32
 }
 
 // Microsoft.UI.Composition.ICompositionAnimationBase (synthetic:Microsoft_UI_Composition_ICompositionAnimationBase)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["a77c0e5a-f059-4e85-bcef-c068694cec78", "Microsoft.UI.Composition.ICompositionAnimationBase"]
 public interface Microsoft_UI_Composition_ICompositionAnimationBase <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionAnimationFactory (synthetic:Microsoft_UI_Composition_ICompositionAnimationFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["2ed278ca-4cca-5f7f-8d47-f930552a7769", "Microsoft.UI.Composition.ICompositionAnimationFactory"]
 public interface Microsoft_UI_Composition_ICompositionAnimationFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionAnimationGroup (synthetic:Microsoft_UI_Composition_ICompositionAnimationGroup)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["a51cdcac-b972-5ae7-81d0-9d91c71ecb7a", "Microsoft.UI.Composition.ICompositionAnimationGroup"]
 public interface Microsoft_UI_Composition_ICompositionAnimationGroup <: IInspectable {
     func Count(value: CPointer<Int32>): Int32
@@ -13264,31 +13518,37 @@ public interface Microsoft_UI_Composition_ICompositionAnimationGroup <: IInspect
 }
 
 // Microsoft.UI.Composition.ICompositionBackdropBrush (synthetic:Microsoft_UI_Composition_ICompositionBackdropBrush)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["6c866bb3-172a-570c-82ac-bf9848d99a59", "Microsoft.UI.Composition.ICompositionBackdropBrush"]
 public interface Microsoft_UI_Composition_ICompositionBackdropBrush <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionBatchCompletedEventArgs (synthetic:Microsoft_UI_Composition_ICompositionBatchCompletedEventArgs)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["ac400334-4358-5fb0-bfc3-117fe581998f", "Microsoft.UI.Composition.ICompositionBatchCompletedEventArgs"]
 public interface Microsoft_UI_Composition_ICompositionBatchCompletedEventArgs <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionBrush (synthetic:Microsoft_UI_Composition_ICompositionBrush)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["483924e7-99a5-5377-968b-dec6d40bbccd", "Microsoft.UI.Composition.ICompositionBrush"]
 public interface Microsoft_UI_Composition_ICompositionBrush <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionBrushFactory (synthetic:Microsoft_UI_Composition_ICompositionBrushFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["abf2b354-7130-53d9-8324-365d7e02ede7", "Microsoft.UI.Composition.ICompositionBrushFactory"]
 public interface Microsoft_UI_Composition_ICompositionBrushFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionClip (synthetic:Microsoft_UI_Composition_ICompositionClip)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["b66b55cb-b5a5-5bee-8972-ae78233cb34c", "Microsoft.UI.Composition.ICompositionClip"]
 public interface Microsoft_UI_Composition_ICompositionClip <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionClip2 (synthetic:Microsoft_UI_Composition_ICompositionClip2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["cdf6bf80-afd7-57dc-8148-6ccbbb5d78bb", "Microsoft.UI.Composition.ICompositionClip2"]
 public interface Microsoft_UI_Composition_ICompositionClip2 <: IInspectable {
     func AnchorPoint(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -13308,11 +13568,13 @@ public interface Microsoft_UI_Composition_ICompositionClip2 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionClipFactory (synthetic:Microsoft_UI_Composition_ICompositionClipFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["611dec65-d302-52bc-92ab-a295bd141ae4", "Microsoft.UI.Composition.ICompositionClipFactory"]
 public interface Microsoft_UI_Composition_ICompositionClipFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionColorBrush (synthetic:Microsoft_UI_Composition_ICompositionColorBrush)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["3f8ffb69-3e71-55a7-8e79-f27a214c56ae", "Microsoft.UI.Composition.ICompositionColorBrush"]
 public interface Microsoft_UI_Composition_ICompositionColorBrush <: IInspectable {
     func Color(value: CPointer<Windows_UI_Color>): Int32
@@ -13320,6 +13582,7 @@ public interface Microsoft_UI_Composition_ICompositionColorBrush <: IInspectable
 }
 
 // Microsoft.UI.Composition.ICompositionColorGradientStop (synthetic:Microsoft_UI_Composition_ICompositionColorGradientStop)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["868030d8-c5c0-5dd8-a765-e32cd3497aa9", "Microsoft.UI.Composition.ICompositionColorGradientStop"]
 public interface Microsoft_UI_Composition_ICompositionColorGradientStop <: IInspectable {
     func Color(value: CPointer<Windows_UI_Color>): Int32
@@ -13329,11 +13592,13 @@ public interface Microsoft_UI_Composition_ICompositionColorGradientStop <: IInsp
 }
 
 // Microsoft.UI.Composition.ICompositionColorGradientStopCollection (synthetic:Microsoft_UI_Composition_ICompositionColorGradientStopCollection)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["4794cb29-ce9d-5837-9fc9-847df3e197de", "Microsoft.UI.Composition.ICompositionColorGradientStopCollection"]
 public interface Microsoft_UI_Composition_ICompositionColorGradientStopCollection <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionCommitBatch (synthetic:Microsoft_UI_Composition_ICompositionCommitBatch)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["c4550fa8-a7f2-5259-bf74-33b2f5240a28", "Microsoft.UI.Composition.ICompositionCommitBatch"]
 public interface Microsoft_UI_Composition_ICompositionCommitBatch <: IInspectable {
     func IsActive(value: CPointer<Bool>): Int32
@@ -13343,22 +13608,26 @@ public interface Microsoft_UI_Composition_ICompositionCommitBatch <: IInspectabl
 }
 
 // Microsoft.UI.Composition.ICompositionContainerShape (synthetic:Microsoft_UI_Composition_ICompositionContainerShape)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["064aabd5-2dab-52d3-824b-c72456540f29", "Microsoft.UI.Composition.ICompositionContainerShape", "Shapes.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionContainerShape <: IInspectable {
     func Shapes(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Composition.ICompositionEasingFunction (synthetic:Microsoft_UI_Composition_ICompositionEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["8e1ecd0d-57d8-5bc9-9bcd-e43d0dd733c4", "Microsoft.UI.Composition.ICompositionEasingFunction"]
 public interface Microsoft_UI_Composition_ICompositionEasingFunction <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionEasingFunctionFactory (synthetic:Microsoft_UI_Composition_ICompositionEasingFunctionFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["7d7d32c3-574b-5620-9902-db426851802f", "Microsoft.UI.Composition.ICompositionEasingFunctionFactory"]
 public interface Microsoft_UI_Composition_ICompositionEasingFunctionFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionEasingFunctionStatics (synthetic:Microsoft_UI_Composition_ICompositionEasingFunctionStatics)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["9d4b87ff-6dca-5ce2-b69c-e52705b0fef4", "Microsoft.UI.Composition.ICompositionEasingFunctionStatics", "CreateCubicBezierEasingFunction.result=Com;CreateLinearEasingFunction.result=Com;CreateStepEasingFunction.result=Com;CreateStepEasingFunctionWithStepCount.result=Com;CreateBackEasingFunction.result=Com;CreateBounceEasingFunction.result=Com;CreateCircleEasingFunction.result=Com;CreateElasticEasingFunction.result=Com;CreateExponentialEasingFunction.result=Com;CreatePowerEasingFunction.result=Com;CreateSineEasingFunction.result=Com"]
 public interface Microsoft_UI_Composition_ICompositionEasingFunctionStatics <: IInspectable {
     func CreateCubicBezierEasingFunction(owner: CPointer<Unit>, controlPoint1: Windows_Foundation_Numerics_Vector2, controlPoint2: Windows_Foundation_Numerics_Vector2, result: CPointer<CPointer<Unit>>): Int32
@@ -13375,6 +13644,7 @@ public interface Microsoft_UI_Composition_ICompositionEasingFunctionStatics <: I
 }
 
 // Microsoft.UI.Composition.ICompositionEffectBrush (synthetic:Microsoft_UI_Composition_ICompositionEffectBrush)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["62e0bbab-1f45-5a44-9ddf-f0c38a02ed85", "Microsoft.UI.Composition.ICompositionEffectBrush", "GetSourceParameter.result=Com"]
 public interface Microsoft_UI_Composition_ICompositionEffectBrush <: IInspectable {
     func GetSourceParameter(name: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
@@ -13382,6 +13652,7 @@ public interface Microsoft_UI_Composition_ICompositionEffectBrush <: IInspectabl
 }
 
 // Microsoft.UI.Composition.ICompositionEffectFactory (synthetic:Microsoft_UI_Composition_ICompositionEffectFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["c50f407a-0231-5ed2-b7a7-ca66d3e14b3b", "Microsoft.UI.Composition.ICompositionEffectFactory", "CreateBrush.result=Com"]
 public interface Microsoft_UI_Composition_ICompositionEffectFactory <: IInspectable {
     func CreateBrush(result: CPointer<CPointer<Unit>>): Int32
@@ -13390,6 +13661,7 @@ public interface Microsoft_UI_Composition_ICompositionEffectFactory <: IInspecta
 }
 
 // Microsoft.UI.Composition.ICompositionEllipseGeometry (synthetic:Microsoft_UI_Composition_ICompositionEllipseGeometry)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["f2a21042-7a57-58c1-8b47-8bc8b21d3aa0", "Microsoft.UI.Composition.ICompositionEllipseGeometry"]
 public interface Microsoft_UI_Composition_ICompositionEllipseGeometry <: IInspectable {
     func Center(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -13399,6 +13671,7 @@ public interface Microsoft_UI_Composition_ICompositionEllipseGeometry <: IInspec
 }
 
 // Microsoft.UI.Composition.ICompositionGeometricClip (synthetic:Microsoft_UI_Composition_ICompositionGeometricClip)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["e3c0a8c5-5297-5d69-8b91-f5330bb1cb27", "Microsoft.UI.Composition.ICompositionGeometricClip", "Geometry.value=Com;ViewBox.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionGeometricClip <: IInspectable {
     func Geometry(value: CPointer<CPointer<Unit>>): Int32
@@ -13408,6 +13681,7 @@ public interface Microsoft_UI_Composition_ICompositionGeometricClip <: IInspecta
 }
 
 // Microsoft.UI.Composition.ICompositionGeometry (synthetic:Microsoft_UI_Composition_ICompositionGeometry)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["4e40bdb2-450b-5a81-9e9b-149417980cc4", "Microsoft.UI.Composition.ICompositionGeometry"]
 public interface Microsoft_UI_Composition_ICompositionGeometry <: IInspectable {
     func TrimEnd(value: CPointer<Float32>): Int32
@@ -13419,11 +13693,13 @@ public interface Microsoft_UI_Composition_ICompositionGeometry <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionGeometryFactory (synthetic:Microsoft_UI_Composition_ICompositionGeometryFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["b2fb802b-c691-5554-8312-9c6d358d6b9e", "Microsoft.UI.Composition.ICompositionGeometryFactory"]
 public interface Microsoft_UI_Composition_ICompositionGeometryFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionGradientBrush (synthetic:Microsoft_UI_Composition_ICompositionGradientBrush)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["9165d1fb-c738-5f44-addc-309ee071d588", "Microsoft.UI.Composition.ICompositionGradientBrush", "ColorStops.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionGradientBrush <: IInspectable {
     func AnchorPoint(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -13448,6 +13724,7 @@ public interface Microsoft_UI_Composition_ICompositionGradientBrush <: IInspecta
 }
 
 // Microsoft.UI.Composition.ICompositionGradientBrush2 (synthetic:Microsoft_UI_Composition_ICompositionGradientBrush2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["03e9edf3-ee3d-58fc-8c0b-95e4b6060a94", "Microsoft.UI.Composition.ICompositionGradientBrush2"]
 public interface Microsoft_UI_Composition_ICompositionGradientBrush2 <: IInspectable {
     func MappingMode(value: CPointer<Int32>): Int32
@@ -13455,23 +13732,27 @@ public interface Microsoft_UI_Composition_ICompositionGradientBrush2 <: IInspect
 }
 
 // Microsoft.UI.Composition.ICompositionGradientBrushFactory (synthetic:Microsoft_UI_Composition_ICompositionGradientBrushFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["b043b155-4b40-590d-a0d9-f8c1a7e0c88f", "Microsoft.UI.Composition.ICompositionGradientBrushFactory"]
 public interface Microsoft_UI_Composition_ICompositionGradientBrushFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionLight (synthetic:Microsoft_UI_Composition_ICompositionLight)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["6d633e77-a6b8-5a2d-8235-e0c380c3b47b", "Microsoft.UI.Composition.ICompositionLight", "Targets.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionLight <: IInspectable {
     func Targets(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Composition.ICompositionLight2 (synthetic:Microsoft_UI_Composition_ICompositionLight2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["0bb940a4-05ef-5920-bae1-918b36d44380", "Microsoft.UI.Composition.ICompositionLight2", "ExclusionsFromTargets.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionLight2 <: IInspectable {
     func ExclusionsFromTargets(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Composition.ICompositionLight3 (synthetic:Microsoft_UI_Composition_ICompositionLight3)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["95ce4859-dd55-5c38-a3eb-13d053cebb1e", "Microsoft.UI.Composition.ICompositionLight3"]
 public interface Microsoft_UI_Composition_ICompositionLight3 <: IInspectable {
     func IsEnabled(value: CPointer<Bool>): Int32
@@ -13479,11 +13760,13 @@ public interface Microsoft_UI_Composition_ICompositionLight3 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionLightFactory (synthetic:Microsoft_UI_Composition_ICompositionLightFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["cb29caed-9245-51a6-ba56-addbaefa54cc", "Microsoft.UI.Composition.ICompositionLightFactory"]
 public interface Microsoft_UI_Composition_ICompositionLightFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionLineGeometry (synthetic:Microsoft_UI_Composition_ICompositionLineGeometry)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["489f9382-c186-5936-8946-c4f927e844aa", "Microsoft.UI.Composition.ICompositionLineGeometry"]
 public interface Microsoft_UI_Composition_ICompositionLineGeometry <: IInspectable {
     func Start(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -13493,6 +13776,7 @@ public interface Microsoft_UI_Composition_ICompositionLineGeometry <: IInspectab
 }
 
 // Microsoft.UI.Composition.ICompositionLinearGradientBrush (synthetic:Microsoft_UI_Composition_ICompositionLinearGradientBrush)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["f726fb52-270c-58b1-a902-89576772dedc", "Microsoft.UI.Composition.ICompositionLinearGradientBrush"]
 public interface Microsoft_UI_Composition_ICompositionLinearGradientBrush <: IInspectable {
     func EndPoint(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -13502,6 +13786,7 @@ public interface Microsoft_UI_Composition_ICompositionLinearGradientBrush <: IIn
 }
 
 // Microsoft.UI.Composition.ICompositionMaskBrush (synthetic:Microsoft_UI_Composition_ICompositionMaskBrush)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["c9502786-65aa-5be5-a679-c3b5dbfb0dc6", "Microsoft.UI.Composition.ICompositionMaskBrush", "Mask.value=Com;Source.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionMaskBrush <: IInspectable {
     func Mask(value: CPointer<CPointer<Unit>>): Int32
@@ -13511,6 +13796,7 @@ public interface Microsoft_UI_Composition_ICompositionMaskBrush <: IInspectable 
 }
 
 // Microsoft.UI.Composition.ICompositionNineGridBrush (synthetic:Microsoft_UI_Composition_ICompositionNineGridBrush)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["c77a3d21-c7ee-517a-98f4-ad9a7202bc86", "Microsoft.UI.Composition.ICompositionNineGridBrush", "Source.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionNineGridBrush <: IInspectable {
     func BottomInset(value: CPointer<Float32>): Int32
@@ -13540,6 +13826,7 @@ public interface Microsoft_UI_Composition_ICompositionNineGridBrush <: IInspecta
 }
 
 // Microsoft.UI.Composition.ICompositionObject (synthetic:Microsoft_UI_Composition_ICompositionObject)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["0e583d49-fb5e-5481-a426-d3c41e059a5a", "Microsoft.UI.Composition.ICompositionObject", "Compositor.value=Com;Properties.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionObject <: IInspectable {
     func Compositor(value: CPointer<CPointer<Unit>>): Int32
@@ -13549,6 +13836,7 @@ public interface Microsoft_UI_Composition_ICompositionObject <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionObject2 (synthetic:Microsoft_UI_Composition_ICompositionObject2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["bcbbfebf-799c-51ce-9c82-b6e49e7e62e1", "Microsoft.UI.Composition.ICompositionObject2", "Comment.value=HString;ImplicitAnimations.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionObject2 <: IInspectable {
     func Comment(value: CPointer<CPointer<Unit>>): Int32
@@ -13560,29 +13848,34 @@ public interface Microsoft_UI_Composition_ICompositionObject2 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionObject3 (synthetic:Microsoft_UI_Composition_ICompositionObject3)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["d43c5cf1-47df-52b8-b409-d5831503905e", "Microsoft.UI.Composition.ICompositionObject3", "DispatcherQueue.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionObject3 <: IInspectable {
     func DispatcherQueue(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Composition.ICompositionObject4 (synthetic:Microsoft_UI_Composition_ICompositionObject4)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["029ad57c-5497-51f3-8b40-e4e235992c6f", "Microsoft.UI.Composition.ICompositionObject4", "TryGetAnimationController.result=Com"]
 public interface Microsoft_UI_Composition_ICompositionObject4 <: IInspectable {
     func TryGetAnimationController(propertyName: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Composition.ICompositionObject5 (synthetic:Microsoft_UI_Composition_ICompositionObject5)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["85fd26d1-bb99-5392-9dce-a05cb81458a5", "Microsoft.UI.Composition.ICompositionObject5"]
 public interface Microsoft_UI_Composition_ICompositionObject5 <: IInspectable {
     func StartAnimationWithController(propertyName: CPointer<Unit>, animation: CPointer<Unit>, animationController: CPointer<Unit>): Int32
 }
 
 // Microsoft.UI.Composition.ICompositionObjectFactory (synthetic:Microsoft_UI_Composition_ICompositionObjectFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["6133c5f9-cd3b-56b2-876f-eb849db14911", "Microsoft.UI.Composition.ICompositionObjectFactory"]
 public interface Microsoft_UI_Composition_ICompositionObjectFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionObjectStatics (synthetic:Microsoft_UI_Composition_ICompositionObjectStatics)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["a091356c-38ae-514c-9b58-ad5c8c7936ad", "Microsoft.UI.Composition.ICompositionObjectStatics"]
 public interface Microsoft_UI_Composition_ICompositionObjectStatics <: IInspectable {
     func StartAnimationWithIAnimationObject(target: CPointer<Unit>, propertyName: CPointer<Unit>, animation: CPointer<Unit>): Int32
@@ -13590,17 +13883,20 @@ public interface Microsoft_UI_Composition_ICompositionObjectStatics <: IInspecta
 }
 
 // Microsoft.UI.Composition.ICompositionPath (synthetic:Microsoft_UI_Composition_ICompositionPath)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["17c518c0-d7a2-54be-ac7f-c408562a6a20", "Microsoft.UI.Composition.ICompositionPath"]
 public interface Microsoft_UI_Composition_ICompositionPath <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionPathFactory (synthetic:Microsoft_UI_Composition_ICompositionPathFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["87143312-d280-51d2-b75b-5d76ea86c285", "Microsoft.UI.Composition.ICompositionPathFactory", "Create.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionPathFactory <: IInspectable {
     func Create(source: CPointer<Unit>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Composition.ICompositionPathGeometry (synthetic:Microsoft_UI_Composition_ICompositionPathGeometry)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["0f6e6b82-060b-571e-b849-ab8e0d723962", "Microsoft.UI.Composition.ICompositionPathGeometry", "Path.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionPathGeometry <: IInspectable {
     func Path(value: CPointer<CPointer<Unit>>): Int32
@@ -13608,6 +13904,7 @@ public interface Microsoft_UI_Composition_ICompositionPathGeometry <: IInspectab
 }
 
 // Microsoft.UI.Composition.ICompositionProjectedShadow (synthetic:Microsoft_UI_Composition_ICompositionProjectedShadow)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["d400ab10-8b92-5abb-9e23-807974fc6961", "Microsoft.UI.Composition.ICompositionProjectedShadow", "Casters.value=Com;LightSource.value=Com;Receivers.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionProjectedShadow <: IInspectable {
     func BlurRadiusMultiplier(value: CPointer<Float32>): Int32
@@ -13623,6 +13920,7 @@ public interface Microsoft_UI_Composition_ICompositionProjectedShadow <: IInspec
 }
 
 // Microsoft.UI.Composition.ICompositionProjectedShadowCaster (synthetic:Microsoft_UI_Composition_ICompositionProjectedShadowCaster)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["15a9f2d0-6bae-521b-90c7-c7500f2bf562", "Microsoft.UI.Composition.ICompositionProjectedShadowCaster", "Brush.value=Com;CastingVisual.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionProjectedShadowCaster <: IInspectable {
     func Brush(value: CPointer<CPointer<Unit>>): Int32
@@ -13632,6 +13930,7 @@ public interface Microsoft_UI_Composition_ICompositionProjectedShadowCaster <: I
 }
 
 // Microsoft.UI.Composition.ICompositionProjectedShadowCasterCollection (synthetic:Microsoft_UI_Composition_ICompositionProjectedShadowCasterCollection)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["b120bfdc-533c-57a9-ae16-d43ba52472c4", "Microsoft.UI.Composition.ICompositionProjectedShadowCasterCollection"]
 public interface Microsoft_UI_Composition_ICompositionProjectedShadowCasterCollection <: IInspectable {
     func Count(value: CPointer<Int32>): Int32
@@ -13644,12 +13943,14 @@ public interface Microsoft_UI_Composition_ICompositionProjectedShadowCasterColle
 }
 
 // Microsoft.UI.Composition.ICompositionProjectedShadowCasterCollectionStatics (synthetic:Microsoft_UI_Composition_ICompositionProjectedShadowCasterCollectionStatics)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["43a98014-b88b-5b2a-b1e2-5e776ab77538", "Microsoft.UI.Composition.ICompositionProjectedShadowCasterCollectionStatics"]
 public interface Microsoft_UI_Composition_ICompositionProjectedShadowCasterCollectionStatics <: IInspectable {
     func MaxRespectedCasters(value: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Composition.ICompositionProjectedShadowReceiver (synthetic:Microsoft_UI_Composition_ICompositionProjectedShadowReceiver)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["29fe12b0-f1a0-50e1-af28-2e943bc819d6", "Microsoft.UI.Composition.ICompositionProjectedShadowReceiver", "ReceivingVisual.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionProjectedShadowReceiver <: IInspectable {
     func ReceivingVisual(value: CPointer<CPointer<Unit>>): Int32
@@ -13657,6 +13958,7 @@ public interface Microsoft_UI_Composition_ICompositionProjectedShadowReceiver <:
 }
 
 // Microsoft.UI.Composition.ICompositionProjectedShadowReceiverUnorderedCollection (synthetic:Microsoft_UI_Composition_ICompositionProjectedShadowReceiverUnorderedCollection)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["2d35f751-a1fa-5fff-b156-6d8fcd8362ed", "Microsoft.UI.Composition.ICompositionProjectedShadowReceiverUnorderedCollection"]
 public interface Microsoft_UI_Composition_ICompositionProjectedShadowReceiverUnorderedCollection <: IInspectable {
     func Add(value: CPointer<Unit>): Int32
@@ -13666,6 +13968,7 @@ public interface Microsoft_UI_Composition_ICompositionProjectedShadowReceiverUno
 }
 
 // Microsoft.UI.Composition.ICompositionPropertySet (synthetic:Microsoft_UI_Composition_ICompositionPropertySet)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["97f7a17b-97be-5545-9f1c-0b9d44577f57", "Microsoft.UI.Composition.ICompositionPropertySet"]
 public interface Microsoft_UI_Composition_ICompositionPropertySet <: IInspectable {
     func InsertColor(propertyName: CPointer<Unit>, value: Windows_UI_Color): Int32
@@ -13687,6 +13990,7 @@ public interface Microsoft_UI_Composition_ICompositionPropertySet <: IInspectabl
 }
 
 // Microsoft.UI.Composition.ICompositionPropertySet2 (synthetic:Microsoft_UI_Composition_ICompositionPropertySet2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["3db6d621-3497-55e4-95bf-8ae5e7c34c33", "Microsoft.UI.Composition.ICompositionPropertySet2"]
 public interface Microsoft_UI_Composition_ICompositionPropertySet2 <: IInspectable {
     func InsertBoolean(propertyName: CPointer<Unit>, value: Bool): Int32
@@ -13694,6 +13998,7 @@ public interface Microsoft_UI_Composition_ICompositionPropertySet2 <: IInspectab
 }
 
 // Microsoft.UI.Composition.ICompositionRadialGradientBrush (synthetic:Microsoft_UI_Composition_ICompositionRadialGradientBrush)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["17662f3f-d351-5435-b3b4-ec26cefeccc5", "Microsoft.UI.Composition.ICompositionRadialGradientBrush"]
 public interface Microsoft_UI_Composition_ICompositionRadialGradientBrush <: IInspectable {
     func EllipseCenter(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -13705,6 +14010,7 @@ public interface Microsoft_UI_Composition_ICompositionRadialGradientBrush <: IIn
 }
 
 // Microsoft.UI.Composition.ICompositionRectangleGeometry (synthetic:Microsoft_UI_Composition_ICompositionRectangleGeometry)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["bd551fcf-2c7f-5125-ac44-50a4f1d8fa76", "Microsoft.UI.Composition.ICompositionRectangleGeometry"]
 public interface Microsoft_UI_Composition_ICompositionRectangleGeometry <: IInspectable {
     func Offset(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -13714,6 +14020,7 @@ public interface Microsoft_UI_Composition_ICompositionRectangleGeometry <: IInsp
 }
 
 // Microsoft.UI.Composition.ICompositionRoundedRectangleGeometry (synthetic:Microsoft_UI_Composition_ICompositionRoundedRectangleGeometry)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["02eafc87-8d1f-5445-a416-d81baee8a750", "Microsoft.UI.Composition.ICompositionRoundedRectangleGeometry"]
 public interface Microsoft_UI_Composition_ICompositionRoundedRectangleGeometry <: IInspectable {
     func CornerRadius(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -13725,6 +14032,7 @@ public interface Microsoft_UI_Composition_ICompositionRoundedRectangleGeometry <
 }
 
 // Microsoft.UI.Composition.ICompositionScopedBatch (synthetic:Microsoft_UI_Composition_ICompositionScopedBatch)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["d31ca572-99ce-5969-b042-6c2d330a3859", "Microsoft.UI.Composition.ICompositionScopedBatch"]
 public interface Microsoft_UI_Composition_ICompositionScopedBatch <: IInspectable {
     func IsActive(value: CPointer<Bool>): Int32
@@ -13737,16 +14045,19 @@ public interface Microsoft_UI_Composition_ICompositionScopedBatch <: IInspectabl
 }
 
 // Microsoft.UI.Composition.ICompositionShadow (synthetic:Microsoft_UI_Composition_ICompositionShadow)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["176b8bb5-4dae-59b2-b9a0-2499b243267c", "Microsoft.UI.Composition.ICompositionShadow"]
 public interface Microsoft_UI_Composition_ICompositionShadow <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionShadowFactory (synthetic:Microsoft_UI_Composition_ICompositionShadowFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["ff27546d-9750-54ae-ab8c-126cbe9158c3", "Microsoft.UI.Composition.ICompositionShadowFactory"]
 public interface Microsoft_UI_Composition_ICompositionShadowFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionShape (synthetic:Microsoft_UI_Composition_ICompositionShape)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["ed75d4d8-437f-5640-9720-faae35ce5895", "Microsoft.UI.Composition.ICompositionShape"]
 public interface Microsoft_UI_Composition_ICompositionShape <: IInspectable {
     func CenterPoint(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -13764,11 +14075,13 @@ public interface Microsoft_UI_Composition_ICompositionShape <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionShapeFactory (synthetic:Microsoft_UI_Composition_ICompositionShapeFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["7aa2b987-9cdd-5b6e-8ac1-e989d78b4811", "Microsoft.UI.Composition.ICompositionShapeFactory"]
 public interface Microsoft_UI_Composition_ICompositionShapeFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionSpriteShape (synthetic:Microsoft_UI_Composition_ICompositionSpriteShape)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["982138f2-5781-509a-ba5d-112bcb0b98ef", "Microsoft.UI.Composition.ICompositionSpriteShape", "FillBrush.value=Com;Geometry.value=Com;StrokeBrush.value=Com;StrokeDashArray.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionSpriteShape <: IInspectable {
     func FillBrush(value: CPointer<CPointer<Unit>>): Int32
@@ -13797,6 +14110,7 @@ public interface Microsoft_UI_Composition_ICompositionSpriteShape <: IInspectabl
 }
 
 // Microsoft.UI.Composition.ICompositionSupportsSystemBackdrop (synthetic:Microsoft_UI_Composition_ICompositionSupportsSystemBackdrop)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["397dafe4-b6c2-5bb9-951d-f5707de8b7bc", "Microsoft.UI.Composition.ICompositionSupportsSystemBackdrop", "SystemBackdrop.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionSupportsSystemBackdrop <: IInspectable {
     func SystemBackdrop(value: CPointer<CPointer<Unit>>): Int32
@@ -13804,11 +14118,13 @@ public interface Microsoft_UI_Composition_ICompositionSupportsSystemBackdrop <: 
 }
 
 // Microsoft.UI.Composition.ICompositionSurface (synthetic:Microsoft_UI_Composition_ICompositionSurface)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["9ec612c3-a5d2-4f97-9df3-6b49ce736215", "Microsoft.UI.Composition.ICompositionSurface"]
 public interface Microsoft_UI_Composition_ICompositionSurface <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionSurfaceBrush (synthetic:Microsoft_UI_Composition_ICompositionSurfaceBrush)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["616bb5a5-0a33-512d-b4b1-3d3734f04aca", "Microsoft.UI.Composition.ICompositionSurfaceBrush", "Surface.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionSurfaceBrush <: IInspectable {
     func BitmapInterpolationMode(value: CPointer<Int32>): Int32
@@ -13824,6 +14140,7 @@ public interface Microsoft_UI_Composition_ICompositionSurfaceBrush <: IInspectab
 }
 
 // Microsoft.UI.Composition.ICompositionSurfaceBrush2 (synthetic:Microsoft_UI_Composition_ICompositionSurfaceBrush2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["9904b7e3-084b-58b5-9ae1-3a2040dd7a22", "Microsoft.UI.Composition.ICompositionSurfaceBrush2"]
 public interface Microsoft_UI_Composition_ICompositionSurfaceBrush2 <: IInspectable {
     func AnchorPoint(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -13843,6 +14160,7 @@ public interface Microsoft_UI_Composition_ICompositionSurfaceBrush2 <: IInspecta
 }
 
 // Microsoft.UI.Composition.ICompositionSurfaceBrush3 (synthetic:Microsoft_UI_Composition_ICompositionSurfaceBrush3)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["8aa74c78-680c-5791-ab07-92db0f37e352", "Microsoft.UI.Composition.ICompositionSurfaceBrush3"]
 public interface Microsoft_UI_Composition_ICompositionSurfaceBrush3 <: IInspectable {
     func SnapToPixels(value: CPointer<Bool>): Int32
@@ -13850,6 +14168,7 @@ public interface Microsoft_UI_Composition_ICompositionSurfaceBrush3 <: IInspecta
 }
 
 // Microsoft.UI.Composition.ICompositionViewBox (synthetic:Microsoft_UI_Composition_ICompositionViewBox)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["667e4071-addd-5ded-b6c0-09e03a14be7e", "Microsoft.UI.Composition.ICompositionViewBox"]
 public interface Microsoft_UI_Composition_ICompositionViewBox <: IInspectable {
     func HorizontalAlignmentRatio(value: CPointer<Float32>): Int32
@@ -13865,6 +14184,7 @@ public interface Microsoft_UI_Composition_ICompositionViewBox <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositionVisualSurface (synthetic:Microsoft_UI_Composition_ICompositionVisualSurface)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["49e3624b-4d2e-53e7-9e02-f64831681134", "Microsoft.UI.Composition.ICompositionVisualSurface", "SourceVisual.value=Com"]
 public interface Microsoft_UI_Composition_ICompositionVisualSurface <: IInspectable {
     func SourceVisual(value: CPointer<CPointer<Unit>>): Int32
@@ -13876,6 +14196,7 @@ public interface Microsoft_UI_Composition_ICompositionVisualSurface <: IInspecta
 }
 
 // Microsoft.UI.Composition.ICompositor (synthetic:Microsoft_UI_Composition_ICompositor)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["95213c13-c4cb-57de-b267-d21ab901ae38", "Microsoft.UI.Composition.ICompositor", "CreateColorKeyFrameAnimation.result=Com;CreateColorBrush.result=Com;CreateColorBrushWithColor.result=Com;CreateContainerVisual.result=Com;CreateCubicBezierEasingFunction.result=Com;CreateEffectFactory.result=Com;CreateEffectFactoryWithProperties.result=Com;CreateExpressionAnimation.result=Com;CreateExpressionAnimationWithExpression.result=Com;CreateInsetClip.result=Com;CreateInsetClipWithInsets.result=Com;CreateLinearEasingFunction.result=Com;CreatePropertySet.result=Com;CreateQuaternionKeyFrameAnimation.result=Com;CreateScalarKeyFrameAnimation.result=Com;CreateScopedBatch.result=Com;CreateSpriteVisual.result=Com;CreateSurfaceBrush.result=Com;CreateSurfaceBrushWithSurface.result=Com;CreateVector2KeyFrameAnimation.result=Com;CreateVector3KeyFrameAnimation.result=Com;CreateVector4KeyFrameAnimation.result=Com;GetCommitBatch.result=Com"]
 public interface Microsoft_UI_Composition_ICompositor <: IInspectable {
     func CreateColorKeyFrameAnimation(result: CPointer<CPointer<Unit>>): Int32
@@ -13904,6 +14225,7 @@ public interface Microsoft_UI_Composition_ICompositor <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositor2 (synthetic:Microsoft_UI_Composition_ICompositor2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["a9ffedad-3982-576d-a38a-c888ff605819", "Microsoft.UI.Composition.ICompositor2", "CreateAmbientLight.result=Com;CreateAnimationGroup.result=Com;CreateBackdropBrush.result=Com;CreateDistantLight.result=Com;CreateDropShadow.result=Com;CreateImplicitAnimationCollection.result=Com;CreateLayerVisual.result=Com;CreateMaskBrush.result=Com;CreateNineGridBrush.result=Com;CreatePointLight.result=Com;CreateSpotLight.result=Com;CreateStepEasingFunction.result=Com;CreateStepEasingFunctionWithStepCount.result=Com"]
 public interface Microsoft_UI_Composition_ICompositor2 <: IInspectable {
     func CreateAmbientLight(result: CPointer<CPointer<Unit>>): Int32
@@ -13922,6 +14244,7 @@ public interface Microsoft_UI_Composition_ICompositor2 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositor4 (synthetic:Microsoft_UI_Composition_ICompositor4)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["ee444bca-735c-5cf2-b79d-a6dd46c16160", "Microsoft.UI.Composition.ICompositor4", "CreateColorGradientStop.result=Com;CreateColorGradientStopWithOffsetAndColor.result=Com;CreateLinearGradientBrush.result=Com;CreateSpringScalarAnimation.result=Com;CreateSpringVector2Animation.result=Com;CreateSpringVector3Animation.result=Com"]
 public interface Microsoft_UI_Composition_ICompositor4 <: IInspectable {
     func CreateColorGradientStop(result: CPointer<CPointer<Unit>>): Int32
@@ -13933,6 +14256,7 @@ public interface Microsoft_UI_Composition_ICompositor4 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositor5 (synthetic:Microsoft_UI_Composition_ICompositor5)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["bb52d644-a030-5c19-b883-577ded739ae7", "Microsoft.UI.Composition.ICompositor5", "Comment.value=HString;CreateBounceScalarAnimation.result=Com;CreateBounceVector2Animation.result=Com;CreateBounceVector3Animation.result=Com;CreateContainerShape.result=Com;CreateEllipseGeometry.result=Com;CreateLineGeometry.result=Com;CreatePathGeometry.result=Com;CreatePathGeometryWithPath.result=Com;CreatePathKeyFrameAnimation.result=Com;CreateRectangleGeometry.result=Com;CreateRoundedRectangleGeometry.result=Com;CreateShapeVisual.result=Com;CreateSpriteShape.result=Com;CreateSpriteShapeWithGeometry.result=Com;CreateViewBox.result=Com;RequestCommitAsync.operation=Com"]
 public interface Microsoft_UI_Composition_ICompositor5 <: IInspectable {
     func Comment(value: CPointer<CPointer<Unit>>): Int32
@@ -13958,6 +14282,7 @@ public interface Microsoft_UI_Composition_ICompositor5 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositor6 (synthetic:Microsoft_UI_Composition_ICompositor6)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["5fd20200-c188-5737-b567-5e61741af19c", "Microsoft.UI.Composition.ICompositor6", "CreateGeometricClip.result=Com;CreateGeometricClipWithGeometry.result=Com;CreateRedirectVisual.result=Com;CreateRedirectVisualWithSourceVisual.result=Com;CreateBooleanKeyFrameAnimation.result=Com"]
 public interface Microsoft_UI_Composition_ICompositor6 <: IInspectable {
     func CreateGeometricClip(result: CPointer<CPointer<Unit>>): Int32
@@ -13968,6 +14293,7 @@ public interface Microsoft_UI_Composition_ICompositor6 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositor7 (synthetic:Microsoft_UI_Composition_ICompositor7)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["5358b81b-4799-5e7c-906c-e3df3b2e95eb", "Microsoft.UI.Composition.ICompositor7", "DispatcherQueue.value=Com;CreateAnimationPropertyInfo.result=Com;CreateRectangleClip.result=Com;CreateRectangleClipWithSides.result=Com;CreateRectangleClipWithSidesAndRadius.result=Com"]
 public interface Microsoft_UI_Composition_ICompositor7 <: IInspectable {
     func DispatcherQueue(value: CPointer<CPointer<Unit>>): Int32
@@ -13978,12 +14304,14 @@ public interface Microsoft_UI_Composition_ICompositor7 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositor8 (synthetic:Microsoft_UI_Composition_ICompositor8)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["02f5c9ee-a3c0-577a-9d23-44024c8eacda", "Microsoft.UI.Composition.ICompositor8", "CreateAnimationController.result=Com"]
 public interface Microsoft_UI_Composition_ICompositor8 <: IInspectable {
     func CreateAnimationController(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Composition.ICompositorStatics (synthetic:Microsoft_UI_Composition_ICompositorStatics)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["6baa947a-f103-55c6-91ad-3d275bea65c4", "Microsoft.UI.Composition.ICompositorStatics"]
 public interface Microsoft_UI_Composition_ICompositorStatics <: IInspectable {
     func MaxGlobalPlaybackRate(value: CPointer<Float32>): Int32
@@ -13991,6 +14319,7 @@ public interface Microsoft_UI_Composition_ICompositorStatics <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICompositorWithProjectedShadow (synthetic:Microsoft_UI_Composition_ICompositorWithProjectedShadow)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["60ab2bf2-b95c-5944-8b36-c9773b9f5256", "Microsoft.UI.Composition.ICompositorWithProjectedShadow", "CreateProjectedShadowCaster.result=Com;CreateProjectedShadow.result=Com;CreateProjectedShadowReceiver.result=Com"]
 public interface Microsoft_UI_Composition_ICompositorWithProjectedShadow <: IInspectable {
     func CreateProjectedShadowCaster(result: CPointer<CPointer<Unit>>): Int32
@@ -13999,29 +14328,34 @@ public interface Microsoft_UI_Composition_ICompositorWithProjectedShadow <: IIns
 }
 
 // Microsoft.UI.Composition.ICompositorWithRadialGradient (synthetic:Microsoft_UI_Composition_ICompositorWithRadialGradient)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["fa4f8f7d-5cc7-5c9c-883b-fe878a2f3e30", "Microsoft.UI.Composition.ICompositorWithRadialGradient", "CreateRadialGradientBrush.result=Com"]
 public interface Microsoft_UI_Composition_ICompositorWithRadialGradient <: IInspectable {
     func CreateRadialGradientBrush(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Composition.ICompositorWithVisualSurface (synthetic:Microsoft_UI_Composition_ICompositorWithVisualSurface)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["5fcfe24a-690a-5378-acee-561e84bfb982", "Microsoft.UI.Composition.ICompositorWithVisualSurface", "CreateVisualSurface.result=Com"]
 public interface Microsoft_UI_Composition_ICompositorWithVisualSurface <: IInspectable {
     func CreateVisualSurface(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Composition.IContainerVisual (synthetic:Microsoft_UI_Composition_IContainerVisual)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["c70dbce1-2c2f-5d8e-91a4-aae1121e6186", "Microsoft.UI.Composition.IContainerVisual", "Children.value=Com"]
 public interface Microsoft_UI_Composition_IContainerVisual <: IInspectable {
     func Children(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Composition.IContainerVisualFactory (synthetic:Microsoft_UI_Composition_IContainerVisualFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["3fa45eeb-c6dd-5afd-971d-eaaf6245e716", "Microsoft.UI.Composition.IContainerVisualFactory"]
 public interface Microsoft_UI_Composition_IContainerVisualFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ICubicBezierEasingFunction (synthetic:Microsoft_UI_Composition_ICubicBezierEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["35e7fcde-f9ce-590a-8b88-64a82a6b4b48", "Microsoft.UI.Composition.ICubicBezierEasingFunction"]
 public interface Microsoft_UI_Composition_ICubicBezierEasingFunction <: IInspectable {
     func ControlPoint1(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -14029,6 +14363,7 @@ public interface Microsoft_UI_Composition_ICubicBezierEasingFunction <: IInspect
 }
 
 // Microsoft.UI.Composition.IDistantLight (synthetic:Microsoft_UI_Composition_IDistantLight)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["125ef556-56ee-5c60-b944-571928ca03f5", "Microsoft.UI.Composition.IDistantLight", "CoordinateSpace.value=Com"]
 public interface Microsoft_UI_Composition_IDistantLight <: IInspectable {
     func Color(value: CPointer<Windows_UI_Color>): Int32
@@ -14040,6 +14375,7 @@ public interface Microsoft_UI_Composition_IDistantLight <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IDistantLight2 (synthetic:Microsoft_UI_Composition_IDistantLight2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["9f97bfec-b6b9-51ee-8480-b546468c748f", "Microsoft.UI.Composition.IDistantLight2"]
 public interface Microsoft_UI_Composition_IDistantLight2 <: IInspectable {
     func Intensity(value: CPointer<Float32>): Int32
@@ -14047,6 +14383,7 @@ public interface Microsoft_UI_Composition_IDistantLight2 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IDropShadow (synthetic:Microsoft_UI_Composition_IDropShadow)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["977095d2-265f-5f58-9789-cb7f85e98c9e", "Microsoft.UI.Composition.IDropShadow", "Mask.value=Com"]
 public interface Microsoft_UI_Composition_IDropShadow <: IInspectable {
     func BlurRadius(value: CPointer<Float32>): Int32
@@ -14062,6 +14399,7 @@ public interface Microsoft_UI_Composition_IDropShadow <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IDropShadow2 (synthetic:Microsoft_UI_Composition_IDropShadow2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["cbc7c266-2d33-5711-b3b4-5699410bef56", "Microsoft.UI.Composition.IDropShadow2"]
 public interface Microsoft_UI_Composition_IDropShadow2 <: IInspectable {
     func SourcePolicy(value: CPointer<Int32>): Int32
@@ -14069,6 +14407,7 @@ public interface Microsoft_UI_Composition_IDropShadow2 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IElasticEasingFunction (synthetic:Microsoft_UI_Composition_IElasticEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["b952e12f-4a50-51a9-a11a-23855f4aae07", "Microsoft.UI.Composition.IElasticEasingFunction"]
 public interface Microsoft_UI_Composition_IElasticEasingFunction <: IInspectable {
     func Mode(value: CPointer<Int32>): Int32
@@ -14077,6 +14416,7 @@ public interface Microsoft_UI_Composition_IElasticEasingFunction <: IInspectable
 }
 
 // Microsoft.UI.Composition.IExponentialEasingFunction (synthetic:Microsoft_UI_Composition_IExponentialEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["df29ecc1-3ffc-565f-9d6c-533586908106", "Microsoft.UI.Composition.IExponentialEasingFunction"]
 public interface Microsoft_UI_Composition_IExponentialEasingFunction <: IInspectable {
     func Mode(value: CPointer<Int32>): Int32
@@ -14084,6 +14424,7 @@ public interface Microsoft_UI_Composition_IExponentialEasingFunction <: IInspect
 }
 
 // Microsoft.UI.Composition.IExpressionAnimation (synthetic:Microsoft_UI_Composition_IExpressionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["7fff5826-1992-56c0-9060-5ade561a4f2d", "Microsoft.UI.Composition.IExpressionAnimation", "Expression.value=HString"]
 public interface Microsoft_UI_Composition_IExpressionAnimation <: IInspectable {
     func Expression(value: CPointer<CPointer<Unit>>): Int32
@@ -14091,11 +14432,13 @@ public interface Microsoft_UI_Composition_IExpressionAnimation <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IImplicitAnimationCollection (synthetic:Microsoft_UI_Composition_IImplicitAnimationCollection)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["c5c0689e-f5ae-5bed-829b-c522cda39717", "Microsoft.UI.Composition.IImplicitAnimationCollection"]
 public interface Microsoft_UI_Composition_IImplicitAnimationCollection <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IInsetClip (synthetic:Microsoft_UI_Composition_IInsetClip)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["f9d99475-7b59-5b28-a1d2-b832da6988c9", "Microsoft.UI.Composition.IInsetClip"]
 public interface Microsoft_UI_Composition_IInsetClip <: IInspectable {
     func BottomInset(value: CPointer<Float32>): Int32
@@ -14109,6 +14452,7 @@ public interface Microsoft_UI_Composition_IInsetClip <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IKeyFrameAnimation (synthetic:Microsoft_UI_Composition_IKeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["5a8f57f0-f059-5b47-b308-c4c80fc71248", "Microsoft.UI.Composition.IKeyFrameAnimation"]
 public interface Microsoft_UI_Composition_IKeyFrameAnimation <: IInspectable {
     func DelayTime(value: CPointer<Windows_Foundation_TimeSpan>): Int32
@@ -14127,6 +14471,7 @@ public interface Microsoft_UI_Composition_IKeyFrameAnimation <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IKeyFrameAnimation2 (synthetic:Microsoft_UI_Composition_IKeyFrameAnimation2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["414692e5-8a7e-58ea-83e1-25ce475d9300", "Microsoft.UI.Composition.IKeyFrameAnimation2"]
 public interface Microsoft_UI_Composition_IKeyFrameAnimation2 <: IInspectable {
     func Direction(value: CPointer<Int32>): Int32
@@ -14134,6 +14479,7 @@ public interface Microsoft_UI_Composition_IKeyFrameAnimation2 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IKeyFrameAnimation3 (synthetic:Microsoft_UI_Composition_IKeyFrameAnimation3)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["4f97e180-9bcb-5fc4-abbe-43aa3be327e7", "Microsoft.UI.Composition.IKeyFrameAnimation3"]
 public interface Microsoft_UI_Composition_IKeyFrameAnimation3 <: IInspectable {
     func DelayBehavior(value: CPointer<Int32>): Int32
@@ -14141,11 +14487,13 @@ public interface Microsoft_UI_Composition_IKeyFrameAnimation3 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IKeyFrameAnimationFactory (synthetic:Microsoft_UI_Composition_IKeyFrameAnimationFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["7cccfc87-3baf-5100-b5f8-2f779f954f19", "Microsoft.UI.Composition.IKeyFrameAnimationFactory"]
 public interface Microsoft_UI_Composition_IKeyFrameAnimationFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ILayerVisual (synthetic:Microsoft_UI_Composition_ILayerVisual)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["64d05ca1-3bf6-5d4f-98a1-7500f2f23ebe", "Microsoft.UI.Composition.ILayerVisual", "Effect.value=Com"]
 public interface Microsoft_UI_Composition_ILayerVisual <: IInspectable {
     func Effect(value: CPointer<CPointer<Unit>>): Int32
@@ -14153,6 +14501,7 @@ public interface Microsoft_UI_Composition_ILayerVisual <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ILayerVisual2 (synthetic:Microsoft_UI_Composition_ILayerVisual2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["9ab2e401-af45-54da-9991-dd31273155d2", "Microsoft.UI.Composition.ILayerVisual2", "Shadow.value=Com"]
 public interface Microsoft_UI_Composition_ILayerVisual2 <: IInspectable {
     func Shadow(value: CPointer<CPointer<Unit>>): Int32
@@ -14160,11 +14509,13 @@ public interface Microsoft_UI_Composition_ILayerVisual2 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ILinearEasingFunction (synthetic:Microsoft_UI_Composition_ILinearEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["79bfeef6-70c7-50a6-bb3a-0e9636148695", "Microsoft.UI.Composition.ILinearEasingFunction"]
 public interface Microsoft_UI_Composition_ILinearEasingFunction <: IInspectable {
 }
 
 // Microsoft.UI.Composition.INaturalMotionAnimation (synthetic:Microsoft_UI_Composition_INaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["2ff54ebb-a035-50be-a73c-20014975ee31", "Microsoft.UI.Composition.INaturalMotionAnimation"]
 public interface Microsoft_UI_Composition_INaturalMotionAnimation <: IInspectable {
     func DelayBehavior(value: CPointer<Int32>): Int32
@@ -14176,11 +14527,13 @@ public interface Microsoft_UI_Composition_INaturalMotionAnimation <: IInspectabl
 }
 
 // Microsoft.UI.Composition.INaturalMotionAnimationFactory (synthetic:Microsoft_UI_Composition_INaturalMotionAnimationFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["0411a259-2622-59e2-a59e-1e23d8f83a9f", "Microsoft.UI.Composition.INaturalMotionAnimationFactory"]
 public interface Microsoft_UI_Composition_INaturalMotionAnimationFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IPathKeyFrameAnimation (synthetic:Microsoft_UI_Composition_IPathKeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["2b692808-43da-5118-b66d-904a3ec74fd9", "Microsoft.UI.Composition.IPathKeyFrameAnimation"]
 public interface Microsoft_UI_Composition_IPathKeyFrameAnimation <: IInspectable {
     func InsertKeyFrame(normalizedProgressKey: Float32, path: CPointer<Unit>): Int32
@@ -14188,6 +14541,7 @@ public interface Microsoft_UI_Composition_IPathKeyFrameAnimation <: IInspectable
 }
 
 // Microsoft.UI.Composition.IPointLight (synthetic:Microsoft_UI_Composition_IPointLight)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["ed5cc102-f0ac-59a8-8678-ce54146e7be8", "Microsoft.UI.Composition.IPointLight", "CoordinateSpace.value=Com"]
 public interface Microsoft_UI_Composition_IPointLight <: IInspectable {
     func Color(value: CPointer<Windows_UI_Color>): Int32
@@ -14205,6 +14559,7 @@ public interface Microsoft_UI_Composition_IPointLight <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IPointLight2 (synthetic:Microsoft_UI_Composition_IPointLight2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["de466104-59d9-57d2-92b5-554d6d82edf2", "Microsoft.UI.Composition.IPointLight2"]
 public interface Microsoft_UI_Composition_IPointLight2 <: IInspectable {
     func Intensity(value: CPointer<Float32>): Int32
@@ -14212,6 +14567,7 @@ public interface Microsoft_UI_Composition_IPointLight2 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IPointLight3 (synthetic:Microsoft_UI_Composition_IPointLight3)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["be30e87a-8cbb-5a56-8d24-2cd865f383b3", "Microsoft.UI.Composition.IPointLight3"]
 public interface Microsoft_UI_Composition_IPointLight3 <: IInspectable {
     func MinAttenuationCutoff(value: CPointer<Float32>): Int32
@@ -14221,6 +14577,7 @@ public interface Microsoft_UI_Composition_IPointLight3 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IPowerEasingFunction (synthetic:Microsoft_UI_Composition_IPowerEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["0268a272-ea06-5fb0-8def-49726bcee39b", "Microsoft.UI.Composition.IPowerEasingFunction"]
 public interface Microsoft_UI_Composition_IPowerEasingFunction <: IInspectable {
     func Mode(value: CPointer<Int32>): Int32
@@ -14228,6 +14585,7 @@ public interface Microsoft_UI_Composition_IPowerEasingFunction <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IQuaternionKeyFrameAnimation (synthetic:Microsoft_UI_Composition_IQuaternionKeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["e72d1026-da3b-5d56-858b-3a9aa3c57d70", "Microsoft.UI.Composition.IQuaternionKeyFrameAnimation"]
 public interface Microsoft_UI_Composition_IQuaternionKeyFrameAnimation <: IInspectable {
     func InsertKeyFrame(normalizedProgressKey: Float32, value: Windows_Foundation_Numerics_Quaternion): Int32
@@ -14235,6 +14593,7 @@ public interface Microsoft_UI_Composition_IQuaternionKeyFrameAnimation <: IInspe
 }
 
 // Microsoft.UI.Composition.IRectangleClip (synthetic:Microsoft_UI_Composition_IRectangleClip)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["bc261502-2259-5c01-8616-556110a09657", "Microsoft.UI.Composition.IRectangleClip"]
 public interface Microsoft_UI_Composition_IRectangleClip <: IInspectable {
     func Bottom(value: CPointer<Float32>): Int32
@@ -14256,6 +14615,7 @@ public interface Microsoft_UI_Composition_IRectangleClip <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IRedirectVisual (synthetic:Microsoft_UI_Composition_IRedirectVisual)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["6c10081a-cde1-50d9-ac05-78d6845b656f", "Microsoft.UI.Composition.IRedirectVisual", "Source.value=Com"]
 public interface Microsoft_UI_Composition_IRedirectVisual <: IInspectable {
     func Source(value: CPointer<CPointer<Unit>>): Int32
@@ -14263,6 +14623,7 @@ public interface Microsoft_UI_Composition_IRedirectVisual <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IScalarKeyFrameAnimation (synthetic:Microsoft_UI_Composition_IScalarKeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["5a5f8abe-d129-5b25-8aff-8180fd9bfb22", "Microsoft.UI.Composition.IScalarKeyFrameAnimation"]
 public interface Microsoft_UI_Composition_IScalarKeyFrameAnimation <: IInspectable {
     func InsertKeyFrame(normalizedProgressKey: Float32, value: Float32): Int32
@@ -14270,6 +14631,7 @@ public interface Microsoft_UI_Composition_IScalarKeyFrameAnimation <: IInspectab
 }
 
 // Microsoft.UI.Composition.IScalarNaturalMotionAnimation (synthetic:Microsoft_UI_Composition_IScalarNaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["903224b0-2dbe-56eb-b9ea-33d2e3113181", "Microsoft.UI.Composition.IScalarNaturalMotionAnimation", "FinalValue.value=Com;InitialValue.value=Com"]
 public interface Microsoft_UI_Composition_IScalarNaturalMotionAnimation <: IInspectable {
     func FinalValue(value: CPointer<CPointer<Unit>>): Int32
@@ -14281,11 +14643,13 @@ public interface Microsoft_UI_Composition_IScalarNaturalMotionAnimation <: IInsp
 }
 
 // Microsoft.UI.Composition.IScalarNaturalMotionAnimationFactory (synthetic:Microsoft_UI_Composition_IScalarNaturalMotionAnimationFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["14f8a9ab-976c-5e6f-890b-9a74d07fa39f", "Microsoft.UI.Composition.IScalarNaturalMotionAnimationFactory"]
 public interface Microsoft_UI_Composition_IScalarNaturalMotionAnimationFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IShapeVisual (synthetic:Microsoft_UI_Composition_IShapeVisual)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["a911c80b-a5a5-5aca-b8ff-c43f08f06143", "Microsoft.UI.Composition.IShapeVisual", "Shapes.value=Com;ViewBox.value=Com"]
 public interface Microsoft_UI_Composition_IShapeVisual <: IInspectable {
     func Shapes(value: CPointer<CPointer<Unit>>): Int32
@@ -14294,12 +14658,14 @@ public interface Microsoft_UI_Composition_IShapeVisual <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ISineEasingFunction (synthetic:Microsoft_UI_Composition_ISineEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["7fccb5f8-cb0e-5a01-a26b-98880ff49dc6", "Microsoft.UI.Composition.ISineEasingFunction"]
 public interface Microsoft_UI_Composition_ISineEasingFunction <: IInspectable {
     func Mode(value: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Composition.ISpotLight (synthetic:Microsoft_UI_Composition_ISpotLight)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["5935496a-0586-5f77-bd03-d5a6bb9e8fa0", "Microsoft.UI.Composition.ISpotLight", "CoordinateSpace.value=Com"]
 public interface Microsoft_UI_Composition_ISpotLight <: IInspectable {
     func ConstantAttenuation(value: CPointer<Float32>): Int32
@@ -14329,6 +14695,7 @@ public interface Microsoft_UI_Composition_ISpotLight <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ISpotLight2 (synthetic:Microsoft_UI_Composition_ISpotLight2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["49dd3b50-ec5c-5b6c-baa1-8504b13e3a67", "Microsoft.UI.Composition.ISpotLight2"]
 public interface Microsoft_UI_Composition_ISpotLight2 <: IInspectable {
     func InnerConeIntensity(value: CPointer<Float32>): Int32
@@ -14338,6 +14705,7 @@ public interface Microsoft_UI_Composition_ISpotLight2 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ISpotLight3 (synthetic:Microsoft_UI_Composition_ISpotLight3)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["c6919941-0d9f-58c8-91e2-adef6e5e70a4", "Microsoft.UI.Composition.ISpotLight3"]
 public interface Microsoft_UI_Composition_ISpotLight3 <: IInspectable {
     func MinAttenuationCutoff(value: CPointer<Float32>): Int32
@@ -14347,6 +14715,7 @@ public interface Microsoft_UI_Composition_ISpotLight3 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ISpringScalarNaturalMotionAnimation (synthetic:Microsoft_UI_Composition_ISpringScalarNaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["6f720afd-d3d0-5e78-9c2e-83092f6ea45e", "Microsoft.UI.Composition.ISpringScalarNaturalMotionAnimation"]
 public interface Microsoft_UI_Composition_ISpringScalarNaturalMotionAnimation <: IInspectable {
     func DampingRatio(value: CPointer<Float32>): Int32
@@ -14356,6 +14725,7 @@ public interface Microsoft_UI_Composition_ISpringScalarNaturalMotionAnimation <:
 }
 
 // Microsoft.UI.Composition.ISpringVector2NaturalMotionAnimation (synthetic:Microsoft_UI_Composition_ISpringVector2NaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["5b4580a4-2594-521e-b288-eaf2c2a16a66", "Microsoft.UI.Composition.ISpringVector2NaturalMotionAnimation"]
 public interface Microsoft_UI_Composition_ISpringVector2NaturalMotionAnimation <: IInspectable {
     func DampingRatio(value: CPointer<Float32>): Int32
@@ -14365,6 +14735,7 @@ public interface Microsoft_UI_Composition_ISpringVector2NaturalMotionAnimation <
 }
 
 // Microsoft.UI.Composition.ISpringVector3NaturalMotionAnimation (synthetic:Microsoft_UI_Composition_ISpringVector3NaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["02d9e1c6-7434-5464-a1f6-d644ce1fc9a6", "Microsoft.UI.Composition.ISpringVector3NaturalMotionAnimation"]
 public interface Microsoft_UI_Composition_ISpringVector3NaturalMotionAnimation <: IInspectable {
     func DampingRatio(value: CPointer<Float32>): Int32
@@ -14374,6 +14745,7 @@ public interface Microsoft_UI_Composition_ISpringVector3NaturalMotionAnimation <
 }
 
 // Microsoft.UI.Composition.ISpriteVisual (synthetic:Microsoft_UI_Composition_ISpriteVisual)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["7e964632-45e4-5761-806d-5b4022c14f26", "Microsoft.UI.Composition.ISpriteVisual", "Brush.value=Com"]
 public interface Microsoft_UI_Composition_ISpriteVisual <: IInspectable {
     func Brush(value: CPointer<CPointer<Unit>>): Int32
@@ -14381,6 +14753,7 @@ public interface Microsoft_UI_Composition_ISpriteVisual <: IInspectable {
 }
 
 // Microsoft.UI.Composition.ISpriteVisual2 (synthetic:Microsoft_UI_Composition_ISpriteVisual2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["3cb43662-9ecf-5128-850d-9eb8437774f0", "Microsoft.UI.Composition.ISpriteVisual2", "Shadow.value=Com"]
 public interface Microsoft_UI_Composition_ISpriteVisual2 <: IInspectable {
     func Shadow(value: CPointer<CPointer<Unit>>): Int32
@@ -14388,6 +14761,7 @@ public interface Microsoft_UI_Composition_ISpriteVisual2 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IStepEasingFunction (synthetic:Microsoft_UI_Composition_IStepEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["c7b1d4cf-c562-56b3-b4e6-b21326165f71", "Microsoft.UI.Composition.IStepEasingFunction"]
 public interface Microsoft_UI_Composition_IStepEasingFunction <: IInspectable {
     func FinalStep(value: CPointer<Int32>): Int32
@@ -14403,6 +14777,7 @@ public interface Microsoft_UI_Composition_IStepEasingFunction <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IVector2KeyFrameAnimation (synthetic:Microsoft_UI_Composition_IVector2KeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["e9c5e3fd-43b7-526e-9da0-4c3ea96db27d", "Microsoft.UI.Composition.IVector2KeyFrameAnimation"]
 public interface Microsoft_UI_Composition_IVector2KeyFrameAnimation <: IInspectable {
     func InsertKeyFrame(normalizedProgressKey: Float32, value: Windows_Foundation_Numerics_Vector2): Int32
@@ -14410,6 +14785,7 @@ public interface Microsoft_UI_Composition_IVector2KeyFrameAnimation <: IInspecta
 }
 
 // Microsoft.UI.Composition.IVector2NaturalMotionAnimation (synthetic:Microsoft_UI_Composition_IVector2NaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["e00e60ce-d1be-5c24-885d-c1d0a749d109", "Microsoft.UI.Composition.IVector2NaturalMotionAnimation", "FinalValue.value=Com;InitialValue.value=Com"]
 public interface Microsoft_UI_Composition_IVector2NaturalMotionAnimation <: IInspectable {
     func FinalValue(value: CPointer<CPointer<Unit>>): Int32
@@ -14421,11 +14797,13 @@ public interface Microsoft_UI_Composition_IVector2NaturalMotionAnimation <: IIns
 }
 
 // Microsoft.UI.Composition.IVector2NaturalMotionAnimationFactory (synthetic:Microsoft_UI_Composition_IVector2NaturalMotionAnimationFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["e39aead8-80f9-5f64-8644-e9e5646b796f", "Microsoft.UI.Composition.IVector2NaturalMotionAnimationFactory"]
 public interface Microsoft_UI_Composition_IVector2NaturalMotionAnimationFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IVector3KeyFrameAnimation (synthetic:Microsoft_UI_Composition_IVector3KeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["d7da980e-2dde-5dd1-a40c-d6868dd2449e", "Microsoft.UI.Composition.IVector3KeyFrameAnimation"]
 public interface Microsoft_UI_Composition_IVector3KeyFrameAnimation <: IInspectable {
     func InsertKeyFrame(normalizedProgressKey: Float32, value: Windows_Foundation_Numerics_Vector3): Int32
@@ -14433,6 +14811,7 @@ public interface Microsoft_UI_Composition_IVector3KeyFrameAnimation <: IInspecta
 }
 
 // Microsoft.UI.Composition.IVector3NaturalMotionAnimation (synthetic:Microsoft_UI_Composition_IVector3NaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["13feeef2-d2c0-5b72-ad67-983a19b9b783", "Microsoft.UI.Composition.IVector3NaturalMotionAnimation", "FinalValue.value=Com;InitialValue.value=Com"]
 public interface Microsoft_UI_Composition_IVector3NaturalMotionAnimation <: IInspectable {
     func FinalValue(value: CPointer<CPointer<Unit>>): Int32
@@ -14444,11 +14823,13 @@ public interface Microsoft_UI_Composition_IVector3NaturalMotionAnimation <: IIns
 }
 
 // Microsoft.UI.Composition.IVector3NaturalMotionAnimationFactory (synthetic:Microsoft_UI_Composition_IVector3NaturalMotionAnimationFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["428241cb-be9c-5c2a-939c-ec78aa60bb8a", "Microsoft.UI.Composition.IVector3NaturalMotionAnimationFactory"]
 public interface Microsoft_UI_Composition_IVector3NaturalMotionAnimationFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IVector4KeyFrameAnimation (synthetic:Microsoft_UI_Composition_IVector4KeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["16cea3b9-c5e3-5f6f-b5c7-da29a31ccfc7", "Microsoft.UI.Composition.IVector4KeyFrameAnimation"]
 public interface Microsoft_UI_Composition_IVector4KeyFrameAnimation <: IInspectable {
     func InsertKeyFrame(normalizedProgressKey: Float32, value: Windows_Foundation_Numerics_Vector4): Int32
@@ -14456,6 +14837,7 @@ public interface Microsoft_UI_Composition_IVector4KeyFrameAnimation <: IInspecta
 }
 
 // Microsoft.UI.Composition.IVisual (synthetic:Microsoft_UI_Composition_IVisual)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["c0eeab6c-c897-5ac6-a1c9-63abd5055b9b", "Microsoft.UI.Composition.IVisual", "Clip.value=Com;Parent.value=Com"]
 public interface Microsoft_UI_Composition_IVisual <: IInspectable {
     func AnchorPoint(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -14494,6 +14876,7 @@ public interface Microsoft_UI_Composition_IVisual <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IVisual2 (synthetic:Microsoft_UI_Composition_IVisual2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["492a7995-0c5c-5993-a283-52e4da3050ee", "Microsoft.UI.Composition.IVisual2", "ParentForTransform.value=Com"]
 public interface Microsoft_UI_Composition_IVisual2 <: IInspectable {
     func ParentForTransform(value: CPointer<CPointer<Unit>>): Int32
@@ -14505,6 +14888,7 @@ public interface Microsoft_UI_Composition_IVisual2 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IVisual3 (synthetic:Microsoft_UI_Composition_IVisual3)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["972b70b0-950d-5656-a380-bd4a70775868", "Microsoft.UI.Composition.IVisual3"]
 public interface Microsoft_UI_Composition_IVisual3 <: IInspectable {
     func IsHitTestVisible(value: CPointer<Bool>): Int32
@@ -14512,6 +14896,7 @@ public interface Microsoft_UI_Composition_IVisual3 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IVisual4 (synthetic:Microsoft_UI_Composition_IVisual4)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["27cb223f-c431-57ac-b61e-d6b7515d579f", "Microsoft.UI.Composition.IVisual4"]
 public interface Microsoft_UI_Composition_IVisual4 <: IInspectable {
     func IsPixelSnappingEnabled(value: CPointer<Bool>): Int32
@@ -14519,6 +14904,7 @@ public interface Microsoft_UI_Composition_IVisual4 <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IVisualCollection (synthetic:Microsoft_UI_Composition_IVisualCollection)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["d002896d-67d8-5f69-ab70-581fa3bf370f", "Microsoft.UI.Composition.IVisualCollection"]
 public interface Microsoft_UI_Composition_IVisualCollection <: IInspectable {
     func Count(value: CPointer<Int32>): Int32
@@ -14531,22 +14917,26 @@ public interface Microsoft_UI_Composition_IVisualCollection <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IVisualElement (synthetic:Microsoft_UI_Composition_IVisualElement)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["2180f1f5-b5d8-4bf6-920a-12006e63efef", "Microsoft.UI.Composition.IVisualElement"]
 public interface Microsoft_UI_Composition_IVisualElement <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IVisualElement2 (synthetic:Microsoft_UI_Composition_IVisualElement2)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["bc950c8d-1db0-53aa-9dee-34271cd18ce6", "Microsoft.UI.Composition.IVisualElement2", "GetVisualInternal.result=Com"]
 public interface Microsoft_UI_Composition_IVisualElement2 <: IInspectable {
     func GetVisualInternal(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Composition.IVisualFactory (synthetic:Microsoft_UI_Composition_IVisualFactory)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["77bb4668-83fa-5bb5-b78b-5e6fdc3d4038", "Microsoft.UI.Composition.IVisualFactory"]
 public interface Microsoft_UI_Composition_IVisualFactory <: IInspectable {
 }
 
 // Microsoft.UI.Composition.IVisualUnorderedCollection (synthetic:Microsoft_UI_Composition_IVisualUnorderedCollection)
+@When[Microsoft_UI_Composition == "on"]
 @Interface["4a97216e-793e-54e3-96e8-f9db790119cd", "Microsoft.UI.Composition.IVisualUnorderedCollection"]
 public interface Microsoft_UI_Composition_IVisualUnorderedCollection <: IInspectable {
     func Count(value: CPointer<Int32>): Int32
@@ -14556,6 +14946,7 @@ public interface Microsoft_UI_Composition_IVisualUnorderedCollection <: IInspect
 }
 
 // Microsoft.UI.Composition.ImplicitAnimationCollection (synthetic:Microsoft_UI_Composition_ImplicitAnimationCollection)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_ImplicitAnimationCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -14677,6 +15068,7 @@ public class Microsoft_UI_Composition_ImplicitAnimationCollection <: windows_int
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_ImplicitAnimationCollection <: windows_core.HandleWinrtType<Microsoft_UI_Composition_ImplicitAnimationCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_ImplicitAnimationCollection): CPointer<Unit> {
         value.asRaw()
@@ -14695,6 +15087,7 @@ extend Microsoft_UI_Composition_ImplicitAnimationCollection <: windows_core.Hand
 }
 
 // Microsoft.UI.Composition.InitialValueExpressionCollection (synthetic:Microsoft_UI_Composition_InitialValueExpressionCollection)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_InitialValueExpressionCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -14894,6 +15287,7 @@ public class Microsoft_UI_Composition_InitialValueExpressionCollection <: window
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_InitialValueExpressionCollection <: windows_core.HandleWinrtType<Microsoft_UI_Composition_InitialValueExpressionCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_InitialValueExpressionCollection): CPointer<Unit> {
         value.asRaw()
@@ -14912,6 +15306,7 @@ extend Microsoft_UI_Composition_InitialValueExpressionCollection <: windows_core
 }
 
 // Microsoft.UI.Composition.InsetClip (synthetic:Microsoft_UI_Composition_InsetClip)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_InsetClip <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -15109,6 +15504,7 @@ public class Microsoft_UI_Composition_InsetClip <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_InsetClip <: windows_core.HandleWinrtType<Microsoft_UI_Composition_InsetClip> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_InsetClip): CPointer<Unit> {
         value.asRaw()
@@ -15127,6 +15523,7 @@ extend Microsoft_UI_Composition_InsetClip <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Composition.KeyFrameAnimation (synthetic:Microsoft_UI_Composition_KeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_KeyFrameAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -15412,6 +15809,7 @@ public class Microsoft_UI_Composition_KeyFrameAnimation <: windows_interface.Int
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_KeyFrameAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_KeyFrameAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_KeyFrameAnimation): CPointer<Unit> {
         value.asRaw()
@@ -15430,6 +15828,7 @@ extend Microsoft_UI_Composition_KeyFrameAnimation <: windows_core.HandleWinrtTyp
 }
 
 // Microsoft.UI.Composition.LayerVisual (synthetic:Microsoft_UI_Composition_LayerVisual)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_LayerVisual <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -15604,6 +16003,7 @@ public class Microsoft_UI_Composition_LayerVisual <: windows_interface.Interface
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_LayerVisual <: windows_core.HandleWinrtType<Microsoft_UI_Composition_LayerVisual> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_LayerVisual): CPointer<Unit> {
         value.asRaw()
@@ -15622,6 +16022,7 @@ extend Microsoft_UI_Composition_LayerVisual <: windows_core.HandleWinrtType<Micr
 }
 
 // Microsoft.UI.Composition.LinearEasingFunction (synthetic:Microsoft_UI_Composition_LinearEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_LinearEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -15736,6 +16137,7 @@ public class Microsoft_UI_Composition_LinearEasingFunction <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_LinearEasingFunction <: windows_core.HandleWinrtType<Microsoft_UI_Composition_LinearEasingFunction> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_LinearEasingFunction): CPointer<Unit> {
         value.asRaw()
@@ -15754,6 +16156,7 @@ extend Microsoft_UI_Composition_LinearEasingFunction <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Composition.NaturalMotionAnimation (synthetic:Microsoft_UI_Composition_NaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_NaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -15953,6 +16356,7 @@ public class Microsoft_UI_Composition_NaturalMotionAnimation <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_NaturalMotionAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_NaturalMotionAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_NaturalMotionAnimation): CPointer<Unit> {
         value.asRaw()
@@ -15971,6 +16375,7 @@ extend Microsoft_UI_Composition_NaturalMotionAnimation <: windows_core.HandleWin
 }
 
 // Microsoft.UI.Composition.PathKeyFrameAnimation (synthetic:Microsoft_UI_Composition_PathKeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_PathKeyFrameAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -16156,6 +16561,7 @@ public class Microsoft_UI_Composition_PathKeyFrameAnimation <: windows_interface
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_PathKeyFrameAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_PathKeyFrameAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_PathKeyFrameAnimation): CPointer<Unit> {
         value.asRaw()
@@ -16174,6 +16580,7 @@ extend Microsoft_UI_Composition_PathKeyFrameAnimation <: windows_core.HandleWinr
 }
 
 // Microsoft.UI.Composition.PointLight (synthetic:Microsoft_UI_Composition_PointLight)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_PointLight <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -16436,6 +16843,7 @@ public class Microsoft_UI_Composition_PointLight <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_PointLight <: windows_core.HandleWinrtType<Microsoft_UI_Composition_PointLight> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_PointLight): CPointer<Unit> {
         value.asRaw()
@@ -16454,6 +16862,7 @@ extend Microsoft_UI_Composition_PointLight <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Composition.PowerEasingFunction (synthetic:Microsoft_UI_Composition_PowerEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_PowerEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -16592,6 +17001,7 @@ public class Microsoft_UI_Composition_PowerEasingFunction <: windows_interface.I
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_PowerEasingFunction <: windows_core.HandleWinrtType<Microsoft_UI_Composition_PowerEasingFunction> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_PowerEasingFunction): CPointer<Unit> {
         value.asRaw()
@@ -16610,6 +17020,7 @@ extend Microsoft_UI_Composition_PowerEasingFunction <: windows_core.HandleWinrtT
 }
 
 // Microsoft.UI.Composition.QuaternionKeyFrameAnimation (synthetic:Microsoft_UI_Composition_QuaternionKeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_QuaternionKeyFrameAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -16791,6 +17202,7 @@ public class Microsoft_UI_Composition_QuaternionKeyFrameAnimation <: windows_int
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_QuaternionKeyFrameAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_QuaternionKeyFrameAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_QuaternionKeyFrameAnimation): CPointer<Unit> {
         value.asRaw()
@@ -16809,6 +17221,7 @@ extend Microsoft_UI_Composition_QuaternionKeyFrameAnimation <: windows_core.Hand
 }
 
 // Microsoft.UI.Composition.RectangleClip (synthetic:Microsoft_UI_Composition_RectangleClip)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_RectangleClip <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -17082,6 +17495,7 @@ public class Microsoft_UI_Composition_RectangleClip <: windows_interface.Interfa
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_RectangleClip <: windows_core.HandleWinrtType<Microsoft_UI_Composition_RectangleClip> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_RectangleClip): CPointer<Unit> {
         value.asRaw()
@@ -17100,6 +17514,7 @@ extend Microsoft_UI_Composition_RectangleClip <: windows_core.HandleWinrtType<Mi
 }
 
 // Microsoft.UI.Composition.RedirectVisual (synthetic:Microsoft_UI_Composition_RedirectVisual)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_RedirectVisual <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -17267,6 +17682,7 @@ public class Microsoft_UI_Composition_RedirectVisual <: windows_interface.Interf
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_RedirectVisual <: windows_core.HandleWinrtType<Microsoft_UI_Composition_RedirectVisual> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_RedirectVisual): CPointer<Unit> {
         value.asRaw()
@@ -17285,6 +17701,7 @@ extend Microsoft_UI_Composition_RedirectVisual <: windows_core.HandleWinrtType<M
 }
 
 // Microsoft.UI.Composition.ScalarKeyFrameAnimation (synthetic:Microsoft_UI_Composition_ScalarKeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_ScalarKeyFrameAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -17466,6 +17883,7 @@ public class Microsoft_UI_Composition_ScalarKeyFrameAnimation <: windows_interfa
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_ScalarKeyFrameAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_ScalarKeyFrameAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_ScalarKeyFrameAnimation): CPointer<Unit> {
         value.asRaw()
@@ -17484,6 +17902,7 @@ extend Microsoft_UI_Composition_ScalarKeyFrameAnimation <: windows_core.HandleWi
 }
 
 // Microsoft.UI.Composition.ScalarNaturalMotionAnimation (synthetic:Microsoft_UI_Composition_ScalarNaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_ScalarNaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -17702,6 +18121,7 @@ public class Microsoft_UI_Composition_ScalarNaturalMotionAnimation <: windows_in
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_ScalarNaturalMotionAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_ScalarNaturalMotionAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_ScalarNaturalMotionAnimation): CPointer<Unit> {
         value.asRaw()
@@ -17720,6 +18140,7 @@ extend Microsoft_UI_Composition_ScalarNaturalMotionAnimation <: windows_core.Han
 }
 
 // Microsoft.UI.Composition.ShapeVisual (synthetic:Microsoft_UI_Composition_ShapeVisual)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_ShapeVisual <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -17903,6 +18324,7 @@ public class Microsoft_UI_Composition_ShapeVisual <: windows_interface.Interface
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_ShapeVisual <: windows_core.HandleWinrtType<Microsoft_UI_Composition_ShapeVisual> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_ShapeVisual): CPointer<Unit> {
         value.asRaw()
@@ -17921,6 +18343,7 @@ extend Microsoft_UI_Composition_ShapeVisual <: windows_core.HandleWinrtType<Micr
 }
 
 // Microsoft.UI.Composition.SineEasingFunction (synthetic:Microsoft_UI_Composition_SineEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_SineEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18047,6 +18470,7 @@ public class Microsoft_UI_Composition_SineEasingFunction <: windows_interface.In
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_SineEasingFunction <: windows_core.HandleWinrtType<Microsoft_UI_Composition_SineEasingFunction> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_SineEasingFunction): CPointer<Unit> {
         value.asRaw()
@@ -18065,6 +18489,7 @@ extend Microsoft_UI_Composition_SineEasingFunction <: windows_core.HandleWinrtTy
 }
 
 // Microsoft.UI.Composition.SpotLight (synthetic:Microsoft_UI_Composition_SpotLight)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_SpotLight <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18441,6 +18866,7 @@ public class Microsoft_UI_Composition_SpotLight <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_SpotLight <: windows_core.HandleWinrtType<Microsoft_UI_Composition_SpotLight> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_SpotLight): CPointer<Unit> {
         value.asRaw()
@@ -18459,6 +18885,7 @@ extend Microsoft_UI_Composition_SpotLight <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Composition.SpringScalarNaturalMotionAnimation (synthetic:Microsoft_UI_Composition_SpringScalarNaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_SpringScalarNaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18653,6 +19080,7 @@ public class Microsoft_UI_Composition_SpringScalarNaturalMotionAnimation <: wind
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_SpringScalarNaturalMotionAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_SpringScalarNaturalMotionAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_SpringScalarNaturalMotionAnimation): CPointer<Unit> {
         value.asRaw()
@@ -18671,6 +19099,7 @@ extend Microsoft_UI_Composition_SpringScalarNaturalMotionAnimation <: windows_co
 }
 
 // Microsoft.UI.Composition.SpringVector2NaturalMotionAnimation (synthetic:Microsoft_UI_Composition_SpringVector2NaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_SpringVector2NaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -18865,6 +19294,7 @@ public class Microsoft_UI_Composition_SpringVector2NaturalMotionAnimation <: win
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_SpringVector2NaturalMotionAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_SpringVector2NaturalMotionAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_SpringVector2NaturalMotionAnimation): CPointer<Unit> {
         value.asRaw()
@@ -18883,6 +19313,7 @@ extend Microsoft_UI_Composition_SpringVector2NaturalMotionAnimation <: windows_c
 }
 
 // Microsoft.UI.Composition.SpringVector3NaturalMotionAnimation (synthetic:Microsoft_UI_Composition_SpringVector3NaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_SpringVector3NaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19077,6 +19508,7 @@ public class Microsoft_UI_Composition_SpringVector3NaturalMotionAnimation <: win
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_SpringVector3NaturalMotionAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_SpringVector3NaturalMotionAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_SpringVector3NaturalMotionAnimation): CPointer<Unit> {
         value.asRaw()
@@ -19095,6 +19527,7 @@ extend Microsoft_UI_Composition_SpringVector3NaturalMotionAnimation <: windows_c
 }
 
 // Microsoft.UI.Composition.SpriteVisual (synthetic:Microsoft_UI_Composition_SpriteVisual)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_SpriteVisual <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19269,6 +19702,7 @@ public class Microsoft_UI_Composition_SpriteVisual <: windows_interface.Interfac
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_SpriteVisual <: windows_core.HandleWinrtType<Microsoft_UI_Composition_SpriteVisual> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_SpriteVisual): CPointer<Unit> {
         value.asRaw()
@@ -19287,6 +19721,7 @@ extend Microsoft_UI_Composition_SpriteVisual <: windows_core.HandleWinrtType<Mic
 }
 
 // Microsoft.UI.Composition.StepEasingFunction (synthetic:Microsoft_UI_Composition_StepEasingFunction)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_StepEasingFunction <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19496,6 +19931,7 @@ public class Microsoft_UI_Composition_StepEasingFunction <: windows_interface.In
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_StepEasingFunction <: windows_core.HandleWinrtType<Microsoft_UI_Composition_StepEasingFunction> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_StepEasingFunction): CPointer<Unit> {
         value.asRaw()
@@ -19514,6 +19950,7 @@ extend Microsoft_UI_Composition_StepEasingFunction <: windows_core.HandleWinrtTy
 }
 
 // Microsoft.UI.Composition.SystemBackdrops.ISystemBackdropConfiguration (synthetic:Microsoft_UI_Composition_SystemBackdrops_ISystemBackdropConfiguration)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
 @Interface["ebcce1b9-0e0c-5431-ab0e-00f3f0669962", "Microsoft.UI.Composition.SystemBackdrops.ISystemBackdropConfiguration", "HighContrastBackgroundColor.value=Com"]
 public interface Microsoft_UI_Composition_SystemBackdrops_ISystemBackdropConfiguration <: IInspectable {
     func HighContrastBackgroundColor(value: CPointer<CPointer<Unit>>): Int32
@@ -19527,6 +19964,7 @@ public interface Microsoft_UI_Composition_SystemBackdrops_ISystemBackdropConfigu
 }
 
 // Microsoft.UI.Composition.SystemBackdrops.SystemBackdropConfiguration (synthetic:Microsoft_UI_Composition_SystemBackdrops_SystemBackdropConfiguration)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
 public class Microsoft_UI_Composition_SystemBackdrops_SystemBackdropConfiguration <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19678,6 +20116,7 @@ public class Microsoft_UI_Composition_SystemBackdrops_SystemBackdropConfiguratio
     }
 }
 
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
 extend Microsoft_UI_Composition_SystemBackdrops_SystemBackdropConfiguration <: windows_core.HandleWinrtType<Microsoft_UI_Composition_SystemBackdrops_SystemBackdropConfiguration> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_SystemBackdrops_SystemBackdropConfiguration): CPointer<Unit> {
         value.asRaw()
@@ -19696,6 +20135,7 @@ extend Microsoft_UI_Composition_SystemBackdrops_SystemBackdropConfiguration <: w
 }
 
 // Microsoft.UI.Composition.SystemBackdrops.SystemBackdropTheme (synthetic:Microsoft_UI_Composition_SystemBackdrops_SystemBackdropTheme)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
 public struct Microsoft_UI_Composition_SystemBackdrops_SystemBackdropTheme {
     public let value: Int32
     public init() {
@@ -19705,11 +20145,15 @@ public struct Microsoft_UI_Composition_SystemBackdrops_SystemBackdropTheme {
         this.value = value
     }
 }
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
 public let Microsoft_UI_Composition_SystemBackdrops_SystemBackdropTheme_Default = Microsoft_UI_Composition_SystemBackdrops_SystemBackdropTheme(0)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
 public let Microsoft_UI_Composition_SystemBackdrops_SystemBackdropTheme_Light = Microsoft_UI_Composition_SystemBackdrops_SystemBackdropTheme(1)
+@When[Microsoft_UI_Composition_SystemBackdrops == "on"]
 public let Microsoft_UI_Composition_SystemBackdrops_SystemBackdropTheme_Dark = Microsoft_UI_Composition_SystemBackdrops_SystemBackdropTheme(2)
 
 // Microsoft.UI.Composition.Vector2KeyFrameAnimation (synthetic:Microsoft_UI_Composition_Vector2KeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_Vector2KeyFrameAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -19891,6 +20335,7 @@ public class Microsoft_UI_Composition_Vector2KeyFrameAnimation <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_Vector2KeyFrameAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_Vector2KeyFrameAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_Vector2KeyFrameAnimation): CPointer<Unit> {
         value.asRaw()
@@ -19909,6 +20354,7 @@ extend Microsoft_UI_Composition_Vector2KeyFrameAnimation <: windows_core.HandleW
 }
 
 // Microsoft.UI.Composition.Vector2NaturalMotionAnimation (synthetic:Microsoft_UI_Composition_Vector2NaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_Vector2NaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20127,6 +20573,7 @@ public class Microsoft_UI_Composition_Vector2NaturalMotionAnimation <: windows_i
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_Vector2NaturalMotionAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_Vector2NaturalMotionAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_Vector2NaturalMotionAnimation): CPointer<Unit> {
         value.asRaw()
@@ -20145,6 +20592,7 @@ extend Microsoft_UI_Composition_Vector2NaturalMotionAnimation <: windows_core.Ha
 }
 
 // Microsoft.UI.Composition.Vector3KeyFrameAnimation (synthetic:Microsoft_UI_Composition_Vector3KeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_Vector3KeyFrameAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20326,6 +20774,7 @@ public class Microsoft_UI_Composition_Vector3KeyFrameAnimation <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_Vector3KeyFrameAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_Vector3KeyFrameAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_Vector3KeyFrameAnimation): CPointer<Unit> {
         value.asRaw()
@@ -20344,6 +20793,7 @@ extend Microsoft_UI_Composition_Vector3KeyFrameAnimation <: windows_core.HandleW
 }
 
 // Microsoft.UI.Composition.Vector3NaturalMotionAnimation (synthetic:Microsoft_UI_Composition_Vector3NaturalMotionAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_Vector3NaturalMotionAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20562,6 +21012,7 @@ public class Microsoft_UI_Composition_Vector3NaturalMotionAnimation <: windows_i
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_Vector3NaturalMotionAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_Vector3NaturalMotionAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_Vector3NaturalMotionAnimation): CPointer<Unit> {
         value.asRaw()
@@ -20580,6 +21031,7 @@ extend Microsoft_UI_Composition_Vector3NaturalMotionAnimation <: windows_core.Ha
 }
 
 // Microsoft.UI.Composition.Vector4KeyFrameAnimation (synthetic:Microsoft_UI_Composition_Vector4KeyFrameAnimation)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_Vector4KeyFrameAnimation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -20761,6 +21213,7 @@ public class Microsoft_UI_Composition_Vector4KeyFrameAnimation <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_Vector4KeyFrameAnimation <: windows_core.HandleWinrtType<Microsoft_UI_Composition_Vector4KeyFrameAnimation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_Vector4KeyFrameAnimation): CPointer<Unit> {
         value.asRaw()
@@ -20779,6 +21232,7 @@ extend Microsoft_UI_Composition_Vector4KeyFrameAnimation <: windows_core.HandleW
 }
 
 // Microsoft.UI.Composition.Visual (synthetic:Microsoft_UI_Composition_Visual)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_Visual <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -21233,6 +21687,7 @@ public class Microsoft_UI_Composition_Visual <: windows_interface.InterfaceWrapp
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_Visual <: windows_core.HandleWinrtType<Microsoft_UI_Composition_Visual> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_Visual): CPointer<Unit> {
         value.asRaw()
@@ -21251,6 +21706,7 @@ extend Microsoft_UI_Composition_Visual <: windows_core.HandleWinrtType<Microsoft
 }
 
 // Microsoft.UI.Composition.VisualCollection (synthetic:Microsoft_UI_Composition_VisualCollection)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_VisualCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -21439,6 +21895,7 @@ public class Microsoft_UI_Composition_VisualCollection <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_VisualCollection <: windows_core.HandleWinrtType<Microsoft_UI_Composition_VisualCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_VisualCollection): CPointer<Unit> {
         value.asRaw()
@@ -21457,6 +21914,7 @@ extend Microsoft_UI_Composition_VisualCollection <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Composition.VisualUnorderedCollection (synthetic:Microsoft_UI_Composition_VisualUnorderedCollection)
+@When[Microsoft_UI_Composition == "on"]
 public class Microsoft_UI_Composition_VisualUnorderedCollection <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -21611,6 +22069,7 @@ public class Microsoft_UI_Composition_VisualUnorderedCollection <: windows_inter
     }
 }
 
+@When[Microsoft_UI_Composition == "on"]
 extend Microsoft_UI_Composition_VisualUnorderedCollection <: windows_core.HandleWinrtType<Microsoft_UI_Composition_VisualUnorderedCollection> {
     public static func intoWinrtHandle(value: Microsoft_UI_Composition_VisualUnorderedCollection): CPointer<Unit> {
         value.asRaw()
@@ -21629,6 +22088,7 @@ extend Microsoft_UI_Composition_VisualUnorderedCollection <: windows_core.Handle
 }
 
 // Microsoft.UI.Content.ChildSiteLink (synthetic:Microsoft_UI_Content_ChildSiteLink)
+@When[Microsoft_UI_Content == "on"]
 public class Microsoft_UI_Content_ChildSiteLink <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -21838,6 +22298,7 @@ public class Microsoft_UI_Content_ChildSiteLink <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Content == "on"]
 extend Microsoft_UI_Content_ChildSiteLink <: windows_core.HandleWinrtType<Microsoft_UI_Content_ChildSiteLink> {
     public static func intoWinrtHandle(value: Microsoft_UI_Content_ChildSiteLink): CPointer<Unit> {
         value.asRaw()
@@ -21856,6 +22317,7 @@ extend Microsoft_UI_Content_ChildSiteLink <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Content.ContentAutomationOptions (synthetic:Microsoft_UI_Content_ContentAutomationOptions)
+@When[Microsoft_UI_Content == "on"]
 public struct Microsoft_UI_Content_ContentAutomationOptions {
     public let value: Int32
     public init() {
@@ -21865,11 +22327,15 @@ public struct Microsoft_UI_Content_ContentAutomationOptions {
         this.value = value
     }
 }
+@When[Microsoft_UI_Content == "on"]
 public let Microsoft_UI_Content_ContentAutomationOptions_None = Microsoft_UI_Content_ContentAutomationOptions(0)
+@When[Microsoft_UI_Content == "on"]
 public let Microsoft_UI_Content_ContentAutomationOptions_FrameworkBased = Microsoft_UI_Content_ContentAutomationOptions(1)
+@When[Microsoft_UI_Content == "on"]
 public let Microsoft_UI_Content_ContentAutomationOptions_FragmentBased = Microsoft_UI_Content_ContentAutomationOptions(2)
 
 // Microsoft.UI.Content.ContentCoordinateConverter (synthetic:Microsoft_UI_Content_ContentCoordinateConverter)
+@When[Microsoft_UI_Content == "on"]
 public class Microsoft_UI_Content_ContentCoordinateConverter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -22099,6 +22565,7 @@ public class Microsoft_UI_Content_ContentCoordinateConverter <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Content == "on"]
 extend Microsoft_UI_Content_ContentCoordinateConverter <: windows_core.HandleWinrtType<Microsoft_UI_Content_ContentCoordinateConverter> {
     public static func intoWinrtHandle(value: Microsoft_UI_Content_ContentCoordinateConverter): CPointer<Unit> {
         value.asRaw()
@@ -22117,6 +22584,7 @@ extend Microsoft_UI_Content_ContentCoordinateConverter <: windows_core.HandleWin
 }
 
 // Microsoft.UI.Content.ContentCoordinateRoundingMode (synthetic:Microsoft_UI_Content_ContentCoordinateRoundingMode)
+@When[Microsoft_UI_Content == "on"]
 public struct Microsoft_UI_Content_ContentCoordinateRoundingMode {
     public let value: Int32
     public init() {
@@ -22126,12 +22594,17 @@ public struct Microsoft_UI_Content_ContentCoordinateRoundingMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Content == "on"]
 public let Microsoft_UI_Content_ContentCoordinateRoundingMode_Auto = Microsoft_UI_Content_ContentCoordinateRoundingMode(0)
+@When[Microsoft_UI_Content == "on"]
 public let Microsoft_UI_Content_ContentCoordinateRoundingMode_Floor = Microsoft_UI_Content_ContentCoordinateRoundingMode(1)
+@When[Microsoft_UI_Content == "on"]
 public let Microsoft_UI_Content_ContentCoordinateRoundingMode_Round = Microsoft_UI_Content_ContentCoordinateRoundingMode(2)
+@When[Microsoft_UI_Content == "on"]
 public let Microsoft_UI_Content_ContentCoordinateRoundingMode_Ceiling = Microsoft_UI_Content_ContentCoordinateRoundingMode(3)
 
 // Microsoft.UI.Content.ContentDeferral (synthetic:Microsoft_UI_Content_ContentDeferral)
+@When[Microsoft_UI_Content == "on"]
 public class Microsoft_UI_Content_ContentDeferral <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -22198,6 +22671,7 @@ public class Microsoft_UI_Content_ContentDeferral <: windows_interface.Interface
     }
 }
 
+@When[Microsoft_UI_Content == "on"]
 extend Microsoft_UI_Content_ContentDeferral <: windows_core.HandleWinrtType<Microsoft_UI_Content_ContentDeferral> {
     public static func intoWinrtHandle(value: Microsoft_UI_Content_ContentDeferral): CPointer<Unit> {
         value.asRaw()
@@ -22216,6 +22690,7 @@ extend Microsoft_UI_Content_ContentDeferral <: windows_core.HandleWinrtType<Micr
 }
 
 // Microsoft.UI.Content.ContentEnvironmentSettingChangedEventArgs (synthetic:Microsoft_UI_Content_ContentEnvironmentSettingChangedEventArgs)
+@When[Microsoft_UI_Content == "on"]
 public class Microsoft_UI_Content_ContentEnvironmentSettingChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -22290,6 +22765,7 @@ public class Microsoft_UI_Content_ContentEnvironmentSettingChangedEventArgs <: w
     }
 }
 
+@When[Microsoft_UI_Content == "on"]
 extend Microsoft_UI_Content_ContentEnvironmentSettingChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Content_ContentEnvironmentSettingChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Content_ContentEnvironmentSettingChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -22308,6 +22784,7 @@ extend Microsoft_UI_Content_ContentEnvironmentSettingChangedEventArgs <: windows
 }
 
 // Microsoft.UI.Content.ContentEnvironmentStateChangedEventArgs (synthetic:Microsoft_UI_Content_ContentEnvironmentStateChangedEventArgs)
+@When[Microsoft_UI_Content == "on"]
 public class Microsoft_UI_Content_ContentEnvironmentStateChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -22397,6 +22874,7 @@ public class Microsoft_UI_Content_ContentEnvironmentStateChangedEventArgs <: win
     }
 }
 
+@When[Microsoft_UI_Content == "on"]
 extend Microsoft_UI_Content_ContentEnvironmentStateChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Content_ContentEnvironmentStateChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Content_ContentEnvironmentStateChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -22415,6 +22893,7 @@ extend Microsoft_UI_Content_ContentEnvironmentStateChangedEventArgs <: windows_c
 }
 
 // Microsoft.UI.Content.ContentIsland (synthetic:Microsoft_UI_Content_ContentIsland)
+@When[Microsoft_UI_Content == "on"]
 public class Microsoft_UI_Content_ContentIsland <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -22946,6 +23425,7 @@ public class Microsoft_UI_Content_ContentIsland <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Content == "on"]
 extend Microsoft_UI_Content_ContentIsland <: windows_core.HandleWinrtType<Microsoft_UI_Content_ContentIsland> {
     public static func intoWinrtHandle(value: Microsoft_UI_Content_ContentIsland): CPointer<Unit> {
         value.asRaw()
@@ -22964,6 +23444,7 @@ extend Microsoft_UI_Content_ContentIsland <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Content.ContentIslandAutomationProviderRequestedEventArgs (synthetic:Microsoft_UI_Content_ContentIslandAutomationProviderRequestedEventArgs)
+@When[Microsoft_UI_Content == "on"]
 public class Microsoft_UI_Content_ContentIslandAutomationProviderRequestedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -23066,6 +23547,7 @@ public class Microsoft_UI_Content_ContentIslandAutomationProviderRequestedEventA
     }
 }
 
+@When[Microsoft_UI_Content == "on"]
 extend Microsoft_UI_Content_ContentIslandAutomationProviderRequestedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Content_ContentIslandAutomationProviderRequestedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Content_ContentIslandAutomationProviderRequestedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -23084,6 +23566,7 @@ extend Microsoft_UI_Content_ContentIslandAutomationProviderRequestedEventArgs <:
 }
 
 // Microsoft.UI.Content.ContentIslandEnvironment (synthetic:Microsoft_UI_Content_ContentIslandEnvironment)
+@When[Microsoft_UI_Content == "on"]
 public class Microsoft_UI_Content_ContentIslandEnvironment <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -23213,6 +23696,7 @@ public class Microsoft_UI_Content_ContentIslandEnvironment <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Content == "on"]
 extend Microsoft_UI_Content_ContentIslandEnvironment <: windows_core.HandleWinrtType<Microsoft_UI_Content_ContentIslandEnvironment> {
     public static func intoWinrtHandle(value: Microsoft_UI_Content_ContentIslandEnvironment): CPointer<Unit> {
         value.asRaw()
@@ -23231,6 +23715,7 @@ extend Microsoft_UI_Content_ContentIslandEnvironment <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Content.ContentIslandStateChangedEventArgs (synthetic:Microsoft_UI_Content_ContentIslandStateChangedEventArgs)
+@When[Microsoft_UI_Content == "on"]
 public class Microsoft_UI_Content_ContentIslandStateChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -23356,6 +23841,7 @@ public class Microsoft_UI_Content_ContentIslandStateChangedEventArgs <: windows_
     }
 }
 
+@When[Microsoft_UI_Content == "on"]
 extend Microsoft_UI_Content_ContentIslandStateChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Content_ContentIslandStateChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Content_ContentIslandStateChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -23374,6 +23860,7 @@ extend Microsoft_UI_Content_ContentIslandStateChangedEventArgs <: windows_core.H
 }
 
 // Microsoft.UI.Content.ContentLayoutDirection (synthetic:Microsoft_UI_Content_ContentLayoutDirection)
+@When[Microsoft_UI_Content == "on"]
 public struct Microsoft_UI_Content_ContentLayoutDirection {
     public let value: Int32
     public init() {
@@ -23383,10 +23870,13 @@ public struct Microsoft_UI_Content_ContentLayoutDirection {
         this.value = value
     }
 }
+@When[Microsoft_UI_Content == "on"]
 public let Microsoft_UI_Content_ContentLayoutDirection_LeftToRight = Microsoft_UI_Content_ContentLayoutDirection(0)
+@When[Microsoft_UI_Content == "on"]
 public let Microsoft_UI_Content_ContentLayoutDirection_RightToLeft = Microsoft_UI_Content_ContentLayoutDirection(1)
 
 // Microsoft.UI.Content.ContentSiteAutomationProviderRequestedEventArgs (synthetic:Microsoft_UI_Content_ContentSiteAutomationProviderRequestedEventArgs)
+@When[Microsoft_UI_Content == "on"]
 public class Microsoft_UI_Content_ContentSiteAutomationProviderRequestedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -23489,6 +23979,7 @@ public class Microsoft_UI_Content_ContentSiteAutomationProviderRequestedEventArg
     }
 }
 
+@When[Microsoft_UI_Content == "on"]
 extend Microsoft_UI_Content_ContentSiteAutomationProviderRequestedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Content_ContentSiteAutomationProviderRequestedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Content_ContentSiteAutomationProviderRequestedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -23507,6 +23998,7 @@ extend Microsoft_UI_Content_ContentSiteAutomationProviderRequestedEventArgs <: w
 }
 
 // Microsoft.UI.Content.ContentSiteEnvironmentView (synthetic:Microsoft_UI_Content_ContentSiteEnvironmentView)
+@When[Microsoft_UI_Content == "on"]
 public class Microsoft_UI_Content_ContentSiteEnvironmentView <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -23596,6 +24088,7 @@ public class Microsoft_UI_Content_ContentSiteEnvironmentView <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Content == "on"]
 extend Microsoft_UI_Content_ContentSiteEnvironmentView <: windows_core.HandleWinrtType<Microsoft_UI_Content_ContentSiteEnvironmentView> {
     public static func intoWinrtHandle(value: Microsoft_UI_Content_ContentSiteEnvironmentView): CPointer<Unit> {
         value.asRaw()
@@ -23614,6 +24107,7 @@ extend Microsoft_UI_Content_ContentSiteEnvironmentView <: windows_core.HandleWin
 }
 
 // Microsoft.UI.Content.ContentSiteView (synthetic:Microsoft_UI_Content_ContentSiteView)
+@When[Microsoft_UI_Content == "on"]
 public class Microsoft_UI_Content_ContentSiteView <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -23866,6 +24360,7 @@ public class Microsoft_UI_Content_ContentSiteView <: windows_interface.Interface
     }
 }
 
+@When[Microsoft_UI_Content == "on"]
 extend Microsoft_UI_Content_ContentSiteView <: windows_core.HandleWinrtType<Microsoft_UI_Content_ContentSiteView> {
     public static func intoWinrtHandle(value: Microsoft_UI_Content_ContentSiteView): CPointer<Unit> {
         value.asRaw()
@@ -23884,6 +24379,7 @@ extend Microsoft_UI_Content_ContentSiteView <: windows_core.HandleWinrtType<Micr
 }
 
 // Microsoft.UI.Content.DesktopPopupSiteBridge (synthetic:Microsoft_UI_Content_DesktopPopupSiteBridge)
+@When[Microsoft_UI_Content == "on"]
 public class Microsoft_UI_Content_DesktopPopupSiteBridge <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24126,6 +24622,7 @@ public class Microsoft_UI_Content_DesktopPopupSiteBridge <: windows_interface.In
     }
 }
 
+@When[Microsoft_UI_Content == "on"]
 extend Microsoft_UI_Content_DesktopPopupSiteBridge <: windows_core.HandleWinrtType<Microsoft_UI_Content_DesktopPopupSiteBridge> {
     public static func intoWinrtHandle(value: Microsoft_UI_Content_DesktopPopupSiteBridge): CPointer<Unit> {
         value.asRaw()
@@ -24144,6 +24641,7 @@ extend Microsoft_UI_Content_DesktopPopupSiteBridge <: windows_core.HandleWinrtTy
 }
 
 // Microsoft.UI.Content.IChildSiteLink (synthetic:Microsoft_UI_Content_IChildSiteLink)
+@When[Microsoft_UI_Content == "on"]
 @Interface["b5a64814-608b-5fb7-a7cb-eb628fd588cd", "Microsoft.UI.Content.IChildSiteLink", "DispatcherQueue.value=Com;SiteView.value=Com"]
 public interface Microsoft_UI_Content_IChildSiteLink <: IInspectable {
     func ActualSize(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -24156,6 +24654,7 @@ public interface Microsoft_UI_Content_IChildSiteLink <: IInspectable {
 }
 
 // Microsoft.UI.Content.IChildSiteLinkStatics (synthetic:Microsoft_UI_Content_IChildSiteLinkStatics)
+@When[Microsoft_UI_Content == "on"]
 @Interface["28edc98a-4f94-50b1-8a87-9e7169ebf4b7", "Microsoft.UI.Content.IChildSiteLinkStatics", "Create.result=Com;CreateForSystemVisual.result=Com"]
 public interface Microsoft_UI_Content_IChildSiteLinkStatics <: IInspectable {
     func Create(parent: CPointer<Unit>, placementVisual: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
@@ -24163,6 +24662,7 @@ public interface Microsoft_UI_Content_IChildSiteLinkStatics <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentCoordinateConverter (synthetic:Microsoft_UI_Content_IContentCoordinateConverter)
+@When[Microsoft_UI_Content == "on"]
 @Interface["10a11230-5eb4-5840-a346-570f4a49040f", "Microsoft.UI.Content.IContentCoordinateConverter", "ConvertLocalToScreenWithPoints.result=Array<Windows_Graphics_PointInt32>;ConvertLocalToScreenWithPointsAndRoundingMode.result=Array<Windows_Graphics_PointInt32>;ConvertScreenToLocalWithPoints.result=Array<Windows_Foundation_Point>"]
 public interface Microsoft_UI_Content_IContentCoordinateConverter <: IInspectable {
     func ConvertLocalToScreenWithPoint(localPoint: Windows_Foundation_Point, result: CPointer<Windows_Graphics_PointInt32>): Int32
@@ -24175,29 +24675,34 @@ public interface Microsoft_UI_Content_IContentCoordinateConverter <: IInspectabl
 }
 
 // Microsoft.UI.Content.IContentCoordinateConverterFactory (synthetic:Microsoft_UI_Content_IContentCoordinateConverterFactory)
+@When[Microsoft_UI_Content == "on"]
 @Interface["a4b216ee-0e26-56bd-9209-a75cf9d80f27", "Microsoft.UI.Content.IContentCoordinateConverterFactory"]
 public interface Microsoft_UI_Content_IContentCoordinateConverterFactory <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentCoordinateConverterStatics (synthetic:Microsoft_UI_Content_IContentCoordinateConverterStatics)
+@When[Microsoft_UI_Content == "on"]
 @Interface["f56374ce-b6df-5b42-a58f-4e3bb039e3a9", "Microsoft.UI.Content.IContentCoordinateConverterStatics", "CreateForWindowId.result=Com"]
 public interface Microsoft_UI_Content_IContentCoordinateConverterStatics <: IInspectable {
     func CreateForWindowId(windowId: Microsoft_UI_WindowId, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Content.IContentDeferral (synthetic:Microsoft_UI_Content_IContentDeferral)
+@When[Microsoft_UI_Content == "on"]
 @Interface["470529f5-cd93-599b-968e-f8a689bc3a07", "Microsoft.UI.Content.IContentDeferral"]
 public interface Microsoft_UI_Content_IContentDeferral <: IInspectable {
     func Complete(): Int32
 }
 
 // Microsoft.UI.Content.IContentEnvironmentSettingChangedEventArgs (synthetic:Microsoft_UI_Content_IContentEnvironmentSettingChangedEventArgs)
+@When[Microsoft_UI_Content == "on"]
 @Interface["76478051-fc80-5eec-a3f3-62606abe06b7", "Microsoft.UI.Content.IContentEnvironmentSettingChangedEventArgs", "SettingName.value=HString"]
 public interface Microsoft_UI_Content_IContentEnvironmentSettingChangedEventArgs <: IInspectable {
     func SettingName(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Content.IContentEnvironmentStateChangedEventArgs (synthetic:Microsoft_UI_Content_IContentEnvironmentStateChangedEventArgs)
+@When[Microsoft_UI_Content == "on"]
 @Interface["8970fa4f-10ba-5f67-970b-8c72bc009b67", "Microsoft.UI.Content.IContentEnvironmentStateChangedEventArgs"]
 public interface Microsoft_UI_Content_IContentEnvironmentStateChangedEventArgs <: IInspectable {
     func DidAppWindowIdChange(value: CPointer<Bool>): Int32
@@ -24205,12 +24710,14 @@ public interface Microsoft_UI_Content_IContentEnvironmentStateChangedEventArgs <
 }
 
 // Microsoft.UI.Content.IContentEnvironmentStateChangedEventArgs2 (synthetic:Microsoft_UI_Content_IContentEnvironmentStateChangedEventArgs2)
+@When[Microsoft_UI_Content == "on"]
 @Interface["cec0497d-76c7-544b-bf6e-816c9b16c99f", "Microsoft.UI.Content.IContentEnvironmentStateChangedEventArgs2"]
 public interface Microsoft_UI_Content_IContentEnvironmentStateChangedEventArgs2 <: IInspectable {
     func DidDisplayScaleChange(value: CPointer<Bool>): Int32
 }
 
 // Microsoft.UI.Content.IContentIsland (synthetic:Microsoft_UI_Content_IContentIsland)
+@When[Microsoft_UI_Content == "on"]
 @Interface["5b2504ba-361c-50aa-bd6e-4122c6d93889", "Microsoft.UI.Content.IContentIsland", "AppData.value=Com;CoordinateConverter.value=Com;CustomProperties.value=Com;DispatcherQueue.value=Com;Environment.value=Com;GetAutomationHostProvider.result=Com;GetStateChangeDeferral.result=Com"]
 public interface Microsoft_UI_Content_IContentIsland <: IInspectable {
     func ActualSize(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -24242,6 +24749,7 @@ public interface Microsoft_UI_Content_IContentIsland <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentIsland2 (synthetic:Microsoft_UI_Content_IContentIsland2)
+@When[Microsoft_UI_Content == "on"]
 @Interface["9f891825-4f83-5ada-9ebd-9d329460aede", "Microsoft.UI.Content.IContentIsland2", "Children.value=Com;Popups.value=Com"]
 public interface Microsoft_UI_Content_IContentIsland2 <: IInspectable {
     func Children(value: CPointer<CPointer<Unit>>): Int32
@@ -24253,6 +24761,7 @@ public interface Microsoft_UI_Content_IContentIsland2 <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentIslandAutomation (synthetic:Microsoft_UI_Content_IContentIslandAutomation)
+@When[Microsoft_UI_Content == "on"]
 @Interface["8752c11e-1896-565a-bfb0-2b0770030e97", "Microsoft.UI.Content.IContentIslandAutomation", "FragmentRootAutomationProvider.value=Com;NextSiblingAutomationProvider.value=Com;ParentAutomationProvider.value=Com;PreviousSiblingAutomationProvider.value=Com"]
 public interface Microsoft_UI_Content_IContentIslandAutomation <: IInspectable {
     func AutomationOption(value: CPointer<Int32>): Int32
@@ -24263,6 +24772,7 @@ public interface Microsoft_UI_Content_IContentIslandAutomation <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentIslandAutomationProviderRequestedEventArgs (synthetic:Microsoft_UI_Content_IContentIslandAutomationProviderRequestedEventArgs)
+@When[Microsoft_UI_Content == "on"]
 @Interface["9fe24bed-2b9c-5137-887f-403c94841824", "Microsoft.UI.Content.IContentIslandAutomationProviderRequestedEventArgs", "AutomationProvider.value=Com"]
 public interface Microsoft_UI_Content_IContentIslandAutomationProviderRequestedEventArgs <: IInspectable {
     func AutomationProvider(value: CPointer<CPointer<Unit>>): Int32
@@ -24272,6 +24782,7 @@ public interface Microsoft_UI_Content_IContentIslandAutomationProviderRequestedE
 }
 
 // Microsoft.UI.Content.IContentIslandEnvironment (synthetic:Microsoft_UI_Content_IContentIslandEnvironment)
+@When[Microsoft_UI_Content == "on"]
 @Interface["c334236d-da88-566d-811d-74aef2eba978", "Microsoft.UI.Content.IContentIslandEnvironment"]
 public interface Microsoft_UI_Content_IContentIslandEnvironment <: IInspectable {
     func AppWindowId(value: CPointer<Microsoft_UI_WindowId>): Int32
@@ -24283,22 +24794,26 @@ public interface Microsoft_UI_Content_IContentIslandEnvironment <: IInspectable 
 }
 
 // Microsoft.UI.Content.IContentIslandEnvironment2 (synthetic:Microsoft_UI_Content_IContentIslandEnvironment2)
+@When[Microsoft_UI_Content == "on"]
 @Interface["6bf81a71-c1e4-54d6-ac0d-02bcff5297e7", "Microsoft.UI.Content.IContentIslandEnvironment2"]
 public interface Microsoft_UI_Content_IContentIslandEnvironment2 <: IInspectable {
     func DisplayScale(value: CPointer<Float32>): Int32
 }
 
 // Microsoft.UI.Content.IContentIslandEnvironmentFactory (synthetic:Microsoft_UI_Content_IContentIslandEnvironmentFactory)
+@When[Microsoft_UI_Content == "on"]
 @Interface["47a782d6-b177-5c1e-bf87-90437dd809d0", "Microsoft.UI.Content.IContentIslandEnvironmentFactory"]
 public interface Microsoft_UI_Content_IContentIslandEnvironmentFactory <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentIslandFactory (synthetic:Microsoft_UI_Content_IContentIslandFactory)
+@When[Microsoft_UI_Content == "on"]
 @Interface["82383f52-e81a-5ec9-a954-bac8a931ba7d", "Microsoft.UI.Content.IContentIslandFactory"]
 public interface Microsoft_UI_Content_IContentIslandFactory <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentIslandStateChangedEventArgs (synthetic:Microsoft_UI_Content_IContentIslandStateChangedEventArgs)
+@When[Microsoft_UI_Content == "on"]
 @Interface["c828eeb2-0c62-5b40-9d48-77c06083c278", "Microsoft.UI.Content.IContentIslandStateChangedEventArgs"]
 public interface Microsoft_UI_Content_IContentIslandStateChangedEventArgs <: IInspectable {
     func DidActualSizeChange(value: CPointer<Bool>): Int32
@@ -24309,6 +24824,7 @@ public interface Microsoft_UI_Content_IContentIslandStateChangedEventArgs <: IIn
 }
 
 // Microsoft.UI.Content.IContentIslandStateChangedEventArgs2 (synthetic:Microsoft_UI_Content_IContentIslandStateChangedEventArgs2)
+@When[Microsoft_UI_Content == "on"]
 @Interface["8ad25be1-a89a-5872-896e-8298dd20eb0d", "Microsoft.UI.Content.IContentIslandStateChangedEventArgs2"]
 public interface Microsoft_UI_Content_IContentIslandStateChangedEventArgs2 <: IInspectable {
     func DidLocalToClientTransformMatrixChange(value: CPointer<Bool>): Int32
@@ -24316,6 +24832,7 @@ public interface Microsoft_UI_Content_IContentIslandStateChangedEventArgs2 <: II
 }
 
 // Microsoft.UI.Content.IContentIslandStatics (synthetic:Microsoft_UI_Content_IContentIslandStatics)
+@When[Microsoft_UI_Content == "on"]
 @Interface["7b9eb7cc-8c43-5e0a-ab23-ab48628fd223", "Microsoft.UI.Content.IContentIslandStatics", "Create.result=Com;FindAllForCompositor.result=Array<Microsoft_UI_Content_ContentIsland>;FindAllForCurrentThread.result=Array<Microsoft_UI_Content_ContentIsland>;GetByVisual.result=Com;GetFromId.result=Com"]
 public interface Microsoft_UI_Content_IContentIslandStatics <: IInspectable {
     func Create(Root: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
@@ -24326,6 +24843,7 @@ public interface Microsoft_UI_Content_IContentIslandStatics <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentIslandStatics2 (synthetic:Microsoft_UI_Content_IContentIslandStatics2)
+@When[Microsoft_UI_Content == "on"]
 @Interface["b2c6fa77-13c9-5064-bb1d-f878d86acc65", "Microsoft.UI.Content.IContentIslandStatics2", "CreateForSystemVisual.result=Com;FindAllForSystemCompositor.result=Array<Microsoft_UI_Content_ContentIsland>;GetBySystemVisual.result=Com"]
 public interface Microsoft_UI_Content_IContentIslandStatics2 <: IInspectable {
     func CreateForSystemVisual(queue: CPointer<Unit>, root: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
@@ -24334,6 +24852,7 @@ public interface Microsoft_UI_Content_IContentIslandStatics2 <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentSiteAutomation (synthetic:Microsoft_UI_Content_IContentSiteAutomation)
+@When[Microsoft_UI_Content == "on"]
 @Interface["db4f4683-cd76-50d0-9ae1-044ceb3d3c7a", "Microsoft.UI.Content.IContentSiteAutomation", "AutomationProvider.value=Com"]
 public interface Microsoft_UI_Content_IContentSiteAutomation <: IInspectable {
     func AutomationOption(value: CPointer<Int32>): Int32
@@ -24350,6 +24869,7 @@ public interface Microsoft_UI_Content_IContentSiteAutomation <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentSiteAutomationProviderRequestedEventArgs (synthetic:Microsoft_UI_Content_IContentSiteAutomationProviderRequestedEventArgs)
+@When[Microsoft_UI_Content == "on"]
 @Interface["73a093b9-55d4-5598-b70e-6250b732f821", "Microsoft.UI.Content.IContentSiteAutomationProviderRequestedEventArgs", "AutomationProvider.value=Com"]
 public interface Microsoft_UI_Content_IContentSiteAutomationProviderRequestedEventArgs <: IInspectable {
     func AutomationProvider(value: CPointer<CPointer<Unit>>): Int32
@@ -24359,6 +24879,7 @@ public interface Microsoft_UI_Content_IContentSiteAutomationProviderRequestedEve
 }
 
 // Microsoft.UI.Content.IContentSiteBridge (synthetic:Microsoft_UI_Content_IContentSiteBridge)
+@When[Microsoft_UI_Content == "on"]
 @Interface["faaab99e-a42b-549c-92df-3b6d6e1e368b", "Microsoft.UI.Content.IContentSiteBridge", "DispatcherQueue.value=Com;LayoutDirectionOverride.value=Com"]
 public interface Microsoft_UI_Content_IContentSiteBridge <: IInspectable {
     func DispatcherQueue(value: CPointer<CPointer<Unit>>): Int32
@@ -24369,6 +24890,7 @@ public interface Microsoft_UI_Content_IContentSiteBridge <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentSiteEnvironmentView (synthetic:Microsoft_UI_Content_IContentSiteEnvironmentView)
+@When[Microsoft_UI_Content == "on"]
 @Interface["5b6fe420-0bb3-54dd-8589-786cf02e38f1", "Microsoft.UI.Content.IContentSiteEnvironmentView"]
 public interface Microsoft_UI_Content_IContentSiteEnvironmentView <: IInspectable {
     func AppWindowId(value: CPointer<Microsoft_UI_WindowId>): Int32
@@ -24376,17 +24898,20 @@ public interface Microsoft_UI_Content_IContentSiteEnvironmentView <: IInspectabl
 }
 
 // Microsoft.UI.Content.IContentSiteEnvironmentView2 (synthetic:Microsoft_UI_Content_IContentSiteEnvironmentView2)
+@When[Microsoft_UI_Content == "on"]
 @Interface["0b43c89a-9196-5a64-a078-eb150acae527", "Microsoft.UI.Content.IContentSiteEnvironmentView2"]
 public interface Microsoft_UI_Content_IContentSiteEnvironmentView2 <: IInspectable {
     func DisplayScale(value: CPointer<Float32>): Int32
 }
 
 // Microsoft.UI.Content.IContentSiteEnvironmentViewFactory (synthetic:Microsoft_UI_Content_IContentSiteEnvironmentViewFactory)
+@When[Microsoft_UI_Content == "on"]
 @Interface["c901edf2-f184-5a64-8d58-8cf8efa8b678", "Microsoft.UI.Content.IContentSiteEnvironmentViewFactory"]
 public interface Microsoft_UI_Content_IContentSiteEnvironmentViewFactory <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentSiteInput (synthetic:Microsoft_UI_Content_IContentSiteInput)
+@When[Microsoft_UI_Content == "on"]
 @Interface["0ead8189-10d3-550d-b747-8847bd7c9d21", "Microsoft.UI.Content.IContentSiteInput"]
 public interface Microsoft_UI_Content_IContentSiteInput <: IInspectable {
     func ProcessesKeyboardInput(value: CPointer<Bool>): Int32
@@ -24396,12 +24921,14 @@ public interface Microsoft_UI_Content_IContentSiteInput <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentSiteLink (synthetic:Microsoft_UI_Content_IContentSiteLink)
+@When[Microsoft_UI_Content == "on"]
 @Interface["d9247341-f5d0-5084-af66-f5df5f314fc0", "Microsoft.UI.Content.IContentSiteLink", "Parent.value=Com"]
 public interface Microsoft_UI_Content_IContentSiteLink <: IInspectable {
     func Parent(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Content.IContentSiteView (synthetic:Microsoft_UI_Content_IContentSiteView)
+@When[Microsoft_UI_Content == "on"]
 @Interface["2d5d8dd5-358e-5b05-993b-b2666d1786b3", "Microsoft.UI.Content.IContentSiteView", "CoordinateConverter.value=Com;DispatcherQueue.value=Com;EnvironmentView.value=Com"]
 public interface Microsoft_UI_Content_IContentSiteView <: IInspectable {
     func ActualSize(value: CPointer<Windows_Foundation_Numerics_Vector2>): Int32
@@ -24421,6 +24948,7 @@ public interface Microsoft_UI_Content_IContentSiteView <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentSiteView2 (synthetic:Microsoft_UI_Content_IContentSiteView2)
+@When[Microsoft_UI_Content == "on"]
 @Interface["628adce3-820f-57de-bdc8-3720ff73014b", "Microsoft.UI.Content.IContentSiteView2"]
 public interface Microsoft_UI_Content_IContentSiteView2 <: IInspectable {
     func LocalToClientTransformMatrix(value: CPointer<Windows_Foundation_Numerics_Matrix4x4>): Int32
@@ -24430,17 +24958,20 @@ public interface Microsoft_UI_Content_IContentSiteView2 <: IInspectable {
 }
 
 // Microsoft.UI.Content.IContentSiteViewAutomation (synthetic:Microsoft_UI_Content_IContentSiteViewAutomation)
+@When[Microsoft_UI_Content == "on"]
 @Interface["f9d1d5ff-9669-5553-a875-aee03e11edd8", "Microsoft.UI.Content.IContentSiteViewAutomation"]
 public interface Microsoft_UI_Content_IContentSiteViewAutomation <: IInspectable {
     func AutomationOption(value: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Content.IContentSiteViewFactory (synthetic:Microsoft_UI_Content_IContentSiteViewFactory)
+@When[Microsoft_UI_Content == "on"]
 @Interface["9efd72f0-63ef-5b6a-a50c-5685bd8100f1", "Microsoft.UI.Content.IContentSiteViewFactory"]
 public interface Microsoft_UI_Content_IContentSiteViewFactory <: IInspectable {
 }
 
 // Microsoft.UI.Content.IDesktopPopupSiteBridge (synthetic:Microsoft_UI_Content_IDesktopPopupSiteBridge)
+@When[Microsoft_UI_Content == "on"]
 @Interface["84eaab23-f716-5ad8-ac00-3d77c01d42cc", "Microsoft.UI.Content.IDesktopPopupSiteBridge", "SiteView.value=Com"]
 public interface Microsoft_UI_Content_IDesktopPopupSiteBridge <: IInspectable {
     func IsEnabled(value: CPointer<Bool>): Int32
@@ -24459,6 +24990,7 @@ public interface Microsoft_UI_Content_IDesktopPopupSiteBridge <: IInspectable {
 }
 
 // Microsoft.UI.Content.IDesktopPopupSiteBridge2 (synthetic:Microsoft_UI_Content_IDesktopPopupSiteBridge2)
+@When[Microsoft_UI_Content == "on"]
 @Interface["4559ff0e-4326-5038-b18d-37b66b242eb3", "Microsoft.UI.Content.IDesktopPopupSiteBridge2"]
 public interface Microsoft_UI_Content_IDesktopPopupSiteBridge2 <: IInspectable {
     func AnchoringBehavior(value: CPointer<Int32>): Int32
@@ -24468,12 +25000,14 @@ public interface Microsoft_UI_Content_IDesktopPopupSiteBridge2 <: IInspectable {
 }
 
 // Microsoft.UI.Content.IDesktopPopupSiteBridgeStatics (synthetic:Microsoft_UI_Content_IDesktopPopupSiteBridgeStatics)
+@When[Microsoft_UI_Content == "on"]
 @Interface["4ea2b77b-3177-5e5b-8d0d-a76e15c6d080", "Microsoft.UI.Content.IDesktopPopupSiteBridgeStatics", "Create.result=Com"]
 public interface Microsoft_UI_Content_IDesktopPopupSiteBridgeStatics <: IInspectable {
     func Create(parent: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Content.PopupAnchor (synthetic:Microsoft_UI_Content_PopupAnchor)
+@When[Microsoft_UI_Content == "on"]
 public struct Microsoft_UI_Content_PopupAnchor {
     public let value: Int32
     public init() {
@@ -24483,11 +25017,15 @@ public struct Microsoft_UI_Content_PopupAnchor {
         this.value = value
     }
 }
+@When[Microsoft_UI_Content == "on"]
 public let Microsoft_UI_Content_PopupAnchor_None = Microsoft_UI_Content_PopupAnchor(0)
+@When[Microsoft_UI_Content == "on"]
 public let Microsoft_UI_Content_PopupAnchor_TopLevelWindow = Microsoft_UI_Content_PopupAnchor(1)
+@When[Microsoft_UI_Content == "on"]
 public let Microsoft_UI_Content_PopupAnchor_ParentIsland = Microsoft_UI_Content_PopupAnchor(2)
 
 // Microsoft.UI.Dispatching.DispatcherExitDeferral (synthetic:Microsoft_UI_Dispatching_DispatcherExitDeferral)
+@When[Microsoft_UI_Dispatching == "on"]
 public class Microsoft_UI_Dispatching_DispatcherExitDeferral <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24565,6 +25103,7 @@ public class Microsoft_UI_Dispatching_DispatcherExitDeferral <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Dispatching == "on"]
 extend Microsoft_UI_Dispatching_DispatcherExitDeferral <: windows_core.HandleWinrtType<Microsoft_UI_Dispatching_DispatcherExitDeferral> {
     public static func intoWinrtHandle(value: Microsoft_UI_Dispatching_DispatcherExitDeferral): CPointer<Unit> {
         value.asRaw()
@@ -24583,6 +25122,7 @@ extend Microsoft_UI_Dispatching_DispatcherExitDeferral <: windows_core.HandleWin
 }
 
 // Microsoft.UI.Dispatching.DispatcherQueue (synthetic:Microsoft_UI_Dispatching_DispatcherQueue)
+@When[Microsoft_UI_Dispatching == "on"]
 public class Microsoft_UI_Dispatching_DispatcherQueue <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24747,6 +25287,7 @@ public class Microsoft_UI_Dispatching_DispatcherQueue <: windows_interface.Inter
     }
 }
 
+@When[Microsoft_UI_Dispatching == "on"]
 extend Microsoft_UI_Dispatching_DispatcherQueue <: windows_core.HandleWinrtType<Microsoft_UI_Dispatching_DispatcherQueue> {
     public static func intoWinrtHandle(value: Microsoft_UI_Dispatching_DispatcherQueue): CPointer<Unit> {
         value.asRaw()
@@ -24765,6 +25306,7 @@ extend Microsoft_UI_Dispatching_DispatcherQueue <: windows_core.HandleWinrtType<
 }
 
 // Microsoft.UI.Dispatching.DispatcherQueueHandler (synthetic:Microsoft_UI_Dispatching_DispatcherQueueHandler)
+@When[Microsoft_UI_Dispatching == "on"]
 @C
 public struct Microsoft_UI_Dispatching_DispatcherQueueHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -24772,6 +25314,7 @@ public struct Microsoft_UI_Dispatching_DispatcherQueueHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Dispatching == "on"]
 public open class Microsoft_UI_Dispatching_DispatcherQueueHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -24839,18 +25382,22 @@ public open class Microsoft_UI_Dispatching_DispatcherQueueHandler <: windows_int
     }
 }
 
+@When[Microsoft_UI_Dispatching == "on"]
 extend Microsoft_UI_Dispatching_DispatcherQueueHandler <: windows_core.Interface<Microsoft_UI_Dispatching_DispatcherQueueHandler> {}
 
+@When[Microsoft_UI_Dispatching == "on"]
 private class OwnedMicrosoft_UI_Dispatching_DispatcherQueueHandler <: Microsoft_UI_Dispatching_DispatcherQueueHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Dispatching == "on"]
 public interface Microsoft_UI_Dispatching_DispatcherQueueHandlerInvokerErased {
     func __winrtThunk_Invoke(): Int32
 }
 
+@When[Microsoft_UI_Dispatching == "on"]
 public interface Microsoft_UI_Dispatching_DispatcherQueueHandlerInvoker <: Microsoft_UI_Dispatching_DispatcherQueueHandlerInvokerErased {
     func Invoke(): Unit {
         ()
@@ -24868,6 +25415,7 @@ public interface Microsoft_UI_Dispatching_DispatcherQueueHandlerInvoker <: Micro
     }
 }
 
+@When[Microsoft_UI_Dispatching == "on"]
 private class Microsoft_UI_Dispatching_DispatcherQueueHandlerBox <: Microsoft_UI_Dispatching_DispatcherQueueHandlerInvoker & Resource {
     public let invoke_: () -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Dispatching_DispatcherQueueHandlerVtbl>
@@ -24905,6 +25453,7 @@ private class Microsoft_UI_Dispatching_DispatcherQueueHandlerBox <: Microsoft_UI
     }
 }
 
+@When[Microsoft_UI_Dispatching == "on"]
 func buildMicrosoft_UI_Dispatching_DispatcherQueueHandlerBoxVtbl(): Microsoft_UI_Dispatching_DispatcherQueueHandlerVtbl {
     var vtbl = Microsoft_UI_Dispatching_DispatcherQueueHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -24921,6 +25470,7 @@ func buildMicrosoft_UI_Dispatching_DispatcherQueueHandlerBoxVtbl(): Microsoft_UI
 
 
 // Microsoft.UI.Dispatching.DispatcherQueuePriority (synthetic:Microsoft_UI_Dispatching_DispatcherQueuePriority)
+@When[Microsoft_UI_Dispatching == "on"]
 public struct Microsoft_UI_Dispatching_DispatcherQueuePriority {
     public let value: Int32
     public init() {
@@ -24930,11 +25480,15 @@ public struct Microsoft_UI_Dispatching_DispatcherQueuePriority {
         this.value = value
     }
 }
+@When[Microsoft_UI_Dispatching == "on"]
 public let Microsoft_UI_Dispatching_DispatcherQueuePriority_Low = Microsoft_UI_Dispatching_DispatcherQueuePriority(-10)
+@When[Microsoft_UI_Dispatching == "on"]
 public let Microsoft_UI_Dispatching_DispatcherQueuePriority_Normal = Microsoft_UI_Dispatching_DispatcherQueuePriority(0)
+@When[Microsoft_UI_Dispatching == "on"]
 public let Microsoft_UI_Dispatching_DispatcherQueuePriority_High = Microsoft_UI_Dispatching_DispatcherQueuePriority(10)
 
 // Microsoft.UI.Dispatching.DispatcherQueueShutdownStartingEventArgs (synthetic:Microsoft_UI_Dispatching_DispatcherQueueShutdownStartingEventArgs)
+@When[Microsoft_UI_Dispatching == "on"]
 public class Microsoft_UI_Dispatching_DispatcherQueueShutdownStartingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -25007,6 +25561,7 @@ public class Microsoft_UI_Dispatching_DispatcherQueueShutdownStartingEventArgs <
     }
 }
 
+@When[Microsoft_UI_Dispatching == "on"]
 extend Microsoft_UI_Dispatching_DispatcherQueueShutdownStartingEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Dispatching_DispatcherQueueShutdownStartingEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Dispatching_DispatcherQueueShutdownStartingEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -25025,6 +25580,7 @@ extend Microsoft_UI_Dispatching_DispatcherQueueShutdownStartingEventArgs <: wind
 }
 
 // Microsoft.UI.Dispatching.DispatcherQueueTimer (synthetic:Microsoft_UI_Dispatching_DispatcherQueueTimer)
+@When[Microsoft_UI_Dispatching == "on"]
 public class Microsoft_UI_Dispatching_DispatcherQueueTimer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -25169,6 +25725,7 @@ public class Microsoft_UI_Dispatching_DispatcherQueueTimer <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Dispatching == "on"]
 extend Microsoft_UI_Dispatching_DispatcherQueueTimer <: windows_core.HandleWinrtType<Microsoft_UI_Dispatching_DispatcherQueueTimer> {
     public static func intoWinrtHandle(value: Microsoft_UI_Dispatching_DispatcherQueueTimer): CPointer<Unit> {
         value.asRaw()
@@ -25187,6 +25744,7 @@ extend Microsoft_UI_Dispatching_DispatcherQueueTimer <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Dispatching.DispatcherRunOptions (synthetic:Microsoft_UI_Dispatching_DispatcherRunOptions)
+@When[Microsoft_UI_Dispatching == "on"]
 public struct Microsoft_UI_Dispatching_DispatcherRunOptions {
     public let value: UInt32
     public init() {
@@ -25211,17 +25769,22 @@ public struct Microsoft_UI_Dispatching_DispatcherRunOptions {
         return Microsoft_UI_Dispatching_DispatcherRunOptions(!value)
     }
 }
+@When[Microsoft_UI_Dispatching == "on"]
 public let Microsoft_UI_Dispatching_DispatcherRunOptions_None = Microsoft_UI_Dispatching_DispatcherRunOptions(0)
+@When[Microsoft_UI_Dispatching == "on"]
 public let Microsoft_UI_Dispatching_DispatcherRunOptions_ContinueOnQuit = Microsoft_UI_Dispatching_DispatcherRunOptions(1)
+@When[Microsoft_UI_Dispatching == "on"]
 public let Microsoft_UI_Dispatching_DispatcherRunOptions_QuitOnlyLocalLoop = Microsoft_UI_Dispatching_DispatcherRunOptions(2)
 
 // Microsoft.UI.Dispatching.IDispatcherExitDeferral (synthetic:Microsoft_UI_Dispatching_IDispatcherExitDeferral)
+@When[Microsoft_UI_Dispatching == "on"]
 @Interface["910b5aac-3310-563e-8418-f3005579729e", "Microsoft.UI.Dispatching.IDispatcherExitDeferral"]
 public interface Microsoft_UI_Dispatching_IDispatcherExitDeferral <: IInspectable {
     func Complete(): Int32
 }
 
 // Microsoft.UI.Dispatching.IDispatcherQueue (synthetic:Microsoft_UI_Dispatching_IDispatcherQueue)
+@When[Microsoft_UI_Dispatching == "on"]
 @Interface["f6ebf8fa-be1c-5bf6-a467-73da28738ae8", "Microsoft.UI.Dispatching.IDispatcherQueue", "CreateTimer.result=Com"]
 public interface Microsoft_UI_Dispatching_IDispatcherQueue <: IInspectable {
     func CreateTimer(result: CPointer<CPointer<Unit>>): Int32
@@ -25234,12 +25797,14 @@ public interface Microsoft_UI_Dispatching_IDispatcherQueue <: IInspectable {
 }
 
 // Microsoft.UI.Dispatching.IDispatcherQueue2 (synthetic:Microsoft_UI_Dispatching_IDispatcherQueue2)
+@When[Microsoft_UI_Dispatching == "on"]
 @Interface["0cf48751-f1ac-59b8-ba52-6ce7a1444d6f", "Microsoft.UI.Dispatching.IDispatcherQueue2"]
 public interface Microsoft_UI_Dispatching_IDispatcherQueue2 <: IInspectable {
     func HasThreadAccess(value: CPointer<Bool>): Int32
 }
 
 // Microsoft.UI.Dispatching.IDispatcherQueue3 (synthetic:Microsoft_UI_Dispatching_IDispatcherQueue3)
+@When[Microsoft_UI_Dispatching == "on"]
 @Interface["14a7a175-5c27-5a35-b079-21960cf764a8", "Microsoft.UI.Dispatching.IDispatcherQueue3"]
 public interface Microsoft_UI_Dispatching_IDispatcherQueue3 <: IInspectable {
     func EnqueueEventLoopExit(): Int32
@@ -25253,18 +25818,21 @@ public interface Microsoft_UI_Dispatching_IDispatcherQueue3 <: IInspectable {
 }
 
 // Microsoft.UI.Dispatching.IDispatcherQueueShutdownStartingEventArgs (synthetic:Microsoft_UI_Dispatching_IDispatcherQueueShutdownStartingEventArgs)
+@When[Microsoft_UI_Dispatching == "on"]
 @Interface["32519be5-072b-5660-a70e-8835c9b8157d", "Microsoft.UI.Dispatching.IDispatcherQueueShutdownStartingEventArgs", "GetDeferral.result=Com"]
 public interface Microsoft_UI_Dispatching_IDispatcherQueueShutdownStartingEventArgs <: IInspectable {
     func GetDeferral(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Dispatching.IDispatcherQueueStatics (synthetic:Microsoft_UI_Dispatching_IDispatcherQueueStatics)
+@When[Microsoft_UI_Dispatching == "on"]
 @Interface["cd3382ea-a455-5124-b63a-ca40d34ca23c", "Microsoft.UI.Dispatching.IDispatcherQueueStatics", "GetForCurrentThread.result=Com"]
 public interface Microsoft_UI_Dispatching_IDispatcherQueueStatics <: IInspectable {
     func GetForCurrentThread(result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Dispatching.IDispatcherQueueTimer (synthetic:Microsoft_UI_Dispatching_IDispatcherQueueTimer)
+@When[Microsoft_UI_Dispatching == "on"]
 @Interface["ad4d63fd-88fe-541f-ac11-bf2dc1ed2ce5", "Microsoft.UI.Dispatching.IDispatcherQueueTimer"]
 public interface Microsoft_UI_Dispatching_IDispatcherQueueTimer <: IInspectable {
     func Interval(value: CPointer<Windows_Foundation_TimeSpan>): Int32
@@ -25279,12 +25847,14 @@ public interface Microsoft_UI_Dispatching_IDispatcherQueueTimer <: IInspectable 
 }
 
 // Microsoft.UI.DisplayId (synthetic:Microsoft_UI_DisplayId)
+@When[Microsoft_UI == "on"]
 @C
 public struct Microsoft_UI_DisplayId {
     public var Value: UInt64 = 0u64
 }
 
 // Microsoft.UI.IClosableNotifier (synthetic:Microsoft_UI_IClosableNotifier)
+@When[Microsoft_UI == "on"]
 @Interface["2989e93b-ed0f-5e79-90f2-eac592fc6e6a", "Microsoft.UI.IClosableNotifier"]
 public interface Microsoft_UI_IClosableNotifier <: IInspectable {
     func IsClosed(value: CPointer<Bool>): Int32
@@ -25295,12 +25865,14 @@ public interface Microsoft_UI_IClosableNotifier <: IInspectable {
 }
 
 // Microsoft.UI.IconId (synthetic:Microsoft_UI_IconId)
+@When[Microsoft_UI == "on"]
 @C
 public struct Microsoft_UI_IconId {
     public var Value: UInt64 = 0u64
 }
 
 // Microsoft.UI.Input.HoldingState (synthetic:Microsoft_UI_Input_HoldingState)
+@When[Microsoft_UI_Input == "on"]
 public struct Microsoft_UI_Input_HoldingState {
     public let value: Int32
     public init() {
@@ -25310,38 +25882,47 @@ public struct Microsoft_UI_Input_HoldingState {
         this.value = value
     }
 }
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_HoldingState_Started = Microsoft_UI_Input_HoldingState(0)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_HoldingState_Completed = Microsoft_UI_Input_HoldingState(1)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_HoldingState_Canceled = Microsoft_UI_Input_HoldingState(2)
 
 // Microsoft.UI.Input.IInputCursor (synthetic:Microsoft_UI_Input_IInputCursor)
+@When[Microsoft_UI_Input == "on"]
 @Interface["359b15f9-19c2-5714-8432-75176826406b", "Microsoft.UI.Input.IInputCursor"]
 public interface Microsoft_UI_Input_IInputCursor <: IInspectable {
 }
 
 // Microsoft.UI.Input.IInputCursorFactory (synthetic:Microsoft_UI_Input_IInputCursorFactory)
+@When[Microsoft_UI_Input == "on"]
 @Interface["2f47647b-4be0-53e9-be7e-c38d5459db6b", "Microsoft.UI.Input.IInputCursorFactory"]
 public interface Microsoft_UI_Input_IInputCursorFactory <: IInspectable {
 }
 
 // Microsoft.UI.Input.IInputCursorStatics (synthetic:Microsoft_UI_Input_IInputCursorStatics)
+@When[Microsoft_UI_Input == "on"]
 @Interface["92f6a552-099f-55fb-8c31-e450284c9643", "Microsoft.UI.Input.IInputCursorStatics", "CreateFromCoreCursor.result=Com"]
 public interface Microsoft_UI_Input_IInputCursorStatics <: IInspectable {
     func CreateFromCoreCursor(cursor: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Input.IInputObject (synthetic:Microsoft_UI_Input_IInputObject)
+@When[Microsoft_UI_Input == "on"]
 @Interface["42edbc88-d386-544d-b1b8-68617fe68282", "Microsoft.UI.Input.IInputObject", "DispatcherQueue.value=Com"]
 public interface Microsoft_UI_Input_IInputObject <: IInspectable {
     func DispatcherQueue(value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Input.IInputObjectFactory (synthetic:Microsoft_UI_Input_IInputObjectFactory)
+@When[Microsoft_UI_Input == "on"]
 @Interface["f7786bc2-b0b8-5961-9a57-ae199d452106", "Microsoft.UI.Input.IInputObjectFactory"]
 public interface Microsoft_UI_Input_IInputObjectFactory <: IInspectable {
 }
 
 // Microsoft.UI.Input.IInputPointerSource (synthetic:Microsoft_UI_Input_IInputPointerSource)
+@When[Microsoft_UI_Input == "on"]
 @Interface["6a6c2764-c3f4-5be5-8447-c9a98766c240", "Microsoft.UI.Input.IInputPointerSource", "Cursor.value=Com"]
 public interface Microsoft_UI_Input_IInputPointerSource <: IInspectable {
     func Cursor(value: CPointer<CPointer<Unit>>): Int32
@@ -25370,12 +25951,14 @@ public interface Microsoft_UI_Input_IInputPointerSource <: IInspectable {
 }
 
 // Microsoft.UI.Input.IInputPointerSourceStatics (synthetic:Microsoft_UI_Input_IInputPointerSourceStatics)
+@When[Microsoft_UI_Input == "on"]
 @Interface["e8a19fd1-a914-533f-9b0f-6bf0065e6781", "Microsoft.UI.Input.IInputPointerSourceStatics", "GetForIsland.result=Com"]
 public interface Microsoft_UI_Input_IInputPointerSourceStatics <: IInspectable {
     func GetForIsland(island: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Input.IPointerEventArgs (synthetic:Microsoft_UI_Input_IPointerEventArgs)
+@When[Microsoft_UI_Input == "on"]
 @Interface["865b188c-2ed5-5df8-829f-ac0701d5c51a", "Microsoft.UI.Input.IPointerEventArgs", "CurrentPoint.value=Com;GetIntermediatePoints.result=Com;GetIntermediateTransformedPoints.result=Com"]
 public interface Microsoft_UI_Input_IPointerEventArgs <: IInspectable {
     func CurrentPoint(value: CPointer<CPointer<Unit>>): Int32
@@ -25387,6 +25970,7 @@ public interface Microsoft_UI_Input_IPointerEventArgs <: IInspectable {
 }
 
 // Microsoft.UI.Input.IPointerPoint (synthetic:Microsoft_UI_Input_IPointerPoint)
+@When[Microsoft_UI_Input == "on"]
 @Interface["0d430ee6-252c-59a4-b2a2-d44264dc6a40", "Microsoft.UI.Input.IPointerPoint", "Properties.value=Com;GetTransformedPoint.result=Com"]
 public interface Microsoft_UI_Input_IPointerPoint <: IInspectable {
     func FrameId(value: CPointer<UInt32>): Int32
@@ -25400,6 +25984,7 @@ public interface Microsoft_UI_Input_IPointerPoint <: IInspectable {
 }
 
 // Microsoft.UI.Input.IPointerPointProperties (synthetic:Microsoft_UI_Input_IPointerPointProperties)
+@When[Microsoft_UI_Input == "on"]
 @Interface["d760ed77-4b10-57a5-b3cc-d9bf3413e996", "Microsoft.UI.Input.IPointerPointProperties"]
 public interface Microsoft_UI_Input_IPointerPointProperties <: IInspectable {
     func ContactRect(value: CPointer<Windows_Foundation_Rect>): Int32
@@ -25426,12 +26011,14 @@ public interface Microsoft_UI_Input_IPointerPointProperties <: IInspectable {
 }
 
 // Microsoft.UI.Input.IPointerPointStatics (synthetic:Microsoft_UI_Input_IPointerPointStatics)
+@When[Microsoft_UI_Input == "on"]
 @Interface["880d34c2-acfd-51d9-b60a-b408ce17590c", "Microsoft.UI.Input.IPointerPointStatics", "GetCurrentPoint.result=Com"]
 public interface Microsoft_UI_Input_IPointerPointStatics <: IInspectable {
     func GetCurrentPoint(pointerId: UInt32, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Input.IPointerPointTransform (synthetic:Microsoft_UI_Input_IPointerPointTransform)
+@When[Microsoft_UI_Input == "on"]
 @Interface["db4791bc-994d-54c7-92ef-66ea1de9b43c", "Microsoft.UI.Input.IPointerPointTransform", "Inverse.value=Com"]
 public interface Microsoft_UI_Input_IPointerPointTransform <: IInspectable {
     func Inverse(value: CPointer<CPointer<Unit>>): Int32
@@ -25440,6 +26027,7 @@ public interface Microsoft_UI_Input_IPointerPointTransform <: IInspectable {
 }
 
 // Microsoft.UI.Input.InputCursor (synthetic:Microsoft_UI_Input_InputCursor)
+@When[Microsoft_UI_Input == "on"]
 public class Microsoft_UI_Input_InputCursor <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -25521,6 +26109,7 @@ public class Microsoft_UI_Input_InputCursor <: windows_interface.InterfaceWrappe
     }
 }
 
+@When[Microsoft_UI_Input == "on"]
 extend Microsoft_UI_Input_InputCursor <: windows_core.HandleWinrtType<Microsoft_UI_Input_InputCursor> {
     public static func intoWinrtHandle(value: Microsoft_UI_Input_InputCursor): CPointer<Unit> {
         value.asRaw()
@@ -25539,6 +26128,7 @@ extend Microsoft_UI_Input_InputCursor <: windows_core.HandleWinrtType<Microsoft_
 }
 
 // Microsoft.UI.Input.InputObject (synthetic:Microsoft_UI_Input_InputObject)
+@When[Microsoft_UI_Input == "on"]
 public class Microsoft_UI_Input_InputObject <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -25613,6 +26203,7 @@ public class Microsoft_UI_Input_InputObject <: windows_interface.InterfaceWrappe
     }
 }
 
+@When[Microsoft_UI_Input == "on"]
 extend Microsoft_UI_Input_InputObject <: windows_core.HandleWinrtType<Microsoft_UI_Input_InputObject> {
     public static func intoWinrtHandle(value: Microsoft_UI_Input_InputObject): CPointer<Unit> {
         value.asRaw()
@@ -25631,6 +26222,7 @@ extend Microsoft_UI_Input_InputObject <: windows_core.HandleWinrtType<Microsoft_
 }
 
 // Microsoft.UI.Input.InputPointerSource (synthetic:Microsoft_UI_Input_InputPointerSource)
+@When[Microsoft_UI_Input == "on"]
 public class Microsoft_UI_Input_InputPointerSource <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -25949,6 +26541,7 @@ public class Microsoft_UI_Input_InputPointerSource <: windows_interface.Interfac
     }
 }
 
+@When[Microsoft_UI_Input == "on"]
 extend Microsoft_UI_Input_InputPointerSource <: windows_core.HandleWinrtType<Microsoft_UI_Input_InputPointerSource> {
     public static func intoWinrtHandle(value: Microsoft_UI_Input_InputPointerSource): CPointer<Unit> {
         value.asRaw()
@@ -25967,6 +26560,7 @@ extend Microsoft_UI_Input_InputPointerSource <: windows_core.HandleWinrtType<Mic
 }
 
 // Microsoft.UI.Input.InputPointerSourceDeviceKinds (synthetic:Microsoft_UI_Input_InputPointerSourceDeviceKinds)
+@When[Microsoft_UI_Input == "on"]
 public struct Microsoft_UI_Input_InputPointerSourceDeviceKinds {
     public let value: UInt32
     public init() {
@@ -25991,12 +26585,17 @@ public struct Microsoft_UI_Input_InputPointerSourceDeviceKinds {
         return Microsoft_UI_Input_InputPointerSourceDeviceKinds(!value)
     }
 }
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_InputPointerSourceDeviceKinds_None = Microsoft_UI_Input_InputPointerSourceDeviceKinds(0)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_InputPointerSourceDeviceKinds_Touch = Microsoft_UI_Input_InputPointerSourceDeviceKinds(1)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_InputPointerSourceDeviceKinds_Pen = Microsoft_UI_Input_InputPointerSourceDeviceKinds(2)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_InputPointerSourceDeviceKinds_Mouse = Microsoft_UI_Input_InputPointerSourceDeviceKinds(4)
 
 // Microsoft.UI.Input.ManipulationDelta (synthetic:Microsoft_UI_Input_ManipulationDelta)
+@When[Microsoft_UI_Input == "on"]
 @C
 public struct Microsoft_UI_Input_ManipulationDelta {
     public var Translation: Windows_Foundation_Point = Windows_Foundation_Point()
@@ -26006,6 +26605,7 @@ public struct Microsoft_UI_Input_ManipulationDelta {
 }
 
 // Microsoft.UI.Input.ManipulationVelocities (synthetic:Microsoft_UI_Input_ManipulationVelocities)
+@When[Microsoft_UI_Input == "on"]
 @C
 public struct Microsoft_UI_Input_ManipulationVelocities {
     public var Linear: Windows_Foundation_Point = Windows_Foundation_Point()
@@ -26014,6 +26614,7 @@ public struct Microsoft_UI_Input_ManipulationVelocities {
 }
 
 // Microsoft.UI.Input.PointerDeviceType (synthetic:Microsoft_UI_Input_PointerDeviceType)
+@When[Microsoft_UI_Input == "on"]
 public struct Microsoft_UI_Input_PointerDeviceType {
     public let value: Int32
     public init() {
@@ -26023,12 +26624,17 @@ public struct Microsoft_UI_Input_PointerDeviceType {
         this.value = value
     }
 }
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerDeviceType_Touch = Microsoft_UI_Input_PointerDeviceType(0)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerDeviceType_Pen = Microsoft_UI_Input_PointerDeviceType(1)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerDeviceType_Mouse = Microsoft_UI_Input_PointerDeviceType(2)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerDeviceType_Touchpad = Microsoft_UI_Input_PointerDeviceType(3)
 
 // Microsoft.UI.Input.PointerEventArgs (synthetic:Microsoft_UI_Input_PointerEventArgs)
+@When[Microsoft_UI_Input == "on"]
 public class Microsoft_UI_Input_PointerEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -26164,6 +26770,7 @@ public class Microsoft_UI_Input_PointerEventArgs <: windows_interface.InterfaceW
     }
 }
 
+@When[Microsoft_UI_Input == "on"]
 extend Microsoft_UI_Input_PointerEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Input_PointerEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Input_PointerEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -26182,6 +26789,7 @@ extend Microsoft_UI_Input_PointerEventArgs <: windows_core.HandleWinrtType<Micro
 }
 
 // Microsoft.UI.Input.PointerPoint (synthetic:Microsoft_UI_Input_PointerPoint)
+@When[Microsoft_UI_Input == "on"]
 public class Microsoft_UI_Input_PointerPoint <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -26358,6 +26966,7 @@ public class Microsoft_UI_Input_PointerPoint <: windows_interface.InterfaceWrapp
     }
 }
 
+@When[Microsoft_UI_Input == "on"]
 extend Microsoft_UI_Input_PointerPoint <: windows_core.HandleWinrtType<Microsoft_UI_Input_PointerPoint> {
     public static func intoWinrtHandle(value: Microsoft_UI_Input_PointerPoint): CPointer<Unit> {
         value.asRaw()
@@ -26376,6 +26985,7 @@ extend Microsoft_UI_Input_PointerPoint <: windows_core.HandleWinrtType<Microsoft
 }
 
 // Microsoft.UI.Input.PointerPointProperties (synthetic:Microsoft_UI_Input_PointerPointProperties)
+@When[Microsoft_UI_Input == "on"]
 public class Microsoft_UI_Input_PointerPointProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -26686,6 +27296,7 @@ public class Microsoft_UI_Input_PointerPointProperties <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Input == "on"]
 extend Microsoft_UI_Input_PointerPointProperties <: windows_core.HandleWinrtType<Microsoft_UI_Input_PointerPointProperties> {
     public static func intoWinrtHandle(value: Microsoft_UI_Input_PointerPointProperties): CPointer<Unit> {
         value.asRaw()
@@ -26704,6 +27315,7 @@ extend Microsoft_UI_Input_PointerPointProperties <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Input.PointerUpdateKind (synthetic:Microsoft_UI_Input_PointerUpdateKind)
+@When[Microsoft_UI_Input == "on"]
 public struct Microsoft_UI_Input_PointerUpdateKind {
     public let value: Int32
     public init() {
@@ -26713,19 +27325,31 @@ public struct Microsoft_UI_Input_PointerUpdateKind {
         this.value = value
     }
 }
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerUpdateKind_Other = Microsoft_UI_Input_PointerUpdateKind(0)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerUpdateKind_LeftButtonPressed = Microsoft_UI_Input_PointerUpdateKind(1)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerUpdateKind_LeftButtonReleased = Microsoft_UI_Input_PointerUpdateKind(2)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerUpdateKind_RightButtonPressed = Microsoft_UI_Input_PointerUpdateKind(3)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerUpdateKind_RightButtonReleased = Microsoft_UI_Input_PointerUpdateKind(4)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerUpdateKind_MiddleButtonPressed = Microsoft_UI_Input_PointerUpdateKind(5)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerUpdateKind_MiddleButtonReleased = Microsoft_UI_Input_PointerUpdateKind(6)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerUpdateKind_XButton1Pressed = Microsoft_UI_Input_PointerUpdateKind(7)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerUpdateKind_XButton1Released = Microsoft_UI_Input_PointerUpdateKind(8)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerUpdateKind_XButton2Pressed = Microsoft_UI_Input_PointerUpdateKind(9)
+@When[Microsoft_UI_Input == "on"]
 public let Microsoft_UI_Input_PointerUpdateKind_XButton2Released = Microsoft_UI_Input_PointerUpdateKind(10)
 
 // Microsoft.UI.Text.CaretType (synthetic:Microsoft_UI_Text_CaretType)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_CaretType {
     public let value: Int32
     public init() {
@@ -26735,10 +27359,13 @@ public struct Microsoft_UI_Text_CaretType {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_CaretType_Normal = Microsoft_UI_Text_CaretType(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_CaretType_Null = Microsoft_UI_Text_CaretType(1)
 
 // Microsoft.UI.Text.FindOptions (synthetic:Microsoft_UI_Text_FindOptions)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_FindOptions {
     public let value: UInt32
     public init() {
@@ -26763,11 +27390,15 @@ public struct Microsoft_UI_Text_FindOptions {
         return Microsoft_UI_Text_FindOptions(!value)
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_FindOptions_None = Microsoft_UI_Text_FindOptions(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_FindOptions_Word = Microsoft_UI_Text_FindOptions(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_FindOptions_Case = Microsoft_UI_Text_FindOptions(4)
 
 // Microsoft.UI.Text.FormatEffect (synthetic:Microsoft_UI_Text_FormatEffect)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_FormatEffect {
     public let value: Int32
     public init() {
@@ -26777,12 +27408,17 @@ public struct Microsoft_UI_Text_FormatEffect {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_FormatEffect_Off = Microsoft_UI_Text_FormatEffect(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_FormatEffect_On = Microsoft_UI_Text_FormatEffect(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_FormatEffect_Toggle = Microsoft_UI_Text_FormatEffect(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_FormatEffect_Undefined = Microsoft_UI_Text_FormatEffect(3)
 
 // Microsoft.UI.Text.HorizontalCharacterAlignment (synthetic:Microsoft_UI_Text_HorizontalCharacterAlignment)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_HorizontalCharacterAlignment {
     public let value: Int32
     public init() {
@@ -26792,11 +27428,15 @@ public struct Microsoft_UI_Text_HorizontalCharacterAlignment {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_HorizontalCharacterAlignment_Left = Microsoft_UI_Text_HorizontalCharacterAlignment(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_HorizontalCharacterAlignment_Right = Microsoft_UI_Text_HorizontalCharacterAlignment(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_HorizontalCharacterAlignment_Center = Microsoft_UI_Text_HorizontalCharacterAlignment(2)
 
 // Microsoft.UI.Text.ITextCharacterFormat (synthetic:Microsoft_UI_Text_ITextCharacterFormat)
+@When[Microsoft_UI_Text == "on"]
 @Interface["f5710050-98e5-5788-b1e3-32191eebf94d", "Microsoft.UI.Text.ITextCharacterFormat", "LanguageTag.value=HString;Name.value=HString;GetClone.result=Com"]
 public interface Microsoft_UI_Text_ITextCharacterFormat <: IInspectable {
     func AllCaps(value: CPointer<Int32>): Int32
@@ -26852,6 +27492,7 @@ public interface Microsoft_UI_Text_ITextCharacterFormat <: IInspectable {
 }
 
 // Microsoft.UI.Text.ITextDocument (synthetic:Microsoft_UI_Text_ITextDocument)
+@When[Microsoft_UI_Text == "on"]
 @Interface["1149d57d-86a6-59dd-88d9-196f27bc5c85", "Microsoft.UI.Text.ITextDocument", "Selection.value=Com;GetDefaultCharacterFormat.result=Com;GetDefaultParagraphFormat.result=Com;GetRange.result=Com;GetRangeFromPoint.result=Com;GetText.value=HString"]
 public interface Microsoft_UI_Text_ITextDocument <: IInspectable {
     func CaretType(value: CPointer<Int32>): Int32
@@ -26889,6 +27530,7 @@ public interface Microsoft_UI_Text_ITextDocument <: IInspectable {
 }
 
 // Microsoft.UI.Text.ITextDocument2 (synthetic:Microsoft_UI_Text_ITextDocument2)
+@When[Microsoft_UI_Text == "on"]
 @Interface["21febcf1-2110-5879-b1da-b343097e71e1", "Microsoft.UI.Text.ITextDocument2", "GetMathML.value=HString"]
 public interface Microsoft_UI_Text_ITextDocument2 <: IInspectable {
     func GetMathMode(result: CPointer<Int32>): Int32
@@ -26898,6 +27540,7 @@ public interface Microsoft_UI_Text_ITextDocument2 <: IInspectable {
 }
 
 // Microsoft.UI.Text.ITextParagraphFormat (synthetic:Microsoft_UI_Text_ITextParagraphFormat)
+@When[Microsoft_UI_Text == "on"]
 @Interface["219b6cdf-0d0b-5701-b8a1-6c906b3ebbe1", "Microsoft.UI.Text.ITextParagraphFormat", "GetClone.result=Com"]
 public interface Microsoft_UI_Text_ITextParagraphFormat <: IInspectable {
     func Alignment(value: CPointer<Int32>): Int32
@@ -26951,6 +27594,7 @@ public interface Microsoft_UI_Text_ITextParagraphFormat <: IInspectable {
 }
 
 // Microsoft.UI.Text.ITextRange (synthetic:Microsoft_UI_Text_ITextRange)
+@When[Microsoft_UI_Text == "on"]
 @Interface["06d4abcf-0c06-5d12-a743-85537efd09ea", "Microsoft.UI.Text.ITextRange", "CharacterFormat.value=Com;FormattedText.value=Com;Link.value=HString;ParagraphFormat.value=Com;Text.value=HString;GetClone.result=Com;GetText.value=HString"]
 public interface Microsoft_UI_Text_ITextRange <: IInspectable {
     func Character(value: CPointer<UInt16>): Int32
@@ -27008,6 +27652,7 @@ public interface Microsoft_UI_Text_ITextRange <: IInspectable {
 }
 
 // Microsoft.UI.Text.ITextSelection (synthetic:Microsoft_UI_Text_ITextSelection)
+@When[Microsoft_UI_Text == "on"]
 @Interface["8f5e6cb1-2b04-589f-bd24-54e5cd8dd399", "Microsoft.UI.Text.ITextSelection"]
 public interface Microsoft_UI_Text_ITextSelection <: IInspectable {
     func Options(value: CPointer<UInt32>): Int32
@@ -27023,6 +27668,7 @@ public interface Microsoft_UI_Text_ITextSelection <: IInspectable {
 }
 
 // Microsoft.UI.Text.LetterCase (synthetic:Microsoft_UI_Text_LetterCase)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_LetterCase {
     public let value: Int32
     public init() {
@@ -27032,10 +27678,13 @@ public struct Microsoft_UI_Text_LetterCase {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LetterCase_Lower = Microsoft_UI_Text_LetterCase(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LetterCase_Upper = Microsoft_UI_Text_LetterCase(1)
 
 // Microsoft.UI.Text.LineSpacingRule (synthetic:Microsoft_UI_Text_LineSpacingRule)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_LineSpacingRule {
     public let value: Int32
     public init() {
@@ -27045,16 +27694,25 @@ public struct Microsoft_UI_Text_LineSpacingRule {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LineSpacingRule_Undefined = Microsoft_UI_Text_LineSpacingRule(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LineSpacingRule_Single = Microsoft_UI_Text_LineSpacingRule(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LineSpacingRule_OneAndHalf = Microsoft_UI_Text_LineSpacingRule(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LineSpacingRule_Double = Microsoft_UI_Text_LineSpacingRule(3)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LineSpacingRule_AtLeast = Microsoft_UI_Text_LineSpacingRule(4)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LineSpacingRule_Exactly = Microsoft_UI_Text_LineSpacingRule(5)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LineSpacingRule_Multiple = Microsoft_UI_Text_LineSpacingRule(6)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LineSpacingRule_Percent = Microsoft_UI_Text_LineSpacingRule(7)
 
 // Microsoft.UI.Text.LinkType (synthetic:Microsoft_UI_Text_LinkType)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_LinkType {
     public let value: Int32
     public init() {
@@ -27064,17 +27722,27 @@ public struct Microsoft_UI_Text_LinkType {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LinkType_Undefined = Microsoft_UI_Text_LinkType(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LinkType_NotALink = Microsoft_UI_Text_LinkType(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LinkType_ClientLink = Microsoft_UI_Text_LinkType(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LinkType_FriendlyLinkName = Microsoft_UI_Text_LinkType(3)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LinkType_FriendlyLinkAddress = Microsoft_UI_Text_LinkType(4)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LinkType_AutoLink = Microsoft_UI_Text_LinkType(5)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LinkType_AutoLinkEmail = Microsoft_UI_Text_LinkType(6)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LinkType_AutoLinkPhone = Microsoft_UI_Text_LinkType(7)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_LinkType_AutoLinkPath = Microsoft_UI_Text_LinkType(8)
 
 // Microsoft.UI.Text.MarkerAlignment (synthetic:Microsoft_UI_Text_MarkerAlignment)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_MarkerAlignment {
     public let value: Int32
     public init() {
@@ -27084,12 +27752,17 @@ public struct Microsoft_UI_Text_MarkerAlignment {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerAlignment_Undefined = Microsoft_UI_Text_MarkerAlignment(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerAlignment_Left = Microsoft_UI_Text_MarkerAlignment(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerAlignment_Center = Microsoft_UI_Text_MarkerAlignment(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerAlignment_Right = Microsoft_UI_Text_MarkerAlignment(3)
 
 // Microsoft.UI.Text.MarkerStyle (synthetic:Microsoft_UI_Text_MarkerStyle)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_MarkerStyle {
     public let value: Int32
     public init() {
@@ -27099,15 +27772,23 @@ public struct Microsoft_UI_Text_MarkerStyle {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerStyle_Undefined = Microsoft_UI_Text_MarkerStyle(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerStyle_Parenthesis = Microsoft_UI_Text_MarkerStyle(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerStyle_Parentheses = Microsoft_UI_Text_MarkerStyle(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerStyle_Period = Microsoft_UI_Text_MarkerStyle(3)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerStyle_Plain = Microsoft_UI_Text_MarkerStyle(4)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerStyle_Minus = Microsoft_UI_Text_MarkerStyle(5)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerStyle_NoNumber = Microsoft_UI_Text_MarkerStyle(6)
 
 // Microsoft.UI.Text.MarkerType (synthetic:Microsoft_UI_Text_MarkerType)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_MarkerType {
     public let value: Int32
     public init() {
@@ -27117,33 +27798,59 @@ public struct Microsoft_UI_Text_MarkerType {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_Undefined = Microsoft_UI_Text_MarkerType(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_None = Microsoft_UI_Text_MarkerType(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_Bullet = Microsoft_UI_Text_MarkerType(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_Arabic = Microsoft_UI_Text_MarkerType(3)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_LowercaseEnglishLetter = Microsoft_UI_Text_MarkerType(4)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_UppercaseEnglishLetter = Microsoft_UI_Text_MarkerType(5)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_LowercaseRoman = Microsoft_UI_Text_MarkerType(6)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_UppercaseRoman = Microsoft_UI_Text_MarkerType(7)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_UnicodeSequence = Microsoft_UI_Text_MarkerType(8)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_CircledNumber = Microsoft_UI_Text_MarkerType(9)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_BlackCircleWingding = Microsoft_UI_Text_MarkerType(10)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_WhiteCircleWingding = Microsoft_UI_Text_MarkerType(11)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_ArabicWide = Microsoft_UI_Text_MarkerType(12)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_SimplifiedChinese = Microsoft_UI_Text_MarkerType(13)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_TraditionalChinese = Microsoft_UI_Text_MarkerType(14)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_JapanSimplifiedChinese = Microsoft_UI_Text_MarkerType(15)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_JapanKorea = Microsoft_UI_Text_MarkerType(16)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_ArabicDictionary = Microsoft_UI_Text_MarkerType(17)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_ArabicAbjad = Microsoft_UI_Text_MarkerType(18)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_Hebrew = Microsoft_UI_Text_MarkerType(19)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_ThaiAlphabetic = Microsoft_UI_Text_MarkerType(20)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_ThaiNumeric = Microsoft_UI_Text_MarkerType(21)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_DevanagariVowel = Microsoft_UI_Text_MarkerType(22)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_DevanagariConsonant = Microsoft_UI_Text_MarkerType(23)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_MarkerType_DevanagariNumeric = Microsoft_UI_Text_MarkerType(24)
 
 // Microsoft.UI.Text.ParagraphAlignment (synthetic:Microsoft_UI_Text_ParagraphAlignment)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_ParagraphAlignment {
     public let value: Int32
     public init() {
@@ -27153,13 +27860,19 @@ public struct Microsoft_UI_Text_ParagraphAlignment {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphAlignment_Undefined = Microsoft_UI_Text_ParagraphAlignment(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphAlignment_Left = Microsoft_UI_Text_ParagraphAlignment(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphAlignment_Center = Microsoft_UI_Text_ParagraphAlignment(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphAlignment_Right = Microsoft_UI_Text_ParagraphAlignment(3)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphAlignment_Justify = Microsoft_UI_Text_ParagraphAlignment(4)
 
 // Microsoft.UI.Text.ParagraphStyle (synthetic:Microsoft_UI_Text_ParagraphStyle)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_ParagraphStyle {
     public let value: Int32
     public init() {
@@ -27169,20 +27882,33 @@ public struct Microsoft_UI_Text_ParagraphStyle {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphStyle_Undefined = Microsoft_UI_Text_ParagraphStyle(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphStyle_None = Microsoft_UI_Text_ParagraphStyle(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphStyle_Normal = Microsoft_UI_Text_ParagraphStyle(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphStyle_Heading1 = Microsoft_UI_Text_ParagraphStyle(3)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphStyle_Heading2 = Microsoft_UI_Text_ParagraphStyle(4)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphStyle_Heading3 = Microsoft_UI_Text_ParagraphStyle(5)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphStyle_Heading4 = Microsoft_UI_Text_ParagraphStyle(6)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphStyle_Heading5 = Microsoft_UI_Text_ParagraphStyle(7)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphStyle_Heading6 = Microsoft_UI_Text_ParagraphStyle(8)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphStyle_Heading7 = Microsoft_UI_Text_ParagraphStyle(9)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphStyle_Heading8 = Microsoft_UI_Text_ParagraphStyle(10)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_ParagraphStyle_Heading9 = Microsoft_UI_Text_ParagraphStyle(11)
 
 // Microsoft.UI.Text.PointOptions (synthetic:Microsoft_UI_Text_PointOptions)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_PointOptions {
     public let value: UInt32
     public init() {
@@ -27207,16 +27933,25 @@ public struct Microsoft_UI_Text_PointOptions {
         return Microsoft_UI_Text_PointOptions(!value)
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_PointOptions_None = Microsoft_UI_Text_PointOptions(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_PointOptions_IncludeInset = Microsoft_UI_Text_PointOptions(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_PointOptions_Start = Microsoft_UI_Text_PointOptions(32)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_PointOptions_ClientCoordinates = Microsoft_UI_Text_PointOptions(256)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_PointOptions_AllowOffClient = Microsoft_UI_Text_PointOptions(512)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_PointOptions_Transform = Microsoft_UI_Text_PointOptions(1024)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_PointOptions_NoHorizontalScroll = Microsoft_UI_Text_PointOptions(65536)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_PointOptions_NoVerticalScroll = Microsoft_UI_Text_PointOptions(262144)
 
 // Microsoft.UI.Text.RangeGravity (synthetic:Microsoft_UI_Text_RangeGravity)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_RangeGravity {
     public let value: Int32
     public init() {
@@ -27226,13 +27961,19 @@ public struct Microsoft_UI_Text_RangeGravity {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_RangeGravity_UIBehavior = Microsoft_UI_Text_RangeGravity(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_RangeGravity_Backward = Microsoft_UI_Text_RangeGravity(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_RangeGravity_Forward = Microsoft_UI_Text_RangeGravity(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_RangeGravity_Inward = Microsoft_UI_Text_RangeGravity(3)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_RangeGravity_Outward = Microsoft_UI_Text_RangeGravity(4)
 
 // Microsoft.UI.Text.RichEditMathMode (synthetic:Microsoft_UI_Text_RichEditMathMode)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_RichEditMathMode {
     public let value: Int32
     public init() {
@@ -27242,10 +27983,13 @@ public struct Microsoft_UI_Text_RichEditMathMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_RichEditMathMode_NoMath = Microsoft_UI_Text_RichEditMathMode(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_RichEditMathMode_MathOnly = Microsoft_UI_Text_RichEditMathMode(1)
 
 // Microsoft.UI.Text.RichEditTextDocument (synthetic:Microsoft_UI_Text_RichEditTextDocument)
+@When[Microsoft_UI_Text == "on"]
 public class Microsoft_UI_Text_RichEditTextDocument <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -27654,6 +28398,7 @@ public class Microsoft_UI_Text_RichEditTextDocument <: windows_interface.Interfa
     }
 }
 
+@When[Microsoft_UI_Text == "on"]
 extend Microsoft_UI_Text_RichEditTextDocument <: windows_core.HandleWinrtType<Microsoft_UI_Text_RichEditTextDocument> {
     public static func intoWinrtHandle(value: Microsoft_UI_Text_RichEditTextDocument): CPointer<Unit> {
         value.asRaw()
@@ -27672,6 +28417,7 @@ extend Microsoft_UI_Text_RichEditTextDocument <: windows_core.HandleWinrtType<Mi
 }
 
 // Microsoft.UI.Text.SelectionOptions (synthetic:Microsoft_UI_Text_SelectionOptions)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_SelectionOptions {
     public let value: UInt32
     public init() {
@@ -27696,13 +28442,19 @@ public struct Microsoft_UI_Text_SelectionOptions {
         return Microsoft_UI_Text_SelectionOptions(!value)
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_SelectionOptions_StartActive = Microsoft_UI_Text_SelectionOptions(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_SelectionOptions_AtEndOfLine = Microsoft_UI_Text_SelectionOptions(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_SelectionOptions_Overtype = Microsoft_UI_Text_SelectionOptions(4)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_SelectionOptions_Active = Microsoft_UI_Text_SelectionOptions(8)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_SelectionOptions_Replace = Microsoft_UI_Text_SelectionOptions(16)
 
 // Microsoft.UI.Text.SelectionType (synthetic:Microsoft_UI_Text_SelectionType)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_SelectionType {
     public let value: Int32
     public init() {
@@ -27712,13 +28464,19 @@ public struct Microsoft_UI_Text_SelectionType {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_SelectionType_None = Microsoft_UI_Text_SelectionType(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_SelectionType_InsertionPoint = Microsoft_UI_Text_SelectionType(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_SelectionType_Normal = Microsoft_UI_Text_SelectionType(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_SelectionType_InlineShape = Microsoft_UI_Text_SelectionType(7)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_SelectionType_Shape = Microsoft_UI_Text_SelectionType(8)
 
 // Microsoft.UI.Text.TabAlignment (synthetic:Microsoft_UI_Text_TabAlignment)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_TabAlignment {
     public let value: Int32
     public init() {
@@ -27728,13 +28486,19 @@ public struct Microsoft_UI_Text_TabAlignment {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TabAlignment_Left = Microsoft_UI_Text_TabAlignment(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TabAlignment_Center = Microsoft_UI_Text_TabAlignment(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TabAlignment_Right = Microsoft_UI_Text_TabAlignment(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TabAlignment_Decimal = Microsoft_UI_Text_TabAlignment(3)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TabAlignment_Bar = Microsoft_UI_Text_TabAlignment(4)
 
 // Microsoft.UI.Text.TabLeader (synthetic:Microsoft_UI_Text_TabLeader)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_TabLeader {
     public let value: Int32
     public init() {
@@ -27744,20 +28508,28 @@ public struct Microsoft_UI_Text_TabLeader {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TabLeader_Spaces = Microsoft_UI_Text_TabLeader(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TabLeader_Dots = Microsoft_UI_Text_TabLeader(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TabLeader_Dashes = Microsoft_UI_Text_TabLeader(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TabLeader_Lines = Microsoft_UI_Text_TabLeader(3)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TabLeader_ThickLines = Microsoft_UI_Text_TabLeader(4)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TabLeader_Equals = Microsoft_UI_Text_TabLeader(5)
 
 // Microsoft.UI.Text.TextApiContract (synthetic:Microsoft_UI_Text_TextApiContract)
+@When[Microsoft_UI_Text == "on"]
 @C
 public struct Microsoft_UI_Text_TextApiContract {
     public var reserved: Int32 = 0
 }
 
 // Microsoft.UI.Text.TextGetOptions (synthetic:Microsoft_UI_Text_TextGetOptions)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_TextGetOptions {
     public let value: UInt32
     public init() {
@@ -27782,17 +28554,27 @@ public struct Microsoft_UI_Text_TextGetOptions {
         return Microsoft_UI_Text_TextGetOptions(!value)
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextGetOptions_None = Microsoft_UI_Text_TextGetOptions(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextGetOptions_AdjustCrlf = Microsoft_UI_Text_TextGetOptions(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextGetOptions_UseCrlf = Microsoft_UI_Text_TextGetOptions(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextGetOptions_UseObjectText = Microsoft_UI_Text_TextGetOptions(4)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextGetOptions_AllowFinalEop = Microsoft_UI_Text_TextGetOptions(8)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextGetOptions_NoHidden = Microsoft_UI_Text_TextGetOptions(32)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextGetOptions_IncludeNumbering = Microsoft_UI_Text_TextGetOptions(64)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextGetOptions_FormatRtf = Microsoft_UI_Text_TextGetOptions(8192)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextGetOptions_UseLf = Microsoft_UI_Text_TextGetOptions(16777216)
 
 // Microsoft.UI.Text.TextRangeUnit (synthetic:Microsoft_UI_Text_TextRangeUnit)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_TextRangeUnit {
     public let value: Int32
     public init() {
@@ -27802,41 +28584,75 @@ public struct Microsoft_UI_Text_TextRangeUnit {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Character = Microsoft_UI_Text_TextRangeUnit(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Word = Microsoft_UI_Text_TextRangeUnit(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Sentence = Microsoft_UI_Text_TextRangeUnit(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Paragraph = Microsoft_UI_Text_TextRangeUnit(3)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Line = Microsoft_UI_Text_TextRangeUnit(4)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Story = Microsoft_UI_Text_TextRangeUnit(5)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Screen = Microsoft_UI_Text_TextRangeUnit(6)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Section = Microsoft_UI_Text_TextRangeUnit(7)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Window = Microsoft_UI_Text_TextRangeUnit(8)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_CharacterFormat = Microsoft_UI_Text_TextRangeUnit(9)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_ParagraphFormat = Microsoft_UI_Text_TextRangeUnit(10)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Object = Microsoft_UI_Text_TextRangeUnit(11)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_HardParagraph = Microsoft_UI_Text_TextRangeUnit(12)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Cluster = Microsoft_UI_Text_TextRangeUnit(13)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Bold = Microsoft_UI_Text_TextRangeUnit(14)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Italic = Microsoft_UI_Text_TextRangeUnit(15)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Underline = Microsoft_UI_Text_TextRangeUnit(16)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Strikethrough = Microsoft_UI_Text_TextRangeUnit(17)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_ProtectedText = Microsoft_UI_Text_TextRangeUnit(18)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Link = Microsoft_UI_Text_TextRangeUnit(19)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_SmallCaps = Microsoft_UI_Text_TextRangeUnit(20)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_AllCaps = Microsoft_UI_Text_TextRangeUnit(21)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Hidden = Microsoft_UI_Text_TextRangeUnit(22)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Outline = Microsoft_UI_Text_TextRangeUnit(23)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Shadow = Microsoft_UI_Text_TextRangeUnit(24)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Imprint = Microsoft_UI_Text_TextRangeUnit(25)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Disabled = Microsoft_UI_Text_TextRangeUnit(26)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Revised = Microsoft_UI_Text_TextRangeUnit(27)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Subscript = Microsoft_UI_Text_TextRangeUnit(28)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_Superscript = Microsoft_UI_Text_TextRangeUnit(29)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_FontBound = Microsoft_UI_Text_TextRangeUnit(30)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_LinkProtected = Microsoft_UI_Text_TextRangeUnit(31)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextRangeUnit_ContentLink = Microsoft_UI_Text_TextRangeUnit(32)
 
 // Microsoft.UI.Text.TextScript (synthetic:Microsoft_UI_Text_TextScript)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_TextScript {
     public let value: Int32
     public init() {
@@ -27846,72 +28662,137 @@ public struct Microsoft_UI_Text_TextScript {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Undefined = Microsoft_UI_Text_TextScript(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Ansi = Microsoft_UI_Text_TextScript(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_EastEurope = Microsoft_UI_Text_TextScript(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Cyrillic = Microsoft_UI_Text_TextScript(3)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Greek = Microsoft_UI_Text_TextScript(4)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Turkish = Microsoft_UI_Text_TextScript(5)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Hebrew = Microsoft_UI_Text_TextScript(6)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Arabic = Microsoft_UI_Text_TextScript(7)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Baltic = Microsoft_UI_Text_TextScript(8)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Vietnamese = Microsoft_UI_Text_TextScript(9)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Default = Microsoft_UI_Text_TextScript(10)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Symbol = Microsoft_UI_Text_TextScript(11)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Thai = Microsoft_UI_Text_TextScript(12)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_ShiftJis = Microsoft_UI_Text_TextScript(13)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_GB2312 = Microsoft_UI_Text_TextScript(14)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Hangul = Microsoft_UI_Text_TextScript(15)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Big5 = Microsoft_UI_Text_TextScript(16)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_PC437 = Microsoft_UI_Text_TextScript(17)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Oem = Microsoft_UI_Text_TextScript(18)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Mac = Microsoft_UI_Text_TextScript(19)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Armenian = Microsoft_UI_Text_TextScript(20)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Syriac = Microsoft_UI_Text_TextScript(21)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Thaana = Microsoft_UI_Text_TextScript(22)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Devanagari = Microsoft_UI_Text_TextScript(23)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Bengali = Microsoft_UI_Text_TextScript(24)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Gurmukhi = Microsoft_UI_Text_TextScript(25)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Gujarati = Microsoft_UI_Text_TextScript(26)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Oriya = Microsoft_UI_Text_TextScript(27)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Tamil = Microsoft_UI_Text_TextScript(28)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Telugu = Microsoft_UI_Text_TextScript(29)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Kannada = Microsoft_UI_Text_TextScript(30)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Malayalam = Microsoft_UI_Text_TextScript(31)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Sinhala = Microsoft_UI_Text_TextScript(32)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Lao = Microsoft_UI_Text_TextScript(33)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Tibetan = Microsoft_UI_Text_TextScript(34)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Myanmar = Microsoft_UI_Text_TextScript(35)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Georgian = Microsoft_UI_Text_TextScript(36)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Jamo = Microsoft_UI_Text_TextScript(37)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Ethiopic = Microsoft_UI_Text_TextScript(38)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Cherokee = Microsoft_UI_Text_TextScript(39)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Aboriginal = Microsoft_UI_Text_TextScript(40)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Ogham = Microsoft_UI_Text_TextScript(41)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Runic = Microsoft_UI_Text_TextScript(42)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Khmer = Microsoft_UI_Text_TextScript(43)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Mongolian = Microsoft_UI_Text_TextScript(44)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Braille = Microsoft_UI_Text_TextScript(45)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Yi = Microsoft_UI_Text_TextScript(46)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Limbu = Microsoft_UI_Text_TextScript(47)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_TaiLe = Microsoft_UI_Text_TextScript(48)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_NewTaiLue = Microsoft_UI_Text_TextScript(49)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_SylotiNagri = Microsoft_UI_Text_TextScript(50)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Kharoshthi = Microsoft_UI_Text_TextScript(51)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Kayahli = Microsoft_UI_Text_TextScript(52)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_UnicodeSymbol = Microsoft_UI_Text_TextScript(53)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Emoji = Microsoft_UI_Text_TextScript(54)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Glagolitic = Microsoft_UI_Text_TextScript(55)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Lisu = Microsoft_UI_Text_TextScript(56)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Vai = Microsoft_UI_Text_TextScript(57)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_NKo = Microsoft_UI_Text_TextScript(58)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Osmanya = Microsoft_UI_Text_TextScript(59)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_PhagsPa = Microsoft_UI_Text_TextScript(60)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Gothic = Microsoft_UI_Text_TextScript(61)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Deseret = Microsoft_UI_Text_TextScript(62)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextScript_Tifinagh = Microsoft_UI_Text_TextScript(63)
 
 // Microsoft.UI.Text.TextSetOptions (synthetic:Microsoft_UI_Text_TextSetOptions)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_TextSetOptions {
     public let value: UInt32
     public init() {
@@ -27936,15 +28817,23 @@ public struct Microsoft_UI_Text_TextSetOptions {
         return Microsoft_UI_Text_TextSetOptions(!value)
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextSetOptions_None = Microsoft_UI_Text_TextSetOptions(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextSetOptions_UnicodeBidi = Microsoft_UI_Text_TextSetOptions(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextSetOptions_Unlink = Microsoft_UI_Text_TextSetOptions(8)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextSetOptions_Unhide = Microsoft_UI_Text_TextSetOptions(16)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextSetOptions_CheckTextLimit = Microsoft_UI_Text_TextSetOptions(32)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextSetOptions_FormatRtf = Microsoft_UI_Text_TextSetOptions(8192)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_TextSetOptions_ApplyRtfDocumentDefaults = Microsoft_UI_Text_TextSetOptions(16384)
 
 // Microsoft.UI.Text.UnderlineType (synthetic:Microsoft_UI_Text_UnderlineType)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_UnderlineType {
     public let value: Int32
     public init() {
@@ -27954,28 +28843,49 @@ public struct Microsoft_UI_Text_UnderlineType {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_Undefined = Microsoft_UI_Text_UnderlineType(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_None = Microsoft_UI_Text_UnderlineType(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_Single = Microsoft_UI_Text_UnderlineType(2)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_Words = Microsoft_UI_Text_UnderlineType(3)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_Double = Microsoft_UI_Text_UnderlineType(4)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_Dotted = Microsoft_UI_Text_UnderlineType(5)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_Dash = Microsoft_UI_Text_UnderlineType(6)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_DashDot = Microsoft_UI_Text_UnderlineType(7)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_DashDotDot = Microsoft_UI_Text_UnderlineType(8)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_Wave = Microsoft_UI_Text_UnderlineType(9)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_Thick = Microsoft_UI_Text_UnderlineType(10)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_Thin = Microsoft_UI_Text_UnderlineType(11)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_DoubleWave = Microsoft_UI_Text_UnderlineType(12)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_HeavyWave = Microsoft_UI_Text_UnderlineType(13)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_LongDash = Microsoft_UI_Text_UnderlineType(14)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_ThickDash = Microsoft_UI_Text_UnderlineType(15)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_ThickDashDot = Microsoft_UI_Text_UnderlineType(16)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_ThickDashDotDot = Microsoft_UI_Text_UnderlineType(17)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_ThickDotted = Microsoft_UI_Text_UnderlineType(18)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_UnderlineType_ThickLongDash = Microsoft_UI_Text_UnderlineType(19)
 
 // Microsoft.UI.Text.VerticalCharacterAlignment (synthetic:Microsoft_UI_Text_VerticalCharacterAlignment)
+@When[Microsoft_UI_Text == "on"]
 public struct Microsoft_UI_Text_VerticalCharacterAlignment {
     public let value: Int32
     public init() {
@@ -27985,17 +28895,22 @@ public struct Microsoft_UI_Text_VerticalCharacterAlignment {
         this.value = value
     }
 }
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_VerticalCharacterAlignment_Top = Microsoft_UI_Text_VerticalCharacterAlignment(0)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_VerticalCharacterAlignment_Baseline = Microsoft_UI_Text_VerticalCharacterAlignment(1)
+@When[Microsoft_UI_Text == "on"]
 public let Microsoft_UI_Text_VerticalCharacterAlignment_Bottom = Microsoft_UI_Text_VerticalCharacterAlignment(2)
 
 // Microsoft.UI.WindowId (synthetic:Microsoft_UI_WindowId)
+@When[Microsoft_UI == "on"]
 @C
 public struct Microsoft_UI_WindowId {
     public var Value: UInt64 = 0u64
 }
 
 // Microsoft.UI.Windowing.AppWindow (synthetic:Microsoft_UI_Windowing_AppWindow)
+@When[Microsoft_UI_Windowing == "on"]
 public class Microsoft_UI_Windowing_AppWindow <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -28451,6 +29366,7 @@ public class Microsoft_UI_Windowing_AppWindow <: windows_interface.InterfaceWrap
     }
 }
 
+@When[Microsoft_UI_Windowing == "on"]
 extend Microsoft_UI_Windowing_AppWindow <: windows_core.HandleWinrtType<Microsoft_UI_Windowing_AppWindow> {
     public static func intoWinrtHandle(value: Microsoft_UI_Windowing_AppWindow): CPointer<Unit> {
         value.asRaw()
@@ -28469,6 +29385,7 @@ extend Microsoft_UI_Windowing_AppWindow <: windows_core.HandleWinrtType<Microsof
 }
 
 // Microsoft.UI.Windowing.AppWindowChangedEventArgs (synthetic:Microsoft_UI_Windowing_AppWindowChangedEventArgs)
+@When[Microsoft_UI_Windowing == "on"]
 public class Microsoft_UI_Windowing_AppWindowChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -28582,6 +29499,7 @@ public class Microsoft_UI_Windowing_AppWindowChangedEventArgs <: windows_interfa
     }
 }
 
+@When[Microsoft_UI_Windowing == "on"]
 extend Microsoft_UI_Windowing_AppWindowChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Windowing_AppWindowChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Windowing_AppWindowChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -28600,6 +29518,7 @@ extend Microsoft_UI_Windowing_AppWindowChangedEventArgs <: windows_core.HandleWi
 }
 
 // Microsoft.UI.Windowing.AppWindowClosingEventArgs (synthetic:Microsoft_UI_Windowing_AppWindowClosingEventArgs)
+@When[Microsoft_UI_Windowing == "on"]
 public class Microsoft_UI_Windowing_AppWindowClosingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -28677,6 +29596,7 @@ public class Microsoft_UI_Windowing_AppWindowClosingEventArgs <: windows_interfa
     }
 }
 
+@When[Microsoft_UI_Windowing == "on"]
 extend Microsoft_UI_Windowing_AppWindowClosingEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Windowing_AppWindowClosingEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Windowing_AppWindowClosingEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -28695,6 +29615,7 @@ extend Microsoft_UI_Windowing_AppWindowClosingEventArgs <: windows_core.HandleWi
 }
 
 // Microsoft.UI.Windowing.AppWindowPresenter (synthetic:Microsoft_UI_Windowing_AppWindowPresenter)
+@When[Microsoft_UI_Windowing == "on"]
 public class Microsoft_UI_Windowing_AppWindowPresenter <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -28765,6 +29686,7 @@ public class Microsoft_UI_Windowing_AppWindowPresenter <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Windowing == "on"]
 extend Microsoft_UI_Windowing_AppWindowPresenter <: windows_core.HandleWinrtType<Microsoft_UI_Windowing_AppWindowPresenter> {
     public static func intoWinrtHandle(value: Microsoft_UI_Windowing_AppWindowPresenter): CPointer<Unit> {
         value.asRaw()
@@ -28783,6 +29705,7 @@ extend Microsoft_UI_Windowing_AppWindowPresenter <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Windowing.AppWindowPresenterKind (synthetic:Microsoft_UI_Windowing_AppWindowPresenterKind)
+@When[Microsoft_UI_Windowing == "on"]
 public struct Microsoft_UI_Windowing_AppWindowPresenterKind {
     public let value: Int32
     public init() {
@@ -28792,12 +29715,17 @@ public struct Microsoft_UI_Windowing_AppWindowPresenterKind {
         this.value = value
     }
 }
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_AppWindowPresenterKind_Default = Microsoft_UI_Windowing_AppWindowPresenterKind(0)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_AppWindowPresenterKind_CompactOverlay = Microsoft_UI_Windowing_AppWindowPresenterKind(1)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_AppWindowPresenterKind_FullScreen = Microsoft_UI_Windowing_AppWindowPresenterKind(2)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_AppWindowPresenterKind_Overlapped = Microsoft_UI_Windowing_AppWindowPresenterKind(3)
 
 // Microsoft.UI.Windowing.AppWindowTitleBar (synthetic:Microsoft_UI_Windowing_AppWindowTitleBar)
+@When[Microsoft_UI_Windowing == "on"]
 public class Microsoft_UI_Windowing_AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -29277,6 +30205,7 @@ public class Microsoft_UI_Windowing_AppWindowTitleBar <: windows_interface.Inter
     }
 }
 
+@When[Microsoft_UI_Windowing == "on"]
 extend Microsoft_UI_Windowing_AppWindowTitleBar <: windows_core.HandleWinrtType<Microsoft_UI_Windowing_AppWindowTitleBar> {
     public static func intoWinrtHandle(value: Microsoft_UI_Windowing_AppWindowTitleBar): CPointer<Unit> {
         value.asRaw()
@@ -29295,6 +30224,7 @@ extend Microsoft_UI_Windowing_AppWindowTitleBar <: windows_core.HandleWinrtType<
 }
 
 // Microsoft.UI.Windowing.DisplayArea (synthetic:Microsoft_UI_Windowing_DisplayArea)
+@When[Microsoft_UI_Windowing == "on"]
 public class Microsoft_UI_Windowing_DisplayArea <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -29499,6 +30429,7 @@ public class Microsoft_UI_Windowing_DisplayArea <: windows_interface.InterfaceWr
     }
 }
 
+@When[Microsoft_UI_Windowing == "on"]
 extend Microsoft_UI_Windowing_DisplayArea <: windows_core.HandleWinrtType<Microsoft_UI_Windowing_DisplayArea> {
     public static func intoWinrtHandle(value: Microsoft_UI_Windowing_DisplayArea): CPointer<Unit> {
         value.asRaw()
@@ -29517,6 +30448,7 @@ extend Microsoft_UI_Windowing_DisplayArea <: windows_core.HandleWinrtType<Micros
 }
 
 // Microsoft.UI.Windowing.DisplayAreaFallback (synthetic:Microsoft_UI_Windowing_DisplayAreaFallback)
+@When[Microsoft_UI_Windowing == "on"]
 public struct Microsoft_UI_Windowing_DisplayAreaFallback {
     public let value: Int32
     public init() {
@@ -29526,11 +30458,15 @@ public struct Microsoft_UI_Windowing_DisplayAreaFallback {
         this.value = value
     }
 }
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_DisplayAreaFallback_None = Microsoft_UI_Windowing_DisplayAreaFallback(0)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_DisplayAreaFallback_Primary = Microsoft_UI_Windowing_DisplayAreaFallback(1)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_DisplayAreaFallback_Nearest = Microsoft_UI_Windowing_DisplayAreaFallback(2)
 
 // Microsoft.UI.Windowing.DisplayAreaWatcher (synthetic:Microsoft_UI_Windowing_DisplayAreaWatcher)
+@When[Microsoft_UI_Windowing == "on"]
 public class Microsoft_UI_Windowing_DisplayAreaWatcher <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -29717,6 +30653,7 @@ public class Microsoft_UI_Windowing_DisplayAreaWatcher <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Windowing == "on"]
 extend Microsoft_UI_Windowing_DisplayAreaWatcher <: windows_core.HandleWinrtType<Microsoft_UI_Windowing_DisplayAreaWatcher> {
     public static func intoWinrtHandle(value: Microsoft_UI_Windowing_DisplayAreaWatcher): CPointer<Unit> {
         value.asRaw()
@@ -29735,6 +30672,7 @@ extend Microsoft_UI_Windowing_DisplayAreaWatcher <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Windowing.DisplayAreaWatcherStatus (synthetic:Microsoft_UI_Windowing_DisplayAreaWatcherStatus)
+@When[Microsoft_UI_Windowing == "on"]
 public struct Microsoft_UI_Windowing_DisplayAreaWatcherStatus {
     public let value: Int32
     public init() {
@@ -29744,14 +30682,21 @@ public struct Microsoft_UI_Windowing_DisplayAreaWatcherStatus {
         this.value = value
     }
 }
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_DisplayAreaWatcherStatus_Created = Microsoft_UI_Windowing_DisplayAreaWatcherStatus(0)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_DisplayAreaWatcherStatus_Started = Microsoft_UI_Windowing_DisplayAreaWatcherStatus(1)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_DisplayAreaWatcherStatus_EnumerationCompleted = Microsoft_UI_Windowing_DisplayAreaWatcherStatus(2)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_DisplayAreaWatcherStatus_Stopping = Microsoft_UI_Windowing_DisplayAreaWatcherStatus(3)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_DisplayAreaWatcherStatus_Stopped = Microsoft_UI_Windowing_DisplayAreaWatcherStatus(4)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_DisplayAreaWatcherStatus_Aborted = Microsoft_UI_Windowing_DisplayAreaWatcherStatus(5)
 
 // Microsoft.UI.Windowing.IAppWindow (synthetic:Microsoft_UI_Windowing_IAppWindow)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["cfa788b3-643b-5c5e-ad4e-321d48a82acd", "Microsoft.UI.Windowing.IAppWindow", "Presenter.value=Com;Title.value=HString;TitleBar.value=Com"]
 public interface Microsoft_UI_Windowing_IAppWindow <: IInspectable {
     func Id(value: CPointer<Microsoft_UI_WindowId>): Int32
@@ -29786,6 +30731,7 @@ public interface Microsoft_UI_Windowing_IAppWindow <: IInspectable {
 }
 
 // Microsoft.UI.Windowing.IAppWindow2 (synthetic:Microsoft_UI_Windowing_IAppWindow2)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["6cd41292-794c-5cac-8961-210d012c6ebc", "Microsoft.UI.Windowing.IAppWindow2"]
 public interface Microsoft_UI_Windowing_IAppWindow2 <: IInspectable {
     func ClientSize(value: CPointer<Windows_Graphics_SizeInt32>): Int32
@@ -29797,6 +30743,7 @@ public interface Microsoft_UI_Windowing_IAppWindow2 <: IInspectable {
 }
 
 // Microsoft.UI.Windowing.IAppWindow3 (synthetic:Microsoft_UI_Windowing_IAppWindow3)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["2f260cea-193d-5dd6-a904-d7649a608d2f", "Microsoft.UI.Windowing.IAppWindow3", "DispatcherQueue.value=Com"]
 public interface Microsoft_UI_Windowing_IAppWindow3 <: IInspectable {
     func AssociateWithDispatcherQueue(dispatcherQueue: CPointer<Unit>): Int32
@@ -29804,6 +30751,7 @@ public interface Microsoft_UI_Windowing_IAppWindow3 <: IInspectable {
 }
 
 // Microsoft.UI.Windowing.IAppWindow4 (synthetic:Microsoft_UI_Windowing_IAppWindow4)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["383bfb91-ea29-5414-80cd-6c76d981eb31", "Microsoft.UI.Windowing.IAppWindow4"]
 public interface Microsoft_UI_Windowing_IAppWindow4 <: IInspectable {
     func SetTaskbarIcon(iconPath: CPointer<Unit>): Int32
@@ -29813,6 +30761,7 @@ public interface Microsoft_UI_Windowing_IAppWindow4 <: IInspectable {
 }
 
 // Microsoft.UI.Windowing.IAppWindowChangedEventArgs (synthetic:Microsoft_UI_Windowing_IAppWindowChangedEventArgs)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["2182bc5d-fdac-5c3e-bf37-7d8d684e9d1d", "Microsoft.UI.Windowing.IAppWindowChangedEventArgs"]
 public interface Microsoft_UI_Windowing_IAppWindowChangedEventArgs <: IInspectable {
     func DidPositionChange(value: CPointer<Bool>): Int32
@@ -29822,6 +30771,7 @@ public interface Microsoft_UI_Windowing_IAppWindowChangedEventArgs <: IInspectab
 }
 
 // Microsoft.UI.Windowing.IAppWindowChangedEventArgs2 (synthetic:Microsoft_UI_Windowing_IAppWindowChangedEventArgs2)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["a773ab4c-a5ec-50e8-98ac-247fe6cd4227", "Microsoft.UI.Windowing.IAppWindowChangedEventArgs2"]
 public interface Microsoft_UI_Windowing_IAppWindowChangedEventArgs2 <: IInspectable {
     func DidZOrderChange(value: CPointer<Bool>): Int32
@@ -29831,6 +30781,7 @@ public interface Microsoft_UI_Windowing_IAppWindowChangedEventArgs2 <: IInspecta
 }
 
 // Microsoft.UI.Windowing.IAppWindowClosingEventArgs (synthetic:Microsoft_UI_Windowing_IAppWindowClosingEventArgs)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["0e09d90b-2261-590b-9ad1-8504991d8754", "Microsoft.UI.Windowing.IAppWindowClosingEventArgs"]
 public interface Microsoft_UI_Windowing_IAppWindowClosingEventArgs <: IInspectable {
     func Cancel(value: CPointer<Bool>): Int32
@@ -29838,17 +30789,20 @@ public interface Microsoft_UI_Windowing_IAppWindowClosingEventArgs <: IInspectab
 }
 
 // Microsoft.UI.Windowing.IAppWindowPresenter (synthetic:Microsoft_UI_Windowing_IAppWindowPresenter)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["bc3042c2-c6c6-5632-8989-ff0ec6d3b40d", "Microsoft.UI.Windowing.IAppWindowPresenter"]
 public interface Microsoft_UI_Windowing_IAppWindowPresenter <: IInspectable {
     func Kind(value: CPointer<Int32>): Int32
 }
 
 // Microsoft.UI.Windowing.IAppWindowPresenterFactory (synthetic:Microsoft_UI_Windowing_IAppWindowPresenterFactory)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["62082e3c-1368-5238-90d1-e932dc718a82", "Microsoft.UI.Windowing.IAppWindowPresenterFactory"]
 public interface Microsoft_UI_Windowing_IAppWindowPresenterFactory <: IInspectable {
 }
 
 // Microsoft.UI.Windowing.IAppWindowStatics (synthetic:Microsoft_UI_Windowing_IAppWindowStatics)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["3c315c24-d540-5d72-b518-b226b83627cb", "Microsoft.UI.Windowing.IAppWindowStatics", "Create.result=Com;CreateWithPresenter.result=Com;CreateWithPresenterAndOwner.result=Com;GetFromWindowId.result=Com"]
 public interface Microsoft_UI_Windowing_IAppWindowStatics <: IInspectable {
     func Create(result: CPointer<CPointer<Unit>>): Int32
@@ -29858,12 +30812,14 @@ public interface Microsoft_UI_Windowing_IAppWindowStatics <: IInspectable {
 }
 
 // Microsoft.UI.Windowing.IAppWindowStatics2 (synthetic:Microsoft_UI_Windowing_IAppWindowStatics2)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["cabc23db-4606-5d6e-89a5-06de1d8bd3e2", "Microsoft.UI.Windowing.IAppWindowStatics2", "CreateWithDispatcherQueue.result=Com"]
 public interface Microsoft_UI_Windowing_IAppWindowStatics2 <: IInspectable {
     func CreateWithDispatcherQueue(appWindowPresenter: CPointer<Unit>, ownerWindowId: Microsoft_UI_WindowId, DispatcherQueue: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Windowing.IAppWindowTitleBar (synthetic:Microsoft_UI_Windowing_IAppWindowTitleBar)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["5574efa2-c91c-5700-a363-539c71a7aaf4", "Microsoft.UI.Windowing.IAppWindowTitleBar", "BackgroundColor.value=Com;ButtonBackgroundColor.value=Com;ButtonForegroundColor.value=Com;ButtonHoverBackgroundColor.value=Com;ButtonHoverForegroundColor.value=Com;ButtonInactiveBackgroundColor.value=Com;ButtonInactiveForegroundColor.value=Com;ButtonPressedBackgroundColor.value=Com;ButtonPressedForegroundColor.value=Com;ForegroundColor.value=Com;InactiveBackgroundColor.value=Com;InactiveForegroundColor.value=Com"]
 public interface Microsoft_UI_Windowing_IAppWindowTitleBar <: IInspectable {
     func BackgroundColor(value: CPointer<CPointer<Unit>>): Int32
@@ -29902,6 +30858,7 @@ public interface Microsoft_UI_Windowing_IAppWindowTitleBar <: IInspectable {
 }
 
 // Microsoft.UI.Windowing.IAppWindowTitleBar2 (synthetic:Microsoft_UI_Windowing_IAppWindowTitleBar2)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["86faed38-748a-5b4b-9ccf-3ba0496c9041", "Microsoft.UI.Windowing.IAppWindowTitleBar2"]
 public interface Microsoft_UI_Windowing_IAppWindowTitleBar2 <: IInspectable {
     func PreferredHeightOption(value: CPointer<Int32>): Int32
@@ -29909,6 +30866,7 @@ public interface Microsoft_UI_Windowing_IAppWindowTitleBar2 <: IInspectable {
 }
 
 // Microsoft.UI.Windowing.IAppWindowTitleBar3 (synthetic:Microsoft_UI_Windowing_IAppWindowTitleBar3)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["07146e74-0410-5597-aba7-1af276d2ae07", "Microsoft.UI.Windowing.IAppWindowTitleBar3"]
 public interface Microsoft_UI_Windowing_IAppWindowTitleBar3 <: IInspectable {
     func PreferredTheme(value: CPointer<Int32>): Int32
@@ -29916,12 +30874,14 @@ public interface Microsoft_UI_Windowing_IAppWindowTitleBar3 <: IInspectable {
 }
 
 // Microsoft.UI.Windowing.IAppWindowTitleBarStatics (synthetic:Microsoft_UI_Windowing_IAppWindowTitleBarStatics)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["9e1da52e-8b15-54d6-a886-f7b9f9d930b2", "Microsoft.UI.Windowing.IAppWindowTitleBarStatics"]
 public interface Microsoft_UI_Windowing_IAppWindowTitleBarStatics <: IInspectable {
     func IsCustomizationSupported(result: CPointer<Bool>): Int32
 }
 
 // Microsoft.UI.Windowing.IDisplayArea (synthetic:Microsoft_UI_Windowing_IDisplayArea)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["5c7e0537-b621-5579-bcae-a84aa8746167", "Microsoft.UI.Windowing.IDisplayArea"]
 public interface Microsoft_UI_Windowing_IDisplayArea <: IInspectable {
     func DisplayId(value: CPointer<Microsoft_UI_DisplayId>): Int32
@@ -29931,6 +30891,7 @@ public interface Microsoft_UI_Windowing_IDisplayArea <: IInspectable {
 }
 
 // Microsoft.UI.Windowing.IDisplayAreaStatics (synthetic:Microsoft_UI_Windowing_IDisplayAreaStatics)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["02ab4926-211e-5d49-8e4b-2af193daed09", "Microsoft.UI.Windowing.IDisplayAreaStatics", "Primary.value=Com;CreateWatcher.result=Com;FindAll.result=Com;GetFromWindowId.result=Com;GetFromPoint.result=Com;GetFromRect.result=Com"]
 public interface Microsoft_UI_Windowing_IDisplayAreaStatics <: IInspectable {
     func Primary(value: CPointer<CPointer<Unit>>): Int32
@@ -29942,12 +30903,14 @@ public interface Microsoft_UI_Windowing_IDisplayAreaStatics <: IInspectable {
 }
 
 // Microsoft.UI.Windowing.IDisplayAreaStatics2 (synthetic:Microsoft_UI_Windowing_IDisplayAreaStatics2)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["7207ad4b-890d-5dd7-bc18-78ffd9544d8f", "Microsoft.UI.Windowing.IDisplayAreaStatics2", "GetFromDisplayId.result=Com"]
 public interface Microsoft_UI_Windowing_IDisplayAreaStatics2 <: IInspectable {
     func GetFromDisplayId(displayId: Microsoft_UI_DisplayId, result: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Windowing.IDisplayAreaWatcher (synthetic:Microsoft_UI_Windowing_IDisplayAreaWatcher)
+@When[Microsoft_UI_Windowing == "on"]
 @Interface["83f6562f-d3a0-548b-8e4f-a99be3d95c9c", "Microsoft.UI.Windowing.IDisplayAreaWatcher"]
 public interface Microsoft_UI_Windowing_IDisplayAreaWatcher <: IInspectable {
     func Status(value: CPointer<Int32>): Int32
@@ -29966,6 +30929,7 @@ public interface Microsoft_UI_Windowing_IDisplayAreaWatcher <: IInspectable {
 }
 
 // Microsoft.UI.Windowing.IconShowOptions (synthetic:Microsoft_UI_Windowing_IconShowOptions)
+@When[Microsoft_UI_Windowing == "on"]
 public struct Microsoft_UI_Windowing_IconShowOptions {
     public let value: Int32
     public init() {
@@ -29975,10 +30939,13 @@ public struct Microsoft_UI_Windowing_IconShowOptions {
         this.value = value
     }
 }
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_IconShowOptions_ShowIconAndSystemMenu = Microsoft_UI_Windowing_IconShowOptions(0)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_IconShowOptions_HideIconAndSystemMenu = Microsoft_UI_Windowing_IconShowOptions(1)
 
 // Microsoft.UI.Windowing.TitleBarHeightOption (synthetic:Microsoft_UI_Windowing_TitleBarHeightOption)
+@When[Microsoft_UI_Windowing == "on"]
 public struct Microsoft_UI_Windowing_TitleBarHeightOption {
     public let value: Int32
     public init() {
@@ -29988,11 +30955,15 @@ public struct Microsoft_UI_Windowing_TitleBarHeightOption {
         this.value = value
     }
 }
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_TitleBarHeightOption_Standard = Microsoft_UI_Windowing_TitleBarHeightOption(0)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_TitleBarHeightOption_Tall = Microsoft_UI_Windowing_TitleBarHeightOption(1)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_TitleBarHeightOption_Collapsed = Microsoft_UI_Windowing_TitleBarHeightOption(2)
 
 // Microsoft.UI.Windowing.TitleBarTheme (synthetic:Microsoft_UI_Windowing_TitleBarTheme)
+@When[Microsoft_UI_Windowing == "on"]
 public struct Microsoft_UI_Windowing_TitleBarTheme {
     public let value: Int32
     public init() {
@@ -30002,12 +30973,17 @@ public struct Microsoft_UI_Windowing_TitleBarTheme {
         this.value = value
     }
 }
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_TitleBarTheme_Legacy = Microsoft_UI_Windowing_TitleBarTheme(0)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_TitleBarTheme_UseDefaultAppMode = Microsoft_UI_Windowing_TitleBarTheme(1)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_TitleBarTheme_Light = Microsoft_UI_Windowing_TitleBarTheme(2)
+@When[Microsoft_UI_Windowing == "on"]
 public let Microsoft_UI_Windowing_TitleBarTheme_Dark = Microsoft_UI_Windowing_TitleBarTheme(3)
 
 // Microsoft.UI.Xaml.Application (synthetic:Microsoft_UI_Xaml_Application)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_Application <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -30295,6 +31271,7 @@ public class Microsoft_UI_Xaml_Application <: windows_interface.InterfaceWrapper
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_Application <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Application> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Application): CPointer<Unit> {
         value.asRaw()
@@ -30313,6 +31290,7 @@ extend Microsoft_UI_Xaml_Application <: windows_core.HandleWinrtType<Microsoft_U
 }
 
 // Microsoft.UI.Xaml.ApplicationHighContrastAdjustment (synthetic:Microsoft_UI_Xaml_ApplicationHighContrastAdjustment)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_ApplicationHighContrastAdjustment {
     public let value: UInt32
     public init() {
@@ -30337,10 +31315,13 @@ public struct Microsoft_UI_Xaml_ApplicationHighContrastAdjustment {
         return Microsoft_UI_Xaml_ApplicationHighContrastAdjustment(!value)
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_ApplicationHighContrastAdjustment_None = Microsoft_UI_Xaml_ApplicationHighContrastAdjustment(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_ApplicationHighContrastAdjustment_Auto = Microsoft_UI_Xaml_ApplicationHighContrastAdjustment(4294967295)
 
 // Microsoft.UI.Xaml.ApplicationInitializationCallback (synthetic:Microsoft_UI_Xaml_ApplicationInitializationCallback)
+@When[Microsoft_UI_Xaml == "on"]
 @C
 public struct Microsoft_UI_Xaml_ApplicationInitializationCallbackVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -30348,6 +31329,7 @@ public struct Microsoft_UI_Xaml_ApplicationInitializationCallbackVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public open class Microsoft_UI_Xaml_ApplicationInitializationCallback <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -30415,18 +31397,22 @@ public open class Microsoft_UI_Xaml_ApplicationInitializationCallback <: windows
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_ApplicationInitializationCallback <: windows_core.Interface<Microsoft_UI_Xaml_ApplicationInitializationCallback> {}
 
+@When[Microsoft_UI_Xaml == "on"]
 private class OwnedMicrosoft_UI_Xaml_ApplicationInitializationCallback <: Microsoft_UI_Xaml_ApplicationInitializationCallback {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public interface Microsoft_UI_Xaml_ApplicationInitializationCallbackInvokerErased {
     func __winrtThunk_Invoke(p: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public interface Microsoft_UI_Xaml_ApplicationInitializationCallbackInvoker <: Microsoft_UI_Xaml_ApplicationInitializationCallbackInvokerErased {
     func Invoke(p: CPointer<Unit>): Unit {
         ()
@@ -30444,6 +31430,7 @@ public interface Microsoft_UI_Xaml_ApplicationInitializationCallbackInvoker <: M
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 private class Microsoft_UI_Xaml_ApplicationInitializationCallbackBox <: Microsoft_UI_Xaml_ApplicationInitializationCallbackInvoker & Resource {
     public let invoke_: (CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_ApplicationInitializationCallbackVtbl>
@@ -30481,6 +31468,7 @@ private class Microsoft_UI_Xaml_ApplicationInitializationCallbackBox <: Microsof
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 func buildMicrosoft_UI_Xaml_ApplicationInitializationCallbackBoxVtbl(): Microsoft_UI_Xaml_ApplicationInitializationCallbackVtbl {
     var vtbl = Microsoft_UI_Xaml_ApplicationInitializationCallbackVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -30497,6 +31485,7 @@ func buildMicrosoft_UI_Xaml_ApplicationInitializationCallbackBoxVtbl(): Microsof
 
 
 // Microsoft.UI.Xaml.ApplicationInitializationCallbackParams (synthetic:Microsoft_UI_Xaml_ApplicationInitializationCallbackParams)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_ApplicationInitializationCallbackParams <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -30555,6 +31544,7 @@ public class Microsoft_UI_Xaml_ApplicationInitializationCallbackParams <: window
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_ApplicationInitializationCallbackParams <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_ApplicationInitializationCallbackParams> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_ApplicationInitializationCallbackParams): CPointer<Unit> {
         value.asRaw()
@@ -30573,6 +31563,7 @@ extend Microsoft_UI_Xaml_ApplicationInitializationCallbackParams <: windows_core
 }
 
 // Microsoft.UI.Xaml.ApplicationTheme (synthetic:Microsoft_UI_Xaml_ApplicationTheme)
+@When[Microsoft_UI_Xaml == "on"]
 public struct Microsoft_UI_Xaml_ApplicationTheme {
     public let value: Int32
     public init() {
@@ -30582,10 +31573,13 @@ public struct Microsoft_UI_Xaml_ApplicationTheme {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_ApplicationTheme_Light = Microsoft_UI_Xaml_ApplicationTheme(0)
+@When[Microsoft_UI_Xaml == "on"]
 public let Microsoft_UI_Xaml_ApplicationTheme_Dark = Microsoft_UI_Xaml_ApplicationTheme(1)
 
 // Microsoft.UI.Xaml.Automation.AnnotationType (synthetic:Microsoft_UI_Xaml_Automation_AnnotationType)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public struct Microsoft_UI_Xaml_Automation_AnnotationType {
     public let value: Int32
     public init() {
@@ -30595,31 +31589,55 @@ public struct Microsoft_UI_Xaml_Automation_AnnotationType {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_Unknown = Microsoft_UI_Xaml_Automation_AnnotationType(60000)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_SpellingError = Microsoft_UI_Xaml_Automation_AnnotationType(60001)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_GrammarError = Microsoft_UI_Xaml_Automation_AnnotationType(60002)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_Comment = Microsoft_UI_Xaml_Automation_AnnotationType(60003)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_FormulaError = Microsoft_UI_Xaml_Automation_AnnotationType(60004)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_TrackChanges = Microsoft_UI_Xaml_Automation_AnnotationType(60005)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_Header = Microsoft_UI_Xaml_Automation_AnnotationType(60006)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_Footer = Microsoft_UI_Xaml_Automation_AnnotationType(60007)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_Highlighted = Microsoft_UI_Xaml_Automation_AnnotationType(60008)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_Endnote = Microsoft_UI_Xaml_Automation_AnnotationType(60009)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_Footnote = Microsoft_UI_Xaml_Automation_AnnotationType(60010)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_InsertionChange = Microsoft_UI_Xaml_Automation_AnnotationType(60011)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_DeletionChange = Microsoft_UI_Xaml_Automation_AnnotationType(60012)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_MoveChange = Microsoft_UI_Xaml_Automation_AnnotationType(60013)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_FormatChange = Microsoft_UI_Xaml_Automation_AnnotationType(60014)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_UnsyncedChange = Microsoft_UI_Xaml_Automation_AnnotationType(60015)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_EditingLockedChange = Microsoft_UI_Xaml_Automation_AnnotationType(60016)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_ExternalChange = Microsoft_UI_Xaml_Automation_AnnotationType(60017)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_ConflictingChange = Microsoft_UI_Xaml_Automation_AnnotationType(60018)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_Author = Microsoft_UI_Xaml_Automation_AnnotationType(60019)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_AdvancedProofingIssue = Microsoft_UI_Xaml_Automation_AnnotationType(60020)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_DataValidationError = Microsoft_UI_Xaml_Automation_AnnotationType(60021)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AnnotationType_CircularReferenceError = Microsoft_UI_Xaml_Automation_AnnotationType(60022)
 
 // Microsoft.UI.Xaml.Automation.AutomationAnnotation (synthetic:Microsoft_UI_Xaml_Automation_AutomationAnnotation)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public class Microsoft_UI_Xaml_Automation_AutomationAnnotation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -30798,6 +31816,7 @@ public class Microsoft_UI_Xaml_Automation_AutomationAnnotation <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Xaml_Automation == "on"]
 extend Microsoft_UI_Xaml_Automation_AutomationAnnotation <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Automation_AutomationAnnotation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Automation_AutomationAnnotation): CPointer<Unit> {
         value.asRaw()
@@ -30816,6 +31835,7 @@ extend Microsoft_UI_Xaml_Automation_AutomationAnnotation <: windows_core.HandleW
 }
 
 // Microsoft.UI.Xaml.Automation.AutomationProperties (synthetic:Microsoft_UI_Xaml_Automation_AutomationProperties)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public class Microsoft_UI_Xaml_Automation_AutomationProperties <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -31954,6 +32974,7 @@ public class Microsoft_UI_Xaml_Automation_AutomationProperties <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Xaml_Automation == "on"]
 extend Microsoft_UI_Xaml_Automation_AutomationProperties <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Automation_AutomationProperties> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Automation_AutomationProperties): CPointer<Unit> {
         value.asRaw()
@@ -31972,6 +32993,7 @@ extend Microsoft_UI_Xaml_Automation_AutomationProperties <: windows_core.HandleW
 }
 
 // Microsoft.UI.Xaml.Automation.AutomationProperty (synthetic:Microsoft_UI_Xaml_Automation_AutomationProperty)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public class Microsoft_UI_Xaml_Automation_AutomationProperty <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -32030,6 +33052,7 @@ public class Microsoft_UI_Xaml_Automation_AutomationProperty <: windows_interfac
     }
 }
 
+@When[Microsoft_UI_Xaml_Automation == "on"]
 extend Microsoft_UI_Xaml_Automation_AutomationProperty <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Automation_AutomationProperty> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Automation_AutomationProperty): CPointer<Unit> {
         value.asRaw()
@@ -32048,6 +33071,7 @@ extend Microsoft_UI_Xaml_Automation_AutomationProperty <: windows_core.HandleWin
 }
 
 // Microsoft.UI.Xaml.Automation.AutomationTextEditChangeType (synthetic:Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public struct Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType {
     public let value: Int32
     public init() {
@@ -32057,12 +33081,17 @@ public struct Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType_None = Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType(0)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType_AutoCorrect = Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType(1)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType_Composition = Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType(2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 public let Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType_CompositionFinalized = Microsoft_UI_Xaml_Automation_AutomationTextEditChangeType(3)
 
 // Microsoft.UI.Xaml.Automation.IAutomationAnnotation (synthetic:Microsoft_UI_Xaml_Automation_IAutomationAnnotation)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 @Interface["c2cc46ad-1414-5f1b-808a-89e5d53d82fe", "Microsoft.UI.Xaml.Automation.IAutomationAnnotation", "Element.value=Com"]
 public interface Microsoft_UI_Xaml_Automation_IAutomationAnnotation <: IInspectable {
     func Type(value: CPointer<Int32>): Int32
@@ -32072,6 +33101,7 @@ public interface Microsoft_UI_Xaml_Automation_IAutomationAnnotation <: IInspecta
 }
 
 // Microsoft.UI.Xaml.Automation.IAutomationAnnotationFactory (synthetic:Microsoft_UI_Xaml_Automation_IAutomationAnnotationFactory)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 @Interface["95f82773-eac5-572e-87de-24d9514b9a89", "Microsoft.UI.Xaml.Automation.IAutomationAnnotationFactory", "CreateInstance.value=Com;CreateWithElementParameter.value=Com"]
 public interface Microsoft_UI_Xaml_Automation_IAutomationAnnotationFactory <: IInspectable {
     func CreateInstance(type_: Int32, value: CPointer<CPointer<Unit>>): Int32
@@ -32079,6 +33109,7 @@ public interface Microsoft_UI_Xaml_Automation_IAutomationAnnotationFactory <: II
 }
 
 // Microsoft.UI.Xaml.Automation.IAutomationAnnotationStatics (synthetic:Microsoft_UI_Xaml_Automation_IAutomationAnnotationStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 @Interface["c5abdc1e-fc26-5444-a8b3-59b2c0a95578", "Microsoft.UI.Xaml.Automation.IAutomationAnnotationStatics", "TypeProperty.value=Com;ElementProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Automation_IAutomationAnnotationStatics <: IInspectable {
     func TypeProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -32086,11 +33117,13 @@ public interface Microsoft_UI_Xaml_Automation_IAutomationAnnotationStatics <: II
 }
 
 // Microsoft.UI.Xaml.Automation.IAutomationProperties (synthetic:Microsoft_UI_Xaml_Automation_IAutomationProperties)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 @Interface["525c6a71-dd8a-52a0-977b-db1b02f8e896", "Microsoft.UI.Xaml.Automation.IAutomationProperties"]
 public interface Microsoft_UI_Xaml_Automation_IAutomationProperties <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Automation.IAutomationPropertiesStatics (synthetic:Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 @Interface["b1e3e0f3-112f-5966-87dc-7862d4ad50e5", "Microsoft.UI.Xaml.Automation.IAutomationPropertiesStatics", "AcceleratorKeyProperty.value=Com;GetAcceleratorKey.result=HString;AccessKeyProperty.value=Com;GetAccessKey.result=HString;AutomationIdProperty.value=Com;GetAutomationId.result=HString;HelpTextProperty.value=Com;GetHelpText.result=HString;IsRequiredForFormProperty.value=Com;ItemStatusProperty.value=Com;GetItemStatus.result=HString;ItemTypeProperty.value=Com;GetItemType.result=HString;LabeledByProperty.value=Com;GetLabeledBy.result=Com;NameProperty.value=Com;GetName.result=HString;LiveSettingProperty.value=Com;AccessibilityViewProperty.value=Com;ControlledPeersProperty.value=Com;GetControlledPeers.result=Com;PositionInSetProperty.value=Com;SizeOfSetProperty.value=Com;LevelProperty.value=Com;AnnotationsProperty.value=Com;GetAnnotations.result=Com;LandmarkTypeProperty.value=Com;LocalizedLandmarkTypeProperty.value=Com;GetLocalizedLandmarkType.result=HString;IsPeripheralProperty.value=Com;IsDataValidForFormProperty.value=Com;FullDescriptionProperty.value=Com;GetFullDescription.result=HString;LocalizedControlTypeProperty.value=Com;GetLocalizedControlType.result=HString;DescribedByProperty.value=Com;GetDescribedBy.result=Com;FlowsToProperty.value=Com;GetFlowsTo.result=Com;FlowsFromProperty.value=Com;GetFlowsFrom.result=Com;CultureProperty.value=Com;HeadingLevelProperty.value=Com;IsDialogProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics <: IInspectable {
     func AcceleratorKeyProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -32175,6 +33208,7 @@ public interface Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics <: II
 }
 
 // Microsoft.UI.Xaml.Automation.IAutomationPropertiesStatics2 (synthetic:Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics2)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 @Interface["d933a3ed-e90a-5df0-853d-cad17a0b9ec8", "Microsoft.UI.Xaml.Automation.IAutomationPropertiesStatics2", "AutomationControlTypeProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics2 <: IInspectable {
     func AutomationControlTypeProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -32183,11 +33217,13 @@ public interface Microsoft_UI_Xaml_Automation_IAutomationPropertiesStatics2 <: I
 }
 
 // Microsoft.UI.Xaml.Automation.IAutomationProperty (synthetic:Microsoft_UI_Xaml_Automation_IAutomationProperty)
+@When[Microsoft_UI_Xaml_Automation == "on"]
 @Interface["5ca6b2c8-ff86-5a41-aa18-6948fae592cf", "Microsoft.UI.Xaml.Automation.IAutomationProperty"]
 public interface Microsoft_UI_Xaml_Automation_IAutomationProperty <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Automation.Peers.AccessibilityView (synthetic:Microsoft_UI_Xaml_Automation_Peers_AccessibilityView)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct Microsoft_UI_Xaml_Automation_Peers_AccessibilityView {
     public let value: Int32
     public init() {
@@ -32197,11 +33233,15 @@ public struct Microsoft_UI_Xaml_Automation_Peers_AccessibilityView {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AccessibilityView_Raw = Microsoft_UI_Xaml_Automation_Peers_AccessibilityView(0)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AccessibilityView_Control = Microsoft_UI_Xaml_Automation_Peers_AccessibilityView(1)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AccessibilityView_Content = Microsoft_UI_Xaml_Automation_Peers_AccessibilityView(2)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationControlType (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationControlType)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct Microsoft_UI_Xaml_Automation_Peers_AutomationControlType {
     public let value: Int32
     public init() {
@@ -32211,50 +33251,93 @@ public struct Microsoft_UI_Xaml_Automation_Peers_AutomationControlType {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Button = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(0)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Calendar = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(1)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_CheckBox = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(2)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_ComboBox = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(3)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Edit = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(4)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Hyperlink = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(5)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Image = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(6)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_ListItem = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(7)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_List = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(8)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Menu = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(9)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_MenuBar = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(10)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_MenuItem = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(11)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_ProgressBar = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(12)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_RadioButton = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(13)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_ScrollBar = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(14)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Slider = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(15)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Spinner = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(16)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_StatusBar = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(17)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Tab = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(18)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_TabItem = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(19)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Text = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(20)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_ToolBar = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(21)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_ToolTip = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(22)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Tree = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(23)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_TreeItem = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(24)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Custom = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(25)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Group = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(26)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Thumb = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(27)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_DataGrid = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(28)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_DataItem = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(29)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Document = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(30)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_SplitButton = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(31)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Window = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(32)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Pane = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(33)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Header = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(34)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_HeaderItem = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(35)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Table = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(36)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_TitleBar = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(37)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_Separator = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(38)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_SemanticZoom = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(39)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_AppBar = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(40)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationControlType_FlipView = Microsoft_UI_Xaml_Automation_Peers_AutomationControlType(41)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationEvents (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationEvents)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct Microsoft_UI_Xaml_Automation_Peers_AutomationEvents {
     public let value: Int32
     public init() {
@@ -32264,38 +33347,69 @@ public struct Microsoft_UI_Xaml_Automation_Peers_AutomationEvents {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_ToolTipOpened = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(0)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_ToolTipClosed = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(1)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_MenuOpened = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(2)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_MenuClosed = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(3)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_AutomationFocusChanged = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(4)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_InvokePatternOnInvoked = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(5)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_SelectionItemPatternOnElementAddedToSelection = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(6)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_SelectionItemPatternOnElementRemovedFromSelection = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(7)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_SelectionItemPatternOnElementSelected = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(8)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_SelectionPatternOnInvalidated = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(9)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_TextPatternOnTextSelectionChanged = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(10)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_TextPatternOnTextChanged = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(11)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_AsyncContentLoaded = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(12)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_PropertyChanged = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(13)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_StructureChanged = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(14)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_DragStart = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(15)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_DragCancel = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(16)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_DragComplete = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(17)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_DragEnter = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(18)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_DragLeave = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(19)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_Dropped = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(20)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_LiveRegionChanged = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(21)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_InputReachedTarget = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(22)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_InputReachedOtherElement = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(23)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_InputDiscarded = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(24)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_WindowClosed = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(25)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_WindowOpened = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(26)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_ConversionTargetChanged = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(27)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_TextEditTextChanged = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(28)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationEvents_LayoutInvalidated = Microsoft_UI_Xaml_Automation_Peers_AutomationEvents(29)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationHeadingLevel (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel {
     public let value: Int32
     public init() {
@@ -32305,18 +33419,29 @@ public struct Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_None = Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel(0)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level1 = Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel(1)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level2 = Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel(2)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level3 = Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel(3)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level4 = Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel(4)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level5 = Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel(5)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level6 = Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel(6)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level7 = Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel(7)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level8 = Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel(8)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level9 = Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel(9)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationLandmarkType (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType {
     public let value: Int32
     public init() {
@@ -32326,14 +33451,21 @@ public struct Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType_None = Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType(0)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType_Custom = Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType(1)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType_Form = Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType(2)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType_Main = Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType(3)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType_Navigation = Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType(4)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType_Search = Microsoft_UI_Xaml_Automation_Peers_AutomationLandmarkType(5)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationLiveSetting (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting {
     public let value: Int32
     public init() {
@@ -32343,11 +33475,15 @@ public struct Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting_Off = Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting(0)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting_Polite = Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting(1)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting_Assertive = Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting(2)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationNavigationDirection (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection {
     public let value: Int32
     public init() {
@@ -32357,13 +33493,19 @@ public struct Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection_Parent = Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection(0)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection_NextSibling = Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection(1)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection_PreviousSibling = Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection(2)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection_FirstChild = Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection(3)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection_LastChild = Microsoft_UI_Xaml_Automation_Peers_AutomationNavigationDirection(4)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationNotificationKind (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind {
     public let value: Int32
     public init() {
@@ -32373,13 +33515,19 @@ public struct Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind_ItemAdded = Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind(0)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind_ItemRemoved = Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind(1)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind_ActionCompleted = Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind(2)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind_ActionAborted = Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind(3)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind_Other = Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationKind(4)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationNotificationProcessing (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessing)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessing {
     public let value: Int32
     public init() {
@@ -32389,13 +33537,19 @@ public struct Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessin
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessing_ImportantAll = Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessing(0)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessing_ImportantMostRecent = Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessing(1)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessing_All = Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessing(2)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessing_MostRecent = Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessing(3)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessing_CurrentThenMostRecent = Microsoft_UI_Xaml_Automation_Peers_AutomationNotificationProcessing(4)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationOrientation (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationOrientation)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct Microsoft_UI_Xaml_Automation_Peers_AutomationOrientation {
     public let value: Int32
     public init() {
@@ -32405,11 +33559,15 @@ public struct Microsoft_UI_Xaml_Automation_Peers_AutomationOrientation {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationOrientation_None = Microsoft_UI_Xaml_Automation_Peers_AutomationOrientation(0)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationOrientation_Horizontal = Microsoft_UI_Xaml_Automation_Peers_AutomationOrientation(1)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationOrientation_Vertical = Microsoft_UI_Xaml_Automation_Peers_AutomationOrientation(2)
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public class Microsoft_UI_Xaml_Automation_Peers_AutomationPeer <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -33169,6 +34327,7 @@ public class Microsoft_UI_Xaml_Automation_Peers_AutomationPeer <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 extend Microsoft_UI_Xaml_Automation_Peers_AutomationPeer <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Automation_Peers_AutomationPeer> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Automation_Peers_AutomationPeer): CPointer<Unit> {
         value.asRaw()
@@ -33187,6 +34346,7 @@ extend Microsoft_UI_Xaml_Automation_Peers_AutomationPeer <: windows_core.HandleW
 }
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationPeerAnnotation (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationPeerAnnotation)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public class Microsoft_UI_Xaml_Automation_Peers_AutomationPeerAnnotation <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -33363,6 +34523,7 @@ public class Microsoft_UI_Xaml_Automation_Peers_AutomationPeerAnnotation <: wind
     }
 }
 
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 extend Microsoft_UI_Xaml_Automation_Peers_AutomationPeerAnnotation <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Automation_Peers_AutomationPeerAnnotation> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Automation_Peers_AutomationPeerAnnotation): CPointer<Unit> {
         value.asRaw()
@@ -33381,6 +34542,7 @@ extend Microsoft_UI_Xaml_Automation_Peers_AutomationPeerAnnotation <: windows_co
 }
 
 // Microsoft.UI.Xaml.Automation.Peers.AutomationStructureChangeType (synthetic:Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType {
     public let value: Int32
     public init() {
@@ -33390,14 +34552,21 @@ public struct Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType_ChildAdded = Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType(0)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType_ChildRemoved = Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType(1)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType_ChildrenInvalidated = Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType(2)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType_ChildrenBulkAdded = Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType(3)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType_ChildrenBulkRemoved = Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType(4)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType_ChildrenReordered = Microsoft_UI_Xaml_Automation_Peers_AutomationStructureChangeType(5)
 
 // Microsoft.UI.Xaml.Automation.Peers.IAutomationPeer (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAutomationPeer)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 @Interface["e51d3e4e-34f0-568c-999f-6277e2afe6d7", "Microsoft.UI.Xaml.Automation.Peers.IAutomationPeer", "EventsSource.value=Com;GetPattern.result=Com;GetAcceleratorKey.result=HString;GetAccessKey.result=HString;GetAutomationId.result=HString;GetChildren.result=Com;Navigate.result=Com;GetClassName.result=HString;GetHelpText.result=HString;GetItemStatus.result=HString;GetItemType.result=HString;GetLabeledBy.result=Com;GetLocalizedControlType.result=HString;GetName.result=HString;GetParent.result=Com;GetPeerFromPoint.result=Com;GetElementFromPoint.result=Com;GetFocusedElement.result=Com;GetControlledPeers.result=Com;GetAnnotations.result=Com;GetLocalizedLandmarkType.result=HString;GetFullDescription.result=HString"]
 public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeer <: IInspectable {
     func EventsSource(value: CPointer<CPointer<Unit>>): Int32
@@ -33457,6 +34626,7 @@ public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeer <: IInspecta
 }
 
 // Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerAnnotation (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerAnnotation)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 @Interface["2738b92a-2528-5b63-973d-d29eb0593647", "Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerAnnotation", "Peer.value=Com"]
 public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerAnnotation <: IInspectable {
     func Type(value: CPointer<Int32>): Int32
@@ -33466,6 +34636,7 @@ public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerAnnotation <:
 }
 
 // Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerAnnotationFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerAnnotationFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 @Interface["25a1a202-bd68-5d41-a311-f84af9c8c440", "Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerAnnotationFactory", "CreateInstance.value=Com;CreateWithPeerParameter.value=Com"]
 public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerAnnotationFactory <: IInspectable {
     func CreateInstance(type_: Int32, value: CPointer<CPointer<Unit>>): Int32
@@ -33473,6 +34644,7 @@ public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerAnnotationFac
 }
 
 // Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerAnnotationStatics (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerAnnotationStatics)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 @Interface["c46105d7-8ca3-50e3-a1bc-b6bb2f9ce1cd", "Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerAnnotationStatics", "TypeProperty.value=Com;PeerProperty.value=Com"]
 public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerAnnotationStatics <: IInspectable {
     func TypeProperty(value: CPointer<CPointer<Unit>>): Int32
@@ -33480,12 +34652,14 @@ public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerAnnotationSta
 }
 
 // Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerFactory (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerFactory)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 @Interface["a1af86a0-6ec6-5be2-858f-72808be6fddd", "Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerFactory", "CreateInstance.innerInterface=Com;CreateInstance.value=Com"]
 public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerFactory <: IInspectable {
     func CreateInstance(baseInterface: CPointer<Unit>, innerInterface: CPointer<CPointer<Unit>>, value: CPointer<CPointer<Unit>>): Int32
 }
 
 // Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerOverrides (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerOverrides)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 @Interface["44f8f6df-1b60-512d-a295-dd8c276c4618", "Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerOverrides", "GetPatternCore.result=Com;GetAcceleratorKeyCore.result=HString;GetAccessKeyCore.result=HString;GetAutomationIdCore.result=HString;GetChildrenCore.result=Com;NavigateCore.result=Com;GetClassNameCore.result=HString;GetHelpTextCore.result=HString;GetItemStatusCore.result=HString;GetItemTypeCore.result=HString;GetLabeledByCore.result=Com;GetLocalizedControlTypeCore.result=HString;GetNameCore.result=HString;GetPeerFromPointCore.result=Com;GetElementFromPointCore.result=Com;GetFocusedElementCore.result=Com;GetControlledPeersCore.result=Com;GetAnnotationsCore.result=Com;GetLocalizedLandmarkTypeCore.result=HString;GetFullDescriptionCore.result=HString;GetDescribedByCore.result=Com;GetFlowsToCore.result=Com;GetFlowsFromCore.result=Com"]
 public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerOverrides <: IInspectable {
     func GetPatternCore(patternInterface: Int32, result: CPointer<CPointer<Unit>>): Int32
@@ -33538,6 +34712,7 @@ public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerOverrides <: 
 }
 
 // Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerProtected (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerProtected)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 @Interface["9663b2c3-8c1f-56d4-abd9-268082a9e8bc", "Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerProtected", "PeerFromProvider.result=Com;ProviderFromPeer.result=Com"]
 public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerProtected <: IInspectable {
     func PeerFromProvider(provider: CPointer<Unit>, result: CPointer<CPointer<Unit>>): Int32
@@ -33545,6 +34720,7 @@ public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerProtected <: 
 }
 
 // Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerStatics (synthetic:Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerStatics)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 @Interface["90b157ff-18d5-5623-850c-612ceae576bd", "Microsoft.UI.Xaml.Automation.Peers.IAutomationPeerStatics"]
 public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerStatics <: IInspectable {
     func ListenerExists(eventId: Int32, result: CPointer<Bool>): Int32
@@ -33552,6 +34728,7 @@ public interface Microsoft_UI_Xaml_Automation_Peers_IAutomationPeerStatics <: II
 }
 
 // Microsoft.UI.Xaml.Automation.Peers.PatternInterface (synthetic:Microsoft_UI_Xaml_Automation_Peers_PatternInterface)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public struct Microsoft_UI_Xaml_Automation_Peers_PatternInterface {
     public let value: Int32
     public init() {
@@ -33561,42 +34738,77 @@ public struct Microsoft_UI_Xaml_Automation_Peers_PatternInterface {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Invoke = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(0)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Selection = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(1)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Value = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(2)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_RangeValue = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(3)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Scroll = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(4)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_ScrollItem = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(5)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_ExpandCollapse = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(6)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Grid = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(7)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_GridItem = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(8)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_MultipleView = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(9)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Window = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(10)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_SelectionItem = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(11)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Dock = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(12)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Table = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(13)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_TableItem = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(14)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Toggle = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(15)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Transform = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(16)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Text = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(17)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_ItemContainer = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(18)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_VirtualizedItem = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(19)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Text2 = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(20)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_TextChild = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(21)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_TextRange = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(22)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Annotation = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(23)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Drag = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(24)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_DropTarget = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(25)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_ObjectModel = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(26)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Spreadsheet = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(27)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_SpreadsheetItem = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(28)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Styles = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(29)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_Transform2 = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(30)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_SynchronizedInput = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(31)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_TextEdit = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(32)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 public let Microsoft_UI_Xaml_Automation_Peers_PatternInterface_CustomNavigation = Microsoft_UI_Xaml_Automation_Peers_PatternInterface(33)
 
 // Microsoft.UI.Xaml.Automation.Peers.RawElementProviderRuntimeId (synthetic:Microsoft_UI_Xaml_Automation_Peers_RawElementProviderRuntimeId)
+@When[Microsoft_UI_Xaml_Automation_Peers == "on"]
 @C
 public struct Microsoft_UI_Xaml_Automation_Peers_RawElementProviderRuntimeId {
     public var Part1: UInt32 = 0u32
@@ -33604,11 +34816,13 @@ public struct Microsoft_UI_Xaml_Automation_Peers_RawElementProviderRuntimeId {
 }
 
 // Microsoft.UI.Xaml.Automation.Provider.IIRawElementProviderSimple (synthetic:Microsoft_UI_Xaml_Automation_Provider_IIRawElementProviderSimple)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
 @Interface["f90bc239-ade2-55c9-a838-a3b0579763c5", "Microsoft.UI.Xaml.Automation.Provider.IIRawElementProviderSimple"]
 public interface Microsoft_UI_Xaml_Automation_Provider_IIRawElementProviderSimple <: IInspectable {
 }
 
 // Microsoft.UI.Xaml.Automation.Provider.IRawElementProviderSimple (synthetic:Microsoft_UI_Xaml_Automation_Provider_IRawElementProviderSimple)
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
 public class Microsoft_UI_Xaml_Automation_Provider_IRawElementProviderSimple <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -33674,6 +34888,7 @@ public class Microsoft_UI_Xaml_Automation_Provider_IRawElementProviderSimple <: 
     }
 }
 
+@When[Microsoft_UI_Xaml_Automation_Provider == "on"]
 extend Microsoft_UI_Xaml_Automation_Provider_IRawElementProviderSimple <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Automation_Provider_IRawElementProviderSimple> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Automation_Provider_IRawElementProviderSimple): CPointer<Unit> {
         value.asRaw()
@@ -33692,6 +34907,7 @@ extend Microsoft_UI_Xaml_Automation_Provider_IRawElementProviderSimple <: window
 }
 
 // Microsoft.UI.Xaml.BindingFailedEventArgs (synthetic:Microsoft_UI_Xaml_BindingFailedEventArgs)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_BindingFailedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -33766,6 +34982,7 @@ public class Microsoft_UI_Xaml_BindingFailedEventArgs <: windows_interface.Inter
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_BindingFailedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_BindingFailedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_BindingFailedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -33784,6 +35001,7 @@ extend Microsoft_UI_Xaml_BindingFailedEventArgs <: windows_core.HandleWinrtType<
 }
 
 // Microsoft.UI.Xaml.BindingFailedEventHandler (synthetic:Microsoft_UI_Xaml_BindingFailedEventHandler)
+@When[Microsoft_UI_Xaml == "on"]
 @C
 public struct Microsoft_UI_Xaml_BindingFailedEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -33791,6 +35009,7 @@ public struct Microsoft_UI_Xaml_BindingFailedEventHandlerVtbl {
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public open class Microsoft_UI_Xaml_BindingFailedEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -33858,18 +35077,22 @@ public open class Microsoft_UI_Xaml_BindingFailedEventHandler <: windows_interfa
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_BindingFailedEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_BindingFailedEventHandler> {}
 
+@When[Microsoft_UI_Xaml == "on"]
 private class OwnedMicrosoft_UI_Xaml_BindingFailedEventHandler <: Microsoft_UI_Xaml_BindingFailedEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public interface Microsoft_UI_Xaml_BindingFailedEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 public interface Microsoft_UI_Xaml_BindingFailedEventHandlerInvoker <: Microsoft_UI_Xaml_BindingFailedEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -33887,6 +35110,7 @@ public interface Microsoft_UI_Xaml_BindingFailedEventHandlerInvoker <: Microsoft
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 private class Microsoft_UI_Xaml_BindingFailedEventHandlerBox <: Microsoft_UI_Xaml_BindingFailedEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_BindingFailedEventHandlerVtbl>
@@ -33924,6 +35148,7 @@ private class Microsoft_UI_Xaml_BindingFailedEventHandlerBox <: Microsoft_UI_Xam
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 func buildMicrosoft_UI_Xaml_BindingFailedEventHandlerBoxVtbl(): Microsoft_UI_Xaml_BindingFailedEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_BindingFailedEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -33940,6 +35165,7 @@ func buildMicrosoft_UI_Xaml_BindingFailedEventHandlerBoxVtbl(): Microsoft_UI_Xam
 
 
 // Microsoft.UI.Xaml.BringIntoViewOptions (synthetic:Microsoft_UI_Xaml_BringIntoViewOptions)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_BringIntoViewOptions <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -34129,6 +35355,7 @@ public class Microsoft_UI_Xaml_BringIntoViewOptions <: windows_interface.Interfa
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_BringIntoViewOptions <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_BringIntoViewOptions> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_BringIntoViewOptions): CPointer<Unit> {
         value.asRaw()
@@ -34147,6 +35374,7 @@ extend Microsoft_UI_Xaml_BringIntoViewOptions <: windows_core.HandleWinrtType<Mi
 }
 
 // Microsoft.UI.Xaml.BringIntoViewRequestedEventArgs (synthetic:Microsoft_UI_Xaml_BringIntoViewRequestedEventArgs)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_BringIntoViewRequestedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -34356,6 +35584,7 @@ public class Microsoft_UI_Xaml_BringIntoViewRequestedEventArgs <: windows_interf
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_BringIntoViewRequestedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_BringIntoViewRequestedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_BringIntoViewRequestedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -34374,6 +35603,7 @@ extend Microsoft_UI_Xaml_BringIntoViewRequestedEventArgs <: windows_core.HandleW
 }
 
 // Microsoft.UI.Xaml.BrushTransition (synthetic:Microsoft_UI_Xaml_BrushTransition)
+@When[Microsoft_UI_Xaml == "on"]
 public class Microsoft_UI_Xaml_BrushTransition <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -34485,6 +35715,7 @@ public class Microsoft_UI_Xaml_BrushTransition <: windows_interface.InterfaceWra
     }
 }
 
+@When[Microsoft_UI_Xaml == "on"]
 extend Microsoft_UI_Xaml_BrushTransition <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_BrushTransition> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_BrushTransition): CPointer<Unit> {
         value.asRaw()
@@ -34503,6 +35734,7 @@ extend Microsoft_UI_Xaml_BrushTransition <: windows_core.HandleWinrtType<Microso
 }
 
 // Microsoft.UI.Xaml.Controls.AnchorRequestedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -34602,6 +35834,7 @@ public class Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs <: windows_inte
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -34620,6 +35853,7 @@ extend Microsoft_UI_Xaml_Controls_AnchorRequestedEventArgs <: windows_core.Handl
 }
 
 // Microsoft.UI.Xaml.Controls.AppBar (synthetic:Microsoft_UI_Xaml_Controls_AppBar)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_AppBar <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -35052,6 +36286,7 @@ public class Microsoft_UI_Xaml_Controls_AppBar <: windows_interface.InterfaceWra
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_AppBar <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AppBar> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AppBar): CPointer<Unit> {
         value.asRaw()
@@ -35070,6 +36305,7 @@ extend Microsoft_UI_Xaml_Controls_AppBar <: windows_core.HandleWinrtType<Microso
 }
 
 // Microsoft.UI.Xaml.Controls.AppBarButton (synthetic:Microsoft_UI_Xaml_Controls_AppBarButton)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_AppBarButton <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -35496,6 +36732,7 @@ public class Microsoft_UI_Xaml_Controls_AppBarButton <: windows_interface.Interf
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_AppBarButton <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AppBarButton> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AppBarButton): CPointer<Unit> {
         value.asRaw()
@@ -35514,6 +36751,7 @@ extend Microsoft_UI_Xaml_Controls_AppBarButton <: windows_core.HandleWinrtType<M
 }
 
 // Microsoft.UI.Xaml.Controls.AppBarClosedDisplayMode (synthetic:Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode {
     public let value: Int32
     public init() {
@@ -35523,11 +36761,15 @@ public struct Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode_Compact = Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode_Minimal = Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode_Hidden = Microsoft_UI_Xaml_Controls_AppBarClosedDisplayMode(2)
 
 // Microsoft.UI.Xaml.Controls.AppBarSeparator (synthetic:Microsoft_UI_Xaml_Controls_AppBarSeparator)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_AppBarSeparator <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -35760,6 +37002,7 @@ public class Microsoft_UI_Xaml_Controls_AppBarSeparator <: windows_interface.Int
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_AppBarSeparator <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AppBarSeparator> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AppBarSeparator): CPointer<Unit> {
         value.asRaw()
@@ -35778,6 +37021,7 @@ extend Microsoft_UI_Xaml_Controls_AppBarSeparator <: windows_core.HandleWinrtTyp
 }
 
 // Microsoft.UI.Xaml.Controls.AppBarToggleButton (synthetic:Microsoft_UI_Xaml_Controls_AppBarToggleButton)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_AppBarToggleButton <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -36211,6 +37455,7 @@ public class Microsoft_UI_Xaml_Controls_AppBarToggleButton <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_AppBarToggleButton <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AppBarToggleButton> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AppBarToggleButton): CPointer<Unit> {
         value.asRaw()
@@ -36229,6 +37474,7 @@ extend Microsoft_UI_Xaml_Controls_AppBarToggleButton <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Xaml.Controls.AutoSuggestBox (synthetic:Microsoft_UI_Xaml_Controls_AutoSuggestBox)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_AutoSuggestBox <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -36908,6 +38154,7 @@ public class Microsoft_UI_Xaml_Controls_AutoSuggestBox <: windows_interface.Inte
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_AutoSuggestBox <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AutoSuggestBox> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AutoSuggestBox): CPointer<Unit> {
         value.asRaw()
@@ -36926,6 +38173,7 @@ extend Microsoft_UI_Xaml_Controls_AutoSuggestBox <: windows_core.HandleWinrtType
 }
 
 // Microsoft.UI.Xaml.Controls.AutoSuggestBoxQuerySubmittedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -37034,6 +38282,7 @@ public class Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs <:
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -37052,6 +38301,7 @@ extend Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs <: windo
 }
 
 // Microsoft.UI.Xaml.Controls.AutoSuggestBoxSuggestionChosenEventArgs (synthetic:Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -37144,6 +38394,7 @@ public class Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs 
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -37162,6 +38413,7 @@ extend Microsoft_UI_Xaml_Controls_AutoSuggestBoxSuggestionChosenEventArgs <: win
 }
 
 // Microsoft.UI.Xaml.Controls.AutoSuggestBoxTextChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -37281,6 +38533,7 @@ public class Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs <: wi
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -37299,6 +38552,7 @@ extend Microsoft_UI_Xaml_Controls_AutoSuggestBoxTextChangedEventArgs <: windows_
 }
 
 // Microsoft.UI.Xaml.Controls.AutoSuggestionBoxTextChangeReason (synthetic:Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason {
     public let value: Int32
     public init() {
@@ -37308,11 +38562,15 @@ public struct Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason_UserInput = Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason_ProgrammaticChange = Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason_SuggestionChosen = Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason(2)
 
 // Microsoft.UI.Xaml.Controls.BackgroundSizing (synthetic:Microsoft_UI_Xaml_Controls_BackgroundSizing)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_BackgroundSizing {
     public let value: Int32
     public init() {
@@ -37322,10 +38580,13 @@ public struct Microsoft_UI_Xaml_Controls_BackgroundSizing {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_BackgroundSizing_InnerBorderEdge = Microsoft_UI_Xaml_Controls_BackgroundSizing(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_BackgroundSizing_OuterBorderEdge = Microsoft_UI_Xaml_Controls_BackgroundSizing(1)
 
 // Microsoft.UI.Xaml.Controls.Border (synthetic:Microsoft_UI_Xaml_Controls_Border)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_Border <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -37764,6 +39025,7 @@ public class Microsoft_UI_Xaml_Controls_Border <: windows_interface.InterfaceWra
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_Border <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_Border> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_Border): CPointer<Unit> {
         value.asRaw()
@@ -37782,6 +39044,7 @@ extend Microsoft_UI_Xaml_Controls_Border <: windows_core.HandleWinrtType<Microso
 }
 
 // Microsoft.UI.Xaml.Controls.BreadcrumbBar (synthetic:Microsoft_UI_Xaml_Controls_BreadcrumbBar)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_BreadcrumbBar <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -38063,6 +39326,7 @@ public class Microsoft_UI_Xaml_Controls_BreadcrumbBar <: windows_interface.Inter
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_BreadcrumbBar <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_BreadcrumbBar> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_BreadcrumbBar): CPointer<Unit> {
         value.asRaw()
@@ -38081,6 +39345,7 @@ extend Microsoft_UI_Xaml_Controls_BreadcrumbBar <: windows_core.HandleWinrtType<
 }
 
 // Microsoft.UI.Xaml.Controls.BreadcrumbBarItemClickedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -38167,6 +39432,7 @@ public class Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs <: win
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -38185,6 +39451,7 @@ extend Microsoft_UI_Xaml_Controls_BreadcrumbBarItemClickedEventArgs <: windows_c
 }
 
 // Microsoft.UI.Xaml.Controls.Button (synthetic:Microsoft_UI_Xaml_Controls_Button)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_Button <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -38428,6 +39695,7 @@ public class Microsoft_UI_Xaml_Controls_Button <: windows_interface.InterfaceWra
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_Button <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_Button> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_Button): CPointer<Unit> {
         value.asRaw()
@@ -38446,6 +39714,7 @@ extend Microsoft_UI_Xaml_Controls_Button <: windows_core.HandleWinrtType<Microso
 }
 
 // Microsoft.UI.Xaml.Controls.CalendarDatePicker (synthetic:Microsoft_UI_Xaml_Controls_CalendarDatePicker)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_CalendarDatePicker <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -39373,6 +40642,7 @@ public class Microsoft_UI_Xaml_Controls_CalendarDatePicker <: windows_interface.
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_CalendarDatePicker <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CalendarDatePicker> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CalendarDatePicker): CPointer<Unit> {
         value.asRaw()
@@ -39391,6 +40661,7 @@ extend Microsoft_UI_Xaml_Controls_CalendarDatePicker <: windows_core.HandleWinrt
 }
 
 // Microsoft.UI.Xaml.Controls.CalendarDatePickerDateChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -39481,6 +40752,7 @@ public class Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs <
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -39499,6 +40771,7 @@ extend Microsoft_UI_Xaml_Controls_CalendarDatePickerDateChangedEventArgs <: wind
 }
 
 // Microsoft.UI.Xaml.Controls.CalendarView (synthetic:Microsoft_UI_Xaml_Controls_CalendarView)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_CalendarView <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -42453,6 +43726,7 @@ public class Microsoft_UI_Xaml_Controls_CalendarView <: windows_interface.Interf
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_CalendarView <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CalendarView> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CalendarView): CPointer<Unit> {
         value.asRaw()
@@ -42471,6 +43745,7 @@ extend Microsoft_UI_Xaml_Controls_CalendarView <: windows_core.HandleWinrtType<M
 }
 
 // Microsoft.UI.Xaml.Controls.CalendarViewDayItem (synthetic:Microsoft_UI_Xaml_Controls_CalendarViewDayItem)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_CalendarViewDayItem <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -42723,6 +43998,7 @@ public class Microsoft_UI_Xaml_Controls_CalendarViewDayItem <: windows_interface
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_CalendarViewDayItem <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CalendarViewDayItem> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CalendarViewDayItem): CPointer<Unit> {
         value.asRaw()
@@ -42741,6 +44017,7 @@ extend Microsoft_UI_Xaml_Controls_CalendarViewDayItem <: windows_core.HandleWinr
 }
 
 // Microsoft.UI.Xaml.Controls.CalendarViewDayItemChangingEventArgs (synthetic:Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -42859,6 +44136,7 @@ public class Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs <: 
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -42877,6 +44155,7 @@ extend Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventArgs <: window
 }
 
 // Microsoft.UI.Xaml.Controls.CalendarViewDayItemChangingEventHandler (synthetic:Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 @C
 public struct Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -42884,6 +44163,7 @@ public struct Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler
     public init() {}
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public open class Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -42951,18 +44231,22 @@ public open class Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHan
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler <: windows_core.Interface<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler> {}
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 private class OwnedMicrosoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler <: Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler {
     public init(raw: CPointer<Unit>) {
         super(raw, takeOwnership: true, allowManualRelease: false)
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public interface Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerInvokerErased {
     func __winrtThunk_Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Int32
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public interface Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerInvoker <: Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerInvokerErased {
     func Invoke(sender: CPointer<Unit>, e: CPointer<Unit>): Unit {
         ()
@@ -42980,6 +44264,7 @@ public interface Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHand
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 private class Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerBox <: Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerInvoker & Resource {
     public let invoke_: (CPointer<Unit>, CPointer<Unit>) -> Unit
     private let vtblHandle: CPointer<Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerVtbl>
@@ -43017,6 +44302,7 @@ private class Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandler
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 func buildMicrosoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerBoxVtbl(): Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerVtbl {
     var vtbl = Microsoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerVtbl()
     vtbl.base_ = windows_core.buildIUnknownVtbl()
@@ -43033,6 +44319,7 @@ func buildMicrosoft_UI_Xaml_Controls_CalendarViewDayItemChangingEventHandlerBoxV
 
 
 // Microsoft.UI.Xaml.Controls.CalendarViewDisplayMode (synthetic:Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode {
     public let value: Int32
     public init() {
@@ -43042,11 +44329,15 @@ public struct Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode_Month = Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode_Year = Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode_Decade = Microsoft_UI_Xaml_Controls_CalendarViewDisplayMode(2)
 
 // Microsoft.UI.Xaml.Controls.CalendarViewSelectedDatesChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -43137,6 +44428,7 @@ public class Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArg
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs): CPointer<Unit> {
         value.asRaw()
@@ -43155,6 +44447,7 @@ extend Microsoft_UI_Xaml_Controls_CalendarViewSelectedDatesChangedEventArgs <: w
 }
 
 // Microsoft.UI.Xaml.Controls.CalendarViewSelectionMode (synthetic:Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode {
     public let value: Int32
     public init() {
@@ -43164,11 +44457,15 @@ public struct Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode_None = Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode_Single = Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode(1)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode_Multiple = Microsoft_UI_Xaml_Controls_CalendarViewSelectionMode(2)
 
 // Microsoft.UI.Xaml.Controls.CandidateWindowAlignment (synthetic:Microsoft_UI_Xaml_Controls_CandidateWindowAlignment)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public struct Microsoft_UI_Xaml_Controls_CandidateWindowAlignment {
     public let value: Int32
     public init() {
@@ -43178,10 +44475,13 @@ public struct Microsoft_UI_Xaml_Controls_CandidateWindowAlignment {
         this.value = value
     }
 }
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CandidateWindowAlignment_Default = Microsoft_UI_Xaml_Controls_CandidateWindowAlignment(0)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public let Microsoft_UI_Xaml_Controls_CandidateWindowAlignment_BottomEdge = Microsoft_UI_Xaml_Controls_CandidateWindowAlignment(1)
 
 // Microsoft.UI.Xaml.Controls.CandidateWindowBoundsChangedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs)
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public class Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & windows_core.RuntimeName & windows_core.RuntimeType {
     public init(raw: CPointer<Unit>) {
         super(raw)
@@ -43252,6 +44552,7 @@ public class Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs <:
     }
 }
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 extend Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs <: windows_core.HandleWinrtType<Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs> {
     public static func intoWinrtHandle(value: Microsoft_UI_Xaml_Controls_CandidateWindowBoundsChangedEventArgs): CPointer<Unit> {
         value.asRaw()

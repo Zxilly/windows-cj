@@ -2,19 +2,29 @@
 
 package windows_common.Win32.Security
 
+@When[Windows_Win32_Security == "on"]
 import windows_libloading as windows_libloading
+import windows_common.Win32.Foundation as native_helper_edge_0
+@When[Windows_Win32_Security == "on"]
 import windows_common.Win32.Foundation.HANDLE
+@When[Windows_Win32_Security == "on"]
 import windows_common.Win32.Foundation.LUID
+@When[Windows_Win32_Security == "on"]
 import windows_common.Win32.Foundation.UNICODE_STRING
+@When[Windows_Win32_Security == "on"]
 import windows_core as windows_core
+@When[Windows_Win32_Security == "on"]
 import windows_interface.GUID
+@When[Windows_Win32_Security == "on"]
 import windows_strings as windows_strings
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheck(pSecurityDescriptor: PSECURITY_DESCRIPTOR, ClientToken: HANDLE, DesiredAccess: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, PrivilegeSet: CPointer<PRIVILEGE_SET>, PrivilegeSetLength: CPointer<UInt32>, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<GENERIC_MAPPING>, CPointer<PRIVILEGE_SET>, CPointer<UInt32>, CPointer<UInt32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AccessCheck"))
     return unsafe { proc(pSecurityDescriptor.Value, ClientToken.Value, DesiredAccess, GenericMapping, PrivilegeSet, PrivilegeSetLength, GrantedAccess, AccessStatus) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, ClientToken: HANDLE, DesiredAccess: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, PrivilegeSet: CPointer<PRIVILEGE_SET>, PrivilegeSetLength: CPointer<UInt32>, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>): windows_core.Result<Unit> {
     if (AccessCheck(pSecurityDescriptor, ClientToken, DesiredAccess, GenericMapping, PrivilegeSet, PrivilegeSetLength, GrantedAccess, AccessStatus)) {
         return windows_core.Result<Unit>.Ok(())
@@ -22,16 +32,19 @@ public func AccessCheckChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, Client
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckAndAuditAlarmW(SubsystemName: windows_strings.PWSTR, HandleId: CPointer<Unit>, ObjectTypeName: windows_strings.PWSTR, ObjectName: windows_strings.PWSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, DesiredAccess: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Bool, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, UInt32, CPointer<GENERIC_MAPPING>, Int32, CPointer<UInt32>, CPointer<Int32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AccessCheckAndAuditAlarmW"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, ObjectTypeName.asPtr(), ObjectName.asPtr(), SecurityDescriptor.Value, DesiredAccess, GenericMapping, if (ObjectCreation) { 1 } else { 0 }, GrantedAccess, AccessStatus, pfGenerateOnClose) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckByType(pSecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, ClientToken: HANDLE, DesiredAccess: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, PrivilegeSet: CPointer<PRIVILEGE_SET>, PrivilegeSetLength: CPointer<UInt32>, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<OBJECT_TYPE_LIST>, UInt32, CPointer<GENERIC_MAPPING>, CPointer<PRIVILEGE_SET>, CPointer<UInt32>, CPointer<UInt32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AccessCheckByType"))
     return unsafe { proc(pSecurityDescriptor.Value, PrincipalSelfSid.Value, ClientToken.Value, DesiredAccess, ObjectTypeList, ObjectTypeListLength, GenericMapping, PrivilegeSet, PrivilegeSetLength, GrantedAccess, AccessStatus) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckByTypeChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, ClientToken: HANDLE, DesiredAccess: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, PrivilegeSet: CPointer<PRIVILEGE_SET>, PrivilegeSetLength: CPointer<UInt32>, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>): windows_core.Result<Unit> {
     if (AccessCheckByType(pSecurityDescriptor, PrincipalSelfSid, ClientToken, DesiredAccess, ObjectTypeList, ObjectTypeListLength, GenericMapping, PrivilegeSet, PrivilegeSetLength, GrantedAccess, AccessStatus)) {
         return windows_core.Result<Unit>.Ok(())
@@ -39,11 +52,13 @@ public func AccessCheckByTypeChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, 
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckByTypeResultList(pSecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, ClientToken: HANDLE, DesiredAccess: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, PrivilegeSet: CPointer<PRIVILEGE_SET>, PrivilegeSetLength: CPointer<UInt32>, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<OBJECT_TYPE_LIST>, UInt32, CPointer<GENERIC_MAPPING>, CPointer<PRIVILEGE_SET>, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AccessCheckByTypeResultList"))
     return unsafe { proc(pSecurityDescriptor.Value, PrincipalSelfSid.Value, ClientToken.Value, DesiredAccess, ObjectTypeList, ObjectTypeListLength, GenericMapping, PrivilegeSet, PrivilegeSetLength, GrantedAccessList, AccessStatusList) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckByTypeResultListChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, ClientToken: HANDLE, DesiredAccess: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, PrivilegeSet: CPointer<PRIVILEGE_SET>, PrivilegeSetLength: CPointer<UInt32>, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>): windows_core.Result<Unit> {
     if (AccessCheckByTypeResultList(pSecurityDescriptor, PrincipalSelfSid, ClientToken, DesiredAccess, ObjectTypeList, ObjectTypeListLength, GenericMapping, PrivilegeSet, PrivilegeSetLength, GrantedAccessList, AccessStatusList)) {
         return windows_core.Result<Unit>.Ok(())
@@ -51,26 +66,31 @@ public func AccessCheckByTypeResultListChecked(pSecurityDescriptor: PSECURITY_DE
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckByTypeAndAuditAlarmW(SubsystemName: windows_strings.PWSTR, HandleId: CPointer<Unit>, ObjectTypeName: windows_strings.PWSTR, ObjectName: windows_strings.PWSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Bool, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, CPointer<Unit>, UInt32, Int32, UInt32, CPointer<OBJECT_TYPE_LIST>, UInt32, CPointer<GENERIC_MAPPING>, Int32, CPointer<UInt32>, CPointer<Int32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AccessCheckByTypeAndAuditAlarmW"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, ObjectTypeName.asPtr(), ObjectName.asPtr(), SecurityDescriptor.Value, PrincipalSelfSid.Value, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, if (ObjectCreation) { 1 } else { 0 }, GrantedAccess, AccessStatus, pfGenerateOnClose) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckByTypeResultListAndAuditAlarmW(SubsystemName: windows_strings.PWSTR, HandleId: CPointer<Unit>, ObjectTypeName: windows_strings.PWSTR, ObjectName: windows_strings.PWSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Bool, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, CPointer<Unit>, UInt32, Int32, UInt32, CPointer<OBJECT_TYPE_LIST>, UInt32, CPointer<GENERIC_MAPPING>, Int32, CPointer<UInt32>, CPointer<UInt32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AccessCheckByTypeResultListAndAuditAlarmW"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, ObjectTypeName.asPtr(), ObjectName.asPtr(), SecurityDescriptor.Value, PrincipalSelfSid.Value, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, if (ObjectCreation) { 1 } else { 0 }, GrantedAccessList, AccessStatusList, pfGenerateOnClose) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckByTypeResultListAndAuditAlarmByHandleW(SubsystemName: windows_strings.PWSTR, HandleId: CPointer<Unit>, ClientToken: HANDLE, ObjectTypeName: windows_strings.PWSTR, ObjectName: windows_strings.PWSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Bool, GrantedAccessList: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<Unit>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, CPointer<Unit>, UInt32, Int32, UInt32, CPointer<OBJECT_TYPE_LIST>, UInt32, CPointer<GENERIC_MAPPING>, Int32, CPointer<UInt32>, CPointer<UInt32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AccessCheckByTypeResultListAndAuditAlarmByHandleW"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, ClientToken.Value, ObjectTypeName.asPtr(), ObjectName.asPtr(), SecurityDescriptor.Value, PrincipalSelfSid.Value, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, if (ObjectCreation) { 1 } else { 0 }, GrantedAccessList, AccessStatusList, pfGenerateOnClose) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAccessAllowedAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AccessMask: UInt32, pSid: PSID): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AddAccessAllowedAce"))
     return unsafe { proc(pAcl, dwAceRevision, AccessMask, pSid.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAccessAllowedAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AccessMask: UInt32, pSid: PSID): windows_core.Result<Unit> {
     if (AddAccessAllowedAce(pAcl, dwAceRevision, AccessMask, pSid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -78,11 +98,13 @@ public func AddAccessAllowedAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt3
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAccessAllowedAceEx(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, pSid: PSID): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AddAccessAllowedAceEx"))
     return unsafe { proc(pAcl, dwAceRevision, AceFlags, AccessMask, pSid.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAccessAllowedAceExChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, pSid: PSID): windows_core.Result<Unit> {
     if (AddAccessAllowedAceEx(pAcl, dwAceRevision, AceFlags, AccessMask, pSid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -90,11 +112,13 @@ public func AddAccessAllowedAceExChecked(pAcl: CPointer<ACL>, dwAceRevision: UIn
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAccessAllowedObjectAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, UInt32, CPointer<GUID>, CPointer<GUID>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AddAccessAllowedObjectAce"))
     return unsafe { proc(pAcl, dwAceRevision, AceFlags, AccessMask, ObjectTypeGuid, InheritedObjectTypeGuid, pSid.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAccessAllowedObjectAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID): windows_core.Result<Unit> {
     if (AddAccessAllowedObjectAce(pAcl, dwAceRevision, AceFlags, AccessMask, ObjectTypeGuid, InheritedObjectTypeGuid, pSid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -102,11 +126,13 @@ public func AddAccessAllowedObjectAceChecked(pAcl: CPointer<ACL>, dwAceRevision:
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAccessDeniedAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AccessMask: UInt32, pSid: PSID): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AddAccessDeniedAce"))
     return unsafe { proc(pAcl, dwAceRevision, AccessMask, pSid.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAccessDeniedAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AccessMask: UInt32, pSid: PSID): windows_core.Result<Unit> {
     if (AddAccessDeniedAce(pAcl, dwAceRevision, AccessMask, pSid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -114,11 +140,13 @@ public func AddAccessDeniedAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAccessDeniedAceEx(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, pSid: PSID): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AddAccessDeniedAceEx"))
     return unsafe { proc(pAcl, dwAceRevision, AceFlags, AccessMask, pSid.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAccessDeniedAceExChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, pSid: PSID): windows_core.Result<Unit> {
     if (AddAccessDeniedAceEx(pAcl, dwAceRevision, AceFlags, AccessMask, pSid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -126,11 +154,13 @@ public func AddAccessDeniedAceExChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAccessDeniedObjectAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, UInt32, CPointer<GUID>, CPointer<GUID>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AddAccessDeniedObjectAce"))
     return unsafe { proc(pAcl, dwAceRevision, AceFlags, AccessMask, ObjectTypeGuid, InheritedObjectTypeGuid, pSid.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAccessDeniedObjectAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID): windows_core.Result<Unit> {
     if (AddAccessDeniedObjectAce(pAcl, dwAceRevision, AceFlags, AccessMask, ObjectTypeGuid, InheritedObjectTypeGuid, pSid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -138,11 +168,13 @@ public func AddAccessDeniedObjectAceChecked(pAcl: CPointer<ACL>, dwAceRevision: 
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, dwStartingAceIndex: UInt32, pAceList: CPointer<Unit>, nAceListLength: UInt32): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, CPointer<Unit>, UInt32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AddAce"))
     return unsafe { proc(pAcl, dwAceRevision, dwStartingAceIndex, pAceList, nAceListLength) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, dwStartingAceIndex: UInt32, pAceList: CPointer<Unit>, nAceListLength: UInt32): windows_core.Result<Unit> {
     if (AddAce(pAcl, dwAceRevision, dwStartingAceIndex, pAceList, nAceListLength)) {
         return windows_core.Result<Unit>.Ok(())
@@ -150,11 +182,13 @@ public func AddAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, dwStarting
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAuditAccessAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, dwAccessMask: UInt32, pSid: PSID, bAuditSuccess: Bool, bAuditFailure: Bool): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, CPointer<Unit>, Int32, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AddAuditAccessAce"))
     return unsafe { proc(pAcl, dwAceRevision, dwAccessMask, pSid.Value, if (bAuditSuccess) { 1 } else { 0 }, if (bAuditFailure) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAuditAccessAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, dwAccessMask: UInt32, pSid: PSID, bAuditSuccess: Bool, bAuditFailure: Bool): windows_core.Result<Unit> {
     if (AddAuditAccessAce(pAcl, dwAceRevision, dwAccessMask, pSid, bAuditSuccess, bAuditFailure)) {
         return windows_core.Result<Unit>.Ok(())
@@ -162,11 +196,13 @@ public func AddAuditAccessAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32,
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAuditAccessAceEx(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, dwAccessMask: UInt32, pSid: PSID, bAuditSuccess: Bool, bAuditFailure: Bool): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, UInt32, CPointer<Unit>, Int32, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AddAuditAccessAceEx"))
     return unsafe { proc(pAcl, dwAceRevision, AceFlags, dwAccessMask, pSid.Value, if (bAuditSuccess) { 1 } else { 0 }, if (bAuditFailure) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAuditAccessAceExChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, dwAccessMask: UInt32, pSid: PSID, bAuditSuccess: Bool, bAuditFailure: Bool): windows_core.Result<Unit> {
     if (AddAuditAccessAceEx(pAcl, dwAceRevision, AceFlags, dwAccessMask, pSid, bAuditSuccess, bAuditFailure)) {
         return windows_core.Result<Unit>.Ok(())
@@ -174,11 +210,13 @@ public func AddAuditAccessAceExChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt3
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAuditAccessObjectAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID, bAuditSuccess: Bool, bAuditFailure: Bool): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, UInt32, CPointer<GUID>, CPointer<GUID>, CPointer<Unit>, Int32, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AddAuditAccessObjectAce"))
     return unsafe { proc(pAcl, dwAceRevision, AceFlags, AccessMask, ObjectTypeGuid, InheritedObjectTypeGuid, pSid.Value, if (bAuditSuccess) { 1 } else { 0 }, if (bAuditFailure) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddAuditAccessObjectAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, ObjectTypeGuid: CPointer<GUID>, InheritedObjectTypeGuid: CPointer<GUID>, pSid: PSID, bAuditSuccess: Bool, bAuditFailure: Bool): windows_core.Result<Unit> {
     if (AddAuditAccessObjectAce(pAcl, dwAceRevision, AceFlags, AccessMask, ObjectTypeGuid, InheritedObjectTypeGuid, pSid, bAuditSuccess, bAuditFailure)) {
         return windows_core.Result<Unit>.Ok(())
@@ -186,11 +224,13 @@ public func AddAuditAccessObjectAceChecked(pAcl: CPointer<ACL>, dwAceRevision: U
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddMandatoryAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, MandatoryPolicy: UInt32, pLabelSid: PSID): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AddMandatoryAce"))
     return unsafe { proc(pAcl, dwAceRevision, AceFlags, MandatoryPolicy, pLabelSid.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddMandatoryAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, MandatoryPolicy: UInt32, pLabelSid: PSID): windows_core.Result<Unit> {
     if (AddMandatoryAce(pAcl, dwAceRevision, AceFlags, MandatoryPolicy, pLabelSid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -198,11 +238,13 @@ public func AddMandatoryAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, A
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddResourceAttributeAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, pSid: PSID, pAttributeInfo: CPointer<CLAIM_SECURITY_ATTRIBUTES_INFORMATION>, pReturnLength: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, UInt32, CPointer<Unit>, CPointer<CLAIM_SECURITY_ATTRIBUTES_INFORMATION>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "AddResourceAttributeAce"))
     return unsafe { proc(pAcl, dwAceRevision, AceFlags, AccessMask, pSid.Value, pAttributeInfo, pReturnLength) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddResourceAttributeAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, pSid: PSID, pAttributeInfo: CPointer<CLAIM_SECURITY_ATTRIBUTES_INFORMATION>, pReturnLength: CPointer<UInt32>): windows_core.Result<Unit> {
     if (AddResourceAttributeAce(pAcl, dwAceRevision, AceFlags, AccessMask, pSid, pAttributeInfo, pReturnLength)) {
         return windows_core.Result<Unit>.Ok(())
@@ -210,11 +252,13 @@ public func AddResourceAttributeAceChecked(pAcl: CPointer<ACL>, dwAceRevision: U
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddScopedPolicyIDAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, pSid: PSID): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "AddScopedPolicyIDAce"))
     return unsafe { proc(pAcl, dwAceRevision, AceFlags, AccessMask, pSid.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddScopedPolicyIDAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AccessMask: UInt32, pSid: PSID): windows_core.Result<Unit> {
     if (AddScopedPolicyIDAce(pAcl, dwAceRevision, AceFlags, AccessMask, pSid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -222,11 +266,13 @@ public func AddScopedPolicyIDAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AdjustTokenGroups(TokenHandle: HANDLE, ResetToDefault: Bool, NewState: CPointer<TOKEN_GROUPS>, BufferLength: UInt32, PreviousState: CPointer<TOKEN_GROUPS>, ReturnLength: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<Unit>, Int32, CPointer<TOKEN_GROUPS>, UInt32, CPointer<TOKEN_GROUPS>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AdjustTokenGroups"))
     return unsafe { proc(TokenHandle.Value, if (ResetToDefault) { 1 } else { 0 }, NewState, BufferLength, PreviousState, ReturnLength) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AdjustTokenGroupsChecked(TokenHandle: HANDLE, ResetToDefault: Bool, NewState: CPointer<TOKEN_GROUPS>, BufferLength: UInt32, PreviousState: CPointer<TOKEN_GROUPS>, ReturnLength: CPointer<UInt32>): windows_core.Result<Unit> {
     if (AdjustTokenGroups(TokenHandle, ResetToDefault, NewState, BufferLength, PreviousState, ReturnLength)) {
         return windows_core.Result<Unit>.Ok(())
@@ -234,11 +280,13 @@ public func AdjustTokenGroupsChecked(TokenHandle: HANDLE, ResetToDefault: Bool, 
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AdjustTokenPrivileges(TokenHandle: HANDLE, DisableAllPrivileges: Bool, NewState: CPointer<TOKEN_PRIVILEGES>, BufferLength: UInt32, PreviousState: CPointer<TOKEN_PRIVILEGES>, ReturnLength: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<Unit>, Int32, CPointer<TOKEN_PRIVILEGES>, UInt32, CPointer<TOKEN_PRIVILEGES>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AdjustTokenPrivileges"))
     return unsafe { proc(TokenHandle.Value, if (DisableAllPrivileges) { 1 } else { 0 }, NewState, BufferLength, PreviousState, ReturnLength) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AdjustTokenPrivilegesChecked(TokenHandle: HANDLE, DisableAllPrivileges: Bool, NewState: CPointer<TOKEN_PRIVILEGES>, BufferLength: UInt32, PreviousState: CPointer<TOKEN_PRIVILEGES>, ReturnLength: CPointer<UInt32>): windows_core.Result<Unit> {
     if (AdjustTokenPrivileges(TokenHandle, DisableAllPrivileges, NewState, BufferLength, PreviousState, ReturnLength)) {
         return windows_core.Result<Unit>.Ok(())
@@ -246,11 +294,13 @@ public func AdjustTokenPrivilegesChecked(TokenHandle: HANDLE, DisableAllPrivileg
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AllocateAndInitializeSid(pIdentifierAuthority: CPointer<VArray<UInt8, $6>>, nSubAuthorityCount: UInt8, nSubAuthority0: UInt32, nSubAuthority1: UInt32, nSubAuthority2: UInt32, nSubAuthority3: UInt32, nSubAuthority4: UInt32, nSubAuthority5: UInt32, nSubAuthority6: UInt32, nSubAuthority7: UInt32, pSid: CPointer<PSID>): Bool {
     let proc = CFunc<(CPointer<VArray<UInt8, $6>>, UInt8, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AllocateAndInitializeSid"))
     return unsafe { proc(pIdentifierAuthority, nSubAuthorityCount, nSubAuthority0, nSubAuthority1, nSubAuthority2, nSubAuthority3, nSubAuthority4, nSubAuthority5, nSubAuthority6, nSubAuthority7, CPointer<CPointer<Unit>>(pSid)) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AllocateAndInitializeSidChecked(pIdentifierAuthority: CPointer<VArray<UInt8, $6>>, nSubAuthorityCount: UInt8, nSubAuthority0: UInt32, nSubAuthority1: UInt32, nSubAuthority2: UInt32, nSubAuthority3: UInt32, nSubAuthority4: UInt32, nSubAuthority5: UInt32, nSubAuthority6: UInt32, nSubAuthority7: UInt32, pSid: CPointer<PSID>): windows_core.Result<Unit> {
     if (AllocateAndInitializeSid(pIdentifierAuthority, nSubAuthorityCount, nSubAuthority0, nSubAuthority1, nSubAuthority2, nSubAuthority3, nSubAuthority4, nSubAuthority5, nSubAuthority6, nSubAuthority7, pSid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -258,11 +308,13 @@ public func AllocateAndInitializeSidChecked(pIdentifierAuthority: CPointer<VArra
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AllocateLocallyUniqueId(Luid: CPointer<LUID>): Bool {
     let proc = CFunc<(CPointer<LUID>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AllocateLocallyUniqueId"))
     return unsafe { proc(Luid) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AllocateLocallyUniqueIdChecked(Luid: CPointer<LUID>): windows_core.Result<Unit> {
     if (AllocateLocallyUniqueId(Luid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -270,21 +322,25 @@ public func AllocateLocallyUniqueIdChecked(Luid: CPointer<LUID>): windows_core.R
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AreAllAccessesGranted(GrantedAccess: UInt32, DesiredAccess: UInt32): Bool {
     let proc = CFunc<(UInt32, UInt32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AreAllAccessesGranted"))
     return unsafe { proc(GrantedAccess, DesiredAccess) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AreAnyAccessesGranted(GrantedAccess: UInt32, DesiredAccess: UInt32): Bool {
     let proc = CFunc<(UInt32, UInt32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AreAnyAccessesGranted"))
     return unsafe { proc(GrantedAccess, DesiredAccess) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CheckTokenMembership(TokenHandle: HANDLE, SidToCheck: PSID, IsMember: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "CheckTokenMembership"))
     return unsafe { proc(TokenHandle.Value, SidToCheck.Value, IsMember) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CheckTokenMembershipChecked(TokenHandle: HANDLE, SidToCheck: PSID, IsMember: CPointer<Int32>): windows_core.Result<Unit> {
     if (CheckTokenMembership(TokenHandle, SidToCheck, IsMember)) {
         return windows_core.Result<Unit>.Ok(())
@@ -292,11 +348,13 @@ public func CheckTokenMembershipChecked(TokenHandle: HANDLE, SidToCheck: PSID, I
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CheckTokenCapability(TokenHandle: HANDLE, CapabilitySidToCheck: PSID, HasCapability: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "CheckTokenCapability"))
     return unsafe { proc(TokenHandle.Value, CapabilitySidToCheck.Value, HasCapability) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CheckTokenCapabilityChecked(TokenHandle: HANDLE, CapabilitySidToCheck: PSID, HasCapability: CPointer<Int32>): windows_core.Result<Unit> {
     if (CheckTokenCapability(TokenHandle, CapabilitySidToCheck, HasCapability)) {
         return windows_core.Result<Unit>.Ok(())
@@ -304,16 +362,19 @@ public func CheckTokenCapabilityChecked(TokenHandle: HANDLE, CapabilitySidToChec
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetAppContainerAce(Acl: CPointer<ACL>, StartingAceIndex: UInt32, AppContainerAce: CPointer<CPointer<Unit>>, AppContainerAceIndex: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetAppContainerAce"))
     return unsafe { proc(Acl, StartingAceIndex, AppContainerAce, AppContainerAceIndex) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CheckTokenMembershipEx(TokenHandle: HANDLE, SidToCheck: PSID, Flags: UInt32, IsMember: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "CheckTokenMembershipEx"))
     return unsafe { proc(TokenHandle.Value, SidToCheck.Value, Flags, IsMember) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CheckTokenMembershipExChecked(TokenHandle: HANDLE, SidToCheck: PSID, Flags: UInt32, IsMember: CPointer<Int32>): windows_core.Result<Unit> {
     if (CheckTokenMembershipEx(TokenHandle, SidToCheck, Flags, IsMember)) {
         return windows_core.Result<Unit>.Ok(())
@@ -321,11 +382,13 @@ public func CheckTokenMembershipExChecked(TokenHandle: HANDLE, SidToCheck: PSID,
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ConvertToAutoInheritPrivateObjectSecurity(ParentDescriptor: PSECURITY_DESCRIPTOR, CurrentSecurityDescriptor: PSECURITY_DESCRIPTOR, NewSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectType: CPointer<GUID>, IsDirectoryObject: Bool, GenericMapping: CPointer<GENERIC_MAPPING>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<GUID>, UInt8, CPointer<GENERIC_MAPPING>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ConvertToAutoInheritPrivateObjectSecurity"))
     return unsafe { proc(ParentDescriptor.Value, CurrentSecurityDescriptor.Value, CPointer<CPointer<Unit>>(NewSecurityDescriptor), ObjectType, if (IsDirectoryObject) { 1u8 } else { 0u8 }, GenericMapping) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ConvertToAutoInheritPrivateObjectSecurityChecked(ParentDescriptor: PSECURITY_DESCRIPTOR, CurrentSecurityDescriptor: PSECURITY_DESCRIPTOR, NewSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectType: CPointer<GUID>, IsDirectoryObject: Bool, GenericMapping: CPointer<GENERIC_MAPPING>): windows_core.Result<Unit> {
     if (ConvertToAutoInheritPrivateObjectSecurity(ParentDescriptor, CurrentSecurityDescriptor, NewSecurityDescriptor, ObjectType, IsDirectoryObject, GenericMapping)) {
         return windows_core.Result<Unit>.Ok(())
@@ -333,11 +396,13 @@ public func ConvertToAutoInheritPrivateObjectSecurityChecked(ParentDescriptor: P
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CopySid(nDestinationSidLength: UInt32, pDestinationSid: PSID, pSourceSid: PSID): Bool {
     let proc = CFunc<(UInt32, CPointer<Unit>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "CopySid"))
     return unsafe { proc(nDestinationSidLength, pDestinationSid.Value, pSourceSid.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CopySidChecked(nDestinationSidLength: UInt32, pDestinationSid: PSID, pSourceSid: PSID): windows_core.Result<Unit> {
     if (CopySid(nDestinationSidLength, pDestinationSid, pSourceSid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -345,11 +410,13 @@ public func CopySidChecked(nDestinationSidLength: UInt32, pDestinationSid: PSID,
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CreatePrivateObjectSecurity(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, IsDirectoryObject: Bool, Token: HANDLE, GenericMapping: CPointer<GENERIC_MAPPING>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, Int32, CPointer<Unit>, CPointer<GENERIC_MAPPING>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "CreatePrivateObjectSecurity"))
     return unsafe { proc(ParentDescriptor.Value, CreatorDescriptor.Value, CPointer<CPointer<Unit>>(NewDescriptor), if (IsDirectoryObject) { 1 } else { 0 }, Token.Value, GenericMapping) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CreatePrivateObjectSecurityChecked(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, IsDirectoryObject: Bool, Token: HANDLE, GenericMapping: CPointer<GENERIC_MAPPING>): windows_core.Result<Unit> {
     if (CreatePrivateObjectSecurity(ParentDescriptor, CreatorDescriptor, NewDescriptor, IsDirectoryObject, Token, GenericMapping)) {
         return windows_core.Result<Unit>.Ok(())
@@ -357,11 +424,13 @@ public func CreatePrivateObjectSecurityChecked(ParentDescriptor: PSECURITY_DESCR
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CreatePrivateObjectSecurityEx(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectType: CPointer<GUID>, IsContainerObject: Bool, AutoInheritFlags: UInt32, Token: HANDLE, GenericMapping: CPointer<GENERIC_MAPPING>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<GUID>, Int32, UInt32, CPointer<Unit>, CPointer<GENERIC_MAPPING>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "CreatePrivateObjectSecurityEx"))
     return unsafe { proc(ParentDescriptor.Value, CreatorDescriptor.Value, CPointer<CPointer<Unit>>(NewDescriptor), ObjectType, if (IsContainerObject) { 1 } else { 0 }, AutoInheritFlags, Token.Value, GenericMapping) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CreatePrivateObjectSecurityExChecked(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectType: CPointer<GUID>, IsContainerObject: Bool, AutoInheritFlags: UInt32, Token: HANDLE, GenericMapping: CPointer<GENERIC_MAPPING>): windows_core.Result<Unit> {
     if (CreatePrivateObjectSecurityEx(ParentDescriptor, CreatorDescriptor, NewDescriptor, ObjectType, IsContainerObject, AutoInheritFlags, Token, GenericMapping)) {
         return windows_core.Result<Unit>.Ok(())
@@ -369,11 +438,13 @@ public func CreatePrivateObjectSecurityExChecked(ParentDescriptor: PSECURITY_DES
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CreatePrivateObjectSecurityWithMultipleInheritance(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectTypes: CPointer<CPointer<GUID>>, GuidCount: UInt32, IsContainerObject: Bool, AutoInheritFlags: UInt32, Token: HANDLE, GenericMapping: CPointer<GENERIC_MAPPING>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<CPointer<GUID>>, UInt32, Int32, UInt32, CPointer<Unit>, CPointer<GENERIC_MAPPING>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "CreatePrivateObjectSecurityWithMultipleInheritance"))
     return unsafe { proc(ParentDescriptor.Value, CreatorDescriptor.Value, CPointer<CPointer<Unit>>(NewDescriptor), ObjectTypes, GuidCount, if (IsContainerObject) { 1 } else { 0 }, AutoInheritFlags, Token.Value, GenericMapping) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CreatePrivateObjectSecurityWithMultipleInheritanceChecked(ParentDescriptor: PSECURITY_DESCRIPTOR, CreatorDescriptor: PSECURITY_DESCRIPTOR, NewDescriptor: CPointer<PSECURITY_DESCRIPTOR>, ObjectTypes: CPointer<CPointer<GUID>>, GuidCount: UInt32, IsContainerObject: Bool, AutoInheritFlags: UInt32, Token: HANDLE, GenericMapping: CPointer<GENERIC_MAPPING>): windows_core.Result<Unit> {
     if (CreatePrivateObjectSecurityWithMultipleInheritance(ParentDescriptor, CreatorDescriptor, NewDescriptor, ObjectTypes, GuidCount, IsContainerObject, AutoInheritFlags, Token, GenericMapping)) {
         return windows_core.Result<Unit>.Ok(())
@@ -381,11 +452,13 @@ public func CreatePrivateObjectSecurityWithMultipleInheritanceChecked(ParentDesc
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CreateRestrictedToken(ExistingTokenHandle: HANDLE, Flags: UInt32, DisableSidCount: UInt32, SidsToDisable: CPointer<SID_AND_ATTRIBUTES>, DeletePrivilegeCount: UInt32, PrivilegesToDelete: CPointer<LUID_AND_ATTRIBUTES>, RestrictedSidCount: UInt32, SidsToRestrict: CPointer<SID_AND_ATTRIBUTES>, NewTokenHandle: CPointer<HANDLE>): Bool {
     let proc = CFunc<(CPointer<Unit>, UInt32, UInt32, CPointer<SID_AND_ATTRIBUTES>, UInt32, CPointer<LUID_AND_ATTRIBUTES>, UInt32, CPointer<SID_AND_ATTRIBUTES>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "CreateRestrictedToken"))
     return unsafe { proc(ExistingTokenHandle.Value, Flags, DisableSidCount, SidsToDisable, DeletePrivilegeCount, PrivilegesToDelete, RestrictedSidCount, SidsToRestrict, CPointer<CPointer<Unit>>(NewTokenHandle)) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CreateRestrictedTokenChecked(ExistingTokenHandle: HANDLE, Flags: UInt32, DisableSidCount: UInt32, SidsToDisable: CPointer<SID_AND_ATTRIBUTES>, DeletePrivilegeCount: UInt32, PrivilegesToDelete: CPointer<LUID_AND_ATTRIBUTES>, RestrictedSidCount: UInt32, SidsToRestrict: CPointer<SID_AND_ATTRIBUTES>, NewTokenHandle: CPointer<HANDLE>): windows_core.Result<Unit> {
     if (CreateRestrictedToken(ExistingTokenHandle, Flags, DisableSidCount, SidsToDisable, DeletePrivilegeCount, PrivilegesToDelete, RestrictedSidCount, SidsToRestrict, NewTokenHandle)) {
         return windows_core.Result<Unit>.Ok(())
@@ -393,11 +466,13 @@ public func CreateRestrictedTokenChecked(ExistingTokenHandle: HANDLE, Flags: UIn
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CreateWellKnownSid(WellKnownSidType: Int32, DomainSid: PSID, pSid: PSID, cbSid: CPointer<UInt32>): Bool {
     let proc = CFunc<(Int32, CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "CreateWellKnownSid"))
     return unsafe { proc(WellKnownSidType, DomainSid.Value, pSid.Value, cbSid) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func CreateWellKnownSidChecked(WellKnownSidType: Int32, DomainSid: PSID, pSid: PSID, cbSid: CPointer<UInt32>): windows_core.Result<Unit> {
     if (CreateWellKnownSid(WellKnownSidType, DomainSid, pSid, cbSid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -405,11 +480,13 @@ public func CreateWellKnownSidChecked(WellKnownSidType: Int32, DomainSid: PSID, 
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func EqualDomainSid(pSid1: PSID, pSid2: PSID, pfEqual: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EqualDomainSid"))
     return unsafe { proc(pSid1.Value, pSid2.Value, pfEqual) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func EqualDomainSidChecked(pSid1: PSID, pSid2: PSID, pfEqual: CPointer<Int32>): windows_core.Result<Unit> {
     if (EqualDomainSid(pSid1, pSid2, pfEqual)) {
         return windows_core.Result<Unit>.Ok(())
@@ -417,11 +494,13 @@ public func EqualDomainSidChecked(pSid1: PSID, pSid2: PSID, pfEqual: CPointer<In
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func DeleteAce(pAcl: CPointer<ACL>, dwAceIndex: UInt32): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "DeleteAce"))
     return unsafe { proc(pAcl, dwAceIndex) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func DeleteAceChecked(pAcl: CPointer<ACL>, dwAceIndex: UInt32): windows_core.Result<Unit> {
     if (DeleteAce(pAcl, dwAceIndex)) {
         return windows_core.Result<Unit>.Ok(())
@@ -429,11 +508,13 @@ public func DeleteAceChecked(pAcl: CPointer<ACL>, dwAceIndex: UInt32): windows_c
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func DestroyPrivateObjectSecurity(ObjectDescriptor: CPointer<PSECURITY_DESCRIPTOR>): Bool {
     let proc = CFunc<(CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "DestroyPrivateObjectSecurity"))
     return unsafe { proc(CPointer<CPointer<Unit>>(ObjectDescriptor)) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func DestroyPrivateObjectSecurityChecked(ObjectDescriptor: CPointer<PSECURITY_DESCRIPTOR>): windows_core.Result<Unit> {
     if (DestroyPrivateObjectSecurity(ObjectDescriptor)) {
         return windows_core.Result<Unit>.Ok(())
@@ -441,11 +522,13 @@ public func DestroyPrivateObjectSecurityChecked(ObjectDescriptor: CPointer<PSECU
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func DuplicateToken(ExistingTokenHandle: HANDLE, ImpersonationLevel: Int32, DuplicateTokenHandle: CPointer<HANDLE>): Bool {
     let proc = CFunc<(CPointer<Unit>, Int32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "DuplicateToken"))
     return unsafe { proc(ExistingTokenHandle.Value, ImpersonationLevel, CPointer<CPointer<Unit>>(DuplicateTokenHandle)) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func DuplicateTokenChecked(ExistingTokenHandle: HANDLE, ImpersonationLevel: Int32, DuplicateTokenHandle: CPointer<HANDLE>): windows_core.Result<Unit> {
     if (DuplicateToken(ExistingTokenHandle, ImpersonationLevel, DuplicateTokenHandle)) {
         return windows_core.Result<Unit>.Ok(())
@@ -453,11 +536,13 @@ public func DuplicateTokenChecked(ExistingTokenHandle: HANDLE, ImpersonationLeve
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func DuplicateTokenEx(hExistingToken: HANDLE, dwDesiredAccess: UInt32, lpTokenAttributes: CPointer<SECURITY_ATTRIBUTES>, ImpersonationLevel: Int32, TokenType: Int32, phNewToken: CPointer<HANDLE>): Bool {
     let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<SECURITY_ATTRIBUTES>, Int32, Int32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "DuplicateTokenEx"))
     return unsafe { proc(hExistingToken.Value, dwDesiredAccess, lpTokenAttributes, ImpersonationLevel, TokenType, CPointer<CPointer<Unit>>(phNewToken)) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func DuplicateTokenExChecked(hExistingToken: HANDLE, dwDesiredAccess: UInt32, lpTokenAttributes: CPointer<SECURITY_ATTRIBUTES>, ImpersonationLevel: Int32, TokenType: Int32, phNewToken: CPointer<HANDLE>): windows_core.Result<Unit> {
     if (DuplicateTokenEx(hExistingToken, dwDesiredAccess, lpTokenAttributes, ImpersonationLevel, TokenType, phNewToken)) {
         return windows_core.Result<Unit>.Ok(())
@@ -465,21 +550,25 @@ public func DuplicateTokenExChecked(hExistingToken: HANDLE, dwDesiredAccess: UIn
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func EqualPrefixSid(pSid1: PSID, pSid2: PSID): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EqualPrefixSid"))
     return unsafe { proc(pSid1.Value, pSid2.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func EqualSid(pSid1: PSID, pSid2: PSID): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "EqualSid"))
     return unsafe { proc(pSid1.Value, pSid2.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func FindFirstFreeAce(pAcl: CPointer<ACL>, pAce: CPointer<CPointer<Unit>>): Bool {
     let proc = CFunc<(CPointer<ACL>, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "FindFirstFreeAce"))
     return unsafe { proc(pAcl, pAce) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func FindFirstFreeAceChecked(pAcl: CPointer<ACL>, pAce: CPointer<CPointer<Unit>>): windows_core.Result<Unit> {
     if (FindFirstFreeAce(pAcl, pAce)) {
         return windows_core.Result<Unit>.Ok(())
@@ -487,16 +576,19 @@ public func FindFirstFreeAceChecked(pAcl: CPointer<ACL>, pAce: CPointer<CPointer
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func FreeSid(pSid: PSID): CPointer<Unit> {
     let proc = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("ADVAPI32.dll", "FreeSid"))
     return unsafe { proc(pSid.Value) }
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetAce(pAcl: CPointer<ACL>, dwAceIndex: UInt32, pAce: CPointer<CPointer<Unit>>): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetAce"))
     return unsafe { proc(pAcl, dwAceIndex, pAce) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetAceChecked(pAcl: CPointer<ACL>, dwAceIndex: UInt32, pAce: CPointer<CPointer<Unit>>): windows_core.Result<Unit> {
     if (GetAce(pAcl, dwAceIndex, pAce)) {
         return windows_core.Result<Unit>.Ok(())
@@ -504,11 +596,13 @@ public func GetAceChecked(pAcl: CPointer<ACL>, dwAceIndex: UInt32, pAce: CPointe
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetAclInformation(pAcl: CPointer<ACL>, pAclInformation: CPointer<Unit>, nAclInformationLength: UInt32, dwAclInformationClass: Int32): Bool {
     let proc = CFunc<(CPointer<ACL>, CPointer<Unit>, UInt32, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetAclInformation"))
     return unsafe { proc(pAcl, pAclInformation, nAclInformationLength, dwAclInformationClass) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetAclInformationChecked(pAcl: CPointer<ACL>, pAclInformation: CPointer<Unit>, nAclInformationLength: UInt32, dwAclInformationClass: Int32): windows_core.Result<Unit> {
     if (GetAclInformation(pAcl, pAclInformation, nAclInformationLength, dwAclInformationClass)) {
         return windows_core.Result<Unit>.Ok(())
@@ -516,11 +610,13 @@ public func GetAclInformationChecked(pAcl: CPointer<ACL>, pAclInformation: CPoin
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetFileSecurityW(lpFileName: windows_strings.PWSTR, RequestedInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<UInt16>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetFileSecurityW"))
     return unsafe { proc(lpFileName.asPtr(), RequestedInformation, pSecurityDescriptor.Value, nLength, lpnLengthNeeded) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetFileSecurityWChecked(lpFileName: windows_strings.PWSTR, RequestedInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): windows_core.Result<Unit> {
     if (GetFileSecurityW(lpFileName, RequestedInformation, pSecurityDescriptor, nLength, lpnLengthNeeded)) {
         return windows_core.Result<Unit>.Ok(())
@@ -528,11 +624,13 @@ public func GetFileSecurityWChecked(lpFileName: windows_strings.PWSTR, Requested
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetKernelObjectSecurity(Handle: HANDLE, RequestedInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetKernelObjectSecurity"))
     return unsafe { proc(Handle.Value, RequestedInformation, pSecurityDescriptor.Value, nLength, lpnLengthNeeded) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetKernelObjectSecurityChecked(Handle: HANDLE, RequestedInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): windows_core.Result<Unit> {
     if (GetKernelObjectSecurity(Handle, RequestedInformation, pSecurityDescriptor, nLength, lpnLengthNeeded)) {
         return windows_core.Result<Unit>.Ok(())
@@ -540,16 +638,19 @@ public func GetKernelObjectSecurityChecked(Handle: HANDLE, RequestedInformation:
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetLengthSid(pSid: PSID): UInt32 {
     let proc = CFunc<(CPointer<Unit>) -> UInt32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetLengthSid"))
     return unsafe { proc(pSid.Value) }
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetPrivateObjectSecurity(ObjectDescriptor: PSECURITY_DESCRIPTOR, SecurityInformation: UInt32, ResultantDescriptor: PSECURITY_DESCRIPTOR, DescriptorLength: UInt32, ReturnLength: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetPrivateObjectSecurity"))
     return unsafe { proc(ObjectDescriptor.Value, SecurityInformation, ResultantDescriptor.Value, DescriptorLength, ReturnLength) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetPrivateObjectSecurityChecked(ObjectDescriptor: PSECURITY_DESCRIPTOR, SecurityInformation: UInt32, ResultantDescriptor: PSECURITY_DESCRIPTOR, DescriptorLength: UInt32, ReturnLength: CPointer<UInt32>): windows_core.Result<Unit> {
     if (GetPrivateObjectSecurity(ObjectDescriptor, SecurityInformation, ResultantDescriptor, DescriptorLength, ReturnLength)) {
         return windows_core.Result<Unit>.Ok(())
@@ -557,11 +658,13 @@ public func GetPrivateObjectSecurityChecked(ObjectDescriptor: PSECURITY_DESCRIPT
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSecurityDescriptorControl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pControl: CPointer<UInt16>, lpdwRevision: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<UInt16>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetSecurityDescriptorControl"))
     return unsafe { proc(pSecurityDescriptor.Value, pControl, lpdwRevision) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSecurityDescriptorControlChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pControl: CPointer<UInt16>, lpdwRevision: CPointer<UInt32>): windows_core.Result<Unit> {
     if (GetSecurityDescriptorControl(pSecurityDescriptor, pControl, lpdwRevision)) {
         return windows_core.Result<Unit>.Ok(())
@@ -569,11 +672,13 @@ public func GetSecurityDescriptorControlChecked(pSecurityDescriptor: PSECURITY_D
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSecurityDescriptorDacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, lpbDaclPresent: CPointer<Int32>, pDacl: CPointer<CPointer<ACL>>, lpbDaclDefaulted: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<CPointer<ACL>>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetSecurityDescriptorDacl"))
     return unsafe { proc(pSecurityDescriptor.Value, lpbDaclPresent, pDacl, lpbDaclDefaulted) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSecurityDescriptorDaclChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, lpbDaclPresent: CPointer<Int32>, pDacl: CPointer<CPointer<ACL>>, lpbDaclDefaulted: CPointer<Int32>): windows_core.Result<Unit> {
     if (GetSecurityDescriptorDacl(pSecurityDescriptor, lpbDaclPresent, pDacl, lpbDaclDefaulted)) {
         return windows_core.Result<Unit>.Ok(())
@@ -581,11 +686,13 @@ public func GetSecurityDescriptorDaclChecked(pSecurityDescriptor: PSECURITY_DESC
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSecurityDescriptorGroup(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pGroup: CPointer<PSID>, lpbGroupDefaulted: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetSecurityDescriptorGroup"))
     return unsafe { proc(pSecurityDescriptor.Value, CPointer<CPointer<Unit>>(pGroup), lpbGroupDefaulted) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSecurityDescriptorGroupChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pGroup: CPointer<PSID>, lpbGroupDefaulted: CPointer<Int32>): windows_core.Result<Unit> {
     if (GetSecurityDescriptorGroup(pSecurityDescriptor, pGroup, lpbGroupDefaulted)) {
         return windows_core.Result<Unit>.Ok(())
@@ -593,16 +700,19 @@ public func GetSecurityDescriptorGroupChecked(pSecurityDescriptor: PSECURITY_DES
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSecurityDescriptorLength(pSecurityDescriptor: PSECURITY_DESCRIPTOR): UInt32 {
     let proc = CFunc<(CPointer<Unit>) -> UInt32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetSecurityDescriptorLength"))
     return unsafe { proc(pSecurityDescriptor.Value) }
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSecurityDescriptorOwner(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pOwner: CPointer<PSID>, lpbOwnerDefaulted: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetSecurityDescriptorOwner"))
     return unsafe { proc(pSecurityDescriptor.Value, CPointer<CPointer<Unit>>(pOwner), lpbOwnerDefaulted) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSecurityDescriptorOwnerChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pOwner: CPointer<PSID>, lpbOwnerDefaulted: CPointer<Int32>): windows_core.Result<Unit> {
     if (GetSecurityDescriptorOwner(pSecurityDescriptor, pOwner, lpbOwnerDefaulted)) {
         return windows_core.Result<Unit>.Ok(())
@@ -610,16 +720,19 @@ public func GetSecurityDescriptorOwnerChecked(pSecurityDescriptor: PSECURITY_DES
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSecurityDescriptorRMControl(SecurityDescriptor: PSECURITY_DESCRIPTOR, RMControl: CPointer<UInt8>): UInt32 {
     let proc = CFunc<(CPointer<Unit>, CPointer<UInt8>) -> UInt32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetSecurityDescriptorRMControl"))
     return unsafe { proc(SecurityDescriptor.Value, RMControl) }
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSecurityDescriptorSacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, lpbSaclPresent: CPointer<Int32>, pSacl: CPointer<CPointer<ACL>>, lpbSaclDefaulted: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Int32>, CPointer<CPointer<ACL>>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetSecurityDescriptorSacl"))
     return unsafe { proc(pSecurityDescriptor.Value, lpbSaclPresent, pSacl, lpbSaclDefaulted) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSecurityDescriptorSaclChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, lpbSaclPresent: CPointer<Int32>, pSacl: CPointer<CPointer<ACL>>, lpbSaclDefaulted: CPointer<Int32>): windows_core.Result<Unit> {
     if (GetSecurityDescriptorSacl(pSecurityDescriptor, lpbSaclPresent, pSacl, lpbSaclDefaulted)) {
         return windows_core.Result<Unit>.Ok(())
@@ -627,31 +740,37 @@ public func GetSecurityDescriptorSaclChecked(pSecurityDescriptor: PSECURITY_DESC
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSidIdentifierAuthority(pSid: PSID): CPointer<VArray<UInt8, $6>> {
     let proc = CFunc<(CPointer<Unit>) -> CPointer<VArray<UInt8, $6>>>(windows_libloading.resolveProc("ADVAPI32.dll", "GetSidIdentifierAuthority"))
     return unsafe { proc(pSid.Value) }
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSidLengthRequired(nSubAuthorityCount: UInt8): UInt32 {
     let proc = CFunc<(UInt8) -> UInt32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetSidLengthRequired"))
     return unsafe { proc(nSubAuthorityCount) }
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSidSubAuthority(pSid: PSID, nSubAuthority: UInt32): CPointer<UInt32> {
     let proc = CFunc<(CPointer<Unit>, UInt32) -> CPointer<UInt32>>(windows_libloading.resolveProc("ADVAPI32.dll", "GetSidSubAuthority"))
     return unsafe { proc(pSid.Value, nSubAuthority) }
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetSidSubAuthorityCount(pSid: PSID): CPointer<UInt8> {
     let proc = CFunc<(CPointer<Unit>) -> CPointer<UInt8>>(windows_libloading.resolveProc("ADVAPI32.dll", "GetSidSubAuthorityCount"))
     return unsafe { proc(pSid.Value) }
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetTokenInformation(TokenHandle: HANDLE, TokenInformationClass: Int32, TokenInformation: CPointer<Unit>, TokenInformationLength: UInt32, ReturnLength: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetTokenInformation"))
     return unsafe { proc(TokenHandle.Value, TokenInformationClass, TokenInformation, TokenInformationLength, ReturnLength) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetTokenInformationChecked(TokenHandle: HANDLE, TokenInformationClass: Int32, TokenInformation: CPointer<Unit>, TokenInformationLength: UInt32, ReturnLength: CPointer<UInt32>): windows_core.Result<Unit> {
     if (GetTokenInformation(TokenHandle, TokenInformationClass, TokenInformation, TokenInformationLength, ReturnLength)) {
         return windows_core.Result<Unit>.Ok(())
@@ -659,11 +778,13 @@ public func GetTokenInformationChecked(TokenHandle: HANDLE, TokenInformationClas
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetWindowsAccountDomainSid(pSid: PSID, pDomainSid: PSID, cbDomainSid: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetWindowsAccountDomainSid"))
     return unsafe { proc(pSid.Value, pDomainSid.Value, cbDomainSid) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetWindowsAccountDomainSidChecked(pSid: PSID, pDomainSid: PSID, cbDomainSid: CPointer<UInt32>): windows_core.Result<Unit> {
     if (GetWindowsAccountDomainSid(pSid, pDomainSid, cbDomainSid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -671,11 +792,13 @@ public func GetWindowsAccountDomainSidChecked(pSid: PSID, pDomainSid: PSID, cbDo
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ImpersonateAnonymousToken(ThreadHandle: HANDLE): Bool {
     let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ImpersonateAnonymousToken"))
     return unsafe { proc(ThreadHandle.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ImpersonateAnonymousTokenChecked(ThreadHandle: HANDLE): windows_core.Result<Unit> {
     if (ImpersonateAnonymousToken(ThreadHandle)) {
         return windows_core.Result<Unit>.Ok(())
@@ -683,11 +806,13 @@ public func ImpersonateAnonymousTokenChecked(ThreadHandle: HANDLE): windows_core
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ImpersonateLoggedOnUser(hToken: HANDLE): Bool {
     let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ImpersonateLoggedOnUser"))
     return unsafe { proc(hToken.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ImpersonateLoggedOnUserChecked(hToken: HANDLE): windows_core.Result<Unit> {
     if (ImpersonateLoggedOnUser(hToken)) {
         return windows_core.Result<Unit>.Ok(())
@@ -695,11 +820,13 @@ public func ImpersonateLoggedOnUserChecked(hToken: HANDLE): windows_core.Result<
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ImpersonateSelf(ImpersonationLevel: Int32): Bool {
     let proc = CFunc<(Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ImpersonateSelf"))
     return unsafe { proc(ImpersonationLevel) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ImpersonateSelfChecked(ImpersonationLevel: Int32): windows_core.Result<Unit> {
     if (ImpersonateSelf(ImpersonationLevel)) {
         return windows_core.Result<Unit>.Ok(())
@@ -707,11 +834,13 @@ public func ImpersonateSelfChecked(ImpersonationLevel: Int32): windows_core.Resu
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func InitializeAcl(pAcl: CPointer<ACL>, nAclLength: UInt32, dwAclRevision: UInt32): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "InitializeAcl"))
     return unsafe { proc(pAcl, nAclLength, dwAclRevision) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func InitializeAclChecked(pAcl: CPointer<ACL>, nAclLength: UInt32, dwAclRevision: UInt32): windows_core.Result<Unit> {
     if (InitializeAcl(pAcl, nAclLength, dwAclRevision)) {
         return windows_core.Result<Unit>.Ok(())
@@ -719,11 +848,13 @@ public func InitializeAclChecked(pAcl: CPointer<ACL>, nAclLength: UInt32, dwAclR
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func InitializeSecurityDescriptor(pSecurityDescriptor: PSECURITY_DESCRIPTOR, dwRevision: UInt32): Bool {
     let proc = CFunc<(CPointer<Unit>, UInt32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "InitializeSecurityDescriptor"))
     return unsafe { proc(pSecurityDescriptor.Value, dwRevision) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func InitializeSecurityDescriptorChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, dwRevision: UInt32): windows_core.Result<Unit> {
     if (InitializeSecurityDescriptor(pSecurityDescriptor, dwRevision)) {
         return windows_core.Result<Unit>.Ok(())
@@ -731,11 +862,13 @@ public func InitializeSecurityDescriptorChecked(pSecurityDescriptor: PSECURITY_D
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func InitializeSid(Sid: PSID, pIdentifierAuthority: CPointer<VArray<UInt8, $6>>, nSubAuthorityCount: UInt8): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<VArray<UInt8, $6>>, UInt8) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "InitializeSid"))
     return unsafe { proc(Sid.Value, pIdentifierAuthority, nSubAuthorityCount) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func InitializeSidChecked(Sid: PSID, pIdentifierAuthority: CPointer<VArray<UInt8, $6>>, nSubAuthorityCount: UInt8): windows_core.Result<Unit> {
     if (InitializeSid(Sid, pIdentifierAuthority, nSubAuthorityCount)) {
         return windows_core.Result<Unit>.Ok(())
@@ -743,36 +876,43 @@ public func InitializeSidChecked(Sid: PSID, pIdentifierAuthority: CPointer<VArra
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func IsTokenRestricted(TokenHandle: HANDLE): Bool {
     let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "IsTokenRestricted"))
     return unsafe { proc(TokenHandle.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func IsValidAcl(pAcl: CPointer<ACL>): Bool {
     let proc = CFunc<(CPointer<ACL>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "IsValidAcl"))
     return unsafe { proc(pAcl) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func IsValidSecurityDescriptor(pSecurityDescriptor: PSECURITY_DESCRIPTOR): Bool {
     let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "IsValidSecurityDescriptor"))
     return unsafe { proc(pSecurityDescriptor.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func IsValidSid(pSid: PSID): Bool {
     let proc = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "IsValidSid"))
     return unsafe { proc(pSid.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func IsWellKnownSid(pSid: PSID, WellKnownSidType: Int32): Bool {
     let proc = CFunc<(CPointer<Unit>, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "IsWellKnownSid"))
     return unsafe { proc(pSid.Value, WellKnownSidType) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func MakeAbsoluteSD(pSelfRelativeSecurityDescriptor: PSECURITY_DESCRIPTOR, pAbsoluteSecurityDescriptor: PSECURITY_DESCRIPTOR, lpdwAbsoluteSecurityDescriptorSize: CPointer<UInt32>, pDacl: CPointer<ACL>, lpdwDaclSize: CPointer<UInt32>, pSacl: CPointer<ACL>, lpdwSaclSize: CPointer<UInt32>, pOwner: PSID, lpdwOwnerSize: CPointer<UInt32>, pPrimaryGroup: PSID, lpdwPrimaryGroupSize: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>, CPointer<ACL>, CPointer<UInt32>, CPointer<ACL>, CPointer<UInt32>, CPointer<Unit>, CPointer<UInt32>, CPointer<Unit>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "MakeAbsoluteSD"))
     return unsafe { proc(pSelfRelativeSecurityDescriptor.Value, pAbsoluteSecurityDescriptor.Value, lpdwAbsoluteSecurityDescriptorSize, pDacl, lpdwDaclSize, pSacl, lpdwSaclSize, pOwner.Value, lpdwOwnerSize, pPrimaryGroup.Value, lpdwPrimaryGroupSize) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func MakeAbsoluteSDChecked(pSelfRelativeSecurityDescriptor: PSECURITY_DESCRIPTOR, pAbsoluteSecurityDescriptor: PSECURITY_DESCRIPTOR, lpdwAbsoluteSecurityDescriptorSize: CPointer<UInt32>, pDacl: CPointer<ACL>, lpdwDaclSize: CPointer<UInt32>, pSacl: CPointer<ACL>, lpdwSaclSize: CPointer<UInt32>, pOwner: PSID, lpdwOwnerSize: CPointer<UInt32>, pPrimaryGroup: PSID, lpdwPrimaryGroupSize: CPointer<UInt32>): windows_core.Result<Unit> {
     if (MakeAbsoluteSD(pSelfRelativeSecurityDescriptor, pAbsoluteSecurityDescriptor, lpdwAbsoluteSecurityDescriptorSize, pDacl, lpdwDaclSize, pSacl, lpdwSaclSize, pOwner, lpdwOwnerSize, pPrimaryGroup, lpdwPrimaryGroupSize)) {
         return windows_core.Result<Unit>.Ok(())
@@ -780,11 +920,13 @@ public func MakeAbsoluteSDChecked(pSelfRelativeSecurityDescriptor: PSECURITY_DES
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func MakeSelfRelativeSD(pAbsoluteSecurityDescriptor: PSECURITY_DESCRIPTOR, pSelfRelativeSecurityDescriptor: PSECURITY_DESCRIPTOR, lpdwBufferLength: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "MakeSelfRelativeSD"))
     return unsafe { proc(pAbsoluteSecurityDescriptor.Value, pSelfRelativeSecurityDescriptor.Value, lpdwBufferLength) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func MakeSelfRelativeSDChecked(pAbsoluteSecurityDescriptor: PSECURITY_DESCRIPTOR, pSelfRelativeSecurityDescriptor: PSECURITY_DESCRIPTOR, lpdwBufferLength: CPointer<UInt32>): windows_core.Result<Unit> {
     if (MakeSelfRelativeSD(pAbsoluteSecurityDescriptor, pSelfRelativeSecurityDescriptor, lpdwBufferLength)) {
         return windows_core.Result<Unit>.Ok(())
@@ -792,36 +934,43 @@ public func MakeSelfRelativeSDChecked(pAbsoluteSecurityDescriptor: PSECURITY_DES
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func MapGenericMask(AccessMask: CPointer<UInt32>, GenericMapping: CPointer<GENERIC_MAPPING>): Unit {
     let proc = CFunc<(CPointer<UInt32>, CPointer<GENERIC_MAPPING>) -> Unit>(windows_libloading.resolveProc("ADVAPI32.dll", "MapGenericMask"))
     unsafe { proc(AccessMask, GenericMapping) }
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ObjectCloseAuditAlarmW(SubsystemName: windows_strings.PWSTR, HandleId: CPointer<Unit>, GenerateOnClose: Bool): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<Unit>, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ObjectCloseAuditAlarmW"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, if (GenerateOnClose) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ObjectDeleteAuditAlarmW(SubsystemName: windows_strings.PWSTR, HandleId: CPointer<Unit>, GenerateOnClose: Bool): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<Unit>, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ObjectDeleteAuditAlarmW"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, if (GenerateOnClose) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ObjectOpenAuditAlarmW(SubsystemName: windows_strings.PWSTR, HandleId: CPointer<Unit>, ObjectTypeName: windows_strings.PWSTR, ObjectName: windows_strings.PWSTR, pSecurityDescriptor: PSECURITY_DESCRIPTOR, ClientToken: HANDLE, DesiredAccess: UInt32, GrantedAccess: UInt32, Privileges: CPointer<PRIVILEGE_SET>, ObjectCreation: Bool, AccessGranted: Bool, GenerateOnClose: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<PRIVILEGE_SET>, Int32, Int32, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ObjectOpenAuditAlarmW"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, ObjectTypeName.asPtr(), ObjectName.asPtr(), pSecurityDescriptor.Value, ClientToken.Value, DesiredAccess, GrantedAccess, Privileges, if (ObjectCreation) { 1 } else { 0 }, if (AccessGranted) { 1 } else { 0 }, GenerateOnClose) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ObjectPrivilegeAuditAlarmW(SubsystemName: windows_strings.PWSTR, HandleId: CPointer<Unit>, ClientToken: HANDLE, DesiredAccess: UInt32, Privileges: CPointer<PRIVILEGE_SET>, AccessGranted: Bool): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<PRIVILEGE_SET>, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ObjectPrivilegeAuditAlarmW"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, ClientToken.Value, DesiredAccess, Privileges, if (AccessGranted) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func PrivilegeCheck(ClientToken: HANDLE, RequiredPrivileges: CPointer<PRIVILEGE_SET>, pfResult: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<PRIVILEGE_SET>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "PrivilegeCheck"))
     return unsafe { proc(ClientToken.Value, RequiredPrivileges, pfResult) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func PrivilegeCheckChecked(ClientToken: HANDLE, RequiredPrivileges: CPointer<PRIVILEGE_SET>, pfResult: CPointer<Int32>): windows_core.Result<Unit> {
     if (PrivilegeCheck(ClientToken, RequiredPrivileges, pfResult)) {
         return windows_core.Result<Unit>.Ok(())
@@ -829,21 +978,25 @@ public func PrivilegeCheckChecked(ClientToken: HANDLE, RequiredPrivileges: CPoin
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func PrivilegedServiceAuditAlarmW(SubsystemName: windows_strings.PWSTR, ServiceName: windows_strings.PWSTR, ClientToken: HANDLE, Privileges: CPointer<PRIVILEGE_SET>, AccessGranted: Bool): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, CPointer<PRIVILEGE_SET>, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "PrivilegedServiceAuditAlarmW"))
     return unsafe { proc(SubsystemName.asPtr(), ServiceName.asPtr(), ClientToken.Value, Privileges, if (AccessGranted) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func QuerySecurityAccessMask(SecurityInformation: UInt32, DesiredAccess: CPointer<UInt32>): Unit {
     let proc = CFunc<(UInt32, CPointer<UInt32>) -> Unit>(windows_libloading.resolveProc("ADVAPI32.dll", "QuerySecurityAccessMask"))
     unsafe { proc(SecurityInformation, DesiredAccess) }
 }
 
+@When[Windows_Win32_Security == "on"]
 public func RevertToSelf(): Bool {
     let proc = CFunc<() -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "RevertToSelf"))
     return unsafe { proc() } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func RevertToSelfChecked(): windows_core.Result<Unit> {
     if (RevertToSelf()) {
         return windows_core.Result<Unit>.Ok(())
@@ -851,11 +1004,13 @@ public func RevertToSelfChecked(): windows_core.Result<Unit> {
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetAclInformation(pAcl: CPointer<ACL>, pAclInformation: CPointer<Unit>, nAclInformationLength: UInt32, dwAclInformationClass: Int32): Bool {
     let proc = CFunc<(CPointer<ACL>, CPointer<Unit>, UInt32, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetAclInformation"))
     return unsafe { proc(pAcl, pAclInformation, nAclInformationLength, dwAclInformationClass) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetAclInformationChecked(pAcl: CPointer<ACL>, pAclInformation: CPointer<Unit>, nAclInformationLength: UInt32, dwAclInformationClass: Int32): windows_core.Result<Unit> {
     if (SetAclInformation(pAcl, pAclInformation, nAclInformationLength, dwAclInformationClass)) {
         return windows_core.Result<Unit>.Ok(())
@@ -863,16 +1018,19 @@ public func SetAclInformationChecked(pAcl: CPointer<ACL>, pAclInformation: CPoin
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetFileSecurityW(lpFileName: windows_strings.PWSTR, SecurityInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR): Bool {
     let proc = CFunc<(CPointer<UInt16>, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetFileSecurityW"))
     return unsafe { proc(lpFileName.asPtr(), SecurityInformation, pSecurityDescriptor.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetKernelObjectSecurity(Handle: HANDLE, SecurityInformation: UInt32, SecurityDescriptor: PSECURITY_DESCRIPTOR): Bool {
     let proc = CFunc<(CPointer<Unit>, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetKernelObjectSecurity"))
     return unsafe { proc(Handle.Value, SecurityInformation, SecurityDescriptor.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetKernelObjectSecurityChecked(Handle: HANDLE, SecurityInformation: UInt32, SecurityDescriptor: PSECURITY_DESCRIPTOR): windows_core.Result<Unit> {
     if (SetKernelObjectSecurity(Handle, SecurityInformation, SecurityDescriptor)) {
         return windows_core.Result<Unit>.Ok(())
@@ -880,11 +1038,13 @@ public func SetKernelObjectSecurityChecked(Handle: HANDLE, SecurityInformation: 
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetPrivateObjectSecurity(SecurityInformation: UInt32, ModificationDescriptor: PSECURITY_DESCRIPTOR, ObjectsSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, GenericMapping: CPointer<GENERIC_MAPPING>, Token: HANDLE): Bool {
     let proc = CFunc<(UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>, CPointer<GENERIC_MAPPING>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetPrivateObjectSecurity"))
     return unsafe { proc(SecurityInformation, ModificationDescriptor.Value, CPointer<CPointer<Unit>>(ObjectsSecurityDescriptor), GenericMapping, Token.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetPrivateObjectSecurityChecked(SecurityInformation: UInt32, ModificationDescriptor: PSECURITY_DESCRIPTOR, ObjectsSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, GenericMapping: CPointer<GENERIC_MAPPING>, Token: HANDLE): windows_core.Result<Unit> {
     if (SetPrivateObjectSecurity(SecurityInformation, ModificationDescriptor, ObjectsSecurityDescriptor, GenericMapping, Token)) {
         return windows_core.Result<Unit>.Ok(())
@@ -892,11 +1052,13 @@ public func SetPrivateObjectSecurityChecked(SecurityInformation: UInt32, Modific
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetPrivateObjectSecurityEx(SecurityInformation: UInt32, ModificationDescriptor: PSECURITY_DESCRIPTOR, ObjectsSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, AutoInheritFlags: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, Token: HANDLE): Bool {
     let proc = CFunc<(UInt32, CPointer<Unit>, CPointer<CPointer<Unit>>, UInt32, CPointer<GENERIC_MAPPING>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetPrivateObjectSecurityEx"))
     return unsafe { proc(SecurityInformation, ModificationDescriptor.Value, CPointer<CPointer<Unit>>(ObjectsSecurityDescriptor), AutoInheritFlags, GenericMapping, Token.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetPrivateObjectSecurityExChecked(SecurityInformation: UInt32, ModificationDescriptor: PSECURITY_DESCRIPTOR, ObjectsSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, AutoInheritFlags: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, Token: HANDLE): windows_core.Result<Unit> {
     if (SetPrivateObjectSecurityEx(SecurityInformation, ModificationDescriptor, ObjectsSecurityDescriptor, AutoInheritFlags, GenericMapping, Token)) {
         return windows_core.Result<Unit>.Ok(())
@@ -904,16 +1066,19 @@ public func SetPrivateObjectSecurityExChecked(SecurityInformation: UInt32, Modif
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetSecurityAccessMask(SecurityInformation: UInt32, DesiredAccess: CPointer<UInt32>): Unit {
     let proc = CFunc<(UInt32, CPointer<UInt32>) -> Unit>(windows_libloading.resolveProc("ADVAPI32.dll", "SetSecurityAccessMask"))
     unsafe { proc(SecurityInformation, DesiredAccess) }
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetSecurityDescriptorControl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, ControlBitsOfInterest: UInt16, ControlBitsToSet: UInt16): Bool {
     let proc = CFunc<(CPointer<Unit>, UInt16, UInt16) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetSecurityDescriptorControl"))
     return unsafe { proc(pSecurityDescriptor.Value, ControlBitsOfInterest, ControlBitsToSet) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetSecurityDescriptorControlChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, ControlBitsOfInterest: UInt16, ControlBitsToSet: UInt16): windows_core.Result<Unit> {
     if (SetSecurityDescriptorControl(pSecurityDescriptor, ControlBitsOfInterest, ControlBitsToSet)) {
         return windows_core.Result<Unit>.Ok(())
@@ -921,11 +1086,13 @@ public func SetSecurityDescriptorControlChecked(pSecurityDescriptor: PSECURITY_D
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetSecurityDescriptorDacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, bDaclPresent: Bool, pDacl: CPointer<ACL>, bDaclDefaulted: Bool): Bool {
     let proc = CFunc<(CPointer<Unit>, Int32, CPointer<ACL>, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetSecurityDescriptorDacl"))
     return unsafe { proc(pSecurityDescriptor.Value, if (bDaclPresent) { 1 } else { 0 }, pDacl, if (bDaclDefaulted) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetSecurityDescriptorDaclChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, bDaclPresent: Bool, pDacl: CPointer<ACL>, bDaclDefaulted: Bool): windows_core.Result<Unit> {
     if (SetSecurityDescriptorDacl(pSecurityDescriptor, bDaclPresent, pDacl, bDaclDefaulted)) {
         return windows_core.Result<Unit>.Ok(())
@@ -933,11 +1100,13 @@ public func SetSecurityDescriptorDaclChecked(pSecurityDescriptor: PSECURITY_DESC
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetSecurityDescriptorGroup(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pGroup: PSID, bGroupDefaulted: Bool): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetSecurityDescriptorGroup"))
     return unsafe { proc(pSecurityDescriptor.Value, pGroup.Value, if (bGroupDefaulted) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetSecurityDescriptorGroupChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pGroup: PSID, bGroupDefaulted: Bool): windows_core.Result<Unit> {
     if (SetSecurityDescriptorGroup(pSecurityDescriptor, pGroup, bGroupDefaulted)) {
         return windows_core.Result<Unit>.Ok(())
@@ -945,11 +1114,13 @@ public func SetSecurityDescriptorGroupChecked(pSecurityDescriptor: PSECURITY_DES
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetSecurityDescriptorOwner(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pOwner: PSID, bOwnerDefaulted: Bool): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<Unit>, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetSecurityDescriptorOwner"))
     return unsafe { proc(pSecurityDescriptor.Value, pOwner.Value, if (bOwnerDefaulted) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetSecurityDescriptorOwnerChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, pOwner: PSID, bOwnerDefaulted: Bool): windows_core.Result<Unit> {
     if (SetSecurityDescriptorOwner(pSecurityDescriptor, pOwner, bOwnerDefaulted)) {
         return windows_core.Result<Unit>.Ok(())
@@ -957,16 +1128,19 @@ public func SetSecurityDescriptorOwnerChecked(pSecurityDescriptor: PSECURITY_DES
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetSecurityDescriptorRMControl(SecurityDescriptor: PSECURITY_DESCRIPTOR, RMControl: CPointer<UInt8>): UInt32 {
     let proc = CFunc<(CPointer<Unit>, CPointer<UInt8>) -> UInt32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetSecurityDescriptorRMControl"))
     return unsafe { proc(SecurityDescriptor.Value, RMControl) }
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetSecurityDescriptorSacl(pSecurityDescriptor: PSECURITY_DESCRIPTOR, bSaclPresent: Bool, pSacl: CPointer<ACL>, bSaclDefaulted: Bool): Bool {
     let proc = CFunc<(CPointer<Unit>, Int32, CPointer<ACL>, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetSecurityDescriptorSacl"))
     return unsafe { proc(pSecurityDescriptor.Value, if (bSaclPresent) { 1 } else { 0 }, pSacl, if (bSaclDefaulted) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetSecurityDescriptorSaclChecked(pSecurityDescriptor: PSECURITY_DESCRIPTOR, bSaclPresent: Bool, pSacl: CPointer<ACL>, bSaclDefaulted: Bool): windows_core.Result<Unit> {
     if (SetSecurityDescriptorSacl(pSecurityDescriptor, bSaclPresent, pSacl, bSaclDefaulted)) {
         return windows_core.Result<Unit>.Ok(())
@@ -974,11 +1148,13 @@ public func SetSecurityDescriptorSaclChecked(pSecurityDescriptor: PSECURITY_DESC
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetTokenInformation(TokenHandle: HANDLE, TokenInformationClass: Int32, TokenInformation: CPointer<Unit>, TokenInformationLength: UInt32): Bool {
     let proc = CFunc<(CPointer<Unit>, Int32, CPointer<Unit>, UInt32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetTokenInformation"))
     return unsafe { proc(TokenHandle.Value, TokenInformationClass, TokenInformation, TokenInformationLength) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetTokenInformationChecked(TokenHandle: HANDLE, TokenInformationClass: Int32, TokenInformation: CPointer<Unit>, TokenInformationLength: UInt32): windows_core.Result<Unit> {
     if (SetTokenInformation(TokenHandle, TokenInformationClass, TokenInformation, TokenInformationLength)) {
         return windows_core.Result<Unit>.Ok(())
@@ -986,11 +1162,13 @@ public func SetTokenInformationChecked(TokenHandle: HANDLE, TokenInformationClas
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetCachedSigningLevel(SourceFiles: CPointer<HANDLE>, SourceFileCount: UInt32, Flags: UInt32, TargetFile: HANDLE): Bool {
     let proc = CFunc<(CPointer<CPointer<Unit>>, UInt32, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "SetCachedSigningLevel"))
     return unsafe { proc(CPointer<CPointer<Unit>>(SourceFiles), SourceFileCount, Flags, TargetFile.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetCachedSigningLevelChecked(SourceFiles: CPointer<HANDLE>, SourceFileCount: UInt32, Flags: UInt32, TargetFile: HANDLE): windows_core.Result<Unit> {
     if (SetCachedSigningLevel(SourceFiles, SourceFileCount, Flags, TargetFile)) {
         return windows_core.Result<Unit>.Ok(())
@@ -998,11 +1176,13 @@ public func SetCachedSigningLevelChecked(SourceFiles: CPointer<HANDLE>, SourceFi
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetCachedSigningLevel(File: HANDLE, Flags: CPointer<UInt32>, SigningLevel: CPointer<UInt32>, Thumbprint: CPointer<UInt8>, ThumbprintSize: CPointer<UInt32>, ThumbprintAlgorithm: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<UInt32>, CPointer<UInt8>, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("KERNEL32.dll", "GetCachedSigningLevel"))
     return unsafe { proc(File.Value, Flags, SigningLevel, Thumbprint, ThumbprintSize, ThumbprintAlgorithm) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetCachedSigningLevelChecked(File: HANDLE, Flags: CPointer<UInt32>, SigningLevel: CPointer<UInt32>, Thumbprint: CPointer<UInt8>, ThumbprintSize: CPointer<UInt32>, ThumbprintAlgorithm: CPointer<UInt32>): windows_core.Result<Unit> {
     if (GetCachedSigningLevel(File, Flags, SigningLevel, Thumbprint, ThumbprintSize, ThumbprintAlgorithm)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1010,11 +1190,13 @@ public func GetCachedSigningLevelChecked(File: HANDLE, Flags: CPointer<UInt32>, 
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func DeriveCapabilitySidsFromName(CapName: windows_strings.PWSTR, CapabilityGroupSids: CPointer<CPointer<PSID>>, CapabilityGroupSidCount: CPointer<UInt32>, CapabilitySids: CPointer<CPointer<PSID>>, CapabilitySidCount: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<CPointer<CPointer<Unit>>>, CPointer<UInt32>, CPointer<CPointer<CPointer<Unit>>>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("api-ms-win-security-base-l1-2-2.dll", "DeriveCapabilitySidsFromName"))
     return unsafe { proc(CapName.asPtr(), CPointer<CPointer<CPointer<Unit>>>(CapabilityGroupSids), CapabilityGroupSidCount, CPointer<CPointer<CPointer<Unit>>>(CapabilitySids), CapabilitySidCount) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func DeriveCapabilitySidsFromNameChecked(CapName: windows_strings.PWSTR, CapabilityGroupSids: CPointer<CPointer<PSID>>, CapabilityGroupSidCount: CPointer<UInt32>, CapabilitySids: CPointer<CPointer<PSID>>, CapabilitySidCount: CPointer<UInt32>): windows_core.Result<Unit> {
     if (DeriveCapabilitySidsFromName(CapName, CapabilityGroupSids, CapabilityGroupSidCount, CapabilitySids, CapabilitySidCount)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1022,16 +1204,19 @@ public func DeriveCapabilitySidsFromNameChecked(CapName: windows_strings.PWSTR, 
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func RtlNormalizeSecurityDescriptor(SecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, SecurityDescriptorLength: UInt32, NewSecurityDescriptor: CPointer<PSECURITY_DESCRIPTOR>, NewSecurityDescriptorLength: CPointer<UInt32>, CheckOnly: Bool): Bool {
     let proc = CFunc<(CPointer<CPointer<Unit>>, UInt32, CPointer<CPointer<Unit>>, CPointer<UInt32>, UInt8) -> UInt8>(windows_libloading.resolveProc("ntdll.dll", "RtlNormalizeSecurityDescriptor"))
     return unsafe { proc(CPointer<CPointer<Unit>>(SecurityDescriptor), SecurityDescriptorLength, CPointer<CPointer<Unit>>(NewSecurityDescriptor), NewSecurityDescriptorLength, if (CheckOnly) { 1u8 } else { 0u8 }) } != 0u8
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetUserObjectSecurity(hObj: HANDLE, pSIRequested: CPointer<UInt32>, pSID: PSECURITY_DESCRIPTOR): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("USER32.dll", "SetUserObjectSecurity"))
     return unsafe { proc(hObj.Value, pSIRequested, pSID.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetUserObjectSecurityChecked(hObj: HANDLE, pSIRequested: CPointer<UInt32>, pSID: PSECURITY_DESCRIPTOR): windows_core.Result<Unit> {
     if (SetUserObjectSecurity(hObj, pSIRequested, pSID)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1039,11 +1224,13 @@ public func SetUserObjectSecurityChecked(hObj: HANDLE, pSIRequested: CPointer<UI
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetUserObjectSecurity(hObj: HANDLE, pSIRequested: CPointer<UInt32>, pSID: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<Unit>, CPointer<UInt32>, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("USER32.dll", "GetUserObjectSecurity"))
     return unsafe { proc(hObj.Value, pSIRequested, pSID.Value, nLength, lpnLengthNeeded) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetUserObjectSecurityChecked(hObj: HANDLE, pSIRequested: CPointer<UInt32>, pSID: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): windows_core.Result<Unit> {
     if (GetUserObjectSecurity(hObj, pSIRequested, pSID, nLength, lpnLengthNeeded)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1051,11 +1238,13 @@ public func GetUserObjectSecurityChecked(hObj: HANDLE, pSIRequested: CPointer<UI
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckAndAuditAlarmA(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, ObjectTypeName: windows_strings.PSTR, ObjectName: windows_strings.PSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, DesiredAccess: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Bool, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>, UInt32, CPointer<GENERIC_MAPPING>, Int32, CPointer<UInt32>, CPointer<Int32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AccessCheckAndAuditAlarmA"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, ObjectTypeName.asPtr(), ObjectName.asPtr(), SecurityDescriptor.Value, DesiredAccess, GenericMapping, if (ObjectCreation) { 1 } else { 0 }, GrantedAccess, AccessStatus, pfGenerateOnClose) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckAndAuditAlarmAChecked(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, ObjectTypeName: windows_strings.PSTR, ObjectName: windows_strings.PSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, DesiredAccess: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Bool, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): windows_core.Result<Unit> {
     if (AccessCheckAndAuditAlarmA(SubsystemName, HandleId, ObjectTypeName, ObjectName, SecurityDescriptor, DesiredAccess, GenericMapping, ObjectCreation, GrantedAccess, AccessStatus, pfGenerateOnClose)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1063,11 +1252,13 @@ public func AccessCheckAndAuditAlarmAChecked(SubsystemName: windows_strings.PSTR
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckByTypeAndAuditAlarmA(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, ObjectTypeName: windows_strings.PSTR, ObjectName: windows_strings.PSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Bool, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>, CPointer<Unit>, UInt32, Int32, UInt32, CPointer<OBJECT_TYPE_LIST>, UInt32, CPointer<GENERIC_MAPPING>, Int32, CPointer<UInt32>, CPointer<Int32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AccessCheckByTypeAndAuditAlarmA"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, ObjectTypeName.asPtr(), ObjectName.asPtr(), SecurityDescriptor.Value, PrincipalSelfSid.Value, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, if (ObjectCreation) { 1 } else { 0 }, GrantedAccess, AccessStatus, pfGenerateOnClose) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckByTypeAndAuditAlarmAChecked(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, ObjectTypeName: windows_strings.PSTR, ObjectName: windows_strings.PSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Bool, GrantedAccess: CPointer<UInt32>, AccessStatus: CPointer<Int32>, pfGenerateOnClose: CPointer<Int32>): windows_core.Result<Unit> {
     if (AccessCheckByTypeAndAuditAlarmA(SubsystemName, HandleId, ObjectTypeName, ObjectName, SecurityDescriptor, PrincipalSelfSid, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, ObjectCreation, GrantedAccess, AccessStatus, pfGenerateOnClose)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1075,11 +1266,13 @@ public func AccessCheckByTypeAndAuditAlarmAChecked(SubsystemName: windows_string
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckByTypeResultListAndAuditAlarmA(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, ObjectTypeName: windows_strings.PSTR, ObjectName: windows_strings.PSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Bool, GrantedAccess: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>, CPointer<Unit>, UInt32, Int32, UInt32, CPointer<OBJECT_TYPE_LIST>, UInt32, CPointer<GENERIC_MAPPING>, Int32, CPointer<UInt32>, CPointer<UInt32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AccessCheckByTypeResultListAndAuditAlarmA"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, ObjectTypeName.asPtr(), ObjectName.asPtr(), SecurityDescriptor.Value, PrincipalSelfSid.Value, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, if (ObjectCreation) { 1 } else { 0 }, GrantedAccess, AccessStatusList, pfGenerateOnClose) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckByTypeResultListAndAuditAlarmAChecked(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, ObjectTypeName: windows_strings.PSTR, ObjectName: windows_strings.PSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Bool, GrantedAccess: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): windows_core.Result<Unit> {
     if (AccessCheckByTypeResultListAndAuditAlarmA(SubsystemName, HandleId, ObjectTypeName, ObjectName, SecurityDescriptor, PrincipalSelfSid, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, ObjectCreation, GrantedAccess, AccessStatusList, pfGenerateOnClose)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1087,11 +1280,13 @@ public func AccessCheckByTypeResultListAndAuditAlarmAChecked(SubsystemName: wind
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckByTypeResultListAndAuditAlarmByHandleA(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, ClientToken: HANDLE, ObjectTypeName: windows_strings.PSTR, ObjectName: windows_strings.PSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Bool, GrantedAccess: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<Unit>, CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>, CPointer<Unit>, UInt32, Int32, UInt32, CPointer<OBJECT_TYPE_LIST>, UInt32, CPointer<GENERIC_MAPPING>, Int32, CPointer<UInt32>, CPointer<UInt32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AccessCheckByTypeResultListAndAuditAlarmByHandleA"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, ClientToken.Value, ObjectTypeName.asPtr(), ObjectName.asPtr(), SecurityDescriptor.Value, PrincipalSelfSid.Value, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, if (ObjectCreation) { 1 } else { 0 }, GrantedAccess, AccessStatusList, pfGenerateOnClose) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AccessCheckByTypeResultListAndAuditAlarmByHandleAChecked(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, ClientToken: HANDLE, ObjectTypeName: windows_strings.PSTR, ObjectName: windows_strings.PSTR, SecurityDescriptor: PSECURITY_DESCRIPTOR, PrincipalSelfSid: PSID, DesiredAccess: UInt32, AuditType: Int32, Flags: UInt32, ObjectTypeList: CPointer<OBJECT_TYPE_LIST>, ObjectTypeListLength: UInt32, GenericMapping: CPointer<GENERIC_MAPPING>, ObjectCreation: Bool, GrantedAccess: CPointer<UInt32>, AccessStatusList: CPointer<UInt32>, pfGenerateOnClose: CPointer<Int32>): windows_core.Result<Unit> {
     if (AccessCheckByTypeResultListAndAuditAlarmByHandleA(SubsystemName, HandleId, ClientToken, ObjectTypeName, ObjectName, SecurityDescriptor, PrincipalSelfSid, DesiredAccess, AuditType, Flags, ObjectTypeList, ObjectTypeListLength, GenericMapping, ObjectCreation, GrantedAccess, AccessStatusList, pfGenerateOnClose)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1099,11 +1294,13 @@ public func AccessCheckByTypeResultListAndAuditAlarmByHandleAChecked(SubsystemNa
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ObjectOpenAuditAlarmA(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, ObjectTypeName: windows_strings.PSTR, ObjectName: windows_strings.PSTR, pSecurityDescriptor: PSECURITY_DESCRIPTOR, ClientToken: HANDLE, DesiredAccess: UInt32, GrantedAccess: UInt32, Privileges: CPointer<PRIVILEGE_SET>, ObjectCreation: Bool, AccessGranted: Bool, GenerateOnClose: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<Unit>, CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>, CPointer<Unit>, UInt32, UInt32, CPointer<PRIVILEGE_SET>, Int32, Int32, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ObjectOpenAuditAlarmA"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, ObjectTypeName.asPtr(), ObjectName.asPtr(), pSecurityDescriptor.Value, ClientToken.Value, DesiredAccess, GrantedAccess, Privileges, if (ObjectCreation) { 1 } else { 0 }, if (AccessGranted) { 1 } else { 0 }, GenerateOnClose) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ObjectOpenAuditAlarmAChecked(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, ObjectTypeName: windows_strings.PSTR, ObjectName: windows_strings.PSTR, pSecurityDescriptor: PSECURITY_DESCRIPTOR, ClientToken: HANDLE, DesiredAccess: UInt32, GrantedAccess: UInt32, Privileges: CPointer<PRIVILEGE_SET>, ObjectCreation: Bool, AccessGranted: Bool, GenerateOnClose: CPointer<Int32>): windows_core.Result<Unit> {
     if (ObjectOpenAuditAlarmA(SubsystemName, HandleId, ObjectTypeName, ObjectName, pSecurityDescriptor, ClientToken, DesiredAccess, GrantedAccess, Privileges, ObjectCreation, AccessGranted, GenerateOnClose)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1111,11 +1308,13 @@ public func ObjectOpenAuditAlarmAChecked(SubsystemName: windows_strings.PSTR, Ha
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ObjectPrivilegeAuditAlarmA(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, ClientToken: HANDLE, DesiredAccess: UInt32, Privileges: CPointer<PRIVILEGE_SET>, AccessGranted: Bool): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<PRIVILEGE_SET>, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ObjectPrivilegeAuditAlarmA"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, ClientToken.Value, DesiredAccess, Privileges, if (AccessGranted) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ObjectPrivilegeAuditAlarmAChecked(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, ClientToken: HANDLE, DesiredAccess: UInt32, Privileges: CPointer<PRIVILEGE_SET>, AccessGranted: Bool): windows_core.Result<Unit> {
     if (ObjectPrivilegeAuditAlarmA(SubsystemName, HandleId, ClientToken, DesiredAccess, Privileges, AccessGranted)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1123,11 +1322,13 @@ public func ObjectPrivilegeAuditAlarmAChecked(SubsystemName: windows_strings.PST
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ObjectCloseAuditAlarmA(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, GenerateOnClose: Bool): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<Unit>, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ObjectCloseAuditAlarmA"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, if (GenerateOnClose) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ObjectCloseAuditAlarmAChecked(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, GenerateOnClose: Bool): windows_core.Result<Unit> {
     if (ObjectCloseAuditAlarmA(SubsystemName, HandleId, GenerateOnClose)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1135,11 +1336,13 @@ public func ObjectCloseAuditAlarmAChecked(SubsystemName: windows_strings.PSTR, H
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ObjectDeleteAuditAlarmA(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, GenerateOnClose: Bool): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<Unit>, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "ObjectDeleteAuditAlarmA"))
     return unsafe { proc(SubsystemName.asPtr(), HandleId, if (GenerateOnClose) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func ObjectDeleteAuditAlarmAChecked(SubsystemName: windows_strings.PSTR, HandleId: CPointer<Unit>, GenerateOnClose: Bool): windows_core.Result<Unit> {
     if (ObjectDeleteAuditAlarmA(SubsystemName, HandleId, GenerateOnClose)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1147,11 +1350,13 @@ public func ObjectDeleteAuditAlarmAChecked(SubsystemName: windows_strings.PSTR, 
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func PrivilegedServiceAuditAlarmA(SubsystemName: windows_strings.PSTR, ServiceName: windows_strings.PSTR, ClientToken: HANDLE, Privileges: CPointer<PRIVILEGE_SET>, AccessGranted: Bool): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>, CPointer<PRIVILEGE_SET>, Int32) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "PrivilegedServiceAuditAlarmA"))
     return unsafe { proc(SubsystemName.asPtr(), ServiceName.asPtr(), ClientToken.Value, Privileges, if (AccessGranted) { 1 } else { 0 }) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func PrivilegedServiceAuditAlarmAChecked(SubsystemName: windows_strings.PSTR, ServiceName: windows_strings.PSTR, ClientToken: HANDLE, Privileges: CPointer<PRIVILEGE_SET>, AccessGranted: Bool): windows_core.Result<Unit> {
     if (PrivilegedServiceAuditAlarmA(SubsystemName, ServiceName, ClientToken, Privileges, AccessGranted)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1159,11 +1364,13 @@ public func PrivilegedServiceAuditAlarmAChecked(SubsystemName: windows_strings.P
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddConditionalAce(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AceType: UInt8, AccessMask: UInt32, pSid: PSID, ConditionStr: windows_strings.PWSTR, ReturnLength: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<ACL>, UInt32, UInt32, UInt8, UInt32, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "AddConditionalAce"))
     return unsafe { proc(pAcl, dwAceRevision, AceFlags, AceType, AccessMask, pSid.Value, ConditionStr.asPtr(), ReturnLength) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func AddConditionalAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32, AceFlags: UInt32, AceType: UInt8, AccessMask: UInt32, pSid: PSID, ConditionStr: windows_strings.PWSTR, ReturnLength: CPointer<UInt32>): windows_core.Result<Unit> {
     if (AddConditionalAce(pAcl, dwAceRevision, AceFlags, AceType, AccessMask, pSid, ConditionStr, ReturnLength)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1171,11 +1378,13 @@ public func AddConditionalAceChecked(pAcl: CPointer<ACL>, dwAceRevision: UInt32,
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetFileSecurityA(lpFileName: windows_strings.PSTR, SecurityInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR): Bool {
     let proc = CFunc<(CPointer<UInt8>, UInt32, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "SetFileSecurityA"))
     return unsafe { proc(lpFileName.asPtr(), SecurityInformation, pSecurityDescriptor.Value) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func SetFileSecurityAChecked(lpFileName: windows_strings.PSTR, SecurityInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR): windows_core.Result<Unit> {
     if (SetFileSecurityA(lpFileName, SecurityInformation, pSecurityDescriptor)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1183,11 +1392,13 @@ public func SetFileSecurityAChecked(lpFileName: windows_strings.PSTR, SecurityIn
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetFileSecurityA(lpFileName: windows_strings.PSTR, RequestedInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<UInt8>, UInt32, CPointer<Unit>, UInt32, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "GetFileSecurityA"))
     return unsafe { proc(lpFileName.asPtr(), RequestedInformation, pSecurityDescriptor.Value, nLength, lpnLengthNeeded) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func GetFileSecurityAChecked(lpFileName: windows_strings.PSTR, RequestedInformation: UInt32, pSecurityDescriptor: PSECURITY_DESCRIPTOR, nLength: UInt32, lpnLengthNeeded: CPointer<UInt32>): windows_core.Result<Unit> {
     if (GetFileSecurityA(lpFileName, RequestedInformation, pSecurityDescriptor, nLength, lpnLengthNeeded)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1195,11 +1406,13 @@ public func GetFileSecurityAChecked(lpFileName: windows_strings.PSTR, RequestedI
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupAccountSidA(lpSystemName: windows_strings.PSTR, Sid: PSID, Name: windows_strings.PSTR, cchName: CPointer<UInt32>, ReferencedDomainName: windows_strings.PSTR, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<Unit>, CPointer<UInt8>, CPointer<UInt32>, CPointer<UInt8>, CPointer<UInt32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LookupAccountSidA"))
     return unsafe { proc(lpSystemName.asPtr(), Sid.Value, Name.asPtr(), cchName, ReferencedDomainName.asPtr(), cchReferencedDomainName, peUse) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupAccountSidAChecked(lpSystemName: windows_strings.PSTR, Sid: PSID, Name: windows_strings.PSTR, cchName: CPointer<UInt32>, ReferencedDomainName: windows_strings.PSTR, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<Int32>): windows_core.Result<Unit> {
     if (LookupAccountSidA(lpSystemName, Sid, Name, cchName, ReferencedDomainName, cchReferencedDomainName, peUse)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1207,11 +1420,13 @@ public func LookupAccountSidAChecked(lpSystemName: windows_strings.PSTR, Sid: PS
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupAccountSidW(lpSystemName: windows_strings.PWSTR, Sid: PSID, Name: windows_strings.PWSTR, cchName: CPointer<UInt32>, ReferencedDomainName: windows_strings.PWSTR, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<Unit>, CPointer<UInt16>, CPointer<UInt32>, CPointer<UInt16>, CPointer<UInt32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LookupAccountSidW"))
     return unsafe { proc(lpSystemName.asPtr(), Sid.Value, Name.asPtr(), cchName, ReferencedDomainName.asPtr(), cchReferencedDomainName, peUse) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupAccountSidWChecked(lpSystemName: windows_strings.PWSTR, Sid: PSID, Name: windows_strings.PWSTR, cchName: CPointer<UInt32>, ReferencedDomainName: windows_strings.PWSTR, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<Int32>): windows_core.Result<Unit> {
     if (LookupAccountSidW(lpSystemName, Sid, Name, cchName, ReferencedDomainName, cchReferencedDomainName, peUse)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1219,11 +1434,13 @@ public func LookupAccountSidWChecked(lpSystemName: windows_strings.PWSTR, Sid: P
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupAccountNameA(lpSystemName: windows_strings.PSTR, lpAccountName: windows_strings.PSTR, Sid: PSID, cbSid: CPointer<UInt32>, ReferencedDomainName: windows_strings.PSTR, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<Unit>, CPointer<UInt32>, CPointer<UInt8>, CPointer<UInt32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LookupAccountNameA"))
     return unsafe { proc(lpSystemName.asPtr(), lpAccountName.asPtr(), Sid.Value, cbSid, ReferencedDomainName.asPtr(), cchReferencedDomainName, peUse) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupAccountNameAChecked(lpSystemName: windows_strings.PSTR, lpAccountName: windows_strings.PSTR, Sid: PSID, cbSid: CPointer<UInt32>, ReferencedDomainName: windows_strings.PSTR, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<Int32>): windows_core.Result<Unit> {
     if (LookupAccountNameA(lpSystemName, lpAccountName, Sid, cbSid, ReferencedDomainName, cchReferencedDomainName, peUse)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1231,11 +1448,13 @@ public func LookupAccountNameAChecked(lpSystemName: windows_strings.PSTR, lpAcco
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupAccountNameW(lpSystemName: windows_strings.PWSTR, lpAccountName: windows_strings.PWSTR, Sid: PSID, cbSid: CPointer<UInt32>, ReferencedDomainName: windows_strings.PWSTR, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<Int32>): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<Unit>, CPointer<UInt32>, CPointer<UInt16>, CPointer<UInt32>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LookupAccountNameW"))
     return unsafe { proc(lpSystemName.asPtr(), lpAccountName.asPtr(), Sid.Value, cbSid, ReferencedDomainName.asPtr(), cchReferencedDomainName, peUse) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupAccountNameWChecked(lpSystemName: windows_strings.PWSTR, lpAccountName: windows_strings.PWSTR, Sid: PSID, cbSid: CPointer<UInt32>, ReferencedDomainName: windows_strings.PWSTR, cchReferencedDomainName: CPointer<UInt32>, peUse: CPointer<Int32>): windows_core.Result<Unit> {
     if (LookupAccountNameW(lpSystemName, lpAccountName, Sid, cbSid, ReferencedDomainName, cchReferencedDomainName, peUse)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1243,11 +1462,13 @@ public func LookupAccountNameWChecked(lpSystemName: windows_strings.PWSTR, lpAcc
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupPrivilegeValueA(lpSystemName: windows_strings.PSTR, lpName: windows_strings.PSTR, lpLuid: CPointer<LUID>): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<LUID>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LookupPrivilegeValueA"))
     return unsafe { proc(lpSystemName.asPtr(), lpName.asPtr(), lpLuid) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupPrivilegeValueAChecked(lpSystemName: windows_strings.PSTR, lpName: windows_strings.PSTR, lpLuid: CPointer<LUID>): windows_core.Result<Unit> {
     if (LookupPrivilegeValueA(lpSystemName, lpName, lpLuid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1255,11 +1476,13 @@ public func LookupPrivilegeValueAChecked(lpSystemName: windows_strings.PSTR, lpN
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupPrivilegeValueW(lpSystemName: windows_strings.PWSTR, lpName: windows_strings.PWSTR, lpLuid: CPointer<LUID>): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<LUID>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LookupPrivilegeValueW"))
     return unsafe { proc(lpSystemName.asPtr(), lpName.asPtr(), lpLuid) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupPrivilegeValueWChecked(lpSystemName: windows_strings.PWSTR, lpName: windows_strings.PWSTR, lpLuid: CPointer<LUID>): windows_core.Result<Unit> {
     if (LookupPrivilegeValueW(lpSystemName, lpName, lpLuid)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1267,11 +1490,13 @@ public func LookupPrivilegeValueWChecked(lpSystemName: windows_strings.PWSTR, lp
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupPrivilegeNameA(lpSystemName: windows_strings.PSTR, lpLuid: CPointer<LUID>, lpName: windows_strings.PSTR, cchName: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<LUID>, CPointer<UInt8>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LookupPrivilegeNameA"))
     return unsafe { proc(lpSystemName.asPtr(), lpLuid, lpName.asPtr(), cchName) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupPrivilegeNameAChecked(lpSystemName: windows_strings.PSTR, lpLuid: CPointer<LUID>, lpName: windows_strings.PSTR, cchName: CPointer<UInt32>): windows_core.Result<Unit> {
     if (LookupPrivilegeNameA(lpSystemName, lpLuid, lpName, cchName)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1279,11 +1504,13 @@ public func LookupPrivilegeNameAChecked(lpSystemName: windows_strings.PSTR, lpLu
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupPrivilegeNameW(lpSystemName: windows_strings.PWSTR, lpLuid: CPointer<LUID>, lpName: windows_strings.PWSTR, cchName: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<LUID>, CPointer<UInt16>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LookupPrivilegeNameW"))
     return unsafe { proc(lpSystemName.asPtr(), lpLuid, lpName.asPtr(), cchName) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupPrivilegeNameWChecked(lpSystemName: windows_strings.PWSTR, lpLuid: CPointer<LUID>, lpName: windows_strings.PWSTR, cchName: CPointer<UInt32>): windows_core.Result<Unit> {
     if (LookupPrivilegeNameW(lpSystemName, lpLuid, lpName, cchName)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1291,11 +1518,13 @@ public func LookupPrivilegeNameWChecked(lpSystemName: windows_strings.PWSTR, lpL
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupPrivilegeDisplayNameA(lpSystemName: windows_strings.PSTR, lpName: windows_strings.PSTR, lpDisplayName: windows_strings.PSTR, cchDisplayName: CPointer<UInt32>, lpLanguageId: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LookupPrivilegeDisplayNameA"))
     return unsafe { proc(lpSystemName.asPtr(), lpName.asPtr(), lpDisplayName.asPtr(), cchDisplayName, lpLanguageId) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupPrivilegeDisplayNameAChecked(lpSystemName: windows_strings.PSTR, lpName: windows_strings.PSTR, lpDisplayName: windows_strings.PSTR, cchDisplayName: CPointer<UInt32>, lpLanguageId: CPointer<UInt32>): windows_core.Result<Unit> {
     if (LookupPrivilegeDisplayNameA(lpSystemName, lpName, lpDisplayName, cchDisplayName, lpLanguageId)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1303,11 +1532,13 @@ public func LookupPrivilegeDisplayNameAChecked(lpSystemName: windows_strings.PST
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupPrivilegeDisplayNameW(lpSystemName: windows_strings.PWSTR, lpName: windows_strings.PWSTR, lpDisplayName: windows_strings.PWSTR, cchDisplayName: CPointer<UInt32>, lpLanguageId: CPointer<UInt32>): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LookupPrivilegeDisplayNameW"))
     return unsafe { proc(lpSystemName.asPtr(), lpName.asPtr(), lpDisplayName.asPtr(), cchDisplayName, lpLanguageId) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LookupPrivilegeDisplayNameWChecked(lpSystemName: windows_strings.PWSTR, lpName: windows_strings.PWSTR, lpDisplayName: windows_strings.PWSTR, cchDisplayName: CPointer<UInt32>, lpLanguageId: CPointer<UInt32>): windows_core.Result<Unit> {
     if (LookupPrivilegeDisplayNameW(lpSystemName, lpName, lpDisplayName, cchDisplayName, lpLanguageId)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1315,11 +1546,13 @@ public func LookupPrivilegeDisplayNameWChecked(lpSystemName: windows_strings.PWS
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LogonUserA(lpszUsername: windows_strings.PSTR, lpszDomain: windows_strings.PSTR, lpszPassword: windows_strings.PSTR, dwLogonType: UInt32, dwLogonProvider: UInt32, phToken: CPointer<HANDLE>): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LogonUserA"))
     return unsafe { proc(lpszUsername.asPtr(), lpszDomain.asPtr(), lpszPassword.asPtr(), dwLogonType, dwLogonProvider, CPointer<CPointer<Unit>>(phToken)) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LogonUserAChecked(lpszUsername: windows_strings.PSTR, lpszDomain: windows_strings.PSTR, lpszPassword: windows_strings.PSTR, dwLogonType: UInt32, dwLogonProvider: UInt32, phToken: CPointer<HANDLE>): windows_core.Result<Unit> {
     if (LogonUserA(lpszUsername, lpszDomain, lpszPassword, dwLogonType, dwLogonProvider, phToken)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1327,11 +1560,13 @@ public func LogonUserAChecked(lpszUsername: windows_strings.PSTR, lpszDomain: wi
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LogonUserW(lpszUsername: windows_strings.PWSTR, lpszDomain: windows_strings.PWSTR, lpszPassword: windows_strings.PWSTR, dwLogonType: UInt32, dwLogonProvider: UInt32, phToken: CPointer<HANDLE>): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, UInt32, UInt32, CPointer<CPointer<Unit>>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LogonUserW"))
     return unsafe { proc(lpszUsername.asPtr(), lpszDomain.asPtr(), lpszPassword.asPtr(), dwLogonType, dwLogonProvider, CPointer<CPointer<Unit>>(phToken)) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LogonUserWChecked(lpszUsername: windows_strings.PWSTR, lpszDomain: windows_strings.PWSTR, lpszPassword: windows_strings.PWSTR, dwLogonType: UInt32, dwLogonProvider: UInt32, phToken: CPointer<HANDLE>): windows_core.Result<Unit> {
     if (LogonUserW(lpszUsername, lpszDomain, lpszPassword, dwLogonType, dwLogonProvider, phToken)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1339,11 +1574,13 @@ public func LogonUserWChecked(lpszUsername: windows_strings.PWSTR, lpszDomain: w
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LogonUserExA(lpszUsername: windows_strings.PSTR, lpszDomain: windows_strings.PSTR, lpszPassword: windows_strings.PSTR, dwLogonType: UInt32, dwLogonProvider: UInt32, phToken: CPointer<HANDLE>, ppLogonSid: CPointer<PSID>, ppProfileBuffer: CPointer<CPointer<Unit>>, pdwProfileLength: CPointer<UInt32>, pQuotaLimits: CPointer<QUOTA_LIMITS>): Bool {
     let proc = CFunc<(CPointer<UInt8>, CPointer<UInt8>, CPointer<UInt8>, UInt32, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>, CPointer<UInt32>, CPointer<QUOTA_LIMITS>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LogonUserExA"))
     return unsafe { proc(lpszUsername.asPtr(), lpszDomain.asPtr(), lpszPassword.asPtr(), dwLogonType, dwLogonProvider, CPointer<CPointer<Unit>>(phToken), CPointer<CPointer<Unit>>(ppLogonSid), ppProfileBuffer, pdwProfileLength, pQuotaLimits) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LogonUserExAChecked(lpszUsername: windows_strings.PSTR, lpszDomain: windows_strings.PSTR, lpszPassword: windows_strings.PSTR, dwLogonType: UInt32, dwLogonProvider: UInt32, phToken: CPointer<HANDLE>, ppLogonSid: CPointer<PSID>, ppProfileBuffer: CPointer<CPointer<Unit>>, pdwProfileLength: CPointer<UInt32>, pQuotaLimits: CPointer<QUOTA_LIMITS>): windows_core.Result<Unit> {
     if (LogonUserExA(lpszUsername, lpszDomain, lpszPassword, dwLogonType, dwLogonProvider, phToken, ppLogonSid, ppProfileBuffer, pdwProfileLength, pQuotaLimits)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1351,11 +1588,13 @@ public func LogonUserExAChecked(lpszUsername: windows_strings.PSTR, lpszDomain: 
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LogonUserExW(lpszUsername: windows_strings.PWSTR, lpszDomain: windows_strings.PWSTR, lpszPassword: windows_strings.PWSTR, dwLogonType: UInt32, dwLogonProvider: UInt32, phToken: CPointer<HANDLE>, ppLogonSid: CPointer<PSID>, ppProfileBuffer: CPointer<CPointer<Unit>>, pdwProfileLength: CPointer<UInt32>, pQuotaLimits: CPointer<QUOTA_LIMITS>): Bool {
     let proc = CFunc<(CPointer<UInt16>, CPointer<UInt16>, CPointer<UInt16>, UInt32, UInt32, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>, CPointer<CPointer<Unit>>, CPointer<UInt32>, CPointer<QUOTA_LIMITS>) -> Int32>(windows_libloading.resolveProc("ADVAPI32.dll", "LogonUserExW"))
     return unsafe { proc(lpszUsername.asPtr(), lpszDomain.asPtr(), lpszPassword.asPtr(), dwLogonType, dwLogonProvider, CPointer<CPointer<Unit>>(phToken), CPointer<CPointer<Unit>>(ppLogonSid), ppProfileBuffer, pdwProfileLength, pQuotaLimits) } != 0
 }
 
+@When[Windows_Win32_Security == "on"]
 public func LogonUserExWChecked(lpszUsername: windows_strings.PWSTR, lpszDomain: windows_strings.PWSTR, lpszPassword: windows_strings.PWSTR, dwLogonType: UInt32, dwLogonProvider: UInt32, phToken: CPointer<HANDLE>, ppLogonSid: CPointer<PSID>, ppProfileBuffer: CPointer<CPointer<Unit>>, pdwProfileLength: CPointer<UInt32>, pQuotaLimits: CPointer<QUOTA_LIMITS>): windows_core.Result<Unit> {
     if (LogonUserExW(lpszUsername, lpszDomain, lpszPassword, dwLogonType, dwLogonProvider, phToken, ppLogonSid, ppProfileBuffer, pdwProfileLength, pQuotaLimits)) {
         return windows_core.Result<Unit>.Ok(())
@@ -1363,6 +1602,7 @@ public func LogonUserExWChecked(lpszUsername: windows_strings.PWSTR, lpszDomain:
     windows_core.Result<Unit>.Err(windows_core.errorFromThread())
 }
 
+@When[Windows_Win32_Security == "on"]
 public func RtlConvertSidToUnicodeString(UnicodeString: CPointer<UNICODE_STRING>, Sid: PSID, AllocateDestinationString: Bool): Int32 {
     let proc = CFunc<(CPointer<UNICODE_STRING>, CPointer<Unit>, UInt8) -> Int32>(windows_libloading.resolveProc("ntdll.dll", "RtlConvertSidToUnicodeString"))
     return unsafe { proc(UnicodeString, Sid.Value, if (AllocateDestinationString) { 1u8 } else { 0u8 }) }

@@ -2,7 +2,10 @@
 
 package windows_common.Win32.System.WinRT.Xaml
 
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
 import windows_common.impl.{Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNative, Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNativeVtbl}
 
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
 public type ISwapChainPanelNative = Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNative
+@When[Windows_Win32_System_WinRT_Xaml == "on"]
 public type ISwapChainPanelNativeVtbl = Windows_Win32_System_WinRT_Xaml_ISwapChainPanelNativeVtbl

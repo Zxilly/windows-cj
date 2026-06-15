@@ -2,125 +2,246 @@
 
 package windows_common.Microsoft.UI.Xaml.Input
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 import windows_common.impl.{Microsoft_UI_Xaml_Input_AccessKeyDisplayDismissedEventArgs, Microsoft_UI_Xaml_Input_AccessKeyDisplayRequestedEventArgs, Microsoft_UI_Xaml_Input_AccessKeyInvokedEventArgs, Microsoft_UI_Xaml_Input_CharacterReceivedRoutedEventArgs, Microsoft_UI_Xaml_Input_ContextRequestedEventArgs, Microsoft_UI_Xaml_Input_DoubleTappedEventHandler, Microsoft_UI_Xaml_Input_DoubleTappedRoutedEventArgs, Microsoft_UI_Xaml_Input_FocusInputDeviceKind, Microsoft_UI_Xaml_Input_FocusNavigationDirection, Microsoft_UI_Xaml_Input_GettingFocusEventArgs, Microsoft_UI_Xaml_Input_HoldingEventHandler, Microsoft_UI_Xaml_Input_HoldingRoutedEventArgs, Microsoft_UI_Xaml_Input_IAccessKeyDisplayDismissedEventArgs, Microsoft_UI_Xaml_Input_IAccessKeyDisplayDismissedEventArgsVtbl, Microsoft_UI_Xaml_Input_IAccessKeyDisplayRequestedEventArgs, Microsoft_UI_Xaml_Input_IAccessKeyDisplayRequestedEventArgsVtbl, Microsoft_UI_Xaml_Input_IAccessKeyInvokedEventArgs, Microsoft_UI_Xaml_Input_IAccessKeyInvokedEventArgsVtbl, Microsoft_UI_Xaml_Input_ICharacterReceivedRoutedEventArgs, Microsoft_UI_Xaml_Input_ICharacterReceivedRoutedEventArgsVtbl, Microsoft_UI_Xaml_Input_ICommand, Microsoft_UI_Xaml_Input_ICommandVtbl, Microsoft_UI_Xaml_Input_IContextRequestedEventArgs, Microsoft_UI_Xaml_Input_IContextRequestedEventArgsVtbl, Microsoft_UI_Xaml_Input_IDoubleTappedRoutedEventArgs, Microsoft_UI_Xaml_Input_IDoubleTappedRoutedEventArgsVtbl, Microsoft_UI_Xaml_Input_IGettingFocusEventArgs, Microsoft_UI_Xaml_Input_IGettingFocusEventArgsVtbl, Microsoft_UI_Xaml_Input_IHoldingRoutedEventArgs, Microsoft_UI_Xaml_Input_IHoldingRoutedEventArgsVtbl, Microsoft_UI_Xaml_Input_IInertiaExpansionBehavior, Microsoft_UI_Xaml_Input_IInertiaExpansionBehaviorVtbl, Microsoft_UI_Xaml_Input_IInertiaRotationBehavior, Microsoft_UI_Xaml_Input_IInertiaRotationBehaviorVtbl, Microsoft_UI_Xaml_Input_IInertiaTranslationBehavior, Microsoft_UI_Xaml_Input_IInertiaTranslationBehaviorVtbl, Microsoft_UI_Xaml_Input_IInputScope, Microsoft_UI_Xaml_Input_IInputScopeVtbl, Microsoft_UI_Xaml_Input_IInputScopeName, Microsoft_UI_Xaml_Input_IInputScopeNameVtbl, Microsoft_UI_Xaml_Input_IInputScopeNameFactory, Microsoft_UI_Xaml_Input_IInputScopeNameFactoryVtbl, Microsoft_UI_Xaml_Input_IKeyRoutedEventArgs, Microsoft_UI_Xaml_Input_IKeyRoutedEventArgsVtbl, Microsoft_UI_Xaml_Input_IKeyboardAccelerator, Microsoft_UI_Xaml_Input_IKeyboardAcceleratorVtbl, Microsoft_UI_Xaml_Input_IKeyboardAcceleratorFactory, Microsoft_UI_Xaml_Input_IKeyboardAcceleratorFactoryVtbl, Microsoft_UI_Xaml_Input_IKeyboardAcceleratorInvokedEventArgs, Microsoft_UI_Xaml_Input_IKeyboardAcceleratorInvokedEventArgsVtbl, Microsoft_UI_Xaml_Input_IKeyboardAcceleratorStatics, Microsoft_UI_Xaml_Input_IKeyboardAcceleratorStaticsVtbl, Microsoft_UI_Xaml_Input_ILosingFocusEventArgs, Microsoft_UI_Xaml_Input_ILosingFocusEventArgsVtbl, Microsoft_UI_Xaml_Input_IManipulationCompletedRoutedEventArgs, Microsoft_UI_Xaml_Input_IManipulationCompletedRoutedEventArgsVtbl, Microsoft_UI_Xaml_Input_IManipulationDeltaRoutedEventArgs, Microsoft_UI_Xaml_Input_IManipulationDeltaRoutedEventArgsVtbl, Microsoft_UI_Xaml_Input_IManipulationInertiaStartingRoutedEventArgs, Microsoft_UI_Xaml_Input_IManipulationInertiaStartingRoutedEventArgsVtbl, Microsoft_UI_Xaml_Input_IManipulationPivot, Microsoft_UI_Xaml_Input_IManipulationPivotVtbl, Microsoft_UI_Xaml_Input_IManipulationPivotFactory, Microsoft_UI_Xaml_Input_IManipulationPivotFactoryVtbl}
+@When[Microsoft_UI_Xaml_Input == "on"]
 import windows_common.impl.{Microsoft_UI_Xaml_Input_IManipulationStartedRoutedEventArgs, Microsoft_UI_Xaml_Input_IManipulationStartedRoutedEventArgsVtbl, Microsoft_UI_Xaml_Input_IManipulationStartedRoutedEventArgsFactory, Microsoft_UI_Xaml_Input_IManipulationStartedRoutedEventArgsFactoryVtbl, Microsoft_UI_Xaml_Input_IManipulationStartingRoutedEventArgs, Microsoft_UI_Xaml_Input_IManipulationStartingRoutedEventArgsVtbl, Microsoft_UI_Xaml_Input_INoFocusCandidateFoundEventArgs, Microsoft_UI_Xaml_Input_INoFocusCandidateFoundEventArgsVtbl, Microsoft_UI_Xaml_Input_IPointer, Microsoft_UI_Xaml_Input_IPointerVtbl, Microsoft_UI_Xaml_Input_IPointerRoutedEventArgs, Microsoft_UI_Xaml_Input_IPointerRoutedEventArgsVtbl, Microsoft_UI_Xaml_Input_IProcessKeyboardAcceleratorEventArgs, Microsoft_UI_Xaml_Input_IProcessKeyboardAcceleratorEventArgsVtbl, Microsoft_UI_Xaml_Input_IRightTappedRoutedEventArgs, Microsoft_UI_Xaml_Input_IRightTappedRoutedEventArgsVtbl, Microsoft_UI_Xaml_Input_ITappedRoutedEventArgs, Microsoft_UI_Xaml_Input_ITappedRoutedEventArgsVtbl, Microsoft_UI_Xaml_Input_InertiaExpansionBehavior, Microsoft_UI_Xaml_Input_InertiaRotationBehavior, Microsoft_UI_Xaml_Input_InertiaTranslationBehavior, Microsoft_UI_Xaml_Input_InputScope, Microsoft_UI_Xaml_Input_InputScopeName, Microsoft_UI_Xaml_Input_InputScopeNameValue, Microsoft_UI_Xaml_Input_KeyEventHandler, Microsoft_UI_Xaml_Input_KeyRoutedEventArgs, Microsoft_UI_Xaml_Input_KeyTipPlacementMode, Microsoft_UI_Xaml_Input_KeyboardAccelerator, Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs, Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode, Microsoft_UI_Xaml_Input_KeyboardNavigationMode, Microsoft_UI_Xaml_Input_LosingFocusEventArgs, Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler, Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs, Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler, Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs, Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler, Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs, Microsoft_UI_Xaml_Input_ManipulationModes, Microsoft_UI_Xaml_Input_ManipulationPivot, Microsoft_UI_Xaml_Input_ManipulationStartedEventHandler, Microsoft_UI_Xaml_Input_ManipulationStartedRoutedEventArgs, Microsoft_UI_Xaml_Input_ManipulationStartingEventHandler, Microsoft_UI_Xaml_Input_ManipulationStartingRoutedEventArgs, Microsoft_UI_Xaml_Input_NoFocusCandidateFoundEventArgs, Microsoft_UI_Xaml_Input_Pointer, Microsoft_UI_Xaml_Input_PointerEventHandler, Microsoft_UI_Xaml_Input_PointerRoutedEventArgs, Microsoft_UI_Xaml_Input_ProcessKeyboardAcceleratorEventArgs, Microsoft_UI_Xaml_Input_RightTappedEventHandler, Microsoft_UI_Xaml_Input_RightTappedRoutedEventArgs, Microsoft_UI_Xaml_Input_TappedEventHandler, Microsoft_UI_Xaml_Input_TappedRoutedEventArgs, Microsoft_UI_Xaml_Input_XYFocusKeyboardNavigationMode, Microsoft_UI_Xaml_Input_XYFocusNavigationStrategy}
 
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type AccessKeyDisplayDismissedEventArgs = Microsoft_UI_Xaml_Input_AccessKeyDisplayDismissedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type AccessKeyDisplayRequestedEventArgs = Microsoft_UI_Xaml_Input_AccessKeyDisplayRequestedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type AccessKeyInvokedEventArgs = Microsoft_UI_Xaml_Input_AccessKeyInvokedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type CharacterReceivedRoutedEventArgs = Microsoft_UI_Xaml_Input_CharacterReceivedRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ContextRequestedEventArgs = Microsoft_UI_Xaml_Input_ContextRequestedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type DoubleTappedEventHandler = Microsoft_UI_Xaml_Input_DoubleTappedEventHandler
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type DoubleTappedRoutedEventArgs = Microsoft_UI_Xaml_Input_DoubleTappedRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type FocusInputDeviceKind = Microsoft_UI_Xaml_Input_FocusInputDeviceKind
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type FocusNavigationDirection = Microsoft_UI_Xaml_Input_FocusNavigationDirection
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type GettingFocusEventArgs = Microsoft_UI_Xaml_Input_GettingFocusEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type HoldingEventHandler = Microsoft_UI_Xaml_Input_HoldingEventHandler
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type HoldingRoutedEventArgs = Microsoft_UI_Xaml_Input_HoldingRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IAccessKeyDisplayDismissedEventArgs = Microsoft_UI_Xaml_Input_IAccessKeyDisplayDismissedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IAccessKeyDisplayDismissedEventArgsVtbl = Microsoft_UI_Xaml_Input_IAccessKeyDisplayDismissedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IAccessKeyDisplayRequestedEventArgs = Microsoft_UI_Xaml_Input_IAccessKeyDisplayRequestedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IAccessKeyDisplayRequestedEventArgsVtbl = Microsoft_UI_Xaml_Input_IAccessKeyDisplayRequestedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IAccessKeyInvokedEventArgs = Microsoft_UI_Xaml_Input_IAccessKeyInvokedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IAccessKeyInvokedEventArgsVtbl = Microsoft_UI_Xaml_Input_IAccessKeyInvokedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ICharacterReceivedRoutedEventArgs = Microsoft_UI_Xaml_Input_ICharacterReceivedRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ICharacterReceivedRoutedEventArgsVtbl = Microsoft_UI_Xaml_Input_ICharacterReceivedRoutedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ICommand = Microsoft_UI_Xaml_Input_ICommand
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ICommandVtbl = Microsoft_UI_Xaml_Input_ICommandVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IContextRequestedEventArgs = Microsoft_UI_Xaml_Input_IContextRequestedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IContextRequestedEventArgsVtbl = Microsoft_UI_Xaml_Input_IContextRequestedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IDoubleTappedRoutedEventArgs = Microsoft_UI_Xaml_Input_IDoubleTappedRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IDoubleTappedRoutedEventArgsVtbl = Microsoft_UI_Xaml_Input_IDoubleTappedRoutedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IGettingFocusEventArgs = Microsoft_UI_Xaml_Input_IGettingFocusEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IGettingFocusEventArgsVtbl = Microsoft_UI_Xaml_Input_IGettingFocusEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IHoldingRoutedEventArgs = Microsoft_UI_Xaml_Input_IHoldingRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IHoldingRoutedEventArgsVtbl = Microsoft_UI_Xaml_Input_IHoldingRoutedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IInertiaExpansionBehavior = Microsoft_UI_Xaml_Input_IInertiaExpansionBehavior
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IInertiaExpansionBehaviorVtbl = Microsoft_UI_Xaml_Input_IInertiaExpansionBehaviorVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IInertiaRotationBehavior = Microsoft_UI_Xaml_Input_IInertiaRotationBehavior
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IInertiaRotationBehaviorVtbl = Microsoft_UI_Xaml_Input_IInertiaRotationBehaviorVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IInertiaTranslationBehavior = Microsoft_UI_Xaml_Input_IInertiaTranslationBehavior
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IInertiaTranslationBehaviorVtbl = Microsoft_UI_Xaml_Input_IInertiaTranslationBehaviorVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IInputScope = Microsoft_UI_Xaml_Input_IInputScope
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IInputScopeVtbl = Microsoft_UI_Xaml_Input_IInputScopeVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IInputScopeName = Microsoft_UI_Xaml_Input_IInputScopeName
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IInputScopeNameVtbl = Microsoft_UI_Xaml_Input_IInputScopeNameVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IInputScopeNameFactory = Microsoft_UI_Xaml_Input_IInputScopeNameFactory
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IInputScopeNameFactoryVtbl = Microsoft_UI_Xaml_Input_IInputScopeNameFactoryVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IKeyRoutedEventArgs = Microsoft_UI_Xaml_Input_IKeyRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IKeyRoutedEventArgsVtbl = Microsoft_UI_Xaml_Input_IKeyRoutedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IKeyboardAccelerator = Microsoft_UI_Xaml_Input_IKeyboardAccelerator
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IKeyboardAcceleratorVtbl = Microsoft_UI_Xaml_Input_IKeyboardAcceleratorVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IKeyboardAcceleratorFactory = Microsoft_UI_Xaml_Input_IKeyboardAcceleratorFactory
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IKeyboardAcceleratorFactoryVtbl = Microsoft_UI_Xaml_Input_IKeyboardAcceleratorFactoryVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IKeyboardAcceleratorInvokedEventArgs = Microsoft_UI_Xaml_Input_IKeyboardAcceleratorInvokedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IKeyboardAcceleratorInvokedEventArgsVtbl = Microsoft_UI_Xaml_Input_IKeyboardAcceleratorInvokedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IKeyboardAcceleratorStatics = Microsoft_UI_Xaml_Input_IKeyboardAcceleratorStatics
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IKeyboardAcceleratorStaticsVtbl = Microsoft_UI_Xaml_Input_IKeyboardAcceleratorStaticsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ILosingFocusEventArgs = Microsoft_UI_Xaml_Input_ILosingFocusEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ILosingFocusEventArgsVtbl = Microsoft_UI_Xaml_Input_ILosingFocusEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationCompletedRoutedEventArgs = Microsoft_UI_Xaml_Input_IManipulationCompletedRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationCompletedRoutedEventArgsVtbl = Microsoft_UI_Xaml_Input_IManipulationCompletedRoutedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationDeltaRoutedEventArgs = Microsoft_UI_Xaml_Input_IManipulationDeltaRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationDeltaRoutedEventArgsVtbl = Microsoft_UI_Xaml_Input_IManipulationDeltaRoutedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationInertiaStartingRoutedEventArgs = Microsoft_UI_Xaml_Input_IManipulationInertiaStartingRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationInertiaStartingRoutedEventArgsVtbl = Microsoft_UI_Xaml_Input_IManipulationInertiaStartingRoutedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationPivot = Microsoft_UI_Xaml_Input_IManipulationPivot
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationPivotVtbl = Microsoft_UI_Xaml_Input_IManipulationPivotVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationPivotFactory = Microsoft_UI_Xaml_Input_IManipulationPivotFactory
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationPivotFactoryVtbl = Microsoft_UI_Xaml_Input_IManipulationPivotFactoryVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationStartedRoutedEventArgs = Microsoft_UI_Xaml_Input_IManipulationStartedRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationStartedRoutedEventArgsVtbl = Microsoft_UI_Xaml_Input_IManipulationStartedRoutedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationStartedRoutedEventArgsFactory = Microsoft_UI_Xaml_Input_IManipulationStartedRoutedEventArgsFactory
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationStartedRoutedEventArgsFactoryVtbl = Microsoft_UI_Xaml_Input_IManipulationStartedRoutedEventArgsFactoryVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationStartingRoutedEventArgs = Microsoft_UI_Xaml_Input_IManipulationStartingRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IManipulationStartingRoutedEventArgsVtbl = Microsoft_UI_Xaml_Input_IManipulationStartingRoutedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type INoFocusCandidateFoundEventArgs = Microsoft_UI_Xaml_Input_INoFocusCandidateFoundEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type INoFocusCandidateFoundEventArgsVtbl = Microsoft_UI_Xaml_Input_INoFocusCandidateFoundEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IPointer = Microsoft_UI_Xaml_Input_IPointer
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IPointerVtbl = Microsoft_UI_Xaml_Input_IPointerVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IPointerRoutedEventArgs = Microsoft_UI_Xaml_Input_IPointerRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IPointerRoutedEventArgsVtbl = Microsoft_UI_Xaml_Input_IPointerRoutedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IProcessKeyboardAcceleratorEventArgs = Microsoft_UI_Xaml_Input_IProcessKeyboardAcceleratorEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IProcessKeyboardAcceleratorEventArgsVtbl = Microsoft_UI_Xaml_Input_IProcessKeyboardAcceleratorEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IRightTappedRoutedEventArgs = Microsoft_UI_Xaml_Input_IRightTappedRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type IRightTappedRoutedEventArgsVtbl = Microsoft_UI_Xaml_Input_IRightTappedRoutedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ITappedRoutedEventArgs = Microsoft_UI_Xaml_Input_ITappedRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ITappedRoutedEventArgsVtbl = Microsoft_UI_Xaml_Input_ITappedRoutedEventArgsVtbl
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type InertiaExpansionBehavior = Microsoft_UI_Xaml_Input_InertiaExpansionBehavior
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type InertiaRotationBehavior = Microsoft_UI_Xaml_Input_InertiaRotationBehavior
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type InertiaTranslationBehavior = Microsoft_UI_Xaml_Input_InertiaTranslationBehavior
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type InputScope = Microsoft_UI_Xaml_Input_InputScope
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type InputScopeName = Microsoft_UI_Xaml_Input_InputScopeName
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type InputScopeNameValue = Microsoft_UI_Xaml_Input_InputScopeNameValue
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type KeyEventHandler = Microsoft_UI_Xaml_Input_KeyEventHandler
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type KeyRoutedEventArgs = Microsoft_UI_Xaml_Input_KeyRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type KeyTipPlacementMode = Microsoft_UI_Xaml_Input_KeyTipPlacementMode
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type KeyboardAccelerator = Microsoft_UI_Xaml_Input_KeyboardAccelerator
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type KeyboardAcceleratorInvokedEventArgs = Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type KeyboardAcceleratorPlacementMode = Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type KeyboardNavigationMode = Microsoft_UI_Xaml_Input_KeyboardNavigationMode
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type LosingFocusEventArgs = Microsoft_UI_Xaml_Input_LosingFocusEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ManipulationCompletedEventHandler = Microsoft_UI_Xaml_Input_ManipulationCompletedEventHandler
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ManipulationCompletedRoutedEventArgs = Microsoft_UI_Xaml_Input_ManipulationCompletedRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ManipulationDeltaEventHandler = Microsoft_UI_Xaml_Input_ManipulationDeltaEventHandler
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ManipulationDeltaRoutedEventArgs = Microsoft_UI_Xaml_Input_ManipulationDeltaRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ManipulationInertiaStartingEventHandler = Microsoft_UI_Xaml_Input_ManipulationInertiaStartingEventHandler
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ManipulationInertiaStartingRoutedEventArgs = Microsoft_UI_Xaml_Input_ManipulationInertiaStartingRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ManipulationModes = Microsoft_UI_Xaml_Input_ManipulationModes
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ManipulationPivot = Microsoft_UI_Xaml_Input_ManipulationPivot
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ManipulationStartedEventHandler = Microsoft_UI_Xaml_Input_ManipulationStartedEventHandler
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ManipulationStartedRoutedEventArgs = Microsoft_UI_Xaml_Input_ManipulationStartedRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ManipulationStartingEventHandler = Microsoft_UI_Xaml_Input_ManipulationStartingEventHandler
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ManipulationStartingRoutedEventArgs = Microsoft_UI_Xaml_Input_ManipulationStartingRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type NoFocusCandidateFoundEventArgs = Microsoft_UI_Xaml_Input_NoFocusCandidateFoundEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type Pointer = Microsoft_UI_Xaml_Input_Pointer
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type PointerEventHandler = Microsoft_UI_Xaml_Input_PointerEventHandler
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type PointerRoutedEventArgs = Microsoft_UI_Xaml_Input_PointerRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type ProcessKeyboardAcceleratorEventArgs = Microsoft_UI_Xaml_Input_ProcessKeyboardAcceleratorEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type RightTappedEventHandler = Microsoft_UI_Xaml_Input_RightTappedEventHandler
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type RightTappedRoutedEventArgs = Microsoft_UI_Xaml_Input_RightTappedRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type TappedEventHandler = Microsoft_UI_Xaml_Input_TappedEventHandler
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type TappedRoutedEventArgs = Microsoft_UI_Xaml_Input_TappedRoutedEventArgs
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type XYFocusKeyboardNavigationMode = Microsoft_UI_Xaml_Input_XYFocusKeyboardNavigationMode
+@When[Microsoft_UI_Xaml_Input == "on"]
 public type XYFocusNavigationStrategy = Microsoft_UI_Xaml_Input_XYFocusNavigationStrategy

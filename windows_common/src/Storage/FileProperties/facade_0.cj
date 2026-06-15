@@ -2,34 +2,64 @@
 
 package windows_common.Storage.FileProperties
 
+@When[Windows_Storage_FileProperties == "on"]
 import windows_common.impl.{Windows_Storage_FileProperties_BasicProperties, Windows_Storage_FileProperties_DocumentProperties, Windows_Storage_FileProperties_IBasicProperties, Windows_Storage_FileProperties_IBasicPropertiesVtbl, Windows_Storage_FileProperties_IDocumentProperties, Windows_Storage_FileProperties_IDocumentPropertiesVtbl, Windows_Storage_FileProperties_IImageProperties, Windows_Storage_FileProperties_IImagePropertiesVtbl, Windows_Storage_FileProperties_IMusicProperties, Windows_Storage_FileProperties_IMusicPropertiesVtbl, Windows_Storage_FileProperties_IStorageItemContentProperties, Windows_Storage_FileProperties_IStorageItemContentPropertiesVtbl, Windows_Storage_FileProperties_IStorageItemExtraProperties, Windows_Storage_FileProperties_IStorageItemExtraPropertiesVtbl, Windows_Storage_FileProperties_IThumbnailProperties, Windows_Storage_FileProperties_IThumbnailPropertiesVtbl, Windows_Storage_FileProperties_IVideoProperties, Windows_Storage_FileProperties_IVideoPropertiesVtbl, Windows_Storage_FileProperties_ImageProperties, Windows_Storage_FileProperties_MusicProperties, Windows_Storage_FileProperties_PhotoOrientation, Windows_Storage_FileProperties_PropertyPrefetchOptions, Windows_Storage_FileProperties_StorageItemContentProperties, Windows_Storage_FileProperties_StorageItemThumbnail, Windows_Storage_FileProperties_ThumbnailMode, Windows_Storage_FileProperties_ThumbnailOptions, Windows_Storage_FileProperties_ThumbnailType, Windows_Storage_FileProperties_VideoOrientation, Windows_Storage_FileProperties_VideoProperties}
 
+@When[Windows_Storage_FileProperties == "on"]
 public type BasicProperties = Windows_Storage_FileProperties_BasicProperties
+@When[Windows_Storage_FileProperties == "on"]
 public type DocumentProperties = Windows_Storage_FileProperties_DocumentProperties
+@When[Windows_Storage_FileProperties == "on"]
 public type IBasicProperties = Windows_Storage_FileProperties_IBasicProperties
+@When[Windows_Storage_FileProperties == "on"]
 public type IBasicPropertiesVtbl = Windows_Storage_FileProperties_IBasicPropertiesVtbl
+@When[Windows_Storage_FileProperties == "on"]
 public type IDocumentProperties = Windows_Storage_FileProperties_IDocumentProperties
+@When[Windows_Storage_FileProperties == "on"]
 public type IDocumentPropertiesVtbl = Windows_Storage_FileProperties_IDocumentPropertiesVtbl
+@When[Windows_Storage_FileProperties == "on"]
 public type IImageProperties = Windows_Storage_FileProperties_IImageProperties
+@When[Windows_Storage_FileProperties == "on"]
 public type IImagePropertiesVtbl = Windows_Storage_FileProperties_IImagePropertiesVtbl
+@When[Windows_Storage_FileProperties == "on"]
 public type IMusicProperties = Windows_Storage_FileProperties_IMusicProperties
+@When[Windows_Storage_FileProperties == "on"]
 public type IMusicPropertiesVtbl = Windows_Storage_FileProperties_IMusicPropertiesVtbl
+@When[Windows_Storage_FileProperties == "on"]
 public type IStorageItemContentProperties = Windows_Storage_FileProperties_IStorageItemContentProperties
+@When[Windows_Storage_FileProperties == "on"]
 public type IStorageItemContentPropertiesVtbl = Windows_Storage_FileProperties_IStorageItemContentPropertiesVtbl
+@When[Windows_Storage_FileProperties == "on"]
 public type IStorageItemExtraProperties = Windows_Storage_FileProperties_IStorageItemExtraProperties
+@When[Windows_Storage_FileProperties == "on"]
 public type IStorageItemExtraPropertiesVtbl = Windows_Storage_FileProperties_IStorageItemExtraPropertiesVtbl
+@When[Windows_Storage_FileProperties == "on"]
 public type IThumbnailProperties = Windows_Storage_FileProperties_IThumbnailProperties
+@When[Windows_Storage_FileProperties == "on"]
 public type IThumbnailPropertiesVtbl = Windows_Storage_FileProperties_IThumbnailPropertiesVtbl
+@When[Windows_Storage_FileProperties == "on"]
 public type IVideoProperties = Windows_Storage_FileProperties_IVideoProperties
+@When[Windows_Storage_FileProperties == "on"]
 public type IVideoPropertiesVtbl = Windows_Storage_FileProperties_IVideoPropertiesVtbl
+@When[Windows_Storage_FileProperties == "on"]
 public type ImageProperties = Windows_Storage_FileProperties_ImageProperties
+@When[Windows_Storage_FileProperties == "on"]
 public type MusicProperties = Windows_Storage_FileProperties_MusicProperties
+@When[Windows_Storage_FileProperties == "on"]
 public type PhotoOrientation = Windows_Storage_FileProperties_PhotoOrientation
+@When[Windows_Storage_FileProperties == "on"]
 public type PropertyPrefetchOptions = Windows_Storage_FileProperties_PropertyPrefetchOptions
+@When[Windows_Storage_FileProperties == "on"]
 public type StorageItemContentProperties = Windows_Storage_FileProperties_StorageItemContentProperties
+@When[Windows_Storage_FileProperties == "on"]
 public type StorageItemThumbnail = Windows_Storage_FileProperties_StorageItemThumbnail
+@When[Windows_Storage_FileProperties == "on"]
 public type ThumbnailMode = Windows_Storage_FileProperties_ThumbnailMode
+@When[Windows_Storage_FileProperties == "on"]
 public type ThumbnailOptions = Windows_Storage_FileProperties_ThumbnailOptions
+@When[Windows_Storage_FileProperties == "on"]
 public type ThumbnailType = Windows_Storage_FileProperties_ThumbnailType
+@When[Windows_Storage_FileProperties == "on"]
 public type VideoOrientation = Windows_Storage_FileProperties_VideoOrientation
+@When[Windows_Storage_FileProperties == "on"]
 public type VideoProperties = Windows_Storage_FileProperties_VideoProperties

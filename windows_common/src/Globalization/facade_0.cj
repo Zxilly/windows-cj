@@ -2,6 +2,8 @@
 
 package windows_common.Globalization
 
+@When[Windows_Globalization == "on"]
 import windows_common.impl.{Windows_Globalization_DayOfWeek}
 
+@When[Windows_Globalization == "on"]
 public type DayOfWeek = Windows_Globalization_DayOfWeek

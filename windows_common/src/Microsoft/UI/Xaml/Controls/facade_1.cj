@@ -2,204 +2,404 @@
 
 package windows_common.Microsoft.UI.Xaml.Controls
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 import windows_common.impl.{Microsoft_UI_Xaml_Controls_IViewbox, Microsoft_UI_Xaml_Controls_IViewboxVtbl, Microsoft_UI_Xaml_Controls_IViewboxStatics, Microsoft_UI_Xaml_Controls_IViewboxStaticsVtbl, Microsoft_UI_Xaml_Controls_IconElement, Microsoft_UI_Xaml_Controls_IconSource, Microsoft_UI_Xaml_Controls_Image, Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger, Microsoft_UI_Xaml_Controls_InfoBadge, Microsoft_UI_Xaml_Controls_InfoBadgeTemplateSettings, Microsoft_UI_Xaml_Controls_InfoBar, Microsoft_UI_Xaml_Controls_InfoBarCloseReason, Microsoft_UI_Xaml_Controls_InfoBarClosedEventArgs, Microsoft_UI_Xaml_Controls_InfoBarClosingEventArgs, Microsoft_UI_Xaml_Controls_InfoBarSeverity, Microsoft_UI_Xaml_Controls_InfoBarTemplateSettings, Microsoft_UI_Xaml_Controls_IsTextTrimmedChangedEventArgs, Microsoft_UI_Xaml_Controls_ItemClickEventArgs, Microsoft_UI_Xaml_Controls_ItemClickEventHandler, Microsoft_UI_Xaml_Controls_ItemCollection, Microsoft_UI_Xaml_Controls_ItemContainer, Microsoft_UI_Xaml_Controls_ItemContainerGenerator, Microsoft_UI_Xaml_Controls_ItemsControl, Microsoft_UI_Xaml_Controls_ItemsPanelTemplate, Microsoft_UI_Xaml_Controls_LightDismissOverlayMode, Microsoft_UI_Xaml_Controls_ListBox, Microsoft_UI_Xaml_Controls_ListView, Microsoft_UI_Xaml_Controls_ListViewBase, Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem, Microsoft_UI_Xaml_Controls_ListViewItem, Microsoft_UI_Xaml_Controls_ListViewReorderMode, Microsoft_UI_Xaml_Controls_ListViewSelectionMode, Microsoft_UI_Xaml_Controls_MenuBar, Microsoft_UI_Xaml_Controls_MenuBarItem, Microsoft_UI_Xaml_Controls_MenuFlyout, Microsoft_UI_Xaml_Controls_MenuFlyoutItem, Microsoft_UI_Xaml_Controls_MenuFlyoutItemBase, Microsoft_UI_Xaml_Controls_MenuFlyoutSeparator, Microsoft_UI_Xaml_Controls_MenuFlyoutSubItem, Microsoft_UI_Xaml_Controls_NavigationView, Microsoft_UI_Xaml_Controls_NavigationViewBackButtonVisible, Microsoft_UI_Xaml_Controls_NavigationViewBackRequestedEventArgs, Microsoft_UI_Xaml_Controls_NavigationViewDisplayMode, Microsoft_UI_Xaml_Controls_NavigationViewDisplayModeChangedEventArgs, Microsoft_UI_Xaml_Controls_NavigationViewItem, Microsoft_UI_Xaml_Controls_NavigationViewItemBase, Microsoft_UI_Xaml_Controls_NavigationViewItemCollapsedEventArgs, Microsoft_UI_Xaml_Controls_NavigationViewItemExpandingEventArgs, Microsoft_UI_Xaml_Controls_NavigationViewItemHeader, Microsoft_UI_Xaml_Controls_NavigationViewItemInvokedEventArgs, Microsoft_UI_Xaml_Controls_NavigationViewOverflowLabelMode, Microsoft_UI_Xaml_Controls_NavigationViewPaneClosingEventArgs, Microsoft_UI_Xaml_Controls_NavigationViewPaneDisplayMode, Microsoft_UI_Xaml_Controls_NavigationViewSelectionChangedEventArgs, Microsoft_UI_Xaml_Controls_NavigationViewSelectionFollowsFocus, Microsoft_UI_Xaml_Controls_NavigationViewShoulderNavigationEnabled, Microsoft_UI_Xaml_Controls_NavigationViewTemplateSettings, Microsoft_UI_Xaml_Controls_NumberBox, Microsoft_UI_Xaml_Controls_NumberBoxSpinButtonPlacementMode, Microsoft_UI_Xaml_Controls_NumberBoxValidationMode, Microsoft_UI_Xaml_Controls_NumberBoxValueChangedEventArgs, Microsoft_UI_Xaml_Controls_Orientation, Microsoft_UI_Xaml_Controls_Panel, Microsoft_UI_Xaml_Controls_PasswordBox}
+@When[Microsoft_UI_Xaml_Controls == "on"]
 import windows_common.impl.{Microsoft_UI_Xaml_Controls_PasswordBoxPasswordChangingEventArgs, Microsoft_UI_Xaml_Controls_PasswordRevealMode, Microsoft_UI_Xaml_Controls_PersonPicture, Microsoft_UI_Xaml_Controls_PersonPictureTemplateSettings, Microsoft_UI_Xaml_Controls_Pivot, Microsoft_UI_Xaml_Controls_PivotHeaderFocusVisualPlacement, Microsoft_UI_Xaml_Controls_PivotItem, Microsoft_UI_Xaml_Controls_PivotItemEventArgs, Microsoft_UI_Xaml_Controls_PivotSlideInAnimationGroup, Microsoft_UI_Xaml_Controls_ProgressBar, Microsoft_UI_Xaml_Controls_ProgressBarTemplateSettings, Microsoft_UI_Xaml_Controls_ProgressRing, Microsoft_UI_Xaml_Controls_ProgressRingTemplateSettings, Microsoft_UI_Xaml_Controls_RadioButton, Microsoft_UI_Xaml_Controls_RadioButtons, Microsoft_UI_Xaml_Controls_RatingControl, Microsoft_UI_Xaml_Controls_RatingItemInfo, Microsoft_UI_Xaml_Controls_RelativePanel, Microsoft_UI_Xaml_Controls_RequiresPointer, Microsoft_UI_Xaml_Controls_RichEditBox, Microsoft_UI_Xaml_Controls_RichEditBoxSelectionChangingEventArgs, Microsoft_UI_Xaml_Controls_RichEditBoxTextChangingEventArgs, Microsoft_UI_Xaml_Controls_RichEditClipboardFormat, Microsoft_UI_Xaml_Controls_RichTextBlock, Microsoft_UI_Xaml_Controls_RichTextBlockOverflow, Microsoft_UI_Xaml_Controls_RowDefinition, Microsoft_UI_Xaml_Controls_RowDefinitionCollection, Microsoft_UI_Xaml_Controls_ScrollBarVisibility, Microsoft_UI_Xaml_Controls_ScrollIntoViewAlignment, Microsoft_UI_Xaml_Controls_ScrollMode, Microsoft_UI_Xaml_Controls_ScrollView, Microsoft_UI_Xaml_Controls_ScrollViewer, Microsoft_UI_Xaml_Controls_ScrollViewerView, Microsoft_UI_Xaml_Controls_ScrollViewerViewChangedEventArgs, Microsoft_UI_Xaml_Controls_ScrollViewerViewChangingEventArgs, Microsoft_UI_Xaml_Controls_ScrollingAnchorRequestedEventArgs, Microsoft_UI_Xaml_Controls_ScrollingAnimationMode, Microsoft_UI_Xaml_Controls_ScrollingBringingIntoViewEventArgs, Microsoft_UI_Xaml_Controls_ScrollingChainMode, Microsoft_UI_Xaml_Controls_ScrollingContentOrientation, Microsoft_UI_Xaml_Controls_ScrollingInputKinds, Microsoft_UI_Xaml_Controls_ScrollingInteractionState, Microsoft_UI_Xaml_Controls_ScrollingRailMode, Microsoft_UI_Xaml_Controls_ScrollingScrollAnimationStartingEventArgs, Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility, Microsoft_UI_Xaml_Controls_ScrollingScrollCompletedEventArgs, Microsoft_UI_Xaml_Controls_ScrollingScrollMode, Microsoft_UI_Xaml_Controls_ScrollingScrollOptions, Microsoft_UI_Xaml_Controls_ScrollingSnapPointsMode, Microsoft_UI_Xaml_Controls_ScrollingZoomAnimationStartingEventArgs, Microsoft_UI_Xaml_Controls_ScrollingZoomCompletedEventArgs, Microsoft_UI_Xaml_Controls_ScrollingZoomMode, Microsoft_UI_Xaml_Controls_ScrollingZoomOptions, Microsoft_UI_Xaml_Controls_SelectionChangedEventArgs, Microsoft_UI_Xaml_Controls_SelectionChangedEventHandler, Microsoft_UI_Xaml_Controls_SelectionMode, Microsoft_UI_Xaml_Controls_SelectorBar, Microsoft_UI_Xaml_Controls_SelectorBarItem, Microsoft_UI_Xaml_Controls_SelectorBarSelectionChangedEventArgs, Microsoft_UI_Xaml_Controls_SemanticZoom, Microsoft_UI_Xaml_Controls_SemanticZoomLocation, Microsoft_UI_Xaml_Controls_SemanticZoomViewChangedEventArgs, Microsoft_UI_Xaml_Controls_SemanticZoomViewChangedEventHandler, Microsoft_UI_Xaml_Controls_Slider}
+@When[Microsoft_UI_Xaml_Controls == "on"]
 import windows_common.impl.{Microsoft_UI_Xaml_Controls_SnapPointsType, Microsoft_UI_Xaml_Controls_SplitButton, Microsoft_UI_Xaml_Controls_SplitButtonClickEventArgs, Microsoft_UI_Xaml_Controls_SplitView, Microsoft_UI_Xaml_Controls_SplitViewDisplayMode, Microsoft_UI_Xaml_Controls_SplitViewPaneClosingEventArgs, Microsoft_UI_Xaml_Controls_SplitViewPanePlacement, Microsoft_UI_Xaml_Controls_StackPanel, Microsoft_UI_Xaml_Controls_StretchDirection, Microsoft_UI_Xaml_Controls_StyleSelector, Microsoft_UI_Xaml_Controls_SwapChainPanel, Microsoft_UI_Xaml_Controls_Symbol, Microsoft_UI_Xaml_Controls_SymbolIcon, Microsoft_UI_Xaml_Controls_TabView, Microsoft_UI_Xaml_Controls_TabViewCloseButtonOverlayMode, Microsoft_UI_Xaml_Controls_TabViewExternalTornOutTabsDroppedEventArgs, Microsoft_UI_Xaml_Controls_TabViewExternalTornOutTabsDroppingEventArgs, Microsoft_UI_Xaml_Controls_TabViewItem, Microsoft_UI_Xaml_Controls_TabViewItemTemplateSettings, Microsoft_UI_Xaml_Controls_TabViewTabCloseRequestedEventArgs, Microsoft_UI_Xaml_Controls_TabViewTabDragCompletedEventArgs, Microsoft_UI_Xaml_Controls_TabViewTabDragStartingEventArgs, Microsoft_UI_Xaml_Controls_TabViewTabDroppedOutsideEventArgs, Microsoft_UI_Xaml_Controls_TabViewTabTearOutRequestedEventArgs, Microsoft_UI_Xaml_Controls_TabViewTabTearOutWindowRequestedEventArgs, Microsoft_UI_Xaml_Controls_TabViewWidthMode, Microsoft_UI_Xaml_Controls_TeachingTip, Microsoft_UI_Xaml_Controls_TeachingTipCloseReason, Microsoft_UI_Xaml_Controls_TeachingTipClosedEventArgs, Microsoft_UI_Xaml_Controls_TeachingTipClosingEventArgs, Microsoft_UI_Xaml_Controls_TeachingTipHeroContentPlacementMode, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode, Microsoft_UI_Xaml_Controls_TeachingTipTailVisibility, Microsoft_UI_Xaml_Controls_TeachingTipTemplateSettings, Microsoft_UI_Xaml_Controls_TextBlock, Microsoft_UI_Xaml_Controls_TextBox, Microsoft_UI_Xaml_Controls_TextBoxBeforeTextChangingEventArgs, Microsoft_UI_Xaml_Controls_TextBoxSelectionChangingEventArgs, Microsoft_UI_Xaml_Controls_TextBoxTextChangingEventArgs, Microsoft_UI_Xaml_Controls_TextChangedEventArgs, Microsoft_UI_Xaml_Controls_TextChangedEventHandler, Microsoft_UI_Xaml_Controls_TextCompositionChangedEventArgs, Microsoft_UI_Xaml_Controls_TextCompositionEndedEventArgs, Microsoft_UI_Xaml_Controls_TextCompositionStartedEventArgs, Microsoft_UI_Xaml_Controls_TextControlCopyingToClipboardEventArgs, Microsoft_UI_Xaml_Controls_TextControlCuttingToClipboardEventArgs, Microsoft_UI_Xaml_Controls_TextControlPasteEventArgs, Microsoft_UI_Xaml_Controls_TextControlPasteEventHandler, Microsoft_UI_Xaml_Controls_TimePicker, Microsoft_UI_Xaml_Controls_TimePickerSelectedValueChangedEventArgs, Microsoft_UI_Xaml_Controls_TimePickerValueChangedEventArgs, Microsoft_UI_Xaml_Controls_TitleBar, Microsoft_UI_Xaml_Controls_TitleBarTemplateSettings, Microsoft_UI_Xaml_Controls_ToggleSwitch, Microsoft_UI_Xaml_Controls_ToolTip, Microsoft_UI_Xaml_Controls_ToolTipService, Microsoft_UI_Xaml_Controls_TreeView, Microsoft_UI_Xaml_Controls_TreeViewCollapsedEventArgs, Microsoft_UI_Xaml_Controls_TreeViewDragItemsCompletedEventArgs, Microsoft_UI_Xaml_Controls_TreeViewDragItemsStartingEventArgs, Microsoft_UI_Xaml_Controls_TreeViewExpandingEventArgs, Microsoft_UI_Xaml_Controls_TreeViewItemInvokedEventArgs, Microsoft_UI_Xaml_Controls_TreeViewNode, Microsoft_UI_Xaml_Controls_TreeViewSelectionChangedEventArgs}
+@When[Microsoft_UI_Xaml_Controls == "on"]
 import windows_common.impl.{Microsoft_UI_Xaml_Controls_TreeViewSelectionMode, Microsoft_UI_Xaml_Controls_UIElementCollection, Microsoft_UI_Xaml_Controls_Viewbox, Microsoft_UI_Xaml_Controls_ZoomMode}
 
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type IViewbox = Microsoft_UI_Xaml_Controls_IViewbox
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type IViewboxVtbl = Microsoft_UI_Xaml_Controls_IViewboxVtbl
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type IViewboxStatics = Microsoft_UI_Xaml_Controls_IViewboxStatics
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type IViewboxStaticsVtbl = Microsoft_UI_Xaml_Controls_IViewboxStaticsVtbl
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type IconElement = Microsoft_UI_Xaml_Controls_IconElement
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type IconSource = Microsoft_UI_Xaml_Controls_IconSource
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type Image = Microsoft_UI_Xaml_Controls_Image
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type IncrementalLoadingTrigger = Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type InfoBadge = Microsoft_UI_Xaml_Controls_InfoBadge
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type InfoBadgeTemplateSettings = Microsoft_UI_Xaml_Controls_InfoBadgeTemplateSettings
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type InfoBar = Microsoft_UI_Xaml_Controls_InfoBar
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type InfoBarCloseReason = Microsoft_UI_Xaml_Controls_InfoBarCloseReason
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type InfoBarClosedEventArgs = Microsoft_UI_Xaml_Controls_InfoBarClosedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type InfoBarClosingEventArgs = Microsoft_UI_Xaml_Controls_InfoBarClosingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type InfoBarSeverity = Microsoft_UI_Xaml_Controls_InfoBarSeverity
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type InfoBarTemplateSettings = Microsoft_UI_Xaml_Controls_InfoBarTemplateSettings
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type IsTextTrimmedChangedEventArgs = Microsoft_UI_Xaml_Controls_IsTextTrimmedChangedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ItemClickEventArgs = Microsoft_UI_Xaml_Controls_ItemClickEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ItemClickEventHandler = Microsoft_UI_Xaml_Controls_ItemClickEventHandler
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ItemCollection = Microsoft_UI_Xaml_Controls_ItemCollection
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ItemContainer = Microsoft_UI_Xaml_Controls_ItemContainer
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ItemContainerGenerator = Microsoft_UI_Xaml_Controls_ItemContainerGenerator
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ItemsControl = Microsoft_UI_Xaml_Controls_ItemsControl
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ItemsPanelTemplate = Microsoft_UI_Xaml_Controls_ItemsPanelTemplate
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type LightDismissOverlayMode = Microsoft_UI_Xaml_Controls_LightDismissOverlayMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ListBox = Microsoft_UI_Xaml_Controls_ListBox
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ListView = Microsoft_UI_Xaml_Controls_ListView
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ListViewBase = Microsoft_UI_Xaml_Controls_ListViewBase
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ListViewBaseHeaderItem = Microsoft_UI_Xaml_Controls_ListViewBaseHeaderItem
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ListViewItem = Microsoft_UI_Xaml_Controls_ListViewItem
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ListViewReorderMode = Microsoft_UI_Xaml_Controls_ListViewReorderMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ListViewSelectionMode = Microsoft_UI_Xaml_Controls_ListViewSelectionMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type MenuBar = Microsoft_UI_Xaml_Controls_MenuBar
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type MenuBarItem = Microsoft_UI_Xaml_Controls_MenuBarItem
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type MenuFlyout = Microsoft_UI_Xaml_Controls_MenuFlyout
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type MenuFlyoutItem = Microsoft_UI_Xaml_Controls_MenuFlyoutItem
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type MenuFlyoutItemBase = Microsoft_UI_Xaml_Controls_MenuFlyoutItemBase
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type MenuFlyoutSeparator = Microsoft_UI_Xaml_Controls_MenuFlyoutSeparator
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type MenuFlyoutSubItem = Microsoft_UI_Xaml_Controls_MenuFlyoutSubItem
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationView = Microsoft_UI_Xaml_Controls_NavigationView
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewBackButtonVisible = Microsoft_UI_Xaml_Controls_NavigationViewBackButtonVisible
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewBackRequestedEventArgs = Microsoft_UI_Xaml_Controls_NavigationViewBackRequestedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewDisplayMode = Microsoft_UI_Xaml_Controls_NavigationViewDisplayMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewDisplayModeChangedEventArgs = Microsoft_UI_Xaml_Controls_NavigationViewDisplayModeChangedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewItem = Microsoft_UI_Xaml_Controls_NavigationViewItem
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewItemBase = Microsoft_UI_Xaml_Controls_NavigationViewItemBase
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewItemCollapsedEventArgs = Microsoft_UI_Xaml_Controls_NavigationViewItemCollapsedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewItemExpandingEventArgs = Microsoft_UI_Xaml_Controls_NavigationViewItemExpandingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewItemHeader = Microsoft_UI_Xaml_Controls_NavigationViewItemHeader
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewItemInvokedEventArgs = Microsoft_UI_Xaml_Controls_NavigationViewItemInvokedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewOverflowLabelMode = Microsoft_UI_Xaml_Controls_NavigationViewOverflowLabelMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewPaneClosingEventArgs = Microsoft_UI_Xaml_Controls_NavigationViewPaneClosingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewPaneDisplayMode = Microsoft_UI_Xaml_Controls_NavigationViewPaneDisplayMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewSelectionChangedEventArgs = Microsoft_UI_Xaml_Controls_NavigationViewSelectionChangedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewSelectionFollowsFocus = Microsoft_UI_Xaml_Controls_NavigationViewSelectionFollowsFocus
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewShoulderNavigationEnabled = Microsoft_UI_Xaml_Controls_NavigationViewShoulderNavigationEnabled
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NavigationViewTemplateSettings = Microsoft_UI_Xaml_Controls_NavigationViewTemplateSettings
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NumberBox = Microsoft_UI_Xaml_Controls_NumberBox
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NumberBoxSpinButtonPlacementMode = Microsoft_UI_Xaml_Controls_NumberBoxSpinButtonPlacementMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NumberBoxValidationMode = Microsoft_UI_Xaml_Controls_NumberBoxValidationMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type NumberBoxValueChangedEventArgs = Microsoft_UI_Xaml_Controls_NumberBoxValueChangedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type Orientation = Microsoft_UI_Xaml_Controls_Orientation
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type Panel = Microsoft_UI_Xaml_Controls_Panel
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type PasswordBox = Microsoft_UI_Xaml_Controls_PasswordBox
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type PasswordBoxPasswordChangingEventArgs = Microsoft_UI_Xaml_Controls_PasswordBoxPasswordChangingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type PasswordRevealMode = Microsoft_UI_Xaml_Controls_PasswordRevealMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type PersonPicture = Microsoft_UI_Xaml_Controls_PersonPicture
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type PersonPictureTemplateSettings = Microsoft_UI_Xaml_Controls_PersonPictureTemplateSettings
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type Pivot = Microsoft_UI_Xaml_Controls_Pivot
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type PivotHeaderFocusVisualPlacement = Microsoft_UI_Xaml_Controls_PivotHeaderFocusVisualPlacement
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type PivotItem = Microsoft_UI_Xaml_Controls_PivotItem
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type PivotItemEventArgs = Microsoft_UI_Xaml_Controls_PivotItemEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type PivotSlideInAnimationGroup = Microsoft_UI_Xaml_Controls_PivotSlideInAnimationGroup
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ProgressBar = Microsoft_UI_Xaml_Controls_ProgressBar
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ProgressBarTemplateSettings = Microsoft_UI_Xaml_Controls_ProgressBarTemplateSettings
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ProgressRing = Microsoft_UI_Xaml_Controls_ProgressRing
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ProgressRingTemplateSettings = Microsoft_UI_Xaml_Controls_ProgressRingTemplateSettings
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RadioButton = Microsoft_UI_Xaml_Controls_RadioButton
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RadioButtons = Microsoft_UI_Xaml_Controls_RadioButtons
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RatingControl = Microsoft_UI_Xaml_Controls_RatingControl
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RatingItemInfo = Microsoft_UI_Xaml_Controls_RatingItemInfo
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RelativePanel = Microsoft_UI_Xaml_Controls_RelativePanel
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RequiresPointer = Microsoft_UI_Xaml_Controls_RequiresPointer
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RichEditBox = Microsoft_UI_Xaml_Controls_RichEditBox
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RichEditBoxSelectionChangingEventArgs = Microsoft_UI_Xaml_Controls_RichEditBoxSelectionChangingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RichEditBoxTextChangingEventArgs = Microsoft_UI_Xaml_Controls_RichEditBoxTextChangingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RichEditClipboardFormat = Microsoft_UI_Xaml_Controls_RichEditClipboardFormat
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RichTextBlock = Microsoft_UI_Xaml_Controls_RichTextBlock
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RichTextBlockOverflow = Microsoft_UI_Xaml_Controls_RichTextBlockOverflow
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RowDefinition = Microsoft_UI_Xaml_Controls_RowDefinition
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type RowDefinitionCollection = Microsoft_UI_Xaml_Controls_RowDefinitionCollection
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollBarVisibility = Microsoft_UI_Xaml_Controls_ScrollBarVisibility
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollIntoViewAlignment = Microsoft_UI_Xaml_Controls_ScrollIntoViewAlignment
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollMode = Microsoft_UI_Xaml_Controls_ScrollMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollView = Microsoft_UI_Xaml_Controls_ScrollView
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollViewer = Microsoft_UI_Xaml_Controls_ScrollViewer
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollViewerView = Microsoft_UI_Xaml_Controls_ScrollViewerView
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollViewerViewChangedEventArgs = Microsoft_UI_Xaml_Controls_ScrollViewerViewChangedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollViewerViewChangingEventArgs = Microsoft_UI_Xaml_Controls_ScrollViewerViewChangingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingAnchorRequestedEventArgs = Microsoft_UI_Xaml_Controls_ScrollingAnchorRequestedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingAnimationMode = Microsoft_UI_Xaml_Controls_ScrollingAnimationMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingBringingIntoViewEventArgs = Microsoft_UI_Xaml_Controls_ScrollingBringingIntoViewEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingChainMode = Microsoft_UI_Xaml_Controls_ScrollingChainMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingContentOrientation = Microsoft_UI_Xaml_Controls_ScrollingContentOrientation
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingInputKinds = Microsoft_UI_Xaml_Controls_ScrollingInputKinds
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingInteractionState = Microsoft_UI_Xaml_Controls_ScrollingInteractionState
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingRailMode = Microsoft_UI_Xaml_Controls_ScrollingRailMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingScrollAnimationStartingEventArgs = Microsoft_UI_Xaml_Controls_ScrollingScrollAnimationStartingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingScrollBarVisibility = Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingScrollCompletedEventArgs = Microsoft_UI_Xaml_Controls_ScrollingScrollCompletedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingScrollMode = Microsoft_UI_Xaml_Controls_ScrollingScrollMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingScrollOptions = Microsoft_UI_Xaml_Controls_ScrollingScrollOptions
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingSnapPointsMode = Microsoft_UI_Xaml_Controls_ScrollingSnapPointsMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingZoomAnimationStartingEventArgs = Microsoft_UI_Xaml_Controls_ScrollingZoomAnimationStartingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingZoomCompletedEventArgs = Microsoft_UI_Xaml_Controls_ScrollingZoomCompletedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingZoomMode = Microsoft_UI_Xaml_Controls_ScrollingZoomMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ScrollingZoomOptions = Microsoft_UI_Xaml_Controls_ScrollingZoomOptions
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SelectionChangedEventArgs = Microsoft_UI_Xaml_Controls_SelectionChangedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SelectionChangedEventHandler = Microsoft_UI_Xaml_Controls_SelectionChangedEventHandler
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SelectionMode = Microsoft_UI_Xaml_Controls_SelectionMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SelectorBar = Microsoft_UI_Xaml_Controls_SelectorBar
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SelectorBarItem = Microsoft_UI_Xaml_Controls_SelectorBarItem
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SelectorBarSelectionChangedEventArgs = Microsoft_UI_Xaml_Controls_SelectorBarSelectionChangedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SemanticZoom = Microsoft_UI_Xaml_Controls_SemanticZoom
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SemanticZoomLocation = Microsoft_UI_Xaml_Controls_SemanticZoomLocation
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SemanticZoomViewChangedEventArgs = Microsoft_UI_Xaml_Controls_SemanticZoomViewChangedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SemanticZoomViewChangedEventHandler = Microsoft_UI_Xaml_Controls_SemanticZoomViewChangedEventHandler
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type Slider = Microsoft_UI_Xaml_Controls_Slider
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SnapPointsType = Microsoft_UI_Xaml_Controls_SnapPointsType
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SplitButton = Microsoft_UI_Xaml_Controls_SplitButton
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SplitButtonClickEventArgs = Microsoft_UI_Xaml_Controls_SplitButtonClickEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SplitView = Microsoft_UI_Xaml_Controls_SplitView
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SplitViewDisplayMode = Microsoft_UI_Xaml_Controls_SplitViewDisplayMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SplitViewPaneClosingEventArgs = Microsoft_UI_Xaml_Controls_SplitViewPaneClosingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SplitViewPanePlacement = Microsoft_UI_Xaml_Controls_SplitViewPanePlacement
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type StackPanel = Microsoft_UI_Xaml_Controls_StackPanel
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type StretchDirection = Microsoft_UI_Xaml_Controls_StretchDirection
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type StyleSelector = Microsoft_UI_Xaml_Controls_StyleSelector
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SwapChainPanel = Microsoft_UI_Xaml_Controls_SwapChainPanel
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type Symbol = Microsoft_UI_Xaml_Controls_Symbol
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type SymbolIcon = Microsoft_UI_Xaml_Controls_SymbolIcon
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TabView = Microsoft_UI_Xaml_Controls_TabView
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TabViewCloseButtonOverlayMode = Microsoft_UI_Xaml_Controls_TabViewCloseButtonOverlayMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TabViewExternalTornOutTabsDroppedEventArgs = Microsoft_UI_Xaml_Controls_TabViewExternalTornOutTabsDroppedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TabViewExternalTornOutTabsDroppingEventArgs = Microsoft_UI_Xaml_Controls_TabViewExternalTornOutTabsDroppingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TabViewItem = Microsoft_UI_Xaml_Controls_TabViewItem
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TabViewItemTemplateSettings = Microsoft_UI_Xaml_Controls_TabViewItemTemplateSettings
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TabViewTabCloseRequestedEventArgs = Microsoft_UI_Xaml_Controls_TabViewTabCloseRequestedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TabViewTabDragCompletedEventArgs = Microsoft_UI_Xaml_Controls_TabViewTabDragCompletedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TabViewTabDragStartingEventArgs = Microsoft_UI_Xaml_Controls_TabViewTabDragStartingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TabViewTabDroppedOutsideEventArgs = Microsoft_UI_Xaml_Controls_TabViewTabDroppedOutsideEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TabViewTabTearOutRequestedEventArgs = Microsoft_UI_Xaml_Controls_TabViewTabTearOutRequestedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TabViewTabTearOutWindowRequestedEventArgs = Microsoft_UI_Xaml_Controls_TabViewTabTearOutWindowRequestedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TabViewWidthMode = Microsoft_UI_Xaml_Controls_TabViewWidthMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TeachingTip = Microsoft_UI_Xaml_Controls_TeachingTip
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TeachingTipCloseReason = Microsoft_UI_Xaml_Controls_TeachingTipCloseReason
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TeachingTipClosedEventArgs = Microsoft_UI_Xaml_Controls_TeachingTipClosedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TeachingTipClosingEventArgs = Microsoft_UI_Xaml_Controls_TeachingTipClosingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TeachingTipHeroContentPlacementMode = Microsoft_UI_Xaml_Controls_TeachingTipHeroContentPlacementMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TeachingTipPlacementMode = Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TeachingTipTailVisibility = Microsoft_UI_Xaml_Controls_TeachingTipTailVisibility
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TeachingTipTemplateSettings = Microsoft_UI_Xaml_Controls_TeachingTipTemplateSettings
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextBlock = Microsoft_UI_Xaml_Controls_TextBlock
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextBox = Microsoft_UI_Xaml_Controls_TextBox
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextBoxBeforeTextChangingEventArgs = Microsoft_UI_Xaml_Controls_TextBoxBeforeTextChangingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextBoxSelectionChangingEventArgs = Microsoft_UI_Xaml_Controls_TextBoxSelectionChangingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextBoxTextChangingEventArgs = Microsoft_UI_Xaml_Controls_TextBoxTextChangingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextChangedEventArgs = Microsoft_UI_Xaml_Controls_TextChangedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextChangedEventHandler = Microsoft_UI_Xaml_Controls_TextChangedEventHandler
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextCompositionChangedEventArgs = Microsoft_UI_Xaml_Controls_TextCompositionChangedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextCompositionEndedEventArgs = Microsoft_UI_Xaml_Controls_TextCompositionEndedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextCompositionStartedEventArgs = Microsoft_UI_Xaml_Controls_TextCompositionStartedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextControlCopyingToClipboardEventArgs = Microsoft_UI_Xaml_Controls_TextControlCopyingToClipboardEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextControlCuttingToClipboardEventArgs = Microsoft_UI_Xaml_Controls_TextControlCuttingToClipboardEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextControlPasteEventArgs = Microsoft_UI_Xaml_Controls_TextControlPasteEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TextControlPasteEventHandler = Microsoft_UI_Xaml_Controls_TextControlPasteEventHandler
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TimePicker = Microsoft_UI_Xaml_Controls_TimePicker
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TimePickerSelectedValueChangedEventArgs = Microsoft_UI_Xaml_Controls_TimePickerSelectedValueChangedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TimePickerValueChangedEventArgs = Microsoft_UI_Xaml_Controls_TimePickerValueChangedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TitleBar = Microsoft_UI_Xaml_Controls_TitleBar
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TitleBarTemplateSettings = Microsoft_UI_Xaml_Controls_TitleBarTemplateSettings
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ToggleSwitch = Microsoft_UI_Xaml_Controls_ToggleSwitch
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ToolTip = Microsoft_UI_Xaml_Controls_ToolTip
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ToolTipService = Microsoft_UI_Xaml_Controls_ToolTipService
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TreeView = Microsoft_UI_Xaml_Controls_TreeView
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TreeViewCollapsedEventArgs = Microsoft_UI_Xaml_Controls_TreeViewCollapsedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TreeViewDragItemsCompletedEventArgs = Microsoft_UI_Xaml_Controls_TreeViewDragItemsCompletedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TreeViewDragItemsStartingEventArgs = Microsoft_UI_Xaml_Controls_TreeViewDragItemsStartingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TreeViewExpandingEventArgs = Microsoft_UI_Xaml_Controls_TreeViewExpandingEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TreeViewItemInvokedEventArgs = Microsoft_UI_Xaml_Controls_TreeViewItemInvokedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TreeViewNode = Microsoft_UI_Xaml_Controls_TreeViewNode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TreeViewSelectionChangedEventArgs = Microsoft_UI_Xaml_Controls_TreeViewSelectionChangedEventArgs
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type TreeViewSelectionMode = Microsoft_UI_Xaml_Controls_TreeViewSelectionMode
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type UIElementCollection = Microsoft_UI_Xaml_Controls_UIElementCollection
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type Viewbox = Microsoft_UI_Xaml_Controls_Viewbox
+@When[Microsoft_UI_Xaml_Controls == "on"]
 public type ZoomMode = Microsoft_UI_Xaml_Controls_ZoomMode

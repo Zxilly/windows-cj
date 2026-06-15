@@ -2,6 +2,8 @@
 
 package windows_common.Security.EnterpriseData
 
+@When[Windows_Security_EnterpriseData == "on"]
 import windows_common.impl.{Windows_Security_EnterpriseData_ProtectionPolicyEvaluationResult}
 
+@When[Windows_Security_EnterpriseData == "on"]
 public type ProtectionPolicyEvaluationResult = Windows_Security_EnterpriseData_ProtectionPolicyEvaluationResult

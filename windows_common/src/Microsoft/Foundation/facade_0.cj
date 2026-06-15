@@ -2,6 +2,8 @@
 
 package windows_common.Microsoft.Foundation
 
+@When[Microsoft_Foundation == "on"]
 import windows_common.impl.{Microsoft_Foundation_WindowsAppSDKContract}
 
+@When[Microsoft_Foundation == "on"]
 public type WindowsAppSDKContract = Microsoft_Foundation_WindowsAppSDKContract

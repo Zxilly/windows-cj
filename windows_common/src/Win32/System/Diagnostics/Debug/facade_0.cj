@@ -2,14 +2,24 @@
 
 package windows_common.Win32.System.Diagnostics.Debug
 
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 import windows_common.impl.{Windows_Win32_System_Diagnostics_Debug_ARM64_NT_NEON128, Windows_Win32_System_Diagnostics_Debug_ARM64_NT_NEON128__Anonymous_e__Struct, Windows_Win32_System_Diagnostics_Debug_CONTEXT, Windows_Win32_System_Diagnostics_Debug_CONTEXT__Anonymous_e__Union, Windows_Win32_System_Diagnostics_Debug_CONTEXT__Anonymous_e__Union__Anonymous_e__Struct, Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS, Windows_Win32_System_Diagnostics_Debug_EXCEPTION_RECORD, Windows_Win32_System_Diagnostics_Debug_M128A, Windows_Win32_System_Diagnostics_Debug_XSAVE_FORMAT}
 
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public type ARM64_NT_NEON128 = Windows_Win32_System_Diagnostics_Debug_ARM64_NT_NEON128
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public type ARM64_NT_NEON128__Anonymous_e__Struct = Windows_Win32_System_Diagnostics_Debug_ARM64_NT_NEON128__Anonymous_e__Struct
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public type CONTEXT = Windows_Win32_System_Diagnostics_Debug_CONTEXT
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public type CONTEXT__Anonymous_e__Union = Windows_Win32_System_Diagnostics_Debug_CONTEXT__Anonymous_e__Union
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public type CONTEXT__Anonymous_e__Union__Anonymous_e__Struct = Windows_Win32_System_Diagnostics_Debug_CONTEXT__Anonymous_e__Union__Anonymous_e__Struct
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public type CONTEXT_FLAGS = Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public type EXCEPTION_RECORD = Windows_Win32_System_Diagnostics_Debug_EXCEPTION_RECORD
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public type M128A = Windows_Win32_System_Diagnostics_Debug_M128A
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public type XSAVE_FORMAT = Windows_Win32_System_Diagnostics_Debug_XSAVE_FORMAT

@@ -2,6 +2,8 @@
 
 package windows_common.Graphics.DirectX
 
+@When[Windows_Graphics_DirectX == "on"]
 import windows_common.impl.{Windows_Graphics_DirectX_DirectXPixelFormat}
 
+@When[Windows_Graphics_DirectX == "on"]
 public type DirectXPixelFormat = Windows_Graphics_DirectX_DirectXPixelFormat

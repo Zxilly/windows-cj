@@ -8,6 +8,7 @@ import windows_interface as windows_interface
 import windows_polyfill as windows_polyfill
 
 // Windows.Win32.Security.SYSTEM_ALARM_OBJECT_ACE (synthetic:Windows_Win32_Security_SYSTEM_ALARM_OBJECT_ACE)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_SYSTEM_ALARM_OBJECT_ACE {
     public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
@@ -19,6 +20,7 @@ public struct Windows_Win32_Security_SYSTEM_ALARM_OBJECT_ACE {
 }
 
 // Windows.Win32.Security.SYSTEM_AUDIT_ACE (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_ACE)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_SYSTEM_AUDIT_ACE {
     public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
@@ -27,6 +29,7 @@ public struct Windows_Win32_Security_SYSTEM_AUDIT_ACE {
 }
 
 // Windows.Win32.Security.SYSTEM_AUDIT_CALLBACK_ACE (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_ACE)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_ACE {
     public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
@@ -35,6 +38,7 @@ public struct Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_ACE {
 }
 
 // Windows.Win32.Security.SYSTEM_AUDIT_CALLBACK_OBJECT_ACE (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_OBJECT_ACE)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_OBJECT_ACE {
     public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
@@ -46,6 +50,7 @@ public struct Windows_Win32_Security_SYSTEM_AUDIT_CALLBACK_OBJECT_ACE {
 }
 
 // Windows.Win32.Security.SYSTEM_AUDIT_OBJECT_ACE (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE {
     public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
@@ -57,11 +62,15 @@ public struct Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE {
 }
 
 // Windows.Win32.Security.SYSTEM_AUDIT_OBJECT_ACE_FLAGS (synthetic:Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS)
+@When[Windows_Win32_Security == "on"]
 public type Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS = UInt32
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS_ACE_OBJECT_TYPE_PRESENT: Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS = 1
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS_ACE_INHERITED_OBJECT_TYPE_PRESENT: Windows_Win32_Security_SYSTEM_AUDIT_OBJECT_ACE_FLAGS = 2
 
 // Windows.Win32.Security.SYSTEM_MANDATORY_LABEL_ACE (synthetic:Windows_Win32_Security_SYSTEM_MANDATORY_LABEL_ACE)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_SYSTEM_MANDATORY_LABEL_ACE {
     public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
@@ -70,6 +79,7 @@ public struct Windows_Win32_Security_SYSTEM_MANDATORY_LABEL_ACE {
 }
 
 // Windows.Win32.Security.SYSTEM_PROCESS_TRUST_LABEL_ACE (synthetic:Windows_Win32_Security_SYSTEM_PROCESS_TRUST_LABEL_ACE)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_SYSTEM_PROCESS_TRUST_LABEL_ACE {
     public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
@@ -78,6 +88,7 @@ public struct Windows_Win32_Security_SYSTEM_PROCESS_TRUST_LABEL_ACE {
 }
 
 // Windows.Win32.Security.SYSTEM_RESOURCE_ATTRIBUTE_ACE (synthetic:Windows_Win32_Security_SYSTEM_RESOURCE_ATTRIBUTE_ACE)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_SYSTEM_RESOURCE_ATTRIBUTE_ACE {
     public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
@@ -86,6 +97,7 @@ public struct Windows_Win32_Security_SYSTEM_RESOURCE_ATTRIBUTE_ACE {
 }
 
 // Windows.Win32.Security.SYSTEM_SCOPED_POLICY_ID_ACE (synthetic:Windows_Win32_Security_SYSTEM_SCOPED_POLICY_ID_ACE)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_SYSTEM_SCOPED_POLICY_ID_ACE {
     public var Header: Windows_Win32_Security_ACE_HEADER = Windows_Win32_Security_ACE_HEADER()
@@ -94,6 +106,7 @@ public struct Windows_Win32_Security_SYSTEM_SCOPED_POLICY_ID_ACE {
 }
 
 // Windows.Win32.Security.TOKEN_ACCESS_INFORMATION (synthetic:Windows_Win32_Security_TOKEN_ACCESS_INFORMATION)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_ACCESS_INFORMATION {
     public var SidHash: CPointer<Unit> = CPointer<Unit>()
@@ -112,42 +125,67 @@ public struct Windows_Win32_Security_TOKEN_ACCESS_INFORMATION {
 }
 
 // Windows.Win32.Security.TOKEN_ACCESS_MASK (synthetic:Windows_Win32_Security_TOKEN_ACCESS_MASK)
+@When[Windows_Win32_Security == "on"]
 public type Windows_Win32_Security_TOKEN_ACCESS_MASK = UInt32
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_DELETE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 65536
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_READ_CONTROL: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131072
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_WRITE_DAC: Windows_Win32_Security_TOKEN_ACCESS_MASK = 262144
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_WRITE_OWNER: Windows_Win32_Security_TOKEN_ACCESS_MASK = 524288
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ACCESS_SYSTEM_SECURITY: Windows_Win32_Security_TOKEN_ACCESS_MASK = 16777216
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ASSIGN_PRIMARY: Windows_Win32_Security_TOKEN_ACCESS_MASK = 1
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_DUPLICATE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 2
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_IMPERSONATE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 4
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_QUERY: Windows_Win32_Security_TOKEN_ACCESS_MASK = 8
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_QUERY_SOURCE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 16
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ADJUST_PRIVILEGES: Windows_Win32_Security_TOKEN_ACCESS_MASK = 32
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ADJUST_GROUPS: Windows_Win32_Security_TOKEN_ACCESS_MASK = 64
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ADJUST_DEFAULT: Windows_Win32_Security_TOKEN_ACCESS_MASK = 128
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ADJUST_SESSIONID: Windows_Win32_Security_TOKEN_ACCESS_MASK = 256
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_READ: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131080
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_WRITE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131296
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_EXECUTE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131072
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_TRUST_CONSTRAINT_MASK: Windows_Win32_Security_TOKEN_ACCESS_MASK = 131096
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ACCESS_PSEUDO_HANDLE_WIN8: Windows_Win32_Security_TOKEN_ACCESS_MASK = 24
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ACCESS_PSEUDO_HANDLE: Windows_Win32_Security_TOKEN_ACCESS_MASK = 24
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ACCESS_MASK_TOKEN_ALL_ACCESS: Windows_Win32_Security_TOKEN_ACCESS_MASK = 983551
 
 // Windows.Win32.Security.TOKEN_APPCONTAINER_INFORMATION (synthetic:Windows_Win32_Security_TOKEN_APPCONTAINER_INFORMATION)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_APPCONTAINER_INFORMATION {
     public var TokenAppContainer: Windows_Win32_Security_PSID = Windows_Win32_Security_PSID()
 }
 
 // Windows.Win32.Security.TOKEN_AUDIT_POLICY (synthetic:Windows_Win32_Security_TOKEN_AUDIT_POLICY)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_AUDIT_POLICY {
     public var PerUserPolicy: VArray<UInt8, $31> = VArray<UInt8, $31>(repeat: 0u8)
 }
 
 // Windows.Win32.Security.TOKEN_CONTROL (synthetic:Windows_Win32_Security_TOKEN_CONTROL)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_CONTROL {
     public var TokenId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
@@ -157,30 +195,38 @@ public struct Windows_Win32_Security_TOKEN_CONTROL {
 }
 
 // Windows.Win32.Security.TOKEN_DEFAULT_DACL (synthetic:Windows_Win32_Security_TOKEN_DEFAULT_DACL)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_DEFAULT_DACL {
     public var DefaultDacl: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.Security.TOKEN_DEVICE_CLAIMS (synthetic:Windows_Win32_Security_TOKEN_DEVICE_CLAIMS)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_DEVICE_CLAIMS {
     public var DeviceClaims: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.Security.TOKEN_ELEVATION (synthetic:Windows_Win32_Security_TOKEN_ELEVATION)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_ELEVATION {
     public var TokenIsElevated: UInt32 = 0u32
 }
 
 // Windows.Win32.Security.TOKEN_ELEVATION_TYPE (synthetic:Windows_Win32_Security_TOKEN_ELEVATION_TYPE)
+@When[Windows_Win32_Security == "on"]
 public type Windows_Win32_Security_TOKEN_ELEVATION_TYPE = Int32
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ELEVATION_TYPE_TokenElevationTypeDefault: Windows_Win32_Security_TOKEN_ELEVATION_TYPE = 1
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ELEVATION_TYPE_TokenElevationTypeFull: Windows_Win32_Security_TOKEN_ELEVATION_TYPE = 2
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_ELEVATION_TYPE_TokenElevationTypeLimited: Windows_Win32_Security_TOKEN_ELEVATION_TYPE = 3
 
 // Windows.Win32.Security.TOKEN_GROUPS (synthetic:Windows_Win32_Security_TOKEN_GROUPS)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_GROUPS {
     public var GroupCount: UInt32 = 0u32
@@ -188,6 +234,7 @@ public struct Windows_Win32_Security_TOKEN_GROUPS {
 }
 
 // Windows.Win32.Security.TOKEN_GROUPS_AND_PRIVILEGES (synthetic:Windows_Win32_Security_TOKEN_GROUPS_AND_PRIVILEGES)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_GROUPS_AND_PRIVILEGES {
     public var SidCount: UInt32 = 0u32
@@ -203,103 +250,167 @@ public struct Windows_Win32_Security_TOKEN_GROUPS_AND_PRIVILEGES {
 }
 
 // Windows.Win32.Security.TOKEN_INFORMATION_CLASS (synthetic:Windows_Win32_Security_TOKEN_INFORMATION_CLASS)
+@When[Windows_Win32_Security == "on"]
 public type Windows_Win32_Security_TOKEN_INFORMATION_CLASS = Int32
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenUser: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 1
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenGroups: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 2
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenPrivileges: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 3
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenOwner: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 4
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenPrimaryGroup: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 5
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenDefaultDacl: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 6
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSource: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 7
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenType: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 8
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenImpersonationLevel: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 9
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenStatistics: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 10
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenRestrictedSids: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 11
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSessionId: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 12
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenGroupsAndPrivileges: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 13
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSessionReference: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 14
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSandBoxInert: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 15
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenAuditPolicy: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 16
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenOrigin: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 17
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenElevationType: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 18
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenLinkedToken: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 19
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenElevation: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 20
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenHasRestrictions: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 21
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenAccessInformation: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 22
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenVirtualizationAllowed: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 23
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenVirtualizationEnabled: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 24
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIntegrityLevel: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 25
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenUIAccess: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 26
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenMandatoryPolicy: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 27
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenLogonSid: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 28
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsAppContainer: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 29
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenCapabilities: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 30
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenAppContainerSid: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 31
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenAppContainerNumber: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 32
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenUserClaimAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 33
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenDeviceClaimAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 34
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenRestrictedUserClaimAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 35
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenRestrictedDeviceClaimAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 36
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenDeviceGroups: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 37
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenRestrictedDeviceGroups: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 38
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSecurityAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 39
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsRestricted: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 40
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenProcessTrustLevel: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 41
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenPrivateNameSpace: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 42
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenSingletonAttributes: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 43
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenBnoIsolation: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 44
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenChildProcessFlags: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 45
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsLessPrivilegedAppContainer: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 46
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsSandboxed: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 47
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenIsAppSilo: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 48
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenLoggingInformation: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 49
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_TokenLearningMode: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 50
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_INFORMATION_CLASS_MaxTokenInfoClass: Windows_Win32_Security_TOKEN_INFORMATION_CLASS = 51
 
 // Windows.Win32.Security.TOKEN_LINKED_TOKEN (synthetic:Windows_Win32_Security_TOKEN_LINKED_TOKEN)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_LINKED_TOKEN {
     public var LinkedToken: Windows_Win32_Foundation_HANDLE = Windows_Win32_Foundation_HANDLE()
 }
 
 // Windows.Win32.Security.TOKEN_MANDATORY_LABEL (synthetic:Windows_Win32_Security_TOKEN_MANDATORY_LABEL)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_MANDATORY_LABEL {
     public var Label: Windows_Win32_Security_SID_AND_ATTRIBUTES = Windows_Win32_Security_SID_AND_ATTRIBUTES()
 }
 
 // Windows.Win32.Security.TOKEN_MANDATORY_POLICY (synthetic:Windows_Win32_Security_TOKEN_MANDATORY_POLICY)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_MANDATORY_POLICY {
     public var Policy: UInt32 = 0u32
 }
 
 // Windows.Win32.Security.TOKEN_MANDATORY_POLICY_ID (synthetic:Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID)
+@When[Windows_Win32_Security == "on"]
 public type Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = UInt32
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID_TOKEN_MANDATORY_POLICY_OFF: Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = 0
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID_TOKEN_MANDATORY_POLICY_NO_WRITE_UP: Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = 1
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID_TOKEN_MANDATORY_POLICY_NEW_PROCESS_MIN: Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = 2
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID_TOKEN_MANDATORY_POLICY_VALID_MASK: Windows_Win32_Security_TOKEN_MANDATORY_POLICY_ID = 3
 
 // Windows.Win32.Security.TOKEN_ORIGIN (synthetic:Windows_Win32_Security_TOKEN_ORIGIN)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_ORIGIN {
     public var OriginatingLogonSession: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
 }
 
 // Windows.Win32.Security.TOKEN_OWNER (synthetic:Windows_Win32_Security_TOKEN_OWNER)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_OWNER {
     public var Owner: Windows_Win32_Security_PSID = Windows_Win32_Security_PSID()
 }
 
 // Windows.Win32.Security.TOKEN_PRIMARY_GROUP (synthetic:Windows_Win32_Security_TOKEN_PRIMARY_GROUP)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_PRIMARY_GROUP {
     public var PrimaryGroup: Windows_Win32_Security_PSID = Windows_Win32_Security_PSID()
 }
 
 // Windows.Win32.Security.TOKEN_PRIVILEGES (synthetic:Windows_Win32_Security_TOKEN_PRIVILEGES)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_PRIVILEGES {
     public var PrivilegeCount: UInt32 = 0u32
@@ -307,13 +418,19 @@ public struct Windows_Win32_Security_TOKEN_PRIVILEGES {
 }
 
 // Windows.Win32.Security.TOKEN_PRIVILEGES_ATTRIBUTES (synthetic:Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES)
+@When[Windows_Win32_Security == "on"]
 public type Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = UInt32
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES_SE_PRIVILEGE_ENABLED: Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = 2
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES_SE_PRIVILEGE_ENABLED_BY_DEFAULT: Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = 1
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES_SE_PRIVILEGE_REMOVED: Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = 4
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES_SE_PRIVILEGE_USED_FOR_ACCESS: Windows_Win32_Security_TOKEN_PRIVILEGES_ATTRIBUTES = 2147483648
 
 // Windows.Win32.Security.TOKEN_SOURCE (synthetic:Windows_Win32_Security_TOKEN_SOURCE)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_SOURCE {
     public var SourceName: VArray<Int8, $8> = VArray<Int8, $8>(repeat: 0i8)
@@ -321,6 +438,7 @@ public struct Windows_Win32_Security_TOKEN_SOURCE {
 }
 
 // Windows.Win32.Security.TOKEN_STATISTICS (synthetic:Windows_Win32_Security_TOKEN_STATISTICS)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_STATISTICS {
     public var TokenId: Windows_Win32_Foundation_LUID = Windows_Win32_Foundation_LUID()
@@ -336,192 +454,357 @@ public struct Windows_Win32_Security_TOKEN_STATISTICS {
 }
 
 // Windows.Win32.Security.TOKEN_TYPE (synthetic:Windows_Win32_Security_TOKEN_TYPE)
+@When[Windows_Win32_Security == "on"]
 public type Windows_Win32_Security_TOKEN_TYPE = Int32
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_TYPE_TokenPrimary: Windows_Win32_Security_TOKEN_TYPE = 1
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_TOKEN_TYPE_TokenImpersonation: Windows_Win32_Security_TOKEN_TYPE = 2
 
 // Windows.Win32.Security.TOKEN_USER (synthetic:Windows_Win32_Security_TOKEN_USER)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_USER {
     public var User: Windows_Win32_Security_SID_AND_ATTRIBUTES = Windows_Win32_Security_SID_AND_ATTRIBUTES()
 }
 
 // Windows.Win32.Security.TOKEN_USER_CLAIMS (synthetic:Windows_Win32_Security_TOKEN_USER_CLAIMS)
+@When[Windows_Win32_Security == "on"]
 @C
 public struct Windows_Win32_Security_TOKEN_USER_CLAIMS {
     public var UserClaims: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.Security.WELL_KNOWN_SID_TYPE (synthetic:Windows_Win32_Security_WELL_KNOWN_SID_TYPE)
+@When[Windows_Win32_Security == "on"]
 public type Windows_Win32_Security_WELL_KNOWN_SID_TYPE = Int32
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNullSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 0
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinWorldSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 1
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 2
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorOwnerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 3
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorGroupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 4
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorOwnerServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 5
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorGroupServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 6
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNtAuthoritySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 7
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinDialupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 8
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNetworkSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 9
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBatchSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 10
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinInteractiveSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 11
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinServiceSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 12
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAnonymousSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 13
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinProxySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 14
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinEnterpriseControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 15
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinSelfSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 16
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticatedUserSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 17
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinRestrictedCodeSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 18
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinTerminalServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 19
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinRemoteLogonIdSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 20
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLogonIdsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 21
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalSystemSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 22
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalServiceSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 23
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNetworkServiceSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 24
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinDomainSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 25
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAdministratorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 26
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 27
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinGuestsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 28
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPowerUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 29
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAccountOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 30
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinSystemOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 31
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPrintOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 32
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinBackupOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 33
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinReplicatorSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 34
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPreWindows2000CompatibleAccessSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 35
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRemoteDesktopUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 36
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinNetworkConfigurationOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 37
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountAdministratorSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 38
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountGuestSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 39
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountKrbtgtSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 40
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountDomainAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 41
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountDomainUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 42
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountDomainGuestsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 43
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountComputersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 44
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 45
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountCertAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 46
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountSchemaAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 47
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountEnterpriseAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 48
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountPolicyAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 49
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountRasAndIasServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 50
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNTLMAuthenticationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 51
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinDigestAuthenticationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 52
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinSChannelAuthenticationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 53
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinThisOrganizationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 54
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinOtherOrganizationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 55
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinIncomingForestTrustBuildersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 56
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPerfMonitoringUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 57
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinPerfLoggingUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 58
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAuthorizationAccessSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 59
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinTerminalServerLicenseServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 60
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinDCOMUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 61
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinIUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 62
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinIUserSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 63
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinCryptoOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 64
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinUntrustedLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 65
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLowLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 66
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinMediumLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 67
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinHighLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 68
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinSystemLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 69
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinWriteRestrictedCodeSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 70
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCreatorOwnerRightsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 71
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCacheablePrincipalsGroupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 72
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNonCacheablePrincipalsGroupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 73
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinEnterpriseReadonlyControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 74
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountReadonlyControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 75
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinEventLogReadersGroup: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 76
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinNewEnterpriseReadonlyControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 77
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinCertSvcDComAccessGroup: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 78
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinMediumPlusLabelSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 79
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalLogonSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 80
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinConsoleLogonSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 81
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinThisOrganizationCertificateSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 82
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinApplicationPackageAuthoritySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 83
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAnyPackageSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 84
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityInternetClientSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 85
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityInternetClientServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 86
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityPrivateNetworkClientServerSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 87
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityPicturesLibrarySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 88
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityVideosLibrarySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 89
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityMusicLibrarySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 90
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityDocumentsLibrarySid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 91
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilitySharedUserCertificatesSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 92
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityEnterpriseAuthenticationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 93
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityRemovableStorageSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 94
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRDSRemoteAccessServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 95
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRDSEndpointServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 96
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRDSManagementServersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 97
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinUserModeDriversSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 98
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinHyperVAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 99
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountCloneableControllersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 100
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinAccessControlAssistanceOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 101
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinRemoteManagementUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 102
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationAuthorityAssertedSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 103
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationServiceAssertedSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 104
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalAccountSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 105
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinLocalAccountAndAdministratorSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 106
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountProtectedUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 107
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityAppointmentsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 108
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinCapabilityContactsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 109
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountDefaultSystemManagedSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 110
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinDefaultSystemManagedGroupSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 111
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinStorageReplicaAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 112
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountKeyAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 113
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAccountEnterpriseKeyAdminsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 114
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationKeyTrustSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 115
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationKeyPropertyMFASid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 116
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationKeyPropertyAttestationSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 117
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinAuthenticationFreshKeyAuthSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 118
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinDeviceOwnersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 119
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinUserModeHardwareOperatorsSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 120
+@When[Windows_Win32_Security == "on"]
 public let Windows_Win32_Security_WELL_KNOWN_SID_TYPE_WinBuiltinOpenSSHUsersSid: Windows_Win32_Security_WELL_KNOWN_SID_TYPE = 121
 
 // Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS (synthetic:Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = UInt16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_AUTO: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_STATIC: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_EMBEDDED: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_FIXEDSIZE: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_RECORD: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_HAVEIID: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 64
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_HAVEVARTYPE: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 128
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_BSTR: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 256
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_UNKNOWN: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 512
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_DISPATCH: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 1024
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_VARIANT: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 2048
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS_FADF_RESERVED: Windows_Win32_System_Com_ADVANCED_FEATURE_FLAGS = 61448
 
 // Windows.Win32.System.Com.ADVF (synthetic:Windows_Win32_System_Com_ADVF)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_ADVF = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVF_ADVF_NODATA: Windows_Win32_System_Com_ADVF = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVF_ADVF_PRIMEFIRST: Windows_Win32_System_Com_ADVF = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVF_ADVF_ONLYONCE: Windows_Win32_System_Com_ADVF = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVF_ADVF_DATAONSTOP: Windows_Win32_System_Com_ADVF = 64
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVF_ADVFCACHE_NOHANDLER: Windows_Win32_System_Com_ADVF = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVF_ADVFCACHE_FORCEBUILTIN: Windows_Win32_System_Com_ADVF = 16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ADVF_ADVFCACHE_ONSAVE: Windows_Win32_System_Com_ADVF = 32
 
 // Windows.Win32.System.Com.APTTYPE (synthetic:Windows_Win32_System_Com_APTTYPE)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_APTTYPE = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_APTTYPE_APTTYPE_CURRENT: Windows_Win32_System_Com_APTTYPE = -1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_APTTYPE_APTTYPE_STA: Windows_Win32_System_Com_APTTYPE = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_APTTYPE_APTTYPE_MTA: Windows_Win32_System_Com_APTTYPE = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_APTTYPE_APTTYPE_NA: Windows_Win32_System_Com_APTTYPE = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_APTTYPE_APTTYPE_MAINSTA: Windows_Win32_System_Com_APTTYPE = 3
 
 // Windows.Win32.System.Com.APTTYPEQUALIFIER (synthetic:Windows_Win32_System_Com_APTTYPEQUALIFIER)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_APTTYPEQUALIFIER = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NONE: Windows_Win32_System_Com_APTTYPEQUALIFIER = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_IMPLICIT_MTA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NA_ON_MTA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NA_ON_STA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NA_ON_IMPLICIT_MTA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_NA_ON_MAINSTA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 5
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_APPLICATION_STA: Windows_Win32_System_Com_APTTYPEQUALIFIER = 6
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_APTTYPEQUALIFIER_APTTYPEQUALIFIER_RESERVED_1: Windows_Win32_System_Com_APTTYPEQUALIFIER = 7
 
 // Windows.Win32.System.Com.AUTHENTICATEINFO (synthetic:Windows_Win32_System_Com_AUTHENTICATEINFO)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_AUTHENTICATEINFO {
     public var dwFlags: UInt32 = 0u32
@@ -529,11 +812,15 @@ public struct Windows_Win32_System_Com_AUTHENTICATEINFO {
 }
 
 // Windows.Win32.System.Com.ApplicationType (synthetic:Windows_Win32_System_Com_ApplicationType)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_ApplicationType = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ApplicationType_ServerApplication: Windows_Win32_System_Com_ApplicationType = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ApplicationType_LibraryApplication: Windows_Win32_System_Com_ApplicationType = 1
 
 // Windows.Win32.System.Com.AsyncIAdviseSink (synthetic:Windows_Win32_System_Com_AsyncIAdviseSink)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_AsyncIAdviseSink <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -611,6 +898,7 @@ public class Windows_Win32_System_Com_AsyncIAdviseSink <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_AsyncIAdviseSink <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIAdviseSink> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_AsyncIAdviseSink): CPointer<Unit> {
         value.asRaw()
@@ -643,6 +931,7 @@ extend Windows_Win32_System_Com_AsyncIAdviseSink <: windows_core.HandleWinrtType
 }
 
 // Windows.Win32.System.Com.AsyncIAdviseSinkVtbl (synthetic:Windows_Win32_System_Com_AsyncIAdviseSinkVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_AsyncIAdviseSinkVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -660,6 +949,7 @@ public struct Windows_Win32_System_Com_AsyncIAdviseSinkVtbl {
 }
 
 // Windows.Win32.System.Com.AsyncIAdviseSink2 (synthetic:Windows_Win32_System_Com_AsyncIAdviseSink2)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_AsyncIAdviseSink2 <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -737,6 +1027,7 @@ public class Windows_Win32_System_Com_AsyncIAdviseSink2 <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_AsyncIAdviseSink2 <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIAdviseSink2> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_AsyncIAdviseSink2): CPointer<Unit> {
         value.asRaw()
@@ -769,6 +1060,7 @@ extend Windows_Win32_System_Com_AsyncIAdviseSink2 <: windows_core.HandleWinrtTyp
 }
 
 // Windows.Win32.System.Com.AsyncIAdviseSink2Vtbl (synthetic:Windows_Win32_System_Com_AsyncIAdviseSink2Vtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_AsyncIAdviseSink2Vtbl {
     public var base_: Windows_Win32_System_Com_AsyncIAdviseSinkVtbl = Windows_Win32_System_Com_AsyncIAdviseSinkVtbl()
@@ -778,6 +1070,7 @@ public struct Windows_Win32_System_Com_AsyncIAdviseSink2Vtbl {
 }
 
 // Windows.Win32.System.Com.AsyncIMultiQI (synthetic:Windows_Win32_System_Com_AsyncIMultiQI)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_AsyncIMultiQI <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -855,6 +1148,7 @@ public class Windows_Win32_System_Com_AsyncIMultiQI <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_AsyncIMultiQI <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIMultiQI> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_AsyncIMultiQI): CPointer<Unit> {
         value.asRaw()
@@ -887,6 +1181,7 @@ extend Windows_Win32_System_Com_AsyncIMultiQI <: windows_core.HandleWinrtType<Wi
 }
 
 // Windows.Win32.System.Com.AsyncIMultiQIVtbl (synthetic:Windows_Win32_System_Com_AsyncIMultiQIVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_AsyncIMultiQIVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -896,6 +1191,7 @@ public struct Windows_Win32_System_Com_AsyncIMultiQIVtbl {
 }
 
 // Windows.Win32.System.Com.AsyncIPipeByte (synthetic:Windows_Win32_System_Com_AsyncIPipeByte)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_AsyncIPipeByte <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -973,6 +1269,7 @@ public class Windows_Win32_System_Com_AsyncIPipeByte <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_AsyncIPipeByte <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIPipeByte> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_AsyncIPipeByte): CPointer<Unit> {
         value.asRaw()
@@ -1005,6 +1302,7 @@ extend Windows_Win32_System_Com_AsyncIPipeByte <: windows_core.HandleWinrtType<W
 }
 
 // Windows.Win32.System.Com.AsyncIPipeByteVtbl (synthetic:Windows_Win32_System_Com_AsyncIPipeByteVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_AsyncIPipeByteVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -1016,6 +1314,7 @@ public struct Windows_Win32_System_Com_AsyncIPipeByteVtbl {
 }
 
 // Windows.Win32.System.Com.AsyncIPipeDouble (synthetic:Windows_Win32_System_Com_AsyncIPipeDouble)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_AsyncIPipeDouble <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -1093,6 +1392,7 @@ public class Windows_Win32_System_Com_AsyncIPipeDouble <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_AsyncIPipeDouble <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIPipeDouble> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_AsyncIPipeDouble): CPointer<Unit> {
         value.asRaw()
@@ -1125,6 +1425,7 @@ extend Windows_Win32_System_Com_AsyncIPipeDouble <: windows_core.HandleWinrtType
 }
 
 // Windows.Win32.System.Com.AsyncIPipeDoubleVtbl (synthetic:Windows_Win32_System_Com_AsyncIPipeDoubleVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_AsyncIPipeDoubleVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -1136,6 +1437,7 @@ public struct Windows_Win32_System_Com_AsyncIPipeDoubleVtbl {
 }
 
 // Windows.Win32.System.Com.AsyncIPipeLong (synthetic:Windows_Win32_System_Com_AsyncIPipeLong)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_AsyncIPipeLong <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -1213,6 +1515,7 @@ public class Windows_Win32_System_Com_AsyncIPipeLong <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_AsyncIPipeLong <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIPipeLong> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_AsyncIPipeLong): CPointer<Unit> {
         value.asRaw()
@@ -1245,6 +1548,7 @@ extend Windows_Win32_System_Com_AsyncIPipeLong <: windows_core.HandleWinrtType<W
 }
 
 // Windows.Win32.System.Com.AsyncIPipeLongVtbl (synthetic:Windows_Win32_System_Com_AsyncIPipeLongVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_AsyncIPipeLongVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -1256,6 +1560,7 @@ public struct Windows_Win32_System_Com_AsyncIPipeLongVtbl {
 }
 
 // Windows.Win32.System.Com.AsyncIUnknown (synthetic:Windows_Win32_System_Com_AsyncIUnknown)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_AsyncIUnknown <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -1333,6 +1638,7 @@ public class Windows_Win32_System_Com_AsyncIUnknown <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_AsyncIUnknown <: windows_core.HandleWinrtType<Windows_Win32_System_Com_AsyncIUnknown> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_AsyncIUnknown): CPointer<Unit> {
         value.asRaw()
@@ -1365,6 +1671,7 @@ extend Windows_Win32_System_Com_AsyncIUnknown <: windows_core.HandleWinrtType<Wi
 }
 
 // Windows.Win32.System.Com.AsyncIUnknownVtbl (synthetic:Windows_Win32_System_Com_AsyncIUnknownVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_AsyncIUnknownVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -1378,6 +1685,7 @@ public struct Windows_Win32_System_Com_AsyncIUnknownVtbl {
 }
 
 // Windows.Win32.System.Com.BINDINFO (synthetic:Windows_Win32_System_Com_BINDINFO)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_BINDINFO {
     public var cbSize: UInt32 = 0u32
@@ -1397,11 +1705,15 @@ public struct Windows_Win32_System_Com_BINDINFO {
 }
 
 // Windows.Win32.System.Com.BINDINFOF (synthetic:Windows_Win32_System_Com_BINDINFOF)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_BINDINFOF = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_BINDINFOF_BINDINFOF_URLENCODESTGMEDDATA: Windows_Win32_System_Com_BINDINFOF = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_BINDINFOF_BINDINFOF_URLENCODEDEXTRAINFO: Windows_Win32_System_Com_BINDINFOF = 2
 
 // Windows.Win32.System.Com.BINDPTR (synthetic:Windows_Win32_System_Com_BINDPTR)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_BINDPTR {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -1474,11 +1786,15 @@ public struct Windows_Win32_System_Com_BINDPTR {
 }
 
 // Windows.Win32.System.Com.BIND_FLAGS (synthetic:Windows_Win32_System_Com_BIND_FLAGS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_BIND_FLAGS = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_BIND_FLAGS_BIND_MAYBOTHERUSER: Windows_Win32_System_Com_BIND_FLAGS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_BIND_FLAGS_BIND_JUSTTESTEXISTENCE: Windows_Win32_System_Com_BIND_FLAGS = 2
 
 // Windows.Win32.System.Com.BIND_OPTS (synthetic:Windows_Win32_System_Com_BIND_OPTS)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_BIND_OPTS {
     public var cbStruct: UInt32 = 0u32
@@ -1488,6 +1804,7 @@ public struct Windows_Win32_System_Com_BIND_OPTS {
 }
 
 // Windows.Win32.System.Com.BIND_OPTS2 (synthetic:Windows_Win32_System_Com_BIND_OPTS2)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_BIND_OPTS2 {
     public var Base: Windows_Win32_System_Com_BIND_OPTS = Windows_Win32_System_Com_BIND_OPTS()
@@ -1498,6 +1815,7 @@ public struct Windows_Win32_System_Com_BIND_OPTS2 {
 }
 
 // Windows.Win32.System.Com.BIND_OPTS3 (synthetic:Windows_Win32_System_Com_BIND_OPTS3)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_BIND_OPTS3 {
     public var Base: Windows_Win32_System_Com_BIND_OPTS2 = Windows_Win32_System_Com_BIND_OPTS2()
@@ -1505,6 +1823,7 @@ public struct Windows_Win32_System_Com_BIND_OPTS3 {
 }
 
 // Windows.Win32.System.Com.BLOB (synthetic:Windows_Win32_System_Com_BLOB)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_BLOB {
     public var cbSize: UInt32 = 0u32
@@ -1512,6 +1831,7 @@ public struct Windows_Win32_System_Com_BLOB {
 }
 
 // Windows.Win32.System.Com.BYTE_BLOB (synthetic:Windows_Win32_System_Com_BYTE_BLOB)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_BYTE_BLOB {
     public var clSize: UInt32 = 0u32
@@ -1519,6 +1839,7 @@ public struct Windows_Win32_System_Com_BYTE_BLOB {
 }
 
 // Windows.Win32.System.Com.BYTE_SIZEDARR (synthetic:Windows_Win32_System_Com_BYTE_SIZEDARR)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_BYTE_SIZEDARR {
     public var clSize: UInt32 = 0u32
@@ -1526,28 +1847,47 @@ public struct Windows_Win32_System_Com_BYTE_SIZEDARR {
 }
 
 // Windows.Win32.System.Com.CALLCONV (synthetic:Windows_Win32_System_Com_CALLCONV)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_CALLCONV = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLCONV_CC_FASTCALL: Windows_Win32_System_Com_CALLCONV = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLCONV_CC_CDECL: Windows_Win32_System_Com_CALLCONV = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLCONV_CC_MSCPASCAL: Windows_Win32_System_Com_CALLCONV = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLCONV_CC_PASCAL: Windows_Win32_System_Com_CALLCONV = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLCONV_CC_MACPASCAL: Windows_Win32_System_Com_CALLCONV = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLCONV_CC_STDCALL: Windows_Win32_System_Com_CALLCONV = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLCONV_CC_FPFASTCALL: Windows_Win32_System_Com_CALLCONV = 5
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLCONV_CC_SYSCALL: Windows_Win32_System_Com_CALLCONV = 6
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLCONV_CC_MPWCDECL: Windows_Win32_System_Com_CALLCONV = 7
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLCONV_CC_MPWPASCAL: Windows_Win32_System_Com_CALLCONV = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLCONV_CC_MAX: Windows_Win32_System_Com_CALLCONV = 9
 
 // Windows.Win32.System.Com.CALLTYPE (synthetic:Windows_Win32_System_Com_CALLTYPE)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_CALLTYPE = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLTYPE_CALLTYPE_TOPLEVEL: Windows_Win32_System_Com_CALLTYPE = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLTYPE_CALLTYPE_NESTED: Windows_Win32_System_Com_CALLTYPE = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLTYPE_CALLTYPE_ASYNC: Windows_Win32_System_Com_CALLTYPE = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLTYPE_CALLTYPE_TOPLEVEL_CALLPENDING: Windows_Win32_System_Com_CALLTYPE = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CALLTYPE_CALLTYPE_ASYNC_CALLPENDING: Windows_Win32_System_Com_CALLTYPE = 5
 
 // Windows.Win32.System.Com.CATEGORYINFO (synthetic:Windows_Win32_System_Com_CATEGORYINFO)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_CATEGORYINFO {
     public var catid: GUID = GUID()
@@ -1556,41 +1896,75 @@ public struct Windows_Win32_System_Com_CATEGORYINFO {
 }
 
 // Windows.Win32.System.Com.CLSCTX (synthetic:Windows_Win32_System_Com_CLSCTX)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_CLSCTX = UInt32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_INPROC_SERVER: Windows_Win32_System_Com_CLSCTX = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_INPROC_HANDLER: Windows_Win32_System_Com_CLSCTX = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_LOCAL_SERVER: Windows_Win32_System_Com_CLSCTX = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_INPROC_SERVER16: Windows_Win32_System_Com_CLSCTX = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_REMOTE_SERVER: Windows_Win32_System_Com_CLSCTX = 16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_INPROC_HANDLER16: Windows_Win32_System_Com_CLSCTX = 32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_RESERVED1: Windows_Win32_System_Com_CLSCTX = 64
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_RESERVED2: Windows_Win32_System_Com_CLSCTX = 128
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_RESERVED3: Windows_Win32_System_Com_CLSCTX = 256
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_RESERVED4: Windows_Win32_System_Com_CLSCTX = 512
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_NO_CODE_DOWNLOAD: Windows_Win32_System_Com_CLSCTX = 1024
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_RESERVED5: Windows_Win32_System_Com_CLSCTX = 2048
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_NO_CUSTOM_MARSHAL: Windows_Win32_System_Com_CLSCTX = 4096
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_ENABLE_CODE_DOWNLOAD: Windows_Win32_System_Com_CLSCTX = 8192
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_NO_FAILURE_LOG: Windows_Win32_System_Com_CLSCTX = 16384
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_DISABLE_AAA: Windows_Win32_System_Com_CLSCTX = 32768
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_ENABLE_AAA: Windows_Win32_System_Com_CLSCTX = 65536
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_FROM_DEFAULT_CONTEXT: Windows_Win32_System_Com_CLSCTX = 131072
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_ACTIVATE_X86_SERVER: Windows_Win32_System_Com_CLSCTX = 262144
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_ACTIVATE_32_BIT_SERVER: Windows_Win32_System_Com_CLSCTX = 262144
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_ACTIVATE_64_BIT_SERVER: Windows_Win32_System_Com_CLSCTX = 524288
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_ENABLE_CLOAKING: Windows_Win32_System_Com_CLSCTX = 1048576
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_APPCONTAINER: Windows_Win32_System_Com_CLSCTX = 4194304
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_ACTIVATE_AAA_AS_IU: Windows_Win32_System_Com_CLSCTX = 8388608
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_RESERVED6: Windows_Win32_System_Com_CLSCTX = 16777216
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_ACTIVATE_ARM32_SERVER: Windows_Win32_System_Com_CLSCTX = 33554432
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_ALLOW_LOWER_TRUST_REGISTRATION: Windows_Win32_System_Com_CLSCTX = 67108864
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_SERVER_MUST_BE_EQUAL_OR_GREATER_PRIVILEGE: Windows_Win32_System_Com_CLSCTX = 134217728
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_DO_NOT_ELEVATE_SERVER: Windows_Win32_System_Com_CLSCTX = 268435456
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_PS_DLL: Windows_Win32_System_Com_CLSCTX = 2147483648
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_ALL: Windows_Win32_System_Com_CLSCTX = 23
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CLSCTX_CLSCTX_SERVER: Windows_Win32_System_Com_CLSCTX = 21
 
 // Windows.Win32.System.Com.COAUTHIDENTITY (synthetic:Windows_Win32_System_Com_COAUTHIDENTITY)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_COAUTHIDENTITY {
     public var User: CPointer<Unit> = CPointer<Unit>()
@@ -1603,6 +1977,7 @@ public struct Windows_Win32_System_Com_COAUTHIDENTITY {
 }
 
 // Windows.Win32.System.Com.COAUTHINFO (synthetic:Windows_Win32_System_Com_COAUTHINFO)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_COAUTHINFO {
     public var dwAuthnSvc: UInt32 = 0u32
@@ -1615,24 +1990,37 @@ public struct Windows_Win32_System_Com_COAUTHINFO {
 }
 
 // Windows.Win32.System.Com.COINIT (synthetic:Windows_Win32_System_Com_COINIT)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_COINIT = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COINIT_COINIT_APARTMENTTHREADED: Windows_Win32_System_Com_COINIT = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COINIT_COINIT_MULTITHREADED: Windows_Win32_System_Com_COINIT = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COINIT_COINIT_DISABLE_OLE1DDE: Windows_Win32_System_Com_COINIT = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COINIT_COINIT_SPEED_OVER_MEMORY: Windows_Win32_System_Com_COINIT = 8
 
 // Windows.Win32.System.Com.COINITBASE (synthetic:Windows_Win32_System_Com_COINITBASE)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_COINITBASE = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COINITBASE_COINITBASE_MULTITHREADED: Windows_Win32_System_Com_COINITBASE = 0
 
 // Windows.Win32.System.Com.COMSD (synthetic:Windows_Win32_System_Com_COMSD)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_COMSD = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COMSD_SD_LAUNCHPERMISSIONS: Windows_Win32_System_Com_COMSD = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COMSD_SD_ACCESSPERMISSIONS: Windows_Win32_System_Com_COMSD = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COMSD_SD_LAUNCHRESTRICTIONS: Windows_Win32_System_Com_COMSD = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COMSD_SD_ACCESSRESTRICTIONS: Windows_Win32_System_Com_COMSD = 3
 
 // Windows.Win32.System.Com.CONNECTDATA (synthetic:Windows_Win32_System_Com_CONNECTDATA)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_CONNECTDATA {
     public var pUnk: CPointer<Unit> = CPointer<Unit>()
@@ -1640,6 +2028,7 @@ public struct Windows_Win32_System_Com_CONNECTDATA {
 }
 
 // Windows.Win32.System.Com.COSERVERINFO (synthetic:Windows_Win32_System_Com_COSERVERINFO)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_COSERVERINFO {
     public var dwReserved1: UInt32 = 0u32
@@ -1649,49 +2038,79 @@ public struct Windows_Win32_System_Com_COSERVERINFO {
 }
 
 // Windows.Win32.System.Com.COWAIT_FLAGS (synthetic:Windows_Win32_System_Com_COWAIT_FLAGS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_COWAIT_FLAGS = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COWAIT_FLAGS_COWAIT_DEFAULT: Windows_Win32_System_Com_COWAIT_FLAGS = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COWAIT_FLAGS_COWAIT_WAITALL: Windows_Win32_System_Com_COWAIT_FLAGS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COWAIT_FLAGS_COWAIT_ALERTABLE: Windows_Win32_System_Com_COWAIT_FLAGS = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COWAIT_FLAGS_COWAIT_INPUTAVAILABLE: Windows_Win32_System_Com_COWAIT_FLAGS = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COWAIT_FLAGS_COWAIT_DISPATCH_CALLS: Windows_Win32_System_Com_COWAIT_FLAGS = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_COWAIT_FLAGS_COWAIT_DISPATCH_WINDOW_MESSAGES: Windows_Win32_System_Com_COWAIT_FLAGS = 16
 
 // Windows.Win32.System.Com.CO_DEVICE_CATALOG_COOKIE (synthetic:Windows_Win32_System_Com_CO_DEVICE_CATALOG_COOKIE)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_CO_DEVICE_CATALOG_COOKIE {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Com.CO_MARSHALING_CONTEXT_ATTRIBUTES (synthetic:Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_SOURCE_IS_APP_CONTAINER: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_1: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483648
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_2: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483647
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_3: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483646
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_4: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483645
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_5: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483644
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_6: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483643
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_7: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483642
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_8: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483641
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_9: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483640
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_10: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483639
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_11: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483638
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_12: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483637
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_13: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483636
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_14: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483635
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_15: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483634
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_16: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483633
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_17: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483632
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES_CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_18: Windows_Win32_System_Com_CO_MARSHALING_CONTEXT_ATTRIBUTES = -2147483631
 
 // Windows.Win32.System.Com.CO_MTA_USAGE_COOKIE (synthetic:Windows_Win32_System_Com_CO_MTA_USAGE_COOKIE)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_CO_MTA_USAGE_COOKIE {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Com.CSPLATFORM (synthetic:Windows_Win32_System_Com_CSPLATFORM)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_CSPLATFORM {
     public var dwPlatformId: UInt32 = 0u32
@@ -1701,6 +2120,7 @@ public struct Windows_Win32_System_Com_CSPLATFORM {
 }
 
 // Windows.Win32.System.Com.CUSTDATA (synthetic:Windows_Win32_System_Com_CUSTDATA)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_CUSTDATA {
     public var cCustData: UInt32 = 0u32
@@ -1708,6 +2128,7 @@ public struct Windows_Win32_System_Com_CUSTDATA {
 }
 
 // Windows.Win32.System.Com.CUSTDATAITEM (synthetic:Windows_Win32_System_Com_CUSTDATAITEM)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_CUSTDATAITEM {
     public var guid: GUID = GUID()
@@ -1715,12 +2136,17 @@ public struct Windows_Win32_System_Com_CUSTDATAITEM {
 }
 
 // Windows.Win32.System.Com.CWMO_FLAGS (synthetic:Windows_Win32_System_Com_CWMO_FLAGS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_CWMO_FLAGS = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CWMO_FLAGS_CWMO_DEFAULT: Windows_Win32_System_Com_CWMO_FLAGS = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CWMO_FLAGS_CWMO_DISPATCH_CALLS: Windows_Win32_System_Com_CWMO_FLAGS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_CWMO_FLAGS_CWMO_DISPATCH_WINDOW_MESSAGES: Windows_Win32_System_Com_CWMO_FLAGS = 2
 
 // Windows.Win32.System.Com.CY (synthetic:Windows_Win32_System_Com_CY)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_CY {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -1767,6 +2193,7 @@ public struct Windows_Win32_System_Com_CY {
 }
 
 // Windows.Win32.System.Com.CY._Anonymous_e__Struct (synthetic:Windows_Win32_System_Com_CY__Anonymous_e__Struct)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_CY__Anonymous_e__Struct {
     public var Lo: UInt32 = 0u32
@@ -1774,6 +2201,7 @@ public struct Windows_Win32_System_Com_CY__Anonymous_e__Struct {
 }
 
 // Windows.Win32.System.Com.ComCallData (synthetic:Windows_Win32_System_Com_ComCallData)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ComCallData {
     public var dwDispid: UInt32 = 0u32
@@ -1782,6 +2210,7 @@ public struct Windows_Win32_System_Com_ComCallData {
 }
 
 // Windows.Win32.System.Com.ContextProperty (synthetic:Windows_Win32_System_Com_ContextProperty)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ContextProperty {
     public var policyId: GUID = GUID()
@@ -1790,33 +2219,53 @@ public struct Windows_Win32_System_Com_ContextProperty {
 }
 
 // Windows.Win32.System.Com.DATADIR (synthetic:Windows_Win32_System_Com_DATADIR)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_DATADIR = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DATADIR_DATADIR_GET: Windows_Win32_System_Com_DATADIR = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DATADIR_DATADIR_SET: Windows_Win32_System_Com_DATADIR = 2
 
 // Windows.Win32.System.Com.DCOM_CALL_STATE (synthetic:Windows_Win32_System_Com_DCOM_CALL_STATE)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_DCOM_CALL_STATE = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DCOM_CALL_STATE_DCOM_NONE: Windows_Win32_System_Com_DCOM_CALL_STATE = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DCOM_CALL_STATE_DCOM_CALL_COMPLETE: Windows_Win32_System_Com_DCOM_CALL_STATE = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DCOM_CALL_STATE_DCOM_CALL_CANCELED: Windows_Win32_System_Com_DCOM_CALL_STATE = 2
 
 // Windows.Win32.System.Com.DESCKIND (synthetic:Windows_Win32_System_Com_DESCKIND)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_DESCKIND = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DESCKIND_DESCKIND_NONE: Windows_Win32_System_Com_DESCKIND = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DESCKIND_DESCKIND_FUNCDESC: Windows_Win32_System_Com_DESCKIND = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DESCKIND_DESCKIND_VARDESC: Windows_Win32_System_Com_DESCKIND = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DESCKIND_DESCKIND_TYPECOMP: Windows_Win32_System_Com_DESCKIND = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DESCKIND_DESCKIND_IMPLICITAPPOBJ: Windows_Win32_System_Com_DESCKIND = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DESCKIND_DESCKIND_MAX: Windows_Win32_System_Com_DESCKIND = 5
 
 // Windows.Win32.System.Com.DISPATCH_FLAGS (synthetic:Windows_Win32_System_Com_DISPATCH_FLAGS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_DISPATCH_FLAGS = UInt16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DISPATCH_FLAGS_DISPATCH_METHOD: Windows_Win32_System_Com_DISPATCH_FLAGS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DISPATCH_FLAGS_DISPATCH_PROPERTYGET: Windows_Win32_System_Com_DISPATCH_FLAGS = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DISPATCH_FLAGS_DISPATCH_PROPERTYPUT: Windows_Win32_System_Com_DISPATCH_FLAGS = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DISPATCH_FLAGS_DISPATCH_PROPERTYPUTREF: Windows_Win32_System_Com_DISPATCH_FLAGS = 8
 
 // Windows.Win32.System.Com.DISPPARAMS (synthetic:Windows_Win32_System_Com_DISPPARAMS)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_DISPPARAMS {
     public var rgvarg: CPointer<Unit> = CPointer<Unit>()
@@ -1826,15 +2275,23 @@ public struct Windows_Win32_System_Com_DISPPARAMS {
 }
 
 // Windows.Win32.System.Com.DVASPECT (synthetic:Windows_Win32_System_Com_DVASPECT)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_DVASPECT = UInt32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DVASPECT_DVASPECT_CONTENT: Windows_Win32_System_Com_DVASPECT = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DVASPECT_DVASPECT_THUMBNAIL: Windows_Win32_System_Com_DVASPECT = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DVASPECT_DVASPECT_ICON: Windows_Win32_System_Com_DVASPECT = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DVASPECT_DVASPECT_DOCPRINT: Windows_Win32_System_Com_DVASPECT = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DVASPECT_DVASPECT_OPAQUE: Windows_Win32_System_Com_DVASPECT = 16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_DVASPECT_DVASPECT_TRANSPARENT: Windows_Win32_System_Com_DVASPECT = 32
 
 // Windows.Win32.System.Com.DVTARGETDEVICE (synthetic:Windows_Win32_System_Com_DVTARGETDEVICE)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_DVTARGETDEVICE {
     public var tdSize: UInt32 = 0u32
@@ -1846,6 +2303,7 @@ public struct Windows_Win32_System_Com_DVTARGETDEVICE {
 }
 
 // Windows.Win32.System.Com.DWORD_BLOB (synthetic:Windows_Win32_System_Com_DWORD_BLOB)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_DWORD_BLOB {
     public var clSize: UInt32 = 0u32
@@ -1853,6 +2311,7 @@ public struct Windows_Win32_System_Com_DWORD_BLOB {
 }
 
 // Windows.Win32.System.Com.DWORD_SIZEDARR (synthetic:Windows_Win32_System_Com_DWORD_SIZEDARR)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_DWORD_SIZEDARR {
     public var clSize: UInt32 = 0u32
@@ -1860,6 +2319,7 @@ public struct Windows_Win32_System_Com_DWORD_SIZEDARR {
 }
 
 // Windows.Win32.System.Com.ELEMDESC (synthetic:Windows_Win32_System_Com_ELEMDESC)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ELEMDESC {
     public var tdesc: Windows_Win32_System_Com_TYPEDESC = Windows_Win32_System_Com_TYPEDESC()
@@ -1867,6 +2327,7 @@ public struct Windows_Win32_System_Com_ELEMDESC {
 }
 
 // Windows.Win32.System.Com.ELEMDESC._Anonymous_e__Union (synthetic:Windows_Win32_System_Com_ELEMDESC__Anonymous_e__Union)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ELEMDESC__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
@@ -1917,25 +2378,43 @@ public struct Windows_Win32_System_Com_ELEMDESC__Anonymous_e__Union {
 }
 
 // Windows.Win32.System.Com.EOLE_AUTHENTICATION_CAPABILITIES (synthetic:Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_NONE: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_MUTUAL_AUTH: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_STATIC_CLOAKING: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_DYNAMIC_CLOAKING: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 64
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_ANY_AUTHORITY: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 128
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_MAKE_FULLSIC: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 256
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_DEFAULT: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 2048
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_SECURE_REFS: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_ACCESS_CONTROL: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_APPID: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_DYNAMIC: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_REQUIRE_FULLSIC: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 512
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_AUTO_IMPERSONATE: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 1024
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_DISABLE_AAA: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 4096
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_NO_CUSTOM_MARSHAL: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 8192
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES_EOAC_RESERVED1: Windows_Win32_System_Com_EOLE_AUTHENTICATION_CAPABILITIES = 16384
 
 // Windows.Win32.System.Com.EXCEPINFO (synthetic:Windows_Win32_System_Com_EXCEPINFO)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_EXCEPINFO {
     public var wCode: UInt16 = 0u16
@@ -1950,12 +2429,17 @@ public struct Windows_Win32_System_Com_EXCEPINFO {
 }
 
 // Windows.Win32.System.Com.EXTCONN (synthetic:Windows_Win32_System_Com_EXTCONN)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_EXTCONN = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EXTCONN_EXTCONN_STRONG: Windows_Win32_System_Com_EXTCONN = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EXTCONN_EXTCONN_WEAK: Windows_Win32_System_Com_EXTCONN = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_EXTCONN_EXTCONN_CALLABLE: Windows_Win32_System_Com_EXTCONN = 4
 
 // Windows.Win32.System.Com.FLAGGED_BYTE_BLOB (synthetic:Windows_Win32_System_Com_FLAGGED_BYTE_BLOB)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_FLAGGED_BYTE_BLOB {
     public var fFlags: UInt32 = 0u32
@@ -1964,6 +2448,7 @@ public struct Windows_Win32_System_Com_FLAGGED_BYTE_BLOB {
 }
 
 // Windows.Win32.System.Com.FLAGGED_WORD_BLOB (synthetic:Windows_Win32_System_Com_FLAGGED_WORD_BLOB)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_FLAGGED_WORD_BLOB {
     public var fFlags: UInt32 = 0u32
@@ -1972,6 +2457,7 @@ public struct Windows_Win32_System_Com_FLAGGED_WORD_BLOB {
 }
 
 // Windows.Win32.System.Com.FLAG_STGMEDIUM (synthetic:Windows_Win32_System_Com_FLAG_STGMEDIUM)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_FLAG_STGMEDIUM {
     public var ContextFlags: Int32 = 0i32
@@ -1980,6 +2466,7 @@ public struct Windows_Win32_System_Com_FLAG_STGMEDIUM {
 }
 
 // Windows.Win32.System.Com.FORMATETC (synthetic:Windows_Win32_System_Com_FORMATETC)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_FORMATETC {
     public var cfFormat: UInt16 = 0u16
@@ -1990,6 +2477,7 @@ public struct Windows_Win32_System_Com_FORMATETC {
 }
 
 // Windows.Win32.System.Com.FUNCDESC (synthetic:Windows_Win32_System_Com_FUNCDESC)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_FUNCDESC {
     public var memid: Int32 = 0i32
@@ -2007,30 +2495,51 @@ public struct Windows_Win32_System_Com_FUNCDESC {
 }
 
 // Windows.Win32.System.Com.FUNCFLAGS (synthetic:Windows_Win32_System_Com_FUNCFLAGS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_FUNCFLAGS = UInt16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCFLAGS_FUNCFLAG_FRESTRICTED: Windows_Win32_System_Com_FUNCFLAGS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCFLAGS_FUNCFLAG_FSOURCE: Windows_Win32_System_Com_FUNCFLAGS = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCFLAGS_FUNCFLAG_FBINDABLE: Windows_Win32_System_Com_FUNCFLAGS = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCFLAGS_FUNCFLAG_FREQUESTEDIT: Windows_Win32_System_Com_FUNCFLAGS = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCFLAGS_FUNCFLAG_FDISPLAYBIND: Windows_Win32_System_Com_FUNCFLAGS = 16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCFLAGS_FUNCFLAG_FDEFAULTBIND: Windows_Win32_System_Com_FUNCFLAGS = 32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCFLAGS_FUNCFLAG_FHIDDEN: Windows_Win32_System_Com_FUNCFLAGS = 64
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCFLAGS_FUNCFLAG_FUSESGETLASTERROR: Windows_Win32_System_Com_FUNCFLAGS = 128
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCFLAGS_FUNCFLAG_FDEFAULTCOLLELEM: Windows_Win32_System_Com_FUNCFLAGS = 256
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCFLAGS_FUNCFLAG_FUIDEFAULT: Windows_Win32_System_Com_FUNCFLAGS = 512
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCFLAGS_FUNCFLAG_FNONBROWSABLE: Windows_Win32_System_Com_FUNCFLAGS = 1024
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCFLAGS_FUNCFLAG_FREPLACEABLE: Windows_Win32_System_Com_FUNCFLAGS = 2048
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCFLAGS_FUNCFLAG_FIMMEDIATEBIND: Windows_Win32_System_Com_FUNCFLAGS = 4096
 
 // Windows.Win32.System.Com.FUNCKIND (synthetic:Windows_Win32_System_Com_FUNCKIND)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_FUNCKIND = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCKIND_FUNC_VIRTUAL: Windows_Win32_System_Com_FUNCKIND = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCKIND_FUNC_PUREVIRTUAL: Windows_Win32_System_Com_FUNCKIND = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCKIND_FUNC_NONVIRTUAL: Windows_Win32_System_Com_FUNCKIND = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCKIND_FUNC_STATIC: Windows_Win32_System_Com_FUNCKIND = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_FUNCKIND_FUNC_DISPATCH: Windows_Win32_System_Com_FUNCKIND = 4
 
 // Windows.Win32.System.Com.GDI_OBJECT (synthetic:Windows_Win32_System_Com_GDI_OBJECT)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_GDI_OBJECT {
     public var ObjectType: UInt32 = 0u32
@@ -2038,6 +2547,7 @@ public struct Windows_Win32_System_Com_GDI_OBJECT {
 }
 
 // Windows.Win32.System.Com.GDI_OBJECT._u_e__Struct (synthetic:Windows_Win32_System_Com_GDI_OBJECT__u_e__Struct)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_GDI_OBJECT__u_e__Struct {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -2110,49 +2620,83 @@ public struct Windows_Win32_System_Com_GDI_OBJECT__u_e__Struct {
 }
 
 // Windows.Win32.System.Com.GLOBALOPT_EH_VALUES (synthetic:Windows_Win32_System_Com_GLOBALOPT_EH_VALUES)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_GLOBALOPT_EH_VALUES = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_EH_VALUES_COMGLB_EXCEPTION_HANDLE: Windows_Win32_System_Com_GLOBALOPT_EH_VALUES = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_EH_VALUES_COMGLB_EXCEPTION_DONOT_HANDLE_FATAL: Windows_Win32_System_Com_GLOBALOPT_EH_VALUES = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_EH_VALUES_COMGLB_EXCEPTION_DONOT_HANDLE: Windows_Win32_System_Com_GLOBALOPT_EH_VALUES = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_EH_VALUES_COMGLB_EXCEPTION_DONOT_HANDLE_ANY: Windows_Win32_System_Com_GLOBALOPT_EH_VALUES = 2
 
 // Windows.Win32.System.Com.GLOBALOPT_PROPERTIES (synthetic:Windows_Win32_System_Com_GLOBALOPT_PROPERTIES)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_GLOBALOPT_PROPERTIES = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_PROPERTIES_COMGLB_EXCEPTION_HANDLING: Windows_Win32_System_Com_GLOBALOPT_PROPERTIES = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_PROPERTIES_COMGLB_APPID: Windows_Win32_System_Com_GLOBALOPT_PROPERTIES = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_PROPERTIES_COMGLB_RPC_THREADPOOL_SETTING: Windows_Win32_System_Com_GLOBALOPT_PROPERTIES = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_PROPERTIES_COMGLB_RO_SETTINGS: Windows_Win32_System_Com_GLOBALOPT_PROPERTIES = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_PROPERTIES_COMGLB_UNMARSHALING_POLICY: Windows_Win32_System_Com_GLOBALOPT_PROPERTIES = 5
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_PROPERTIES_COMGLB_PROPERTIES_RESERVED1: Windows_Win32_System_Com_GLOBALOPT_PROPERTIES = 6
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_PROPERTIES_COMGLB_PROPERTIES_RESERVED2: Windows_Win32_System_Com_GLOBALOPT_PROPERTIES = 7
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_PROPERTIES_COMGLB_PROPERTIES_RESERVED3: Windows_Win32_System_Com_GLOBALOPT_PROPERTIES = 8
 
 // Windows.Win32.System.Com.GLOBALOPT_RO_FLAGS (synthetic:Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS_COMGLB_STA_MODALLOOP_REMOVE_TOUCH_MESSAGES: Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS_COMGLB_STA_MODALLOOP_SHARED_QUEUE_REMOVE_INPUT_MESSAGES: Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS_COMGLB_STA_MODALLOOP_SHARED_QUEUE_DONOT_REMOVE_INPUT_MESSAGES: Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS_COMGLB_FAST_RUNDOWN: Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS_COMGLB_RESERVED1: Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS = 16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS_COMGLB_RESERVED2: Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS = 32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS_COMGLB_RESERVED3: Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS = 64
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS_COMGLB_STA_MODALLOOP_SHARED_QUEUE_REORDER_POINTER_MESSAGES: Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS = 128
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS_COMGLB_RESERVED4: Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS = 256
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS_COMGLB_RESERVED5: Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS = 512
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS_COMGLB_RESERVED6: Windows_Win32_System_Com_GLOBALOPT_RO_FLAGS = 1024
 
 // Windows.Win32.System.Com.GLOBALOPT_RPCTP_VALUES (synthetic:Windows_Win32_System_Com_GLOBALOPT_RPCTP_VALUES)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_GLOBALOPT_RPCTP_VALUES = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_RPCTP_VALUES_COMGLB_RPC_THREADPOOL_SETTING_DEFAULT_POOL: Windows_Win32_System_Com_GLOBALOPT_RPCTP_VALUES = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_RPCTP_VALUES_COMGLB_RPC_THREADPOOL_SETTING_PRIVATE_POOL: Windows_Win32_System_Com_GLOBALOPT_RPCTP_VALUES = 1
 
 // Windows.Win32.System.Com.GLOBALOPT_UNMARSHALING_POLICY_VALUES (synthetic:Windows_Win32_System_Com_GLOBALOPT_UNMARSHALING_POLICY_VALUES)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_GLOBALOPT_UNMARSHALING_POLICY_VALUES = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_UNMARSHALING_POLICY_VALUES_COMGLB_UNMARSHALING_POLICY_NORMAL: Windows_Win32_System_Com_GLOBALOPT_UNMARSHALING_POLICY_VALUES = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_UNMARSHALING_POLICY_VALUES_COMGLB_UNMARSHALING_POLICY_STRONG: Windows_Win32_System_Com_GLOBALOPT_UNMARSHALING_POLICY_VALUES = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_GLOBALOPT_UNMARSHALING_POLICY_VALUES_COMGLB_UNMARSHALING_POLICY_HYBRID: Windows_Win32_System_Com_GLOBALOPT_UNMARSHALING_POLICY_VALUES = 2
 
 // Windows.Win32.System.Com.HYPER_SIZEDARR (synthetic:Windows_Win32_System_Com_HYPER_SIZEDARR)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_HYPER_SIZEDARR {
     public var clSize: UInt32 = 0u32
@@ -2160,6 +2704,7 @@ public struct Windows_Win32_System_Com_HYPER_SIZEDARR {
 }
 
 // Windows.Win32.System.Com.IActivationFilter (synthetic:Windows_Win32_System_Com_IActivationFilter)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IActivationFilter <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -2237,6 +2782,7 @@ public class Windows_Win32_System_Com_IActivationFilter <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IActivationFilter <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IActivationFilter> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IActivationFilter): CPointer<Unit> {
         value.asRaw()
@@ -2269,6 +2815,7 @@ extend Windows_Win32_System_Com_IActivationFilter <: windows_core.HandleWinrtTyp
 }
 
 // Windows.Win32.System.Com.IActivationFilterVtbl (synthetic:Windows_Win32_System_Com_IActivationFilterVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IActivationFilterVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -2277,6 +2824,7 @@ public struct Windows_Win32_System_Com_IActivationFilterVtbl {
 }
 
 // Windows.Win32.System.Com.IAddrExclusionControl (synthetic:Windows_Win32_System_Com_IAddrExclusionControl)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IAddrExclusionControl <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -2354,6 +2902,7 @@ public class Windows_Win32_System_Com_IAddrExclusionControl <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IAddrExclusionControl <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAddrExclusionControl> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IAddrExclusionControl): CPointer<Unit> {
         value.asRaw()
@@ -2386,6 +2935,7 @@ extend Windows_Win32_System_Com_IAddrExclusionControl <: windows_core.HandleWinr
 }
 
 // Windows.Win32.System.Com.IAddrExclusionControlVtbl (synthetic:Windows_Win32_System_Com_IAddrExclusionControlVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IAddrExclusionControlVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -2395,6 +2945,7 @@ public struct Windows_Win32_System_Com_IAddrExclusionControlVtbl {
 }
 
 // Windows.Win32.System.Com.IAddrTrackingControl (synthetic:Windows_Win32_System_Com_IAddrTrackingControl)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IAddrTrackingControl <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -2472,6 +3023,7 @@ public class Windows_Win32_System_Com_IAddrTrackingControl <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IAddrTrackingControl <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAddrTrackingControl> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IAddrTrackingControl): CPointer<Unit> {
         value.asRaw()
@@ -2504,6 +3056,7 @@ extend Windows_Win32_System_Com_IAddrTrackingControl <: windows_core.HandleWinrt
 }
 
 // Windows.Win32.System.Com.IAddrTrackingControlVtbl (synthetic:Windows_Win32_System_Com_IAddrTrackingControlVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IAddrTrackingControlVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -2513,6 +3066,7 @@ public struct Windows_Win32_System_Com_IAddrTrackingControlVtbl {
 }
 
 // Windows.Win32.System.Com.IAdviseSink (synthetic:Windows_Win32_System_Com_IAdviseSink)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IAdviseSink <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -2590,6 +3144,7 @@ public class Windows_Win32_System_Com_IAdviseSink <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IAdviseSink <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAdviseSink> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IAdviseSink): CPointer<Unit> {
         value.asRaw()
@@ -2622,6 +3177,7 @@ extend Windows_Win32_System_Com_IAdviseSink <: windows_core.HandleWinrtType<Wind
 }
 
 // Windows.Win32.System.Com.IAdviseSinkVtbl (synthetic:Windows_Win32_System_Com_IAdviseSinkVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IAdviseSinkVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -2634,6 +3190,7 @@ public struct Windows_Win32_System_Com_IAdviseSinkVtbl {
 }
 
 // Windows.Win32.System.Com.IAdviseSink2 (synthetic:Windows_Win32_System_Com_IAdviseSink2)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IAdviseSink2 <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -2711,6 +3268,7 @@ public class Windows_Win32_System_Com_IAdviseSink2 <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IAdviseSink2 <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAdviseSink2> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IAdviseSink2): CPointer<Unit> {
         value.asRaw()
@@ -2743,6 +3301,7 @@ extend Windows_Win32_System_Com_IAdviseSink2 <: windows_core.HandleWinrtType<Win
 }
 
 // Windows.Win32.System.Com.IAdviseSink2Vtbl (synthetic:Windows_Win32_System_Com_IAdviseSink2Vtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IAdviseSink2Vtbl {
     public var base_: Windows_Win32_System_Com_IAdviseSinkVtbl = Windows_Win32_System_Com_IAdviseSinkVtbl()
@@ -2751,6 +3310,7 @@ public struct Windows_Win32_System_Com_IAdviseSink2Vtbl {
 }
 
 // Windows.Win32.System.Com.IAgileObject (synthetic:Windows_Win32_System_Com_IAgileObject)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IAgileObject <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -2828,6 +3388,7 @@ public class Windows_Win32_System_Com_IAgileObject <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IAgileObject <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAgileObject> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IAgileObject): CPointer<Unit> {
         value.asRaw()
@@ -2860,6 +3421,7 @@ extend Windows_Win32_System_Com_IAgileObject <: windows_core.HandleWinrtType<Win
 }
 
 // Windows.Win32.System.Com.IAgileObjectVtbl (synthetic:Windows_Win32_System_Com_IAgileObjectVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IAgileObjectVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -2867,6 +3429,7 @@ public struct Windows_Win32_System_Com_IAgileObjectVtbl {
 }
 
 // Windows.Win32.System.Com.IAsyncManager (synthetic:Windows_Win32_System_Com_IAsyncManager)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IAsyncManager <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -2944,6 +3507,7 @@ public class Windows_Win32_System_Com_IAsyncManager <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IAsyncManager <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAsyncManager> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IAsyncManager): CPointer<Unit> {
         value.asRaw()
@@ -2976,6 +3540,7 @@ extend Windows_Win32_System_Com_IAsyncManager <: windows_core.HandleWinrtType<Wi
 }
 
 // Windows.Win32.System.Com.IAsyncManagerVtbl (synthetic:Windows_Win32_System_Com_IAsyncManagerVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IAsyncManagerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -2986,6 +3551,7 @@ public struct Windows_Win32_System_Com_IAsyncManagerVtbl {
 }
 
 // Windows.Win32.System.Com.IAsyncRpcChannelBuffer (synthetic:Windows_Win32_System_Com_IAsyncRpcChannelBuffer)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IAsyncRpcChannelBuffer <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -3063,6 +3629,7 @@ public class Windows_Win32_System_Com_IAsyncRpcChannelBuffer <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IAsyncRpcChannelBuffer <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAsyncRpcChannelBuffer> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IAsyncRpcChannelBuffer): CPointer<Unit> {
         value.asRaw()
@@ -3095,6 +3662,7 @@ extend Windows_Win32_System_Com_IAsyncRpcChannelBuffer <: windows_core.HandleWin
 }
 
 // Windows.Win32.System.Com.IAsyncRpcChannelBufferVtbl (synthetic:Windows_Win32_System_Com_IAsyncRpcChannelBufferVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IAsyncRpcChannelBufferVtbl {
     public var base_: Windows_Win32_System_Com_IRpcChannelBuffer2Vtbl = Windows_Win32_System_Com_IRpcChannelBuffer2Vtbl()
@@ -3105,6 +3673,7 @@ public struct Windows_Win32_System_Com_IAsyncRpcChannelBufferVtbl {
 }
 
 // Windows.Win32.System.Com.IAuthenticate (synthetic:Windows_Win32_System_Com_IAuthenticate)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IAuthenticate <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -3182,6 +3751,7 @@ public class Windows_Win32_System_Com_IAuthenticate <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IAuthenticate <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAuthenticate> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IAuthenticate): CPointer<Unit> {
         value.asRaw()
@@ -3214,6 +3784,7 @@ extend Windows_Win32_System_Com_IAuthenticate <: windows_core.HandleWinrtType<Wi
 }
 
 // Windows.Win32.System.Com.IAuthenticateVtbl (synthetic:Windows_Win32_System_Com_IAuthenticateVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IAuthenticateVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -3222,6 +3793,7 @@ public struct Windows_Win32_System_Com_IAuthenticateVtbl {
 }
 
 // Windows.Win32.System.Com.IAuthenticateEx (synthetic:Windows_Win32_System_Com_IAuthenticateEx)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IAuthenticateEx <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -3299,6 +3871,7 @@ public class Windows_Win32_System_Com_IAuthenticateEx <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IAuthenticateEx <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IAuthenticateEx> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IAuthenticateEx): CPointer<Unit> {
         value.asRaw()
@@ -3331,6 +3904,7 @@ extend Windows_Win32_System_Com_IAuthenticateEx <: windows_core.HandleWinrtType<
 }
 
 // Windows.Win32.System.Com.IAuthenticateExVtbl (synthetic:Windows_Win32_System_Com_IAuthenticateExVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IAuthenticateExVtbl {
     public var base_: Windows_Win32_System_Com_IAuthenticateVtbl = Windows_Win32_System_Com_IAuthenticateVtbl()
@@ -3339,6 +3913,7 @@ public struct Windows_Win32_System_Com_IAuthenticateExVtbl {
 }
 
 // Windows.Win32.System.Com.IBindCtx (synthetic:Windows_Win32_System_Com_IBindCtx)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IBindCtx <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -3416,6 +3991,7 @@ public class Windows_Win32_System_Com_IBindCtx <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IBindCtx <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IBindCtx> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IBindCtx): CPointer<Unit> {
         value.asRaw()
@@ -3448,6 +4024,7 @@ extend Windows_Win32_System_Com_IBindCtx <: windows_core.HandleWinrtType<Windows
 }
 
 // Windows.Win32.System.Com.IBindCtxVtbl (synthetic:Windows_Win32_System_Com_IBindCtxVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IBindCtxVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -3465,6 +4042,7 @@ public struct Windows_Win32_System_Com_IBindCtxVtbl {
 }
 
 // Windows.Win32.System.Com.IBindHost (synthetic:Windows_Win32_System_Com_IBindHost)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IBindHost <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -3542,6 +4120,7 @@ public class Windows_Win32_System_Com_IBindHost <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IBindHost <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IBindHost> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IBindHost): CPointer<Unit> {
         value.asRaw()
@@ -3574,6 +4153,7 @@ extend Windows_Win32_System_Com_IBindHost <: windows_core.HandleWinrtType<Window
 }
 
 // Windows.Win32.System.Com.IBindHostVtbl (synthetic:Windows_Win32_System_Com_IBindHostVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IBindHostVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -3584,6 +4164,7 @@ public struct Windows_Win32_System_Com_IBindHostVtbl {
 }
 
 // Windows.Win32.System.Com.IBindStatusCallback (synthetic:Windows_Win32_System_Com_IBindStatusCallback)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IBindStatusCallback <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -3661,6 +4242,7 @@ public class Windows_Win32_System_Com_IBindStatusCallback <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IBindStatusCallback <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IBindStatusCallback> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IBindStatusCallback): CPointer<Unit> {
         value.asRaw()
@@ -3693,6 +4275,7 @@ extend Windows_Win32_System_Com_IBindStatusCallback <: windows_core.HandleWinrtT
 }
 
 // Windows.Win32.System.Com.IBindStatusCallbackVtbl (synthetic:Windows_Win32_System_Com_IBindStatusCallbackVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IBindStatusCallbackVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -3708,6 +4291,7 @@ public struct Windows_Win32_System_Com_IBindStatusCallbackVtbl {
 }
 
 // Windows.Win32.System.Com.IBindStatusCallbackEx (synthetic:Windows_Win32_System_Com_IBindStatusCallbackEx)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IBindStatusCallbackEx <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -3785,6 +4369,7 @@ public class Windows_Win32_System_Com_IBindStatusCallbackEx <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IBindStatusCallbackEx <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IBindStatusCallbackEx> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IBindStatusCallbackEx): CPointer<Unit> {
         value.asRaw()
@@ -3817,6 +4402,7 @@ extend Windows_Win32_System_Com_IBindStatusCallbackEx <: windows_core.HandleWinr
 }
 
 // Windows.Win32.System.Com.IBindStatusCallbackExVtbl (synthetic:Windows_Win32_System_Com_IBindStatusCallbackExVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IBindStatusCallbackExVtbl {
     public var base_: Windows_Win32_System_Com_IBindStatusCallbackVtbl = Windows_Win32_System_Com_IBindStatusCallbackVtbl()
@@ -3825,6 +4411,7 @@ public struct Windows_Win32_System_Com_IBindStatusCallbackExVtbl {
 }
 
 // Windows.Win32.System.Com.IBinding (synthetic:Windows_Win32_System_Com_IBinding)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IBinding <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -3902,6 +4489,7 @@ public class Windows_Win32_System_Com_IBinding <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IBinding <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IBinding> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IBinding): CPointer<Unit> {
         value.asRaw()
@@ -3934,6 +4522,7 @@ extend Windows_Win32_System_Com_IBinding <: windows_core.HandleWinrtType<Windows
 }
 
 // Windows.Win32.System.Com.IBindingVtbl (synthetic:Windows_Win32_System_Com_IBindingVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IBindingVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -3947,6 +4536,7 @@ public struct Windows_Win32_System_Com_IBindingVtbl {
 }
 
 // Windows.Win32.System.Com.IBlockingLock (synthetic:Windows_Win32_System_Com_IBlockingLock)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IBlockingLock <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -4024,6 +4614,7 @@ public class Windows_Win32_System_Com_IBlockingLock <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IBlockingLock <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IBlockingLock> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IBlockingLock): CPointer<Unit> {
         value.asRaw()
@@ -4056,6 +4647,7 @@ extend Windows_Win32_System_Com_IBlockingLock <: windows_core.HandleWinrtType<Wi
 }
 
 // Windows.Win32.System.Com.IBlockingLockVtbl (synthetic:Windows_Win32_System_Com_IBlockingLockVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IBlockingLockVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -4065,6 +4657,7 @@ public struct Windows_Win32_System_Com_IBlockingLockVtbl {
 }
 
 // Windows.Win32.System.Com.ICallFactory (synthetic:Windows_Win32_System_Com_ICallFactory)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ICallFactory <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -4142,6 +4735,7 @@ public class Windows_Win32_System_Com_ICallFactory <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ICallFactory <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ICallFactory> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ICallFactory): CPointer<Unit> {
         value.asRaw()
@@ -4174,6 +4768,7 @@ extend Windows_Win32_System_Com_ICallFactory <: windows_core.HandleWinrtType<Win
 }
 
 // Windows.Win32.System.Com.ICallFactoryVtbl (synthetic:Windows_Win32_System_Com_ICallFactoryVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ICallFactoryVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -4182,6 +4777,7 @@ public struct Windows_Win32_System_Com_ICallFactoryVtbl {
 }
 
 // Windows.Win32.System.Com.ICancelMethodCalls (synthetic:Windows_Win32_System_Com_ICancelMethodCalls)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ICancelMethodCalls <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -4259,6 +4855,7 @@ public class Windows_Win32_System_Com_ICancelMethodCalls <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ICancelMethodCalls <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ICancelMethodCalls> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ICancelMethodCalls): CPointer<Unit> {
         value.asRaw()
@@ -4291,6 +4888,7 @@ extend Windows_Win32_System_Com_ICancelMethodCalls <: windows_core.HandleWinrtTy
 }
 
 // Windows.Win32.System.Com.ICancelMethodCallsVtbl (synthetic:Windows_Win32_System_Com_ICancelMethodCallsVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ICancelMethodCallsVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -4300,6 +4898,7 @@ public struct Windows_Win32_System_Com_ICancelMethodCallsVtbl {
 }
 
 // Windows.Win32.System.Com.ICatInformation (synthetic:Windows_Win32_System_Com_ICatInformation)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ICatInformation <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -4377,6 +4976,7 @@ public class Windows_Win32_System_Com_ICatInformation <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ICatInformation <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ICatInformation> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ICatInformation): CPointer<Unit> {
         value.asRaw()
@@ -4409,6 +5009,7 @@ extend Windows_Win32_System_Com_ICatInformation <: windows_core.HandleWinrtType<
 }
 
 // Windows.Win32.System.Com.ICatInformationVtbl (synthetic:Windows_Win32_System_Com_ICatInformationVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ICatInformationVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -4422,6 +5023,7 @@ public struct Windows_Win32_System_Com_ICatInformationVtbl {
 }
 
 // Windows.Win32.System.Com.ICatRegister (synthetic:Windows_Win32_System_Com_ICatRegister)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ICatRegister <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -4499,6 +5101,7 @@ public class Windows_Win32_System_Com_ICatRegister <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ICatRegister <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ICatRegister> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ICatRegister): CPointer<Unit> {
         value.asRaw()
@@ -4531,6 +5134,7 @@ extend Windows_Win32_System_Com_ICatRegister <: windows_core.HandleWinrtType<Win
 }
 
 // Windows.Win32.System.Com.ICatRegisterVtbl (synthetic:Windows_Win32_System_Com_ICatRegisterVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ICatRegisterVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -4544,6 +5148,7 @@ public struct Windows_Win32_System_Com_ICatRegisterVtbl {
 }
 
 // Windows.Win32.System.Com.IChannelHook (synthetic:Windows_Win32_System_Com_IChannelHook)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IChannelHook <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -4621,6 +5226,7 @@ public class Windows_Win32_System_Com_IChannelHook <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IChannelHook <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IChannelHook> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IChannelHook): CPointer<Unit> {
         value.asRaw()
@@ -4653,6 +5259,7 @@ extend Windows_Win32_System_Com_IChannelHook <: windows_core.HandleWinrtType<Win
 }
 
 // Windows.Win32.System.Com.IChannelHookVtbl (synthetic:Windows_Win32_System_Com_IChannelHookVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IChannelHookVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -4666,6 +5273,7 @@ public struct Windows_Win32_System_Com_IChannelHookVtbl {
 }
 
 // Windows.Win32.System.Com.IClassActivator (synthetic:Windows_Win32_System_Com_IClassActivator)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IClassActivator <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -4743,6 +5351,7 @@ public class Windows_Win32_System_Com_IClassActivator <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IClassActivator <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IClassActivator> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IClassActivator): CPointer<Unit> {
         value.asRaw()
@@ -4775,6 +5384,7 @@ extend Windows_Win32_System_Com_IClassActivator <: windows_core.HandleWinrtType<
 }
 
 // Windows.Win32.System.Com.IClassActivatorVtbl (synthetic:Windows_Win32_System_Com_IClassActivatorVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IClassActivatorVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -4783,6 +5393,7 @@ public struct Windows_Win32_System_Com_IClassActivatorVtbl {
 }
 
 // Windows.Win32.System.Com.IClassFactory (synthetic:Windows_Win32_System_Com_IClassFactory)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IClassFactory <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -4860,6 +5471,7 @@ public class Windows_Win32_System_Com_IClassFactory <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IClassFactory <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IClassFactory> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IClassFactory): CPointer<Unit> {
         value.asRaw()
@@ -4892,6 +5504,7 @@ extend Windows_Win32_System_Com_IClassFactory <: windows_core.HandleWinrtType<Wi
 }
 
 // Windows.Win32.System.Com.IClassFactoryVtbl (synthetic:Windows_Win32_System_Com_IClassFactoryVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IClassFactoryVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -4901,6 +5514,7 @@ public struct Windows_Win32_System_Com_IClassFactoryVtbl {
 }
 
 // Windows.Win32.System.Com.IClientSecurity (synthetic:Windows_Win32_System_Com_IClientSecurity)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IClientSecurity <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -4978,6 +5592,7 @@ public class Windows_Win32_System_Com_IClientSecurity <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IClientSecurity <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IClientSecurity> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IClientSecurity): CPointer<Unit> {
         value.asRaw()
@@ -5010,6 +5625,7 @@ extend Windows_Win32_System_Com_IClientSecurity <: windows_core.HandleWinrtType<
 }
 
 // Windows.Win32.System.Com.IClientSecurityVtbl (synthetic:Windows_Win32_System_Com_IClientSecurityVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IClientSecurityVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -5020,6 +5636,7 @@ public struct Windows_Win32_System_Com_IClientSecurityVtbl {
 }
 
 // Windows.Win32.System.Com.IComThreadingInfo (synthetic:Windows_Win32_System_Com_IComThreadingInfo)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IComThreadingInfo <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -5097,6 +5714,7 @@ public class Windows_Win32_System_Com_IComThreadingInfo <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IComThreadingInfo <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IComThreadingInfo> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IComThreadingInfo): CPointer<Unit> {
         value.asRaw()
@@ -5129,6 +5747,7 @@ extend Windows_Win32_System_Com_IComThreadingInfo <: windows_core.HandleWinrtTyp
 }
 
 // Windows.Win32.System.Com.IComThreadingInfoVtbl (synthetic:Windows_Win32_System_Com_IComThreadingInfoVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IComThreadingInfoVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -5140,6 +5759,7 @@ public struct Windows_Win32_System_Com_IComThreadingInfoVtbl {
 }
 
 // Windows.Win32.System.Com.IConnectionPoint (synthetic:Windows_Win32_System_Com_IConnectionPoint)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IConnectionPoint <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -5217,6 +5837,7 @@ public class Windows_Win32_System_Com_IConnectionPoint <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IConnectionPoint <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IConnectionPoint> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IConnectionPoint): CPointer<Unit> {
         value.asRaw()
@@ -5249,6 +5870,7 @@ extend Windows_Win32_System_Com_IConnectionPoint <: windows_core.HandleWinrtType
 }
 
 // Windows.Win32.System.Com.IConnectionPointVtbl (synthetic:Windows_Win32_System_Com_IConnectionPointVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IConnectionPointVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -5261,6 +5883,7 @@ public struct Windows_Win32_System_Com_IConnectionPointVtbl {
 }
 
 // Windows.Win32.System.Com.IConnectionPointContainer (synthetic:Windows_Win32_System_Com_IConnectionPointContainer)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IConnectionPointContainer <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -5338,6 +5961,7 @@ public class Windows_Win32_System_Com_IConnectionPointContainer <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IConnectionPointContainer <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IConnectionPointContainer> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IConnectionPointContainer): CPointer<Unit> {
         value.asRaw()
@@ -5370,6 +5994,7 @@ extend Windows_Win32_System_Com_IConnectionPointContainer <: windows_core.Handle
 }
 
 // Windows.Win32.System.Com.IConnectionPointContainerVtbl (synthetic:Windows_Win32_System_Com_IConnectionPointContainerVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IConnectionPointContainerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -5379,6 +6004,7 @@ public struct Windows_Win32_System_Com_IConnectionPointContainerVtbl {
 }
 
 // Windows.Win32.System.Com.IContext (synthetic:Windows_Win32_System_Com_IContext)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IContext <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -5456,6 +6082,7 @@ public class Windows_Win32_System_Com_IContext <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IContext <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IContext> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IContext): CPointer<Unit> {
         value.asRaw()
@@ -5488,6 +6115,7 @@ extend Windows_Win32_System_Com_IContext <: windows_core.HandleWinrtType<Windows
 }
 
 // Windows.Win32.System.Com.IContextVtbl (synthetic:Windows_Win32_System_Com_IContextVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IContextVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -5499,6 +6127,7 @@ public struct Windows_Win32_System_Com_IContextVtbl {
 }
 
 // Windows.Win32.System.Com.IContextCallback (synthetic:Windows_Win32_System_Com_IContextCallback)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IContextCallback <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -5576,6 +6205,7 @@ public class Windows_Win32_System_Com_IContextCallback <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IContextCallback <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IContextCallback> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IContextCallback): CPointer<Unit> {
         value.asRaw()
@@ -5608,6 +6238,7 @@ extend Windows_Win32_System_Com_IContextCallback <: windows_core.HandleWinrtType
 }
 
 // Windows.Win32.System.Com.IContextCallbackVtbl (synthetic:Windows_Win32_System_Com_IContextCallbackVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IContextCallbackVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -5616,6 +6247,7 @@ public struct Windows_Win32_System_Com_IContextCallbackVtbl {
 }
 
 // Windows.Win32.System.Com.IDLDESC (synthetic:Windows_Win32_System_Com_IDLDESC)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IDLDESC {
     public var dwReserved: CPointer<Unit> = CPointer<Unit>()
@@ -5623,14 +6255,21 @@ public struct Windows_Win32_System_Com_IDLDESC {
 }
 
 // Windows.Win32.System.Com.IDLFLAGS (synthetic:Windows_Win32_System_Com_IDLFLAGS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_IDLFLAGS = UInt16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_IDLFLAGS_IDLFLAG_NONE: Windows_Win32_System_Com_IDLFLAGS = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_IDLFLAGS_IDLFLAG_FIN: Windows_Win32_System_Com_IDLFLAGS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_IDLFLAGS_IDLFLAG_FOUT: Windows_Win32_System_Com_IDLFLAGS = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_IDLFLAGS_IDLFLAG_FLCID: Windows_Win32_System_Com_IDLFLAGS = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_IDLFLAGS_IDLFLAG_FRETVAL: Windows_Win32_System_Com_IDLFLAGS = 8
 
 // Windows.Win32.System.Com.IDataAdviseHolder (synthetic:Windows_Win32_System_Com_IDataAdviseHolder)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IDataAdviseHolder <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -5708,6 +6347,7 @@ public class Windows_Win32_System_Com_IDataAdviseHolder <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IDataAdviseHolder <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IDataAdviseHolder> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IDataAdviseHolder): CPointer<Unit> {
         value.asRaw()
@@ -5740,6 +6380,7 @@ extend Windows_Win32_System_Com_IDataAdviseHolder <: windows_core.HandleWinrtTyp
 }
 
 // Windows.Win32.System.Com.IDataAdviseHolderVtbl (synthetic:Windows_Win32_System_Com_IDataAdviseHolderVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IDataAdviseHolderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -5751,6 +6392,7 @@ public struct Windows_Win32_System_Com_IDataAdviseHolderVtbl {
 }
 
 // Windows.Win32.System.Com.IDataObject (synthetic:Windows_Win32_System_Com_IDataObject)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IDataObject <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -5828,6 +6470,7 @@ public class Windows_Win32_System_Com_IDataObject <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IDataObject <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IDataObject> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IDataObject): CPointer<Unit> {
         value.asRaw()
@@ -5860,6 +6503,7 @@ extend Windows_Win32_System_Com_IDataObject <: windows_core.HandleWinrtType<Wind
 }
 
 // Windows.Win32.System.Com.IDataObjectVtbl (synthetic:Windows_Win32_System_Com_IDataObjectVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IDataObjectVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -5876,6 +6520,7 @@ public struct Windows_Win32_System_Com_IDataObjectVtbl {
 }
 
 // Windows.Win32.System.Com.IDispatch (synthetic:Windows_Win32_System_Com_IDispatch)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IDispatch <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -5953,6 +6598,7 @@ public class Windows_Win32_System_Com_IDispatch <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IDispatch <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IDispatch> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IDispatch): CPointer<Unit> {
         value.asRaw()
@@ -5985,6 +6631,7 @@ extend Windows_Win32_System_Com_IDispatch <: windows_core.HandleWinrtType<Window
 }
 
 // Windows.Win32.System.Com.IDispatchVtbl (synthetic:Windows_Win32_System_Com_IDispatchVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IDispatchVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -5996,6 +6643,7 @@ public struct Windows_Win32_System_Com_IDispatchVtbl {
 }
 
 // Windows.Win32.System.Com.IEnumCATEGORYINFO (synthetic:Windows_Win32_System_Com_IEnumCATEGORYINFO)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IEnumCATEGORYINFO <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -6073,6 +6721,7 @@ public class Windows_Win32_System_Com_IEnumCATEGORYINFO <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IEnumCATEGORYINFO <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumCATEGORYINFO> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IEnumCATEGORYINFO): CPointer<Unit> {
         value.asRaw()
@@ -6105,6 +6754,7 @@ extend Windows_Win32_System_Com_IEnumCATEGORYINFO <: windows_core.HandleWinrtTyp
 }
 
 // Windows.Win32.System.Com.IEnumCATEGORYINFOVtbl (synthetic:Windows_Win32_System_Com_IEnumCATEGORYINFOVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IEnumCATEGORYINFOVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -6116,6 +6766,7 @@ public struct Windows_Win32_System_Com_IEnumCATEGORYINFOVtbl {
 }
 
 // Windows.Win32.System.Com.IEnumConnectionPoints (synthetic:Windows_Win32_System_Com_IEnumConnectionPoints)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IEnumConnectionPoints <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -6193,6 +6844,7 @@ public class Windows_Win32_System_Com_IEnumConnectionPoints <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IEnumConnectionPoints <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumConnectionPoints> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IEnumConnectionPoints): CPointer<Unit> {
         value.asRaw()
@@ -6225,6 +6877,7 @@ extend Windows_Win32_System_Com_IEnumConnectionPoints <: windows_core.HandleWinr
 }
 
 // Windows.Win32.System.Com.IEnumConnectionPointsVtbl (synthetic:Windows_Win32_System_Com_IEnumConnectionPointsVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IEnumConnectionPointsVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -6236,6 +6889,7 @@ public struct Windows_Win32_System_Com_IEnumConnectionPointsVtbl {
 }
 
 // Windows.Win32.System.Com.IEnumConnections (synthetic:Windows_Win32_System_Com_IEnumConnections)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IEnumConnections <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -6313,6 +6967,7 @@ public class Windows_Win32_System_Com_IEnumConnections <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IEnumConnections <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumConnections> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IEnumConnections): CPointer<Unit> {
         value.asRaw()
@@ -6345,6 +7000,7 @@ extend Windows_Win32_System_Com_IEnumConnections <: windows_core.HandleWinrtType
 }
 
 // Windows.Win32.System.Com.IEnumConnectionsVtbl (synthetic:Windows_Win32_System_Com_IEnumConnectionsVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IEnumConnectionsVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -6356,6 +7012,7 @@ public struct Windows_Win32_System_Com_IEnumConnectionsVtbl {
 }
 
 // Windows.Win32.System.Com.IEnumContextProps (synthetic:Windows_Win32_System_Com_IEnumContextProps)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IEnumContextProps <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -6433,6 +7090,7 @@ public class Windows_Win32_System_Com_IEnumContextProps <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IEnumContextProps <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumContextProps> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IEnumContextProps): CPointer<Unit> {
         value.asRaw()
@@ -6465,6 +7123,7 @@ extend Windows_Win32_System_Com_IEnumContextProps <: windows_core.HandleWinrtTyp
 }
 
 // Windows.Win32.System.Com.IEnumContextPropsVtbl (synthetic:Windows_Win32_System_Com_IEnumContextPropsVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IEnumContextPropsVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -6477,6 +7136,7 @@ public struct Windows_Win32_System_Com_IEnumContextPropsVtbl {
 }
 
 // Windows.Win32.System.Com.IEnumFORMATETC (synthetic:Windows_Win32_System_Com_IEnumFORMATETC)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IEnumFORMATETC <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -6554,6 +7214,7 @@ public class Windows_Win32_System_Com_IEnumFORMATETC <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IEnumFORMATETC <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumFORMATETC> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IEnumFORMATETC): CPointer<Unit> {
         value.asRaw()
@@ -6586,6 +7247,7 @@ extend Windows_Win32_System_Com_IEnumFORMATETC <: windows_core.HandleWinrtType<W
 }
 
 // Windows.Win32.System.Com.IEnumFORMATETCVtbl (synthetic:Windows_Win32_System_Com_IEnumFORMATETCVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IEnumFORMATETCVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -6597,6 +7259,7 @@ public struct Windows_Win32_System_Com_IEnumFORMATETCVtbl {
 }
 
 // Windows.Win32.System.Com.IEnumGUID (synthetic:Windows_Win32_System_Com_IEnumGUID)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IEnumGUID <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -6674,6 +7337,7 @@ public class Windows_Win32_System_Com_IEnumGUID <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IEnumGUID <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumGUID> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IEnumGUID): CPointer<Unit> {
         value.asRaw()
@@ -6706,6 +7370,7 @@ extend Windows_Win32_System_Com_IEnumGUID <: windows_core.HandleWinrtType<Window
 }
 
 // Windows.Win32.System.Com.IEnumGUIDVtbl (synthetic:Windows_Win32_System_Com_IEnumGUIDVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IEnumGUIDVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -6717,6 +7382,7 @@ public struct Windows_Win32_System_Com_IEnumGUIDVtbl {
 }
 
 // Windows.Win32.System.Com.IEnumMoniker (synthetic:Windows_Win32_System_Com_IEnumMoniker)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IEnumMoniker <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -6794,6 +7460,7 @@ public class Windows_Win32_System_Com_IEnumMoniker <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IEnumMoniker <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumMoniker> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IEnumMoniker): CPointer<Unit> {
         value.asRaw()
@@ -6826,6 +7493,7 @@ extend Windows_Win32_System_Com_IEnumMoniker <: windows_core.HandleWinrtType<Win
 }
 
 // Windows.Win32.System.Com.IEnumMonikerVtbl (synthetic:Windows_Win32_System_Com_IEnumMonikerVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IEnumMonikerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -6837,6 +7505,7 @@ public struct Windows_Win32_System_Com_IEnumMonikerVtbl {
 }
 
 // Windows.Win32.System.Com.IEnumSTATDATA (synthetic:Windows_Win32_System_Com_IEnumSTATDATA)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IEnumSTATDATA <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -6914,6 +7583,7 @@ public class Windows_Win32_System_Com_IEnumSTATDATA <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IEnumSTATDATA <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumSTATDATA> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IEnumSTATDATA): CPointer<Unit> {
         value.asRaw()
@@ -6946,6 +7616,7 @@ extend Windows_Win32_System_Com_IEnumSTATDATA <: windows_core.HandleWinrtType<Wi
 }
 
 // Windows.Win32.System.Com.IEnumSTATDATAVtbl (synthetic:Windows_Win32_System_Com_IEnumSTATDATAVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IEnumSTATDATAVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -6957,6 +7628,7 @@ public struct Windows_Win32_System_Com_IEnumSTATDATAVtbl {
 }
 
 // Windows.Win32.System.Com.IEnumString (synthetic:Windows_Win32_System_Com_IEnumString)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IEnumString <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -7034,6 +7706,7 @@ public class Windows_Win32_System_Com_IEnumString <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IEnumString <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumString> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IEnumString): CPointer<Unit> {
         value.asRaw()
@@ -7066,6 +7739,7 @@ extend Windows_Win32_System_Com_IEnumString <: windows_core.HandleWinrtType<Wind
 }
 
 // Windows.Win32.System.Com.IEnumStringVtbl (synthetic:Windows_Win32_System_Com_IEnumStringVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IEnumStringVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -7077,6 +7751,7 @@ public struct Windows_Win32_System_Com_IEnumStringVtbl {
 }
 
 // Windows.Win32.System.Com.IEnumUnknown (synthetic:Windows_Win32_System_Com_IEnumUnknown)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IEnumUnknown <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -7154,6 +7829,7 @@ public class Windows_Win32_System_Com_IEnumUnknown <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IEnumUnknown <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IEnumUnknown> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IEnumUnknown): CPointer<Unit> {
         value.asRaw()
@@ -7186,6 +7862,7 @@ extend Windows_Win32_System_Com_IEnumUnknown <: windows_core.HandleWinrtType<Win
 }
 
 // Windows.Win32.System.Com.IEnumUnknownVtbl (synthetic:Windows_Win32_System_Com_IEnumUnknownVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IEnumUnknownVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -7197,6 +7874,7 @@ public struct Windows_Win32_System_Com_IEnumUnknownVtbl {
 }
 
 // Windows.Win32.System.Com.IErrorInfo (synthetic:Windows_Win32_System_Com_IErrorInfo)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IErrorInfo <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -7274,6 +7952,7 @@ public class Windows_Win32_System_Com_IErrorInfo <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IErrorInfo <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IErrorInfo> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IErrorInfo): CPointer<Unit> {
         value.asRaw()
@@ -7306,6 +7985,7 @@ extend Windows_Win32_System_Com_IErrorInfo <: windows_core.HandleWinrtType<Windo
 }
 
 // Windows.Win32.System.Com.IErrorInfoVtbl (synthetic:Windows_Win32_System_Com_IErrorInfoVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IErrorInfoVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -7318,6 +7998,7 @@ public struct Windows_Win32_System_Com_IErrorInfoVtbl {
 }
 
 // Windows.Win32.System.Com.IErrorLog (synthetic:Windows_Win32_System_Com_IErrorLog)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IErrorLog <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -7395,6 +8076,7 @@ public class Windows_Win32_System_Com_IErrorLog <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IErrorLog <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IErrorLog> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IErrorLog): CPointer<Unit> {
         value.asRaw()
@@ -7427,6 +8109,7 @@ extend Windows_Win32_System_Com_IErrorLog <: windows_core.HandleWinrtType<Window
 }
 
 // Windows.Win32.System.Com.IErrorLogVtbl (synthetic:Windows_Win32_System_Com_IErrorLogVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IErrorLogVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -7435,6 +8118,7 @@ public struct Windows_Win32_System_Com_IErrorLogVtbl {
 }
 
 // Windows.Win32.System.Com.IExternalConnection (synthetic:Windows_Win32_System_Com_IExternalConnection)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IExternalConnection <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -7512,6 +8196,7 @@ public class Windows_Win32_System_Com_IExternalConnection <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IExternalConnection <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IExternalConnection> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IExternalConnection): CPointer<Unit> {
         value.asRaw()
@@ -7544,6 +8229,7 @@ extend Windows_Win32_System_Com_IExternalConnection <: windows_core.HandleWinrtT
 }
 
 // Windows.Win32.System.Com.IExternalConnectionVtbl (synthetic:Windows_Win32_System_Com_IExternalConnectionVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IExternalConnectionVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -7553,6 +8239,7 @@ public struct Windows_Win32_System_Com_IExternalConnectionVtbl {
 }
 
 // Windows.Win32.System.Com.IFastRundown (synthetic:Windows_Win32_System_Com_IFastRundown)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IFastRundown <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -7630,6 +8317,7 @@ public class Windows_Win32_System_Com_IFastRundown <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IFastRundown <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IFastRundown> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IFastRundown): CPointer<Unit> {
         value.asRaw()
@@ -7662,6 +8350,7 @@ extend Windows_Win32_System_Com_IFastRundown <: windows_core.HandleWinrtType<Win
 }
 
 // Windows.Win32.System.Com.IFastRundownVtbl (synthetic:Windows_Win32_System_Com_IFastRundownVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IFastRundownVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -7669,6 +8358,7 @@ public struct Windows_Win32_System_Com_IFastRundownVtbl {
 }
 
 // Windows.Win32.System.Com.IForegroundTransfer (synthetic:Windows_Win32_System_Com_IForegroundTransfer)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IForegroundTransfer <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -7746,6 +8436,7 @@ public class Windows_Win32_System_Com_IForegroundTransfer <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IForegroundTransfer <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IForegroundTransfer> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IForegroundTransfer): CPointer<Unit> {
         value.asRaw()
@@ -7778,6 +8469,7 @@ extend Windows_Win32_System_Com_IForegroundTransfer <: windows_core.HandleWinrtT
 }
 
 // Windows.Win32.System.Com.IForegroundTransferVtbl (synthetic:Windows_Win32_System_Com_IForegroundTransferVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IForegroundTransferVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -7786,6 +8478,7 @@ public struct Windows_Win32_System_Com_IForegroundTransferVtbl {
 }
 
 // Windows.Win32.System.Com.IGlobalInterfaceTable (synthetic:Windows_Win32_System_Com_IGlobalInterfaceTable)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IGlobalInterfaceTable <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -7863,6 +8556,7 @@ public class Windows_Win32_System_Com_IGlobalInterfaceTable <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IGlobalInterfaceTable <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IGlobalInterfaceTable> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IGlobalInterfaceTable): CPointer<Unit> {
         value.asRaw()
@@ -7895,6 +8589,7 @@ extend Windows_Win32_System_Com_IGlobalInterfaceTable <: windows_core.HandleWinr
 }
 
 // Windows.Win32.System.Com.IGlobalInterfaceTableVtbl (synthetic:Windows_Win32_System_Com_IGlobalInterfaceTableVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IGlobalInterfaceTableVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -7905,6 +8600,7 @@ public struct Windows_Win32_System_Com_IGlobalInterfaceTableVtbl {
 }
 
 // Windows.Win32.System.Com.IGlobalOptions (synthetic:Windows_Win32_System_Com_IGlobalOptions)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IGlobalOptions <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -7982,6 +8678,7 @@ public class Windows_Win32_System_Com_IGlobalOptions <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IGlobalOptions <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IGlobalOptions> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IGlobalOptions): CPointer<Unit> {
         value.asRaw()
@@ -8014,6 +8711,7 @@ extend Windows_Win32_System_Com_IGlobalOptions <: windows_core.HandleWinrtType<W
 }
 
 // Windows.Win32.System.Com.IGlobalOptionsVtbl (synthetic:Windows_Win32_System_Com_IGlobalOptionsVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IGlobalOptionsVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -8023,6 +8721,7 @@ public struct Windows_Win32_System_Com_IGlobalOptionsVtbl {
 }
 
 // Windows.Win32.System.Com.IInitializeSpy (synthetic:Windows_Win32_System_Com_IInitializeSpy)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IInitializeSpy <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -8100,6 +8799,7 @@ public class Windows_Win32_System_Com_IInitializeSpy <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IInitializeSpy <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IInitializeSpy> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IInitializeSpy): CPointer<Unit> {
         value.asRaw()
@@ -8132,6 +8832,7 @@ extend Windows_Win32_System_Com_IInitializeSpy <: windows_core.HandleWinrtType<W
 }
 
 // Windows.Win32.System.Com.IInitializeSpyVtbl (synthetic:Windows_Win32_System_Com_IInitializeSpyVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IInitializeSpyVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -8143,6 +8844,7 @@ public struct Windows_Win32_System_Com_IInitializeSpyVtbl {
 }
 
 // Windows.Win32.System.Com.IInternalUnknown (synthetic:Windows_Win32_System_Com_IInternalUnknown)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IInternalUnknown <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -8220,6 +8922,7 @@ public class Windows_Win32_System_Com_IInternalUnknown <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IInternalUnknown <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IInternalUnknown> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IInternalUnknown): CPointer<Unit> {
         value.asRaw()
@@ -8252,6 +8955,7 @@ extend Windows_Win32_System_Com_IInternalUnknown <: windows_core.HandleWinrtType
 }
 
 // Windows.Win32.System.Com.IInternalUnknownVtbl (synthetic:Windows_Win32_System_Com_IInternalUnknownVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IInternalUnknownVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -8260,13 +8964,19 @@ public struct Windows_Win32_System_Com_IInternalUnknownVtbl {
 }
 
 // Windows.Win32.System.Com.IMPLTYPEFLAGS (synthetic:Windows_Win32_System_Com_IMPLTYPEFLAGS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_IMPLTYPEFLAGS = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_IMPLTYPEFLAGS_IMPLTYPEFLAG_FDEFAULT: Windows_Win32_System_Com_IMPLTYPEFLAGS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_IMPLTYPEFLAGS_IMPLTYPEFLAG_FSOURCE: Windows_Win32_System_Com_IMPLTYPEFLAGS = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_IMPLTYPEFLAGS_IMPLTYPEFLAG_FRESTRICTED: Windows_Win32_System_Com_IMPLTYPEFLAGS = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_IMPLTYPEFLAGS_IMPLTYPEFLAG_FDEFAULTVTABLE: Windows_Win32_System_Com_IMPLTYPEFLAGS = 8
 
 // Windows.Win32.System.Com.IMachineGlobalObjectTable (synthetic:Windows_Win32_System_Com_IMachineGlobalObjectTable)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IMachineGlobalObjectTable <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -8344,6 +9054,7 @@ public class Windows_Win32_System_Com_IMachineGlobalObjectTable <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IMachineGlobalObjectTable <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IMachineGlobalObjectTable> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IMachineGlobalObjectTable): CPointer<Unit> {
         value.asRaw()
@@ -8376,6 +9087,7 @@ extend Windows_Win32_System_Com_IMachineGlobalObjectTable <: windows_core.Handle
 }
 
 // Windows.Win32.System.Com.IMachineGlobalObjectTableVtbl (synthetic:Windows_Win32_System_Com_IMachineGlobalObjectTableVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IMachineGlobalObjectTableVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -8386,6 +9098,7 @@ public struct Windows_Win32_System_Com_IMachineGlobalObjectTableVtbl {
 }
 
 // Windows.Win32.System.Com.IMalloc (synthetic:Windows_Win32_System_Com_IMalloc)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IMalloc <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -8463,6 +9176,7 @@ public class Windows_Win32_System_Com_IMalloc <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IMalloc <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IMalloc> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IMalloc): CPointer<Unit> {
         value.asRaw()
@@ -8495,6 +9209,7 @@ extend Windows_Win32_System_Com_IMalloc <: windows_core.HandleWinrtType<Windows_
 }
 
 // Windows.Win32.System.Com.IMallocVtbl (synthetic:Windows_Win32_System_Com_IMallocVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IMallocVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -8508,6 +9223,7 @@ public struct Windows_Win32_System_Com_IMallocVtbl {
 }
 
 // Windows.Win32.System.Com.IMallocSpy (synthetic:Windows_Win32_System_Com_IMallocSpy)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IMallocSpy <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -8585,6 +9301,7 @@ public class Windows_Win32_System_Com_IMallocSpy <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IMallocSpy <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IMallocSpy> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IMallocSpy): CPointer<Unit> {
         value.asRaw()
@@ -8617,6 +9334,7 @@ extend Windows_Win32_System_Com_IMallocSpy <: windows_core.HandleWinrtType<Windo
 }
 
 // Windows.Win32.System.Com.IMallocSpyVtbl (synthetic:Windows_Win32_System_Com_IMallocSpyVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IMallocSpyVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -8636,6 +9354,7 @@ public struct Windows_Win32_System_Com_IMallocSpyVtbl {
 }
 
 // Windows.Win32.System.Com.IMoniker (synthetic:Windows_Win32_System_Com_IMoniker)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IMoniker <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -8713,6 +9432,7 @@ public class Windows_Win32_System_Com_IMoniker <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IMoniker <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IMoniker> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IMoniker): CPointer<Unit> {
         value.asRaw()
@@ -8745,6 +9465,7 @@ extend Windows_Win32_System_Com_IMoniker <: windows_core.HandleWinrtType<Windows
 }
 
 // Windows.Win32.System.Com.IMonikerVtbl (synthetic:Windows_Win32_System_Com_IMonikerVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IMonikerVtbl {
     public var base_: Windows_Win32_System_Com_IPersistStreamVtbl = Windows_Win32_System_Com_IPersistStreamVtbl()
@@ -8767,6 +9488,7 @@ public struct Windows_Win32_System_Com_IMonikerVtbl {
 }
 
 // Windows.Win32.System.Com.IMultiQI (synthetic:Windows_Win32_System_Com_IMultiQI)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IMultiQI <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -8844,6 +9566,7 @@ public class Windows_Win32_System_Com_IMultiQI <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IMultiQI <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IMultiQI> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IMultiQI): CPointer<Unit> {
         value.asRaw()
@@ -8876,6 +9599,7 @@ extend Windows_Win32_System_Com_IMultiQI <: windows_core.HandleWinrtType<Windows
 }
 
 // Windows.Win32.System.Com.IMultiQIVtbl (synthetic:Windows_Win32_System_Com_IMultiQIVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IMultiQIVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -8884,6 +9608,7 @@ public struct Windows_Win32_System_Com_IMultiQIVtbl {
 }
 
 // Windows.Win32.System.Com.INTERFACEINFO (synthetic:Windows_Win32_System_Com_INTERFACEINFO)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_INTERFACEINFO {
     public var pUnk: CPointer<Unit> = CPointer<Unit>()
@@ -8892,13 +9617,19 @@ public struct Windows_Win32_System_Com_INTERFACEINFO {
 }
 
 // Windows.Win32.System.Com.INVOKEKIND (synthetic:Windows_Win32_System_Com_INVOKEKIND)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_INVOKEKIND = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_INVOKEKIND_INVOKE_FUNC: Windows_Win32_System_Com_INVOKEKIND = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_INVOKEKIND_INVOKE_PROPERTYGET: Windows_Win32_System_Com_INVOKEKIND = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_INVOKEKIND_INVOKE_PROPERTYPUT: Windows_Win32_System_Com_INVOKEKIND = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_INVOKEKIND_INVOKE_PROPERTYPUTREF: Windows_Win32_System_Com_INVOKEKIND = 8
 
 // Windows.Win32.System.Com.INoMarshal (synthetic:Windows_Win32_System_Com_INoMarshal)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_INoMarshal <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -8976,6 +9707,7 @@ public class Windows_Win32_System_Com_INoMarshal <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_INoMarshal <: windows_core.HandleWinrtType<Windows_Win32_System_Com_INoMarshal> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_INoMarshal): CPointer<Unit> {
         value.asRaw()
@@ -9008,6 +9740,7 @@ extend Windows_Win32_System_Com_INoMarshal <: windows_core.HandleWinrtType<Windo
 }
 
 // Windows.Win32.System.Com.INoMarshalVtbl (synthetic:Windows_Win32_System_Com_INoMarshalVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_INoMarshalVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -9015,6 +9748,7 @@ public struct Windows_Win32_System_Com_INoMarshalVtbl {
 }
 
 // Windows.Win32.System.Com.IOplockStorage (synthetic:Windows_Win32_System_Com_IOplockStorage)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IOplockStorage <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -9092,6 +9826,7 @@ public class Windows_Win32_System_Com_IOplockStorage <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IOplockStorage <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IOplockStorage> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IOplockStorage): CPointer<Unit> {
         value.asRaw()
@@ -9124,6 +9859,7 @@ extend Windows_Win32_System_Com_IOplockStorage <: windows_core.HandleWinrtType<W
 }
 
 // Windows.Win32.System.Com.IOplockStorageVtbl (synthetic:Windows_Win32_System_Com_IOplockStorageVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IOplockStorageVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -9133,6 +9869,7 @@ public struct Windows_Win32_System_Com_IOplockStorageVtbl {
 }
 
 // Windows.Win32.System.Com.IPSFactoryBuffer (synthetic:Windows_Win32_System_Com_IPSFactoryBuffer)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IPSFactoryBuffer <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -9210,6 +9947,7 @@ public class Windows_Win32_System_Com_IPSFactoryBuffer <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IPSFactoryBuffer <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPSFactoryBuffer> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IPSFactoryBuffer): CPointer<Unit> {
         value.asRaw()
@@ -9242,6 +9980,7 @@ extend Windows_Win32_System_Com_IPSFactoryBuffer <: windows_core.HandleWinrtType
 }
 
 // Windows.Win32.System.Com.IPSFactoryBufferVtbl (synthetic:Windows_Win32_System_Com_IPSFactoryBufferVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IPSFactoryBufferVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -9251,6 +9990,7 @@ public struct Windows_Win32_System_Com_IPSFactoryBufferVtbl {
 }
 
 // Windows.Win32.System.Com.IPackagedComSyntaxSupport (synthetic:Windows_Win32_System_Com_IPackagedComSyntaxSupport)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IPackagedComSyntaxSupport <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -9328,6 +10068,7 @@ public class Windows_Win32_System_Com_IPackagedComSyntaxSupport <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IPackagedComSyntaxSupport <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPackagedComSyntaxSupport> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IPackagedComSyntaxSupport): CPointer<Unit> {
         value.asRaw()
@@ -9360,6 +10101,7 @@ extend Windows_Win32_System_Com_IPackagedComSyntaxSupport <: windows_core.Handle
 }
 
 // Windows.Win32.System.Com.IPackagedComSyntaxSupportVtbl (synthetic:Windows_Win32_System_Com_IPackagedComSyntaxSupportVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IPackagedComSyntaxSupportVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -9368,6 +10110,7 @@ public struct Windows_Win32_System_Com_IPackagedComSyntaxSupportVtbl {
 }
 
 // Windows.Win32.System.Com.IPersist (synthetic:Windows_Win32_System_Com_IPersist)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IPersist <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -9445,6 +10188,7 @@ public class Windows_Win32_System_Com_IPersist <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IPersist <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPersist> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IPersist): CPointer<Unit> {
         value.asRaw()
@@ -9477,6 +10221,7 @@ extend Windows_Win32_System_Com_IPersist <: windows_core.HandleWinrtType<Windows
 }
 
 // Windows.Win32.System.Com.IPersistVtbl (synthetic:Windows_Win32_System_Com_IPersistVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IPersistVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -9485,6 +10230,7 @@ public struct Windows_Win32_System_Com_IPersistVtbl {
 }
 
 // Windows.Win32.System.Com.IPersistFile (synthetic:Windows_Win32_System_Com_IPersistFile)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IPersistFile <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -9562,6 +10308,7 @@ public class Windows_Win32_System_Com_IPersistFile <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IPersistFile <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPersistFile> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IPersistFile): CPointer<Unit> {
         value.asRaw()
@@ -9594,6 +10341,7 @@ extend Windows_Win32_System_Com_IPersistFile <: windows_core.HandleWinrtType<Win
 }
 
 // Windows.Win32.System.Com.IPersistFileVtbl (synthetic:Windows_Win32_System_Com_IPersistFileVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IPersistFileVtbl {
     public var base_: Windows_Win32_System_Com_IPersistVtbl = Windows_Win32_System_Com_IPersistVtbl()
@@ -9606,6 +10354,7 @@ public struct Windows_Win32_System_Com_IPersistFileVtbl {
 }
 
 // Windows.Win32.System.Com.IPersistMemory (synthetic:Windows_Win32_System_Com_IPersistMemory)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IPersistMemory <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -9683,6 +10432,7 @@ public class Windows_Win32_System_Com_IPersistMemory <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IPersistMemory <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPersistMemory> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IPersistMemory): CPointer<Unit> {
         value.asRaw()
@@ -9715,6 +10465,7 @@ extend Windows_Win32_System_Com_IPersistMemory <: windows_core.HandleWinrtType<W
 }
 
 // Windows.Win32.System.Com.IPersistMemoryVtbl (synthetic:Windows_Win32_System_Com_IPersistMemoryVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IPersistMemoryVtbl {
     public var base_: Windows_Win32_System_Com_IPersistVtbl = Windows_Win32_System_Com_IPersistVtbl()
@@ -9727,6 +10478,7 @@ public struct Windows_Win32_System_Com_IPersistMemoryVtbl {
 }
 
 // Windows.Win32.System.Com.IPersistStream (synthetic:Windows_Win32_System_Com_IPersistStream)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IPersistStream <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -9804,6 +10556,7 @@ public class Windows_Win32_System_Com_IPersistStream <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IPersistStream <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPersistStream> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IPersistStream): CPointer<Unit> {
         value.asRaw()
@@ -9836,6 +10589,7 @@ extend Windows_Win32_System_Com_IPersistStream <: windows_core.HandleWinrtType<W
 }
 
 // Windows.Win32.System.Com.IPersistStreamVtbl (synthetic:Windows_Win32_System_Com_IPersistStreamVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IPersistStreamVtbl {
     public var base_: Windows_Win32_System_Com_IPersistVtbl = Windows_Win32_System_Com_IPersistVtbl()
@@ -9847,6 +10601,7 @@ public struct Windows_Win32_System_Com_IPersistStreamVtbl {
 }
 
 // Windows.Win32.System.Com.IPersistStreamInit (synthetic:Windows_Win32_System_Com_IPersistStreamInit)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IPersistStreamInit <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -9924,6 +10679,7 @@ public class Windows_Win32_System_Com_IPersistStreamInit <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IPersistStreamInit <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPersistStreamInit> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IPersistStreamInit): CPointer<Unit> {
         value.asRaw()
@@ -9956,6 +10712,7 @@ extend Windows_Win32_System_Com_IPersistStreamInit <: windows_core.HandleWinrtTy
 }
 
 // Windows.Win32.System.Com.IPersistStreamInitVtbl (synthetic:Windows_Win32_System_Com_IPersistStreamInitVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IPersistStreamInitVtbl {
     public var base_: Windows_Win32_System_Com_IPersistVtbl = Windows_Win32_System_Com_IPersistVtbl()
@@ -9968,6 +10725,7 @@ public struct Windows_Win32_System_Com_IPersistStreamInitVtbl {
 }
 
 // Windows.Win32.System.Com.IPipeByte (synthetic:Windows_Win32_System_Com_IPipeByte)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IPipeByte <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -10045,6 +10803,7 @@ public class Windows_Win32_System_Com_IPipeByte <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IPipeByte <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPipeByte> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IPipeByte): CPointer<Unit> {
         value.asRaw()
@@ -10077,6 +10836,7 @@ extend Windows_Win32_System_Com_IPipeByte <: windows_core.HandleWinrtType<Window
 }
 
 // Windows.Win32.System.Com.IPipeByteVtbl (synthetic:Windows_Win32_System_Com_IPipeByteVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IPipeByteVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -10086,6 +10846,7 @@ public struct Windows_Win32_System_Com_IPipeByteVtbl {
 }
 
 // Windows.Win32.System.Com.IPipeDouble (synthetic:Windows_Win32_System_Com_IPipeDouble)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IPipeDouble <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -10163,6 +10924,7 @@ public class Windows_Win32_System_Com_IPipeDouble <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IPipeDouble <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPipeDouble> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IPipeDouble): CPointer<Unit> {
         value.asRaw()
@@ -10195,6 +10957,7 @@ extend Windows_Win32_System_Com_IPipeDouble <: windows_core.HandleWinrtType<Wind
 }
 
 // Windows.Win32.System.Com.IPipeDoubleVtbl (synthetic:Windows_Win32_System_Com_IPipeDoubleVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IPipeDoubleVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -10204,6 +10967,7 @@ public struct Windows_Win32_System_Com_IPipeDoubleVtbl {
 }
 
 // Windows.Win32.System.Com.IPipeLong (synthetic:Windows_Win32_System_Com_IPipeLong)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IPipeLong <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -10281,6 +11045,7 @@ public class Windows_Win32_System_Com_IPipeLong <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IPipeLong <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IPipeLong> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IPipeLong): CPointer<Unit> {
         value.asRaw()
@@ -10313,6 +11078,7 @@ extend Windows_Win32_System_Com_IPipeLong <: windows_core.HandleWinrtType<Window
 }
 
 // Windows.Win32.System.Com.IPipeLongVtbl (synthetic:Windows_Win32_System_Com_IPipeLongVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IPipeLongVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -10322,6 +11088,7 @@ public struct Windows_Win32_System_Com_IPipeLongVtbl {
 }
 
 // Windows.Win32.System.Com.IProcessInitControl (synthetic:Windows_Win32_System_Com_IProcessInitControl)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IProcessInitControl <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -10399,6 +11166,7 @@ public class Windows_Win32_System_Com_IProcessInitControl <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IProcessInitControl <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IProcessInitControl> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IProcessInitControl): CPointer<Unit> {
         value.asRaw()
@@ -10431,6 +11199,7 @@ extend Windows_Win32_System_Com_IProcessInitControl <: windows_core.HandleWinrtT
 }
 
 // Windows.Win32.System.Com.IProcessInitControlVtbl (synthetic:Windows_Win32_System_Com_IProcessInitControlVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IProcessInitControlVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -10439,6 +11208,7 @@ public struct Windows_Win32_System_Com_IProcessInitControlVtbl {
 }
 
 // Windows.Win32.System.Com.IProcessLock (synthetic:Windows_Win32_System_Com_IProcessLock)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IProcessLock <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -10516,6 +11286,7 @@ public class Windows_Win32_System_Com_IProcessLock <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IProcessLock <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IProcessLock> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IProcessLock): CPointer<Unit> {
         value.asRaw()
@@ -10548,6 +11319,7 @@ extend Windows_Win32_System_Com_IProcessLock <: windows_core.HandleWinrtType<Win
 }
 
 // Windows.Win32.System.Com.IProcessLockVtbl (synthetic:Windows_Win32_System_Com_IProcessLockVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IProcessLockVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -10557,6 +11329,7 @@ public struct Windows_Win32_System_Com_IProcessLockVtbl {
 }
 
 // Windows.Win32.System.Com.IProgressNotify (synthetic:Windows_Win32_System_Com_IProgressNotify)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IProgressNotify <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -10634,6 +11407,7 @@ public class Windows_Win32_System_Com_IProgressNotify <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IProgressNotify <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IProgressNotify> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IProgressNotify): CPointer<Unit> {
         value.asRaw()
@@ -10666,6 +11440,7 @@ extend Windows_Win32_System_Com_IProgressNotify <: windows_core.HandleWinrtType<
 }
 
 // Windows.Win32.System.Com.IProgressNotifyVtbl (synthetic:Windows_Win32_System_Com_IProgressNotifyVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IProgressNotifyVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -10674,6 +11449,7 @@ public struct Windows_Win32_System_Com_IProgressNotifyVtbl {
 }
 
 // Windows.Win32.System.Com.IROTData (synthetic:Windows_Win32_System_Com_IROTData)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IROTData <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -10751,6 +11527,7 @@ public class Windows_Win32_System_Com_IROTData <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IROTData <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IROTData> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IROTData): CPointer<Unit> {
         value.asRaw()
@@ -10783,6 +11560,7 @@ extend Windows_Win32_System_Com_IROTData <: windows_core.HandleWinrtType<Windows
 }
 
 // Windows.Win32.System.Com.IROTDataVtbl (synthetic:Windows_Win32_System_Com_IROTDataVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IROTDataVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -10791,6 +11569,7 @@ public struct Windows_Win32_System_Com_IROTDataVtbl {
 }
 
 // Windows.Win32.System.Com.IReleaseMarshalBuffers (synthetic:Windows_Win32_System_Com_IReleaseMarshalBuffers)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IReleaseMarshalBuffers <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -10868,6 +11647,7 @@ public class Windows_Win32_System_Com_IReleaseMarshalBuffers <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IReleaseMarshalBuffers <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IReleaseMarshalBuffers> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IReleaseMarshalBuffers): CPointer<Unit> {
         value.asRaw()
@@ -10900,6 +11680,7 @@ extend Windows_Win32_System_Com_IReleaseMarshalBuffers <: windows_core.HandleWin
 }
 
 // Windows.Win32.System.Com.IReleaseMarshalBuffersVtbl (synthetic:Windows_Win32_System_Com_IReleaseMarshalBuffersVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IReleaseMarshalBuffersVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -10908,6 +11689,7 @@ public struct Windows_Win32_System_Com_IReleaseMarshalBuffersVtbl {
 }
 
 // Windows.Win32.System.Com.IRpcChannelBuffer (synthetic:Windows_Win32_System_Com_IRpcChannelBuffer)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IRpcChannelBuffer <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -10985,6 +11767,7 @@ public class Windows_Win32_System_Com_IRpcChannelBuffer <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IRpcChannelBuffer <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRpcChannelBuffer> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IRpcChannelBuffer): CPointer<Unit> {
         value.asRaw()
@@ -11017,6 +11800,7 @@ extend Windows_Win32_System_Com_IRpcChannelBuffer <: windows_core.HandleWinrtTyp
 }
 
 // Windows.Win32.System.Com.IRpcChannelBufferVtbl (synthetic:Windows_Win32_System_Com_IRpcChannelBufferVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IRpcChannelBufferVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -11029,6 +11813,7 @@ public struct Windows_Win32_System_Com_IRpcChannelBufferVtbl {
 }
 
 // Windows.Win32.System.Com.IRpcChannelBuffer2 (synthetic:Windows_Win32_System_Com_IRpcChannelBuffer2)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IRpcChannelBuffer2 <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -11106,6 +11891,7 @@ public class Windows_Win32_System_Com_IRpcChannelBuffer2 <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IRpcChannelBuffer2 <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRpcChannelBuffer2> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IRpcChannelBuffer2): CPointer<Unit> {
         value.asRaw()
@@ -11138,6 +11924,7 @@ extend Windows_Win32_System_Com_IRpcChannelBuffer2 <: windows_core.HandleWinrtTy
 }
 
 // Windows.Win32.System.Com.IRpcChannelBuffer2Vtbl (synthetic:Windows_Win32_System_Com_IRpcChannelBuffer2Vtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IRpcChannelBuffer2Vtbl {
     public var base_: Windows_Win32_System_Com_IRpcChannelBufferVtbl = Windows_Win32_System_Com_IRpcChannelBufferVtbl()
@@ -11146,6 +11933,7 @@ public struct Windows_Win32_System_Com_IRpcChannelBuffer2Vtbl {
 }
 
 // Windows.Win32.System.Com.IRpcChannelBuffer3 (synthetic:Windows_Win32_System_Com_IRpcChannelBuffer3)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IRpcChannelBuffer3 <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -11223,6 +12011,7 @@ public class Windows_Win32_System_Com_IRpcChannelBuffer3 <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IRpcChannelBuffer3 <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRpcChannelBuffer3> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IRpcChannelBuffer3): CPointer<Unit> {
         value.asRaw()
@@ -11255,6 +12044,7 @@ extend Windows_Win32_System_Com_IRpcChannelBuffer3 <: windows_core.HandleWinrtTy
 }
 
 // Windows.Win32.System.Com.IRpcChannelBuffer3Vtbl (synthetic:Windows_Win32_System_Com_IRpcChannelBuffer3Vtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IRpcChannelBuffer3Vtbl {
     public var base_: Windows_Win32_System_Com_IRpcChannelBuffer2Vtbl = Windows_Win32_System_Com_IRpcChannelBuffer2Vtbl()
@@ -11269,6 +12059,7 @@ public struct Windows_Win32_System_Com_IRpcChannelBuffer3Vtbl {
 }
 
 // Windows.Win32.System.Com.IRpcHelper (synthetic:Windows_Win32_System_Com_IRpcHelper)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IRpcHelper <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -11346,6 +12137,7 @@ public class Windows_Win32_System_Com_IRpcHelper <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IRpcHelper <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRpcHelper> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IRpcHelper): CPointer<Unit> {
         value.asRaw()
@@ -11378,6 +12170,7 @@ extend Windows_Win32_System_Com_IRpcHelper <: windows_core.HandleWinrtType<Windo
 }
 
 // Windows.Win32.System.Com.IRpcHelperVtbl (synthetic:Windows_Win32_System_Com_IRpcHelperVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IRpcHelperVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -11387,6 +12180,7 @@ public struct Windows_Win32_System_Com_IRpcHelperVtbl {
 }
 
 // Windows.Win32.System.Com.IRpcOptions (synthetic:Windows_Win32_System_Com_IRpcOptions)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IRpcOptions <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -11464,6 +12258,7 @@ public class Windows_Win32_System_Com_IRpcOptions <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IRpcOptions <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRpcOptions> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IRpcOptions): CPointer<Unit> {
         value.asRaw()
@@ -11496,6 +12291,7 @@ extend Windows_Win32_System_Com_IRpcOptions <: windows_core.HandleWinrtType<Wind
 }
 
 // Windows.Win32.System.Com.IRpcOptionsVtbl (synthetic:Windows_Win32_System_Com_IRpcOptionsVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IRpcOptionsVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -11505,6 +12301,7 @@ public struct Windows_Win32_System_Com_IRpcOptionsVtbl {
 }
 
 // Windows.Win32.System.Com.IRpcProxyBuffer (synthetic:Windows_Win32_System_Com_IRpcProxyBuffer)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IRpcProxyBuffer <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -11582,6 +12379,7 @@ public class Windows_Win32_System_Com_IRpcProxyBuffer <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IRpcProxyBuffer <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRpcProxyBuffer> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IRpcProxyBuffer): CPointer<Unit> {
         value.asRaw()
@@ -11614,6 +12412,7 @@ extend Windows_Win32_System_Com_IRpcProxyBuffer <: windows_core.HandleWinrtType<
 }
 
 // Windows.Win32.System.Com.IRpcProxyBufferVtbl (synthetic:Windows_Win32_System_Com_IRpcProxyBufferVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IRpcProxyBufferVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -11623,6 +12422,7 @@ public struct Windows_Win32_System_Com_IRpcProxyBufferVtbl {
 }
 
 // Windows.Win32.System.Com.IRpcStubBuffer (synthetic:Windows_Win32_System_Com_IRpcStubBuffer)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IRpcStubBuffer <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -11700,6 +12500,7 @@ public class Windows_Win32_System_Com_IRpcStubBuffer <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IRpcStubBuffer <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRpcStubBuffer> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IRpcStubBuffer): CPointer<Unit> {
         value.asRaw()
@@ -11732,6 +12533,7 @@ extend Windows_Win32_System_Com_IRpcStubBuffer <: windows_core.HandleWinrtType<W
 }
 
 // Windows.Win32.System.Com.IRpcStubBufferVtbl (synthetic:Windows_Win32_System_Com_IRpcStubBufferVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IRpcStubBufferVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -11746,6 +12548,7 @@ public struct Windows_Win32_System_Com_IRpcStubBufferVtbl {
 }
 
 // Windows.Win32.System.Com.IRpcSyntaxNegotiate (synthetic:Windows_Win32_System_Com_IRpcSyntaxNegotiate)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IRpcSyntaxNegotiate <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -11823,6 +12626,7 @@ public class Windows_Win32_System_Com_IRpcSyntaxNegotiate <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IRpcSyntaxNegotiate <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRpcSyntaxNegotiate> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IRpcSyntaxNegotiate): CPointer<Unit> {
         value.asRaw()
@@ -11855,6 +12659,7 @@ extend Windows_Win32_System_Com_IRpcSyntaxNegotiate <: windows_core.HandleWinrtT
 }
 
 // Windows.Win32.System.Com.IRpcSyntaxNegotiateVtbl (synthetic:Windows_Win32_System_Com_IRpcSyntaxNegotiateVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IRpcSyntaxNegotiateVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -11863,6 +12668,7 @@ public struct Windows_Win32_System_Com_IRpcSyntaxNegotiateVtbl {
 }
 
 // Windows.Win32.System.Com.IRunnableObject (synthetic:Windows_Win32_System_Com_IRunnableObject)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IRunnableObject <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -11940,6 +12746,7 @@ public class Windows_Win32_System_Com_IRunnableObject <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IRunnableObject <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRunnableObject> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IRunnableObject): CPointer<Unit> {
         value.asRaw()
@@ -11972,6 +12779,7 @@ extend Windows_Win32_System_Com_IRunnableObject <: windows_core.HandleWinrtType<
 }
 
 // Windows.Win32.System.Com.IRunnableObjectVtbl (synthetic:Windows_Win32_System_Com_IRunnableObjectVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IRunnableObjectVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -11984,6 +12792,7 @@ public struct Windows_Win32_System_Com_IRunnableObjectVtbl {
 }
 
 // Windows.Win32.System.Com.IRunningObjectTable (synthetic:Windows_Win32_System_Com_IRunningObjectTable)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IRunningObjectTable <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -12061,6 +12870,7 @@ public class Windows_Win32_System_Com_IRunningObjectTable <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IRunningObjectTable <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IRunningObjectTable> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IRunningObjectTable): CPointer<Unit> {
         value.asRaw()
@@ -12093,6 +12903,7 @@ extend Windows_Win32_System_Com_IRunningObjectTable <: windows_core.HandleWinrtT
 }
 
 // Windows.Win32.System.Com.IRunningObjectTableVtbl (synthetic:Windows_Win32_System_Com_IRunningObjectTableVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IRunningObjectTableVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -12107,6 +12918,7 @@ public struct Windows_Win32_System_Com_IRunningObjectTableVtbl {
 }
 
 // Windows.Win32.System.Com.ISequentialStream (synthetic:Windows_Win32_System_Com_ISequentialStream)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISequentialStream <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -12184,6 +12996,7 @@ public class Windows_Win32_System_Com_ISequentialStream <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISequentialStream <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISequentialStream> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISequentialStream): CPointer<Unit> {
         value.asRaw()
@@ -12216,6 +13029,7 @@ extend Windows_Win32_System_Com_ISequentialStream <: windows_core.HandleWinrtTyp
 }
 
 // Windows.Win32.System.Com.ISequentialStreamVtbl (synthetic:Windows_Win32_System_Com_ISequentialStreamVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISequentialStreamVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -12225,6 +13039,7 @@ public struct Windows_Win32_System_Com_ISequentialStreamVtbl {
 }
 
 // Windows.Win32.System.Com.IServerSecurity (synthetic:Windows_Win32_System_Com_IServerSecurity)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IServerSecurity <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -12302,6 +13117,7 @@ public class Windows_Win32_System_Com_IServerSecurity <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IServerSecurity <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IServerSecurity> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IServerSecurity): CPointer<Unit> {
         value.asRaw()
@@ -12334,6 +13150,7 @@ extend Windows_Win32_System_Com_IServerSecurity <: windows_core.HandleWinrtType<
 }
 
 // Windows.Win32.System.Com.IServerSecurityVtbl (synthetic:Windows_Win32_System_Com_IServerSecurityVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IServerSecurityVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -12345,6 +13162,7 @@ public struct Windows_Win32_System_Com_IServerSecurityVtbl {
 }
 
 // Windows.Win32.System.Com.IServiceProvider (synthetic:Windows_Win32_System_Com_IServiceProvider)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IServiceProvider <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -12422,6 +13240,7 @@ public class Windows_Win32_System_Com_IServiceProvider <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IServiceProvider <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IServiceProvider> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IServiceProvider): CPointer<Unit> {
         value.asRaw()
@@ -12454,6 +13273,7 @@ extend Windows_Win32_System_Com_IServiceProvider <: windows_core.HandleWinrtType
 }
 
 // Windows.Win32.System.Com.IServiceProviderVtbl (synthetic:Windows_Win32_System_Com_IServiceProviderVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IServiceProviderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -12462,6 +13282,7 @@ public struct Windows_Win32_System_Com_IServiceProviderVtbl {
 }
 
 // Windows.Win32.System.Com.IStdMarshalInfo (synthetic:Windows_Win32_System_Com_IStdMarshalInfo)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IStdMarshalInfo <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -12539,6 +13360,7 @@ public class Windows_Win32_System_Com_IStdMarshalInfo <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IStdMarshalInfo <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IStdMarshalInfo> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IStdMarshalInfo): CPointer<Unit> {
         value.asRaw()
@@ -12571,6 +13393,7 @@ extend Windows_Win32_System_Com_IStdMarshalInfo <: windows_core.HandleWinrtType<
 }
 
 // Windows.Win32.System.Com.IStdMarshalInfoVtbl (synthetic:Windows_Win32_System_Com_IStdMarshalInfoVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IStdMarshalInfoVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -12579,6 +13402,7 @@ public struct Windows_Win32_System_Com_IStdMarshalInfoVtbl {
 }
 
 // Windows.Win32.System.Com.IStream (synthetic:Windows_Win32_System_Com_IStream)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IStream <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -12656,6 +13480,7 @@ public class Windows_Win32_System_Com_IStream <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IStream <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IStream> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IStream): CPointer<Unit> {
         value.asRaw()
@@ -12688,6 +13513,7 @@ extend Windows_Win32_System_Com_IStream <: windows_core.HandleWinrtType<Windows_
 }
 
 // Windows.Win32.System.Com.IStreamVtbl (synthetic:Windows_Win32_System_Com_IStreamVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IStreamVtbl {
     public var base_: Windows_Win32_System_Com_ISequentialStreamVtbl = Windows_Win32_System_Com_ISequentialStreamVtbl()
@@ -12704,6 +13530,7 @@ public struct Windows_Win32_System_Com_IStreamVtbl {
 }
 
 // Windows.Win32.System.Com.ISupportActivateAsActivatorPackaged (synthetic:Windows_Win32_System_Com_ISupportActivateAsActivatorPackaged)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISupportActivateAsActivatorPackaged <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -12781,6 +13608,7 @@ public class Windows_Win32_System_Com_ISupportActivateAsActivatorPackaged <: Res
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISupportActivateAsActivatorPackaged <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportActivateAsActivatorPackaged> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISupportActivateAsActivatorPackaged): CPointer<Unit> {
         value.asRaw()
@@ -12813,6 +13641,7 @@ extend Windows_Win32_System_Com_ISupportActivateAsActivatorPackaged <: windows_c
 }
 
 // Windows.Win32.System.Com.ISupportActivateAsActivatorPackagedVtbl (synthetic:Windows_Win32_System_Com_ISupportActivateAsActivatorPackagedVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISupportActivateAsActivatorPackagedVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -12820,6 +13649,7 @@ public struct Windows_Win32_System_Com_ISupportActivateAsActivatorPackagedVtbl {
 }
 
 // Windows.Win32.System.Com.ISupportActivationFromPackage (synthetic:Windows_Win32_System_Com_ISupportActivationFromPackage)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISupportActivationFromPackage <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -12897,6 +13727,7 @@ public class Windows_Win32_System_Com_ISupportActivationFromPackage <: Resource 
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISupportActivationFromPackage <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportActivationFromPackage> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISupportActivationFromPackage): CPointer<Unit> {
         value.asRaw()
@@ -12929,6 +13760,7 @@ extend Windows_Win32_System_Com_ISupportActivationFromPackage <: windows_core.Ha
 }
 
 // Windows.Win32.System.Com.ISupportActivationFromPackageVtbl (synthetic:Windows_Win32_System_Com_ISupportActivationFromPackageVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISupportActivationFromPackageVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -12936,6 +13768,7 @@ public struct Windows_Win32_System_Com_ISupportActivationFromPackageVtbl {
 }
 
 // Windows.Win32.System.Com.ISupportAllowLowerTrustActivation (synthetic:Windows_Win32_System_Com_ISupportAllowLowerTrustActivation)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISupportAllowLowerTrustActivation <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -13013,6 +13846,7 @@ public class Windows_Win32_System_Com_ISupportAllowLowerTrustActivation <: Resou
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISupportAllowLowerTrustActivation <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportAllowLowerTrustActivation> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISupportAllowLowerTrustActivation): CPointer<Unit> {
         value.asRaw()
@@ -13045,6 +13879,7 @@ extend Windows_Win32_System_Com_ISupportAllowLowerTrustActivation <: windows_cor
 }
 
 // Windows.Win32.System.Com.ISupportAllowLowerTrustActivationVtbl (synthetic:Windows_Win32_System_Com_ISupportAllowLowerTrustActivationVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISupportAllowLowerTrustActivationVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -13052,6 +13887,7 @@ public struct Windows_Win32_System_Com_ISupportAllowLowerTrustActivationVtbl {
 }
 
 // Windows.Win32.System.Com.ISupportCoAddComDependencyOnPackage (synthetic:Windows_Win32_System_Com_ISupportCoAddComDependencyOnPackage)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISupportCoAddComDependencyOnPackage <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -13129,6 +13965,7 @@ public class Windows_Win32_System_Com_ISupportCoAddComDependencyOnPackage <: Res
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISupportCoAddComDependencyOnPackage <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportCoAddComDependencyOnPackage> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISupportCoAddComDependencyOnPackage): CPointer<Unit> {
         value.asRaw()
@@ -13161,6 +13998,7 @@ extend Windows_Win32_System_Com_ISupportCoAddComDependencyOnPackage <: windows_c
 }
 
 // Windows.Win32.System.Com.ISupportCoAddComDependencyOnPackageVtbl (synthetic:Windows_Win32_System_Com_ISupportCoAddComDependencyOnPackageVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISupportCoAddComDependencyOnPackageVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -13168,6 +14006,7 @@ public struct Windows_Win32_System_Com_ISupportCoAddComDependencyOnPackageVtbl {
 }
 
 // Windows.Win32.System.Com.ISupportDoNotElevateServerActivation (synthetic:Windows_Win32_System_Com_ISupportDoNotElevateServerActivation)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISupportDoNotElevateServerActivation <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -13245,6 +14084,7 @@ public class Windows_Win32_System_Com_ISupportDoNotElevateServerActivation <: Re
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISupportDoNotElevateServerActivation <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportDoNotElevateServerActivation> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISupportDoNotElevateServerActivation): CPointer<Unit> {
         value.asRaw()
@@ -13277,6 +14117,7 @@ extend Windows_Win32_System_Com_ISupportDoNotElevateServerActivation <: windows_
 }
 
 // Windows.Win32.System.Com.ISupportDoNotElevateServerActivationVtbl (synthetic:Windows_Win32_System_Com_ISupportDoNotElevateServerActivationVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISupportDoNotElevateServerActivationVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -13284,6 +14125,7 @@ public struct Windows_Win32_System_Com_ISupportDoNotElevateServerActivationVtbl 
 }
 
 // Windows.Win32.System.Com.ISupportErrorInfo (synthetic:Windows_Win32_System_Com_ISupportErrorInfo)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISupportErrorInfo <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -13361,6 +14203,7 @@ public class Windows_Win32_System_Com_ISupportErrorInfo <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISupportErrorInfo <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportErrorInfo> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISupportErrorInfo): CPointer<Unit> {
         value.asRaw()
@@ -13393,6 +14236,7 @@ extend Windows_Win32_System_Com_ISupportErrorInfo <: windows_core.HandleWinrtTyp
 }
 
 // Windows.Win32.System.Com.ISupportErrorInfoVtbl (synthetic:Windows_Win32_System_Com_ISupportErrorInfoVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISupportErrorInfoVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -13401,6 +14245,7 @@ public struct Windows_Win32_System_Com_ISupportErrorInfoVtbl {
 }
 
 // Windows.Win32.System.Com.ISupportPackagedComElevationEnabledClasses (synthetic:Windows_Win32_System_Com_ISupportPackagedComElevationEnabledClasses)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISupportPackagedComElevationEnabledClasses <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -13478,6 +14323,7 @@ public class Windows_Win32_System_Com_ISupportPackagedComElevationEnabledClasses
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISupportPackagedComElevationEnabledClasses <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportPackagedComElevationEnabledClasses> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISupportPackagedComElevationEnabledClasses): CPointer<Unit> {
         value.asRaw()
@@ -13510,6 +14356,7 @@ extend Windows_Win32_System_Com_ISupportPackagedComElevationEnabledClasses <: wi
 }
 
 // Windows.Win32.System.Com.ISupportPackagedComElevationEnabledClassesVtbl (synthetic:Windows_Win32_System_Com_ISupportPackagedComElevationEnabledClassesVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISupportPackagedComElevationEnabledClassesVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -13517,6 +14364,7 @@ public struct Windows_Win32_System_Com_ISupportPackagedComElevationEnabledClasse
 }
 
 // Windows.Win32.System.Com.ISupportPackagedComRegistrationVisibility (synthetic:Windows_Win32_System_Com_ISupportPackagedComRegistrationVisibility)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISupportPackagedComRegistrationVisibility <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -13594,6 +14442,7 @@ public class Windows_Win32_System_Com_ISupportPackagedComRegistrationVisibility 
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISupportPackagedComRegistrationVisibility <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportPackagedComRegistrationVisibility> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISupportPackagedComRegistrationVisibility): CPointer<Unit> {
         value.asRaw()
@@ -13626,6 +14475,7 @@ extend Windows_Win32_System_Com_ISupportPackagedComRegistrationVisibility <: win
 }
 
 // Windows.Win32.System.Com.ISupportPackagedComRegistrationVisibilityVtbl (synthetic:Windows_Win32_System_Com_ISupportPackagedComRegistrationVisibilityVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISupportPackagedComRegistrationVisibilityVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -13633,6 +14483,7 @@ public struct Windows_Win32_System_Com_ISupportPackagedComRegistrationVisibility
 }
 
 // Windows.Win32.System.Com.ISupportServerMustBeEqualOrGreaterPrivilegeActivation (synthetic:Windows_Win32_System_Com_ISupportServerMustBeEqualOrGreaterPrivilegeActivation)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISupportServerMustBeEqualOrGreaterPrivilegeActivation <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -13710,6 +14561,7 @@ public class Windows_Win32_System_Com_ISupportServerMustBeEqualOrGreaterPrivileg
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISupportServerMustBeEqualOrGreaterPrivilegeActivation <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISupportServerMustBeEqualOrGreaterPrivilegeActivation> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISupportServerMustBeEqualOrGreaterPrivilegeActivation): CPointer<Unit> {
         value.asRaw()
@@ -13742,6 +14594,7 @@ extend Windows_Win32_System_Com_ISupportServerMustBeEqualOrGreaterPrivilegeActiv
 }
 
 // Windows.Win32.System.Com.ISupportServerMustBeEqualOrGreaterPrivilegeActivationVtbl (synthetic:Windows_Win32_System_Com_ISupportServerMustBeEqualOrGreaterPrivilegeActivationVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISupportServerMustBeEqualOrGreaterPrivilegeActivationVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -13749,6 +14602,7 @@ public struct Windows_Win32_System_Com_ISupportServerMustBeEqualOrGreaterPrivile
 }
 
 // Windows.Win32.System.Com.ISurrogate (synthetic:Windows_Win32_System_Com_ISurrogate)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISurrogate <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -13826,6 +14680,7 @@ public class Windows_Win32_System_Com_ISurrogate <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISurrogate <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISurrogate> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISurrogate): CPointer<Unit> {
         value.asRaw()
@@ -13858,6 +14713,7 @@ extend Windows_Win32_System_Com_ISurrogate <: windows_core.HandleWinrtType<Windo
 }
 
 // Windows.Win32.System.Com.ISurrogateVtbl (synthetic:Windows_Win32_System_Com_ISurrogateVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISurrogateVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -13867,6 +14723,7 @@ public struct Windows_Win32_System_Com_ISurrogateVtbl {
 }
 
 // Windows.Win32.System.Com.ISurrogateService (synthetic:Windows_Win32_System_Com_ISurrogateService)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISurrogateService <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -13944,6 +14801,7 @@ public class Windows_Win32_System_Com_ISurrogateService <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISurrogateService <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISurrogateService> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISurrogateService): CPointer<Unit> {
         value.asRaw()
@@ -13976,6 +14834,7 @@ extend Windows_Win32_System_Com_ISurrogateService <: windows_core.HandleWinrtTyp
 }
 
 // Windows.Win32.System.Com.ISurrogateServiceVtbl (synthetic:Windows_Win32_System_Com_ISurrogateServiceVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISurrogateServiceVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -13988,6 +14847,7 @@ public struct Windows_Win32_System_Com_ISurrogateServiceVtbl {
 }
 
 // Windows.Win32.System.Com.ISynchronize (synthetic:Windows_Win32_System_Com_ISynchronize)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISynchronize <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -14065,6 +14925,7 @@ public class Windows_Win32_System_Com_ISynchronize <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISynchronize <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISynchronize> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISynchronize): CPointer<Unit> {
         value.asRaw()
@@ -14097,6 +14958,7 @@ extend Windows_Win32_System_Com_ISynchronize <: windows_core.HandleWinrtType<Win
 }
 
 // Windows.Win32.System.Com.ISynchronizeVtbl (synthetic:Windows_Win32_System_Com_ISynchronizeVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISynchronizeVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -14107,6 +14969,7 @@ public struct Windows_Win32_System_Com_ISynchronizeVtbl {
 }
 
 // Windows.Win32.System.Com.ISynchronizeContainer (synthetic:Windows_Win32_System_Com_ISynchronizeContainer)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISynchronizeContainer <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -14184,6 +15047,7 @@ public class Windows_Win32_System_Com_ISynchronizeContainer <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISynchronizeContainer <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISynchronizeContainer> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISynchronizeContainer): CPointer<Unit> {
         value.asRaw()
@@ -14216,6 +15080,7 @@ extend Windows_Win32_System_Com_ISynchronizeContainer <: windows_core.HandleWinr
 }
 
 // Windows.Win32.System.Com.ISynchronizeContainerVtbl (synthetic:Windows_Win32_System_Com_ISynchronizeContainerVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISynchronizeContainerVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -14225,6 +15090,7 @@ public struct Windows_Win32_System_Com_ISynchronizeContainerVtbl {
 }
 
 // Windows.Win32.System.Com.ISynchronizeEvent (synthetic:Windows_Win32_System_Com_ISynchronizeEvent)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISynchronizeEvent <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -14302,6 +15168,7 @@ public class Windows_Win32_System_Com_ISynchronizeEvent <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISynchronizeEvent <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISynchronizeEvent> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISynchronizeEvent): CPointer<Unit> {
         value.asRaw()
@@ -14334,6 +15201,7 @@ extend Windows_Win32_System_Com_ISynchronizeEvent <: windows_core.HandleWinrtTyp
 }
 
 // Windows.Win32.System.Com.ISynchronizeEventVtbl (synthetic:Windows_Win32_System_Com_ISynchronizeEventVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISynchronizeEventVtbl {
     public var base_: Windows_Win32_System_Com_ISynchronizeHandleVtbl = Windows_Win32_System_Com_ISynchronizeHandleVtbl()
@@ -14342,6 +15210,7 @@ public struct Windows_Win32_System_Com_ISynchronizeEventVtbl {
 }
 
 // Windows.Win32.System.Com.ISynchronizeHandle (synthetic:Windows_Win32_System_Com_ISynchronizeHandle)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISynchronizeHandle <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -14419,6 +15288,7 @@ public class Windows_Win32_System_Com_ISynchronizeHandle <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISynchronizeHandle <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISynchronizeHandle> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISynchronizeHandle): CPointer<Unit> {
         value.asRaw()
@@ -14451,6 +15321,7 @@ extend Windows_Win32_System_Com_ISynchronizeHandle <: windows_core.HandleWinrtTy
 }
 
 // Windows.Win32.System.Com.ISynchronizeHandleVtbl (synthetic:Windows_Win32_System_Com_ISynchronizeHandleVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISynchronizeHandleVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -14459,6 +15330,7 @@ public struct Windows_Win32_System_Com_ISynchronizeHandleVtbl {
 }
 
 // Windows.Win32.System.Com.ISynchronizeMutex (synthetic:Windows_Win32_System_Com_ISynchronizeMutex)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ISynchronizeMutex <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -14536,6 +15408,7 @@ public class Windows_Win32_System_Com_ISynchronizeMutex <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ISynchronizeMutex <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ISynchronizeMutex> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ISynchronizeMutex): CPointer<Unit> {
         value.asRaw()
@@ -14568,6 +15441,7 @@ extend Windows_Win32_System_Com_ISynchronizeMutex <: windows_core.HandleWinrtTyp
 }
 
 // Windows.Win32.System.Com.ISynchronizeMutexVtbl (synthetic:Windows_Win32_System_Com_ISynchronizeMutexVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ISynchronizeMutexVtbl {
     public var base_: Windows_Win32_System_Com_ISynchronizeVtbl = Windows_Win32_System_Com_ISynchronizeVtbl()
@@ -14576,6 +15450,7 @@ public struct Windows_Win32_System_Com_ISynchronizeMutexVtbl {
 }
 
 // Windows.Win32.System.Com.ITimeAndNoticeControl (synthetic:Windows_Win32_System_Com_ITimeAndNoticeControl)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ITimeAndNoticeControl <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -14653,6 +15528,7 @@ public class Windows_Win32_System_Com_ITimeAndNoticeControl <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ITimeAndNoticeControl <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ITimeAndNoticeControl> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ITimeAndNoticeControl): CPointer<Unit> {
         value.asRaw()
@@ -14685,6 +15561,7 @@ extend Windows_Win32_System_Com_ITimeAndNoticeControl <: windows_core.HandleWinr
 }
 
 // Windows.Win32.System.Com.ITimeAndNoticeControlVtbl (synthetic:Windows_Win32_System_Com_ITimeAndNoticeControlVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ITimeAndNoticeControlVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -14693,6 +15570,7 @@ public struct Windows_Win32_System_Com_ITimeAndNoticeControlVtbl {
 }
 
 // Windows.Win32.System.Com.ITypeComp (synthetic:Windows_Win32_System_Com_ITypeComp)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ITypeComp <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -14770,6 +15648,7 @@ public class Windows_Win32_System_Com_ITypeComp <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ITypeComp <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ITypeComp> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ITypeComp): CPointer<Unit> {
         value.asRaw()
@@ -14802,6 +15681,7 @@ extend Windows_Win32_System_Com_ITypeComp <: windows_core.HandleWinrtType<Window
 }
 
 // Windows.Win32.System.Com.ITypeCompVtbl (synthetic:Windows_Win32_System_Com_ITypeCompVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ITypeCompVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -14811,6 +15691,7 @@ public struct Windows_Win32_System_Com_ITypeCompVtbl {
 }
 
 // Windows.Win32.System.Com.ITypeInfo (synthetic:Windows_Win32_System_Com_ITypeInfo)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ITypeInfo <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -14888,6 +15769,7 @@ public class Windows_Win32_System_Com_ITypeInfo <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ITypeInfo <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ITypeInfo> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ITypeInfo): CPointer<Unit> {
         value.asRaw()
@@ -14920,6 +15802,7 @@ extend Windows_Win32_System_Com_ITypeInfo <: windows_core.HandleWinrtType<Window
 }
 
 // Windows.Win32.System.Com.ITypeInfoVtbl (synthetic:Windows_Win32_System_Com_ITypeInfoVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ITypeInfoVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -14946,6 +15829,7 @@ public struct Windows_Win32_System_Com_ITypeInfoVtbl {
 }
 
 // Windows.Win32.System.Com.ITypeInfo2 (synthetic:Windows_Win32_System_Com_ITypeInfo2)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ITypeInfo2 <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -15023,6 +15907,7 @@ public class Windows_Win32_System_Com_ITypeInfo2 <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ITypeInfo2 <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ITypeInfo2> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ITypeInfo2): CPointer<Unit> {
         value.asRaw()
@@ -15055,6 +15940,7 @@ extend Windows_Win32_System_Com_ITypeInfo2 <: windows_core.HandleWinrtType<Windo
 }
 
 // Windows.Win32.System.Com.ITypeInfo2Vtbl (synthetic:Windows_Win32_System_Com_ITypeInfo2Vtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ITypeInfo2Vtbl {
     public var base_: Windows_Win32_System_Com_ITypeInfoVtbl = Windows_Win32_System_Com_ITypeInfoVtbl()
@@ -15077,6 +15963,7 @@ public struct Windows_Win32_System_Com_ITypeInfo2Vtbl {
 }
 
 // Windows.Win32.System.Com.ITypeLib (synthetic:Windows_Win32_System_Com_ITypeLib)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ITypeLib <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -15154,6 +16041,7 @@ public class Windows_Win32_System_Com_ITypeLib <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ITypeLib <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ITypeLib> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ITypeLib): CPointer<Unit> {
         value.asRaw()
@@ -15186,6 +16074,7 @@ extend Windows_Win32_System_Com_ITypeLib <: windows_core.HandleWinrtType<Windows
 }
 
 // Windows.Win32.System.Com.ITypeLibVtbl (synthetic:Windows_Win32_System_Com_ITypeLibVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ITypeLibVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -15203,6 +16092,7 @@ public struct Windows_Win32_System_Com_ITypeLibVtbl {
 }
 
 // Windows.Win32.System.Com.ITypeLib2 (synthetic:Windows_Win32_System_Com_ITypeLib2)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ITypeLib2 <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -15280,6 +16170,7 @@ public class Windows_Win32_System_Com_ITypeLib2 <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ITypeLib2 <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ITypeLib2> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ITypeLib2): CPointer<Unit> {
         value.asRaw()
@@ -15312,6 +16203,7 @@ extend Windows_Win32_System_Com_ITypeLib2 <: windows_core.HandleWinrtType<Window
 }
 
 // Windows.Win32.System.Com.ITypeLib2Vtbl (synthetic:Windows_Win32_System_Com_ITypeLib2Vtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ITypeLib2Vtbl {
     public var base_: Windows_Win32_System_Com_ITypeLibVtbl = Windows_Win32_System_Com_ITypeLibVtbl()
@@ -15323,6 +16215,7 @@ public struct Windows_Win32_System_Com_ITypeLib2Vtbl {
 }
 
 // Windows.Win32.System.Com.ITypeLibRegistration (synthetic:Windows_Win32_System_Com_ITypeLibRegistration)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ITypeLibRegistration <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -15400,6 +16293,7 @@ public class Windows_Win32_System_Com_ITypeLibRegistration <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ITypeLibRegistration <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ITypeLibRegistration> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ITypeLibRegistration): CPointer<Unit> {
         value.asRaw()
@@ -15432,6 +16326,7 @@ extend Windows_Win32_System_Com_ITypeLibRegistration <: windows_core.HandleWinrt
 }
 
 // Windows.Win32.System.Com.ITypeLibRegistrationVtbl (synthetic:Windows_Win32_System_Com_ITypeLibRegistrationVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ITypeLibRegistrationVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -15447,6 +16342,7 @@ public struct Windows_Win32_System_Com_ITypeLibRegistrationVtbl {
 }
 
 // Windows.Win32.System.Com.ITypeLibRegistrationReader (synthetic:Windows_Win32_System_Com_ITypeLibRegistrationReader)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_ITypeLibRegistrationReader <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -15524,6 +16420,7 @@ public class Windows_Win32_System_Com_ITypeLibRegistrationReader <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_ITypeLibRegistrationReader <: windows_core.HandleWinrtType<Windows_Win32_System_Com_ITypeLibRegistrationReader> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_ITypeLibRegistrationReader): CPointer<Unit> {
         value.asRaw()
@@ -15556,6 +16453,7 @@ extend Windows_Win32_System_Com_ITypeLibRegistrationReader <: windows_core.Handl
 }
 
 // Windows.Win32.System.Com.ITypeLibRegistrationReaderVtbl (synthetic:Windows_Win32_System_Com_ITypeLibRegistrationReaderVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_ITypeLibRegistrationReaderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -15564,6 +16462,7 @@ public struct Windows_Win32_System_Com_ITypeLibRegistrationReaderVtbl {
 }
 
 // Windows.Win32.System.Com.IUnknown (synthetic:Windows_Win32_System_Com_IUnknown)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IUnknown <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -15641,6 +16540,7 @@ public class Windows_Win32_System_Com_IUnknown <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IUnknown <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IUnknown> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IUnknown): CPointer<Unit> {
         value.asRaw()
@@ -15673,9 +16573,11 @@ extend Windows_Win32_System_Com_IUnknown <: windows_core.HandleWinrtType<Windows
 }
 
 // Windows.Win32.System.Com.IUnknownVtbl (synthetic:Windows_Win32_System_Com_IUnknownVtbl)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_IUnknownVtbl = windows_interface.IUnknownVtbl
 
 // Windows.Win32.System.Com.IUri (synthetic:Windows_Win32_System_Com_IUri)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IUri <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -15753,6 +16655,7 @@ public class Windows_Win32_System_Com_IUri <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IUri <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IUri> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IUri): CPointer<Unit> {
         value.asRaw()
@@ -15785,6 +16688,7 @@ extend Windows_Win32_System_Com_IUri <: windows_core.HandleWinrtType<Windows_Win
 }
 
 // Windows.Win32.System.Com.IUriVtbl (synthetic:Windows_Win32_System_Com_IUriVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IUriVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -15817,6 +16721,7 @@ public struct Windows_Win32_System_Com_IUriVtbl {
 }
 
 // Windows.Win32.System.Com.IUriBuilder (synthetic:Windows_Win32_System_Com_IUriBuilder)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IUriBuilder <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -15894,6 +16799,7 @@ public class Windows_Win32_System_Com_IUriBuilder <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IUriBuilder <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IUriBuilder> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IUriBuilder): CPointer<Unit> {
         value.asRaw()
@@ -15926,6 +16832,7 @@ extend Windows_Win32_System_Com_IUriBuilder <: windows_core.HandleWinrtType<Wind
 }
 
 // Windows.Win32.System.Com.IUriBuilderVtbl (synthetic:Windows_Win32_System_Com_IUriBuilderVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IUriBuilderVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -15956,6 +16863,7 @@ public struct Windows_Win32_System_Com_IUriBuilderVtbl {
 }
 
 // Windows.Win32.System.Com.IUrlMon (synthetic:Windows_Win32_System_Com_IUrlMon)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IUrlMon <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -16033,6 +16941,7 @@ public class Windows_Win32_System_Com_IUrlMon <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IUrlMon <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IUrlMon> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IUrlMon): CPointer<Unit> {
         value.asRaw()
@@ -16065,6 +16974,7 @@ extend Windows_Win32_System_Com_IUrlMon <: windows_core.HandleWinrtType<Windows_
 }
 
 // Windows.Win32.System.Com.IUrlMonVtbl (synthetic:Windows_Win32_System_Com_IUrlMonVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IUrlMonVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -16073,6 +16983,7 @@ public struct Windows_Win32_System_Com_IUrlMonVtbl {
 }
 
 // Windows.Win32.System.Com.IWaitMultiple (synthetic:Windows_Win32_System_Com_IWaitMultiple)
+@When[Windows_Win32_System_Com == "on"]
 public class Windows_Win32_System_Com_IWaitMultiple <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -16150,6 +17061,7 @@ public class Windows_Win32_System_Com_IWaitMultiple <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com == "on"]
 extend Windows_Win32_System_Com_IWaitMultiple <: windows_core.HandleWinrtType<Windows_Win32_System_Com_IWaitMultiple> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_IWaitMultiple): CPointer<Unit> {
         value.asRaw()
@@ -16182,6 +17094,7 @@ extend Windows_Win32_System_Com_IWaitMultiple <: windows_core.HandleWinrtType<Wi
 }
 
 // Windows.Win32.System.Com.IWaitMultipleVtbl (synthetic:Windows_Win32_System_Com_IWaitMultipleVtbl)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_IWaitMultipleVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -16191,69 +17104,115 @@ public struct Windows_Win32_System_Com_IWaitMultipleVtbl {
 }
 
 // Windows.Win32.System.Com.LOCKTYPE (synthetic:Windows_Win32_System_Com_LOCKTYPE)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_LOCKTYPE = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_LOCKTYPE_LOCK_WRITE: Windows_Win32_System_Com_LOCKTYPE = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_LOCKTYPE_LOCK_EXCLUSIVE: Windows_Win32_System_Com_LOCKTYPE = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_LOCKTYPE_LOCK_ONLYONCE: Windows_Win32_System_Com_LOCKTYPE = 4
 
 // Windows.Win32.System.Com.LPEXCEPFINO_DEFERRED_FILLIN (synthetic:Windows_Win32_System_Com_LPEXCEPFINO_DEFERRED_FILLIN)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_LPEXCEPFINO_DEFERRED_FILLIN = CFunc<(CPointer<Unit>) -> Int32>
 
 // Windows.Win32.System.Com.LPFNCANUNLOADNOW (synthetic:Windows_Win32_System_Com_LPFNCANUNLOADNOW)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_LPFNCANUNLOADNOW = CFunc<() -> Int32>
 
 // Windows.Win32.System.Com.LPFNGETCLASSOBJECT (synthetic:Windows_Win32_System_Com_LPFNGETCLASSOBJECT)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_LPFNGETCLASSOBJECT = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>
 
 // Windows.Win32.System.Com.MEMCTX (synthetic:Windows_Win32_System_Com_MEMCTX)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_MEMCTX = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MEMCTX_MEMCTX_TASK: Windows_Win32_System_Com_MEMCTX = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MEMCTX_MEMCTX_SHARED: Windows_Win32_System_Com_MEMCTX = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MEMCTX_MEMCTX_MACSYSTEM: Windows_Win32_System_Com_MEMCTX = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MEMCTX_MEMCTX_UNKNOWN: Windows_Win32_System_Com_MEMCTX = -1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MEMCTX_MEMCTX_SAME: Windows_Win32_System_Com_MEMCTX = -2
 
 // Windows.Win32.System.Com.MKRREDUCE (synthetic:Windows_Win32_System_Com_MKRREDUCE)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_MKRREDUCE = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKRREDUCE_MKRREDUCE_ONE: Windows_Win32_System_Com_MKRREDUCE = 196608
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKRREDUCE_MKRREDUCE_TOUSER: Windows_Win32_System_Com_MKRREDUCE = 131072
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKRREDUCE_MKRREDUCE_THROUGHUSER: Windows_Win32_System_Com_MKRREDUCE = 65536
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKRREDUCE_MKRREDUCE_ALL: Windows_Win32_System_Com_MKRREDUCE = 0
 
 // Windows.Win32.System.Com.MKSYS (synthetic:Windows_Win32_System_Com_MKSYS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_MKSYS = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKSYS_MKSYS_NONE: Windows_Win32_System_Com_MKSYS = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKSYS_MKSYS_GENERICCOMPOSITE: Windows_Win32_System_Com_MKSYS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKSYS_MKSYS_FILEMONIKER: Windows_Win32_System_Com_MKSYS = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKSYS_MKSYS_ANTIMONIKER: Windows_Win32_System_Com_MKSYS = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKSYS_MKSYS_ITEMMONIKER: Windows_Win32_System_Com_MKSYS = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKSYS_MKSYS_POINTERMONIKER: Windows_Win32_System_Com_MKSYS = 5
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKSYS_MKSYS_CLASSMONIKER: Windows_Win32_System_Com_MKSYS = 7
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKSYS_MKSYS_OBJREFMONIKER: Windows_Win32_System_Com_MKSYS = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKSYS_MKSYS_SESSIONMONIKER: Windows_Win32_System_Com_MKSYS = 9
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MKSYS_MKSYS_LUAMONIKER: Windows_Win32_System_Com_MKSYS = 10
 
 // Windows.Win32.System.Com.MSHCTX (synthetic:Windows_Win32_System_Com_MSHCTX)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_MSHCTX = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHCTX_MSHCTX_LOCAL: Windows_Win32_System_Com_MSHCTX = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHCTX_MSHCTX_NOSHAREDMEM: Windows_Win32_System_Com_MSHCTX = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHCTX_MSHCTX_DIFFERENTMACHINE: Windows_Win32_System_Com_MSHCTX = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHCTX_MSHCTX_INPROC: Windows_Win32_System_Com_MSHCTX = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHCTX_MSHCTX_CROSSCTX: Windows_Win32_System_Com_MSHCTX = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHCTX_MSHCTX_CONTAINER: Windows_Win32_System_Com_MSHCTX = 5
 
 // Windows.Win32.System.Com.MSHLFLAGS (synthetic:Windows_Win32_System_Com_MSHLFLAGS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_MSHLFLAGS = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHLFLAGS_MSHLFLAGS_NORMAL: Windows_Win32_System_Com_MSHLFLAGS = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHLFLAGS_MSHLFLAGS_TABLESTRONG: Windows_Win32_System_Com_MSHLFLAGS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHLFLAGS_MSHLFLAGS_TABLEWEAK: Windows_Win32_System_Com_MSHLFLAGS = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHLFLAGS_MSHLFLAGS_NOPING: Windows_Win32_System_Com_MSHLFLAGS = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHLFLAGS_MSHLFLAGS_RESERVED1: Windows_Win32_System_Com_MSHLFLAGS = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHLFLAGS_MSHLFLAGS_RESERVED2: Windows_Win32_System_Com_MSHLFLAGS = 16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHLFLAGS_MSHLFLAGS_RESERVED3: Windows_Win32_System_Com_MSHLFLAGS = 32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_MSHLFLAGS_MSHLFLAGS_RESERVED4: Windows_Win32_System_Com_MSHLFLAGS = 64
 
 // Windows.Win32.System.Com.MULTI_QI (synthetic:Windows_Win32_System_Com_MULTI_QI)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_MULTI_QI {
     public var pIID: CPointer<Unit> = CPointer<Unit>()
@@ -16262,26 +17221,36 @@ public struct Windows_Win32_System_Com_MULTI_QI {
 }
 
 // Windows.Win32.System.Com.MachineGlobalObjectTableRegistrationToken (synthetic:Windows_Win32_System_Com_MachineGlobalObjectTableRegistrationToken)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_MachineGlobalObjectTableRegistrationToken {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Com.PENDINGMSG (synthetic:Windows_Win32_System_Com_PENDINGMSG)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_PENDINGMSG = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_PENDINGMSG_PENDINGMSG_CANCELCALL: Windows_Win32_System_Com_PENDINGMSG = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_PENDINGMSG_PENDINGMSG_WAITNOPROCESS: Windows_Win32_System_Com_PENDINGMSG = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_PENDINGMSG_PENDINGMSG_WAITDEFPROCESS: Windows_Win32_System_Com_PENDINGMSG = 2
 
 // Windows.Win32.System.Com.PENDINGTYPE (synthetic:Windows_Win32_System_Com_PENDINGTYPE)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_PENDINGTYPE = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_PENDINGTYPE_PENDINGTYPE_TOPLEVEL: Windows_Win32_System_Com_PENDINGTYPE = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_PENDINGTYPE_PENDINGTYPE_NESTED: Windows_Win32_System_Com_PENDINGTYPE = 2
 
 // Windows.Win32.System.Com.PFNCONTEXTCALL (synthetic:Windows_Win32_System_Com_PFNCONTEXTCALL)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_PFNCONTEXTCALL = CFunc<(CPointer<Unit>) -> Int32>
 
 // Windows.Win32.System.Com.QUERYCONTEXT (synthetic:Windows_Win32_System_Com_QUERYCONTEXT)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_QUERYCONTEXT {
     public var dwContext: UInt32 = 0u32
@@ -16292,20 +17261,31 @@ public struct Windows_Win32_System_Com_QUERYCONTEXT {
 }
 
 // Windows.Win32.System.Com.REGCLS (synthetic:Windows_Win32_System_Com_REGCLS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_REGCLS = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_REGCLS_REGCLS_SINGLEUSE: Windows_Win32_System_Com_REGCLS = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_REGCLS_REGCLS_MULTIPLEUSE: Windows_Win32_System_Com_REGCLS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_REGCLS_REGCLS_MULTI_SEPARATE: Windows_Win32_System_Com_REGCLS = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_REGCLS_REGCLS_SUSPENDED: Windows_Win32_System_Com_REGCLS = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_REGCLS_REGCLS_SURROGATE: Windows_Win32_System_Com_REGCLS = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_REGCLS_REGCLS_AGILE: Windows_Win32_System_Com_REGCLS = 16
 
 // Windows.Win32.System.Com.ROT_FLAGS (synthetic:Windows_Win32_System_Com_ROT_FLAGS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_ROT_FLAGS = UInt32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ROT_FLAGS_ROTFLAGS_REGISTRATIONKEEPSALIVE: Windows_Win32_System_Com_ROT_FLAGS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ROT_FLAGS_ROTFLAGS_ALLOWANYCLIENT: Windows_Win32_System_Com_ROT_FLAGS = 2
 
 // Windows.Win32.System.Com.RPCOLEMESSAGE (synthetic:Windows_Win32_System_Com_RPCOLEMESSAGE)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_RPCOLEMESSAGE {
     public var reserved1: CPointer<Unit> = CPointer<Unit>()
@@ -16318,39 +17298,65 @@ public struct Windows_Win32_System_Com_RPCOLEMESSAGE {
 }
 
 // Windows.Win32.System.Com.RPCOPT_PROPERTIES (synthetic:Windows_Win32_System_Com_RPCOPT_PROPERTIES)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_RPCOPT_PROPERTIES = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPCOPT_PROPERTIES_COMBND_RPCTIMEOUT: Windows_Win32_System_Com_RPCOPT_PROPERTIES = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPCOPT_PROPERTIES_COMBND_SERVER_LOCALITY: Windows_Win32_System_Com_RPCOPT_PROPERTIES = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPCOPT_PROPERTIES_COMBND_RESERVED1: Windows_Win32_System_Com_RPCOPT_PROPERTIES = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPCOPT_PROPERTIES_COMBND_RESERVED2: Windows_Win32_System_Com_RPCOPT_PROPERTIES = 5
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPCOPT_PROPERTIES_COMBND_RESERVED3: Windows_Win32_System_Com_RPCOPT_PROPERTIES = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPCOPT_PROPERTIES_COMBND_RESERVED4: Windows_Win32_System_Com_RPCOPT_PROPERTIES = 16
 
 // Windows.Win32.System.Com.RPCOPT_SERVER_LOCALITY_VALUES (synthetic:Windows_Win32_System_Com_RPCOPT_SERVER_LOCALITY_VALUES)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_RPCOPT_SERVER_LOCALITY_VALUES = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPCOPT_SERVER_LOCALITY_VALUES_SERVER_LOCALITY_PROCESS_LOCAL: Windows_Win32_System_Com_RPCOPT_SERVER_LOCALITY_VALUES = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPCOPT_SERVER_LOCALITY_VALUES_SERVER_LOCALITY_MACHINE_LOCAL: Windows_Win32_System_Com_RPCOPT_SERVER_LOCALITY_VALUES = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPCOPT_SERVER_LOCALITY_VALUES_SERVER_LOCALITY_REMOTE: Windows_Win32_System_Com_RPCOPT_SERVER_LOCALITY_VALUES = 2
 
 // Windows.Win32.System.Com.RPC_C_AUTHN_LEVEL (synthetic:Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL = UInt32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL_RPC_C_AUTHN_LEVEL_DEFAULT: Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL_RPC_C_AUTHN_LEVEL_NONE: Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL_RPC_C_AUTHN_LEVEL_CONNECT: Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL_RPC_C_AUTHN_LEVEL_CALL: Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL_RPC_C_AUTHN_LEVEL_PKT: Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL_RPC_C_AUTHN_LEVEL_PKT_INTEGRITY: Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL = 5
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL_RPC_C_AUTHN_LEVEL_PKT_PRIVACY: Windows_Win32_System_Com_RPC_C_AUTHN_LEVEL = 6
 
 // Windows.Win32.System.Com.RPC_C_IMP_LEVEL (synthetic:Windows_Win32_System_Com_RPC_C_IMP_LEVEL)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_RPC_C_IMP_LEVEL = UInt32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPC_C_IMP_LEVEL_RPC_C_IMP_LEVEL_DEFAULT: Windows_Win32_System_Com_RPC_C_IMP_LEVEL = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPC_C_IMP_LEVEL_RPC_C_IMP_LEVEL_ANONYMOUS: Windows_Win32_System_Com_RPC_C_IMP_LEVEL = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPC_C_IMP_LEVEL_RPC_C_IMP_LEVEL_IDENTIFY: Windows_Win32_System_Com_RPC_C_IMP_LEVEL = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPC_C_IMP_LEVEL_RPC_C_IMP_LEVEL_IMPERSONATE: Windows_Win32_System_Com_RPC_C_IMP_LEVEL = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_RPC_C_IMP_LEVEL_RPC_C_IMP_LEVEL_DELEGATE: Windows_Win32_System_Com_RPC_C_IMP_LEVEL = 4
 
 // Windows.Win32.System.Com.RemSTGMEDIUM (synthetic:Windows_Win32_System_Com_RemSTGMEDIUM)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_RemSTGMEDIUM {
     public var tymed: UInt32 = 0u32
@@ -16362,6 +17368,7 @@ public struct Windows_Win32_System_Com_RemSTGMEDIUM {
 }
 
 // Windows.Win32.System.Com.SAFEARRAY (synthetic:Windows_Win32_System_Com_SAFEARRAY)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_SAFEARRAY {
     public var cDims: UInt16 = 0u16
@@ -16373,6 +17380,7 @@ public struct Windows_Win32_System_Com_SAFEARRAY {
 }
 
 // Windows.Win32.System.Com.SAFEARRAYBOUND (synthetic:Windows_Win32_System_Com_SAFEARRAYBOUND)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_SAFEARRAYBOUND {
     public var cElements: UInt32 = 0u32
@@ -16380,6 +17388,7 @@ public struct Windows_Win32_System_Com_SAFEARRAYBOUND {
 }
 
 // Windows.Win32.System.Com.SChannelHookCallInfo (synthetic:Windows_Win32_System_Com_SChannelHookCallInfo)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_SChannelHookCallInfo {
     public var iid: GUID = GUID()
@@ -16391,12 +17400,17 @@ public struct Windows_Win32_System_Com_SChannelHookCallInfo {
 }
 
 // Windows.Win32.System.Com.SERVERCALL (synthetic:Windows_Win32_System_Com_SERVERCALL)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_SERVERCALL = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_SERVERCALL_SERVERCALL_ISHANDLED: Windows_Win32_System_Com_SERVERCALL = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_SERVERCALL_SERVERCALL_REJECTED: Windows_Win32_System_Com_SERVERCALL = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_SERVERCALL_SERVERCALL_RETRYLATER: Windows_Win32_System_Com_SERVERCALL = 2
 
 // Windows.Win32.System.Com.SOLE_AUTHENTICATION_INFO (synthetic:Windows_Win32_System_Com_SOLE_AUTHENTICATION_INFO)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_SOLE_AUTHENTICATION_INFO {
     public var dwAuthnSvc: UInt32 = 0u32
@@ -16405,6 +17419,7 @@ public struct Windows_Win32_System_Com_SOLE_AUTHENTICATION_INFO {
 }
 
 // Windows.Win32.System.Com.SOLE_AUTHENTICATION_LIST (synthetic:Windows_Win32_System_Com_SOLE_AUTHENTICATION_LIST)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_SOLE_AUTHENTICATION_LIST {
     public var cAuthInfo: UInt32 = 0u32
@@ -16412,6 +17427,7 @@ public struct Windows_Win32_System_Com_SOLE_AUTHENTICATION_LIST {
 }
 
 // Windows.Win32.System.Com.SOLE_AUTHENTICATION_SERVICE (synthetic:Windows_Win32_System_Com_SOLE_AUTHENTICATION_SERVICE)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_SOLE_AUTHENTICATION_SERVICE {
     public var dwAuthnSvc: UInt32 = 0u32
@@ -16421,6 +17437,7 @@ public struct Windows_Win32_System_Com_SOLE_AUTHENTICATION_SERVICE {
 }
 
 // Windows.Win32.System.Com.STATDATA (synthetic:Windows_Win32_System_Com_STATDATA)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_STATDATA {
     public var formatetc: Windows_Win32_System_Com_FORMATETC = Windows_Win32_System_Com_FORMATETC()
@@ -16430,12 +17447,17 @@ public struct Windows_Win32_System_Com_STATDATA {
 }
 
 // Windows.Win32.System.Com.STATFLAG (synthetic:Windows_Win32_System_Com_STATFLAG)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_STATFLAG = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STATFLAG_STATFLAG_DEFAULT: Windows_Win32_System_Com_STATFLAG = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STATFLAG_STATFLAG_NONAME: Windows_Win32_System_Com_STATFLAG = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STATFLAG_STATFLAG_NOOPEN: Windows_Win32_System_Com_STATFLAG = 2
 
 // Windows.Win32.System.Com.STATSTG (synthetic:Windows_Win32_System_Com_STATSTG)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_STATSTG {
     public var pwcsName: CPointer<UInt16> = CPointer<UInt16>()
@@ -16452,35 +17474,61 @@ public struct Windows_Win32_System_Com_STATSTG {
 }
 
 // Windows.Win32.System.Com.STGC (synthetic:Windows_Win32_System_Com_STGC)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_STGC = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGC_STGC_DEFAULT: Windows_Win32_System_Com_STGC = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGC_STGC_OVERWRITE: Windows_Win32_System_Com_STGC = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGC_STGC_ONLYIFCURRENT: Windows_Win32_System_Com_STGC = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGC_STGC_DANGEROUSLYCOMMITMERELYTODISKCACHE: Windows_Win32_System_Com_STGC = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGC_STGC_CONSOLIDATE: Windows_Win32_System_Com_STGC = 8
 
 // Windows.Win32.System.Com.STGM (synthetic:Windows_Win32_System_Com_STGM)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_STGM = UInt32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_DIRECT: Windows_Win32_System_Com_STGM = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_TRANSACTED: Windows_Win32_System_Com_STGM = 65536
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_SIMPLE: Windows_Win32_System_Com_STGM = 134217728
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_READ: Windows_Win32_System_Com_STGM = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_WRITE: Windows_Win32_System_Com_STGM = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_READWRITE: Windows_Win32_System_Com_STGM = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_SHARE_DENY_NONE: Windows_Win32_System_Com_STGM = 64
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_SHARE_DENY_READ: Windows_Win32_System_Com_STGM = 48
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_SHARE_DENY_WRITE: Windows_Win32_System_Com_STGM = 32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_SHARE_EXCLUSIVE: Windows_Win32_System_Com_STGM = 16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_PRIORITY: Windows_Win32_System_Com_STGM = 262144
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_DELETEONRELEASE: Windows_Win32_System_Com_STGM = 67108864
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_NOSCRATCH: Windows_Win32_System_Com_STGM = 1048576
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_CREATE: Windows_Win32_System_Com_STGM = 4096
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_CONVERT: Windows_Win32_System_Com_STGM = 131072
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_FAILIFTHERE: Windows_Win32_System_Com_STGM = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_NOSNAPSHOT: Windows_Win32_System_Com_STGM = 2097152
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGM_STGM_DIRECT_SWMR: Windows_Win32_System_Com_STGM = 4194304
 
 // Windows.Win32.System.Com.STGMEDIUM (synthetic:Windows_Win32_System_Com_STGMEDIUM)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_STGMEDIUM {
     public var tymed: UInt32 = 0u32
@@ -16489,6 +17537,7 @@ public struct Windows_Win32_System_Com_STGMEDIUM {
 }
 
 // Windows.Win32.System.Com.STGMEDIUM._u_e__Union (synthetic:Windows_Win32_System_Com_STGMEDIUM__u_e__Union)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_STGMEDIUM__u_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -16649,31 +17698,49 @@ public struct Windows_Win32_System_Com_STGMEDIUM__u_e__Union {
 }
 
 // Windows.Win32.System.Com.STGTY (synthetic:Windows_Win32_System_Com_STGTY)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_STGTY = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGTY_STGTY_STORAGE: Windows_Win32_System_Com_STGTY = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGTY_STGTY_STREAM: Windows_Win32_System_Com_STGTY = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGTY_STGTY_LOCKBYTES: Windows_Win32_System_Com_STGTY = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STGTY_STGTY_PROPERTY: Windows_Win32_System_Com_STGTY = 4
 
 // Windows.Win32.System.Com.STREAM_SEEK (synthetic:Windows_Win32_System_Com_STREAM_SEEK)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_STREAM_SEEK = UInt32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STREAM_SEEK_STREAM_SEEK_SET: Windows_Win32_System_Com_STREAM_SEEK = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STREAM_SEEK_STREAM_SEEK_CUR: Windows_Win32_System_Com_STREAM_SEEK = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_STREAM_SEEK_STREAM_SEEK_END: Windows_Win32_System_Com_STREAM_SEEK = 2
 
 // Windows.Win32.System.Com.SYSKIND (synthetic:Windows_Win32_System_Com_SYSKIND)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_SYSKIND = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_SYSKIND_SYS_WIN16: Windows_Win32_System_Com_SYSKIND = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_SYSKIND_SYS_WIN32: Windows_Win32_System_Com_SYSKIND = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_SYSKIND_SYS_MAC: Windows_Win32_System_Com_SYSKIND = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_SYSKIND_SYS_WIN64: Windows_Win32_System_Com_SYSKIND = 3
 
 // Windows.Win32.System.Com.ShutdownType (synthetic:Windows_Win32_System_Com_ShutdownType)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_ShutdownType = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ShutdownType_IdleShutdown: Windows_Win32_System_Com_ShutdownType = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_ShutdownType_ForcedShutdown: Windows_Win32_System_Com_ShutdownType = 1
 
 // Windows.Win32.System.Com.StorageLayout (synthetic:Windows_Win32_System_Com_StorageLayout)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_StorageLayout {
     public var LayoutType: UInt32 = 0u32
@@ -16683,6 +17750,7 @@ public struct Windows_Win32_System_Com_StorageLayout {
 }
 
 // Windows.Win32.System.Com.StructuredStorage.IEnumSTATSTG (synthetic:Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG)
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 public class Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -16760,6 +17828,7 @@ public class Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG <: Resource
     }
 }
 
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 extend Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG <: windows_core.HandleWinrtType<Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG): CPointer<Unit> {
         value.asRaw()
@@ -16792,6 +17861,7 @@ extend Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTG <: windows_core.H
 }
 
 // Windows.Win32.System.Com.StructuredStorage.IEnumSTATSTGVtbl (synthetic:Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTGVtbl)
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 @C
 public struct Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTGVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -16803,6 +17873,7 @@ public struct Windows_Win32_System_Com_StructuredStorage_IEnumSTATSTGVtbl {
 }
 
 // Windows.Win32.System.Com.StructuredStorage.IStorage (synthetic:Windows_Win32_System_Com_StructuredStorage_IStorage)
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 public class Windows_Win32_System_Com_StructuredStorage_IStorage <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -16880,6 +17951,7 @@ public class Windows_Win32_System_Com_StructuredStorage_IStorage <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 extend Windows_Win32_System_Com_StructuredStorage_IStorage <: windows_core.HandleWinrtType<Windows_Win32_System_Com_StructuredStorage_IStorage> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Com_StructuredStorage_IStorage): CPointer<Unit> {
         value.asRaw()
@@ -16912,6 +17984,7 @@ extend Windows_Win32_System_Com_StructuredStorage_IStorage <: windows_core.Handl
 }
 
 // Windows.Win32.System.Com.StructuredStorage.IStorageVtbl (synthetic:Windows_Win32_System_Com_StructuredStorage_IStorageVtbl)
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 @C
 public struct Windows_Win32_System_Com_StructuredStorage_IStorageVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -16934,6 +18007,7 @@ public struct Windows_Win32_System_Com_StructuredStorage_IStorageVtbl {
 }
 
 // Windows.Win32.System.Com.StructuredStorage.STGMOVE (synthetic:Windows_Win32_System_Com_StructuredStorage_STGMOVE)
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 public struct Windows_Win32_System_Com_StructuredStorage_STGMOVE {
     public let value: Int32
     public init() {
@@ -16943,16 +18017,23 @@ public struct Windows_Win32_System_Com_StructuredStorage_STGMOVE {
         this.value = value
     }
 }
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 public let Windows_Win32_System_Com_StructuredStorage_STGMOVE_STGMOVE_MOVE = Windows_Win32_System_Com_StructuredStorage_STGMOVE(0)
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 public let Windows_Win32_System_Com_StructuredStorage_STGMOVE_STGMOVE_COPY = Windows_Win32_System_Com_StructuredStorage_STGMOVE(1)
+@When[Windows_Win32_System_Com_StructuredStorage == "on"]
 public let Windows_Win32_System_Com_StructuredStorage_STGMOVE_STGMOVE_SHALLOWCOPY = Windows_Win32_System_Com_StructuredStorage_STGMOVE(2)
 
 // Windows.Win32.System.Com.THDTYPE (synthetic:Windows_Win32_System_Com_THDTYPE)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_THDTYPE = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_THDTYPE_THDTYPE_BLOCKMESSAGES: Windows_Win32_System_Com_THDTYPE = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_THDTYPE_THDTYPE_PROCESSMESSAGES: Windows_Win32_System_Com_THDTYPE = 1
 
 // Windows.Win32.System.Com.TLIBATTR (synthetic:Windows_Win32_System_Com_TLIBATTR)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_TLIBATTR {
     public var guid: GUID = GUID()
@@ -16964,17 +18045,27 @@ public struct Windows_Win32_System_Com_TLIBATTR {
 }
 
 // Windows.Win32.System.Com.TYMED (synthetic:Windows_Win32_System_Com_TYMED)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_TYMED = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYMED_TYMED_HGLOBAL: Windows_Win32_System_Com_TYMED = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYMED_TYMED_FILE: Windows_Win32_System_Com_TYMED = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYMED_TYMED_ISTREAM: Windows_Win32_System_Com_TYMED = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYMED_TYMED_ISTORAGE: Windows_Win32_System_Com_TYMED = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYMED_TYMED_GDI: Windows_Win32_System_Com_TYMED = 16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYMED_TYMED_MFPICT: Windows_Win32_System_Com_TYMED = 32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYMED_TYMED_ENHMF: Windows_Win32_System_Com_TYMED = 64
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYMED_TYMED_NULL: Windows_Win32_System_Com_TYMED = 0
 
 // Windows.Win32.System.Com.TYPEATTR (synthetic:Windows_Win32_System_Com_TYPEATTR)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_TYPEATTR {
     public var guid: GUID = GUID()
@@ -16998,6 +18089,7 @@ public struct Windows_Win32_System_Com_TYPEATTR {
 }
 
 // Windows.Win32.System.Com.TYPEDESC (synthetic:Windows_Win32_System_Com_TYPEDESC)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_TYPEDESC {
     public var Anonymous: Windows_Win32_System_Com_TYPEDESC__Anonymous_e__Union = Windows_Win32_System_Com_TYPEDESC__Anonymous_e__Union()
@@ -17005,6 +18097,7 @@ public struct Windows_Win32_System_Com_TYPEDESC {
 }
 
 // Windows.Win32.System.Com.TYPEDESC._Anonymous_e__Union (synthetic:Windows_Win32_System_Com_TYPEDESC__Anonymous_e__Union)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_TYPEDESC__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -17073,75 +18166,137 @@ public struct Windows_Win32_System_Com_TYPEDESC__Anonymous_e__Union {
 }
 
 // Windows.Win32.System.Com.TYPEKIND (synthetic:Windows_Win32_System_Com_TYPEKIND)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_TYPEKIND = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYPEKIND_TKIND_ENUM: Windows_Win32_System_Com_TYPEKIND = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYPEKIND_TKIND_RECORD: Windows_Win32_System_Com_TYPEKIND = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYPEKIND_TKIND_MODULE: Windows_Win32_System_Com_TYPEKIND = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYPEKIND_TKIND_INTERFACE: Windows_Win32_System_Com_TYPEKIND = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYPEKIND_TKIND_DISPATCH: Windows_Win32_System_Com_TYPEKIND = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYPEKIND_TKIND_COCLASS: Windows_Win32_System_Com_TYPEKIND = 5
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYPEKIND_TKIND_ALIAS: Windows_Win32_System_Com_TYPEKIND = 6
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYPEKIND_TKIND_UNION: Windows_Win32_System_Com_TYPEKIND = 7
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYPEKIND_TKIND_MAX: Windows_Win32_System_Com_TYPEKIND = 8
 
 // Windows.Win32.System.Com.TYSPEC (synthetic:Windows_Win32_System_Com_TYSPEC)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_TYSPEC = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYSPEC_TYSPEC_CLSID: Windows_Win32_System_Com_TYSPEC = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYSPEC_TYSPEC_FILEEXT: Windows_Win32_System_Com_TYSPEC = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYSPEC_TYSPEC_MIMETYPE: Windows_Win32_System_Com_TYSPEC = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYSPEC_TYSPEC_FILENAME: Windows_Win32_System_Com_TYSPEC = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYSPEC_TYSPEC_PROGID: Windows_Win32_System_Com_TYSPEC = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYSPEC_TYSPEC_PACKAGENAME: Windows_Win32_System_Com_TYSPEC = 5
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_TYSPEC_TYSPEC_OBJECTID: Windows_Win32_System_Com_TYSPEC = 6
 
 // Windows.Win32.System.Com.URI_CREATE_FLAGS (synthetic:Windows_Win32_System_Com_URI_CREATE_FLAGS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_URI_CREATE_FLAGS = UInt32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_ALLOW_RELATIVE: Windows_Win32_System_Com_URI_CREATE_FLAGS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME: Windows_Win32_System_Com_URI_CREATE_FLAGS = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME: Windows_Win32_System_Com_URI_CREATE_FLAGS = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_NOFRAG: Windows_Win32_System_Com_URI_CREATE_FLAGS = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_NO_CANONICALIZE: Windows_Win32_System_Com_URI_CREATE_FLAGS = 16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_CANONICALIZE: Windows_Win32_System_Com_URI_CREATE_FLAGS = 256
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_FILE_USE_DOS_PATH: Windows_Win32_System_Com_URI_CREATE_FLAGS = 32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_DECODE_EXTRA_INFO: Windows_Win32_System_Com_URI_CREATE_FLAGS = 64
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_NO_DECODE_EXTRA_INFO: Windows_Win32_System_Com_URI_CREATE_FLAGS = 128
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_CRACK_UNKNOWN_SCHEMES: Windows_Win32_System_Com_URI_CREATE_FLAGS = 512
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES: Windows_Win32_System_Com_URI_CREATE_FLAGS = 1024
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_PRE_PROCESS_HTML_URI: Windows_Win32_System_Com_URI_CREATE_FLAGS = 2048
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_NO_PRE_PROCESS_HTML_URI: Windows_Win32_System_Com_URI_CREATE_FLAGS = 4096
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_IE_SETTINGS: Windows_Win32_System_Com_URI_CREATE_FLAGS = 8192
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_NO_IE_SETTINGS: Windows_Win32_System_Com_URI_CREATE_FLAGS = 16384
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS: Windows_Win32_System_Com_URI_CREATE_FLAGS = 32768
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_NORMALIZE_INTL_CHARACTERS: Windows_Win32_System_Com_URI_CREATE_FLAGS = 65536
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_URI_CREATE_FLAGS_Uri_CREATE_CANONICALIZE_ABSOLUTE: Windows_Win32_System_Com_URI_CREATE_FLAGS = 131072
 
 // Windows.Win32.System.Com.Uri_PROPERTY (synthetic:Windows_Win32_System_Com_Uri_PROPERTY)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_Uri_PROPERTY = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_ABSOLUTE_URI: Windows_Win32_System_Com_Uri_PROPERTY = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_STRING_START: Windows_Win32_System_Com_Uri_PROPERTY = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_AUTHORITY: Windows_Win32_System_Com_Uri_PROPERTY = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_DISPLAY_URI: Windows_Win32_System_Com_Uri_PROPERTY = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_DOMAIN: Windows_Win32_System_Com_Uri_PROPERTY = 3
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_EXTENSION: Windows_Win32_System_Com_Uri_PROPERTY = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_FRAGMENT: Windows_Win32_System_Com_Uri_PROPERTY = 5
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_HOST: Windows_Win32_System_Com_Uri_PROPERTY = 6
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_PASSWORD: Windows_Win32_System_Com_Uri_PROPERTY = 7
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_PATH: Windows_Win32_System_Com_Uri_PROPERTY = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_PATH_AND_QUERY: Windows_Win32_System_Com_Uri_PROPERTY = 9
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_QUERY: Windows_Win32_System_Com_Uri_PROPERTY = 10
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_RAW_URI: Windows_Win32_System_Com_Uri_PROPERTY = 11
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_SCHEME_NAME: Windows_Win32_System_Com_Uri_PROPERTY = 12
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_USER_INFO: Windows_Win32_System_Com_Uri_PROPERTY = 13
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_USER_NAME: Windows_Win32_System_Com_Uri_PROPERTY = 14
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_STRING_LAST: Windows_Win32_System_Com_Uri_PROPERTY = 14
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_HOST_TYPE: Windows_Win32_System_Com_Uri_PROPERTY = 15
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_DWORD_START: Windows_Win32_System_Com_Uri_PROPERTY = 15
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_PORT: Windows_Win32_System_Com_Uri_PROPERTY = 16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_SCHEME: Windows_Win32_System_Com_Uri_PROPERTY = 17
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_ZONE: Windows_Win32_System_Com_Uri_PROPERTY = 18
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_Uri_PROPERTY_Uri_PROPERTY_DWORD_LAST: Windows_Win32_System_Com_Uri_PROPERTY = 18
 
 // Windows.Win32.System.Com.VARDESC (synthetic:Windows_Win32_System_Com_VARDESC)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_VARDESC {
     public var memid: Int32 = 0i32
@@ -17153,6 +18308,7 @@ public struct Windows_Win32_System_Com_VARDESC {
 }
 
 // Windows.Win32.System.Com.VARDESC._Anonymous_e__Union (synthetic:Windows_Win32_System_Com_VARDESC__Anonymous_e__Union)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_VARDESC__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -17199,29 +18355,49 @@ public struct Windows_Win32_System_Com_VARDESC__Anonymous_e__Union {
 }
 
 // Windows.Win32.System.Com.VARFLAGS (synthetic:Windows_Win32_System_Com_VARFLAGS)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_VARFLAGS = UInt16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARFLAGS_VARFLAG_FREADONLY: Windows_Win32_System_Com_VARFLAGS = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARFLAGS_VARFLAG_FSOURCE: Windows_Win32_System_Com_VARFLAGS = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARFLAGS_VARFLAG_FBINDABLE: Windows_Win32_System_Com_VARFLAGS = 4
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARFLAGS_VARFLAG_FREQUESTEDIT: Windows_Win32_System_Com_VARFLAGS = 8
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARFLAGS_VARFLAG_FDISPLAYBIND: Windows_Win32_System_Com_VARFLAGS = 16
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARFLAGS_VARFLAG_FDEFAULTBIND: Windows_Win32_System_Com_VARFLAGS = 32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARFLAGS_VARFLAG_FHIDDEN: Windows_Win32_System_Com_VARFLAGS = 64
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARFLAGS_VARFLAG_FRESTRICTED: Windows_Win32_System_Com_VARFLAGS = 128
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARFLAGS_VARFLAG_FDEFAULTCOLLELEM: Windows_Win32_System_Com_VARFLAGS = 256
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARFLAGS_VARFLAG_FUIDEFAULT: Windows_Win32_System_Com_VARFLAGS = 512
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARFLAGS_VARFLAG_FNONBROWSABLE: Windows_Win32_System_Com_VARFLAGS = 1024
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARFLAGS_VARFLAG_FREPLACEABLE: Windows_Win32_System_Com_VARFLAGS = 2048
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARFLAGS_VARFLAG_FIMMEDIATEBIND: Windows_Win32_System_Com_VARFLAGS = 4096
 
 // Windows.Win32.System.Com.VARKIND (synthetic:Windows_Win32_System_Com_VARKIND)
+@When[Windows_Win32_System_Com == "on"]
 public type Windows_Win32_System_Com_VARKIND = Int32
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARKIND_VAR_PERINSTANCE: Windows_Win32_System_Com_VARKIND = 0
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARKIND_VAR_STATIC: Windows_Win32_System_Com_VARKIND = 1
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARKIND_VAR_CONST: Windows_Win32_System_Com_VARKIND = 2
+@When[Windows_Win32_System_Com == "on"]
 public let Windows_Win32_System_Com_VARKIND_VAR_DISPATCH: Windows_Win32_System_Com_VARKIND = 3
 
 // Windows.Win32.System.Com.WORD_BLOB (synthetic:Windows_Win32_System_Com_WORD_BLOB)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_WORD_BLOB {
     public var clSize: UInt32 = 0u32
@@ -17229,6 +18405,7 @@ public struct Windows_Win32_System_Com_WORD_BLOB {
 }
 
 // Windows.Win32.System.Com.WORD_SIZEDARR (synthetic:Windows_Win32_System_Com_WORD_SIZEDARR)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_WORD_SIZEDARR {
     public var clSize: UInt32 = 0u32
@@ -17236,6 +18413,7 @@ public struct Windows_Win32_System_Com_WORD_SIZEDARR {
 }
 
 // Windows.Win32.System.Com.uCLSSPEC (synthetic:Windows_Win32_System_Com_uCLSSPEC)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_uCLSSPEC {
     public var tyspec: UInt32 = 0u32
@@ -17243,6 +18421,7 @@ public struct Windows_Win32_System_Com_uCLSSPEC {
 }
 
 // Windows.Win32.System.Com.uCLSSPEC._tagged_union_e__Struct (synthetic:Windows_Win32_System_Com_uCLSSPEC__tagged_union_e__Struct)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_uCLSSPEC__tagged_union_e__Struct {
     public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
@@ -17403,6 +18582,7 @@ public struct Windows_Win32_System_Com_uCLSSPEC__tagged_union_e__Struct {
 }
 
 // Windows.Win32.System.Com.uCLSSPEC._tagged_union_e__Struct._ByName_e__Struct (synthetic:Windows_Win32_System_Com_uCLSSPEC__tagged_union_e__Struct__ByName_e__Struct)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_uCLSSPEC__tagged_union_e__Struct__ByName_e__Struct {
     public var pPackageName: CPointer<UInt16> = CPointer<UInt16>()
@@ -17410,6 +18590,7 @@ public struct Windows_Win32_System_Com_uCLSSPEC__tagged_union_e__Struct__ByName_
 }
 
 // Windows.Win32.System.Com.uCLSSPEC._tagged_union_e__Struct._ByObjectId_e__Struct (synthetic:Windows_Win32_System_Com_uCLSSPEC__tagged_union_e__Struct__ByObjectId_e__Struct)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_uCLSSPEC__tagged_union_e__Struct__ByObjectId_e__Struct {
     public var ObjectId: GUID = GUID()
@@ -17417,6 +18598,7 @@ public struct Windows_Win32_System_Com_uCLSSPEC__tagged_union_e__Struct__ByObjec
 }
 
 // Windows.Win32.System.Com.userFLAG_STGMEDIUM (synthetic:Windows_Win32_System_Com_userFLAG_STGMEDIUM)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_userFLAG_STGMEDIUM {
     public var ContextFlags: Int32 = 0i32
@@ -17425,6 +18607,7 @@ public struct Windows_Win32_System_Com_userFLAG_STGMEDIUM {
 }
 
 // Windows.Win32.System.Com.userSTGMEDIUM (synthetic:Windows_Win32_System_Com_userSTGMEDIUM)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_userSTGMEDIUM {
     public var u: Windows_Win32_System_Com_userSTGMEDIUM__STGMEDIUM_UNION = Windows_Win32_System_Com_userSTGMEDIUM__STGMEDIUM_UNION()
@@ -17432,6 +18615,7 @@ public struct Windows_Win32_System_Com_userSTGMEDIUM {
 }
 
 // Windows.Win32.System.Com.userSTGMEDIUM._STGMEDIUM_UNION (synthetic:Windows_Win32_System_Com_userSTGMEDIUM__STGMEDIUM_UNION)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_userSTGMEDIUM__STGMEDIUM_UNION {
     public var tymed: UInt32 = 0u32
@@ -17439,6 +18623,7 @@ public struct Windows_Win32_System_Com_userSTGMEDIUM__STGMEDIUM_UNION {
 }
 
 // Windows.Win32.System.Com.userSTGMEDIUM._STGMEDIUM_UNION._u_e__Struct (synthetic:Windows_Win32_System_Com_userSTGMEDIUM__STGMEDIUM_UNION__u_e__Struct)
+@When[Windows_Win32_System_Com == "on"]
 @C
 public struct Windows_Win32_System_Com_userSTGMEDIUM__STGMEDIUM_UNION__u_e__Struct {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -17599,6 +18784,7 @@ public struct Windows_Win32_System_Com_userSTGMEDIUM__STGMEDIUM_UNION__u_e__Stru
 }
 
 // Windows.Win32.System.Diagnostics.Debug.ARM64_NT_NEON128 (synthetic:Windows_Win32_System_Diagnostics_Debug_ARM64_NT_NEON128)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 @C
 public struct Windows_Win32_System_Diagnostics_Debug_ARM64_NT_NEON128 {
     public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
@@ -17715,6 +18901,7 @@ public struct Windows_Win32_System_Diagnostics_Debug_ARM64_NT_NEON128 {
 }
 
 // Windows.Win32.System.Diagnostics.Debug.ARM64_NT_NEON128._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_ARM64_NT_NEON128__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 @C
 public struct Windows_Win32_System_Diagnostics_Debug_ARM64_NT_NEON128__Anonymous_e__Struct {
     public var Low: UInt64 = 0u64
@@ -17722,6 +18909,7 @@ public struct Windows_Win32_System_Diagnostics_Debug_ARM64_NT_NEON128__Anonymous
 }
 
 // Windows.Win32.System.Diagnostics.Debug.CONTEXT (synthetic:Windows_Win32_System_Diagnostics_Debug_CONTEXT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 @C
 public struct Windows_Win32_System_Diagnostics_Debug_CONTEXT {
     public var ContextFlags: UInt32 = 0u32
@@ -17739,6 +18927,7 @@ public struct Windows_Win32_System_Diagnostics_Debug_CONTEXT {
 }
 
 // Windows.Win32.System.Diagnostics.Debug.CONTEXT._Anonymous_e__Union (synthetic:Windows_Win32_System_Diagnostics_Debug_CONTEXT__Anonymous_e__Union)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 @C
 public struct Windows_Win32_System_Diagnostics_Debug_CONTEXT__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $31> = VArray<UInt64, $31>(repeat: 0u64)
@@ -17789,6 +18978,7 @@ public struct Windows_Win32_System_Diagnostics_Debug_CONTEXT__Anonymous_e__Union
 }
 
 // Windows.Win32.System.Diagnostics.Debug.CONTEXT._Anonymous_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_Diagnostics_Debug_CONTEXT__Anonymous_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 @C
 public struct Windows_Win32_System_Diagnostics_Debug_CONTEXT__Anonymous_e__Union__Anonymous_e__Struct {
     public var X0: UInt64 = 0u64
@@ -17825,65 +19015,123 @@ public struct Windows_Win32_System_Diagnostics_Debug_CONTEXT__Anonymous_e__Union
 }
 
 // Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS (synthetic:Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public type Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = UInt32
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1048576
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_CONTROL_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1048577
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_INTEGER_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1048578
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_SEGMENTS_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1048580
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_FLOATING_POINT_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1048584
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_DEBUG_REGISTERS_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1048592
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_FULL_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1048587
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_ALL_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1048607
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_XSTATE_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1048640
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_KERNEL_CET_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1048704
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_KERNEL_DEBUGGER_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 67108864
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_EXCEPTION_ACTIVE_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 134217728
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_SERVICE_ACTIVE_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 268435456
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_EXCEPTION_REQUEST_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1073741824
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_EXCEPTION_REPORTING_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 2147483648
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_UNWOUND_TO_CALL_AMD64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 536870912
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 65536
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_CONTROL_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 65537
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_INTEGER_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 65538
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_SEGMENTS_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 65540
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_FLOATING_POINT_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 65544
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_DEBUG_REGISTERS_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 65552
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_EXTENDED_REGISTERS_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 65568
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_FULL_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 65543
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_ALL_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 65599
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_XSTATE_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 65600
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_EXCEPTION_ACTIVE_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 134217728
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_SERVICE_ACTIVE_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 268435456
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_EXCEPTION_REQUEST_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1073741824
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_EXCEPTION_REPORTING_X86: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 2147483648
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 4194304
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_CONTROL_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 4194305
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_INTEGER_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 4194306
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_FLOATING_POINT_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 4194308
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_DEBUG_REGISTERS_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 4194312
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_X18_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 4194320
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_FULL_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 4194311
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_ALL_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 4194335
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_EXCEPTION_ACTIVE_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 134217728
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_SERVICE_ACTIVE_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 268435456
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_EXCEPTION_REQUEST_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1073741824
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_EXCEPTION_REPORTING_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 2147483648
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_UNWOUND_TO_CALL_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 536870912
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_RET_TO_GUEST_ARM64: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1073741824
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_ARM: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 2097152
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_CONTROL_ARM: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 2097153
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_INTEGER_ARM: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 2097154
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_FLOATING_POINT_ARM: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 2097156
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_DEBUG_REGISTERS_ARM: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 2097160
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_FULL_ARM: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 2097159
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_ALL_ARM: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 2097167
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_EXCEPTION_ACTIVE_ARM: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 134217728
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_SERVICE_ACTIVE_ARM: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 268435456
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_EXCEPTION_REQUEST_ARM: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 1073741824
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_EXCEPTION_REPORTING_ARM: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 2147483648
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 public let Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS_CONTEXT_UNWOUND_TO_CALL_ARM: Windows_Win32_System_Diagnostics_Debug_CONTEXT_FLAGS = 536870912
 
 // Windows.Win32.System.Diagnostics.Debug.EXCEPTION_RECORD (synthetic:Windows_Win32_System_Diagnostics_Debug_EXCEPTION_RECORD)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 @C
 public struct Windows_Win32_System_Diagnostics_Debug_EXCEPTION_RECORD {
     public var ExceptionCode: Int32 = 0i32
@@ -17895,6 +19143,7 @@ public struct Windows_Win32_System_Diagnostics_Debug_EXCEPTION_RECORD {
 }
 
 // Windows.Win32.System.Diagnostics.Debug.M128A (synthetic:Windows_Win32_System_Diagnostics_Debug_M128A)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 @C
 public struct Windows_Win32_System_Diagnostics_Debug_M128A {
     public var Low: UInt64 = 0u64
@@ -17902,6 +19151,7 @@ public struct Windows_Win32_System_Diagnostics_Debug_M128A {
 }
 
 // Windows.Win32.System.Diagnostics.Debug.XSAVE_FORMAT (synthetic:Windows_Win32_System_Diagnostics_Debug_XSAVE_FORMAT)
+@When[Windows_Win32_System_Diagnostics_Debug == "on"]
 @C
 public struct Windows_Win32_System_Diagnostics_Debug_XSAVE_FORMAT {
     public var ControlWord: UInt16 = 0u16
@@ -17923,11 +19173,15 @@ public struct Windows_Win32_System_Diagnostics_Debug_XSAVE_FORMAT {
 }
 
 // Windows.Win32.System.Kernel.COMPARTMENT_ID (synthetic:Windows_Win32_System_Kernel_COMPARTMENT_ID)
+@When[Windows_Win32_System_Kernel == "on"]
 public type Windows_Win32_System_Kernel_COMPARTMENT_ID = Int32
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_COMPARTMENT_ID_UNSPECIFIED_COMPARTMENT_ID: Windows_Win32_System_Kernel_COMPARTMENT_ID = 0
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_COMPARTMENT_ID_DEFAULT_COMPARTMENT_ID: Windows_Win32_System_Kernel_COMPARTMENT_ID = 1
 
 // Windows.Win32.System.Kernel.CSTRING (synthetic:Windows_Win32_System_Kernel_CSTRING)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_CSTRING {
     public var Length: UInt16 = 0u16
@@ -17936,18 +19190,27 @@ public struct Windows_Win32_System_Kernel_CSTRING {
 }
 
 // Windows.Win32.System.Kernel.EVENT_TYPE (synthetic:Windows_Win32_System_Kernel_EVENT_TYPE)
+@When[Windows_Win32_System_Kernel == "on"]
 public type Windows_Win32_System_Kernel_EVENT_TYPE = Int32
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_EVENT_TYPE_NotificationEvent: Windows_Win32_System_Kernel_EVENT_TYPE = 0
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_EVENT_TYPE_SynchronizationEvent: Windows_Win32_System_Kernel_EVENT_TYPE = 1
 
 // Windows.Win32.System.Kernel.EXCEPTION_DISPOSITION (synthetic:Windows_Win32_System_Kernel_EXCEPTION_DISPOSITION)
+@When[Windows_Win32_System_Kernel == "on"]
 public type Windows_Win32_System_Kernel_EXCEPTION_DISPOSITION = Int32
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_EXCEPTION_DISPOSITION_ExceptionContinueExecution: Windows_Win32_System_Kernel_EXCEPTION_DISPOSITION = 0
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_EXCEPTION_DISPOSITION_ExceptionContinueSearch: Windows_Win32_System_Kernel_EXCEPTION_DISPOSITION = 1
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_EXCEPTION_DISPOSITION_ExceptionNestedException: Windows_Win32_System_Kernel_EXCEPTION_DISPOSITION = 2
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_EXCEPTION_DISPOSITION_ExceptionCollidedUnwind: Windows_Win32_System_Kernel_EXCEPTION_DISPOSITION = 3
 
 // Windows.Win32.System.Kernel.EXCEPTION_REGISTRATION_RECORD (synthetic:Windows_Win32_System_Kernel_EXCEPTION_REGISTRATION_RECORD)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_EXCEPTION_REGISTRATION_RECORD {
     public var Next: CPointer<Unit> = CPointer<Unit>()
@@ -17955,9 +19218,11 @@ public struct Windows_Win32_System_Kernel_EXCEPTION_REGISTRATION_RECORD {
 }
 
 // Windows.Win32.System.Kernel.EXCEPTION_ROUTINE (synthetic:Windows_Win32_System_Kernel_EXCEPTION_ROUTINE)
+@When[Windows_Win32_System_Kernel == "on"]
 public type Windows_Win32_System_Kernel_EXCEPTION_ROUTINE = CFunc<(CPointer<Unit>, CPointer<Unit>, CPointer<Unit>, CPointer<Unit>) -> Int32>
 
 // Windows.Win32.System.Kernel.FLOATING_SAVE_AREA (synthetic:Windows_Win32_System_Kernel_FLOATING_SAVE_AREA)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_FLOATING_SAVE_AREA {
     public var ControlWord: UInt32 = 0u32
@@ -17972,6 +19237,7 @@ public struct Windows_Win32_System_Kernel_FLOATING_SAVE_AREA {
 }
 
 // Windows.Win32.System.Kernel.LIST_ENTRY (synthetic:Windows_Win32_System_Kernel_LIST_ENTRY)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_LIST_ENTRY {
     public var Flink: CPointer<Unit> = CPointer<Unit>()
@@ -17979,6 +19245,7 @@ public struct Windows_Win32_System_Kernel_LIST_ENTRY {
 }
 
 // Windows.Win32.System.Kernel.LIST_ENTRY32 (synthetic:Windows_Win32_System_Kernel_LIST_ENTRY32)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_LIST_ENTRY32 {
     public var Flink: UInt32 = 0u32
@@ -17986,6 +19253,7 @@ public struct Windows_Win32_System_Kernel_LIST_ENTRY32 {
 }
 
 // Windows.Win32.System.Kernel.LIST_ENTRY64 (synthetic:Windows_Win32_System_Kernel_LIST_ENTRY64)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_LIST_ENTRY64 {
     public var Flink: UInt64 = 0u64
@@ -17993,12 +19261,17 @@ public struct Windows_Win32_System_Kernel_LIST_ENTRY64 {
 }
 
 // Windows.Win32.System.Kernel.NT_PRODUCT_TYPE (synthetic:Windows_Win32_System_Kernel_NT_PRODUCT_TYPE)
+@When[Windows_Win32_System_Kernel == "on"]
 public type Windows_Win32_System_Kernel_NT_PRODUCT_TYPE = Int32
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_NT_PRODUCT_TYPE_NtProductWinNt: Windows_Win32_System_Kernel_NT_PRODUCT_TYPE = 1
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_NT_PRODUCT_TYPE_NtProductLanManNt: Windows_Win32_System_Kernel_NT_PRODUCT_TYPE = 2
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_NT_PRODUCT_TYPE_NtProductServer: Windows_Win32_System_Kernel_NT_PRODUCT_TYPE = 3
 
 // Windows.Win32.System.Kernel.NT_TIB (synthetic:Windows_Win32_System_Kernel_NT_TIB)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_NT_TIB {
     public var ExceptionList: CPointer<Unit> = CPointer<Unit>()
@@ -18011,6 +19284,7 @@ public struct Windows_Win32_System_Kernel_NT_TIB {
 }
 
 // Windows.Win32.System.Kernel.NT_TIB._Anonymous_e__Union (synthetic:Windows_Win32_System_Kernel_NT_TIB__Anonymous_e__Union)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_NT_TIB__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -18057,6 +19331,7 @@ public struct Windows_Win32_System_Kernel_NT_TIB__Anonymous_e__Union {
 }
 
 // Windows.Win32.System.Kernel.OBJECTID (synthetic:Windows_Win32_System_Kernel_OBJECTID)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_OBJECTID {
     public var Lineage: GUID = GUID()
@@ -18064,6 +19339,7 @@ public struct Windows_Win32_System_Kernel_OBJECTID {
 }
 
 // Windows.Win32.System.Kernel.PROCESSOR_NUMBER (synthetic:Windows_Win32_System_Kernel_PROCESSOR_NUMBER)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_PROCESSOR_NUMBER {
     public var Group: UInt16 = 0u16
@@ -18072,12 +19348,14 @@ public struct Windows_Win32_System_Kernel_PROCESSOR_NUMBER {
 }
 
 // Windows.Win32.System.Kernel.QUAD (synthetic:Windows_Win32_System_Kernel_QUAD)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_QUAD {
     public var Anonymous: Windows_Win32_System_Kernel_QUAD__Anonymous_e__Union = Windows_Win32_System_Kernel_QUAD__Anonymous_e__Union()
 }
 
 // Windows.Win32.System.Kernel.QUAD._Anonymous_e__Union (synthetic:Windows_Win32_System_Kernel_QUAD__Anonymous_e__Union)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_QUAD__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -18120,6 +19398,7 @@ public struct Windows_Win32_System_Kernel_QUAD__Anonymous_e__Union {
 }
 
 // Windows.Win32.System.Kernel.RTL_BALANCED_NODE (synthetic:Windows_Win32_System_Kernel_RTL_BALANCED_NODE)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_RTL_BALANCED_NODE {
     public var Anonymous1: Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous1_e__Union = Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous1_e__Union()
@@ -18127,6 +19406,7 @@ public struct Windows_Win32_System_Kernel_RTL_BALANCED_NODE {
 }
 
 // Windows.Win32.System.Kernel.RTL_BALANCED_NODE._Anonymous1_e__Union (synthetic:Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous1_e__Union)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous1_e__Union {
     public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
@@ -18177,6 +19457,7 @@ public struct Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous1_e__Union
 }
 
 // Windows.Win32.System.Kernel.RTL_BALANCED_NODE._Anonymous1_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous1_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous1_e__Union__Anonymous_e__Struct {
     public var Left: CPointer<Unit> = CPointer<Unit>()
@@ -18184,6 +19465,7 @@ public struct Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous1_e__Union
 }
 
 // Windows.Win32.System.Kernel.RTL_BALANCED_NODE._Anonymous2_e__Union (synthetic:Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous2_e__Union)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous2_e__Union {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -18230,24 +19512,28 @@ public struct Windows_Win32_System_Kernel_RTL_BALANCED_NODE__Anonymous2_e__Union
 }
 
 // Windows.Win32.System.Kernel.SINGLE_LIST_ENTRY (synthetic:Windows_Win32_System_Kernel_SINGLE_LIST_ENTRY)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_SINGLE_LIST_ENTRY {
     public var Next: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Kernel.SINGLE_LIST_ENTRY32 (synthetic:Windows_Win32_System_Kernel_SINGLE_LIST_ENTRY32)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_SINGLE_LIST_ENTRY32 {
     public var Next: UInt32 = 0u32
 }
 
 // Windows.Win32.System.Kernel.SLIST_ENTRY (synthetic:Windows_Win32_System_Kernel_SLIST_ENTRY)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_SLIST_ENTRY {
     public var Next: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Kernel.SLIST_HEADER (synthetic:Windows_Win32_System_Kernel_SLIST_HEADER)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_SLIST_HEADER {
     public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
@@ -18298,6 +19584,7 @@ public struct Windows_Win32_System_Kernel_SLIST_HEADER {
 }
 
 // Windows.Win32.System.Kernel.SLIST_HEADER._Anonymous_e__Struct (synthetic:Windows_Win32_System_Kernel_SLIST_HEADER__Anonymous_e__Struct)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_SLIST_HEADER__Anonymous_e__Struct {
     public var Alignment: UInt64 = 0u64
@@ -18305,6 +19592,7 @@ public struct Windows_Win32_System_Kernel_SLIST_HEADER__Anonymous_e__Struct {
 }
 
 // Windows.Win32.System.Kernel.SLIST_HEADER._HeaderArm64_e__Struct (synthetic:Windows_Win32_System_Kernel_SLIST_HEADER__HeaderArm64_e__Struct)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_SLIST_HEADER__HeaderArm64_e__Struct {
     public var _bitfield1: UInt64 = 0u64
@@ -18348,6 +19636,7 @@ public struct Windows_Win32_System_Kernel_SLIST_HEADER__HeaderArm64_e__Struct {
 }
 
 // Windows.Win32.System.Kernel.SLIST_HEADER._HeaderX64_e__Struct (synthetic:Windows_Win32_System_Kernel_SLIST_HEADER__HeaderX64_e__Struct)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_SLIST_HEADER__HeaderX64_e__Struct {
     public var _bitfield1: UInt64 = 0u64
@@ -18391,6 +19680,7 @@ public struct Windows_Win32_System_Kernel_SLIST_HEADER__HeaderX64_e__Struct {
 }
 
 // Windows.Win32.System.Kernel.STRING (synthetic:Windows_Win32_System_Kernel_STRING)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_STRING {
     public var Length: UInt16 = 0u16
@@ -18399,6 +19689,7 @@ public struct Windows_Win32_System_Kernel_STRING {
 }
 
 // Windows.Win32.System.Kernel.STRING32 (synthetic:Windows_Win32_System_Kernel_STRING32)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_STRING32 {
     public var Length: UInt16 = 0u16
@@ -18407,6 +19698,7 @@ public struct Windows_Win32_System_Kernel_STRING32 {
 }
 
 // Windows.Win32.System.Kernel.STRING64 (synthetic:Windows_Win32_System_Kernel_STRING64)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_STRING64 {
     public var Length: UInt16 = 0u16
@@ -18415,47 +19707,78 @@ public struct Windows_Win32_System_Kernel_STRING64 {
 }
 
 // Windows.Win32.System.Kernel.SUITE_TYPE (synthetic:Windows_Win32_System_Kernel_SUITE_TYPE)
+@When[Windows_Win32_System_Kernel == "on"]
 public type Windows_Win32_System_Kernel_SUITE_TYPE = Int32
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_SmallBusiness: Windows_Win32_System_Kernel_SUITE_TYPE = 0
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_Enterprise: Windows_Win32_System_Kernel_SUITE_TYPE = 1
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_BackOffice: Windows_Win32_System_Kernel_SUITE_TYPE = 2
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_CommunicationServer: Windows_Win32_System_Kernel_SUITE_TYPE = 3
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_TerminalServer: Windows_Win32_System_Kernel_SUITE_TYPE = 4
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_SmallBusinessRestricted: Windows_Win32_System_Kernel_SUITE_TYPE = 5
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_EmbeddedNT: Windows_Win32_System_Kernel_SUITE_TYPE = 6
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_DataCenter: Windows_Win32_System_Kernel_SUITE_TYPE = 7
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_SingleUserTS: Windows_Win32_System_Kernel_SUITE_TYPE = 8
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_Personal: Windows_Win32_System_Kernel_SUITE_TYPE = 9
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_Blade: Windows_Win32_System_Kernel_SUITE_TYPE = 10
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_EmbeddedRestricted: Windows_Win32_System_Kernel_SUITE_TYPE = 11
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_SecurityAppliance: Windows_Win32_System_Kernel_SUITE_TYPE = 12
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_StorageServer: Windows_Win32_System_Kernel_SUITE_TYPE = 13
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_ComputeServer: Windows_Win32_System_Kernel_SUITE_TYPE = 14
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_WHServer: Windows_Win32_System_Kernel_SUITE_TYPE = 15
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_PhoneNT: Windows_Win32_System_Kernel_SUITE_TYPE = 16
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_MultiUserTS: Windows_Win32_System_Kernel_SUITE_TYPE = 17
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_SUITE_TYPE_MaxSuiteType: Windows_Win32_System_Kernel_SUITE_TYPE = 18
 
 // Windows.Win32.System.Kernel.TIMER_TYPE (synthetic:Windows_Win32_System_Kernel_TIMER_TYPE)
+@When[Windows_Win32_System_Kernel == "on"]
 public type Windows_Win32_System_Kernel_TIMER_TYPE = Int32
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_TIMER_TYPE_NotificationTimer: Windows_Win32_System_Kernel_TIMER_TYPE = 0
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_TIMER_TYPE_SynchronizationTimer: Windows_Win32_System_Kernel_TIMER_TYPE = 1
 
 // Windows.Win32.System.Kernel.WAIT_TYPE (synthetic:Windows_Win32_System_Kernel_WAIT_TYPE)
+@When[Windows_Win32_System_Kernel == "on"]
 public type Windows_Win32_System_Kernel_WAIT_TYPE = Int32
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_WAIT_TYPE_WaitAll: Windows_Win32_System_Kernel_WAIT_TYPE = 0
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_WAIT_TYPE_WaitAny: Windows_Win32_System_Kernel_WAIT_TYPE = 1
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_WAIT_TYPE_WaitNotification: Windows_Win32_System_Kernel_WAIT_TYPE = 2
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_WAIT_TYPE_WaitDequeue: Windows_Win32_System_Kernel_WAIT_TYPE = 3
+@When[Windows_Win32_System_Kernel == "on"]
 public let Windows_Win32_System_Kernel_WAIT_TYPE_WaitDpc: Windows_Win32_System_Kernel_WAIT_TYPE = 4
 
 // Windows.Win32.System.Kernel.WNF_STATE_NAME (synthetic:Windows_Win32_System_Kernel_WNF_STATE_NAME)
+@When[Windows_Win32_System_Kernel == "on"]
 @C
 public struct Windows_Win32_System_Kernel_WNF_STATE_NAME {
     public var Data: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0u32)
 }
 
 // Windows.Win32.System.Ole.ARRAYDESC (synthetic:Windows_Win32_System_Ole_ARRAYDESC)
+@When[Windows_Win32_System_Ole == "on"]
 @C
 public struct Windows_Win32_System_Ole_ARRAYDESC {
     public var tdescElem: Windows_Win32_System_Com_TYPEDESC = Windows_Win32_System_Com_TYPEDESC()
@@ -18464,6 +19787,7 @@ public struct Windows_Win32_System_Ole_ARRAYDESC {
 }
 
 // Windows.Win32.System.Ole.IRecordInfo (synthetic:Windows_Win32_System_Ole_IRecordInfo)
+@When[Windows_Win32_System_Ole == "on"]
 public class Windows_Win32_System_Ole_IRecordInfo <: Resource {
     private let raw: CPointer<Unit>
     private var ownsHandle: Bool = false
@@ -18541,6 +19865,7 @@ public class Windows_Win32_System_Ole_IRecordInfo <: Resource {
     }
 }
 
+@When[Windows_Win32_System_Ole == "on"]
 extend Windows_Win32_System_Ole_IRecordInfo <: windows_core.HandleWinrtType<Windows_Win32_System_Ole_IRecordInfo> {
     public static func intoWinrtHandle(value: Windows_Win32_System_Ole_IRecordInfo): CPointer<Unit> {
         value.asRaw()
@@ -18573,6 +19898,7 @@ extend Windows_Win32_System_Ole_IRecordInfo <: windows_core.HandleWinrtType<Wind
 }
 
 // Windows.Win32.System.Ole.IRecordInfoVtbl (synthetic:Windows_Win32_System_Ole_IRecordInfoVtbl)
+@When[Windows_Win32_System_Ole == "on"]
 @C
 public struct Windows_Win32_System_Ole_IRecordInfoVtbl {
     public var base_: windows_interface.IUnknownVtbl = windows_interface.IUnknownVtbl()
@@ -18596,6 +19922,7 @@ public struct Windows_Win32_System_Ole_IRecordInfoVtbl {
 }
 
 // Windows.Win32.System.Ole.PARAMDESC (synthetic:Windows_Win32_System_Ole_PARAMDESC)
+@When[Windows_Win32_System_Ole == "on"]
 @C
 public struct Windows_Win32_System_Ole_PARAMDESC {
     public var pparamdescex: CPointer<Unit> = CPointer<Unit>()
@@ -18603,6 +19930,7 @@ public struct Windows_Win32_System_Ole_PARAMDESC {
 }
 
 // Windows.Win32.System.Ole.PARAMDESCEX (synthetic:Windows_Win32_System_Ole_PARAMDESCEX)
+@When[Windows_Win32_System_Ole == "on"]
 @C
 public struct Windows_Win32_System_Ole_PARAMDESCEX {
     public var cBytes: UInt32 = 0u32
@@ -18610,17 +19938,27 @@ public struct Windows_Win32_System_Ole_PARAMDESCEX {
 }
 
 // Windows.Win32.System.Ole.PARAMFLAGS (synthetic:Windows_Win32_System_Ole_PARAMFLAGS)
+@When[Windows_Win32_System_Ole == "on"]
 public type Windows_Win32_System_Ole_PARAMFLAGS = UInt16
+@When[Windows_Win32_System_Ole == "on"]
 public let Windows_Win32_System_Ole_PARAMFLAGS_PARAMFLAG_NONE: Windows_Win32_System_Ole_PARAMFLAGS = 0
+@When[Windows_Win32_System_Ole == "on"]
 public let Windows_Win32_System_Ole_PARAMFLAGS_PARAMFLAG_FIN: Windows_Win32_System_Ole_PARAMFLAGS = 1
+@When[Windows_Win32_System_Ole == "on"]
 public let Windows_Win32_System_Ole_PARAMFLAGS_PARAMFLAG_FOUT: Windows_Win32_System_Ole_PARAMFLAGS = 2
+@When[Windows_Win32_System_Ole == "on"]
 public let Windows_Win32_System_Ole_PARAMFLAGS_PARAMFLAG_FLCID: Windows_Win32_System_Ole_PARAMFLAGS = 4
+@When[Windows_Win32_System_Ole == "on"]
 public let Windows_Win32_System_Ole_PARAMFLAGS_PARAMFLAG_FRETVAL: Windows_Win32_System_Ole_PARAMFLAGS = 8
+@When[Windows_Win32_System_Ole == "on"]
 public let Windows_Win32_System_Ole_PARAMFLAGS_PARAMFLAG_FOPT: Windows_Win32_System_Ole_PARAMFLAGS = 16
+@When[Windows_Win32_System_Ole == "on"]
 public let Windows_Win32_System_Ole_PARAMFLAGS_PARAMFLAG_FHASDEFAULT: Windows_Win32_System_Ole_PARAMFLAGS = 32
+@When[Windows_Win32_System_Ole == "on"]
 public let Windows_Win32_System_Ole_PARAMFLAGS_PARAMFLAG_FHASCUSTDATA: Windows_Win32_System_Ole_PARAMFLAGS = 64
 
 // Windows.Win32.System.Registry.DSKTLSYSTEMTIME (synthetic:Windows_Win32_System_Registry_DSKTLSYSTEMTIME)
+@When[Windows_Win32_System_Registry == "on"]
 @C
 public struct Windows_Win32_System_Registry_DSKTLSYSTEMTIME {
     public var wYear: UInt16 = 0u16
@@ -18635,15 +19973,18 @@ public struct Windows_Win32_System_Registry_DSKTLSYSTEMTIME {
 }
 
 // Windows.Win32.System.Registry.HKEY (synthetic:Windows_Win32_System_Registry_HKEY)
+@When[Windows_Win32_System_Registry == "on"]
 @C
 public struct Windows_Win32_System_Registry_HKEY {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Registry.PQUERYHANDLER (synthetic:Windows_Win32_System_Registry_PQUERYHANDLER)
+@When[Windows_Win32_System_Registry == "on"]
 public type Windows_Win32_System_Registry_PQUERYHANDLER = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, UInt32) -> UInt32>
 
 // Windows.Win32.System.Registry.PVALUEA (synthetic:Windows_Win32_System_Registry_PVALUEA)
+@When[Windows_Win32_System_Registry == "on"]
 @C
 public struct Windows_Win32_System_Registry_PVALUEA {
     public var pv_valuename: CPointer<UInt8> = CPointer<UInt8>()
@@ -18653,6 +19994,7 @@ public struct Windows_Win32_System_Registry_PVALUEA {
 }
 
 // Windows.Win32.System.Registry.PVALUEW (synthetic:Windows_Win32_System_Registry_PVALUEW)
+@When[Windows_Win32_System_Registry == "on"]
 @C
 public struct Windows_Win32_System_Registry_PVALUEW {
     public var pv_valuename: CPointer<UInt16> = CPointer<UInt16>()
@@ -18662,29 +20004,47 @@ public struct Windows_Win32_System_Registry_PVALUEW {
 }
 
 // Windows.Win32.System.Registry.REG_CREATE_KEY_DISPOSITION (synthetic:Windows_Win32_System_Registry_REG_CREATE_KEY_DISPOSITION)
+@When[Windows_Win32_System_Registry == "on"]
 public type Windows_Win32_System_Registry_REG_CREATE_KEY_DISPOSITION = UInt32
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_CREATE_KEY_DISPOSITION_REG_CREATED_NEW_KEY: Windows_Win32_System_Registry_REG_CREATE_KEY_DISPOSITION = 1
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_CREATE_KEY_DISPOSITION_REG_OPENED_EXISTING_KEY: Windows_Win32_System_Registry_REG_CREATE_KEY_DISPOSITION = 2
 
 // Windows.Win32.System.Registry.REG_NOTIFY_FILTER (synthetic:Windows_Win32_System_Registry_REG_NOTIFY_FILTER)
+@When[Windows_Win32_System_Registry == "on"]
 public type Windows_Win32_System_Registry_REG_NOTIFY_FILTER = UInt32
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_NOTIFY_FILTER_REG_NOTIFY_CHANGE_NAME: Windows_Win32_System_Registry_REG_NOTIFY_FILTER = 1
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_NOTIFY_FILTER_REG_NOTIFY_CHANGE_ATTRIBUTES: Windows_Win32_System_Registry_REG_NOTIFY_FILTER = 2
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_NOTIFY_FILTER_REG_NOTIFY_CHANGE_LAST_SET: Windows_Win32_System_Registry_REG_NOTIFY_FILTER = 4
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_NOTIFY_FILTER_REG_NOTIFY_CHANGE_SECURITY: Windows_Win32_System_Registry_REG_NOTIFY_FILTER = 8
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_NOTIFY_FILTER_REG_NOTIFY_THREAD_AGNOSTIC: Windows_Win32_System_Registry_REG_NOTIFY_FILTER = 268435456
 
 // Windows.Win32.System.Registry.REG_OPEN_CREATE_OPTIONS (synthetic:Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS)
+@When[Windows_Win32_System_Registry == "on"]
 public type Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS = UInt32
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS_REG_OPTION_RESERVED: Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS = 0
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS_REG_OPTION_NON_VOLATILE: Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS = 0
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS_REG_OPTION_VOLATILE: Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS = 1
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS_REG_OPTION_CREATE_LINK: Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS = 2
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS_REG_OPTION_BACKUP_RESTORE: Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS = 4
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS_REG_OPTION_OPEN_LINK: Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS = 8
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS_REG_OPTION_DONT_VIRTUALIZE: Windows_Win32_System_Registry_REG_OPEN_CREATE_OPTIONS = 16
 
 // Windows.Win32.System.Registry.REG_PROVIDER (synthetic:Windows_Win32_System_Registry_REG_PROVIDER)
+@When[Windows_Win32_System_Registry == "on"]
 @C
 public struct Windows_Win32_System_Registry_REG_PROVIDER {
     public var pi_R0_1val: CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, UInt32) -> UInt32> = CFunc<(CPointer<Unit>, CPointer<Unit>, UInt32, CPointer<Unit>, CPointer<Unit>, UInt32) -> UInt32>(CPointer<Unit>())
@@ -18696,68 +20056,121 @@ public struct Windows_Win32_System_Registry_REG_PROVIDER {
 }
 
 // Windows.Win32.System.Registry.REG_RESTORE_KEY_FLAGS (synthetic:Windows_Win32_System_Registry_REG_RESTORE_KEY_FLAGS)
+@When[Windows_Win32_System_Registry == "on"]
 public type Windows_Win32_System_Registry_REG_RESTORE_KEY_FLAGS = Int32
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_RESTORE_KEY_FLAGS_REG_FORCE_RESTORE: Windows_Win32_System_Registry_REG_RESTORE_KEY_FLAGS = 8
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_RESTORE_KEY_FLAGS_REG_WHOLE_HIVE_VOLATILE: Windows_Win32_System_Registry_REG_RESTORE_KEY_FLAGS = 1
 
 // Windows.Win32.System.Registry.REG_ROUTINE_FLAGS (synthetic:Windows_Win32_System_Registry_REG_ROUTINE_FLAGS)
+@When[Windows_Win32_System_Registry == "on"]
 public type Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = UInt32
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_RT_DWORD: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 24
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_RT_QWORD: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 72
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_RT_REG_NONE: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 1
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_RT_REG_SZ: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 2
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_RT_REG_EXPAND_SZ: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 4
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_RT_REG_BINARY: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 8
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_RT_REG_DWORD: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 16
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_RT_REG_MULTI_SZ: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 32
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_RT_REG_QWORD: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 64
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_RT_ANY: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 65535
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_SUBKEY_WOW6464KEY: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 65536
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_SUBKEY_WOW6432KEY: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 131072
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_WOW64_MASK: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 196608
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_NOEXPAND: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 268435456
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_ROUTINE_FLAGS_RRF_ZEROONFAILURE: Windows_Win32_System_Registry_REG_ROUTINE_FLAGS = 536870912
 
 // Windows.Win32.System.Registry.REG_SAM_FLAGS (synthetic:Windows_Win32_System_Registry_REG_SAM_FLAGS)
+@When[Windows_Win32_System_Registry == "on"]
 public type Windows_Win32_System_Registry_REG_SAM_FLAGS = UInt32
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAM_FLAGS_KEY_QUERY_VALUE: Windows_Win32_System_Registry_REG_SAM_FLAGS = 1
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAM_FLAGS_KEY_SET_VALUE: Windows_Win32_System_Registry_REG_SAM_FLAGS = 2
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAM_FLAGS_KEY_CREATE_SUB_KEY: Windows_Win32_System_Registry_REG_SAM_FLAGS = 4
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAM_FLAGS_KEY_ENUMERATE_SUB_KEYS: Windows_Win32_System_Registry_REG_SAM_FLAGS = 8
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAM_FLAGS_KEY_NOTIFY: Windows_Win32_System_Registry_REG_SAM_FLAGS = 16
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAM_FLAGS_KEY_CREATE_LINK: Windows_Win32_System_Registry_REG_SAM_FLAGS = 32
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAM_FLAGS_KEY_WOW64_32KEY: Windows_Win32_System_Registry_REG_SAM_FLAGS = 512
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAM_FLAGS_KEY_WOW64_64KEY: Windows_Win32_System_Registry_REG_SAM_FLAGS = 256
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAM_FLAGS_KEY_WOW64_RES: Windows_Win32_System_Registry_REG_SAM_FLAGS = 768
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAM_FLAGS_KEY_READ: Windows_Win32_System_Registry_REG_SAM_FLAGS = 131097
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAM_FLAGS_KEY_WRITE: Windows_Win32_System_Registry_REG_SAM_FLAGS = 131078
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAM_FLAGS_KEY_EXECUTE: Windows_Win32_System_Registry_REG_SAM_FLAGS = 131097
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAM_FLAGS_KEY_ALL_ACCESS: Windows_Win32_System_Registry_REG_SAM_FLAGS = 983103
 
 // Windows.Win32.System.Registry.REG_SAVE_FORMAT (synthetic:Windows_Win32_System_Registry_REG_SAVE_FORMAT)
+@When[Windows_Win32_System_Registry == "on"]
 public type Windows_Win32_System_Registry_REG_SAVE_FORMAT = UInt32
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAVE_FORMAT_REG_STANDARD_FORMAT: Windows_Win32_System_Registry_REG_SAVE_FORMAT = 1
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAVE_FORMAT_REG_LATEST_FORMAT: Windows_Win32_System_Registry_REG_SAVE_FORMAT = 2
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_SAVE_FORMAT_REG_NO_COMPRESSION: Windows_Win32_System_Registry_REG_SAVE_FORMAT = 4
 
 // Windows.Win32.System.Registry.REG_VALUE_TYPE (synthetic:Windows_Win32_System_Registry_REG_VALUE_TYPE)
+@When[Windows_Win32_System_Registry == "on"]
 public type Windows_Win32_System_Registry_REG_VALUE_TYPE = UInt32
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_NONE: Windows_Win32_System_Registry_REG_VALUE_TYPE = 0
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_SZ: Windows_Win32_System_Registry_REG_VALUE_TYPE = 1
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_EXPAND_SZ: Windows_Win32_System_Registry_REG_VALUE_TYPE = 2
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_BINARY: Windows_Win32_System_Registry_REG_VALUE_TYPE = 3
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_DWORD: Windows_Win32_System_Registry_REG_VALUE_TYPE = 4
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_DWORD_LITTLE_ENDIAN: Windows_Win32_System_Registry_REG_VALUE_TYPE = 4
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_DWORD_BIG_ENDIAN: Windows_Win32_System_Registry_REG_VALUE_TYPE = 5
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_LINK: Windows_Win32_System_Registry_REG_VALUE_TYPE = 6
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_MULTI_SZ: Windows_Win32_System_Registry_REG_VALUE_TYPE = 7
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_RESOURCE_LIST: Windows_Win32_System_Registry_REG_VALUE_TYPE = 8
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_FULL_RESOURCE_DESCRIPTOR: Windows_Win32_System_Registry_REG_VALUE_TYPE = 9
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_RESOURCE_REQUIREMENTS_LIST: Windows_Win32_System_Registry_REG_VALUE_TYPE = 10
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_QWORD: Windows_Win32_System_Registry_REG_VALUE_TYPE = 11
+@When[Windows_Win32_System_Registry == "on"]
 public let Windows_Win32_System_Registry_REG_VALUE_TYPE_REG_QWORD_LITTLE_ENDIAN: Windows_Win32_System_Registry_REG_VALUE_TYPE = 11
 
 // Windows.Win32.System.Registry.VALENTA (synthetic:Windows_Win32_System_Registry_VALENTA)
+@When[Windows_Win32_System_Registry == "on"]
 @C
 public struct Windows_Win32_System_Registry_VALENTA {
     public var ve_valuename: CPointer<UInt8> = CPointer<UInt8>()
@@ -18767,6 +20180,7 @@ public struct Windows_Win32_System_Registry_VALENTA {
 }
 
 // Windows.Win32.System.Registry.VALENTW (synthetic:Windows_Win32_System_Registry_VALENTW)
+@When[Windows_Win32_System_Registry == "on"]
 @C
 public struct Windows_Win32_System_Registry_VALENTW {
     public var ve_valuename: CPointer<UInt16> = CPointer<UInt16>()
@@ -18776,6 +20190,7 @@ public struct Windows_Win32_System_Registry_VALENTW {
 }
 
 // Windows.Win32.System.Registry.val_context (synthetic:Windows_Win32_System_Registry_val_context)
+@When[Windows_Win32_System_Registry == "on"]
 @C
 public struct Windows_Win32_System_Registry_val_context {
     public var valuelen: Int32 = 0i32
@@ -18784,12 +20199,17 @@ public struct Windows_Win32_System_Registry_val_context {
 }
 
 // Windows.Win32.System.Services.ENUM_SERVICE_STATE (synthetic:Windows_Win32_System_Services_ENUM_SERVICE_STATE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_ENUM_SERVICE_STATE = UInt32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_ENUM_SERVICE_STATE_SERVICE_ACTIVE: Windows_Win32_System_Services_ENUM_SERVICE_STATE = 1
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_ENUM_SERVICE_STATE_SERVICE_INACTIVE: Windows_Win32_System_Services_ENUM_SERVICE_STATE = 2
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_ENUM_SERVICE_STATE_SERVICE_STATE_ALL: Windows_Win32_System_Services_ENUM_SERVICE_STATE = 3
 
 // Windows.Win32.System.Services.ENUM_SERVICE_STATUSA (synthetic:Windows_Win32_System_Services_ENUM_SERVICE_STATUSA)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_ENUM_SERVICE_STATUSA {
     public var lpServiceName: CPointer<UInt8> = CPointer<UInt8>()
@@ -18798,6 +20218,7 @@ public struct Windows_Win32_System_Services_ENUM_SERVICE_STATUSA {
 }
 
 // Windows.Win32.System.Services.ENUM_SERVICE_STATUSW (synthetic:Windows_Win32_System_Services_ENUM_SERVICE_STATUSW)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_ENUM_SERVICE_STATUSW {
     public var lpServiceName: CPointer<UInt16> = CPointer<UInt16>()
@@ -18806,6 +20227,7 @@ public struct Windows_Win32_System_Services_ENUM_SERVICE_STATUSW {
 }
 
 // Windows.Win32.System.Services.ENUM_SERVICE_STATUS_PROCESSA (synthetic:Windows_Win32_System_Services_ENUM_SERVICE_STATUS_PROCESSA)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_ENUM_SERVICE_STATUS_PROCESSA {
     public var lpServiceName: CPointer<UInt8> = CPointer<UInt8>()
@@ -18814,6 +20236,7 @@ public struct Windows_Win32_System_Services_ENUM_SERVICE_STATUS_PROCESSA {
 }
 
 // Windows.Win32.System.Services.ENUM_SERVICE_STATUS_PROCESSW (synthetic:Windows_Win32_System_Services_ENUM_SERVICE_STATUS_PROCESSW)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_ENUM_SERVICE_STATUS_PROCESSW {
     public var lpServiceName: CPointer<UInt16> = CPointer<UInt16>()
@@ -18822,49 +20245,70 @@ public struct Windows_Win32_System_Services_ENUM_SERVICE_STATUS_PROCESSW {
 }
 
 // Windows.Win32.System.Services.ENUM_SERVICE_TYPE (synthetic:Windows_Win32_System_Services_ENUM_SERVICE_TYPE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_ENUM_SERVICE_TYPE = UInt32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_ENUM_SERVICE_TYPE_SERVICE_DRIVER: Windows_Win32_System_Services_ENUM_SERVICE_TYPE = 11
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_ENUM_SERVICE_TYPE_SERVICE_KERNEL_DRIVER: Windows_Win32_System_Services_ENUM_SERVICE_TYPE = 1
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_ENUM_SERVICE_TYPE_SERVICE_WIN32: Windows_Win32_System_Services_ENUM_SERVICE_TYPE = 48
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_ENUM_SERVICE_TYPE_SERVICE_WIN32_SHARE_PROCESS: Windows_Win32_System_Services_ENUM_SERVICE_TYPE = 32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_ENUM_SERVICE_TYPE_SERVICE_ADAPTER: Windows_Win32_System_Services_ENUM_SERVICE_TYPE = 4
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_ENUM_SERVICE_TYPE_SERVICE_FILE_SYSTEM_DRIVER: Windows_Win32_System_Services_ENUM_SERVICE_TYPE = 2
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_ENUM_SERVICE_TYPE_SERVICE_RECOGNIZER_DRIVER: Windows_Win32_System_Services_ENUM_SERVICE_TYPE = 8
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_ENUM_SERVICE_TYPE_SERVICE_WIN32_OWN_PROCESS: Windows_Win32_System_Services_ENUM_SERVICE_TYPE = 16
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_ENUM_SERVICE_TYPE_SERVICE_USER_OWN_PROCESS: Windows_Win32_System_Services_ENUM_SERVICE_TYPE = 80
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_ENUM_SERVICE_TYPE_SERVICE_USER_SHARE_PROCESS: Windows_Win32_System_Services_ENUM_SERVICE_TYPE = 96
 
 // Windows.Win32.System.Services.HANDLER_FUNCTION (synthetic:Windows_Win32_System_Services_HANDLER_FUNCTION)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_HANDLER_FUNCTION = CFunc<(UInt32) -> Unit>
 
 // Windows.Win32.System.Services.HANDLER_FUNCTION_EX (synthetic:Windows_Win32_System_Services_HANDLER_FUNCTION_EX)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_HANDLER_FUNCTION_EX = CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>
 
 // Windows.Win32.System.Services.LPHANDLER_FUNCTION (synthetic:Windows_Win32_System_Services_LPHANDLER_FUNCTION)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_LPHANDLER_FUNCTION = CFunc<(UInt32) -> Unit>
 
 // Windows.Win32.System.Services.LPHANDLER_FUNCTION_EX (synthetic:Windows_Win32_System_Services_LPHANDLER_FUNCTION_EX)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_LPHANDLER_FUNCTION_EX = CFunc<(UInt32, UInt32, CPointer<Unit>, CPointer<Unit>) -> UInt32>
 
 // Windows.Win32.System.Services.LPSERVICE_MAIN_FUNCTIONA (synthetic:Windows_Win32_System_Services_LPSERVICE_MAIN_FUNCTIONA)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_LPSERVICE_MAIN_FUNCTIONA = CFunc<(UInt32, CPointer<CPointer<UInt8>>) -> Unit>
 
 // Windows.Win32.System.Services.LPSERVICE_MAIN_FUNCTIONW (synthetic:Windows_Win32_System_Services_LPSERVICE_MAIN_FUNCTIONW)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_LPSERVICE_MAIN_FUNCTIONW = CFunc<(UInt32, CPointer<CPointer<UInt16>>) -> Unit>
 
 // Windows.Win32.System.Services.PFN_SC_NOTIFY_CALLBACK (synthetic:Windows_Win32_System_Services_PFN_SC_NOTIFY_CALLBACK)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_PFN_SC_NOTIFY_CALLBACK = CFunc<(CPointer<Unit>) -> Unit>
 
 // Windows.Win32.System.Services.PSC_NOTIFICATION_CALLBACK (synthetic:Windows_Win32_System_Services_PSC_NOTIFICATION_CALLBACK)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_PSC_NOTIFICATION_CALLBACK = CFunc<(UInt32, CPointer<Unit>) -> Unit>
 
 // Windows.Win32.System.Services.PSC_NOTIFICATION_REGISTRATION (synthetic:Windows_Win32_System_Services_PSC_NOTIFICATION_REGISTRATION)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_PSC_NOTIFICATION_REGISTRATION {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Services.QUERY_SERVICE_CONFIGA (synthetic:Windows_Win32_System_Services_QUERY_SERVICE_CONFIGA)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_QUERY_SERVICE_CONFIGA {
     public var dwServiceType: UInt32 = 0u32
@@ -18879,6 +20323,7 @@ public struct Windows_Win32_System_Services_QUERY_SERVICE_CONFIGA {
 }
 
 // Windows.Win32.System.Services.QUERY_SERVICE_CONFIGW (synthetic:Windows_Win32_System_Services_QUERY_SERVICE_CONFIGW)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_QUERY_SERVICE_CONFIGW {
     public var dwServiceType: UInt32 = 0u32
@@ -18893,6 +20338,7 @@ public struct Windows_Win32_System_Services_QUERY_SERVICE_CONFIGW {
 }
 
 // Windows.Win32.System.Services.QUERY_SERVICE_LOCK_STATUSA (synthetic:Windows_Win32_System_Services_QUERY_SERVICE_LOCK_STATUSA)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_QUERY_SERVICE_LOCK_STATUSA {
     public var fIsLocked: UInt32 = 0u32
@@ -18901,6 +20347,7 @@ public struct Windows_Win32_System_Services_QUERY_SERVICE_LOCK_STATUSA {
 }
 
 // Windows.Win32.System.Services.QUERY_SERVICE_LOCK_STATUSW (synthetic:Windows_Win32_System_Services_QUERY_SERVICE_LOCK_STATUSW)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_QUERY_SERVICE_LOCK_STATUSW {
     public var fIsLocked: UInt32 = 0u32
@@ -18909,6 +20356,7 @@ public struct Windows_Win32_System_Services_QUERY_SERVICE_LOCK_STATUSW {
 }
 
 // Windows.Win32.System.Services.SC_ACTION (synthetic:Windows_Win32_System_Services_SC_ACTION)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SC_ACTION {
     public var Type: Int32 = 0i32
@@ -18916,47 +20364,74 @@ public struct Windows_Win32_System_Services_SC_ACTION {
 }
 
 // Windows.Win32.System.Services.SC_ACTION_TYPE (synthetic:Windows_Win32_System_Services_SC_ACTION_TYPE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SC_ACTION_TYPE = Int32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SC_ACTION_TYPE_SC_ACTION_NONE: Windows_Win32_System_Services_SC_ACTION_TYPE = 0
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SC_ACTION_TYPE_SC_ACTION_RESTART: Windows_Win32_System_Services_SC_ACTION_TYPE = 1
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SC_ACTION_TYPE_SC_ACTION_REBOOT: Windows_Win32_System_Services_SC_ACTION_TYPE = 2
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SC_ACTION_TYPE_SC_ACTION_RUN_COMMAND: Windows_Win32_System_Services_SC_ACTION_TYPE = 3
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SC_ACTION_TYPE_SC_ACTION_OWN_RESTART: Windows_Win32_System_Services_SC_ACTION_TYPE = 4
 
 // Windows.Win32.System.Services.SC_ENUM_TYPE (synthetic:Windows_Win32_System_Services_SC_ENUM_TYPE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SC_ENUM_TYPE = Int32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SC_ENUM_TYPE_SC_ENUM_PROCESS_INFO: Windows_Win32_System_Services_SC_ENUM_TYPE = 0
 
 // Windows.Win32.System.Services.SC_EVENT_TYPE (synthetic:Windows_Win32_System_Services_SC_EVENT_TYPE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SC_EVENT_TYPE = Int32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SC_EVENT_TYPE_SC_EVENT_DATABASE_CHANGE: Windows_Win32_System_Services_SC_EVENT_TYPE = 0
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SC_EVENT_TYPE_SC_EVENT_PROPERTY_CHANGE: Windows_Win32_System_Services_SC_EVENT_TYPE = 1
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SC_EVENT_TYPE_SC_EVENT_STATUS_CHANGE: Windows_Win32_System_Services_SC_EVENT_TYPE = 2
 
 // Windows.Win32.System.Services.SC_HANDLE (synthetic:Windows_Win32_System_Services_SC_HANDLE)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SC_HANDLE {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Services.SC_STATUS_TYPE (synthetic:Windows_Win32_System_Services_SC_STATUS_TYPE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SC_STATUS_TYPE = Int32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SC_STATUS_TYPE_SC_STATUS_PROCESS_INFO: Windows_Win32_System_Services_SC_STATUS_TYPE = 0
 
 // Windows.Win32.System.Services.SERVICE_CONFIG (synthetic:Windows_Win32_System_Services_SERVICE_CONFIG)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_CONFIG = UInt32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_CONFIG_SERVICE_CONFIG_DELAYED_AUTO_START_INFO: Windows_Win32_System_Services_SERVICE_CONFIG = 3
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_CONFIG_SERVICE_CONFIG_DESCRIPTION: Windows_Win32_System_Services_SERVICE_CONFIG = 1
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_CONFIG_SERVICE_CONFIG_FAILURE_ACTIONS: Windows_Win32_System_Services_SERVICE_CONFIG = 2
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_CONFIG_SERVICE_CONFIG_FAILURE_ACTIONS_FLAG: Windows_Win32_System_Services_SERVICE_CONFIG = 4
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_CONFIG_SERVICE_CONFIG_PREFERRED_NODE: Windows_Win32_System_Services_SERVICE_CONFIG = 9
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_CONFIG_SERVICE_CONFIG_PRESHUTDOWN_INFO: Windows_Win32_System_Services_SERVICE_CONFIG = 7
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_CONFIG_SERVICE_CONFIG_REQUIRED_PRIVILEGES_INFO: Windows_Win32_System_Services_SERVICE_CONFIG = 6
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_CONFIG_SERVICE_CONFIG_SERVICE_SID_INFO: Windows_Win32_System_Services_SERVICE_CONFIG = 5
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_CONFIG_SERVICE_CONFIG_TRIGGER_INFO: Windows_Win32_System_Services_SERVICE_CONFIG = 8
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_CONFIG_SERVICE_CONFIG_LAUNCH_PROTECTED: Windows_Win32_System_Services_SERVICE_CONFIG = 12
 
 // Windows.Win32.System.Services.SERVICE_CONTROL_STATUS_REASON_PARAMSA (synthetic:Windows_Win32_System_Services_SERVICE_CONTROL_STATUS_REASON_PARAMSA)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_CONTROL_STATUS_REASON_PARAMSA {
     public var dwReason: UInt32 = 0u32
@@ -18965,6 +20440,7 @@ public struct Windows_Win32_System_Services_SERVICE_CONTROL_STATUS_REASON_PARAMS
 }
 
 // Windows.Win32.System.Services.SERVICE_CONTROL_STATUS_REASON_PARAMSW (synthetic:Windows_Win32_System_Services_SERVICE_CONTROL_STATUS_REASON_PARAMSW)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_CONTROL_STATUS_REASON_PARAMSW {
     public var dwReason: UInt32 = 0u32
@@ -18973,12 +20449,14 @@ public struct Windows_Win32_System_Services_SERVICE_CONTROL_STATUS_REASON_PARAMS
 }
 
 // Windows.Win32.System.Services.SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM (synthetic:Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM {
     public var u: Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union = Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union()
 }
 
 // Windows.Win32.System.Services.SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM._u_e__Union (synthetic:Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union {
     public var _raw: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0u32)
@@ -19029,6 +20507,7 @@ public struct Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_D
 }
 
 // Windows.Win32.System.Services.SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM._u_e__Union._s_e__Struct (synthetic:Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM__u_e__Union__s_e__Struct {
     public var DataOffset: UInt32 = 0u32
@@ -19036,36 +20515,48 @@ public struct Windows_Win32_System_Services_SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_D
 }
 
 // Windows.Win32.System.Services.SERVICE_DELAYED_AUTO_START_INFO (synthetic:Windows_Win32_System_Services_SERVICE_DELAYED_AUTO_START_INFO)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_DELAYED_AUTO_START_INFO {
     public var fDelayedAutostart: Int32 = 0i32
 }
 
 // Windows.Win32.System.Services.SERVICE_DESCRIPTIONA (synthetic:Windows_Win32_System_Services_SERVICE_DESCRIPTIONA)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_DESCRIPTIONA {
     public var lpDescription: CPointer<UInt8> = CPointer<UInt8>()
 }
 
 // Windows.Win32.System.Services.SERVICE_DESCRIPTIONW (synthetic:Windows_Win32_System_Services_SERVICE_DESCRIPTIONW)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_DESCRIPTIONW {
     public var lpDescription: CPointer<UInt16> = CPointer<UInt16>()
 }
 
 // Windows.Win32.System.Services.SERVICE_DIRECTORY_TYPE (synthetic:Windows_Win32_System_Services_SERVICE_DIRECTORY_TYPE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_DIRECTORY_TYPE = Int32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_DIRECTORY_TYPE_ServiceDirectoryPersistentState: Windows_Win32_System_Services_SERVICE_DIRECTORY_TYPE = 0
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_DIRECTORY_TYPE_ServiceDirectoryTypeMax: Windows_Win32_System_Services_SERVICE_DIRECTORY_TYPE = 1
 
 // Windows.Win32.System.Services.SERVICE_ERROR (synthetic:Windows_Win32_System_Services_SERVICE_ERROR)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_ERROR = UInt32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_ERROR_SERVICE_ERROR_CRITICAL: Windows_Win32_System_Services_SERVICE_ERROR = 3
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_ERROR_SERVICE_ERROR_IGNORE: Windows_Win32_System_Services_SERVICE_ERROR = 0
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_ERROR_SERVICE_ERROR_NORMAL: Windows_Win32_System_Services_SERVICE_ERROR = 1
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_ERROR_SERVICE_ERROR_SEVERE: Windows_Win32_System_Services_SERVICE_ERROR = 2
 
 // Windows.Win32.System.Services.SERVICE_FAILURE_ACTIONSA (synthetic:Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONSA)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONSA {
     public var dwResetPeriod: UInt32 = 0u32
@@ -19076,6 +20567,7 @@ public struct Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONSA {
 }
 
 // Windows.Win32.System.Services.SERVICE_FAILURE_ACTIONSW (synthetic:Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONSW)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONSW {
     public var dwResetPeriod: UInt32 = 0u32
@@ -19086,37 +20578,53 @@ public struct Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONSW {
 }
 
 // Windows.Win32.System.Services.SERVICE_FAILURE_ACTIONS_FLAG (synthetic:Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONS_FLAG)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_FAILURE_ACTIONS_FLAG {
     public var fFailureActionsOnNonCrashFailures: Int32 = 0i32
 }
 
 // Windows.Win32.System.Services.SERVICE_LAUNCH_PROTECTED_INFO (synthetic:Windows_Win32_System_Services_SERVICE_LAUNCH_PROTECTED_INFO)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_LAUNCH_PROTECTED_INFO {
     public var dwLaunchProtected: UInt32 = 0u32
 }
 
 // Windows.Win32.System.Services.SERVICE_MAIN_FUNCTIONA (synthetic:Windows_Win32_System_Services_SERVICE_MAIN_FUNCTIONA)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_MAIN_FUNCTIONA = CFunc<(UInt32, CPointer<Unit>) -> Unit>
 
 // Windows.Win32.System.Services.SERVICE_MAIN_FUNCTIONW (synthetic:Windows_Win32_System_Services_SERVICE_MAIN_FUNCTIONW)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_MAIN_FUNCTIONW = CFunc<(UInt32, CPointer<CPointer<UInt16>>) -> Unit>
 
 // Windows.Win32.System.Services.SERVICE_NOTIFY (synthetic:Windows_Win32_System_Services_SERVICE_NOTIFY)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_NOTIFY = UInt32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_NOTIFY_SERVICE_NOTIFY_CREATED: Windows_Win32_System_Services_SERVICE_NOTIFY = 128
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_NOTIFY_SERVICE_NOTIFY_CONTINUE_PENDING: Windows_Win32_System_Services_SERVICE_NOTIFY = 16
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_NOTIFY_SERVICE_NOTIFY_DELETE_PENDING: Windows_Win32_System_Services_SERVICE_NOTIFY = 512
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_NOTIFY_SERVICE_NOTIFY_DELETED: Windows_Win32_System_Services_SERVICE_NOTIFY = 256
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_NOTIFY_SERVICE_NOTIFY_PAUSE_PENDING: Windows_Win32_System_Services_SERVICE_NOTIFY = 32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_NOTIFY_SERVICE_NOTIFY_PAUSED: Windows_Win32_System_Services_SERVICE_NOTIFY = 64
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_NOTIFY_SERVICE_NOTIFY_RUNNING: Windows_Win32_System_Services_SERVICE_NOTIFY = 8
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_NOTIFY_SERVICE_NOTIFY_START_PENDING: Windows_Win32_System_Services_SERVICE_NOTIFY = 2
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_NOTIFY_SERVICE_NOTIFY_STOP_PENDING: Windows_Win32_System_Services_SERVICE_NOTIFY = 4
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_NOTIFY_SERVICE_NOTIFY_STOPPED: Windows_Win32_System_Services_SERVICE_NOTIFY = 1
 
 // Windows.Win32.System.Services.SERVICE_NOTIFY_1 (synthetic:Windows_Win32_System_Services_SERVICE_NOTIFY_1)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_NOTIFY_1 {
     public var dwVersion: UInt32 = 0u32
@@ -19127,6 +20635,7 @@ public struct Windows_Win32_System_Services_SERVICE_NOTIFY_1 {
 }
 
 // Windows.Win32.System.Services.SERVICE_NOTIFY_2A (synthetic:Windows_Win32_System_Services_SERVICE_NOTIFY_2A)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_NOTIFY_2A {
     public var dwVersion: UInt32 = 0u32
@@ -19139,6 +20648,7 @@ public struct Windows_Win32_System_Services_SERVICE_NOTIFY_2A {
 }
 
 // Windows.Win32.System.Services.SERVICE_NOTIFY_2W (synthetic:Windows_Win32_System_Services_SERVICE_NOTIFY_2W)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_NOTIFY_2W {
     public var dwVersion: UInt32 = 0u32
@@ -19151,6 +20661,7 @@ public struct Windows_Win32_System_Services_SERVICE_NOTIFY_2W {
 }
 
 // Windows.Win32.System.Services.SERVICE_PREFERRED_NODE_INFO (synthetic:Windows_Win32_System_Services_SERVICE_PREFERRED_NODE_INFO)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_PREFERRED_NODE_INFO {
     public var usPreferredNode: UInt16 = 0u16
@@ -19158,63 +20669,86 @@ public struct Windows_Win32_System_Services_SERVICE_PREFERRED_NODE_INFO {
 }
 
 // Windows.Win32.System.Services.SERVICE_PRESHUTDOWN_INFO (synthetic:Windows_Win32_System_Services_SERVICE_PRESHUTDOWN_INFO)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_PRESHUTDOWN_INFO {
     public var dwPreshutdownTimeout: UInt32 = 0u32
 }
 
 // Windows.Win32.System.Services.SERVICE_REGISTRY_STATE_TYPE (synthetic:Windows_Win32_System_Services_SERVICE_REGISTRY_STATE_TYPE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_REGISTRY_STATE_TYPE = Int32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_REGISTRY_STATE_TYPE_ServiceRegistryStateParameters: Windows_Win32_System_Services_SERVICE_REGISTRY_STATE_TYPE = 0
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_REGISTRY_STATE_TYPE_ServiceRegistryStatePersistent: Windows_Win32_System_Services_SERVICE_REGISTRY_STATE_TYPE = 1
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_REGISTRY_STATE_TYPE_MaxServiceRegistryStateType: Windows_Win32_System_Services_SERVICE_REGISTRY_STATE_TYPE = 2
 
 // Windows.Win32.System.Services.SERVICE_REQUIRED_PRIVILEGES_INFOA (synthetic:Windows_Win32_System_Services_SERVICE_REQUIRED_PRIVILEGES_INFOA)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_REQUIRED_PRIVILEGES_INFOA {
     public var pmszRequiredPrivileges: CPointer<UInt8> = CPointer<UInt8>()
 }
 
 // Windows.Win32.System.Services.SERVICE_REQUIRED_PRIVILEGES_INFOW (synthetic:Windows_Win32_System_Services_SERVICE_REQUIRED_PRIVILEGES_INFOW)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_REQUIRED_PRIVILEGES_INFOW {
     public var pmszRequiredPrivileges: CPointer<UInt16> = CPointer<UInt16>()
 }
 
 // Windows.Win32.System.Services.SERVICE_RUNS_IN_PROCESS (synthetic:Windows_Win32_System_Services_SERVICE_RUNS_IN_PROCESS)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_RUNS_IN_PROCESS = UInt32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_RUNS_IN_PROCESS_SERVICE_RUNS_IN_NON_SYSTEM_OR_NOT_RUNNING: Windows_Win32_System_Services_SERVICE_RUNS_IN_PROCESS = 0
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_RUNS_IN_PROCESS_SERVICE_RUNS_IN_SYSTEM_PROCESS: Windows_Win32_System_Services_SERVICE_RUNS_IN_PROCESS = 1
 
 // Windows.Win32.System.Services.SERVICE_SHARED_DIRECTORY_TYPE (synthetic:Windows_Win32_System_Services_SERVICE_SHARED_DIRECTORY_TYPE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_SHARED_DIRECTORY_TYPE = Int32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_SHARED_DIRECTORY_TYPE_ServiceSharedDirectoryPersistentState: Windows_Win32_System_Services_SERVICE_SHARED_DIRECTORY_TYPE = 0
 
 // Windows.Win32.System.Services.SERVICE_SHARED_REGISTRY_STATE_TYPE (synthetic:Windows_Win32_System_Services_SERVICE_SHARED_REGISTRY_STATE_TYPE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_SHARED_REGISTRY_STATE_TYPE = Int32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_SHARED_REGISTRY_STATE_TYPE_ServiceSharedRegistryPersistentState: Windows_Win32_System_Services_SERVICE_SHARED_REGISTRY_STATE_TYPE = 0
 
 // Windows.Win32.System.Services.SERVICE_SID_INFO (synthetic:Windows_Win32_System_Services_SERVICE_SID_INFO)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_SID_INFO {
     public var dwServiceSidType: UInt32 = 0u32
 }
 
 // Windows.Win32.System.Services.SERVICE_START_REASON (synthetic:Windows_Win32_System_Services_SERVICE_START_REASON)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_START_REASON {
     public var dwReason: UInt32 = 0u32
 }
 
 // Windows.Win32.System.Services.SERVICE_START_TYPE (synthetic:Windows_Win32_System_Services_SERVICE_START_TYPE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_START_TYPE = UInt32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_START_TYPE_SERVICE_AUTO_START: Windows_Win32_System_Services_SERVICE_START_TYPE = 2
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_START_TYPE_SERVICE_BOOT_START: Windows_Win32_System_Services_SERVICE_START_TYPE = 0
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_START_TYPE_SERVICE_DEMAND_START: Windows_Win32_System_Services_SERVICE_START_TYPE = 3
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_START_TYPE_SERVICE_DISABLED: Windows_Win32_System_Services_SERVICE_START_TYPE = 4
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_START_TYPE_SERVICE_SYSTEM_START: Windows_Win32_System_Services_SERVICE_START_TYPE = 1
 
 // Windows.Win32.System.Services.SERVICE_STATUS (synthetic:Windows_Win32_System_Services_SERVICE_STATUS)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_STATUS {
     public var dwServiceType: UInt32 = 0u32
@@ -19227,22 +20761,32 @@ public struct Windows_Win32_System_Services_SERVICE_STATUS {
 }
 
 // Windows.Win32.System.Services.SERVICE_STATUS_CURRENT_STATE (synthetic:Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE = UInt32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE_SERVICE_CONTINUE_PENDING: Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE = 5
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE_SERVICE_PAUSE_PENDING: Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE = 6
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE_SERVICE_PAUSED: Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE = 7
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE_SERVICE_RUNNING: Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE = 4
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE_SERVICE_START_PENDING: Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE = 2
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE_SERVICE_STOP_PENDING: Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE = 3
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE_SERVICE_STOPPED: Windows_Win32_System_Services_SERVICE_STATUS_CURRENT_STATE = 1
 
 // Windows.Win32.System.Services.SERVICE_STATUS_HANDLE (synthetic:Windows_Win32_System_Services_SERVICE_STATUS_HANDLE)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_STATUS_HANDLE {
     public var Value: CPointer<Unit> = CPointer<Unit>()
 }
 
 // Windows.Win32.System.Services.SERVICE_STATUS_PROCESS (synthetic:Windows_Win32_System_Services_SERVICE_STATUS_PROCESS)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_STATUS_PROCESS {
     public var dwServiceType: UInt32 = 0u32
@@ -19257,6 +20801,7 @@ public struct Windows_Win32_System_Services_SERVICE_STATUS_PROCESS {
 }
 
 // Windows.Win32.System.Services.SERVICE_TABLE_ENTRYA (synthetic:Windows_Win32_System_Services_SERVICE_TABLE_ENTRYA)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_TABLE_ENTRYA {
     public var lpServiceName: CPointer<UInt8> = CPointer<UInt8>()
@@ -19264,6 +20809,7 @@ public struct Windows_Win32_System_Services_SERVICE_TABLE_ENTRYA {
 }
 
 // Windows.Win32.System.Services.SERVICE_TABLE_ENTRYW (synthetic:Windows_Win32_System_Services_SERVICE_TABLE_ENTRYW)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_TABLE_ENTRYW {
     public var lpServiceName: CPointer<UInt16> = CPointer<UInt16>()
@@ -19271,6 +20817,7 @@ public struct Windows_Win32_System_Services_SERVICE_TABLE_ENTRYW {
 }
 
 // Windows.Win32.System.Services.SERVICE_TIMECHANGE_INFO (synthetic:Windows_Win32_System_Services_SERVICE_TIMECHANGE_INFO)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_TIMECHANGE_INFO {
     public var liNewTime: Int64 = 0i64
@@ -19278,6 +20825,7 @@ public struct Windows_Win32_System_Services_SERVICE_TIMECHANGE_INFO {
 }
 
 // Windows.Win32.System.Services.SERVICE_TRIGGER (synthetic:Windows_Win32_System_Services_SERVICE_TRIGGER)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_TRIGGER {
     public var dwTriggerType: UInt32 = 0u32
@@ -19288,17 +20836,22 @@ public struct Windows_Win32_System_Services_SERVICE_TRIGGER {
 }
 
 // Windows.Win32.System.Services.SERVICE_TRIGGER_ACTION (synthetic:Windows_Win32_System_Services_SERVICE_TRIGGER_ACTION)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_TRIGGER_ACTION = UInt32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_ACTION_SERVICE_TRIGGER_ACTION_SERVICE_START: Windows_Win32_System_Services_SERVICE_TRIGGER_ACTION = 1
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_ACTION_SERVICE_TRIGGER_ACTION_SERVICE_STOP: Windows_Win32_System_Services_SERVICE_TRIGGER_ACTION = 2
 
 // Windows.Win32.System.Services.SERVICE_TRIGGER_CUSTOM_STATE_ID (synthetic:Windows_Win32_System_Services_SERVICE_TRIGGER_CUSTOM_STATE_ID)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_TRIGGER_CUSTOM_STATE_ID {
     public var Data: VArray<UInt32, $2> = VArray<UInt32, $2>(repeat: 0u32)
 }
 
 // Windows.Win32.System.Services.SERVICE_TRIGGER_INFO (synthetic:Windows_Win32_System_Services_SERVICE_TRIGGER_INFO)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_TRIGGER_INFO {
     public var cTriggers: UInt32 = 0u32
@@ -19307,6 +20860,7 @@ public struct Windows_Win32_System_Services_SERVICE_TRIGGER_INFO {
 }
 
 // Windows.Win32.System.Services.SERVICE_TRIGGER_SPECIFIC_DATA_ITEM (synthetic:Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM)
+@When[Windows_Win32_System_Services == "on"]
 @C
 public struct Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM {
     public var dwDataType: UInt32 = 0u32
@@ -19315,24 +20869,39 @@ public struct Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM {
 }
 
 // Windows.Win32.System.Services.SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE (synthetic:Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE = UInt32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE_SERVICE_TRIGGER_DATA_TYPE_BINARY: Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE = 1
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE_SERVICE_TRIGGER_DATA_TYPE_STRING: Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE = 2
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE_SERVICE_TRIGGER_DATA_TYPE_LEVEL: Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE = 3
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE_SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ANY: Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE = 4
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE_SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ALL: Windows_Win32_System_Services_SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE = 5
 
 // Windows.Win32.System.Services.SERVICE_TRIGGER_TYPE (synthetic:Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE)
+@When[Windows_Win32_System_Services == "on"]
 public type Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE = UInt32
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE_SERVICE_TRIGGER_TYPE_CUSTOM: Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE = 20
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE_SERVICE_TRIGGER_TYPE_DEVICE_INTERFACE_ARRIVAL: Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE = 1
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE_SERVICE_TRIGGER_TYPE_DOMAIN_JOIN: Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE = 3
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE_SERVICE_TRIGGER_TYPE_FIREWALL_PORT_EVENT: Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE = 4
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE_SERVICE_TRIGGER_TYPE_GROUP_POLICY: Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE = 5
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE_SERVICE_TRIGGER_TYPE_IP_ADDRESS_AVAILABILITY: Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE = 2
+@When[Windows_Win32_System_Services == "on"]
 public let Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE_SERVICE_TRIGGER_TYPE_NETWORK_ENDPOINT: Windows_Win32_System_Services_SERVICE_TRIGGER_TYPE = 6
 
 // Windows.Win32.System.SystemInformation.CACHE_DESCRIPTOR (synthetic:Windows_Win32_System_SystemInformation_CACHE_DESCRIPTOR)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_CACHE_DESCRIPTOR {
     public var Level: UInt8 = 0u8
@@ -19343,6 +20912,7 @@ public struct Windows_Win32_System_SystemInformation_CACHE_DESCRIPTOR {
 }
 
 // Windows.Win32.System.SystemInformation.CACHE_RELATIONSHIP (synthetic:Windows_Win32_System_SystemInformation_CACHE_RELATIONSHIP)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_CACHE_RELATIONSHIP {
     public var Level: UInt8 = 0u8
@@ -19356,6 +20926,7 @@ public struct Windows_Win32_System_SystemInformation_CACHE_RELATIONSHIP {
 }
 
 // Windows.Win32.System.SystemInformation.CACHE_RELATIONSHIP._Anonymous_e__Union (synthetic:Windows_Win32_System_SystemInformation_CACHE_RELATIONSHIP__Anonymous_e__Union)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_CACHE_RELATIONSHIP__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
@@ -19406,124 +20977,227 @@ public struct Windows_Win32_System_SystemInformation_CACHE_RELATIONSHIP__Anonymo
 }
 
 // Windows.Win32.System.SystemInformation.COMPUTER_NAME_FORMAT (synthetic:Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT = Int32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT_ComputerNameNetBIOS: Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT = 0
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT_ComputerNameDnsHostname: Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT_ComputerNameDnsDomain: Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT = 2
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT_ComputerNameDnsFullyQualified: Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT = 3
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT_ComputerNamePhysicalNetBIOS: Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT = 4
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT_ComputerNamePhysicalDnsHostname: Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT = 5
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT_ComputerNamePhysicalDnsDomain: Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT = 6
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT_ComputerNamePhysicalDnsFullyQualified: Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT = 7
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT_ComputerNameMax: Windows_Win32_System_SystemInformation_COMPUTER_NAME_FORMAT = 8
 
 // Windows.Win32.System.SystemInformation.CPU_SET_INFORMATION_TYPE (synthetic:Windows_Win32_System_SystemInformation_CPU_SET_INFORMATION_TYPE)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_CPU_SET_INFORMATION_TYPE = Int32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_CPU_SET_INFORMATION_TYPE_CpuSetInformation: Windows_Win32_System_SystemInformation_CPU_SET_INFORMATION_TYPE = 0
 
 // Windows.Win32.System.SystemInformation.DEP_SYSTEM_POLICY_TYPE (synthetic:Windows_Win32_System_SystemInformation_DEP_SYSTEM_POLICY_TYPE)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_DEP_SYSTEM_POLICY_TYPE = Int32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEP_SYSTEM_POLICY_TYPE_DEPPolicyAlwaysOff: Windows_Win32_System_SystemInformation_DEP_SYSTEM_POLICY_TYPE = 0
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEP_SYSTEM_POLICY_TYPE_DEPPolicyAlwaysOn: Windows_Win32_System_SystemInformation_DEP_SYSTEM_POLICY_TYPE = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEP_SYSTEM_POLICY_TYPE_DEPPolicyOptIn: Windows_Win32_System_SystemInformation_DEP_SYSTEM_POLICY_TYPE = 2
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEP_SYSTEM_POLICY_TYPE_DEPPolicyOptOut: Windows_Win32_System_SystemInformation_DEP_SYSTEM_POLICY_TYPE = 3
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEP_SYSTEM_POLICY_TYPE_DEPTotalPolicyCount: Windows_Win32_System_SystemInformation_DEP_SYSTEM_POLICY_TYPE = 4
 
 // Windows.Win32.System.SystemInformation.DEVELOPER_DRIVE_ENABLEMENT_STATE (synthetic:Windows_Win32_System_SystemInformation_DEVELOPER_DRIVE_ENABLEMENT_STATE)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_DEVELOPER_DRIVE_ENABLEMENT_STATE = Int32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVELOPER_DRIVE_ENABLEMENT_STATE_DeveloperDriveEnablementStateError: Windows_Win32_System_SystemInformation_DEVELOPER_DRIVE_ENABLEMENT_STATE = 0
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVELOPER_DRIVE_ENABLEMENT_STATE_DeveloperDriveEnabled: Windows_Win32_System_SystemInformation_DEVELOPER_DRIVE_ENABLEMENT_STATE = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVELOPER_DRIVE_ENABLEMENT_STATE_DeveloperDriveDisabledBySystemPolicy: Windows_Win32_System_SystemInformation_DEVELOPER_DRIVE_ENABLEMENT_STATE = 2
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVELOPER_DRIVE_ENABLEMENT_STATE_DeveloperDriveDisabledByGroupPolicy: Windows_Win32_System_SystemInformation_DEVELOPER_DRIVE_ENABLEMENT_STATE = 3
 
 // Windows.Win32.System.SystemInformation.DEVICEFAMILYDEVICEFORM (synthetic:Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = UInt32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_UNKNOWN: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 0
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_PHONE: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_TABLET: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 2
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_DESKTOP: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 3
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_NOTEBOOK: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 4
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_CONVERTIBLE: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 5
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_DETACHABLE: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 6
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_ALLINONE: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 7
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_STICKPC: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 8
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_PUCK: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 9
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_LARGESCREEN: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 10
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_HMD: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 11
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_INDUSTRY_HANDHELD: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 12
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_INDUSTRY_TABLET: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 13
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_BANKING: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 14
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_BUILDING_AUTOMATION: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 15
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_DIGITAL_SIGNAGE: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 16
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_GAMING: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 17
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_HOME_AUTOMATION: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 18
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_INDUSTRIAL_AUTOMATION: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 19
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_KIOSK: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 20
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_MAKER_BOARD: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 21
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_MEDICAL: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 22
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_NETWORKING: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 23
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_POINT_OF_SERVICE: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 24
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_PRINTING: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 25
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_THIN_CLIENT: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 26
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_TOY: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 27
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_VENDING: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 28
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_INDUSTRY_OTHER: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 29
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_ONE: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 30
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_ONE_S: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 31
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_ONE_X: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_ONE_X_DEVKIT: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 33
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_SERIES_X: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 34
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_SERIES_X_DEVKIT: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 35
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_SERIES_S: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 36
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_01: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 37
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_02: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 38
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_03: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 39
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_04: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 40
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_05: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 41
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_06: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 42
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_07: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 43
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_08: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 44
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_09: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 45
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_GAMING_HANDHELD: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 46
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_GAMING_CONSOLE: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 47
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM_DEVICEFAMILYDEVICEFORM_MAX: Windows_Win32_System_SystemInformation_DEVICEFAMILYDEVICEFORM = 47
 
 // Windows.Win32.System.SystemInformation.DEVICEFAMILYINFOENUM (synthetic:Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = UInt32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_UAP: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 0
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_WINDOWS_8X: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_WINDOWS_PHONE_8X: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 2
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_DESKTOP: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 3
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_MOBILE: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 4
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_XBOX: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 5
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_TEAM: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 6
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_IOT: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 7
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_IOT_HEADLESS: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 8
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_SERVER: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 9
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_HOLOGRAPHIC: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 10
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_XBOXSRA: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 11
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_XBOXERA: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 12
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_SERVER_NANO: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 13
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_8828080: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 14
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_7067329: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 15
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_WINDOWS_CORE: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 16
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_WINDOWS_CORE_HEADLESS: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 17
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM_DEVICEFAMILYINFOENUM_MAX: Windows_Win32_System_SystemInformation_DEVICEFAMILYINFOENUM = 17
 
 // Windows.Win32.System.SystemInformation.FIRMWARE_TABLE_PROVIDER (synthetic:Windows_Win32_System_SystemInformation_FIRMWARE_TABLE_PROVIDER)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_FIRMWARE_TABLE_PROVIDER = UInt32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_FIRMWARE_TABLE_PROVIDER_ACPI: Windows_Win32_System_SystemInformation_FIRMWARE_TABLE_PROVIDER = 1094930505
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_FIRMWARE_TABLE_PROVIDER_FIRM: Windows_Win32_System_SystemInformation_FIRMWARE_TABLE_PROVIDER = 1179210317
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_FIRMWARE_TABLE_PROVIDER_RSMB: Windows_Win32_System_SystemInformation_FIRMWARE_TABLE_PROVIDER = 1381190978
 
 // Windows.Win32.System.SystemInformation.FIRMWARE_TYPE (synthetic:Windows_Win32_System_SystemInformation_FIRMWARE_TYPE)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_FIRMWARE_TYPE = Int32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_FIRMWARE_TYPE_FirmwareTypeUnknown: Windows_Win32_System_SystemInformation_FIRMWARE_TYPE = 0
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_FIRMWARE_TYPE_FirmwareTypeBios: Windows_Win32_System_SystemInformation_FIRMWARE_TYPE = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_FIRMWARE_TYPE_FirmwareTypeUefi: Windows_Win32_System_SystemInformation_FIRMWARE_TYPE = 2
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_FIRMWARE_TYPE_FirmwareTypeMax: Windows_Win32_System_SystemInformation_FIRMWARE_TYPE = 3
 
 // Windows.Win32.System.SystemInformation.GROUP_AFFINITY (synthetic:Windows_Win32_System_SystemInformation_GROUP_AFFINITY)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_GROUP_AFFINITY {
     public var Mask: CPointer<Unit> = CPointer<Unit>()
@@ -19532,6 +21206,7 @@ public struct Windows_Win32_System_SystemInformation_GROUP_AFFINITY {
 }
 
 // Windows.Win32.System.SystemInformation.GROUP_AFFINITY32 (synthetic:Windows_Win32_System_SystemInformation_GROUP_AFFINITY32)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_GROUP_AFFINITY32 {
     public var Mask: UInt32 = 0u32
@@ -19540,6 +21215,7 @@ public struct Windows_Win32_System_SystemInformation_GROUP_AFFINITY32 {
 }
 
 // Windows.Win32.System.SystemInformation.GROUP_AFFINITY64 (synthetic:Windows_Win32_System_SystemInformation_GROUP_AFFINITY64)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_GROUP_AFFINITY64 {
     public var Mask: UInt64 = 0u64
@@ -19548,6 +21224,7 @@ public struct Windows_Win32_System_SystemInformation_GROUP_AFFINITY64 {
 }
 
 // Windows.Win32.System.SystemInformation.GROUP_RELATIONSHIP (synthetic:Windows_Win32_System_SystemInformation_GROUP_RELATIONSHIP)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_GROUP_RELATIONSHIP {
     public var MaximumGroupCount: UInt16 = 0u16
@@ -19557,53 +21234,97 @@ public struct Windows_Win32_System_SystemInformation_GROUP_RELATIONSHIP {
 }
 
 // Windows.Win32.System.SystemInformation.IMAGE_FILE_MACHINE (synthetic:Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = UInt16
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_AXP64: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 644
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_I386: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 332
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_IA64: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 512
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_AMD64: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 34404
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_UNKNOWN: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 0
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_TARGET_HOST: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_R3000: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 354
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_R4000: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 358
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_R10000: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 360
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_WCEMIPSV2: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 361
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_ALPHA: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 388
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_SH3: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 418
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_SH3DSP: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 419
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_SH3E: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 420
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_SH4: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 422
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_SH5: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 424
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_ARM: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 448
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_THUMB: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 450
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_ARMNT: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 452
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_AM33: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 467
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_POWERPC: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 496
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_POWERPCFP: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 497
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_MIPS16: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 614
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_ALPHA64: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 644
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_MIPSFPU: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 870
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_MIPSFPU16: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 1126
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_TRICORE: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 1312
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_CEF: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 3311
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_EBC: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 3772
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_M32R: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 36929
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_ARM64: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 43620
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE_IMAGE_FILE_MACHINE_CEE: Windows_Win32_System_SystemInformation_IMAGE_FILE_MACHINE = 49390
 
 // Windows.Win32.System.SystemInformation.LOGICAL_PROCESSOR_RELATIONSHIP (synthetic:Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP = Int32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP_RelationProcessorCore: Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP = 0
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP_RelationNumaNode: Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP_RelationCache: Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP = 2
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP_RelationProcessorPackage: Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP = 3
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP_RelationGroup: Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP = 4
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP_RelationProcessorDie: Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP = 5
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP_RelationNumaNodeEx: Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP = 6
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP_RelationProcessorModule: Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP = 7
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP_RelationAll: Windows_Win32_System_SystemInformation_LOGICAL_PROCESSOR_RELATIONSHIP = 65535
 
 // Windows.Win32.System.SystemInformation.MEMORYSTATUS (synthetic:Windows_Win32_System_SystemInformation_MEMORYSTATUS)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_MEMORYSTATUS {
     public var dwLength: UInt32 = 0u32
@@ -19617,6 +21338,7 @@ public struct Windows_Win32_System_SystemInformation_MEMORYSTATUS {
 }
 
 // Windows.Win32.System.SystemInformation.MEMORYSTATUSEX (synthetic:Windows_Win32_System_SystemInformation_MEMORYSTATUSEX)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_MEMORYSTATUSEX {
     public var dwLength: UInt32 = 0u32
@@ -19631,6 +21353,7 @@ public struct Windows_Win32_System_SystemInformation_MEMORYSTATUSEX {
 }
 
 // Windows.Win32.System.SystemInformation.NUMA_NODE_RELATIONSHIP (synthetic:Windows_Win32_System_SystemInformation_NUMA_NODE_RELATIONSHIP)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_NUMA_NODE_RELATIONSHIP {
     public var NodeNumber: UInt32 = 0u32
@@ -19640,6 +21363,7 @@ public struct Windows_Win32_System_SystemInformation_NUMA_NODE_RELATIONSHIP {
 }
 
 // Windows.Win32.System.SystemInformation.NUMA_NODE_RELATIONSHIP._Anonymous_e__Union (synthetic:Windows_Win32_System_SystemInformation_NUMA_NODE_RELATIONSHIP__Anonymous_e__Union)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_NUMA_NODE_RELATIONSHIP__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
@@ -19690,6 +21414,7 @@ public struct Windows_Win32_System_SystemInformation_NUMA_NODE_RELATIONSHIP__Ano
 }
 
 // Windows.Win32.System.SystemInformation.OSVERSIONINFOA (synthetic:Windows_Win32_System_SystemInformation_OSVERSIONINFOA)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_OSVERSIONINFOA {
     public var dwOSVersionInfoSize: UInt32 = 0u32
@@ -19701,6 +21426,7 @@ public struct Windows_Win32_System_SystemInformation_OSVERSIONINFOA {
 }
 
 // Windows.Win32.System.SystemInformation.OSVERSIONINFOEXA (synthetic:Windows_Win32_System_SystemInformation_OSVERSIONINFOEXA)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_OSVERSIONINFOEXA {
     public var dwOSVersionInfoSize: UInt32 = 0u32
@@ -19717,6 +21443,7 @@ public struct Windows_Win32_System_SystemInformation_OSVERSIONINFOEXA {
 }
 
 // Windows.Win32.System.SystemInformation.OSVERSIONINFOEXW (synthetic:Windows_Win32_System_SystemInformation_OSVERSIONINFOEXW)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_OSVERSIONINFOEXW {
     public var dwOSVersionInfoSize: UInt32 = 0u32
@@ -19733,6 +21460,7 @@ public struct Windows_Win32_System_SystemInformation_OSVERSIONINFOEXW {
 }
 
 // Windows.Win32.System.SystemInformation.OSVERSIONINFOW (synthetic:Windows_Win32_System_SystemInformation_OSVERSIONINFOW)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_OSVERSIONINFOW {
     public var dwOSVersionInfoSize: UInt32 = 0u32
@@ -19744,224 +21472,431 @@ public struct Windows_Win32_System_SystemInformation_OSVERSIONINFOW {
 }
 
 // Windows.Win32.System.SystemInformation.OS_DEPLOYEMENT_STATE_VALUES (synthetic:Windows_Win32_System_SystemInformation_OS_DEPLOYEMENT_STATE_VALUES)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_OS_DEPLOYEMENT_STATE_VALUES = Int32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_DEPLOYEMENT_STATE_VALUES_OS_DEPLOYMENT_STANDARD: Windows_Win32_System_SystemInformation_OS_DEPLOYEMENT_STATE_VALUES = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_DEPLOYEMENT_STATE_VALUES_OS_DEPLOYMENT_COMPACT: Windows_Win32_System_SystemInformation_OS_DEPLOYEMENT_STATE_VALUES = 2
 
 // Windows.Win32.System.SystemInformation.OS_PRODUCT_TYPE (synthetic:Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = UInt32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_UNDEFINED: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 0
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ULTIMATE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_HOME_BASIC: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 2
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_HOME_PREMIUM: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 3
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 4
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_HOME_BASIC_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 5
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_BUSINESS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 6
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STANDARD_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 7
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_DATACENTER_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 8
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_SMALLBUSINESS_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 9
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 10
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STARTER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 11
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_DATACENTER_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 12
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STANDARD_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 13
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 14
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_SERVER_IA64: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 15
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_BUSINESS_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 16
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_WEB_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 17
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CLUSTER_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 18
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_HOME_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 19
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STORAGE_EXPRESS_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 20
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STORAGE_STANDARD_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 21
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STORAGE_WORKGROUP_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 22
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STORAGE_ENTERPRISE_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 23
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_SERVER_FOR_SMALLBUSINESS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 24
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_SMALLBUSINESS_SERVER_PREMIUM: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 25
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_HOME_PREMIUM_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 26
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 27
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ULTIMATE_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 28
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_WEB_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 29
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_MEDIUMBUSINESS_SERVER_MANAGEMENT: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 30
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_MEDIUMBUSINESS_SERVER_SECURITY: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 31
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_MEDIUMBUSINESS_SERVER_MESSAGING: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_SERVER_FOUNDATION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 33
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_HOME_PREMIUM_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 34
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_SERVER_FOR_SMALLBUSINESS_V: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 35
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STANDARD_SERVER_V: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 36
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_DATACENTER_SERVER_V: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 37
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_SERVER_V: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 38
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_DATACENTER_SERVER_CORE_V: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 39
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STANDARD_SERVER_CORE_V: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 40
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_SERVER_CORE_V: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 41
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_HYPERV: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 42
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STORAGE_EXPRESS_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 43
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STORAGE_STANDARD_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 44
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STORAGE_WORKGROUP_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 45
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STORAGE_ENTERPRISE_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 46
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STARTER_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 47
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PROFESSIONAL: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 48
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PROFESSIONAL_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 49
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_SB_SOLUTION_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 50
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_SERVER_FOR_SB_SOLUTIONS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 51
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STANDARD_SERVER_SOLUTIONS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 52
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STANDARD_SERVER_SOLUTIONS_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 53
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_SB_SOLUTION_SERVER_EM: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 54
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_SERVER_FOR_SB_SOLUTIONS_EM: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 55
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_SOLUTION_EMBEDDEDSERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 56
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_SOLUTION_EMBEDDEDSERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 57
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PROFESSIONAL_EMBEDDED: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 58
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ESSENTIALBUSINESS_SERVER_MGMT: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 59
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ESSENTIALBUSINESS_SERVER_ADDL: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 60
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ESSENTIALBUSINESS_SERVER_MGMTSVC: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 61
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ESSENTIALBUSINESS_SERVER_ADDLSVC: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 62
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_SMALLBUSINESS_SERVER_PREMIUM_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 63
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CLUSTER_SERVER_V: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 64
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EMBEDDED: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 65
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STARTER_E: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 66
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_HOME_BASIC_E: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 67
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_HOME_PREMIUM_E: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 68
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PROFESSIONAL_E: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 69
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_E: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 70
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ULTIMATE_E: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 71
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_EVALUATION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 72
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_MULTIPOINT_STANDARD_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 76
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_MULTIPOINT_PREMIUM_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 77
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STANDARD_EVALUATION_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 79
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_DATACENTER_EVALUATION_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 80
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_N_EVALUATION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 84
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EMBEDDED_AUTOMOTIVE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 85
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EMBEDDED_INDUSTRY_A: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 86
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_THINPC: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 87
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EMBEDDED_A: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 88
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EMBEDDED_INDUSTRY: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 89
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EMBEDDED_E: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 90
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EMBEDDED_INDUSTRY_E: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 91
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EMBEDDED_INDUSTRY_A_E: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 92
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 95
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 96
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CORE_ARM: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 97
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CORE_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 98
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CORE_COUNTRYSPECIFIC: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 99
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CORE_SINGLELANGUAGE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 100
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 101
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PROFESSIONAL_WMC: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 103
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EMBEDDED_INDUSTRY_EVAL: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 105
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EMBEDDED_INDUSTRY_E_EVAL: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 106
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EMBEDDED_EVAL: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 107
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EMBEDDED_E_EVAL: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 108
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_NANO_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 109
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CLOUD_STORAGE_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 110
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CORE_CONNECTED: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 111
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PROFESSIONAL_STUDENT: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 112
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CORE_CONNECTED_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 113
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PROFESSIONAL_STUDENT_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 114
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CORE_CONNECTED_SINGLELANGUAGE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 115
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CORE_CONNECTED_COUNTRYSPECIFIC: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 116
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CONNECTED_CAR: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 117
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_INDUSTRY_HANDHELD: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 118
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PPI_PRO: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 119
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ARM64_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 120
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EDUCATION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 121
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_EDUCATION_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 122
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_IOTUAP: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 123
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CLOUD_HOST_INFRASTRUCTURE_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 124
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_S: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 125
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_S_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 126
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PROFESSIONAL_S: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 127
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PROFESSIONAL_S_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 128
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_S_EVALUATION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 129
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_S_N_EVALUATION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 130
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_HOLOGRAPHIC: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 135
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_HOLOGRAPHIC_BUSINESS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 136
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PRO_SINGLE_LANGUAGE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 138
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PRO_CHINA: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 139
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_SUBSCRIPTION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 140
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISE_SUBSCRIPTION_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 141
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_DATACENTER_NANO_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 143
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STANDARD_NANO_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 144
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_DATACENTER_A_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 145
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STANDARD_A_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 146
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_DATACENTER_WS_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 147
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STANDARD_WS_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 148
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_UTILITY_VM: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 149
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_DATACENTER_EVALUATION_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 159
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_STANDARD_EVALUATION_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 160
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PRO_WORKSTATION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 161
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PRO_WORKSTATION_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 162
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PRO_FOR_EDUCATION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 164
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_PRO_FOR_EDUCATION_N: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 165
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_AZURE_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 168
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_AZURE_NANO_SERVER: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 169
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISEG: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 171
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ENTERPRISEGN: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 172
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_SERVERRDSH: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 175
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CLOUD: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 178
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CLOUDN: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 179
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_HUBOS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 180
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_ONECOREUPDATEOS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 182
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CLOUDE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 183
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_IOTOS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 185
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CLOUDEN: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 186
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_IOTEDGEOS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 187
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_IOTENTERPRISE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 188
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_LITE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 189
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_IOTENTERPRISES: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 191
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_XBOX_SYSTEMOS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 192
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_XBOX_GAMEOS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 194
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_XBOX_ERAOS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 195
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_XBOX_DURANGOHOSTOS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 196
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_XBOX_SCARLETTHOSTOS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 197
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_XBOX_KEYSTONE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 198
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_AZURE_SERVER_CLOUDHOST: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 199
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_AZURE_SERVER_CLOUDMOS: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 200
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CLOUDEDITIONN: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 202
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_CLOUDEDITION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 203
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_VALIDATION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 204
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_IOTENTERPRISESK: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 205
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_IOTENTERPRISEK: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 206
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_IOTENTERPRISESEVAL: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 207
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_AZURE_SERVER_AGENTBRIDGE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 208
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_AZURE_SERVER_NANOHOST: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 209
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_WNC: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 210
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_AZURESTACKHCI_SERVER_CORE: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 406
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_DATACENTER_SERVER_AZURE_EDITION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 407
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_DATACENTER_SERVER_CORE_AZURE_EDITION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 408
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_DATACENTER_WS_SERVER_CORE_AZURE_EDITION: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 409
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE_PRODUCT_UNLICENSED: Windows_Win32_System_SystemInformation_OS_PRODUCT_TYPE = 2882382797
 
 // Windows.Win32.System.SystemInformation.PGET_SYSTEM_WOW64_DIRECTORY_A (synthetic:Windows_Win32_System_SystemInformation_PGET_SYSTEM_WOW64_DIRECTORY_A)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_PGET_SYSTEM_WOW64_DIRECTORY_A = CFunc<(CPointer<UInt8>, UInt32) -> UInt32>
 
 // Windows.Win32.System.SystemInformation.PGET_SYSTEM_WOW64_DIRECTORY_W (synthetic:Windows_Win32_System_SystemInformation_PGET_SYSTEM_WOW64_DIRECTORY_W)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_PGET_SYSTEM_WOW64_DIRECTORY_W = CFunc<(CPointer<UInt16>, UInt32) -> UInt32>
 
 // Windows.Win32.System.SystemInformation.PROCESSOR_ARCHITECTURE (synthetic:Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = UInt16
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_INTEL: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 0
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_MIPS: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_ALPHA: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 2
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_PPC: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 3
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_SHX: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 4
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_ARM: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 5
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_IA64: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 6
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_ALPHA64: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 7
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_MSIL: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 8
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_AMD64: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 9
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_IA32_ON_WIN64: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 10
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_NEUTRAL: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 11
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_ARM64: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 12
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_ARM32_ON_WIN64: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 13
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_IA32_ON_ARM64: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 14
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE_PROCESSOR_ARCHITECTURE_UNKNOWN: Windows_Win32_System_SystemInformation_PROCESSOR_ARCHITECTURE = 65535
 
 // Windows.Win32.System.SystemInformation.PROCESSOR_CACHE_TYPE (synthetic:Windows_Win32_System_SystemInformation_PROCESSOR_CACHE_TYPE)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_PROCESSOR_CACHE_TYPE = Int32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_CACHE_TYPE_CacheUnified: Windows_Win32_System_SystemInformation_PROCESSOR_CACHE_TYPE = 0
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_CACHE_TYPE_CacheInstruction: Windows_Win32_System_SystemInformation_PROCESSOR_CACHE_TYPE = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_CACHE_TYPE_CacheData: Windows_Win32_System_SystemInformation_PROCESSOR_CACHE_TYPE = 2
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_CACHE_TYPE_CacheTrace: Windows_Win32_System_SystemInformation_PROCESSOR_CACHE_TYPE = 3
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_PROCESSOR_CACHE_TYPE_CacheUnknown: Windows_Win32_System_SystemInformation_PROCESSOR_CACHE_TYPE = 4
 
 // Windows.Win32.System.SystemInformation.PROCESSOR_GROUP_INFO (synthetic:Windows_Win32_System_SystemInformation_PROCESSOR_GROUP_INFO)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_PROCESSOR_GROUP_INFO {
     public var MaximumProcessorCount: UInt8 = 0u8
@@ -19971,6 +21906,7 @@ public struct Windows_Win32_System_SystemInformation_PROCESSOR_GROUP_INFO {
 }
 
 // Windows.Win32.System.SystemInformation.PROCESSOR_RELATIONSHIP (synthetic:Windows_Win32_System_SystemInformation_PROCESSOR_RELATIONSHIP)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_PROCESSOR_RELATIONSHIP {
     public var Flags: UInt8 = 0u8
@@ -19981,28 +21917,49 @@ public struct Windows_Win32_System_SystemInformation_PROCESSOR_RELATIONSHIP {
 }
 
 // Windows.Win32.System.SystemInformation.RTL_SYSTEM_GLOBAL_DATA_ID (synthetic:Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = Int32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdUnknown: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 0
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdRngSeedVersion: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdInterruptTime: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 2
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdTimeZoneBias: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 3
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdImageNumberLow: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 4
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdImageNumberHigh: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 5
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdTimeZoneId: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 6
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdNtMajorVersion: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 7
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdNtMinorVersion: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 8
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdSystemExpirationDate: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 9
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdKdDebuggerEnabled: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 10
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdCyclesPerYield: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 11
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdSafeBootMode: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 12
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdLastSystemRITEventTickCount: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 13
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdConsoleSharedDataFlags: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 14
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdNtSystemRootDrive: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 15
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdQpcBypassEnabled: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 16
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdQpcData: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 17
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID_GlobalDataIdQpcBias: Windows_Win32_System_SystemInformation_RTL_SYSTEM_GLOBAL_DATA_ID = 18
 
 // Windows.Win32.System.SystemInformation.SYSTEM_CPU_SET_INFORMATION (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION {
     public var Size: UInt32 = 0u32
@@ -20011,6 +21968,7 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION 
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_CPU_SET_INFORMATION._Anonymous_e__Union (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $3> = VArray<UInt64, $3>(repeat: 0u64)
@@ -20039,6 +21997,7 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION_
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_CPU_SET_INFORMATION._Anonymous_e__Union._CpuSet_e__Struct (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct {
     public var Id: UInt32 = 0u32
@@ -20054,6 +22013,7 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION_
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_CPU_SET_INFORMATION._Anonymous_e__Union._CpuSet_e__Struct._Anonymous1_e__Union (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union {
     public var _raw: VArray<UInt8, $1> = VArray<UInt8, $1>(repeat: 0u8)
@@ -20100,6 +22060,7 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION_
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_CPU_SET_INFORMATION._Anonymous_e__Union._CpuSet_e__Struct._Anonymous1_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous1_e__Union__Anonymous_e__Struct {
     public var _bitfield: UInt8 = 0u8
@@ -20151,6 +22112,7 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION_
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_CPU_SET_INFORMATION._Anonymous_e__Union._CpuSet_e__Struct._Anonymous2_e__Union (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous2_e__Union)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION__Anonymous_e__Union__CpuSet_e__Struct__Anonymous2_e__Union {
     public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
@@ -20193,6 +22155,7 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_CPU_SET_INFORMATION_
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_INFO (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_INFO)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_INFO {
     public var Anonymous: Windows_Win32_System_SystemInformation_SYSTEM_INFO__Anonymous_e__Union = Windows_Win32_System_SystemInformation_SYSTEM_INFO__Anonymous_e__Union()
@@ -20208,6 +22171,7 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_INFO {
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_INFO._Anonymous_e__Union (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_INFO__Anonymous_e__Union)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_INFO__Anonymous_e__Union {
     public var _raw: VArray<UInt32, $1> = VArray<UInt32, $1>(repeat: 0u32)
@@ -20254,6 +22218,7 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_INFO__Anonymous_e__U
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_INFO._Anonymous_e__Union._Anonymous_e__Struct (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_INFO__Anonymous_e__Union__Anonymous_e__Struct {
     public var wProcessorArchitecture: UInt16 = 0u16
@@ -20261,6 +22226,7 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_INFO__Anonymous_e__U
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_LOGICAL_PROCESSOR_INFORMATION (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_INFORMATION)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_INFORMATION {
     public var ProcessorMask: CPointer<Unit> = CPointer<Unit>()
@@ -20269,6 +22235,7 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_IN
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_LOGICAL_PROCESSOR_INFORMATION._Anonymous_e__Union (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $2> = VArray<UInt64, $2>(repeat: 0u64)
@@ -20363,18 +22330,21 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_IN
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_LOGICAL_PROCESSOR_INFORMATION._Anonymous_e__Union._NumaNode_e__Struct (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__NumaNode_e__Struct {
     public var NodeNumber: UInt32 = 0u32
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_LOGICAL_PROCESSOR_INFORMATION._Anonymous_e__Union._ProcessorCore_e__Struct (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_INFORMATION__Anonymous_e__Union__ProcessorCore_e__Struct {
     public var Flags: UInt8 = 0u8
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX {
     public var Relationship: Int32 = 0i32
@@ -20383,6 +22353,7 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_IN
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX._Anonymous_e__Union (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX__Anonymous_e__Union {
     public var _raw: VArray<UInt64, $9> = VArray<UInt64, $9>(repeat: 0u64)
@@ -20477,18 +22448,21 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_LOGICAL_PROCESSOR_IN
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_POOL_ZEROING_INFORMATION (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_POOL_ZEROING_INFORMATION)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_POOL_ZEROING_INFORMATION {
     public var PoolZeroingSupportPresent: UInt8 = 0u8
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION {
     public var CycleTime: UInt64 = 0u64
 }
 
 // Windows.Win32.System.SystemInformation.SYSTEM_SUPPORTED_PROCESSOR_ARCHITECTURES_INFORMATION (synthetic:Windows_Win32_System_SystemInformation_SYSTEM_SUPPORTED_PROCESSOR_ARCHITECTURES_INFORMATION)
+@When[Windows_Win32_System_SystemInformation == "on"]
 @C
 public struct Windows_Win32_System_SystemInformation_SYSTEM_SUPPORTED_PROCESSOR_ARCHITECTURES_INFORMATION {
     public var _bitfield: UInt32 = 0u32
@@ -20558,30 +22532,49 @@ public struct Windows_Win32_System_SystemInformation_SYSTEM_SUPPORTED_PROCESSOR_
 }
 
 // Windows.Win32.System.SystemInformation.USER_CET_ENVIRONMENT (synthetic:Windows_Win32_System_SystemInformation_USER_CET_ENVIRONMENT)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_USER_CET_ENVIRONMENT = UInt32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_USER_CET_ENVIRONMENT_USER_CET_ENVIRONMENT_WIN32_PROCESS: Windows_Win32_System_SystemInformation_USER_CET_ENVIRONMENT = 0
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_USER_CET_ENVIRONMENT_USER_CET_ENVIRONMENT_SGX2_ENCLAVE: Windows_Win32_System_SystemInformation_USER_CET_ENVIRONMENT = 2
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_USER_CET_ENVIRONMENT_USER_CET_ENVIRONMENT_VBS_ENCLAVE: Windows_Win32_System_SystemInformation_USER_CET_ENVIRONMENT = 16
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_USER_CET_ENVIRONMENT_USER_CET_ENVIRONMENT_VBS_BASIC_ENCLAVE: Windows_Win32_System_SystemInformation_USER_CET_ENVIRONMENT = 17
 
 // Windows.Win32.System.SystemInformation.VER_FLAGS (synthetic:Windows_Win32_System_SystemInformation_VER_FLAGS)
+@When[Windows_Win32_System_SystemInformation == "on"]
 public type Windows_Win32_System_SystemInformation_VER_FLAGS = UInt32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_VER_FLAGS_VER_MINORVERSION: Windows_Win32_System_SystemInformation_VER_FLAGS = 1
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_VER_FLAGS_VER_MAJORVERSION: Windows_Win32_System_SystemInformation_VER_FLAGS = 2
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_VER_FLAGS_VER_BUILDNUMBER: Windows_Win32_System_SystemInformation_VER_FLAGS = 4
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_VER_FLAGS_VER_PLATFORMID: Windows_Win32_System_SystemInformation_VER_FLAGS = 8
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_VER_FLAGS_VER_SERVICEPACKMINOR: Windows_Win32_System_SystemInformation_VER_FLAGS = 16
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_VER_FLAGS_VER_SERVICEPACKMAJOR: Windows_Win32_System_SystemInformation_VER_FLAGS = 32
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_VER_FLAGS_VER_SUITENAME: Windows_Win32_System_SystemInformation_VER_FLAGS = 64
+@When[Windows_Win32_System_SystemInformation == "on"]
 public let Windows_Win32_System_SystemInformation_VER_FLAGS_VER_PRODUCT_TYPE: Windows_Win32_System_SystemInformation_VER_FLAGS = 128
 
 // Windows.Win32.System.SystemServices.RTL_UMS_SCHEDULER_REASON (synthetic:Windows_Win32_System_SystemServices_RTL_UMS_SCHEDULER_REASON)
+@When[Windows_Win32_System_SystemServices == "on"]
 public type Windows_Win32_System_SystemServices_RTL_UMS_SCHEDULER_REASON = Int32
+@When[Windows_Win32_System_SystemServices == "on"]
 public let Windows_Win32_System_SystemServices_RTL_UMS_SCHEDULER_REASON_UmsSchedulerStartup: Windows_Win32_System_SystemServices_RTL_UMS_SCHEDULER_REASON = 0
+@When[Windows_Win32_System_SystemServices == "on"]
 public let Windows_Win32_System_SystemServices_RTL_UMS_SCHEDULER_REASON_UmsSchedulerThreadBlocked: Windows_Win32_System_SystemServices_RTL_UMS_SCHEDULER_REASON = 1
+@When[Windows_Win32_System_SystemServices == "on"]
 public let Windows_Win32_System_SystemServices_RTL_UMS_SCHEDULER_REASON_UmsSchedulerThreadYield: Windows_Win32_System_SystemServices_RTL_UMS_SCHEDULER_REASON = 2
 
 // Windows.Win32.System.SystemServices.remoteMETAFILEPICT (synthetic:Windows_Win32_System_SystemServices_remoteMETAFILEPICT)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_remoteMETAFILEPICT {
     public var mm: Int32 = 0i32
@@ -20591,6 +22584,7 @@ public struct Windows_Win32_System_SystemServices_remoteMETAFILEPICT {
 }
 
 // Windows.Win32.System.SystemServices.userBITMAP (synthetic:Windows_Win32_System_SystemServices_userBITMAP)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_userBITMAP {
     public var bmType: Int32 = 0i32
@@ -20604,6 +22598,7 @@ public struct Windows_Win32_System_SystemServices_userBITMAP {
 }
 
 // Windows.Win32.System.SystemServices.userHBITMAP (synthetic:Windows_Win32_System_SystemServices_userHBITMAP)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_userHBITMAP {
     public var fContext: Int32 = 0i32
@@ -20611,6 +22606,7 @@ public struct Windows_Win32_System_SystemServices_userHBITMAP {
 }
 
 // Windows.Win32.System.SystemServices.userHBITMAP._u_e__Struct (synthetic:Windows_Win32_System_SystemServices_userHBITMAP__u_e__Struct)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_userHBITMAP__u_e__Struct {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -20675,6 +22671,7 @@ public struct Windows_Win32_System_SystemServices_userHBITMAP__u_e__Struct {
 }
 
 // Windows.Win32.System.SystemServices.userHENHMETAFILE (synthetic:Windows_Win32_System_SystemServices_userHENHMETAFILE)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_userHENHMETAFILE {
     public var fContext: Int32 = 0i32
@@ -20682,6 +22679,7 @@ public struct Windows_Win32_System_SystemServices_userHENHMETAFILE {
 }
 
 // Windows.Win32.System.SystemServices.userHENHMETAFILE._u_e__Struct (synthetic:Windows_Win32_System_SystemServices_userHENHMETAFILE__u_e__Struct)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_userHENHMETAFILE__u_e__Struct {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -20746,6 +22744,7 @@ public struct Windows_Win32_System_SystemServices_userHENHMETAFILE__u_e__Struct 
 }
 
 // Windows.Win32.System.SystemServices.userHGLOBAL (synthetic:Windows_Win32_System_SystemServices_userHGLOBAL)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_userHGLOBAL {
     public var fContext: Int32 = 0i32
@@ -20753,6 +22752,7 @@ public struct Windows_Win32_System_SystemServices_userHGLOBAL {
 }
 
 // Windows.Win32.System.SystemServices.userHGLOBAL._u_e__Struct (synthetic:Windows_Win32_System_SystemServices_userHGLOBAL__u_e__Struct)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_userHGLOBAL__u_e__Struct {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -20817,6 +22817,7 @@ public struct Windows_Win32_System_SystemServices_userHGLOBAL__u_e__Struct {
 }
 
 // Windows.Win32.System.SystemServices.userHMETAFILE (synthetic:Windows_Win32_System_SystemServices_userHMETAFILE)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_userHMETAFILE {
     public var fContext: Int32 = 0i32
@@ -20824,6 +22825,7 @@ public struct Windows_Win32_System_SystemServices_userHMETAFILE {
 }
 
 // Windows.Win32.System.SystemServices.userHMETAFILE._u_e__Struct (synthetic:Windows_Win32_System_SystemServices_userHMETAFILE__u_e__Struct)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_userHMETAFILE__u_e__Struct {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -20888,6 +22890,7 @@ public struct Windows_Win32_System_SystemServices_userHMETAFILE__u_e__Struct {
 }
 
 // Windows.Win32.System.SystemServices.userHMETAFILEPICT (synthetic:Windows_Win32_System_SystemServices_userHMETAFILEPICT)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_userHMETAFILEPICT {
     public var fContext: Int32 = 0i32
@@ -20895,6 +22898,7 @@ public struct Windows_Win32_System_SystemServices_userHMETAFILEPICT {
 }
 
 // Windows.Win32.System.SystemServices.userHMETAFILEPICT._u_e__Struct (synthetic:Windows_Win32_System_SystemServices_userHMETAFILEPICT__u_e__Struct)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_userHMETAFILEPICT__u_e__Struct {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -20959,6 +22963,7 @@ public struct Windows_Win32_System_SystemServices_userHMETAFILEPICT__u_e__Struct
 }
 
 // Windows.Win32.System.SystemServices.userHPALETTE (synthetic:Windows_Win32_System_SystemServices_userHPALETTE)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_userHPALETTE {
     public var fContext: Int32 = 0i32
@@ -20966,6 +22971,7 @@ public struct Windows_Win32_System_SystemServices_userHPALETTE {
 }
 
 // Windows.Win32.System.SystemServices.userHPALETTE._u_e__Struct (synthetic:Windows_Win32_System_SystemServices_userHPALETTE__u_e__Struct)
+@When[Windows_Win32_System_SystemServices == "on"]
 @C
 public struct Windows_Win32_System_SystemServices_userHPALETTE__u_e__Struct {
     public var _raw: VArray<UInt64, $1> = VArray<UInt64, $1>(repeat: 0u64)
@@ -21030,9 +23036,11 @@ public struct Windows_Win32_System_SystemServices_userHPALETTE__u_e__Struct {
 }
 
 // Windows.Win32.System.Threading.APC_CALLBACK_FUNCTION (synthetic:Windows_Win32_System_Threading_APC_CALLBACK_FUNCTION)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_APC_CALLBACK_FUNCTION = CFunc<(UInt32, CPointer<Unit>, CPointer<Unit>) -> Unit>
 
 // Windows.Win32.System.Threading.APP_MEMORY_INFORMATION (synthetic:Windows_Win32_System_Threading_APP_MEMORY_INFORMATION)
+@When[Windows_Win32_System_Threading == "on"]
 @C
 public struct Windows_Win32_System_Threading_APP_MEMORY_INFORMATION {
     public var AvailableCommit: UInt64 = 0u64
@@ -21042,9 +23050,15 @@ public struct Windows_Win32_System_Threading_APP_MEMORY_INFORMATION {
 }
 
 // Windows.Win32.System.Threading.AVRT_PRIORITY (synthetic:Windows_Win32_System_Threading_AVRT_PRIORITY)
+@When[Windows_Win32_System_Threading == "on"]
 public type Windows_Win32_System_Threading_AVRT_PRIORITY = Int32
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_AVRT_PRIORITY_AVRT_PRIORITY_VERYLOW: Windows_Win32_System_Threading_AVRT_PRIORITY = -2
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_AVRT_PRIORITY_AVRT_PRIORITY_LOW: Windows_Win32_System_Threading_AVRT_PRIORITY = -1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_AVRT_PRIORITY_AVRT_PRIORITY_NORMAL: Windows_Win32_System_Threading_AVRT_PRIORITY = 0
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_AVRT_PRIORITY_AVRT_PRIORITY_HIGH: Windows_Win32_System_Threading_AVRT_PRIORITY = 1
+@When[Windows_Win32_System_Threading == "on"]
 public let Windows_Win32_System_Threading_AVRT_PRIORITY_AVRT_PRIORITY_CRITICAL: Windows_Win32_System_Threading_AVRT_PRIORITY = 2
