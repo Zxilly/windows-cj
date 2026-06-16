@@ -49,7 +49,7 @@ import windows_interface.{GUID, IUnknownVtbl}
 //     documented integer values are inlined:
 //       CLSCTX_ALL = 23, CSIDL_DESKTOP = 0, SWC_DESKTOP = 8,
 //       SWFO_NEEDDISPATCH = 1, SVGIO_BACKGROUND = 0, SW_SHOWNORMAL = 1.
-//   • windows_variant builds VARIANTs over windows_common's VARIANT struct;
+//   • windows_variant builds VARIANTs over windows_sys's VARIANT struct;
 //     the bindings declare their own identically-laid-out (24-byte @C) VARIANT.
 //     We reinterpret one as the other through a pointer copy when feeding the
 //     vtbl CFunc fields — pure ABI passthrough, no value change.
@@ -107,7 +107,7 @@ func iidIShellDispatch2(): GUID {
     GUID.from_values(2764474668u32, 15273u16, 4562u16, 157u8, 234u8, 0u8, 192u8, 79u8, 177u8, 97u8, 98u8)
 }
 
-// Reinterpret a windows_variant VARIANT (windows_common layout) as the
+// Reinterpret a windows_variant VARIANT (windows_sys layout) as the
 // bindings' own identically-laid-out VARIANT for the vtbl CFunc call. Pure
 // 24-byte ABI passthrough.
 func toBindingsVariant(value: VARIANT): BindingsVariant {
