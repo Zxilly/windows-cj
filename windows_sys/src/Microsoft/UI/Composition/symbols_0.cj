@@ -4094,10 +4094,10 @@ public class CompositionEasingFunction <: windows_interface.InterfaceWrapperBase
         }
     }
 
-    public static func CreateCubicBezierEasingFunction(owner: Microsoft_UI_Composition_Compositor, controlPoint1: Windows_Foundation_Numerics.Vector2, controlPoint2: Windows_Foundation_Numerics.Vector2): CubicBezierEasingFunction {
+    public static func CreateCubicBezierEasingFunction(owner: Compositor, controlPoint1: Windows_Foundation_Numerics.Vector2, controlPoint2: Windows_Foundation_Numerics.Vector2): CubicBezierEasingFunction {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Composition_Compositor>(owner)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Compositor>(owner)) {
             try (factory__ = windows_core.factory<CompositionEasingFunction, ICompositionEasingFunctionStatics>().unwrap()) {
                 hr__ = unsafe { factory__.CreateCubicBezierEasingFunction(__argBorrow0.asRaw(), controlPoint1, controlPoint2, CPointer<CPointer<Unit>>(inout result__)) }
             }
@@ -4110,10 +4110,10 @@ public class CompositionEasingFunction <: windows_interface.InterfaceWrapperBase
         return CubicBezierEasingFunction.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateLinearEasingFunction(owner: Microsoft_UI_Composition_Compositor): LinearEasingFunction {
+    public static func CreateLinearEasingFunction(owner: Compositor): LinearEasingFunction {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Composition_Compositor>(owner)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Compositor>(owner)) {
             try (factory__ = windows_core.factory<CompositionEasingFunction, ICompositionEasingFunctionStatics>().unwrap()) {
                 hr__ = unsafe { factory__.CreateLinearEasingFunction(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
             }
@@ -4126,10 +4126,10 @@ public class CompositionEasingFunction <: windows_interface.InterfaceWrapperBase
         return LinearEasingFunction.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateStepEasingFunction(owner: Microsoft_UI_Composition_Compositor): StepEasingFunction {
+    public static func CreateStepEasingFunction(owner: Compositor): StepEasingFunction {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Composition_Compositor>(owner)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Compositor>(owner)) {
             try (factory__ = windows_core.factory<CompositionEasingFunction, ICompositionEasingFunctionStatics>().unwrap()) {
                 hr__ = unsafe { factory__.CreateStepEasingFunction(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
             }
@@ -4142,10 +4142,10 @@ public class CompositionEasingFunction <: windows_interface.InterfaceWrapperBase
         return StepEasingFunction.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateStepEasingFunctionWithStepCount(owner: Microsoft_UI_Composition_Compositor, stepCount: Int32): StepEasingFunction {
+    public static func CreateStepEasingFunctionWithStepCount(owner: Compositor, stepCount: Int32): StepEasingFunction {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Composition_Compositor>(owner)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Compositor>(owner)) {
             try (factory__ = windows_core.factory<CompositionEasingFunction, ICompositionEasingFunctionStatics>().unwrap()) {
                 hr__ = unsafe { factory__.CreateStepEasingFunctionWithStepCount(__argBorrow0.asRaw(), stepCount, CPointer<CPointer<Unit>>(inout result__)) }
             }
@@ -4158,10 +4158,10 @@ public class CompositionEasingFunction <: windows_interface.InterfaceWrapperBase
         return StepEasingFunction.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateBackEasingFunction(owner: Microsoft_UI_Composition_Compositor, mode: CompositionEasingFunctionMode, amplitude: Float32): BackEasingFunction {
+    public static func CreateBackEasingFunction(owner: Compositor, mode: CompositionEasingFunctionMode, amplitude: Float32): BackEasingFunction {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Composition_Compositor>(owner)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Compositor>(owner)) {
             try (factory__ = windows_core.factory<CompositionEasingFunction, ICompositionEasingFunctionStatics>().unwrap()) {
                 hr__ = unsafe { factory__.CreateBackEasingFunction(__argBorrow0.asRaw(), mode.value, amplitude, CPointer<CPointer<Unit>>(inout result__)) }
             }
@@ -4174,10 +4174,10 @@ public class CompositionEasingFunction <: windows_interface.InterfaceWrapperBase
         return BackEasingFunction.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateBounceEasingFunction(owner: Microsoft_UI_Composition_Compositor, mode: CompositionEasingFunctionMode, bounces: Int32, bounciness: Float32): BounceEasingFunction {
+    public static func CreateBounceEasingFunction(owner: Compositor, mode: CompositionEasingFunctionMode, bounces: Int32, bounciness: Float32): BounceEasingFunction {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Composition_Compositor>(owner)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Compositor>(owner)) {
             try (factory__ = windows_core.factory<CompositionEasingFunction, ICompositionEasingFunctionStatics>().unwrap()) {
                 hr__ = unsafe { factory__.CreateBounceEasingFunction(__argBorrow0.asRaw(), mode.value, bounces, bounciness, CPointer<CPointer<Unit>>(inout result__)) }
             }
@@ -4190,10 +4190,10 @@ public class CompositionEasingFunction <: windows_interface.InterfaceWrapperBase
         return BounceEasingFunction.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateCircleEasingFunction(owner: Microsoft_UI_Composition_Compositor, mode: CompositionEasingFunctionMode): CircleEasingFunction {
+    public static func CreateCircleEasingFunction(owner: Compositor, mode: CompositionEasingFunctionMode): CircleEasingFunction {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Composition_Compositor>(owner)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Compositor>(owner)) {
             try (factory__ = windows_core.factory<CompositionEasingFunction, ICompositionEasingFunctionStatics>().unwrap()) {
                 hr__ = unsafe { factory__.CreateCircleEasingFunction(__argBorrow0.asRaw(), mode.value, CPointer<CPointer<Unit>>(inout result__)) }
             }
@@ -4206,10 +4206,10 @@ public class CompositionEasingFunction <: windows_interface.InterfaceWrapperBase
         return CircleEasingFunction.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateElasticEasingFunction(owner: Microsoft_UI_Composition_Compositor, mode: CompositionEasingFunctionMode, oscillations: Int32, springiness: Float32): ElasticEasingFunction {
+    public static func CreateElasticEasingFunction(owner: Compositor, mode: CompositionEasingFunctionMode, oscillations: Int32, springiness: Float32): ElasticEasingFunction {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Composition_Compositor>(owner)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Compositor>(owner)) {
             try (factory__ = windows_core.factory<CompositionEasingFunction, ICompositionEasingFunctionStatics>().unwrap()) {
                 hr__ = unsafe { factory__.CreateElasticEasingFunction(__argBorrow0.asRaw(), mode.value, oscillations, springiness, CPointer<CPointer<Unit>>(inout result__)) }
             }
@@ -4222,10 +4222,10 @@ public class CompositionEasingFunction <: windows_interface.InterfaceWrapperBase
         return ElasticEasingFunction.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateExponentialEasingFunction(owner: Microsoft_UI_Composition_Compositor, mode: CompositionEasingFunctionMode, exponent: Float32): ExponentialEasingFunction {
+    public static func CreateExponentialEasingFunction(owner: Compositor, mode: CompositionEasingFunctionMode, exponent: Float32): ExponentialEasingFunction {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Composition_Compositor>(owner)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Compositor>(owner)) {
             try (factory__ = windows_core.factory<CompositionEasingFunction, ICompositionEasingFunctionStatics>().unwrap()) {
                 hr__ = unsafe { factory__.CreateExponentialEasingFunction(__argBorrow0.asRaw(), mode.value, exponent, CPointer<CPointer<Unit>>(inout result__)) }
             }
@@ -4238,10 +4238,10 @@ public class CompositionEasingFunction <: windows_interface.InterfaceWrapperBase
         return ExponentialEasingFunction.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreatePowerEasingFunction(owner: Microsoft_UI_Composition_Compositor, mode: CompositionEasingFunctionMode, power: Float32): PowerEasingFunction {
+    public static func CreatePowerEasingFunction(owner: Compositor, mode: CompositionEasingFunctionMode, power: Float32): PowerEasingFunction {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Composition_Compositor>(owner)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Compositor>(owner)) {
             try (factory__ = windows_core.factory<CompositionEasingFunction, ICompositionEasingFunctionStatics>().unwrap()) {
                 hr__ = unsafe { factory__.CreatePowerEasingFunction(__argBorrow0.asRaw(), mode.value, power, CPointer<CPointer<Unit>>(inout result__)) }
             }
@@ -4254,10 +4254,10 @@ public class CompositionEasingFunction <: windows_interface.InterfaceWrapperBase
         return PowerEasingFunction.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateSineEasingFunction(owner: Microsoft_UI_Composition_Compositor, mode: CompositionEasingFunctionMode): SineEasingFunction {
+    public static func CreateSineEasingFunction(owner: Compositor, mode: CompositionEasingFunctionMode): SineEasingFunction {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Composition_Compositor>(owner)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Compositor>(owner)) {
             try (factory__ = windows_core.factory<CompositionEasingFunction, ICompositionEasingFunctionStatics>().unwrap()) {
                 hr__ = unsafe { factory__.CreateSineEasingFunction(__argBorrow0.asRaw(), mode.value, CPointer<CPointer<Unit>>(inout result__)) }
             }
@@ -6707,7 +6707,7 @@ public class CompositionObject <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public prop Compositor: Microsoft_UI_Composition_Compositor {
+    public prop Compositor: Compositor {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -6715,11 +6715,11 @@ public class CompositionObject <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.Compositor(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Composition_Compositor>(result__)
+                windows_core.winrtReleaseGenericOut<Compositor>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Composition_Compositor.fromAbiTakeWinrtHandle(result__)
+            return Compositor.fromAbiTakeWinrtHandle(result__)
         }
     }
 
@@ -11698,9 +11698,6 @@ public class Compositor <: windows_interface.InterfaceWrapperBase & windows_inte
         Compositor.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Composition == "on"]
-type Microsoft_UI_Composition_Compositor = Compositor
-
 
 // Microsoft.UI.Composition.ContainerVisual (synthetic:Microsoft_UI_Composition_ContainerVisual)
 @When[Microsoft_UI_Composition == "on"]

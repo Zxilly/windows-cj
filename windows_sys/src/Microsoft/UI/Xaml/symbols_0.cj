@@ -120,7 +120,7 @@ public class Application <: windows_interface.InterfaceWrapperBase & windows_int
         }
     }
 
-    public prop DebugSettings: Microsoft_UI_Xaml_DebugSettings {
+    public prop DebugSettings: DebugSettings {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -128,15 +128,15 @@ public class Application <: windows_interface.InterfaceWrapperBase & windows_int
                 hr__ = unsafe { interface__.DebugSettings(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DebugSettings>(result__)
+                windows_core.winrtReleaseGenericOut<DebugSettings>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_DebugSettings.fromAbiTakeWinrtHandle(result__)
+            return DebugSettings.fromAbiTakeWinrtHandle(result__)
         }
     }
 
-    public mut prop FocusVisualKind: Microsoft_UI_Xaml_FocusVisualKind {
+    public mut prop FocusVisualKind: FocusVisualKind {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -144,7 +144,7 @@ public class Application <: windows_interface.InterfaceWrapperBase & windows_int
                 hr__ = unsafe { interface__.FocusVisualKind(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_FocusVisualKind(result__)
+            return FocusVisualKind(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -1640,9 +1640,6 @@ func buildCreateDefaultValueCallbackBoxVtbl(): CreateDefaultValueCallbackVtbl {
     return vtbl
 }
 
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_CreateDefaultValueCallback = CreateDefaultValueCallback
-
 
 // Microsoft.UI.Xaml.DataContextChangedEventArgs (synthetic:Microsoft_UI_Xaml_DataContextChangedEventArgs)
 @When[Microsoft_UI_Xaml == "on"]
@@ -2124,9 +2121,6 @@ public class DebugSettings <: windows_interface.InterfaceWrapperBase & windows_i
         DebugSettings.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_DebugSettings = DebugSettings
-
 
 // Microsoft.UI.Xaml.DependencyObject (synthetic:Microsoft_UI_Xaml_DependencyObject)
 @When[Microsoft_UI_Xaml == "on"]
@@ -2972,9 +2966,6 @@ public struct DispatcherShutdownMode {
 public let DispatcherShutdownMode_OnLastWindowClose = DispatcherShutdownMode(0)
 @When[Microsoft_UI_Xaml == "on"]
 public let DispatcherShutdownMode_OnExplicitShutdown = DispatcherShutdownMode(1)
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_DispatcherShutdownMode = DispatcherShutdownMode
-
 
 // Microsoft.UI.Xaml.DragEventArgs (synthetic:Microsoft_UI_Xaml_DragEventArgs)
 @When[Microsoft_UI_Xaml == "on"]
@@ -3098,7 +3089,7 @@ public class DragEventArgs <: windows_interface.InterfaceWrapperBase & windows_i
         }
     }
 
-    public prop DragUIOverride: Microsoft_UI_Xaml_DragUIOverride {
+    public prop DragUIOverride: DragUIOverride {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -3106,11 +3097,11 @@ public class DragEventArgs <: windows_interface.InterfaceWrapperBase & windows_i
                 hr__ = unsafe { interface__.DragUIOverride(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DragUIOverride>(result__)
+                windows_core.winrtReleaseGenericOut<DragUIOverride>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_DragUIOverride.fromAbiTakeWinrtHandle(result__)
+            return DragUIOverride.fromAbiTakeWinrtHandle(result__)
         }
     }
 
@@ -3556,7 +3547,7 @@ public class DragStartingEventArgs <: windows_interface.InterfaceWrapperBase & w
         }
     }
 
-    public prop DragUI: Microsoft_UI_Xaml_DragUI {
+    public prop DragUI: DragUI {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -3564,11 +3555,11 @@ public class DragStartingEventArgs <: windows_interface.InterfaceWrapperBase & w
                 hr__ = unsafe { interface__.DragUI(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_DragUI>(result__)
+                windows_core.winrtReleaseGenericOut<DragUI>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_DragUI.fromAbiTakeWinrtHandle(result__)
+            return DragUI.fromAbiTakeWinrtHandle(result__)
         }
     }
 
@@ -3752,9 +3743,6 @@ public class DragUI <: windows_interface.InterfaceWrapperBase & windows_interfac
         DragUI.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_DragUI = DragUI
-
 
 // Microsoft.UI.Xaml.DragUIOverride (synthetic:Microsoft_UI_Xaml_DragUIOverride)
 @When[Microsoft_UI_Xaml == "on"]
@@ -3960,9 +3948,6 @@ public class DragUIOverride <: windows_interface.InterfaceWrapperBase & windows_
         DragUIOverride.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_DragUIOverride = DragUIOverride
-
 
 // Microsoft.UI.Xaml.DropCompletedEventArgs (synthetic:Microsoft_UI_Xaml_DropCompletedEventArgs)
 @When[Microsoft_UI_Xaml == "on"]
@@ -4847,9 +4832,6 @@ public struct FlowDirection {
 public let FlowDirection_LeftToRight = FlowDirection(0)
 @When[Microsoft_UI_Xaml == "on"]
 public let FlowDirection_RightToLeft = FlowDirection(1)
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_FlowDirection = FlowDirection
-
 
 // Microsoft.UI.Xaml.FocusState (synthetic:Microsoft_UI_Xaml_FocusState)
 @When[Microsoft_UI_Xaml == "on"]
@@ -4870,9 +4852,6 @@ public let FocusState_Pointer = FocusState(1)
 public let FocusState_Keyboard = FocusState(2)
 @When[Microsoft_UI_Xaml == "on"]
 public let FocusState_Programmatic = FocusState(3)
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_FocusState = FocusState
-
 
 // Microsoft.UI.Xaml.FocusVisualKind (synthetic:Microsoft_UI_Xaml_FocusVisualKind)
 @When[Microsoft_UI_Xaml == "on"]
@@ -4891,9 +4870,6 @@ public let FocusVisualKind_DottedLine = FocusVisualKind(0)
 public let FocusVisualKind_HighVisibility = FocusVisualKind(1)
 @When[Microsoft_UI_Xaml == "on"]
 public let FocusVisualKind_Reveal = FocusVisualKind(2)
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_FocusVisualKind = FocusVisualKind
-
 
 // Microsoft.UI.Xaml.FrameworkElement (synthetic:Microsoft_UI_Xaml_FrameworkElement)
 @When[Microsoft_UI_Xaml == "on"]
@@ -5116,7 +5092,7 @@ public class FrameworkElement <: windows_interface.InterfaceWrapperBase & window
         }
     }
 
-    public mut prop FlowDirection: Microsoft_UI_Xaml_FlowDirection {
+    public mut prop FlowDirection: FlowDirection {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -5124,7 +5100,7 @@ public class FrameworkElement <: windows_interface.InterfaceWrapperBase & window
                 hr__ = unsafe { interface__.FlowDirection(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_FlowDirection(result__)
+            return FlowDirection(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -5261,7 +5237,7 @@ public class FrameworkElement <: windows_interface.InterfaceWrapperBase & window
         }
     }
 
-    public mut prop HorizontalAlignment: Microsoft_UI_Xaml_HorizontalAlignment {
+    public mut prop HorizontalAlignment: HorizontalAlignment {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -5269,7 +5245,7 @@ public class FrameworkElement <: windows_interface.InterfaceWrapperBase & window
                 hr__ = unsafe { interface__.HorizontalAlignment(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_HorizontalAlignment(result__)
+            return HorizontalAlignment(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -5497,7 +5473,7 @@ public class FrameworkElement <: windows_interface.InterfaceWrapperBase & window
         }
     }
 
-    public mut prop Style: Microsoft_UI_Xaml_Style {
+    public mut prop Style: Style {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -5505,15 +5481,15 @@ public class FrameworkElement <: windows_interface.InterfaceWrapperBase & window
                 hr__ = unsafe { interface__.Style(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Style>(result__)
+                windows_core.winrtReleaseGenericOut<Style>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Style.fromAbiTakeWinrtHandle(result__)
+            return Style.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Style>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Style>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetStyle(__argBorrow0.asRaw()) }
                 }
@@ -5563,7 +5539,7 @@ public class FrameworkElement <: windows_interface.InterfaceWrapperBase & window
         }
     }
 
-    public mut prop VerticalAlignment: Microsoft_UI_Xaml_VerticalAlignment {
+    public mut prop VerticalAlignment: VerticalAlignment {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -5571,7 +5547,7 @@ public class FrameworkElement <: windows_interface.InterfaceWrapperBase & window
                 hr__ = unsafe { interface__.VerticalAlignment(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_VerticalAlignment(result__)
+            return VerticalAlignment(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -6386,9 +6362,6 @@ public let GridUnitType_Auto = GridUnitType(0)
 public let GridUnitType_Pixel = GridUnitType(1)
 @When[Microsoft_UI_Xaml == "on"]
 public let GridUnitType_Star = GridUnitType(2)
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_GridUnitType = GridUnitType
-
 
 // Microsoft.UI.Xaml.HorizontalAlignment (synthetic:Microsoft_UI_Xaml_HorizontalAlignment)
 @When[Microsoft_UI_Xaml == "on"]
@@ -6409,9 +6382,6 @@ public let HorizontalAlignment_Center = HorizontalAlignment(1)
 public let HorizontalAlignment_Right = HorizontalAlignment(2)
 @When[Microsoft_UI_Xaml == "on"]
 public let HorizontalAlignment_Stretch = HorizontalAlignment(3)
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_HorizontalAlignment = HorizontalAlignment
-
 
 // Microsoft.UI.Xaml.IApplication (synthetic:Microsoft_UI_Xaml_IApplication)
 @When[Microsoft_UI_Xaml == "on"]
@@ -7766,9 +7736,6 @@ public let LayoutCycleDebugBreakLevel_None = LayoutCycleDebugBreakLevel(0)
 public let LayoutCycleDebugBreakLevel_Low = LayoutCycleDebugBreakLevel(1)
 @When[Microsoft_UI_Xaml == "on"]
 public let LayoutCycleDebugBreakLevel_High = LayoutCycleDebugBreakLevel(2)
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_LayoutCycleDebugBreakLevel = LayoutCycleDebugBreakLevel
-
 
 // Microsoft.UI.Xaml.LayoutCycleTracingLevel (synthetic:Microsoft_UI_Xaml_LayoutCycleTracingLevel)
 @When[Microsoft_UI_Xaml == "on"]
@@ -7787,9 +7754,6 @@ public let LayoutCycleTracingLevel_None = LayoutCycleTracingLevel(0)
 public let LayoutCycleTracingLevel_Low = LayoutCycleTracingLevel(1)
 @When[Microsoft_UI_Xaml == "on"]
 public let LayoutCycleTracingLevel_High = LayoutCycleTracingLevel(2)
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_LayoutCycleTracingLevel = LayoutCycleTracingLevel
-
 
 // Microsoft.UI.Xaml.LineStackingStrategy (synthetic:Microsoft_UI_Xaml_LineStackingStrategy)
 @When[Microsoft_UI_Xaml == "on"]
@@ -8034,7 +7998,7 @@ public class PropertyMetadata <: windows_interface.InterfaceWrapperBase & window
         defaultInterface()
     }
 
-    public prop CreateDefaultValueCallback: Microsoft_UI_Xaml_CreateDefaultValueCallback {
+    public prop CreateDefaultValueCallback: CreateDefaultValueCallback {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -8042,11 +8006,11 @@ public class PropertyMetadata <: windows_interface.InterfaceWrapperBase & window
                 hr__ = unsafe { interface__.CreateDefaultValueCallback(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_CreateDefaultValueCallback>(result__)
+                windows_core.winrtReleaseGenericOut<CreateDefaultValueCallback>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_CreateDefaultValueCallback.fromAbiTakeWinrtHandle(result__)
+            return CreateDefaultValueCallback.fromAbiTakeWinrtHandle(result__)
         }
     }
 
@@ -8174,10 +8138,10 @@ public class PropertyMetadata <: windows_interface.InterfaceWrapperBase & window
         return PropertyMetadata.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateWithFactory(createDefaultValueCallback: Microsoft_UI_Xaml_CreateDefaultValueCallback): PropertyMetadata {
+    public static func CreateWithFactory(createDefaultValueCallback: CreateDefaultValueCallback): PropertyMetadata {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_CreateDefaultValueCallback>(createDefaultValueCallback)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<CreateDefaultValueCallback>(createDefaultValueCallback)) {
             try (factory__ = windows_core.factory<PropertyMetadata, IPropertyMetadataStatics>().unwrap()) {
                 hr__ = unsafe { factory__.CreateWithFactory(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
             }
@@ -8190,10 +8154,10 @@ public class PropertyMetadata <: windows_interface.InterfaceWrapperBase & window
         return PropertyMetadata.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateWithFactoryAndCallback(createDefaultValueCallback: Microsoft_UI_Xaml_CreateDefaultValueCallback, propertyChangedCallback: PropertyChangedCallback): PropertyMetadata {
+    public static func CreateWithFactoryAndCallback(createDefaultValueCallback: CreateDefaultValueCallback, propertyChangedCallback: PropertyChangedCallback): PropertyMetadata {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_CreateDefaultValueCallback>(createDefaultValueCallback)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<CreateDefaultValueCallback>(createDefaultValueCallback)) {
             try (__argBorrow1 = windows_core.winrtBorrowGenericIn<PropertyChangedCallback>(propertyChangedCallback)) {
                 try (factory__ = windows_core.factory<PropertyMetadata, IPropertyMetadataStatics>().unwrap()) {
                     hr__ = unsafe { factory__.CreateWithFactoryAndCallback(__argBorrow0.asRaw(), __argBorrow1.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
@@ -9670,7 +9634,7 @@ public class Style <: windows_interface.InterfaceWrapperBase & windows_interface
         }
     }
 
-    public mut prop BasedOn: Microsoft_UI_Xaml_Style {
+    public mut prop BasedOn: Style {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -9678,15 +9642,15 @@ public class Style <: windows_interface.InterfaceWrapperBase & windows_interface
                 hr__ = unsafe { interface__.BasedOn(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Style>(result__)
+                windows_core.winrtReleaseGenericOut<Style>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Style.fromAbiTakeWinrtHandle(result__)
+            return Style.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Style>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Style>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetBasedOn(__argBorrow0.asRaw()) }
                 }
@@ -9761,18 +9725,18 @@ public class Style <: windows_interface.InterfaceWrapperBase & windows_interface
         }
     }
 
-    public static func CreateInstance(targetType: Windows_UI_Xaml_Interop.TypeName): Microsoft_UI_Xaml_Style {
+    public static func CreateInstance(targetType: Windows_UI_Xaml_Interop.TypeName): Style {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (factory__ = windows_core.factory<Style, IStyleFactory>().unwrap()) {
             hr__ = unsafe { factory__.CreateInstance(targetType, CPointer<CPointer<Unit>>(inout result__)) }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Style>(result__)
+            windows_core.winrtReleaseGenericOut<Style>(result__)
             result__ = CPointer<Unit>()
         }
         hr__.check()
-        return Microsoft_UI_Xaml_Style.fromAbiTakeWinrtHandle(result__)
+        return Style.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func abiType(): String {
@@ -9806,9 +9770,6 @@ public class Style <: windows_interface.InterfaceWrapperBase & windows_interface
         Style.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_Style = Style
-
 
 // Microsoft.UI.Xaml.TargetPropertyPath (synthetic:Microsoft_UI_Xaml_TargetPropertyPath)
 @When[Microsoft_UI_Xaml == "on"]
@@ -10760,7 +10721,7 @@ public class UIElement <: windows_interface.InterfaceWrapperBase & windows_inter
         }
     }
 
-    public prop FocusState: Microsoft_UI_Xaml_FocusState {
+    public prop FocusState: FocusState {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -10768,7 +10729,7 @@ public class UIElement <: windows_interface.InterfaceWrapperBase & windows_inter
                 hr__ = unsafe { interface__.FocusState(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_FocusState(result__)
+            return FocusState(result__)
         }
     }
 
@@ -11582,7 +11543,7 @@ public class UIElement <: windows_interface.InterfaceWrapperBase & windows_inter
         }
     }
 
-    public mut prop Visibility: Microsoft_UI_Xaml_Visibility {
+    public mut prop Visibility: Visibility {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -11590,7 +11551,7 @@ public class UIElement <: windows_interface.InterfaceWrapperBase & windows_inter
                 hr__ = unsafe { interface__.Visibility(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Visibility(result__)
+            return Visibility(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -11796,7 +11757,7 @@ public class UIElement <: windows_interface.InterfaceWrapperBase & windows_inter
         }
     }
 
-    public mut prop XamlRoot: Microsoft_UI_Xaml_XamlRoot {
+    public mut prop XamlRoot: XamlRoot {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -11804,15 +11765,15 @@ public class UIElement <: windows_interface.InterfaceWrapperBase & windows_inter
                 hr__ = unsafe { interface__.XamlRoot(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_XamlRoot>(result__)
+                windows_core.winrtReleaseGenericOut<XamlRoot>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_XamlRoot.fromAbiTakeWinrtHandle(result__)
+            return XamlRoot.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_XamlRoot>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<XamlRoot>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetXamlRoot(__argBorrow0.asRaw()) }
                 }
@@ -12785,7 +12746,7 @@ public class UIElement <: windows_interface.InterfaceWrapperBase & windows_inter
         hr__.check()
     }
 
-    public func Focus(value: Microsoft_UI_Xaml_FocusState): Bool {
+    public func Focus(value: FocusState): Bool {
         var result__ = false
         var hr__ = windows_core.E_POINTER
         try (interface__ = defaultInterface()) {
@@ -14476,9 +14437,6 @@ public let VerticalAlignment_Center = VerticalAlignment(1)
 public let VerticalAlignment_Bottom = VerticalAlignment(2)
 @When[Microsoft_UI_Xaml == "on"]
 public let VerticalAlignment_Stretch = VerticalAlignment(3)
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_VerticalAlignment = VerticalAlignment
-
 
 // Microsoft.UI.Xaml.Visibility (synthetic:Microsoft_UI_Xaml_Visibility)
 @When[Microsoft_UI_Xaml == "on"]
@@ -14495,9 +14453,6 @@ public struct Visibility {
 public let Visibility_Visible = Visibility(0)
 @When[Microsoft_UI_Xaml == "on"]
 public let Visibility_Collapsed = Visibility(1)
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_Visibility = Visibility
-
 
 // Microsoft.UI.Xaml.WinUIContract (synthetic:Microsoft_UI_Xaml_WinUIContract)
 @When[Microsoft_UI_Xaml == "on"]
@@ -14961,7 +14916,7 @@ public class WindowActivatedEventArgs <: windows_interface.InterfaceWrapperBase 
         }
     }
 
-    public prop WindowActivationState: Microsoft_UI_Xaml_WindowActivationState {
+    public prop WindowActivationState: WindowActivationState {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -14969,7 +14924,7 @@ public class WindowActivatedEventArgs <: windows_interface.InterfaceWrapperBase 
                 hr__ = unsafe { interface__.WindowActivationState(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_WindowActivationState(result__)
+            return WindowActivationState(result__)
         }
     }
 
@@ -15022,9 +14977,6 @@ public let WindowActivationState_CodeActivated = WindowActivationState(0)
 public let WindowActivationState_Deactivated = WindowActivationState(1)
 @When[Microsoft_UI_Xaml == "on"]
 public let WindowActivationState_PointerActivated = WindowActivationState(2)
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_WindowActivationState = WindowActivationState
-
 
 // Microsoft.UI.Xaml.WindowEventArgs (synthetic:Microsoft_UI_Xaml_WindowEventArgs)
 @When[Microsoft_UI_Xaml == "on"]
@@ -15546,10 +15498,10 @@ public class XamlRoot <: windows_interface.InterfaceWrapperBase & windows_interf
         }
     }
 
-    public func addChanged(handler: Windows_Foundation.TypedEventHandler<Microsoft_UI_Xaml_XamlRoot, XamlRootChangedEventArgs>): Windows_Foundation.EventRegistrationToken {
+    public func addChanged(handler: Windows_Foundation.TypedEventHandler<XamlRoot, XamlRootChangedEventArgs>): Windows_Foundation.EventRegistrationToken {
         var result__ = 0i64
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<Microsoft_UI_Xaml_XamlRoot, XamlRootChangedEventArgs>>(handler)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<XamlRoot, XamlRootChangedEventArgs>>(handler)) {
             try (interface__ = defaultInterface()) {
                 hr__ = unsafe { interface__.Changed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
             }
@@ -15597,9 +15549,6 @@ public class XamlRoot <: windows_interface.InterfaceWrapperBase & windows_interf
         XamlRoot.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml == "on"]
-type Microsoft_UI_Xaml_XamlRoot = XamlRoot
-
 
 // Microsoft.UI.Xaml.XamlRootChangedEventArgs (synthetic:Microsoft_UI_Xaml_XamlRootChangedEventArgs)
 @When[Microsoft_UI_Xaml == "on"]

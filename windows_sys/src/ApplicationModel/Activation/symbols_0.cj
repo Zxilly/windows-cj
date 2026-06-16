@@ -414,10 +414,10 @@ public class SplashScreen <: windows_interface.InterfaceWrapperBase & windows_in
         }
     }
 
-    public func addDismissed(handler: Windows_Foundation.TypedEventHandler<Windows_ApplicationModel_Activation_SplashScreen, windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
+    public func addDismissed(handler: Windows_Foundation.TypedEventHandler<SplashScreen, windows_interface.IInspectable>): Windows_Foundation.EventRegistrationToken {
         var result__ = 0i64
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<Windows_ApplicationModel_Activation_SplashScreen, windows_interface.IInspectable>>(handler)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<SplashScreen, windows_interface.IInspectable>>(handler)) {
             try (interface__ = defaultInterface()) {
                 hr__ = unsafe { interface__.Dismissed(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
             }
@@ -465,9 +465,6 @@ public class SplashScreen <: windows_interface.InterfaceWrapperBase & windows_in
         SplashScreen.viewOf(raw)
     }
 }
-@When[Windows_ApplicationModel_Activation == "on"]
-type Windows_ApplicationModel_Activation_SplashScreen = SplashScreen
-
 
 // Windows.ApplicationModel.Activation.TileActivatedInfo (synthetic:Windows_ApplicationModel_Activation_TileActivatedInfo)
 @When[Windows_ApplicationModel_Activation == "on"]
@@ -559,5 +556,3 @@ public class TileActivatedInfo <: windows_interface.InterfaceWrapperBase & windo
         TileActivatedInfo.viewOf(raw)
     }
 }
-@When[Windows_ApplicationModel_Activation == "on"]
-type Windows_ApplicationModel_Activation_TileActivatedInfo = TileActivatedInfo

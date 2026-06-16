@@ -31,9 +31,6 @@ public let BitmapAlphaMode_Premultiplied = BitmapAlphaMode(0)
 public let BitmapAlphaMode_Straight = BitmapAlphaMode(1)
 @When[Windows_Graphics_Imaging == "on"]
 public let BitmapAlphaMode_Ignore = BitmapAlphaMode(2)
-@When[Windows_Graphics_Imaging == "on"]
-type Windows_Graphics_Imaging_BitmapAlphaMode = BitmapAlphaMode
-
 
 // Windows.Graphics.Imaging.BitmapBuffer (synthetic:Windows_Graphics_Imaging_BitmapBuffer)
 @When[Windows_Graphics_Imaging == "on"]
@@ -191,9 +188,6 @@ public let BitmapPixelFormat_Nv12 = BitmapPixelFormat(103)
 public let BitmapPixelFormat_P010 = BitmapPixelFormat(104)
 @When[Windows_Graphics_Imaging == "on"]
 public let BitmapPixelFormat_Yuy2 = BitmapPixelFormat(107)
-@When[Windows_Graphics_Imaging == "on"]
-type Windows_Graphics_Imaging_BitmapPixelFormat = BitmapPixelFormat
-
 
 // Windows.Graphics.Imaging.BitmapPlaneDescription (synthetic:Windows_Graphics_Imaging_BitmapPlaneDescription)
 @When[Windows_Graphics_Imaging == "on"]
@@ -304,7 +298,7 @@ public class SoftwareBitmap <: windows_interface.InterfaceWrapperBase & windows_
         }
     }
 
-    public prop BitmapAlphaMode: Windows_Graphics_Imaging_BitmapAlphaMode {
+    public prop BitmapAlphaMode: BitmapAlphaMode {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -312,11 +306,11 @@ public class SoftwareBitmap <: windows_interface.InterfaceWrapperBase & windows_
                 hr__ = unsafe { interface__.BitmapAlphaMode(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Windows_Graphics_Imaging_BitmapAlphaMode(result__)
+            return BitmapAlphaMode(result__)
         }
     }
 
-    public prop BitmapPixelFormat: Windows_Graphics_Imaging_BitmapPixelFormat {
+    public prop BitmapPixelFormat: BitmapPixelFormat {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -324,7 +318,7 @@ public class SoftwareBitmap <: windows_interface.InterfaceWrapperBase & windows_
                 hr__ = unsafe { interface__.BitmapPixelFormat(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Windows_Graphics_Imaging_BitmapPixelFormat(result__)
+            return BitmapPixelFormat(result__)
         }
     }
 
@@ -476,7 +470,7 @@ public class SoftwareBitmap <: windows_interface.InterfaceWrapperBase & windows_
         return SoftwareBitmap.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func Convert(source: SoftwareBitmap, format: Windows_Graphics_Imaging_BitmapPixelFormat): SoftwareBitmap {
+    public static func Convert(source: SoftwareBitmap, format: BitmapPixelFormat): SoftwareBitmap {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (__argBorrow0 = windows_core.winrtBorrowGenericIn<SoftwareBitmap>(source)) {
@@ -492,7 +486,7 @@ public class SoftwareBitmap <: windows_interface.InterfaceWrapperBase & windows_
         return SoftwareBitmap.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func ConvertWithAlpha(source: SoftwareBitmap, format: Windows_Graphics_Imaging_BitmapPixelFormat, alpha: Windows_Graphics_Imaging_BitmapAlphaMode): SoftwareBitmap {
+    public static func ConvertWithAlpha(source: SoftwareBitmap, format: BitmapPixelFormat, alpha: BitmapAlphaMode): SoftwareBitmap {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (__argBorrow0 = windows_core.winrtBorrowGenericIn<SoftwareBitmap>(source)) {
@@ -508,7 +502,7 @@ public class SoftwareBitmap <: windows_interface.InterfaceWrapperBase & windows_
         return SoftwareBitmap.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateCopyFromBuffer(source: Windows_Storage_Streams.IBuffer, format: Windows_Graphics_Imaging_BitmapPixelFormat, width: Int32, height: Int32): SoftwareBitmap {
+    public static func CreateCopyFromBuffer(source: Windows_Storage_Streams.IBuffer, format: BitmapPixelFormat, width: Int32, height: Int32): SoftwareBitmap {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IBuffer>(source)) {
@@ -524,7 +518,7 @@ public class SoftwareBitmap <: windows_interface.InterfaceWrapperBase & windows_
         return SoftwareBitmap.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateCopyWithAlphaFromBuffer(source: Windows_Storage_Streams.IBuffer, format: Windows_Graphics_Imaging_BitmapPixelFormat, width: Int32, height: Int32, alpha: Windows_Graphics_Imaging_BitmapAlphaMode): SoftwareBitmap {
+    public static func CreateCopyWithAlphaFromBuffer(source: Windows_Storage_Streams.IBuffer, format: BitmapPixelFormat, width: Int32, height: Int32, alpha: BitmapAlphaMode): SoftwareBitmap {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Storage_Streams.IBuffer>(source)) {
@@ -556,7 +550,7 @@ public class SoftwareBitmap <: windows_interface.InterfaceWrapperBase & windows_
         return Windows_Foundation.IAsyncOperation<SoftwareBitmap>.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateCopyWithAlphaFromSurfaceAsync(surface: Windows_Graphics_DirectX_Direct3D11.IDirect3DSurface, alpha: Windows_Graphics_Imaging_BitmapAlphaMode): Windows_Foundation.IAsyncOperation<SoftwareBitmap> {
+    public static func CreateCopyWithAlphaFromSurfaceAsync(surface: Windows_Graphics_DirectX_Direct3D11.IDirect3DSurface, alpha: BitmapAlphaMode): Windows_Foundation.IAsyncOperation<SoftwareBitmap> {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Graphics_DirectX_Direct3D11.IDirect3DSurface>(surface)) {
@@ -572,7 +566,7 @@ public class SoftwareBitmap <: windows_interface.InterfaceWrapperBase & windows_
         return Windows_Foundation.IAsyncOperation<SoftwareBitmap>.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func Create(format: Windows_Graphics_Imaging_BitmapPixelFormat, width: Int32, height: Int32): SoftwareBitmap {
+    public static func Create(format: BitmapPixelFormat, width: Int32, height: Int32): SoftwareBitmap {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (factory__ = windows_core.factory<SoftwareBitmap, ISoftwareBitmapFactory>().unwrap()) {
@@ -586,7 +580,7 @@ public class SoftwareBitmap <: windows_interface.InterfaceWrapperBase & windows_
         return SoftwareBitmap.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateWithAlpha(format: Windows_Graphics_Imaging_BitmapPixelFormat, width: Int32, height: Int32, alpha: Windows_Graphics_Imaging_BitmapAlphaMode): SoftwareBitmap {
+    public static func CreateWithAlpha(format: BitmapPixelFormat, width: Int32, height: Int32, alpha: BitmapAlphaMode): SoftwareBitmap {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (factory__ = windows_core.factory<SoftwareBitmap, ISoftwareBitmapFactory>().unwrap()) {

@@ -240,7 +240,7 @@ public class Binding <: windows_interface.InterfaceWrapperBase & windows_interfa
         }
     }
 
-    public mut prop RelativeSource: Microsoft_UI_Xaml_Data_RelativeSource {
+    public mut prop RelativeSource: RelativeSource {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -248,15 +248,15 @@ public class Binding <: windows_interface.InterfaceWrapperBase & windows_interfa
                 hr__ = unsafe { interface__.RelativeSource(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Data_RelativeSource>(result__)
+                windows_core.winrtReleaseGenericOut<RelativeSource>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Data_RelativeSource.fromAbiTakeWinrtHandle(result__)
+            return RelativeSource.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Data_RelativeSource>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<RelativeSource>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetRelativeSource(__argBorrow0.asRaw()) }
                 }
@@ -315,7 +315,7 @@ public class Binding <: windows_interface.InterfaceWrapperBase & windows_interfa
         }
     }
 
-    public mut prop UpdateSourceTrigger: Microsoft_UI_Xaml_Data_UpdateSourceTrigger {
+    public mut prop UpdateSourceTrigger: UpdateSourceTrigger {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -323,7 +323,7 @@ public class Binding <: windows_interface.InterfaceWrapperBase & windows_interfa
                 hr__ = unsafe { interface__.UpdateSourceTrigger(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Data_UpdateSourceTrigger(result__)
+            return UpdateSourceTrigger(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -1381,7 +1381,7 @@ public class RelativeSource <: windows_interface.InterfaceWrapperBase & windows_
         }
     }
 
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Data_RelativeSource {
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): RelativeSource {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         if (innerInterface.isNull()) {
@@ -1394,7 +1394,7 @@ public class RelativeSource <: windows_interface.InterfaceWrapperBase & windows_
             }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Data_RelativeSource>(result__)
+            windows_core.winrtReleaseGenericOut<RelativeSource>(result__)
             result__ = CPointer<Unit>()
         }
         if (hr__.failed()) {
@@ -1412,7 +1412,7 @@ public class RelativeSource <: windows_interface.InterfaceWrapperBase & windows_
             case None => throw windows_core.WindowsException(windows_core.E_POINTER)
         }
         innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Data_RelativeSource.fromAbiTakeWinrtHandle(result__)
+        return RelativeSource.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func abiType(): String {
@@ -1446,9 +1446,6 @@ public class RelativeSource <: windows_interface.InterfaceWrapperBase & windows_
         RelativeSource.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Data == "on"]
-type Microsoft_UI_Xaml_Data_RelativeSource = RelativeSource
-
 
 // Microsoft.UI.Xaml.Data.RelativeSourceMode (synthetic:Microsoft_UI_Xaml_Data_RelativeSourceMode)
 @When[Microsoft_UI_Xaml_Data == "on"]
@@ -1487,5 +1484,3 @@ public let UpdateSourceTrigger_PropertyChanged = UpdateSourceTrigger(1)
 public let UpdateSourceTrigger_Explicit = UpdateSourceTrigger(2)
 @When[Microsoft_UI_Xaml_Data == "on"]
 public let UpdateSourceTrigger_LostFocus = UpdateSourceTrigger(3)
-@When[Microsoft_UI_Xaml_Data == "on"]
-type Microsoft_UI_Xaml_Data_UpdateSourceTrigger = UpdateSourceTrigger

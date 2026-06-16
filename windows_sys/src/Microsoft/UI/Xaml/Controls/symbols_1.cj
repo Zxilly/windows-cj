@@ -255,9 +255,6 @@ public class IconElement <: windows_interface.InterfaceWrapperBase & windows_int
         IconElement.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_IconElement = IconElement
-
 
 // Microsoft.UI.Xaml.Controls.IconSource (synthetic:Microsoft_UI_Xaml_Controls_IconSource)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -341,18 +338,18 @@ public class IconSource <: windows_interface.InterfaceWrapperBase & windows_inte
         }
     }
 
-    public func CreateIconElement(): Microsoft_UI_Xaml_Controls_IconElement {
+    public func CreateIconElement(): IconElement {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (interface__ = defaultInterface()) {
             hr__ = unsafe { interface__.CreateIconElement(CPointer<CPointer<Unit>>(inout result__)) }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+            windows_core.winrtReleaseGenericOut<IconElement>(result__)
             result__ = CPointer<Unit>()
         }
         hr__.check()
-        return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+        return IconElement.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func ForegroundProperty(): Microsoft_UI_Xaml.DependencyProperty {
@@ -400,9 +397,6 @@ public class IconSource <: windows_interface.InterfaceWrapperBase & windows_inte
         IconSource.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_IconSource = IconSource
-
 
 // Microsoft.UI.Xaml.Controls.Image (synthetic:Microsoft_UI_Xaml_Controls_Image)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -748,9 +742,6 @@ public struct IncrementalLoadingTrigger {
 public let IncrementalLoadingTrigger_None = IncrementalLoadingTrigger(0)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let IncrementalLoadingTrigger_Edge = IncrementalLoadingTrigger(1)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger = IncrementalLoadingTrigger
-
 
 // Microsoft.UI.Xaml.Controls.InfoBadge (synthetic:Microsoft_UI_Xaml_Controls_InfoBadge)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -886,7 +877,7 @@ public class InfoBadge <: windows_interface.InterfaceWrapperBase & windows_inter
         }
     }
 
-    public mut prop IconSource: Microsoft_UI_Xaml_Controls_IconSource {
+    public mut prop IconSource: IconSource {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -894,15 +885,15 @@ public class InfoBadge <: windows_interface.InterfaceWrapperBase & windows_inter
                 hr__ = unsafe { interface__.IconSource(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconSource>(result__)
+                windows_core.winrtReleaseGenericOut<IconSource>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconSource.fromAbiTakeWinrtHandle(result__)
+            return IconSource.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconSource>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconSource>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIconSource(__argBorrow0.asRaw()) }
                 }
@@ -988,7 +979,7 @@ public class InfoBadge <: windows_interface.InterfaceWrapperBase & windows_inter
         return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_InfoBadge {
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): InfoBadge {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         if (innerInterface.isNull()) {
@@ -1001,7 +992,7 @@ public class InfoBadge <: windows_interface.InterfaceWrapperBase & windows_inter
             }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_InfoBadge>(result__)
+            windows_core.winrtReleaseGenericOut<InfoBadge>(result__)
             result__ = CPointer<Unit>()
         }
         if (hr__.failed()) {
@@ -1019,7 +1010,7 @@ public class InfoBadge <: windows_interface.InterfaceWrapperBase & windows_inter
             case None => throw windows_core.WindowsException(windows_core.E_POINTER)
         }
         innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Controls_InfoBadge.fromAbiTakeWinrtHandle(result__)
+        return InfoBadge.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func abiType(): String {
@@ -1053,9 +1044,6 @@ public class InfoBadge <: windows_interface.InterfaceWrapperBase & windows_inter
         InfoBadge.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_InfoBadge = InfoBadge
-
 
 // Microsoft.UI.Xaml.Controls.InfoBadgeTemplateSettings (synthetic:Microsoft_UI_Xaml_Controls_InfoBadgeTemplateSettings)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -1107,7 +1095,7 @@ public class InfoBadgeTemplateSettings <: windows_interface.InterfaceWrapperBase
         }
     }
 
-    public mut prop IconElement: Microsoft_UI_Xaml_Controls_IconElement {
+    public mut prop IconElement: IconElement {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1115,15 +1103,15 @@ public class InfoBadgeTemplateSettings <: windows_interface.InterfaceWrapperBase
                 hr__ = unsafe { interface__.IconElement(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                windows_core.winrtReleaseGenericOut<IconElement>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+            return IconElement.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconElement>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIconElement(__argBorrow0.asRaw()) }
                 }
@@ -1529,7 +1517,7 @@ public class InfoBar <: windows_interface.InterfaceWrapperBase & windows_interfa
         }
     }
 
-    public mut prop IconSource: Microsoft_UI_Xaml_Controls_IconSource {
+    public mut prop IconSource: IconSource {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1537,15 +1525,15 @@ public class InfoBar <: windows_interface.InterfaceWrapperBase & windows_interfa
                 hr__ = unsafe { interface__.IconSource(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconSource>(result__)
+                windows_core.winrtReleaseGenericOut<IconSource>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconSource.fromAbiTakeWinrtHandle(result__)
+            return IconSource.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconSource>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconSource>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIconSource(__argBorrow0.asRaw()) }
                 }
@@ -2297,7 +2285,7 @@ public class InfoBarTemplateSettings <: windows_interface.InterfaceWrapperBase &
         }
     }
 
-    public mut prop IconElement: Microsoft_UI_Xaml_Controls_IconElement {
+    public mut prop IconElement: IconElement {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -2305,15 +2293,15 @@ public class InfoBarTemplateSettings <: windows_interface.InterfaceWrapperBase &
                 hr__ = unsafe { interface__.IconElement(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                windows_core.winrtReleaseGenericOut<IconElement>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+            return IconElement.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconElement>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIconElement(__argBorrow0.asRaw()) }
                 }
@@ -3074,7 +3062,7 @@ public class ItemContainer <: windows_interface.InterfaceWrapperBase & windows_i
         return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_ItemContainer {
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): ItemContainer {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         if (innerInterface.isNull()) {
@@ -3087,7 +3075,7 @@ public class ItemContainer <: windows_interface.InterfaceWrapperBase & windows_i
             }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ItemContainer>(result__)
+            windows_core.winrtReleaseGenericOut<ItemContainer>(result__)
             result__ = CPointer<Unit>()
         }
         if (hr__.failed()) {
@@ -3105,7 +3093,7 @@ public class ItemContainer <: windows_interface.InterfaceWrapperBase & windows_i
             case None => throw windows_core.WindowsException(windows_core.E_POINTER)
         }
         innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Controls_ItemContainer.fromAbiTakeWinrtHandle(result__)
+        return ItemContainer.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func abiType(): String {
@@ -3139,9 +3127,6 @@ public class ItemContainer <: windows_interface.InterfaceWrapperBase & windows_i
         ItemContainer.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_ItemContainer = ItemContainer
-
 
 // Microsoft.UI.Xaml.Controls.ItemContainerGenerator (synthetic:Microsoft_UI_Xaml_Controls_ItemContainerGenerator)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -3264,20 +3249,20 @@ public class ItemContainerGenerator <: windows_interface.InterfaceWrapperBase & 
         return Microsoft_UI_Xaml.DependencyObject.fromAbiTakeWinrtHandle(result__)
     }
 
-    public func GetItemContainerGeneratorForPanel(panel: Microsoft_UI_Xaml_Controls_Panel): Microsoft_UI_Xaml_Controls_ItemContainerGenerator {
+    public func GetItemContainerGeneratorForPanel(panel: Panel): ItemContainerGenerator {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_Panel>(panel)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Panel>(panel)) {
             try (interface__ = defaultInterface()) {
                 hr__ = unsafe { interface__.GetItemContainerGeneratorForPanel(__argBorrow0.asRaw(), CPointer<CPointer<Unit>>(inout result__)) }
             }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ItemContainerGenerator>(result__)
+            windows_core.winrtReleaseGenericOut<ItemContainerGenerator>(result__)
             result__ = CPointer<Unit>()
         }
         hr__.check()
-        return Microsoft_UI_Xaml_Controls_ItemContainerGenerator.fromAbiTakeWinrtHandle(result__)
+        return ItemContainerGenerator.fromAbiTakeWinrtHandle(result__)
     }
 
     public func StartAt(position: Microsoft_UI_Xaml_Controls_Primitives.GeneratorPosition, direction: Microsoft_UI_Xaml_Controls_Primitives.GeneratorDirection, allowStartAtRealizedItem: Bool): Unit {
@@ -3404,9 +3389,6 @@ public class ItemContainerGenerator <: windows_interface.InterfaceWrapperBase & 
         ItemContainerGenerator.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_ItemContainerGenerator = ItemContainerGenerator
-
 
 // Microsoft.UI.Xaml.Controls.ItemsControl (synthetic:Microsoft_UI_Xaml_Controls_ItemsControl)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -3581,7 +3563,7 @@ public class ItemsControl <: windows_interface.InterfaceWrapperBase & windows_in
         }
     }
 
-    public prop GroupStyle: Windows_Foundation_Collections.IObservableVector<Microsoft_UI_Xaml_Controls_GroupStyle> {
+    public prop GroupStyle: Windows_Foundation_Collections.IObservableVector<GroupStyle> {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -3589,15 +3571,15 @@ public class ItemsControl <: windows_interface.InterfaceWrapperBase & windows_in
                 hr__ = unsafe { interface__.GroupStyle(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IObservableVector<Microsoft_UI_Xaml_Controls_GroupStyle>>(result__)
+                windows_core.winrtReleaseGenericOut<Windows_Foundation_Collections.IObservableVector<GroupStyle>>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Windows_Foundation_Collections.IObservableVector<Microsoft_UI_Xaml_Controls_GroupStyle>.fromAbiTakeWinrtHandle(result__)
+            return Windows_Foundation_Collections.IObservableVector<GroupStyle>.fromAbiTakeWinrtHandle(result__)
         }
     }
 
-    public mut prop GroupStyleSelector: Microsoft_UI_Xaml_Controls_GroupStyleSelector {
+    public mut prop GroupStyleSelector: GroupStyleSelector {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -3605,15 +3587,15 @@ public class ItemsControl <: windows_interface.InterfaceWrapperBase & windows_in
                 hr__ = unsafe { interface__.GroupStyleSelector(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_GroupStyleSelector>(result__)
+                windows_core.winrtReleaseGenericOut<GroupStyleSelector>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_GroupStyleSelector.fromAbiTakeWinrtHandle(result__)
+            return GroupStyleSelector.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_GroupStyleSelector>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<GroupStyleSelector>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetGroupStyleSelector(__argBorrow0.asRaw()) }
                 }
@@ -3634,7 +3616,7 @@ public class ItemsControl <: windows_interface.InterfaceWrapperBase & windows_in
         }
     }
 
-    public prop ItemContainerGenerator: Microsoft_UI_Xaml_Controls_ItemContainerGenerator {
+    public prop ItemContainerGenerator: ItemContainerGenerator {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -3642,11 +3624,11 @@ public class ItemsControl <: windows_interface.InterfaceWrapperBase & windows_in
                 hr__ = unsafe { interface__.ItemContainerGenerator(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_ItemContainerGenerator>(result__)
+                windows_core.winrtReleaseGenericOut<ItemContainerGenerator>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_ItemContainerGenerator.fromAbiTakeWinrtHandle(result__)
+            return ItemContainerGenerator.fromAbiTakeWinrtHandle(result__)
         }
     }
 
@@ -3816,7 +3798,7 @@ public class ItemsControl <: windows_interface.InterfaceWrapperBase & windows_in
         }
     }
 
-    public prop ItemsPanelRoot: Microsoft_UI_Xaml_Controls_Panel {
+    public prop ItemsPanelRoot: Panel {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -3824,11 +3806,11 @@ public class ItemsControl <: windows_interface.InterfaceWrapperBase & windows_in
                 hr__ = unsafe { interface__.ItemsPanelRoot(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_Panel>(result__)
+                windows_core.winrtReleaseGenericOut<Panel>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_Panel.fromAbiTakeWinrtHandle(result__)
+            return Panel.fromAbiTakeWinrtHandle(result__)
         }
     }
 
@@ -4228,9 +4210,6 @@ public let LightDismissOverlayMode_Auto = LightDismissOverlayMode(0)
 public let LightDismissOverlayMode_On = LightDismissOverlayMode(1)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let LightDismissOverlayMode_Off = LightDismissOverlayMode(2)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_LightDismissOverlayMode = LightDismissOverlayMode
-
 
 // Microsoft.UI.Xaml.Controls.ListBox (synthetic:Microsoft_UI_Xaml_Controls_ListBox)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -4410,7 +4389,7 @@ public class ListBox <: windows_interface.InterfaceWrapperBase & windows_interfa
         }
     }
 
-    public mut prop SelectionMode: Microsoft_UI_Xaml_Controls_SelectionMode {
+    public mut prop SelectionMode: SelectionMode {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -4418,7 +4397,7 @@ public class ListBox <: windows_interface.InterfaceWrapperBase & windows_interfa
                 hr__ = unsafe { interface__.SelectionMode(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_SelectionMode(result__)
+            return SelectionMode(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -5197,7 +5176,7 @@ public class ListViewBase <: windows_interface.InterfaceWrapperBase & windows_in
         }
     }
 
-    public mut prop IncrementalLoadingTrigger: Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger {
+    public mut prop IncrementalLoadingTrigger: IncrementalLoadingTrigger {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -5205,7 +5184,7 @@ public class ListViewBase <: windows_interface.InterfaceWrapperBase & windows_in
                 hr__ = unsafe { interface__.IncrementalLoadingTrigger(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IncrementalLoadingTrigger(result__)
+            return IncrementalLoadingTrigger(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -7326,7 +7305,7 @@ public class MenuFlyoutItem <: windows_interface.InterfaceWrapperBase & windows_
         }
     }
 
-    public mut prop Icon: Microsoft_UI_Xaml_Controls_IconElement {
+    public mut prop Icon: IconElement {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -7334,15 +7313,15 @@ public class MenuFlyoutItem <: windows_interface.InterfaceWrapperBase & windows_
                 hr__ = unsafe { interface__.Icon(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                windows_core.winrtReleaseGenericOut<IconElement>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+            return IconElement.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconElement>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIcon(__argBorrow0.asRaw()) }
                 }
@@ -8087,7 +8066,7 @@ public class MenuFlyoutSubItem <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop Icon: Microsoft_UI_Xaml_Controls_IconElement {
+    public mut prop Icon: IconElement {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -8095,15 +8074,15 @@ public class MenuFlyoutSubItem <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.Icon(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                windows_core.winrtReleaseGenericOut<IconElement>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+            return IconElement.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconElement>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIcon(__argBorrow0.asRaw()) }
                 }
@@ -8398,7 +8377,7 @@ public class NavigationView <: windows_interface.InterfaceWrapperBase & windows_
         }
     }
 
-    public mut prop AutoSuggestBox: Microsoft_UI_Xaml_Controls_AutoSuggestBox {
+    public mut prop AutoSuggestBox: AutoSuggestBox {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -8406,15 +8385,15 @@ public class NavigationView <: windows_interface.InterfaceWrapperBase & windows_
                 hr__ = unsafe { interface__.AutoSuggestBox(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_AutoSuggestBox>(result__)
+                windows_core.winrtReleaseGenericOut<AutoSuggestBox>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_AutoSuggestBox.fromAbiTakeWinrtHandle(result__)
+            return AutoSuggestBox.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_AutoSuggestBox>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<AutoSuggestBox>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetAutoSuggestBox(__argBorrow0.asRaw()) }
                 }
@@ -9972,7 +9951,7 @@ public class NavigationViewItem <: windows_interface.InterfaceWrapperBase & wind
         }
     }
 
-    public mut prop Icon: Microsoft_UI_Xaml_Controls_IconElement {
+    public mut prop Icon: IconElement {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -9980,15 +9959,15 @@ public class NavigationViewItem <: windows_interface.InterfaceWrapperBase & wind
                 hr__ = unsafe { interface__.Icon(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                windows_core.winrtReleaseGenericOut<IconElement>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+            return IconElement.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconElement>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIcon(__argBorrow0.asRaw()) }
                 }
@@ -12643,9 +12622,6 @@ public struct Orientation {
 public let Orientation_Vertical = Orientation(0)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let Orientation_Horizontal = Orientation(1)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_Orientation = Orientation
-
 
 // Microsoft.UI.Xaml.Controls.Panel (synthetic:Microsoft_UI_Xaml_Controls_Panel)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -12905,7 +12881,7 @@ public class Panel <: windows_interface.InterfaceWrapperBase & windows_interface
         return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_Panel {
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Panel {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         if (innerInterface.isNull()) {
@@ -12918,7 +12894,7 @@ public class Panel <: windows_interface.InterfaceWrapperBase & windows_interface
             }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_Panel>(result__)
+            windows_core.winrtReleaseGenericOut<Panel>(result__)
             result__ = CPointer<Unit>()
         }
         if (hr__.failed()) {
@@ -12936,7 +12912,7 @@ public class Panel <: windows_interface.InterfaceWrapperBase & windows_interface
             case None => throw windows_core.WindowsException(windows_core.E_POINTER)
         }
         innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Controls_Panel.fromAbiTakeWinrtHandle(result__)
+        return Panel.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func abiType(): String {
@@ -12970,9 +12946,6 @@ public class Panel <: windows_interface.InterfaceWrapperBase & windows_interface
         Panel.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_Panel = Panel
-
 
 // Microsoft.UI.Xaml.Controls.PasswordBox (synthetic:Microsoft_UI_Xaml_Controls_PasswordBox)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -13308,7 +13281,7 @@ public class PasswordBox <: windows_interface.InterfaceWrapperBase & windows_int
         }
     }
 
-    public mut prop PasswordRevealMode: Microsoft_UI_Xaml_Controls_PasswordRevealMode {
+    public mut prop PasswordRevealMode: PasswordRevealMode {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -13316,7 +13289,7 @@ public class PasswordBox <: windows_interface.InterfaceWrapperBase & windows_int
                 hr__ = unsafe { interface__.PasswordRevealMode(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_PasswordRevealMode(result__)
+            return PasswordRevealMode(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -13893,9 +13866,6 @@ public let PasswordRevealMode_Peek = PasswordRevealMode(0)
 public let PasswordRevealMode_Hidden = PasswordRevealMode(1)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let PasswordRevealMode_Visible = PasswordRevealMode(2)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_PasswordRevealMode = PasswordRevealMode
-
 
 // Microsoft.UI.Xaml.Controls.PersonPicture (synthetic:Microsoft_UI_Xaml_Controls_PersonPicture)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -18377,7 +18347,7 @@ public class RelativePanel <: windows_interface.InterfaceWrapperBase & windows_i
         }
     }
 
-    public mut prop BackgroundSizing: Microsoft_UI_Xaml_Controls_BackgroundSizing {
+    public mut prop BackgroundSizing: BackgroundSizing {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -18385,7 +18355,7 @@ public class RelativePanel <: windows_interface.InterfaceWrapperBase & windows_i
                 hr__ = unsafe { interface__.BackgroundSizing(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_BackgroundSizing(result__)
+            return BackgroundSizing(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -19267,9 +19237,6 @@ public let RequiresPointer_Never = RequiresPointer(0)
 public let RequiresPointer_WhenEngaged = RequiresPointer(1)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let RequiresPointer_WhenFocused = RequiresPointer(2)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_RequiresPointer = RequiresPointer
-
 
 // Microsoft.UI.Xaml.Controls.RichEditBox (synthetic:Microsoft_UI_Xaml_Controls_RichEditBox)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -19424,7 +19391,7 @@ public class RichEditBox <: windows_interface.InterfaceWrapperBase & windows_int
         }
     }
 
-    public mut prop CharacterCasing: Microsoft_UI_Xaml_Controls_CharacterCasing {
+    public mut prop CharacterCasing: CharacterCasing {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -19432,7 +19399,7 @@ public class RichEditBox <: windows_interface.InterfaceWrapperBase & windows_int
                 hr__ = unsafe { interface__.CharacterCasing(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_CharacterCasing(result__)
+            return CharacterCasing(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -19506,7 +19473,7 @@ public class RichEditBox <: windows_interface.InterfaceWrapperBase & windows_int
         }
     }
 
-    public mut prop DisabledFormattingAccelerators: Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators {
+    public mut prop DisabledFormattingAccelerators: DisabledFormattingAccelerators {
         get() {
             var result__ = 0u32
             var hr__ = windows_core.E_POINTER
@@ -19514,7 +19481,7 @@ public class RichEditBox <: windows_interface.InterfaceWrapperBase & windows_int
                 hr__ = unsafe { interface__.DisabledFormattingAccelerators(CPointer<UInt32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators(result__)
+            return DisabledFormattingAccelerators(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -25234,7 +25201,7 @@ public class ScrollViewer <: windows_interface.InterfaceWrapperBase & windows_in
         }
     }
 
-    public mut prop ZoomMode: Microsoft_UI_Xaml_Controls_ZoomMode {
+    public mut prop ZoomMode: ZoomMode {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -25242,7 +25209,7 @@ public class ScrollViewer <: windows_interface.InterfaceWrapperBase & windows_in
                 hr__ = unsafe { interface__.ZoomMode(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_ZoomMode(result__)
+            return ZoomMode(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -26223,7 +26190,7 @@ public class ScrollViewer <: windows_interface.InterfaceWrapperBase & windows_in
         return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func GetZoomMode(element: Microsoft_UI_Xaml.DependencyObject): Microsoft_UI_Xaml_Controls_ZoomMode {
+    public static func GetZoomMode(element: Microsoft_UI_Xaml.DependencyObject): ZoomMode {
         var result__ = 0i32
         var hr__ = windows_core.E_POINTER
         try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyObject>(element)) {
@@ -26232,10 +26199,10 @@ public class ScrollViewer <: windows_interface.InterfaceWrapperBase & windows_in
             }
         }
         hr__.check()
-        return Microsoft_UI_Xaml_Controls_ZoomMode(result__)
+        return ZoomMode(result__)
     }
 
-    public static func SetZoomMode(element: Microsoft_UI_Xaml.DependencyObject, zoomMode: Microsoft_UI_Xaml_Controls_ZoomMode): Unit {
+    public static func SetZoomMode(element: Microsoft_UI_Xaml.DependencyObject, zoomMode: ZoomMode): Unit {
         var hr__ = windows_core.E_POINTER
         try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml.DependencyObject>(element)) {
             try (factory__ = windows_core.factory<ScrollViewer, IScrollViewerStatics>().unwrap()) {
@@ -28350,9 +28317,6 @@ public let SelectionMode_Single = SelectionMode(0)
 public let SelectionMode_Multiple = SelectionMode(1)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let SelectionMode_Extended = SelectionMode(2)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_SelectionMode = SelectionMode
-
 
 // Microsoft.UI.Xaml.Controls.SelectorBar (synthetic:Microsoft_UI_Xaml_Controls_SelectorBar)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -28784,7 +28748,7 @@ public class SelectorBarItem <: windows_interface.InterfaceWrapperBase & windows
         }
     }
 
-    public mut prop Icon: Microsoft_UI_Xaml_Controls_IconElement {
+    public mut prop Icon: IconElement {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -28792,15 +28756,15 @@ public class SelectorBarItem <: windows_interface.InterfaceWrapperBase & windows
                 hr__ = unsafe { interface__.Icon(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                windows_core.winrtReleaseGenericOut<IconElement>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+            return IconElement.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconElement>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIcon(__argBorrow0.asRaw()) }
                 }
@@ -30111,7 +30075,7 @@ public class Slider <: windows_interface.InterfaceWrapperBase & windows_interfac
         }
     }
 
-    public mut prop Orientation: Microsoft_UI_Xaml_Controls_Orientation {
+    public mut prop Orientation: Orientation {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -30119,7 +30083,7 @@ public class Slider <: windows_interface.InterfaceWrapperBase & windows_interfac
                 hr__ = unsafe { interface__.Orientation(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_Orientation(result__)
+            return Orientation(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -31115,7 +31079,7 @@ public class SplitView <: windows_interface.InterfaceWrapperBase & windows_inter
         }
     }
 
-    public mut prop LightDismissOverlayMode: Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
+    public mut prop LightDismissOverlayMode: LightDismissOverlayMode {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -31123,7 +31087,7 @@ public class SplitView <: windows_interface.InterfaceWrapperBase & windows_inter
                 hr__ = unsafe { interface__.LightDismissOverlayMode(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(result__)
+            return LightDismissOverlayMode(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -31807,7 +31771,7 @@ public class StackPanel <: windows_interface.InterfaceWrapperBase & windows_inte
         }
     }
 
-    public mut prop BackgroundSizing: Microsoft_UI_Xaml_Controls_BackgroundSizing {
+    public mut prop BackgroundSizing: BackgroundSizing {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -31815,7 +31779,7 @@ public class StackPanel <: windows_interface.InterfaceWrapperBase & windows_inte
                 hr__ = unsafe { interface__.BackgroundSizing(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_BackgroundSizing(result__)
+            return BackgroundSizing(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -31889,7 +31853,7 @@ public class StackPanel <: windows_interface.InterfaceWrapperBase & windows_inte
         }
     }
 
-    public mut prop Orientation: Microsoft_UI_Xaml_Controls_Orientation {
+    public mut prop Orientation: Orientation {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -31897,7 +31861,7 @@ public class StackPanel <: windows_interface.InterfaceWrapperBase & windows_inte
                 hr__ = unsafe { interface__.Orientation(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_Orientation(result__)
+            return Orientation(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -32141,9 +32105,6 @@ public let StretchDirection_UpOnly = StretchDirection(0)
 public let StretchDirection_DownOnly = StretchDirection(1)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let StretchDirection_Both = StretchDirection(2)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_StretchDirection = StretchDirection
-
 
 // Microsoft.UI.Xaml.Controls.StyleSelector (synthetic:Microsoft_UI_Xaml_Controls_StyleSelector)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -32963,9 +32924,6 @@ public let Symbol_Share = Symbol(59181)
 public let Symbol_Print = Symbol(59209)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let Symbol_XboxOneConsole = Symbol(59792)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_Symbol = Symbol
-
 
 // Microsoft.UI.Xaml.Controls.SymbolIcon (synthetic:Microsoft_UI_Xaml_Controls_SymbolIcon)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -33087,7 +33045,7 @@ public class SymbolIcon <: windows_interface.InterfaceWrapperBase & windows_inte
         }
     }
 
-    public mut prop Symbol: Microsoft_UI_Xaml_Controls_Symbol {
+    public mut prop Symbol: Symbol {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -33095,7 +33053,7 @@ public class SymbolIcon <: windows_interface.InterfaceWrapperBase & windows_inte
                 hr__ = unsafe { interface__.Symbol(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_Symbol(result__)
+            return Symbol(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -33117,7 +33075,7 @@ public class SymbolIcon <: windows_interface.InterfaceWrapperBase & windows_inte
         }
     }
 
-    public static func CreateInstanceWithSymbol(symbol: Microsoft_UI_Xaml_Controls_Symbol): SymbolIcon {
+    public static func CreateInstanceWithSymbol(symbol: Symbol): SymbolIcon {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (factory__ = windows_core.factory<SymbolIcon, ISymbolIconFactory>().unwrap()) {
@@ -34754,7 +34712,7 @@ public class TabViewItem <: windows_interface.InterfaceWrapperBase & windows_int
         }
     }
 
-    public mut prop IconSource: Microsoft_UI_Xaml_Controls_IconSource {
+    public mut prop IconSource: IconSource {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -34762,15 +34720,15 @@ public class TabViewItem <: windows_interface.InterfaceWrapperBase & windows_int
                 hr__ = unsafe { interface__.IconSource(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconSource>(result__)
+                windows_core.winrtReleaseGenericOut<IconSource>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconSource.fromAbiTakeWinrtHandle(result__)
+            return IconSource.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconSource>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconSource>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIconSource(__argBorrow0.asRaw()) }
                 }
@@ -35027,7 +34985,7 @@ public class TabViewItemTemplateSettings <: windows_interface.InterfaceWrapperBa
         }
     }
 
-    public mut prop IconElement: Microsoft_UI_Xaml_Controls_IconElement {
+    public mut prop IconElement: IconElement {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -35035,15 +34993,15 @@ public class TabViewItemTemplateSettings <: windows_interface.InterfaceWrapperBa
                 hr__ = unsafe { interface__.IconElement(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                windows_core.winrtReleaseGenericOut<IconElement>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+            return IconElement.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconElement>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIconElement(__argBorrow0.asRaw()) }
                 }
@@ -36284,7 +36242,7 @@ public class TeachingTip <: windows_interface.InterfaceWrapperBase & windows_int
         }
     }
 
-    public mut prop IconSource: Microsoft_UI_Xaml_Controls_IconSource {
+    public mut prop IconSource: IconSource {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -36292,15 +36250,15 @@ public class TeachingTip <: windows_interface.InterfaceWrapperBase & windows_int
                 hr__ = unsafe { interface__.IconSource(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconSource>(result__)
+                windows_core.winrtReleaseGenericOut<IconSource>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconSource.fromAbiTakeWinrtHandle(result__)
+            return IconSource.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconSource>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconSource>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIconSource(__argBorrow0.asRaw()) }
                 }
@@ -37305,7 +37263,7 @@ public class TeachingTipTemplateSettings <: windows_interface.InterfaceWrapperBa
         }
     }
 
-    public mut prop IconElement: Microsoft_UI_Xaml_Controls_IconElement {
+    public mut prop IconElement: IconElement {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -37313,15 +37271,15 @@ public class TeachingTipTemplateSettings <: windows_interface.InterfaceWrapperBa
                 hr__ = unsafe { interface__.IconElement(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                windows_core.winrtReleaseGenericOut<IconElement>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+            return IconElement.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconElement>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIconElement(__argBorrow0.asRaw()) }
                 }
@@ -38942,7 +38900,7 @@ public class TextBox <: windows_interface.InterfaceWrapperBase & windows_interfa
         }
     }
 
-    public mut prop CharacterCasing: Microsoft_UI_Xaml_Controls_CharacterCasing {
+    public mut prop CharacterCasing: CharacterCasing {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -38950,7 +38908,7 @@ public class TextBox <: windows_interface.InterfaceWrapperBase & windows_interfa
                 hr__ = unsafe { interface__.CharacterCasing(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_CharacterCasing(result__)
+            return CharacterCasing(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -41808,7 +41766,7 @@ public class TimePicker <: windows_interface.InterfaceWrapperBase & windows_inte
         }
     }
 
-    public mut prop LightDismissOverlayMode: Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
+    public mut prop LightDismissOverlayMode: LightDismissOverlayMode {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -41816,7 +41774,7 @@ public class TimePicker <: windows_interface.InterfaceWrapperBase & windows_inte
                 hr__ = unsafe { interface__.LightDismissOverlayMode(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(result__)
+            return LightDismissOverlayMode(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -42466,7 +42424,7 @@ public class TitleBar <: windows_interface.InterfaceWrapperBase & windows_interf
         }
     }
 
-    public mut prop IconSource: Microsoft_UI_Xaml_Controls_IconSource {
+    public mut prop IconSource: IconSource {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -42474,15 +42432,15 @@ public class TitleBar <: windows_interface.InterfaceWrapperBase & windows_interf
                 hr__ = unsafe { interface__.IconSource(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconSource>(result__)
+                windows_core.winrtReleaseGenericOut<IconSource>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconSource.fromAbiTakeWinrtHandle(result__)
+            return IconSource.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconSource>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconSource>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIconSource(__argBorrow0.asRaw()) }
                 }
@@ -43016,7 +42974,7 @@ public class TitleBarTemplateSettings <: windows_interface.InterfaceWrapperBase 
         }
     }
 
-    public mut prop IconElement: Microsoft_UI_Xaml_Controls_IconElement {
+    public mut prop IconElement: IconElement {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -43024,15 +42982,15 @@ public class TitleBarTemplateSettings <: windows_interface.InterfaceWrapperBase 
                 hr__ = unsafe { interface__.IconElement(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                windows_core.winrtReleaseGenericOut<IconElement>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+            return IconElement.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconElement>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIconElement(__argBorrow0.asRaw()) }
                 }
@@ -46115,17 +46073,17 @@ public class Viewbox <: windows_interface.InterfaceWrapperBase & windows_interfa
         hr__.check()
     }
 
-    public func StretchDirection(): Microsoft_UI_Xaml_Controls_StretchDirection {
+    public func StretchDirection(): StretchDirection {
         var result__ = 0i32
         var hr__ = windows_core.E_POINTER
         try (interface__ = defaultInterface()) {
             hr__ = unsafe { interface__.StretchDirection(CPointer<Int32>(inout result__)) }
         }
         hr__.check()
-        return Microsoft_UI_Xaml_Controls_StretchDirection(result__)
+        return StretchDirection(result__)
     }
 
-    public func SetStretchDirection(value: Microsoft_UI_Xaml_Controls_StretchDirection): Unit {
+    public func SetStretchDirection(value: StretchDirection): Unit {
         var hr__ = windows_core.E_POINTER
         try (interface__ = defaultInterface()) {
             hr__ = unsafe { interface__.SetStretchDirection(value.value) }
@@ -46219,5 +46177,3 @@ public struct ZoomMode {
 public let ZoomMode_Disabled = ZoomMode(0)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let ZoomMode_Enabled = ZoomMode(1)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_ZoomMode = ZoomMode

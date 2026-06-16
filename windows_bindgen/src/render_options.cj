@@ -137,43 +137,18 @@ public func currentReferences(): ArrayList<ReferenceStage> {
 // unaffected.
 var activeRenderNamespace: String = ""
 var activeSymbolsByName: HashMap<String, SymbolRecord> = HashMap<String, SymbolRecord>()
-// Short names that, within the active namespace, also name a member (property/method/
-// field) of some wrapper. A bare same-namespace reference to such a type would be
-// shadowed by the member (a Cangjie member shadows a same-named type in both type and
-// constructor-call position), so these are referenced by their globally-unique flat
-// name instead, resolved through an in-package `type <flat> = <short>` alias.
-var activeCollidingTypes: HashSet<String> = HashSet<String>()
 
 public func setNamespaceAwareRendering(
     namespace: String,
-    symbolsByName: HashMap<String, SymbolRecord>,
-    collidingTypes: HashSet<String>
+    symbolsByName: HashMap<String, SymbolRecord>
 ): Unit {
     activeRenderNamespace = namespace
     activeSymbolsByName = symbolsByName
-    activeCollidingTypes = collidingTypes
 }
 
 public func clearNamespaceAwareRendering(): Unit {
     activeRenderNamespace = ""
     activeSymbolsByName = HashMap<String, SymbolRecord>()
-    activeCollidingTypes = HashSet<String>()
-}
-
-// Per-namespace set of short type names that collide with a member name (computed once
-// over the whole selection). The writer reads this to set the active colliding set per
-// rendered symbol and to emit the `type <flat> = <short>` aliases.
-var collidingTypesByNamespace: HashMap<String, HashSet<String>> = HashMap<String, HashSet<String>>()
-
-public func setCollidingTypesByNamespace(value: HashMap<String, HashSet<String>>): Unit {
-    collidingTypesByNamespace = value
-}
-
-public func collidingTypesForNamespace(namespace: String): HashSet<String> {
-    match (collidingTypesByNamespace.get(namespace)) {
-        case Some(found) => return found
-        case None => return HashSet<String>()
-    }
 }
 
 public func qualifyMangledFullName(fullName: String): String {
@@ -194,12 +169,9 @@ public func qualifyMangledFullName(fullName: String, mangled: String): String {
         match (activeSymbolsByName.get(fullName)) {
             case Some(symbol) =>
                 if (symbol.namespace == activeRenderNamespace) {
-                    // A same-namespace short name that collides with a member must be
-                    // referenced by its flat name (resolved via an in-package alias) so the
-                    // member does not shadow it in type or constructor-call position.
-                    if (activeCollidingTypes.contains(symbol.name)) {
-                        return mangled
-                    }
+                    // Same-namespace reference: emit the short name. The compiler resolves a
+                    // same-named member past the type in type, constructor-call, and
+                    // static-access position, so no flat-name fallback is needed.
                     return symbol.name
                 }
                 return "${namespaceToCfgVar(symbol.namespace)}.${symbol.name}"

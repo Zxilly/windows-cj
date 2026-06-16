@@ -31,9 +31,6 @@ public struct CaretType {
 public let CaretType_Normal = CaretType(0)
 @When[Microsoft_UI_Text == "on"]
 public let CaretType_Null = CaretType(1)
-@When[Microsoft_UI_Text == "on"]
-type Microsoft_UI_Text_CaretType = CaretType
-
 
 // Microsoft.UI.Text.FindOptions (synthetic:Microsoft_UI_Text_FindOptions)
 @When[Microsoft_UI_Text == "on"]
@@ -381,9 +378,6 @@ public let LineSpacingRule_Exactly = LineSpacingRule(5)
 public let LineSpacingRule_Multiple = LineSpacingRule(6)
 @When[Microsoft_UI_Text == "on"]
 public let LineSpacingRule_Percent = LineSpacingRule(7)
-@When[Microsoft_UI_Text == "on"]
-type Microsoft_UI_Text_LineSpacingRule = LineSpacingRule
-
 
 // Microsoft.UI.Text.LinkType (synthetic:Microsoft_UI_Text_LinkType)
 @When[Microsoft_UI_Text == "on"]
@@ -414,9 +408,6 @@ public let LinkType_AutoLinkEmail = LinkType(6)
 public let LinkType_AutoLinkPhone = LinkType(7)
 @When[Microsoft_UI_Text == "on"]
 public let LinkType_AutoLinkPath = LinkType(8)
-@When[Microsoft_UI_Text == "on"]
-type Microsoft_UI_Text_LinkType = LinkType
-
 
 // Microsoft.UI.Text.MarkerAlignment (synthetic:Microsoft_UI_Text_MarkerAlignment)
 @When[Microsoft_UI_Text == "on"]
@@ -734,7 +725,7 @@ public class RichEditTextDocument <: windows_interface.InterfaceWrapperBase & wi
         }
     }
 
-    public mut prop CaretType: Microsoft_UI_Text_CaretType {
+    public mut prop CaretType: CaretType {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -742,7 +733,7 @@ public class RichEditTextDocument <: windows_interface.InterfaceWrapperBase & wi
                 hr__ = unsafe { interface__.CaretType(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Text_CaretType(result__)
+            return CaretType(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -1464,9 +1455,6 @@ public let TextScript_Gothic = TextScript(61)
 public let TextScript_Deseret = TextScript(62)
 @When[Microsoft_UI_Text == "on"]
 public let TextScript_Tifinagh = TextScript(63)
-@When[Microsoft_UI_Text == "on"]
-type Microsoft_UI_Text_TextScript = TextScript
-
 
 // Microsoft.UI.Text.TextSetOptions (synthetic:Microsoft_UI_Text_TextSetOptions)
 @When[Microsoft_UI_Text == "on"]

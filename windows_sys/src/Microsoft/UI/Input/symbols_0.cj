@@ -774,9 +774,6 @@ public let PointerDeviceType_Pen = PointerDeviceType(1)
 public let PointerDeviceType_Mouse = PointerDeviceType(2)
 @When[Microsoft_UI_Input == "on"]
 public let PointerDeviceType_Touchpad = PointerDeviceType(3)
-@When[Microsoft_UI_Input == "on"]
-type Microsoft_UI_Input_PointerDeviceType = PointerDeviceType
-
 
 // Microsoft.UI.Input.PointerEventArgs (synthetic:Microsoft_UI_Input_PointerEventArgs)
 @When[Microsoft_UI_Input == "on"]
@@ -997,7 +994,7 @@ public class PointerPoint <: windows_interface.InterfaceWrapperBase & windows_in
         }
     }
 
-    public prop PointerDeviceType: Microsoft_UI_Input_PointerDeviceType {
+    public prop PointerDeviceType: PointerDeviceType {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -1005,7 +1002,7 @@ public class PointerPoint <: windows_interface.InterfaceWrapperBase & windows_in
                 hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Input_PointerDeviceType(result__)
+            return PointerDeviceType(result__)
         }
     }
 
@@ -1346,7 +1343,7 @@ public class PointerPointProperties <: windows_interface.InterfaceWrapperBase & 
         }
     }
 
-    public prop PointerUpdateKind: Microsoft_UI_Input_PointerUpdateKind {
+    public prop PointerUpdateKind: PointerUpdateKind {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -1354,7 +1351,7 @@ public class PointerPointProperties <: windows_interface.InterfaceWrapperBase & 
                 hr__ = unsafe { interface__.PointerUpdateKind(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Input_PointerUpdateKind(result__)
+            return PointerUpdateKind(result__)
         }
     }
 
@@ -1483,5 +1480,3 @@ public let PointerUpdateKind_XButton1Released = PointerUpdateKind(8)
 public let PointerUpdateKind_XButton2Pressed = PointerUpdateKind(9)
 @When[Microsoft_UI_Input == "on"]
 public let PointerUpdateKind_XButton2Released = PointerUpdateKind(10)
-@When[Microsoft_UI_Input == "on"]
-type Microsoft_UI_Input_PointerUpdateKind = PointerUpdateKind

@@ -380,7 +380,7 @@ public class AppBar <: windows_interface.InterfaceWrapperBase & windows_interfac
         }
     }
 
-    public mut prop LightDismissOverlayMode: Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
+    public mut prop LightDismissOverlayMode: LightDismissOverlayMode {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -388,7 +388,7 @@ public class AppBar <: windows_interface.InterfaceWrapperBase & windows_interfac
                 hr__ = unsafe { interface__.LightDismissOverlayMode(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(result__)
+            return LightDismissOverlayMode(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -786,7 +786,7 @@ public class AppBarButton <: windows_interface.InterfaceWrapperBase & windows_in
         }
     }
 
-    public mut prop Icon: Microsoft_UI_Xaml_Controls_IconElement {
+    public mut prop Icon: IconElement {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -794,15 +794,15 @@ public class AppBarButton <: windows_interface.InterfaceWrapperBase & windows_in
                 hr__ = unsafe { interface__.Icon(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                windows_core.winrtReleaseGenericOut<IconElement>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+            return IconElement.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconElement>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIcon(__argBorrow0.asRaw()) }
                 }
@@ -1503,7 +1503,7 @@ public class AppBarToggleButton <: windows_interface.InterfaceWrapperBase & wind
         }
     }
 
-    public mut prop Icon: Microsoft_UI_Xaml_Controls_IconElement {
+    public mut prop Icon: IconElement {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1511,15 +1511,15 @@ public class AppBarToggleButton <: windows_interface.InterfaceWrapperBase & wind
                 hr__ = unsafe { interface__.Icon(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                windows_core.winrtReleaseGenericOut<IconElement>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+            return IconElement.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconElement>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetIcon(__argBorrow0.asRaw()) }
                 }
@@ -2020,7 +2020,7 @@ public class AutoSuggestBox <: windows_interface.InterfaceWrapperBase & windows_
         }
     }
 
-    public mut prop LightDismissOverlayMode: Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
+    public mut prop LightDismissOverlayMode: LightDismissOverlayMode {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -2028,7 +2028,7 @@ public class AutoSuggestBox <: windows_interface.InterfaceWrapperBase & windows_
                 hr__ = unsafe { interface__.LightDismissOverlayMode(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(result__)
+            return LightDismissOverlayMode(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -2083,7 +2083,7 @@ public class AutoSuggestBox <: windows_interface.InterfaceWrapperBase & windows_
         }
     }
 
-    public mut prop QueryIcon: Microsoft_UI_Xaml_Controls_IconElement {
+    public mut prop QueryIcon: IconElement {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -2091,15 +2091,15 @@ public class AutoSuggestBox <: windows_interface.InterfaceWrapperBase & windows_
                 hr__ = unsafe { interface__.QueryIcon(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_IconElement>(result__)
+                windows_core.winrtReleaseGenericOut<IconElement>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_IconElement.fromAbiTakeWinrtHandle(result__)
+            return IconElement.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Controls_IconElement>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<IconElement>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetQueryIcon(__argBorrow0.asRaw()) }
                 }
@@ -2202,10 +2202,10 @@ public class AutoSuggestBox <: windows_interface.InterfaceWrapperBase & windows_
         }
     }
 
-    public func addQuerySubmitted(handler: Windows_Foundation.TypedEventHandler<Microsoft_UI_Xaml_Controls_AutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs>): Windows_Foundation.EventRegistrationToken {
+    public func addQuerySubmitted(handler: Windows_Foundation.TypedEventHandler<AutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs>): Windows_Foundation.EventRegistrationToken {
         var result__ = 0i64
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<Microsoft_UI_Xaml_Controls_AutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs>>(handler)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<AutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs>>(handler)) {
             try (interface__ = defaultInterface()) {
                 hr__ = unsafe { interface__.QuerySubmitted(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
             }
@@ -2222,10 +2222,10 @@ public class AutoSuggestBox <: windows_interface.InterfaceWrapperBase & windows_
         hr__.check()
     }
 
-    public func addSuggestionChosen(handler: Windows_Foundation.TypedEventHandler<Microsoft_UI_Xaml_Controls_AutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs>): Windows_Foundation.EventRegistrationToken {
+    public func addSuggestionChosen(handler: Windows_Foundation.TypedEventHandler<AutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs>): Windows_Foundation.EventRegistrationToken {
         var result__ = 0i64
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<Microsoft_UI_Xaml_Controls_AutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs>>(handler)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<AutoSuggestBox, AutoSuggestBoxSuggestionChosenEventArgs>>(handler)) {
             try (interface__ = defaultInterface()) {
                 hr__ = unsafe { interface__.SuggestionChosen(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
             }
@@ -2242,10 +2242,10 @@ public class AutoSuggestBox <: windows_interface.InterfaceWrapperBase & windows_
         hr__.check()
     }
 
-    public func addTextChanged(handler: Windows_Foundation.TypedEventHandler<Microsoft_UI_Xaml_Controls_AutoSuggestBox, AutoSuggestBoxTextChangedEventArgs>): Windows_Foundation.EventRegistrationToken {
+    public func addTextChanged(handler: Windows_Foundation.TypedEventHandler<AutoSuggestBox, AutoSuggestBoxTextChangedEventArgs>): Windows_Foundation.EventRegistrationToken {
         var result__ = 0i64
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<Microsoft_UI_Xaml_Controls_AutoSuggestBox, AutoSuggestBoxTextChangedEventArgs>>(handler)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<AutoSuggestBox, AutoSuggestBoxTextChangedEventArgs>>(handler)) {
             try (interface__ = defaultInterface()) {
                 hr__ = unsafe { interface__.TextChanged(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
             }
@@ -2472,9 +2472,6 @@ public class AutoSuggestBox <: windows_interface.InterfaceWrapperBase & windows_
         AutoSuggestBox.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_AutoSuggestBox = AutoSuggestBox
-
 
 // Microsoft.UI.Xaml.Controls.AutoSuggestBoxQuerySubmittedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_AutoSuggestBoxQuerySubmittedEventArgs)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -2879,9 +2876,6 @@ public struct BackgroundSizing {
 public let BackgroundSizing_InnerBorderEdge = BackgroundSizing(0)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let BackgroundSizing_OuterBorderEdge = BackgroundSizing(1)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_BackgroundSizing = BackgroundSizing
-
 
 // Microsoft.UI.Xaml.Controls.Border (synthetic:Microsoft_UI_Xaml_Controls_Border)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -3021,7 +3015,7 @@ public class Border <: windows_interface.InterfaceWrapperBase & windows_interfac
         }
     }
 
-    public mut prop BackgroundSizing: Microsoft_UI_Xaml_Controls_BackgroundSizing {
+    public mut prop BackgroundSizing: BackgroundSizing {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -3029,7 +3023,7 @@ public class Border <: windows_interface.InterfaceWrapperBase & windows_interfac
                 hr__ = unsafe { interface__.BackgroundSizing(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_BackgroundSizing(result__)
+            return BackgroundSizing(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -4447,7 +4441,7 @@ public class CalendarDatePicker <: windows_interface.InterfaceWrapperBase & wind
         }
     }
 
-    public mut prop LightDismissOverlayMode: Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
+    public mut prop LightDismissOverlayMode: LightDismissOverlayMode {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -4455,7 +4449,7 @@ public class CalendarDatePicker <: windows_interface.InterfaceWrapperBase & wind
                 hr__ = unsafe { interface__.LightDismissOverlayMode(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(result__)
+            return LightDismissOverlayMode(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -9148,9 +9142,6 @@ public let CharacterCasing_Normal = CharacterCasing(0)
 public let CharacterCasing_Lower = CharacterCasing(1)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let CharacterCasing_Upper = CharacterCasing(2)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_CharacterCasing = CharacterCasing
-
 
 // Microsoft.UI.Xaml.Controls.CheckBox (synthetic:Microsoft_UI_Xaml_Controls_CheckBox)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -9961,7 +9952,7 @@ public class ColorPicker <: windows_interface.InterfaceWrapperBase & windows_int
         }
     }
 
-    public mut prop ColorSpectrumComponents: Microsoft_UI_Xaml_Controls_ColorSpectrumComponents {
+    public mut prop ColorSpectrumComponents: ColorSpectrumComponents {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -9969,7 +9960,7 @@ public class ColorPicker <: windows_interface.InterfaceWrapperBase & windows_int
                 hr__ = unsafe { interface__.ColorSpectrumComponents(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_ColorSpectrumComponents(result__)
+            return ColorSpectrumComponents(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -9980,7 +9971,7 @@ public class ColorPicker <: windows_interface.InterfaceWrapperBase & windows_int
         }
     }
 
-    public mut prop ColorSpectrumShape: Microsoft_UI_Xaml_Controls_ColorSpectrumShape {
+    public mut prop ColorSpectrumShape: ColorSpectrumShape {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -9988,7 +9979,7 @@ public class ColorPicker <: windows_interface.InterfaceWrapperBase & windows_int
                 hr__ = unsafe { interface__.ColorSpectrumShape(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_ColorSpectrumShape(result__)
+            return ColorSpectrumShape(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -10698,9 +10689,6 @@ public let ColorSpectrumComponents_SaturationHue = ColorSpectrumComponents(3)
 public let ColorSpectrumComponents_SaturationValue = ColorSpectrumComponents(4)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let ColorSpectrumComponents_ValueSaturation = ColorSpectrumComponents(5)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_ColorSpectrumComponents = ColorSpectrumComponents
-
 
 // Microsoft.UI.Xaml.Controls.ColorSpectrumShape (synthetic:Microsoft_UI_Xaml_Controls_ColorSpectrumShape)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -10717,9 +10705,6 @@ public struct ColorSpectrumShape {
 public let ColorSpectrumShape_Box = ColorSpectrumShape(0)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let ColorSpectrumShape_Ring = ColorSpectrumShape(1)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_ColorSpectrumShape = ColorSpectrumShape
-
 
 // Microsoft.UI.Xaml.Controls.ColumnDefinition (synthetic:Microsoft_UI_Xaml_Controls_ColumnDefinition)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -11482,7 +11467,7 @@ public class ComboBox <: windows_interface.InterfaceWrapperBase & windows_interf
         }
     }
 
-    public mut prop LightDismissOverlayMode: Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
+    public mut prop LightDismissOverlayMode: LightDismissOverlayMode {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -11490,7 +11475,7 @@ public class ComboBox <: windows_interface.InterfaceWrapperBase & windows_interf
                 hr__ = unsafe { interface__.LightDismissOverlayMode(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(result__)
+            return LightDismissOverlayMode(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -15500,7 +15485,7 @@ public class Control <: windows_interface.InterfaceWrapperBase & windows_interfa
         }
     }
 
-    public mut prop BackgroundSizing: Microsoft_UI_Xaml_Controls_BackgroundSizing {
+    public mut prop BackgroundSizing: BackgroundSizing {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -15508,7 +15493,7 @@ public class Control <: windows_interface.InterfaceWrapperBase & windows_interfa
                 hr__ = unsafe { interface__.BackgroundSizing(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_BackgroundSizing(result__)
+            return BackgroundSizing(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -15885,7 +15870,7 @@ public class Control <: windows_interface.InterfaceWrapperBase & windows_interfa
         }
     }
 
-    public mut prop RequiresPointer: Microsoft_UI_Xaml_Controls_RequiresPointer {
+    public mut prop RequiresPointer: RequiresPointer {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -15893,7 +15878,7 @@ public class Control <: windows_interface.InterfaceWrapperBase & windows_interfa
                 hr__ = unsafe { interface__.RequiresPointer(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_RequiresPointer(result__)
+            return RequiresPointer(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -17081,7 +17066,7 @@ public class DatePicker <: windows_interface.InterfaceWrapperBase & windows_inte
         }
     }
 
-    public mut prop LightDismissOverlayMode: Microsoft_UI_Xaml_Controls_LightDismissOverlayMode {
+    public mut prop LightDismissOverlayMode: LightDismissOverlayMode {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -17089,7 +17074,7 @@ public class DatePicker <: windows_interface.InterfaceWrapperBase & windows_inte
                 hr__ = unsafe { interface__.LightDismissOverlayMode(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_LightDismissOverlayMode(result__)
+            return LightDismissOverlayMode(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -17182,7 +17167,7 @@ public class DatePicker <: windows_interface.InterfaceWrapperBase & windows_inte
         }
     }
 
-    public mut prop Orientation: Microsoft_UI_Xaml_Controls_Orientation {
+    public mut prop Orientation: Orientation {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -17190,7 +17175,7 @@ public class DatePicker <: windows_interface.InterfaceWrapperBase & windows_inte
                 hr__ = unsafe { interface__.Orientation(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_Orientation(result__)
+            return Orientation(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -17828,9 +17813,6 @@ public let DisabledFormattingAccelerators_Italic = DisabledFormattingAccelerator
 public let DisabledFormattingAccelerators_Underline = DisabledFormattingAccelerators(4)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let DisabledFormattingAccelerators_All = DisabledFormattingAccelerators(4294967295)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_DisabledFormattingAccelerators = DisabledFormattingAccelerators
-
 
 // Microsoft.UI.Xaml.Controls.DragItemsCompletedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_DragItemsCompletedEventArgs)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -18579,9 +18561,6 @@ public struct ExpandDirection {
 public let ExpandDirection_Down = ExpandDirection(0)
 @When[Microsoft_UI_Xaml_Controls == "on"]
 public let ExpandDirection_Up = ExpandDirection(1)
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_ExpandDirection = ExpandDirection
-
 
 // Microsoft.UI.Xaml.Controls.Expander (synthetic:Microsoft_UI_Xaml_Controls_Expander)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -18731,7 +18710,7 @@ public class Expander <: windows_interface.InterfaceWrapperBase & windows_interf
         }
     }
 
-    public mut prop ExpandDirection: Microsoft_UI_Xaml_Controls_ExpandDirection {
+    public mut prop ExpandDirection: ExpandDirection {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -18739,7 +18718,7 @@ public class Expander <: windows_interface.InterfaceWrapperBase & windows_interf
                 hr__ = unsafe { interface__.ExpandDirection(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_ExpandDirection(result__)
+            return ExpandDirection(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -19702,7 +19681,7 @@ public class Flyout <: windows_interface.InterfaceWrapperBase & windows_interfac
         return Microsoft_UI_Xaml.DependencyProperty.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_Flyout {
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Flyout {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         if (innerInterface.isNull()) {
@@ -19715,7 +19694,7 @@ public class Flyout <: windows_interface.InterfaceWrapperBase & windows_interfac
             }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_Flyout>(result__)
+            windows_core.winrtReleaseGenericOut<Flyout>(result__)
             result__ = CPointer<Unit>()
         }
         if (hr__.failed()) {
@@ -19733,7 +19712,7 @@ public class Flyout <: windows_interface.InterfaceWrapperBase & windows_interfac
             case None => throw windows_core.WindowsException(windows_core.E_POINTER)
         }
         innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Controls_Flyout.fromAbiTakeWinrtHandle(result__)
+        return Flyout.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func abiType(): String {
@@ -19767,9 +19746,6 @@ public class Flyout <: windows_interface.InterfaceWrapperBase & windows_interfac
         Flyout.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_Flyout = Flyout
-
 
 // Microsoft.UI.Xaml.Controls.FocusDisengagedEventArgs (synthetic:Microsoft_UI_Xaml_Controls_FocusDisengagedEventArgs)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -20074,7 +20050,7 @@ public class Grid <: windows_interface.InterfaceWrapperBase & windows_interface.
         }
     }
 
-    public mut prop BackgroundSizing: Microsoft_UI_Xaml_Controls_BackgroundSizing {
+    public mut prop BackgroundSizing: BackgroundSizing {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -20082,7 +20058,7 @@ public class Grid <: windows_interface.InterfaceWrapperBase & windows_interface.
                 hr__ = unsafe { interface__.BackgroundSizing(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Controls_BackgroundSizing(result__)
+            return BackgroundSizing(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -21014,7 +20990,7 @@ public class GroupStyle <: windows_interface.InterfaceWrapperBase & windows_inte
         }
     }
 
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_GroupStyle {
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): GroupStyle {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         if (innerInterface.isNull()) {
@@ -21027,7 +21003,7 @@ public class GroupStyle <: windows_interface.InterfaceWrapperBase & windows_inte
             }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_GroupStyle>(result__)
+            windows_core.winrtReleaseGenericOut<GroupStyle>(result__)
             result__ = CPointer<Unit>()
         }
         if (hr__.failed()) {
@@ -21045,7 +21021,7 @@ public class GroupStyle <: windows_interface.InterfaceWrapperBase & windows_inte
             case None => throw windows_core.WindowsException(windows_core.E_POINTER)
         }
         innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Controls_GroupStyle.fromAbiTakeWinrtHandle(result__)
+        return GroupStyle.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func abiType(): String {
@@ -21079,9 +21055,6 @@ public class GroupStyle <: windows_interface.InterfaceWrapperBase & windows_inte
         GroupStyle.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_GroupStyle = GroupStyle
-
 
 // Microsoft.UI.Xaml.Controls.GroupStyleSelector (synthetic:Microsoft_UI_Xaml_Controls_GroupStyleSelector)
 @When[Microsoft_UI_Xaml_Controls == "on"]
@@ -21133,7 +21106,7 @@ public class GroupStyleSelector <: windows_interface.InterfaceWrapperBase & wind
         }
     }
 
-    public func SelectGroupStyle(group: windows_interface.IInspectable, level: UInt32): Microsoft_UI_Xaml_Controls_GroupStyle {
+    public func SelectGroupStyle(group: windows_interface.IInspectable, level: UInt32): GroupStyle {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_interface.IInspectable>(group)) {
@@ -21142,14 +21115,14 @@ public class GroupStyleSelector <: windows_interface.InterfaceWrapperBase & wind
             }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_GroupStyle>(result__)
+            windows_core.winrtReleaseGenericOut<GroupStyle>(result__)
             result__ = CPointer<Unit>()
         }
         hr__.check()
-        return Microsoft_UI_Xaml_Controls_GroupStyle.fromAbiTakeWinrtHandle(result__)
+        return GroupStyle.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Controls_GroupStyleSelector {
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): GroupStyleSelector {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         if (innerInterface.isNull()) {
@@ -21162,7 +21135,7 @@ public class GroupStyleSelector <: windows_interface.InterfaceWrapperBase & wind
             }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Controls_GroupStyleSelector>(result__)
+            windows_core.winrtReleaseGenericOut<GroupStyleSelector>(result__)
             result__ = CPointer<Unit>()
         }
         if (hr__.failed()) {
@@ -21180,7 +21153,7 @@ public class GroupStyleSelector <: windows_interface.InterfaceWrapperBase & wind
             case None => throw windows_core.WindowsException(windows_core.E_POINTER)
         }
         innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Controls_GroupStyleSelector.fromAbiTakeWinrtHandle(result__)
+        return GroupStyleSelector.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func abiType(): String {
@@ -21214,9 +21187,6 @@ public class GroupStyleSelector <: windows_interface.InterfaceWrapperBase & wind
         GroupStyleSelector.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Controls == "on"]
-type Microsoft_UI_Xaml_Controls_GroupStyleSelector = GroupStyleSelector
-
 
 // Microsoft.UI.Xaml.Controls.HyperlinkButton (synthetic:Microsoft_UI_Xaml_Controls_HyperlinkButton)
 @When[Microsoft_UI_Xaml_Controls == "on"]

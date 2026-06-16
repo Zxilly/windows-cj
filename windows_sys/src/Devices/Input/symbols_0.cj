@@ -125,7 +125,7 @@ public class PointerDevice <: windows_interface.InterfaceWrapperBase & windows_i
         }
     }
 
-    public prop PointerDeviceType: Windows_Devices_Input_PointerDeviceType {
+    public prop PointerDeviceType: PointerDeviceType {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -133,7 +133,7 @@ public class PointerDevice <: windows_interface.InterfaceWrapperBase & windows_i
                 hr__ = unsafe { interface__.PointerDeviceType(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Windows_Devices_Input_PointerDeviceType(result__)
+            return PointerDeviceType(result__)
         }
     }
 
@@ -244,9 +244,6 @@ public let PointerDeviceType_Pen = PointerDeviceType(1)
 public let PointerDeviceType_Mouse = PointerDeviceType(2)
 @When[Windows_Devices_Input == "on"]
 public let PointerDeviceType_Touchpad = PointerDeviceType(3)
-@When[Windows_Devices_Input == "on"]
-type Windows_Devices_Input_PointerDeviceType = PointerDeviceType
-
 
 // Windows.Devices.Input.PointerDeviceUsage (synthetic:Windows_Devices_Input_PointerDeviceUsage)
 @When[Windows_Devices_Input == "on"]

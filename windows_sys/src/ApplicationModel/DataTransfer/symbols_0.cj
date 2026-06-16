@@ -2060,7 +2060,7 @@ public class ShareProvider <: windows_interface.InterfaceWrapperBase & windows_i
         }
     }
 
-    public static func Create(title: windows_core.HString, displayIcon: Windows_Storage_Streams.RandomAccessStreamReference, backgroundColor: Windows_UI.Color, handler: ShareProviderHandler): Windows_ApplicationModel_DataTransfer_ShareProvider {
+    public static func Create(title: windows_core.HString, displayIcon: Windows_Storage_Streams.RandomAccessStreamReference, backgroundColor: Windows_UI.Color, handler: ShareProviderHandler): ShareProvider {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(title)) {
@@ -2073,11 +2073,11 @@ public class ShareProvider <: windows_interface.InterfaceWrapperBase & windows_i
             }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Windows_ApplicationModel_DataTransfer_ShareProvider>(result__)
+            windows_core.winrtReleaseGenericOut<ShareProvider>(result__)
             result__ = CPointer<Unit>()
         }
         hr__.check()
-        return Windows_ApplicationModel_DataTransfer_ShareProvider.fromAbiTakeWinrtHandle(result__)
+        return ShareProvider.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func abiType(): String {
@@ -2111,9 +2111,6 @@ public class ShareProvider <: windows_interface.InterfaceWrapperBase & windows_i
         ShareProvider.viewOf(raw)
     }
 }
-@When[Windows_ApplicationModel_DataTransfer == "on"]
-type Windows_ApplicationModel_DataTransfer_ShareProvider = ShareProvider
-
 
 // Windows.ApplicationModel.DataTransfer.ShareProviderHandler (synthetic:Windows_ApplicationModel_DataTransfer_ShareProviderHandler)
 @When[Windows_ApplicationModel_DataTransfer == "on"]
@@ -2340,7 +2337,7 @@ public class ShareProviderOperation <: windows_interface.InterfaceWrapperBase & 
         }
     }
 
-    public prop Provider: Windows_ApplicationModel_DataTransfer_ShareProvider {
+    public prop Provider: ShareProvider {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -2348,11 +2345,11 @@ public class ShareProviderOperation <: windows_interface.InterfaceWrapperBase & 
                 hr__ = unsafe { interface__.Provider(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Windows_ApplicationModel_DataTransfer_ShareProvider>(result__)
+                windows_core.winrtReleaseGenericOut<ShareProvider>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Windows_ApplicationModel_DataTransfer_ShareProvider.fromAbiTakeWinrtHandle(result__)
+            return ShareProvider.fromAbiTakeWinrtHandle(result__)
         }
     }
 
@@ -2455,7 +2452,7 @@ public class ShareTargetInfo <: windows_interface.InterfaceWrapperBase & windows
         }
     }
 
-    public prop ShareProvider: Windows_ApplicationModel_DataTransfer_ShareProvider {
+    public prop ShareProvider: ShareProvider {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -2463,11 +2460,11 @@ public class ShareTargetInfo <: windows_interface.InterfaceWrapperBase & windows
                 hr__ = unsafe { interface__.ShareProvider(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Windows_ApplicationModel_DataTransfer_ShareProvider>(result__)
+                windows_core.winrtReleaseGenericOut<ShareProvider>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Windows_ApplicationModel_DataTransfer_ShareProvider.fromAbiTakeWinrtHandle(result__)
+            return ShareProvider.fromAbiTakeWinrtHandle(result__)
         }
     }
 

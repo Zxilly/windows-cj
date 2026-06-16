@@ -2997,10 +2997,10 @@ public class KeyboardAccelerator <: windows_interface.InterfaceWrapperBase & win
         }
     }
 
-    public func addInvoked(handler: Windows_Foundation.TypedEventHandler<Microsoft_UI_Xaml_Input_KeyboardAccelerator, KeyboardAcceleratorInvokedEventArgs>): Windows_Foundation.EventRegistrationToken {
+    public func addInvoked(handler: Windows_Foundation.TypedEventHandler<KeyboardAccelerator, KeyboardAcceleratorInvokedEventArgs>): Windows_Foundation.EventRegistrationToken {
         var result__ = 0i64
         var hr__ = windows_core.E_POINTER
-        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<Microsoft_UI_Xaml_Input_KeyboardAccelerator, KeyboardAcceleratorInvokedEventArgs>>(handler)) {
+        try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Windows_Foundation.TypedEventHandler<KeyboardAccelerator, KeyboardAcceleratorInvokedEventArgs>>(handler)) {
             try (interface__ = defaultInterface()) {
                 hr__ = unsafe { interface__.Invoked(__argBorrow0.asRaw(), CPointer<Int64>(inout result__)) }
             }
@@ -3017,7 +3017,7 @@ public class KeyboardAccelerator <: windows_interface.InterfaceWrapperBase & win
         hr__.check()
     }
 
-    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): Microsoft_UI_Xaml_Input_KeyboardAccelerator {
+    public static func CreateInstance(baseInterface: windows_interface.IInspectable, innerInterface: windows_core.OutSlot<windows_interface.IInspectable>): KeyboardAccelerator {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         if (innerInterface.isNull()) {
@@ -3030,7 +3030,7 @@ public class KeyboardAccelerator <: windows_interface.InterfaceWrapperBase & win
             }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Input_KeyboardAccelerator>(result__)
+            windows_core.winrtReleaseGenericOut<KeyboardAccelerator>(result__)
             result__ = CPointer<Unit>()
         }
         if (hr__.failed()) {
@@ -3048,7 +3048,7 @@ public class KeyboardAccelerator <: windows_interface.InterfaceWrapperBase & win
             case None => throw windows_core.WindowsException(windows_core.E_POINTER)
         }
         innerInterface.write(windows_interface.IInspectable.fromAbiTakeWinrtHandle(__arg1Value))
-        return Microsoft_UI_Xaml_Input_KeyboardAccelerator.fromAbiTakeWinrtHandle(result__)
+        return KeyboardAccelerator.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func KeyProperty(): Microsoft_UI_Xaml.DependencyProperty {
@@ -3138,9 +3138,6 @@ public class KeyboardAccelerator <: windows_interface.InterfaceWrapperBase & win
         KeyboardAccelerator.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Input == "on"]
-type Microsoft_UI_Xaml_Input_KeyboardAccelerator = KeyboardAccelerator
-
 
 // Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs (synthetic:Microsoft_UI_Xaml_Input_KeyboardAcceleratorInvokedEventArgs)
 @When[Microsoft_UI_Xaml_Input == "on"]
@@ -3220,7 +3217,7 @@ public class KeyboardAcceleratorInvokedEventArgs <: windows_interface.InterfaceW
         }
     }
 
-    public prop KeyboardAccelerator: Microsoft_UI_Xaml_Input_KeyboardAccelerator {
+    public prop KeyboardAccelerator: KeyboardAccelerator {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -3228,11 +3225,11 @@ public class KeyboardAcceleratorInvokedEventArgs <: windows_interface.InterfaceW
                 hr__ = unsafe { interface__.KeyboardAccelerator(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Input_KeyboardAccelerator>(result__)
+                windows_core.winrtReleaseGenericOut<KeyboardAccelerator>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Input_KeyboardAccelerator.fromAbiTakeWinrtHandle(result__)
+            return KeyboardAccelerator.fromAbiTakeWinrtHandle(result__)
         }
     }
 
@@ -5822,9 +5819,6 @@ public class Pointer <: windows_interface.InterfaceWrapperBase & windows_interfa
         Pointer.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Input == "on"]
-type Microsoft_UI_Xaml_Input_Pointer = Pointer
-
 
 // Microsoft.UI.Xaml.Input.PointerEventHandler (synthetic:Microsoft_UI_Xaml_Input_PointerEventHandler)
 @When[Microsoft_UI_Xaml_Input == "on"]
@@ -6085,7 +6079,7 @@ public class PointerRoutedEventArgs <: windows_interface.InterfaceWrapperBase & 
         }
     }
 
-    public prop Pointer: Microsoft_UI_Xaml_Input_Pointer {
+    public prop Pointer: Pointer {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -6093,11 +6087,11 @@ public class PointerRoutedEventArgs <: windows_interface.InterfaceWrapperBase & 
                 hr__ = unsafe { interface__.Pointer(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Input_Pointer>(result__)
+                windows_core.winrtReleaseGenericOut<Pointer>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Input_Pointer.fromAbiTakeWinrtHandle(result__)
+            return Pointer.fromAbiTakeWinrtHandle(result__)
         }
     }
 

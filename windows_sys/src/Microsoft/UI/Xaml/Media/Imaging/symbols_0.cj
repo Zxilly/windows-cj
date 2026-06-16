@@ -168,7 +168,7 @@ public class BitmapImage <: windows_interface.InterfaceWrapperBase & windows_int
         }
     }
 
-    public mut prop DecodePixelType: Microsoft_UI_Xaml_Media_Imaging_DecodePixelType {
+    public mut prop DecodePixelType: DecodePixelType {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -176,7 +176,7 @@ public class BitmapImage <: windows_interface.InterfaceWrapperBase & windows_int
                 hr__ = unsafe { interface__.DecodePixelType(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Media_Imaging_DecodePixelType(result__)
+            return DecodePixelType(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -718,9 +718,6 @@ public struct DecodePixelType {
 public let DecodePixelType_Physical = DecodePixelType(0)
 @When[Microsoft_UI_Xaml_Media_Imaging == "on"]
 public let DecodePixelType_Logical = DecodePixelType(1)
-@When[Microsoft_UI_Xaml_Media_Imaging == "on"]
-type Microsoft_UI_Xaml_Media_Imaging_DecodePixelType = DecodePixelType
-
 
 // Microsoft.UI.Xaml.Media.Imaging.DownloadProgressEventArgs (synthetic:Microsoft_UI_Xaml_Media_Imaging_DownloadProgressEventArgs)
 @When[Microsoft_UI_Xaml_Media_Imaging == "on"]

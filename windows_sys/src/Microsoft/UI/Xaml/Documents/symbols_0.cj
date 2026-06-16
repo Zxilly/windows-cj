@@ -1154,9 +1154,6 @@ public struct LogicalDirection {
 public let LogicalDirection_Backward = LogicalDirection(0)
 @When[Microsoft_UI_Xaml_Documents == "on"]
 public let LogicalDirection_Forward = LogicalDirection(1)
-@When[Microsoft_UI_Xaml_Documents == "on"]
-type Microsoft_UI_Xaml_Documents_LogicalDirection = LogicalDirection
-
 
 // Microsoft.UI.Xaml.Documents.Paragraph (synthetic:Microsoft_UI_Xaml_Documents_Paragraph)
 @When[Microsoft_UI_Xaml_Documents == "on"]
@@ -2623,14 +2620,14 @@ public class TextPointer <: windows_interface.InterfaceWrapperBase & windows_int
         return Microsoft_UI_Xaml.FrameworkElement.fromAbiTakeWinrtHandle(result__)
     }
 
-    public func LogicalDirection(): Microsoft_UI_Xaml_Documents_LogicalDirection {
+    public func LogicalDirection(): LogicalDirection {
         var result__ = 0i32
         var hr__ = windows_core.E_POINTER
         try (interface__ = defaultInterface()) {
             hr__ = unsafe { interface__.LogicalDirection(CPointer<Int32>(inout result__)) }
         }
         hr__.check()
-        return Microsoft_UI_Xaml_Documents_LogicalDirection(result__)
+        return LogicalDirection(result__)
     }
 
     public func Offset(): Int32 {
@@ -2643,7 +2640,7 @@ public class TextPointer <: windows_interface.InterfaceWrapperBase & windows_int
         return result__
     }
 
-    public func GetCharacterRect(direction: Microsoft_UI_Xaml_Documents_LogicalDirection): Windows_Foundation.Rect {
+    public func GetCharacterRect(direction: LogicalDirection): Windows_Foundation.Rect {
         var result__ = Windows_Foundation.Rect()
         var hr__ = windows_core.E_POINTER
         try (interface__ = defaultInterface()) {
@@ -2653,7 +2650,7 @@ public class TextPointer <: windows_interface.InterfaceWrapperBase & windows_int
         return result__
     }
 
-    public func GetPositionAtOffset(offset: Int32, direction: Microsoft_UI_Xaml_Documents_LogicalDirection): TextPointer {
+    public func GetPositionAtOffset(offset: Int32, direction: LogicalDirection): TextPointer {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (interface__ = defaultInterface()) {

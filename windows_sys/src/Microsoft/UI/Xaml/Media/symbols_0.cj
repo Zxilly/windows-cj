@@ -37,9 +37,6 @@ public let AlignmentX_Left = AlignmentX(0)
 public let AlignmentX_Center = AlignmentX(1)
 @When[Microsoft_UI_Xaml_Media == "on"]
 public let AlignmentX_Right = AlignmentX(2)
-@When[Microsoft_UI_Xaml_Media == "on"]
-type Microsoft_UI_Xaml_Media_AlignmentX = AlignmentX
-
 
 // Microsoft.UI.Xaml.Media.AlignmentY (synthetic:Microsoft_UI_Xaml_Media_AlignmentY)
 @When[Microsoft_UI_Xaml_Media == "on"]
@@ -58,9 +55,6 @@ public let AlignmentY_Top = AlignmentY(0)
 public let AlignmentY_Center = AlignmentY(1)
 @When[Microsoft_UI_Xaml_Media == "on"]
 public let AlignmentY_Bottom = AlignmentY(2)
-@When[Microsoft_UI_Xaml_Media == "on"]
-type Microsoft_UI_Xaml_Media_AlignmentY = AlignmentY
-
 
 // Microsoft.UI.Xaml.Media.Brush (synthetic:Microsoft_UI_Xaml_Media_Brush)
 @When[Microsoft_UI_Xaml_Media == "on"]
@@ -145,7 +139,7 @@ public class Brush <: windows_interface.InterfaceWrapperBase & windows_interface
         }
     }
 
-    public mut prop RelativeTransform: Microsoft_UI_Xaml_Media_Transform {
+    public mut prop RelativeTransform: Transform {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -153,15 +147,15 @@ public class Brush <: windows_interface.InterfaceWrapperBase & windows_interface
                 hr__ = unsafe { interface__.RelativeTransform(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Transform>(result__)
+                windows_core.winrtReleaseGenericOut<Transform>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Media_Transform.fromAbiTakeWinrtHandle(result__)
+            return Transform.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Transform>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Transform>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetRelativeTransform(__argBorrow0.asRaw()) }
                 }
@@ -170,7 +164,7 @@ public class Brush <: windows_interface.InterfaceWrapperBase & windows_interface
         }
     }
 
-    public mut prop Transform: Microsoft_UI_Xaml_Media_Transform {
+    public mut prop Transform: Transform {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -178,15 +172,15 @@ public class Brush <: windows_interface.InterfaceWrapperBase & windows_interface
                 hr__ = unsafe { interface__.Transform(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Transform>(result__)
+                windows_core.winrtReleaseGenericOut<Transform>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Media_Transform.fromAbiTakeWinrtHandle(result__)
+            return Transform.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Transform>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Transform>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetTransform(__argBorrow0.asRaw()) }
                 }
@@ -1222,7 +1216,7 @@ public class Geometry <: windows_interface.InterfaceWrapperBase & windows_interf
         }
     }
 
-    public mut prop Transform: Microsoft_UI_Xaml_Media_Transform {
+    public mut prop Transform: Transform {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1230,15 +1224,15 @@ public class Geometry <: windows_interface.InterfaceWrapperBase & windows_interf
                 hr__ = unsafe { interface__.Transform(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_Transform>(result__)
+                windows_core.winrtReleaseGenericOut<Transform>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Media_Transform.fromAbiTakeWinrtHandle(result__)
+            return Transform.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_Transform>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Transform>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetTransform(__argBorrow0.asRaw()) }
                 }
@@ -1736,7 +1730,7 @@ public class ImageBrush <: windows_interface.InterfaceWrapperBase & windows_inte
         }
     }
 
-    public mut prop ImageSource: Microsoft_UI_Xaml_Media_ImageSource {
+    public mut prop ImageSource: ImageSource {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1744,15 +1738,15 @@ public class ImageBrush <: windows_interface.InterfaceWrapperBase & windows_inte
                 hr__ = unsafe { interface__.ImageSource(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Microsoft_UI_Xaml_Media_ImageSource>(result__)
+                windows_core.winrtReleaseGenericOut<ImageSource>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Media_ImageSource.fromAbiTakeWinrtHandle(result__)
+            return ImageSource.fromAbiTakeWinrtHandle(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
-            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<Microsoft_UI_Xaml_Media_ImageSource>(value)) {
+            try (__argBorrow0 = windows_core.winrtBorrowGenericIn<ImageSource>(value)) {
                 try (interface__ = defaultInterface()) {
                     hr__ = unsafe { interface__.SetImageSource(__argBorrow0.asRaw()) }
                 }
@@ -1939,9 +1933,6 @@ public class ImageSource <: windows_interface.InterfaceWrapperBase & windows_int
         ImageSource.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Media == "on"]
-type Microsoft_UI_Xaml_Media_ImageSource = ImageSource
-
 
 // Microsoft.UI.Xaml.Media.PenLineCap (synthetic:Microsoft_UI_Xaml_Media_PenLineCap)
 @When[Microsoft_UI_Xaml_Media == "on"]
@@ -2579,9 +2570,6 @@ public let Stretch_Fill = Stretch(1)
 public let Stretch_Uniform = Stretch(2)
 @When[Microsoft_UI_Xaml_Media == "on"]
 public let Stretch_UniformToFill = Stretch(3)
-@When[Microsoft_UI_Xaml_Media == "on"]
-type Microsoft_UI_Xaml_Media_Stretch = Stretch
-
 
 // Microsoft.UI.Xaml.Media.SystemBackdrop (synthetic:Microsoft_UI_Xaml_Media_SystemBackdrop)
 @When[Microsoft_UI_Xaml_Media == "on"]
@@ -2795,7 +2783,7 @@ public class TileBrush <: windows_interface.InterfaceWrapperBase & windows_inter
         }
     }
 
-    public mut prop AlignmentX: Microsoft_UI_Xaml_Media_AlignmentX {
+    public mut prop AlignmentX: AlignmentX {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -2803,7 +2791,7 @@ public class TileBrush <: windows_interface.InterfaceWrapperBase & windows_inter
                 hr__ = unsafe { interface__.AlignmentX(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Media_AlignmentX(result__)
+            return AlignmentX(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -2814,7 +2802,7 @@ public class TileBrush <: windows_interface.InterfaceWrapperBase & windows_inter
         }
     }
 
-    public mut prop AlignmentY: Microsoft_UI_Xaml_Media_AlignmentY {
+    public mut prop AlignmentY: AlignmentY {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -2822,7 +2810,7 @@ public class TileBrush <: windows_interface.InterfaceWrapperBase & windows_inter
                 hr__ = unsafe { interface__.AlignmentY(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Media_AlignmentY(result__)
+            return AlignmentY(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -2833,7 +2821,7 @@ public class TileBrush <: windows_interface.InterfaceWrapperBase & windows_inter
         }
     }
 
-    public mut prop Stretch: Microsoft_UI_Xaml_Media_Stretch {
+    public mut prop Stretch: Stretch {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -2841,7 +2829,7 @@ public class TileBrush <: windows_interface.InterfaceWrapperBase & windows_inter
                 hr__ = unsafe { interface__.Stretch(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Xaml_Media_Stretch(result__)
+            return Stretch(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -3055,9 +3043,6 @@ public class Transform <: windows_interface.InterfaceWrapperBase & windows_inter
         Transform.viewOf(raw)
     }
 }
-@When[Microsoft_UI_Xaml_Media == "on"]
-type Microsoft_UI_Xaml_Media_Transform = Transform
-
 
 // Microsoft.UI.Xaml.Media.XamlLight (synthetic:Microsoft_UI_Xaml_Media_XamlLight)
 @When[Microsoft_UI_Xaml_Media == "on"]

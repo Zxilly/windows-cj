@@ -580,7 +580,7 @@ public class PointerPointProperties <: windows_interface.InterfaceWrapperBase & 
         }
     }
 
-    public prop PointerUpdateKind: Windows_UI_Input_PointerUpdateKind {
+    public prop PointerUpdateKind: PointerUpdateKind {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -588,7 +588,7 @@ public class PointerPointProperties <: windows_interface.InterfaceWrapperBase & 
                 hr__ = unsafe { interface__.PointerUpdateKind(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Windows_UI_Input_PointerUpdateKind(result__)
+            return PointerUpdateKind(result__)
         }
     }
 
@@ -737,5 +737,3 @@ public let PointerUpdateKind_XButton1Released = PointerUpdateKind(8)
 public let PointerUpdateKind_XButton2Pressed = PointerUpdateKind(9)
 @When[Windows_UI_Input == "on"]
 public let PointerUpdateKind_XButton2Released = PointerUpdateKind(10)
-@When[Windows_UI_Input == "on"]
-type Windows_UI_Input_PointerUpdateKind = PointerUpdateKind

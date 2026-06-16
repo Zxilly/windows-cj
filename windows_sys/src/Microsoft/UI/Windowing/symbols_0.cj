@@ -1163,7 +1163,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
         }
     }
 
-    public mut prop IconShowOptions: Microsoft_UI_Windowing_IconShowOptions {
+    public mut prop IconShowOptions: IconShowOptions {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -1171,7 +1171,7 @@ public class AppWindowTitleBar <: windows_interface.InterfaceWrapperBase & windo
                 hr__ = unsafe { interface__.IconShowOptions(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Microsoft_UI_Windowing_IconShowOptions(result__)
+            return IconShowOptions(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -2035,9 +2035,6 @@ public struct IconShowOptions {
 public let IconShowOptions_ShowIconAndSystemMenu = IconShowOptions(0)
 @When[Microsoft_UI_Windowing == "on"]
 public let IconShowOptions_HideIconAndSystemMenu = IconShowOptions(1)
-@When[Microsoft_UI_Windowing == "on"]
-type Microsoft_UI_Windowing_IconShowOptions = IconShowOptions
-
 
 // Microsoft.UI.Windowing.TitleBarHeightOption (synthetic:Microsoft_UI_Windowing_TitleBarHeightOption)
 @When[Microsoft_UI_Windowing == "on"]

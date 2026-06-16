@@ -810,7 +810,6 @@ func generate(config: CliConfig, records: ArrayList<SymbolRecord>): Unit {
     // package `windows_sys.<NsPath>` (short-named, gated, with package-alias
     // imports for the namespaces it references). There is no separate impl/ split
     // and no facade re-export layer; the namespace package IS the public surface.
-    setCollidingTypesByNamespace(computeCollidingTypes(selected, selectedByName, renderOptions))
     writeImplFiles(writer, selected, config.packageName, selectedByName, namespaceDeps, renderOptions)
     let namespaces = selectedNamespaces(selected)
     // Anchor every intermediate namespace node (e.g. `windows_sys.Microsoft.UI`
@@ -1791,8 +1790,7 @@ func renderGatedImplSource(
     // and resolve every type reference through the namespace-aware path so a
     // same-namespace reference is short and a cross-namespace reference is
     // `<ns_var>.<short>`, matching the alias imports the writer emits.
-    let collidingTypes = collidingTypesForNamespace(symbol.namespace)
-    setNamespaceAwareRendering(symbol.namespace, symbolsByName, collidingTypes)
+    setNamespaceAwareRendering(symbol.namespace, symbolsByName)
     var rendered = renderSymbolImplWithGate(
         shortNameSymbol(symbol),
         symbolsByName,
@@ -1800,97 +1798,8 @@ func renderGatedImplSource(
         TargetAbiOptions.defaults(),
         gatePrefix(symbol.namespace)
     )
-    // If this type's short name collides with a member name in the namespace, references
-    // to it are rendered by its flat name; emit the in-package alias mapping that flat
-    // name back to the short declaration so those references resolve.
-    if (collidingTypes.contains(symbol.name)) {
-        rendered += "\n${cfgGateAnnotation(symbol.namespace)}\ntype ${symbol.implName} = ${symbol.name}\n"
-    }
     clearNamespaceAwareRendering()
     return rendered
-}
-
-// Compute, per namespace, the set of short type names that also name a member (property,
-// method, field, or event) of some wrapper in that namespace. Such a name, used as a bare
-// same-namespace reference, would be shadowed by the member (Cangjie resolves a member
-// over a same-named type in both type and constructor-call position), so the writer
-// renders references to these types by their globally-unique flat name instead.
-func computeCollidingTypes(
-    symbols: ArrayList<SymbolRecord>,
-    symbolsByName: HashMap<String, SymbolRecord>,
-    options: RenderOptions
-): HashMap<String, HashSet<String>> {
-    let typeNamesByNs = HashMap<String, HashSet<String>>()
-    let memberNamesByNs = HashMap<String, HashSet<String>>()
-    for (symbol in symbols) {
-        getOrCreateStringSet(typeNamesByNs, symbol.namespace).add(symbol.name)
-        // Collect member names from the rendered source rather than the raw metadata: a
-        // property getter `get_X` renders as `func X`, a `put_X` setter is dropped, and
-        // every name is `cjIdentifier`-normalised, so scanning the emitted declarations
-        // captures the identifiers that actually shadow types. (Local `let`/`var` names are
-        // also captured but never match a type name, so the over-collection is harmless.)
-        collectMemberNames(
-            renderImplSource(symbol, symbolsByName, options),
-            getOrCreateStringSet(memberNamesByNs, symbol.namespace)
-        )
-    }
-    let result = HashMap<String, HashSet<String>>()
-    for ((namespace, typeNames) in typeNamesByNs) {
-        let colliding = HashSet<String>()
-        let memberNames = match (memberNamesByNs.get(namespace)) {
-            case Some(found) => found
-            case None => HashSet<String>()
-        }
-        for (typeName in typeNames) {
-            if (memberNames.contains(typeName)) {
-                colliding.add(typeName)
-            }
-        }
-        result.add(namespace, colliding)
-    }
-    return result
-}
-
-// Scan rendered source for member/binding declarations and record each declared name. A
-// `func`/`prop`/`let`/`const`/`var` keyword token is immediately followed by the declared
-// identifier; tokenising on identifier boundaries and taking the token after each keyword
-// captures exactly the emitted names.
-func collectMemberNames(source: String, into: HashSet<String>): Unit {
-    let bytes = source.toArray()
-    let size = Int64(bytes.size)
-    var i: Int64 = 0
-    var previousWasKeyword = false
-    while (i < size) {
-        if (!isIdentifierByte(bytes[i])) {
-            i += 1
-            continue
-        }
-        var j = i + 1
-        while (j < size && isIdentifierByte(bytes[j])) {
-            j += 1
-        }
-        let token = String.fromUtf8(bytes[i..j])
-        if (previousWasKeyword) {
-            into.add(token)
-            previousWasKeyword = false
-        } else if (token == "func" || token == "prop" || token == "let" || token == "const" ||
-            token == "var") {
-            previousWasKeyword = true
-        } else {
-            previousWasKeyword = false
-        }
-        i = j
-    }
-}
-
-func getOrCreateStringSet(map: HashMap<String, HashSet<String>>, key: String): HashSet<String> {
-    match (map.get(key)) {
-        case Some(found) => return found
-        case None =>
-            let fresh = HashSet<String>()
-            map.add(key, fresh)
-            return fresh
-    }
 }
 
 // A view of the symbol whose impl name is its short, package-scoped name. In the

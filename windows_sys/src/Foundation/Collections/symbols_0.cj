@@ -29,9 +29,6 @@ public let CollectionChange_ItemInserted = CollectionChange(1)
 public let CollectionChange_ItemRemoved = CollectionChange(2)
 @When[Windows_Foundation_Collections == "on"]
 public let CollectionChange_ItemChanged = CollectionChange(3)
-@When[Windows_Foundation_Collections == "on"]
-type Windows_Foundation_Collections_CollectionChange = CollectionChange
-
 
 // Windows.Foundation.Collections.IIterable`1 (synthetic:Windows_Foundation_Collections_IIterable_1)
 @When[Windows_Foundation_Collections == "on"]

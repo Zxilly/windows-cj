@@ -898,18 +898,18 @@ public class User <: windows_interface.InterfaceWrapperBase & windows_interface.
         return Windows_Foundation.IAsyncOperation<Windows_Storage_Streams.IRandomAccessStreamReference>.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func GetDefault(): Windows_System_User {
+    public static func GetDefault(): User {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (factory__ = windows_core.factory<User, IUserStatics2>().unwrap()) {
             hr__ = unsafe { factory__.GetDefault(CPointer<CPointer<Unit>>(inout result__)) }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Windows_System_User>(result__)
+            windows_core.winrtReleaseGenericOut<User>(result__)
             result__ = CPointer<Unit>()
         }
         hr__.check()
-        return Windows_System_User.fromAbiTakeWinrtHandle(result__)
+        return User.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func CreateWatcher(): UserWatcher {
@@ -926,49 +926,49 @@ public class User <: windows_interface.InterfaceWrapperBase & windows_interface.
         return UserWatcher.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func FindAllAsync(): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Windows_System_User>> {
+    public static func FindAllAsync(): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<User>> {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (factory__ = windows_core.factory<User, IUserStatics>().unwrap()) {
             hr__ = unsafe { factory__.FindAllAsync(CPointer<CPointer<Unit>>(inout result__)) }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Windows_System_User>>>(result__)
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<User>>>(result__)
             result__ = CPointer<Unit>()
         }
         hr__.check()
-        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Windows_System_User>>.fromAbiTakeWinrtHandle(result__)
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<User>>.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func FindAllAsyncByType(type_: UserType): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Windows_System_User>> {
+    public static func FindAllAsyncByType(type_: UserType): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<User>> {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (factory__ = windows_core.factory<User, IUserStatics>().unwrap()) {
             hr__ = unsafe { factory__.FindAllAsyncByType(type_.value, CPointer<CPointer<Unit>>(inout result__)) }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Windows_System_User>>>(result__)
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<User>>>(result__)
             result__ = CPointer<Unit>()
         }
         hr__.check()
-        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Windows_System_User>>.fromAbiTakeWinrtHandle(result__)
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<User>>.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func FindAllAsyncByTypeAndStatus(type_: UserType, status: UserAuthenticationStatus): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Windows_System_User>> {
+    public static func FindAllAsyncByTypeAndStatus(type_: UserType, status: UserAuthenticationStatus): Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<User>> {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (factory__ = windows_core.factory<User, IUserStatics>().unwrap()) {
             hr__ = unsafe { factory__.FindAllAsyncByTypeAndStatus(type_.value, status.value, CPointer<CPointer<Unit>>(inout result__)) }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Windows_System_User>>>(result__)
+            windows_core.winrtReleaseGenericOut<Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<User>>>(result__)
             result__ = CPointer<Unit>()
         }
         hr__.check()
-        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<Windows_System_User>>.fromAbiTakeWinrtHandle(result__)
+        return Windows_Foundation.IAsyncOperation<Windows_Foundation_Collections.IVectorView<User>>.fromAbiTakeWinrtHandle(result__)
     }
 
-    public static func GetFromId(nonRoamableId: windows_core.HString): Windows_System_User {
+    public static func GetFromId(nonRoamableId: windows_core.HString): User {
         var result__ = CPointer<Unit>()
         var hr__ = windows_core.E_POINTER
         try (__argBorrow0 = windows_core.winrtBorrowGenericIn<windows_core.HString>(nonRoamableId)) {
@@ -977,11 +977,11 @@ public class User <: windows_interface.InterfaceWrapperBase & windows_interface.
             }
         }
         if (hr__.failed() && result__.isNotNull()) {
-            windows_core.winrtReleaseGenericOut<Windows_System_User>(result__)
+            windows_core.winrtReleaseGenericOut<User>(result__)
             result__ = CPointer<Unit>()
         }
         hr__.check()
-        return Windows_System_User.fromAbiTakeWinrtHandle(result__)
+        return User.fromAbiTakeWinrtHandle(result__)
     }
 
     public static func abiType(): String {
@@ -1015,9 +1015,6 @@ public class User <: windows_interface.InterfaceWrapperBase & windows_interface.
         User.viewOf(raw)
     }
 }
-@When[Windows_System == "on"]
-type Windows_System_User = User
-
 
 // Windows.System.UserAgeConsentGroup (synthetic:Windows_System_UserAgeConsentGroup)
 @When[Windows_System == "on"]
@@ -1227,7 +1224,7 @@ public class UserAuthenticationStatusChangingEventArgs <: windows_interface.Inte
         }
     }
 
-    public prop User: Windows_System_User {
+    public prop User: User {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1235,11 +1232,11 @@ public class UserAuthenticationStatusChangingEventArgs <: windows_interface.Inte
                 hr__ = unsafe { interface__.User(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Windows_System_User>(result__)
+                windows_core.winrtReleaseGenericOut<User>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Windows_System_User.fromAbiTakeWinrtHandle(result__)
+            return User.fromAbiTakeWinrtHandle(result__)
         }
     }
 
@@ -1339,7 +1336,7 @@ public class UserChangedEventArgs <: windows_interface.InterfaceWrapperBase & wi
         }
     }
 
-    public prop User: Windows_System_User {
+    public prop User: User {
         get() {
             var result__ = CPointer<Unit>()
             var hr__ = windows_core.E_POINTER
@@ -1347,11 +1344,11 @@ public class UserChangedEventArgs <: windows_interface.InterfaceWrapperBase & wi
                 hr__ = unsafe { interface__.User(CPointer<CPointer<Unit>>(inout result__)) }
             }
             if (hr__.failed() && result__.isNotNull()) {
-                windows_core.winrtReleaseGenericOut<Windows_System_User>(result__)
+                windows_core.winrtReleaseGenericOut<User>(result__)
                 result__ = CPointer<Unit>()
             }
             hr__.check()
-            return Windows_System_User.fromAbiTakeWinrtHandle(result__)
+            return User.fromAbiTakeWinrtHandle(result__)
         }
     }
 

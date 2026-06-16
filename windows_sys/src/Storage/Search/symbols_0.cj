@@ -97,9 +97,6 @@ public let DateStackOption_None = DateStackOption(0)
 public let DateStackOption_Year = DateStackOption(1)
 @When[Windows_Storage_Search == "on"]
 public let DateStackOption_Month = DateStackOption(2)
-@When[Windows_Storage_Search == "on"]
-type Windows_Storage_Search_DateStackOption = DateStackOption
-
 
 // Windows.Storage.Search.FolderDepth (synthetic:Windows_Storage_Search_FolderDepth)
 @When[Windows_Storage_Search == "on"]
@@ -116,9 +113,6 @@ public struct FolderDepth {
 public let FolderDepth_Shallow = FolderDepth(0)
 @When[Windows_Storage_Search == "on"]
 public let FolderDepth_Deep = FolderDepth(1)
-@When[Windows_Storage_Search == "on"]
-type Windows_Storage_Search_FolderDepth = FolderDepth
-
 
 // Windows.Storage.Search.IQueryOptions (synthetic:Windows_Storage_Search_IQueryOptions)
 @When[Windows_Storage_Search == "on"]
@@ -267,9 +261,6 @@ public let IndexerOption_OnlyUseIndexer = IndexerOption(1)
 public let IndexerOption_DoNotUseIndexer = IndexerOption(2)
 @When[Windows_Storage_Search == "on"]
 public let IndexerOption_OnlyUseIndexerAndOptimizeForIndexedProperties = IndexerOption(3)
-@When[Windows_Storage_Search == "on"]
-type Windows_Storage_Search_IndexerOption = IndexerOption
-
 
 // Windows.Storage.Search.QueryOptions (synthetic:Windows_Storage_Search_QueryOptions)
 @When[Windows_Storage_Search == "on"]
@@ -346,7 +337,7 @@ public class QueryOptions <: windows_interface.InterfaceWrapperBase & windows_in
         }
     }
 
-    public prop DateStackOption: Windows_Storage_Search_DateStackOption {
+    public prop DateStackOption: DateStackOption {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -354,7 +345,7 @@ public class QueryOptions <: windows_interface.InterfaceWrapperBase & windows_in
                 hr__ = unsafe { interface__.DateStackOption(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Windows_Storage_Search_DateStackOption(result__)
+            return DateStackOption(result__)
         }
     }
 
@@ -374,7 +365,7 @@ public class QueryOptions <: windows_interface.InterfaceWrapperBase & windows_in
         }
     }
 
-    public mut prop FolderDepth: Windows_Storage_Search_FolderDepth {
+    public mut prop FolderDepth: FolderDepth {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -382,7 +373,7 @@ public class QueryOptions <: windows_interface.InterfaceWrapperBase & windows_in
                 hr__ = unsafe { interface__.FolderDepth(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Windows_Storage_Search_FolderDepth(result__)
+            return FolderDepth(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
@@ -409,7 +400,7 @@ public class QueryOptions <: windows_interface.InterfaceWrapperBase & windows_in
         }
     }
 
-    public mut prop IndexerOption: Windows_Storage_Search_IndexerOption {
+    public mut prop IndexerOption: IndexerOption {
         get() {
             var result__ = 0i32
             var hr__ = windows_core.E_POINTER
@@ -417,7 +408,7 @@ public class QueryOptions <: windows_interface.InterfaceWrapperBase & windows_in
                 hr__ = unsafe { interface__.IndexerOption(CPointer<Int32>(inout result__)) }
             }
             hr__.check()
-            return Windows_Storage_Search_IndexerOption(result__)
+            return IndexerOption(result__)
         }
         set(value) {
             var hr__ = windows_core.E_POINTER
