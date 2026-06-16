@@ -560,7 +560,7 @@ func renderWinrtDelegateWrapper(
     }
     var content = "${gate}public open class ${genericTypeName} <: windows_interface.InterfaceWrapperBase & " +
         "windows_interface.ComInterface & windows_interface.RuntimeType & windows_core.RuntimeType & " +
-        "windows_interface.DescriptorSchemaProvider${genericWhere} {\n"
+        "windows_interface.DescriptorSchemaProvider & windows_core.Interface<${genericTypeName}>${genericWhere} {\n"
     content += "    public init(raw: CPointer<Unit>) {\n"
     content += "        super(raw)\n"
     content += "    }\n\n"
@@ -610,6 +610,12 @@ func renderWinrtDelegateWrapper(
     content += "        windows_interface.RuntimeTypeContract(\"${cjStringContent(runtimeName)}\", " +
         "${genericTypeName}.signature(), ${genericTypeName}.iid())\n"
     content += "    }\n\n"
+    // Disambiguate the runtimeContract default (windows_core.RuntimeType direct base + via
+    // windows_core.Interface<T>) for the WinRT delegate wrapper.
+    content += "    public static func runtimeContract(): windows_interface.RuntimeTypeContract {\n"
+    content += "        let value__ = ${genericTypeName}.signature()\n"
+    content += "        windows_interface.RuntimeTypeContract(value__, value__)\n"
+    content += "    }\n\n"
     content += "    public static func projectionKind(): String {\n"
     content += "        return \"delegate\"\n"
     content += "    }\n"
@@ -644,7 +650,6 @@ func renderWinrtDelegateWrapper(
     content += "        return object.intoInterface(${genericTypeName}.descriptor())\n"
     content += "    }\n"
     content += "}\n\n"
-    content += "${gate}extend${genericParams} ${genericTypeName} <: windows_core.Interface<${genericTypeName}>${genericWhere} {}\n\n"
     content += "${gate}private class Owned${symbol.implName}${genericParams} <: ${genericTypeName}${genericWhere} {\n"
     content += "    public init(raw: CPointer<Unit>) {\n"
     content += "        super(raw, takeOwnership: true, allowManualRelease: false)\n"
@@ -3076,7 +3081,7 @@ func nativeComInterfaceBaseVtblName(
             if (baseFullName == "Windows.Win32.System.WinRT.IInspectable") {
                 return "windows_interface.IInspectableVtbl"
             }
-            return "${mangleFullName(baseFullName)}Vtbl"
+            return "${qualifyMangledFullName(baseFullName)}Vtbl"
         case None => return "windows_interface.IUnknownVtbl"
     }
 }
@@ -3670,7 +3675,7 @@ func renderGenericWinrtInterfaceWrapper(
     let runtimeName = stripGenericArity(symbol.fullName)
     var content = "${gate}public open class ${genericTypeName} <: windows_interface.InterfaceWrapperBase & " +
         "windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.RuntimeType & " +
-        "windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider${genericWhere} {\n"
+        "windows_core.RuntimeType & windows_interface.DescriptorSchemaProvider & windows_core.Interface<${genericTypeName}>${genericWhere} {\n"
     content += "    public init(raw: CPointer<Unit>) {\n"
     content += "        super(raw)\n"
     content += "    }\n\n"
@@ -3719,6 +3724,13 @@ func renderGenericWinrtInterfaceWrapper(
     content += "        windows_interface.RuntimeTypeContract(\"${cjStringContent(runtimeName)}\", " +
         "${genericTypeName}.signature(), ${genericTypeName}.iid())\n"
     content += "    }\n\n"
+    // windows_core.Interface<T> is now a direct base alongside the direct windows_core.RuntimeType,
+    // so the diamond keeps the inherited default runtimeContract from resolving; provide it
+    // explicitly (matching that default) for the generic interface wrapper.
+    content += "    public static func runtimeContract(): windows_interface.RuntimeTypeContract {\n"
+    content += "        let value__ = ${genericTypeName}.signature()\n"
+    content += "        windows_interface.RuntimeTypeContract(value__, value__)\n"
+    content += "    }\n\n"
     content += "    public static func projectionKind(): String {\n"
     content += "        return \"interface\"\n"
     content += "    }\n\n"
@@ -3730,7 +3742,6 @@ func renderGenericWinrtInterfaceWrapper(
     content += "        windows_interface.IInspectable.viewOf(asRaw())\n"
     content += "    }\n"
     content += "}\n\n"
-    content += "${gate}extend${genericParams} ${genericTypeName} <: windows_core.Interface<${genericTypeName}>${genericWhere} {}\n\n"
     content += "${gate}private class Owned${symbol.implName}${genericParams} <: ${genericTypeName}${genericWhere} {\n"
     content += "    public init(raw: CPointer<Unit>) {\n"
     content += "        super(raw, takeOwnership: true, allowManualRelease: false)\n"
@@ -4505,7 +4516,7 @@ func renderRawHandleSymbol(symbol: SymbolRecord, kind: String, gate: String, iid
             "    }\n"
         case None => ""
     }
-    return "${gate}public class ${symbol.implName} <: Resource {\n" +
+    return "${gate}public class ${symbol.implName} <: Resource & windows_core.HandleWinrtType<${symbol.implName}> {\n" +
         "    private let raw: CPointer<Unit>\n" +
         "    private var ownsHandle: Bool = false\n" +
         "    private var closed: Bool = false\n" +
@@ -4578,8 +4589,7 @@ func renderRawHandleSymbol(symbol: SymbolRecord, kind: String, gate: String, iid
         "        return \"${kind}\"\n" +
         "    }\n" +
         iidMethod +
-        "}\n\n" +
-        "${gate}extend ${symbol.implName} <: windows_core.HandleWinrtType<${symbol.implName}> {\n" +
+        "\n" +
         "    public static func intoWinrtHandle(value: ${symbol.implName}): CPointer<Unit> {\n" +
         "        value.asRaw()\n" +
         "    }\n\n" +
@@ -4608,7 +4618,7 @@ func renderRawHandleSymbol(symbol: SymbolRecord, kind: String, gate: String, iid
 }
 
 func renderRawDelegateHandleSymbol(symbol: SymbolRecord, gate: String): String {
-    return "${gate}public class ${symbol.implName} <: Resource {\n" +
+    return "${gate}public class ${symbol.implName} <: Resource & windows_core.HandleWinrtType<${symbol.implName}> {\n" +
         "    private let raw: CPointer<Unit>\n" +
         "    private var ownsHandle: Bool = false\n" +
         "    private var closed: Bool = false\n" +
@@ -4681,8 +4691,7 @@ func renderRawDelegateHandleSymbol(symbol: SymbolRecord, gate: String): String {
         "    public static func projectionKind(): String {\n" +
         "        return \"delegate\"\n" +
         "    }\n" +
-        "}\n\n" +
-        "${gate}extend ${symbol.implName} <: windows_core.HandleWinrtType<${symbol.implName}> {\n" +
+        "\n" +
         "    public static func intoWinrtHandle(value: ${symbol.implName}): CPointer<Unit> {\n" +
         "        value.asRaw()\n" +
         "    }\n\n" +
@@ -4722,7 +4731,7 @@ func renderWinrtRuntimeClassSymbol(
             let interfaceSpecs = winrtClassInterfaceSpecs(typeDef, symbolsByName, symbol.fullName, defaultInterface)
             var content = "${gate}public class ${symbol.implName} <: windows_interface.InterfaceWrapperBase & " +
                 "windows_interface.ComInterface & windows_interface.RuntimeName & windows_interface.RuntimeType & " +
-                "windows_core.RuntimeName & windows_core.RuntimeType {\n"
+                "windows_core.RuntimeName & windows_core.RuntimeType & windows_core.HandleWinrtType<${symbol.implName}> {\n"
             content += "    public init(raw: CPointer<Unit>) {\n"
             content += "        super(raw)\n"
             content += "    }\n\n"
@@ -4782,9 +4791,7 @@ func renderWinrtRuntimeClassSymbol(
             content += "    public static func runtimeType(): windows_interface.RuntimeTypeContract {\n"
             content += "        windows_interface.RuntimeTypeContract(\"${cjStringContent(symbol.fullName)}\", " +
                 "${symbol.implName}.signature(), ${defaultInterfaceName}.iid())\n"
-            content += "    }\n"
-            content += "}\n\n"
-            content += "${gate}extend ${symbol.implName} <: windows_core.HandleWinrtType<${symbol.implName}> {\n"
+            content += "    }\n\n"
             content += "    public static func intoWinrtHandle(value: ${symbol.implName}): CPointer<Unit> {\n"
             content += "        value.asRaw()\n"
             content += "    }\n\n"
@@ -5492,7 +5499,7 @@ func addRuntimeClassFactoryInterfaceSpec(values: ArrayList<RuntimeClassInterface
     match (symbol.typeDef) {
         case Some(typeDef) =>
             if (isInterfaceType(typeDef)) {
-                addUniqueInterfaceSpec(values, RuntimeClassInterfaceSpec(symbol, symbol.implName))
+                addUniqueInterfaceSpec(values, RuntimeClassInterfaceSpec(symbol, qualifyMangledFullName(symbol.fullName)))
             }
         case None => ()
     }
@@ -6581,7 +6588,7 @@ func runtimeClassInterfaceSpecWithSubstitutions(
     match (interfaceImplementationFullName(implementation, symbolsByName, ownerFullName)) {
         case Some(fullName) =>
             match (symbolsByName.get(fullName)) {
-                case Some(symbol) => return Some(RuntimeClassInterfaceSpec(symbol, symbol.implName))
+                case Some(symbol) => return Some(RuntimeClassInterfaceSpec(symbol, qualifyMangledFullName(symbol.fullName)))
                 case None => ()
             }
         case None => ()
@@ -6660,7 +6667,7 @@ func closedWinrtTypeNameWithSubstitutions(
 ): String {
     let typeArguments = signatureTypeArguments(signature)
     if (typeArguments.isEmpty()) {
-        return symbol.implName
+        return qualifyMangledFullName(symbol.fullName)
     }
     let rendered = ArrayList<String>()
     for (argument in typeArguments) {
@@ -6669,7 +6676,7 @@ func closedWinrtTypeNameWithSubstitutions(
         }
         rendered.add(winrtProjectedTypeNameWithSubstitutions(argument, symbolsByName, ownerFullName, substitutions))
     }
-    "${symbol.implName}<${joinStrings(rendered, ", ")}>"
+    "${qualifyMangledFullName(symbol.fullName)}<${joinStrings(rendered, ", ")}>"
 }
 
 func winrtGenericArgumentSatisfiesRuntimeConstraint(

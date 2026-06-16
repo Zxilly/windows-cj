@@ -878,7 +878,9 @@ func appendWrapperClass(
 
     sb.append("public open class ")
     sb.append(interfaceName)
-    sb.append(" <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.DescriptorSchemaProvider {\n")
+    sb.append(" <: windows_interface.InterfaceWrapperBase & windows_interface.ComInterface & windows_core.RuntimeName & windows_interface.DescriptorSchemaProvider & windows_core.Interface<")
+    sb.append(interfaceName)
+    sb.append("> {\n")
     sb.append("    public init(raw: CPointer<Unit>) {\n")
     sb.append("        super(raw)\n")
     sb.append("    }\n\n")
@@ -954,6 +956,13 @@ func appendWrapperClass(
     sb.append(runtimeNameSource)
     sb.append("\n")
     sb.append("    }\n\n")
+    // windows_core.Interface<T> is now a direct base (so its HandleWinrtType methods resolve
+    // through a package alias). It brings windows_core.RuntimeType, whose abstract signature()
+    // collides with the windows_core.RuntimeName default; provide signature() explicitly
+    // (matching that RuntimeName default) to disambiguate.
+    sb.append("    public static func signature(): String {\n")
+    sb.append("        return runtimeName()\n")
+    sb.append("    }\n\n")
     sb.append("    public static func projectionKind(): String {\n")
     sb.append("        return \"interface\"\n")
     sb.append("    }\n\n")
@@ -1001,12 +1010,6 @@ func appendWrapperClass(
         sb.append("    }\n\n")
     }
     sb.append("}\n\n")
-
-    sb.append("extend ")
-    sb.append(interfaceName)
-    sb.append(" <: windows_core.Interface<")
-    sb.append(interfaceName)
-    sb.append("> {}\n\n")
 
     sb.append("private class Owned")
     sb.append(interfaceName)

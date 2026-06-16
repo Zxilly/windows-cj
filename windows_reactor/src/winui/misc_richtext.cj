@@ -10,7 +10,7 @@ import windows_sys.Microsoft.UI.Xaml.Documents.{
     TextElement as XamlTextElement,
     InlineCollection
 }
-import windows_sys.impl.Windows_UI_Text.{Windows_UI_Text_FontWeight}
+import windows_sys.UI.Text.{FontWeight as Windows_UI_Text_FontWeight}
 
 // ============================================================================
 // RichTextBlock paragraph family — free-function implementation.

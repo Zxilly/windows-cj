@@ -3,7 +3,7 @@ package windows_reactor.winui
 import windows_reactor.core.{Prop, PropValue}
 import windows_core.{HString}
 import windows_sys.Microsoft.UI.Xaml.Media.Brush as XamlBrush
-import windows_sys.impl.Microsoft_UI_Xaml.{Microsoft_UI_Xaml_TextWrapping_Wrap, Microsoft_UI_Xaml_TextWrapping_NoWrap}
+import windows_sys.Microsoft.UI.Xaml.{TextWrapping_Wrap as Microsoft_UI_Xaml_TextWrapping_Wrap, TextWrapping_NoWrap as Microsoft_UI_Xaml_TextWrapping_NoWrap}
 
 // Per-family property setters for the text-display controls (TextBlock,
 // RichTextBlock). The generic FrameworkElement / UIElement props, the font

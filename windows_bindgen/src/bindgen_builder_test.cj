@@ -296,13 +296,13 @@ func testGeneratedWriterTracksEachFileOnce() {
     let writer = GeneratedPackageWriter("__windows_cj_missing_dir__", true)
     writer.writeFile("src/mod.cj", "package windows\n")
     writer.writeFile("src/mod.cj", "package windows\n")
-    writer.writeFile("src/impl/mod.cj", "package windows.impl\n")
+    writer.writeFile("src/Foundation/mod.cj", "package windows.Foundation\n")
 
     @Expect(writer.files().size, 2)
     @Expect(writer.files()[0], "src/mod.cj")
-    @Expect(writer.files()[1], "src/impl/mod.cj")
+    @Expect(writer.files()[1], "src/Foundation/mod.cj")
     @Expect(writer.fileHashes().contains("src/mod.cj"), true)
-    @Expect(writer.fileHashes().contains("src/impl/mod.cj"), true)
+    @Expect(writer.fileHashes().contains("src/Foundation/mod.cj"), true)
 }
 
 @Test
@@ -310,7 +310,7 @@ func testGeneratedWriterRejectsConflictingDuplicateFile() {
     let writer = GeneratedPackageWriter("__windows_cj_missing_dir__", true)
     writer.writeFile("src/mod.cj", "package windows\n")
 
-    @Expect(cliTestThrows({ => writer.writeFile("src/mod.cj", "package windows.impl\n") }), true)
+    @Expect(cliTestThrows({ => writer.writeFile("src/mod.cj", "package windows_other\n") }), true)
 }
 
 @Test
@@ -830,7 +830,7 @@ func testWriteImplFilesAddsReferenceImportWhenSymbolIsRemapped() {
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
     writeImplFiles(writer, records, "windows_local", symbolsByName, options)
-    let content = String.fromUtf8(File.readFrom("${outDir}/src/impl/Example_LocalNs/symbols_0.cj"))
+    let content = String.fromUtf8(File.readFrom("${outDir}/src/Example/LocalNs/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
 
     @Expect(content.contains("import windows_refpkg as windows_refpkg"), true)

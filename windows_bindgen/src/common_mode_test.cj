@@ -7854,15 +7854,14 @@ func testCommonNativeHelpersRemapDirect2DAndDirect3DNumericsTypes() {
 
     let writer = GeneratedPackageWriter("__windows_cj_dry_run__", true)
     writeImplFiles(writer, selected, "windows_sys", selectedByName)
-    writeFacadeFiles(writer, "Windows.Foundation.Numerics", selected, "windows_sys")
-    let numericsImpl = writer.writtenFileContent.get("src/impl/Windows_Foundation_Numerics/symbols_0.cj").getOrThrow()
-    let numericsFacade = writer.writtenFileContent.get("src/Foundation/Numerics/facade_0.cj").getOrThrow()
-    @Expect(numericsFacade.contains("import windows_sys.impl.Windows_Foundation_Numerics.*"), true)
-    @Expect(numericsFacade.contains("public type Matrix3x2 = Windows_Foundation_Numerics_Matrix3x2"), true)
-    @Expect(numericsFacade.contains("public type Vector4 = Windows_Foundation_Numerics_Vector4"), true)
-    @Expect(numericsImpl.contains("public struct Windows_Foundation_Numerics_Matrix3x2"), true)
+    // In the nested layout the namespace package IS the public surface: each
+    // namespace's declarations live directly in `windows_sys.<NsPath>` under their
+    // short names; there is no separate impl subpackage and no facade re-export.
+    let numericsImpl = writer.writtenFileContent.get("src/Foundation/Numerics/symbols_0.cj").getOrThrow()
+    @Expect(numericsImpl.contains("package windows_sys.Foundation.Numerics"), true)
+    @Expect(numericsImpl.contains("public struct Matrix3x2"), true)
     @Expect(numericsImpl.contains("public var M32: Float32 = 0.0"), true)
-    @Expect(numericsImpl.contains("public struct Windows_Foundation_Numerics_Vector4"), true)
+    @Expect(numericsImpl.contains("public struct Vector4"), true)
     @Expect(numericsImpl.contains("public var W: Float32 = 0.0"), true)
 
     @Expect(productionDirect2d.contains("import windows_sys.Foundation.Numerics.Matrix3x2"), true)

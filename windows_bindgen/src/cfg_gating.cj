@@ -43,17 +43,18 @@ func cfgGateAnnotation(namespace: String): String {
     return "@When[${namespaceToCfgVar(namespace)} == \"on\"]"
 }
 
-// The impl subpackage name for a namespace. The monolithic impl package is split
-// into per-namespace subpackages `<packageName>.impl.<ns_var>` so a consumer that
-// enables only a few namespaces compiles (and even parses, once cjpm skips the
-// disabled subpackages) only those subpackages instead of the whole impl. The
-// directory mirrors the package: `src/impl/<ns_var>`.
+// The package that holds a namespace's declarations. In the nested layout the
+// declarations live directly in the windows-rs-shaped namespace package
+// `windows_sys.<NsPath>` (e.g. `windows_sys.Storage.FileProperties`), one package
+// per namespace; there is no separate impl split. A consumer that enables only a
+// few namespaces compiles (and, once cjpm skips the disabled subpackages, parses)
+// only those namespace packages. The directory mirrors the package.
 func implSubpackageName(packageName: String, namespace: String): String {
-    return "${packageName}.impl.${namespaceToCfgVar(namespace)}"
+    return namespaceToPackage(namespace, packageName)
 }
 
 func implSubpackageDirectory(namespace: String): String {
-    return "src/impl/${namespaceToCfgVar(namespace)}"
+    return namespaceToDirectory(namespace)
 }
 
 // Render the per-symbol gate prefix (`@When[<ns_var> == "on"]\n`) that the
@@ -159,18 +160,20 @@ func renderImplDependencyEdgeFile(directory: String, packageName: String, implSu
     return "package ${pkg}\n\nimport ${implSubpackage} as ${packageName}_impl_edge\n"
 }
 
-// Render the cross-impl wildcard imports for namespace N's impl subpackage.
+// Render the cross-namespace package-alias imports for namespace N's package.
 //
-// After the split, a symbol in `impl.<ns_var(N)>` that references a symbol in
-// namespace M lives in a different package `impl.<ns_var(M)>` and is no longer
-// in scope by its bare mangled name. For each M that N depends on (from the same
-// namespace-dependency graph that drives namespace-deps.json), emit a gated
-// wildcard import of M's impl subpackage. The import is gated on M's cfg
-// variable so that when M is disabled the import is removed (it would otherwise
-// reference a package whose declarations were all compiled away). Impl symbol
-// names are globally-unique mangled names, so the wildcard imports never clash.
-// These imports are cyclic across sibling impl subpackages, which the circular
-// subpackage compilation support handles.
+// In the nested layout a symbol in `windows_sys.<NsPath(N)>` that references a
+// symbol in namespace M renders that reference as `<ns_var(M)>.<short>` (see
+// qualifyMangledFullName). For each M that N depends on (from the same
+// namespace-dependency graph that drives namespace-deps.json) emit a gated
+// package-alias import binding `<ns_var(M)>` to M's package. The alias matches
+// the qualifier the renderer produces, and using the globally-unique cfg
+// variable as the alias keeps cross-namespace short names collision-free even
+// though many short names repeat across namespaces. The import is gated on M's
+// cfg variable so that when M is disabled it is removed (it would otherwise name
+// a package whose declarations were all compiled away). These imports are cyclic
+// across sibling and parent/child packages, which the circular subpackage
+// compilation support handles.
 //
 // `deps` is the sorted set of namespaces N depends on (already excludes N
 // itself). Self-imports and the root sentinel namespace's own bucket are
@@ -186,9 +189,9 @@ func renderCrossImplImports(
             continue
         }
         let gateVar = namespaceToCfgVar(toNamespace)
-        let target = implSubpackageName(packageName, toNamespace)
+        let target = namespaceToPackage(toNamespace, packageName)
         content += "@When[${gateVar} == \"on\"]\n"
-        content += "import ${target}.*\n"
+        content += "import ${target} as ${gateVar}\n"
     }
     return content
 }

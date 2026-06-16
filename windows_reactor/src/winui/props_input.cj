@@ -9,8 +9,8 @@ import windows_sys.Microsoft.UI.Xaml.Controls.{
     ProgressBar, ProgressRing, RadioButton, RadioButtons, RatingControl
 }
 import windows_sys.Microsoft.UI.Xaml.Controls.Primitives.{ToggleButton, RangeBase}
-import windows_sys.impl.Microsoft_UI_Xaml_Controls.{Microsoft_UI_Xaml_Controls_Orientation_Vertical, Microsoft_UI_Xaml_Controls_Orientation_Horizontal}
-import windows_sys.impl.Windows_Foundation.{Windows_Foundation_IReference_1}
+import windows_sys.Microsoft.UI.Xaml.Controls.{Orientation_Vertical as Microsoft_UI_Xaml_Controls_Orientation_Vertical, Orientation_Horizontal as Microsoft_UI_Xaml_Controls_Orientation_Horizontal}
+import windows_sys.Foundation.{IReference as Windows_Foundation_IReference_1}
 
 // Per-family property setters for value / toggle input controls (CheckBox,
 // RadioButton, RadioButtons, ToggleSwitch, Slider, NumberBox, ProgressBar,

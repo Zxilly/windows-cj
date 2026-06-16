@@ -6,21 +6,26 @@ import std.unittest.*
 import std.unittest.testmacro.*
 
 @Test
-func testFacadeFilesImportOnlyReferencedImplSymbols() {
-    let outDir = ".generated/facade-import-test"
-    removeIfExists(outDir, recursive: true)
+func testNamespacePackageDeclaresOnlyOwnNamespaceSymbols() {
     let records = ArrayList<SymbolRecord>()
     records.add(SymbolRecord("Example.Foundation.Widget", "Example.Foundation", "Widget", "Example_Foundation_Widget", []))
     records.add(SymbolRecord("Example.Foundation.Gadget", "Example.Foundation", "Gadget", "Example_Foundation_Gadget", []))
     records.add(SymbolRecord("Example.Other.Hidden", "Example.Other", "Hidden", "Example_Other_Hidden", []))
-    let writer = GeneratedPackageWriter(outDir, false)
+    let symbolsByName = recordsByFullName(records)
+    let writer = GeneratedPackageWriter("__windows_cj_dry_run__", true)
 
-    writeFacadeFiles(writer, "Example.Foundation", records, "windows")
-    let content = String.fromUtf8(File.readFrom("${outDir}/src/Example/Foundation/facade_0.cj"))
-    removeIfExists(outDir, recursive: true)
+    // In the nested layout each namespace's declarations live directly in its own
+    // package `windows.<NsPath>` under their short names. A namespace package
+    // declares only its own namespace's symbols (with no dependencies here it
+    // imports no other namespace package) and never names a foreign namespace's
+    // symbol.
+    writeImplFiles(writer, records, "windows", symbolsByName)
+    let content = writer.writtenFileContent.get("src/Example/Foundation/symbols_0.cj").getOrThrow()
 
-    @Expect(content.contains("import windows.impl.Example_Foundation.*"), true)
-    @Expect(content.contains("import windows.impl.Example_Other"), false)
+    @Expect(content.contains("package windows.Example.Foundation"), true)
+    @Expect(content.contains("public struct Widget"), true)
+    @Expect(content.contains("public struct Gadget"), true)
+    @Expect(content.contains("import windows.Other"), false)
     @Expect(content.contains("Example_Other_Hidden"), false)
 }
 
@@ -530,7 +535,7 @@ func testWin32TextPointerLiteralConstantsUseStringFactories() {
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
     writeImplFiles(writer, records, "windows", symbolsByName)
-    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/Tiny_Foundation/symbols_0.cj"))
+    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/Tiny/Foundation/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
 
     @Expect(textNamesSource.contains("public static let WideName: windows_strings.WideStringFactory = windows_strings.wideStringFactory(\"Wide.Name\")"), true)
@@ -7025,7 +7030,7 @@ func testDelegateTypesRenderAsCFuncInAbiFields() {
 }
 
 @Test
-func testFacadeExportsInterfaceVtblAlias() {
+func testNamespacePackageDeclaresInterfaceUnderShortName() {
     let json = ##"{
       "winmd_file": "Tiny.winmd",
       "winmd_sha256": "abcd",
@@ -7086,17 +7091,20 @@ func testFacadeExportsInterfaceVtblAlias() {
     let files = ArrayList<WinmdFileRecord>()
     files.add(parseWinmdJson(json, "tiny"))
     let records = buildSymbolRecords(files)
-    let outDir = ".generated/facade-interface-vtbl-test"
-    removeIfExists(outDir, recursive: true)
-    let writer = GeneratedPackageWriter(outDir, false)
+    let symbolsByName = cliTestRecordsByName(records)
+    let writer = GeneratedPackageWriter("__windows_cj_dry_run__", true)
 
-    writeFacadeFiles(writer, "Tiny.Foundation", records, "windows")
-    let content = String.fromUtf8(File.readFrom("${outDir}/src/Tiny/Foundation/facade_0.cj"))
-    removeIfExists(outDir, recursive: true)
+    // In the nested layout the WinRT interface is declared directly in its
+    // namespace package under its short name, driven by the `@Interface[...]`
+    // macro (which generates the Vtbl); there is no separate facade re-export of
+    // the interface type or its Vtbl alias.
+    writeImplFiles(writer, records, "windows", symbolsByName)
+    let content = writer.writtenFileContent.get("src/Tiny/Foundation/symbols_0.cj").getOrThrow()
 
-    @Expect(content.contains("import windows.impl.Tiny_Foundation.*"), true)
-    @Expect(content.contains("public type IWidget = Tiny_Foundation_IWidget"), true)
-    @Expect(content.contains("public type IWidgetVtbl = Tiny_Foundation_IWidgetVtbl"), true)
+    @Expect(content.contains("package windows.Tiny.Foundation"), true)
+    @Expect(content.contains("public interface IWidget <: IInspectable"), true)
+    @Expect(content.contains("@Interface["), true)
+    @Expect(content.contains("public interface Tiny_Foundation_IWidget"), false)
 }
 
 @Test
@@ -7389,7 +7397,7 @@ func testImplFilesImportPolyfillWhenRenderedSourceUsesLayoutHelper() {
     let symbolsByName = cliTestRecordsByName(records)
 
     writeImplFiles(writer, records, "windows", symbolsByName)
-    let content = String.fromUtf8(File.readFrom("${outDir}/src/impl/Example_Foundation/symbols_0.cj"))
+    let content = String.fromUtf8(File.readFrom("${outDir}/src/Example/Foundation/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
 
     @Expect(content.contains("import windows_polyfill as windows_polyfill"), true)
@@ -7885,7 +7893,7 @@ func testWin32GuidAttributeRendersIUnknownBasedNativeComSurface() {
     }
 
     @Expect(source.contains("@Interface["), false)
-    @Expect(source.contains("public class Example_Win32_System_Com_IClassFactory <: Resource {"), true)
+    @Expect(source.contains("public class Example_Win32_System_Com_IClassFactory <: Resource & windows_core.HandleWinrtType<Example_Win32_System_Com_IClassFactory> {"), true)
     @Expect(source.contains("private var ownsHandle: Bool = false"), true)
     @Expect(source.contains("public func close(): Unit"), true)
     @Expect(source.contains("let shouldRelease = ownsHandle\n        ownsHandle = false\n        closed = true\n        if (shouldRelease) {\n            Example_Win32_System_Com_IClassFactory.releaseRaw(raw)\n        }"), true)

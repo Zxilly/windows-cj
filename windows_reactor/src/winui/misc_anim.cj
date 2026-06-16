@@ -8,10 +8,10 @@ import windows_sys.Microsoft.UI.Composition.{
     Visual, CompositionObject, Compositor, CompositionAnimation, CompositionEasingFunction,
     KeyFrameAnimation, ImplicitAnimationCollection
 }
-import windows_sys.impl.Microsoft_UI_Composition.{Microsoft_UI_Composition_ICompositionAnimationBase as ICompositionAnimationBase}
-import windows_sys.impl.Windows_Foundation.{Windows_Foundation_TimeSpan}
-import windows_sys.impl.Windows_Foundation_Collections.{Windows_Foundation_Collections_IMap_2 as XamlIMap}
-import windows_sys.impl.Windows_Foundation_Numerics.{Windows_Foundation_Numerics_Vector2, Windows_Foundation_Numerics_Vector3}
+import windows_sys.Microsoft.UI.Composition.{ICompositionAnimationBase as ICompositionAnimationBase}
+import windows_sys.Foundation.{TimeSpan as Windows_Foundation_TimeSpan}
+import windows_sys.Foundation.Collections.{IMap as XamlIMap}
+import windows_sys.Foundation.Numerics.{Vector2 as Windows_Foundation_Numerics_Vector2, Vector3 as Windows_Foundation_Numerics_Vector3}
 
 // ============================================================================
 // Composition animation family — free-function implementations.

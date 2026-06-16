@@ -3,9 +3,9 @@ package windows_reactor.winui
 import windows_reactor.core.{Prop, PropValue}
 import windows_reactor.core.PasswordRevealMode as ReactorPasswordRevealMode
 import windows_core.{HString, OutSlot}
-import windows_sys.impl.Microsoft_UI_Text.{Microsoft_UI_Text_TextSetOptions_None, Microsoft_UI_Text_TextGetOptions_None}
-import windows_sys.impl.Microsoft_UI_Xaml.{Microsoft_UI_Xaml_TextWrapping_Wrap, Microsoft_UI_Xaml_TextWrapping_NoWrap}
-import windows_sys.impl.Microsoft_UI_Xaml_Controls.{Microsoft_UI_Xaml_Controls_PasswordRevealMode_Peek, Microsoft_UI_Xaml_Controls_PasswordRevealMode_Hidden, Microsoft_UI_Xaml_Controls_PasswordRevealMode_Visible}
+import windows_sys.Microsoft.UI.Text.{TextSetOptions_None as Microsoft_UI_Text_TextSetOptions_None, TextGetOptions_None as Microsoft_UI_Text_TextGetOptions_None}
+import windows_sys.Microsoft.UI.Xaml.{TextWrapping_Wrap as Microsoft_UI_Xaml_TextWrapping_Wrap, TextWrapping_NoWrap as Microsoft_UI_Xaml_TextWrapping_NoWrap}
+import windows_sys.Microsoft.UI.Xaml.Controls.{PasswordRevealMode_Peek as Microsoft_UI_Xaml_Controls_PasswordRevealMode_Peek, PasswordRevealMode_Hidden as Microsoft_UI_Xaml_Controls_PasswordRevealMode_Hidden, PasswordRevealMode_Visible as Microsoft_UI_Xaml_Controls_PasswordRevealMode_Visible}
 
 // Depth>0 while the reactor is programmatically setting RichEditBox text (controlled
 // value). RichEditBox raises TextChanged synchronously from SetText; the TextChanged

@@ -24,8 +24,8 @@ import windows_sys.Foundation.{TypedEventHandler}
 // IAppWindowTitleBar2 carries PreferredHeightOption (Tall / Standard).
 import windows_sys.Microsoft.UI.Windowing.{AppWindow, TitleBarHeightOption}
 import windows_sys.Graphics.{SizeInt32}
-import windows_sys.impl.Microsoft_UI_Windowing.{Microsoft_UI_Windowing_TitleBarHeightOption_Tall, Microsoft_UI_Windowing_TitleBarHeightOption_Standard}
-import windows_sys.impl.Windows_UI_Xaml_Interop.{Windows_UI_Xaml_Interop_TypeName}
+import windows_sys.Microsoft.UI.Windowing.{TitleBarHeightOption_Tall as Microsoft_UI_Windowing_TitleBarHeightOption_Tall, TitleBarHeightOption_Standard as Microsoft_UI_Windowing_TitleBarHeightOption_Standard}
+import windows_sys.UI.Xaml.Interop.{TypeName as Windows_UI_Xaml_Interop_TypeName}
 import windows_core.{
     E_FAIL,
     E_NOINTERFACE,

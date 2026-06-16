@@ -453,7 +453,7 @@ func testWinrtInterfaceRendersInterfaceMacroAndSupportDependencies() {
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
     writeImplFiles(writer, records, "windows", symbolsByName)
-    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/Example_Foundation/symbols_0.cj"))
+    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/Example/Foundation/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
     @Expect(implChunk.contains("import windows_core.*"), false)
     @Expect(implChunk.contains("import windows_interface.*"), false)
@@ -569,19 +569,21 @@ func testGenericWinrtInterfaceUsesClosedSignatureIid() {
     @Expect(source.contains("windows_interface.InterfaceParameterSchema(\"result\", \"CPointer<CPointer<Unit>>\", \"OutSlot<T>\", windows_interface.InterfaceParameterBridgeKind.OutSlot)"), true)
     @Expect(source.contains("windows_interface.InterfaceParameterSchema(\"result\", \"CPointer<CPointer<Unit>>\", \"CPointer<CPointer<Unit>>\", windows_interface.InterfaceParameterBridgeKind.Value)"), false)
     @Expect(source.contains("windows_interface.InterfaceDescriptor<Example_Foundation_IVector_1<T>>"), true)
-    @Expect(source.contains("extend<T> Example_Foundation_IVector_1<T> <: windows_core.Interface<Example_Foundation_IVector_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}"), true)
+    // The empty `extend ... <: windows_core.Interface<T> {}` block is folded into
+    // the wrapper class's own base list (no separate extend declaration).
+    @Expect(source.contains("& windows_core.Interface<Example_Foundation_IVector_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {"), true)
     @Expect(source.contains("windows_interface.GUID.parse(\"11111111-2222-3333-4455-66778899aabb\")"), false)
 
-    let outDir = ".generated/generic-facade-alias-test"
-    removeIfExists(outDir, recursive: true)
-    let writer = GeneratedPackageWriter(outDir, false)
-    writeFacadeFiles(writer, "Example.Foundation", records, "windows")
-    let facade = String.fromUtf8(File.readFrom("${outDir}/src/Example/Foundation/facade_0.cj"))
-    removeIfExists(outDir, recursive: true)
+    // In the nested layout the namespace package declares the generic type
+    // directly under its short name (with its `<T>` parameter list preserved);
+    // there is no separate facade re-export alias layer.
+    let writer = GeneratedPackageWriter("__windows_cj_dry_run__", true)
+    writeImplFiles(writer, records, "windows", symbolsByName)
+    let nsPackage = writer.writtenFileContent.get("src/Example/Foundation/symbols_0.cj").getOrThrow()
 
-    @Expect(facade.contains("public type IVector<T> = Example_Foundation_IVector_1<T>"), true)
-    @Expect(facade.contains("public type IVector = Example_Foundation_IVector_1"), false)
-    @Expect(facade.contains("public type IVectorVtbl = Example_Foundation_IVector_1Vtbl"), true)
+    @Expect(nsPackage.contains("package windows.Example.Foundation"), true)
+    @Expect(nsPackage.contains("public open class IVector<T> <: windows_interface.InterfaceWrapperBase"), true)
+    @Expect(nsPackage.contains("public open class Example_Foundation_IVector_1<T>"), false)
 }
 
 @Test
@@ -691,7 +693,7 @@ func testGenericWinrtDelegateUsesClosedSignatureIid() {
     @Expect(source.contains("private class Example_Foundation_EventHandler_1Box<T> <: Example_Foundation_EventHandler_1Invoker<T> & Resource"), true)
     @Expect(source.contains("func buildExample_Foundation_EventHandler_1BoxVtbl<T>(): Example_Foundation_EventHandler_1Vtbl where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T>"), true)
     @Expect(source.contains("windows_core.asImplFromRaw<Example_Foundation_EventHandler_1InvokerErased>(instanceRaw)"), true)
-    @Expect(source.contains("extend<T> Example_Foundation_EventHandler_1<T> <: windows_core.Interface<Example_Foundation_EventHandler_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {}"), true)
+    @Expect(source.contains("& windows_core.Interface<Example_Foundation_EventHandler_1<T>> where T <: windows_core.RuntimeType & windows_core.WinrtGenericType<T> {"), true)
     @Expect(source.contains("public class Example_Foundation_EventHandler_1 {\n    private let raw: CPointer<Unit>"), false)
     @Expect(source.contains("unsupportedDelegateAuthoringReason"), false)
 }
@@ -1555,14 +1557,14 @@ func testWinrtClassWithDefaultInterfaceRendersRuntimeWrapper() {
     @Expect(classSource.contains("public static func runtimeName(): String {\n        \"Example.Foundation.Widget\"\n    }"), true)
     @Expect(classSource.contains("return \"rc(Example.Foundation.Widget;{\" + Example_Foundation_IWidget.iid().toSignatureString() + \"})\""), true)
     @Expect(classSource.contains("windows_interface.RuntimeTypeContract(\"Example.Foundation.Widget\", Example_Foundation_Widget.signature(), Example_Foundation_IWidget.iid())"), true)
-    @Expect(classSource.contains("extend Example_Foundation_Widget <: windows_core.HandleWinrtType<Example_Foundation_Widget>"), true)
+    @Expect(classSource.contains("& windows_core.HandleWinrtType<Example_Foundation_Widget> {"), true)
     @Expect(classSource.contains("public class Example_Foundation_Widget {\n    private let raw: CPointer<Unit>"), false)
 
     let outDir = ".generated/runtime-class-wrapper-import-test"
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
     writeImplFiles(writer, records, "windows", symbolsByName)
-    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/Example_Foundation/symbols_0.cj"))
+    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/Example/Foundation/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
     @Expect(implChunk.contains("import windows_core as windows_core"), true)
     @Expect(implChunk.contains("import windows_interface as windows_interface"), true)
@@ -3238,7 +3240,7 @@ func testWinrtInterfaceArrayParametersRenderSizePointerPairs() {
     removeIfExists(outDir, recursive: true)
     let writer = GeneratedPackageWriter(outDir, false)
     writeImplFiles(writer, records, "windows", symbolsByName)
-    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/impl/Example_Foundation/symbols_0.cj"))
+    let implChunk = String.fromUtf8(File.readFrom("${outDir}/src/Example/Foundation/symbols_0.cj"))
     removeIfExists(outDir, recursive: true)
     @Expect(implChunk.contains("import windows_interface.GUID"), true)
 }
@@ -3437,7 +3439,7 @@ func testWinrtDelegateParametersRenderAsComPointers() {
     @Expect(delegateSource.contains("private class OwnedTiny_Foundation_TypedEventHandler <: Tiny_Foundation_TypedEventHandler"), true)
     @Expect(delegateSource.contains("super(raw, takeOwnership: true, allowManualRelease: false)"), true)
     @Expect(delegateSource.contains("Tiny_Foundation_TypedEventHandler(raw, takeOwnership: false, allowManualRelease: false)"), true)
-    @Expect(delegateSource.contains("extend Tiny_Foundation_TypedEventHandler <: windows_core.Interface<Tiny_Foundation_TypedEventHandler>"), true)
+    @Expect(delegateSource.contains("& windows_core.Interface<Tiny_Foundation_TypedEventHandler> {"), true)
     @Expect(delegateSource.contains("unsupportedDelegateAuthoringReason"), false)
     @Expect(source.contains("func add_Completed(handler: CPointer<Unit>, result: CPointer<Tiny_Foundation_EventRegistrationToken>): Int32"), true)
     @Expect(source.contains("func add_Completed(handler: CFunc<(CPointer<Unit>, CPointer<Unit>) -> Unit>"), false)

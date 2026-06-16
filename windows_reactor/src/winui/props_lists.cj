@@ -9,7 +9,7 @@ import windows_sys.Microsoft.UI.Xaml.Controls.{
     TreeViewNode, ItemsControl, Control, TextBlock
 }
 import windows_sys.Microsoft.UI.Xaml.Controls.Primitives.Selector
-import windows_sys.impl.Microsoft_UI_Xaml_Controls.{Microsoft_UI_Xaml_Controls_TreeViewSelectionMode as TreeViewSelectionModeAbi, Microsoft_UI_Xaml_Controls_TreeViewSelectionMode_None as TVSelNone, Microsoft_UI_Xaml_Controls_TreeViewSelectionMode_Single as TVSelSingle, Microsoft_UI_Xaml_Controls_TreeViewSelectionMode_Multiple as TVSelMultiple}
+import windows_sys.Microsoft.UI.Xaml.Controls.{TreeViewSelectionMode as TreeViewSelectionModeAbi, TreeViewSelectionMode_None as TVSelNone, TreeViewSelectionMode_Single as TVSelSingle, TreeViewSelectionMode_Multiple as TVSelMultiple}
 
 // ============================================================================
 // Per-family property setters for selection / collection controls (ListView,

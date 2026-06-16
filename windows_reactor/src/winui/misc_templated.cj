@@ -7,8 +7,8 @@ import windows_sys.Microsoft.UI.Xaml.Controls.{
 }
 import windows_sys.Microsoft.UI.Xaml.Controls.Primitives.Selector
 import windows_sys.Microsoft.UI.Xaml.Controls.SelectionChangedEventHandler
-import windows_sys.impl.Microsoft_UI_Xaml_Controls.{Microsoft_UI_Xaml_Controls_ListViewSelectionMode as ListViewSelectionModeAbi, Microsoft_UI_Xaml_Controls_ListViewSelectionMode_None as LVSelNone, Microsoft_UI_Xaml_Controls_ListViewSelectionMode_Single as LVSelSingle, Microsoft_UI_Xaml_Controls_ListViewSelectionMode_Multiple as LVSelMultiple, Microsoft_UI_Xaml_Controls_ListViewSelectionMode_Extended as LVSelExtended}
-import windows_sys.impl.Windows_Foundation_Collections.{Windows_Foundation_Collections_IVector_1 as IVectorRaw}
+import windows_sys.Microsoft.UI.Xaml.Controls.{ListViewSelectionMode as ListViewSelectionModeAbi, ListViewSelectionMode_None as LVSelNone, ListViewSelectionMode_Single as LVSelSingle, ListViewSelectionMode_Multiple as LVSelMultiple, ListViewSelectionMode_Extended as LVSelExtended}
+import windows_sys.Foundation.Collections.{IVector as IVectorRaw}
 
 // ============================================================================
 // Templated (virtualised) list/grid/flip family — free functions.

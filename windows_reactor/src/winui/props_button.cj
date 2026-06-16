@@ -7,8 +7,8 @@ import std.collection.{ArrayList}
 import windows_core.{HString, queryInterfaceRaw}
 import windows_interface.{IInspectable}
 import windows_reference.{IReference, hStringReference, boolReference}
-import windows_sys.impl.Windows_Foundation.{Windows_Foundation_IReference_1}
-import windows_sys.impl.Windows_Foundation_Collections.{Windows_Foundation_Collections_IVector_1 as IVectorRaw}
+import windows_sys.Foundation.{IReference as Windows_Foundation_IReference_1}
+import windows_sys.Foundation.Collections.{IVector as IVectorRaw}
 import windows_sys.Microsoft.UI.Xaml.Controls.{
     ContentControl, TextBlock, Control, StackPanel, Panel, SymbolIcon, Symbol, Orientation,
     MenuFlyout, MenuFlyoutItem, MenuFlyoutSubItem, MenuFlyoutItemBase, CommandBarFlyout,

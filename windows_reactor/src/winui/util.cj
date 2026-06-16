@@ -11,7 +11,7 @@ import windows_core.{
     queryInterfaceRaw
 }
 import windows_interface.IInspectable
-import windows_sys.impl.Windows_Foundation_Collections.{Windows_Foundation_Collections_IVector_1 as IVectorRawUtil, Windows_Foundation_Collections_IMap_2 as IMapRawUtil}
+import windows_sys.Foundation.Collections.{IVector as IVectorRawUtil, IMap as IMapRawUtil}
 
 // The reactor's canonical Object-vector wrapper: a generic
 // IVector<IInspectable> obtained by QI'ing a WinRT object with the canonical
