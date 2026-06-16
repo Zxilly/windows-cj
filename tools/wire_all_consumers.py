@@ -2,11 +2,11 @@
 # requires-python = ">=3.10"
 # dependencies = []
 # ///
-"""Discover and wire every windows_common consumer module in the repo.
+"""Discover and wire every windows_sys consumer module in the repo.
 
 A *consumer* is any module (cjpm.toml + sources) that, transitively over its
-local ``path =`` dependencies, imports at least one ``windows_common.<NS>``
-facade. windows_common gates each namespace behind a Cangjie ``cfg`` variable
+local ``path =`` dependencies, imports at least one ``windows_sys.<NS>``
+facade. windows_sys gates each namespace behind a Cangjie ``cfg`` variable
 (default off), so each consumer must inject a complete
 ``override-compile-option`` ``--cfg`` string listing every variable, with the
 namespaces it (transitively) needs turned on and the rest off.
@@ -19,8 +19,8 @@ This tool automates the two-step pilot flow for *all* consumers:
 Discovery rules (mirrors the task spec):
   * Walk every ``cjpm.toml`` under the repo root, skipping any path that
     contains a ``target`` component.
-  * Skip windows_common itself and any module that lives *inside* the
-    windows_common directory.
+  * Skip windows_sys itself and any module that lives *inside* the
+    windows_sys directory.
   * Skip nested ``bindings`` member modules (e.g. ``samples/.../bindings``):
     they are self-contained projection sets, built as members of their parent
     sample, not standalone consumers. (Their facade-import set is empty anyway
@@ -52,7 +52,7 @@ import consumer_namespaces as cn  # noqa: E402
 import select_features as sf  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
-WINDOWS_COMMON_DIR = (ROOT / "windows_common").resolve()
+WINDOWS_SYS_DIR = (ROOT / "windows_sys").resolve()
 CJPM_TOML = "cjpm.toml"
 
 
@@ -68,8 +68,8 @@ def discover_module_dirs() -> list[Path]:
         # Skip the repo-root workspace cjpm.toml (it has no [package] consumer body).
         if module_dir == ROOT:
             continue
-        # Skip windows_common itself and anything nested inside it.
-        if module_dir == WINDOWS_COMMON_DIR or WINDOWS_COMMON_DIR in module_dir.parents:
+        # Skip windows_sys itself and anything nested inside it.
+        if module_dir == WINDOWS_SYS_DIR or WINDOWS_SYS_DIR in module_dir.parents:
             continue
         # Skip nested `bindings` member modules.
         if module_dir.name == "bindings":
@@ -80,7 +80,7 @@ def discover_module_dirs() -> list[Path]:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Wire override-compile-option into every windows_common consumer."
+        description="Wire override-compile-option into every windows_sys consumer."
     )
     parser.add_argument(
         "--dry-run",
@@ -88,14 +88,14 @@ def main(argv: list[str] | None = None) -> int:
         help="Only print which modules would be wired (and each ns count); write nothing.",
     )
     parser.add_argument(
-        "--windows-common-dir",
+        "--windows-sys-dir",
         type=Path,
-        default=WINDOWS_COMMON_DIR,
-        help="windows_common directory holding namespace-deps.json and impl/cfg.toml.",
+        default=WINDOWS_SYS_DIR,
+        help="windows_sys directory holding namespace-deps.json and impl/cfg.toml.",
     )
     args = parser.parse_args(argv)
 
-    package_dir = args.windows_common_dir.resolve()
+    package_dir = args.windows_sys_dir.resolve()
     universe = cn.load_namespace_universe(package_dir)
     deps = sf.load_namespace_deps(package_dir)
     cfg_vars = sf.all_cfg_vars(package_dir)

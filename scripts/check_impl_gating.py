@@ -2,10 +2,10 @@
 # requires-python = ">=3.10"
 # dependencies = []
 # ///
-"""Structural completeness self-check for windows_common impl cfg gating.
+"""Structural completeness self-check for windows_sys impl cfg gating.
 
 The generator structurally prefixes every top-level declaration it emits into the
-``windows_common.impl`` package with an ``@When[<namespace> == "on"]`` gate (see
+``windows_sys.impl`` package with an ``@When[<namespace> == "on"]`` gate (see
 ``windows_bindgen/src/render_symbol.cj``). This is a render-time invariant, not a
 source-text post-process, so a missed render point would silently emit an
 ungated declaration that compiles under every feature selection (defeating the
@@ -32,7 +32,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-IMPL_DIR = ROOT / "windows_common" / "src" / "impl"
+IMPL_DIR = ROOT / "windows_sys" / "src" / "impl"
 
 # Column-0 keywords that begin a top-level declaration (after any attribute chain).
 DECL_KEYWORDS = (
@@ -107,7 +107,7 @@ def main(argv: list[str] | None = None) -> int:
         "--impl-dir",
         type=Path,
         default=IMPL_DIR,
-        help="Directory of generated impl chunks (default: windows_common/src/impl).",
+        help="Directory of generated impl chunks (default: windows_sys/src/impl).",
     )
     args = parser.parse_args(argv)
 

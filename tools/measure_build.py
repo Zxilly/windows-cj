@@ -10,8 +10,8 @@ peak single-process RSS plus the wall-clock duration. Always uses dev_perf_ci.
 
 Usage::
 
-    python tools/measure_build.py -- cjpm build -m windows_common -j 8
-    python tools/measure_build.py --label off -- cjpm build -m windows_common -j 8
+    python tools/measure_build.py -- cjpm build -m windows_sys -j 8
+    python tools/measure_build.py --label off -- cjpm build -m windows_sys -j 8
 """
 
 from __future__ import annotations
@@ -94,7 +94,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "command",
         nargs=argparse.REMAINDER,
-        help="Command to run after `--` (e.g. cjpm build -m windows_common -j 8).",
+        help="Command to run after `--` (e.g. cjpm build -m windows_sys -j 8).",
     )
     return parser.parse_args(argv)
 
