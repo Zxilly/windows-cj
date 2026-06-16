@@ -1,9 +1,9 @@
 package windows_numerics
 
 import std.math.{cos, sin, sqrt}
-import windows_common.Foundation.Numerics.Matrix4x4 as CommonMatrix4x4
-import windows_common.Foundation.Numerics.Vector2 as CommonVector2
-import windows_common.Foundation.Numerics.Vector3 as CommonVector3
+import windows_sys.Foundation.Numerics.Matrix4x4 as CommonMatrix4x4
+import windows_sys.Foundation.Numerics.Vector2 as CommonVector2
+import windows_sys.Foundation.Numerics.Vector3 as CommonVector3
 
 public type Matrix4x4 = CommonMatrix4x4
 public type Vector2 = CommonVector2

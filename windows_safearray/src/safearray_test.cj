@@ -2,7 +2,7 @@ package windows_safearray
 
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_common.Win32.System.Com.IUnknownVtbl
+import windows_sys.Win32.System.Com.IUnknownVtbl
 import windows_variant.Variant
 import windows_variant.VT_BSTR
 import windows_variant.VT_I4

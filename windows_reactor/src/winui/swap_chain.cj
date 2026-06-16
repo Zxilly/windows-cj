@@ -7,11 +7,11 @@ import windows_core.{
     queryInterfaceRaw
 }
 import windows_interface.{IInspectable}
-import windows_common.Microsoft.UI.Xaml.{IUIElement, IFrameworkElement, FrameworkElement, SizeChangedEventHandler}
-import windows_common.Microsoft.UI.Xaml.Controls.{SwapChainPanel}
-import windows_common.Microsoft.UI.Xaml.Media.{CompositionTarget}
-import windows_common.Win32.System.WinRT.Xaml.{ISwapChainPanelNativeVtbl}
-import windows_common.Foundation.{TypedEventHandler, EventHandler}
+import windows_sys.Microsoft.UI.Xaml.{IUIElement, IFrameworkElement, FrameworkElement, SizeChangedEventHandler}
+import windows_sys.Microsoft.UI.Xaml.Controls.{SwapChainPanel}
+import windows_sys.Microsoft.UI.Xaml.Media.{CompositionTarget}
+import windows_sys.Win32.System.WinRT.Xaml.{ISwapChainPanelNativeVtbl}
+import windows_sys.Foundation.{TypedEventHandler, EventHandler}
 
 // ============================================================================
 // SwapChainPanel subsystem (phase B of the canvas port).
@@ -22,13 +22,13 @@ import windows_common.Foundation.{TypedEventHandler, EventHandler}
 // chain. Drives the per-frame `Microsoft.UI.Xaml.Media.CompositionTarget`
 // Rendering event for continuous redraw.
 //
-// PROJECTION STRATEGY — windows_common GENERATED PROJECTION:
+// PROJECTION STRATEGY — windows_sys GENERATED PROJECTION:
 //   `SwapChainPanel`, its `ISwapChainPanel` composition-scale interface and
 //   factory, `Microsoft.UI.Xaml.Media.CompositionTarget` (the static Rendering
 //   event), and the `Windows.Win32.System.WinRT.Xaml.ISwapChainPanelNative`
-//   interop vtbl are all part of the curated windows_common projection (their
+//   interop vtbl are all part of the curated windows_sys projection (their
 //   precise-type features are listed in
-//   windows_common/codegen-manifest.json requested_features). This file uses
+//   windows_sys/codegen-manifest.json requested_features). This file uses
 //   those generated projection types directly:
 //     - SwapChainPanel.CreateInstance — composable (CreateInstance with null
 //       aggregation base) activation, the same shape as every other composable

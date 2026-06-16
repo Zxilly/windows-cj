@@ -6,40 +6,14 @@ import windows_core.{HString}
 import windows_interface.{IInspectable}
 import windows_reference.{hStringReference, IReference}
 import windows_collections.{toInspectableVector}
-import windows_common.Foundation.{Uri}
-import windows_common.Microsoft.UI.Xaml.Controls.{
+import windows_sys.Foundation.{Uri}
+import windows_sys.Microsoft.UI.Xaml.Controls.{
     ContentControl, Control, TextBlock
 }
-import windows_common.Microsoft.UI.Xaml.Media.{ImageSource}
-import windows_common.Microsoft.UI.Xaml.Media.Imaging.{BitmapImage}
-import windows_common.impl.{
-    Microsoft_UI_Xaml_Controls_InfoBarSeverity_Informational,
-    Microsoft_UI_Xaml_Controls_InfoBarSeverity_Success,
-    Microsoft_UI_Xaml_Controls_InfoBarSeverity_Warning,
-    Microsoft_UI_Xaml_Controls_InfoBarSeverity_Error,
-    Microsoft_UI_Xaml_Media_Stretch_None,
-    Microsoft_UI_Xaml_Media_Stretch_Fill,
-    Microsoft_UI_Xaml_Media_Stretch_Uniform,
-    Microsoft_UI_Xaml_Media_Stretch_UniformToFill,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_Auto,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_Top,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_Bottom,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_Left,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_Right,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_TopRight,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_TopLeft,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_BottomRight,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_BottomLeft,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_LeftTop,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_LeftBottom,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_RightTop,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_RightBottom,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_Center,
-    Microsoft_UI_Xaml_Controls_SplitViewDisplayMode,
-    Microsoft_UI_Xaml_Controls_InfoBarSeverity,
-    Microsoft_UI_Xaml_Media_Stretch,
-    Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode
-}
+import windows_sys.Microsoft.UI.Xaml.Media.{ImageSource}
+import windows_sys.Microsoft.UI.Xaml.Media.Imaging.{BitmapImage}
+import windows_sys.impl.Microsoft_UI_Xaml_Controls.{Microsoft_UI_Xaml_Controls_InfoBarSeverity_Informational, Microsoft_UI_Xaml_Controls_InfoBarSeverity_Success, Microsoft_UI_Xaml_Controls_InfoBarSeverity_Warning, Microsoft_UI_Xaml_Controls_InfoBarSeverity_Error, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_Auto, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_Top, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_Bottom, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_Left, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_Right, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_TopRight, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_TopLeft, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_BottomRight, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_BottomLeft, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_LeftTop, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_LeftBottom, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_RightTop, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_RightBottom, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode_Center, Microsoft_UI_Xaml_Controls_SplitViewDisplayMode, Microsoft_UI_Xaml_Controls_InfoBarSeverity, Microsoft_UI_Xaml_Controls_TeachingTipPlacementMode}
+import windows_sys.impl.Microsoft_UI_Xaml_Media.{Microsoft_UI_Xaml_Media_Stretch_None, Microsoft_UI_Xaml_Media_Stretch_Fill, Microsoft_UI_Xaml_Media_Stretch_Uniform, Microsoft_UI_Xaml_Media_Stretch_UniformToFill, Microsoft_UI_Xaml_Media_Stretch}
 
 // Per-family property setters for dialogs / surfaces / misc content controls
 // (ContentDialog, InfoBar, InfoBadge, TeachingTip, Expander, PersonPicture,

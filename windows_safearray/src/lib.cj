@@ -1,6 +1,6 @@
 package windows_safearray
 
-import windows_common.Win32.System.Com as ComNs
+import windows_sys.Win32.System.Com as ComNs
 import windows_variant.VARENUM
 
 public type SAFEARRAY = ComNs.SAFEARRAY

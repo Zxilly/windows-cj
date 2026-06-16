@@ -2,7 +2,7 @@ package windows_threading
 
 import std.collection.HashMap
 import std.sync.{AtomicBool, Mutex}
-import windows_common.Win32.System.Threading as Win32Threading
+import windows_sys.Win32.System.Threading as Win32Threading
 
 public type BOOL = Int32
 public type PTP_CALLBACK_INSTANCE = Win32Threading.PTP_CALLBACK_INSTANCE

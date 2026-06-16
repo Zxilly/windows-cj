@@ -2,7 +2,7 @@ package windows_reactor.winui
 
 import std.collection.ArrayList
 import std.math.round
-import windows_common.Microsoft.UI.Xaml.{
+import windows_sys.Microsoft.UI.Xaml.{
     Application,
     IApplicationFactory,
     IApplicationFactoryVtbl,
@@ -15,20 +15,17 @@ import windows_common.Microsoft.UI.Xaml.{
     UIElement,
     Window
 }
-import windows_common.Microsoft.UI.Xaml.{ResourceDictionary}
-import windows_common.Microsoft.UI.Xaml.{ResourceManagerRequestedEventArgs}
-import windows_common.Microsoft.Windows.ApplicationModel.Resources.{ResourceManager}
-import windows_common.Foundation.{TypedEventHandler}
+import windows_sys.Microsoft.UI.Xaml.{ResourceDictionary}
+import windows_sys.Microsoft.UI.Xaml.{ResourceManagerRequestedEventArgs}
+import windows_sys.Microsoft.Windows.ApplicationModel.Resources.{ResourceManager}
+import windows_sys.Foundation.{TypedEventHandler}
 // Window-sizing path: IWindow2 exposes AppWindow; AppWindow.Resize takes a SizeInt32.
 // Title-bar height path: AppWindow.TitleBar (an AppWindowTitleBar) QI'd to
 // IAppWindowTitleBar2 carries PreferredHeightOption (Tall / Standard).
-import windows_common.Microsoft.UI.Windowing.{AppWindow, TitleBarHeightOption}
-import windows_common.Graphics.{SizeInt32}
-import windows_common.impl.{
-    Windows_UI_Xaml_Interop_TypeName,
-    Microsoft_UI_Windowing_TitleBarHeightOption_Tall,
-    Microsoft_UI_Windowing_TitleBarHeightOption_Standard
-}
+import windows_sys.Microsoft.UI.Windowing.{AppWindow, TitleBarHeightOption}
+import windows_sys.Graphics.{SizeInt32}
+import windows_sys.impl.Microsoft_UI_Windowing.{Microsoft_UI_Windowing_TitleBarHeightOption_Tall, Microsoft_UI_Windowing_TitleBarHeightOption_Standard}
+import windows_sys.impl.Windows_UI_Xaml_Interop.{Windows_UI_Xaml_Interop_TypeName}
 import windows_core.{
     E_FAIL,
     E_NOINTERFACE,

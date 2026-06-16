@@ -2,18 +2,16 @@ package windows_reactor.winui
 
 import windows_core.{HString, winrtBorrowGenericIn}
 import windows_reactor.core.{ImplicitTransitions, LayoutAnimationConfig, AnimationConfig, Easing}
-import windows_common.Microsoft.UI.Xaml.{FrameworkElement}
-import windows_common.Microsoft.UI.Xaml.Hosting.{ElementCompositionPreview}
-import windows_common.Microsoft.UI.Composition.{
+import windows_sys.Microsoft.UI.Xaml.{FrameworkElement}
+import windows_sys.Microsoft.UI.Xaml.Hosting.{ElementCompositionPreview}
+import windows_sys.Microsoft.UI.Composition.{
     Visual, CompositionObject, Compositor, CompositionAnimation, CompositionEasingFunction,
     KeyFrameAnimation, ImplicitAnimationCollection
 }
-import windows_common.impl.{
-    Windows_Foundation_Numerics_Vector2, Windows_Foundation_Numerics_Vector3,
-    Windows_Foundation_TimeSpan,
-    Windows_Foundation_Collections_IMap_2 as XamlIMap,
-    Microsoft_UI_Composition_ICompositionAnimationBase as ICompositionAnimationBase
-}
+import windows_sys.impl.Microsoft_UI_Composition.{Microsoft_UI_Composition_ICompositionAnimationBase as ICompositionAnimationBase}
+import windows_sys.impl.Windows_Foundation.{Windows_Foundation_TimeSpan}
+import windows_sys.impl.Windows_Foundation_Collections.{Windows_Foundation_Collections_IMap_2 as XamlIMap}
+import windows_sys.impl.Windows_Foundation_Numerics.{Windows_Foundation_Numerics_Vector2, Windows_Foundation_Numerics_Vector3}
 
 // ============================================================================
 // Composition animation family — free-function implementations.
@@ -26,7 +24,7 @@ import windows_common.impl.{
 // Ported faithfully from the reference backend's apply_implicit_transitions /
 // run_property_animation_inner / easing_for / anim_duration_to_timespan.
 //
-// Projection ABI (verified against windows_common, Microsoft.UI.Composition):
+// Projection ABI (verified against windows_sys, Microsoft.UI.Composition):
 //   - ElementCompositionPreview.GetElementVisual(UIElement) -> Visual.
 //   - Visual viewed as CompositionObject exposes Compositor (get) and
 //     StartAnimation(HString, CompositionAnimation); Visual exposes Scale

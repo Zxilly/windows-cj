@@ -5,36 +5,18 @@ import windows_reactor.core.{
     ScrollViewScrollBarVisibility, ImageStretch
 }
 import windows_core.queryInterfaceRaw
-import windows_common.Microsoft.UI.Xaml.Controls.{
+import windows_sys.Microsoft.UI.Xaml.Controls.{
     Panel, StackPanel, Grid, Border, Viewbox, ScrollViewer, ScrollView, Control,
     RowDefinition, ColumnDefinition
 }
-import windows_common.Microsoft.UI.Xaml.{
+import windows_sys.Microsoft.UI.Xaml.{
     CornerRadius as XamlCornerRadius, GridLength as XamlGridLength,
     Thickness as XamlThickness
 }
-import windows_common.Microsoft.UI.Xaml.Media.Brush as XamlBrush
-import windows_common.impl.{
-    Microsoft_UI_Xaml_Controls_Orientation_Vertical,
-    Microsoft_UI_Xaml_Controls_Orientation_Horizontal,
-    Microsoft_UI_Xaml_Controls_ScrollBarVisibility as ScrollBarVisAbi,
-    Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Auto,
-    Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Visible,
-    Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Hidden,
-    Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Disabled,
-    Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility as ScrollingScrollBarVisAbi,
-    Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility_Auto,
-    Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility_Visible,
-    Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility_Hidden,
-    Microsoft_UI_Xaml_Media_Stretch as StretchAbi,
-    Microsoft_UI_Xaml_Media_Stretch_None,
-    Microsoft_UI_Xaml_Media_Stretch_Fill,
-    Microsoft_UI_Xaml_Media_Stretch_Uniform,
-    Microsoft_UI_Xaml_Media_Stretch_UniformToFill,
-    Microsoft_UI_Xaml_GridUnitType_Auto,
-    Microsoft_UI_Xaml_GridUnitType_Pixel,
-    Microsoft_UI_Xaml_GridUnitType_Star
-}
+import windows_sys.Microsoft.UI.Xaml.Media.Brush as XamlBrush
+import windows_sys.impl.Microsoft_UI_Xaml.{Microsoft_UI_Xaml_GridUnitType_Auto, Microsoft_UI_Xaml_GridUnitType_Pixel, Microsoft_UI_Xaml_GridUnitType_Star}
+import windows_sys.impl.Microsoft_UI_Xaml_Controls.{Microsoft_UI_Xaml_Controls_Orientation_Vertical, Microsoft_UI_Xaml_Controls_Orientation_Horizontal, Microsoft_UI_Xaml_Controls_ScrollBarVisibility as ScrollBarVisAbi, Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Auto, Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Visible, Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Hidden, Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Disabled, Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility as ScrollingScrollBarVisAbi, Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility_Auto, Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility_Visible, Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility_Hidden}
+import windows_sys.impl.Microsoft_UI_Xaml_Media.{Microsoft_UI_Xaml_Media_Stretch as StretchAbi, Microsoft_UI_Xaml_Media_Stretch_None, Microsoft_UI_Xaml_Media_Stretch_Fill, Microsoft_UI_Xaml_Media_Stretch_Uniform, Microsoft_UI_Xaml_Media_Stretch_UniformToFill}
 
 // ============================================================================
 // Per-family property setters for layout containers: StackPanel, Grid, Canvas,
@@ -47,7 +29,7 @@ import windows_common.impl.{
 // Opacity), font props, attached props and Resources are handled by the shared
 // backend layers BEFORE this function and are not duplicated here.
 //
-// Property ABI (spec §8.1, verified against windows_common):
+// Property ABI (spec §8.1, verified against windows_sys):
 //   - StackPanel.Orientation / .Spacing, Grid.RowSpacing / .ColumnSpacing,
 //     Border.{Padding,Background,CornerRadius,BorderBrush,BorderThickness,Child},
 //     Grid.RowDefinitions / .ColumnDefinitions (collections),

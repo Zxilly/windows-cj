@@ -3,7 +3,7 @@ package windows_reactor.winui
 import windows_reactor.core.{ControlKind}
 import windows_core.{OutSlot}
 import windows_interface.{IInspectable}
-import windows_common.Microsoft.UI.Xaml.Controls.{
+import windows_sys.Microsoft.UI.Xaml.Controls.{
     TextBlock, Button, StackPanel, Border, CheckBox, TextBox, Grid, ScrollViewer,
     ToggleSwitch, Slider, RadioButton, NumberBox, ProgressBar, ProgressRing, Expander,
     HyperlinkButton, InfoBar, InfoBadge, PersonPicture, Image, TabView, TabViewItem,
@@ -13,16 +13,16 @@ import windows_common.Microsoft.UI.Xaml.Controls.{
     ListBox, DropDownButton, SplitButton, AutoSuggestBox, SplitView, MenuBar, ScrollView,
     TreeView, CommandBar, TeachingTip, SelectorBar, RichEditBox, RelativePanel
 }
-import windows_common.Microsoft.UI.Xaml.Controls.Primitives.{RepeatButton, ToggleButton}
-import windows_common.Microsoft.UI.Xaml.Shapes.{Rectangle, Ellipse, Line}
-import windows_common.Microsoft.UI.Xaml.{IFrameworkElement, IUIElement}
+import windows_sys.Microsoft.UI.Xaml.Controls.Primitives.{RepeatButton, ToggleButton}
+import windows_sys.Microsoft.UI.Xaml.Shapes.{Rectangle, Ellipse, Line}
+import windows_sys.Microsoft.UI.Xaml.{IFrameworkElement, IUIElement}
 
 // ============================================================================
 // Handle — one variant per backend-creatable ControlKind (61), each holding its
 // backing projection class. The projection is a GC-managed reference that owns
 // one COM ref; GC + close() manage its lifetime (no manual AddRef/Release).
 //
-// Instantiation ABI (spec §8.1, verified against windows_common projections):
+// Instantiation ABI (spec §8.1, verified against windows_sys projections):
 //   - default-activatable leaves expose `static new()`:
 //       TextBlock, Border, ScrollViewer, ToggleSwitch, Image, PasswordBox,
 //       RichTextBlock, Viewbox, AutoSuggestBox, RepeatButton (Primitives),
@@ -97,7 +97,7 @@ public enum Handle {
     | RelativePanelH(RelativePanel)
     | ToggleButtonH(ToggleButton)
     // SwapChainPanel's backing object is SwapChainPanelControl (see
-    // winui/swap_chain.cj), a thin wrapper over the generated windows_common
+    // winui/swap_chain.cj), a thin wrapper over the generated windows_sys
     // SwapChainPanel projection (it adds the canvas-specific interop surface).
     | SwapChainPanelH(SwapChainPanelControl)
 
@@ -547,7 +547,7 @@ public func makeHandleForKind(kind: ControlKind): Handle {
         case ToggleButton => Handle.ToggleButtonH(makeComposable(ToggleButton.CreateInstance))
 
         // ── composable (CreateInstance with null base), via SwapChainPanelControl ─
-        // SwapChainPanelControl.create() activates the generated windows_common
+        // SwapChainPanelControl.create() activates the generated windows_sys
         // SwapChainPanel projection through its composition factory (makeComposable);
         // see winui/swap_chain.cj.
         case SwapChainPanel => Handle.SwapChainPanelH(SwapChainPanelControl.create())

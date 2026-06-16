@@ -1,6 +1,6 @@
 package windows_propvariant
 
-import windows_common.Win32.Foundation as Foundation
+import windows_sys.Win32.Foundation as Foundation
 import windows_interface.GUID
 import windows_polyfill.*
 import windows_strings.BSTR

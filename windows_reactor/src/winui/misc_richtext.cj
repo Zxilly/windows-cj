@@ -2,7 +2,7 @@ package windows_reactor.winui
 
 import windows_reactor.core.{RichTextParagraph, RichTextRun, RichTextHyperlink}
 import windows_core.HString
-import windows_common.Microsoft.UI.Xaml.Documents.{
+import windows_sys.Microsoft.UI.Xaml.Documents.{
     Paragraph as XamlParagraph,
     Run as XamlRun,
     Inline as XamlInline,
@@ -10,7 +10,7 @@ import windows_common.Microsoft.UI.Xaml.Documents.{
     TextElement as XamlTextElement,
     InlineCollection
 }
-import windows_common.impl.{Windows_UI_Text_FontWeight}
+import windows_sys.impl.Windows_UI_Text.{Windows_UI_Text_FontWeight}
 
 // ============================================================================
 // RichTextBlock paragraph family — free-function implementation.
@@ -24,7 +24,7 @@ import windows_common.impl.{Windows_UI_Text_FontWeight}
 //   build a Paragraph, populate its Inlines (an IVector<Inline>) with Run
 //   elements, and append the Paragraph (viewed as a Block) to Blocks.
 //
-// Projection ABI (verified against windows_common):
+// Projection ABI (verified against windows_sys):
 //   - RichTextBlock.Blocks: get-only prop returning an owned BlockCollection
 //     (an IVector<Block>); .Clear() / .Append(Block) mutate it.
 //   - Paragraph.new() (default-activatable) → Paragraph; .Inlines() returns an

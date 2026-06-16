@@ -7,18 +7,16 @@ import std.collection.{ArrayList}
 import windows_core.{HString, queryInterfaceRaw}
 import windows_interface.{IInspectable}
 import windows_reference.{IReference, hStringReference, boolReference}
-import windows_common.impl.{
-    Windows_Foundation_IReference_1,
-    Windows_Foundation_Collections_IVector_1 as IVectorRaw
-}
-import windows_common.Microsoft.UI.Xaml.Controls.{
+import windows_sys.impl.Windows_Foundation.{Windows_Foundation_IReference_1}
+import windows_sys.impl.Windows_Foundation_Collections.{Windows_Foundation_Collections_IVector_1 as IVectorRaw}
+import windows_sys.Microsoft.UI.Xaml.Controls.{
     ContentControl, TextBlock, Control, StackPanel, Panel, SymbolIcon, Symbol, Orientation,
     MenuFlyout, MenuFlyoutItem, MenuFlyoutSubItem, MenuFlyoutItemBase, CommandBarFlyout,
     Flyout, AppBarButton, ICommandBarElement
 }
-import windows_common.Microsoft.UI.Xaml.Controls.Primitives.{ButtonBase, FlyoutBase}
-import windows_common.Microsoft.UI.Xaml.{FrameworkElement, Application, Style, UIElement, RoutedEventHandler}
-import windows_common.Foundation.Uri
+import windows_sys.Microsoft.UI.Xaml.Controls.Primitives.{ButtonBase, FlyoutBase}
+import windows_sys.Microsoft.UI.Xaml.{FrameworkElement, Application, Style, UIElement, RoutedEventHandler}
+import windows_sys.Foundation.Uri
 
 // ============================================================================
 // Per-family property setters for the button controls (Button, RepeatButton,
@@ -29,7 +27,7 @@ import windows_common.Foundation.Uri
 // Resources) are consumed by the earlier dispatch layers in backend.cj and
 // never reach here. Only button-family-specific props land in this function.
 //
-// Projection ABI (spec §8.1, verified against the windows_common projections):
+// Projection ABI (spec §8.1, verified against the windows_sys projections):
 //   - ButtonContent / CheckBoxLabel: ContentControl.Content (QI to IContentControl,
 //     wrap the label string in a TextBlock — behaviourally a text label).
 //   - IsEnabled: Control.IsEnabled (QI to IControl).

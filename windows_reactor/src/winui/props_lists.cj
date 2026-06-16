@@ -5,23 +5,18 @@ import windows_reactor.core.{Prop, PropValue, TreeNodeDef, TreeSelectionMode}
 import windows_core.HString
 import windows_interface.IInspectable
 import windows_reference.hStringReference
-import windows_common.Microsoft.UI.Xaml.Controls.{
+import windows_sys.Microsoft.UI.Xaml.Controls.{
     TreeViewNode, ItemsControl, Control, TextBlock
 }
-import windows_common.Microsoft.UI.Xaml.Controls.Primitives.Selector
-import windows_common.impl.{
-    Microsoft_UI_Xaml_Controls_TreeViewSelectionMode as TreeViewSelectionModeAbi,
-    Microsoft_UI_Xaml_Controls_TreeViewSelectionMode_None as TVSelNone,
-    Microsoft_UI_Xaml_Controls_TreeViewSelectionMode_Single as TVSelSingle,
-    Microsoft_UI_Xaml_Controls_TreeViewSelectionMode_Multiple as TVSelMultiple
-}
+import windows_sys.Microsoft.UI.Xaml.Controls.Primitives.Selector
+import windows_sys.impl.Microsoft_UI_Xaml_Controls.{Microsoft_UI_Xaml_Controls_TreeViewSelectionMode as TreeViewSelectionModeAbi, Microsoft_UI_Xaml_Controls_TreeViewSelectionMode_None as TVSelNone, Microsoft_UI_Xaml_Controls_TreeViewSelectionMode_Single as TVSelSingle, Microsoft_UI_Xaml_Controls_TreeViewSelectionMode_Multiple as TVSelMultiple}
 
 // ============================================================================
 // Per-family property setters for selection / collection controls (ListView,
 // GridView, ListBox, ComboBox, FlipView, TreeView). Returns true when the prop
 // was consumed.
 //
-// ABI notes (spec §8.1, verified against the windows_common projections):
+// ABI notes (spec §8.1, verified against the windows_sys projections):
 //   - ComboBox / ListBox flat-list items: QI the control to the high-level
 //     ItemsControl class (defaultInterface == IItemsControl), read its `Items`
 //     (an ItemCollection backed by IObservableVector<IInspectable>), QI that to

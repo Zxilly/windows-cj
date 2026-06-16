@@ -2,7 +2,7 @@ package windows_threading
 
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_common.Win32.System.Threading as Win32Threading
+import windows_sys.Win32.System.Threading as Win32Threading
 
 class IntBox {
     var value = 0

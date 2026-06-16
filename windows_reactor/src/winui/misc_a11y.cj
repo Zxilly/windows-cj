@@ -9,76 +9,23 @@ import windows_reactor.core.{
     TooltipContent, TooltipPlacement, PointerHandlers, PointerEventInfo,
     LiveSetting, HeadingLevel, KeyboardKey, Element
 }
-import windows_common.Microsoft.UI.Xaml.{UIElement, DependencyObject}
-import windows_common.Microsoft.UI.Xaml.Automation.{AutomationProperties}
-import windows_common.Microsoft.UI.Xaml.Input.{
+import windows_sys.Microsoft.UI.Xaml.{UIElement, DependencyObject}
+import windows_sys.Microsoft.UI.Xaml.Automation.{AutomationProperties}
+import windows_sys.Microsoft.UI.Xaml.Input.{
     KeyboardAccelerator as XamlKeyboardAccelerator,
     KeyboardAcceleratorInvokedEventArgs,
     PointerEventHandler, TappedEventHandler, RightTappedEventHandler,
     PointerRoutedEventArgs
 }
-import windows_common.Microsoft.UI.Input.{PointerPoint}
-import windows_common.Microsoft.UI.Xaml.Controls.{TextBlock, StackPanel, Panel, ContentControl, ToolTip, ToolTipService, Image}
-import windows_common.Microsoft.UI.Xaml.Media.{ImageSource}
-import windows_common.Foundation.{TypedEventHandler}
-import windows_common.impl.{
-    Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting_Off as LiveSetting_Off,
-    Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting_Polite as LiveSetting_Polite,
-    Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting_Assertive as LiveSetting_Assertive,
-    Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_None as HeadingLevel_None,
-    Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level1 as HeadingLevel_Level1,
-    Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level2 as HeadingLevel_Level2,
-    Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level3 as HeadingLevel_Level3,
-    Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level4 as HeadingLevel_Level4,
-    Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level5 as HeadingLevel_Level5,
-    Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level6 as HeadingLevel_Level6,
-    Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level7 as HeadingLevel_Level7,
-    Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level8 as HeadingLevel_Level8,
-    Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level9 as HeadingLevel_Level9,
-    Windows_System_VirtualKey as XamlVirtualKey,
-    Windows_System_VirtualKeyModifiers as XamlVirtualKeyModifiers,
-    Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode_Hidden as AcceleratorPlacement_Hidden,
-    Microsoft_UI_Xaml_Controls_Primitives_PlacementMode as XamlPlacementMode,
-    Microsoft_UI_Xaml_Controls_Primitives_PlacementMode_Top as Placement_Top,
-    Microsoft_UI_Xaml_Controls_Primitives_PlacementMode_Bottom as Placement_Bottom,
-    Microsoft_UI_Xaml_Controls_Primitives_PlacementMode_Left as Placement_Left,
-    Microsoft_UI_Xaml_Controls_Primitives_PlacementMode_Right as Placement_Right,
-    Microsoft_UI_Xaml_Controls_Primitives_PlacementMode_Mouse as Placement_Mouse,
-    Microsoft_UI_Xaml_Controls_Orientation_Vertical as Orientation_Vertical,
-    Microsoft_UI_Xaml_Controls_Orientation_Horizontal as Orientation_Horizontal,
-    Windows_System_VirtualKey_A, Windows_System_VirtualKey_B, Windows_System_VirtualKey_C,
-    Windows_System_VirtualKey_D, Windows_System_VirtualKey_E, Windows_System_VirtualKey_F,
-    Windows_System_VirtualKey_G, Windows_System_VirtualKey_H, Windows_System_VirtualKey_I,
-    Windows_System_VirtualKey_J, Windows_System_VirtualKey_K, Windows_System_VirtualKey_L,
-    Windows_System_VirtualKey_M, Windows_System_VirtualKey_N, Windows_System_VirtualKey_O,
-    Windows_System_VirtualKey_P, Windows_System_VirtualKey_Q, Windows_System_VirtualKey_R,
-    Windows_System_VirtualKey_S, Windows_System_VirtualKey_T, Windows_System_VirtualKey_U,
-    Windows_System_VirtualKey_V, Windows_System_VirtualKey_W, Windows_System_VirtualKey_X,
-    Windows_System_VirtualKey_Y, Windows_System_VirtualKey_Z,
-    Windows_System_VirtualKey_Number0, Windows_System_VirtualKey_Number1,
-    Windows_System_VirtualKey_Number2, Windows_System_VirtualKey_Number3,
-    Windows_System_VirtualKey_Number4, Windows_System_VirtualKey_Number5,
-    Windows_System_VirtualKey_Number6, Windows_System_VirtualKey_Number7,
-    Windows_System_VirtualKey_Number8, Windows_System_VirtualKey_Number9,
-    Windows_System_VirtualKey_NumberPad0, Windows_System_VirtualKey_NumberPad1,
-    Windows_System_VirtualKey_NumberPad2, Windows_System_VirtualKey_NumberPad3,
-    Windows_System_VirtualKey_NumberPad4, Windows_System_VirtualKey_NumberPad5,
-    Windows_System_VirtualKey_NumberPad6, Windows_System_VirtualKey_NumberPad7,
-    Windows_System_VirtualKey_NumberPad8, Windows_System_VirtualKey_NumberPad9,
-    Windows_System_VirtualKey_Add, Windows_System_VirtualKey_Subtract,
-    Windows_System_VirtualKey_Multiply, Windows_System_VirtualKey_Divide,
-    Windows_System_VirtualKey_Decimal,
-    Windows_System_VirtualKey_F1, Windows_System_VirtualKey_F2, Windows_System_VirtualKey_F3,
-    Windows_System_VirtualKey_F4, Windows_System_VirtualKey_F5, Windows_System_VirtualKey_F6,
-    Windows_System_VirtualKey_F7, Windows_System_VirtualKey_F8, Windows_System_VirtualKey_F9,
-    Windows_System_VirtualKey_F10, Windows_System_VirtualKey_F11, Windows_System_VirtualKey_F12,
-    Windows_System_VirtualKey_Enter, Windows_System_VirtualKey_Escape, Windows_System_VirtualKey_Tab,
-    Windows_System_VirtualKey_Space, Windows_System_VirtualKey_Back, Windows_System_VirtualKey_Delete,
-    Windows_System_VirtualKey_Insert, Windows_System_VirtualKey_Home, Windows_System_VirtualKey_End,
-    Windows_System_VirtualKey_PageUp, Windows_System_VirtualKey_PageDown,
-    Windows_System_VirtualKey_Left, Windows_System_VirtualKey_Right,
-    Windows_System_VirtualKey_Up, Windows_System_VirtualKey_Down
-}
+import windows_sys.Microsoft.UI.Input.{PointerPoint}
+import windows_sys.Microsoft.UI.Xaml.Controls.{TextBlock, StackPanel, Panel, ContentControl, ToolTip, ToolTipService, Image}
+import windows_sys.Microsoft.UI.Xaml.Media.{ImageSource}
+import windows_sys.Foundation.{TypedEventHandler}
+import windows_sys.impl.Microsoft_UI_Xaml_Automation_Peers.{Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting_Off as LiveSetting_Off, Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting_Polite as LiveSetting_Polite, Microsoft_UI_Xaml_Automation_Peers_AutomationLiveSetting_Assertive as LiveSetting_Assertive, Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_None as HeadingLevel_None, Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level1 as HeadingLevel_Level1, Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level2 as HeadingLevel_Level2, Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level3 as HeadingLevel_Level3, Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level4 as HeadingLevel_Level4, Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level5 as HeadingLevel_Level5, Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level6 as HeadingLevel_Level6, Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level7 as HeadingLevel_Level7, Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level8 as HeadingLevel_Level8, Microsoft_UI_Xaml_Automation_Peers_AutomationHeadingLevel_Level9 as HeadingLevel_Level9}
+import windows_sys.impl.Microsoft_UI_Xaml_Controls.{Microsoft_UI_Xaml_Controls_Orientation_Vertical as Orientation_Vertical, Microsoft_UI_Xaml_Controls_Orientation_Horizontal as Orientation_Horizontal}
+import windows_sys.impl.Microsoft_UI_Xaml_Controls_Primitives.{Microsoft_UI_Xaml_Controls_Primitives_PlacementMode as XamlPlacementMode, Microsoft_UI_Xaml_Controls_Primitives_PlacementMode_Top as Placement_Top, Microsoft_UI_Xaml_Controls_Primitives_PlacementMode_Bottom as Placement_Bottom, Microsoft_UI_Xaml_Controls_Primitives_PlacementMode_Left as Placement_Left, Microsoft_UI_Xaml_Controls_Primitives_PlacementMode_Right as Placement_Right, Microsoft_UI_Xaml_Controls_Primitives_PlacementMode_Mouse as Placement_Mouse}
+import windows_sys.impl.Microsoft_UI_Xaml_Input.{Microsoft_UI_Xaml_Input_KeyboardAcceleratorPlacementMode_Hidden as AcceleratorPlacement_Hidden}
+import windows_sys.impl.Windows_System.{Windows_System_VirtualKey as XamlVirtualKey, Windows_System_VirtualKeyModifiers as XamlVirtualKeyModifiers, Windows_System_VirtualKey_A, Windows_System_VirtualKey_B, Windows_System_VirtualKey_C, Windows_System_VirtualKey_D, Windows_System_VirtualKey_E, Windows_System_VirtualKey_F, Windows_System_VirtualKey_G, Windows_System_VirtualKey_H, Windows_System_VirtualKey_I, Windows_System_VirtualKey_J, Windows_System_VirtualKey_K, Windows_System_VirtualKey_L, Windows_System_VirtualKey_M, Windows_System_VirtualKey_N, Windows_System_VirtualKey_O, Windows_System_VirtualKey_P, Windows_System_VirtualKey_Q, Windows_System_VirtualKey_R, Windows_System_VirtualKey_S, Windows_System_VirtualKey_T, Windows_System_VirtualKey_U, Windows_System_VirtualKey_V, Windows_System_VirtualKey_W, Windows_System_VirtualKey_X, Windows_System_VirtualKey_Y, Windows_System_VirtualKey_Z, Windows_System_VirtualKey_Number0, Windows_System_VirtualKey_Number1, Windows_System_VirtualKey_Number2, Windows_System_VirtualKey_Number3, Windows_System_VirtualKey_Number4, Windows_System_VirtualKey_Number5, Windows_System_VirtualKey_Number6, Windows_System_VirtualKey_Number7, Windows_System_VirtualKey_Number8, Windows_System_VirtualKey_Number9, Windows_System_VirtualKey_NumberPad0, Windows_System_VirtualKey_NumberPad1, Windows_System_VirtualKey_NumberPad2, Windows_System_VirtualKey_NumberPad3, Windows_System_VirtualKey_NumberPad4, Windows_System_VirtualKey_NumberPad5, Windows_System_VirtualKey_NumberPad6, Windows_System_VirtualKey_NumberPad7, Windows_System_VirtualKey_NumberPad8, Windows_System_VirtualKey_NumberPad9, Windows_System_VirtualKey_Add, Windows_System_VirtualKey_Subtract, Windows_System_VirtualKey_Multiply, Windows_System_VirtualKey_Divide, Windows_System_VirtualKey_Decimal, Windows_System_VirtualKey_F1, Windows_System_VirtualKey_F2, Windows_System_VirtualKey_F3, Windows_System_VirtualKey_F4, Windows_System_VirtualKey_F5, Windows_System_VirtualKey_F6, Windows_System_VirtualKey_F7, Windows_System_VirtualKey_F8, Windows_System_VirtualKey_F9, Windows_System_VirtualKey_F10, Windows_System_VirtualKey_F11, Windows_System_VirtualKey_F12, Windows_System_VirtualKey_Enter, Windows_System_VirtualKey_Escape, Windows_System_VirtualKey_Tab, Windows_System_VirtualKey_Space, Windows_System_VirtualKey_Back, Windows_System_VirtualKey_Delete, Windows_System_VirtualKey_Insert, Windows_System_VirtualKey_Home, Windows_System_VirtualKey_End, Windows_System_VirtualKey_PageUp, Windows_System_VirtualKey_PageDown, Windows_System_VirtualKey_Left, Windows_System_VirtualKey_Right, Windows_System_VirtualKey_Up, Windows_System_VirtualKey_Down}
 
 // ============================================================================
 // Accessibility / keyboard / tooltip / pointer family — free-function impls.
@@ -90,7 +37,7 @@ import windows_common.impl.{
 // Ported faithfully from the reference backend's set_accessibility /
 // set_keyboard_accelerators / set_tooltip / set_pointer_handlers.
 //
-// Projection ABI (verified against windows_common):
+// Projection ABI (verified against windows_sys):
 //   - AutomationProperties.SetName / SetAutomationId / SetHelpText are statics
 //     taking (DependencyObject, HString); SetLiveSetting / SetHeadingLevel take
 //     the corresponding Automation.Peers enum. Every backend-creatable control

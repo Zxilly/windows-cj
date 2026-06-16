@@ -4,9 +4,9 @@ import std.collection.{ArrayList, HashSet, HashMap}
 import windows_reactor.core.{Event, EventHandler}
 import windows_core.{queryInterfaceRaw}
 import windows_interface.{IInspectable}
-import windows_common.Microsoft.UI.Xaml.{FrameworkElement, RoutedEventHandler}
-import windows_common.Foundation.{TypedEventHandler}
-import windows_common.Microsoft.UI.Xaml.Controls.{
+import windows_sys.Microsoft.UI.Xaml.{FrameworkElement, RoutedEventHandler}
+import windows_sys.Foundation.{TypedEventHandler}
+import windows_sys.Microsoft.UI.Xaml.Controls.{
     TabView, TabViewTabCloseRequestedEventArgs,
     NavigationView, NavigationViewBackRequestedEventArgs, NavigationViewSelectionChangedEventArgs,
     NavigationViewItem,
@@ -61,7 +61,7 @@ func releaseNavDelegates(ownerKey: UIntNative): Unit { navDelegateRetention.remo
 // handler.invoke* call is wrapped in try/catch so a HandlerMismatchException
 // (or any read failure) never crosses the Invoke FFI boundary.
 //
-// Projection ABI (verified against windows_common):
+// Projection ABI (verified against windows_sys):
 //   - TabView.addSelectionChanged(SelectionChangedEventHandler) /
 //     addTabCloseRequested(TypedEventHandler<TabView, TabViewTabCloseRequestedEventArgs>)
 //   - NavigationView.addSelectionChanged(TypedEventHandler<NavigationView,

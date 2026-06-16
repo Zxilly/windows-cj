@@ -2,7 +2,7 @@ package windows_services
 
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_common.Win32.System.Services as Win32Services
+import windows_sys.Win32.System.Services as Win32Services
 
 class BoolBox {
     var value = false

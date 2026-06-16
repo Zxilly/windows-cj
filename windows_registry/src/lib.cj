@@ -1,10 +1,10 @@
 package windows_registry
 
 import std.collection.*
-import windows_common.Win32.Foundation as Win32Foundation
-import windows_common.Win32.Security as Win32Security
-import windows_common.Win32.System.Kernel as Win32Kernel
-import windows_common.Win32.System.Registry as Win32Registry
+import windows_sys.Win32.Foundation as Win32Foundation
+import windows_sys.Win32.Security as Win32Security
+import windows_sys.Win32.System.Kernel as Win32Kernel
+import windows_sys.Win32.System.Registry as Win32Registry
 import windows_result.Error as WinError
 import windows_result.*
 import windows_strings.*

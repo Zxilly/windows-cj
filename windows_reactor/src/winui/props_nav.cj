@@ -9,7 +9,7 @@ import windows_core.{HString, GUID, queryInterfaceRaw, releaseSystemHStringHandl
 import windows_interface.{IInspectable}
 import windows_reference.{hStringReference, IReference}
 import windows_collections.{toInspectableVector}
-import windows_common.Microsoft.UI.Xaml.Controls.{
+import windows_sys.Microsoft.UI.Xaml.Controls.{
     ContentControl, TextBlock, SymbolIcon, Symbol, IconElement, ICommandBarElement,
     NavigationViewItem, NavigationViewItemHeader, MenuBarItem, MenuFlyoutItem,
     MenuFlyoutSeparator, MenuFlyoutSubItem, AppBarButton, AppBarToggleButton,
@@ -17,20 +17,9 @@ import windows_common.Microsoft.UI.Xaml.Controls.{
     NavigationView, TabView, TabViewItem, Pivot, PivotItem,
     MenuBar, CommandBar, SelectorBar, BreadcrumbBar
 }
-import windows_common.Microsoft.UI.Xaml.{FrameworkElement}
-import windows_common.impl.{
-    Windows_Foundation_Collections_IVector_1 as IVectorRaw,
-    Microsoft_UI_Xaml_Controls_NavigationViewPaneDisplayMode_Auto as PaneAuto,
-    Microsoft_UI_Xaml_Controls_NavigationViewPaneDisplayMode_Left as PaneLeft,
-    Microsoft_UI_Xaml_Controls_NavigationViewPaneDisplayMode_Top as PaneTop,
-    Microsoft_UI_Xaml_Controls_NavigationViewPaneDisplayMode_LeftCompact as PaneLeftCompact,
-    Microsoft_UI_Xaml_Controls_NavigationViewPaneDisplayMode_LeftMinimal as PaneLeftMinimal,
-    Microsoft_UI_Xaml_Controls_NavigationViewBackButtonVisible_Auto as BackAuto,
-    Microsoft_UI_Xaml_Controls_NavigationViewBackButtonVisible_Collapsed as BackCollapsed,
-    Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition_Bottom as LabelBottom,
-    Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition_Right as LabelRight,
-    Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition_Collapsed as LabelCollapsed
-}
+import windows_sys.Microsoft.UI.Xaml.{FrameworkElement}
+import windows_sys.impl.Microsoft_UI_Xaml_Controls.{Microsoft_UI_Xaml_Controls_NavigationViewPaneDisplayMode_Auto as PaneAuto, Microsoft_UI_Xaml_Controls_NavigationViewPaneDisplayMode_Left as PaneLeft, Microsoft_UI_Xaml_Controls_NavigationViewPaneDisplayMode_Top as PaneTop, Microsoft_UI_Xaml_Controls_NavigationViewPaneDisplayMode_LeftCompact as PaneLeftCompact, Microsoft_UI_Xaml_Controls_NavigationViewPaneDisplayMode_LeftMinimal as PaneLeftMinimal, Microsoft_UI_Xaml_Controls_NavigationViewBackButtonVisible_Auto as BackAuto, Microsoft_UI_Xaml_Controls_NavigationViewBackButtonVisible_Collapsed as BackCollapsed, Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition_Bottom as LabelBottom, Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition_Right as LabelRight, Microsoft_UI_Xaml_Controls_CommandBarDefaultLabelPosition_Collapsed as LabelCollapsed}
+import windows_sys.impl.Windows_Foundation_Collections.{Windows_Foundation_Collections_IVector_1 as IVectorRaw}
 
 // Programmatic selections requested before the NavigationView has loaded (template
 // applied, ItemsRepeater realized live containers). Setting SelectedItem to a
@@ -57,7 +46,7 @@ let navTagBoxes = HashMap<UIntNative, ArrayList<IReference<HString>>>()
 // Resources) are consumed by the earlier dispatch layers in backend.cj and never
 // reach here. Only navigation-family-specific props land in this function.
 //
-// Projection ABI (spec §8.1, verified against the windows_common projections):
+// Projection ABI (spec §8.1, verified against the windows_sys projections):
 //   - High-level leaf props on the variant-bound class: TabView.SelectedIndex /
 //     .CanReorderTabs, TabViewItem.Header / .IsClosable, Pivot.SelectedIndex /
 //     .Title, PivotItem.Header, NavigationView.IsPaneOpen / .IsSettingsVisible /

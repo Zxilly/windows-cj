@@ -1,7 +1,7 @@
 package windows_variant
 
-import windows_common.Win32.Foundation as Foundation
-import windows_common.Win32.System.Variant as VariantNs
+import windows_sys.Win32.Foundation as Foundation
+import windows_sys.Win32.System.Variant as VariantNs
 import windows_strings.BSTR
 
 public type VARIANT_BOOL = Foundation.VARIANT_BOOL

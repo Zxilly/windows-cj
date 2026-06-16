@@ -1,7 +1,7 @@
 package windows_reactor.winui
 
 import windows_reactor.core.{Prop, PropValue, Brush}
-import windows_common.Microsoft.UI.Xaml.Shapes.Shape
+import windows_sys.Microsoft.UI.Xaml.Shapes.Shape
 
 // Per-family property setters for vector shapes (Rectangle, Ellipse, Line).
 // Returns true when the prop was consumed.

@@ -1,6 +1,6 @@
 package windows_version
 
-import windows_common.Win32.System.SystemInformation as Win32SystemInformation
+import windows_sys.Win32.System.SystemInformation as Win32SystemInformation
 import windows_registry.*
 import windows_result.Result
 

@@ -2,7 +2,7 @@ package windows_variant
 
 import std.unittest.*
 import std.unittest.testmacro.*
-import windows_common.Win32.System.Com.IUnknownVtbl
+import windows_sys.Win32.System.Com.IUnknownVtbl
 import windows_strings.HString
 import windows_strings.debugObservedWindowsCreateStringCount
 import windows_strings.debugObservedWindowsDeleteStringCount

@@ -3,15 +3,9 @@ package windows_reactor.winui
 import windows_reactor.core.{Prop, PropValue}
 import windows_reactor.core.PasswordRevealMode as ReactorPasswordRevealMode
 import windows_core.{HString, OutSlot}
-import windows_common.impl.{
-    Microsoft_UI_Xaml_TextWrapping_Wrap,
-    Microsoft_UI_Xaml_TextWrapping_NoWrap,
-    Microsoft_UI_Xaml_Controls_PasswordRevealMode_Peek,
-    Microsoft_UI_Xaml_Controls_PasswordRevealMode_Hidden,
-    Microsoft_UI_Xaml_Controls_PasswordRevealMode_Visible,
-    Microsoft_UI_Text_TextSetOptions_None,
-    Microsoft_UI_Text_TextGetOptions_None
-}
+import windows_sys.impl.Microsoft_UI_Text.{Microsoft_UI_Text_TextSetOptions_None, Microsoft_UI_Text_TextGetOptions_None}
+import windows_sys.impl.Microsoft_UI_Xaml.{Microsoft_UI_Xaml_TextWrapping_Wrap, Microsoft_UI_Xaml_TextWrapping_NoWrap}
+import windows_sys.impl.Microsoft_UI_Xaml_Controls.{Microsoft_UI_Xaml_Controls_PasswordRevealMode_Peek, Microsoft_UI_Xaml_Controls_PasswordRevealMode_Hidden, Microsoft_UI_Xaml_Controls_PasswordRevealMode_Visible}
 
 // Depth>0 while the reactor is programmatically setting RichEditBox text (controlled
 // value). RichEditBox raises TextChanged synchronously from SetText; the TextChanged
@@ -29,7 +23,7 @@ func richEditTextChangeSuppressed(): Bool { richEditSuppressDepth > 0 }
 // props land here.
 //
 // Projection ABI (spec §8.1): every member used here is a high-level `mut prop`
-// on the variant-bound projection class (verified against the windows_common
+// on the variant-bound projection class (verified against the windows_sys
 // projections): TextBox.{Text, PlaceholderText, Header, AcceptsReturn,
 // TextWrapping, IsReadOnly(unused)}, PasswordBox.{Password, PlaceholderText,
 // Header, PasswordRevealMode, IsPasswordRevealButtonEnabled}, RichEditBox.{

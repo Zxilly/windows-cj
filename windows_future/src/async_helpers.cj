@@ -4,9 +4,9 @@ import windows_interface as windows_interface
 import std.collection.HashMap
 import std.sync.*
 import std.time.*
-import windows_common.Win32.Foundation as Win32Foundation
-import windows_common.Win32.Security as Win32Security
-import windows_common.Win32.System.Threading as Win32Threading
+import windows_sys.Win32.Foundation as Win32Foundation
+import windows_sys.Win32.Security as Win32Security
+import windows_sys.Win32.System.Threading as Win32Threading
 import windows_core
 import windows_core.{ComObject, E_ABORT, E_FAIL, E_POINTER, HRESULT, HResult, HResultAbi, InParam, Result, S_OK, WinError}
 import windows_interface.ComInterface

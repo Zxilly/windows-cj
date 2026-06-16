@@ -2,19 +2,13 @@ package windows_reactor.winui
 
 import windows_reactor.core.{Callback, SelectionMode}
 import windows_interface.IInspectable
-import windows_common.Microsoft.UI.Xaml.Controls.{
+import windows_sys.Microsoft.UI.Xaml.Controls.{
     ItemsControl, ListViewBase, TextBlock
 }
-import windows_common.Microsoft.UI.Xaml.Controls.Primitives.Selector
-import windows_common.Microsoft.UI.Xaml.Controls.SelectionChangedEventHandler
-import windows_common.impl.{
-    Windows_Foundation_Collections_IVector_1 as IVectorRaw,
-    Microsoft_UI_Xaml_Controls_ListViewSelectionMode as ListViewSelectionModeAbi,
-    Microsoft_UI_Xaml_Controls_ListViewSelectionMode_None as LVSelNone,
-    Microsoft_UI_Xaml_Controls_ListViewSelectionMode_Single as LVSelSingle,
-    Microsoft_UI_Xaml_Controls_ListViewSelectionMode_Multiple as LVSelMultiple,
-    Microsoft_UI_Xaml_Controls_ListViewSelectionMode_Extended as LVSelExtended
-}
+import windows_sys.Microsoft.UI.Xaml.Controls.Primitives.Selector
+import windows_sys.Microsoft.UI.Xaml.Controls.SelectionChangedEventHandler
+import windows_sys.impl.Microsoft_UI_Xaml_Controls.{Microsoft_UI_Xaml_Controls_ListViewSelectionMode as ListViewSelectionModeAbi, Microsoft_UI_Xaml_Controls_ListViewSelectionMode_None as LVSelNone, Microsoft_UI_Xaml_Controls_ListViewSelectionMode_Single as LVSelSingle, Microsoft_UI_Xaml_Controls_ListViewSelectionMode_Multiple as LVSelMultiple, Microsoft_UI_Xaml_Controls_ListViewSelectionMode_Extended as LVSelExtended}
+import windows_sys.impl.Windows_Foundation_Collections.{Windows_Foundation_Collections_IVector_1 as IVectorRaw}
 
 // ============================================================================
 // Templated (virtualised) list/grid/flip family — free functions.
@@ -29,7 +23,7 @@ import windows_common.impl.{
 // set_templated_selection_mode / scroll_templated_to_index /
 // attach_templated_selection_changed / attach_templated_realization.
 //
-// Projection ABI (spec §8.6, verified against the windows_common projections):
+// Projection ABI (spec §8.6, verified against the windows_sys projections):
 //   - ListView / GridView / FlipView are ItemsControl-derived; their item store
 //     is `IItemsControl.Items` (an ItemCollection backed by an
 //     IObservableVector<IInspectable>). QI the control to the high-level

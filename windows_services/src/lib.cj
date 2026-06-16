@@ -2,7 +2,7 @@ package windows_services
 
 import std.collection.HashMap
 import std.sync.Mutex
-import windows_common.Win32.System.Services as Win32Services
+import windows_sys.Win32.System.Services as Win32Services
 import windows_strings.PWSTR
 
 public type BOOL = Int32

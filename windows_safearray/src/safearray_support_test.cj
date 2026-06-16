@@ -1,6 +1,6 @@
 package windows_safearray
 
-import windows_common.Win32.System.Com.IUnknownVtbl
+import windows_sys.Win32.System.Com.IUnknownVtbl
 import windows_strings.BSTR
 
 func safeArrayTestThrows(action: () -> Unit): Bool {

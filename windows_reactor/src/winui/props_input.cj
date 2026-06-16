@@ -4,16 +4,13 @@ import windows_reactor.core.{Prop, PropValue}
 import windows_core.{HString}
 import windows_interface.{IInspectable}
 import windows_reference.{IReference, hStringReference, boolReference}
-import windows_common.Microsoft.UI.Xaml.Controls.{
+import windows_sys.Microsoft.UI.Xaml.Controls.{
     Control, ContentControl, TextBlock, ToggleSwitch, Slider, NumberBox,
     ProgressBar, ProgressRing, RadioButton, RadioButtons, RatingControl
 }
-import windows_common.Microsoft.UI.Xaml.Controls.Primitives.{ToggleButton, RangeBase}
-import windows_common.impl.{
-    Microsoft_UI_Xaml_Controls_Orientation_Vertical,
-    Microsoft_UI_Xaml_Controls_Orientation_Horizontal,
-    Windows_Foundation_IReference_1
-}
+import windows_sys.Microsoft.UI.Xaml.Controls.Primitives.{ToggleButton, RangeBase}
+import windows_sys.impl.Microsoft_UI_Xaml_Controls.{Microsoft_UI_Xaml_Controls_Orientation_Vertical, Microsoft_UI_Xaml_Controls_Orientation_Horizontal}
+import windows_sys.impl.Windows_Foundation.{Windows_Foundation_IReference_1}
 
 // Per-family property setters for value / toggle input controls (CheckBox,
 // RadioButton, RadioButtons, ToggleSwitch, Slider, NumberBox, ProgressBar,

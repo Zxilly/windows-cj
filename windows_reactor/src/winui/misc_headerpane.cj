@@ -1,7 +1,7 @@
 package windows_reactor.winui
 
 import windows_interface.{IInspectable}
-import windows_common.Microsoft.UI.Xaml.{UIElement}
+import windows_sys.Microsoft.UI.Xaml.{UIElement}
 
 // ============================================================================
 // Header / Pane element family — free-function setters.
@@ -14,7 +14,7 @@ import windows_common.Microsoft.UI.Xaml.{UIElement}
 //
 // Reference: winui/backend/mod.rs set_header_element / set_pane_element.
 //
-// Projection ABI (verified against windows_common):
+// Projection ABI (verified against windows_sys):
 //   - Expander.Header is an IInspectable-typed `mut prop` (SetHeader). The
 //     reference passes its UIElement; we QI the header handle to the high-level
 //     UIElement and hand its IInspectable view to the setter.

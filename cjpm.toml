@@ -20,7 +20,7 @@ members = [
     "windows_safearray",
     "windows_registry",
     "windows_services",
-    "windows_common",
+    "windows_sys",
     "windows_reactor",
     "windows_canvas",
     "windows_metadata",

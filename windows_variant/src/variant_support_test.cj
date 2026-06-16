@@ -1,6 +1,6 @@
 package windows_variant
 
-import windows_common.Win32.System.Com.IUnknownVtbl
+import windows_sys.Win32.System.Com.IUnknownVtbl
 import windows_strings.BSTR
 import windows_libloading as windows_libloading
 

@@ -12,7 +12,7 @@
 
 [dependencies]
   windows_time = { path = "../windows_time" }
-  windows_common = { path = "../windows_common" }
+  windows_sys = { path = "../windows_sys" }
   windows_core = { path = "../windows_core" }
   windows_interface = { path = "../windows_interface" }
   windows_collections = { path = "../windows_collections" }
