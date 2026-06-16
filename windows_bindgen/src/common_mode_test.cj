@@ -72,14 +72,14 @@ func testCommonNativeHelperFilesRenderSelectedPInvokeMethods() {
     let features = ArrayList<String>()
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
-    let helpers = commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected))
+    let helpers = commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected))
     let native = cliTestHelperFile(helpers, "src/Native/native_helpers.cj")
     let example = cliTestHelperFile(helpers, "src/Example/Native/native_helpers.cj")
 
     @Expect(native.isEmpty(), true)
-    @Expect(example.contains("package windows_common.Example.Native"), true)
+    @Expect(example.contains("package windows_sys.Example.Native"), true)
     @Expect(example.contains("import windows_libloading as windows_libloading"), true)
-    @Expect(example.contains("import windows_common.Native as Native"), false)
+    @Expect(example.contains("import windows_sys.Native as Native"), false)
     @Expect(example.contains("public func GetTickCount(): UInt32"), true)
     @Expect(example.contains("windows_libloading.resolveProc(\"KERNEL32.dll\", \"GetTickCount\")"), true)
     @Expect(example.contains("Native.resolveProc"), false)
@@ -248,7 +248,7 @@ func testCommonNativeHelperFilesAdaptTransparentAbiWrappers() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -342,7 +342,7 @@ func testCommonNativeHelpersUseTextPointerRemapsWithoutTypeDefinitions() {
         )
     ))
     let content = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Foundation",
         specs,
         HashMap<String, SymbolRecord>()
@@ -350,7 +350,7 @@ func testCommonNativeHelpersUseTextPointerRemapsWithoutTypeDefinitions() {
     let files = ArrayList<GeneratedNativeHelperFile>()
     files.add(GeneratedNativeHelperFile("src/Win32/Foundation/native_helpers.cj", content))
     let deps = ArrayList<String>()
-    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_common", deps, files)
+    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_sys", deps, files)
 
     @Expect(content.contains("import windows_strings as windows_strings"), true)
     @Expect(content.contains("public func PathFindFileNameW(path: windows_strings.PWSTR): windows_strings.PWSTR"), true)
@@ -400,7 +400,7 @@ func testCommonNativeHelpersDoNotImportTextPointerWrappersForPointerOnlySlots() 
         )
     ))
     let content = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Foundation",
         specs,
         HashMap<String, SymbolRecord>()
@@ -408,7 +408,7 @@ func testCommonNativeHelpersDoNotImportTextPointerWrappersForPointerOnlySlots() 
     let files = ArrayList<GeneratedNativeHelperFile>()
     files.add(GeneratedNativeHelperFile("src/Win32/Foundation/native_helpers.cj", content))
     let deps = ArrayList<String>()
-    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_common", deps, files)
+    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_sys", deps, files)
 
     @Expect(content.contains("public func UpdateWidePointer(value: CPointer<CPointer<UInt16>>): Int32"), true)
     @Expect(content.contains("public func UpdateAnsiPointer(value: CPointer<CPointer<UInt8>>): Int32"), true)
@@ -511,7 +511,7 @@ func testCommonNativeHelperFilesDoNotProjectNonWin32TextPointersByShortName() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -623,11 +623,11 @@ func testCommonNativeHelperFilesUseAssociatedEnumParameterProjection() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
-    @Expect(helper.contains("import windows_common.Example.Enums.FILE_ACTION"), true)
+    @Expect(helper.contains("import windows_sys.Example.Enums.FILE_ACTION"), true)
     @Expect(helper.contains("public func SetAction(action: FILE_ACTION): Int32"), true)
     @Expect(helper.contains("public func SetAction(action: UInt32): Int32"), false)
     @Expect(helper.contains("let proc = CFunc<(UInt32) -> Int32>"), true)
@@ -736,11 +736,11 @@ func testCommonNativeHelperFilesUseStringAssociatedEnumParameterDependency() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
-    @Expect(helper.contains("import windows_common.Example.Enums.FILE_MODE"), true)
+    @Expect(helper.contains("import windows_sys.Example.Enums.FILE_MODE"), true)
     @Expect(helper.contains("public func SetMode(mode: FILE_MODE): Int32"), true)
     @Expect(helper.contains("public func SetMode(mode: UInt32): Int32"), false)
     @Expect(helper.contains("return unsafe { proc(UInt32(mode.value)) }"), true)
@@ -865,7 +865,7 @@ func testCommonNativeHelperFilesUseRawAliasAssociatedEnumParameterWithoutWrapper
     features.add("Windows.Win32.System.Com")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Win32/System/Com/native_helpers.cj"
     )
 
@@ -962,7 +962,7 @@ func testCommonNativeHelperFilesDefaultReservedParameters() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -1072,7 +1072,7 @@ func testCommonNativeHelperFilesDoNotInferReservedArrayLengthParameters() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -1176,7 +1176,7 @@ func testCommonNativeHelperFilesProjectBoolParametersAndReturns() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -1279,7 +1279,7 @@ func testCommonNativeHelperFilesRenderSetLastErrorCheckedBoolWrapper() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -1316,7 +1316,7 @@ func testCommonNativeHelperFilesRenderHResultCheckedWrapper() {
     let specs = ArrayList<NativeFunctionSpec>()
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", method))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Example.Native",
         specs,
         HashMap<String, SymbolRecord>()
@@ -1357,7 +1357,7 @@ func testCommonNativeHelperFilesRenderMultipleSuccessHResultCheckedWrapper() {
     let specs = ArrayList<NativeFunctionSpec>()
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", method))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Example.Native",
         specs,
         HashMap<String, SymbolRecord>()
@@ -1430,7 +1430,7 @@ func testCommonNativeHelperFilesRenderMultiQiHResultCheckedWrappersPreserveStatu
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", instanceMethod))
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", appMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Example.Native",
         specs,
         HashMap<String, SymbolRecord>()
@@ -1477,7 +1477,7 @@ func testCommonNativeHelperFilesRenderHResultComOutPtrCheckedWrapper() {
     let specs = ArrayList<NativeFunctionSpec>()
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", method))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Example.Native",
         specs,
         HashMap<String, SymbolRecord>()
@@ -1538,7 +1538,7 @@ func testCommonNativeHelperFilesRenderHResultOwnedPwstrOutCheckedWrapper() {
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", threadMethod))
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", guidMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Example.Native",
         specs,
         HashMap<String, SymbolRecord>()
@@ -1606,7 +1606,7 @@ func testCommonNativeHelperFilesRenderHResultOwnedPointerOutCheckedWrapper() {
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", securityMethod))
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", authMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Example.Native",
         specs,
         HashMap<String, SymbolRecord>()
@@ -1702,7 +1702,7 @@ func testCommonNativeHelperFilesRenderCoQueryBlanketOptionalOutCleanup() {
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", proxyMethod))
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", clientMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Example.Native",
         specs,
         HashMap<String, SymbolRecord>()
@@ -1802,7 +1802,7 @@ func testCommonNativeHelperFilesRenderRtwqOptionalScalarKeyCleanup() {
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", scheduleMethod))
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", periodicMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Example.Native",
         specs,
         HashMap<String, SymbolRecord>()
@@ -1855,7 +1855,7 @@ func testCommonNativeHelperFilesRenderHResultMultiComOutPtrCheckedWrapperClearsS
     let specs = ArrayList<NativeFunctionSpec>()
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", method))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Example.Native",
         specs,
         HashMap<String, SymbolRecord>()
@@ -1915,7 +1915,7 @@ func testCommonNativeHelperFilesInferHResultComInterfaceOutPtrCheckedWrapper() {
     let specs = ArrayList<NativeFunctionSpec>()
     specs.add(NativeFunctionSpec("Example.Native", "Example.Native.Apis", method))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Example.Native",
         specs,
         symbolsByName
@@ -2055,7 +2055,7 @@ func testCommonNativeHelperFilesRenderWin32FoundationCheckedHandleWrappers() {
     specs.add(NativeFunctionSpec("Windows.Win32.Foundation", "Windows.Win32.Foundation.Apis", duplicateMethod))
     specs.add(NativeFunctionSpec("Windows.Win32.Foundation", "Windows.Win32.Foundation.Apis", openProcessMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Foundation",
         specs,
         symbolsByName
@@ -2126,13 +2126,13 @@ func testCommonNativeHelperFilesRenderSetLastErrorBoolFalseSuccessStatusWrappers
         specs.add(NativeFunctionSpec("Windows.Win32.System.Threading", "Windows.Win32.System.Threading.Apis", method))
     }
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.Threading",
         specs,
         symbolsByName
     )
 
-    @Expect(helper.contains("import windows_common.Win32.Foundation.GetLastError"), false)
+    @Expect(helper.contains("import windows_sys.Win32.Foundation.GetLastError"), false)
     for (name in timeoutBoolNames) {
         @Expect(helper.contains("public func ${name}Checked(): windows_core.Result<Bool>"), true)
         @Expect(helper.contains("let result__ = ${name}()\n    if (result__) {\n        return windows_core.Result<Bool>.Ok(true)\n    }\n    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc(\"KERNEL32.dll\", \"GetLastError\"))\n    let lastError__ = unsafe { getLastErrorProc__() }\n    if (lastError__ == 1460u32) {\n        return windows_core.Result<Bool>.Ok(false)\n    }\n    windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))"), true)
@@ -2158,13 +2158,13 @@ func testCommonNativeHelperFilesRenderSetLastErrorBoolFalseSuccessStatusWrappers
         pendingSpecs.add(NativeFunctionSpec("Windows.Win32.System.Threading", "Windows.Win32.System.Threading.Apis", method))
     }
     let pendingHelper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.Threading",
         pendingSpecs,
         symbolsByName
     )
 
-    @Expect(pendingHelper.contains("import windows_common.Win32.Foundation.GetLastError"), false)
+    @Expect(pendingHelper.contains("import windows_sys.Win32.Foundation.GetLastError"), false)
     for (name in pendingBoolNames) {
         @Expect(pendingHelper.contains("public func ${name}Checked(): windows_core.Result<Bool>"), true)
         @Expect(pendingHelper.contains("let result__ = ${name}()\n    if (result__) {\n        return windows_core.Result<Bool>.Ok(true)\n    }\n    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc(\"KERNEL32.dll\", \"GetLastError\"))\n    let lastError__ = unsafe { getLastErrorProc__() }\n    if (lastError__ == 997u32) {\n        return windows_core.Result<Bool>.Ok(false)\n    }\n    windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))"), true)
@@ -2199,13 +2199,13 @@ func testCommonNativeHelperFilesRenderSetLastErrorBoolFalseSuccessStatusWrappers
         ioSpecs.add(NativeFunctionSpec("Windows.Win32.System.IO", "Windows.Win32.System.IO.Apis", method))
     }
     let ioHelper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.IO",
         ioSpecs,
         symbolsByName
     )
 
-    @Expect(ioHelper.contains("import windows_common.Win32.Foundation.GetLastError"), false)
+    @Expect(ioHelper.contains("import windows_sys.Win32.Foundation.GetLastError"), false)
     for (name in ioBoolNames) {
         @Expect(ioHelper.contains("public func ${name}Checked(): windows_core.Result<Bool>"), true)
         @Expect(ioHelper.contains("let result__ = ${name}()\n    if (result__) {\n        return windows_core.Result<Bool>.Ok(true)\n    }\n    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc(\"KERNEL32.dll\", \"GetLastError\"))\n    let lastError__ = unsafe { getLastErrorProc__() }\n    if (lastError__ == 997u32) {\n        return windows_core.Result<Bool>.Ok(false)\n    }\n    windows_core.Result<Bool>.Err(windows_core.errorFromWin32(lastError__))"), true)
@@ -2224,7 +2224,7 @@ func testCommonNativeHelperFilesRenderSetLastErrorBoolFalseSuccessStatusWrappers
     let connectSpecs = ArrayList<NativeFunctionSpec>()
     connectSpecs.add(NativeFunctionSpec("Windows.Win32.System.Pipes", "Windows.Win32.System.Pipes.Apis", connectMethod))
     let connectHelper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.Pipes",
         connectSpecs,
         symbolsByName
@@ -2256,7 +2256,7 @@ func testCommonNativeHelperFilesRenderSetLastErrorBoolFalseSuccessStatusWrappers
     overlappedSpecs.add(NativeFunctionSpec("Windows.Win32.System.IO", "Windows.Win32.System.IO.Apis", overlappedResultMethod))
     overlappedSpecs.add(NativeFunctionSpec("Windows.Win32.System.IO", "Windows.Win32.System.IO.Apis", overlappedResultExMethod))
     let overlappedHelper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.IO",
         overlappedSpecs,
         symbolsByName
@@ -2291,7 +2291,7 @@ func testCommonNativeHelperFilesRenderSetLastErrorBoolFalseSuccessStatusWrappers
     completionStatusSpecs.add(NativeFunctionSpec("Windows.Win32.System.IO", "Windows.Win32.System.IO.Apis", completionStatusMethod))
     completionStatusSpecs.add(NativeFunctionSpec("Windows.Win32.System.IO", "Windows.Win32.System.IO.Apis", completionStatusExMethod))
     let completionStatusHelper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.IO",
         completionStatusSpecs,
         symbolsByName
@@ -2319,13 +2319,13 @@ func testCommonNativeHelperFilesRenderSetLastErrorBoolFalseSuccessStatusWrappers
         winHttpResendSpecs.add(NativeFunctionSpec("Windows.Win32.Networking.WinHttp", "Windows.Win32.Networking.WinHttp.Apis", method))
     }
     let winHttpResendHelper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Networking.WinHttp",
         winHttpResendSpecs,
         symbolsByName
     )
 
-    @Expect(winHttpResendHelper.contains("import windows_common.Win32.Foundation.GetLastError"), false)
+    @Expect(winHttpResendHelper.contains("import windows_sys.Win32.Foundation.GetLastError"), false)
     for (name in winHttpResendNames) {
         @Expect(winHttpResendHelper.contains("public func ${name}Checked(): windows_core.Result<UInt32>"), true)
         @Expect(winHttpResendHelper.contains("let result__ = ${name}()\n    if (result__) {\n        return windows_core.Result<UInt32>.Ok(0u32)\n    }\n    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc(\"KERNEL32.dll\", \"GetLastError\"))\n    let lastError__ = unsafe { getLastErrorProc__() }\n    if (lastError__ == 12032u32) {\n        return windows_core.Result<UInt32>.Ok(lastError__)\n    }\n    windows_core.Result<UInt32>.Err(windows_core.errorFromWin32(lastError__))"), true)
@@ -2352,13 +2352,13 @@ func testCommonNativeHelperFilesRenderSetLastErrorBoolFalseSuccessStatusWrappers
         winHttpBufferProbeSpecs.add(NativeFunctionSpec("Windows.Win32.Networking.WinHttp", "Windows.Win32.Networking.WinHttp.Apis", method))
     }
     let winHttpBufferProbeHelper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Networking.WinHttp",
         winHttpBufferProbeSpecs,
         symbolsByName
     )
 
-    @Expect(winHttpBufferProbeHelper.contains("import windows_common.Win32.Foundation.GetLastError"), false)
+    @Expect(winHttpBufferProbeHelper.contains("import windows_sys.Win32.Foundation.GetLastError"), false)
     for (name in winHttpBufferProbeNames) {
         @Expect(winHttpBufferProbeHelper.contains("public func ${name}Checked(): windows_core.Result<UInt32>"), true)
         if (name == "WinHttpQueryHeaders") {
@@ -2440,7 +2440,7 @@ func testCommonNativeHelperFilesRenderSetLastErrorInvalidHandleWrappers() {
         specs.add(NativeFunctionSpec("Windows.Win32.Storage.FileSystem", "Windows.Win32.Storage.FileSystem.Apis", method))
     }
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Storage.FileSystem",
         specs,
         symbolsByName
@@ -2545,7 +2545,7 @@ func testCommonNativeHelperFilesRenderSetLastErrorNullSuccessHandleWrappers() {
     specs.add(NativeFunctionSpec("Windows.Win32.Foundation", "Windows.Win32.Foundation.Apis", globalMethod))
     specs.add(NativeFunctionSpec("Windows.Win32.Foundation", "Windows.Win32.Foundation.Apis", localMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Foundation",
         specs,
         symbolsByName
@@ -2644,7 +2644,7 @@ func testCommonNativeHelperFilesRenderSetLastErrorCheckedServiceHandleWrappers()
     specs.add(NativeFunctionSpec("Windows.Win32.System.Services", "Windows.Win32.System.Services.Apis", openManagerMethod))
     specs.add(NativeFunctionSpec("Windows.Win32.System.Services", "Windows.Win32.System.Services.Apis", registerMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.Services",
         specs,
         symbolsByName
@@ -2734,7 +2734,7 @@ func testCommonNativeHelperFilesRenderSetLastErrorCheckedThreadingPointerHandleW
     specs.add(NativeFunctionSpec("Windows.Win32.System.Threading", "Windows.Win32.System.Threading.Apis", createThreadpoolMethod))
     specs.add(NativeFunctionSpec("Windows.Win32.System.Threading", "Windows.Win32.System.Threading.Apis", avrtMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.Threading",
         specs,
         symbolsByName
@@ -2872,13 +2872,13 @@ func testCommonNativeHelperFilesRenderSetLastErrorWaitEventWrappers() {
     specs.add(NativeFunctionSpec("Windows.Win32.System.Threading", "Windows.Win32.System.Threading.Apis", singleMethod))
     specs.add(NativeFunctionSpec("Windows.Win32.System.Threading", "Windows.Win32.System.Threading.Apis", multipleMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.Threading",
         specs,
         symbolsByName
     )
 
-    @Expect(helper.contains("import windows_common.Win32.Foundation.WAIT_EVENT"), true)
+    @Expect(helper.contains("import windows_sys.Win32.Foundation.WAIT_EVENT"), true)
     @Expect(helper.contains("public func WaitForSingleObject(hHandle: HANDLE, dwMilliseconds: UInt32): UInt32"), true)
     @Expect(helper.contains("public func WaitForSingleObjectChecked(hHandle: HANDLE, dwMilliseconds: UInt32): windows_core.Result<WAIT_EVENT>"), true)
     @Expect(helper.contains("let result__ = WaitForSingleObject(hHandle, dwMilliseconds)\n    if (result__ == 0xFFFFFFFFu32) {\n        return windows_core.Result<WAIT_EVENT>.Err(windows_core.errorFromThread())\n    }\n    windows_core.Result<WAIT_EVENT>.Ok(result__)"), true)
@@ -3599,14 +3599,14 @@ func testCommonNativeHelperFilesRenderSetLastErrorScalarAndPointerSentinelWrappe
     specs.add(NativeFunctionSpec("Windows.Win32.System.Threading", "Windows.Win32.System.Threading.Apis", fiberMethod))
     specs.add(NativeFunctionSpec("Windows.Win32.System.Threading", "Windows.Win32.System.Threading.Apis", affinityMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.Threading",
         specs,
         symbolsByName
     )
 
-    @Expect(helper.contains("import windows_common.Win32.Foundation.GetLastError"), false)
-    @Expect(helper.contains("import windows_common.Win32.Foundation.SetLastError"), false)
+    @Expect(helper.contains("import windows_sys.Win32.Foundation.GetLastError"), false)
+    @Expect(helper.contains("import windows_sys.Win32.Foundation.SetLastError"), false)
     @Expect(helper.contains("import windows_strings as windows_strings"), true)
     @Expect(helper.contains("public func TlsGetValueChecked(dwTlsIndex: UInt32): windows_core.Result<CPointer<Unit>>"), true)
     @Expect(helper.contains("let setLastErrorProc__ = CFunc<(UInt32) -> Unit>(windows_libloading.resolveProc(\"KERNEL32.dll\", \"SetLastError\"))\n    unsafe { setLastErrorProc__(0u32) }\n    let result__ = TlsGetValue(dwTlsIndex)\n    if (result__.isNotNull()) {\n        return windows_core.Result<CPointer<Unit>>.Ok(result__)\n    }\n    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc(\"KERNEL32.dll\", \"GetLastError\"))\n    let lastError__ = unsafe { getLastErrorProc__() }\n    if (lastError__ == 0u32) {\n        return windows_core.Result<CPointer<Unit>>.Ok(result__)\n    }\n    windows_core.Result<CPointer<Unit>>.Err(windows_core.errorFromWin32(lastError__))"), true)
@@ -4212,7 +4212,7 @@ func testCommonNativeHelperFilesRenderWinSockSocketErrorCheckedWrapper() {
     specs.add(NativeFunctionSpec("Windows.Win32.Networking.WinSock", "Windows.Win32.Networking.WinSock.Apis", wsaAcceptMethod))
     specs.add(NativeFunctionSpec("Windows.Win32.Networking.WinSock", "Windows.Win32.Networking.WinSock.Apis", wsaJoinLeafMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Networking.WinSock",
         specs,
         symbolsByName
@@ -4220,8 +4220,8 @@ func testCommonNativeHelperFilesRenderWinSockSocketErrorCheckedWrapper() {
 
     @Expect(helper.contains("import windows_core as windows_core"), true)
     @Expect(helper.contains("import windows_polyfill as windows_polyfill"), true)
-    @Expect(helper.contains("import windows_common.Win32.Foundation.WAIT_EVENT"), true)
-    @Expect(helper.contains("import windows_common.Win32.Foundation.GetLastError"), false)
+    @Expect(helper.contains("import windows_sys.Win32.Foundation.WAIT_EVENT"), true)
+    @Expect(helper.contains("import windows_sys.Win32.Foundation.GetLastError"), false)
     @Expect(helper.contains("public func connectChecked(s: UIntNative, name: CPointer<Unit>, namelen: Int32): windows_core.Result<Unit>"), true)
     @Expect(helper.contains("let result__ = connect(s, name, namelen)\n    if (result__ == -1) {\n        let errorProc__ = CFunc<() -> Int32>(windows_libloading.resolveProc(\"WS2_32.dll\", \"WSAGetLastError\"))\n        let error__ = unsafe { errorProc__() }\n        return windows_core.Result<Unit>.Err(windows_core.errorFromWin32(UInt32(error__)))\n    }\n    windows_core.Result<Unit>.Ok(())"), true)
     @Expect(helper.contains("public func WSAEventSelectChecked(): windows_core.Result<Unit>"), true)
@@ -4350,7 +4350,7 @@ func testCommonNativeHelperFilesRenderSetLastErrorTypedPointerNullWrapper() {
     let specs = ArrayList<NativeFunctionSpec>()
     specs.add(NativeFunctionSpec("Windows.Win32.Security.Cryptography", "Windows.Win32.Security.Cryptography.Apis", certMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Security.Cryptography",
         specs,
         symbolsByName
@@ -4398,14 +4398,14 @@ func testCommonNativeHelperFilesRenderSendMessageTimeoutCheckedWrapper() {
     let specs = ArrayList<NativeFunctionSpec>()
     specs.add(NativeFunctionSpec("Windows.Win32.UI.WindowsAndMessaging", "Windows.Win32.UI.WindowsAndMessaging.Apis", method))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.UI.WindowsAndMessaging",
         specs,
         HashMap<String, SymbolRecord>()
     )
 
-    @Expect(helper.contains("import windows_common.Win32.Foundation.GetLastError"), false)
-    @Expect(helper.contains("import windows_common.Win32.Foundation.SetLastError"), false)
+    @Expect(helper.contains("import windows_sys.Win32.Foundation.GetLastError"), false)
+    @Expect(helper.contains("import windows_sys.Win32.Foundation.SetLastError"), false)
     @Expect(helper.contains("public func SendMessageTimeoutW(hWnd: CPointer<Unit>, Msg: UInt32, wParam: UIntNative, lParam: IntNative, fuFlags: UInt32, uTimeout: UInt32, lpdwResult: CPointer<UIntNative>): IntNative"), true)
     @Expect(helper.contains("public func SendMessageTimeoutWChecked(hWnd: CPointer<Unit>, Msg: UInt32, wParam: UIntNative, lParam: IntNative, fuFlags: UInt32, uTimeout: UInt32, lpdwResult: CPointer<UIntNative>): windows_core.Result<IntNative>"), true)
     @Expect(helper.contains("let setLastErrorProc__ = CFunc<(UInt32) -> Unit>(windows_libloading.resolveProc(\"KERNEL32.dll\", \"SetLastError\"))\n    unsafe { setLastErrorProc__(0u32) }\n    let result__ = SendMessageTimeoutW(hWnd, Msg, wParam, lParam, fuFlags, uTimeout, lpdwResult)\n    if (result__ != 0) {\n        return windows_core.Result<IntNative>.Ok(result__)\n    }\n    let getLastErrorProc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc(\"KERNEL32.dll\", \"GetLastError\"))\n    let lastError__ = unsafe { getLastErrorProc__() }\n    if (lastError__ == 0u32) {\n        return windows_core.Result<IntNative>.Err(windows_core.errorFromHRESULT(windows_core.E_FAIL))\n    }\n    windows_core.Result<IntNative>.Err(windows_core.errorFromWin32(lastError__))"), true)
@@ -4474,7 +4474,7 @@ func testCommonNativeHelperFilesRenderFileSystemUInt32SentinelWrappers() {
     specs.add(NativeFunctionSpec("Windows.Win32.Storage.FileSystem", "Windows.Win32.Storage.FileSystem.Apis", versionSizeMethod))
     specs.add(NativeFunctionSpec("Windows.Win32.Storage.FileSystem", "Windows.Win32.Storage.FileSystem.Apis", queryDosDeviceMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Storage.FileSystem",
         specs,
         HashMap<String, SymbolRecord>()
@@ -4673,7 +4673,7 @@ func testCommonNativeHelperFilesSkipCheckedWrapperForSetLastErrorBoolPredicates(
     specs.add(NativeFunctionSpec("Windows.Win32.Security", "Windows.Win32.Security.Apis", getCachedSigningLevelMethod))
     specs.add(NativeFunctionSpec("Windows.Win32.Security", "Windows.Win32.Security.Apis", setCachedSigningLevelMethod))
     let helper = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Security",
         specs,
         symbolsByName
@@ -4787,7 +4787,7 @@ func testCommonNativeHelperFilesDoNotProjectNonWin32BoolByShortName() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -4883,7 +4883,7 @@ func testCommonNativeHelperFilesKeepWin32BoolPointersRaw() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -4897,12 +4897,12 @@ func testCommonNativeHelperFilesKeepWin32BoolPointersRaw() {
 func testCommonNativeHelperFilesRenderDynamicAppRuntimeSpecs() {
     let helpers = commonNativeHelperFiles(
         ArrayList<SymbolRecord>(),
-        "windows_common",
+        "windows_sys",
         HashMap<String, SymbolRecord>()
     )
     let appRuntime = cliTestHelperFile(helpers, "src/Native/AppRuntime/native_helpers.cj")
 
-    @Expect(appRuntime.contains("package windows_common.Native.AppRuntime"), true)
+    @Expect(appRuntime.contains("package windows_sys.Native.AppRuntime"), true)
     @Expect(appRuntime.contains("import windows_libloading as windows_libloading"), true)
     @Expect(appRuntime.contains("public func MddBootstrapInitialize2("), true)
     @Expect(appRuntime.contains("bootstrapDllPath: String"), true)
@@ -4915,7 +4915,7 @@ func testCommonNativeHelperFilesRenderDynamicAppRuntimeSpecs() {
 func testCommonNativeHelperFilesRenderSyntheticSupportApis() {
     let helpers = commonNativeHelperFiles(
         ArrayList<SymbolRecord>(),
-        "windows_common",
+        "windows_sys",
         HashMap<String, SymbolRecord>()
     )
     let systemInformation = cliTestHelperFile(helpers, "src/Win32/System/SystemInformation/native_helpers.cj")
@@ -5039,7 +5039,7 @@ func testCommonNativeHelperFilesUseRawPointersForProjectedClassPointers() {
     features.add("Example.Com")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Com/native_helpers.cj"
     )
 
@@ -5138,7 +5138,7 @@ func testCommonNativeHelperFilesUseNativeArrayInfoForLengthParameters() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -5236,7 +5236,7 @@ func testCommonNativeHelperFilesUseFixedNativeArrayInfoParameters() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -5353,7 +5353,7 @@ func testCommonNativeHelperFilesKeepSharedNativeArrayLengthExplicit() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -5452,7 +5452,7 @@ func testCommonNativeHelperFilesKeepOutNativeArrayLengthExplicit() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -5566,7 +5566,7 @@ func testCommonNativeHelperFilesKeepMixedSharedNativeArrayLengthExplicit() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -5664,7 +5664,7 @@ func testCommonNativeHelperFilesUseMemorySizeAttributeForByteArrays() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -5764,7 +5764,7 @@ func testCommonNativeHelperFilesKeepMemorySizeAttributeExplicitForNonByteArrays(
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -5842,7 +5842,7 @@ func testCommonNativeHelperFilesSkipForceInlinePseudoImports() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -5988,7 +5988,7 @@ func testCommonNativeHelperFilesRenderDelegateParametersWithNativeAbiTypes() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -6097,14 +6097,14 @@ func testCommonSelectionOmitsPInvokeContainers() {
 @Test
 func testCommonPackageCjpmOmitsUnusedSupportPackages() {
     let deps = ArrayList<String>()
-    let cjpm = renderCjpmToml("windows_common", supportDeps: deps)
+    let cjpm = renderCjpmToml("windows_sys", supportDeps: deps)
 
     @Expect(cjpm.contains("windows_core ="), false)
     @Expect(cjpm.contains("windows_polyfill ="), false)
-    @Expect(cjpm.contains("windows_common ="), false)
+    @Expect(cjpm.contains("windows_sys ="), false)
     @Expect(cjpm.contains("windows_libloading = { path = \"../windows_libloading\" }"), true)
     @Expect(cjpm.contains("[dependencies]"), true)
-    @Expect(cjpm.contains(".generated/windows_common"), false)
+    @Expect(cjpm.contains(".generated/windows_sys"), false)
 }
 
 @Test
@@ -6112,7 +6112,7 @@ func testCommonPackageCjpmUsesLocalPathDependencies() {
     let deps = ArrayList<String>()
     deps.add("windows_core")
     deps.add("windows_polyfill")
-    let cjpm = renderCjpmToml("windows_common", supportDeps: deps)
+    let cjpm = renderCjpmToml("windows_sys", supportDeps: deps)
 
     @Expect(cjpm.contains("windows_core = { path = \"../windows_core\" }"), true)
     @Expect(cjpm.contains("windows_polyfill = { path = \"../windows_polyfill\" }"), true)
@@ -6124,7 +6124,7 @@ func testCommonPackageCjpmUsesLocalPathDependencies() {
 func testCommonNativeHelpersImportLibloadingDirectly() {
     let helpers = commonNativeHelperFiles(
         ArrayList<SymbolRecord>(),
-        "windows_common",
+        "windows_sys",
         HashMap<String, SymbolRecord>()
     )
     let native = cliTestHelperFile(helpers, "src/Native/native_helpers.cj")
@@ -6132,13 +6132,13 @@ func testCommonNativeHelpersImportLibloadingDirectly() {
     let appRuntime = cliTestHelperFile(helpers, "src/Native/AppRuntime/native_helpers.cj")
 
     @Expect(native.isEmpty(), true)
-    @Expect(nativeMod.contains("package windows_common.Native"), true)
+    @Expect(nativeMod.contains("package windows_sys.Native"), true)
     @Expect(nativeMod.contains("resolveProc"), false)
     @Expect(nativeMod.contains("windows_libloading"), false)
-    @Expect(appRuntime.contains("package windows_common.Native.AppRuntime"), true)
+    @Expect(appRuntime.contains("package windows_sys.Native.AppRuntime"), true)
     @Expect(appRuntime.contains("import windows_libloading as windows_libloading"), true)
     @Expect(appRuntime.contains("windows_libloading.resolveProc"), true)
-    @Expect(appRuntime.contains("import windows_common.Native as Native"), false)
+    @Expect(appRuntime.contains("import windows_sys.Native as Native"), false)
     @Expect(appRuntime.contains("Native.resolveProc"), false)
 }
 
@@ -6187,7 +6187,7 @@ func testCommonNativeHelpersRenderSystemGuidPointersAsGuidPointers() {
     ))
 
     let content = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.Com",
         specs,
         HashMap<String, SymbolRecord>()
@@ -6222,7 +6222,7 @@ func testCommonNativeHelpersPreserveNestedVoidPointerDepth() {
     ))
 
     let content = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.Com",
         specs,
         HashMap<String, SymbolRecord>()
@@ -6273,7 +6273,7 @@ func testCommonNativeHelpersUseNativeIntegerForSizeT() {
     ))
 
     let content = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.Com",
         specs,
         HashMap<String, SymbolRecord>()
@@ -6380,7 +6380,7 @@ func testCommonNativeHelpersDoNotProjectNonWin32PointerSizedIntegersByShortName(
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -6428,7 +6428,7 @@ func testCommonNativeHelpersUseFoundationCharAndBooleanRemapsWithoutTypeDefiniti
     ))
 
     let content = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Foundation",
         specs,
         HashMap<String, SymbolRecord>()
@@ -6567,7 +6567,7 @@ func testCommonNativeHelpersDoNotProjectNonWin32CharAndBooleanByShortName() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -6605,13 +6605,13 @@ func testCommonNativeHelpersUseEventRegistrationTokenRemapsWithoutTypeDefinition
     ))
 
     let winrtContent = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.WinRT",
         specs,
         HashMap<String, SymbolRecord>()
     )
     let foundationContent = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Foundation",
         specs,
         HashMap<String, SymbolRecord>()
@@ -6720,7 +6720,7 @@ func testCommonNativeHelpersDoNotProjectNonWin32EventRegistrationTokenByShortNam
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -6757,13 +6757,13 @@ func testCommonNativeHelpersUseHResultRemapsWithoutTypeDefinitions() {
     ))
 
     let win32Content = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Foundation",
         specs,
         HashMap<String, SymbolRecord>()
     )
     let foundationContent = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Foundation",
         specs,
         HashMap<String, SymbolRecord>()
@@ -6876,7 +6876,7 @@ func testCommonNativeHelpersDoNotProjectNonWin32HResultByShortName() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -6959,7 +6959,7 @@ func testCommonNativeHelpersUseBStrRemapsWithoutTypeDefinitions() {
         )
     ))
     let content = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Foundation",
         specs,
         HashMap<String, SymbolRecord>()
@@ -6967,7 +6967,7 @@ func testCommonNativeHelpersUseBStrRemapsWithoutTypeDefinitions() {
     let files = ArrayList<GeneratedNativeHelperFile>()
     files.add(GeneratedNativeHelperFile("src/Win32/Foundation/native_helpers.cj", content))
     let deps = ArrayList<String>()
-    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_common", deps, files)
+    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_sys", deps, files)
 
     @Expect(content.contains("import windows_strings as windows_strings"), true)
     @Expect(content.contains("public func SysAllocString(psz: CPointer<UInt16>): windows_strings.BSTR"), true)
@@ -7011,7 +7011,7 @@ func testCommonNativeHelpersDoNotImportBStrResourceForPointerOnlySlots() {
         )
     ))
     let content = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Foundation",
         specs,
         HashMap<String, SymbolRecord>()
@@ -7019,7 +7019,7 @@ func testCommonNativeHelpersDoNotImportBStrResourceForPointerOnlySlots() {
     let files = ArrayList<GeneratedNativeHelperFile>()
     files.add(GeneratedNativeHelperFile("src/Win32/Foundation/native_helpers.cj", content))
     let deps = ArrayList<String>()
-    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_common", deps, files)
+    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_sys", deps, files)
 
     @Expect(content.contains("public func SysReAllocString(pbstr: CPointer<CPointer<Unit>>, psz: CPointer<UInt16>): Int32"), true)
     @Expect(content.contains("let proc = CFunc<(CPointer<CPointer<Unit>>, CPointer<UInt16>) -> Int32>"), true)
@@ -7121,7 +7121,7 @@ func testCommonNativeHelpersDoNotProjectNonWin32BStrByShortName() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -7209,7 +7209,7 @@ func testCommonNativeHelpersUseHStringRemapsWithoutTypeDefinitions() {
         )
     ))
     let content = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.WinRT",
         specs,
         HashMap<String, SymbolRecord>()
@@ -7217,7 +7217,7 @@ func testCommonNativeHelpersUseHStringRemapsWithoutTypeDefinitions() {
     let files = ArrayList<GeneratedNativeHelperFile>()
     files.add(GeneratedNativeHelperFile("src/Win32/System/WinRT/native_helpers.cj", content))
     let deps = ArrayList<String>()
-    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_common", deps, files)
+    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_sys", deps, files)
 
     @Expect(content.contains("import windows_core as windows_core"), true)
     @Expect(content.contains("public func WindowsGetStringLen(string: windows_core.HString): UInt32"), true)
@@ -7265,7 +7265,7 @@ func testCommonNativeHelpersDoNotImportHStringResourceForPointerOnlySlots() {
         )
     ))
     let content = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.WinRT",
         specs,
         HashMap<String, SymbolRecord>()
@@ -7273,7 +7273,7 @@ func testCommonNativeHelpersDoNotImportHStringResourceForPointerOnlySlots() {
     let files = ArrayList<GeneratedNativeHelperFile>()
     files.add(GeneratedNativeHelperFile("src/Win32/System/WinRT/native_helpers.cj", content))
     let deps = ArrayList<String>()
-    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_common", deps, files)
+    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_sys", deps, files)
 
     @Expect(content.contains("public func HSTRING_UserFree(flags: CPointer<UInt32>, string: CPointer<CPointer<Unit>>): Unit"), true)
     @Expect(content.contains("let proc = CFunc<(CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Unit>"), true)
@@ -7375,7 +7375,7 @@ func testCommonNativeHelpersDoNotProjectNonWinRtHStringByShortName() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -7423,7 +7423,7 @@ func testCommonNativeHelpersUseComInterfaceRemapsWithoutTypeDefinitions() {
         )
     ))
     let content = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.System.Com",
         specs,
         HashMap<String, SymbolRecord>()
@@ -7431,7 +7431,7 @@ func testCommonNativeHelpersUseComInterfaceRemapsWithoutTypeDefinitions() {
     let files = ArrayList<GeneratedNativeHelperFile>()
     files.add(GeneratedNativeHelperFile("src/Win32/System/Com/native_helpers.cj", content))
     let deps = ArrayList<String>()
-    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_common", deps, files)
+    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_sys", deps, files)
 
     @Expect(content.contains("import windows_interface as windows_interface"), true)
     @Expect(content.contains("public func Inspect(input: windows_interface.IInspectable): windows_interface.IUnknown"), true)
@@ -7539,7 +7539,7 @@ func testCommonNativeHelpersDoNotProjectNonWin32ComInterfacesByShortName() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -7810,28 +7810,28 @@ func testCommonNativeHelpersRemapDirect2DAndDirect3DNumericsTypes() {
     let symbolsByName = recordsByFullName(records)
 
     let direct2d = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Graphics.Direct2D.Common",
         specs,
         symbolsByName
     )
     let direct3d = renderNativeHelperNamespaceSource(
-        "windows_common",
+        "windows_sys",
         "Windows.Win32.Graphics.Direct3D",
         specs,
         symbolsByName
     )
 
-    @Expect(direct2d.contains("import windows_common.Foundation.Numerics.Vector2"), true)
-    @Expect(direct2d.contains("import windows_common.Foundation.Numerics.Matrix3x2"), true)
-    @Expect(direct2d.contains("import windows_common.Foundation.Numerics.Vector4"), true)
+    @Expect(direct2d.contains("import windows_sys.Foundation.Numerics.Vector2"), true)
+    @Expect(direct2d.contains("import windows_sys.Foundation.Numerics.Matrix3x2"), true)
+    @Expect(direct2d.contains("import windows_sys.Foundation.Numerics.Vector4"), true)
     @Expect(direct2d.contains("public func UsePoint(point: Vector2): Vector2"), true)
     @Expect(direct2d.contains("public func UseVector4(matrix: Matrix3x2): Vector4"), true)
     @Expect(direct2d.contains("let proc = CFunc<(Vector2) -> Vector2>"), true)
     @Expect(direct2d.contains("let proc = CFunc<(Matrix3x2) -> Vector4>"), true)
     @Expect(direct2d.contains("return unsafe { proc(point) }"), true)
     @Expect(direct2d.contains("return unsafe { proc(matrix) }"), true)
-    @Expect(direct3d.contains("import windows_common.Foundation.Numerics.Matrix4x4"), true)
+    @Expect(direct3d.contains("import windows_sys.Foundation.Numerics.Matrix4x4"), true)
     @Expect(direct3d.contains("public func UseMatrix(matrix: Matrix4x4): Matrix4x4"), true)
     @Expect(direct3d.contains("let proc = CFunc<(Matrix4x4) -> Matrix4x4>"), true)
     @Expect(direct3d.contains("return unsafe { proc(matrix) }"), true)
@@ -7843,7 +7843,7 @@ func testCommonNativeHelpersRemapDirect2DAndDirect3DNumericsTypes() {
     features.add("Windows.Win32.Graphics.Direct3D")
     let selected = selectSymbols(features, records)
     let selectedByName = recordsByFullName(selected)
-    let helpers = commonNativeHelperFiles(selected, "windows_common", selectedByName)
+    let helpers = commonNativeHelperFiles(selected, "windows_sys", selectedByName)
     let productionDirect2d = cliTestHelperFile(helpers, "src/Win32/Graphics/Direct2D/Common/native_helpers.cj")
     let productionDirect3d = cliTestHelperFile(helpers, "src/Win32/Graphics/Direct3D/native_helpers.cj")
 
@@ -7853,11 +7853,11 @@ func testCommonNativeHelpersRemapDirect2DAndDirect3DNumericsTypes() {
     @Expect(cliTestContainsSymbol(selected, "Windows.Foundation.Numerics.Matrix4x4"), true)
 
     let writer = GeneratedPackageWriter("__windows_cj_dry_run__", true)
-    writeImplFiles(writer, selected, "windows_common", selectedByName)
-    writeFacadeFiles(writer, "Windows.Foundation.Numerics", selected, "windows_common")
+    writeImplFiles(writer, selected, "windows_sys", selectedByName)
+    writeFacadeFiles(writer, "Windows.Foundation.Numerics", selected, "windows_sys")
     let numericsImpl = writer.writtenFileContent.get("src/impl/Windows_Foundation_Numerics/symbols_0.cj").getOrThrow()
     let numericsFacade = writer.writtenFileContent.get("src/Foundation/Numerics/facade_0.cj").getOrThrow()
-    @Expect(numericsFacade.contains("import windows_common.impl.Windows_Foundation_Numerics.*"), true)
+    @Expect(numericsFacade.contains("import windows_sys.impl.Windows_Foundation_Numerics.*"), true)
     @Expect(numericsFacade.contains("public type Matrix3x2 = Windows_Foundation_Numerics_Matrix3x2"), true)
     @Expect(numericsFacade.contains("public type Vector4 = Windows_Foundation_Numerics_Vector4"), true)
     @Expect(numericsImpl.contains("public struct Windows_Foundation_Numerics_Matrix3x2"), true)
@@ -7865,14 +7865,14 @@ func testCommonNativeHelpersRemapDirect2DAndDirect3DNumericsTypes() {
     @Expect(numericsImpl.contains("public struct Windows_Foundation_Numerics_Vector4"), true)
     @Expect(numericsImpl.contains("public var W: Float32 = 0.0"), true)
 
-    @Expect(productionDirect2d.contains("import windows_common.Foundation.Numerics.Matrix3x2"), true)
-    @Expect(productionDirect2d.contains("import windows_common.Foundation.Numerics.Matrix4x4"), true)
-    @Expect(productionDirect2d.contains("import windows_common.Foundation.Numerics.Vector2"), true)
-    @Expect(productionDirect2d.contains("import windows_common.Foundation.Numerics.Vector4"), true)
+    @Expect(productionDirect2d.contains("import windows_sys.Foundation.Numerics.Matrix3x2"), true)
+    @Expect(productionDirect2d.contains("import windows_sys.Foundation.Numerics.Matrix4x4"), true)
+    @Expect(productionDirect2d.contains("import windows_sys.Foundation.Numerics.Vector2"), true)
+    @Expect(productionDirect2d.contains("import windows_sys.Foundation.Numerics.Vector4"), true)
     @Expect(productionDirect2d.contains("public func UsePoint(point: Vector2): Vector2"), true)
     @Expect(productionDirect2d.contains("public func UseVector4(matrix: Matrix3x2): Vector4"), true)
     @Expect(productionDirect2d.contains("public func UseMatrix4(matrix: Matrix4x4): Matrix4x4"), true)
-    @Expect(productionDirect3d.contains("import windows_common.Foundation.Numerics.Matrix4x4"), true)
+    @Expect(productionDirect3d.contains("import windows_sys.Foundation.Numerics.Matrix4x4"), true)
     @Expect(productionDirect3d.contains("public func UseMatrix(matrix: Matrix4x4): Matrix4x4"), true)
     @Expect(productionDirect2d.contains("CPointer<Unit>"), false)
     @Expect(productionDirect3d.contains("CPointer<Unit>"), false)
@@ -7971,7 +7971,7 @@ func testCommonNativeHelpersDoNotRemapNonDirect2DNumericsShortNames() {
     features.add("Example.Native")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Example/Native/native_helpers.cj"
     )
 
@@ -7986,11 +7986,11 @@ func testCommonNativeHelperImportsParticipateInSupportDependencies() {
     let files = ArrayList<GeneratedNativeHelperFile>()
     files.add(GeneratedNativeHelperFile(
         "src/Win32/System/Com/native_helpers.cj",
-        "package windows_common.Win32.System.Com\n\nimport windows_libloading as windows_libloading\nimport windows_interface.GUID\n\nlet _ = windows_libloading.resolveProc\n"
+        "package windows_sys.Win32.System.Com\n\nimport windows_libloading as windows_libloading\nimport windows_interface.GUID\n\nlet _ = windows_libloading.resolveProc\n"
     ))
     let deps = ArrayList<String>()
 
-    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_common", deps, files)
+    collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_sys", deps, files)
 
     @Expect(cliTestContainsString(deps.toArray(), "windows_interface"), true)
     @Expect(cliTestContainsString(deps.toArray(), "windows_libloading"), true)
@@ -8001,10 +8001,10 @@ func testCommonPackageNamesAreFlatAndCfgFree() {
     let config = parseArgs(["--common", "--feature", "Microsoft.Web.WebView2.Core"])
     let cjpm = renderCjpmToml(config.packageName)
 
-    @Expect(config.packageName, "windows_common")
-    @Expect(config.outputDir, "windows_common")
-    @Expect(namespaceToPackage("Windows.Foundation", config.packageName), "windows_common.Foundation")
-    @Expect(namespaceToPackage("Microsoft.Web.WebView2.Core", config.packageName), "windows_common.Microsoft.Web.WebView2.Core")
+    @Expect(config.packageName, "windows_sys")
+    @Expect(config.outputDir, "windows_sys")
+    @Expect(namespaceToPackage("Windows.Foundation", config.packageName), "windows_sys.Foundation")
+    @Expect(namespaceToPackage("Microsoft.Web.WebView2.Core", config.packageName), "windows_sys.Microsoft.Web.WebView2.Core")
     @Expect(namespaceToRelativePath("Windows.Foundation"), "src/Foundation/mod.cj")
     @Expect(cjpm.contains("@When"), false)
     @Expect(cjpm.contains("--cfg"), false)

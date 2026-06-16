@@ -80,7 +80,7 @@ func collectSupportDependencyNamesFromSource(
 func stableSupportDependencyNames(): Array<String> {
     return [
         "windows_collections",
-        "windows_common",
+        "windows_sys",
         "windows_core",
         "windows_foundation",
         "windows_future",
@@ -96,7 +96,7 @@ func stableSupportDependencyNames(): Array<String> {
 func stableSupportDependencyPath(dependency: String): String {
     match (dependency) {
         case "windows_collections" => return "windows_collections"
-        case "windows_common" => return "windows_common"
+        case "windows_sys" => return "windows_sys"
         case "windows_core" => return "windows_core"
         case "windows_foundation" => return "windows_foundation"
         case "windows_future" => return "windows_future"
@@ -167,8 +167,8 @@ func windowsImportPayload(line: String): Option<String> {
         text = stripPrefix(text, "public ")
         text = trimAscii(text)
     }
-    if (startsWith(text, "import windows_common.")) {
-        return Some(stripPrefix(text, "import windows_common."))
+    if (startsWith(text, "import windows_sys.")) {
+        return Some(stripPrefix(text, "import windows_sys."))
     }
     if (startsWith(text, "import windows.")) {
         return Some(stripPrefix(text, "import windows."))

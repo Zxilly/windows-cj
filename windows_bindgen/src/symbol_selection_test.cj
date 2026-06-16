@@ -550,7 +550,7 @@ func testFilterReferencedSymbolsDoesNotFilterSubNamespaces() {
     symbols.add(SymbolRecord("Windows.Win32.Security.ACL", "Windows.Win32.Security", "ACL", "Windows_Win32_Security_ACL", []))
     symbols.add(SymbolRecord("Windows.Win32.Security.Cryptography.ALG_ID", "Windows.Win32.Security.Cryptography", "ALG_ID", "Windows_Win32_Security_Cryptography_ALG_ID", []))
     let references = ArrayList<ReferenceStage>()
-    references.add(ReferenceStage.parse("windows_common,skip-root,Windows.Win32.Security"))
+    references.add(ReferenceStage.parse("windows_sys,skip-root,Windows.Win32.Security"))
 
     let remaining = filterReferencedSymbols(symbols, references)
 
@@ -564,7 +564,7 @@ func testFilterReferencedSymbolsSupportsWildcardForNamespacePrefix() {
     symbols.add(SymbolRecord("Windows.Win32.Security.ACL", "Windows.Win32.Security", "ACL", "Windows_Win32_Security_ACL", []))
     symbols.add(SymbolRecord("Windows.Win32.Security.Cryptography.ALG_ID", "Windows.Win32.Security.Cryptography", "ALG_ID", "Windows_Win32_Security_Cryptography_ALG_ID", []))
     let references = ArrayList<ReferenceStage>()
-    references.add(ReferenceStage.parse("windows_common,skip-root,Windows.Win32.Security*"))
+    references.add(ReferenceStage.parse("windows_sys,skip-root,Windows.Win32.Security*"))
 
     let remaining = filterReferencedSymbols(symbols, references)
 

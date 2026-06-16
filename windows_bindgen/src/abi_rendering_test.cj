@@ -6518,7 +6518,7 @@ func testWin32PointerSizedIntegerAbiContextsUseNativeAliases() {
     features.add("Tiny.Foundation")
     let selected = selectSymbols(features, records)
     let helper = cliTestHelperFile(
-        commonNativeHelperFiles(selected, "windows_common", recordsByFullName(selected)),
+        commonNativeHelperFiles(selected, "windows_sys", recordsByFullName(selected)),
         "src/Tiny/Foundation/native_helpers.cj"
     )
 

@@ -234,8 +234,8 @@ func testParseArgsCommonModeDefaultsOutputAndFeatures() {
     let config = parseArgs(["--input-json", "metadata.json", "--common"])
 
     @Expect(config.common, true)
-    @Expect(config.packageName, "windows_common")
-    @Expect(config.outputDir, "windows_common")
+    @Expect(config.packageName, "windows_sys")
+    @Expect(config.outputDir, "windows_sys")
     @Expect(config.features.isEmpty(), true)
     @Expect(config.supportPackageDirs.isEmpty(), false)
 }

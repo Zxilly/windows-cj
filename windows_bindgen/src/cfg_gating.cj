@@ -7,7 +7,7 @@ import std.collection.*
 // Each WinRT/Win32 namespace maps to one Cangjie cfg variable whose name is the
 // namespace with '.' replaced by '_' (e.g. "Microsoft.UI.Composition" ->
 // "Microsoft_UI_Composition"). The generator decorates every top-level
-// declaration it emits into the windows_common.impl package, and every facade
+// declaration it emits into the windows_sys.impl package, and every facade
 // re-export, with `@When[<ns_var> == "on"]`. When the variable is "off" (the
 // default in the per-package cfg.toml) the declaration is removed during the
 // compiler's ConditionalCompilation phase, so it never reaches Semantic / CHIR /
@@ -117,8 +117,8 @@ func directoryOfRelativePath(relativePath: String): String {
 }
 
 // The package name for a gated source directory (`src/Win32/Foundation` ->
-// `windows_common.Win32.Foundation`, `src/Native/AppRuntime` ->
-// `windows_common.Native.AppRuntime`). The directory layout already encodes the
+// `windows_sys.Win32.Foundation`, `src/Native/AppRuntime` ->
+// `windows_sys.Native.AppRuntime`). The directory layout already encodes the
 // namespace (Windows-rooted namespaces have their root stripped by
 // namespaceToDirectory), so replacing the `src` segment with the package name and
 // '/' with '.' reconstructs the package exactly.

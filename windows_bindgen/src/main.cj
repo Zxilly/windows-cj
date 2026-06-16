@@ -183,9 +183,9 @@ public class BindgenBuilder {
 
     public func common(): BindgenBuilder {
         config.common = true
-        config.packageName = "windows_common"
+        config.packageName = "windows_sys"
         if (config.outputDir == ".generated/windows") {
-            config.outputDir = "windows_common"
+            config.outputDir = "windows_sys"
         }
         return this
     }
@@ -453,9 +453,9 @@ func parseArgs(args: Array<String>): CliConfig {
                 config.manifestPath = args[i]
             case "--common" =>
                 config.common = true
-                config.packageName = "windows_common"
+                config.packageName = "windows_sys"
                 if (config.outputDir == ".generated/windows") {
-                    config.outputDir = "windows_common"
+                    config.outputDir = "windows_sys"
                 }
             case "--clean" => config.clean = true
             case "--dry-run" => config.dryRun = true
@@ -1486,7 +1486,7 @@ func renderCjpmToml(packageName: String, supportDeps!: ArrayList<String> = Array
     for (dependency in supportDeps) {
         addUnique(effectiveSupportDeps, dependency)
     }
-    if (packageName == "windows_common") {
+    if (packageName == "windows_sys") {
         addUnique(effectiveSupportDeps, "windows_libloading")
     }
     let linkOptions = collectSupportLinkOptions(effectiveSupportDeps)
@@ -1508,7 +1508,7 @@ func renderCjpmToml(packageName: String, supportDeps!: ArrayList<String> = Array
 }
 
 func generatedPackageDependencyPrefix(packageName: String): String {
-    if (packageName == "windows_common") {
+    if (packageName == "windows_sys") {
         return ".."
     }
     return "../.."
