@@ -914,6 +914,18 @@ public class WinUIBackend <: Backend {
         }
     }
 
+    public func runEnterTransition(id: ControlId, config: ?AnimationConfig): Unit {
+        match (controls.get(id.raw)) {
+            case Some(h) =>
+                try {
+                    animRunEnterTransition(h, config)
+                } catch (e: Exception) {
+                    println("WinUIBackend.runEnterTransition(#${id.raw}) failed: ${e}")
+                }
+            case None => ()
+        }
+    }
+
     public func setRichTextParagraphs(id: ControlId, paragraphs: Array<RichTextParagraph>): Unit {
         match (controls.get(id.raw)) {
             case Some(h) =>

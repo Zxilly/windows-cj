@@ -262,6 +262,61 @@ func animRunProperty(handle: Handle, config: ?AnimationConfig): Unit {
     }
 }
 
+// Run an ENTER (mount) transition: drive the element's composition Visual from
+// the config's "from" opacity to the natural 1.0, producing a fade IN. Unlike
+// animRunProperty (which animates the CURRENT value -> the config value, and so
+// cannot express "appear from nothing" for an element whose Visual defaults to
+// opacity 1), this inserts an explicit progress-0 from-key-frame. It drives the
+// composition Opacity channel directly (not the XAML UIElement.Opacity facade),
+// so it does NOT double-drive / conflict with XAML layout the way a facade
+// `.opacity()` + implicit transition would.
+func animRunEnterTransition(handle: Handle, config: ?AnimationConfig): Unit {
+    let cfg = match (config) {
+        case Some(c) => c
+        case None => return
+    }
+    let visual = elementVisual(handle)
+    try {
+        let compObj = compositionObjectOf(visual)
+        try {
+            let compositor = compObj.Compositor
+            try {
+                match (cfg.opacity) {
+                    case Some(fromOpacity) => runEnterOpacity(compObj, compositor, Float32(fromOpacity), cfg)
+                    case None => ()
+                }
+            } finally {
+                compositor.close()
+            }
+        } finally {
+            compObj.close()
+        }
+    } finally {
+        visual.close()
+    }
+}
+
+// Opacity fade-in: animate the composition Opacity from `fromValue` (e.g. 0) to
+// 1.0 over the config duration. The explicit progress-0 key-frame fixes the start
+// regardless of the Visual's current Opacity.
+func runEnterOpacity(compObj: CompositionObject, compositor: Compositor,
+                     fromValue: Float32, cfg: AnimationConfig): Unit {
+    let anim = compositor.CreateScalarKeyFrameAnimation()
+    try {
+        setAnimationDuration(anim.asRaw(), cfg.durationMs)
+        let easing = easingFor(compositor, cfg.easing)
+        try {
+            anim.InsertKeyFrameWithEasingFunction(0.0f32, fromValue, easing)
+            anim.InsertKeyFrameWithEasingFunction(1.0f32, 1.0f32, easing)
+        } finally {
+            easing.close()
+        }
+        startAnimation(compObj, "Opacity", anim.asRaw())
+    } finally {
+        anim.close()
+    }
+}
+
 // ── private helpers ─────────────────────────────────────────────────────────
 
 func vec2(x: Float64, y: Float64): Windows_Foundation_Numerics_Vector2 {

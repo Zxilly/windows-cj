@@ -561,7 +561,7 @@ public class Reconciler {
                     case Some(p) => backend.runPropertyAnimation(id, Some(p))
                     case None =>
                         match (anim.enterTransition) {
-                            case Some(enter) => backend.runPropertyAnimation(id, Some(enter))
+                            case Some(enter) => backend.runEnterTransition(id, Some(enter))
                             case None => ()
                         }
                 }

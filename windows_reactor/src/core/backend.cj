@@ -741,6 +741,15 @@ public interface Backend {
     func runPropertyAnimation(id: ControlId, config: ?AnimationConfig): Unit {
         let _ = id; let _ = config
     }
+    // Run an ENTER (mount) transition: the config's opacity/scale are the FROM
+    // state and the animation drives them to the natural 1.0 over its duration —
+    // i.e. a fade/scale IN. (runPropertyAnimation animates the current value TO
+    // the config value, which cannot express "appear from nothing"; enter needs an
+    // explicit from-keyframe, so it is a distinct entry point.) Default no-op;
+    // the WinUI backend drives the element's composition Visual.
+    func runEnterTransition(id: ControlId, config: ?AnimationConfig): Unit {
+        let _ = id; let _ = config
+    }
     func setRichTextParagraphs(id: ControlId, paragraphs: Array<RichTextParagraph>): Unit {
         let _ = id; let _ = paragraphs
     }
