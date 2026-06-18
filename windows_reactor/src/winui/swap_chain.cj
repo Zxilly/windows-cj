@@ -7,12 +7,11 @@ import windows_core.{
     queryInterfaceRaw
 }
 import windows_interface.{IInspectable}
-import windows_reactor.bindings.Microsoft.UI.Xaml.{IUIElement, IFrameworkElement, FrameworkElement, SizeChangedEventHandler}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{SwapChainPanel}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Media.{CompositionTarget}
-import windows_reactor.bindings.Win32.System.WinRT.Xaml.{ISwapChainPanelNativeVtbl}
-import windows_reactor.bindings.Foundation.{TypedEventHandler, EventHandler}
-
+import windows_reactor.bindings.{IUIElement, IFrameworkElement, FrameworkElement, SizeChangedEventHandler}
+import windows_reactor.bindings.{SwapChainPanel}
+import windows_reactor.bindings.{CompositionTarget}
+import windows_reactor.bindings.{ISwapChainPanelNativeVtbl}
+import windows_reactor.bindings.{TypedEventHandler, EventHandler}
 // ============================================================================
 // SwapChainPanel subsystem (phase B of the canvas port).
 //

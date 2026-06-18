@@ -3,20 +3,10 @@ package windows_reactor.winui
 import windows_reactor.core.{ControlKind}
 import windows_core.{OutSlot}
 import windows_interface.{IInspectable}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
-    TextBlock, Button, StackPanel, Border, CheckBox, TextBox, Grid, ScrollViewer,
-    ToggleSwitch, Slider, RadioButton, NumberBox, ProgressBar, ProgressRing, Expander,
-    HyperlinkButton, InfoBar, InfoBadge, PersonPicture, Image, TabView, TabViewItem,
-    NavigationView, TitleBar, Pivot, PivotItem, BreadcrumbBar, PasswordBox, RadioButtons,
-    ComboBox, Canvas, RichTextBlock, ListView, GridView, FlipView, ContentDialog, Viewbox,
-    RatingControl, ColorPicker, DatePicker, TimePicker, CalendarDatePicker, CalendarView,
-    ListBox, DropDownButton, SplitButton, AutoSuggestBox, SplitView, MenuBar, ScrollView,
-    TreeView, CommandBar, TeachingTip, SelectorBar, RichEditBox, RelativePanel
-}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.Primitives.{RepeatButton, ToggleButton}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Shapes.{Rectangle, Ellipse, Line}
-import windows_reactor.bindings.Microsoft.UI.Xaml.{IFrameworkElement, IUIElement}
-
+import windows_reactor.bindings.{TextBlock, Button, StackPanel, Border, CheckBox, TextBox, Grid, ScrollViewer, ToggleSwitch, Slider, RadioButton, NumberBox, ProgressBar, ProgressRing, Expander, HyperlinkButton, InfoBar, InfoBadge, PersonPicture, Image, TabView, TabViewItem, NavigationView, TitleBar, Pivot, PivotItem, BreadcrumbBar, PasswordBox, RadioButtons, ComboBox, Canvas, RichTextBlock, ListView, GridView, FlipView, ContentDialog, Viewbox, RatingControl, ColorPicker, DatePicker, TimePicker, CalendarDatePicker, CalendarView, ListBox, DropDownButton, SplitButton, AutoSuggestBox, SplitView, MenuBar, ScrollView, TreeView, CommandBar, TeachingTip, SelectorBar, RichEditBox, RelativePanel}
+import windows_reactor.bindings.{RepeatButton, ToggleButton}
+import windows_reactor.bindings.{Rectangle, Ellipse, Line}
+import windows_reactor.bindings.{IFrameworkElement, IUIElement}
 // ============================================================================
 // Handle — one variant per backend-creatable ControlKind (61), each holding its
 // backing projection class. The projection is a GC-managed reference that owns

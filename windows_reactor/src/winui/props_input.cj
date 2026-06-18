@@ -4,14 +4,10 @@ import windows_reactor.core.{Prop, PropValue}
 import windows_core.{HString}
 import windows_interface.{IInspectable}
 import windows_reference.{IReference, hStringReference, boolReference}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
-    Control, ContentControl, TextBlock, ToggleSwitch, Slider, NumberBox,
-    ProgressBar, ProgressRing, RadioButton, RadioButtons, RatingControl
-}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.Primitives.{ToggleButton, RangeBase}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{Orientation_Vertical as Microsoft_UI_Xaml_Controls_Orientation_Vertical, Orientation_Horizontal as Microsoft_UI_Xaml_Controls_Orientation_Horizontal}
-import windows_reactor.bindings.Foundation.{IReference as Windows_Foundation_IReference_1}
-
+import windows_reactor.bindings.{Control, ContentControl, TextBlock, ToggleSwitch, Slider, NumberBox, ProgressBar, ProgressRing, RadioButton, RadioButtons, RatingControl}
+import windows_reactor.bindings.{ToggleButton, RangeBase}
+import windows_reactor.bindings.{Orientation_Vertical as Microsoft_UI_Xaml_Controls_Orientation_Vertical, Orientation_Horizontal as Microsoft_UI_Xaml_Controls_Orientation_Horizontal}
+import windows_reactor.bindings.{IReference as Windows_Foundation_IReference_1}
 // Per-family property setters for value / toggle input controls (CheckBox,
 // RadioButton, RadioButtons, ToggleSwitch, Slider, NumberBox, ProgressBar,
 // ProgressRing, RatingControl). Returns true when the prop was consumed.

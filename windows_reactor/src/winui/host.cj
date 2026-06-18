@@ -2,30 +2,18 @@ package windows_reactor.winui
 
 import std.collection.ArrayList
 import std.math.round
-import windows_reactor.bindings.Microsoft.UI.Xaml.{
-    Application,
-    IApplicationFactory,
-    IApplicationFactoryVtbl,
-    IApplicationOverrides,
-    IApplicationStatics,
-    IApplicationStaticsVtbl,
-    IUIElement,
-    IWindowFactory,
-    IWindowFactoryVtbl,
-    UIElement,
-    Window
-}
-import windows_reactor.bindings.Microsoft.UI.Xaml.{ResourceDictionary}
-import windows_reactor.bindings.Microsoft.UI.Xaml.{ResourceManagerRequestedEventArgs}
-import windows_reactor.bindings.Microsoft.Windows.ApplicationModel.Resources.{ResourceManager}
-import windows_reactor.bindings.Foundation.{TypedEventHandler}
+import windows_reactor.bindings.{Application, IApplicationFactory, IApplicationFactoryVtbl, IApplicationOverrides, IApplicationStatics, IApplicationStaticsVtbl, IUIElement, IWindowFactory, IWindowFactoryVtbl, UIElement, Window}
+import windows_reactor.bindings.{ResourceDictionary}
+import windows_reactor.bindings.{ResourceManagerRequestedEventArgs}
+import windows_reactor.bindings.{ResourceManager}
+import windows_reactor.bindings.{TypedEventHandler}
 // Window-sizing path: IWindow2 exposes AppWindow; AppWindow.Resize takes a SizeInt32.
 // Title-bar height path: AppWindow.TitleBar (an AppWindowTitleBar) QI'd to
 // IAppWindowTitleBar2 carries PreferredHeightOption (Tall / Standard).
-import windows_reactor.bindings.Microsoft.UI.Windowing.{AppWindow, TitleBarHeightOption}
-import windows_reactor.bindings.Graphics.{SizeInt32}
-import windows_reactor.bindings.Microsoft.UI.Windowing.{TitleBarHeightOption_Tall as Microsoft_UI_Windowing_TitleBarHeightOption_Tall, TitleBarHeightOption_Standard as Microsoft_UI_Windowing_TitleBarHeightOption_Standard}
-import windows_reactor.bindings.UI.Xaml.Interop.{TypeName as Windows_UI_Xaml_Interop_TypeName}
+import windows_reactor.bindings.{AppWindow, TitleBarHeightOption}
+import windows_reactor.bindings.{SizeInt32}
+import windows_reactor.bindings.{TitleBarHeightOption_Tall as Microsoft_UI_Windowing_TitleBarHeightOption_Tall, TitleBarHeightOption_Standard as Microsoft_UI_Windowing_TitleBarHeightOption_Standard}
+import windows_reactor.bindings.{TypeName as Windows_UI_Xaml_Interop_TypeName}
 import windows_core.{
     E_FAIL,
     E_NOINTERFACE,

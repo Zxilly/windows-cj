@@ -4,9 +4,8 @@ import std.collection.{HashMap}
 import windows_reactor.core.{Prop, ControlKind, ThemeRef}
 import windows_core.{HString, queryInterfaceRaw}
 import windows_reference.hStringReference
-import windows_reactor.bindings.Microsoft.UI.Xaml.{FrameworkElement, Style}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Markup.XamlReader
-
+import windows_reactor.bindings.{FrameworkElement, Style}
+import windows_reactor.bindings.XamlReader
 // ============================================================================
 // Theme-binding + Resources family — faithfully ported from the reference
 // winui/backend/mod.rs apply_theme_resource_style / style_target_for_handle /

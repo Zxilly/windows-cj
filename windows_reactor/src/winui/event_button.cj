@@ -2,11 +2,10 @@ package windows_reactor.winui
 
 import std.collection.{ArrayList}
 import windows_reactor.core.{Event, EventHandler}
-import windows_reactor.bindings.Microsoft.UI.Xaml.{RoutedEventHandler}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.Primitives.{ButtonBase}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{SplitButton, SplitButtonClickEventArgs}
-import windows_reactor.bindings.Foundation.{TypedEventHandler}
-
+import windows_reactor.bindings.{RoutedEventHandler}
+import windows_reactor.bindings.{ButtonBase}
+import windows_reactor.bindings.{SplitButton, SplitButtonClickEventArgs}
+import windows_reactor.bindings.{TypedEventHandler}
 // ============================================================================
 // Button event family.
 //

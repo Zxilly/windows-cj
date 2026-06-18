@@ -1,7 +1,7 @@
 package windows_reactor.winui
 
 import windows_core.HRESULT
-import windows_reactor.bindings.Win32.System.Com as Win32Com
+import windows_reactor.bindings as Win32Com
 import windows_libloading as windows_libloading
 
 // ============================================================================

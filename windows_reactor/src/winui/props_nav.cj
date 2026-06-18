@@ -9,18 +9,10 @@ import windows_core.{HString, GUID, queryInterfaceRaw, releaseSystemHStringHandl
 import windows_interface.{IInspectable}
 import windows_reference.{hStringReference, IReference}
 import windows_collections.{toInspectableVector}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
-    ContentControl, TextBlock, SymbolIcon, Symbol, IconElement, ICommandBarElement,
-    NavigationViewItem, NavigationViewItemHeader, MenuBarItem, MenuFlyoutItem,
-    MenuFlyoutSeparator, MenuFlyoutSubItem, AppBarButton, AppBarToggleButton,
-    AppBarSeparator, SelectorBarItem, AutoSuggestBox,
-    NavigationView, TabView, TabViewItem, Pivot, PivotItem,
-    MenuBar, CommandBar, SelectorBar, BreadcrumbBar
-}
-import windows_reactor.bindings.Microsoft.UI.Xaml.{FrameworkElement}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{NavigationViewPaneDisplayMode_Auto as PaneAuto, NavigationViewPaneDisplayMode_Left as PaneLeft, NavigationViewPaneDisplayMode_Top as PaneTop, NavigationViewPaneDisplayMode_LeftCompact as PaneLeftCompact, NavigationViewPaneDisplayMode_LeftMinimal as PaneLeftMinimal, NavigationViewBackButtonVisible_Auto as BackAuto, NavigationViewBackButtonVisible_Collapsed as BackCollapsed, CommandBarDefaultLabelPosition_Bottom as LabelBottom, CommandBarDefaultLabelPosition_Right as LabelRight, CommandBarDefaultLabelPosition_Collapsed as LabelCollapsed}
-import windows_reactor.bindings.Foundation.Collections.{IVector as IVectorRaw}
-
+import windows_reactor.bindings.{ContentControl, TextBlock, SymbolIcon, Symbol, IconElement, ICommandBarElement, NavigationViewItem, NavigationViewItemHeader, MenuBarItem, MenuFlyoutItem, MenuFlyoutSeparator, MenuFlyoutSubItem, AppBarButton, AppBarToggleButton, AppBarSeparator, SelectorBarItem, AutoSuggestBox, NavigationView, TabView, TabViewItem, Pivot, PivotItem, MenuBar, CommandBar, SelectorBar, BreadcrumbBar}
+import windows_reactor.bindings.{FrameworkElement}
+import windows_reactor.bindings.{NavigationViewPaneDisplayMode_Auto as PaneAuto, NavigationViewPaneDisplayMode_Left as PaneLeft, NavigationViewPaneDisplayMode_Top as PaneTop, NavigationViewPaneDisplayMode_LeftCompact as PaneLeftCompact, NavigationViewPaneDisplayMode_LeftMinimal as PaneLeftMinimal, NavigationViewBackButtonVisible_Auto as BackAuto, NavigationViewBackButtonVisible_Collapsed as BackCollapsed, CommandBarDefaultLabelPosition_Bottom as LabelBottom, CommandBarDefaultLabelPosition_Right as LabelRight, CommandBarDefaultLabelPosition_Collapsed as LabelCollapsed}
+import windows_reactor.bindings.{IVector as IVectorRaw}
 // Programmatic selections requested before the NavigationView has loaded (template
 // applied, ItemsRepeater realized live containers). Setting SelectedItem to a
 // pre-realization item makes WinUI's own OnApplyTemplate read it back and AV. We defer:

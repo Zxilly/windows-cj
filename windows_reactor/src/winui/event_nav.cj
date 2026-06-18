@@ -4,19 +4,9 @@ import std.collection.{ArrayList, HashSet, HashMap}
 import windows_reactor.core.{Event, EventHandler}
 import windows_core.{queryInterfaceRaw}
 import windows_interface.{IInspectable}
-import windows_reactor.bindings.Microsoft.UI.Xaml.{FrameworkElement, RoutedEventHandler}
-import windows_reactor.bindings.Foundation.{TypedEventHandler}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
-    TabView, TabViewTabCloseRequestedEventArgs,
-    NavigationView, NavigationViewBackRequestedEventArgs, NavigationViewSelectionChangedEventArgs,
-    NavigationViewItem,
-    AutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs, AutoSuggestBoxSuggestionChosenEventArgs,
-    AutoSuggestBoxTextChangedEventArgs,
-    Pivot, SelectorBar, SelectorBarSelectionChangedEventArgs, SplitView,
-    BreadcrumbBar, BreadcrumbBarItemClickedEventArgs,
-    SelectionChangedEventHandler
-}
-
+import windows_reactor.bindings.{FrameworkElement, RoutedEventHandler}
+import windows_reactor.bindings.{TypedEventHandler}
+import windows_reactor.bindings.{TabView, TabViewTabCloseRequestedEventArgs, NavigationView, NavigationViewBackRequestedEventArgs, NavigationViewSelectionChangedEventArgs, NavigationViewItem, AutoSuggestBox, AutoSuggestBoxQuerySubmittedEventArgs, AutoSuggestBoxSuggestionChosenEventArgs, AutoSuggestBoxTextChangedEventArgs, Pivot, SelectorBar, SelectorBarSelectionChangedEventArgs, SplitView, BreadcrumbBar, BreadcrumbBarItemClickedEventArgs, SelectionChangedEventHandler}
 // NavigationView owners whose WinUI Loaded event has fired (template applied, the
 // ItemsRepeater realized live containers). The programmatic SelectedItem write is
 // deferred until then (props_nav.cj) — writing it during prophase, before the control is

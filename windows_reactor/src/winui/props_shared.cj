@@ -1,8 +1,7 @@
 package windows_reactor.winui
 
 import windows_interface.{IInspectable}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{Control}
-
+import windows_reactor.bindings.{Control}
 // ============================================================================
 // Cross-family shared helpers that several props_*.cj files reference but none
 // defines on its own. The parallel per-family authoring left two coordination

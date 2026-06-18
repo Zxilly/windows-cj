@@ -2,17 +2,13 @@ package windows_reactor.winui
 
 import windows_core.{HString, winrtBorrowGenericIn}
 import windows_reactor.core.{ImplicitTransitions, LayoutAnimationConfig, AnimationConfig, Easing}
-import windows_reactor.bindings.Microsoft.UI.Xaml.{FrameworkElement}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Hosting.{ElementCompositionPreview}
-import windows_reactor.bindings.Microsoft.UI.Composition.{
-    Visual, CompositionObject, Compositor, CompositionAnimation, CompositionEasingFunction,
-    KeyFrameAnimation, ImplicitAnimationCollection
-}
-import windows_reactor.bindings.Microsoft.UI.Composition.{ICompositionAnimationBase as ICompositionAnimationBase}
-import windows_reactor.bindings.Foundation.{TimeSpan as Windows_Foundation_TimeSpan}
-import windows_reactor.bindings.Foundation.Collections.{IMap as XamlIMap}
-import windows_reactor.bindings.Foundation.Numerics.{Vector2 as Windows_Foundation_Numerics_Vector2, Vector3 as Windows_Foundation_Numerics_Vector3}
-
+import windows_reactor.bindings.{FrameworkElement}
+import windows_reactor.bindings.{ElementCompositionPreview}
+import windows_reactor.bindings.{Visual, CompositionObject, Compositor, CompositionAnimation, CompositionEasingFunction, KeyFrameAnimation, ImplicitAnimationCollection}
+import windows_reactor.bindings.{ICompositionAnimationBase as ICompositionAnimationBase}
+import windows_reactor.bindings.{TimeSpan as Windows_Foundation_TimeSpan}
+import windows_reactor.bindings.{IMap as XamlIMap}
+import windows_reactor.bindings.{Vector2 as Windows_Foundation_Numerics_Vector2, Vector3 as Windows_Foundation_Numerics_Vector3}
 // ============================================================================
 // Composition animation family — free-function implementations.
 //

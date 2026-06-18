@@ -2,14 +2,11 @@ package windows_reactor.winui
 
 import windows_reactor.core.{Callback, SelectionMode}
 import windows_interface.IInspectable
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
-    ItemsControl, ListViewBase, TextBlock
-}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.Primitives.Selector
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.SelectionChangedEventHandler
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{ListViewSelectionMode as ListViewSelectionModeAbi, ListViewSelectionMode_None as LVSelNone, ListViewSelectionMode_Single as LVSelSingle, ListViewSelectionMode_Multiple as LVSelMultiple, ListViewSelectionMode_Extended as LVSelExtended}
-import windows_reactor.bindings.Foundation.Collections.{IVector as IVectorRaw}
-
+import windows_reactor.bindings.{ItemsControl, ListViewBase, TextBlock}
+import windows_reactor.bindings.Selector
+import windows_reactor.bindings.SelectionChangedEventHandler
+import windows_reactor.bindings.{ListViewSelectionMode as ListViewSelectionModeAbi, ListViewSelectionMode_None as LVSelNone, ListViewSelectionMode_Single as LVSelSingle, ListViewSelectionMode_Multiple as LVSelMultiple, ListViewSelectionMode_Extended as LVSelExtended}
+import windows_reactor.bindings.{IVector as IVectorRaw}
 // ============================================================================
 // Templated (virtualised) list/grid/flip family — free functions.
 //

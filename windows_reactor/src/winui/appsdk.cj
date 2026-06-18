@@ -1,7 +1,7 @@
 package windows_reactor.winui
 
 import windows_core.{HRESULT, S_OK}
-import windows_reactor.bindings.Native.AppRuntime as AppRuntime
+import windows_reactor.bindings as AppRuntime
 import windows_libloading as windows_libloading
 
 // ============================================================================

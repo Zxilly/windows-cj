@@ -3,15 +3,8 @@ package windows_reactor.winui
 import std.collection.{ArrayList}
 import windows_reactor.core.{Event, EventHandler}
 import windows_interface.{IInspectable}
-import windows_reactor.bindings.Foundation.{TypedEventHandler}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
-    Expander, ExpanderExpandingEventArgs, ExpanderCollapsedEventArgs,
-    InfoBar, InfoBarClosedEventArgs,
-    ContentDialog, ContentDialogClosedEventArgs,
-    TeachingTip, TeachingTipClosedEventArgs,
-    TitleBar
-}
-
+import windows_reactor.bindings.{TypedEventHandler}
+import windows_reactor.bindings.{Expander, ExpanderExpandingEventArgs, ExpanderCollapsedEventArgs, InfoBar, InfoBarClosedEventArgs, ContentDialog, ContentDialogClosedEventArgs, TeachingTip, TeachingTipClosedEventArgs, TitleBar}
 // ============================================================================
 // Dialog / surface event family.
 //

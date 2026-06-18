@@ -7,11 +7,9 @@
   license = ["MIT"]
   output-type = "static"
   cjc-version = "1.1.0"
-  # 注意：不能开 --incremental-compile。裁剪绑定子包 windows_reactor.bindings 含循环
-  # subpackage（如 Foundation ↔ Foundation.Collections），cjpm 会把成环的一组包缩点成
-  # 一次多-p cjc 编译；而增量编译的写缓存路径断言「单一源码包」，多包组会触发 ICE
-  # （source packages should only have one element）。整包全量编译即可。
-  compile-option = "--experimental -Woff unused"
+  # 裁剪绑定子包 windows_reactor.bindings 现为单一扁平包（无命名空间子包、无环），
+  # 是普通单源码包增量节点：改一个消费者文件只重编该文件，绑定包不变则整体跳过。
+  compile-option = "--experimental --incremental-compile -Woff unused"
 [dependencies]
   windows_polyfill = { path = "../windows_polyfill" }
   windows_strings = { path = "../windows_strings" }

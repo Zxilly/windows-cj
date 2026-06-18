@@ -3,20 +3,11 @@ package windows_reactor.winui
 import std.collection.{ArrayList}
 import windows_reactor.core.{Event, EventHandler}
 import windows_core.{HString, OutSlot}
-import windows_reactor.bindings.Foundation.{TypedEventHandler}
-import windows_reactor.bindings.Microsoft.UI.Xaml.{RoutedEventHandler}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
-    TextBox, TextChangedEventHandler,
-    PasswordBox,
-    RichEditBox,
-    AutoSuggestBox,
-    AutoSuggestBoxTextChangedEventArgs,
-    AutoSuggestBoxQuerySubmittedEventArgs,
-    AutoSuggestBoxSuggestionChosenEventArgs
-}
-import windows_reactor.bindings.Microsoft.UI.Text.{TextGetOptions_None as Microsoft_UI_Text_TextGetOptions_None}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{AutoSuggestionBoxTextChangeReason_UserInput as Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason_UserInput}
-
+import windows_reactor.bindings.{TypedEventHandler}
+import windows_reactor.bindings.{RoutedEventHandler}
+import windows_reactor.bindings.{TextBox, TextChangedEventHandler, PasswordBox, RichEditBox, AutoSuggestBox, AutoSuggestBoxTextChangedEventArgs, AutoSuggestBoxQuerySubmittedEventArgs, AutoSuggestBoxSuggestionChosenEventArgs}
+import windows_reactor.bindings.{TextGetOptions_None as Microsoft_UI_Text_TextGetOptions_None}
+import windows_reactor.bindings.{AutoSuggestionBoxTextChangeReason_UserInput as Microsoft_UI_Xaml_Controls_AutoSuggestionBoxTextChangeReason_UserInput}
 // ============================================================================
 // Text-input event family.
 //

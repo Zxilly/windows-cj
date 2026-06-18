@@ -7,17 +7,12 @@ import std.collection.{ArrayList}
 import windows_core.{HString, queryInterfaceRaw}
 import windows_interface.{IInspectable}
 import windows_reference.{IReference, hStringReference, boolReference}
-import windows_reactor.bindings.Foundation.{IReference as Windows_Foundation_IReference_1}
-import windows_reactor.bindings.Foundation.Collections.{IVector as IVectorRaw}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
-    ContentControl, TextBlock, Control, StackPanel, Panel, SymbolIcon, Symbol, Orientation,
-    MenuFlyout, MenuFlyoutItem, MenuFlyoutSubItem, MenuFlyoutItemBase, CommandBarFlyout,
-    Flyout, AppBarButton, ICommandBarElement
-}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.Primitives.{ButtonBase, FlyoutBase}
-import windows_reactor.bindings.Microsoft.UI.Xaml.{FrameworkElement, Application, Style, UIElement, RoutedEventHandler}
-import windows_reactor.bindings.Foundation.Uri
-
+import windows_reactor.bindings.{IReference as Windows_Foundation_IReference_1}
+import windows_reactor.bindings.{IVector as IVectorRaw}
+import windows_reactor.bindings.{ContentControl, TextBlock, Control, StackPanel, Panel, SymbolIcon, Symbol, Orientation, MenuFlyout, MenuFlyoutItem, MenuFlyoutSubItem, MenuFlyoutItemBase, CommandBarFlyout, Flyout, AppBarButton, ICommandBarElement}
+import windows_reactor.bindings.{ButtonBase, FlyoutBase}
+import windows_reactor.bindings.{FrameworkElement, Application, Style, UIElement, RoutedEventHandler}
+import windows_reactor.bindings.Uri
 // ============================================================================
 // Per-family property setters for the button controls (Button, RepeatButton,
 // DropDownButton, SplitButton, HyperlinkButton, ToggleButton). Returns true

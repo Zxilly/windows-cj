@@ -31,16 +31,13 @@ import windows_reactor.core.{
 }
 import windows_core.{HString, OutSlot, queryInterfaceRaw}
 import windows_interface.{IInspectable}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
-    Panel, ContentControl, TextBlock, Control, RichTextBlock, Grid, Canvas,
-    RelativePanel, TabView, UIElementCollection, Border, Viewbox, ContentDialog
-}
-import windows_reactor.bindings.Microsoft.UI.Xaml.{UIElement, FrameworkElement, IUIElement, XamlRoot, Thickness as XamlThickness}
-import windows_reactor.bindings.Microsoft.UI.Xaml.Media.SolidColorBrush
-import windows_reactor.bindings.Microsoft.UI.Xaml.Media.Brush as XamlBrush
-import windows_reactor.bindings.Microsoft.UI.Xaml.Media.FontFamily
-import windows_reactor.bindings.UI.Color as XamlColor
-import windows_reactor.bindings.UI.Text.{FontWeight as Windows_UI_Text_FontWeight}
+import windows_reactor.bindings.{Panel, ContentControl, TextBlock, Control, RichTextBlock, Grid, Canvas, RelativePanel, TabView, UIElementCollection, Border, Viewbox, ContentDialog}
+import windows_reactor.bindings.{UIElement, FrameworkElement, IUIElement, XamlRoot, Thickness as XamlThickness}
+import windows_reactor.bindings.SolidColorBrush
+import windows_reactor.bindings.Brush as XamlBrush
+import windows_reactor.bindings.FontFamily
+import windows_reactor.bindings.Color as XamlColor
+import windows_reactor.bindings.{FontWeight as Windows_UI_Text_FontWeight}
 import windows_reference.{hStringReference}
 
 // ============================================================================
