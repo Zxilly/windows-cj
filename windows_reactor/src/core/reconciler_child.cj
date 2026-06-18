@@ -283,26 +283,46 @@ func reconcileKeyedMiddle(r: Reconciler, parent: ControlId, old: Array<Element>,
                 case None => ()
             }
         } else if (lis.contains(i)) {
-            // LIS items don't move, but earlier non-LIS moves may have shifted
-            // them to a different actual slot. Use keyToPanel for the current
-            // position (NOT targetPanelIdx) so we update the right control.
+            // LIS items are in increasing relative order, so they need no backend
+            // move *relative to one another*. But this left-to-right pass relies on
+            // the invariant "after processing new element i, its control occupies
+            // panel slot prefix+i". A non-LIS move (or a mount) earlier in this same
+            // pass can displace an LIS control off slot prefix+i — its tracked slot
+            // drifts to actualPos != targetPanelIdx. Previously the LIS branch left
+            // the control at actualPos and merely retargeted the *update* to it: that
+            // keeps THIS update correct but leaves the live child order out of step
+            // with the slot model. The drift accumulates across renders until a later
+            // element is paired with the wrong control — the control's changed props
+            // (e.g. text) get applied while its other visual props (foreground,
+            // canvas position) keep a different element's stale values. In the 2048
+            // board (every tile re-keyed to a new grid cell each move) this surfaces
+            // as a low-value tile rendered with a high-value tile's white foreground
+            // ("white 4"), and as tiles drawn at the wrong cell. Re-anchor the LIS
+            // control to its target slot prefix+i so the invariant holds for every
+            // element and the live mirror stays exactly in the new order. The move is
+            // a no-op when actualPos already equals targetPanelIdx (the common case),
+            // so well-behaved reorders incur no extra backend ops.
             let oldRel = newToOld[i]
             let oldEl = old[oldStart + oldRel]
             let key = effectiveKey(oldEl, oldStart + oldRel)
             let actualPos = keyToPanel.get(key).getOrThrow()
-            if (r.childAt(parent, actualPos).isSome()) {
+            if (actualPos != targetPanelIdx) {
+                r.moveChildTracked(parent, actualPos, targetPanelIdx)
+                shiftPanelMapOnMove(keyToPanel, actualPos, targetPanelIdx)
+            }
+            if (r.childAt(parent, targetPanelIdx).isSome()) {
                 if (canSkipUpdate(oldEl, newEl)) {
-                    let stateDirty = match (r.childAt(parent, actualPos)) {
+                    let stateDirty = match (r.childAt(parent, targetPanelIdx)) {
                         case Some(cid) => r.isComponentStateDirty(cid)
                         case None => false
                     }
                     if (stateDirty) {
-                        updateChildTracked(r, parent, actualPos, oldEl, newEl)
+                        updateChildTracked(r, parent, targetPanelIdx, oldEl, newEl)
                     } else {
                         r.debugElementsSkipped++
                     }
                 } else {
-                    updateChildTracked(r, parent, actualPos, oldEl, newEl)
+                    updateChildTracked(r, parent, targetPanelIdx, oldEl, newEl)
                 }
             }
         } else {
