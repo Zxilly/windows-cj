@@ -49,7 +49,9 @@ python scripts/gen_app_narrow_bindings.py --reuse-ws       # 复用已暂存的 
 
 ## 两个铺开摩擦（工具已内置规避）
 
-1. **cjpm workspace 成员注入。** `windows-cj/cjpm.toml` 是个 cjpm `[workspace]`，`windows_sys` 是其成员。任何指向 workspace 的依赖路径都会让 cjpm 注入**全部**成员，于是窄 `windows_sys` 与真成员撞名（`modules with name 'windows_sys' are conflicted`）。工具用**暂存临时 workspace**绕开：它是 `windows-cj` 的副本（排除 `target/`，并把真 `windows_sys` 的 *src* 换成窄内容、保持同包名），整棵树只有一个 `windows_sys`。真 workspace 下的一切都不被触碰。（永久替代方案：把 `windows_sys` 从 workspace `members` 列表移除。）
+1. **cjpm 模块名解析冲突。** `windows_reactor` 按路径硬依赖全量 `windows_sys`（`windows_reactor/cjpm.toml`：`windows_sys = { path = "../windows_sys" }`）。app 经 reactor 把这个全量 `windows_sys` 拉进依赖闭包后，再想补一个同名的窄 `windows_sys`，cjpm 的依赖图里就出现两个 `windows_sys` 模块，解析期撞名报 `modules with name 'windows_sys' are conflicted`（cjpm 按**模块名**解析，源只有 path/git/中心仓，**无** cargo `[patch]` 式依赖覆盖）。这是模块身份冲突，与「有没有被用到」无关 —— 没被依赖的包不会进二进制，binary 体积由机制见下文「为什么必须生成期裁剪」（`llvm.used` 钉死被编译类型），与 workspace 成员身份无关。工具用**暂存临时 workspace**绕开：拷一份 `windows-cj`（排除 `target/`），把全量 `windows_sys` 的 *src* **就地**换成窄内容、保持同包名，于是整棵树只有一个 `windows_sys`（内容是窄的），reactor 与 app 都解析到它。真 workspace 全程不被触碰。
+
+   > 注：仅把 `windows_sys` 从 workspace `members` 移除**并不够** —— reactor 仍会经自己的 `../windows_sys` 路径依赖把全量拉进来。干净替换只有「就地换 src」（本工具所用）或「改 reactor 的依赖路径指向窄包」两条路。
 
 2. **GC mutator-lock 看门狗 ICE。** 全并行构建下运行期的 mutator-lock 看门狗可能编译途中触发（`Wait mutator list lock timeout`，在重命名空间包上崩），即便设了 `cjMutatorLockTimeout=240` 也可能。工具用 **`-j 4`** 构建以削减并发 cjc 的 mutator 争用，能干净通过。（exe 体积与并行度无关，只影响构建时间，所以 ~5.2 min 偏保守——看门狗允许时更高 `-j` 会更快。）
 
