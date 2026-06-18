@@ -63,6 +63,7 @@ class CliConfig {
     public var sys: Bool = false
     public var implement: Bool = false
     public var noComment: Bool = false
+    public var flat: Bool = false
     public var defaultWinmdInput: Bool = false
     public let derives: ArrayList<String> = ArrayList<String>()
     public let referenceArgs: ArrayList<String> = ArrayList<String>()
@@ -86,6 +87,7 @@ public class BindgenConfig {
     public let sys: Bool
     public let implement: Bool
     public let noComment: Bool
+    public let flat: Bool
     public let derives: Array<String>
     public let referenceArgs: Array<String>
 
@@ -107,6 +109,7 @@ public class BindgenConfig {
         this.sys = config.sys
         this.implement = config.implement
         this.noComment = config.noComment
+        this.flat = config.flat
         this.derives = copyStrings(config.derives)
         this.referenceArgs = copyStrings(config.referenceArgs)
     }
@@ -463,6 +466,7 @@ func parseArgs(args: Array<String>): CliConfig {
             case "--print-link-options" => config.printLinkOptions = true
             case "--print-link-option" => config.printLinkOptions = true
             case "--sys" => config.sys = true
+            case "--flat" => config.flat = true
             case "--implement" => config.implement = true
             case "--no-comment" => config.noComment = true
             case "--derive" =>
@@ -756,6 +760,40 @@ func generate(config: CliConfig, records: ArrayList<SymbolRecord>): Unit {
         collectSupportDependencyNamesFromGeneratedNativeHelpers(config.packageName, supportDeps, commonHelperFiles)
     }
     let writer = GeneratedPackageWriter(config.outputDir, config.dryRun, noComment: renderOptions.noComment)
+
+    if (config.flat) {
+        // Flat single-package layout: every selected type in one package, no
+        // namespace subpackages, no cross-package import cycles, no `@When`
+        // gating. The single source package is an ordinary incremental node, so a
+        // downstream edit recompiles only the changed file and skips the
+        // unchanged bindings. See flat_rendering.cj for the disambiguation rule.
+        writer.writeFile("cjpm.toml", renderCjpmToml(config.packageName, supportDeps: supportDeps))
+        let flatNames = writeFlatPackage(
+            writer,
+            selected,
+            nativeSelected,
+            config.packageName,
+            selectedByName,
+            nativeSelectedByName,
+            renderOptions,
+            config.common
+        )
+        // Emit the full-name -> flat-name disambiguation map so downstream tools
+        // (e.g. the import rewriter) resolve a consumer's `<Ns>.<Type>` import to
+        // the exact flat name the package declares.
+        writer.writeFile("flat-name-map.json", renderFlatNameMapJson(selected, flatNames))
+        let manifest = renderManifest(selectionRules, selected, writer.files(), writer.fileHashes(), config.packageName)
+        if (!config.manifestPath.isEmpty()) {
+            if (!config.dryRun) {
+                ensureDir(directoryOf(config.manifestPath))
+                File.writeTo(config.manifestPath, manifest.toArray())
+            }
+        } else {
+            writer.writeFile("codegen-manifest.json", manifest)
+        }
+        return
+    }
+
     // The support-dependency set is recorded as cjpm.toml [dependencies] (the
     // real link edges); the generated subpackages import what they use directly,
     // so no redundant root-level import anchor file is emitted.
@@ -1699,7 +1737,13 @@ func implChunkNeedsGuidImport(rendered: String): Bool {
     rendered.contains("-> GUID") ||
     rendered.contains("<GUID") ||
     rendered.contains("GUID>") ||
-    rendered.contains("VArray<GUID")
+    rendered.contains("VArray<GUID") ||
+    // A bare `GUID` as a function-pointer parameter (e.g. a vtable method
+    // `CFunc<(CPointer<Unit>, GUID, CPointer<Unit>) -> Int32>`) is delimited by
+    // `, ` or `(`, not by the patterns above. These cannot match the qualified
+    // `windows_interface.GUID` (a `.` precedes GUID there), so no false positives.
+    rendered.contains(", GUID") ||
+    rendered.contains("(GUID")
 }
 
 // Render one impl subpackage source file. `implSubpackage` is the full package

@@ -390,7 +390,13 @@ func renderSymbolImplWithGate(
                         return "${header}\n${renderInterfaceSymbol(symbol, typeDef, symbolsByName, guidValue, options, gate)}"
                     case None => ()
                 }
-                return "${header}\n${renderRawHandleSymbol(symbol, "interface", gate)}"
+                // A COM interface without a GUID attribute (an abstract base such as
+                // IVPBaseConfig) still needs its vtable struct emitted: a derived interface's
+                // Vtbl references it via `base_: <Base>Vtbl`. Without it the derived Vtbl
+                // (e.g. IVPConfigVtbl) names an undeclared `IVPBaseConfigVtbl`. Emit the
+                // handle class (no iid, as before) plus the vtable struct.
+                return "${header}\n${renderRawHandleSymbol(symbol, "interface", gate)}\n\n" +
+                    renderNativeComInterfaceVtblSymbol(symbol, typeDef, symbolsByName, gate)
             }
             if (isWinrtClassType(typeDef)) {
                 match (renderWinrtRuntimeClassSymbol(symbol, typeDef, symbolsByName, gate)) {
@@ -2100,10 +2106,10 @@ func renderEnumSymbol(
     let underlying = enumUnderlyingType(typeDef, symbolsByName)
     var content = "${gate}public struct ${symbol.implName} {\n" +
         "    public let value: ${underlying}\n" +
-        "    public init() {\n" +
+        "    public const init() {\n" +
         "        this.value = ${cjLiteralInt("0", underlying)}\n" +
         "    }\n" +
-        "    public init(value: ${underlying}) {\n" +
+        "    public const init(value: ${underlying}) {\n" +
         "        this.value = value\n" +
         "    }\n"
     let isFlags = hasSystemFlagsAttribute(typeDef.customAttributes)
@@ -2118,7 +2124,7 @@ func renderEnumSymbol(
         if (isEnumLiteral(field)) {
             match (literalValue(field.defaultValue)) {
                 case Some(value) =>
-                    content += "\n${gate}public let ${symbol.implName}_${cjIdentifier(field.name)} = " +
+                    content += "\n${gate}public const ${symbol.implName}_${cjIdentifier(field.name)} = " +
                         "${symbol.implName}(${cjLiteral(value, underlying)})"
                 case None => ()
             }
@@ -2152,7 +2158,7 @@ func renderRawAliasSymbol(symbol: SymbolRecord, typeDef: TypeDefinitionRecord, r
         if (isEnumLiteral(field)) {
             match (literalValue(field.defaultValue)) {
                 case Some(value) =>
-                    content += "\n${gate}public let ${symbol.implName}_${cjIdentifier(field.name)}: ${symbol.implName} = " +
+                    content += "\n${gate}public const ${symbol.implName}_${cjIdentifier(field.name)}: ${symbol.implName} = " +
                         cjLiteral(value, rawType)
                 case None => ()
             }
@@ -6672,9 +6678,18 @@ func closedWinrtTypeNameWithSubstitutions(
     let rendered = ArrayList<String>()
     for (argument in typeArguments) {
         if (!winrtGenericArgumentSatisfiesRuntimeConstraint(argument, symbolsByName, ownerFullName, substitutions)) {
-            return "windows_interface.IInspectable"
+            // A value-struct / enum argument cannot satisfy the closed-generic
+            // WinrtGenericType constraint, so it projects to IInspectable (the ABI fallback
+            // element type) -- but only THAT argument falls back. Keep rendering the closed
+            // collection type (e.g. `IVector<IInspectable>`) instead of collapsing the whole
+            // type to a bare `IInspectable`: the generated members and substitutions
+            // (`runtimeClassGenericSubstitutions`) already project the element as IInspectable,
+            // so a bare IInspectable here drops the collection interface and its methods
+            // (`Append`/`GetAt`/...), leaving calls like `interface__.Append(...)` unresolved.
+            rendered.add("windows_interface.IInspectable")
+        } else {
+            rendered.add(winrtProjectedTypeNameWithSubstitutions(argument, symbolsByName, ownerFullName, substitutions))
         }
-        rendered.add(winrtProjectedTypeNameWithSubstitutions(argument, symbolsByName, ownerFullName, substitutions))
     }
     "${qualifyMangledFullName(symbol.fullName)}<${joinStrings(rendered, ", ")}>"
 }
@@ -6722,7 +6737,13 @@ func winrtGenericArgumentSatisfiesRuntimeConstraint(
                             return !isValueType(typeDef) && !isEnumType(typeDef)
                         case None => return true
                     }
-                case None => return true
+                // The referenced type is not in the generated symbol set (its namespace
+                // is absent from the winmd inputs, e.g. an external WinRT component). It
+                // has no projected Cangjie type, so a closed generic argument over it
+                // cannot satisfy the constraint and must project to IInspectable -- the
+                // ABI-equivalent object pointer -- rather than emitting a dangling flat
+                // mangled name that resolves to nothing.
+                case None => return false
             }
         case None => ()
     }
@@ -6820,7 +6841,15 @@ func winrtProjectedTypeNameWithSubstitutions(
                         ownerFullName,
                         substitutions
                     )
-                case None => return qualifyMangledFullName(fullName)
+                // The referenced WinRT type is absent from the generated symbol set
+                // (its namespace is not among the winmd inputs, e.g. an external
+                // component like Microsoft.Web.WebView2.Core). It has no projected
+                // Cangjie type, so project it -- in every position (return type, field,
+                // generic cleanup) -- to IInspectable, the ABI-equivalent object handle.
+                // IInspectable implements HandleWinrtType, so the body's
+                // `fromAbiTakeWinrtHandle` / `winrtReleaseGenericOut<...>` resolve.
+                // Emitting the flat mangled name here would dangle (nothing declares it).
+                case None => return "windows_interface.IInspectable"
             }
         case None => ()
     }
@@ -7804,7 +7833,17 @@ func cjDefaultValue(typeName: String): String {
     }
     if (startsWith(typeName, "VArray<")) {
         match (vArrayElementTypeName(typeName)) {
-            case Some(elementType) => return "${typeName}(repeat: ${vArrayRepeatValue(elementType)})"
+            case Some(elementType) =>
+                if (startsWith(elementType, "CFunc<")) {
+                    // cjc crashes (ICE / codegen SIGSEGV) on `VArray<CFunc<...>, $N>(repeat: <cfunc>)`
+                    // -- the repeat-constructor lowering mishandles a function-pointer element type.
+                    // The element-initializer-closure form compiles cleanly and is behaviorally
+                    // identical (each slot gets the same null CFunc), so use it for CFunc elements
+                    // (e.g. an embedded dispatch table like RASCONNSTATE.Methods). Scalar elements
+                    // keep the simpler `repeat:` form.
+                    return "${typeName}({ _ => ${vArrayRepeatValue(elementType)} })"
+                }
+                return "${typeName}(repeat: ${vArrayRepeatValue(elementType)})"
             case None => return "${typeName}()"
         }
     }
@@ -7846,10 +7885,26 @@ func vArrayElementTypeName(typeName: String): Option<String> {
     if (!startsWith(typeName, prefix)) {
         return None
     }
-    var i = Int64(prefixBytes.size)
+    // Split `VArray<ELEMENT, $N>` at the comma that separates ELEMENT from the
+    // size, i.e. the first comma at nesting depth 0. A naive first-comma split
+    // truncates element types that themselves contain commas, e.g. a function
+    // pointer `CFunc<(a, b) -> Unit>`, leaving a malformed default initializer.
+    // Track `<`/`(` depth; the `>` in the `->` return arrow is not a closer.
+    let start = Int64(prefixBytes.size)
+    var depth = 0
+    var i = start
     while (i < Int64(bytes.size)) {
-        if (bytes[i] == b',') {
-            return Some(String.fromUtf8(bytes[Int64(prefixBytes.size)..i]))
+        let c = bytes[i]
+        if (c == b'<' || c == b'(') {
+            depth += 1
+        } else if (c == b')') {
+            depth -= 1
+        } else if (c == b'>') {
+            if (!(i > start && bytes[i - 1] == b'-')) {
+                depth -= 1
+            }
+        } else if (c == b',' && depth == 0) {
+            return Some(String.fromUtf8(bytes[start..i]))
         }
         i += 1
     }

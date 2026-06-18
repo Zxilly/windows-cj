@@ -70,7 +70,7 @@ func testClosedWinrtGenericValueStructArgumentFallsBackToInspectable() {
         typeArguments: arguments
     )
 
-    @Expect(winrtProjectedTypeName(signature, symbolsByName, "Example.Foundation.Device"), "windows_interface.IInspectable")
+    @Expect(winrtProjectedTypeName(signature, symbolsByName, "Example.Foundation.Device"), "Example_Foundation_IVectorView_1<windows_interface.IInspectable>")
 }
 
 @Test

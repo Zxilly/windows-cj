@@ -575,9 +575,43 @@ func collectNativeTypeImports(
                     if (symbol.namespace != namespace && nativeNamedTypeUsesFacadeAlias(symbol, symbolsByName)) {
                         addUnique(imports, "${namespaceToPackage(symbol.namespace, packageName)}.${symbol.name}")
                     }
+                    // A delegate parameter is rendered inline as a `CFunc<...>` whose own
+                    // parameter/return types (e.g. a cross-namespace `IO_STATUS_BLOCK` inside
+                    // an APC routine) must also be imported. The delegate type itself uses no
+                    // facade alias (handled above), so without this its nested type references
+                    // would be left undeclared. Recurse in raw (pointerDepth > 0) context: the
+                    // CFunc body renders these types raw, so only named value-type facade
+                    // imports apply — support-package imports (BSTR/HSTRING/COM) stay suppressed.
+                    match (symbol.typeDef) {
+                        case Some(typeDef) =>
+                            if (isDelegateType(typeDef)) {
+                                for (method in typeDef.methods) {
+                                    if (method.name == "Invoke") {
+                                        collectNativeTypeImports(packageName, namespace, fullName, method.signature.returnType, symbolsByName, imports, pointerDepth: 1)
+                                        for (parameter in method.signature.parameters) {
+                                            collectNativeTypeImports(packageName, namespace, fullName, parameter, symbolsByName, imports, pointerDepth: 1)
+                                        }
+                                    }
+                                }
+                            }
+                        case None => ()
+                    }
                 case None => ()
             }
         case None => ()
+    }
+    // A bare function-pointer signature is likewise expanded inline as a `CFunc<...>`;
+    // its parameter/return types must be imported even though the outer signature has
+    // no resolvable named type of its own.
+    if (signature.kind == "FunctionPointer") {
+        match (signature.functionPointerSignature) {
+            case Some(methodSignature) =>
+                collectNativeTypeImports(packageName, namespace, ownerFullName, methodSignature.returnType, symbolsByName, imports, pointerDepth: 1)
+                for (parameter in methodSignature.parameters) {
+                    collectNativeTypeImports(packageName, namespace, ownerFullName, parameter, symbolsByName, imports, pointerDepth: 1)
+                }
+            case None => ()
+        }
     }
     match (signature.typeSig) {
         case Some(nested) =>
@@ -673,7 +707,10 @@ func renderNativeFunction(spec: NativeFunctionSpec, symbolsByName: HashMap<Strin
     }
     let procType = nativeCFuncType(spec, rawReturnType, symbolsByName)
     var content = "${gatePrefix}public func ${cjIdentifier(method.name)}(${publicParams}): ${returnType} {\n"
-    content += "    let proc = ${procType}(${nativeResolveExpression(spec)})\n"
+    // Use a reserved `__`-suffixed local so it never collides with a Win32 parameter named
+    // `proc` (e.g. the callback parameter of EnumMetaFile/EnumEnhMetaFile); Cangjie `let` does
+    // not allow same-scope shadowing, so a bare `proc` local would be a redefinition.
+    content += "    let proc__ = ${procType}(${nativeResolveExpression(spec)})\n"
     let args = nativeFunctionArgumentText(spec, symbolsByName)
     let arrayInfos = nativeArrayParameterInfos(spec, symbolsByName)
     let hStringInfos = nativeHStringArgumentInfos(spec, symbolsByName)
@@ -3578,27 +3615,36 @@ func renderNativeProcInvocation(
 ): String {
     var content = ""
     if (returnType == "Unit") {
-        content += "${indent}unsafe { proc(${args}) }\n"
+        content += "${indent}unsafe { proc__(${args}) }\n"
     } else if (returnType == "Bool" && nativeIsIntegerBoolAbiType(rawReturnType)) {
-        content += "${indent}return unsafe { proc(${args}) } != ${nativeBoolFalseLiteral(rawReturnType)}\n"
+        content += "${indent}return unsafe { proc__(${args}) } != ${nativeBoolFalseLiteral(rawReturnType)}\n"
     } else if (returnType == "windows_strings.BSTR" && rawReturnType == "CPointer<Unit>") {
-        content += "${indent}return windows_strings.BSTR.fromRawTake(CPointer<UInt16>(unsafe { proc(${args}) }))\n"
+        content += "${indent}return windows_strings.BSTR.fromRawTake(CPointer<UInt16>(unsafe { proc__(${args}) }))\n"
     } else if (returnType == "windows_core.HString" && rawReturnType == "CPointer<Unit>") {
-        content += "${indent}return windows_core.HString.fromSystemHandleTake(unsafe { proc(${args}) })\n"
+        content += "${indent}return windows_core.HString.fromSystemHandleTake(unsafe { proc__(${args}) })\n"
     } else if (nativeIsComInterfacePublicType(returnType) && rawReturnType == "CPointer<Unit>") {
-        content += "${indent}return ${returnType}.fromAbiTake(unsafe { proc(${args}) })\n"
+        content += "${indent}return ${returnType}.fromAbiTake(unsafe { proc__(${args}) })\n"
     } else if (nativeIsTextPointerPublicType(returnType)) {
-        content += "${indent}return ${returnType}.fromRaw(unsafe { proc(${args}) })\n"
+        content += "${indent}return ${returnType}.fromRaw(unsafe { proc__(${args}) })\n"
+    } else if (returnType != rawReturnType && startsWithString(returnType, "CPointer<") && startsWithString(rawReturnType, "CPointer<")) {
+        // Both the public and raw returns are pointers, but to different element
+        // types (e.g. an opaque handle `CPointer<GLUquadric>` returned through the
+        // raw `CPointer<CPointer<Unit>>`). Reinterpret via the pointer constructor:
+        // `CPointer` has no settable `.Value`, so the newtype `.Value` path below
+        // would emit `result.Value = ...` and fail to compile. This mirrors the
+        // argument side (`nativeArgumentExpression`), which casts pointer types the
+        // same way.
+        content += "${indent}return ${returnType}(unsafe { proc__(${args}) })\n"
     } else if (returnType != rawReturnType) {
         content += "${indent}var result = ${returnType}()\n"
-        content += "${indent}result.Value = unsafe { proc(${args}) }\n"
+        content += "${indent}result.Value = unsafe { proc__(${args}) }\n"
         if (explicitReturn) {
             content += "${indent}return result\n"
         } else {
             content += "${indent}result\n"
         }
     } else {
-        content += "${indent}return unsafe { proc(${args}) }\n"
+        content += "${indent}return unsafe { proc__(${args}) }\n"
     }
     return content
 }
@@ -4453,10 +4499,21 @@ func nativeNamedPublicType(fullName: String, symbolsByName: HashMap<String, Symb
                     if (!isValueType(typeDef)) {
                         return "CPointer<Unit>"
                     }
-                    return symbol.name
-                case None => return symbol.name
+                    return flatAwareSymbolName(symbol)
+                case None => return flatAwareSymbolName(symbol)
             }
         case None => return "CPointer<Unit>"
+    }
+}
+
+// A named value type renders by its package-scoped short name. In flat mode the
+// flattened package may have disambiguated that short name, so consult the
+// flat-name map (keyed by full name) and emit the disambiguated name; outside
+// flat mode this is just `symbol.name`.
+func flatAwareSymbolName(symbol: SymbolRecord): String {
+    match (flatNameOf(symbol.fullName)) {
+        case Some(flatName) => return flatName
+        case None => return symbol.name
     }
 }
 
@@ -4521,8 +4578,8 @@ func nativeNamedRawType(fullName: String, symbolsByName: HashMap<String, SymbolR
                     if (!isValueType(typeDef)) {
                         return "CPointer<Unit>"
                     }
-                    return symbol.name
-                case None => return symbol.name
+                    return flatAwareSymbolName(symbol)
+                case None => return flatAwareSymbolName(symbol)
             }
         case None => return "CPointer<Unit>"
     }

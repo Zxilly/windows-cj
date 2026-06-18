@@ -254,15 +254,15 @@ func testCommonNativeHelperFilesAdaptTransparentAbiWrappers() {
 
     @Expect(helper.contains("import windows_strings as windows_strings"), true)
     @Expect(helper.contains("public func CreateThing(name: windows_strings.PWSTR): HTHING"), true)
-    @Expect(helper.contains("let proc = CFunc<(CPointer<UInt16>) -> CPointer<Unit>>"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CPointer<UInt16>) -> CPointer<Unit>>"), true)
     @Expect(helper.contains("var result = HTHING()"), true)
-    @Expect(helper.contains("result.Value = unsafe { proc(name.asPtr()) }"), true)
+    @Expect(helper.contains("result.Value = unsafe { proc__(name.asPtr()) }"), true)
     @Expect(helper.contains("public func CloseThing(thing: HTHING): Int32"), true)
-    @Expect(helper.contains("let proc = CFunc<(CPointer<Unit>) -> Int32>"), true)
-    @Expect(helper.contains("unsafe { proc(thing.Value) }"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CPointer<Unit>) -> Int32>"), true)
+    @Expect(helper.contains("unsafe { proc__(thing.Value) }"), true)
     @Expect(helper.contains("public func DuplicateThing(source: HTHING, target: CPointer<HTHING>): Bool"), true)
-    @Expect(helper.contains("let proc = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>"), true)
-    @Expect(helper.contains("return unsafe { proc(source.Value, CPointer<CPointer<Unit>>(target)) } != 0"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CPointer<Unit>, CPointer<CPointer<Unit>>) -> Int32>"), true)
+    @Expect(helper.contains("return unsafe { proc__(source.Value, CPointer<CPointer<Unit>>(target)) } != 0"), true)
     @Expect(helper.contains("target.Value"), false)
 }
 
@@ -354,19 +354,19 @@ func testCommonNativeHelpersUseTextPointerRemapsWithoutTypeDefinitions() {
 
     @Expect(content.contains("import windows_strings as windows_strings"), true)
     @Expect(content.contains("public func PathFindFileNameW(path: windows_strings.PWSTR): windows_strings.PWSTR"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<UInt16>) -> CPointer<UInt16>>"), true)
-    @Expect(content.contains("return windows_strings.PWSTR.fromRaw(unsafe { proc(path.asPtr()) })"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<UInt16>) -> CPointer<UInt16>>"), true)
+    @Expect(content.contains("return windows_strings.PWSTR.fromRaw(unsafe { proc__(path.asPtr()) })"), true)
     @Expect(content.contains("public func PathFindFileNameA(path: windows_strings.PSTR): windows_strings.PSTR"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<UInt8>) -> CPointer<UInt8>>"), true)
-    @Expect(content.contains("return windows_strings.PSTR.fromRaw(unsafe { proc(path.asPtr()) })"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<UInt8>) -> CPointer<UInt8>>"), true)
+    @Expect(content.contains("return windows_strings.PSTR.fromRaw(unsafe { proc__(path.asPtr()) })"), true)
     @Expect(content.contains("public func CompareStringOrdinal(left: windows_strings.PCWSTR, right: windows_strings.PCWSTR): Int32"), true)
-    @Expect(content.contains("return unsafe { proc(left.asPtr(), right.asPtr()) }"), true)
+    @Expect(content.contains("return unsafe { proc__(left.asPtr(), right.asPtr()) }"), true)
     @Expect(content.contains("public func CompareStringA(left: windows_strings.PCSTR, right: windows_strings.PCSTR): Int32"), true)
-    @Expect(content.contains("return unsafe { proc(left.asPtr(), right.asPtr()) }"), true)
+    @Expect(content.contains("return unsafe { proc__(left.asPtr(), right.asPtr()) }"), true)
     @Expect(content.contains("public func UpdateWidePointer(value: CPointer<CPointer<UInt16>>): Int32"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<CPointer<UInt16>>) -> Int32>"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<CPointer<UInt16>>) -> Int32>"), true)
     @Expect(content.contains("public func UpdateAnsiPointer(value: CPointer<CPointer<UInt8>>): Int32"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<CPointer<UInt8>>) -> Int32>"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<CPointer<UInt8>>) -> Int32>"), true)
     @Expect(content.contains("CPointer<windows_strings.PWSTR>"), false)
     @Expect(content.contains("CPointer<windows_strings.PSTR>"), false)
     @Expect(content.contains("var result = windows_strings.PWSTR()"), false)
@@ -516,8 +516,8 @@ func testCommonNativeHelperFilesDoNotProjectNonWin32TextPointersByShortName() {
     )
 
     @Expect(helper.contains("public func UseCustomText(text: PWSTR): Int32"), true)
-    @Expect(helper.contains("let proc = CFunc<(CPointer<Unit>) -> Int32>"), true)
-    @Expect(helper.contains("return unsafe { proc(text.Value) }"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CPointer<Unit>) -> Int32>"), true)
+    @Expect(helper.contains("return unsafe { proc__(text.Value) }"), true)
     @Expect(helper.contains("text: CPointer<UInt16>"), false)
 }
 
@@ -630,8 +630,8 @@ func testCommonNativeHelperFilesUseAssociatedEnumParameterProjection() {
     @Expect(helper.contains("import windows_sys.Example.Enums.FILE_ACTION"), true)
     @Expect(helper.contains("public func SetAction(action: FILE_ACTION): Int32"), true)
     @Expect(helper.contains("public func SetAction(action: UInt32): Int32"), false)
-    @Expect(helper.contains("let proc = CFunc<(UInt32) -> Int32>"), true)
-    @Expect(helper.contains("return unsafe { proc(UInt32(action.value)) }"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(UInt32) -> Int32>"), true)
+    @Expect(helper.contains("return unsafe { proc__(UInt32(action.value)) }"), true)
 }
 
 @Test
@@ -743,7 +743,7 @@ func testCommonNativeHelperFilesUseStringAssociatedEnumParameterDependency() {
     @Expect(helper.contains("import windows_sys.Example.Enums.FILE_MODE"), true)
     @Expect(helper.contains("public func SetMode(mode: FILE_MODE): Int32"), true)
     @Expect(helper.contains("public func SetMode(mode: UInt32): Int32"), false)
-    @Expect(helper.contains("return unsafe { proc(UInt32(mode.value)) }"), true)
+    @Expect(helper.contains("return unsafe { proc__(UInt32(mode.value)) }"), true)
 }
 
 @Test
@@ -871,8 +871,8 @@ func testCommonNativeHelperFilesUseRawAliasAssociatedEnumParameterWithoutWrapper
 
     @Expect(helper.contains("public func CoInitializeEx(dwCoInit: COINIT): Int32"), true)
     @Expect(helper.contains("pvReserved:"), false)
-    @Expect(helper.contains("let proc = CFunc<(CPointer<Unit>, UInt32) -> Int32>"), true)
-    @Expect(helper.contains("return unsafe { proc(CPointer<Unit>(), UInt32(dwCoInit)) }"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CPointer<Unit>, UInt32) -> Int32>"), true)
+    @Expect(helper.contains("return unsafe { proc__(CPointer<Unit>(), UInt32(dwCoInit)) }"), true)
     @Expect(helper.contains("dwCoInit.value"), false)
 }
 
@@ -968,8 +968,8 @@ func testCommonNativeHelperFilesDefaultReservedParameters() {
 
     @Expect(helper.contains("public func Configure(value: UInt32): Int32"), true)
     @Expect(helper.contains("reserved: UInt32"), false)
-    @Expect(helper.contains("let proc = CFunc<(UInt32, UInt32) -> Int32>"), true)
-    @Expect(helper.contains("return unsafe { proc(0u32, value) }"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(UInt32, UInt32) -> Int32>"), true)
+    @Expect(helper.contains("return unsafe { proc__(0u32, value) }"), true)
 }
 
 @Test
@@ -1080,7 +1080,7 @@ func testCommonNativeHelperFilesDoNotInferReservedArrayLengthParameters() {
     @Expect(helper.contains("count: UInt32"), false)
     @Expect(helper.contains("values: Array<UInt16>"), false)
     @Expect(helper.contains("acquireArrayRawData(values)"), false)
-    @Expect(helper.contains("return unsafe { proc(0u32, values) }"), true)
+    @Expect(helper.contains("return unsafe { proc__(0u32, values) }"), true)
 }
 
 @Test
@@ -1182,8 +1182,8 @@ func testCommonNativeHelperFilesProjectBoolParametersAndReturns() {
 
     @Expect(helper.contains("public func SetEnabled(enabled: Bool): Bool"), true)
     @Expect(helper.contains("enabled: Int32"), false)
-    @Expect(helper.contains("let proc = CFunc<(Int32) -> Int32>"), true)
-    @Expect(helper.contains("return unsafe { proc(if (enabled) { 1 } else { 0 }) } != 0"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(Int32) -> Int32>"), true)
+    @Expect(helper.contains("return unsafe { proc__(if (enabled) { 1 } else { 0 }) } != 0"), true)
 }
 
 @Test
@@ -4793,7 +4793,7 @@ func testCommonNativeHelperFilesDoNotProjectNonWin32BoolByShortName() {
 
     @Expect(helper.contains("public func UseCustomBool(flag: UInt32): Int32"), true)
     @Expect(helper.contains("flag: Bool"), false)
-    @Expect(helper.contains("return unsafe { proc(flag) }"), true)
+    @Expect(helper.contains("return unsafe { proc__(flag) }"), true)
 }
 
 @Test
@@ -4889,8 +4889,8 @@ func testCommonNativeHelperFilesKeepWin32BoolPointersRaw() {
 
     @Expect(helper.contains("public func ReadFlag(flag: CPointer<Int32>): Int32"), true)
     @Expect(helper.contains("CPointer<Bool>"), false)
-    @Expect(helper.contains("let proc = CFunc<(CPointer<Int32>) -> Int32>"), true)
-    @Expect(helper.contains("return unsafe { proc(flag) }"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CPointer<Int32>) -> Int32>"), true)
+    @Expect(helper.contains("return unsafe { proc__(flag) }"), true)
 }
 
 @Test
@@ -5044,9 +5044,9 @@ func testCommonNativeHelperFilesUseRawPointersForProjectedClassPointers() {
     )
 
     @Expect(helper.contains("public func CreateThing(ppThing: CPointer<CPointer<Unit>>): Int32"), true)
-    @Expect(helper.contains("let proc = CFunc<(CPointer<CPointer<Unit>>) -> Int32>"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CPointer<CPointer<Unit>>) -> Int32>"), true)
     @Expect(helper.contains("public func UseThing(thing: CPointer<Unit>): Int32"), true)
-    @Expect(helper.contains("let proc = CFunc<(CPointer<Unit>) -> Int32>"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CPointer<Unit>) -> Int32>"), true)
     @Expect(helper.contains("CPointer<IThing>"), false)
 }
 
@@ -5144,9 +5144,9 @@ func testCommonNativeHelperFilesUseNativeArrayInfoForLengthParameters() {
 
     @Expect(helper.contains("public func SumValues(values: Array<UInt16>): Int32"), true)
     @Expect(helper.contains("count: UInt32"), false)
-    @Expect(helper.contains("let proc = CFunc<(UInt32, CPointer<UInt16>) -> Int32>"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(UInt32, CPointer<UInt16>) -> Int32>"), true)
     @Expect(helper.contains("let __valuesArrayHandle = unsafe { acquireArrayRawData(values) }"), true)
-    @Expect(helper.contains("return unsafe { proc(UInt32(values.size), __valuesArrayHandle.pointer) }"), true)
+    @Expect(helper.contains("return unsafe { proc__(UInt32(values.size), __valuesArrayHandle.pointer) }"), true)
     @Expect(helper.contains("unsafe { releaseArrayRawData(__valuesArrayHandle) }"), true)
 }
 
@@ -5241,11 +5241,11 @@ func testCommonNativeHelperFilesUseFixedNativeArrayInfoParameters() {
     )
 
     @Expect(helper.contains("public func UseFourValues(values: Array<UInt16>): Int32"), true)
-    @Expect(helper.contains("let proc = CFunc<(CPointer<UInt16>) -> Int32>"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CPointer<UInt16>) -> Int32>"), true)
     @Expect(helper.contains("if (values.size != 4)"), true)
     @Expect(helper.contains("throw IllegalArgumentException(\"values must contain 4 elements\")"), true)
     @Expect(helper.contains("let __valuesArrayHandle = unsafe { acquireArrayRawData(values) }"), true)
-    @Expect(helper.contains("return unsafe { proc(__valuesArrayHandle.pointer) }"), true)
+    @Expect(helper.contains("return unsafe { proc__(__valuesArrayHandle.pointer) }"), true)
     @Expect(helper.contains("unsafe { releaseArrayRawData(__valuesArrayHandle) }"), true)
 }
 
@@ -5361,7 +5361,7 @@ func testCommonNativeHelperFilesKeepSharedNativeArrayLengthExplicit() {
     @Expect(helper.contains("left: Array<UInt16>"), false)
     @Expect(helper.contains("right: Array<UInt16>"), false)
     @Expect(helper.contains("acquireArrayRawData"), false)
-    @Expect(helper.contains("return unsafe { proc(count, left, right) }"), true)
+    @Expect(helper.contains("return unsafe { proc__(count, left, right) }"), true)
 }
 
 @Test
@@ -5459,7 +5459,7 @@ func testCommonNativeHelperFilesKeepOutNativeArrayLengthExplicit() {
     @Expect(helper.contains("public func ReadValues(count: CPointer<UInt32>, values: CPointer<UInt16>): Int32"), true)
     @Expect(helper.contains("values: Array<UInt16>"), false)
     @Expect(helper.contains("CPointer<UInt32>(values.size)"), false)
-    @Expect(helper.contains("return unsafe { proc(count, values) }"), true)
+    @Expect(helper.contains("return unsafe { proc__(count, values) }"), true)
 }
 
 @Test
@@ -5573,7 +5573,7 @@ func testCommonNativeHelperFilesKeepMixedSharedNativeArrayLengthExplicit() {
     @Expect(helper.contains("public func MixedValues(count: UInt32, values: CPointer<UInt16>, sentinel: UInt16): Int32"), true)
     @Expect(helper.contains("values: Array<UInt16>"), false)
     @Expect(helper.contains("acquireArrayRawData"), false)
-    @Expect(helper.contains("return unsafe { proc(count, values, sentinel) }"), true)
+    @Expect(helper.contains("return unsafe { proc__(count, values, sentinel) }"), true)
 }
 
 @Test
@@ -5670,9 +5670,9 @@ func testCommonNativeHelperFilesUseMemorySizeAttributeForByteArrays() {
 
     @Expect(helper.contains("public func WriteBytes(buffer: Array<UInt8>): Int32"), true)
     @Expect(helper.contains("byteCount: UInt32"), false)
-    @Expect(helper.contains("let proc = CFunc<(CPointer<UInt8>, UInt32) -> Int32>"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CPointer<UInt8>, UInt32) -> Int32>"), true)
     @Expect(helper.contains("let __bufferArrayHandle = unsafe { acquireArrayRawData(buffer) }"), true)
-    @Expect(helper.contains("return unsafe { proc(__bufferArrayHandle.pointer, UInt32(buffer.size)) }"), true)
+    @Expect(helper.contains("return unsafe { proc__(__bufferArrayHandle.pointer, UInt32(buffer.size)) }"), true)
     @Expect(helper.contains("unsafe { releaseArrayRawData(__bufferArrayHandle) }"), true)
 }
 
@@ -5771,7 +5771,7 @@ func testCommonNativeHelperFilesKeepMemorySizeAttributeExplicitForNonByteArrays(
     @Expect(helper.contains("public func WriteWideBytes(buffer: CPointer<UInt16>, byteCount: UInt32): Int32"), true)
     @Expect(helper.contains("buffer: Array<UInt16>"), false)
     @Expect(helper.contains("acquireArrayRawData"), false)
-    @Expect(helper.contains("return unsafe { proc(buffer, byteCount) }"), true)
+    @Expect(helper.contains("return unsafe { proc__(buffer, byteCount) }"), true)
 }
 
 @Test
@@ -5993,7 +5993,7 @@ func testCommonNativeHelperFilesRenderDelegateParametersWithNativeAbiTypes() {
     )
 
     @Expect(helper.contains("callback: CFunc<(Int32, CPointer<Unit>) -> Int32>"), true)
-    @Expect(helper.contains("let proc = CFunc<(CFunc<(Int32, CPointer<Unit>) -> Int32>) -> Int32>"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CFunc<(Int32, CPointer<Unit>) -> Int32>) -> Int32>"), true)
     @Expect(helper.contains("Example_Native_BOOL"), false)
     @Expect(helper.contains("Example_Native_PTP_WORK"), false)
 }
@@ -6280,9 +6280,9 @@ func testCommonNativeHelpersUseNativeIntegerForSizeT() {
     )
 
     @Expect(content.contains("public func CoTaskMemAlloc(cb: UIntNative): CPointer<Unit>"), true)
-    @Expect(content.contains("let proc = CFunc<(UIntNative) -> CPointer<Unit>>"), true)
+    @Expect(content.contains("let proc__ = CFunc<(UIntNative) -> CPointer<Unit>>"), true)
     @Expect(content.contains("public func CoTaskMemRealloc(pv: CPointer<Unit>, cb: UIntNative): CPointer<Unit>"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<Unit>, UIntNative) -> CPointer<Unit>>"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<Unit>, UIntNative) -> CPointer<Unit>>"), true)
     @Expect(content.contains("public func PrimitiveUIntPtrAlloc(cb: UIntNative): CPointer<Unit>"), true)
     @Expect(content.contains("cb: CPointer<Unit>"), false)
 }
@@ -6385,8 +6385,8 @@ func testCommonNativeHelpersDoNotProjectNonWin32PointerSizedIntegersByShortName(
     )
 
     @Expect(helper.contains("public func UseCustomSize(size: UInt32): Int32"), true)
-    @Expect(helper.contains("let proc = CFunc<(UInt32) -> Int32>"), true)
-    @Expect(helper.contains("return unsafe { proc(size) }"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(UInt32) -> Int32>"), true)
+    @Expect(helper.contains("return unsafe { proc__(size) }"), true)
     @Expect(helper.contains("size: UIntNative"), false)
 }
 
@@ -6435,13 +6435,13 @@ func testCommonNativeHelpersUseFoundationCharAndBooleanRemapsWithoutTypeDefiniti
     )
 
     @Expect(content.contains("public func UseChar(ch: Int8): Int8"), true)
-    @Expect(content.contains("let proc = CFunc<(Int8) -> Int8>"), true)
-    @Expect(content.contains("return unsafe { proc(ch) }"), true)
+    @Expect(content.contains("let proc__ = CFunc<(Int8) -> Int8>"), true)
+    @Expect(content.contains("return unsafe { proc__(ch) }"), true)
     @Expect(content.contains("public func UseBoolean(flag: Bool): Bool"), true)
-    @Expect(content.contains("let proc = CFunc<(UInt8) -> UInt8>"), true)
-    @Expect(content.contains("return unsafe { proc(if (flag) { 1u8 } else { 0u8 }) } != 0u8"), true)
+    @Expect(content.contains("let proc__ = CFunc<(UInt8) -> UInt8>"), true)
+    @Expect(content.contains("return unsafe { proc__(if (flag) { 1u8 } else { 0u8 }) } != 0u8"), true)
     @Expect(content.contains("public func UseBooleanPointer(flag: CPointer<UInt8>): Int32"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<UInt8>) -> Int32>"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<UInt8>) -> Int32>"), true)
     @Expect(content.contains("CPointer<Bool>"), false)
     @Expect(content.contains("flag: CPointer<Unit>"), false)
     @Expect(content.contains("ch: CPointer<Unit>"), false)
@@ -6572,8 +6572,8 @@ func testCommonNativeHelpersDoNotProjectNonWin32CharAndBooleanByShortName() {
     )
 
     @Expect(helper.contains("public func UseCustomNativeTypes(flag: UInt8, ch: UInt16): UInt8"), true)
-    @Expect(helper.contains("let proc = CFunc<(UInt8, UInt16) -> UInt8>"), true)
-    @Expect(helper.contains("return unsafe { proc(flag, ch) }"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(UInt8, UInt16) -> UInt8>"), true)
+    @Expect(helper.contains("return unsafe { proc__(flag, ch) }"), true)
     @Expect(helper.contains("flag: Bool"), false)
     @Expect(helper.contains("ch: Int8"), false)
 }
@@ -6618,11 +6618,11 @@ func testCommonNativeHelpersUseEventRegistrationTokenRemapsWithoutTypeDefinition
     )
 
     @Expect(winrtContent.contains("public func UseWinRtToken(token: Int64): Int64"), true)
-    @Expect(winrtContent.contains("let proc = CFunc<(Int64) -> Int64>"), true)
-    @Expect(winrtContent.contains("return unsafe { proc(token) }"), true)
+    @Expect(winrtContent.contains("let proc__ = CFunc<(Int64) -> Int64>"), true)
+    @Expect(winrtContent.contains("return unsafe { proc__(token) }"), true)
     @Expect(foundationContent.contains("public func UseFoundationToken(token: Int64): Int64"), true)
-    @Expect(foundationContent.contains("let proc = CFunc<(Int64) -> Int64>"), true)
-    @Expect(foundationContent.contains("return unsafe { proc(token) }"), true)
+    @Expect(foundationContent.contains("let proc__ = CFunc<(Int64) -> Int64>"), true)
+    @Expect(foundationContent.contains("return unsafe { proc__(token) }"), true)
     @Expect(winrtContent.contains("CPointer<Unit>"), false)
     @Expect(foundationContent.contains("CPointer<Unit>"), false)
 }
@@ -6725,8 +6725,8 @@ func testCommonNativeHelpersDoNotProjectNonWin32EventRegistrationTokenByShortNam
     )
 
     @Expect(helper.contains("public func UseCustomToken(token: UInt32): UInt32"), true)
-    @Expect(helper.contains("let proc = CFunc<(UInt32) -> UInt32>"), true)
-    @Expect(helper.contains("return unsafe { proc(token) }"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(UInt32) -> UInt32>"), true)
+    @Expect(helper.contains("return unsafe { proc__(token) }"), true)
     @Expect(helper.contains("token: Int64"), false)
 }
 
@@ -6770,11 +6770,11 @@ func testCommonNativeHelpersUseHResultRemapsWithoutTypeDefinitions() {
     )
 
     @Expect(win32Content.contains("public func UseWin32HResult(hr: Int32): Int32"), true)
-    @Expect(win32Content.contains("let proc = CFunc<(Int32) -> Int32>"), true)
-    @Expect(win32Content.contains("return unsafe { proc(hr) }"), true)
+    @Expect(win32Content.contains("let proc__ = CFunc<(Int32) -> Int32>"), true)
+    @Expect(win32Content.contains("return unsafe { proc__(hr) }"), true)
     @Expect(foundationContent.contains("public func UseFoundationHResult(hr: Int32): Int32"), true)
-    @Expect(foundationContent.contains("let proc = CFunc<(Int32) -> Int32>"), true)
-    @Expect(foundationContent.contains("return unsafe { proc(hr) }"), true)
+    @Expect(foundationContent.contains("let proc__ = CFunc<(Int32) -> Int32>"), true)
+    @Expect(foundationContent.contains("return unsafe { proc__(hr) }"), true)
     @Expect(win32Content.contains("public func UseWin32HResultChecked(hr: Int32): windows_core.Result<Unit>"), true)
     @Expect(win32Content.contains("windows_core.HRESULT(UseWin32HResult(hr)).ok()"), true)
     @Expect(foundationContent.contains("public func UseFoundationHResultChecked(hr: Int32): windows_core.Result<Unit>"), true)
@@ -6881,8 +6881,8 @@ func testCommonNativeHelpersDoNotProjectNonWin32HResultByShortName() {
     )
 
     @Expect(helper.contains("public func UseCustomHResult(hr: UInt32): UInt32"), true)
-    @Expect(helper.contains("let proc = CFunc<(UInt32) -> UInt32>"), true)
-    @Expect(helper.contains("return unsafe { proc(hr) }"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(UInt32) -> UInt32>"), true)
+    @Expect(helper.contains("return unsafe { proc__(hr) }"), true)
     @Expect(helper.contains("hr: Int32"), false)
 }
 
@@ -6971,25 +6971,25 @@ func testCommonNativeHelpersUseBStrRemapsWithoutTypeDefinitions() {
 
     @Expect(content.contains("import windows_strings as windows_strings"), true)
     @Expect(content.contains("public func SysAllocString(psz: CPointer<UInt16>): windows_strings.BSTR"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<UInt16>) -> CPointer<Unit>>"), true)
-    @Expect(content.contains("return windows_strings.BSTR.fromRawTake(CPointer<UInt16>(unsafe { proc(psz) }))"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<UInt16>) -> CPointer<Unit>>"), true)
+    @Expect(content.contains("return windows_strings.BSTR.fromRawTake(CPointer<UInt16>(unsafe { proc__(psz) }))"), true)
     @Expect(content.contains("public func SysStringLen(pbstr: windows_strings.BSTR): UInt32"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<Unit>) -> UInt32>"), true)
-    @Expect(content.contains("return unsafe { proc(CPointer<Unit>(pbstr.asPtr())) }"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<Unit>) -> UInt32>"), true)
+    @Expect(content.contains("return unsafe { proc__(CPointer<Unit>(pbstr.asPtr())) }"), true)
     @Expect(content.contains("public func SysFreeString(bstrString: windows_strings.BSTR): Unit"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<Unit>) -> Unit>"), true)
-    @Expect(content.contains("unsafe { proc(CPointer<Unit>(bstrString.intoRaw())) }"), true)
-    @Expect(content.contains("unsafe { proc(CPointer<Unit>(bstrString.asPtr())) }"), false)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<Unit>) -> Unit>"), true)
+    @Expect(content.contains("unsafe { proc__(CPointer<Unit>(bstrString.intoRaw())) }"), true)
+    @Expect(content.contains("unsafe { proc__(CPointer<Unit>(bstrString.asPtr())) }"), false)
     @Expect(content.contains("public func FreeBstrAlias(owned: windows_strings.BSTR): Unit"), true)
-    @Expect(content.contains("unsafe { proc(CPointer<Unit>(owned.intoRaw())) }"), true)
-    @Expect(content.contains("unsafe { proc(CPointer<Unit>(owned.asPtr())) }"), false)
+    @Expect(content.contains("unsafe { proc__(CPointer<Unit>(owned.intoRaw())) }"), true)
+    @Expect(content.contains("unsafe { proc__(CPointer<Unit>(owned.asPtr())) }"), false)
     @Expect(content.contains("public func ReleaseBstrAlias(released: windows_strings.BSTR): Unit"), true)
-    @Expect(content.contains("unsafe { proc(CPointer<Unit>(released.intoRaw())) }"), true)
-    @Expect(content.contains("unsafe { proc(CPointer<Unit>(released.asPtr())) }"), false)
+    @Expect(content.contains("unsafe { proc__(CPointer<Unit>(released.intoRaw())) }"), true)
+    @Expect(content.contains("unsafe { proc__(CPointer<Unit>(released.asPtr())) }"), false)
     @Expect(content.contains("public func SysReAllocString(pbstr: CPointer<CPointer<Unit>>, psz: CPointer<UInt16>): Int32"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<CPointer<Unit>>, CPointer<UInt16>) -> Int32>"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<CPointer<Unit>>, CPointer<UInt16>) -> Int32>"), true)
     @Expect(content.contains("var result = windows_strings.BSTR()"), false)
-    @Expect(content.contains("result.Value = unsafe { proc"), false)
+    @Expect(content.contains("result.Value = unsafe { proc__"), false)
     @Expect(cliTestContainsString(deps.toArray(), "windows_strings"), true)
 }
 
@@ -7022,7 +7022,7 @@ func testCommonNativeHelpersDoNotImportBStrResourceForPointerOnlySlots() {
     collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_sys", deps, files)
 
     @Expect(content.contains("public func SysReAllocString(pbstr: CPointer<CPointer<Unit>>, psz: CPointer<UInt16>): Int32"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<CPointer<Unit>>, CPointer<UInt16>) -> Int32>"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<CPointer<Unit>>, CPointer<UInt16>) -> Int32>"), true)
     @Expect(content.contains("import windows_strings as windows_strings"), false)
     @Expect(content.contains("windows_strings.BSTR"), false)
     @Expect(cliTestContainsString(deps.toArray(), "windows_strings"), false)
@@ -7126,9 +7126,9 @@ func testCommonNativeHelpersDoNotProjectNonWin32BStrByShortName() {
     )
 
     @Expect(helper.contains("public func UseCustomBStr(value: BSTR): BSTR"), true)
-    @Expect(helper.contains("let proc = CFunc<(CPointer<Unit>) -> CPointer<Unit>>"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CPointer<Unit>) -> CPointer<Unit>>"), true)
     @Expect(helper.contains("var result = BSTR()"), true)
-    @Expect(helper.contains("result.Value = unsafe { proc(value.Value) }"), true)
+    @Expect(helper.contains("result.Value = unsafe { proc__(value.Value) }"), true)
     @Expect(helper.contains("windows_strings.BSTR"), false)
 }
 
@@ -7221,13 +7221,13 @@ func testCommonNativeHelpersUseHStringRemapsWithoutTypeDefinitions() {
 
     @Expect(content.contains("import windows_core as windows_core"), true)
     @Expect(content.contains("public func WindowsGetStringLen(string: windows_core.HString): UInt32"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<Unit>) -> UInt32>"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<Unit>) -> UInt32>"), true)
     @Expect(content.contains("var __stringHStringHandle = CPointer<Unit>()"), true)
     @Expect(content.contains("__stringHStringHandle = string.toSystemHandleCopy()"), true)
-    @Expect(content.contains("return unsafe { proc(__stringHStringHandle) }"), true)
+    @Expect(content.contains("return unsafe { proc__(__stringHStringHandle) }"), true)
     @Expect(content.contains("windows_core.releaseSystemHStringHandle(__stringHStringHandle)"), true)
     @Expect(content.contains("public func WindowsDuplicateString(string: windows_core.HString): windows_core.HString"), true)
-    @Expect(content.contains("return windows_core.HString.fromSystemHandleTake(unsafe { proc(__stringHStringHandle) })"), true)
+    @Expect(content.contains("return windows_core.HString.fromSystemHandleTake(unsafe { proc__(__stringHStringHandle) })"), true)
     @Expect(content.contains("public func WindowsDeleteString(string: windows_core.HString): Int32"), true)
     @Expect(content.contains("public func DeleteStringAlias(string: windows_core.HString): Int32"), true)
     @Expect(content.contains("windows_libloading.resolveProc(\"api-ms-win-core-winrt-string-l1-1-0.dll\", \"WindowsDeleteString\")"), true)
@@ -7237,11 +7237,11 @@ func testCommonNativeHelpersUseHStringRemapsWithoutTypeDefinitions() {
     @Expect(content.contains("var __rightHStringHandle = CPointer<Unit>()"), true)
     @Expect(content.contains("__leftHStringHandle = left.toSystemHandleCopy()"), true)
     @Expect(content.contains("__rightHStringHandle = right.toSystemHandleCopy()"), true)
-    @Expect(content.contains("return unsafe { proc(__leftHStringHandle, __rightHStringHandle) }"), true)
+    @Expect(content.contains("return unsafe { proc__(__leftHStringHandle, __rightHStringHandle) }"), true)
     @Expect(content.contains("windows_core.releaseSystemHStringHandle(__leftHStringHandle)"), true)
     @Expect(content.contains("windows_core.releaseSystemHStringHandle(__rightHStringHandle)"), true)
     @Expect(content.contains("public func HSTRING_UserUnmarshal(flags: CPointer<UInt32>, buffer: CPointer<UInt8>, string: CPointer<CPointer<Unit>>): CPointer<UInt8>"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<UInt32>, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> CPointer<UInt8>>"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<UInt32>, CPointer<UInt8>, CPointer<CPointer<Unit>>) -> CPointer<UInt8>>"), true)
     @Expect(content.contains("CPointer<windows_core.HString>"), false)
     @Expect(content.contains("var result = windows_core.HString()"), false)
     @Expect(cliTestContainsString(deps.toArray(), "windows_core"), true)
@@ -7276,7 +7276,7 @@ func testCommonNativeHelpersDoNotImportHStringResourceForPointerOnlySlots() {
     collectSupportDependencyNamesFromGeneratedNativeHelpers("windows_sys", deps, files)
 
     @Expect(content.contains("public func HSTRING_UserFree(flags: CPointer<UInt32>, string: CPointer<CPointer<Unit>>): Unit"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Unit>"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<UInt32>, CPointer<CPointer<Unit>>) -> Unit>"), true)
     @Expect(content.contains("import windows_core as windows_core"), false)
     @Expect(content.contains("windows_core.HString"), false)
     @Expect(cliTestContainsString(deps.toArray(), "windows_core"), false)
@@ -7380,9 +7380,9 @@ func testCommonNativeHelpersDoNotProjectNonWinRtHStringByShortName() {
     )
 
     @Expect(helper.contains("public func UseCustomHString(value: HSTRING): HSTRING"), true)
-    @Expect(helper.contains("let proc = CFunc<(CPointer<Unit>) -> CPointer<Unit>>"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CPointer<Unit>) -> CPointer<Unit>>"), true)
     @Expect(helper.contains("var result = HSTRING()"), true)
-    @Expect(helper.contains("result.Value = unsafe { proc(value.Value) }"), true)
+    @Expect(helper.contains("result.Value = unsafe { proc__(value.Value) }"), true)
     @Expect(helper.contains("windows_core.HString"), false)
 }
 
@@ -7435,12 +7435,12 @@ func testCommonNativeHelpersUseComInterfaceRemapsWithoutTypeDefinitions() {
 
     @Expect(content.contains("import windows_interface as windows_interface"), true)
     @Expect(content.contains("public func Inspect(input: windows_interface.IInspectable): windows_interface.IUnknown"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<Unit>) -> CPointer<Unit>>"), true)
-    @Expect(content.contains("return windows_interface.IUnknown.fromAbiTake(unsafe { proc(input.asRaw()) })"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<Unit>) -> CPointer<Unit>>"), true)
+    @Expect(content.contains("return windows_interface.IUnknown.fromAbiTake(unsafe { proc__(input.asRaw()) })"), true)
     @Expect(content.contains("public func UseUnknown(value: windows_interface.IUnknown): Int32"), true)
-    @Expect(content.contains("return unsafe { proc(value.asRaw()) }"), true)
+    @Expect(content.contains("return unsafe { proc__(value.asRaw()) }"), true)
     @Expect(content.contains("public func GetUnknownOut(result: CPointer<CPointer<Unit>>): Int32"), true)
-    @Expect(content.contains("let proc = CFunc<(CPointer<CPointer<Unit>>) -> Int32>"), true)
+    @Expect(content.contains("let proc__ = CFunc<(CPointer<CPointer<Unit>>) -> Int32>"), true)
     @Expect(content.contains("CPointer<windows_interface.IUnknown>"), false)
     @Expect(content.contains("var result = windows_interface.IUnknown()"), false)
     @Expect(cliTestContainsString(deps.toArray(), "windows_interface"), true)
@@ -7544,9 +7544,9 @@ func testCommonNativeHelpersDoNotProjectNonWin32ComInterfacesByShortName() {
     )
 
     @Expect(helper.contains("public func UseCustomUnknown(value: IUnknown): IUnknown"), true)
-    @Expect(helper.contains("let proc = CFunc<(CPointer<Unit>) -> CPointer<Unit>>"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(CPointer<Unit>) -> CPointer<Unit>>"), true)
     @Expect(helper.contains("var result = IUnknown()"), true)
-    @Expect(helper.contains("result.Value = unsafe { proc(value.Value) }"), true)
+    @Expect(helper.contains("result.Value = unsafe { proc__(value.Value) }"), true)
     @Expect(helper.contains("windows_interface.IUnknown"), false)
 }
 
@@ -7827,14 +7827,14 @@ func testCommonNativeHelpersRemapDirect2DAndDirect3DNumericsTypes() {
     @Expect(direct2d.contains("import windows_sys.Foundation.Numerics.Vector4"), true)
     @Expect(direct2d.contains("public func UsePoint(point: Vector2): Vector2"), true)
     @Expect(direct2d.contains("public func UseVector4(matrix: Matrix3x2): Vector4"), true)
-    @Expect(direct2d.contains("let proc = CFunc<(Vector2) -> Vector2>"), true)
-    @Expect(direct2d.contains("let proc = CFunc<(Matrix3x2) -> Vector4>"), true)
-    @Expect(direct2d.contains("return unsafe { proc(point) }"), true)
-    @Expect(direct2d.contains("return unsafe { proc(matrix) }"), true)
+    @Expect(direct2d.contains("let proc__ = CFunc<(Vector2) -> Vector2>"), true)
+    @Expect(direct2d.contains("let proc__ = CFunc<(Matrix3x2) -> Vector4>"), true)
+    @Expect(direct2d.contains("return unsafe { proc__(point) }"), true)
+    @Expect(direct2d.contains("return unsafe { proc__(matrix) }"), true)
     @Expect(direct3d.contains("import windows_sys.Foundation.Numerics.Matrix4x4"), true)
     @Expect(direct3d.contains("public func UseMatrix(matrix: Matrix4x4): Matrix4x4"), true)
-    @Expect(direct3d.contains("let proc = CFunc<(Matrix4x4) -> Matrix4x4>"), true)
-    @Expect(direct3d.contains("return unsafe { proc(matrix) }"), true)
+    @Expect(direct3d.contains("let proc__ = CFunc<(Matrix4x4) -> Matrix4x4>"), true)
+    @Expect(direct3d.contains("return unsafe { proc__(matrix) }"), true)
     @Expect(direct2d.contains("CPointer<Unit>"), false)
     @Expect(direct3d.contains("CPointer<Unit>"), false)
 
@@ -7975,8 +7975,8 @@ func testCommonNativeHelpersDoNotRemapNonDirect2DNumericsShortNames() {
     )
 
     @Expect(helper.contains("public func UseCustomPoint(point: UInt32): UInt32"), true)
-    @Expect(helper.contains("let proc = CFunc<(UInt32) -> UInt32>"), true)
-    @Expect(helper.contains("return unsafe { proc(point) }"), true)
+    @Expect(helper.contains("let proc__ = CFunc<(UInt32) -> UInt32>"), true)
+    @Expect(helper.contains("return unsafe { proc__(point) }"), true)
     @Expect(helper.contains("point: Vector2"), false)
 }
 

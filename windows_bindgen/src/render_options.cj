@@ -151,6 +151,37 @@ public func clearNamespaceAwareRendering(): Unit {
     activeSymbolsByName = HashMap<String, SymbolRecord>()
 }
 
+// Flat single-package rendering context.
+//
+// In flat mode every selected type lives in one package (no per-namespace
+// subpackages), so a type reference is never qualified by a namespace alias:
+// it renders as the type's flat, package-scoped name. Because flattening can
+// collapse two distinct namespaces' types onto the same short name, the writer
+// pre-computes a deterministic flat-name map (full name -> disambiguated flat
+// name) and installs it here. Every reference that resolves to a selected
+// symbol returns that symbol's flat name (bare, no qualifier); references to
+// support/external types fall through to the mangled name resolved via the
+// flat package's imports (windows_core, etc.).
+//
+// Left disabled (the default) the renderer is unaffected, so the nested-layout
+// path and the unit tests keep their behavior.
+var activeFlatRendering: Bool = false
+var activeFlatNameByFullName: HashMap<String, String> = HashMap<String, String>()
+
+public func setFlatRendering(flatNameByFullName: HashMap<String, String>): Unit {
+    activeFlatRendering = true
+    activeFlatNameByFullName = flatNameByFullName
+}
+
+public func clearFlatRendering(): Unit {
+    activeFlatRendering = false
+    activeFlatNameByFullName = HashMap<String, String>()
+}
+
+public func flatNameOf(fullName: String): Option<String> {
+    return activeFlatNameByFullName.get(fullName)
+}
+
 public func qualifyMangledFullName(fullName: String): String {
     let mangled = mangleFullName(fullName)
     return qualifyMangledFullName(fullName, mangled)
@@ -163,6 +194,16 @@ public func qualifyMangledFullName(fullName: String, mangled: String): String {
         match (referenceMatchingFullName(activeReferences, namespace, leafName, fullName)) {
             case Some(stage) => return "${stage.name}.${mangled}"
             case None => ()
+        }
+    }
+    if (activeFlatRendering) {
+        // Flat layout: a reference to any selected symbol renders as its
+        // disambiguated flat name (bare, same package). References to support
+        // types not in the flat map fall through to the mangled name resolved
+        // via the package's support imports.
+        match (activeFlatNameByFullName.get(fullName)) {
+            case Some(flatName) => return flatName
+            case None => return mangled
         }
     }
     if (!activeRenderNamespace.isEmpty()) {
