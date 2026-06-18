@@ -4,8 +4,8 @@ import std.collection.{ArrayList}
 import windows_reactor.core.{Event, EventHandler}
 import windows_core.{DateTime, TimeSpan, queryInterfaceRaw}
 import windows_reference.{IReference}
-import windows_sys.Foundation.{TypedEventHandler}
-import windows_sys.Microsoft.UI.Xaml.Controls.{
+import windows_reactor.bindings.Foundation.{TypedEventHandler}
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
     ColorPicker, ColorChangedEventArgs,
     DatePicker, DatePickerSelectedValueChangedEventArgs,
     TimePicker, TimePickerSelectedValueChangedEventArgs,

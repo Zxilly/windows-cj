@@ -2,16 +2,16 @@ package windows_reactor.winui
 
 import windows_core.{HString, winrtBorrowGenericIn}
 import windows_reactor.core.{ImplicitTransitions, LayoutAnimationConfig, AnimationConfig, Easing}
-import windows_sys.Microsoft.UI.Xaml.{FrameworkElement}
-import windows_sys.Microsoft.UI.Xaml.Hosting.{ElementCompositionPreview}
-import windows_sys.Microsoft.UI.Composition.{
+import windows_reactor.bindings.Microsoft.UI.Xaml.{FrameworkElement}
+import windows_reactor.bindings.Microsoft.UI.Xaml.Hosting.{ElementCompositionPreview}
+import windows_reactor.bindings.Microsoft.UI.Composition.{
     Visual, CompositionObject, Compositor, CompositionAnimation, CompositionEasingFunction,
     KeyFrameAnimation, ImplicitAnimationCollection
 }
-import windows_sys.Microsoft.UI.Composition.{ICompositionAnimationBase as ICompositionAnimationBase}
-import windows_sys.Foundation.{TimeSpan as Windows_Foundation_TimeSpan}
-import windows_sys.Foundation.Collections.{IMap as XamlIMap}
-import windows_sys.Foundation.Numerics.{Vector2 as Windows_Foundation_Numerics_Vector2, Vector3 as Windows_Foundation_Numerics_Vector3}
+import windows_reactor.bindings.Microsoft.UI.Composition.{ICompositionAnimationBase as ICompositionAnimationBase}
+import windows_reactor.bindings.Foundation.{TimeSpan as Windows_Foundation_TimeSpan}
+import windows_reactor.bindings.Foundation.Collections.{IMap as XamlIMap}
+import windows_reactor.bindings.Foundation.Numerics.{Vector2 as Windows_Foundation_Numerics_Vector2, Vector3 as Windows_Foundation_Numerics_Vector3}
 
 // ============================================================================
 // Composition animation family — free-function implementations.
@@ -251,6 +251,14 @@ func animRunProperty(handle: Handle, config: ?AnimationConfig): Unit {
                     case Some(scale) => runScaleAnimation(handle, visual, compObj, compositor, scale, cfg)
                     case None => ()
                 }
+                match (cfg.rotation) {
+                    case Some(rotation) => runRotationAnimation(compObj, compositor, Float32(rotation), cfg)
+                    case None => ()
+                }
+                // cfg.translation is intentionally NOT animated here: the
+                // Translation channel collides with XAML layout for ongoing
+                // re-targeting. Use layoutAnimation for movement; translation on
+                // AnimationConfig is honored only by enterTransition (slide-in).
             } finally {
                 compositor.close()
             }
@@ -263,13 +271,14 @@ func animRunProperty(handle: Handle, config: ?AnimationConfig): Unit {
 }
 
 // Run an ENTER (mount) transition: drive the element's composition Visual from
-// the config's "from" opacity to the natural 1.0, producing a fade IN. Unlike
-// animRunProperty (which animates the CURRENT value -> the config value, and so
-// cannot express "appear from nothing" for an element whose Visual defaults to
-// opacity 1), this inserts an explicit progress-0 from-key-frame. It drives the
-// composition Opacity channel directly (not the XAML UIElement.Opacity facade),
-// so it does NOT double-drive / conflict with XAML layout the way a facade
-// `.opacity()` + implicit transition would.
+// the config's "from" opacity / scale to the natural 1.0, producing a fade /
+// scale IN. Whatever channels the app composes on the AnimationConfig are
+// honored (opacity, scale, or both) — exactly mirroring animRunProperty, except
+// that this animates the FROM value -> natural via an explicit progress-0
+// from-key-frame (animRunProperty animates CURRENT -> config value, which cannot
+// express "appear from nothing"). It drives the composition channels directly
+// (not the XAML UIElement facades), so it does NOT double-drive / conflict with
+// XAML layout the way a facade `.opacity()` + implicit transition would.
 func animRunEnterTransition(handle: Handle, config: ?AnimationConfig): Unit {
     let cfg = match (config) {
         case Some(c) => c
@@ -285,6 +294,14 @@ func animRunEnterTransition(handle: Handle, config: ?AnimationConfig): Unit {
                     case Some(fromOpacity) => runEnterOpacity(compObj, compositor, Float32(fromOpacity), cfg)
                     case None => ()
                 }
+                match (cfg.scale) {
+                    case Some(fromScale) => runEnterScale(handle, visual, compObj, compositor, Float32(fromScale), cfg)
+                    case None => ()
+                }
+                match (cfg.rotation) {
+                    case Some(fromAngle) => runEnterRotation(compObj, compositor, Float32(fromAngle), cfg)
+                    case None => ()
+                }
             } finally {
                 compositor.close()
             }
@@ -293,6 +310,14 @@ func animRunEnterTransition(handle: Handle, config: ?AnimationConfig): Unit {
         }
     } finally {
         visual.close()
+    }
+    // Translation requires ElementCompositionPreview.SetIsTranslationEnabled and
+    // drives the synthetic `Translation` channel (not `Offset`, which collides
+    // with XAML layout), so it is realized self-contained after the shared Visual
+    // block (mirrors animRunLayoutTranslation).
+    match (cfg.translation) {
+        case Some((dx, dy)) => runEnterTranslation(handle, dx, dy, cfg)
+        case None => ()
     }
 }
 
@@ -314,6 +339,101 @@ func runEnterOpacity(compObj: CompositionObject, compositor: Compositor,
         startAnimation(compObj, "Opacity", anim.asRaw())
     } finally {
         anim.close()
+    }
+}
+
+// Scale fade-in: animate the composition Scale (Vector3) from a uniform
+// `fromValue` (e.g. 0.8) to the natural 1.0 over the config duration, pivoting
+// around the element's centre. Mirrors runScaleAnimation's centring/Z handling
+// but inserts an explicit progress-0 from-key-frame so the element scales IN
+// regardless of its Visual's current Scale (the enter counterpart of
+// runEnterOpacity).
+func runEnterScale(handle: Handle, visual: Visual, compObj: CompositionObject,
+                   compositor: Compositor, fromValue: Float32, cfg: AnimationConfig): Unit {
+    match (actualSize(handle)) {
+        case Some((w, h)) where w > 0.0 && h > 0.0 =>
+            visual.CenterPoint = vec3(Float32(w / 2.0), Float32(h / 2.0), 0.0f32)
+        case _ => ()
+    }
+    let currentZ = visual.Scale.Z
+    let anim = compositor.CreateVector3KeyFrameAnimation()
+    try {
+        setAnimationDuration(anim.asRaw(), cfg.durationMs)
+        let easing = easingFor(compositor, cfg.easing)
+        try {
+            anim.InsertKeyFrameWithEasingFunction(0.0f32, vec3(fromValue, fromValue, currentZ), easing)
+            anim.InsertKeyFrameWithEasingFunction(1.0f32, vec3(1.0f32, 1.0f32, currentZ), easing)
+        } finally {
+            easing.close()
+        }
+        startAnimation(compObj, "Scale", anim.asRaw())
+    } finally {
+        anim.close()
+    }
+}
+
+// Rotation spin-in: animate the composition RotationAngleInDegrees from
+// `fromValue` (e.g. -90) to the natural 0° over the config duration, via an
+// explicit progress-0 from-key-frame. The scalar counterpart of runEnterOpacity.
+func runEnterRotation(compObj: CompositionObject, compositor: Compositor,
+                      fromValue: Float32, cfg: AnimationConfig): Unit {
+    let anim = compositor.CreateScalarKeyFrameAnimation()
+    try {
+        setAnimationDuration(anim.asRaw(), cfg.durationMs)
+        let easing = easingFor(compositor, cfg.easing)
+        try {
+            anim.InsertKeyFrameWithEasingFunction(0.0f32, fromValue, easing)
+            anim.InsertKeyFrameWithEasingFunction(1.0f32, 0.0f32, easing)
+        } finally {
+            easing.close()
+        }
+        startAnimation(compObj, "RotationAngleInDegrees", anim.asRaw())
+    } finally {
+        anim.close()
+    }
+}
+
+// Translation slide-in: enable the synthetic Translation channel and animate the
+// composition Visual from `(dx, dy)` to its natural `(0, 0)` over the config
+// duration. Self-contained (own ui / Visual + SetIsTranslationEnabled), mirroring
+// animRunLayoutTranslation; the UIElement Translation FACADE is deliberately never
+// written (writing it double-drives the property and fail-fasts CoreMessagingXP).
+func runEnterTranslation(handle: Handle, dx: Float64, dy: Float64, cfg: AnimationConfig): Unit {
+    let ui = handleUIElementOwned(handle)
+    try {
+        ElementCompositionPreview.SetIsTranslationEnabled(ui, true)
+        let visual = ElementCompositionPreview.GetElementVisual(ui)
+        try {
+            let compObj = compositionObjectOf(visual)
+            try {
+                stopAnimation(compObj, "Translation")
+                let compositor = compObj.Compositor
+                try {
+                    let anim = compositor.CreateVector3KeyFrameAnimation()
+                    try {
+                        setAnimationDuration(anim.asRaw(), cfg.durationMs)
+                        let easing = easingFor(compositor, cfg.easing)
+                        try {
+                            anim.InsertKeyFrame(0.0f32, vec3(Float32(dx), Float32(dy), 0.0f32))
+                            anim.InsertKeyFrameWithEasingFunction(1.0f32, vec3(0.0f32, 0.0f32, 0.0f32), easing)
+                        } finally {
+                            easing.close()
+                        }
+                        startAnimation(compObj, "Translation", anim.asRaw())
+                    } finally {
+                        anim.close()
+                    }
+                } finally {
+                    compositor.close()
+                }
+            } finally {
+                compObj.close()
+            }
+        } finally {
+            visual.close()
+        }
+    } finally {
+        ui.close()
     }
 }
 
@@ -456,6 +576,26 @@ func runOpacityAnimation(compObj: CompositionObject, compositor: Compositor,
             easing.close()
         }
         startAnimation(compObj, "Opacity", anim.asRaw())
+    } finally {
+        anim.close()
+    }
+}
+
+// Run a scalar RotationAngleInDegrees key-frame animation to `targetValue` over
+// the config duration with the config easing. The rotation counterpart of
+// runOpacityAnimation.
+func runRotationAnimation(compObj: CompositionObject, compositor: Compositor,
+                          targetValue: Float32, cfg: AnimationConfig): Unit {
+    let anim = compositor.CreateScalarKeyFrameAnimation()
+    try {
+        setAnimationDuration(anim.asRaw(), cfg.durationMs)
+        let easing = easingFor(compositor, cfg.easing)
+        try {
+            anim.InsertKeyFrameWithEasingFunction(1.0f32, targetValue, easing)
+        } finally {
+            easing.close()
+        }
+        startAnimation(compObj, "RotationAngleInDegrees", anim.asRaw())
     } finally {
         anim.close()
     }

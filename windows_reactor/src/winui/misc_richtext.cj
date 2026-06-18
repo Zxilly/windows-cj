@@ -2,7 +2,7 @@ package windows_reactor.winui
 
 import windows_reactor.core.{RichTextParagraph, RichTextRun, RichTextHyperlink}
 import windows_core.HString
-import windows_sys.Microsoft.UI.Xaml.Documents.{
+import windows_reactor.bindings.Microsoft.UI.Xaml.Documents.{
     Paragraph as XamlParagraph,
     Run as XamlRun,
     Inline as XamlInline,
@@ -10,7 +10,7 @@ import windows_sys.Microsoft.UI.Xaml.Documents.{
     TextElement as XamlTextElement,
     InlineCollection
 }
-import windows_sys.UI.Text.{FontWeight as Windows_UI_Text_FontWeight}
+import windows_reactor.bindings.UI.Text.{FontWeight as Windows_UI_Text_FontWeight}
 
 // ============================================================================
 // RichTextBlock paragraph family — free-function implementation.

@@ -3,11 +3,11 @@ package windows_reactor.winui
 import std.collection.{ArrayList}
 import windows_reactor.core.{Event, EventHandler}
 import windows_core.{queryInterfaceRaw}
-import windows_sys.Microsoft.UI.Xaml.Controls.{
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
     SelectionChangedEventHandler, TreeView, TreeViewItemInvokedEventArgs, TreeViewNode, RadioButtons
 }
-import windows_sys.Microsoft.UI.Xaml.Controls.Primitives.{Selector}
-import windows_sys.Foundation.{TypedEventHandler}
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.Primitives.{Selector}
+import windows_reactor.bindings.Foundation.{TypedEventHandler}
 
 // ============================================================================
 // Selection / collection event family.

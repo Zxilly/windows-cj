@@ -5,18 +5,18 @@ import windows_reactor.core.{
     ScrollViewScrollBarVisibility, ImageStretch
 }
 import windows_core.queryInterfaceRaw
-import windows_sys.Microsoft.UI.Xaml.Controls.{
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
     Panel, StackPanel, Grid, Border, Viewbox, ScrollViewer, ScrollView, Control,
     RowDefinition, ColumnDefinition
 }
-import windows_sys.Microsoft.UI.Xaml.{
+import windows_reactor.bindings.Microsoft.UI.Xaml.{
     CornerRadius as XamlCornerRadius, GridLength as XamlGridLength,
     Thickness as XamlThickness
 }
-import windows_sys.Microsoft.UI.Xaml.Media.Brush as XamlBrush
-import windows_sys.Microsoft.UI.Xaml.{GridUnitType_Auto as Microsoft_UI_Xaml_GridUnitType_Auto, GridUnitType_Pixel as Microsoft_UI_Xaml_GridUnitType_Pixel, GridUnitType_Star as Microsoft_UI_Xaml_GridUnitType_Star}
-import windows_sys.Microsoft.UI.Xaml.Controls.{Orientation_Vertical as Microsoft_UI_Xaml_Controls_Orientation_Vertical, Orientation_Horizontal as Microsoft_UI_Xaml_Controls_Orientation_Horizontal, ScrollBarVisibility as ScrollBarVisAbi, ScrollBarVisibility_Auto as Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Auto, ScrollBarVisibility_Visible as Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Visible, ScrollBarVisibility_Hidden as Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Hidden, ScrollBarVisibility_Disabled as Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Disabled, ScrollingScrollBarVisibility as ScrollingScrollBarVisAbi, ScrollingScrollBarVisibility_Auto as Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility_Auto, ScrollingScrollBarVisibility_Visible as Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility_Visible, ScrollingScrollBarVisibility_Hidden as Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility_Hidden}
-import windows_sys.Microsoft.UI.Xaml.Media.{Stretch as StretchAbi, Stretch_None as Microsoft_UI_Xaml_Media_Stretch_None, Stretch_Fill as Microsoft_UI_Xaml_Media_Stretch_Fill, Stretch_Uniform as Microsoft_UI_Xaml_Media_Stretch_Uniform, Stretch_UniformToFill as Microsoft_UI_Xaml_Media_Stretch_UniformToFill}
+import windows_reactor.bindings.Microsoft.UI.Xaml.Media.Brush as XamlBrush
+import windows_reactor.bindings.Microsoft.UI.Xaml.{GridUnitType_Auto as Microsoft_UI_Xaml_GridUnitType_Auto, GridUnitType_Pixel as Microsoft_UI_Xaml_GridUnitType_Pixel, GridUnitType_Star as Microsoft_UI_Xaml_GridUnitType_Star}
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{Orientation_Vertical as Microsoft_UI_Xaml_Controls_Orientation_Vertical, Orientation_Horizontal as Microsoft_UI_Xaml_Controls_Orientation_Horizontal, ScrollBarVisibility as ScrollBarVisAbi, ScrollBarVisibility_Auto as Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Auto, ScrollBarVisibility_Visible as Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Visible, ScrollBarVisibility_Hidden as Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Hidden, ScrollBarVisibility_Disabled as Microsoft_UI_Xaml_Controls_ScrollBarVisibility_Disabled, ScrollingScrollBarVisibility as ScrollingScrollBarVisAbi, ScrollingScrollBarVisibility_Auto as Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility_Auto, ScrollingScrollBarVisibility_Visible as Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility_Visible, ScrollingScrollBarVisibility_Hidden as Microsoft_UI_Xaml_Controls_ScrollingScrollBarVisibility_Hidden}
+import windows_reactor.bindings.Microsoft.UI.Xaml.Media.{Stretch as StretchAbi, Stretch_None as Microsoft_UI_Xaml_Media_Stretch_None, Stretch_Fill as Microsoft_UI_Xaml_Media_Stretch_Fill, Stretch_Uniform as Microsoft_UI_Xaml_Media_Stretch_Uniform, Stretch_UniformToFill as Microsoft_UI_Xaml_Media_Stretch_UniformToFill}
 
 // ============================================================================
 // Per-family property setters for layout containers: StackPanel, Grid, Canvas,

@@ -1,7 +1,7 @@
 package windows_reactor.winui
 
 import windows_reactor.core.{Dispatcher, SendDispatcher, DispatchPriority, UiMarshaller}
-import windows_sys.Microsoft.UI.Dispatching.{DispatcherQueue, DispatcherQueueHandler}
+import windows_reactor.bindings.Microsoft.UI.Dispatching.{DispatcherQueue, DispatcherQueueHandler}
 
 // ============================================================================
 // WinUIDispatcher — drives the RenderHost render loop onto the WinUI UI thread

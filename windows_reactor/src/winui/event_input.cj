@@ -3,13 +3,13 @@ package windows_reactor.winui
 import std.collection.{ArrayList}
 import windows_reactor.core.{Event, EventHandler}
 import windows_reference.{IReference}
-import windows_sys.Microsoft.UI.Xaml.{RoutedEventHandler}
-import windows_sys.Microsoft.UI.Xaml.Controls.{ToggleSwitch, RatingControl}
-import windows_sys.Microsoft.UI.Xaml.Controls.Primitives.{
+import windows_reactor.bindings.Microsoft.UI.Xaml.{RoutedEventHandler}
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{ToggleSwitch, RatingControl}
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.Primitives.{
     ToggleButton, RangeBase, RangeBaseValueChangedEventHandler, RangeBaseValueChangedEventArgs
 }
-import windows_sys.Microsoft.UI.Xaml.Controls.{NumberBox as Microsoft_UI_Xaml_Controls_NumberBox, NumberBoxValueChangedEventArgs as Microsoft_UI_Xaml_Controls_NumberBoxValueChangedEventArgs, RatingControl as Microsoft_UI_Xaml_Controls_RatingControl}
-import windows_sys.Foundation.{TypedEventHandler as Windows_Foundation_TypedEventHandler_2}
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{NumberBox as Microsoft_UI_Xaml_Controls_NumberBox, NumberBoxValueChangedEventArgs as Microsoft_UI_Xaml_Controls_NumberBoxValueChangedEventArgs, RatingControl as Microsoft_UI_Xaml_Controls_RatingControl}
+import windows_reactor.bindings.Foundation.{TypedEventHandler as Windows_Foundation_TypedEventHandler_2}
 import windows_interface.{IInspectable}
 
 // ============================================================================

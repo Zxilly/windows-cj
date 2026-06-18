@@ -3,11 +3,11 @@ package windows_reactor.winui
 import windows_reactor.core.{Prop, PropValue}
 import windows_core.HString
 import windows_interface.IInspectable
-import windows_sys.Microsoft.UI.Xaml.Controls.{
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
     ColorPicker, DatePicker, TimePicker, CalendarDatePicker, CalendarView,
     TextBlock
 }
-import windows_sys.UI.Color as XamlColor
+import windows_reactor.bindings.UI.Color as XamlColor
 
 // ============================================================================
 // Per-family property setters for date / time / colour pickers (DatePicker,

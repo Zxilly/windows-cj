@@ -1,7 +1,7 @@
 package windows_reactor.winui
 
 import windows_interface.{IInspectable}
-import windows_sys.Microsoft.UI.Xaml.{UIElement}
+import windows_reactor.bindings.Microsoft.UI.Xaml.{UIElement}
 
 // ============================================================================
 // Header / Pane element family — free-function setters.

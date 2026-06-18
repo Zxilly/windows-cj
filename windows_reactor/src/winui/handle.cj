@@ -3,7 +3,7 @@ package windows_reactor.winui
 import windows_reactor.core.{ControlKind}
 import windows_core.{OutSlot}
 import windows_interface.{IInspectable}
-import windows_sys.Microsoft.UI.Xaml.Controls.{
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
     TextBlock, Button, StackPanel, Border, CheckBox, TextBox, Grid, ScrollViewer,
     ToggleSwitch, Slider, RadioButton, NumberBox, ProgressBar, ProgressRing, Expander,
     HyperlinkButton, InfoBar, InfoBadge, PersonPicture, Image, TabView, TabViewItem,
@@ -13,9 +13,9 @@ import windows_sys.Microsoft.UI.Xaml.Controls.{
     ListBox, DropDownButton, SplitButton, AutoSuggestBox, SplitView, MenuBar, ScrollView,
     TreeView, CommandBar, TeachingTip, SelectorBar, RichEditBox, RelativePanel
 }
-import windows_sys.Microsoft.UI.Xaml.Controls.Primitives.{RepeatButton, ToggleButton}
-import windows_sys.Microsoft.UI.Xaml.Shapes.{Rectangle, Ellipse, Line}
-import windows_sys.Microsoft.UI.Xaml.{IFrameworkElement, IUIElement}
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.Primitives.{RepeatButton, ToggleButton}
+import windows_reactor.bindings.Microsoft.UI.Xaml.Shapes.{Rectangle, Ellipse, Line}
+import windows_reactor.bindings.Microsoft.UI.Xaml.{IFrameworkElement, IUIElement}
 
 // ============================================================================
 // Handle — one variant per backend-creatable ControlKind (61), each holding its

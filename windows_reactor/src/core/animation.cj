@@ -93,15 +93,34 @@ public class LayoutAnimationConfig {
     }
 }
 
+func optPairEq(a: ?(Float64, Float64), b: ?(Float64, Float64)): Bool {
+    match ((a, b)) {
+        case (Some((ax, ay)), Some((bx, by))) => ax == bx && ay == by
+        case (None, None) => true
+        case _ => false
+    }
+}
+
+// A composable animation payload. Each channel is optional, so an app composes
+// exactly the channels it wants (opacity, scale, rotation, translation) and the
+// backend realizes whatever is present. The field VALUE is the TARGET for a
+// propertyAnimation (current -> value) and the FROM state for an enterTransition
+// (value -> the natural rest state, i.e. opacity/scale 1.0, rotation 0°,
+// translation (0,0)).
 public class AnimationConfig {
     public var opacity: ?Float64 = None
     public var scale: ?Float64 = None
+    // Rotation angle in degrees.
+    public var rotation: ?Float64 = None
+    // Translation offset (x, y) in DIPs.
+    public var translation: ?(Float64, Float64) = None
     public var durationMs: Float64 = 300.0
     public var easing: Easing = Easing.EaseOut
     public init() {}
 
     public func equals(other: AnimationConfig): Bool {
         optF64Eq(opacity, other.opacity) && optF64Eq(scale, other.scale) &&
+        optF64Eq(rotation, other.rotation) && optPairEq(translation, other.translation) &&
         durationMs == other.durationMs && easing == other.easing
     }
 }

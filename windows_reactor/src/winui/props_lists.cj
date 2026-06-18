@@ -5,11 +5,11 @@ import windows_reactor.core.{Prop, PropValue, TreeNodeDef, TreeSelectionMode}
 import windows_core.HString
 import windows_interface.IInspectable
 import windows_reference.hStringReference
-import windows_sys.Microsoft.UI.Xaml.Controls.{
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{
     TreeViewNode, ItemsControl, Control, TextBlock
 }
-import windows_sys.Microsoft.UI.Xaml.Controls.Primitives.Selector
-import windows_sys.Microsoft.UI.Xaml.Controls.{TreeViewSelectionMode as TreeViewSelectionModeAbi, TreeViewSelectionMode_None as TVSelNone, TreeViewSelectionMode_Single as TVSelSingle, TreeViewSelectionMode_Multiple as TVSelMultiple}
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.Primitives.Selector
+import windows_reactor.bindings.Microsoft.UI.Xaml.Controls.{TreeViewSelectionMode as TreeViewSelectionModeAbi, TreeViewSelectionMode_None as TVSelNone, TreeViewSelectionMode_Single as TVSelSingle, TreeViewSelectionMode_Multiple as TVSelMultiple}
 
 // ============================================================================
 // Per-family property setters for selection / collection controls (ListView,
