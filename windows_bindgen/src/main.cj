@@ -1415,11 +1415,11 @@ func minimalInterfaceRecordWithSeededDependencies(
             isExperimental: typeDef.isExperimental,
             sourceSet: typeDef.sourceSet
         )
-        let saved = minimalInterfaceTruncation
-        minimalInterfaceTruncation = false
-        let seededDeps = typeDependencies(seededTypeDef, record.fullName)
-        minimalInterfaceTruncation = saved
-        for (dependency in seededDeps) {
+        // Collect the seeded members' signature types with truncation OFF so their
+        // dependencies ARE gathered (the interface keeps its full vtable regardless).
+        // Passed explicitly rather than toggling the module flag — no fragile
+        // save/restore that an early return could leak.
+        for (dependency in typeDependencies(seededTypeDef, record.fullName, truncate: false)) {
             addUnique(dependencies, dependency)
         }
     }
@@ -1584,6 +1584,14 @@ func featureRuleMatchesRecord(feature: String, record: SymbolRecord): Bool {
     return record.fullName == feature || record.namespace == feature
 }
 
+// Include/exclude resolution: a record is selected when an include rule matches
+// AND no exclude rule matches — exclude-always-wins, independent of rule
+// specificity. This INTENTIONALLY diverges from the reference projection's
+// specificity-ordered first-match (where a narrow include can override a broad
+// exclude): exclude-wins keeps a wildcard deny like `!*Helper` authoritative over
+// a broad namespace include (see testSelectSymbolsFiltersNamespacePrefixWildcard-
+// AndExclude), which is the behavior this pipeline relies on. The project's filter
+// lists use no exclude rules, so the two resolutions agree on actual inputs.
 func selectionRulesIncludeRecord(rules: ArrayList<String>, record: SymbolRecord): Bool {
     var included = false
     var excluded = false

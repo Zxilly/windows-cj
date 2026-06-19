@@ -186,7 +186,11 @@ func symbolMetadataToken(typeDef: TypeDefinitionRecord, fullName: String): Strin
     return "synthetic:${mangleFullName(fullName)}"
 }
 
-func typeDependencies(typeDef: TypeDefinitionRecord, selfFullName: String): ArrayList<String> {
+func typeDependencies(
+    typeDef: TypeDefinitionRecord,
+    selfFullName: String,
+    truncate!: Bool = minimalInterfaceTruncation
+): ArrayList<String> {
     let dependencies = ArrayList<String>()
     if (typeDef.hasBaseType) {
         addUnique(dependencies, typeDef.baseType)
@@ -223,8 +227,8 @@ func typeDependencies(typeDef: TypeDefinitionRecord, selfFullName: String): Arra
     // field must name its real CType (its enum/struct field types), not a degraded
     // object handle. renderSymbolImplWithGate dispatches value types before the
     // runtime-class path, so the truncation classification mirrors that precedence.
-    let truncateInterface = minimalInterfaceTruncation && isWinrtInterfaceType(typeDef) && !isValueType(typeDef)
-    let truncateClassMembers = minimalInterfaceTruncation && isWinrtClassType(typeDef) && !isValueType(typeDef)
+    let truncateInterface = truncate && isWinrtInterfaceType(typeDef) && !isValueType(typeDef)
+    let truncateClassMembers = truncate && isWinrtClassType(typeDef) && !isValueType(typeDef)
     let truncateMembers = truncateInterface || truncateClassMembers
     // An interface's type-level custom attributes include ExclusiveToAttribute,
     // whose type argument is the runtime CLASS the interface is exclusive to (e.g.

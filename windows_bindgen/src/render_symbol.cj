@@ -3070,10 +3070,10 @@ func renderNativeComInterfaceVtblSymbol(
     content += "@C\n"
     content += "public struct ${vtblImplName} {\n"
     content += "    public var base_: ${baseVtbl} = ${baseVtbl}()\n"
-    let slotNames = ArrayList<String>()
-    for (method in typeDef.methods) {
-        let slotName = uniqueInterfaceSlotName(method, slotNames)
-        slotNames.add(slotName)
+    let slotNames = interfaceSlotNames(typeDef)
+    for (slotIndex__ in 0..typeDef.methods.size) {
+        let method = typeDef.methods[slotIndex__]
+        let slotName = slotNames[slotIndex__]
         let cfuncType = nativeComInterfaceMethodCFuncType(method, symbolsByName)
         content += "    public var ${slotName}: ${cfuncType} = ${cfuncType}(CPointer<Unit>())\n"
     }
@@ -3175,10 +3175,10 @@ func renderInterfaceSymbol(
     }
     var content = "${gate}${interfaceAttr}]\n"
     content += "public interface ${symbol.implName} <: IInspectable {\n"
-    let slotNames = ArrayList<String>()
-    for (method in typeDef.methods) {
-        let slotName = uniqueInterfaceSlotName(method, slotNames)
-        slotNames.add(slotName)
+    let slotNames = interfaceSlotNames(typeDef)
+    for (slotIndex__ in 0..typeDef.methods.size) {
+        let method = typeDef.methods[slotIndex__]
+        let slotName = slotNames[slotIndex__]
         content += "    func ${slotName}(${interfaceMethodMacroParams(method, symbolsByName, symbol.fullName)}): Int32\n"
     }
     content += "}"
@@ -3195,10 +3195,10 @@ func interfaceMacroCleanupSpecs(
     symbolsByName: HashMap<String, SymbolRecord>
 ): String {
     let entries = ArrayList<String>()
-    let slotNames = ArrayList<String>()
-    for (method in typeDef.methods) {
-        let slotName = uniqueInterfaceSlotName(method, slotNames)
-        slotNames.add(slotName)
+    let slotNames = interfaceSlotNames(typeDef)
+    for (slotIndex__ in 0..typeDef.methods.size) {
+        let method = typeDef.methods[slotIndex__]
+        let slotName = slotNames[slotIndex__]
         let pairs = interfaceMethodMacroParameterPairs(method, symbolsByName, symbol.fullName)
         let cleanupSpecs = interfaceDispatcherOutSlotCleanupSpecs(method, pairs, symbolsByName, symbol.fullName)
         for (spec in cleanupSpecs) {
@@ -3215,10 +3215,10 @@ func renderInterfaceImplTrait(
     gate: String
 ): String {
     var content = "${gate}public interface ${symbol.implName}_Impl {\n"
-    let slotNames = ArrayList<String>()
-    for (method in typeDef.methods) {
-        let slotName = uniqueInterfaceSlotName(method, slotNames)
-        slotNames.add(slotName)
+    let slotNames = interfaceSlotNames(typeDef)
+    for (slotIndex__ in 0..typeDef.methods.size) {
+        let method = typeDef.methods[slotIndex__]
+        let slotName = slotNames[slotIndex__]
         let pairs = interfaceMethodMacroParameterPairs(method, symbolsByName, symbol.fullName)
         content += "    func ${slotName}(${parameterPairListText(pairs)}): Int32\n"
     }
@@ -3255,10 +3255,10 @@ func renderGenericWinrtInterfaceVtbl(
     let exceptionAlias = "${symbol.implName}ExceptionBase"
     var content = "${gate}type ${exceptionAlias} = Exception\n\n${gate}@C\npublic struct ${symbol.implName}Vtbl {\n"
     content += "    public var base_: windows_interface.IInspectableVtbl = windows_interface.IInspectableVtbl()\n"
-    let slotNames = ArrayList<String>()
-    for (method in typeDef.methods) {
-        let slotName = uniqueInterfaceSlotName(method, slotNames)
-        slotNames.add(slotName)
+    let slotNames = interfaceSlotNames(typeDef)
+    for (slotIndex__ in 0..typeDef.methods.size) {
+        let method = typeDef.methods[slotIndex__]
+        let slotName = slotNames[slotIndex__]
         let pairs = interfaceMethodMacroParameterPairs(method, symbolsByName, symbol.fullName)
         content += "    public var ${slotName}: CFunc<(${interfaceCFuncParameterTypes(pairs)}) -> Int32> = " +
             interfaceDefaultVtblStub(method, pairs, symbolsByName, symbol.fullName)
@@ -3268,10 +3268,10 @@ func renderGenericWinrtInterfaceVtbl(
     content += "        let _ = offset\n"
     content += "        var vtbl = ${symbol.implName}Vtbl()\n"
     content += "        vtbl.base_ = windows_core.buildIInspectableVtbl()\n"
-    let newSlotNames = ArrayList<String>()
-    for (method in typeDef.methods) {
-        let slotName = uniqueInterfaceSlotName(method, newSlotNames)
-        newSlotNames.add(slotName)
+    let newSlotNames = interfaceSlotNames(typeDef)
+    for (slotIndex__ in 0..typeDef.methods.size) {
+        let method = typeDef.methods[slotIndex__]
+        let slotName = newSlotNames[slotIndex__]
         let pairs = interfaceMethodMacroParameterPairs(method, symbolsByName, symbol.fullName)
         content += "        vtbl.${slotName} = { instanceRaw${interfaceClosureParameterNames(pairs)} =>\n"
         content += "            match (unsafe { windows_core.asImplFromRaw<${symbol.implName}_ImplErased>(instanceRaw) }) {\n"
@@ -3652,10 +3652,10 @@ func renderGenericWinrtInterfaceImplSurfaces(
     gate: String
 ): String {
     var content = "${gate}public interface ${symbol.implName}_ImplErased {\n"
-    let slotNames = ArrayList<String>()
-    for (method in typeDef.methods) {
-        let slotName = uniqueInterfaceSlotName(method, slotNames)
-        slotNames.add(slotName)
+    let slotNames = interfaceSlotNames(typeDef)
+    for (slotIndex__ in 0..typeDef.methods.size) {
+        let method = typeDef.methods[slotIndex__]
+        let slotName = slotNames[slotIndex__]
         let pairs = interfaceMethodMacroParameterPairs(method, symbolsByName, symbol.fullName)
         content += "    func ${slotName}(${parameterPairListText(pairs)}): Int32\n"
     }
@@ -3770,10 +3770,10 @@ func renderGenericWinrtInterfaceMethods(
     symbolsByName: HashMap<String, SymbolRecord>
 ): String {
     var content = ""
-    let slotNames = ArrayList<String>()
-    for (method in typeDef.methods) {
-        let slotName = uniqueInterfaceSlotName(method, slotNames)
-        slotNames.add(slotName)
+    let slotNames = interfaceSlotNames(typeDef)
+    for (slotIndex__ in 0..typeDef.methods.size) {
+        let method = typeDef.methods[slotIndex__]
+        let slotName = slotNames[slotIndex__]
         let pairs = interfaceMethodMacroParameterPairs(method, symbolsByName, symbol.fullName)
         content += "    public unsafe func ${slotName}(${parameterPairListText(pairs)}): windows_core.HRESULT {\n"
         for (tokenOutName in interfaceEventRegistrationTokenOutSlotNames(method, symbolsByName, symbol.fullName)) {
@@ -3919,10 +3919,10 @@ func interfaceMethodSchemas(
         return "Array<windows_interface.InterfaceMethodSchema>(0, { _ => windows_interface.InterfaceMethodSchema(\"\", 0, Array<windows_interface.InterfaceParameterSchema>(0, { _ => windows_interface.InterfaceParameterSchema(\"\", \"\", \"\", windows_interface.InterfaceParameterBridgeKind.Value) }), \"\") })"
     }
     let rendered = ArrayList<String>()
-    let slotNames = ArrayList<String>()
-    for (method in typeDef.methods) {
-        let slotName = uniqueInterfaceSlotName(method, slotNames)
-        slotNames.add(slotName)
+    let slotNames = interfaceSlotNames(typeDef)
+    for (slotIndex__ in 0..typeDef.methods.size) {
+        let method = typeDef.methods[slotIndex__]
+        let slotName = slotNames[slotIndex__]
         rendered.add(
             "windows_interface.InterfaceMethodSchema(\"${slotName}\", ${interfaceParameterSchemas(method, symbolsByName, ownerFullName)}, \"Int32\")"
         )
@@ -4327,6 +4327,18 @@ func interfaceSlotAbiType(
         case None => ()
     }
     return cjAbiTypeInContext(signature, symbolsByName, ownerFullName)
+}
+
+// The ordered, deduplicated vtable slot names for an interface's methods, indexed
+// 1:1 with typeDef.methods. Centralizes the slot-name numbering so every render
+// site (vtable struct, dispatch thunks, slot-name maps) derives the same names
+// from one place and cannot desync.
+func interfaceSlotNames(typeDef: TypeDefinitionRecord): ArrayList<String> {
+    let names = ArrayList<String>()
+    for (method in typeDef.methods) {
+        names.add(uniqueInterfaceSlotName(method, names))
+    }
+    return names
 }
 
 func uniqueInterfaceSlotName(method: MethodRecord, seen: ArrayList<String>): String {
@@ -4850,10 +4862,10 @@ func renderRuntimeClassFactoryMethods(
     for (factorySpec in factories) {
         match (factorySpec.symbol.typeDef) {
             case Some(factoryTypeDef) =>
-                let slotNames = ArrayList<String>()
-                for (method in factoryTypeDef.methods) {
-                    let methodName = uniqueInterfaceSlotName(method, slotNames)
-                    slotNames.add(methodName)
+                let slotNames = interfaceSlotNames(factoryTypeDef)
+                for (slotIndex__ in 0..factoryTypeDef.methods.size) {
+                    let method = factoryTypeDef.methods[slotIndex__]
+                    let methodName = slotNames[slotIndex__]
                     content += renderRuntimeClassFactoryMethod(symbol, factorySpec, method, methodName, symbolsByName)
                 }
             case None => ()
@@ -5819,10 +5831,10 @@ func isIdentifierByte(byte: Byte): Bool {
 
 func runtimeInterfaceSlotNamesByMethod(typeDef: TypeDefinitionRecord): HashMap<String, String> {
     let values = HashMap<String, String>()
-    let seen = ArrayList<String>()
-    for (method in typeDef.methods) {
-        let slotName = uniqueInterfaceSlotName(method, seen)
-        seen.add(slotName)
+    let slotNames = interfaceSlotNames(typeDef)
+    for (slotIndex__ in 0..typeDef.methods.size) {
+        let method = typeDef.methods[slotIndex__]
+        let slotName = slotNames[slotIndex__]
         let key = runtimeMethodSlotKey(method)
         if (!values.contains(key)) {
             values.add(key, slotName)
