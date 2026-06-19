@@ -6,10 +6,6 @@ import std.unittest.testmacro.*
 
 // Helpers ------------------------------------------------------------------
 
-func toList(items: ArrayList<String>): Array<String> {
-    return items.toArray()
-}
-
 func contains(items: ArrayList<String>, value: String): Bool {
     for (s in items) {
         if (s == value) {

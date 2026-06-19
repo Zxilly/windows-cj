@@ -1522,33 +1522,6 @@ func signedI32(value: UInt32): Int64 {
     return Int64(value)
 }
 
-// A field/parameter Constant renders as a JsConstant: { TypeCode, Value }.
-func constantToJson(constType: MetadataType, value: MetadataValue): JsonValue {
-    let obj = JsonObject()
-    obj.put("TypeCode", JsonString(constantTypeCode(constType)))
-    obj.put("Value", scalarValueToJson(value))
-    return obj
-}
-
-func constantTypeCode(ty: MetadataType): String {
-    match (ty) {
-        case MetadataType.Boolean => return "Boolean"
-        case MetadataType.Char => return "Char"
-        case MetadataType.I8 => return "SByte"
-        case MetadataType.U8 => return "Byte"
-        case MetadataType.I16 => return "Int16"
-        case MetadataType.U16 => return "UInt16"
-        case MetadataType.I32 => return "Int32"
-        case MetadataType.U32 => return "UInt32"
-        case MetadataType.I64 => return "Int64"
-        case MetadataType.U64 => return "UInt64"
-        case MetadataType.F32 => return "Single"
-        case MetadataType.F64 => return "Double"
-        case MetadataType.MdString => return "String"
-        case _ => return "Object"
-    }
-}
-
 // Custom-attribute argument value, applying the C# TypeProvider.ToCustomValue
 // special-casing for well-known enum types (architecture flags, attribute
 // targets, calling convention, System.Type). All other values pass through the

@@ -4759,22 +4759,6 @@ func nativeIsComInterfacePublicType(typeName: String): Bool {
         typeName == "windows_interface.IInspectable"
 }
 
-func nativeShortTypeName(fullName: String): String {
-    let bytes = fullName.toArray()
-    var lastDot: Int64 = -1
-    var i: Int64 = 0
-    while (i < Int64(bytes.size)) {
-        if (bytes[i] == b'.') {
-            lastDot = i
-        }
-        i += 1
-    }
-    if (lastDot >= 0 && lastDot + 1 < Int64(bytes.size)) {
-        return String.fromUtf8(bytes[(lastDot + 1)..Int64(bytes.size)])
-    }
-    return fullName
-}
-
 func nativeTransparentScalarType(
     typeDef: TypeDefinitionRecord,
     symbolsByName: HashMap<String, SymbolRecord>,

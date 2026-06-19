@@ -4420,20 +4420,6 @@ func stripPrefix(value: String, count: Int64): String {
     return String.fromUtf8(bytes[count..Int64(bytes.size)])
 }
 
-func guidAttributeLiteral(typeDef: TypeDefinitionRecord): Option<String> {
-    match (guidAttributeValues(typeDef)) {
-        case Some(rawValues) =>
-            let values = ArrayList<String>()
-            var i: Int64 = 0
-            while (i < 11) {
-                values.add(guidLiteralPart(rawValues[i], i))
-                i += 1
-            }
-            return Some("return windows_core.GUID.from_values(${joinStrings(values, ", ")})")
-        case None => return None
-    }
-}
-
 func guidAttributeString(typeDef: TypeDefinitionRecord): Option<String> {
     match (guidAttributeValues(typeDef)) {
         case Some(values) =>
@@ -5248,30 +5234,6 @@ func runtimeInputAbiExpression(
         return "${name}.value"
     }
     return name
-}
-
-func renderRuntimeClassFactoryAbiCall(
-    symbol: SymbolRecord,
-    factorySpec: RuntimeClassInterfaceSpec,
-    methodName: String,
-    callPlan: RuntimeCallPlan,
-    outputArg: String,
-    symbolsByName: HashMap<String, SymbolRecord>,
-    ownerFullName: String
-): String {
-    let outputArgs = ArrayList<String>()
-    if (!outputArg.isEmpty()) {
-        outputArgs.add(outputArg)
-    }
-    return renderRuntimeClassFactoryAbiCallWithArgs(
-        symbol,
-        factorySpec,
-        methodName,
-        callPlan,
-        outputArgs,
-        symbolsByName,
-        ownerFullName
-    )
 }
 
 func renderRuntimeClassFactoryAbiCallWithArgs(
@@ -6441,26 +6403,6 @@ func renderRuntimeClassProjectedMethodBody(
     return content
 }
 
-func renderRuntimeClassInstanceAbiCall(
-    slotName: String,
-    callPlan: RuntimeCallPlan,
-    outputArg: String,
-    indentLevel: Int64
-): String {
-    let outputArgs = ArrayList<String>()
-    if (!outputArg.isEmpty()) {
-        outputArgs.add(outputArg)
-    }
-    return renderRuntimeClassInstanceAbiCallWithArgs(
-        slotName,
-        callPlan,
-        outputArgs,
-        indentLevel,
-        HashMap<String, SymbolRecord>(),
-        ""
-    )
-}
-
 func renderRuntimeClassInstanceAbiCallWithArgs(
     slotName: String,
     callPlan: RuntimeCallPlan,
@@ -6655,21 +6597,6 @@ func runtimeClassGenericSubstitutionTypeName(
         }
     }
     return None
-}
-
-func closedWinrtTypeName(
-    signature: SignatureRecord,
-    symbol: SymbolRecord,
-    symbolsByName: HashMap<String, SymbolRecord>,
-    ownerFullName: String
-): String {
-    return closedWinrtTypeNameWithSubstitutions(
-        signature,
-        symbol,
-        symbolsByName,
-        ownerFullName,
-        ArrayList<RuntimeClassGenericSubstitution>()
-    )
 }
 
 func closedWinrtTypeNameWithSubstitutions(

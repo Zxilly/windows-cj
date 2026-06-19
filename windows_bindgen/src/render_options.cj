@@ -116,10 +116,6 @@ public func clearActiveReferences(): Unit {
     activeReferences = ArrayList<ReferenceStage>()
 }
 
-public func currentReferences(): ArrayList<ReferenceStage> {
-    return activeReferences
-}
-
 // Namespace-aware rendering context for the nested-package layout.
 //
 // When set (non-empty `activeRenderNamespace`), every type reference is resolved

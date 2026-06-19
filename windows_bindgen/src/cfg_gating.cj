@@ -117,49 +117,6 @@ func directoryOfRelativePath(relativePath: String): String {
     return ""
 }
 
-// The package name for a gated source directory (`src/Win32/Foundation` ->
-// `windows_sys.Win32.Foundation`, `src/Native/AppRuntime` ->
-// `windows_sys.Native.AppRuntime`). The directory layout already encodes the
-// namespace (Windows-rooted namespaces have their root stripped by
-// namespaceToDirectory), so replacing the `src` segment with the package name and
-// '/' with '.' reconstructs the package exactly.
-func packageNameForGatedDirectory(directory: String, packageName: String): String {
-    let parts = splitString(directory, b'/')
-    let rebuilt = ArrayList<String>()
-    var index: Int64 = 0
-    while (index < Int64(parts.size)) {
-        if (index == 0 && parts[index] == "src") {
-            rebuilt.add(packageName)
-        } else {
-            rebuilt.add(parts[index])
-        }
-        index += 1
-    }
-    return joinStrings(rebuilt, ".")
-}
-
-// Render a one-line source file that establishes an unconditional package-level
-// dependency edge from a facade/native-helper package to its impl subpackage.
-//
-// cjpm derives build order from package imports, but a cross-package import that
-// is `@When`-gated is treated as a soft edge: under the package scheduler the
-// importing package can be compiled before the impl subpackage (or a sibling
-// facade) has produced its `.cjo`, yielding spurious "can not find package"
-// failures that only clear on a rebuild. An unconditional package alias import
-// (referencing the impl subpackage, not any gated symbol) pins the edge so the
-// impl subpackage is always built first, which also stabilises the order of the
-// sibling facades the native helpers import. The alias is unused; `-Woff unused`
-// suppresses the warning.
-//
-// After the impl monolith was split into per-namespace subpackages, a facade for
-// namespace N edges to its own impl subpackage `<packageName>.impl.<ns_var(N)>`
-// rather than the (now-nonexistent) monolithic `<packageName>.impl`. The caller
-// supplies the concrete target subpackage for the directory.
-func renderImplDependencyEdgeFile(directory: String, packageName: String, implSubpackage: String): String {
-    let pkg = packageNameForGatedDirectory(directory, packageName)
-    return "package ${pkg}\n\nimport ${implSubpackage} as ${packageName}_impl_edge\n"
-}
-
 // Render the cross-namespace package-alias imports for namespace N's package.
 //
 // In the nested layout a symbol in `windows_sys.<NsPath(N)>` that references a
