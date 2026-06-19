@@ -4321,3 +4321,212 @@ public func WriteHitLogging(lpLogginginfo: CPointer<HIT_LOGGING_INFO>): Bool {
     let proc__ = CFunc<(CPointer<HIT_LOGGING_INFO>) -> Int32>(windows_libloading.resolveProc("urlmon.dll", "WriteHitLogging"))
     return unsafe { proc__(lpLogginginfo) } != 0
 }
+
+public func OpenThemeDataForDpi(hwnd: HWND, pszClassList: windows_strings.PWSTR, dpi: UInt32): HTHEME {
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<UInt16>, UInt32) -> CPointer<Unit>>(windows_libloading.resolveProc("UxTheme.dll", "OpenThemeDataForDpi"))
+    var result = HTHEME()
+    result.Value = unsafe { proc__(hwnd.Value, pszClassList.asPtr(), dpi) }
+    result
+}
+
+public func SetDialogControlDpiChangeBehavior(hWnd: HWND, mask: Int32, values: Int32): Bool {
+    let proc__ = CFunc<(CPointer<Unit>, Int32, Int32) -> Int32>(windows_libloading.resolveProc("USER32.dll", "SetDialogControlDpiChangeBehavior"))
+    return unsafe { proc__(hWnd.Value, mask, values) } != 0
+}
+
+public func SetDialogControlDpiChangeBehaviorChecked(hWnd: HWND, mask: Int32, values: Int32): windows_core.Result<Unit> {
+    if (SetDialogControlDpiChangeBehavior(hWnd, mask, values)) {
+        return windows_core.Result<Unit>.Ok(())
+    }
+    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+}
+
+public func GetDialogControlDpiChangeBehavior(hWnd: HWND): Int32 {
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("USER32.dll", "GetDialogControlDpiChangeBehavior"))
+    return unsafe { proc__(hWnd.Value) }
+}
+
+public func SetDialogDpiChangeBehavior(hDlg: HWND, mask: Int32, values: Int32): Bool {
+    let proc__ = CFunc<(CPointer<Unit>, Int32, Int32) -> Int32>(windows_libloading.resolveProc("USER32.dll", "SetDialogDpiChangeBehavior"))
+    return unsafe { proc__(hDlg.Value, mask, values) } != 0
+}
+
+public func SetDialogDpiChangeBehaviorChecked(hDlg: HWND, mask: Int32, values: Int32): windows_core.Result<Unit> {
+    if (SetDialogDpiChangeBehavior(hDlg, mask, values)) {
+        return windows_core.Result<Unit>.Ok(())
+    }
+    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+}
+
+public func GetDialogDpiChangeBehavior(hDlg: HWND): Int32 {
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("USER32.dll", "GetDialogDpiChangeBehavior"))
+    return unsafe { proc__(hDlg.Value) }
+}
+
+public func GetSystemMetricsForDpi(nIndex: Int32, dpi: UInt32): Int32 {
+    let proc__ = CFunc<(Int32, UInt32) -> Int32>(windows_libloading.resolveProc("USER32.dll", "GetSystemMetricsForDpi"))
+    return unsafe { proc__(nIndex, dpi) }
+}
+
+public func AdjustWindowRectExForDpi(lpRect: CPointer<RECT>, dwStyle: UInt32, bMenu: Bool, dwExStyle: UInt32, dpi: UInt32): Bool {
+    let proc__ = CFunc<(CPointer<RECT>, UInt32, Int32, UInt32, UInt32) -> Int32>(windows_libloading.resolveProc("USER32.dll", "AdjustWindowRectExForDpi"))
+    return unsafe { proc__(lpRect, dwStyle, if (bMenu) { 1 } else { 0 }, dwExStyle, dpi) } != 0
+}
+
+public func AdjustWindowRectExForDpiChecked(lpRect: CPointer<RECT>, dwStyle: UInt32, bMenu: Bool, dwExStyle: UInt32, dpi: UInt32): windows_core.Result<Unit> {
+    if (AdjustWindowRectExForDpi(lpRect, dwStyle, bMenu, dwExStyle, dpi)) {
+        return windows_core.Result<Unit>.Ok(())
+    }
+    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+}
+
+public func LogicalToPhysicalPointForPerMonitorDPI(hWnd: HWND, lpPoint: CPointer<POINT>): Bool {
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<POINT>) -> Int32>(windows_libloading.resolveProc("USER32.dll", "LogicalToPhysicalPointForPerMonitorDPI"))
+    return unsafe { proc__(hWnd.Value, lpPoint) } != 0
+}
+
+public func PhysicalToLogicalPointForPerMonitorDPI(hWnd: HWND, lpPoint: CPointer<POINT>): Bool {
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<POINT>) -> Int32>(windows_libloading.resolveProc("USER32.dll", "PhysicalToLogicalPointForPerMonitorDPI"))
+    return unsafe { proc__(hWnd.Value, lpPoint) } != 0
+}
+
+public func SystemParametersInfoForDpi(uiAction: UInt32, uiParam: UInt32, pvParam: CPointer<Unit>, fWinIni: UInt32, dpi: UInt32): Bool {
+    let proc__ = CFunc<(UInt32, UInt32, CPointer<Unit>, UInt32, UInt32) -> Int32>(windows_libloading.resolveProc("USER32.dll", "SystemParametersInfoForDpi"))
+    return unsafe { proc__(uiAction, uiParam, pvParam, fWinIni, dpi) } != 0
+}
+
+public func SystemParametersInfoForDpiChecked(uiAction: UInt32, uiParam: UInt32, pvParam: CPointer<Unit>, fWinIni: UInt32, dpi: UInt32): windows_core.Result<Unit> {
+    if (SystemParametersInfoForDpi(uiAction, uiParam, pvParam, fWinIni, dpi)) {
+        return windows_core.Result<Unit>.Ok(())
+    }
+    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+}
+
+public func SetThreadDpiAwarenessContext(dpiContext: DPI_AWARENESS_CONTEXT): DPI_AWARENESS_CONTEXT {
+    let proc__ = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("USER32.dll", "SetThreadDpiAwarenessContext"))
+    var result = DPI_AWARENESS_CONTEXT()
+    result.Value = unsafe { proc__(dpiContext.Value) }
+    result
+}
+
+public func GetThreadDpiAwarenessContext(): DPI_AWARENESS_CONTEXT {
+    let proc__ = CFunc<() -> CPointer<Unit>>(windows_libloading.resolveProc("USER32.dll", "GetThreadDpiAwarenessContext"))
+    var result = DPI_AWARENESS_CONTEXT()
+    result.Value = unsafe { proc__() }
+    result
+}
+
+public func GetWindowDpiAwarenessContext(hwnd: HWND): DPI_AWARENESS_CONTEXT {
+    let proc__ = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("USER32.dll", "GetWindowDpiAwarenessContext"))
+    var result = DPI_AWARENESS_CONTEXT()
+    result.Value = unsafe { proc__(hwnd.Value) }
+    result
+}
+
+public func GetAwarenessFromDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT): Int32 {
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("USER32.dll", "GetAwarenessFromDpiAwarenessContext"))
+    return unsafe { proc__(value.Value) }
+}
+
+public func GetDpiFromDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT): UInt32 {
+    let proc__ = CFunc<(CPointer<Unit>) -> UInt32>(windows_libloading.resolveProc("USER32.dll", "GetDpiFromDpiAwarenessContext"))
+    return unsafe { proc__(value.Value) }
+}
+
+public func AreDpiAwarenessContextsEqual(dpiContextA: DPI_AWARENESS_CONTEXT, dpiContextB: DPI_AWARENESS_CONTEXT): Bool {
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("USER32.dll", "AreDpiAwarenessContextsEqual"))
+    return unsafe { proc__(dpiContextA.Value, dpiContextB.Value) } != 0
+}
+
+public func IsValidDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT): Bool {
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("USER32.dll", "IsValidDpiAwarenessContext"))
+    return unsafe { proc__(value.Value) } != 0
+}
+
+public func GetDpiForWindow(hwnd: HWND): UInt32 {
+    let proc__ = CFunc<(CPointer<Unit>) -> UInt32>(windows_libloading.resolveProc("USER32.dll", "GetDpiForWindow"))
+    return unsafe { proc__(hwnd.Value) }
+}
+
+public func GetDpiForSystem(): UInt32 {
+    let proc__ = CFunc<() -> UInt32>(windows_libloading.resolveProc("USER32.dll", "GetDpiForSystem"))
+    return unsafe { proc__() }
+}
+
+public func GetSystemDpiForProcess(hProcess: HANDLE): UInt32 {
+    let proc__ = CFunc<(CPointer<Unit>) -> UInt32>(windows_libloading.resolveProc("USER32.dll", "GetSystemDpiForProcess"))
+    return unsafe { proc__(hProcess.Value) }
+}
+
+public func EnableNonClientDpiScaling(hwnd: HWND): Bool {
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("USER32.dll", "EnableNonClientDpiScaling"))
+    return unsafe { proc__(hwnd.Value) } != 0
+}
+
+public func EnableNonClientDpiScalingChecked(hwnd: HWND): windows_core.Result<Unit> {
+    if (EnableNonClientDpiScaling(hwnd)) {
+        return windows_core.Result<Unit>.Ok(())
+    }
+    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+}
+
+public func SetProcessDpiAwarenessContext(value: DPI_AWARENESS_CONTEXT): Bool {
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("USER32.dll", "SetProcessDpiAwarenessContext"))
+    return unsafe { proc__(value.Value) } != 0
+}
+
+public func SetProcessDpiAwarenessContextChecked(value: DPI_AWARENESS_CONTEXT): windows_core.Result<Unit> {
+    if (SetProcessDpiAwarenessContext(value)) {
+        return windows_core.Result<Unit>.Ok(())
+    }
+    windows_core.Result<Unit>.Err(windows_core.errorFromThread())
+}
+
+public func GetDpiAwarenessContextForProcess(hProcess: HANDLE): DPI_AWARENESS_CONTEXT {
+    let proc__ = CFunc<(CPointer<Unit>) -> CPointer<Unit>>(windows_libloading.resolveProc("USER32.dll", "GetDpiAwarenessContextForProcess"))
+    var result = DPI_AWARENESS_CONTEXT()
+    result.Value = unsafe { proc__(hProcess.Value) }
+    result
+}
+
+public func SetThreadDpiHostingBehavior(value: Int32): Int32 {
+    let proc__ = CFunc<(Int32) -> Int32>(windows_libloading.resolveProc("USER32.dll", "SetThreadDpiHostingBehavior"))
+    return unsafe { proc__(value) }
+}
+
+public func GetThreadDpiHostingBehavior(): Int32 {
+    let proc__ = CFunc<() -> Int32>(windows_libloading.resolveProc("USER32.dll", "GetThreadDpiHostingBehavior"))
+    return unsafe { proc__() }
+}
+
+public func GetWindowDpiHostingBehavior(hwnd: HWND): Int32 {
+    let proc__ = CFunc<(CPointer<Unit>) -> Int32>(windows_libloading.resolveProc("USER32.dll", "GetWindowDpiHostingBehavior"))
+    return unsafe { proc__(hwnd.Value) }
+}
+
+public func SetProcessDpiAwareness(value: Int32): Int32 {
+    let proc__ = CFunc<(Int32) -> Int32>(windows_libloading.resolveProc("api-ms-win-shcore-scaling-l1-1-1.dll", "SetProcessDpiAwareness"))
+    return unsafe { proc__(value) }
+}
+
+public func SetProcessDpiAwarenessChecked(value: Int32): windows_core.Result<Unit> {
+    windows_core.HRESULT(SetProcessDpiAwareness(value)).ok()
+}
+
+public func GetProcessDpiAwareness(hprocess: HANDLE, value: CPointer<Int32>): Int32 {
+    let proc__ = CFunc<(CPointer<Unit>, CPointer<Int32>) -> Int32>(windows_libloading.resolveProc("api-ms-win-shcore-scaling-l1-1-1.dll", "GetProcessDpiAwareness"))
+    return unsafe { proc__(hprocess.Value, value) }
+}
+
+public func GetProcessDpiAwarenessChecked(hprocess: HANDLE, value: CPointer<Int32>): windows_core.Result<Unit> {
+    windows_core.HRESULT(GetProcessDpiAwareness(hprocess, value)).ok()
+}
+
+public func GetDpiForMonitor(hmonitor: HMONITOR, dpiType: Int32, dpiX: CPointer<UInt32>, dpiY: CPointer<UInt32>): Int32 {
+    let proc__ = CFunc<(CPointer<Unit>, Int32, CPointer<UInt32>, CPointer<UInt32>) -> Int32>(windows_libloading.resolveProc("api-ms-win-shcore-scaling-l1-1-1.dll", "GetDpiForMonitor"))
+    return unsafe { proc__(hmonitor.Value, dpiType, dpiX, dpiY) }
+}
+
+public func GetDpiForMonitorChecked(hmonitor: HMONITOR, dpiType: Int32, dpiX: CPointer<UInt32>, dpiY: CPointer<UInt32>): windows_core.Result<Unit> {
+    windows_core.HRESULT(GetDpiForMonitor(hmonitor, dpiType, dpiX, dpiY)).ok()
+}
