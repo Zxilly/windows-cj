@@ -8,6 +8,7 @@
   output-type = "executable"
   cjc-version = "1.1.0"
   compile-option = "--experimental --incremental-compile -Woff unused --strip-all"
+  override-compile-option = "--disable-reflection"
 
 [dependencies]
   windows_reactor = { path = "../../../windows_reactor" }
