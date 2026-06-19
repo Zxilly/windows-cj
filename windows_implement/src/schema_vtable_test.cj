@@ -1,6 +1,5 @@
 package windows_implement
 
-import std.reflect.*
 import std.unittest.*
 import std.unittest.testmacro.*
 import windows_interface.*
@@ -26,7 +25,7 @@ class DescriptorAutoVtblProbe <: InterfaceWrapperBase & ComInterface {
 
     public static func descriptor(): InterfaceDescriptor<DescriptorAutoVtblProbe> {
         InterfaceDescriptor<DescriptorAutoVtblProbe>(
-            TypeInfo.of<DescriptorAutoVtblProbe>().name,
+            "DescriptorAutoVtblProbe",
             iid(),
             IUnknown.descriptor(),
             fromAbiTake,
@@ -45,8 +44,18 @@ func fakeVtbl(offset: Int64): CPointer<Unit> {
 }
 
 @Test
-func testDescriptorBackedCustomInterfaceReflectsNoArgWrapperVtbl() {
-    let object = createComObjectFromDescriptors(SchemaOnlyDummy(), [DescriptorAutoVtblProbe.descriptor()])
+func testDescriptorBackedCustomInterfaceRequiresExplicitVtbl() {
+    // Descriptor-backed custom interfaces with a custom slot must be given an
+    // explicit vtable pointer; the no-vtbl overload rejects them.
+    @Expect(implementActionThrows({ =>
+        let _ = createComObjectFromDescriptors(SchemaOnlyDummy(), [DescriptorAutoVtblProbe.descriptor()])
+    }), true)
+
+    let object = createComObjectFromDescriptors(
+        SchemaOnlyDummy(),
+        [DescriptorAutoVtblProbe.descriptor()],
+        DescriptorAutoVtblProbe.vtablePtr()
+    )
     var raw = CPointer<Unit>()
     let hr = object.queryInterfaceBase(DescriptorAutoVtblProbe.iid(), CPointer<CPointer<Unit>>(inout raw))
     @Expect(hr, S_OK)

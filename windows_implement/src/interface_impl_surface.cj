@@ -2,7 +2,6 @@ package windows_implement
 
 import windows_interface as windows_interface
 import std.collection.*
-import std.reflect.*
 import std.sync.AtomicBool
 import std.sync.AtomicInt64
 import windows_interface.*
@@ -581,27 +580,6 @@ func resolvedCustomVtblArray(
     Array<CPointer<Unit>>(slotCount, { index => explicitCustomVtbls[index] })
 }
 
-func reflectedWrapperVtblPtr(descriptor: ResolvedDescriptor): Option<CPointer<Unit>> {
-    match (descriptor.wrapperQualifiedTypeName) {
-        case Some(qualifiedName) =>
-            try {
-                let wrapperType = TypeInfo.get(qualifiedName)
-                let vtablePtrFunc = wrapperType.getStaticFunction("vtablePtr", parseParameterTypes(""))
-                match (vtablePtrFunc.apply(wrapperType, Array<Any>(0, { _ => 0i32 })) as CPointer<Unit>) {
-                    case Some(vtblPtr) =>
-                        if (vtblPtr.isNotNull()) {
-                            return Some(vtblPtr)
-                        }
-                    case None => ()
-                }
-            } catch (_: Exception) {
-                ()
-            }
-        case None => ()
-    }
-    None
-}
-
 func resolvedDescriptorInheritanceDepth(
     resolvedDescriptors: Array<ResolvedDescriptor>,
     descriptorIndex: Int64
@@ -627,29 +605,6 @@ func requiredDescriptorIndicesForCustomSlots(resolvedDescriptors: Array<Resolved
         index += 1
     }
     requiredIndices
-}
-
-func descriptorCustomVtblArray(resolvedDescriptors: Array<ResolvedDescriptor>): Array<CPointer<Unit>> {
-    let slotCount = customSlotCount(resolvedDescriptors)
-    if (slotCount == 0) {
-        return emptyUnitPointerArray()
-    }
-
-    let requiredIndices = requiredDescriptorIndicesForCustomSlots(resolvedDescriptors)
-    var vtblPtrs = Array<CPointer<Unit>>(slotCount, { _ => CPointer<Unit>() })
-    var slot: Int64 = 0
-    while (slot < slotCount) {
-        let descriptorIndex = requiredIndices[slot]
-        if (descriptorIndex >= 0) {
-            match (reflectedWrapperVtblPtr(resolvedDescriptors[descriptorIndex])) {
-                case Some(vtblPtr) =>
-                    vtblPtrs[slot] = vtblPtr
-                case None => ()
-            }
-        }
-        slot += 1
-    }
-    vtblPtrs
 }
 
 func explicitCustomVtblArray(
@@ -750,8 +705,8 @@ public class ComObject<T> <: Resource {
         let resolvedDescriptors = resolveSupportedIids(supportedIids)
         runtime = ComObjectRuntime<T>(inner, supportedIids, resolvedDescriptors)
         runtime.setAgileEnabled(agile)
-        let vtblPtrs = descriptorCustomVtblArray(resolvedDescriptors)
-        attachRuntime(defaultIdentityVtblPtr(supportedIids), vtblPtrs, resolvedDescriptors)
+        requireExplicitSchemaCustomVtbls(resolvedDescriptors)
+        attachRuntime(defaultIdentityVtblPtr(supportedIids), emptyUnitPointerArray(), resolvedDescriptors)
     }
 
     public init(inner: T, supportedIids: Array<GUID>, vtblPtr: CPointer<Unit>, agile!: Bool = true) {
@@ -783,13 +738,8 @@ public class ComObject<T> <: Resource {
     public init(inner: T, supportedIids: Array<GUID>, resolvedDescriptors: Array<ResolvedDescriptor>, agile!: Bool = true) {
         runtime = ComObjectRuntime<T>(inner, supportedIids, resolvedDescriptors)
         runtime.setAgileEnabled(agile)
-        let slotCount = customSlotCount(resolvedDescriptors)
-        let vtblPtrs = descriptorCustomVtblArray(resolvedDescriptors)
-        if (slotCount == 0 && vtblPtrs.size > 0) {
-            attachRuntime(vtblPtrs[0], emptyUnitPointerArray(), resolvedDescriptors)
-        } else {
-            attachRuntime(defaultIdentityVtblPtr(supportedIids), vtblPtrs, resolvedDescriptors)
-        }
+        requireExplicitSchemaCustomVtbls(resolvedDescriptors)
+        attachRuntime(defaultIdentityVtblPtr(supportedIids), emptyUnitPointerArray(), resolvedDescriptors)
     }
 
     public init(
@@ -836,8 +786,7 @@ public class ComObject<T> <: Resource {
         runtime.setAgileEnabled(agile)
         applyRuntimeTypeFromSchemas(runtime, schemas)
         requireExplicitSchemaCustomVtbls(resolvedDescriptors)
-        let vtblPtrs = descriptorCustomVtblArray(resolvedDescriptors)
-        attachRuntime(defaultIdentityVtblPtr(supportedIids), vtblPtrs, resolvedDescriptors)
+        attachRuntime(defaultIdentityVtblPtr(supportedIids), emptyUnitPointerArray(), resolvedDescriptors)
     }
 
     public init(inner: T, schemas: Array<InterfaceDescriptorSchema>, vtblPtr: CPointer<Unit>, agile!: Bool = true) {

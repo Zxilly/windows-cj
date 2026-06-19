@@ -3,7 +3,6 @@ package windows_implement
 public import windows_interface.*
 
 import std.collection.*
-import std.reflect.*
 
 func emptyMethodSchemas(): Array<InterfaceMethodSchema> {
     Array<InterfaceMethodSchema>(0, { _ =>
@@ -312,7 +311,6 @@ public struct ResolvedDescriptor {
     public let runtimeTypeContract: Option<RuntimeTypeContract>
     public let vtableTypeName: String
     public let wrapperTypeName: String
-    public let wrapperQualifiedTypeName: Option<String>
     public let implSurfaceName: String
     public let methods: Array<InterfaceMethodSchema>
 
@@ -330,7 +328,6 @@ public struct ResolvedDescriptor {
         runtimeTypeContract: Option<RuntimeTypeContract>,
         vtableTypeName: String,
         wrapperTypeName: String,
-        wrapperQualifiedTypeName: Option<String>,
         implSurfaceName: String,
         methods: Array<InterfaceMethodSchema>
     ) {
@@ -347,7 +344,6 @@ public struct ResolvedDescriptor {
         this.runtimeTypeContract = runtimeTypeContract
         this.vtableTypeName = vtableTypeName
         this.wrapperTypeName = wrapperTypeName
-        this.wrapperQualifiedTypeName = wrapperQualifiedTypeName
         this.implSurfaceName = implSurfaceName
         this.methods = methods
     }
@@ -367,7 +363,6 @@ public struct ResolvedDescriptor {
             runtimeTypeContract,
             vtableTypeName,
             wrapperTypeName,
-            wrapperQualifiedTypeName,
             implSurfaceName,
             methods
         )
@@ -430,18 +425,9 @@ func resolveSchemaCore(schema: InterfaceDescriptorSchema): ResolvedDescriptor {
         schema.runtimeTypeContract,
         schema.vtableTypeName,
         schema.wrapperTypeName,
-        None,
         schema.implSurfaceName,
         methods
     )
-}
-
-func qualifiedWrapperTypeNameForDescriptor<I>(descriptor: InterfaceDescriptor<I>): Option<String> {
-    let typeInfo = TypeInfo.of<I>()
-    if (typeInfo.name != descriptor.name) {
-        return None
-    }
-    Some(typeInfo.qualifiedName)
 }
 
 func resolveDescriptorCore<I>(descriptor: InterfaceDescriptor<I>): ResolvedDescriptor {
@@ -461,7 +447,6 @@ func resolveDescriptorCore<I>(descriptor: InterfaceDescriptor<I>): ResolvedDescr
         descriptor.runtimeTypeContract,
         "${descriptor.name}Vtbl",
         descriptor.name,
-        qualifiedWrapperTypeNameForDescriptor(descriptor),
         "${descriptor.name}_Impl",
         methods
     )
@@ -580,7 +565,6 @@ func assignSlotIndices(values: Array<ResolvedDescriptor>): Array<ResolvedDescrip
             None,
             "",
             "",
-            None,
             "",
             emptyMethodSchemas()
         )
@@ -663,7 +647,6 @@ public func resolveSupportedIids(supportedIids: Array<GUID>): Array<ResolvedDesc
                 None,
                 "IUnknownVtbl",
                 "IUnknown",
-                None,
                 "IUnknown_Impl",
                 emptyMethodSchemas()
             )
@@ -739,7 +722,7 @@ func toGuidArray(values: ArrayList<GUID>): Array<GUID> {
 
 func toResolvedDescriptorArray(values: ArrayList<ResolvedDescriptor>): Array<ResolvedDescriptor> {
     var result = Array<ResolvedDescriptor>(values.size, { _ =>
-        ResolvedDescriptor("", GUID_ZERO, None, None, emptyStrings(), emptyGuids(), emptyGuids(), 0, 0, false, None, "", "", None, "", emptyMethodSchemas())
+        ResolvedDescriptor("", GUID_ZERO, None, None, emptyStrings(), emptyGuids(), emptyGuids(), 0, 0, false, None, "", "", "", emptyMethodSchemas())
     })
     var index: Int64 = 0
     for (value in values) {
