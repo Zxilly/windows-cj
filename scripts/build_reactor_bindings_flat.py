@@ -55,6 +55,8 @@ BINDINGS_DIR = REACTOR_SRC / "bindings"
 WINUI_DIR = REACTOR_SRC / "winui"
 SCRATCH = WCJ / "_reactor_flat_gen"
 SEEDS_JSON = WCJ / "scripts" / "reactor_bindings_seeds.json"
+METHOD_FILTER_JSON = WCJ / "scripts" / "reactor_method_filter.json"
+METHOD_FILTER_TXT = WCJ / "scripts" / "reactor_method_filter.txt"
 FLAT_PACKAGE = "windows_reactor.bindings"
 
 
@@ -82,19 +84,45 @@ def load_seeds() -> dict:
     return json.loads(SEEDS_JSON.read_text(encoding="utf-8"))
 
 
-def generate(seeds: dict) -> None:
+def load_method_filter() -> dict:
+    if not METHOD_FILTER_JSON.is_file():
+        raise SystemExit(
+            f"missing method filter: {METHOD_FILTER_JSON}\n"
+            f"  generate it: python scripts/convert_reactor_method_filter.py")
+    return json.loads(METHOD_FILTER_JSON.read_text(encoding="utf-8"))
+
+
+def method_filter_args(mf: dict) -> list[str]:
+    """Materialize the method-level filter rules into a newline-delimited file and
+    return `--filter-file <path>`. The manifest carries hundreds of member + whole-
+    type rules plus the (whole-namespace) namespace seeds; passing each as a
+    separate `--filter <rule>` argv pair overflows the Windows 32 KB command-line
+    limit, so the rules go through a file instead (bindgen `--filter-file`)."""
+    rules: list[str] = list(mf["filters"]) + list(mf.get("namespace_seeds", []))
+    METHOD_FILTER_TXT.write_text("\n".join(rules) + "\n", encoding="utf-8")
+    return ["--filter-file", str(METHOD_FILTER_TXT)]
+
+
+def generate(filter_args: list[str], label: str, minimal: bool = False) -> None:
     if not base.GENERATOR.is_file():
         raise SystemExit(f"generator not built: {base.GENERATOR}")
+    # --minimal truncates an interface's selection-closure dependencies to its raw
+    # ABI surface (base interface + IID + member-rule-seeded signature types), so a
+    # method-level filter no longer drags every interface's full high-level type
+    # graph into the closure. The interface VTABLE stays full-slot, so this is ABI-
+    # safe; only the projected high-level type COUNT shrinks. Applies to the
+    # method-filter campaign only -- the whole-type seeds path keeps full closures.
+    minimal_args = ["--minimal"] if minimal else []
     args = [
         "cjv", "run", "dev_perf_ci", str(base.GENERATOR),
         "--common", "--clean", "--flat",
+        *minimal_args,
         "--package-name", FLAT_PACKAGE,
         "--out", str(SCRATCH),
         *base.winmd_inputs(),
-        *base.all_filter_args(seeds),
+        *filter_args,
     ]
-    print(f"=== bindgen --flat -> {SCRATCH} ({len(seeds['type_seeds'])} type + "
-          f"{len(seeds['namespace_seeds'])} ns seeds) ===", flush=True)
+    print(f"=== bindgen --flat -> {SCRATCH} ({label}) ===", flush=True)
     t = time.time()
     r = subprocess.run(args, cwd=str(WCJ), env=base.gen_env())
     if r.returncode != 0:
@@ -156,6 +184,21 @@ def _flat_for(full_name: str, short_name: str, flat_map: dict[str, str]) -> str:
     return short_name
 
 
+_FLAT_VALUES_CACHE: dict[int, set[str]] = {}
+
+
+def _flat_name_values(flat_map: dict[str, str]) -> set[str]:
+    """Set of flat type names (the flat-name map's VALUES). Used to recognize an
+    already-flattened single-segment import (`bindings.Brush`) as a TYPE rather
+    than a namespace. Cached per map object so the per-line rewrite stays O(1)."""
+    key = id(flat_map)
+    cached = _FLAT_VALUES_CACHE.get(key)
+    if cached is None:
+        cached = set(flat_map.values())
+        _FLAT_VALUES_CACHE[key] = cached
+    return cached
+
+
 def _reconstruct_ns(segments: list[str]) -> str:
     return ".".join(segments)
 
@@ -185,6 +228,16 @@ def rewrite_winui_imports(flat_map: dict[str, str]) -> tuple[list[str], int]:
             leaf_ns = _reconstruct_ns(segments[:-1]) if len(segments) >= 2 else ""
             leaf_full = f"{leaf_ns}.{segments[-1]}" if leaf_ns else segments[-1]
             is_type = leaf_full in flat_map
+            # A single-segment path that is ALREADY a flat type name (e.g. a prior
+            # rewrite turned `Microsoft.UI.Xaml.Media.Brush as XamlBrush` into
+            # `bindings.Brush as XamlBrush`) names a TYPE, not a namespace. The
+            # flat-name map keys are full names, so the bare segment never matches
+            # a key — match it against the map's VALUES (the flat type names) so a
+            # re-run does not collapse `bindings.Brush as XamlBrush` into the
+            # package-alias `bindings as XamlBrush`, which would alias the package
+            # instead of the Brush type.
+            if len(segments) == 1 and segments[0] in _flat_name_values(flat_map):
+                is_type = True
             if segments and segments[0] == "Native":
                 is_type = False
             if not is_type:
@@ -315,13 +368,35 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--reuse-gen", action="store_true",
                    help="Reuse existing _reactor_flat_gen (skip bindgen).")
+    p.add_argument("--method-filter", action="store_true",
+                   help="Use the method-level filter (reactor_method_filter.json) "
+                        "instead of the whole-type seeds (reactor_bindings_seeds.json).")
+    p.add_argument("--backup", action="store_true",
+                   help="Back up the current bindings/ to bindings.bak before grafting.")
     p.add_argument("--demo", default=str(WCJ.parent / "windows-reactor-2048-demo"),
                    help="2048 demo dir to de-cfg.")
     args = p.parse_args(argv)
 
+    if args.backup and BINDINGS_DIR.is_dir():
+        bak = BINDINGS_DIR.with_name("bindings.bak")
+        _force_rmtree(bak)
+        shutil.copytree(BINDINGS_DIR, bak)
+        print(f"backed up current bindings -> {bak}", flush=True)
+
     if not args.reuse_gen:
-        seeds = load_seeds()
-        generate(seeds)
+        if args.method_filter:
+            mf = load_method_filter()
+            fargs = method_filter_args(mf)
+            st = mf["stats"]
+            label = (f"method-level: {st['member_level_rules']} member + "
+                     f"{st['whole_type_rules']} whole-type rules (--minimal)")
+            generate(fargs, label, minimal=True)
+        else:
+            seeds = load_seeds()
+            fargs = base.all_filter_args(seeds)
+            label = (f"{len(seeds['type_seeds'])} type + "
+                     f"{len(seeds['namespace_seeds'])} ns seeds")
+            generate(fargs, label)
 
     flat_map = load_flat_name_map()
     print(f"flat-name-map entries: {len(flat_map)}", flush=True)
